@@ -1,0 +1,861 @@
+{
+    "Albania": {
+        "Financial_Authority": "Bank of Albania (Banka e Shqipërisë)",
+        "Abbreviation": "BoA",
+        "Website": "https://www.bankofalbania.org/",
+        "Consumer_Protection_Body": "Consumer Protection Commission",
+        "Website_Consumer_Protection": "http://www.kmk.gov.al/",
+        "Financial_Ombudsman": "No dedicated financial ombudsman, disputes handled by courts or the Consumer Protection Commission."
+    },
+    "Andorra": {
+        "Financial_Authority": "Andorran Financial Authority (Autoritat Financera Andorrana)",
+        "Abbreviation": "AFA",
+        "Website": "https://www.afa.ad/",
+        "Consumer_Protection_Body": "Andorran Consumer Agency (Agència Andorrana del Consum)",
+        "Website_Consumer_Protection": "https://www.consum.ad/",
+        "Financial_Ombudsman": "No dedicated financial ombudsman."
+    },
+    "Armenia": {
+        "Financial_Authority": "Central Bank of Armenia (Հայաստանի Հանրապետության Կենտրոնական Բանկ)",
+        "Abbreviation": "CBA",
+        "Website": "https://www.cba.am/",
+        "Consumer_Protection_Body": "Financial System Mediator (Ֆինանսական համակարգի հաշտարար)",
+        "Website_Consumer_Protection": "https://www.fsm.am/",
+        "Financial_Ombudsman": "Financial System Mediator"
+    },
+    "Australia": {
+        "Financial_Authority": "Australian Prudential Regulation Authority (APRA) and Australian Securities and Investments Commission (ASIC)",
+        "Abbreviation": "APRA / ASIC",
+        "Website": "https://www.apra.gov.au/ and https://asic.gov.au/",
+        "Consumer_Protection_Body": "Australian Financial Complaints Authority (AFCA)",
+        "Website_Consumer_Protection": "https://www.afca.org.au/",
+        "Financial_Ombudsman": "Australian Financial Complaints Authority (AFCA)"
+    },
+    "Austria": {
+        "Financial_Authority": "Financial Market Authority (Finanzmarktaufsicht)",
+        "Abbreviation": "FMA",
+        "Website": "https://www.fma.gv.at/",
+        "Consumer_Protection_Body": "Agency for Consumer Protection (Agentur für Verbraucherschutz)",
+        "Website_Consumer_Protection": "https://www.verbraucherschutz.gv.at/",
+        "Financial_Ombudsman": "Joint Conciliation Board of the Austrian Banking Industry (Gemeinsame Schlichtungsstelle der österreichischen Kreditwirtschaft)"
+    },
+    "Azerbaijan": {
+        "Financial_Authority": "Central Bank of the Republic of Azerbaijan (Azərbaycan Respublikasının Mərkəzi Bankı)",
+        "Abbreviation": "CBAR",
+        "Website": "https://www.cbar.az/",
+        "Consumer_Protection_Body": "State Service for Antimonopoly Policy and Consumer Rights' Protection",
+        "Website_Consumer_Protection": "http://www.consumer.gov.az/",
+        "Financial_Ombudsman": "Banking Ombudsman"
+    },
+    "Bahamas": {
+        "Financial_Authority": "Central Bank of The Bahamas",
+        "Abbreviation": "CBOB",
+        "Website": "https://www.centralbankbahamas.com/",
+        "Consumer_Protection_Body": "Consumer Protection Commission",
+        "Website_Consumer_Protection": "http://www.consumeraffairsbahamas.gov.bs/cpc/",
+        "Financial_Ombudsman": "No dedicated financial ombudsman."
+    },
+    "Bahrain": {
+        "Financial_Authority": "Central Bank of Bahrain (CBB)",
+        "Abbreviation": "CBB",
+        "Website": "https://www.cbb.gov.bh/",
+        "Consumer_Protection_Body": "Consumer Protection Directorate, Ministry of Industry, Commerce & Tourism",
+        "Website_Consumer_Protection": "https://www.moic.gov.bh/",
+        "Financial_Ombudsman": "Central Bank of Bahrain - Consumer Protection Unit"
+    },
+    "Bangladesh": {
+        "Financial_Authority": "Bangladesh Bank",
+        "Abbreviation": "BB",
+        "Website": "https://www.bb.org.bd/",
+        "Consumer_Protection_Body": "Directorate of National Consumer Rights Protection",
+        "Website_Consumer_Protection": "http://www.dncrp.gov.bd/",
+        "Financial_Ombudsman": "Financial Integrity & Customer Services Department, Bangladesh Bank"
+    },
+    "Barbados": {
+        "Financial_Authority": "Central Bank of Barbados and Financial Services Commission (FSC)",
+        "Abbreviation": "CBB / FSC",
+        "Website": "https://www.centralbank.org.bb/ and https://www.fsc.gov.bb/",
+        "Consumer_Protection_Body": "Office of Public Counsel",
+        "Website_Consumer_Protection": "https://www.publiccounsel.gov.bb/",
+        "Financial_Ombudsman": "Financial Services Commission (FSC)"
+    },
+    "Belarus": {
+        "Financial_Authority": "National Bank of the Republic of Belarus (Нацыянальны банк Рэспублікі Беларусь)",
+        "Abbreviation": "NBRB",
+        "Website": "https://www.nbrb.by/",
+        "Consumer_Protection_Body": "Ministry of Antimonopoly Regulation and Trade",
+        "Website_Consumer_Protection": "https://mart.gov.by/",
+        "Financial_Ombudsman": "Financial Ombudsman of the Association of Belarusian Banks"
+    },
+    "Belgium": {
+        "Financial_Authority": "Financial Services and Markets Authority (FSMA)",
+        "Abbreviation": "FSMA",
+        "Website": "https://www.fsma.be/",
+        "Consumer_Protection_Body": "FPS Economy, SMEs, Self-employed and Energy",
+        "Website_Consumer_Protection": "https://economie.fgov.be/",
+        "Financial_Ombudsman": "Ombudsfin - Ombudsman in financial services"
+    },
+    "Bermuda": {
+        "Financial_Authority": "Bermuda Monetary Authority (BMA)",
+        "Abbreviation": "BMA",
+        "Website": "https://www.bma.bm/",
+        "Consumer_Protection_Body": "Consumer Affairs",
+        "Website_Consumer_Protection": "https://www.gov.bm/department/consumer-affairs",
+        "Financial_Ombudsman": "No dedicated financial ombudsman."
+    },
+    "Bosnia and Herzegovina": {
+        "Financial_Authority": "Central Bank of Bosnia and Herzegovina (Centralna banka Bosne i Hercegovine)",
+        "Abbreviation": "CBBH",
+        "Website": "https://www.cbbh.ba/",
+        "Consumer_Protection_Body": "Institution of Ombudsman for consumer protection in Bosnia and Herzegovina",
+        "Website_Consumer_Protection": "http://www.ozp.gov.ba/",
+        "Financial_Ombudsman": "Banking Ombudsman of the Federation of Bosnia and Herzegovina / Banking Ombudsman of Republika Srpska"
+    },
+    "Brazil": {
+        "Financial_Authority": "Central Bank of Brazil (Banco Central do Brasil)",
+        "Abbreviation": "BCB",
+        "Website": "https://www.bcb.gov.br/",
+        "Consumer_Protection_Body": "National Consumer Secretariat (Secretaria Nacional do Consumidor)",
+        "Website_Consumer_Protection": "https://www.justica.gov.br/sua-protecao/consumidor",
+        "Financial_Ombudsman": "Central Bank of Brazil's Ombudsman (Ouvidoria)"
+    },
+    "Bulgaria": {
+        "Financial_Authority": "Bulgarian National Bank (Българска народна банка)",
+        "Abbreviation": "BNB",
+        "Website": "https://www.bnb.bg/",
+        "Consumer_Protection_Body": "Commission for Consumer Protection (Комисия за защита на потребителите)",
+        "Website_Consumer_Protection": "https://kzp.bg/",
+        "Financial_Ombudsman": "Conciliation Commission for Payment Disputes"
+    },
+    "Canada": {
+        "Financial_Authority": "Office of the Superintendent of Financial Institutions (OSFI)",
+        "Abbreviation": "OSFI",
+        "Website": "https://www.osfi-bsif.gc.ca/",
+        "Consumer_Protection_Body": "Financial Consumer Agency of Canada (FCAC)",
+        "Website_Consumer_Protection": "https://www.canada.ca/en/financial-consumer-agency.html",
+        "Financial_Ombudsman": "Ombudsman for Banking Services and Investments (OBSI)"
+    },
+    "Cayman Islands": {
+        "Financial_Authority": "Cayman Islands Monetary Authority (CIMA)",
+        "Abbreviation": "CIMA",
+        "Website": "https://www.cima.ky/",
+        "Consumer_Protection_Body": "No specific consumer protection body for financial services, complaints handled by CIMA.",
+        "Website_Consumer_Protection": "https://www.cima.ky/complaints",
+        "Financial_Ombudsman": "No dedicated financial ombudsman."
+    },
+    "Chile": {
+        "Financial_Authority": "Financial Market Commission (Comisión para el Mercado Financiero)",
+        "Abbreviation": "CMF",
+        "Website": "https://www.cmfchile.cl/",
+        "Consumer_Protection_Body": "National Consumer Service (Servicio Nacional del Consumidor)",
+        "Website_Consumer_Protection": "https://www.sernac.cl/",
+        "Financial_Ombudsman": "Financial Customer Ombudsman (Defensor del Cliente Financiero)"
+    },
+    "China": {
+        "Financial_Authority": "National Administration of Financial Regulation (NAFR)",
+        "Abbreviation": "NAFR",
+        "Website": "http://www.nfca.gov.cn/",
+        "Consumer_Protection_Body": "China Consumers' Association",
+        "Website_Consumer_Protection": "http://www.cca.org.cn/",
+        "Financial_Ombudsman": "Banking and Insurance Consumer Complaint Resolution Center of the NAFR"
+    },
+    "Colombia": {
+        "Financial_Authority": "Financial Superintendence of Colombia (Superintendencia Financiera de Colombia)",
+        "Abbreviation": "SFC",
+        "Website": "https://www.superfinanciera.gov.co/",
+        "Consumer_Protection_Body": "Superintendence of Industry and Commerce (Superintendencia de Industria y Comercio)",
+        "Website_Consumer_Protection": "https://www.sic.gov.co/",
+        "Financial_Ombudsman": "Financial Consumer Defender (Defensor del Consumidor Financiero)"
+    },
+    "Costa Rica": {
+        "Financial_Authority": "General Superintendence of Financial Entities (Superintendencia General de Entidades Financieras)",
+        "Abbreviation": "SUGEF",
+        "Website": "https://www.sugef.fi.cr/",
+        "Consumer_Protection_Body": "Directorate of Support for the Consumer (Dirección de Apoyo al Consumidor)",
+        "Website_Consumer_Protection": "https://www.meic.go.cr/web/80/apoyo-al-consumidor",
+        "Financial_Ombudsman": "No dedicated financial ombudsman."
+    },
+    "Croatia": {
+        "Financial_Authority": "Croatian National Bank (Hrvatska narodna banka)",
+        "Abbreviation": "HNB",
+        "Website": "https://www.hnb.hr/",
+        "Consumer_Protection_Body": "Ministry of Economy and Sustainable Development - Consumer Protection Sector",
+        "Website_Consumer_Protection": "https://gospodarstvo.gov.hr/o-ministarstvu/ustrojstvo/uprava-za-zastitu-potrosaca/100",
+        "Financial_Ombudsman": "Mediation Centre of the Croatian Chamber of Economy"
+    },
+    "Cyprus": {
+        "Financial_Authority": "Central Bank of Cyprus (Κεντρική Τράπεζα της Κύπρου)",
+        "Abbreviation": "CBC",
+        "Website": "https://www.centralbank.cy/",
+        "Consumer_Protection_Body": "Cyprus Consumer Protection Service (Υπηρεσία Προστασίας Καταναλωτή)",
+        "Website_Consumer_Protection": "https://www.consumer.gov.cy/",
+        "Financial_Ombudsman": "Financial Ombudsman of the Republic of Cyprus (Χρηματοοικονομικός Επίτροπος)"
+    },
+    "Czech Republic": {
+        "Financial_Authority": "Czech National Bank (Česká národní banka)",
+        "Abbreviation": "CNB",
+        "Website": "https://www.cnb.cz/",
+        "Consumer_Protection_Body": "Czech Trade Inspection Authority (Česká obchodní inspekce)",
+        "Website_Consumer_Protection": "https://www.coi.cz/",
+        "Financial_Ombudsman": "Financial Arbitrator (Finanční arbitr)"
+    },
+    "Denmark": {
+        "Financial_Authority": "Danish Financial Supervisory Authority (Finanstilsynet)",
+        "Abbreviation": "DFSA",
+        "Website": "https://www.finanstilsynet.dk/",
+        "Consumer_Protection_Body": "Danish Competition and Consumer Authority (Konkurrence- og Forbrugerstyrelsen)",
+        "Website_Consumer_Protection": "https://www.kfst.dk/",
+        "Financial_Ombudsman": "The Danish Financial Complaint Board (Det Finansielle Ankenævn)"
+    },
+    "Dominican Republic": {
+        "Financial_Authority": "Superintendency of Banks of the Dominican Republic (Superintendencia de Bancos de la República Dominicana)",
+        "Abbreviation": "SB",
+        "Website": "https://www.sb.gob.do/",
+        "Consumer_Protection_Body": "National Institute for the Protection of Consumer Rights (Pro Consumidor)",
+        "Website_Consumer_Protection": "https://www.proconsumidor.gob.do/",
+        "Financial_Ombudsman": "User Protection Department (Departamento de Protección al Usuario - ProUsuario) of the Superintendency of Banks"
+    },
+    "Egypt": {
+        "Financial_Authority": "Financial Regulatory Authority (FRA)",
+        "Abbreviation": "FRA",
+        "Website": "http://www.fra.gov.eg/",
+        "Consumer_Protection_Body": "Consumer Protection Agency (CPA)",
+        "Website_Consumer_Protection": "http://www.cpa.gov.eg/",
+        "Financial_Ombudsman": "No dedicated financial ombudsman, complaints handled by FRA."
+    },
+    "Estonia": {
+        "Financial_Authority": "Estonian Financial Supervision and Resolution Authority (Finantsinspektsioon)",
+        "Abbreviation": "EFSA",
+        "Website": "https://www.fi.ee/",
+        "Consumer_Protection_Body": "Consumer Protection and Technical Regulatory Authority (Tarbijakaitse ja Tehnilise Järelevalve Amet)",
+        "Website_Consumer_Protection": "https://www.ttja.ee/",
+        "Financial_Ombudsman": "Consumer Disputes Committee (Tarbijavaidluste komisjon)"
+    },
+    "Finland": {
+        "Financial_Authority": "Financial Supervisory Authority (Finanssivalvonta)",
+        "Abbreviation": "FIN-FSA",
+        "Website": "https://www.finanssivalvonta.fi/",
+        "Consumer_Protection_Body": "Finnish Competition and Consumer Authority (Kilpailu- ja kuluttajavirasto)",
+        "Website_Consumer_Protection": "https://www.kkv.fi/",
+        "Financial_Ombudsman": "Finnish Financial Ombudsman Bureau (FINE)"
+    },
+    "France": {
+        "Financial_Authority": "Prudential Supervision and Resolution Authority (Autorité de contrôle prudentiel et de résolution)",
+        "Abbreviation": "ACPR",
+        "Website": "https://acpr.banque-france.fr/",
+        "Consumer_Protection_Body": "Directorate General for Competition Policy, Consumer Affairs and Fraud Control (DGCCRF)",
+        "Website_Consumer_Protection": "https://www.economie.gouv.fr/dgccrf",
+        "Financial_Ombudsman": "Médiateur de l'Autorité des marchés financiers (AMF) / Médiateurs bancaires"
+    },
+    "Georgia": {
+        "Financial_Authority": "National Bank of Georgia (საქართველოს ეროვნული ბანკი)",
+        "Abbreviation": "NBG",
+        "Website": "https://nbg.gov.ge/",
+        "Consumer_Protection_Body": "Competition Agency of Georgia",
+        "Website_Consumer_Protection": "https://competition.ge/",
+        "Financial_Ombudsman": "No dedicated financial ombudsman, complaints handled by NBG."
+    },
+    "Germany": {
+        "Financial_Authority": "Federal Financial Supervisory Authority (Bundesanstalt für Finanzdienstleistungsaufsicht)",
+        "Abbreviation": "BaFin",
+        "Website": "https://www.bafin.de/",
+        "Consumer_Protection_Body": "Federation of German Consumer Organisations (Verbraucherzentrale Bundesverband)",
+        "Website_Consumer_Protection": "https://www.vzbv.de/",
+        "Financial_Ombudsman": "Schlichtungsstelle bei der Deutschen Bundesbank / Ombudsmann der privaten Banken"
+    },
+    "Ghana": {
+        "Financial_Authority": "Bank of Ghana",
+        "Abbreviation": "BoG",
+        "Website": "https://www.bog.gov.gh/",
+        "Consumer_Protection_Body": "Consumer Protection Agency (CPA) Ghana",
+        "Website_Consumer_Protection": "https://www.cpaghana.org/",
+        "Financial_Ombudsman": "No dedicated financial ombudsman, complaints handled by BoG."
+    },
+    "Gibraltar": {
+        "Financial_Authority": "Gibraltar Financial Services Commission (GFSC)",
+        "Abbreviation": "GFSC",
+        "Website": "https://www.fsc.gi/",
+        "Consumer_Protection_Body": "Office of Fair Trading",
+        "Website_Consumer_Protection": "https://www.oft.gov.gi/",
+        "Financial_Ombudsman": "Financial Services Ombudsman"
+    },
+    "Greece": {
+        "Financial_Authority": "Bank of Greece (Τράπεζα της Ελλάδος)",
+        "Abbreviation": "BoG",
+        "Website": "https://www.bankofgreece.gr/",
+        "Consumer_Protection_Body": "General Secretariat for Consumer Affairs (Γενική Γραμματεία Καταναλωτή)",
+        "Website_Consumer_Protection": "http://www.efpolis.gr/",
+        "Financial_Ombudsman": "Hellenic Financial Ombudsman (Χρηματοοικονομικός Μεσολαβητής)"
+    },
+    "Guernsey": {
+        "Financial_Authority": "Guernsey Financial Services Commission (GFSC)",
+        "Abbreviation": "GFSC",
+        "Website": "https://www.gfsc.gg/",
+        "Consumer_Protection_Body": "Guernsey Trading Standards",
+        "Website_Consumer_Protection": "https://www.gov.gg/tradingstandards",
+        "Financial_Ombudsman": "Channel Islands Financial Ombudsman (CIFO)"
+    },
+    "Hong Kong": {
+        "Financial_Authority": "Hong Kong Monetary Authority (HKMA)",
+        "Abbreviation": "HKMA",
+        "Website": "https://www.hkma.gov.hk/",
+        "Consumer_Protection_Body": "Consumer Council",
+        "Website_Consumer_Protection": "https://www.consumer.org.hk/",
+        "Financial_Ombudsman": "Financial Dispute Resolution Centre (FDRC)"
+    },
+    "Hungary": {
+        "Financial_Authority": "Central Bank of Hungary (Magyar Nemzeti Bank)",
+        "Abbreviation": "MNB",
+        "Website": "https://www.mnb.hu/",
+        "Consumer_Protection_Body": "Ministry for Innovation and Technology",
+        "Website_Consumer_Protection": "https://www.kormany.hu/hu/innovacios-es-technologiai-miniszterium",
+        "Financial_Ombudsman": "Financial Conciliation Board (Pénzügyi Békéltető Testület)"
+    },
+    "Iceland": {
+        "Financial_Authority": "Central Bank of Iceland (Seðlabanki Íslands)",
+        "Abbreviation": "CBI",
+        "Website": "https://www.sedlabanki.is/",
+        "Consumer_Protection_Body": "Icelandic Consumer Agency (Neytendastofa)",
+        "Website_Consumer_Protection": "https://www.neytendastofa.is/",
+        "Financial_Ombudsman": "The Complaints Committee on Transactions with Financial Firms (Úrskurðarnefnd um viðskipti við fjármálafyrirtæki)"
+    },
+    "India": {
+        "Financial_Authority": "Reserve Bank of India (RBI)",
+        "Abbreviation": "RBI",
+        "Website": "https://www.rbi.org.in/",
+        "Consumer_Protection_Body": "National Consumer Disputes Redressal Commission (NCDRC)",
+        "Website_Consumer_Protection": "http://ncdrc.nic.in/",
+        "Financial_Ombudsman": "RBI Ombudsman"
+    },
+    "Indonesia": {
+        "Financial_Authority": "Indonesia Financial Services Authority (Otoritas Jasa Keuangan)",
+        "Abbreviation": "OJK",
+        "Website": "https://www.ojk.go.id/",
+        "Consumer_Protection_Body": "National Consumer Protection Agency (Badan Perlindungan Konsumen Nasional)",
+        "Website_Consumer_Protection": "http://bpkn.go.id/",
+        "Financial_Ombudsman": "Alternative Dispute Resolution Institution for the Financial Services Sector (LAPS SJK)"
+    },
+    "Ireland": {
+        "Financial_Authority": "Central Bank of Ireland",
+        "Abbreviation": "CBI",
+        "Website": "https://www.centralbank.ie/",
+        "Consumer_Protection_Body": "Competition and Consumer Protection Commission (CCPC)",
+        "Website_Consumer_Protection": "https://www.ccpc.ie/",
+        "Financial_Ombudsman": "Financial Services and Pensions Ombudsman (FSPO)"
+    },
+    "Isle of Man": {
+        "Financial_Authority": "Isle of Man Financial Services Authority (IOMFSA)",
+        "Abbreviation": "IOMFSA",
+        "Website": "https://www.iomfsa.im/",
+        "Consumer_Protection_Body": "Isle of Man Office of Fair Trading",
+        "Website_Consumer_Protection": "https://www.gov.im/oft/",
+        "Financial_Ombudsman": "Financial Services Ombudsman Scheme"
+    },
+    "Israel": {
+        "Financial_Authority": "Bank of Israel (בנק ישראל)",
+        "Abbreviation": "BOI",
+        "Website": "https://www.boi.org.il/",
+        "Consumer_Protection_Body": "The Israel Consumer Council",
+        "Website_Consumer_Protection": "https://www.consumers.org.il/",
+        "Financial_Ombudsman": "Supervisor of Banks - Public Enquiries Unit"
+    },
+    "Italy": {
+        "Financial_Authority": "Bank of Italy (Banca d'Italia)",
+        "Abbreviation": "BdI",
+        "Website": "https://www.bancaditalia.it/",
+        "Consumer_Protection_Body": "Italian Competition Authority (Autorità Garante della Concorrenza e del Mercato)",
+        "Website_Consumer_Protection": "https://www.agcm.it/",
+        "Financial_Ombudsman": "Arbitro Bancario Finanziario (ABF)"
+    },
+    "Jamaica": {
+        "Financial_Authority": "Bank of Jamaica (BOJ)",
+        "Abbreviation": "BOJ",
+        "Website": "https://boj.org.jm/",
+        "Consumer_Protection_Body": "Consumer Affairs Commission (CAC)",
+        "Website_Consumer_Protection": "https://www.cac.gov.jm/",
+        "Financial_Ombudsman": "No dedicated financial ombudsman."
+    },
+    "Japan": {
+        "Financial_Authority": "Financial Services Agency (金融庁)",
+        "Abbreviation": "FSA",
+        "Website": "https://www.fsa.go.jp/",
+        "Consumer_Protection_Body": "National Consumer Affairs Center of Japan",
+        "Website_Consumer_Protection": "http://www.kokusen.go.jp/",
+        "Financial_Ombudsman": "Japanese Bankers Association's ADR Center / Other industry-specific ADRs"
+    },
+    "Jersey": {
+        "Financial_Authority": "Jersey Financial Services Commission (JFSC)",
+        "Abbreviation": "JFSC",
+        "Website": "https://www.jerseyfsc.org/",
+        "Consumer_Protection_Body": "Jersey Trading Standards",
+        "Website_Consumer_Protection": "https://www.gov.je/tradingstandards",
+        "Financial_Ombudsman": "Channel Islands Financial Ombudsman (CIFO)"
+    },
+    "Jordan": {
+        "Financial_Authority": "Central Bank of Jordan (البنك المركزي الأردني)",
+        "Abbreviation": "CBJ",
+        "Website": "https://www.cbj.gov.jo/",
+        "Consumer_Protection_Body": "Ministry of Industry, Trade and Supply - Consumer Protection Directorate",
+        "Website_Consumer_Protection": "http://www.mit.gov.jo/",
+        "Financial_Ombudsman": "No dedicated financial ombudsman, complaints handled by CBJ."
+    },
+    "Kazakhstan": {
+        "Financial_Authority": "Agency of the Republic of Kazakhstan for Regulation and Development of the Financial Market",
+        "Abbreviation": "ARDFM",
+        "Website": "https://www.gov.kz/memleket/entities/ardfm",
+        "Consumer_Protection_Body": "Committee for Protection of Consumer Rights",
+        "Website_Consumer_Protection": "https://www.gov.kz/memleket/entities/mti-kzpp",
+        "Financial_Ombudsman": "Banking Ombudsman of the Republic of Kazakhstan"
+    },
+    "Kenya": {
+        "Financial_Authority": "Central Bank of Kenya (CBK)",
+        "Abbreviation": "CBK",
+        "Website": "https://www.centralbank.go.ke/",
+        "Consumer_Protection_Body": "Competition Authority of Kenya",
+        "Website_Consumer_Protection": "https://www.cak.go.ke/",
+        "Financial_Ombudsman": "No dedicated financial ombudsman."
+    },
+    "Kosovo": {
+        "Financial_Authority": "Central Bank of the Republic of Kosovo (Banka Qendrore e Republikës së Kosovës)",
+        "Abbreviation": "CBK",
+        "Website": "https://bqk-kos.org/",
+        "Consumer_Protection_Body": "Ministry of Industry, Entrepreneurship and Trade - Department for Consumer Protection",
+        "Website_Consumer_Protection": "https://mint.rks-gov.net/departamentet/departamenti-per-mbrojtjen-e-konsumatorit/",
+        "Financial_Ombudsman": "No dedicated financial ombudsman."
+    },
+    "Kuwait": {
+        "Financial_Authority": "Central Bank of Kuwait (CBK)",
+        "Abbreviation": "CBK",
+        "Website": "https://www.cbk.gov.kw/",
+        "Consumer_Protection_Body": "Ministry of Commerce and Industry - Commercial Control & Consumer Protection Sector",
+        "Website_Consumer_Protection": "https://www.moci.gov.kw/",
+        "Financial_Ombudsman": "Central Bank of Kuwait - Consumer Protection Unit"
+    },
+    "Kyrgyzstan": {
+        "Financial_Authority": "National Bank of the Kyrgyz Republic (Кыргыз Республикасынын Улуттук банкы)",
+        "Abbreviation": "NBKR",
+        "Website": "https://www.nbkr.kg/",
+        "Consumer_Protection_Body": "State Agency for Antimonopoly Regulation",
+        "Website_Consumer_Protection": "http://antimonopolia.gov.kg/",
+        "Financial_Ombudsman": "Independent Banking Ombudsman"
+    },
+    "Latvia": {
+        "Financial_Authority": "Bank of Latvia (Latvijas Banka)",
+        "Abbreviation": "LB",
+        "Website": "https://www.bank.lv/",
+        "Consumer_Protection_Body": "Consumer Rights Protection Centre (Patērētāju tiesību aizsardzības centrs)",
+        "Website_Consumer_Protection": "https://www.ptac.gov.lv/",
+        "Financial_Ombudsman": "Ombudsman of the Association of Commercial Banks of Latvia"
+    },
+    "Lebanon": {
+        "Financial_Authority": "Banque du Liban (مصرف لبنان)",
+        "Abbreviation": "BDL",
+        "Website": "https://www.bdl.gov.lb/",
+        "Consumer_Protection_Body": "Ministry of Economy and Trade - Consumer Protection Directorate",
+        "Website_Consumer_Protection": "http://www.economy.gov.lb/",
+        "Financial_Ombudsman": "No dedicated financial ombudsman."
+    },
+    "Liechtenstein": {
+        "Financial_Authority": "Financial Market Authority (Finanzmarktaufsicht) Liechtenstein",
+        "Abbreviation": "FMA",
+        "Website": "https://www.fma-li.li/",
+        "Consumer_Protection_Body": "Office for Social Services - Consumer Protection (Amt für Soziale Dienste - Konsumentenschutz)",
+        "Website_Consumer_Protection": "https://www.llv.li/inhalt/1188/amtsstellen/konsumentenschutz",
+        "Financial_Ombudsman": "Conciliation Board for the Financial Sector"
+    },
+    "Lithuania": {
+        "Financial_Authority": "Bank of Lithuania (Lietuvos bankas)",
+        "Abbreviation": "LB",
+        "Website": "https://www.lb.lt/",
+        "Consumer_Protection_Body": "State Consumer Rights Protection Authority (Valstybinė vartotojų teisių apsaugos tarnyba)",
+        "Website_Consumer_Protection": "http://www.vvtat.lt/",
+        "Financial_Ombudsman": "Bank of Lithuania (handles disputes)"
+    },
+    "Luxembourg": {
+        "Financial_Authority": "Commission de Surveillance du Secteur Financier (CSSF)",
+        "Abbreviation": "CSSF",
+        "Website": "https://www.cssf.lu/",
+        "Consumer_Protection_Body": "Union Luxembourgeoise des Consommateurs (ULC)",
+        "Website_Consumer_Protection": "https://www.ulc.lu/",
+        "Financial_Ombudsman": "Commission de Surveillance du Secteur Financier (CSSF) - Out-of-court resolution of complaints"
+    },
+    "Malaysia": {
+        "Financial_Authority": "Central Bank of Malaysia (Bank Negara Malaysia)",
+        "Abbreviation": "BNM",
+        "Website": "https://www.bnm.gov.my/",
+        "Consumer_Protection_Body": "National Consumer Complaints Centre (NCCC)",
+        "Website_Consumer_Protection": "http://www.nccc.org.my/",
+        "Financial_Ombudsman": "Ombudsman for Financial Services (OFS)"
+    },
+    "Malta": {
+        "Financial_Authority": "Malta Financial Services Authority (MFSA)",
+        "Abbreviation": "MFSA",
+        "Website": "https://www.mfsa.mt/",
+        "Consumer_Protection_Body": "Malta Competition and Consumer Affairs Authority (MCCAA)",
+        "Website_Consumer_Protection": "https://www.mccaa.org.mt/",
+        "Financial_Ombudsman": "Office of the Arbiter for Financial Services"
+    },
+    "Mauritius": {
+        "Financial_Authority": "Bank of Mauritius",
+        "Abbreviation": "BOM",
+        "Website": "https://www.bom.mu/",
+        "Consumer_Protection_Body": "Ministry of Commerce and Consumer Protection",
+        "Website_Consumer_Protection": "http://commerce.govmu.org/",
+        "Financial_Ombudsman": "Office of the Ombudsperson for Financial Services"
+    },
+    "Mexico": {
+        "Financial_Authority": "National Banking and Securities Commission (Comisión Nacional Bancaria y de Valores)",
+        "Abbreviation": "CNBV",
+        "Website": "https://www.gob.mx/cnbv",
+        "Consumer_Protection_Body": "National Commission for the Protection and Defense of Users of Financial Services (CONDUSEF)",
+        "Website_Consumer_Protection": "https://www.condusef.gob.mx/",
+        "Financial_Ombudsman": "CONDUSEF"
+    },
+    "Moldova": {
+        "Financial_Authority": "National Bank of Moldova (Banca Națională a Moldovei)",
+        "Abbreviation": "BNM",
+        "Website": "https://www.bnm.md/",
+        "Consumer_Protection_Body": "Agency for Consumer Protection and Market Surveillance",
+        "Website_Consumer_Protection": "https://consumator.gov.md/",
+        "Financial_Ombudsman": "No dedicated financial ombudsman."
+    },
+    "Monaco": {
+        "Financial_Authority": "Prudential Supervision and Resolution Authority (Autorité de contrôle prudentiel et de résolution) - France, under agreement",
+        "Abbreviation": "ACPR",
+        "Website": "https://acpr.banque-france.fr/",
+        "Consumer_Protection_Body": "Commission for the Control of Financial Activities (Commission de Contrôle des Activités Financières - CCAF)",
+        "Website_Consumer_Protection": "https://www.ccaf.mc/",
+        "Financial_Ombudsman": "No dedicated financial ombudsman."
+    },
+    "Montenegro": {
+        "Financial_Authority": "Central Bank of Montenegro (Centralna banka Crne Gore)",
+        "Abbreviation": "CBCG",
+        "Website": "https://www.cbcg.me/",
+        "Consumer_Protection_Body": "Administration for Inspection Affairs - Market Inspection Department",
+        "Website_Consumer_Protection": "http://www.uip.gov.me/",
+        "Financial_Ombudsman": "Banking Ombudsman"
+    },
+    "Morocco": {
+        "Financial_Authority": "Bank Al-Maghrib (بنك المغرب)",
+        "Abbreviation": "BAM",
+        "Website": "https://www.bkam.ma/",
+        "Consumer_Protection_Body": "Ministry of Industry, Trade, and Green and Digital Economy",
+        "Website_Consumer_Protection": "http://www.mcinet.gov.ma/",
+        "Financial_Ombudsman": "Moroccan Center for Banking Mediation (Centre Marocain de Médiation Bancaire)"
+    },
+    "Netherlands": {
+        "Financial_Authority": "De Nederlandsche Bank (DNB) and Authority for the Financial Markets (AFM)",
+        "Abbreviation": "DNB / AFM",
+        "Website": "https://www.dnb.nl/ and https://www.afm.nl/",
+        "Consumer_Protection_Body": "Authority for Consumers and Markets (Autoriteit Consument & Markt)",
+        "Website_Consumer_Protection": "https://www.acm.nl/",
+        "Financial_Ombudsman": "Financial Services Complaints Tribunal (Kifid)"
+    },
+    "New Zealand": {
+        "Financial_Authority": "Reserve Bank of New Zealand (Te Pūtea Matua)",
+        "Abbreviation": "RBNZ",
+        "Website": "https://www.rbnz.govt.nz/",
+        "Consumer_Protection_Body": "Commerce Commission New Zealand",
+        "Website_Consumer_Protection": "https://comcom.govt.nz/",
+        "Financial_Ombudsman": "Banking Ombudsman Scheme"
+    },
+    "Nigeria": {
+        "Financial_Authority": "Central Bank of Nigeria (CBN)",
+        "Abbreviation": "CBN",
+        "Website": "https://www.cbn.gov.ng/",
+        "Consumer_Protection_Body": "Federal Competition and Consumer Protection Commission (FCCPC)",
+        "Website_Consumer_Protection": "https://www.fccpc.gov.ng/",
+        "Financial_Ombudsman": "No dedicated financial ombudsman, complaints handled by CBN."
+    },
+    "North Macedonia": {
+        "Financial_Authority": "National Bank of the Republic of North Macedonia (Народна банка на Република Северна Македонија)",
+        "Abbreviation": "NBRNM",
+        "Website": "https://www.nbrm.mk/",
+        "Consumer_Protection_Body": "Consumer Protection Organization of Macedonia",
+        "Website_Consumer_Protection": "https://opm.org.mk/",
+        "Financial_Ombudsman": "No dedicated financial ombudsman."
+    },
+    "Norway": {
+        "Financial_Authority": "The Financial Supervisory Authority of Norway (Finanstilsynet)",
+        "Abbreviation": "Finanstilsynet",
+        "Website": "https://www.finanstilsynet.no/",
+        "Consumer_Protection_Body": "Norwegian Consumer Council (Forbrukerrådet)",
+        "Website_Consumer_Protection": "https://www.forbrukerradet.no/",
+        "Financial_Ombudsman": "Norwegian Financial Services Complaints Board (Finansklagenemnda)"
+    },
+    "Oman": {
+        "Financial_Authority": "Central Bank of Oman (البنك المركزي العماني)",
+        "Abbreviation": "CBO",
+        "Website": "https://cbo.gov.om/",
+        "Consumer_Protection_Body": "Consumer Protection Authority",
+        "Website_Consumer_Protection": "https://www.pacp.gov.om/",
+        "Financial_Ombudsman": "No dedicated financial ombudsman."
+    },
+    "Pakistan": {
+        "Financial_Authority": "State Bank of Pakistan (SBP)",
+        "Abbreviation": "SBP",
+        "Website": "https://www.sbp.org.pk/",
+        "Consumer_Protection_Body": "Competition Commission of Pakistan",
+        "Website_Consumer_Protection": "https://www.cc.gov.pk/",
+        "Financial_Ombudsman": "Banking Mohtasib Pakistan"
+    },
+    "Panama": {
+        "Financial_Authority": "Superintendency of Banks of Panama (Superintendencia de Bancos de Panamá)",
+        "Abbreviation": "SBP",
+        "Website": "https://www.superbancos.gob.pa/",
+        "Consumer_Protection_Body": "Authority for Consumer Protection and Defense of Competition (ACODECO)",
+        "Website_Consumer_Protection": "https://www.acodeco.gob.pa/",
+        "Financial_Ombudsman": "No dedicated financial ombudsman."
+    },
+    "Peru": {
+        "Financial_Authority": "Superintendency of Banking, Insurance and Private Pension Funds Administrators (Superintendencia de Banca, Seguros y AFP)",
+        "Abbreviation": "SBS",
+        "Website": "https://www.sbs.gob.pe/",
+        "Consumer_Protection_Body": "National Institute for the Defense of Competition and the Protection of Intellectual Property (Indecopi)",
+        "Website_Consumer_Protection": "https://www.indecopi.gob.pe/",
+        "Financial_Ombudsman": "Financial Consumer Defender (Defensor del Cliente Financiero)"
+    },
+    "Philippines": {
+        "Financial_Authority": "Bangko Sentral ng Pilipinas (BSP)",
+        "Abbreviation": "BSP",
+        "Website": "https://www.bsp.gov.ph/",
+        "Consumer_Protection_Body": "Department of Trade and Industry - Consumer Protection Group",
+        "Website_Consumer_Protection": "https://www.dti.gov.ph/konsyumer/",
+        "Financial_Ombudsman": "BSP Consumer Assistance Mechanism (CAM)"
+    },
+    "Poland": {
+        "Financial_Authority": "Polish Financial Supervision Authority (Komisja Nadzoru Finansowego)",
+        "Abbreviation": "KNF",
+        "Website": "https://www.knf.gov.pl/",
+        "Consumer_Protection_Body": "Office of Competition and Consumer Protection (Urząd Ochrony Konkurencji i Konsumentów)",
+        "Website_Consumer_Protection": "https://uokik.gov.pl/",
+        "Financial_Ombudsman": "Financial Ombudsman (Rzecznik Finansowy)"
+    },
+    "Portugal": {
+        "Financial_Authority": "Bank of Portugal (Banco de Portugal)",
+        "Abbreviation": "BdP",
+        "Website": "https://www.bportugal.pt/",
+        "Consumer_Protection_Body": "Directorate-General for Consumer Affairs (Direção-Geral do Consumidor)",
+        "Website_Consumer_Protection": "https://www.consumidor.gov.pt/",
+        "Financial_Ombudsman": "Banking Customer Ombudsman (Provedor do Cliente Bancário)"
+    },
+    "Qatar": {
+        "Financial_Authority": "Qatar Central Bank (مصرف قطر المركزي)",
+        "Abbreviation": "QCB",
+        "Website": "https://www.qcb.gov.qa/",
+        "Consumer_Protection_Body": "Ministry of Commerce and Industry - Consumer Protection and Anti-Commercial Fraud department",
+        "Website_Consumer_Protection": "https://www.moci.gov.qa/",
+        "Financial_Ombudsman": "Qatar Central Bank - Consumer Protection Department"
+    },
+    "Romania": {
+        "Financial_Authority": "National Bank of Romania (Banca Națională a României)",
+        "Abbreviation": "BNR",
+        "Website": "https://www.bnr.ro/",
+        "Consumer_Protection_Body": "National Authority for Consumer Protection (Autoritatea Națională pentru Protecția Consumatorilor)",
+        "Website_Consumer_Protection": "https://anpc.ro/",
+        "Financial_Ombudsman": "Alternative Banking Dispute Resolution Centre (CSALB)"
+    },
+    "Russia": {
+        "Financial_Authority": "Central Bank of the Russian Federation (Банк России)",
+        "Abbreviation": "CBR",
+        "Website": "https://www.cbr.ru/",
+        "Consumer_Protection_Body": "Federal Service for Surveillance on Consumer Rights Protection and Human Wellbeing (Rospotrebnadzor)",
+        "Website_Consumer_Protection": "https://www.rospotrebnadzor.ru/",
+        "Financial_Ombudsman": "Financial Ombudsman Service (Служба финансового уполномоченного)"
+    },
+    "San Marino": {
+        "Financial_Authority": "Central Bank of the Republic of San Marino (Banca Centrale della Repubblica di San Marino)",
+        "Abbreviation": "BCSM",
+        "Website": "https://www.bcsm.sm/",
+        "Consumer_Protection_Body": "Ufficio Attività Economiche - Ufficio Tutela Consumatori",
+        "Website_Consumer_Protection": "https://www.gov.sm/pub1/GovSM/Uffici-e-Servizi/Ufficio-Attivita-Economiche.html",
+        "Financial_Ombudsman": "No dedicated financial ombudsman."
+    },
+    "Saudi Arabia": {
+        "Financial_Authority": "Saudi Central Bank (SAMA)",
+        "Abbreviation": "SAMA",
+        "Website": "https://www.sama.gov.sa/",
+        "Consumer_Protection_Body": "Ministry of Commerce",
+        "Website_Consumer_Protection": "https://mc.gov.sa/",
+        "Financial_Ombudsman": "SAMA - Consumer Protection Department"
+    },
+    "Serbia": {
+        "Financial_Authority": "National Bank of Serbia (Народна банка Србије)",
+        "Abbreviation": "NBS",
+        "Website": "https://www.nbs.rs/",
+        "Consumer_Protection_Body": "Ministry of Trade, Tourism and Telecommunications - Sector for Consumer Protection",
+        "Website_Consumer_Protection": "https://zastitapotrosaca.gov.rs/",
+        "Financial_Ombudsman": "National Bank of Serbia - Centre for User Protection and Financial Education"
+    },
+    "Singapore": {
+      "country_name": "Singapore",
+      "flag": "🇸🇬",
+      "isEU": false,
+      "protectionLevel": "Altissimo",
+      "notes": "Regolamentazione evoluta con supporto psicologico per vittime di truffe. La Polizia, tramite l'app Scamshield, offre una guida esemplare sulle tattiche psicologiche dei truffatori (https://www.scamshield.gov.sg/why-do-people-fall-prey-to-scams/). Guida al rischio: https://www.moneysense.gov.sg/investments/investment-risk/. Cyber Security Agency (Facebook): https://www.facebook.com/CSAsingapore. DBS Bank promuove la responsabilità condivisa (https://www.dbs.com.sg/personal/support/general-shared-responsibility-framework.html). World Investor Week Coordinator: Paulyn Sng.",
+      "financial_authority": {
+        "name": "Monetary Authority of Singapore",
+        "abbreviation": "MAS",
+        "homepage": "https://www.mas.gov.sg/",
+        "fraudReportLink": "https://www.mas.gov.sg/contact-us",
+        "authorityEmail": "webmaster@mas.gov.sg",
+        "social_links": {
+          "linkedin": "https://www.linkedin.com/company/monetary-authority-of-singapore-mas-/",
+          "twitter": "https://twitter.com/MAS_sg",
+          "youtube": "https://www.youtube.com/channel/UCb_3U5s_2Qp3nJg2IuR22mQ"
+        }
+      }
+    },
+    "Slovakia": {
+        "Financial_Authority": "National Bank of Slovakia (Národná banka Slovenska)",
+        "Abbreviation": "NBS",
+        "Website": "https://www.nbs.sk/",
+        "Consumer_Protection_Body": "Slovak Trade Inspection (Slovenská obchodná inšpekcia)",
+        "Website_Consumer_Protection": "https://www.soi.sk/",
+        "Financial_Ombudsman": "Slovak Banking Association Ombudsman"
+    },
+    "Slovenia": {
+        "Financial_Authority": "Bank of Slovenia (Banka Slovenije)",
+        "Abbreviation": "BS",
+        "Website": "https://www.bsi.si/",
+        "Consumer_Protection_Body": "Slovenian Consumer Association (Zveza potrošnikov Slovenije)",
+        "Website_Consumer_Protection": "https://www.zps.si/",
+        "Financial_Ombudsman": "Association of Banks of Slovenia - Ombudsman"
+    },
+    "South Africa": {
+        "Financial_Authority": "Prudential Authority (PA) and Financial Sector Conduct Authority (FSCA)",
+        "Abbreviation": "PA / FSCA",
+        "Website": "https://www.resbank.co.za/ and https://www.fsca.co.za/",
+        "Consumer_Protection_Body": "National Consumer Commission (NCC)",
+        "Website_Consumer_Protection": "http://www.thencc.gov.za/",
+        "Financial_Ombudsman": "Ombudsman for Banking Services"
+    },
+    "South Korea": {
+        "Financial_Authority": "Financial Services Commission (금융위원회) and Financial Supervisory Service (금융감독원)",
+        "Abbreviation": "FSC / FSS",
+        "Website": "https://www.fsc.go.kr/ and https://www.fss.or.kr/",
+        "Consumer_Protection_Body": "Korea Consumer Agency (한국소비자원)",
+        "Website_Consumer_Protection": "https://www.kca.go.kr/",
+        "Financial_Ombudsman": "Financial Supervisory Service - Financial Dispute Resolution Service"
+    },
+    "Spain": {
+        "Financial_Authority": "Bank of Spain (Banco de España)",
+        "Abbreviation": "BdE",
+        "Website": "https://www.bde.es/",
+        "Consumer_Protection_Body": "Ministry of Consumer Affairs (Ministerio de Consumo)",
+        "Website_Consumer_Protection": "https://www.consumo.gob.es/",
+        "Financial_Ombudsman": "Banco de España - Complaints Service"
+    },
+    "Sweden": {
+        "Financial_Authority": "Swedish Financial Supervisory Authority (Finansinspektionen)",
+        "Abbreviation": "FI",
+        "Website": "https://www.fi.se/",
+        "Consumer_Protection_Body": "Swedish Consumer Agency (Konsumentverket)",
+        "Website_Consumer_Protection": "https://www.konsumentverket.se/",
+        "Financial_Ombudsman": "Swedish Consumers' Banking and Finance Bureau (Konsumenternas Bank- och Finansbyrå)"
+    },
+    "Switzerland": {
+        "Financial_Authority": "Swiss Financial Market Supervisory Authority (FINMA)",
+        "Abbreviation": "FINMA",
+        "Website": "https://www.finma.ch/",
+        "Consumer_Protection_Body": "Federal Consumer Affairs Bureau (FCAB)",
+        "Website_Consumer_Protection": "https://www.konsum.admin.ch/",
+        "Financial_Ombudsman": "Swiss Banking Ombudsman"
+    },
+    "Taiwan": {
+        "Financial_Authority": "Financial Supervisory Commission (金融監督管理委員會)",
+        "Abbreviation": "FSC",
+        "Website": "https://www.fsc.gov.tw/",
+        "Consumer_Protection_Body": "Consumer Protection Committee, Executive Yuan",
+        "Website_Consumer_Protection": "https://cpc.ey.gov.tw/",
+        "Financial_Ombudsman": "Financial Ombudsman Institution (FOI)"
+    },
+    "Thailand": {
+        "Financial_Authority": "Bank of Thailand (ธนาคารแห่งประเทศไทย)",
+        "Abbreviation": "BOT",
+        "Website": "https://www.bot.or.th/",
+        "Consumer_Protection_Body": "Office of the Consumer Protection Board (OCPB)",
+        "Website_Consumer_Protection": "https://www.ocpb.go.th/",
+        "Financial_Ombudsman": "Bank of Thailand - Financial Consumer Protection Center"
+    },
+    "Trinidad and Tobago": {
+        "Financial_Authority": "Central Bank of Trinidad and Tobago",
+        "Abbreviation": "CBTT",
+        "Website": "https://www.central-bank.org.tt/",
+        "Consumer_Protection_Body": "Consumer Affairs Division, Ministry of Trade and Industry",
+        "Website_Consumer_Protection": "https://www.tradeind.gov.tt/cad/",
+        "Financial_Ombudsman": "Office of the Financial Services Ombudsman (OFSO)"
+    },
+    "Turkey": {
+        "Financial_Authority": "Banking Regulation and Supervision Agency (Bankacılık Düzenleme ve Denetleme Kurumu)",
+        "Abbreviation": "BRSA / BDDK",
+        "Website": "https://www.bddk.org.tr/",
+        "Consumer_Protection_Body": "Ministry of Trade - Directorate General for Consumer Protection and Market Surveillance",
+        "Website_Consumer_Protection": "https://tuketici.ticaret.gov.tr/",
+        "Financial_Ombudsman": "Turkish Banking Association - Customer Complaints Arbitration Panel"
+    },
+    "Ukraine": {
+        "Financial_Authority": "National Bank of Ukraine (Національний банк України)",
+        "Abbreviation": "NBU",
+        "Website": "https://bank.gov.ua/",
+        "Consumer_Protection_Body": "State Service of Ukraine on Food Safety and Consumer Protection",
+        "Website_Consumer_Protection": "https://dpss.gov.ua/",
+        "Financial_Ombudsman": "No dedicated financial ombudsman, complaints handled by NBU."
+    },
+    "United Arab Emirates": {
+        "Financial_Authority": "Central Bank of the UAE (CBUAE)",
+        "Abbreviation": "CBUAE",
+        "Website": "https://www.centralbank.ae/",
+        "Consumer_Protection_Body": "Ministry of Economy - Consumer Protection Department",
+        "Website_Consumer_Protection": "https://www.moec.gov.ae/",
+        "Financial_Ombudsman": "Sanadak, The Ombudsman for financial services"
+    },
+    "United Kingdom": {
+        "Financial_Authority": "Prudential Regulation Authority (PRA) and Financial Conduct Authority (FCA)",
+        "Abbreviation": "PRA / FCA",
+        "Website": "https://www.bankofengland.co.uk/pra and https://www.fca.org.uk/",
+        "Consumer_Protection_Body": "Citizens Advice",
+        "Website_Consumer_Protection": "https://www.citizensadvice.org.uk/",
+        "Financial_Ombudsman": "Financial Ombudsman Service"
+    },
+    "United States": {
+        "Financial_Authority": "Office of the Comptroller of the Currency (OCC) and Federal Reserve System (The Fed)",
+        "Abbreviation": "OCC / Fed",
+        "Website": "https://www.occ.gov/ and https://www.federalreserve.gov/",
+        "Consumer_Protection_Body": "Consumer Financial Protection Bureau (CFPB)",
+        "Website_Consumer_Protection": "https://www.consumerfinance.gov/",
+        "Financial_Ombudsman": "Consumer Financial Protection Bureau (CFPB)"
+    },
+    "Uruguay": {
+        "Financial_Authority": "Central Bank of Uruguay (Banco Central del Uruguay)",
+        "Abbreviation": "BCU",
+        "Website": "https://www.bcu.gub.uy/",
+        "Consumer_Protection_Body": "Ministry of Economy and Finance - Consumer Defense Area",
+        "Website_Consumer_Protection": "https://www.gub.uy/ministerio-economia-finanzas/defensa-consumidor",
+        "Financial_Ombudsman": "BCU - Superintendency of Financial Services"
+    },
+    "Uzbekistan": {
+        "Financial_Authority": "Central Bank of the Republic of Uzbekistan (O'zbekiston Respublikasi Markaziy banki)",
+        "Abbreviation": "CBU",
+        "Website": "https://cbu.uz/",
+        "Consumer_Protection_Body": "Agency for consumer protection under the Antimonopoly committee of the Republic of Uzbekistan",
+        "Website_Consumer_Protection": "https://consumer.uz/",
+        "Financial_Ombudsman": "No dedicated financial ombudsman."
+    },
+    "Vietnam": {
+        "Financial_Authority": "State Bank of Vietnam (Ngân hàng Nhà nước Việt Nam)",
+        "Abbreviation": "SBV",
+        "Website": "https://www.sbv.gov.vn/",
+        "Consumer_Protection_Body": "Vietnam Competition and Consumer Authority (VCCA)",
+        "Website_Consumer_Protection": "http://www.vcca.gov.vn/",
+        "Financial_Ombudsman": "No dedicated financial ombudsman."
+    },
+    "Zambia": {
+        "Financial_Authority": "Bank of Zambia",
+        "Abbreviation": "BoZ",
+        "Website": "https://www.boz.zm/",
+        "Consumer_Protection_Body": "Competition and Consumer Protection Commission (CCPC)",
+        "Website_Consumer_Protection": "https://www.ccpc.org.zm/",
+        "Financial_Ombudsman": "No dedicated financial ombudsman."
+    }
+}

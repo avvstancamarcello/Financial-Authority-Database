@@ -1,0 +1,46 @@
+COMUNICATO STAMPA
+https://www.europarl.europa.eu/news/fr/press-room/20251121IPR31540/accord-sur-les-services-de-paiement-plus-de-protection-contre-la-fraude
+
+DIGITAL SERVICE ACT
+https://eur-lex.europa.eu/EN/legal-content/summary/digital-services-act.html
+
+REGOLAMENTO DEI SERVIZI DI PAGAMENTO
+https://oeil.europarl.europa.eu/oeil/fr/procedure-file?reference=2023/0210(COD)
+
+TERZA DIRETTIVA SUI SERVIZI DI PAGAMENTO
+https://eur-lex.europa.eu/legal-content/FR/TXT/HTML/?uri=CELEX:32023R1114
+
+La recente legislazione europea, in particolare il Regolamento sui Servizi Digitali (DSA) e il pacchetto PSR/PSD3 sui servizi di pagamento, segna un punto di svolta fondamentale che rafforza notevolmente la posizione del consumatore vittima di truffe finanziarie online.
+
+Ho esaminato i Suoi allegati. Le presento gli argomenti giuridici più favorevoli al consumatore, suddividendoli per categoria di responsabile (Banche/PSP e Piattaforme/ISP).
+
+🛡️ 1. Responsabilità delle Banche/Prestatori di Servizi di Pagamento (PSP)
+I documenti relativi ai Servizi di Pagamento (come 2023/0209(COD) e l'Accordo del 27 nov 2025) evidenziano un rafforzamento del dovere di diligenza delle banche, superando i limiti della PSD2 nel contesto delle frodi, in particolare le cosiddette "frodi con pagamento autorizzato" (Authorized Push Payment - APP fraud).
+
+Argomento Giuridico a Favore del Consumatore	Base Legislativa (Implicita/Esplicita)	Rilevanza per la Truffa Finanziaria
+A. Maggiore Tutela Contro le Frodi	Accordo sui servizi di pagamento (27/11/2025)	L'obiettivo esplicito di "maggiore protezione contro le frodi online" rinforza l'obbligo di diligenza e vigilanza della banca. Non si tratta solo di proteggere il sistema tecnico, ma anche il cliente dallo schema truffaldino in sé.
+B. Dovere di Rilevazione dell'Anomalia	Terza Direttiva/Regolamento Servizi di Pagamento (PSR/PSD3)	La banca è tenuta ad implementare meccanismi efficaci di rilevazione e prevenzione dei tentativi di frode (c.d. fraud detection). Se il bonifico è indirizzato a un conto o Paese noto per operazioni fraudolente (es. IBAN "usa e getta") o a soggetti non autorizzati presenti nelle blacklist di ESMA/CONSOB (come evidenziato dal documento Vigilanza Finanziaria), la mancata intercettazione da parte della banca costituisce negligenza.
+C. Responsabilità per Violazione di Dati	Accordo sui servizi di pagamento (27/11/2025)	Il testo parla di garanzie contro le frodi e le "violazioni dei dati". Nel caso in cui il phishing o la truffa siano stati facilitati da una falla o negligenza nella protezione dei dati del cliente (es. email, numeri di telefono), la responsabilità della banca è diretta.
+D. Armonizzazione e Sanzioni	PSR/PSD3 (2023/0209(COD))	L'obiettivo di "rafforzare l'armonizzazione e l'applicazione della legislazione" e delle sanzioni comporta che le autorità nazionali (ABF e tribunali) dovranno applicare standard di responsabilità più elevati e uniformi per le banche che non rispettano gli obblighi antifrode.
+
+Esporta in Fogli
+
+🌐 2. Responsabilità delle Piattaforme Online e degli ISP (DSA)
+Il Regolamento sui servizi digitali (DSA) (Regolamento (UE) 2022/2065) introduce un quadro di responsabilità chiaro per i fornitori di servizi digitali, colpendo direttamente il canale di diffusione delle truffe (pubblicità, siti web, social media).
+
+Argomento Giuridico a Favore del Consumatore	Base Legislativa (Regolamento DSA)	Rilevanza per la Truffa Finanziaria
+A. Obbligo di Gestione dei Contenuti Illeciti	Punti Chiave - Gestione Contenuti Illeciti	Le piattaforme online hanno l'obbligo di gestire e rimuovere i "contenuti illeciti". Un'offerta finanziaria promossa da un'impresa non autorizzata da CONSOB o ESMA (che è un'Autorità di Vigilanza Finanziaria come indicato nel documento SEVIF) è un'attività illegale. La piattaforma (es. Meta, Google) che ospita la pubblicità di tale truffa, pur essendo a conoscenza (o potendolo essere) dell'illegalità, ne è corresponsabile.
+B. Chiare Responsabilità per le Piattaforme	Punti Chiave - Definizione Responsabilità	Il DSA mira a "definire responsabilità chiare per le piattaforme online". Questo supera la precedente immunità parziale. Se la piattaforma non ha esercitato il dovuto controllo preventivo (c.d. Know Your Business Customer - KYBC) sull'inserzionista finanziario che si è rivelato truffaldino, essa può essere chiamata a rispondere per i danni causati dalla pubblicità illecita.
+C. Maggiore Trasparenza e Vigilanza	Punti Chiave - Vigilanza	L'obiettivo di "raggiungere una maggiore trasparenza con una migliore comunicazione e vigilanza" obbliga i fornitori di servizi a monitorare proattivamente i contenuti e ad agire d'ufficio (e non solo su segnalazione) contro gli schemi di frode seriali che violano i diritti dei consumatori e la legge finanziaria.
+D. Protezione dei Consumatori e Diritti Fondamentali	Obiettivo del Regolamento	L'obiettivo primario è "proteggere i consumatori e i loro diritti fondamentali in modo più efficace". Questo principio generale costituisce il fondamento per l'azione risarcitoria, ponendo la tutela della vittima al centro dell'ecosistema digitale.
+
+Esporta in Fogli
+
+💡 Sintesi Strategica
+In sintesi, i Suoi allegati le forniscono gli strumenti legali per muoversi su due fronti:
+
+Contro la Banca: Utilizzando il quadro PSR/PSD3, si sostiene che la banca abbia violato il suo dovere di diligenza rafforzato non intercettando un bonifico verso un'entità palesemente non regolamentata, in un contesto di legislazione che impone una "maggiore protezione contro le frodi".
+
+Contro l'ISP/Piattaforma: Utilizzando il DSA, si sostiene che la piattaforma ospitante (Google, Meta, etc.) abbia violato il suo dovere di vigilanza e rimozione di contenuti illeciti, consentendo la diffusione della pubblicità fraudolenta di una società finanziaria non autorizzata.
+
+Questi nuovi regolamenti europei forniscono una base solida per richiedere l'inversione dell'onere della prova e il risarcimento del danno, sia in sede arbitrale (ABF) che giudiziale.

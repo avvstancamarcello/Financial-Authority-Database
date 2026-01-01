@@ -1,0 +1,915 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Database Internazionale - Banche, Truffe Finanziarie e Responsabilità</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: #333;
+            line-height: 1.6;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+            position: relative;
+        }
+
+        .language-selector {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            display: flex;
+            gap: 10px;
+            background: rgba(255,255,255,0.2);
+            padding: 8px 12px;
+            border-radius: 25px;
+            backdrop-filter: blur(10px);
+        }
+
+        .lang-btn {
+            background: rgba(255,255,255,0.3);
+            border: 2px solid transparent;
+            color: white;
+            padding: 6px 12px;
+            border-radius: 15px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+
+        .lang-btn:hover {
+            background: rgba(255,255,255,0.5);
+            transform: translateY(-2px);
+        }
+
+        .lang-btn.active {
+            background: white;
+            color: #667eea;
+            border-color: white;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .subtitle {
+            font-size: 1.2em;
+            opacity: 0.95;
+        }
+
+        .eu-references {
+            background: #f0f4ff;
+            padding: 20px;
+            margin: 20px 0;
+            border-left: 5px solid #667eea;
+            border-radius: 8px;
+        }
+
+        .eu-references h3 {
+            color: #1e3c72;
+            margin-bottom: 15px;
+        }
+
+        .eu-references a {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 600;
+            margin: 0 10px;
+        }
+
+        .eu-references a:hover {
+            text-decoration: underline;
+        }
+
+        .controls {
+            padding: 30px;
+            background: #f8f9fa;
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .search-box {
+            flex: 1;
+            min-width: 250px;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 12px 20px;
+            border: 2px solid #ddd;
+            border-radius: 25px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .search-box input:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 10px rgba(102, 126, 234, 0.3);
+        }
+
+        .filter-buttons {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 10px 20px;
+            border: 2px solid #667eea;
+            background: white;
+            color: #667eea;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .filter-btn:hover,
+        .filter-btn.active {
+            background: #667eea;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(102, 126, 234, 0.3);
+        }
+
+        .stats {
+            padding: 30px;
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        .stat-card {
+            background: rgba(255,255,255,0.2);
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            backdrop-filter: blur(10px);
+        }
+
+        .stat-number {
+            font-size: 2.5em;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            font-size: 1em;
+            opacity: 0.9;
+        }
+
+        .content {
+            padding: 30px;
+        }
+
+        .countries-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 25px;
+            margin-top: 20px;
+        }
+
+        .country-card {
+            background: white;
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            padding: 25px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .country-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+            border-color: #667eea;
+        }
+
+        .country-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+
+        .country-flag {
+            font-size: 3em;
+            margin-right: 15px;
+        }
+
+        .country-name {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #667eea;
+        }
+
+        .country-info {
+            margin: 10px 0;
+        }
+
+        .info-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid #f0f0f0;
+            flex-direction: column;
+        }
+
+        .info-label {
+            font-weight: 600;
+            color: #666;
+            margin-bottom: 5px;
+        }
+
+        .info-value {
+            color: #333;
+            font-weight: 500;
+            font-size: 0.95em;
+        }
+
+        .authority-link {
+            margin-top: 15px;
+            padding: 10px;
+            background: #f8f9fa;
+            border-radius: 8px;
+        }
+
+        .authority-link a {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 600;
+            word-break: break-all;
+            transition: color 0.3s ease;
+            font-size: 0.9em;
+        }
+
+        .authority-link a:hover {
+            color: #764ba2;
+            text-decoration: underline;
+        }
+
+        .protection-badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 0.85em;
+            font-weight: 600;
+        }
+
+        .protection-altissimo {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .protection-alto {
+            background: #d1ecf1;
+            color: #0c5460;
+        }
+
+        .protection-medio {
+            background: #fff3cd;
+            color: #856404;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.7);
+            z-index: 1000;
+            overflow-y: auto;
+        }
+
+        .modal-content {
+            background: white;
+            max-width: 900px;
+            margin: 50px auto;
+            border-radius: 15px;
+            padding: 40px;
+            position: relative;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 30px;
+            cursor: pointer;
+            color: #666;
+            transition: color 0.3s ease;
+        }
+
+        .close-modal:hover {
+            color: #f5576c;
+        }
+
+        footer {
+            background: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin-top: 30px;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 1.8em;
+            }
+
+            .language-selector {
+                position: static;
+                justify-content: center;
+                margin-bottom: 15px;
+            }
+
+            .countries-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .stats {
+                grid-template-columns: 1fr;
+            }
+
+            .controls {
+                flex-direction: column;
+            }
+
+            .search-box {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="language-selector">
+                <button class="lang-btn active" onclick="changeLanguage('it')">🇮🇹 IT</button>
+                <button class="lang-btn" onclick="changeLanguage('en')">🇬🇧 EN</button>
+                <button class="lang-btn" onclick="changeLanguage('de')">🇩🇪 DE</button>
+                <button class="lang-btn" onclick="changeLanguage('es')">🇪🇸 ES</button>
+            </div>
+            <h1 data-i18n="title">Database Internazionale</h1>
+            <p class="subtitle" data-i18n="subtitle">Banche, Truffe Finanziarie e Responsabilità</p>
+        </header>
+
+        <div class="content">
+            <div class="eu-references">
+                <h3 data-i18n="euReferences">Riferimenti Istituzionali Europei</h3>
+                <p>
+                    <strong>ESMA</strong> - European Securities and Markets Authority: 
+                    <a href="https://www.esma.europa.eu" target="_blank">https://www.esma.europa.eu</a>
+                </p>
+                <p>
+                    <strong data-i18n="euCommission">Commissione Europea</strong>: 
+                    <a href="https://commission.europa.eu" target="_blank">https://commission.europa.eu</a>
+                </p>
+                <p>
+                    <strong>FBI IC3</strong> - Internet Crime Complaint Center: 
+                    <a href="https://www.ic3.gov/AnnualReport/Reports" target="_blank">https://www.ic3.gov/AnnualReport/Reports</a>
+                </p>
+            </div>
+        </div>
+
+        <div class="controls">
+            <div class="search-box">
+                <input type="text" id="searchInput" data-i18n-placeholder="searchPlaceholder" placeholder="Cerca per paese o autorità...">
+            </div>
+            <div class="filter-buttons">
+                <button class="filter-btn active" onclick="filterCountries('all')" data-i18n="filterAll">Tutti i Paesi</button>
+                <button class="filter-btn" onclick="filterCountries('altissimo')" data-i18n="filterHigh">Protezione Altissima</button>
+                <button class="filter-btn" onclick="filterCountries('ue')" data-i18n="filterEU">Paesi UE</button>
+            </div>
+        </div>
+
+        <div class="stats">
+            <div class="stat-card">
+                <div class="stat-number" id="totalCountries">15</div>
+                <div class="stat-label" data-i18n="statCountries">Paesi Monitorati</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="euCountries">5</div>
+                <div class="stat-label" data-i18n="statEU">Paesi UE</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="highProtection">8</div>
+                <div class="stat-label" data-i18n="statHighProtection">Protezione Altissima</div>
+            </div>
+        </div>
+
+        <div class="content">
+            <div class="countries-grid" id="countriesGrid">
+                <!-- Countries will be populated by JavaScript -->
+            </div>
+        </div>
+
+        <footer>
+            <p data-i18n="footer">© 2024 Database Internazionale - Banche, Truffe Finanziarie e Responsabilità. Tutti i diritti riservati.</p>
+            <p data-i18n="footerNote">Questo database è a scopo informativo. Consultare sempre le autorità competenti.</p>
+        </footer>
+    </div>
+
+    <div id="countryModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal()">&times;</span>
+            <div id="modalContent"></div>
+        </div>
+    </div>
+
+    <script>
+        // Translation data
+        const translations = {
+            it: {
+                title: "Database Internazionale",
+                subtitle: "Banche, Truffe Finanziarie e Responsabilità",
+                searchPlaceholder: "Cerca per paese o autorità...",
+                filterAll: "Tutti i Paesi",
+                filterHigh: "Protezione Altissima",
+                filterEU: "Paesi UE",
+                statCountries: "Paesi Monitorati",
+                statEU: "Paesi UE",
+                statHighProtection: "Protezione Altissima",
+                footer: "© 2024 Database Internazionale - Banche, Truffe Finanziarie e Responsabilità. Tutti i diritti riservati.",
+                footerNote: "Questo database è a scopo informativo. Consultare sempre le autorità competenti.",
+                authority: "Autorità Competente",
+                protectionLevel: "Livello Protezione",
+                legalBasis: "Base Legale",
+                complaintMechanism: "Meccanismo Reclami",
+                fraudReportLink: "Link Segnalazione Frodi",
+                authorityEmail: "Email Autorità",
+                notes: "Note",
+                euReferences: "Riferimenti Istituzionali Europei",
+                euCommission: "Commissione Europea"
+            },
+            en: {
+                title: "International Database",
+                subtitle: "Banks, Financial Fraud and Accountability",
+                searchPlaceholder: "Search by country or authority...",
+                filterAll: "All Countries",
+                filterHigh: "Highest Protection",
+                filterEU: "EU Countries",
+                statCountries: "Monitored Countries",
+                statEU: "EU Countries",
+                statHighProtection: "Highest Protection",
+                footer: "© 2024 International Database - Banks, Financial Fraud and Accountability. All rights reserved.",
+                footerNote: "This database is for informational purposes. Always consult the competent authorities.",
+                authority: "Competent Authority",
+                protectionLevel: "Protection Level",
+                legalBasis: "Legal Basis",
+                complaintMechanism: "Complaint Mechanism",
+                fraudReportLink: "Fraud Report Link",
+                authorityEmail: "Authority Email",
+                notes: "Notes",
+                euReferences: "European Institutional References",
+                euCommission: "European Commission"
+            },
+            de: {
+                title: "Internationale Datenbank",
+                subtitle: "Banken, Finanzbetrug und Verantwortlichkeit",
+                searchPlaceholder: "Suche nach Land oder Behörde...",
+                filterAll: "Alle Länder",
+                filterHigh: "Höchster Schutz",
+                filterEU: "EU-Länder",
+                statCountries: "Überwachte Länder",
+                statEU: "EU-Länder",
+                statHighProtection: "Höchster Schutz",
+                footer: "© 2024 Internationale Datenbank - Banken, Finanzbetrug und Verantwortlichkeit. Alle Rechte vorbehalten.",
+                footerNote: "Diese Datenbank dient nur zu Informationszwecken. Konsultieren Sie immer die zuständigen Behörden.",
+                authority: "Zuständige Behörde",
+                protectionLevel: "Schutzniveau",
+                legalBasis: "Rechtsgrundlage",
+                complaintMechanism: "Beschwerdemechanismus",
+                fraudReportLink: "Betrugsmeldelink",
+                authorityEmail: "Behörden-E-Mail",
+                notes: "Hinweise",
+                euReferences: "Europäische Institutionelle Referenzen",
+                euCommission: "Europäische Kommission"
+            },
+            es: {
+                title: "Base de Datos Internacional",
+                subtitle: "Bancos, Fraude Financiero y Responsabilidad",
+                searchPlaceholder: "Buscar por país o autoridad...",
+                filterAll: "Todos los Países",
+                filterHigh: "Máxima Protección",
+                filterEU: "Países UE",
+                statCountries: "Países Monitoreados",
+                statEU: "Países UE",
+                statHighProtection: "Máxima Protección",
+                footer: "© 2024 Base de Datos Internacional - Bancos, Fraude Financiero y Responsabilidad. Todos los derechos reservados.",
+                footerNote: "Esta base de datos es solo informativa. Siempre consulte con las autoridades competentes.",
+                authority: "Autoridad Competente",
+                protectionLevel: "Nivel de Protección",
+                legalBasis: "Base Legal",
+                complaintMechanism: "Mecanismo de Quejas",
+                fraudReportLink: "Enlace Denuncia Fraude",
+                authorityEmail: "Correo Autoridad",
+                notes: "Notas",
+                euReferences: "Referencias Institucionales Europeas",
+                euCommission: "Comisión Europea"
+            }
+        };
+
+        // Country data from CSV - ALPHABETICALLY ORDERED (A-Z)
+        const countriesData = {
+            arabia_saudita: {
+                flag: "🇸🇦",
+                names: { it: "Arabia Saudita", en: "Saudi Arabia", de: "Saudi-Arabien", es: "Arabia Saudita" },
+                authority: "CMA - Capital Market Authority",
+                protectionLevel: "Alto",
+                legalBasis: "Regole SAMA, CML",
+                complaintMechanism: "Comitati SAMA, Capital Market Authority (CMA)",
+                fraudReportLink: "https://cma.org.sa/en/Awareness/Pages/ComplaintsService.aspx",
+                authorityEmail: "info@cma.org.sa",
+                notes: "SAMA supervisiona le banche, la CMA supervisiona il mercato dei capitali.",
+                isEU: false
+            },
+            argentina: {
+                flag: "🇦🇷",
+                names: { it: "Argentina", en: "Argentina", de: "Argentinien", es: "Argentina" },
+                authority: "CNV - Comisión Nacional de Valores",
+                protectionLevel: "Alto",
+                legalBasis: "Ley Consumo, Regole BCRA",
+                complaintMechanism: "Defensoría del Pueblo, CNV",
+                fraudReportLink: "https://www.argentina.gob.ar/cnv/denuncias",
+                authorityEmail: "denuncias@cnv.gov.ar",
+                notes: "La BCRA (Banca Centrale) gestisce il registro degli intermediari finanziari.",
+                isEU: false
+            },
+            australia: {
+                flag: "🇦🇺",
+                names: { it: "Australia", en: "Australia", de: "Australien", es: "Australia" },
+                authority: "ASIC - Australian Securities and Investments Commission",
+                protectionLevel: "Altissimo",
+                legalBasis: "Corporations Act, Mandatory Scam Code",
+                complaintMechanism: "ASIC, Australian Financial Complaints Authority",
+                fraudReportLink: "https://asic.gov.au/about-asic/contact-us/how-to-complain/report-misconduct-or-a-scam/",
+                authorityEmail: "investor@asic.gov.au",
+                notes: "ASIC gestisce il registro delle aziende e dei servizi finanziari (Moneysmart).",
+                isEU: false
+            },
+            brasile: {
+                flag: "🇧🇷",
+                names: { it: "Brasile", en: "Brazil", de: "Brasilien", es: "Brasil" },
+                authority: "CVM - Comissão de Valores Mobiliários",
+                protectionLevel: "Altissimo",
+                legalBasis: "CDC, Norme BCB",
+                complaintMechanism: "Procons, CVM",
+                fraudReportLink: "https://www.gov.br/cvm/pt-br/assuntos/sac",
+                authorityEmail: "sac@cvm.gov.br",
+                notes: "Il BCB (Banco Central) gestisce il registro delle istituzioni finanziarie autorizzate.",
+                isEU: false
+            },
+            canada: {
+                flag: "🇨🇦",
+                names: { it: "Canada", en: "Canada", de: "Kanada", es: "Canadá" },
+                authority: "OSC - Ontario Securities Commission",
+                protectionLevel: "Alto",
+                legalBasis: "Securities Act, Common Law",
+                complaintMechanism: "Ombudsman, Autorità Provinciali (es. OSC)",
+                fraudReportLink: "https://www.osc.ca/en/contact-osc/submit-complaint-or-tip",
+                authorityEmail: "inquiries@osc.gov.on.ca",
+                notes: "Ogni provincia ha la sua autorità (es. OSC in Ontario, AMF in Quebec).",
+                isEU: false
+            },
+            cile: {
+                flag: "🇨🇱",
+                names: { it: "Cile", en: "Chile", de: "Chile", es: "Chile" },
+                authority: "CMF - Comisión para el Mercado Financiero",
+                protectionLevel: "Alto",
+                legalBasis: "Ley Consumo, Regole SBIF (ora CMF)",
+                complaintMechanism: "SERNAC, Comisión para el Mercado Financiero (CMF)",
+                fraudReportLink: "https://www.cmfchile.cl/portal/principal/613/w3-propertyvalue-25832.html",
+                authorityEmail: "contacto@cmfchile.cl",
+                notes: "La CMF è l'autorità integrata che supervisiona banche, valori assicurativi.",
+                isEU: false
+            },
+            costa_rica: {
+                flag: "🇨🇷",
+                names: { it: "Costa Rica", en: "Costa Rica", de: "Costa Rica", es: "Costa Rica" },
+                authority: "SUGEVAL - Superintendencia General de Valores",
+                protectionLevel: "Medio-Alto",
+                legalBasis: "Ley Consumo, Direttive SUGEF",
+                complaintMechanism: "Mediazione CONAMAJ, SUGEVAL",
+                fraudReportLink: "https://www.sugeval.fi.cr/pages/denuncias",
+                authorityEmail: "info@sugeval.fi.cr",
+                notes: "SUGEF supervisiona le banche, SUGEVAL il mercato dei valori.",
+                isEU: false
+            },
+            danimarca: {
+                flag: "🇩🇰",
+                names: { it: "Danimarca", en: "Denmark", de: "Dänemark", es: "Dinamarca" },
+                authority: "Finanstilsynet - Danish Financial Supervisory Authority",
+                protectionLevel: "Altissimo",
+                legalBasis: "PSD2/PSD3, Norme Finanstilsynet",
+                complaintMechanism: "Ankenævnet for Finansiel Virksomhed, Finanstilsynet",
+                fraudReportLink: "https://www.finanstilsynet.dk/da/Tal-med-os/Anmeld-klage",
+                authorityEmail: "ft@ft.dk",
+                notes: "L'autorità (Finanstilsynet) gestisce anche le segnalazioni di frodi.",
+                isEU: true
+            },
+            filippine: {
+                flag: "🇵🇭",
+                names: { it: "Filippine", en: "Philippines", de: "Philippinen", es: "Filipinas" },
+                authority: "SEC - Securities and Exchange Commission",
+                protectionLevel: "Alto",
+                legalBasis: "RA 11765, Circolari BSP",
+                complaintMechanism: "Reclamo a BSP, Securities and Exchange Commission (SEC)",
+                fraudReportLink: "https://www.sec.gov.ph/complaints-and-inquiries/",
+                authorityEmail: "sec@sec.gov.ph",
+                notes: "La SEC gestisce il registro delle società, comprese quelle di investimento.",
+                isEU: false
+            },
+            francia: {
+                flag: "🇫🇷",
+                names: { it: "Francia", en: "France", de: "Frankreich", es: "Francia" },
+                authority: "AMF - Autorité des Marchés Financiers",
+                protectionLevel: "Altissimo",
+                legalBasis: "PSD2/PSD3, Blacklist AMF",
+                complaintMechanism: "Médiateur de l'AMF/ACPR",
+                fraudReportLink: "https://www.amf-france.org/fr/le-mediateur/signaler-une-pratica-ou-un-operatore-sospetto",
+                authorityEmail: "contact@amf-france.org",
+                notes: "Il sito AMF pubblica una lista nera aggiornata degli operatori non autorizzati. DSA, PSD3, PSR applicabili.",
+                isEU: true
+            },
+            germania: {
+                flag: "🇩🇪",
+                names: { it: "Germania", en: "Germany", de: "Deutschland", es: "Alemania" },
+                authority: "BaFin - Bundesanstalt für Finanzdienstleistungsaufsicht",
+                protectionLevel: "Altissimo",
+                legalBasis: "PSD2/PSD3, BGB",
+                complaintMechanism: "Ombudsman, BaFin",
+                fraudReportLink: "https://www.bafin.de/DE/DieBaFin/KontaktUndService/BeschwerdenUndHinweise/beschwerdenundhinweise_node.html",
+                authorityEmail: "poststelle@bafin.de",
+                notes: "BaFin ha anche una sezione specifica per le frodi di investimento (Anlagbetrug). DSA, PSD3, PSR applicabili.",
+                isEU: true
+            },
+            gibilterra: {
+                flag: "🇬🇮",
+                names: { it: "Gibilterra", en: "Gibraltar", de: "Gibraltar", es: "Gibraltar" },
+                authority: "GFSC - Gibraltar Financial Services Commission",
+                protectionLevel: "Alto",
+                legalBasis: "Leggi modellate sul UK",
+                complaintMechanism: "Financial Ombudsman Service (FOS) di Gibilterra",
+                fraudReportLink: "https://www.fsc.gi/complaints/how-to-make-a-complaint",
+                authorityEmail: "info@fsc.gi",
+                notes: "L'autorità di vigilanza è la Gibraltar Financial Services Commission (GFSC).",
+                isEU: false
+            },
+            giappone: {
+                flag: "🇯🇵",
+                names: { it: "Giappone", en: "Japan", de: "Japan", es: "Japón" },
+                authority: "FSA - Financial Services Agency",
+                protectionLevel: "Altissimo",
+                legalBasis: "Pressione FSA, Dovere di Cura",
+                complaintMechanism: "Pressione FSA, Mediazione",
+                fraudReportLink: "https://www.fsa.go.jp/policy/complaint/index.html",
+                authorityEmail: "Utilizzare il modulo online",
+                notes: "Il sito dell'FSA ha una pagina di allerta sugli investimenti fraudolenti.",
+                isEU: false
+            },
+            hong_kong: {
+                flag: "🇭🇰",
+                names: { it: "Hong Kong", en: "Hong Kong", de: "Hongkong", es: "Hong Kong" },
+                authority: "HKMA - Hong Kong Monetary Authority",
+                protectionLevel: "Medio-Alto",
+                legalBasis: "Banking Ordinance (Cap. 155), Common Law (Duty of Care)",
+                complaintMechanism: "FDRC (Financial Dispute Resolution Centre), HKMA",
+                fraudReportLink: "https://www.hkma.gov.hk/eng/",
+                authorityEmail: "publicenquiry@hkma.gov.hk",
+                notes: "Le banche devono mantenere sistemi di pagamento e canali digitali sicuri.",
+                isEU: false
+            },
+            italia: {
+                flag: "🇮🇹",
+                names: { it: "Italia", en: "Italy", de: "Italien", es: "Italia" },
+                authority: "CONSOB - Commissione Nazionale per le Società e la Borsa",
+                protectionLevel: "Altissimo",
+                legalBasis: "PSD2/PSD3, TUF, Codice del Consumo",
+                complaintMechanism: "ACF (Arbitro per le Controversie Finanziarie), CONSOB",
+                fraudReportLink: "https://www.consob.it/web/area-pubblica/segnalazioni",
+                authorityEmail: "consob@consob.it",
+                notes: "CONSOB pubblica liste nere degli operatori non autorizzati. DSA, PSD3, PSR applicabili.",
+                isEU: true
+            }
+        };
+
+        let currentLanguage = localStorage.getItem('preferredLanguage') || 'it';
+        let currentFilter = 'all';
+
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            changeLanguage(currentLanguage);
+            renderCountries();
+            setupSearch();
+            updateStats();
+        });
+
+        // Language change function
+        function changeLanguage(lang) {
+            currentLanguage = lang;
+            localStorage.setItem('preferredLanguage', lang);
+            
+            // Update active button
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            // Update all translated elements
+            document.querySelectorAll('[data-i18n]').forEach(element => {
+                const key = element.getAttribute('data-i18n');
+                if (translations[lang][key]) {
+                    element.textContent = translations[lang][key];
+                }
+            });
+            
+            // Update placeholder
+            const searchInput = document.getElementById('searchInput');
+            searchInput.placeholder = translations[lang].searchPlaceholder;
+            
+            // Re-render countries with new language
+            renderCountries();
+        }
+
+        // Render countries
+        function renderCountries() {
+            const grid = document.getElementById('countriesGrid');
+            grid.innerHTML = '';
+            
+            // Sort countries alphabetically by Italian name
+            const sortedCountries = Object.entries(countriesData).sort((a, b) => 
+                a[1].names.it.localeCompare(b[1].names.it)
+            );
+            
+            sortedCountries.forEach(([key, country]) => {
+                // Apply filter
+                if (currentFilter === 'altissimo' && country.protectionLevel !== 'Altissimo') return;
+                if (currentFilter === 'ue' && !country.isEU) return;
+                
+                const card = document.createElement('div');
+                card.className = 'country-card';
+                card.onclick = () => openModal(key);
+                
+                const protectionClass = country.protectionLevel === 'Altissimo' ? 'protection-altissimo' : 
+                                      country.protectionLevel === 'Alto' ? 'protection-alto' : 'protection-medio';
+                
+                card.innerHTML = `
+                    <div class="country-header">
+                        <div class="country-flag">${country.flag}</div>
+                        <div class="country-name">${country.names[currentLanguage]}</div>
+                    </div>
+                    <div class="country-info">
+                        <div class="info-row">
+                            <span class="info-label">${translations[currentLanguage].authority}:</span>
+                            <span class="info-value">${country.authority}</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">${translations[currentLanguage].protectionLevel}:</span>
+                            <span class="protection-badge ${protectionClass}">${country.protectionLevel}</span>
+                        </div>
+                        <div class="authority-link">
+                            <span class="info-label">${translations[currentLanguage].fraudReportLink}:</span><br>
+                            <a href="${country.fraudReportLink}" target="_blank">${country.fraudReportLink}</a>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">${translations[currentLanguage].authorityEmail}:</span>
+                            <span class="info-value">${country.authorityEmail}</span>
+                        </div>
+                    </div>
+                `;
+                
+                grid.appendChild(card);
+            });
+        }
+
+        // Filter countries
+        function filterCountries(filter) {
+            currentFilter = filter;
+            
+            // Update active button
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            renderCountries();
+        }
+
+        // Search functionality
+        function setupSearch() {
+            const searchInput = document.getElementById('searchInput');
+            searchInput.addEventListener('input', function(e) {
+                const searchTerm = e.target.value.toLowerCase();
+                const cards = document.querySelectorAll('.country-card');
+                
+                cards.forEach(card => {
+                    const text = card.textContent.toLowerCase();
+                    if (text.includes(searchTerm)) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+        }
+
+        // Update statistics
+        function updateStats() {
+            const totalCountries = Object.keys(countriesData).length;
+            const euCountries = Object.values(countriesData).filter(c => c.isEU).length;
+            const highProtection = Object.values(countriesData).filter(c => c.protectionLevel === 'Altissimo').length;
+            
+            document.getElementById('totalCountries').textContent = totalCountries;
+            document.getElementById('euCountries').textContent = euCountries;
+            document.getElementById('highProtection').textContent = highProtection;
+        }
+
+        // Modal functions
+        function openModal(countryKey) {
+            const country = countriesData[countryKey];
+            const modal = document.getElementById('countryModal');
+            const modalContent = document.getElementById('modalContent');
+            
+            modalContent.innerHTML = `
+                <div class="country-header">
+                    <div class="country-flag">${country.flag}</div>
+                    <div class="country-name">${country.names[currentLanguage]}</div>
+                </div>
+                <div class="country-info" style="margin-top: 20px;">
+                    <h3>${translations[currentLanguage].authority}</h3>
+                    <p>${country.authority}</p>
+                    
+                    <h3 style="margin-top: 20px;">${translations[currentLanguage].protectionLevel}</h3>
+                    <p>${country.protectionLevel}</p>
+                    
+                    <h3 style="margin-top: 20px;">${translations[currentLanguage].legalBasis}</h3>
+                    <p>${country.legalBasis}</p>
+                    
+                    <h3 style="margin-top: 20px;">${translations[currentLanguage].complaintMechanism}</h3>
+                    <p>${country.complaintMechanism}</p>
+                    
+                    <div class="authority-link" style="margin: 20px 0;">
+                        <strong>${translations[currentLanguage].fraudReportLink}:</strong><br>
+                        <a href="${country.fraudReportLink}" target="_blank">${country.fraudReportLink}</a>
+                    </div>
+                    
+                    <h3 style="margin-top: 20px;">${translations[currentLanguage].authorityEmail}</h3>
+                    <p>${country.authorityEmail}</p>
+                    
+                    <h3 style="margin-top: 20px;">${translations[currentLanguage].notes}</h3>
+                    <p>${country.notes}</p>
+                </div>
+            `;
+            
+            modal.style.display = 'block';
+        }
+
+        function closeModal() {
+            document.getElementById('countryModal').style.display = 'none';
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            const modal = document.getElementById('countryModal');
+            if (event.target === modal) {
+                closeModal();
+            }
+        }
+    </script>
+</body>
+</html>
