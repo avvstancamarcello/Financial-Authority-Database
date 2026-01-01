@@ -208,7 +208,7 @@
 
         async function loadCountryData() {
             try {
-                const response = await fetch('financial_authorities_database.json?v=' + new Date().getTime());
+                const response = await fetch('financial_authorities_database.json');
                 if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
                 countriesData = await response.json();
                 renderAll();
@@ -249,11 +249,11 @@
             const grid = document.getElementById('countriesGrid');
             grid.innerHTML = '';
             
-            const sortedCountries = Object.entries(countriesData).sort((a, b) => 
-                a[1].country_name.localeCompare(b[1].country_name)
+            const sortedCountries = countriesData.sort((a, b) => 
+                a.country_name.localeCompare(b.country_name)
             );
             
-            const filtered = sortedCountries.filter(([_, country]) => {
+            const filtered = sortedCountries.filter(country => {
                 if (currentFilter === 'all') return true;
                 if (currentFilter === 'altissimo') return country.protectionLevel === 'Altissimo';
                 if (currentFilter === 'ue') return country.isEU;
@@ -261,10 +261,10 @@
                 return false;
             });
 
-            filtered.forEach(([key, country]) => {
+            filtered.forEach(country => {
                 const card = document.createElement('div');
                 card.className = 'country-card';
-                card.onclick = () => openModal(key);
+                card.onclick = () => openModal(country.country_name); // Use a unique key like name
                 
                 const protectionClass = `protection-${(country.protectionLevel || 'medio').toLowerCase()}`;
                 
@@ -308,17 +308,19 @@
         }
 
         function updateStats() {
-            const total = Object.keys(countriesData).length;
-            const eu = Object.values(countriesData).filter(c => c.isEU).length;
-            const high = Object.values(countriesData).filter(c => c.protectionLevel === 'Altissimo').length;
+            const total = countriesData.length;
+            const eu = countriesData.filter(c => c.isEU).length;
+            const high = countriesData.filter(c => c.protectionLevel === 'Altissimo').length;
             
             document.getElementById('totalCountries').textContent = total;
             document.getElementById('euCountries').textContent = eu;
             document.getElementById('highProtection').textContent = high;
         }
 
-        function openModal(countryKey) {
-            const country = countriesData[countryKey];
+        function openModal(countryName) {
+            const country = countriesData.find(c => c.country_name === countryName);
+            if (!country) return;
+            
             const modal = document.getElementById('countryModal');
             const modalContent = document.getElementById('modalContent');
             
@@ -370,7 +372,7 @@
             const euData = { ...protectionLevels };
             const nonEuData = { ...protectionLevels };
 
-            Object.values(countriesData).forEach(country => {
+            countriesData.forEach(country => {
                 const target = country.isEU ? euData : nonEuData;
                 if (target.hasOwnProperty(country.protectionLevel)) {
                     target[country.protectionLevel]++;
