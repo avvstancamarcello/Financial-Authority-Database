@@ -1,861 +1,1653 @@
 {
-    "Albania": {
-        "Financial_Authority": "Bank of Albania (Banka e Shqipërisë)",
-        "Abbreviation": "BoA",
-        "Website": "https://www.bankofalbania.org/",
-        "Consumer_Protection_Body": "Consumer Protection Commission",
-        "Website_Consumer_Protection": "http://www.kmk.gov.al/",
-        "Financial_Ombudsman": "No dedicated financial ombudsman, disputes handled by courts or the Consumer Protection Commission."
-    },
-    "Andorra": {
-        "Financial_Authority": "Andorran Financial Authority (Autoritat Financera Andorrana)",
-        "Abbreviation": "AFA",
-        "Website": "https://www.afa.ad/",
-        "Consumer_Protection_Body": "Andorran Consumer Agency (Agència Andorrana del Consum)",
-        "Website_Consumer_Protection": "https://www.consum.ad/",
-        "Financial_Ombudsman": "No dedicated financial ombudsman."
-    },
-    "Armenia": {
-        "Financial_Authority": "Central Bank of Armenia (Հայաստանի Հանրապետության Կենտրոնական Բանկ)",
-        "Abbreviation": "CBA",
-        "Website": "https://www.cba.am/",
-        "Consumer_Protection_Body": "Financial System Mediator (Ֆինանսական համակարգի հաշտարար)",
-        "Website_Consumer_Protection": "https://www.fsm.am/",
-        "Financial_Ombudsman": "Financial System Mediator"
-    },
-    "Australia": {
-        "Financial_Authority": "Australian Prudential Regulation Authority (APRA) and Australian Securities and Investments Commission (ASIC)",
-        "Abbreviation": "APRA / ASIC",
-        "Website": "https://www.apra.gov.au/ and https://asic.gov.au/",
-        "Consumer_Protection_Body": "Australian Financial Complaints Authority (AFCA)",
-        "Website_Consumer_Protection": "https://www.afca.org.au/",
-        "Financial_Ombudsman": "Australian Financial Complaints Authority (AFCA)"
-    },
-    "Austria": {
-        "Financial_Authority": "Financial Market Authority (Finanzmarktaufsicht)",
-        "Abbreviation": "FMA",
-        "Website": "https://www.fma.gv.at/",
-        "Consumer_Protection_Body": "Agency for Consumer Protection (Agentur für Verbraucherschutz)",
-        "Website_Consumer_Protection": "https://www.verbraucherschutz.gv.at/",
-        "Financial_Ombudsman": "Joint Conciliation Board of the Austrian Banking Industry (Gemeinsame Schlichtungsstelle der österreichischen Kreditwirtschaft)"
-    },
-    "Azerbaijan": {
-        "Financial_Authority": "Central Bank of the Republic of Azerbaijan (Azərbaycan Respublikasının Mərkəzi Bankı)",
-        "Abbreviation": "CBAR",
-        "Website": "https://www.cbar.az/",
-        "Consumer_Protection_Body": "State Service for Antimonopoly Policy and Consumer Rights' Protection",
-        "Website_Consumer_Protection": "http://www.consumer.gov.az/",
-        "Financial_Ombudsman": "Banking Ombudsman"
-    },
-    "Bahamas": {
-        "Financial_Authority": "Central Bank of The Bahamas",
-        "Abbreviation": "CBOB",
-        "Website": "https://www.centralbankbahamas.com/",
-        "Consumer_Protection_Body": "Consumer Protection Commission",
-        "Website_Consumer_Protection": "http://www.consumeraffairsbahamas.gov.bs/cpc/",
-        "Financial_Ombudsman": "No dedicated financial ombudsman."
-    },
-    "Bahrain": {
-        "Financial_Authority": "Central Bank of Bahrain (CBB)",
-        "Abbreviation": "CBB",
-        "Website": "https://www.cbb.gov.bh/",
-        "Consumer_Protection_Body": "Consumer Protection Directorate, Ministry of Industry, Commerce & Tourism",
-        "Website_Consumer_Protection": "https://www.moic.gov.bh/",
-        "Financial_Ombudsman": "Central Bank of Bahrain - Consumer Protection Unit"
-    },
-    "Bangladesh": {
-        "Financial_Authority": "Bangladesh Bank",
-        "Abbreviation": "BB",
-        "Website": "https://www.bb.org.bd/",
-        "Consumer_Protection_Body": "Directorate of National Consumer Rights Protection",
-        "Website_Consumer_Protection": "http://www.dncrp.gov.bd/",
-        "Financial_Ombudsman": "Financial Integrity & Customer Services Department, Bangladesh Bank"
-    },
-    "Barbados": {
-        "Financial_Authority": "Central Bank of Barbados and Financial Services Commission (FSC)",
-        "Abbreviation": "CBB / FSC",
-        "Website": "https://www.centralbank.org.bb/ and https://www.fsc.gov.bb/",
-        "Consumer_Protection_Body": "Office of Public Counsel",
-        "Website_Consumer_Protection": "https://www.publiccounsel.gov.bb/",
-        "Financial_Ombudsman": "Financial Services Commission (FSC)"
-    },
-    "Belarus": {
-        "Financial_Authority": "National Bank of the Republic of Belarus (Нацыянальны банк Рэспублікі Беларусь)",
-        "Abbreviation": "NBRB",
-        "Website": "https://www.nbrb.by/",
-        "Consumer_Protection_Body": "Ministry of Antimonopoly Regulation and Trade",
-        "Website_Consumer_Protection": "https://mart.gov.by/",
-        "Financial_Ombudsman": "Financial Ombudsman of the Association of Belarusian Banks"
-    },
-    "Belgium": {
-        "Financial_Authority": "Financial Services and Markets Authority (FSMA)",
-        "Abbreviation": "FSMA",
-        "Website": "https://www.fsma.be/",
-        "Consumer_Protection_Body": "FPS Economy, SMEs, Self-employed and Energy",
-        "Website_Consumer_Protection": "https://economie.fgov.be/",
-        "Financial_Ombudsman": "Ombudsfin - Ombudsman in financial services"
-    },
-    "Bermuda": {
-        "Financial_Authority": "Bermuda Monetary Authority (BMA)",
-        "Abbreviation": "BMA",
-        "Website": "https://www.bma.bm/",
-        "Consumer_Protection_Body": "Consumer Affairs",
-        "Website_Consumer_Protection": "https://www.gov.bm/department/consumer-affairs",
-        "Financial_Ombudsman": "No dedicated financial ombudsman."
-    },
-    "Bosnia and Herzegovina": {
-        "Financial_Authority": "Central Bank of Bosnia and Herzegovina (Centralna banka Bosne i Hercegovine)",
-        "Abbreviation": "CBBH",
-        "Website": "https://www.cbbh.ba/",
-        "Consumer_Protection_Body": "Institution of Ombudsman for consumer protection in Bosnia and Herzegovina",
-        "Website_Consumer_Protection": "http://www.ozp.gov.ba/",
-        "Financial_Ombudsman": "Banking Ombudsman of the Federation of Bosnia and Herzegovina / Banking Ombudsman of Republika Srpska"
-    },
-    "Brazil": {
-        "Financial_Authority": "Central Bank of Brazil (Banco Central do Brasil)",
-        "Abbreviation": "BCB",
-        "Website": "https://www.bcb.gov.br/",
-        "Consumer_Protection_Body": "National Consumer Secretariat (Secretaria Nacional do Consumidor)",
-        "Website_Consumer_Protection": "https://www.justica.gov.br/sua-protecao/consumidor",
-        "Financial_Ombudsman": "Central Bank of Brazil's Ombudsman (Ouvidoria)"
-    },
-    "Bulgaria": {
-        "Financial_Authority": "Bulgarian National Bank (Българска народна банка)",
-        "Abbreviation": "BNB",
-        "Website": "https://www.bnb.bg/",
-        "Consumer_Protection_Body": "Commission for Consumer Protection (Комисия за защита на потребителите)",
-        "Website_Consumer_Protection": "https://kzp.bg/",
-        "Financial_Ombudsman": "Conciliation Commission for Payment Disputes"
-    },
-    "Canada": {
-        "Financial_Authority": "Office of the Superintendent of Financial Institutions (OSFI)",
-        "Abbreviation": "OSFI",
-        "Website": "https://www.osfi-bsif.gc.ca/",
-        "Consumer_Protection_Body": "Financial Consumer Agency of Canada (FCAC)",
-        "Website_Consumer_Protection": "https://www.canada.ca/en/financial-consumer-agency.html",
-        "Financial_Ombudsman": "Ombudsman for Banking Services and Investments (OBSI)"
-    },
-    "Cayman Islands": {
-        "Financial_Authority": "Cayman Islands Monetary Authority (CIMA)",
-        "Abbreviation": "CIMA",
-        "Website": "https://www.cima.ky/",
-        "Consumer_Protection_Body": "No specific consumer protection body for financial services, complaints handled by CIMA.",
-        "Website_Consumer_Protection": "https://www.cima.ky/complaints",
-        "Financial_Ombudsman": "No dedicated financial ombudsman."
-    },
-    "Chile": {
-        "Financial_Authority": "Financial Market Commission (Comisión para el Mercado Financiero)",
-        "Abbreviation": "CMF",
-        "Website": "https://www.cmfchile.cl/",
-        "Consumer_Protection_Body": "National Consumer Service (Servicio Nacional del Consumidor)",
-        "Website_Consumer_Protection": "https://www.sernac.cl/",
-        "Financial_Ombudsman": "Financial Customer Ombudsman (Defensor del Cliente Financiero)"
-    },
-    "China": {
-        "Financial_Authority": "National Administration of Financial Regulation (NAFR)",
-        "Abbreviation": "NAFR",
-        "Website": "http://www.nfca.gov.cn/",
-        "Consumer_Protection_Body": "China Consumers' Association",
-        "Website_Consumer_Protection": "http://www.cca.org.cn/",
-        "Financial_Ombudsman": "Banking and Insurance Consumer Complaint Resolution Center of the NAFR"
-    },
-    "Colombia": {
-        "Financial_Authority": "Financial Superintendence of Colombia (Superintendencia Financiera de Colombia)",
-        "Abbreviation": "SFC",
-        "Website": "https://www.superfinanciera.gov.co/",
-        "Consumer_Protection_Body": "Superintendence of Industry and Commerce (Superintendencia de Industria y Comercio)",
-        "Website_Consumer_Protection": "https://www.sic.gov.co/",
-        "Financial_Ombudsman": "Financial Consumer Defender (Defensor del Consumidor Financiero)"
-    },
-    "Costa Rica": {
-        "Financial_Authority": "General Superintendence of Financial Entities (Superintendencia General de Entidades Financieras)",
-        "Abbreviation": "SUGEF",
-        "Website": "https://www.sugef.fi.cr/",
-        "Consumer_Protection_Body": "Directorate of Support for the Consumer (Dirección de Apoyo al Consumidor)",
-        "Website_Consumer_Protection": "https://www.meic.go.cr/web/80/apoyo-al-consumidor",
-        "Financial_Ombudsman": "No dedicated financial ombudsman."
-    },
-    "Croatia": {
-        "Financial_Authority": "Croatian National Bank (Hrvatska narodna banka)",
-        "Abbreviation": "HNB",
-        "Website": "https://www.hnb.hr/",
-        "Consumer_Protection_Body": "Ministry of Economy and Sustainable Development - Consumer Protection Sector",
-        "Website_Consumer_Protection": "https://gospodarstvo.gov.hr/o-ministarstvu/ustrojstvo/uprava-za-zastitu-potrosaca/100",
-        "Financial_Ombudsman": "Mediation Centre of the Croatian Chamber of Economy"
-    },
-    "Cyprus": {
-        "Financial_Authority": "Central Bank of Cyprus (Κεντρική Τράπεζα της Κύπρου)",
-        "Abbreviation": "CBC",
-        "Website": "https://www.centralbank.cy/",
-        "Consumer_Protection_Body": "Cyprus Consumer Protection Service (Υπηρεσία Προστασίας Καταναλωτή)",
-        "Website_Consumer_Protection": "https://www.consumer.gov.cy/",
-        "Financial_Ombudsman": "Financial Ombudsman of the Republic of Cyprus (Χρηματοοικονομικός Επίτροπος)"
-    },
-    "Czech Republic": {
-        "Financial_Authority": "Czech National Bank (Česká národní banka)",
-        "Abbreviation": "CNB",
-        "Website": "https://www.cnb.cz/",
-        "Consumer_Protection_Body": "Czech Trade Inspection Authority (Česká obchodní inspekce)",
-        "Website_Consumer_Protection": "https://www.coi.cz/",
-        "Financial_Ombudsman": "Financial Arbitrator (Finanční arbitr)"
-    },
-    "Denmark": {
-        "Financial_Authority": "Danish Financial Supervisory Authority (Finanstilsynet)",
-        "Abbreviation": "DFSA",
-        "Website": "https://www.finanstilsynet.dk/",
-        "Consumer_Protection_Body": "Danish Competition and Consumer Authority (Konkurrence- og Forbrugerstyrelsen)",
-        "Website_Consumer_Protection": "https://www.kfst.dk/",
-        "Financial_Ombudsman": "The Danish Financial Complaint Board (Det Finansielle Ankenævn)"
-    },
-    "Dominican Republic": {
-        "Financial_Authority": "Superintendency of Banks of the Dominican Republic (Superintendencia de Bancos de la República Dominicana)",
-        "Abbreviation": "SB",
-        "Website": "https://www.sb.gob.do/",
-        "Consumer_Protection_Body": "National Institute for the Protection of Consumer Rights (Pro Consumidor)",
-        "Website_Consumer_Protection": "https://www.proconsumidor.gob.do/",
-        "Financial_Ombudsman": "User Protection Department (Departamento de Protección al Usuario - ProUsuario) of the Superintendency of Banks"
-    },
-    "Egypt": {
-        "Financial_Authority": "Financial Regulatory Authority (FRA)",
-        "Abbreviation": "FRA",
-        "Website": "http://www.fra.gov.eg/",
-        "Consumer_Protection_Body": "Consumer Protection Agency (CPA)",
-        "Website_Consumer_Protection": "http://www.cpa.gov.eg/",
-        "Financial_Ombudsman": "No dedicated financial ombudsman, complaints handled by FRA."
-    },
-    "Estonia": {
-        "Financial_Authority": "Estonian Financial Supervision and Resolution Authority (Finantsinspektsioon)",
-        "Abbreviation": "EFSA",
-        "Website": "https://www.fi.ee/",
-        "Consumer_Protection_Body": "Consumer Protection and Technical Regulatory Authority (Tarbijakaitse ja Tehnilise Järelevalve Amet)",
-        "Website_Consumer_Protection": "https://www.ttja.ee/",
-        "Financial_Ombudsman": "Consumer Disputes Committee (Tarbijavaidluste komisjon)"
-    },
-    "Finland": {
-        "Financial_Authority": "Financial Supervisory Authority (Finanssivalvonta)",
-        "Abbreviation": "FIN-FSA",
-        "Website": "https://www.finanssivalvonta.fi/",
-        "Consumer_Protection_Body": "Finnish Competition and Consumer Authority (Kilpailu- ja kuluttajavirasto)",
-        "Website_Consumer_Protection": "https://www.kkv.fi/",
-        "Financial_Ombudsman": "Finnish Financial Ombudsman Bureau (FINE)"
-    },
-    "France": {
-        "Financial_Authority": "Prudential Supervision and Resolution Authority (Autorité de contrôle prudentiel et de résolution)",
-        "Abbreviation": "ACPR",
-        "Website": "https://acpr.banque-france.fr/",
-        "Consumer_Protection_Body": "Directorate General for Competition Policy, Consumer Affairs and Fraud Control (DGCCRF)",
-        "Website_Consumer_Protection": "https://www.economie.gouv.fr/dgccrf",
-        "Financial_Ombudsman": "Médiateur de l'Autorité des marchés financiers (AMF) / Médiateurs bancaires"
-    },
-    "Georgia": {
-        "Financial_Authority": "National Bank of Georgia (საქართველოს ეროვნული ბანკი)",
-        "Abbreviation": "NBG",
-        "Website": "https://nbg.gov.ge/",
-        "Consumer_Protection_Body": "Competition Agency of Georgia",
-        "Website_Consumer_Protection": "https://competition.ge/",
-        "Financial_Ombudsman": "No dedicated financial ombudsman, complaints handled by NBG."
-    },
-    "Germany": {
-        "Financial_Authority": "Federal Financial Supervisory Authority (Bundesanstalt für Finanzdienstleistungsaufsicht)",
-        "Abbreviation": "BaFin",
-        "Website": "https://www.bafin.de/",
-        "Consumer_Protection_Body": "Federation of German Consumer Organisations (Verbraucherzentrale Bundesverband)",
-        "Website_Consumer_Protection": "https://www.vzbv.de/",
-        "Financial_Ombudsman": "Schlichtungsstelle bei der Deutschen Bundesbank / Ombudsmann der privaten Banken"
-    },
-    "Ghana": {
-        "Financial_Authority": "Bank of Ghana",
-        "Abbreviation": "BoG",
-        "Website": "https://www.bog.gov.gh/",
-        "Consumer_Protection_Body": "Consumer Protection Agency (CPA) Ghana",
-        "Website_Consumer_Protection": "https://www.cpaghana.org/",
-        "Financial_Ombudsman": "No dedicated financial ombudsman, complaints handled by BoG."
-    },
-    "Gibraltar": {
-        "Financial_Authority": "Gibraltar Financial Services Commission (GFSC)",
-        "Abbreviation": "GFSC",
-        "Website": "https://www.fsc.gi/",
-        "Consumer_Protection_Body": "Office of Fair Trading",
-        "Website_Consumer_Protection": "https://www.oft.gov.gi/",
-        "Financial_Ombudsman": "Financial Services Ombudsman"
-    },
-    "Greece": {
-        "Financial_Authority": "Bank of Greece (Τράπεζα της Ελλάδος)",
-        "Abbreviation": "BoG",
-        "Website": "https://www.bankofgreece.gr/",
-        "Consumer_Protection_Body": "General Secretariat for Consumer Affairs (Γενική Γραμματεία Καταναλωτή)",
-        "Website_Consumer_Protection": "http://www.efpolis.gr/",
-        "Financial_Ombudsman": "Hellenic Financial Ombudsman (Χρηματοοικονομικός Μεσολαβητής)"
-    },
-    "Guernsey": {
-        "Financial_Authority": "Guernsey Financial Services Commission (GFSC)",
-        "Abbreviation": "GFSC",
-        "Website": "https://www.gfsc.gg/",
-        "Consumer_Protection_Body": "Guernsey Trading Standards",
-        "Website_Consumer_Protection": "https://www.gov.gg/tradingstandards",
-        "Financial_Ombudsman": "Channel Islands Financial Ombudsman (CIFO)"
-    },
-    "Hong Kong": {
-        "Financial_Authority": "Hong Kong Monetary Authority (HKMA)",
-        "Abbreviation": "HKMA",
-        "Website": "https://www.hkma.gov.hk/",
-        "Consumer_Protection_Body": "Consumer Council",
-        "Website_Consumer_Protection": "https://www.consumer.org.hk/",
-        "Financial_Ombudsman": "Financial Dispute Resolution Centre (FDRC)"
-    },
-    "Hungary": {
-        "Financial_Authority": "Central Bank of Hungary (Magyar Nemzeti Bank)",
-        "Abbreviation": "MNB",
-        "Website": "https://www.mnb.hu/",
-        "Consumer_Protection_Body": "Ministry for Innovation and Technology",
-        "Website_Consumer_Protection": "https://www.kormany.hu/hu/innovacios-es-technologiai-miniszterium",
-        "Financial_Ombudsman": "Financial Conciliation Board (Pénzügyi Békéltető Testület)"
-    },
-    "Iceland": {
-        "Financial_Authority": "Central Bank of Iceland (Seðlabanki Íslands)",
-        "Abbreviation": "CBI",
-        "Website": "https://www.sedlabanki.is/",
-        "Consumer_Protection_Body": "Icelandic Consumer Agency (Neytendastofa)",
-        "Website_Consumer_Protection": "https://www.neytendastofa.is/",
-        "Financial_Ombudsman": "The Complaints Committee on Transactions with Financial Firms (Úrskurðarnefnd um viðskipti við fjármálafyrirtæki)"
-    },
-    "India": {
-        "Financial_Authority": "Reserve Bank of India (RBI)",
-        "Abbreviation": "RBI",
-        "Website": "https://www.rbi.org.in/",
-        "Consumer_Protection_Body": "National Consumer Disputes Redressal Commission (NCDRC)",
-        "Website_Consumer_Protection": "http://ncdrc.nic.in/",
-        "Financial_Ombudsman": "RBI Ombudsman"
-    },
-    "Indonesia": {
-        "Financial_Authority": "Indonesia Financial Services Authority (Otoritas Jasa Keuangan)",
-        "Abbreviation": "OJK",
-        "Website": "https://www.ojk.go.id/",
-        "Consumer_Protection_Body": "National Consumer Protection Agency (Badan Perlindungan Konsumen Nasional)",
-        "Website_Consumer_Protection": "http://bpkn.go.id/",
-        "Financial_Ombudsman": "Alternative Dispute Resolution Institution for the Financial Services Sector (LAPS SJK)"
-    },
-    "Ireland": {
-        "Financial_Authority": "Central Bank of Ireland",
-        "Abbreviation": "CBI",
-        "Website": "https://www.centralbank.ie/",
-        "Consumer_Protection_Body": "Competition and Consumer Protection Commission (CCPC)",
-        "Website_Consumer_Protection": "https://www.ccpc.ie/",
-        "Financial_Ombudsman": "Financial Services and Pensions Ombudsman (FSPO)"
-    },
-    "Isle of Man": {
-        "Financial_Authority": "Isle of Man Financial Services Authority (IOMFSA)",
-        "Abbreviation": "IOMFSA",
-        "Website": "https://www.iomfsa.im/",
-        "Consumer_Protection_Body": "Isle of Man Office of Fair Trading",
-        "Website_Consumer_Protection": "https://www.gov.im/oft/",
-        "Financial_Ombudsman": "Financial Services Ombudsman Scheme"
-    },
-    "Israel": {
-        "Financial_Authority": "Bank of Israel (בנק ישראל)",
-        "Abbreviation": "BOI",
-        "Website": "https://www.boi.org.il/",
-        "Consumer_Protection_Body": "The Israel Consumer Council",
-        "Website_Consumer_Protection": "https://www.consumers.org.il/",
-        "Financial_Ombudsman": "Supervisor of Banks - Public Enquiries Unit"
-    },
-    "Italy": {
-        "Financial_Authority": "Bank of Italy (Banca d'Italia)",
-        "Abbreviation": "BdI",
-        "Website": "https://www.bancaditalia.it/",
-        "Consumer_Protection_Body": "Italian Competition Authority (Autorità Garante della Concorrenza e del Mercato)",
-        "Website_Consumer_Protection": "https://www.agcm.it/",
-        "Financial_Ombudsman": "Arbitro Bancario Finanziario (ABF)"
-    },
-    "Jamaica": {
-        "Financial_Authority": "Bank of Jamaica (BOJ)",
-        "Abbreviation": "BOJ",
-        "Website": "https://boj.org.jm/",
-        "Consumer_Protection_Body": "Consumer Affairs Commission (CAC)",
-        "Website_Consumer_Protection": "https://www.cac.gov.jm/",
-        "Financial_Ombudsman": "No dedicated financial ombudsman."
-    },
-    "Japan": {
-        "Financial_Authority": "Financial Services Agency (金融庁)",
-        "Abbreviation": "FSA",
-        "Website": "https://www.fsa.go.jp/",
-        "Consumer_Protection_Body": "National Consumer Affairs Center of Japan",
-        "Website_Consumer_Protection": "http://www.kokusen.go.jp/",
-        "Financial_Ombudsman": "Japanese Bankers Association's ADR Center / Other industry-specific ADRs"
-    },
-    "Jersey": {
-        "Financial_Authority": "Jersey Financial Services Commission (JFSC)",
-        "Abbreviation": "JFSC",
-        "Website": "https://www.jerseyfsc.org/",
-        "Consumer_Protection_Body": "Jersey Trading Standards",
-        "Website_Consumer_Protection": "https://www.gov.je/tradingstandards",
-        "Financial_Ombudsman": "Channel Islands Financial Ombudsman (CIFO)"
-    },
-    "Jordan": {
-        "Financial_Authority": "Central Bank of Jordan (البنك المركزي الأردني)",
-        "Abbreviation": "CBJ",
-        "Website": "https://www.cbj.gov.jo/",
-        "Consumer_Protection_Body": "Ministry of Industry, Trade and Supply - Consumer Protection Directorate",
-        "Website_Consumer_Protection": "http://www.mit.gov.jo/",
-        "Financial_Ombudsman": "No dedicated financial ombudsman, complaints handled by CBJ."
-    },
-    "Kazakhstan": {
-        "Financial_Authority": "Agency of the Republic of Kazakhstan for Regulation and Development of the Financial Market",
-        "Abbreviation": "ARDFM",
-        "Website": "https://www.gov.kz/memleket/entities/ardfm",
-        "Consumer_Protection_Body": "Committee for Protection of Consumer Rights",
-        "Website_Consumer_Protection": "https://www.gov.kz/memleket/entities/mti-kzpp",
-        "Financial_Ombudsman": "Banking Ombudsman of the Republic of Kazakhstan"
-    },
-    "Kenya": {
-        "Financial_Authority": "Central Bank of Kenya (CBK)",
-        "Abbreviation": "CBK",
-        "Website": "https://www.centralbank.go.ke/",
-        "Consumer_Protection_Body": "Competition Authority of Kenya",
-        "Website_Consumer_Protection": "https://www.cak.go.ke/",
-        "Financial_Ombudsman": "No dedicated financial ombudsman."
-    },
-    "Kosovo": {
-        "Financial_Authority": "Central Bank of the Republic of Kosovo (Banka Qendrore e Republikës së Kosovës)",
-        "Abbreviation": "CBK",
-        "Website": "https://bqk-kos.org/",
-        "Consumer_Protection_Body": "Ministry of Industry, Entrepreneurship and Trade - Department for Consumer Protection",
-        "Website_Consumer_Protection": "https://mint.rks-gov.net/departamentet/departamenti-per-mbrojtjen-e-konsumatorit/",
-        "Financial_Ombudsman": "No dedicated financial ombudsman."
-    },
-    "Kuwait": {
-        "Financial_Authority": "Central Bank of Kuwait (CBK)",
-        "Abbreviation": "CBK",
-        "Website": "https://www.cbk.gov.kw/",
-        "Consumer_Protection_Body": "Ministry of Commerce and Industry - Commercial Control & Consumer Protection Sector",
-        "Website_Consumer_Protection": "https://www.moci.gov.kw/",
-        "Financial_Ombudsman": "Central Bank of Kuwait - Consumer Protection Unit"
-    },
-    "Kyrgyzstan": {
-        "Financial_Authority": "National Bank of the Kyrgyz Republic (Кыргыз Республикасынын Улуттук банкы)",
-        "Abbreviation": "NBKR",
-        "Website": "https://www.nbkr.kg/",
-        "Consumer_Protection_Body": "State Agency for Antimonopoly Regulation",
-        "Website_Consumer_Protection": "http://antimonopolia.gov.kg/",
-        "Financial_Ombudsman": "Independent Banking Ombudsman"
-    },
-    "Latvia": {
-        "Financial_Authority": "Bank of Latvia (Latvijas Banka)",
-        "Abbreviation": "LB",
-        "Website": "https://www.bank.lv/",
-        "Consumer_Protection_Body": "Consumer Rights Protection Centre (Patērētāju tiesību aizsardzības centrs)",
-        "Website_Consumer_Protection": "https://www.ptac.gov.lv/",
-        "Financial_Ombudsman": "Ombudsman of the Association of Commercial Banks of Latvia"
-    },
-    "Lebanon": {
-        "Financial_Authority": "Banque du Liban (مصرف لبنان)",
-        "Abbreviation": "BDL",
-        "Website": "https://www.bdl.gov.lb/",
-        "Consumer_Protection_Body": "Ministry of Economy and Trade - Consumer Protection Directorate",
-        "Website_Consumer_Protection": "http://www.economy.gov.lb/",
-        "Financial_Ombudsman": "No dedicated financial ombudsman."
-    },
-    "Liechtenstein": {
-        "Financial_Authority": "Financial Market Authority (Finanzmarktaufsicht) Liechtenstein",
-        "Abbreviation": "FMA",
-        "Website": "https://www.fma-li.li/",
-        "Consumer_Protection_Body": "Office for Social Services - Consumer Protection (Amt für Soziale Dienste - Konsumentenschutz)",
-        "Website_Consumer_Protection": "https://www.llv.li/inhalt/1188/amtsstellen/konsumentenschutz",
-        "Financial_Ombudsman": "Conciliation Board for the Financial Sector"
-    },
-    "Lithuania": {
-        "Financial_Authority": "Bank of Lithuania (Lietuvos bankas)",
-        "Abbreviation": "LB",
-        "Website": "https://www.lb.lt/",
-        "Consumer_Protection_Body": "State Consumer Rights Protection Authority (Valstybinė vartotojų teisių apsaugos tarnyba)",
-        "Website_Consumer_Protection": "http://www.vvtat.lt/",
-        "Financial_Ombudsman": "Bank of Lithuania (handles disputes)"
-    },
-    "Luxembourg": {
-        "Financial_Authority": "Commission de Surveillance du Secteur Financier (CSSF)",
-        "Abbreviation": "CSSF",
-        "Website": "https://www.cssf.lu/",
-        "Consumer_Protection_Body": "Union Luxembourgeoise des Consommateurs (ULC)",
-        "Website_Consumer_Protection": "https://www.ulc.lu/",
-        "Financial_Ombudsman": "Commission de Surveillance du Secteur Financier (CSSF) - Out-of-court resolution of complaints"
-    },
-    "Malaysia": {
-        "Financial_Authority": "Central Bank of Malaysia (Bank Negara Malaysia)",
-        "Abbreviation": "BNM",
-        "Website": "https://www.bnm.gov.my/",
-        "Consumer_Protection_Body": "National Consumer Complaints Centre (NCCC)",
-        "Website_Consumer_Protection": "http://www.nccc.org.my/",
-        "Financial_Ombudsman": "Ombudsman for Financial Services (OFS)"
-    },
-    "Malta": {
-        "Financial_Authority": "Malta Financial Services Authority (MFSA)",
-        "Abbreviation": "MFSA",
-        "Website": "https://www.mfsa.mt/",
-        "Consumer_Protection_Body": "Malta Competition and Consumer Affairs Authority (MCCAA)",
-        "Website_Consumer_Protection": "https://www.mccaa.org.mt/",
-        "Financial_Ombudsman": "Office of the Arbiter for Financial Services"
-    },
-    "Mauritius": {
-        "Financial_Authority": "Bank of Mauritius",
-        "Abbreviation": "BOM",
-        "Website": "https://www.bom.mu/",
-        "Consumer_Protection_Body": "Ministry of Commerce and Consumer Protection",
-        "Website_Consumer_Protection": "http://commerce.govmu.org/",
-        "Financial_Ombudsman": "Office of the Ombudsperson for Financial Services"
-    },
-    "Mexico": {
-        "Financial_Authority": "National Banking and Securities Commission (Comisión Nacional Bancaria y de Valores)",
-        "Abbreviation": "CNBV",
-        "Website": "https://www.gob.mx/cnbv",
-        "Consumer_Protection_Body": "National Commission for the Protection and Defense of Users of Financial Services (CONDUSEF)",
-        "Website_Consumer_Protection": "https://www.condusef.gob.mx/",
-        "Financial_Ombudsman": "CONDUSEF"
-    },
-    "Moldova": {
-        "Financial_Authority": "National Bank of Moldova (Banca Națională a Moldovei)",
-        "Abbreviation": "BNM",
-        "Website": "https://www.bnm.md/",
-        "Consumer_Protection_Body": "Agency for Consumer Protection and Market Surveillance",
-        "Website_Consumer_Protection": "https://consumator.gov.md/",
-        "Financial_Ombudsman": "No dedicated financial ombudsman."
-    },
-    "Monaco": {
-        "Financial_Authority": "Prudential Supervision and Resolution Authority (Autorité de contrôle prudentiel et de résolution) - France, under agreement",
-        "Abbreviation": "ACPR",
-        "Website": "https://acpr.banque-france.fr/",
-        "Consumer_Protection_Body": "Commission for the Control of Financial Activities (Commission de Contrôle des Activités Financières - CCAF)",
-        "Website_Consumer_Protection": "https://www.ccaf.mc/",
-        "Financial_Ombudsman": "No dedicated financial ombudsman."
-    },
-    "Montenegro": {
-        "Financial_Authority": "Central Bank of Montenegro (Centralna banka Crne Gore)",
-        "Abbreviation": "CBCG",
-        "Website": "https://www.cbcg.me/",
-        "Consumer_Protection_Body": "Administration for Inspection Affairs - Market Inspection Department",
-        "Website_Consumer_Protection": "http://www.uip.gov.me/",
-        "Financial_Ombudsman": "Banking Ombudsman"
-    },
-    "Morocco": {
-        "Financial_Authority": "Bank Al-Maghrib (بنك المغرب)",
-        "Abbreviation": "BAM",
-        "Website": "https://www.bkam.ma/",
-        "Consumer_Protection_Body": "Ministry of Industry, Trade, and Green and Digital Economy",
-        "Website_Consumer_Protection": "http://www.mcinet.gov.ma/",
-        "Financial_Ombudsman": "Moroccan Center for Banking Mediation (Centre Marocain de Médiation Bancaire)"
-    },
-    "Netherlands": {
-        "Financial_Authority": "De Nederlandsche Bank (DNB) and Authority for the Financial Markets (AFM)",
-        "Abbreviation": "DNB / AFM",
-        "Website": "https://www.dnb.nl/ and https://www.afm.nl/",
-        "Consumer_Protection_Body": "Authority for Consumers and Markets (Autoriteit Consument & Markt)",
-        "Website_Consumer_Protection": "https://www.acm.nl/",
-        "Financial_Ombudsman": "Financial Services Complaints Tribunal (Kifid)"
-    },
-    "New Zealand": {
-        "Financial_Authority": "Reserve Bank of New Zealand (Te Pūtea Matua)",
-        "Abbreviation": "RBNZ",
-        "Website": "https://www.rbnz.govt.nz/",
-        "Consumer_Protection_Body": "Commerce Commission New Zealand",
-        "Website_Consumer_Protection": "https://comcom.govt.nz/",
-        "Financial_Ombudsman": "Banking Ombudsman Scheme"
-    },
-    "Nigeria": {
-        "Financial_Authority": "Central Bank of Nigeria (CBN)",
-        "Abbreviation": "CBN",
-        "Website": "https://www.cbn.gov.ng/",
-        "Consumer_Protection_Body": "Federal Competition and Consumer Protection Commission (FCCPC)",
-        "Website_Consumer_Protection": "https://www.fccpc.gov.ng/",
-        "Financial_Ombudsman": "No dedicated financial ombudsman, complaints handled by CBN."
-    },
-    "North Macedonia": {
-        "Financial_Authority": "National Bank of the Republic of North Macedonia (Народна банка на Република Северна Македонија)",
-        "Abbreviation": "NBRNM",
-        "Website": "https://www.nbrm.mk/",
-        "Consumer_Protection_Body": "Consumer Protection Organization of Macedonia",
-        "Website_Consumer_Protection": "https://opm.org.mk/",
-        "Financial_Ombudsman": "No dedicated financial ombudsman."
-    },
-    "Norway": {
-        "Financial_Authority": "The Financial Supervisory Authority of Norway (Finanstilsynet)",
-        "Abbreviation": "Finanstilsynet",
-        "Website": "https://www.finanstilsynet.no/",
-        "Consumer_Protection_Body": "Norwegian Consumer Council (Forbrukerrådet)",
-        "Website_Consumer_Protection": "https://www.forbrukerradet.no/",
-        "Financial_Ombudsman": "Norwegian Financial Services Complaints Board (Finansklagenemnda)"
-    },
-    "Oman": {
-        "Financial_Authority": "Central Bank of Oman (البنك المركزي العماني)",
-        "Abbreviation": "CBO",
-        "Website": "https://cbo.gov.om/",
-        "Consumer_Protection_Body": "Consumer Protection Authority",
-        "Website_Consumer_Protection": "https://www.pacp.gov.om/",
-        "Financial_Ombudsman": "No dedicated financial ombudsman."
-    },
-    "Pakistan": {
-        "Financial_Authority": "State Bank of Pakistan (SBP)",
-        "Abbreviation": "SBP",
-        "Website": "https://www.sbp.org.pk/",
-        "Consumer_Protection_Body": "Competition Commission of Pakistan",
-        "Website_Consumer_Protection": "https://www.cc.gov.pk/",
-        "Financial_Ombudsman": "Banking Mohtasib Pakistan"
-    },
-    "Panama": {
-        "Financial_Authority": "Superintendency of Banks of Panama (Superintendencia de Bancos de Panamá)",
-        "Abbreviation": "SBP",
-        "Website": "https://www.superbancos.gob.pa/",
-        "Consumer_Protection_Body": "Authority for Consumer Protection and Defense of Competition (ACODECO)",
-        "Website_Consumer_Protection": "https://www.acodeco.gob.pa/",
-        "Financial_Ombudsman": "No dedicated financial ombudsman."
-    },
-    "Peru": {
-        "Financial_Authority": "Superintendency of Banking, Insurance and Private Pension Funds Administrators (Superintendencia de Banca, Seguros y AFP)",
-        "Abbreviation": "SBS",
-        "Website": "https://www.sbs.gob.pe/",
-        "Consumer_Protection_Body": "National Institute for the Defense of Competition and the Protection of Intellectual Property (Indecopi)",
-        "Website_Consumer_Protection": "https://www.indecopi.gob.pe/",
-        "Financial_Ombudsman": "Financial Consumer Defender (Defensor del Cliente Financiero)"
-    },
-    "Philippines": {
-        "Financial_Authority": "Bangko Sentral ng Pilipinas (BSP)",
-        "Abbreviation": "BSP",
-        "Website": "https://www.bsp.gov.ph/",
-        "Consumer_Protection_Body": "Department of Trade and Industry - Consumer Protection Group",
-        "Website_Consumer_Protection": "https://www.dti.gov.ph/konsyumer/",
-        "Financial_Ombudsman": "BSP Consumer Assistance Mechanism (CAM)"
-    },
-    "Poland": {
-        "Financial_Authority": "Polish Financial Supervision Authority (Komisja Nadzoru Finansowego)",
-        "Abbreviation": "KNF",
-        "Website": "https://www.knf.gov.pl/",
-        "Consumer_Protection_Body": "Office of Competition and Consumer Protection (Urząd Ochrony Konkurencji i Konsumentów)",
-        "Website_Consumer_Protection": "https://uokik.gov.pl/",
-        "Financial_Ombudsman": "Financial Ombudsman (Rzecznik Finansowy)"
-    },
-    "Portugal": {
-        "Financial_Authority": "Bank of Portugal (Banco de Portugal)",
-        "Abbreviation": "BdP",
-        "Website": "https://www.bportugal.pt/",
-        "Consumer_Protection_Body": "Directorate-General for Consumer Affairs (Direção-Geral do Consumidor)",
-        "Website_Consumer_Protection": "https://www.consumidor.gov.pt/",
-        "Financial_Ombudsman": "Banking Customer Ombudsman (Provedor do Cliente Bancário)"
-    },
-    "Qatar": {
-        "Financial_Authority": "Qatar Central Bank (مصرف قطر المركزي)",
-        "Abbreviation": "QCB",
-        "Website": "https://www.qcb.gov.qa/",
-        "Consumer_Protection_Body": "Ministry of Commerce and Industry - Consumer Protection and Anti-Commercial Fraud department",
-        "Website_Consumer_Protection": "https://www.moci.gov.qa/",
-        "Financial_Ombudsman": "Qatar Central Bank - Consumer Protection Department"
-    },
-    "Romania": {
-        "Financial_Authority": "National Bank of Romania (Banca Națională a României)",
-        "Abbreviation": "BNR",
-        "Website": "https://www.bnr.ro/",
-        "Consumer_Protection_Body": "National Authority for Consumer Protection (Autoritatea Națională pentru Protecția Consumatorilor)",
-        "Website_Consumer_Protection": "https://anpc.ro/",
-        "Financial_Ombudsman": "Alternative Banking Dispute Resolution Centre (CSALB)"
-    },
-    "Russia": {
-        "Financial_Authority": "Central Bank of the Russian Federation (Банк России)",
-        "Abbreviation": "CBR",
-        "Website": "https://www.cbr.ru/",
-        "Consumer_Protection_Body": "Federal Service for Surveillance on Consumer Rights Protection and Human Wellbeing (Rospotrebnadzor)",
-        "Website_Consumer_Protection": "https://www.rospotrebnadzor.ru/",
-        "Financial_Ombudsman": "Financial Ombudsman Service (Служба финансового уполномоченного)"
-    },
-    "San Marino": {
-        "Financial_Authority": "Central Bank of the Republic of San Marino (Banca Centrale della Repubblica di San Marino)",
-        "Abbreviation": "BCSM",
-        "Website": "https://www.bcsm.sm/",
-        "Consumer_Protection_Body": "Ufficio Attività Economiche - Ufficio Tutela Consumatori",
-        "Website_Consumer_Protection": "https://www.gov.sm/pub1/GovSM/Uffici-e-Servizi/Ufficio-Attivita-Economiche.html",
-        "Financial_Ombudsman": "No dedicated financial ombudsman."
-    },
-    "Saudi Arabia": {
-        "Financial_Authority": "Saudi Central Bank (SAMA)",
-        "Abbreviation": "SAMA",
-        "Website": "https://www.sama.gov.sa/",
-        "Consumer_Protection_Body": "Ministry of Commerce",
-        "Website_Consumer_Protection": "https://mc.gov.sa/",
-        "Financial_Ombudsman": "SAMA - Consumer Protection Department"
-    },
-    "Serbia": {
-        "Financial_Authority": "National Bank of Serbia (Народна банка Србије)",
-        "Abbreviation": "NBS",
-        "Website": "https://www.nbs.rs/",
-        "Consumer_Protection_Body": "Ministry of Trade, Tourism and Telecommunications - Sector for Consumer Protection",
-        "Website_Consumer_Protection": "https://zastitapotrosaca.gov.rs/",
-        "Financial_Ombudsman": "National Bank of Serbia - Centre for User Protection and Financial Education"
-    },
-    "Singapore": {
-      "country_name": "Singapore",
-      "flag": "🇸🇬",
-      "isEU": false,
-      "protectionLevel": "Altissimo",
-      "notes": "Regolamentazione evoluta con supporto psicologico per vittime di truffe. La Polizia, tramite l'app Scamshield, offre una guida esemplare sulle tattiche psicologiche dei truffatori (https://www.scamshield.gov.sg/why-do-people-fall-prey-to-scams/). Guida al rischio: https://www.moneysense.gov.sg/investments/investment-risk/. Cyber Security Agency (Facebook): https://www.facebook.com/CSAsingapore. DBS Bank promuove la responsabilità condivisa (https://www.dbs.com.sg/personal/support/general-shared-responsibility-framework.html). World Investor Week Coordinator: Paulyn Sng.",
-      "financial_authority": {
-        "name": "Monetary Authority of Singapore",
-        "abbreviation": "MAS",
-        "homepage": "https://www.mas.gov.sg/",
-        "fraudReportLink": "https://www.mas.gov.sg/contact-us",
-        "authorityEmail": "webmaster@mas.gov.sg",
-        "social_links": {
-          "linkedin": "https://www.linkedin.com/company/monetary-authority-of-singapore-mas-/",
-          "twitter": "https://twitter.com/MAS_sg",
-          "youtube": "https://www.youtube.com/channel/UCb_3U5s_2Qp3nJg2IuR22mQ"
-        }
+  "Albania": {
+    "country_name": "Albania",
+    "flag": "🇦🇱",
+    "isEU": false,
+    "protectionLevel": "Medio",
+    "financial_authority": {
+      "name": "Bank of Albania",
+      "abbreviation": "BoA",
+      "homepage": "https://www.bankofalbania.org/",
+      "fraudReportLink": "https://www.bankofalbania.org/rc/doc/formular_ankese_1557820555.pdf",
+      "authorityEmail": "public@bankofalbania.org",
+      "social_links": {}
+    },
+    "notes": "World Investor Week Coordinator: Anjeza Beja."
+  },
+  "Algeria": {
+    "country_name": "Algeria",
+    "flag": "🇩🇿",
+    "isEU": false,
+    "protectionLevel": "Medio",
+    "financial_authority": {
+      "name": "Commission d'Organisation et de Surveillance des Opérations de Bourse",
+      "abbreviation": "COSOB",
+      "homepage": "https://www.cosob.org/",
+      "fraudReportLink": "https://www.cosob.org/fr/plaintes",
+      "authorityEmail": "contact@cosob.dz",
+      "social_links": {}
+    },
+    "notes": "World Investor Week Coordinator: Abdelhakim Berrah."
+  },
+  "Angola": {
+    "country_name": "Angola",
+    "flag": "🇦🇴",
+    "isEU": false,
+    "protectionLevel": "Medio",
+    "financial_authority": {
+      "name": "Capital Markets Commission",
+      "abbreviation": "CMC",
+      "homepage": "https://www.cmc.ao/",
+      "fraudReportLink": "https://www.cmc.ao/denuncias-e-reclamacoes",
+      "authorityEmail": "cmc@cmc.ao",
+      "social_links": {}
+    },
+    "notes": "World Investor Week Coordinator: José M. Matos."
+  },
+  "Argentina": {
+    "country_name": "Argentina",
+    "flag": "🇦🇷",
+    "isEU": false,
+    "protectionLevel": "Alto",
+    "financial_authority": {
+      "name": "Comisión Nacional de Valores",
+      "abbreviation": "CNV",
+      "homepage": "https://www.argentina.gob.ar/cnv",
+      "fraudReportLink": "https://www.argentina.gob.ar/cnv/denuncias",
+      "authorityEmail": "denuncias@cnv.gov.ar",
+      "social_links": {
+        "linkedin": "https://ar.linkedin.com/company/comision-nacional-de-valores",
+        "twitter": "https://x.com/CNVArgentina",
+        "youtube": "https://www.youtube.com/user/CNVArgentina"
       }
     },
-    "Slovakia": {
-        "Financial_Authority": "National Bank of Slovakia (Národná banka Slovenska)",
-        "Abbreviation": "NBS",
-        "Website": "https://www.nbs.sk/",
-        "Consumer_Protection_Body": "Slovak Trade Inspection (Slovenská obchodná inšpekcia)",
-        "Website_Consumer_Protection": "https://www.soi.sk/",
-        "Financial_Ombudsman": "Slovak Banking Association Ombudsman"
+    "notes": "La BCRA (Banca Centrale) gestisce il registro degli intermediari finanziari."
+  },
+  "Armenia": {
+    "country_name": "Armenia",
+    "flag": "🇦🇲",
+    "isEU": false,
+    "protectionLevel": "Medio",
+    "financial_authority": {
+      "name": "Central Bank of Armenia",
+      "abbreviation": "CBA",
+      "homepage": "https://www.cba.am/",
+      "fraudReportLink": "https://www.cba.am/en/SitePages/fsc/fsc_complaints.aspx",
+      "authorityEmail": "info@cba.am",
+      "social_links": {}
     },
-    "Slovenia": {
-        "Financial_Authority": "Bank of Slovenia (Banka Slovenije)",
-        "Abbreviation": "BS",
-        "Website": "https://www.bsi.si/",
-        "Consumer_Protection_Body": "Slovenian Consumer Association (Zveza potrošnikov Slovenije)",
-        "Website_Consumer_Protection": "https://www.zps.si/",
-        "Financial_Ombudsman": "Association of Banks of Slovenia - Ombudsman"
+    "notes": "World Investor Week Coordinator: Armenak Darbinyan."
+  },
+  "Australia": {
+    "country_name": "Australia",
+    "flag": "🇦🇺",
+    "isEU": false,
+    "protectionLevel": "Altissimo",
+    "financial_authority": {
+      "name": "Australian Securities and Investments Commission",
+      "abbreviation": "ASIC",
+      "homepage": "https://asic.gov.au",
+      "fraudReportLink": "https://asic.gov.au/about-asic/contact-us/how-to-complain/report-misconduct-or-a-scam/",
+      "authorityEmail": "investor.relations@asic.gov.au",
+      "social_links": {
+        "linkedin": "https://www.linkedin.com/company/asic/",
+        "twitter": "https://twitter.com/ASIC_Connect",
+        "youtube": "https://www.youtube.com/user/ASICMoneysmart"
+      }
     },
-    "South Africa": {
-        "Financial_Authority": "Prudential Authority (PA) and Financial Sector Conduct Authority (FSCA)",
-        "Abbreviation": "PA / FSCA",
-        "Website": "https://www.resbank.co.za/ and https://www.fsca.co.za/",
-        "Consumer_Protection_Body": "National Consumer Commission (NCC)",
-        "Website_Consumer_Protection": "http://www.thencc.gov.za/",
-        "Financial_Ombudsman": "Ombudsman for Banking Services"
+    "notes": "ASIC gestisce il registro delle aziende e dei servizi finanziari (Moneysmart)."
+  },
+  "Austria": {
+    "country_name": "Austria",
+    "flag": "🇦🇹",
+    "isEU": true,
+    "protectionLevel": "Altissimo",
+    "financial_authority": {
+      "name": "Financial Market Authority",
+      "abbreviation": "FMA",
+      "homepage": "https://www.fma.gv.at/",
+      "fraudReportLink": "https://www.fma.gv.at/en/consumers/complaints/",
+      "authorityEmail": "fma@fma.gv.at",
+      "social_links": {}
     },
-    "South Korea": {
-        "Financial_Authority": "Financial Services Commission (금융위원회) and Financial Supervisory Service (금융감독원)",
-        "Abbreviation": "FSC / FSS",
-        "Website": "https://www.fsc.go.kr/ and https://www.fss.or.kr/",
-        "Consumer_Protection_Body": "Korea Consumer Agency (한국소비자원)",
-        "Website_Consumer_Protection": "https://www.kca.go.kr/",
-        "Financial_Ombudsman": "Financial Supervisory Service - Financial Dispute Resolution Service"
+    "notes": "Standard UE pienamente applicati."
+  },
+  "Azerbaijan": {
+    "country_name": "Azerbaijan",
+    "flag": "🇦🇿",
+    "isEU": false,
+    "protectionLevel": "Medio",
+    "financial_authority": {
+      "name": "Central Bank of the Republic of Azerbaijan",
+      "abbreviation": "CBA",
+      "homepage": "https://www.cbar.az/",
+      "fraudReportLink": "https://www.cbar.az/page-415/consumer-protection",
+      "authorityEmail": "mail@cbar.az",
+      "social_links": {}
     },
-    "Spain": {
-        "Financial_Authority": "Bank of Spain (Banco de España)",
-        "Abbreviation": "BdE",
-        "Website": "https://www.bde.es/",
-        "Consumer_Protection_Body": "Ministry of Consumer Affairs (Ministerio de Consumo)",
-        "Website_Consumer_Protection": "https://www.consumo.gob.es/",
-        "Financial_Ombudsman": "Banco de España - Complaints Service"
+    "notes": "World Investor Week Coordinator: Vusala Gurbanova."
+  },
+  "Bahamas": {
+    "country_name": "Bahamas",
+    "flag": "🇧🇸",
+    "isEU": false,
+    "protectionLevel": "Medio",
+    "financial_authority": {
+      "name": "Securities Commission of The Bahamas",
+      "abbreviation": "SCB",
+      "homepage": "https://www.scb.gov.bs/",
+      "fraudReportLink": "https://www.scb.gov.bs/contact-us/report-a-scam-or-unauthorized-activity/",
+      "authorityEmail": "info@scb.gov.bs",
+      "social_links": {
+        "facebook": "https://www.facebook.com/securitiescommission.bah",
+        "instagram": "https://www.instagram.com/getsmarteraboutmoney/?hl=en",
+        "linkedin": "https://bs.linkedin.com/company/securities-commission-of-the-bahamas",
+        "youtube": "https://www.youtube.com/@securitiescommissionoftheb6891"
+      }
     },
-    "Sweden": {
-        "Financial_Authority": "Swedish Financial Supervisory Authority (Finansinspektionen)",
-        "Abbreviation": "FI",
-        "Website": "https://www.fi.se/",
-        "Consumer_Protection_Body": "Swedish Consumer Agency (Konsumentverket)",
-        "Website_Consumer_Protection": "https://www.konsumentverket.se/",
-        "Financial_Ombudsman": "Swedish Consumers' Banking and Finance Bureau (Konsumenternas Bank- och Finansbyrå)"
+    "notes": "Focus su educazione finanziaria."
+  },
+  "Bahrain": {
+    "country_name": "Bahrain",
+    "flag": "🇧🇭",
+    "isEU": false,
+    "protectionLevel": "Alto",
+    "financial_authority": {
+      "name": "Central Bank of Bahrain",
+      "abbreviation": "CBB",
+      "homepage": "https://www.cbb.gov.bh",
+      "fraudReportLink": "https://www.cbb.gov.bh/complaints-page/",
+      "authorityEmail": "info@cbb.gov.bh",
+      "social_links": {}
     },
-    "Switzerland": {
-        "Financial_Authority": "Swiss Financial Market Supervisory Authority (FINMA)",
-        "Abbreviation": "FINMA",
-        "Website": "https://www.finma.ch/",
-        "Consumer_Protection_Body": "Federal Consumer Affairs Bureau (FCAB)",
-        "Website_Consumer_Protection": "https://www.konsum.admin.ch/",
-        "Financial_Ombudsman": "Swiss Banking Ombudsman"
+    "notes": ""
+  },
+  "Bangladesh": {
+    "country_name": "Bangladesh",
+    "flag": "🇧🇩",
+    "isEU": false,
+    "protectionLevel": "Medio",
+    "financial_authority": {
+      "name": "Bangladesh Securities and Exchange Commission",
+      "abbreviation": "BSEC",
+      "homepage": "https://www.sec.gov.bd/",
+      "fraudReportLink": "https://www.sec.gov.bd/complain",
+      "authorityEmail": "info@sec.gov.bd",
+      "social_links": {}
     },
-    "Taiwan": {
-        "Financial_Authority": "Financial Supervisory Commission (金融監督管理委員會)",
-        "Abbreviation": "FSC",
-        "Website": "https://www.fsc.gov.tw/",
-        "Consumer_Protection_Body": "Consumer Protection Committee, Executive Yuan",
-        "Website_Consumer_Protection": "https://cpc.ey.gov.tw/",
-        "Financial_Ombudsman": "Financial Ombudsman Institution (FOI)"
+    "notes": "World Investor Week Coordinator: Md. Mahbubul Alam."
+  },
+  "Barbados": {
+    "country_name": "Barbados",
+    "flag": "🇧🇧",
+    "isEU": false,
+    "protectionLevel": "Medio",
+    "financial_authority": {
+      "name": "Financial Services Commission",
+      "abbreviation": "FSC",
+      "homepage": "https://www.fsc.gov.bb/",
+      "fraudReportLink": "https://www.fsc.gov.bb/complaints-queries/",
+      "authorityEmail": "info@fsc.gov.bb",
+      "social_links": {}
     },
-    "Thailand": {
-        "Financial_Authority": "Bank of Thailand (ธนาคารแห่งประเทศไทย)",
-        "Abbreviation": "BOT",
-        "Website": "https://www.bot.or.th/",
-        "Consumer_Protection_Body": "Office of the Consumer Protection Board (OCPB)",
-        "Website_Consumer_Protection": "https://www.ocpb.go.th/",
-        "Financial_Ombudsman": "Bank of Thailand - Financial Consumer Protection Center"
+    "notes": "World Investor Week Coordinator: Legal & Licensing department."
+  },
+  "Belgium": {
+    "country_name": "Belgium",
+    "flag": "🇧🇪",
+    "isEU": true,
+    "protectionLevel": "Altissimo",
+    "financial_authority": {
+      "name": "Financial Services and Markets Authority",
+      "abbreviation": "FSMA",
+      "homepage": "https://www.fsma.be",
+      "fraudReportLink": "https://www.fsma.be/en/consumer/complaints",
+      "authorityEmail": "info@fsma.be",
+      "social_links": {}
     },
-    "Trinidad and Tobago": {
-        "Financial_Authority": "Central Bank of Trinidad and Tobago",
-        "Abbreviation": "CBTT",
-        "Website": "https://www.central-bank.org.tt/",
-        "Consumer_Protection_Body": "Consumer Affairs Division, Ministry of Trade and Industry",
-        "Website_Consumer_Protection": "https://www.tradeind.gov.tt/cad/",
-        "Financial_Ombudsman": "Office of the Financial Services Ombudsman (OFSO)"
+    "notes": "Standard UE applicati."
+  },
+  "Bermuda": {
+    "country_name": "Bermuda",
+    "flag": "🇧🇲",
+    "isEU": false,
+    "protectionLevel": "Alto",
+    "financial_authority": {
+      "name": "Bermuda Monetary Authority",
+      "abbreviation": "BMA",
+      "homepage": "https://www.bma.bm/",
+      "fraudReportLink": "https://www.bma.bm/report-a-scam",
+      "authorityEmail": "enquiries@bma.bm",
+      "social_links": {}
     },
-    "Turkey": {
-        "Financial_Authority": "Banking Regulation and Supervision Agency (Bankacılık Düzenleme ve Denetleme Kurumu)",
-        "Abbreviation": "BRSA / BDDK",
-        "Website": "https://www.bddk.org.tr/",
-        "Consumer_Protection_Body": "Ministry of Trade - Directorate General for Consumer Protection and Market Surveillance",
-        "Website_Consumer_Protection": "https://tuketici.ticaret.gov.tr/",
-        "Financial_Ombudsman": "Turkish Banking Association - Customer Complaints Arbitration Panel"
+    "notes": "World Investor Week Coordinator: Lasonia Packwood."
+  },
+  "Bolivia": {
+    "country_name": "Bolivia",
+    "flag": "🇧🇴",
+    "isEU": false,
+    "protectionLevel": "Medio",
+    "financial_authority": {
+      "name": "Autoridad de Supervisión del Sistema Financiero",
+      "abbreviation": "ASFI",
+      "homepage": "https://www.asfi.gob.bo/",
+      "fraudReportLink": "https://www.asfi.gob.bo/index.php/puntos-de-reclamacion-pr.html",
+      "authorityEmail": "asfi@asfi.gob.bo",
+      "social_links": {}
     },
-    "Ukraine": {
-        "Financial_Authority": "National Bank of Ukraine (Національний банк України)",
-        "Abbreviation": "NBU",
-        "Website": "https://bank.gov.ua/",
-        "Consumer_Protection_Body": "State Service of Ukraine on Food Safety and Consumer Protection",
-        "Website_Consumer_Protection": "https://dpss.gov.ua/",
-        "Financial_Ombudsman": "No dedicated financial ombudsman, complaints handled by NBU."
+    "notes": "World Investor Week Coordinator: Ilse Alemán."
+  },
+  "Botswana": {
+    "country_name": "Botswana",
+    "flag": "🇧🇼",
+    "isEU": false,
+    "protectionLevel": "Medio",
+    "financial_authority": {
+      "name": "Non-Bank Financial Institutions Regulatory Authority",
+      "abbreviation": "NBFIRA",
+      "homepage": "https://www.nbfira.org.bw/",
+      "fraudReportLink": "https://www.nbfira.org.bw/lodge-complaint",
+      "authorityEmail": "info@nbfira.org.bw",
+      "social_links": {}
     },
-    "United Arab Emirates": {
-        "Financial_Authority": "Central Bank of the UAE (CBUAE)",
-        "Abbreviation": "CBUAE",
-        "Website": "https://www.centralbank.ae/",
-        "Consumer_Protection_Body": "Ministry of Economy - Consumer Protection Department",
-        "Website_Consumer_Protection": "https://www.moec.gov.ae/",
-        "Financial_Ombudsman": "Sanadak, The Ombudsman for financial services"
+    "notes": "World Investor Week Coordinator: Boa Ntebele."
+  },
+  "Brazil": {
+    "country_name": "Brazil",
+    "flag": "🇧🇷",
+    "isEU": false,
+    "protectionLevel": "Alto",
+    "financial_authority": {
+      "name": "Comissão de Valores Mobiliários",
+      "abbreviation": "CVM",
+      "homepage": "https://www.gov.br/cvm/",
+      "fraudReportLink": "https://www.gov.br/cvm/pt-br/canais_atendimento/spc/login-cidadao",
+      "authorityEmail": "imprensa@cvm.gov.br",
+      "social_links": {}
     },
-    "United Kingdom": {
-        "Financial_Authority": "Prudential Regulation Authority (PRA) and Financial Conduct Authority (FCA)",
-        "Abbreviation": "PRA / FCA",
-        "Website": "https://www.bankofengland.co.uk/pra and https://www.fca.org.uk/",
-        "Consumer_Protection_Body": "Citizens Advice",
-        "Website_Consumer_Protection": "https://www.citizensadvice.org.uk/",
-        "Financial_Ombudsman": "Financial Ombudsman Service"
+    "notes": "World Investor Week Coordinator: José Alexandre Vasco."
+  },
+  "British Virgin Islands": {
+    "country_name": "British Virgin Islands",
+    "flag": "🇻🇬",
+    "isEU": false,
+    "protectionLevel": "Alto",
+    "financial_authority": {
+      "name": "BVI Financial Services Commission",
+      "abbreviation": "BVI FSC",
+      "homepage": "https://www.bvifsc.vg/",
+      "fraudReportLink": "https://www.bvifsc.vg/complaints-and-assistance",
+      "authorityEmail": "commissioner@bvifsc.vg",
+      "social_links": {}
     },
-    "United States": {
-        "Financial_Authority": "Office of the Comptroller of the Currency (OCC) and Federal Reserve System (The Fed)",
-        "Abbreviation": "OCC / Fed",
-        "Website": "https://www.occ.gov/ and https://www.federalreserve.gov/",
-        "Consumer_Protection_Body": "Consumer Financial Protection Bureau (CFPB)",
-        "Website_Consumer_Protection": "https://www.consumerfinance.gov/",
-        "Financial_Ombudsman": "Consumer Financial Protection Bureau (CFPB)"
+    "notes": "World Investor Week Coordinator: The Registry of Corporate Affairs."
+  },
+  "Bulgaria": {
+    "country_name": "Bulgaria",
+    "flag": "🇧🇬",
+    "isEU": true,
+    "protectionLevel": "Altissimo",
+    "financial_authority": {
+      "name": "Financial Supervision Commission",
+      "abbreviation": "FSC",
+      "homepage": "https://www.fsc.bg/en/",
+      "fraudReportLink": "https://www.fsc.bg/en/for-the-consumers/",
+      "authorityEmail": "fsc@fsc.bg",
+      "social_links": {}
     },
-    "Uruguay": {
-        "Financial_Authority": "Central Bank of Uruguay (Banco Central del Uruguay)",
-        "Abbreviation": "BCU",
-        "Website": "https://www.bcu.gub.uy/",
-        "Consumer_Protection_Body": "Ministry of Economy and Finance - Consumer Defense Area",
-        "Website_Consumer_Protection": "https://www.gub.uy/ministerio-economia-finanzas/defensa-consumidor",
-        "Financial_Ombudsman": "BCU - Superintendency of Financial Services"
+    "notes": "Entrata nell'Area Euro il 1 Gennaio 2026. Standard UE applicati."
+  },
+  "Burkina Faso": {
+    "country_name": "Burkina Faso",
+    "flag": "🇧🇫",
+    "isEU": false,
+    "protectionLevel": "Medio",
+    "financial_authority": {
+      "name": "Conseil Régional de l'Epargne Publique et des Marchés Financiers",
+      "abbreviation": "CREPMF",
+      "homepage": "https://www.crepmf.org/",
+      "fraudReportLink": "https://www.crepmf.org/nous-contacter/",
+      "authorityEmail": "crepmf@crepmf.org",
+      "social_links": {}
     },
-    "Uzbekistan": {
-        "Financial_Authority": "Central Bank of the Republic of Uzbekistan (O'zbekiston Respublikasi Markaziy banki)",
-        "Abbreviation": "CBU",
-        "Website": "https://cbu.uz/",
-        "Consumer_Protection_Body": "Agency for consumer protection under the Antimonopoly committee of the Republic of Uzbekistan",
-        "Website_Consumer_Protection": "https://consumer.uz/",
-        "Financial_Ombudsman": "No dedicated financial ombudsman."
+    "notes": "Autorità regionale per l'Unione Monetaria dell'Africa Occidentale (WAEMU)."
+  },
+  "Cambodia": {
+    "country_name": "Cambodia",
+    "flag": "🇰🇭",
+    "isEU": false,
+    "protectionLevel": "Medio",
+    "financial_authority": {
+      "name": "Securities and Exchange Regulator of Cambodia",
+      "abbreviation": "SERC",
+      "homepage": "https://www.serc.gov.kh/",
+      "fraudReportLink": "https://www.serc.gov.kh/contact-us/",
+      "authorityEmail": "info@serc.gov.kh",
+      "social_links": {}
     },
-    "Vietnam": {
-        "Financial_Authority": "State Bank of Vietnam (Ngân hàng Nhà nước Việt Nam)",
-        "Abbreviation": "SBV",
-        "Website": "https://www.sbv.gov.vn/",
-        "Consumer_Protection_Body": "Vietnam Competition and Consumer Authority (VCCA)",
-        "Website_Consumer_Protection": "http://www.vcca.gov.vn/",
-        "Financial_Ombudsman": "No dedicated financial ombudsman."
+    "notes": "World Investor Week Coordinator: SERC Team."
+  },
+  "Canada": {
+    "country_name": "Canada",
+    "flag": "🇨🇦",
+    "isEU": false,
+    "protectionLevel": "Altissimo",
+    "financial_authority": {
+      "name": "Canadian Securities Administrators",
+      "abbreviation": "CSA",
+      "homepage": "https://www.securities-administrators.ca/",
+      "fraudReportLink": "https://www.securities-administrators.ca/investor-tools/report-a-scam/",
+      "authorityEmail": "csa-acvm-secretariat@acvm-csa.ca",
+      "social_links": {}
     },
-    "Zambia": {
-        "Financial_Authority": "Bank of Zambia",
-        "Abbreviation": "BoZ",
-        "Website": "https://www.boz.zm/",
-        "Consumer_Protection_Body": "Competition and Consumer Protection Commission (CCPC)",
-        "Website_Consumer_Protection": "https://www.ccpc.org.zm/",
-        "Financial_Ombudsman": "No dedicated financial ombudsman."
+    "notes": "Organizzazione che raggruppa le autorità provinciali e territoriali."
+  },
+  "Cayman Islands": {
+    "country_name": "Cayman Islands",
+    "flag": "🇰🇾",
+    "isEU": false,
+    "protectionLevel": "Alto",
+    "financial_authority": {
+      "name": "Cayman Islands Monetary Authority",
+      "abbreviation": "CIMA",
+      "homepage": "https://www.cima.ky/",
+      "fraudReportLink": "https://www.cima.ky/complaints",
+      "authorityEmail": "contact@cima.ky",
+      "social_links": {}
+    },
+    "notes": "World Investor Week Coordinator: CIMA Team."
+  },
+  "CEMAC (Regional)": {
+    "country_name": "CEMAC (Regional)",
+    "flag": "🌍",
+    "isEU": false,
+    "protectionLevel": "Medio",
+    "financial_authority": {
+      "name": "Commission de Surveillance du Marché Financier de l'Afrique Centrale",
+      "abbreviation": "COSUMAF",
+      "homepage": "https://cosumaf.org/",
+      "fraudReportLink": "https://cosumaf.org/contact/",
+      "authorityEmail": "contact@cosumaf.org",
+      "social_links": {}
+    },
+    "notes": "Autorità regionale per Camerun, Repubblica Centrafricana, Ciad, Congo, Guinea Equatoriale e Gabon."
+  },
+  "Chile": {
+    "country_name": "Chile",
+    "flag": "🇨🇱",
+    "isEU": false,
+    "protectionLevel": "Alto",
+    "financial_authority": {
+      "name": "Comisión para el Mercado Financiero",
+      "abbreviation": "CMF",
+      "homepage": "https://www.cmfchile.cl/",
+      "fraudReportLink": "https://www.cmfchile.cl/portal/principal/605/w3-propertyvalue-9871.html",
+      "authorityEmail": "consultas@cmfchile.cl",
+      "social_links": {}
+    },
+    "notes": "World Investor Week Coordinator: CMF Educa."
+  },
+  "Chinese Taipei": {
+    "country_name": "Chinese Taipei",
+    "flag": "🇹🇼",
+    "isEU": false,
+    "protectionLevel": "Medio",
+    "financial_authority": {
+      "name": "Financial Supervisory Commission",
+      "abbreviation": "FSC",
+      "homepage": "https://www.fsc.gov.tw/en/",
+      "fraudReportLink": "https://fscmail.fsc.gov.tw/",
+      "authorityEmail": "chium@sfb.gov.tw",
+      "social_links": {}
+    },
+    "notes": "World Investor Week Coordinator: Tiffany Chiu."
+  },
+  "Colombia": {
+    "country_name": "Colombia",
+    "flag": "🇨🇴",
+    "isEU": false,
+    "protectionLevel": "Alto",
+    "financial_authority": {
+      "name": "Superintendencia Financiera de Colombia",
+      "abbreviation": "SFC",
+      "homepage": "https://www.superfinanciera.gov.co/",
+      "fraudReportLink": "https://www.superfinanciera.gov.co/jsp/index.jsf?id=10080769",
+      "authorityEmail": "super@superfinanciera.gov.co",
+      "social_links": {}
+    },
+    "notes": "World Investor Week Coordinator: Angela Maria Garcia."
+  },
+  "Costa Rica": {
+    "country_name": "Costa Rica",
+    "flag": "🇨🇷",
+    "isEU": false,
+    "protectionLevel": "Medio",
+    "financial_authority": {
+      "name": "Superintendencia General de Valores",
+      "abbreviation": "SUGEVAL",
+      "homepage": "https://www.sugeval.fi.cr/",
+      "fraudReportLink": "https://www.sugeval.fi.cr/tramites_servicios/Paginas/Denuncias.aspx",
+      "authorityEmail": "informacion@sugeval.fi.cr",
+      "social_links": {}
+    },
+    "notes": "World Investor Week Coordinator: María Lucía Fernández."
+  },
+  "Côte d'Ivoire": {
+    "country_name": "Côte d'Ivoire",
+    "flag": "🇨🇮",
+    "isEU": false,
+    "protectionLevel": "Medio",
+    "financial_authority": {
+      "name": "Conseil Régional de l'Epargne Publique et des Marchés Financiers",
+      "abbreviation": "CREPMF",
+      "homepage": "https://www.crepmf.org/",
+      "fraudReportLink": "https://www.crepmf.org/nous-contacter/",
+      "authorityEmail": "crepmf@crepmf.org",
+      "social_links": {}
+    },
+    "notes": "Autorità regionale per l'Unione Monetaria dell'Africa Occidentale (WAEMU)."
+  },
+  "Croatia": {
+    "country_name": "Croatia",
+    "flag": "🇭🇷",
+    "isEU": true,
+    "protectionLevel": "Altissimo",
+    "financial_authority": {
+      "name": "Croatian Financial Services Supervisory Agency",
+      "abbreviation": "HANFA",
+      "homepage": "https://www.hanfa.hr/",
+      "fraudReportLink": "https://www.hanfa.hr/trziste-kapitala/upiti-i-prigovori/",
+      "authorityEmail": "info@hanfa.hr",
+      "social_links": {}
+    },
+    "notes": "World Investor Week Coordinator: HANFA Team."
+  },
+  "Cyprus": {
+    "country_name": "Cyprus",
+    "flag": "🇨🇾",
+    "isEU": true,
+    "protectionLevel": "Altissimo",
+    "financial_authority": {
+      "name": "Cyprus Securities and Exchange Commission",
+      "abbreviation": "CySEC",
+      "homepage": "https://www.cysec.gov.cy/",
+      "fraudReportLink": "https://www.cysec.gov.cy/en-GB/complaints/how-to-complain/",
+      "authorityEmail": "info@cysec.gov.cy",
+      "social_links": {}
+    },
+    "notes": "World Investor Week Coordinator: CySEC Team."
+  },
+  "Czech Republic": {
+    "country_name": "Czech Republic",
+    "flag": "🇨🇿",
+    "isEU": true,
+    "protectionLevel": "Altissimo",
+    "financial_authority": {
+      "name": "Czech National Bank",
+      "abbreviation": "CNB",
+      "homepage": "https://www.cnb.cz/",
+      "fraudReportLink": "https://www.cnb.cz/en/consumer/protection-and-financial-literacy/how-to-file-a-complaint-or-inquiry/",
+      "authorityEmail": "podatelna@cnb.cz",
+      "social_links": {}
+    },
+    "notes": "World Investor Week Coordinator: CNB Team."
+  },
+  "Denmark": {
+    "country_name": "Denmark",
+    "flag": "🇩🇰",
+    "isEU": true,
+    "protectionLevel": "Altissimo",
+    "financial_authority": {
+      "name": "Danish Financial Supervisory Authority",
+      "abbreviation": "Finanstilsynet",
+      "homepage": "https://www.finanstilsynet.dk/",
+      "fraudReportLink": "https://www.finanstilsynet.dk/Forbrugere/Klag-over-en-finansiel-virksomhed",
+      "authorityEmail": "finanstilsynet@ftnet.dk",
+      "social_links": {}
+    },
+    "notes": "World Investor Week Coordinator: Ulla Brøns."
+  },
+  "ECSRC (Regional)": {
+    "country_name": "ECSRC (Regional)",
+    "flag": "🌍",
+    "isEU": false,
+    "protectionLevel": "Medio",
+    "financial_authority": {
+      "name": "Eastern Caribbean Securities Regulatory Commission",
+      "abbreviation": "ECSRC",
+      "homepage": "http://www.ecsrc.com",
+      "fraudReportLink": "http://www.ecsrc.com/complaints/",
+      "authorityEmail": "ecsrc@eccb-centralbank.org",
+      "social_links": {}
+    },
+    "notes": "Autorità regionale per Anguilla, Antigua e Barbuda, Dominica, Grenada, Montserrat, Saint Kitts e Nevis, Santa Lucia, Saint Vincent e Grenadine."
+  },
+  "Egypt": {
+    "country_name": "Egypt",
+    "flag": "🇪🇬",
+    "isEU": false,
+    "protectionLevel": "Alto",
+    "financial_authority": {
+      "name": "Financial Regulatory Authority",
+      "abbreviation": "FRA",
+      "homepage": "https://fra.gov.eg/",
+      "fraudReportLink": "https://fra.gov.eg/complaints/",
+      "authorityEmail": "fra@fra.gov.eg",
+      "social_links": {}
+    },
+    "notes": "World Investor Week Coordinator: FRA Team."
+  },
+  "El Salvador": {
+    "country_name": "El Salvador",
+    "flag": "🇸🇻",
+    "isEU": false,
+    "protectionLevel": "Medio",
+    "financial_authority": {
+      "name": "Superintendencia del Sistema Financiero",
+      "abbreviation": "SSF",
+      "homepage": "https://www.ssf.gob.sv/",
+      "fraudReportLink": "https://www.ssf.gob.sv/atencion-al-usuario-financiero/",
+      "authorityEmail": "info@ssf.gob.sv",
+      "social_links": {}
+    },
+    "notes": "World Investor Week Coordinator: Ana Lorena Guevara de Palacios."
+  },
+  "Estonia": {
+    "country_name": "Estonia",
+    "flag": "🇪🇪",
+    "isEU": true,
+    "protectionLevel": "Altissimo",
+    "financial_authority": {
+      "name": "Finantsinspektsioon",
+      "abbreviation": "FSA",
+      "homepage": "https://www.fi.ee/",
+      "fraudReportLink": "https://www.fi.ee/en/consumer/all-articles/how-submit-complaint-against-financial-service-provider",
+      "authorityEmail": "info@fi.ee",
+      "social_links": {}
+    },
+    "notes": "World Investor Week Coordinator: FSA Team."
+  },
+  "Finland": {
+    "country_name": "Finland",
+    "flag": "🇫🇮",
+    "isEU": true,
+    "protectionLevel": "Altissimo",
+    "financial_authority": {
+      "name": "Financial Supervisory Authority",
+      "abbreviation": "FIN-FSA",
+      "homepage": "https://www.finanssivalvonta.fi/",
+      "fraudReportLink": "https://www.finanssivalvonta.fi/en/about-the-fin-fsa/contact-us/report-suspected-offence/",
+      "authorityEmail": "kirjaamo@finanssivalvonta.fi",
+      "social_links": {}
+    },
+    "notes": "World Investor Week Coordinator: Anneli Tuominen."
+  },
+  "France": {
+    "country_name": "France",
+    "flag": "🇫🇷",
+    "isEU": true,
+    "protectionLevel": "Altissimo",
+    "financial_authority": {
+      "name": "Autorité des Marchés Financiers",
+      "abbreviation": "AMF",
+      "homepage": "https://www.amf-france.org/",
+      "fraudReportLink": "https://www.amf-france.org/fr/le-mediateur-de-lamf/votre-dossier-de-mediation/vous-voulez-deposer-une-demande-de-mediation",
+      "authorityEmail": "mediateur@amf-france.org",
+      "social_links": {}
+    },
+    "notes": "World Investor Week Coordinator: AMF Team."
+  },
+  "Georgia": {
+    "country_name": "Georgia",
+    "flag": "🇬🇪",
+    "isEU": false,
+    "protectionLevel": "Medio",
+    "financial_authority": {
+      "name": "National Bank of Georgia",
+      "abbreviation": "NBG",
+      "homepage": "https://nbg.gov.ge/",
+      "fraudReportLink": "https://nbg.gov.ge/en/page/hot-line",
+      "authorityEmail": "info@nbg.gov.ge",
+      "social_links": {}
+    },
+    "notes": "World Investor Week Coordinator: Lasha Gzirishvili."
+  },
+  "Germany": {
+    "country_name": "Germany",
+    "flag": "🇩🇪",
+    "isEU": true,
+    "protectionLevel": "Altissimo",
+    "financial_authority": {
+      "name": "Bundesanstalt für Finanzdienstleistungsaufsicht",
+      "abbreviation": "BaFin",
+      "homepage": "https://www.bafin.de/",
+      "fraudReportLink": "https://www.bafin.de/EN/DieBaFin/Kontakt/Verbrauchertelefon/verbrauchertelefon_node_en.html",
+      "authorityEmail": "poststelle@bafin.de",
+      "social_links": {}
+    },
+    "notes": "World Investor Week Coordinator: BaFin Team."
+  },
+  "Gibraltar": {
+    "country_name": "Gibraltar",
+    "flag": "🇬🇮",
+    "isEU": false,
+    "protectionLevel": "Alto",
+    "financial_authority": {
+      "name": "Gibraltar Financial Services Commission",
+      "abbreviation": "GFSC",
+      "homepage": "https://www.fsc.gi/",
+      "fraudReportLink": "https://www.fsc.gi/consumer-hub/complaints",
+      "authorityEmail": "information@fsc.gi",
+      "social_links": {}
+    },
+    "notes": "World Investor Week Coordinator: GFSC Team."
+  },
+  "Greece": {
+    "country_name": "Greece",
+    "flag": "🇬🇷",
+    "isEU": true,
+    "protectionLevel": "Altissimo",
+    "financial_authority": {
+      "name": "Hellenic Capital Market Commission",
+      "abbreviation": "HCMC",
+      "homepage": "http://www.hcmc.gr/",
+      "fraudReportLink": "http://www.hcmc.gr/en_US/web/portal/epikoinonia",
+      "authorityEmail": "info@cmc.gov.gr",
+      "social_links": {}
+    },
+    "notes": "World Investor Week Coordinator: HCMC Team."
+  },
+  "Guernsey": {
+    "country_name": "Guernsey",
+    "flag": "🇬🇬",
+    "isEU": false,
+    "protectionLevel": "Alto",
+    "financial_authority": {
+      "name": "Guernsey Financial Services Commission",
+      "abbreviation": "GFSC",
+      "homepage": "https://www.gfsc.gg/",
+      "fraudReportLink": "https://www.gfsc.gg/consumers/making-complaint",
+      "authorityEmail": "info@gfsc.gg",
+      "social_links": {}
+    },
+    "notes": "World Investor Week Coordinator: GFSC Team."
+  },
+  "Hong Kong": {
+    "country_name": "Hong Kong",
+    "flag": "🇭🇰",
+    "isEU": false,
+    "protectionLevel": "Altissimo",
+    "financial_authority": {
+      "name": "Securities and Futures Commission",
+      "abbreviation": "SFC",
+      "homepage": "https://www.sfc.hk/",
+      "fraudReportLink": "https://www.sfc.hk/en/Lodge-a-complaint",
+      "authorityEmail": "enquiry@sfc.hk",
+      "social_links": {}
+    },
+    "notes": "World Investor Week Coordinator: Investor and Financial Education Council."
+  },
+  "Hungary": {
+    "country_name": "Hungary",
+    "flag": "🇭🇺",
+    "isEU": true,
+    "protectionLevel": "Altissimo",
+    "financial_authority": {
+      "name": "Magyar Nemzeti Bank (Central Bank of Hungary)",
+      "abbreviation": "MNB",
+      "homepage": "https://www.mnb.hu/",
+      "fraudReportLink": "https://www.mnb.hu/en/consumer-protection/making-a-complaint",
+      "authorityEmail": "info@mnb.hu",
+      "social_links": {}
+    },
+    "notes": "World Investor Week Coordinator: MNB Team."
+  },
+  "Iceland": {
+    "country_name": "Iceland",
+    "flag": "🇮🇸",
+    "isEU": false,
+    "protectionLevel": "Alto",
+    "financial_authority": {
+      "name": "Central Bank of Iceland",
+      "abbreviation": "CBI",
+      "homepage": "https://www.sedlabanki.is/",
+      "fraudReportLink": "https://www.sedlabanki.is/consumer-protection/complaints-and-comments/",
+      "authorityEmail": "sedlabanki@sedlabanki.is",
+      "social_links": {}
+    },
+    "notes": "World Investor Week Coordinator: CBI Team."
+  },
+  "India": {
+    "country_name": "India",
+    "flag": "🇮🇳",
+    "isEU": false,
+    "protectionLevel": "Alto",
+    "financial_authority": {
+      "name": "Securities and Exchange Board of India",
+      "abbreviation": "SEBI",
+      "homepage": "https://www.sebi.gov.in/",
+      "fraudReportLink": "https://scores.gov.in/",
+      "authorityEmail": "sebi@sebi.gov.in",
+      "social_links": {}
+    },
+    "notes": "World Investor Week Coordinator: SEBI Team."
+  },
+  "Indonesia": {
+    "country_name": "Indonesia",
+    "flag": "🇮🇩",
+    "isEU": false,
+    "protectionLevel": "Medio",
+    "financial_authority": {
+      "name": "Otoritas Jasa Keuangan (Indonesia Financial Services Authority)",
+      "abbreviation": "OJK",
+      "homepage": "https://www.ojk.go.id/",
+      "fraudReportLink": "https://kontak157.ojk.go.id/",
+      "authorityEmail": "humas@ojk.go.id",
+      "social_links": {}
+    },
+    "notes": "World Investor Week Coordinator: OJK Team."
+  },
+  "Ireland": {
+    "country_name": "Ireland",
+    "flag": "🇮🇪",
+    "isEU": true,
+    "protectionLevel": "Altissimo",
+    "financial_authority": {
+      "name": "Central Bank of Ireland",
+      "abbreviation": "CBI",
+      "homepage": "https://www.centralbank.ie/",
+      "fraudReportLink": "https://www.centralbank.ie/consumer-hub/complaints",
+      "authorityEmail": "enquiries@centralbank.ie",
+      "social_links": {}
+    },
+    "notes": "World Investor Week Coordinator: CBI Team."
+  },
+  "Isle of Man": {
+    "country_name": "Isle of Man",
+    "flag": "🇮🇲",
+    "isEU": false,
+    "protectionLevel": "Alto",
+    "financial_authority": {
+      "name": "Isle of Man Financial Services Authority",
+      "abbreviation": "IOMFSA",
+      "homepage": "https://www.iomfsa.im/",
+      "fraudReportLink": "https://www.iomfsa.im/consumer-material/how-to-make-a-complaint/",
+      "authorityEmail": "info@iomfsa.im",
+      "social_links": {}
+    },
+    "notes": "World Investor Week Coordinator: IOMFSA Team."
+  },
+  "Israel": {
+    "country_name": "Israel",
+    "flag": "🇮🇱",
+    "isEU": false,
+    "protectionLevel": "Alto",
+    "financial_authority": {
+      "name": "Israel Securities Authority",
+      "abbreviation": "ISA",
+      "homepage": "https://www.isa.gov.il/",
+      "fraudReportLink": "https://www.isa.gov.il/sites/ISAEng/188/Pages/190.aspx",
+      "authorityEmail": "pniot@isa.gov.il",
+      "social_links": {}
+    },
+    "notes": "World Investor Week Coordinator: ISA Team."
+  },
+  "Italy": {
+    "country_name": "Italy",
+    "flag": "🇮🇹",
+    "isEU": true,
+    "protectionLevel": "Altissimo",
+    "financial_authority": {
+      "name": "Commissione Nazionale per le Società e la Borsa",
+      "abbreviation": "CONSOB",
+      "homepage": "https://www.consob.it/",
+      "fraudReportLink": "https://www.consob.it/web/area-pubblica/esposti",
+      "authorityEmail": "consob@pec.consob.it",
+      "social_links": {}
+    },
+    "notes": "World Investor Week Coordinator: CONSOB Team."
+  },
+  "Jamaica": {
+    "country_name": "Jamaica",
+    "flag": "🇯🇲",
+    "isEU": false,
+    "protectionLevel": "Medio",
+    "financial_authority": {
+      "name": "Financial Services Commission",
+      "abbreviation": "FSC",
+      "homepage": "https://www.fscjamaica.org/",
+      "fraudReportLink": "https://www.fscjamaica.org/complaints/",
+      "authorityEmail": "fsc@fscjamaica.org",
+      "social_links": {}
+    },
+    "notes": "World Investor Week Coordinator: FSC Team."
+  },
+  "Japan": {
+    "country_name": "Japan",
+    "flag": "🇯🇵",
+    "isEU": false,
+    "protectionLevel": "Altissimo",
+    "financial_authority": {
+      "name": "Financial Services Agency",
+      "abbreviation": "FSA",
+      "homepage": "https://www.fsa.go.jp/",
+      "fraudReportLink": "https://www.fsa.go.jp/en/contact/index.html",
+      "authorityEmail": "equestion@fsa.go.jp",
+      "social_links": {}
+    },
+    "notes": "World Investor Week Coordinator: FSA Team."
+  },
+  "Jersey": {
+    "country_name": "Jersey",
+    "flag": "🇯🇪",
+    "isEU": false,
+    "protectionLevel": "Alto",
+    "financial_authority": {
+      "name": "Jersey Financial Services Commission",
+      "abbreviation": "JFSC",
+      "homepage": "https://www.jerseyfsc.org/",
+      "fraudReportLink": "https://www.jerseyfsc.org/industry/making-a-complaint/",
+      "authorityEmail": "info@jerseyfsc.org",
+      "social_links": {}
+    },
+    "notes": "World Investor Week Coordinator: JFSC Team."
+  },
+  "Jordan": {
+    "country_name": "Jordan",
+    "flag": "🇯🇴",
+    "isEU": false,
+    "protectionLevel": "Medio",
+    "financial_authority": {
+      "name": "Jordan Securities Commission",
+      "abbreviation": "JSC",
+      "homepage": "http://www.jsc.gov.jo/",
+      "fraudReportLink": "http://www.jsc.gov.jo/page/en/investor-complaints",
+      "authorityEmail": "info@jsc.gov.jo",
+      "social_links": {}
+    },
+    "notes": "World Investor Week Coordinator: JSC Team."
+  },
+  "Kazakhstan": {
+    "country_name": "Kazakhstan",
+    "flag": "🇰🇿",
+    "isEU": false,
+    "protectionLevel": "Medio",
+    "financial_authority": {
+      "name": "Agency for Regulation and Development of the Financial Market",
+      "abbreviation": "ARDFM",
+      "homepage": "https://www.gov.kz/memleket/entities/ardfm",
+      "fraudReportLink": "https://www.gov.kz/memleket/entities/ardfm/request/1?lang=en",
+      "authorityEmail": "info@finreg.kz",
+      "social_links": {}
+    },
+    "notes": "World Investor Week Coordinator: ARDFM Team."
+  },
+  "Kenya": {
+    "country_name": "Kenya",
+    "flag": "🇰🇪",
+    "isEU": false,
+    "protectionLevel": "Medio",
+    "financial_authority": {
+      "name": "Capital Markets Authority",
+      "abbreviation": "CMA",
+      "homepage": "https://www.cma.or.ke/",
+      "fraudReportLink": "https://www.cma.or.ke/index.php/investor-protection/complaints-handling",
+      "authorityEmail": "corporate@cma.or.ke",
+      "social_links": {}
+    },
+    "notes": "World Investor Week Coordinator: CMA Team."
+  },
+  "Korea, Republic of": {
+    "country_name": "Korea, Republic of",
+    "flag": "🇰🇷",
+    "isEU": false,
+    "protectionLevel": "Altissimo",
+    "financial_authority": {
+      "name": "Financial Supervisory Service",
+      "abbreviation": "FSS",
+      "homepage": "https://www.fss.or.kr/",
+      "fraudReportLink": "https://www.fss.or.kr/fss/en/main/contents.do?menuNo=400023",
+      "authorityEmail": "fssintl@fss.or.kr",
+      "social_links": {}
+    },
+    "notes": "World Investor Week Coordinator: FSS Team."
+  },
+  "Kuwait": {
+    "country_name": "Kuwait",
+    "flag": "🇰🇼",
+    "isEU": false,
+    "protectionLevel": "Alto",
+    "financial_authority": {
+      "name": "Capital Markets Authority",
+      "abbreviation": "CMA",
+      "homepage": "https://www.cma.gov.kw/",
+      "fraudReportLink": "https://www.cma.gov.kw/en/web/cma/complaints",
+      "authorityEmail": "info@cma.gov.kw",
+      "social_links": {}
+    },
+    "notes": "World Investor Week Coordinator: CMA Team."
+  },
+  "Kyrgyzstan": {
+    "country_name": "Kyrgyzstan",
+    "flag": "🇰🇬",
+    "isEU": false,
+    "protectionLevel": "Medio",
+    "financial_authority": {
+      "name": "State Service for Regulation and Supervision of the Financial Market",
+      "abbreviation": "SSRSFM",
+      "homepage": "http://www.fsa.kg/",
+      "fraudReportLink": "http://www.fsa.kg/feedback",
+      "authorityEmail": "info@fsa.kg",
+      "social_links": {}
+    },
+    "notes": "World Investor Week Coordinator: SSRSFM Team."
+  },
+  "Latvia": {
+    "country_name": "Latvia",
+    "flag": "🇱🇻",
+    "isEU": true,
+    "protectionLevel": "Altissimo",
+    "financial_authority": {
+      "name": "Latvijas Banka (Bank of Latvia)",
+      "abbreviation": "LB",
+      "homepage": "https://www.bank.lv/",
+      "fraudReportLink": "https://www.bank.lv/en/customer-protection/submitting-complaints",
+      "authorityEmail": "info@bank.lv",
+      "social_links": {}
+    },
+    "notes": "World Investor Week Coordinator: LB Team."
+  },
+  "Liechtenstein": {
+    "country_name": "Liechtenstein",
+    "flag": "🇱🇮",
+    "isEU": false,
+    "protectionLevel": "Alto",
+    "financial_authority": {
+      "name": "Financial Market Authority Liechtenstein",
+      "abbreviation": "FMA",
+      "homepage": "https://www.fma-li.li/",
+      "fraudReportLink": "https://www.fma-li.li/en/client-protection/complaints-office.html",
+      "authorityEmail": "info@fma-li.li",
+      "social_links": {}
+    },
+    "notes": "World Investor Week Coordinator: FMA Team."
+  },
+  "Lithuania": {
+    "country_name": "Lithuania",
+    "flag": "🇱🇹",
+    "isEU": true,
+    "protectionLevel": "Altissimo",
+    "financial_authority": {
+      "name": "Lietuvos bankas (Bank of Lithuania)",
+      "abbreviation": "LB",
+      "homepage": "https://www.lb.lt/",
+      "fraudReportLink": "https://www.lb.lt/en/consumer-and-financial-market-participant-disputes",
+      "authorityEmail": "info@lb.lt",
+      "social_links": {}
+    },
+    "notes": "World Investor Week Coordinator: LB Team."
+  },
+  "Luxembourg": {
+    "country_name": "Luxembourg",
+    "flag": "🇱🇺",
+    "isEU": true,
+    "protectionLevel": "Altissimo",
+    "financial_authority": {
+      "name": "Commission de Surveillance du Secteur Financier",
+      "abbreviation": "CSSF",
+      "homepage": "https://www.cssf.lu/",
+      "fraudReportLink": "https://www.cssf.lu/en/consumer/complaints/",
+      "authorityEmail": "direction@cssf.lu",
+      "social_links": {}
+    },
+    "notes": "World Investor Week Coordinator: CSSF Team."
+  },
+  "Malawi": {
+    "country_name": "Malawi",
+    "flag": "🇲🇼",
+    "isEU": false,
+    "protectionLevel": "Medio",
+    "financial_authority": {
+      "name": "Reserve Bank of Malawi",
+      "abbreviation": "RBM",
+      "homepage": "https://www.rbm.mw/",
+      "fraudReportLink": "https://www.rbm.mw/Supervision/ComplaintsHandling",
+      "authorityEmail": "rbm@rbm.mw",
+      "social_links": {}
+    },
+    "notes": "World Investor Week Coordinator: RBM Team."
+  },
+  "Malaysia": {
+    "country_name": "Malaysia",
+    "flag": "🇲🇾",
+    "isEU": false,
+    "protectionLevel": "Alto",
+    "financial_authority": {
+      "name": "Securities Commission Malaysia",
+      "abbreviation": "SC",
+      "homepage": "https://www.sc.com.my/",
+      "fraudReportLink": "https://www.sc.com.my/regulation/enforcement/make-a-complaint",
+      "authorityEmail": "aduan@seccom.com.my",
+      "social_links": {}
+    },
+    "notes": "World Investor Week Coordinator: SC Team."
+  },
+  "Malta": {
+    "country_name": "Malta",
+    "flag": "🇲🇹",
+    "isEU": true,
+    "protectionLevel": "Altissimo",
+    "financial_authority": {
+      "name": "Malta Financial Services Authority",
+      "abbreviation": "MFSA",
+      "homepage": "https://www.mfsa.mt/",
+      "fraudReportLink": "https://www.mfsa.mt/consumers/complaints-and-redress/",
+      "authorityEmail": "communications@mfsa.mt",
+      "social_links": {}
+    },
+    "notes": "World Investor Week Coordinator: MFSA Team."
+  },
+  "Mauritius": {
+    "country_name": "Mauritius",
+    "flag": "🇲🇺",
+    "isEU": false,
+    "protectionLevel": "Alto",
+    "financial_authority": {
+      "name": "Financial Services Commission",
+      "abbreviation": "FSC",
+      "homepage": "https://www.fscmauritius.org/",
+      "fraudReportLink": "https://www.fscmauritius.org/en/consumer-protection/complaints",
+      "authorityEmail": "fscmauritius@intnet.mu",
+      "social_links": {}
+    },
+    "notes": "World Investor Week Coordinator: FSC Team."
+  },
+  "Mexico": {
+    "country_name": "Mexico",
+    "flag": "🇲🇽",
+    "isEU": false,
+    "protectionLevel": "Alto",
+    "financial_authority": {
+      "name": "Comisión Nacional Bancaria y de Valores",
+      "abbreviation": "CNBV",
+      "homepage": "https://www.gob.mx/cnbv",
+      "fraudReportLink": "https://www.gob.mx/cnbv/acciones-y-programas/quejas-y-denuncias-ante-la-cnbv",
+      "authorityEmail": "info@cnbv.gob.mx",
+      "social_links": {}
+    },
+    "notes": "World Investor Week Coordinator: CNBV Team."
+  },
+  "Mongolia": {
+    "country_name": "Mongolia",
+    "flag": "🇲🇳",
+    "isEU": false,
+    "protectionLevel": "Medio",
+    "financial_authority": {
+      "name": "Financial Regulatory Commission",
+      "abbreviation": "FRC",
+      "homepage": "https://www.frc.mn/",
+      "fraudReportLink": "https://www.frc.mn/s/10",
+      "authorityEmail": "info@frc.mn",
+      "social_links": {}
+    },
+    "notes": "World Investor Week Coordinator: FRC Team."
+  },
+  "Montenegro": {
+    "country_name": "Montenegro",
+    "flag": "🇲🇪",
+    "isEU": false,
+    "protectionLevel": "Medio",
+    "financial_authority": {
+      "name": "Capital Market Authority",
+      "abbreviation": "CMA",
+      "homepage": "https://www.scmn.me/",
+      "fraudReportLink": "https://www.scmn.me/index.php/zastita-investitora",
+      "authorityEmail": "office@scmn.me",
+      "social_links": {}
+    },
+    "notes": "World Investor Week Coordinator: CMA Team."
+  },
+  "Morocco": {
+    "country_name": "Morocco",
+    "flag": "🇲🇦",
+    "isEU": false,
+    "protectionLevel": "Alto",
+    "financial_authority": {
+      "name": "Autorité Marocaine du Marché des Capitaux",
+      "abbreviation": "AMMC",
+      "homepage": "https://www.ammc.ma/",
+      "fraudReportLink": "https://www.ammc.ma/fr/webform/reclamation",
+      "authorityEmail": "contact@ammc.ma",
+      "social_links": {}
+    },
+    "notes": "World Investor Week Coordinator: AMMC Team."
+  },
+  "Mozambique": {
+    "country_name": "Mozambique",
+    "flag": "🇲🇿",
+    "isEU": false,
+    "protectionLevel": "Medio",
+    "financial_authority": {
+      "name": "Bolsa de Valores de Moçambique",
+      "abbreviation": "BVM",
+      "homepage": "https://www.bvm.co.mz/",
+      "fraudReportLink": "https://www.bvm.co.mz/index.php/pt/contactos",
+      "authorityEmail": "bvm@bvm.co.mz",
+      "social_links": {}
+    },
+    "notes": "World Investor Week Coordinator: BVM Team."
+  },
+  "Netherlands": {
+    "country_name": "Netherlands",
+    "flag": "🇳🇱",
+    "isEU": true,
+    "protectionLevel": "Altissimo",
+    "financial_authority": {
+      "name": "Authority for the Financial Markets",
+      "abbreviation": "AFM",
+      "homepage": "https://www.afm.nl/",
+      "fraudReportLink": "https://www.afm.nl/nl-nl/consumenten/contact/klacht-over-financiele-dienstverlener",
+      "authorityEmail": "info@afm.nl",
+      "social_links": {}
+    },
+    "notes": "World Investor Week Coordinator: AFM Team."
+  },
+  "New Zealand": {
+    "country_name": "New Zealand",
+    "flag": "🇳🇿",
+    "isEU": false,
+    "protectionLevel": "Altissimo",
+    "financial_authority": {
+      "name": "Financial Markets Authority",
+      "abbreviation": "FMA",
+      "homepage": "https://www.fma.govt.nz/",
+      "fraudReportLink": "https://www.fma.govt.nz/contact-us/make-a-complaint/",
+      "authorityEmail": "questions@fma.govt.nz",
+      "social_links": {}
+    },
+    "notes": "World Investor Week Coordinator: FMA Team."
+  },
+  "Nigeria": {
+    "country_name": "Nigeria",
+    "flag": "🇳🇬",
+    "isEU": false,
+    "protectionLevel": "Medio",
+    "financial_authority": {
+      "name": "Securities and Exchange Commission",
+      "abbreviation": "SEC",
+      "homepage": "https://sec.gov.ng/",
+      "fraudReportLink": "https://sec.gov.ng/complaints/",
+      "authorityEmail": "sec@sec.gov.ng",
+      "social_links": {}
+    },
+    "notes": "World Investor Week Coordinator: SEC Team."
+  },
+  "North Macedonia": {
+    "country_name": "North Macedonia",
+    "flag": "🇲🇰",
+    "isEU": false,
+    "protectionLevel": "Medio",
+    "financial_authority": {
+      "name": "Securities and Exchange Commission",
+      "abbreviation": "SEC",
+      "homepage": "https://www.sec.gov.mk/",
+      "fraudReportLink": "https://www.sec.gov.mk/index.php/en/investor-protection-en/complaints-en",
+      "authorityEmail": "info@sec.gov.mk",
+      "social_links": {}
+    },
+    "notes": "World Investor Week Coordinator: SEC Team."
+  },
+  "Oman": {
+    "country_name": "Oman",
+    "flag": "🇴🇲",
+    "isEU": false,
+    "protectionLevel": "Alto",
+    "financial_authority": {
+      "name": "Capital Market Authority",
+      "abbreviation": "CMA",
+      "homepage": "https://cma.gov.om/",
+      "fraudReportLink": "https://cma.gov.om/Home/Page/Complaints",
+      "authorityEmail": "info@cma.gov.om",
+      "social_links": {}
+    },
+    "notes": "World Investor Week Coordinator: CMA Team."
+  },
+  "Pakistan": {
+    "country_name": "Pakistan",
+    "flag": "🇵🇰",
+    "isEU": false,
+    "protectionLevel": "Medio",
+    "financial_authority": {
+      "name": "Securities and Exchange Commission of Pakistan",
+      "abbreviation": "SECP",
+      "homepage": "https://www.secp.gov.pk/",
+      "fraudReportLink": "https://sdms.secp.gov.pk/",
+      "authorityEmail": "queries@secp.gov.pk",
+      "social_links": {}
+    },
+    "notes": "World Investor Week Coordinator: SECP Team."
+  },
+  "Panama": {
+    "country_name": "Panama",
+    "flag": "🇵🇦",
+    "isEU": false,
+    "protectionLevel": "Medio",
+    "financial_authority": {
+      "name": "Superintendencia del Mercado de Valores",
+      "abbreviation": "SMV",
+      "homepage": "https://supervalores.gob.pa/",
+      "fraudReportLink": "https://supervalores.gob.pa/servicios-al-inversionista/presentacion-de-denuncias/",
+      "authorityEmail": "info@supervalores.gob.pa",
+      "social_links": {}
+    },
+    "notes": "World Investor Week Coordinator: SMV Team."
+  },
+  "Papua New Guinea": {
+    "country_name": "Papua New Guinea",
+    "flag": "🇵🇬",
+    "isEU": false,
+    "protectionLevel": "Medio",
+    "financial_authority": {
+      "name": "Securities Commission of Papua New Guinea",
+      "abbreviation": "SCPNG",
+      "homepage": "https://www.scpng.gov.pg/",
+      "fraudReportLink": "https://www.scpng.gov.pg/contact-us/",
+      "authorityEmail": "info@scpng.gov.pg",
+      "social_links": {}
+    },
+    "notes": "World Investor Week Coordinator: SCPNG Team."
+  },
+  "Paraguay": {
+    "country_name": "Paraguay",
+    "flag": "🇵🇾",
+    "isEU": false,
+    "protectionLevel": "Medio",
+    "financial_authority": {
+      "name": "Superintendencia de Valores",
+      "abbreviation": "SIV",
+      "homepage": "https://www.bcp.gov.py/superintendencia-de-valores-i1025",
+      "fraudReportLink": "https://www.bcp.gov.py/superintendencia-de-valores-i1025",
+      "authorityEmail": "cnv@cnv.gov.py",
+      "social_links": {}
+    },
+    "notes": "World Investor Week Coordinator: SIV Team."
+  },
+  "Peru": {
+    "country_name": "Peru",
+    "flag": "🇵🇪",
+    "isEU": false,
+    "protectionLevel": "Alto",
+    "financial_authority": {
+      "name": "Superintendencia del Mercado de Valores",
+      "abbreviation": "SMV",
+      "homepage": "https://www.smv.gob.pe/",
+      "fraudReportLink": "https://www.smv.gob.pe/Frm_Denuncias.aspx",
+      "authorityEmail": "orientacion@smv.gob.pe",
+      "social_links": {}
+    },
+    "notes": "World Investor Week Coordinator: SMV Team."
+  },
+  "Poland": {
+    "country_name": "Poland",
+    "flag": "🇵🇱",
+    "isEU": true,
+    "protectionLevel": "Altissimo",
+    "financial_authority": {
+      "name": "Polish Financial Supervision Authority",
+      "abbreviation": "KNF",
+      "homepage": "https://www.knf.gov.pl/",
+      "fraudReportLink": "https://www.knf.gov.pl/en/CONSUMERS/Arrears_and_complaints",
+      "authorityEmail": "knf@knf.gov.pl",
+      "social_links": {}
+    },
+    "notes": "World Investor Week Coordinator: KNF Team."
+  },
+  "Portugal": {
+    "country_name": "Portugal",
+    "flag": "🇵🇹",
+    "isEU": true,
+    "protectionLevel": "Altissimo",
+    "financial_authority": {
+      "name": "Comissão do Mercado de Valores Mobiliários",
+      "abbreviation": "CMVM",
+      "homepage": "https://www.cmvm.pt/",
+      "fraudReportLink": "https://www.cmvm.pt/pt/AreadoInvestidor/ProtecaodoInvestidor/Reclamacoes/Pages/default.aspx",
+      "authorityEmail": "cmvm@cmvm.pt",
+      "social_links": {}
+    },
+    "notes": "World Investor Week Coordinator: CMVM Team."
+  },
+  "Qatar": {
+    "country_name": "Qatar",
+    "flag": "🇶🇦",
+    "isEU": false,
+    "protectionLevel": "Alto",
+    "financial_authority": {
+      "name": "Qatar Financial Markets Authority",
+      "abbreviation": "QFMA",
+      "homepage": "https://www.qfma.org.qa/",
+      "fraudReportLink": "https://www.qfma.org.qa/en/Pages/Complaints.aspx",
+      "authorityEmail": "info@qfma.org.qa",
+      "social_links": {}
+    },
+    "notes": "World Investor Week Coordinator: QFMA Team."
+  },
+  "Romania": {
+    "country_name": "Romania",
+    "flag": "🇷🇴",
+    "isEU": true,
+    "protectionLevel": "Altissimo",
+    "financial_authority": {
+      "name": "Financial Supervisory Authority",
+      "abbreviation": "ASF",
+      "homepage": "https://asfromania.ro/",
+      "fraudReportLink": "https://asfromania.ro/ro/petitii",
+      "authorityEmail": "office@asfromania.ro",
+      "social_links": {}
+    },
+    "notes": "World Investor Week Coordinator: ASF Team."
+  },
+  "Saudi Arabia": {
+    "country_name": "Saudi Arabia",
+    "flag": "🇸🇦",
+    "isEU": false,
+    "protectionLevel": "Alto",
+    "financial_authority": {
+      "name": "Capital Market Authority",
+      "abbreviation": "CMA",
+      "homepage": "https://cma.org.sa/",
+      "fraudReportLink": "https://cma.org.sa/en/InvestorProtection/Pages/default.aspx",
+      "authorityEmail": "info@cma.org.sa",
+      "social_links": {}
+    },
+    "notes": "World Investor Week Coordinator: CMA Team."
+  },
+  "Serbia": {
+    "country_name": "Serbia",
+    "flag": "🇷🇸",
+    "isEU": false,
+    "protectionLevel": "Medio",
+    "financial_authority": {
+      "name": "Securities Commission",
+      "abbreviation": "SEC",
+      "homepage": "https://www.sec.gov.rs/",
+      "fraudReportLink": "https://www.sec.gov.rs/index.php/en/investors-protection-en/complaints-en",
+      "authorityEmail": "office@sec.gov.rs",
+      "social_links": {}
+    },
+    "notes": "World Investor Week Coordinator: SEC Team."
+  },
+  "Singapore": {
+    "country_name": "Singapore",
+    "flag": "🇸🇬",
+    "isEU": false,
+    "protectionLevel": "Altissimo",
+    "notes": "Regolamentazione di altissima civiltà con supporto psicologico per le vittime (https://www.scamshield.gov.sg/avenues-of-support/), a dimostrazione di grande attenzione per il dramma umano. La Polizia, tramite l'app Scamshield, offre una guida esemplare sulle tattiche psicologiche (https://www.scamshield.gov.sg/why-do-people-fall-prey-to-scams/) e report infografici (https://www.scamshield.gov.sg/scams-and-cybercrime-briefs/). Guida al rischio: https://www.moneysense.gov.sg/investments/investment-risk/. Cyber Security Agency (Facebook): https://www.facebook.com/CSAsingapore. DBS Bank promuove la responsabilità condivisa (https://www.dbs.com.sg/personal/support/general-shared-responsibility-framework.html). World Investor Week Coordinator: Paulyn Sng.",
+    "financial_authority": {
+      "name": "Monetary Authority of Singapore",
+      "abbreviation": "MAS",
+      "homepage": "https://www.mas.gov.sg/",
+      "fraudReportLink": "https://www.mas.gov.sg/contact-us",
+      "authorityEmail": "webmaster@mas.gov.sg",
+      "social_links": {
+        "linkedin": "https://www.linkedin.com/company/monetary-authority-of-singapore-mas-/",
+        "twitter": "https://twitter.com/MAS_sg",
+        "youtube": "https://www.youtube.com/channel/UCb_3U5s_2Qp3nJg2IuR22mQ"
+      }
     }
+  },
+  "Slovakia": {
+    "country_name": "Slovakia",
+    "flag": "🇸🇰",
+    "isEU": true,
+    "protectionLevel": "Altissimo",
+    "financial_authority": {
+      "name": "National Bank of Slovakia",
+      "abbreviation": "NBS",
+      "homepage": "https://www.nbs.sk/",
+      "fraudReportLink": "https://www.nbs.sk/en/consumer-protection/how-to-make-an-enquiry-or-complaint",
+      "authorityEmail": "info@nbs.sk",
+      "social_links": {}
+    },
+    "notes": "World Investor Week Coordinator: NBS Team."
+  },
+  "Slovenia": {
+    "country_name": "Slovenia",
+    "flag": "🇸🇮",
+    "isEU": true,
+    "protectionLevel": "Altissimo",
+    "financial_authority": {
+      "name": "Securities Market Agency",
+      "abbreviation": "ATVP",
+      "homepage": "https://www.atvp.si/",
+      "fraudReportLink": "https://www.atvp.si/en/consumer-protection/questions-and-complaints/",
+      "authorityEmail": "info@atvp.si",
+      "social_links": {}
+    },
+    "notes": "World Investor Week Coordinator: ATVP Team."
+  },
+  "South Africa": {
+    "country_name": "South Africa",
+    "flag": "🇿🇦",
+    "isEU": false,
+    "protectionLevel": "Alto",
+    "financial_authority": {
+      "name": "Financial Sector Conduct Authority",
+      "abbreviation": "FSCA",
+      "homepage": "https://www.fsca.co.za/",
+      "fraudReportLink": "https://www.fsca.co.za/Pages/Contact-Us.aspx",
+      "authorityEmail": "info@fsca.co.za",
+      "social_links": {}
+    },
+    "notes": "World Investor Week Coordinator: FSCA Team."
+  },
+  "Spain": {
+    "country_name": "Spain",
+    "flag": "🇪🇸",
+    "isEU": true,
+    "protectionLevel": "Altissimo",
+    "financial_authority": {
+      "name": "Comisión Nacional del Mercado de Valores",
+      "abbreviation": "CNMV",
+      "homepage": "https://www.cnmv.es/",
+      "fraudReportLink": "https://www.cnmv.es/portal/inversor/reclamaciones.aspx",
+      "authorityEmail": "serviciodereclamaciones@cnmv.es",
+      "social_links": {}
+    },
+    "notes": "World Investor Week Coordinator: CNMV Team."
+  },
+  "St. Vincent and the Grenadines": {
+    "country_name": "St. Vincent and the Grenadines",
+    "flag": "🇻🇨",
+    "isEU": false,
+    "protectionLevel": "Medio",
+    "financial_authority": {
+      "name": "Financial Services Authority",
+      "abbreviation": "FSA",
+      "homepage": "https://svgfsa.com/",
+      "fraudReportLink": "https://svgfsa.com/contact-us/",
+      "authorityEmail": "info@svgfsa.com",
+      "social_links": {}
+    },
+    "notes": "Parte della Eastern Caribbean Currency Union (ECSRC)."
+  },
+  "Sweden": {
+    "country_name": "Sweden",
+    "flag": "🇸🇪",
+    "isEU": true,
+    "protectionLevel": "Altissimo",
+    "financial_authority": {
+      "name": "Finansinspektionen",
+      "abbreviation": "FI",
+      "homepage": "https://www.fi.se/",
+      "fraudReportLink": "https://www.fi.se/en/consumer-protection/if-you-are-dissatisfied/",
+      "authorityEmail": "finansinspektionen@fi.se",
+      "social_links": {}
+    },
+    "notes": "World Investor Week Coordinator: FI Team."
+  },
+  "Switzerland": {
+    "country_name": "Switzerland",
+    "flag": "🇨🇭",
+    "isEU": false,
+    "protectionLevel": "Altissimo",
+    "financial_authority": {
+      "name": "Swiss Financial Market Supervisory Authority",
+      "abbreviation": "FINMA",
+      "homepage": "https://www.finma.ch/en/",
+      "fraudReportLink": "https://www.finma.ch/en/finma/making-a-report/",
+      "authorityEmail": "info@finma.ch",
+      "social_links": {
+        "linkedin": "https://www.linkedin.com/company/finma/",
+        "twitter": "https://twitter.com/FINMA_media",
+        "youtube": "https://www.youtube.com/user/finmamedia"
+      }
+    },
+    "notes": "World Investor Week Coordinator: Roman Rampa."
+  },
+  "Thailand": {
+    "country_name": "Thailand",
+    "flag": "🇹🇭",
+    "isEU": false,
+    "protectionLevel": "Medio",
+    "financial_authority": {
+      "name": "The Securities and Exchange Commission, Thailand",
+      "abbreviation": "SEC,TH",
+      "homepage": "https://www.sec.or.th/EN/Pages/Home.aspx",
+      "fraudReportLink": "https://market.sec.or.th/public/idisc/en/InvestorAlert",
+      "authorityEmail": "sarica@sec.or.th",
+      "social_links": {
+        "twitter": "http://twitter.com/ThaiSEC_News",
+        "youtube": "https://www.youtube.com/user/insideSEC",
+        "facebook": "https://www.facebook.com/sec.or.th"
+      }
+    },
+    "notes": "World Investor Week Coordinator: Sarica Apiwatthakakul."
+  },
+  "Trinidad and Tobago": {
+    "country_name": "Trinidad and Tobago",
+    "flag": "🇹🇹",
+    "isEU": false,
+    "protectionLevel": "Medio",
+    "financial_authority": {
+      "name": "Trinidad and Tobago Securities and Exchange Commission",
+      "abbreviation": "TTSEC",
+      "homepage": "https://www.ttsec.org.tt/",
+      "fraudReportLink": "https://www.ttsec.org.tt/complaint-form/",
+      "authorityEmail": "rachaelr@ttsec.org.tt",
+      "social_links": {
+        "linkedin": "https://www.linkedin.com/company/trinidad-and-tobago-securities-and-exchange-commission/",
+        "twitter": "https://x.com/ttsec_tt",
+        "youtube": "http://youtube.com/%40ttsecuritiesandexchangecom7332",
+        "facebook": "https://www.facebook.com/investucateTT/#",
+        "instagram": "http://instagram.com/ttsec_tt"
+      }
+    },
+    "notes": "Coordinator: Rachael Rampersad. Investor Education: https://investucatett.com/. Investing Game: https://www.investorquest-tt.com/. Mobile Apps: Google Play e Apple App Store."
+  },
+  "Tunisia": {
+    "country_name": "Tunisia",
+    "flag": "🇹🇳",
+    "isEU": false,
+    "protectionLevel": "Medio",
+    "financial_authority": {
+      "name": "Conseil du Marché Financier",
+      "abbreviation": "CMF",
+      "homepage": "https://www.cmf.tn/",
+      "fraudReportLink": "https://www.cmf.tn/deposer-une-plainte",
+      "authorityEmail": "cooperation@cmf.tn",
+      "social_links": {}
+    },
+    "notes": "World Investor Week Coordinator: Mehdi Ben Mustapha."
+  },
+  "Türkiye": {
+    "country_name": "Türkiye",
+    "flag": "🇹🇷",
+    "isEU": false,
+    "protectionLevel": "Alto",
+    "financial_authority": {
+      "name": "Capital Markets Board of Türkiye",
+      "abbreviation": "CMB",
+      "homepage": "http://www.spk.gov.tr",
+      "fraudReportLink": "https://www.spk.gov.tr/Sayfa/Dosya/1031",
+      "authorityEmail": "muge.cetin@spk.gov.tr",
+      "social_links": {}
+    },
+    "notes": "World Investor Week Coordinator: Müge ÇETİN."
+  },
+  "United Arab Emirates": {
+    "country_name": "United Arab Emirates",
+    "flag": "🇦🇪",
+    "isEU": false,
+    "protectionLevel": "Alto",
+    "financial_authority": {
+      "name": "Securities and Commodities Authority",
+      "abbreviation": "SCA",
+      "homepage": "https://www.sca.gov.ae/",
+      "fraudReportLink": "https://www.sca.gov.ae/en/services/complaint-investor.aspx",
+      "authorityEmail": "ma.alali@sca.ae",
+      "social_links": {}
+    },
+    "notes": "World Investor Week Coordinator: Mohammed Al Noukhatha Al Ali."
+  },
+  "United Kingdom": {
+    "country_name": "United Kingdom",
+    "flag": "🇬🇧",
+    "isEU": false,
+    "protectionLevel": "Altissimo",
+    "financial_authority": {
+      "name": "Financial Conduct Authority",
+      "abbreviation": "FCA",
+      "homepage": "https://www.fca.org.uk/",
+      "fraudReportLink": "https://www.fca.org.uk/consumers/report-scam-unauthorised-firm",
+      "authorityEmail": "sam.stoakes@fca.org.uk",
+      "social_links": {}
+    },
+    "notes": "Sito per investitori: https://www.fca.org.uk/investsmart. World Investor Week Coordinator: Sam Stoakes."
+  },
+  "United States of America": {
+    "country_name": "United States of America",
+    "flag": "🇺🇸",
+    "isEU": false,
+    "protectionLevel": "Altissimo",
+    "financial_authority": {
+      "name": "Securities and Exchange Commission",
+      "abbreviation": "SEC",
+      "homepage": "https://www.sec.gov/",
+      "fraudReportLink": "https://www.sec.gov/tcr",
+      "authorityEmail": "DonleyO@sec.gov",
+      "social_links": {}
+    },
+    "notes": "Sito per investitori: https://www.investor.gov/. World Investor Week Coordinator: M. Owen Donley."
+  },
+  "Uruguay": {
+    "country_name": "Uruguay",
+    "flag": "🇺🇾",
+    "isEU": false,
+    "protectionLevel": "Alto",
+    "financial_authority": {
+      "name": "Superintendencia de Servicios Financieros - Banco Central del Uruguay",
+      "abbreviation": "SSF",
+      "homepage": "https://www.bcu.gub.uy",
+      "fraudReportLink": "https://www.bcu.gub.uy/Paginas/custom/reportes-y-denuncias.aspx",
+      "authorityEmail": "vvillete@bcu.gub.uy",
+      "social_links": {}
+    },
+    "notes": "World Investor Week Coordinator: Verónica Villete."
+  },
+  "Zambia": {
+    "country_name": "Zambia",
+    "flag": "🇿🇲",
+    "isEU": false,
+    "protectionLevel": "Medio",
+    "financial_authority": {
+      "name": "Securities and Exchange Commission",
+      "abbreviation": "SEC",
+      "homepage": "https://www.seczambia.org.zm",
+      "fraudReportLink": "https://www.seczambia.org.zm/complaints/",
+      "authorityEmail": "dmakumba@seczambia.org.zm",
+      "social_links": {}
+    },
+    "notes": "World Investor Week Coordinators: Dingase Nunkwe Makumba, Mubanga Kondolo Jr., Sitali Mwala Mugala."
+  }
 }
