@@ -3,11 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Database Bancario Internazionale -- Truffe Finanziarie e Responsabilità</title>
+    <title>Database Autorità Finanziarie Internazionali - Protezione Consumatori</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%); color: #333; line-height: 1.6; min-height: 100vh; padding: 20px; }
         .container { max-width: 1400px; margin: 0 auto; background: white; border-radius: 15px; box-shadow: 0 10px 40px rgba(0,0,0,0.3); overflow: hidden; }
+        .security-banner { background: linear-gradient(135deg, #10b981 0%, #059669 100%); color: white; padding: 20px 30px; text-align: center; border-bottom: 3px solid #047857; display: flex; align-items: center; justify-content: center; gap: 15px; flex-wrap: wrap; }
+        .security-banner .icon { font-size: 2em; }
+        .security-banner .content { flex: 1; min-width: 300px; }
+        .security-banner h2 { margin: 0 0 8px 0; font-size: 1.6em; font-weight: 700; }
+        .security-banner p { margin: 0; font-size: 1.05em; opacity: 0.95; line-height: 1.5; }
+        .security-banner strong { font-weight: 700; text-decoration: underline; }
         header { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 30px; text-align: center; position: relative; }
         .language-selector { justify-content: center; margin-top: 15px; display: flex; gap: 10px; background: rgba(255,255,255,0.2); padding: 8px 12px; border-radius: 25px; backdrop-filter: blur(10px); }
         .lang-btn { background: rgba(255,255,255,0.3); border: 2px solid transparent; color: white; padding: 6px 12px; border-radius: 15px; cursor: pointer; font-weight: 600; font-size: 14px; transition: all 0.3s ease; }
@@ -66,6 +72,14 @@
 </head>
 <body>
     <div class="container">
+        <div class="security-banner">
+            <span class="icon">🛡️</span>
+            <div class="content">
+                <h2 data-i18n="securityTitle">✅ SITO UFFICIALE LEGITTIMO - DATABASE DI PROTEZIONE DEI CONSUMATORI</h2>
+                <p data-i18n="securityText"><strong>Questo è un database educativo ufficiale</strong> creato da Avvocato Marcello Stanca per aiutare i consumatori a verificare la legittimità delle autorità finanziarie e proteggersi dalle frodi. Contiene link alle autorità di vigilanza finanziaria di 108 paesi.</p>
+            </div>
+            <span class="icon">✅</span>
+        </div>
         <header>
             <div class="language-selector">
                 <button class="lang-btn active" onclick="changeLanguage('it')">🇮🇹 IT</button>
@@ -74,7 +88,7 @@
                 <button class="lang-btn" onclick="changeLanguage('es')">🇪🇸 ES</button>
             </div>
             <h1 data-i18n="title">Database Bancario Internazionale</h1>
-            <p class="subtitle" data-i18n="subtitle">Banca Truffe Finanziarie Responsabilità</p>
+            <p class="subtitle" data-i18n="subtitle">Protezione Consumatori - Autorità di Vigilanza Finanziaria</p>
             <p class="intro-text" data-i18n="introText">Questo sito web offre i link per accedere alle webpage delle Autorità Finanziarie di 108 Paesi del Mondo. Usalo per verificare la legittimità e regolarità di imprese, di persone ed entità che offrono servizi finanziari.</p>
         </header>
 
@@ -133,7 +147,9 @@
         const translations = {
             it: {
                 title: "Database Bancario Internazionale",
-                subtitle: "Banca Truffe Finanziarie Responsabilità",
+                subtitle: "Protezione Consumatori - Autorità di Vigilanza Finanziaria",
+                securityTitle: "✅ SITO UFFICIALE LEGITTIMO - DATABASE DI PROTEZIONE DEI CONSUMATORI",
+                securityText: "Questo è un database educativo ufficiale creato da Avvocato Marcello Stanca per aiutare i consumatori a verificare la legittimità delle autorità finanziarie e proteggersi dalle frodi. Contiene link alle autorità di vigilanza finanziaria di 108 paesi.",
                 introText: "Questo sito web offre i link per accedere alle webpage delle Autorità Finanziarie di 108 Paesi del Mondo. Usalo per verificare la legittimità e regolarità di imprese, di persone ed entità che offrono servizi finanziari.",
                 searchPlaceholder: "Cerca per paese o autorità...",
                 filterAll: "Tutti i Paesi",
@@ -161,7 +177,9 @@
             },
             en: {
                 title: "International Banking Database",
-                subtitle: "Bank Fraud, Finance & Liability",
+                subtitle: "Consumer Protection - Financial Supervisory Authorities",
+                securityTitle: "✅ OFFICIAL LEGITIMATE WEBSITE - CONSUMER PROTECTION DATABASE",
+                securityText: "This is an official educational database created by Lawyer Marcello Stanca to help consumers verify the legitimacy of financial authorities and protect themselves from fraud. Contains links to financial supervisory authorities of 108 countries.",
                 introText: "This website provides links to the webpages of the Financial Authorities of 108 countries worldwide. Use it to verify the legitimacy and regularity of companies, individuals, and entities offering financial services.",
                 searchPlaceholder: "Search by country or authority...",
                 filterAll: "All Countries",
