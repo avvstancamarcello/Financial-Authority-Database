@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <!-- Emoji Polyfill for Desktop Browsers (Flag Support) -->
-    <script src="https://cdn.jsdelivr.net/npm/[email protected]/dist/twemoji.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/[email protected]/dist/twemoji.min.js" crossorigin="anonymous" defer></script>
     
     <!-- Meta Tags SEO Base -->
     <meta name="description" content="Database ufficiale delle Autorità Finanziarie di 108 Paesi. Verifica licenze bancarie, segnala frodi, proteggi i tuoi investimenti. Creato da Avv. Marcello Stanca, Firenze.">
@@ -734,12 +734,25 @@
             });
             
             // Applica Twemoji per renderizzare le emoji come immagini SVG su desktop
-            if (typeof twemoji !== 'undefined') {
-                twemoji.parse(grid, {
-                    folder: 'svg',
-                    ext: '.svg'
-                });
-            }
+            // Usa setTimeout per garantire che Twemoji sia completamente caricato
+            setTimeout(() => {
+                if (typeof twemoji !== 'undefined') {
+                    twemoji.parse(grid, {
+                        folder: 'svg',
+                        ext: '.svg'
+                    });
+                } else {
+                    console.warn('Twemoji non ancora caricato, riprovo...');
+                    setTimeout(() => {
+                        if (typeof twemoji !== 'undefined') {
+                            twemoji.parse(grid, {
+                                folder: 'svg',
+                                ext: '.svg'
+                            });
+                        }
+                    }, 500);
+                }
+            }, 100);
         }
 
         function getCountryCode(countryName) {
