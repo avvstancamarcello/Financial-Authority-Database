@@ -345,6 +345,24 @@
         let currentFilter = 'all';
         let countriesData = {};
 
+        // Traduzioni specifiche per le note dei paesi
+        const countryNotesTranslations = {
+            'Singapore': {
+                it: "Regolamentazione di altissima civiltà con supporto psicologico per le vittime (https://www.scamshield.gov.sg/avenues-of-support/), a dimostrazione di grande attenzione per il dramma umano. La Polizia, tramite l'app Scamshield, offre una guida esemplare sulle tattiche psicologiche (https://www.scamshield.gov.sg/why-do-people-fall-prey-to-scams/) e report infografici (https://www.scamshield.gov.sg/scams-and-cybercrime-briefs/). Guida al rischio: https://www.moneysense.gov.sg/investments/investment-risk/. Cyber Security Agency (Facebook): https://www.facebook.com/CSAsingapore. DBS Bank promuove la responsabilità condivisa (https://www.dbs.com.sg/personal/support/general-shared-responsibility-framework.html). World Investor Week Coordinator: Paulyn Sng.",
+                en: "Highly civilized regulation with psychological support for victims (https://www.scamshield.gov.sg/avenues-of-support/), demonstrating great attention to human drama. The Police, through the Scamshield app, offers exemplary guidance on psychological tactics (https://www.scamshield.gov.sg/why-do-people-fall-prey-to-scams/) and infographic reports (https://www.scamshield.gov.sg/scams-and-cybercrime-briefs/). Risk guide: https://www.moneysense.gov.sg/investments/investment-risk/. Cyber Security Agency (Facebook): https://www.facebook.com/CSAsingapore. DBS Bank promotes shared responsibility (https://www.dbs.com.sg/personal/support/general-shared-responsibility-framework.html). World Investor Week Coordinator: Paulyn Sng.",
+                fr: "Réglementation de très haute civilisation avec soutien psychologique pour les victimes (https://www.scamshield.gov.sg/avenues-of-support/), démontrant une grande attention au drame humain. La Police, via l'application Scamshield, offre un guide exemplaire sur les tactiques psychologiques (https://www.scamshield.gov.sg/why-do-people-fall-prey-to-scams/) et des rapports infographiques (https://www.scamshield.gov.sg/scams-and-cybercrime-briefs/). Guide des risques: https://www.moneysense.gov.sg/investments/investment-risk/. Cyber Security Agency (Facebook): https://www.facebook.com/CSAsingapore. DBS Bank promeut la responsabilité partagée (https://www.dbs.com.sg/personal/support/general-shared-responsibility-framework.html). World Investor Week Coordinator: Paulyn Sng.",
+                de: "Hochzivilisierte Regulierung mit psychologischer Unterstützung für Opfer (https://www.scamshield.gov.sg/avenues-of-support/), was große Aufmerksamkeit für das menschliche Drama zeigt. Die Polizei bietet über die Scamshield-App vorbildliche Anleitungen zu psychologischen Taktiken (https://www.scamshield.gov.sg/why-do-people-fall-prey-to-scams/) und Infografik-Berichte (https://www.scamshield.gov.sg/scams-and-cybercrime-briefs/). Risikoleitfaden: https://www.moneysense.gov.sg/investments/investment-risk/. Cyber Security Agency (Facebook): https://www.facebook.com/CSAsingapore. DBS Bank fördert geteilte Verantwortung (https://www.dbs.com.sg/personal/support/general-shared-responsibility-framework.html). World Investor Week Coordinator: Paulyn Sng.",
+                es: "Regulación de altísima civilización con apoyo psicológico para las víctimas (https://www.scamshield.gov.sg/avenues-of-support/), demostrando gran atención al drama humano. La Policía, a través de la aplicación Scamshield, ofrece una guía ejemplar sobre tácticas psicológicas (https://www.scamshield.gov.sg/why-do-people-fall-prey-to-scams/) e informes infográficos (https://www.scamshield.gov.sg/scams-and-cybercrime-briefs/). Guía de riesgos: https://www.moneysense.gov.sg/investments/investment-risk/. Cyber Security Agency (Facebook): https://www.facebook.com/CSAsingapore. DBS Bank promueve la responsabilidad compartida (https://www.dbs.com.sg/personal/support/general-shared-responsibility-framework.html). World Investor Week Coordinator: Paulyn Sng."
+            }
+        };
+
+        function getTranslatedNotes(countryName, notes) {
+            if (countryNotesTranslations[countryName] && countryNotesTranslations[countryName][currentLanguage]) {
+                return countryNotesTranslations[countryName][currentLanguage];
+            }
+            return notes; // Ritorna il testo originale se non c'è traduzione
+        }
+
         document.addEventListener('DOMContentLoaded', async () => {
             await loadCountryData();
             changeLanguage(currentLanguage);
@@ -500,7 +518,7 @@
                     <p><strong>${translations[currentLanguage].modalEmail || 'Email'}:</strong> <a href="mailto:${country.financial_authority.authorityEmail}">${country.financial_authority.authorityEmail}</a></p>
                     ${socialHTML ? `<p style="margin-top:15px;"><strong>${translations[currentLanguage].modalSocial || 'Social'}:</strong> ${socialHTML}</p>` : ''}
                     <h3 style="margin-top: 20px;">${translations[currentLanguage].modalNotes || 'Notes'}:</h3>
-                    <p>${country.notes.replace(/(https?:\/\/[^\s]+)/g, '<a href="$1" target="_blank">$1</a>')}</p>
+                    <p>${getTranslatedNotes(country.country_name, country.notes).replace(/(https?:\/\/[^\s]+)/g, '<a href="$1" target="_blank">$1</a>')}</p>
                 </div>
             `;
             modal.style.display = 'block';
