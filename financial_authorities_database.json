@@ -696,11 +696,11 @@
       "name": "Magyar Nemzeti Bank (Central Bank of Hungary)",
       "abbreviation": "MNB",
       "homepage": "https://www.mnb.hu/",
-      "fraudReportLink": "https://www.mnb.hu/en/consumer-protection/making-a-complaint",
-      "authorityEmail": "info@mnb.hu",
+      "fraudReportLink": "https://www.mnb.hu/fogyasztovedelem/elerhetosegek",
+      "authorityEmail": "ugyfelszolgalat@mnb.hu",
       "social_links": {}
     },
-    "notes": "World Investor Week Coordinator: MNB Team."
+    "notes": "World Investor Week Coordinator: MNB Team. Pagina contatti consumatori: https://www.mnb.hu/fogyasztovedelem/elerhetosegek - Email ufficiale consumatori: ugyfelszolgalat@mnb.hu - Avvisi investitori: https://www.mnb.hu/felugyelet/piacfelugyelet/befektetoi-figyelmeztetesek"
   },
   "Iceland": {
     "country_name": "Iceland",
