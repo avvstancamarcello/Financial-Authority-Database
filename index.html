@@ -727,17 +727,14 @@
                 // Estrai il codice paese (es: IT, FR, US)
                 const countryCode = getCountryCode(country.country_name);
                 
-                // TEST: Prima solo Italia con flag-icon, poi altri con emoji
+                // Usa flag-icon CSS per tutte le bandiere (48x36px)
                 let flagHTML = '';
-                if (countryCode === 'IT') {
-                    // TEST: Bandiera Italia con flag-icon-css dimensioni corrette
-                    flagHTML = `<span class="flag-icon-wrapper"><span class="fi fi-it"></span></span>`;
-                } else if (countryCode && countryCode !== 'CEMAC' && countryCode !== 'ECSRC') {
-                    // Altri paesi: emoji temporanee
-                    flagHTML = `<span class="flag-emoji" style="font-size: 2em;">${country.flag}</span>`;
+                if (countryCode && countryCode !== 'CEMAC' && countryCode !== 'ECSRC') {
+                    // Bandiere nazionali con flag-icon-css
+                    flagHTML = `<span class="flag-icon-wrapper"><span class="fi fi-${countryCode.toLowerCase()}"></span></span>`;
                 } else {
-                    // Regioni: globo
-                    flagHTML = `<span class="flag-emoji" style="font-size: 2em;">🌍</span>`;
+                    // Regioni CEMAC/ECSRC: globo emoji
+                    flagHTML = `<span class="flag-icon-wrapper" style="font-size: 3em;">🌍</span>`;
                 }
                 
                 flagItem.innerHTML = `
