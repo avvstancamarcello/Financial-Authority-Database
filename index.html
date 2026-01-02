@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <!-- Emoji Polyfill for Desktop Browsers (Flag Support) -->
-    <script src="https://cdn.jsdelivr.net/npm/[email protected]/dist/twemoji.min.js" crossorigin="anonymous" defer></script>
+    <!-- Flag Icons CSS Library -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.2.3/css/flag-icons.min.css">
     
     <!-- Meta Tags SEO Base -->
     <meta name="description" content="Database ufficiale delle Autorità Finanziarie di 108 Paesi. Verifica licenze bancarie, segnala frodi, proteggi i tuoi investimenti. Creato da Avv. Marcello Stanca, Firenze.">
@@ -190,13 +190,17 @@
         .flags-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); gap: 15px; max-width: 1200px; margin: 0 auto; }
         .flag-item { background: white; border: 2px solid #e0e0e0; border-radius: 10px; padding: 15px; text-align: center; cursor: pointer; transition: all 0.3s ease; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 110px; }
         .flag-item:hover { transform: translateY(-5px); box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4); border-color: #667eea; }
-        .flag-emoji { font-size: 3.5em; margin-bottom: 8px; display: block; }
-        /* Twemoji image styling for desktop browsers */
-        .flag-emoji img.emoji { 
-            width: 3.5em; 
-            height: 3.5em; 
-            display: inline-block; 
-            vertical-align: middle;
+        .flag-icon-wrapper { 
+            font-size: 3.5em; 
+            margin-bottom: 8px; 
+            display: block; 
+            width: 3.5em;
+            height: 3.5em;
+            line-height: 3.5em;
+        }
+        .flag-icon-wrapper .fi { 
+            font-size: 3.5em;
+            line-height: 1;
         }
         .flag-code { font-weight: 600; color: #667eea; font-size: 0.9em; margin-top: 5px; }
         .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); z-index: 1000; overflow-y: auto; }
@@ -725,34 +729,23 @@
                 // Estrai il codice paese (es: IT, FR, US)
                 const countryCode = getCountryCode(country.country_name);
                 
+                // Usa flag-icon CSS per le bandiere (più affidabile delle emoji su desktop)
+                let flagHTML = '';
+                if (countryCode && countryCode !== 'CEMAC' && countryCode !== 'ECSRC') {
+                    // Usa flag-icon per paesi normali
+                    flagHTML = `<span class="flag-icon-wrapper"><span class="fi fi-${countryCode.toLowerCase()}"></span></span>`;
+                } else {
+                    // Per regioni usa emoji globo
+                    flagHTML = `<span class="flag-icon-wrapper" style="font-size: 3em;">🌍</span>`;
+                }
+                
                 flagItem.innerHTML = `
-                    <span class="flag-emoji">${country.flag}</span>
+                    ${flagHTML}
                     <span class="flag-code">${countryCode}</span>
                 `;
                 
                 grid.appendChild(flagItem);
             });
-            
-            // Applica Twemoji per renderizzare le emoji come immagini SVG su desktop
-            // Usa setTimeout per garantire che Twemoji sia completamente caricato
-            setTimeout(() => {
-                if (typeof twemoji !== 'undefined') {
-                    twemoji.parse(grid, {
-                        folder: 'svg',
-                        ext: '.svg'
-                    });
-                } else {
-                    console.warn('Twemoji non ancora caricato, riprovo...');
-                    setTimeout(() => {
-                        if (typeof twemoji !== 'undefined') {
-                            twemoji.parse(grid, {
-                                folder: 'svg',
-                                ext: '.svg'
-                            });
-                        }
-                    }, 500);
-                }
-            }, 100);
         }
 
         function getCountryCode(countryName) {
