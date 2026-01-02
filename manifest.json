@@ -1,0 +1,35 @@
+{
+  "name": "Financial Authority Database",
+  "short_name": "FinAuthority",
+  "description": "Database delle Autorità Finanziarie di 108 Paesi - Protezione Consumatori",
+  "start_url": "/Financial-Authority-Database/",
+  "display": "standalone",
+  "background_color": "#1e3c72",
+  "theme_color": "#667eea",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["finance", "business", "education"],
+  "lang": "it",
+  "dir": "ltr",
+  "scope": "/Financial-Authority-Database/",
+  "screenshots": [
+    {
+      "src": "screenshot.png",
+      "sizes": "540x720",
+      "type": "image/png"
+    }
+  ]
+}
