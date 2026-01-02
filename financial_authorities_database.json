@@ -1471,11 +1471,15 @@
       "name": "Financial Services Authority",
       "abbreviation": "FSA",
       "homepage": "https://svgfsa.com/",
-      "fraudReportLink": "https://svgfsa.com/contact-us/",
+      "fraudReportLink": "https://fsasvg.com/file-complaint/",
       "authorityEmail": "info@svgfsa.com",
-      "social_links": {}
+      "social_links": {
+        "facebook": "https://www.facebook.com/people/SVG-Financial-Services-Authority/61575001776057/",
+        "linkedin": "https://www.linkedin.com/company/svg-financial-services-authority-fsa/?viewAsMember=true",
+        "instagram": "https://www.instagram.com/svgfsa/"
+      }
     },
-    "notes": "Parte della Eastern Caribbean Currency Union (ECSRC)."
+    "notes": "Parte della Eastern Caribbean Currency Union (ECSRC). Form reclami: https://fsasvg.com/file-complaint/ - Ricerca entità registrate: https://fsasvg.com/entity-name-search/ - Avvisi investitori/Alert frodi: https://fsasvg.com/investor-alerts/ - Tel: (784) 456-2577 / (784) 457-2328 / (784) 485-6031"
   },
   "Sweden": {
     "country_name": "Sweden",
