@@ -67,7 +67,23 @@
         .close-modal { position: absolute; top: 20px; right: 20px; font-size: 30px; cursor: pointer; color: #666; transition: color 0.3s ease; }
         .close-modal:hover { color: #f5576c; }
         footer { background: #2c3e50; color: white; text-align: center; padding: 20px; }
-        @media (max-width: 768px) { h1 { font-size: 1.8em; } .language-selector { position: static; justify-content: center; margin-bottom: 15px; } .countries-grid { grid-template-columns: 1fr; } .stats { grid-template-columns: 1fr; } .controls { flex-direction: column; } .search-box { width: 100%; } }
+        @media (max-width: 768px) { 
+            h1 { font-size: 1.8em; } 
+            .language-selector { position: static; justify-content: center; margin-bottom: 15px; } 
+            .countries-grid { grid-template-columns: 1fr; } 
+            .stats { grid-template-columns: 1fr; } 
+            .controls { flex-direction: column; } 
+            .search-box { width: 100%; }
+            .modal-content { 
+                max-width: 95%; 
+                width: 95%; 
+                margin: 20px auto; 
+                padding: 25px 20px; 
+                font-size: 0.95em;
+            }
+            .close-modal { font-size: 25px; top: 15px; right: 15px; }
+            .authority-link a { font-size: 0.85em; word-break: break-all; }
+        }
     </style>
 </head>
 <body>
