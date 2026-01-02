@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Database Bancario Internazionale -- Truffe Finanziarie e Responsabilità</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%); color: #333; line-height: 1.6; min-height: 100vh; padding: 20px; }
+        .container { max-width: 1400px; margin: 0 auto; background: white; border-radius: 15px; box-shadow: 0 10px 40px rgba(0,0,0,0.3); overflow: hidden; }
+        header { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 30px; text-align: center; position: relative; }
+        .language-selector { justify-content: center; margin-top: 15px; display: flex; gap: 10px; background: rgba(255,255,255,0.2); padding: 8px 12px; border-radius: 25px; backdrop-filter: blur(10px); }
+        .lang-btn { background: rgba(255,255,255,0.3); border: 2px solid transparent; color: white; padding: 6px 12px; border-radius: 15px; cursor: pointer; font-weight: 600; font-size: 14px; transition: all 0.3s ease; }
+        .lang-btn:hover { background: rgba(255,255,255,0.5); transform: translateY(-2px); }
+        .lang-btn.active { background: white; color: #667eea; border-color: white; }
+        h1 { font-size: 2.5em; margin-bottom: 10px; text-shadow: 2px 2px 4px rgba(0,0,0,0.2); }
+        .subtitle { font-size: 1.2em; opacity: 0.95; }
+        .intro-text { padding: 20px 30px; background-color: #f0f4ff; text-align: center; font-size: 1.1em; color: #1e3c72; border-bottom: 1px solid #ddd; }
+        .eu-references { background: #f0f4ff; padding: 20px; margin: 20px 0; border-left: 5px solid #667eea; border-radius: 8px; }
+        .eu-references h3 { color: #1e3c72; margin-bottom: 15px; }
+        .eu-references p { margin-bottom: 10px; }
+        .eu-references a { color: #667eea; text-decoration: none; font-weight: 600; margin: 0 5px; }
+        .eu-references a:hover { text-decoration: underline; }
+        .controls { padding: 30px; background: #f8f9fa; display: flex; gap: 20px; flex-wrap: wrap; align-items: center; justify-content: space-between; border-bottom: 1px solid #ddd;}
+        .search-box { flex: 1; min-width: 250px; }
+        .search-box input { width: 100%; padding: 12px 20px; border: 2px solid #ddd; border-radius: 25px; font-size: 16px; transition: all 0.3s ease; }
+        .search-box input:focus { outline: none; border-color: #667eea; box-shadow: 0 0 10px rgba(102, 126, 234, 0.3); }
+        .filter-buttons { display: flex; gap: 10px; flex-wrap: wrap; }
+        .filter-btn { padding: 10px 20px; border: 2px solid #667eea; background: white; color: #667eea; border-radius: 20px; cursor: pointer; font-weight: 600; transition: all 0.3s ease; }
+        .filter-btn:hover, .filter-btn.active { background: #667eea; color: white; transform: translateY(-2px); box-shadow: 0 4px 8px rgba(102, 126, 234, 0.3); }
+        .stats { padding: 30px; background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); color: white; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; }
+        .stat-card { background: rgba(255,255,255,0.2); padding: 20px; border-radius: 10px; text-align: center; backdrop-filter: blur(10px); }
+        .stat-number { font-size: 2.5em; font-weight: bold; margin-bottom: 5px; }
+        .stat-label { font-size: 1em; opacity: 0.9; }
+        .content { padding: 30px; }
+        .countries-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 25px; margin-top: 20px; }
+        .country-card { background: white; border: 2px solid #e0e0e0; border-radius: 12px; padding: 25px; transition: all 0.3s ease; cursor: pointer; }
+        .country-card:hover { transform: translateY(-5px); box-shadow: 0 8px 20px rgba(0,0,0,0.15); border-color: #667eea; }
+        .country-header { display: flex; align-items: center; margin-bottom: 15px; padding-bottom: 15px; border-bottom: 2px solid #f0f0f0; }
+        .country-flag { font-size: 3em; margin-right: 15px; }
+        .country-name { font-size: 1.5em; font-weight: bold; color: #667eea; }
+        .info-row { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #f0f0f0; flex-direction: column; }
+        .info-label { font-weight: 600; color: #666; margin-bottom: 5px; }
+        .info-value { color: #333; font-weight: 500; font-size: 0.95em; word-break: break-word; }
+        .authority-link { margin-top: 15px; padding: 10px; background: #f8f9fa; border-radius: 8px; }
+        .authority-link a { color: #667eea; text-decoration: none; font-weight: 600; word-break: break-all; transition: color 0.3s ease; font-size: 0.9em; }
+        .authority-link a:hover { color: #764ba2; text-decoration: underline; }
+        .protection-badge { display: inline-block; padding: 4px 12px; border-radius: 12px; font-size: 0.85em; font-weight: 600; }
+        .protection-altissimo { background: #d4edda; color: #155724; }
+        .protection-alto { background: #d1ecf1; color: #0c5460; }
+        .protection-medio { background: #fff3cd; color: #856404; }
+        .chart-container { display: flex; flex-wrap: wrap; gap: 20px; padding: 30px; background-color: #f8f9fa; justify-content: center; }
+        .chart-wrapper { flex: 1; min-width: 400px; max-width: 600px; background: white; padding: 20px; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+        .chart-wrapper h3 { text-align: center; margin-bottom: 15px; color: #1e3c72; }
+        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); z-index: 1000; overflow-y: auto; }
+        .modal-content { background: white; max-width: 900px; margin: 50px auto; border-radius: 15px; padding: 40px; position: relative; }
+        .close-modal { position: absolute; top: 20px; right: 20px; font-size: 30px; cursor: pointer; color: #666; transition: color 0.3s ease; }
+        .close-modal:hover { color: #f5576c; }
+        footer { background: #2c3e50; color: white; text-align: center; padding: 20px; }
+        @media (max-width: 768px) { h1 { font-size: 1.8em; } .language-selector { position: static; justify-content: center; margin-bottom: 15px; } .countries-grid { grid-template-columns: 1fr; } .stats { grid-template-columns: 1fr; } .controls { flex-direction: column; } .search-box { width: 100%; } }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="language-selector">
+                <button class="lang-btn active" onclick="changeLanguage('it')">🇮🇹 IT</button>
+                <button class="lang-btn" onclick="changeLanguage('en')">🇬🇧 EN</button>
+                <button class="lang-btn" onclick="changeLanguage('de')">🇩🇪 DE</button>
+                <button class="lang-btn" onclick="changeLanguage('es')">🇪🇸 ES</button>
+            </div>
+            <h1 data-i18n="title">Database Bancario Internazionale</h1>
+            <p class="subtitle" data-i18n="subtitle">Banca Truffe Finanziarie Responsabilità</p>
+            <p class="intro-text" data-i18n="introText">Questo sito web offre i link per accedere alle webpage delle Autorità Finanziarie di 108 Paesi del Mondo. Usalo per verificare la legittimità e regolarità di imprese, di persone ed entità che offrono servizi finanziari.</p>
+        </header>
+
+        <div class="controls">
+            <div class="search-box">
+                <input type="text" id="searchInput" data-i18n-placeholder="searchPlaceholder" placeholder="Cerca per paese o autorità...">
+            </div>
+            <div class="filter-buttons">
+                <button class="filter-btn active" onclick="filterCountries('all')" data-i18n="filterAll">Tutti i Paesi</button>
+                <button class="filter-btn" onclick="filterCountries('altissimo')" data-i18n="filterHigh">Protezione Altissima</button>
+                <button class="filter-btn" onclick="filterCountries('ue')" data-i18n="filterEU">Paesi UE</button>
+                <button class="filter-btn" onclick="filterCountries('non-ue')" data-i18n="filterNonEU">Paesi non-UE</button>
+            </div>
+        </div>
+
+        <div class="chart-container">
+            <div class="chart-wrapper">
+                <h3 data-i18n="chartEU">Livello Protezione Paesi UE</h3>
+                <canvas id="protectionChartEU"></canvas>
+            </div>
+            <div class="chart-wrapper">
+                <h3 data-i18n="chartNonEU">Livello Protezione Paesi non-UE</h3>
+                <canvas id="protectionChartNonEU"></canvas>
+            </div>
+        </div>
+
+        <div class="content">
+            <div class="eu-references">
+                <h3 data-i18n="euReferences">Risorse Istituzionali di Supervisione - Unione Europea USA FBI - ScamShield</h3>
+                <p><strong>ESMA</strong> - European Securities and Markets Authority: <a href="https://www.esma.europa.eu" target="_blank">esma.europa.eu</a></p>
+                <p><strong data-i18n="euCommission">Commissione Europea</strong>: <a href="https://commission.europa.eu" target="_blank">commission.europa.eu</a></p>
+                <p><strong>FBI IC3</strong> - Internet Crime Complaint Center: <a href="https://www.ic3.gov/AnnualReport/Reports" target="_blank">ic3.gov/AnnualReport/Reports</a></p>
+                <p><strong>IOSCO i-SCAN</strong> - International Organization of Securities Commissions: <a href="https://www.iosco.org/i-scan/" target="_blank">iosco.org/i-scan/</a></p>
+                <p><strong>ScamShield</strong> - Singapore Police Force: <a href="https://www.scamshield.gov.sg/" target="_blank">scamshield.gov.sg</a></p>
+            </div>
+        </div>
+
+        <div class="stats">
+            <div class="stat-card"><div class="stat-number" id="totalCountries">0</div><div class="stat-label" data-i18n="statCountries">Paesi Monitorati</div></div>
+            <div class="stat-card"><div class="stat-number" id="euCountries">0</div><div class="stat-label" data-i18n="statEU">Paesi UE</div></div>
+            <div class="stat-card"><div class="stat-number" id="highProtection">0</div><div class="stat-label" data-i18n="statHighProtection">Protezione Altissima</div></div>
+        </div>
+
+        <div class="content">
+            <div class="countries-grid" id="countriesGrid"></div>
+        </div>
+
+        <footer>
+            <p data-i18n="footer">© 2026 Author is Marcello Stanca Lawyer in Italy Florence. Database Internazionale - Banche, Truffe Finanziarie e Responsabilità. Tutti i diritti riservati.</p>
+            <p data-i18n="footerNote">Questo database è a scopo informativo. Consultare sempre le autorità competenti. Segnala errori della web page al webmaster: <a href="mailto:lawyer@marcellostanca.it" style="color: white;">lawyer@marcellostanca.it</a></p>
+        </footer>
+    </div>
+
+    <div id="countryModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal()">×</span>
+            <div id="modalContent"></div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        const translations = {
+            it: {
+                title: "Database Bancario Internazionale",
+                subtitle: "Banca Truffe Finanziarie Responsabilità",
+                introText: "Questo sito web offre i link per accedere alle webpage delle Autorità Finanziarie di 108 Paesi del Mondo. Usalo per verificare la legittimità e regolarità di imprese, di persone ed entità che offrono servizi finanziari.",
+                searchPlaceholder: "Cerca per paese o autorità...",
+                filterAll: "Tutti i Paesi",
+                filterHigh: "Protezione Altissima",
+                filterEU: "Paesi UE",
+                filterNonEU: "Paesi non-UE",
+                statCountries: "Paesi Monitorati",
+                statEU: "Paesi UE",
+                statHighProtection: "Protezione Altissima",
+                footer: "© 2026 Author is Marcello Stanca Lawyer in Italy Florence. Database Internazionale - Banche, Truffe Finanziarie e Responsabilità. Tutti i diritti riservati.",
+                footerNote: "Questo database è a scopo informativo. Consultare sempre le autorità competenti. Segnala errori della web page al webmaster: lawyer@marcellostanca.it",
+                authority: "Autorità Competente",
+                protectionLevel: "Livello Protezione",
+                notes: "Note",
+                euReferences: "Risorse Istituzionali di Supervisione - Unione Europea USA FBI - ScamShield",
+                euCommission: "Commissione Europea",
+                chartEU: "Livello Protezione Paesi UE",
+                chartNonEU: "Livello Protezione Paesi non-UE",
+                modalAuthority: "Autorità Finanziaria",
+                modalAbbreviation: "Abbreviazione",
+                modalHomepage: "Homepage",
+                modalFraudReport: "Segnalazione Frodi",
+                modalEmail: "Email",
+                modalSocial: "Social Media",
+                modalNotes: "Note"
+            },
+            en: {
+                title: "International Banking Database",
+                subtitle: "Bank Fraud, Finance & Liability",
+                introText: "This website provides links to the webpages of the Financial Authorities of 108 countries worldwide. Use it to verify the legitimacy and regularity of companies, individuals, and entities offering financial services.",
+                searchPlaceholder: "Search by country or authority...",
+                filterAll: "All Countries",
+                filterHigh: "Highest Protection",
+                filterEU: "EU Countries",
+                filterNonEU: "Non-EU Countries",
+                statCountries: "Monitored Countries",
+                statEU: "EU Countries",
+                statHighProtection: "Highest Protection",
+                footer: "© 2026 Author is Marcello Stanca Lawyer in Italy Florence. International Database - Banks, Financial Fraud and Accountability. All rights reserved.",
+                footerNote: "This database is for informational purposes. Always consult the competent authorities. Report website errors to the webmaster: lawyer@marcellostanca.it",
+                authority: "Competent Authority",
+                protectionLevel: "Protection Level",
+                notes: "Notes",
+                euReferences: "Institutional Supervision Resources - European Union USA FBI - ScamShield",
+                euCommission: "European Commission",
+                chartEU: "Protection Level EU Countries",
+                chartNonEU: "Protection Level Non-EU Countries",
+                modalAuthority: "Financial Authority",
+                modalAbbreviation: "Abbreviation",
+                modalHomepage: "Homepage",
+                modalFraudReport: "Fraud Report",
+                modalEmail: "Email",
+                modalSocial: "Social Media",
+                modalNotes: "Notes"
+            }
+            // Add other languages if needed
+        };
+
+        let currentLanguage = 'it';
+        let currentFilter = 'all';
+        let charts = { eu: null, nonEu: null };
+        let countriesData = {};
+
+        document.addEventListener('DOMContentLoaded', async () => {
+            await loadCountryData();
+            changeLanguage(currentLanguage);
+            setupSearch();
+        });
+
+        async function loadCountryData() {
+            try {
+                const response = await fetch('financial_authorities_database.json');
+                if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+                const data = await response.json();
+                // Converti l'oggetto in array
+                countriesData = Object.values(data);
+                renderAll();
+            } catch (error) {
+                console.error('Error loading country data:', error);
+                document.getElementById('countriesGrid').innerHTML = `<p style="color: red; text-align: center;">Could not load country data. Please check the console for errors.</p>`;
+            }
+        }
+
+        function renderAll() {
+            updateStats();
+            renderCountries();
+            createProtectionCharts();
+        }
+
+        function changeLanguage(lang) {
+            currentLanguage = lang;
+            document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
+            const activeBtn = Array.from(document.querySelectorAll('.lang-btn')).find(btn => btn.textContent.includes(lang.toUpperCase()));
+            if(activeBtn) activeBtn.classList.add('active');
+
+            document.querySelectorAll('[data-i18n]').forEach(element => {
+                const key = element.getAttribute('data-i18n');
+                if (translations[lang] && translations[lang][key]) {
+                    element.innerHTML = translations[lang][key];
+                }
+            });
+             document.querySelectorAll('[data-i18n-placeholder]').forEach(element => {
+                const key = element.getAttribute('data-i18n-placeholder');
+                if (translations[lang] && translations[lang][key]) {
+                    element.placeholder = translations[lang][key];
+                }
+            });
+            renderAll();
+        }
+
+        function renderCountries() {
+            const grid = document.getElementById('countriesGrid');
+            grid.innerHTML = '';
+            
+            const sortedCountries = countriesData.sort((a, b) => 
+                a.country_name.localeCompare(b.country_name)
+            );
+            
+            const filtered = sortedCountries.filter(country => {
+                if (currentFilter === 'all') return true;
+                if (currentFilter === 'altissimo') return country.protectionLevel === 'Altissimo';
+                if (currentFilter === 'ue') return country.isEU;
+                if (currentFilter === 'non-ue') return !country.isEU;
+                return false;
+            });
+
+            filtered.forEach(country => {
+                const card = document.createElement('div');
+                card.className = 'country-card';
+                card.onclick = () => openModal(country.country_name); // Use a unique key like name
+                
+                const protectionClass = `protection-${(country.protectionLevel || 'medio').toLowerCase()}`;
+                
+                card.innerHTML = `
+                    <div class="country-header">
+                        <div class="country-flag">${country.flag}</div>
+                        <div class="country-name">${country.country_name}</div>
+                    </div>
+                    <div class="country-info">
+                        <div class="info-row">
+                            <span class="info-label">${translations[currentLanguage].authority || 'Authority'}:</span>
+                            <span class="info-value">${country.financial_authority.name} (${country.financial_authority.abbreviation})</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">${translations[currentLanguage].protectionLevel || 'Protection'}:</span>
+                            <span class="protection-badge ${protectionClass}">${country.protectionLevel}</span>
+                        </div>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        function filterCountries(filter) {
+            currentFilter = filter;
+            document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+            const activeBtn = Array.from(document.querySelectorAll('.filter-btn')).find(btn => btn.getAttribute('onclick').includes(`'${filter}'`));
+            if(activeBtn) activeBtn.classList.add('active');
+            renderCountries();
+        }
+
+        function setupSearch() {
+            const searchInput = document.getElementById('searchInput');
+            searchInput.addEventListener('input', (e) => {
+                const searchTerm = e.target.value.toLowerCase();
+                const cards = document.querySelectorAll('.country-card');
+                cards.forEach(card => {
+                    card.style.display = card.textContent.toLowerCase().includes(searchTerm) ? 'block' : 'none';
+                });
+            });
+        }
+
+        function updateStats() {
+            const total = countriesData.length;
+            const eu = countriesData.filter(c => c.isEU).length;
+            const high = countriesData.filter(c => c.protectionLevel === 'Altissimo').length;
+            
+            document.getElementById('totalCountries').textContent = total;
+            document.getElementById('euCountries').textContent = eu;
+            document.getElementById('highProtection').textContent = high;
+        }
+
+        function openModal(countryName) {
+            const country = countriesData.find(c => c.country_name === countryName);
+            if (!country) return;
+            
+            const modal = document.getElementById('countryModal');
+            const modalContent = document.getElementById('modalContent');
+            
+            const socialLinks = country.financial_authority.social_links;
+            let socialHTML = '';
+            if (socialLinks && Object.keys(socialLinks).length > 0) {
+                socialHTML = Object.entries(socialLinks).map(([key, value]) => {
+                    if (!value) return '';
+                    return `<a href="${value}" target="_blank" style="margin-right: 10px; text-transform: capitalize;">${key}</a>`;
+                }).join('');
+            }
+
+            modalContent.innerHTML = `
+                <div class="country-header">
+                    <div class="country-flag">${country.flag}</div>
+                    <div class="country-name">${country.country_name}</div>
+                </div>
+                <div class="country-info" style="margin-top: 20px;">
+                    <p><strong>${translations[currentLanguage].modalAuthority || 'Authority'}:</strong> ${country.financial_authority.name}</p>
+                    <p><strong>${translations[currentLanguage].modalAbbreviation || 'Abbreviation'}:</strong> ${country.financial_authority.abbreviation}</p>
+                    <p><strong>${translations[currentLanguage].protectionLevel || 'Protection'}:</strong> ${country.protectionLevel}</p>
+                    <div class="authority-link" style="margin: 15px 0;">
+                        <strong>${translations[currentLanguage].modalHomepage || 'Homepage'}:</strong><br>
+                        <a href="${country.financial_authority.homepage}" target="_blank">${country.financial_authority.homepage}</a>
+                    </div>
+                    <div class="authority-link" style="margin: 15px 0;">
+                        <strong>${translations[currentLanguage].modalFraudReport || 'Fraud Report'}:</strong><br>
+                        <a href="${country.financial_authority.fraudReportLink}" target="_blank">${country.financial_authority.fraudReportLink}</a>
+                    </div>
+                    <p><strong>${translations[currentLanguage].modalEmail || 'Email'}:</strong> <a href="mailto:${country.financial_authority.authorityEmail}">${country.financial_authority.authorityEmail}</a></p>
+                    ${socialHTML ? `<p style="margin-top:15px;"><strong>${translations[currentLanguage].modalSocial || 'Social'}:</strong> ${socialHTML}</p>` : ''}
+                    <h3 style="margin-top: 20px;">${translations[currentLanguage].modalNotes || 'Notes'}:</h3>
+                    <p>${country.notes.replace(/(https?:\/\/[^\s]+)/g, '<a href="$1" target="_blank">$1</a>')}</p>
+                </div>
+            `;
+            modal.style.display = 'block';
+        }
+
+        function closeModal() {
+            document.getElementById('countryModal').style.display = 'none';
+        }
+
+        window.onclick = (event) => {
+            if (event.target === document.getElementById('countryModal')) closeModal();
+        };
+
+        function createProtectionCharts() {
+            const protectionLevels = { 'Altissimo': 0, 'Alto': 0, 'Medio': 0 };
+            const euData = { ...protectionLevels };
+            const nonEuData = { ...protectionLevels };
+
+            countriesData.forEach(country => {
+                const target = country.isEU ? euData : nonEuData;
+                if (target.hasOwnProperty(country.protectionLevel)) {
+                    target[country.protectionLevel]++;
+                }
+            });
+
+            const createChart = (canvasId, data, label) => {
+                if (charts[canvasId]) charts[canvasId].destroy();
+                const ctx = document.getElementById(canvasId).getContext('2d');
+                charts[canvasId] = new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: Object.keys(data),
+                        datasets: [{
+                            label: label,
+                            data: Object.values(data),
+                            backgroundColor: ['#d4edda', '#d1ecf1', '#fff3cd'],
+                            borderColor: ['#155724', '#0c5460', '#856404'],
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        responsive: true, maintainAspectRatio: false,
+                        scales: { y: { beginAtZero: true, ticks: { stepSize: 5 } } },
+                        plugins: { legend: { display: false } }
+                    }
+                });
+            };
+
+            createChart('eu', euData, translations[currentLanguage].chartEU);
+            createChart('nonEu', nonEuData, translations[currentLanguage].chartNonEU);
+        }
+    </script>
+</body>
+</html>

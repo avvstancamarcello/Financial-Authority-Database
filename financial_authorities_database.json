@@ -1,0 +1,1653 @@
+{
+  "Albania": {
+    "country_name": "Albania",
+    "flag": "🇦🇱",
+    "isEU": false,
+    "protectionLevel": "Medio",
+    "financial_authority": {
+      "name": "Bank of Albania",
+      "abbreviation": "BoA",
+      "homepage": "https://www.bankofalbania.org/",
+      "fraudReportLink": "https://www.bankofalbania.org/rc/doc/formular_ankese_1557820555.pdf",
+      "authorityEmail": "public@bankofalbania.org",
+      "social_links": {}
+    },
+    "notes": "World Investor Week Coordinator: Anjeza Beja."
+  },
+  "Algeria": {
+    "country_name": "Algeria",
+    "flag": "🇩🇿",
+    "isEU": false,
+    "protectionLevel": "Medio",
+    "financial_authority": {
+      "name": "Commission d'Organisation et de Surveillance des Opérations de Bourse",
+      "abbreviation": "COSOB",
+      "homepage": "https://www.cosob.org/",
+      "fraudReportLink": "https://www.cosob.org/fr/plaintes",
+      "authorityEmail": "contact@cosob.dz",
+      "social_links": {}
+    },
+    "notes": "World Investor Week Coordinator: Abdelhakim Berrah."
+  },
+  "Angola": {
+    "country_name": "Angola",
+    "flag": "🇦🇴",
+    "isEU": false,
+    "protectionLevel": "Medio",
+    "financial_authority": {
+      "name": "Capital Markets Commission",
+      "abbreviation": "CMC",
+      "homepage": "https://www.cmc.ao/",
+      "fraudReportLink": "https://www.cmc.ao/denuncias-e-reclamacoes",
+      "authorityEmail": "cmc@cmc.ao",
+      "social_links": {}
+    },
+    "notes": "World Investor Week Coordinator: José M. Matos."
+  },
+  "Argentina": {
+    "country_name": "Argentina",
+    "flag": "🇦🇷",
+    "isEU": false,
+    "protectionLevel": "Alto",
+    "financial_authority": {
+      "name": "Comisión Nacional de Valores",
+      "abbreviation": "CNV",
+      "homepage": "https://www.argentina.gob.ar/cnv",
+      "fraudReportLink": "https://www.argentina.gob.ar/cnv/denuncias",
+      "authorityEmail": "denuncias@cnv.gov.ar",
+      "social_links": {
+        "linkedin": "https://ar.linkedin.com/company/comision-nacional-de-valores",
+        "twitter": "https://x.com/CNVArgentina",
+        "youtube": "https://www.youtube.com/user/CNVArgentina"
+      }
+    },
+    "notes": "La BCRA (Banca Centrale) gestisce il registro degli intermediari finanziari."
+  },
+  "Armenia": {
+    "country_name": "Armenia",
+    "flag": "🇦🇲",
+    "isEU": false,
+    "protectionLevel": "Medio",
+    "financial_authority": {
+      "name": "Central Bank of Armenia",
+      "abbreviation": "CBA",
+      "homepage": "https://www.cba.am/",
+      "fraudReportLink": "https://www.cba.am/en/SitePages/fsc/fsc_complaints.aspx",
+      "authorityEmail": "info@cba.am",
+      "social_links": {}
+    },
+    "notes": "World Investor Week Coordinator: Armenak Darbinyan."
+  },
+  "Australia": {
+    "country_name": "Australia",
+    "flag": "🇦🇺",
+    "isEU": false,
+    "protectionLevel": "Altissimo",
+    "financial_authority": {
+      "name": "Australian Securities and Investments Commission",
+      "abbreviation": "ASIC",
+      "homepage": "https://asic.gov.au",
+      "fraudReportLink": "https://asic.gov.au/about-asic/contact-us/how-to-complain/report-misconduct-or-a-scam/",
+      "authorityEmail": "investor.relations@asic.gov.au",
+      "social_links": {
+        "linkedin": "https://www.linkedin.com/company/asic/",
+        "twitter": "https://twitter.com/ASIC_Connect",
+        "youtube": "https://www.youtube.com/user/ASICMoneysmart"
+      }
+    },
+    "notes": "ASIC gestisce il registro delle aziende e dei servizi finanziari (Moneysmart)."
+  },
+  "Austria": {
+    "country_name": "Austria",
+    "flag": "🇦🇹",
+    "isEU": true,
+    "protectionLevel": "Altissimo",
+    "financial_authority": {
+      "name": "Financial Market Authority",
+      "abbreviation": "FMA",
+      "homepage": "https://www.fma.gv.at/",
+      "fraudReportLink": "https://www.fma.gv.at/en/consumers/complaints/",
+      "authorityEmail": "fma@fma.gv.at",
+      "social_links": {}
+    },
+    "notes": "Standard UE pienamente applicati."
+  },
+  "Azerbaijan": {
+    "country_name": "Azerbaijan",
+    "flag": "🇦🇿",
+    "isEU": false,
+    "protectionLevel": "Medio",
+    "financial_authority": {
+      "name": "Central Bank of the Republic of Azerbaijan",
+      "abbreviation": "CBA",
+      "homepage": "https://www.cbar.az/",
+      "fraudReportLink": "https://www.cbar.az/page-415/consumer-protection",
+      "authorityEmail": "mail@cbar.az",
+      "social_links": {}
+    },
+    "notes": "World Investor Week Coordinator: Vusala Gurbanova."
+  },
+  "Bahamas": {
+    "country_name": "Bahamas",
+    "flag": "🇧🇸",
+    "isEU": false,
+    "protectionLevel": "Medio",
+    "financial_authority": {
+      "name": "Securities Commission of The Bahamas",
+      "abbreviation": "SCB",
+      "homepage": "https://www.scb.gov.bs/",
+      "fraudReportLink": "https://www.scb.gov.bs/contact-us/report-a-scam-or-unauthorized-activity/",
+      "authorityEmail": "info@scb.gov.bs",
+      "social_links": {
+        "facebook": "https://www.facebook.com/securitiescommission.bah",
+        "instagram": "https://www.instagram.com/getsmarteraboutmoney/?hl=en",
+        "linkedin": "https://bs.linkedin.com/company/securities-commission-of-the-bahamas",
+        "youtube": "https://www.youtube.com/@securitiescommissionoftheb6891"
+      }
+    },
+    "notes": "Focus su educazione finanziaria."
+  },
+  "Bahrain": {
+    "country_name": "Bahrain",
+    "flag": "🇧🇭",
+    "isEU": false,
+    "protectionLevel": "Alto",
+    "financial_authority": {
+      "name": "Central Bank of Bahrain",
+      "abbreviation": "CBB",
+      "homepage": "https://www.cbb.gov.bh",
+      "fraudReportLink": "https://www.cbb.gov.bh/complaints-page/",
+      "authorityEmail": "info@cbb.gov.bh",
+      "social_links": {}
+    },
+    "notes": ""
+  },
+  "Bangladesh": {
+    "country_name": "Bangladesh",
+    "flag": "🇧🇩",
+    "isEU": false,
+    "protectionLevel": "Medio",
+    "financial_authority": {
+      "name": "Bangladesh Securities and Exchange Commission",
+      "abbreviation": "BSEC",
+      "homepage": "https://www.sec.gov.bd/",
+      "fraudReportLink": "https://www.sec.gov.bd/complain",
+      "authorityEmail": "info@sec.gov.bd",
+      "social_links": {}
+    },
+    "notes": "World Investor Week Coordinator: Md. Mahbubul Alam."
+  },
+  "Barbados": {
+    "country_name": "Barbados",
+    "flag": "🇧🇧",
+    "isEU": false,
+    "protectionLevel": "Medio",
+    "financial_authority": {
+      "name": "Financial Services Commission",
+      "abbreviation": "FSC",
+      "homepage": "https://www.fsc.gov.bb/",
+      "fraudReportLink": "https://www.fsc.gov.bb/complaints-queries/",
+      "authorityEmail": "info@fsc.gov.bb",
+      "social_links": {}
+    },
+    "notes": "World Investor Week Coordinator: Legal & Licensing department."
+  },
+  "Belgium": {
+    "country_name": "Belgium",
+    "flag": "🇧🇪",
+    "isEU": true,
+    "protectionLevel": "Altissimo",
+    "financial_authority": {
+      "name": "Financial Services and Markets Authority",
+      "abbreviation": "FSMA",
+      "homepage": "https://www.fsma.be",
+      "fraudReportLink": "https://www.fsma.be/en/consumer/complaints",
+      "authorityEmail": "info@fsma.be",
+      "social_links": {}
+    },
+    "notes": "Standard UE applicati."
+  },
+  "Bermuda": {
+    "country_name": "Bermuda",
+    "flag": "🇧🇲",
+    "isEU": false,
+    "protectionLevel": "Alto",
+    "financial_authority": {
+      "name": "Bermuda Monetary Authority",
+      "abbreviation": "BMA",
+      "homepage": "https://www.bma.bm/",
+      "fraudReportLink": "https://www.bma.bm/report-a-scam",
+      "authorityEmail": "enquiries@bma.bm",
+      "social_links": {}
+    },
+    "notes": "World Investor Week Coordinator: Lasonia Packwood."
+  },
+  "Bolivia": {
+    "country_name": "Bolivia",
+    "flag": "🇧🇴",
+    "isEU": false,
+    "protectionLevel": "Medio",
+    "financial_authority": {
+      "name": "Autoridad de Supervisión del Sistema Financiero",
+      "abbreviation": "ASFI",
+      "homepage": "https://www.asfi.gob.bo/",
+      "fraudReportLink": "https://www.asfi.gob.bo/index.php/puntos-de-reclamacion-pr.html",
+      "authorityEmail": "asfi@asfi.gob.bo",
+      "social_links": {}
+    },
+    "notes": "World Investor Week Coordinator: Ilse Alemán."
+  },
+  "Botswana": {
+    "country_name": "Botswana",
+    "flag": "🇧🇼",
+    "isEU": false,
+    "protectionLevel": "Medio",
+    "financial_authority": {
+      "name": "Non-Bank Financial Institutions Regulatory Authority",
+      "abbreviation": "NBFIRA",
+      "homepage": "https://www.nbfira.org.bw/",
+      "fraudReportLink": "https://www.nbfira.org.bw/lodge-complaint",
+      "authorityEmail": "info@nbfira.org.bw",
+      "social_links": {}
+    },
+    "notes": "World Investor Week Coordinator: Boa Ntebele."
+  },
+  "Brazil": {
+    "country_name": "Brazil",
+    "flag": "🇧🇷",
+    "isEU": false,
+    "protectionLevel": "Alto",
+    "financial_authority": {
+      "name": "Comissão de Valores Mobiliários",
+      "abbreviation": "CVM",
+      "homepage": "https://www.gov.br/cvm/",
+      "fraudReportLink": "https://www.gov.br/cvm/pt-br/canais_atendimento/spc/login-cidadao",
+      "authorityEmail": "imprensa@cvm.gov.br",
+      "social_links": {}
+    },
+    "notes": "World Investor Week Coordinator: José Alexandre Vasco."
+  },
+  "British Virgin Islands": {
+    "country_name": "British Virgin Islands",
+    "flag": "🇻🇬",
+    "isEU": false,
+    "protectionLevel": "Alto",
+    "financial_authority": {
+      "name": "BVI Financial Services Commission",
+      "abbreviation": "BVI FSC",
+      "homepage": "https://www.bvifsc.vg/",
+      "fraudReportLink": "https://www.bvifsc.vg/complaints-and-assistance",
+      "authorityEmail": "commissioner@bvifsc.vg",
+      "social_links": {}
+    },
+    "notes": "World Investor Week Coordinator: The Registry of Corporate Affairs."
+  },
+  "Bulgaria": {
+    "country_name": "Bulgaria",
+    "flag": "🇧🇬",
+    "isEU": true,
+    "protectionLevel": "Altissimo",
+    "financial_authority": {
+      "name": "Financial Supervision Commission",
+      "abbreviation": "FSC",
+      "homepage": "https://www.fsc.bg/en/",
+      "fraudReportLink": "https://www.fsc.bg/en/for-the-consumers/",
+      "authorityEmail": "fsc@fsc.bg",
+      "social_links": {}
+    },
+    "notes": "Entrata nell'Area Euro il 1 Gennaio 2026. Standard UE applicati."
+  },
+  "Burkina Faso": {
+    "country_name": "Burkina Faso",
+    "flag": "🇧🇫",
+    "isEU": false,
+    "protectionLevel": "Medio",
+    "financial_authority": {
+      "name": "Conseil Régional de l'Epargne Publique et des Marchés Financiers",
+      "abbreviation": "CREPMF",
+      "homepage": "https://www.crepmf.org/",
+      "fraudReportLink": "https://www.crepmf.org/nous-contacter/",
+      "authorityEmail": "crepmf@crepmf.org",
+      "social_links": {}
+    },
+    "notes": "Autorità regionale per l'Unione Monetaria dell'Africa Occidentale (WAEMU)."
+  },
+  "Cambodia": {
+    "country_name": "Cambodia",
+    "flag": "🇰🇭",
+    "isEU": false,
+    "protectionLevel": "Medio",
+    "financial_authority": {
+      "name": "Securities and Exchange Regulator of Cambodia",
+      "abbreviation": "SERC",
+      "homepage": "https://www.serc.gov.kh/",
+      "fraudReportLink": "https://www.serc.gov.kh/contact-us/",
+      "authorityEmail": "info@serc.gov.kh",
+      "social_links": {}
+    },
+    "notes": "World Investor Week Coordinator: SERC Team."
+  },
+  "Canada": {
+    "country_name": "Canada",
+    "flag": "🇨🇦",
+    "isEU": false,
+    "protectionLevel": "Altissimo",
+    "financial_authority": {
+      "name": "Canadian Securities Administrators",
+      "abbreviation": "CSA",
+      "homepage": "https://www.securities-administrators.ca/",
+      "fraudReportLink": "https://www.securities-administrators.ca/investor-tools/report-a-scam/",
+      "authorityEmail": "csa-acvm-secretariat@acvm-csa.ca",
+      "social_links": {}
+    },
+    "notes": "Organizzazione che raggruppa le autorità provinciali e territoriali."
+  },
+  "Cayman Islands": {
+    "country_name": "Cayman Islands",
+    "flag": "🇰🇾",
+    "isEU": false,
+    "protectionLevel": "Alto",
+    "financial_authority": {
+      "name": "Cayman Islands Monetary Authority",
+      "abbreviation": "CIMA",
+      "homepage": "https://www.cima.ky/",
+      "fraudReportLink": "https://www.cima.ky/complaints",
+      "authorityEmail": "contact@cima.ky",
+      "social_links": {}
+    },
+    "notes": "World Investor Week Coordinator: CIMA Team."
+  },
+  "CEMAC (Regional)": {
+    "country_name": "CEMAC (Regional)",
+    "flag": "🌍",
+    "isEU": false,
+    "protectionLevel": "Medio",
+    "financial_authority": {
+      "name": "Commission de Surveillance du Marché Financier de l'Afrique Centrale",
+      "abbreviation": "COSUMAF",
+      "homepage": "https://cosumaf.org/",
+      "fraudReportLink": "https://cosumaf.org/contact/",
+      "authorityEmail": "contact@cosumaf.org",
+      "social_links": {}
+    },
+    "notes": "Autorità regionale per Camerun, Repubblica Centrafricana, Ciad, Congo, Guinea Equatoriale e Gabon."
+  },
+  "Chile": {
+    "country_name": "Chile",
+    "flag": "🇨🇱",
+    "isEU": false,
+    "protectionLevel": "Alto",
+    "financial_authority": {
+      "name": "Comisión para el Mercado Financiero",
+      "abbreviation": "CMF",
+      "homepage": "https://www.cmfchile.cl/",
+      "fraudReportLink": "https://www.cmfchile.cl/portal/principal/605/w3-propertyvalue-9871.html",
+      "authorityEmail": "consultas@cmfchile.cl",
+      "social_links": {}
+    },
+    "notes": "World Investor Week Coordinator: CMF Educa."
+  },
+  "Chinese Taipei": {
+    "country_name": "Chinese Taipei",
+    "flag": "🇹🇼",
+    "isEU": false,
+    "protectionLevel": "Medio",
+    "financial_authority": {
+      "name": "Financial Supervisory Commission",
+      "abbreviation": "FSC",
+      "homepage": "https://www.fsc.gov.tw/en/",
+      "fraudReportLink": "https://fscmail.fsc.gov.tw/",
+      "authorityEmail": "chium@sfb.gov.tw",
+      "social_links": {}
+    },
+    "notes": "World Investor Week Coordinator: Tiffany Chiu."
+  },
+  "Colombia": {
+    "country_name": "Colombia",
+    "flag": "🇨🇴",
+    "isEU": false,
+    "protectionLevel": "Alto",
+    "financial_authority": {
+      "name": "Superintendencia Financiera de Colombia",
+      "abbreviation": "SFC",
+      "homepage": "https://www.superfinanciera.gov.co/",
+      "fraudReportLink": "https://www.superfinanciera.gov.co/jsp/index.jsf?id=10080769",
+      "authorityEmail": "super@superfinanciera.gov.co",
+      "social_links": {}
+    },
+    "notes": "World Investor Week Coordinator: Angela Maria Garcia."
+  },
+  "Costa Rica": {
+    "country_name": "Costa Rica",
+    "flag": "🇨🇷",
+    "isEU": false,
+    "protectionLevel": "Medio",
+    "financial_authority": {
+      "name": "Superintendencia General de Valores",
+      "abbreviation": "SUGEVAL",
+      "homepage": "https://www.sugeval.fi.cr/",
+      "fraudReportLink": "https://www.sugeval.fi.cr/tramites_servicios/Paginas/Denuncias.aspx",
+      "authorityEmail": "informacion@sugeval.fi.cr",
+      "social_links": {}
+    },
+    "notes": "World Investor Week Coordinator: María Lucía Fernández."
+  },
+  "Côte d'Ivoire": {
+    "country_name": "Côte d'Ivoire",
+    "flag": "🇨🇮",
+    "isEU": false,
+    "protectionLevel": "Medio",
+    "financial_authority": {
+      "name": "Conseil Régional de l'Epargne Publique et des Marchés Financiers",
+      "abbreviation": "CREPMF",
+      "homepage": "https://www.crepmf.org/",
+      "fraudReportLink": "https://www.crepmf.org/nous-contacter/",
+      "authorityEmail": "crepmf@crepmf.org",
+      "social_links": {}
+    },
+    "notes": "Autorità regionale per l'Unione Monetaria dell'Africa Occidentale (WAEMU)."
+  },
+  "Croatia": {
+    "country_name": "Croatia",
+    "flag": "🇭🇷",
+    "isEU": true,
+    "protectionLevel": "Altissimo",
+    "financial_authority": {
+      "name": "Croatian Financial Services Supervisory Agency",
+      "abbreviation": "HANFA",
+      "homepage": "https://www.hanfa.hr/",
+      "fraudReportLink": "https://www.hanfa.hr/trziste-kapitala/upiti-i-prigovori/",
+      "authorityEmail": "info@hanfa.hr",
+      "social_links": {}
+    },
+    "notes": "World Investor Week Coordinator: HANFA Team."
+  },
+  "Cyprus": {
+    "country_name": "Cyprus",
+    "flag": "🇨🇾",
+    "isEU": true,
+    "protectionLevel": "Altissimo",
+    "financial_authority": {
+      "name": "Cyprus Securities and Exchange Commission",
+      "abbreviation": "CySEC",
+      "homepage": "https://www.cysec.gov.cy/",
+      "fraudReportLink": "https://www.cysec.gov.cy/en-GB/complaints/how-to-complain/",
+      "authorityEmail": "info@cysec.gov.cy",
+      "social_links": {}
+    },
+    "notes": "World Investor Week Coordinator: CySEC Team."
+  },
+  "Czech Republic": {
+    "country_name": "Czech Republic",
+    "flag": "🇨🇿",
+    "isEU": true,
+    "protectionLevel": "Altissimo",
+    "financial_authority": {
+      "name": "Czech National Bank",
+      "abbreviation": "CNB",
+      "homepage": "https://www.cnb.cz/",
+      "fraudReportLink": "https://www.cnb.cz/en/consumer/protection-and-financial-literacy/how-to-file-a-complaint-or-inquiry/",
+      "authorityEmail": "podatelna@cnb.cz",
+      "social_links": {}
+    },
+    "notes": "World Investor Week Coordinator: CNB Team."
+  },
+  "Denmark": {
+    "country_name": "Denmark",
+    "flag": "🇩🇰",
+    "isEU": true,
+    "protectionLevel": "Altissimo",
+    "financial_authority": {
+      "name": "Danish Financial Supervisory Authority",
+      "abbreviation": "Finanstilsynet",
+      "homepage": "https://www.finanstilsynet.dk/",
+      "fraudReportLink": "https://www.finanstilsynet.dk/Forbrugere/Klag-over-en-finansiel-virksomhed",
+      "authorityEmail": "finanstilsynet@ftnet.dk",
+      "social_links": {}
+    },
+    "notes": "World Investor Week Coordinator: Ulla Brøns."
+  },
+  "ECSRC (Regional)": {
+    "country_name": "ECSRC (Regional)",
+    "flag": "🌍",
+    "isEU": false,
+    "protectionLevel": "Medio",
+    "financial_authority": {
+      "name": "Eastern Caribbean Securities Regulatory Commission",
+      "abbreviation": "ECSRC",
+      "homepage": "http://www.ecsrc.com",
+      "fraudReportLink": "http://www.ecsrc.com/complaints/",
+      "authorityEmail": "ecsrc@eccb-centralbank.org",
+      "social_links": {}
+    },
+    "notes": "Autorità regionale per Anguilla, Antigua e Barbuda, Dominica, Grenada, Montserrat, Saint Kitts e Nevis, Santa Lucia, Saint Vincent e Grenadine."
+  },
+  "Egypt": {
+    "country_name": "Egypt",
+    "flag": "🇪🇬",
+    "isEU": false,
+    "protectionLevel": "Alto",
+    "financial_authority": {
+      "name": "Financial Regulatory Authority",
+      "abbreviation": "FRA",
+      "homepage": "https://fra.gov.eg/",
+      "fraudReportLink": "https://fra.gov.eg/complaints/",
+      "authorityEmail": "fra@fra.gov.eg",
+      "social_links": {}
+    },
+    "notes": "World Investor Week Coordinator: FRA Team."
+  },
+  "El Salvador": {
+    "country_name": "El Salvador",
+    "flag": "🇸🇻",
+    "isEU": false,
+    "protectionLevel": "Medio",
+    "financial_authority": {
+      "name": "Superintendencia del Sistema Financiero",
+      "abbreviation": "SSF",
+      "homepage": "https://www.ssf.gob.sv/",
+      "fraudReportLink": "https://www.ssf.gob.sv/atencion-al-usuario-financiero/",
+      "authorityEmail": "info@ssf.gob.sv",
+      "social_links": {}
+    },
+    "notes": "World Investor Week Coordinator: Ana Lorena Guevara de Palacios."
+  },
+  "Estonia": {
+    "country_name": "Estonia",
+    "flag": "🇪🇪",
+    "isEU": true,
+    "protectionLevel": "Altissimo",
+    "financial_authority": {
+      "name": "Finantsinspektsioon",
+      "abbreviation": "FSA",
+      "homepage": "https://www.fi.ee/",
+      "fraudReportLink": "https://www.fi.ee/en/consumer/all-articles/how-submit-complaint-against-financial-service-provider",
+      "authorityEmail": "info@fi.ee",
+      "social_links": {}
+    },
+    "notes": "World Investor Week Coordinator: FSA Team."
+  },
+  "Finland": {
+    "country_name": "Finland",
+    "flag": "🇫🇮",
+    "isEU": true,
+    "protectionLevel": "Altissimo",
+    "financial_authority": {
+      "name": "Financial Supervisory Authority",
+      "abbreviation": "FIN-FSA",
+      "homepage": "https://www.finanssivalvonta.fi/",
+      "fraudReportLink": "https://www.finanssivalvonta.fi/en/about-the-fin-fsa/contact-us/report-suspected-offence/",
+      "authorityEmail": "kirjaamo@finanssivalvonta.fi",
+      "social_links": {}
+    },
+    "notes": "World Investor Week Coordinator: Anneli Tuominen."
+  },
+  "France": {
+    "country_name": "France",
+    "flag": "🇫🇷",
+    "isEU": true,
+    "protectionLevel": "Altissimo",
+    "financial_authority": {
+      "name": "Autorité des Marchés Financiers",
+      "abbreviation": "AMF",
+      "homepage": "https://www.amf-france.org/",
+      "fraudReportLink": "https://www.amf-france.org/fr/le-mediateur-de-lamf/votre-dossier-de-mediation/vous-voulez-deposer-une-demande-de-mediation",
+      "authorityEmail": "mediateur@amf-france.org",
+      "social_links": {}
+    },
+    "notes": "World Investor Week Coordinator: AMF Team."
+  },
+  "Georgia": {
+    "country_name": "Georgia",
+    "flag": "🇬🇪",
+    "isEU": false,
+    "protectionLevel": "Medio",
+    "financial_authority": {
+      "name": "National Bank of Georgia",
+      "abbreviation": "NBG",
+      "homepage": "https://nbg.gov.ge/",
+      "fraudReportLink": "https://nbg.gov.ge/en/page/hot-line",
+      "authorityEmail": "info@nbg.gov.ge",
+      "social_links": {}
+    },
+    "notes": "World Investor Week Coordinator: Lasha Gzirishvili."
+  },
+  "Germany": {
+    "country_name": "Germany",
+    "flag": "🇩🇪",
+    "isEU": true,
+    "protectionLevel": "Altissimo",
+    "financial_authority": {
+      "name": "Bundesanstalt für Finanzdienstleistungsaufsicht",
+      "abbreviation": "BaFin",
+      "homepage": "https://www.bafin.de/",
+      "fraudReportLink": "https://www.bafin.de/EN/DieBaFin/Kontakt/Verbrauchertelefon/verbrauchertelefon_node_en.html",
+      "authorityEmail": "poststelle@bafin.de",
+      "social_links": {}
+    },
+    "notes": "World Investor Week Coordinator: BaFin Team."
+  },
+  "Gibraltar": {
+    "country_name": "Gibraltar",
+    "flag": "🇬🇮",
+    "isEU": false,
+    "protectionLevel": "Alto",
+    "financial_authority": {
+      "name": "Gibraltar Financial Services Commission",
+      "abbreviation": "GFSC",
+      "homepage": "https://www.fsc.gi/",
+      "fraudReportLink": "https://www.fsc.gi/consumer-hub/complaints",
+      "authorityEmail": "information@fsc.gi",
+      "social_links": {}
+    },
+    "notes": "World Investor Week Coordinator: GFSC Team."
+  },
+  "Greece": {
+    "country_name": "Greece",
+    "flag": "🇬🇷",
+    "isEU": true,
+    "protectionLevel": "Altissimo",
+    "financial_authority": {
+      "name": "Hellenic Capital Market Commission",
+      "abbreviation": "HCMC",
+      "homepage": "http://www.hcmc.gr/",
+      "fraudReportLink": "http://www.hcmc.gr/en_US/web/portal/epikoinonia",
+      "authorityEmail": "info@cmc.gov.gr",
+      "social_links": {}
+    },
+    "notes": "World Investor Week Coordinator: HCMC Team."
+  },
+  "Guernsey": {
+    "country_name": "Guernsey",
+    "flag": "🇬🇬",
+    "isEU": false,
+    "protectionLevel": "Alto",
+    "financial_authority": {
+      "name": "Guernsey Financial Services Commission",
+      "abbreviation": "GFSC",
+      "homepage": "https://www.gfsc.gg/",
+      "fraudReportLink": "https://www.gfsc.gg/consumers/making-complaint",
+      "authorityEmail": "info@gfsc.gg",
+      "social_links": {}
+    },
+    "notes": "World Investor Week Coordinator: GFSC Team."
+  },
+  "Hong Kong": {
+    "country_name": "Hong Kong",
+    "flag": "🇭🇰",
+    "isEU": false,
+    "protectionLevel": "Altissimo",
+    "financial_authority": {
+      "name": "Securities and Futures Commission",
+      "abbreviation": "SFC",
+      "homepage": "https://www.sfc.hk/",
+      "fraudReportLink": "https://www.sfc.hk/en/Lodge-a-complaint",
+      "authorityEmail": "enquiry@sfc.hk",
+      "social_links": {}
+    },
+    "notes": "World Investor Week Coordinator: Investor and Financial Education Council."
+  },
+  "Hungary": {
+    "country_name": "Hungary",
+    "flag": "🇭🇺",
+    "isEU": true,
+    "protectionLevel": "Altissimo",
+    "financial_authority": {
+      "name": "Magyar Nemzeti Bank (Central Bank of Hungary)",
+      "abbreviation": "MNB",
+      "homepage": "https://www.mnb.hu/",
+      "fraudReportLink": "https://www.mnb.hu/en/consumer-protection/making-a-complaint",
+      "authorityEmail": "info@mnb.hu",
+      "social_links": {}
+    },
+    "notes": "World Investor Week Coordinator: MNB Team."
+  },
+  "Iceland": {
+    "country_name": "Iceland",
+    "flag": "🇮🇸",
+    "isEU": false,
+    "protectionLevel": "Alto",
+    "financial_authority": {
+      "name": "Central Bank of Iceland",
+      "abbreviation": "CBI",
+      "homepage": "https://www.sedlabanki.is/",
+      "fraudReportLink": "https://www.sedlabanki.is/consumer-protection/complaints-and-comments/",
+      "authorityEmail": "sedlabanki@sedlabanki.is",
+      "social_links": {}
+    },
+    "notes": "World Investor Week Coordinator: CBI Team."
+  },
+  "India": {
+    "country_name": "India",
+    "flag": "🇮🇳",
+    "isEU": false,
+    "protectionLevel": "Alto",
+    "financial_authority": {
+      "name": "Securities and Exchange Board of India",
+      "abbreviation": "SEBI",
+      "homepage": "https://www.sebi.gov.in/",
+      "fraudReportLink": "https://scores.gov.in/",
+      "authorityEmail": "sebi@sebi.gov.in",
+      "social_links": {}
+    },
+    "notes": "World Investor Week Coordinator: SEBI Team."
+  },
+  "Indonesia": {
+    "country_name": "Indonesia",
+    "flag": "🇮🇩",
+    "isEU": false,
+    "protectionLevel": "Medio",
+    "financial_authority": {
+      "name": "Otoritas Jasa Keuangan (Indonesia Financial Services Authority)",
+      "abbreviation": "OJK",
+      "homepage": "https://www.ojk.go.id/",
+      "fraudReportLink": "https://kontak157.ojk.go.id/",
+      "authorityEmail": "humas@ojk.go.id",
+      "social_links": {}
+    },
+    "notes": "World Investor Week Coordinator: OJK Team."
+  },
+  "Ireland": {
+    "country_name": "Ireland",
+    "flag": "🇮🇪",
+    "isEU": true,
+    "protectionLevel": "Altissimo",
+    "financial_authority": {
+      "name": "Central Bank of Ireland",
+      "abbreviation": "CBI",
+      "homepage": "https://www.centralbank.ie/",
+      "fraudReportLink": "https://www.centralbank.ie/consumer-hub/complaints",
+      "authorityEmail": "enquiries@centralbank.ie",
+      "social_links": {}
+    },
+    "notes": "World Investor Week Coordinator: CBI Team."
+  },
+  "Isle of Man": {
+    "country_name": "Isle of Man",
+    "flag": "🇮🇲",
+    "isEU": false,
+    "protectionLevel": "Alto",
+    "financial_authority": {
+      "name": "Isle of Man Financial Services Authority",
+      "abbreviation": "IOMFSA",
+      "homepage": "https://www.iomfsa.im/",
+      "fraudReportLink": "https://www.iomfsa.im/consumer-material/how-to-make-a-complaint/",
+      "authorityEmail": "info@iomfsa.im",
+      "social_links": {}
+    },
+    "notes": "World Investor Week Coordinator: IOMFSA Team."
+  },
+  "Israel": {
+    "country_name": "Israel",
+    "flag": "🇮🇱",
+    "isEU": false,
+    "protectionLevel": "Alto",
+    "financial_authority": {
+      "name": "Israel Securities Authority",
+      "abbreviation": "ISA",
+      "homepage": "https://www.isa.gov.il/",
+      "fraudReportLink": "https://www.isa.gov.il/sites/ISAEng/188/Pages/190.aspx",
+      "authorityEmail": "pniot@isa.gov.il",
+      "social_links": {}
+    },
+    "notes": "World Investor Week Coordinator: ISA Team."
+  },
+  "Italy": {
+    "country_name": "Italy",
+    "flag": "🇮🇹",
+    "isEU": true,
+    "protectionLevel": "Altissimo",
+    "financial_authority": {
+      "name": "Commissione Nazionale per le Società e la Borsa",
+      "abbreviation": "CONSOB",
+      "homepage": "https://www.consob.it/",
+      "fraudReportLink": "https://www.consob.it/web/area-pubblica/esposti",
+      "authorityEmail": "consob@pec.consob.it",
+      "social_links": {}
+    },
+    "notes": "World Investor Week Coordinator: CONSOB Team."
+  },
+  "Jamaica": {
+    "country_name": "Jamaica",
+    "flag": "🇯🇲",
+    "isEU": false,
+    "protectionLevel": "Medio",
+    "financial_authority": {
+      "name": "Financial Services Commission",
+      "abbreviation": "FSC",
+      "homepage": "https://www.fscjamaica.org/",
+      "fraudReportLink": "https://www.fscjamaica.org/complaints/",
+      "authorityEmail": "fsc@fscjamaica.org",
+      "social_links": {}
+    },
+    "notes": "World Investor Week Coordinator: FSC Team."
+  },
+  "Japan": {
+    "country_name": "Japan",
+    "flag": "🇯🇵",
+    "isEU": false,
+    "protectionLevel": "Altissimo",
+    "financial_authority": {
+      "name": "Financial Services Agency",
+      "abbreviation": "FSA",
+      "homepage": "https://www.fsa.go.jp/",
+      "fraudReportLink": "https://www.fsa.go.jp/en/contact/index.html",
+      "authorityEmail": "equestion@fsa.go.jp",
+      "social_links": {}
+    },
+    "notes": "World Investor Week Coordinator: FSA Team."
+  },
+  "Jersey": {
+    "country_name": "Jersey",
+    "flag": "🇯🇪",
+    "isEU": false,
+    "protectionLevel": "Alto",
+    "financial_authority": {
+      "name": "Jersey Financial Services Commission",
+      "abbreviation": "JFSC",
+      "homepage": "https://www.jerseyfsc.org/",
+      "fraudReportLink": "https://www.jerseyfsc.org/industry/making-a-complaint/",
+      "authorityEmail": "info@jerseyfsc.org",
+      "social_links": {}
+    },
+    "notes": "World Investor Week Coordinator: JFSC Team."
+  },
+  "Jordan": {
+    "country_name": "Jordan",
+    "flag": "🇯🇴",
+    "isEU": false,
+    "protectionLevel": "Medio",
+    "financial_authority": {
+      "name": "Jordan Securities Commission",
+      "abbreviation": "JSC",
+      "homepage": "http://www.jsc.gov.jo/",
+      "fraudReportLink": "http://www.jsc.gov.jo/page/en/investor-complaints",
+      "authorityEmail": "info@jsc.gov.jo",
+      "social_links": {}
+    },
+    "notes": "World Investor Week Coordinator: JSC Team."
+  },
+  "Kazakhstan": {
+    "country_name": "Kazakhstan",
+    "flag": "🇰🇿",
+    "isEU": false,
+    "protectionLevel": "Medio",
+    "financial_authority": {
+      "name": "Agency for Regulation and Development of the Financial Market",
+      "abbreviation": "ARDFM",
+      "homepage": "https://www.gov.kz/memleket/entities/ardfm",
+      "fraudReportLink": "https://www.gov.kz/memleket/entities/ardfm/request/1?lang=en",
+      "authorityEmail": "info@finreg.kz",
+      "social_links": {}
+    },
+    "notes": "World Investor Week Coordinator: ARDFM Team."
+  },
+  "Kenya": {
+    "country_name": "Kenya",
+    "flag": "🇰🇪",
+    "isEU": false,
+    "protectionLevel": "Medio",
+    "financial_authority": {
+      "name": "Capital Markets Authority",
+      "abbreviation": "CMA",
+      "homepage": "https://www.cma.or.ke/",
+      "fraudReportLink": "https://www.cma.or.ke/index.php/investor-protection/complaints-handling",
+      "authorityEmail": "corporate@cma.or.ke",
+      "social_links": {}
+    },
+    "notes": "World Investor Week Coordinator: CMA Team."
+  },
+  "Korea, Republic of": {
+    "country_name": "Korea, Republic of",
+    "flag": "🇰🇷",
+    "isEU": false,
+    "protectionLevel": "Altissimo",
+    "financial_authority": {
+      "name": "Financial Supervisory Service",
+      "abbreviation": "FSS",
+      "homepage": "https://www.fss.or.kr/",
+      "fraudReportLink": "https://www.fss.or.kr/fss/en/main/contents.do?menuNo=400023",
+      "authorityEmail": "fssintl@fss.or.kr",
+      "social_links": {}
+    },
+    "notes": "World Investor Week Coordinator: FSS Team."
+  },
+  "Kuwait": {
+    "country_name": "Kuwait",
+    "flag": "🇰🇼",
+    "isEU": false,
+    "protectionLevel": "Alto",
+    "financial_authority": {
+      "name": "Capital Markets Authority",
+      "abbreviation": "CMA",
+      "homepage": "https://www.cma.gov.kw/",
+      "fraudReportLink": "https://www.cma.gov.kw/en/web/cma/complaints",
+      "authorityEmail": "info@cma.gov.kw",
+      "social_links": {}
+    },
+    "notes": "World Investor Week Coordinator: CMA Team."
+  },
+  "Kyrgyzstan": {
+    "country_name": "Kyrgyzstan",
+    "flag": "🇰🇬",
+    "isEU": false,
+    "protectionLevel": "Medio",
+    "financial_authority": {
+      "name": "State Service for Regulation and Supervision of the Financial Market",
+      "abbreviation": "SSRSFM",
+      "homepage": "http://www.fsa.kg/",
+      "fraudReportLink": "http://www.fsa.kg/feedback",
+      "authorityEmail": "info@fsa.kg",
+      "social_links": {}
+    },
+    "notes": "World Investor Week Coordinator: SSRSFM Team."
+  },
+  "Latvia": {
+    "country_name": "Latvia",
+    "flag": "🇱🇻",
+    "isEU": true,
+    "protectionLevel": "Altissimo",
+    "financial_authority": {
+      "name": "Latvijas Banka (Bank of Latvia)",
+      "abbreviation": "LB",
+      "homepage": "https://www.bank.lv/",
+      "fraudReportLink": "https://www.bank.lv/en/customer-protection/submitting-complaints",
+      "authorityEmail": "info@bank.lv",
+      "social_links": {}
+    },
+    "notes": "World Investor Week Coordinator: LB Team."
+  },
+  "Liechtenstein": {
+    "country_name": "Liechtenstein",
+    "flag": "🇱🇮",
+    "isEU": false,
+    "protectionLevel": "Alto",
+    "financial_authority": {
+      "name": "Financial Market Authority Liechtenstein",
+      "abbreviation": "FMA",
+      "homepage": "https://www.fma-li.li/",
+      "fraudReportLink": "https://www.fma-li.li/en/client-protection/complaints-office.html",
+      "authorityEmail": "info@fma-li.li",
+      "social_links": {}
+    },
+    "notes": "World Investor Week Coordinator: FMA Team."
+  },
+  "Lithuania": {
+    "country_name": "Lithuania",
+    "flag": "🇱🇹",
+    "isEU": true,
+    "protectionLevel": "Altissimo",
+    "financial_authority": {
+      "name": "Lietuvos bankas (Bank of Lithuania)",
+      "abbreviation": "LB",
+      "homepage": "https://www.lb.lt/",
+      "fraudReportLink": "https://www.lb.lt/en/consumer-and-financial-market-participant-disputes",
+      "authorityEmail": "info@lb.lt",
+      "social_links": {}
+    },
+    "notes": "World Investor Week Coordinator: LB Team."
+  },
+  "Luxembourg": {
+    "country_name": "Luxembourg",
+    "flag": "🇱🇺",
+    "isEU": true,
+    "protectionLevel": "Altissimo",
+    "financial_authority": {
+      "name": "Commission de Surveillance du Secteur Financier",
+      "abbreviation": "CSSF",
+      "homepage": "https://www.cssf.lu/",
+      "fraudReportLink": "https://www.cssf.lu/en/consumer/complaints/",
+      "authorityEmail": "direction@cssf.lu",
+      "social_links": {}
+    },
+    "notes": "World Investor Week Coordinator: CSSF Team."
+  },
+  "Malawi": {
+    "country_name": "Malawi",
+    "flag": "🇲🇼",
+    "isEU": false,
+    "protectionLevel": "Medio",
+    "financial_authority": {
+      "name": "Reserve Bank of Malawi",
+      "abbreviation": "RBM",
+      "homepage": "https://www.rbm.mw/",
+      "fraudReportLink": "https://www.rbm.mw/Supervision/ComplaintsHandling",
+      "authorityEmail": "rbm@rbm.mw",
+      "social_links": {}
+    },
+    "notes": "World Investor Week Coordinator: RBM Team."
+  },
+  "Malaysia": {
+    "country_name": "Malaysia",
+    "flag": "🇲🇾",
+    "isEU": false,
+    "protectionLevel": "Alto",
+    "financial_authority": {
+      "name": "Securities Commission Malaysia",
+      "abbreviation": "SC",
+      "homepage": "https://www.sc.com.my/",
+      "fraudReportLink": "https://www.sc.com.my/regulation/enforcement/make-a-complaint",
+      "authorityEmail": "aduan@seccom.com.my",
+      "social_links": {}
+    },
+    "notes": "World Investor Week Coordinator: SC Team."
+  },
+  "Malta": {
+    "country_name": "Malta",
+    "flag": "🇲🇹",
+    "isEU": true,
+    "protectionLevel": "Altissimo",
+    "financial_authority": {
+      "name": "Malta Financial Services Authority",
+      "abbreviation": "MFSA",
+      "homepage": "https://www.mfsa.mt/",
+      "fraudReportLink": "https://www.mfsa.mt/consumers/complaints-and-redress/",
+      "authorityEmail": "communications@mfsa.mt",
+      "social_links": {}
+    },
+    "notes": "World Investor Week Coordinator: MFSA Team."
+  },
+  "Mauritius": {
+    "country_name": "Mauritius",
+    "flag": "🇲🇺",
+    "isEU": false,
+    "protectionLevel": "Alto",
+    "financial_authority": {
+      "name": "Financial Services Commission",
+      "abbreviation": "FSC",
+      "homepage": "https://www.fscmauritius.org/",
+      "fraudReportLink": "https://www.fscmauritius.org/en/consumer-protection/complaints",
+      "authorityEmail": "fscmauritius@intnet.mu",
+      "social_links": {}
+    },
+    "notes": "World Investor Week Coordinator: FSC Team."
+  },
+  "Mexico": {
+    "country_name": "Mexico",
+    "flag": "🇲🇽",
+    "isEU": false,
+    "protectionLevel": "Alto",
+    "financial_authority": {
+      "name": "Comisión Nacional Bancaria y de Valores",
+      "abbreviation": "CNBV",
+      "homepage": "https://www.gob.mx/cnbv",
+      "fraudReportLink": "https://www.gob.mx/cnbv/acciones-y-programas/quejas-y-denuncias-ante-la-cnbv",
+      "authorityEmail": "info@cnbv.gob.mx",
+      "social_links": {}
+    },
+    "notes": "World Investor Week Coordinator: CNBV Team."
+  },
+  "Mongolia": {
+    "country_name": "Mongolia",
+    "flag": "🇲🇳",
+    "isEU": false,
+    "protectionLevel": "Medio",
+    "financial_authority": {
+      "name": "Financial Regulatory Commission",
+      "abbreviation": "FRC",
+      "homepage": "https://www.frc.mn/",
+      "fraudReportLink": "https://www.frc.mn/s/10",
+      "authorityEmail": "info@frc.mn",
+      "social_links": {}
+    },
+    "notes": "World Investor Week Coordinator: FRC Team."
+  },
+  "Montenegro": {
+    "country_name": "Montenegro",
+    "flag": "🇲🇪",
+    "isEU": false,
+    "protectionLevel": "Medio",
+    "financial_authority": {
+      "name": "Capital Market Authority",
+      "abbreviation": "CMA",
+      "homepage": "https://www.scmn.me/",
+      "fraudReportLink": "https://www.scmn.me/index.php/zastita-investitora",
+      "authorityEmail": "office@scmn.me",
+      "social_links": {}
+    },
+    "notes": "World Investor Week Coordinator: CMA Team."
+  },
+  "Morocco": {
+    "country_name": "Morocco",
+    "flag": "🇲🇦",
+    "isEU": false,
+    "protectionLevel": "Alto",
+    "financial_authority": {
+      "name": "Autorité Marocaine du Marché des Capitaux",
+      "abbreviation": "AMMC",
+      "homepage": "https://www.ammc.ma/",
+      "fraudReportLink": "https://www.ammc.ma/fr/webform/reclamation",
+      "authorityEmail": "contact@ammc.ma",
+      "social_links": {}
+    },
+    "notes": "World Investor Week Coordinator: AMMC Team."
+  },
+  "Mozambique": {
+    "country_name": "Mozambique",
+    "flag": "🇲🇿",
+    "isEU": false,
+    "protectionLevel": "Medio",
+    "financial_authority": {
+      "name": "Bolsa de Valores de Moçambique",
+      "abbreviation": "BVM",
+      "homepage": "https://www.bvm.co.mz/",
+      "fraudReportLink": "https://www.bvm.co.mz/index.php/pt/contactos",
+      "authorityEmail": "bvm@bvm.co.mz",
+      "social_links": {}
+    },
+    "notes": "World Investor Week Coordinator: BVM Team."
+  },
+  "Netherlands": {
+    "country_name": "Netherlands",
+    "flag": "🇳🇱",
+    "isEU": true,
+    "protectionLevel": "Altissimo",
+    "financial_authority": {
+      "name": "Authority for the Financial Markets",
+      "abbreviation": "AFM",
+      "homepage": "https://www.afm.nl/",
+      "fraudReportLink": "https://www.afm.nl/nl-nl/consumenten/contact/klacht-over-financiele-dienstverlener",
+      "authorityEmail": "info@afm.nl",
+      "social_links": {}
+    },
+    "notes": "World Investor Week Coordinator: AFM Team."
+  },
+  "New Zealand": {
+    "country_name": "New Zealand",
+    "flag": "🇳🇿",
+    "isEU": false,
+    "protectionLevel": "Altissimo",
+    "financial_authority": {
+      "name": "Financial Markets Authority",
+      "abbreviation": "FMA",
+      "homepage": "https://www.fma.govt.nz/",
+      "fraudReportLink": "https://www.fma.govt.nz/contact-us/make-a-complaint/",
+      "authorityEmail": "questions@fma.govt.nz",
+      "social_links": {}
+    },
+    "notes": "World Investor Week Coordinator: FMA Team."
+  },
+  "Nigeria": {
+    "country_name": "Nigeria",
+    "flag": "🇳🇬",
+    "isEU": false,
+    "protectionLevel": "Medio",
+    "financial_authority": {
+      "name": "Securities and Exchange Commission",
+      "abbreviation": "SEC",
+      "homepage": "https://sec.gov.ng/",
+      "fraudReportLink": "https://sec.gov.ng/complaints/",
+      "authorityEmail": "sec@sec.gov.ng",
+      "social_links": {}
+    },
+    "notes": "World Investor Week Coordinator: SEC Team."
+  },
+  "North Macedonia": {
+    "country_name": "North Macedonia",
+    "flag": "🇲🇰",
+    "isEU": false,
+    "protectionLevel": "Medio",
+    "financial_authority": {
+      "name": "Securities and Exchange Commission",
+      "abbreviation": "SEC",
+      "homepage": "https://www.sec.gov.mk/",
+      "fraudReportLink": "https://www.sec.gov.mk/index.php/en/investor-protection-en/complaints-en",
+      "authorityEmail": "info@sec.gov.mk",
+      "social_links": {}
+    },
+    "notes": "World Investor Week Coordinator: SEC Team."
+  },
+  "Oman": {
+    "country_name": "Oman",
+    "flag": "🇴🇲",
+    "isEU": false,
+    "protectionLevel": "Alto",
+    "financial_authority": {
+      "name": "Capital Market Authority",
+      "abbreviation": "CMA",
+      "homepage": "https://cma.gov.om/",
+      "fraudReportLink": "https://cma.gov.om/Home/Page/Complaints",
+      "authorityEmail": "info@cma.gov.om",
+      "social_links": {}
+    },
+    "notes": "World Investor Week Coordinator: CMA Team."
+  },
+  "Pakistan": {
+    "country_name": "Pakistan",
+    "flag": "🇵🇰",
+    "isEU": false,
+    "protectionLevel": "Medio",
+    "financial_authority": {
+      "name": "Securities and Exchange Commission of Pakistan",
+      "abbreviation": "SECP",
+      "homepage": "https://www.secp.gov.pk/",
+      "fraudReportLink": "https://sdms.secp.gov.pk/",
+      "authorityEmail": "queries@secp.gov.pk",
+      "social_links": {}
+    },
+    "notes": "World Investor Week Coordinator: SECP Team."
+  },
+  "Panama": {
+    "country_name": "Panama",
+    "flag": "🇵🇦",
+    "isEU": false,
+    "protectionLevel": "Medio",
+    "financial_authority": {
+      "name": "Superintendencia del Mercado de Valores",
+      "abbreviation": "SMV",
+      "homepage": "https://supervalores.gob.pa/",
+      "fraudReportLink": "https://supervalores.gob.pa/servicios-al-inversionista/presentacion-de-denuncias/",
+      "authorityEmail": "info@supervalores.gob.pa",
+      "social_links": {}
+    },
+    "notes": "World Investor Week Coordinator: SMV Team."
+  },
+  "Papua New Guinea": {
+    "country_name": "Papua New Guinea",
+    "flag": "🇵🇬",
+    "isEU": false,
+    "protectionLevel": "Medio",
+    "financial_authority": {
+      "name": "Securities Commission of Papua New Guinea",
+      "abbreviation": "SCPNG",
+      "homepage": "https://www.scpng.gov.pg/",
+      "fraudReportLink": "https://www.scpng.gov.pg/contact-us/",
+      "authorityEmail": "info@scpng.gov.pg",
+      "social_links": {}
+    },
+    "notes": "World Investor Week Coordinator: SCPNG Team."
+  },
+  "Paraguay": {
+    "country_name": "Paraguay",
+    "flag": "🇵🇾",
+    "isEU": false,
+    "protectionLevel": "Medio",
+    "financial_authority": {
+      "name": "Superintendencia de Valores",
+      "abbreviation": "SIV",
+      "homepage": "https://www.bcp.gov.py/superintendencia-de-valores-i1025",
+      "fraudReportLink": "https://www.bcp.gov.py/superintendencia-de-valores-i1025",
+      "authorityEmail": "cnv@cnv.gov.py",
+      "social_links": {}
+    },
+    "notes": "World Investor Week Coordinator: SIV Team."
+  },
+  "Peru": {
+    "country_name": "Peru",
+    "flag": "🇵🇪",
+    "isEU": false,
+    "protectionLevel": "Alto",
+    "financial_authority": {
+      "name": "Superintendencia del Mercado de Valores",
+      "abbreviation": "SMV",
+      "homepage": "https://www.smv.gob.pe/",
+      "fraudReportLink": "https://www.smv.gob.pe/Frm_Denuncias.aspx",
+      "authorityEmail": "orientacion@smv.gob.pe",
+      "social_links": {}
+    },
+    "notes": "World Investor Week Coordinator: SMV Team."
+  },
+  "Poland": {
+    "country_name": "Poland",
+    "flag": "🇵🇱",
+    "isEU": true,
+    "protectionLevel": "Altissimo",
+    "financial_authority": {
+      "name": "Polish Financial Supervision Authority",
+      "abbreviation": "KNF",
+      "homepage": "https://www.knf.gov.pl/",
+      "fraudReportLink": "https://www.knf.gov.pl/en/CONSUMERS/Arrears_and_complaints",
+      "authorityEmail": "knf@knf.gov.pl",
+      "social_links": {}
+    },
+    "notes": "World Investor Week Coordinator: KNF Team."
+  },
+  "Portugal": {
+    "country_name": "Portugal",
+    "flag": "🇵🇹",
+    "isEU": true,
+    "protectionLevel": "Altissimo",
+    "financial_authority": {
+      "name": "Comissão do Mercado de Valores Mobiliários",
+      "abbreviation": "CMVM",
+      "homepage": "https://www.cmvm.pt/",
+      "fraudReportLink": "https://www.cmvm.pt/pt/AreadoInvestidor/ProtecaodoInvestidor/Reclamacoes/Pages/default.aspx",
+      "authorityEmail": "cmvm@cmvm.pt",
+      "social_links": {}
+    },
+    "notes": "World Investor Week Coordinator: CMVM Team."
+  },
+  "Qatar": {
+    "country_name": "Qatar",
+    "flag": "🇶🇦",
+    "isEU": false,
+    "protectionLevel": "Alto",
+    "financial_authority": {
+      "name": "Qatar Financial Markets Authority",
+      "abbreviation": "QFMA",
+      "homepage": "https://www.qfma.org.qa/",
+      "fraudReportLink": "https://www.qfma.org.qa/en/Pages/Complaints.aspx",
+      "authorityEmail": "info@qfma.org.qa",
+      "social_links": {}
+    },
+    "notes": "World Investor Week Coordinator: QFMA Team."
+  },
+  "Romania": {
+    "country_name": "Romania",
+    "flag": "🇷🇴",
+    "isEU": true,
+    "protectionLevel": "Altissimo",
+    "financial_authority": {
+      "name": "Financial Supervisory Authority",
+      "abbreviation": "ASF",
+      "homepage": "https://asfromania.ro/",
+      "fraudReportLink": "https://asfromania.ro/ro/petitii",
+      "authorityEmail": "office@asfromania.ro",
+      "social_links": {}
+    },
+    "notes": "World Investor Week Coordinator: ASF Team."
+  },
+  "Saudi Arabia": {
+    "country_name": "Saudi Arabia",
+    "flag": "🇸🇦",
+    "isEU": false,
+    "protectionLevel": "Alto",
+    "financial_authority": {
+      "name": "Capital Market Authority",
+      "abbreviation": "CMA",
+      "homepage": "https://cma.org.sa/",
+      "fraudReportLink": "https://cma.org.sa/en/InvestorProtection/Pages/default.aspx",
+      "authorityEmail": "info@cma.org.sa",
+      "social_links": {}
+    },
+    "notes": "World Investor Week Coordinator: CMA Team."
+  },
+  "Serbia": {
+    "country_name": "Serbia",
+    "flag": "🇷🇸",
+    "isEU": false,
+    "protectionLevel": "Medio",
+    "financial_authority": {
+      "name": "Securities Commission",
+      "abbreviation": "SEC",
+      "homepage": "https://www.sec.gov.rs/",
+      "fraudReportLink": "https://www.sec.gov.rs/index.php/en/investors-protection-en/complaints-en",
+      "authorityEmail": "office@sec.gov.rs",
+      "social_links": {}
+    },
+    "notes": "World Investor Week Coordinator: SEC Team."
+  },
+  "Singapore": {
+    "country_name": "Singapore",
+    "flag": "🇸🇬",
+    "isEU": false,
+    "protectionLevel": "Altissimo",
+    "notes": "Regolamentazione di altissima civiltà con supporto psicologico per le vittime (https://www.scamshield.gov.sg/avenues-of-support/), a dimostrazione di grande attenzione per il dramma umano. La Polizia, tramite l'app Scamshield, offre una guida esemplare sulle tattiche psicologiche (https://www.scamshield.gov.sg/why-do-people-fall-prey-to-scams/) e report infografici (https://www.scamshield.gov.sg/scams-and-cybercrime-briefs/). Guida al rischio: https://www.moneysense.gov.sg/investments/investment-risk/. Cyber Security Agency (Facebook): https://www.facebook.com/CSAsingapore. DBS Bank promuove la responsabilità condivisa (https://www.dbs.com.sg/personal/support/general-shared-responsibility-framework.html). World Investor Week Coordinator: Paulyn Sng.",
+    "financial_authority": {
+      "name": "Monetary Authority of Singapore",
+      "abbreviation": "MAS",
+      "homepage": "https://www.mas.gov.sg/",
+      "fraudReportLink": "https://www.mas.gov.sg/contact-us",
+      "authorityEmail": "webmaster@mas.gov.sg",
+      "social_links": {
+        "linkedin": "https://www.linkedin.com/company/monetary-authority-of-singapore-mas-/",
+        "twitter": "https://twitter.com/MAS_sg",
+        "youtube": "https://www.youtube.com/channel/UCb_3U5s_2Qp3nJg2IuR22mQ"
+      }
+    }
+  },
+  "Slovakia": {
+    "country_name": "Slovakia",
+    "flag": "🇸🇰",
+    "isEU": true,
+    "protectionLevel": "Altissimo",
+    "financial_authority": {
+      "name": "National Bank of Slovakia",
+      "abbreviation": "NBS",
+      "homepage": "https://www.nbs.sk/",
+      "fraudReportLink": "https://www.nbs.sk/en/consumer-protection/how-to-make-an-enquiry-or-complaint",
+      "authorityEmail": "info@nbs.sk",
+      "social_links": {}
+    },
+    "notes": "World Investor Week Coordinator: NBS Team."
+  },
+  "Slovenia": {
+    "country_name": "Slovenia",
+    "flag": "🇸🇮",
+    "isEU": true,
+    "protectionLevel": "Altissimo",
+    "financial_authority": {
+      "name": "Securities Market Agency",
+      "abbreviation": "ATVP",
+      "homepage": "https://www.atvp.si/",
+      "fraudReportLink": "https://www.atvp.si/en/consumer-protection/questions-and-complaints/",
+      "authorityEmail": "info@atvp.si",
+      "social_links": {}
+    },
+    "notes": "World Investor Week Coordinator: ATVP Team."
+  },
+  "South Africa": {
+    "country_name": "South Africa",
+    "flag": "🇿🇦",
+    "isEU": false,
+    "protectionLevel": "Alto",
+    "financial_authority": {
+      "name": "Financial Sector Conduct Authority",
+      "abbreviation": "FSCA",
+      "homepage": "https://www.fsca.co.za/",
+      "fraudReportLink": "https://www.fsca.co.za/Pages/Contact-Us.aspx",
+      "authorityEmail": "info@fsca.co.za",
+      "social_links": {}
+    },
+    "notes": "World Investor Week Coordinator: FSCA Team."
+  },
+  "Spain": {
+    "country_name": "Spain",
+    "flag": "🇪🇸",
+    "isEU": true,
+    "protectionLevel": "Altissimo",
+    "financial_authority": {
+      "name": "Comisión Nacional del Mercado de Valores",
+      "abbreviation": "CNMV",
+      "homepage": "https://www.cnmv.es/",
+      "fraudReportLink": "https://www.cnmv.es/portal/inversor/reclamaciones.aspx",
+      "authorityEmail": "serviciodereclamaciones@cnmv.es",
+      "social_links": {}
+    },
+    "notes": "World Investor Week Coordinator: CNMV Team."
+  },
+  "St. Vincent and the Grenadines": {
+    "country_name": "St. Vincent and the Grenadines",
+    "flag": "🇻🇨",
+    "isEU": false,
+    "protectionLevel": "Medio",
+    "financial_authority": {
+      "name": "Financial Services Authority",
+      "abbreviation": "FSA",
+      "homepage": "https://svgfsa.com/",
+      "fraudReportLink": "https://svgfsa.com/contact-us/",
+      "authorityEmail": "info@svgfsa.com",
+      "social_links": {}
+    },
+    "notes": "Parte della Eastern Caribbean Currency Union (ECSRC)."
+  },
+  "Sweden": {
+    "country_name": "Sweden",
+    "flag": "🇸🇪",
+    "isEU": true,
+    "protectionLevel": "Altissimo",
+    "financial_authority": {
+      "name": "Finansinspektionen",
+      "abbreviation": "FI",
+      "homepage": "https://www.fi.se/",
+      "fraudReportLink": "https://www.fi.se/en/consumer-protection/if-you-are-dissatisfied/",
+      "authorityEmail": "finansinspektionen@fi.se",
+      "social_links": {}
+    },
+    "notes": "World Investor Week Coordinator: FI Team."
+  },
+  "Switzerland": {
+    "country_name": "Switzerland",
+    "flag": "🇨🇭",
+    "isEU": false,
+    "protectionLevel": "Altissimo",
+    "financial_authority": {
+      "name": "Swiss Financial Market Supervisory Authority",
+      "abbreviation": "FINMA",
+      "homepage": "https://www.finma.ch/en/",
+      "fraudReportLink": "https://www.finma.ch/en/finma/making-a-report/",
+      "authorityEmail": "info@finma.ch",
+      "social_links": {
+        "linkedin": "https://www.linkedin.com/company/finma/",
+        "twitter": "https://twitter.com/FINMA_media",
+        "youtube": "https://www.youtube.com/user/finmamedia"
+      }
+    },
+    "notes": "World Investor Week Coordinator: Roman Rampa."
+  },
+  "Thailand": {
+    "country_name": "Thailand",
+    "flag": "🇹🇭",
+    "isEU": false,
+    "protectionLevel": "Medio",
+    "financial_authority": {
+      "name": "The Securities and Exchange Commission, Thailand",
+      "abbreviation": "SEC,TH",
+      "homepage": "https://www.sec.or.th/EN/Pages/Home.aspx",
+      "fraudReportLink": "https://market.sec.or.th/public/idisc/en/InvestorAlert",
+      "authorityEmail": "sarica@sec.or.th",
+      "social_links": {
+        "twitter": "http://twitter.com/ThaiSEC_News",
+        "youtube": "https://www.youtube.com/user/insideSEC",
+        "facebook": "https://www.facebook.com/sec.or.th"
+      }
+    },
+    "notes": "World Investor Week Coordinator: Sarica Apiwatthakakul."
+  },
+  "Trinidad and Tobago": {
+    "country_name": "Trinidad and Tobago",
+    "flag": "🇹🇹",
+    "isEU": false,
+    "protectionLevel": "Medio",
+    "financial_authority": {
+      "name": "Trinidad and Tobago Securities and Exchange Commission",
+      "abbreviation": "TTSEC",
+      "homepage": "https://www.ttsec.org.tt/",
+      "fraudReportLink": "https://www.ttsec.org.tt/complaint-form/",
+      "authorityEmail": "rachaelr@ttsec.org.tt",
+      "social_links": {
+        "linkedin": "https://www.linkedin.com/company/trinidad-and-tobago-securities-and-exchange-commission/",
+        "twitter": "https://x.com/ttsec_tt",
+        "youtube": "http://youtube.com/%40ttsecuritiesandexchangecom7332",
+        "facebook": "https://www.facebook.com/investucateTT/#",
+        "instagram": "http://instagram.com/ttsec_tt"
+      }
+    },
+    "notes": "Coordinator: Rachael Rampersad. Investor Education: https://investucatett.com/. Investing Game: https://www.investorquest-tt.com/. Mobile Apps: Google Play e Apple App Store."
+  },
+  "Tunisia": {
+    "country_name": "Tunisia",
+    "flag": "🇹🇳",
+    "isEU": false,
+    "protectionLevel": "Medio",
+    "financial_authority": {
+      "name": "Conseil du Marché Financier",
+      "abbreviation": "CMF",
+      "homepage": "https://www.cmf.tn/",
+      "fraudReportLink": "https://www.cmf.tn/deposer-une-plainte",
+      "authorityEmail": "cooperation@cmf.tn",
+      "social_links": {}
+    },
+    "notes": "World Investor Week Coordinator: Mehdi Ben Mustapha."
+  },
+  "Türkiye": {
+    "country_name": "Türkiye",
+    "flag": "🇹🇷",
+    "isEU": false,
+    "protectionLevel": "Alto",
+    "financial_authority": {
+      "name": "Capital Markets Board of Türkiye",
+      "abbreviation": "CMB",
+      "homepage": "http://www.spk.gov.tr",
+      "fraudReportLink": "https://www.spk.gov.tr/Sayfa/Dosya/1031",
+      "authorityEmail": "muge.cetin@spk.gov.tr",
+      "social_links": {}
+    },
+    "notes": "World Investor Week Coordinator: Müge ÇETİN."
+  },
+  "United Arab Emirates": {
+    "country_name": "United Arab Emirates",
+    "flag": "🇦🇪",
+    "isEU": false,
+    "protectionLevel": "Alto",
+    "financial_authority": {
+      "name": "Securities and Commodities Authority",
+      "abbreviation": "SCA",
+      "homepage": "https://www.sca.gov.ae/",
+      "fraudReportLink": "https://www.sca.gov.ae/en/services/complaint-investor.aspx",
+      "authorityEmail": "ma.alali@sca.ae",
+      "social_links": {}
+    },
+    "notes": "World Investor Week Coordinator: Mohammed Al Noukhatha Al Ali."
+  },
+  "United Kingdom": {
+    "country_name": "United Kingdom",
+    "flag": "🇬🇧",
+    "isEU": false,
+    "protectionLevel": "Altissimo",
+    "financial_authority": {
+      "name": "Financial Conduct Authority",
+      "abbreviation": "FCA",
+      "homepage": "https://www.fca.org.uk/",
+      "fraudReportLink": "https://www.fca.org.uk/consumers/report-scam-unauthorised-firm",
+      "authorityEmail": "sam.stoakes@fca.org.uk",
+      "social_links": {}
+    },
+    "notes": "Sito per investitori: https://www.fca.org.uk/investsmart. World Investor Week Coordinator: Sam Stoakes."
+  },
+  "United States of America": {
+    "country_name": "United States of America",
+    "flag": "🇺🇸",
+    "isEU": false,
+    "protectionLevel": "Altissimo",
+    "financial_authority": {
+      "name": "Securities and Exchange Commission",
+      "abbreviation": "SEC",
+      "homepage": "https://www.sec.gov/",
+      "fraudReportLink": "https://www.sec.gov/tcr",
+      "authorityEmail": "DonleyO@sec.gov",
+      "social_links": {}
+    },
+    "notes": "Sito per investitori: https://www.investor.gov/. World Investor Week Coordinator: M. Owen Donley."
+  },
+  "Uruguay": {
+    "country_name": "Uruguay",
+    "flag": "🇺🇾",
+    "isEU": false,
+    "protectionLevel": "Alto",
+    "financial_authority": {
+      "name": "Superintendencia de Servicios Financieros - Banco Central del Uruguay",
+      "abbreviation": "SSF",
+      "homepage": "https://www.bcu.gub.uy",
+      "fraudReportLink": "https://www.bcu.gub.uy/Paginas/custom/reportes-y-denuncias.aspx",
+      "authorityEmail": "vvillete@bcu.gub.uy",
+      "social_links": {}
+    },
+    "notes": "World Investor Week Coordinator: Verónica Villete."
+  },
+  "Zambia": {
+    "country_name": "Zambia",
+    "flag": "🇿🇲",
+    "isEU": false,
+    "protectionLevel": "Medio",
+    "financial_authority": {
+      "name": "Securities and Exchange Commission",
+      "abbreviation": "SEC",
+      "homepage": "https://www.seczambia.org.zm",
+      "fraudReportLink": "https://www.seczambia.org.zm/complaints/",
+      "authorityEmail": "dmakumba@seczambia.org.zm",
+      "social_links": {}
+    },
+    "notes": "World Investor Week Coordinators: Dingase Nunkwe Makumba, Mubanga Kondolo Jr., Sitali Mwala Mugala."
+  }
+}
