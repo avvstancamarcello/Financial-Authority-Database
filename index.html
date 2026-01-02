@@ -92,7 +92,7 @@
             <span class="icon">🛡️</span>
             <div class="content">
                 <h2 data-i18n="securityTitle">✅ SITO UFFICIALE LEGITTIMO - DATABASE DI PROTEZIONE DEI CONSUMATORI</h2>
-                <p data-i18n="securityText"><strong>Questo è un database educativo ufficiale</strong> creato da Avvocato Marcello Stanca per aiutare i consumatori a verificare la legittimità delle autorità finanziarie e proteggersi dalle frodi. Contiene link alle autorità di vigilanza finanziaria di 108 paesi.</p>
+                <p data-i18n="securityText"><strong>Questo database educativo ufficiale</strong> creato da Avvocato Marcello Stanca aiuta a verificare: <strong>1.</strong> l'identità delle autorità finanziarie indicate agli utenti da pagine web di false imprese, <strong>2.</strong> ma anche l'effettivo possesso di licenza valida, per offrire servizi finanziari nel Paese di residenza del consumatore/cliente bancario. Questa pagina offre strumenti di contatto e di consultazione per proteggere contro le frodi finanziarie.</p>
             </div>
             <span class="icon">✅</span>
         </div>
@@ -100,6 +100,7 @@
             <div class="language-selector">
                 <button class="lang-btn active" onclick="changeLanguage('it')">🇮🇹 IT</button>
                 <button class="lang-btn" onclick="changeLanguage('en')">🇬🇧 EN</button>
+                <button class="lang-btn" onclick="changeLanguage('fr')">🇫🇷 FR</button>
                 <button class="lang-btn" onclick="changeLanguage('de')">🇩🇪 DE</button>
                 <button class="lang-btn" onclick="changeLanguage('es')">🇪🇸 ES</button>
             </div>
@@ -120,11 +121,6 @@
             </div>
         </div>
 
-        <div class="flags-grid-container">
-            <h2 data-i18n="flagsTitle">Accesso Rapido per Paese</h2>
-            <div class="flags-grid" id="flagsGrid"></div>
-        </div>
-
         <div class="content">
             <div class="eu-references">
                 <h3 data-i18n="euReferences">Risorse Istituzionali di Supervisione - Unione Europea USA FBI - ScamShield</h3>
@@ -134,6 +130,11 @@
                 <p><strong>IOSCO i-SCAN</strong> - International Organization of Securities Commissions: <a href="https://www.iosco.org/i-scan/" target="_blank">iosco.org/i-scan/</a></p>
                 <p><strong>ScamShield</strong> - Singapore Police Force: <a href="https://www.scamshield.gov.sg/" target="_blank">scamshield.gov.sg</a></p>
             </div>
+        </div>
+
+        <div class="flags-grid-container">
+            <h2 data-i18n="flagsTitle">Accesso Rapido per Paese</h2>
+            <div class="flags-grid" id="flagsGrid"></div>
         </div>
 
         <div class="stats">
@@ -195,7 +196,7 @@
                 title: "International Banking Database",
                 subtitle: "Financial Market Authorities in 108 Countries",
                 securityTitle: "✅ OFFICIAL LEGITIMATE WEBSITE - CONSUMER PROTECTION DATABASE",
-                securityText: "This is an official educational database created by Lawyer Marcello Stanca to help consumers verify the legitimacy of financial authorities and protect themselves from fraud. Contains links to financial supervisory authorities of 108 countries.",
+                securityText: "This official educational database created by Lawyer Marcello Stanca helps to verify: 1. the identity of financial authorities indicated to users by web pages of fake companies, 2. but also the actual possession of a valid license, to offer financial services in the country of residence of the consumer/banking client. This page offers contact and consultation tools to protect against financial fraud.",
                 introText: "This website provides links to the webpages of the Financial Authorities of 108 countries worldwide. Use it to verify the legitimacy and regularity of companies, individuals, and entities offering financial services.",
                 searchPlaceholder: "Search by country or authority...",
                 filterAll: "All Countries",
@@ -219,6 +220,36 @@
                 modalFraudReport: "Fraud Report",
                 modalEmail: "Email",
                 modalSocial: "Social Media",
+                modalNotes: "Notes"
+            },
+            fr: {
+                title: "Base de Données Bancaire Internationale",
+                subtitle: "Autorités des Marchés Financiers dans 108 Pays",
+                securityTitle: "✅ SITE OFFICIEL LÉGITIME - BASE DE DONNÉES DE PROTECTION DES CONSOMMATEURS",
+                securityText: "Cette base de données éducative officielle créée par l'Avocat Marcello Stanca aide à vérifier: 1. l'identité des autorités financières indiquées aux utilisateurs par des pages web de fausses entreprises, 2. mais aussi la possession effective d'une licence valide, pour offrir des services financiers dans le pays de résidence du consommateur/client bancaire. Cette page offre des outils de contact et de consultation pour protéger contre les fraudes financières.",
+                introText: "Ce site web offre des liens pour accéder aux pages web des Autorités Financières de 108 pays du monde. Utilisez-le pour vérifier la légitimité et la régularité des entreprises, des personnes et des entités offrant des services financiers.",
+                searchPlaceholder: "Rechercher par pays ou autorité...",
+                filterAll: "Tous les Pays",
+                filterHigh: "Protection Maximale",
+                filterEU: "Pays UE",
+                filterNonEU: "Pays hors UE",
+                statCountries: "Pays Surveillés",
+                statEU: "Pays UE",
+                statHighProtection: "Protection Maximale",
+                footer: "© 2026 Auteur: Marcello Stanca Avocat en Italie Florence. Base de Données Internationale - Banques, Fraude Financière et Responsabilité. Tous droits réservés.",
+                footerNote: "Cette base de données est à titre informatif. Consultez toujours les autorités compétentes. Signaler les erreurs de la page web au webmaster: lawyer@marcellostanca.it",
+                authority: "Autorité Compétente",
+                protectionLevel: "Niveau de Protection",
+                notes: "Notes",
+                euReferences: "Ressources de Supervision Institutionnelle - Union Européenne USA FBI - ScamShield",
+                euCommission: "Commission Européenne",
+                flagsTitle: "Accès Rapide par Pays",
+                modalAuthority: "Autorité Financière",
+                modalAbbreviation: "Abréviation",
+                modalHomepage: "Page d'accueil",
+                modalFraudReport: "Signalement de Fraude",
+                modalEmail: "Email",
+                modalSocial: "Réseaux Sociaux",
                 modalNotes: "Notes"
             }
             // Add other languages if needed
