@@ -626,9 +626,9 @@
                 const countryCode = getCountryCode(country.country_name);
                 let flagHTML = '';
                 if (countryCode && countryCode !== 'CEMAC' && countryCode !== 'ECSRC') {
-                    flagHTML = `<span class="fi fi-${countryCode.toLowerCase()}"></span>`;
+                    flagHTML = `<span class="flag-icon-wrapper"><span class="fi fi-${countryCode.toLowerCase()}"></span></span>`;
                 } else {
-                    flagHTML = `<span style="font-size: 3em;">🌍</span>`;
+                    flagHTML = `<span class="flag-icon-wrapper" style="font-size: 3em;">🌍</span>`;
                 }
                 
                 card.innerHTML = `
