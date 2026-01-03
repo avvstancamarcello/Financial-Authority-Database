@@ -1,0 +1,1273 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Odissea Digitale - Il Viaggio dell'Eroe contro le Truffe Finanziarie</title>
+    <meta name="description" content="Come Ulisse tornò a Itaca, riconquista i tuoi capitali. Un viaggio attraverso le 12 fasi dell'Eroe per sconfiggere le truffe finanziarie.">
+    
+    <!-- PWA -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#1a365d">
+    
+    <!-- Icons -->
+    <link rel="icon" type="image/png" href="icon-192.png">
+    <link rel="apple-touch-icon" href="icon-512.png">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --odyssey-blue: #1a365d;
+            --odyssey-gold: #d4af37;
+            --odyssey-wave: #2563eb;
+            --odyssey-danger: #dc2626;
+            --odyssey-success: #16a34a;
+            --bg-light: #f8fafc;
+            --text-dark: #1e293b;
+            --text-light: #64748b;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background: var(--bg-light);
+        }
+
+        /* Header Navigation */
+        .nav-header {
+            background: var(--odyssey-blue);
+            color: white;
+            padding: 1rem 2rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--odyssey-gold);
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--odyssey-gold);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--odyssey-blue) 0%, var(--odyssey-wave) 100%);
+            color: white;
+            padding: 6rem 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '🌊';
+            position: absolute;
+            font-size: 20rem;
+            opacity: 0.1;
+            top: -5rem;
+            right: -5rem;
+            animation: wave 20s infinite ease-in-out;
+        }
+
+        @keyframes wave {
+            0%, 100% { transform: rotate(0deg) translateY(0); }
+            50% { transform: rotate(5deg) translateY(-20px); }
+        }
+
+        .hero-content {
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .hero-subtitle {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            color: var(--odyssey-gold);
+            font-style: italic;
+        }
+
+        .hero-quote {
+            font-size: 1.3rem;
+            margin-bottom: 3rem;
+            opacity: 0.95;
+            font-weight: 300;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: var(--odyssey-gold);
+            color: var(--odyssey-blue);
+            padding: 1.2rem 3rem;
+            font-size: 1.2rem;
+            font-weight: bold;
+            text-decoration: none;
+            border-radius: 50px;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.4);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(212, 175, 55, 0.6);
+        }
+
+        /* Main Content */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        .section {
+            margin-bottom: 5rem;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            color: var(--odyssey-blue);
+            margin-bottom: 1rem;
+            text-align: center;
+            position: relative;
+            padding-bottom: 1rem;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background: var(--odyssey-gold);
+        }
+
+        .section-subtitle {
+            text-align: center;
+            font-size: 1.2rem;
+            color: var(--text-light);
+            margin-bottom: 3rem;
+        }
+
+        /* Hero's Journey Timeline */
+        .journey-timeline {
+            position: relative;
+            padding: 2rem 0;
+        }
+
+        .journey-phase {
+            display: grid;
+            grid-template-columns: 1fr 80px 1fr;
+            gap: 2rem;
+            margin-bottom: 3rem;
+            align-items: center;
+        }
+
+        .journey-phase:nth-child(even) {
+            direction: rtl;
+        }
+
+        .journey-phase:nth-child(even) .phase-content {
+            direction: ltr;
+        }
+
+        .phase-content {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .phase-content:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+        }
+
+        .phase-content.completed {
+            border: 3px solid var(--odyssey-success);
+            background: #f0fdf4;
+        }
+
+        .phase-content.current {
+            border: 3px solid var(--odyssey-gold);
+            background: #fffbeb;
+        }
+
+        .phase-number {
+            font-size: 0.9rem;
+            color: var(--odyssey-gold);
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .phase-title {
+            font-size: 1.5rem;
+            color: var(--odyssey-blue);
+            margin-bottom: 0.5rem;
+        }
+
+        .phase-description {
+            color: var(--text-light);
+            margin-bottom: 1rem;
+        }
+
+        .phase-action {
+            font-size: 0.9rem;
+            color: var(--odyssey-wave);
+            font-weight: 600;
+        }
+
+        .phase-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--odyssey-blue), var(--odyssey-wave));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+            position: relative;
+        }
+
+        .phase-icon::after {
+            content: '';
+            position: absolute;
+            top: 80px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 3px;
+            height: 80px;
+            background: linear-gradient(to bottom, var(--odyssey-wave), transparent);
+        }
+
+        .journey-phase:last-child .phase-icon::after {
+            display: none;
+        }
+
+        .phase-checkbox {
+            margin-top: 1rem;
+        }
+
+        .phase-checkbox input {
+            margin-right: 0.5rem;
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+        }
+
+        .phase-checkbox label {
+            cursor: pointer;
+            font-weight: 600;
+            color: var(--odyssey-blue);
+        }
+
+        /* Mythical Trials */
+        .trials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .trial-card {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+        }
+
+        .trial-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+        }
+
+        .trial-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .trial-title {
+            font-size: 1.5rem;
+            color: var(--odyssey-blue);
+            margin-bottom: 1rem;
+        }
+
+        .trial-myth {
+            font-style: italic;
+            color: var(--odyssey-gold);
+            margin-bottom: 1rem;
+        }
+
+        .trial-modern {
+            color: var(--text-light);
+            margin-bottom: 1rem;
+        }
+
+        .trial-defense {
+            background: var(--bg-light);
+            padding: 1rem;
+            border-radius: 8px;
+            border-left: 4px solid var(--odyssey-success);
+        }
+
+        .trial-defense strong {
+            color: var(--odyssey-success);
+        }
+
+        /* Argonauts Badge System */
+        .badges-container {
+            background: white;
+            padding: 3rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .badges-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .badge-card {
+            text-align: center;
+            padding: 2rem;
+            border: 3px solid #e2e8f0;
+            border-radius: 12px;
+            transition: all 0.3s;
+        }
+
+        .badge-card:hover {
+            border-color: var(--odyssey-gold);
+            transform: scale(1.05);
+        }
+
+        .badge-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .badge-name {
+            font-size: 1.5rem;
+            color: var(--odyssey-blue);
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .badge-requirement {
+            color: var(--text-light);
+            margin-bottom: 1rem;
+        }
+
+        .badge-description {
+            font-style: italic;
+            color: var(--odyssey-gold);
+            font-size: 0.9rem;
+        }
+
+        .badge-card.unlocked {
+            background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%);
+            border-color: var(--odyssey-gold);
+        }
+
+        /* Testimonials */
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .testimonial-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            border-left: 5px solid var(--odyssey-gold);
+        }
+
+        .testimonial-quote {
+            font-size: 1.1rem;
+            font-style: italic;
+            color: var(--text-dark);
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .author-badge {
+            font-size: 2.5rem;
+        }
+
+        .author-info {
+            flex: 1;
+        }
+
+        .author-name {
+            font-weight: bold;
+            color: var(--odyssey-blue);
+        }
+
+        .author-status {
+            color: var(--odyssey-gold);
+            font-size: 0.9rem;
+        }
+
+        .recovery-amount {
+            background: var(--odyssey-success);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+
+        /* Report Form */
+        .report-form {
+            background: white;
+            padding: 3rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            max-width: 700px;
+            margin: 3rem auto;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--odyssey-blue);
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 0.8rem;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--odyssey-wave);
+        }
+
+        .form-group textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .submit-button {
+            background: var(--odyssey-blue);
+            color: white;
+            padding: 1rem 3rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            width: 100%;
+        }
+
+        .submit-button:hover {
+            background: var(--odyssey-wave);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(37, 99, 235, 0.4);
+        }
+
+        /* Progress Tracker */
+        .progress-tracker {
+            background: linear-gradient(135deg, var(--odyssey-blue), var(--odyssey-wave));
+            color: white;
+            padding: 2rem;
+            border-radius: 12px;
+            margin-bottom: 3rem;
+            text-align: center;
+        }
+
+        .progress-stats {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: bold;
+            color: var(--odyssey-gold);
+        }
+
+        .stat-label {
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--odyssey-blue);
+            color: white;
+            padding: 3rem 2rem;
+            text-align: center;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--odyssey-gold);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1.3rem;
+            }
+
+            .hero-quote {
+                font-size: 1rem;
+            }
+
+            .journey-phase {
+                grid-template-columns: 60px 1fr;
+                gap: 1rem;
+            }
+
+            .journey-phase:nth-child(even) {
+                direction: ltr;
+            }
+
+            .phase-icon {
+                width: 60px;
+                height: 60px;
+                font-size: 2rem;
+            }
+
+            .trials-grid,
+            .badges-grid,
+            .testimonials-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-links {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+
+            .progress-stats {
+                flex-direction: column;
+                gap: 1rem;
+            }
+        }
+
+        .alert-box {
+            background: #fef2f2;
+            border-left: 4px solid var(--odyssey-danger);
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin: 2rem 0;
+        }
+
+        .alert-box strong {
+            color: var(--odyssey-danger);
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav-header">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">🌊 Odissea Digitale</a>
+            <ul class="nav-links">
+                <li><a href="index.html">Database Autorità</a></li>
+                <li><a href="#viaggio">Il Viaggio</a></li>
+                <li><a href="#prove">Le Prove</a></li>
+                <li><a href="#argonauti">Argonauti</a></li>
+                <li><a href="#segnala">Segnala</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>🌊 ODISSEA DIGITALE</h1>
+            <p class="hero-subtitle">Dalla Truffa alla Riconquista</p>
+            <p class="hero-quote">"Come Ulisse tornò a Itaca,<br>riporterai i tuoi capitali a casa."</p>
+            <a href="#viaggio" class="cta-button">INIZIA IL VIAGGIO</a>
+        </div>
+    </section>
+
+    <!-- Progress Tracker -->
+    <div class="container">
+        <div class="progress-tracker">
+            <h2>📊 Il Tuo Progresso nell'Odissea</h2>
+            <div class="progress-stats">
+                <div class="stat-item">
+                    <div class="stat-number" id="completed-phases">0</div>
+                    <div class="stat-label">Fasi Completate</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" id="trials-overcome">0</div>
+                    <div class="stat-label">Prove Superate</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" id="current-badge">Marinaio</div>
+                    <div class="stat-label">Rango Attuale</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hero's Journey Section -->
+    <div class="container">
+        <section id="viaggio" class="section">
+            <h2 class="section-title">🗺️ Il Viaggio dell'Eroe</h2>
+            <p class="section-subtitle">Le 12 Fasi di Campbell applicate al recupero dai truffatori</p>
+
+            <div class="journey-timeline">
+                <!-- ATTO I: PARTENZA -->
+                <div class="journey-phase">
+                    <div class="phase-content" data-phase="1">
+                        <div class="phase-number">FASE 1 - Mondo Ordinario</div>
+                        <h3 class="phase-title">🏠 La Vita Prima della Tempesta</h3>
+                        <p class="phase-description">La tua quotidianità serena, prima che i truffatori entrassero nella tua vita. Risparmi accumulati, progetti per il futuro, fiducia nel sistema.</p>
+                        <p class="phase-action">📝 Descrivi la tua situazione finanziaria prima della truffa</p>
+                        <div class="phase-checkbox">
+                            <input type="checkbox" id="phase1" onchange="updateProgress()">
+                            <label for="phase1">Ho completato questa fase</label>
+                        </div>
+                    </div>
+                    <div class="phase-icon">🏠</div>
+                    <div></div>
+                </div>
+
+                <div class="journey-phase">
+                    <div></div>
+                    <div class="phase-icon">📞</div>
+                    <div class="phase-content" data-phase="2">
+                        <div class="phase-number">FASE 2 - Chiamata all'Avventura</div>
+                        <h3 class="phase-title">🎵 Il Canto delle Sirene</h3>
+                        <p class="phase-description">La telefonata, l'email, il messaggio che promette guadagni straordinari. Come le Sirene di Omero, una voce irresistibile che seduce la ragione.</p>
+                        <p class="phase-action">📝 Descrivi come sei stato contattato</p>
+                        <div class="phase-checkbox">
+                            <input type="checkbox" id="phase2" onchange="updateProgress()">
+                            <label for="phase2">Ho completato questa fase</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="journey-phase">
+                    <div class="phase-content" data-phase="3">
+                        <div class="phase-number">FASE 3 - Rifiuto della Chiamata</div>
+                        <h3 class="phase-title">🤔 Il Dubbio Iniziale</h3>
+                        <p class="phase-description">"Sembra troppo bello per essere vero..." Il tuo istinto ti avverte, ma i Fiori di Loto dei truffatori addormentano il giudizio critico.</p>
+                        <p class="phase-action">📝 Quali dubbi hai ignorato?</p>
+                        <div class="phase-checkbox">
+                            <input type="checkbox" id="phase3" onchange="updateProgress()">
+                            <label for="phase3">Ho completato questa fase</label>
+                        </div>
+                    </div>
+                    <div class="phase-icon">🤔</div>
+                    <div></div>
+                </div>
+
+                <div class="journey-phase">
+                    <div></div>
+                    <div class="phase-icon">🦉</div>
+                    <div class="phase-content" data-phase="4">
+                        <div class="phase-number">FASE 4 - Incontro col Mentore</div>
+                        <h3 class="phase-title">🦉 La Guida di Atena</h3>
+                        <p class="phase-description">Trovi il Database Financial Authority, consulti un avvocato, scopri le associazioni consumatori. La dea della saggezza ti offre gli strumenti per navigare.</p>
+                        <p class="phase-action">📝 Chi/cosa ti ha guidato nella reazione?</p>
+                        <div class="phase-checkbox">
+                            <input type="checkbox" id="phase4" onchange="updateProgress()">
+                            <label for="phase4">Ho completato questa fase</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="journey-phase">
+                    <div class="phase-content" data-phase="5">
+                        <div class="phase-number">FASE 5 - Varco della Prima Soglia</div>
+                        <h3 class="phase-title">🐷 La Trasformazione di Circe</h3>
+                        <p class="phase-description">Il primo bonifico. Sei diventato un "porco da macello" nel gergo FBI del "Pig Butchering". Non c'è più ritorno alla normalità precedente.</p>
+                        <p class="phase-action">📝 Quando hai capito di essere stato truffato?</p>
+                        <div class="phase-checkbox">
+                            <input type="checkbox" id="phase5" onchange="updateProgress()">
+                            <label for="phase5">Ho completato questa fase</label>
+                        </div>
+                    </div>
+                    <div class="phase-icon">🐷</div>
+                    <div></div>
+                </div>
+
+                <!-- ATTO II: INIZIAZIONE -->
+                <div class="journey-phase">
+                    <div></div>
+                    <div class="phase-icon">⚔️</div>
+                    <div class="phase-content" data-phase="6">
+                        <div class="phase-number">FASE 6 - Prove, Alleati, Nemici</div>
+                        <h3 class="phase-title">⚔️ L'Isola di Eolo</h3>
+                        <p class="phase-description">Incontri chi ti aiuta (associazioni, altri truffati) e chi ostacola (banche non collaborative, lungaggini burocratiche). Raccogli prove, documenti, screenshot.</p>
+                        <p class="phase-action">📝 Chi hai trovato sul tuo cammino?</p>
+                        <div class="phase-checkbox">
+                            <input type="checkbox" id="phase6" onchange="updateProgress()">
+                            <label for="phase6">Ho completato questa fase</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="journey-phase">
+                    <div class="phase-content" data-phase="7">
+                        <div class="phase-number">FASE 7 - Avvicinamento alla Caverna</div>
+                        <h3 class="phase-title">📋 Preparazione alla Battaglia</h3>
+                        <p class="phase-description">Organizzi la documentazione, prepari la denuncia/reclamo, studi le normative. Ti avvicini all'ingresso del Labirinto del Minotauro (il sistema legale).</p>
+                        <p class="phase-action">📝 Come hai preparato la tua difesa?</p>
+                        <div class="phase-checkbox">
+                            <input type="checkbox" id="phase7" onchange="updateProgress()">
+                            <label for="phase7">Ho completato questa fase</label>
+                        </div>
+                    </div>
+                    <div class="phase-icon">📋</div>
+                    <div></div>
+                </div>
+
+                <div class="journey-phase">
+                    <div></div>
+                    <div class="phase-icon">🐂</div>
+                    <div class="phase-content" data-phase="8">
+                        <div class="phase-number">FASE 8 - Prova Centrale</div>
+                        <h3 class="phase-title">🐂 Il Minotauro nel Labirinto</h3>
+                        <p class="phase-description">Entri nel tribunale, ABF, conciliazione bancaria. Affronti il sistema che vuole divorare la tua speranza. Questa è la battaglia decisiva.</p>
+                        <p class="phase-action">📝 Quale procedura hai avviato?</p>
+                        <div class="phase-checkbox">
+                            <input type="checkbox" id="phase8" onchange="updateProgress()">
+                            <label for="phase8">Ho completato questa fase</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="journey-phase">
+                    <div class="phase-content" data-phase="9">
+                        <div class="phase-number">FASE 9 - Ricompensa</div>
+                        <h3 class="phase-title">⚖️ La Sentenza di Dike</h3>
+                        <p class="phase-description">Ottieni una sentenza favorevole, un accordo di conciliazione, il riconoscimento del torto subito. La dea della Giustizia ti sorride.</p>
+                        <p class="phase-action">📝 Quale risultato hai ottenuto?</p>
+                        <div class="phase-checkbox">
+                            <input type="checkbox" id="phase9" onchange="updateProgress()">
+                            <label for="phase9">Ho completato questa fase</label>
+                        </div>
+                    </div>
+                    <div class="phase-icon">⚖️</div>
+                    <div></div>
+                </div>
+
+                <!-- ATTO III: RITORNO -->
+                <div class="journey-phase">
+                    <div></div>
+                    <div class="phase-icon">🚢</div>
+                    <div class="phase-content" data-phase="10">
+                        <div class="phase-number">FASE 10 - Via del Ritorno</div>
+                        <h3 class="phase-title">🚢 La Navigazione verso Itaca</h3>
+                        <p class="phase-description">Esecuzione del recupero crediti, negoziazioni finali, ultimi ostacoli burocratici. Il viaggio di ritorno a casa può essere insidioso quanto l'andata.</p>
+                        <p class="phase-action">📝 Come stai recuperando i fondi?</p>
+                        <div class="phase-checkbox">
+                            <input type="checkbox" id="phase10" onchange="updateProgress()">
+                            <label for="phase10">Ho completato questa fase</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="journey-phase">
+                    <div class="phase-content" data-phase="11">
+                        <div class="phase-number">FASE 11 - Resurrezione</div>
+                        <h3 class="phase-title">💰 Il Vello d'Oro Riconquistato</h3>
+                        <p class="phase-description">Recuperi parzialmente o totalmente i tuoi capitali. Come gli Argonauti, torni con il tesoro. Rinasci finanziariamente ed emotivamente.</p>
+                        <p class="phase-action">📝 Quanto hai recuperato?</p>
+                        <div class="phase-checkbox">
+                            <input type="checkbox" id="phase11" onchange="updateProgress()">
+                            <label for="phase11">Ho completato questa fase</label>
+                        </div>
+                    </div>
+                    <div class="phase-icon">💰</div>
+                    <div></div>
+                </div>
+
+                <div class="journey-phase">
+                    <div></div>
+                    <div class="phase-icon">🏛️</div>
+                    <div class="phase-content" data-phase="12">
+                        <div class="phase-number">FASE 12 - Ritorno con l'Elisir</div>
+                        <h3 class="phase-title">🏛️ L'Argonauta che Guida Altri</h3>
+                        <p class="phase-description">Diventi mentore per altre vittime, condividi la tua storia, aiuti la comunità. Trasformi il trauma in saggezza, la sconfitta in missione.</p>
+                        <p class="phase-action">📝 Come aiuterai altri naviganti?</p>
+                        <div class="phase-checkbox">
+                            <input type="checkbox" id="phase12" onchange="updateProgress()">
+                            <label for="phase12">Ho completato questa fase</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Mythical Trials Section -->
+        <section id="prove" class="section">
+            <h2 class="section-title">⚡ Le Prove Mitologiche</h2>
+            <p class="section-subtitle">Ogni eroe deve affrontare mostri e inganni. Ecco come riconoscerli e superarli.</p>
+
+            <div class="trials-grid">
+                <!-- Sirens Trial -->
+                <div class="trial-card">
+                    <span class="trial-icon">🎵</span>
+                    <h3 class="trial-title">Le Sirene Telefoniche</h3>
+                    <p class="trial-myth">"Nessun mortale resisteva al loro canto..."</p>
+                    <p class="trial-modern">Chiamate da presunti broker, promesse di guadagni garantiti, pressione psicologica per "investire subito".</p>
+                    <div class="trial-defense">
+                        <strong>🛡️ La Difesa di Ulisse:</strong> Come Ulisse si fece legare all'albero, tu verifica SEMPRE nel Database Financial Authority prima di qualsiasi bonifico. Metti "palline di cera" (filtri anti-spam) alle tue orecchie.
+                    </div>
+                </div>
+
+                <!-- Circe Trial -->
+                <div class="trial-card">
+                    <span class="trial-icon">🐷</span>
+                    <h3 class="trial-title">Circe: Il Pig Butchering</h3>
+                    <p class="trial-myth">"Circe toccò i marinai con la bacchetta e li trasformò in porci..."</p>
+                    <p class="trial-modern">I truffatori FBI chiamano le vittime "maiali da macellare". Ti ingrassano con piccoli guadagni iniziali, poi ti spennano completamente.</p>
+                    <div class="trial-defense">
+                        <strong>🛡️ L'Erba Magica:</strong> Educazione finanziaria, second opinion da esperti indipendenti, diffidare di "troppo bello per essere vero".
+                    </div>
+                </div>
+
+                <!-- Lotus Eaters Trial -->
+                <div class="trial-card">
+                    <span class="trial-icon">🌸</span>
+                    <h3 class="trial-title">I Fiori di Loto</h3>
+                    <p class="trial-myth">"Chi mangiava il loto perdeva memoria e desiderio di tornare a casa..."</p>
+                    <p class="trial-modern">Manipolazione psicologica: ti fanno credere che il problema non esiste, che "recupererai presto", intanto passano i 60 giorni per il chargeback.</p>
+                    <div class="trial-defense">
+                        <strong>🛡️ La Lucidità:</strong> Segna le date critiche (60gg bonifico, prescrizione), consulta subito un avvocato, non fidarti delle "rassicurazioni" del truffatore.
+                    </div>
+                </div>
+
+                <!-- Labyrinth Trial -->
+                <div class="trial-card">
+                    <span class="trial-icon">🏛️</span>
+                    <h3 class="trial-title">Il Labirinto di Minosse</h3>
+                    <p class="trial-myth">"Entravi facilmente, ma uscire era impossibile..."</p>
+                    <p class="trial-modern">Burocrazia infinita: ABF, Conciliazione, Tribunale. Ogni procedura ha tempi biblici, costi elevati, esiti incerti.</p>
+                    <div class="trial-defense">
+                        <strong>🛡️ Il Filo di Arianna:</strong> Associazioni consumatori, avvocati specializzati, class action collettive. Non affrontare il labirinto da solo.
+                    </div>
+                </div>
+
+                <!-- Minotaur Trial -->
+                <div class="trial-card">
+                    <span class="trial-icon">🐂</span>
+                    <h3 class="trial-title">Il Minotauro Bancario</h3>
+                    <p class="trial-myth">"Il mostro divorava i giovani ateniesi nel cuore del labirinto..."</p>
+                    <p class="trial-modern">Banche che negano responsabilità, rifiutano chargeback, scaricano colpe sulla vittima ("dovevi verificare tu").</p>
+                    <div class="trial-defense">
+                        <strong>🛡️ La Spada di Teseo:</strong> Normative PSD2 (responsabilità banca in caso di truffa), sentenze favorevoli già ottenute, petizioni al Parlamento Europeo.
+                    </div>
+                </div>
+
+                <!-- Golden Fleece Trial -->
+                <div class="trial-card">
+                    <span class="trial-icon">💰</span>
+                    <h3 class="trial-title">Il Vello d'Oro</h3>
+                    <p class="trial-myth">"Gli Argonauti affrontarono draghi e mari in tempesta per riconquistarlo..."</p>
+                    <p class="trial-modern">Il recupero dei tuoi capitali richiede perseveranza, alleanze, strategie multiple (penale, civile, conciliazione, pressione mediatica).</p>
+                    <div class="trial-defense">
+                        <strong>🛡️ La Strategia Jason:</strong> Multi-approccio: denuncia penale + ABF + tribunale civile + esposto Consob + petizione Europarlamento. Aumenti le probabilità di recupero.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Argonauts Badge System -->
+        <section id="argonauti" class="section">
+            <h2 class="section-title">🏅 I Ranghi degli Argonauti</h2>
+            <p class="section-subtitle">Ogni segnalazione di truffa ti avvicina al Vello d'Oro. Scala la gerarchia degli eroi.</p>
+
+            <div class="badges-container">
+                <div class="badges-grid">
+                    <!-- Marinaio Badge -->
+                    <div class="badge-card" id="badge-marinaio">
+                        <span class="badge-icon">🎯</span>
+                        <div class="badge-name">Marinaio</div>
+                        <div class="badge-requirement">0-5 segnalazioni</div>
+                        <div class="badge-description">"Hai messo le palline di cera nelle orecchie contro le Sirene"</div>
+                    </div>
+
+                    <!-- Timoniere Badge -->
+                    <div class="badge-card" id="badge-timoniere">
+                        <span class="badge-icon">⚓</span>
+                        <div class="badge-name">Timoniere</div>
+                        <div class="badge-requirement">6-20 segnalazioni</div>
+                        <div class="badge-description">"Hai spezzato un remo del Minotauro aiutando altri"</div>
+                    </div>
+
+                    <!-- Argonauta Badge -->
+                    <div class="badge-card" id="badge-argonauta">
+                        <span class="badge-icon">🛡️</span>
+                        <div class="badge-name">Argonauta</div>
+                        <div class="badge-requirement">21-50 segnalazioni</div>
+                        <div class="badge-description">"Hai conquistato un frammento del Vello d'Oro"</div>
+                    </div>
+
+                    <!-- Eroe Badge -->
+                    <div class="badge-card" id="badge-eroe">
+                        <span class="badge-icon">👑</span>
+                        <div class="badge-name">Eroe di Itaca</div>
+                        <div class="badge-requirement">51+ segnalazioni</div>
+                        <div class="badge-description">"Indossi la corona d'alloro di Ulisse, guida per tutti i naviganti"</div>
+                    </div>
+                </div>
+
+                <div class="alert-box" style="margin-top: 2rem;">
+                    <strong>⚠️ Importante:</strong> Le segnalazioni devono riguardare SOLO informazioni pubbliche (numeri di telefono, email, siti web di truffatori già denunciati). NO vigilantismo, NO dati personali privati. Solo mutuo soccorso legale.
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonials Section -->
+        <section class="section">
+            <h2 class="section-title">📜 Le Cronache dei Reduci</h2>
+            <p class="section-subtitle">Storie vere di chi ha completato l'Odissea e riconquistato il Vello d'Oro</p>
+
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <p class="testimonial-quote">"Ero diventato un porco da macello per Circe-truffatori. Mi promettevano guadagni del 40% mensile sul Forex. Ho perso €47.000 in 6 mesi. Ma come Ulisse, ho trovato la via del ritorno grazie al Database e all'ABF. Oggi ho recuperato il 70% del capitale."</p>
+                    <div class="testimonial-author">
+                        <span class="author-badge">🛡️</span>
+                        <div class="author-info">
+                            <div class="author-name">Marco T.</div>
+                            <div class="author-status">Argonauta - Fase 11/12 completate</div>
+                        </div>
+                        <div class="recovery-amount">€32.900 recuperati</div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card">
+                    <p class="testimonial-quote">"Il canto delle Sirene mi aveva conquistato: 'Investimento sicuro in criptovalute'. Dopo il primo bonifico da €15.000, ho capito di essere nel Labirinto. Ma con il filo di Arianna delle associazioni consumatori, ho trovato l'uscita. Sentenza favorevole del tribunale."</p>
+                    <div class="testimonial-author">
+                        <span class="author-badge">⚓</span>
+                        <div class="author-info">
+                            <div class="author-name">Giulia R.</div>
+                            <div class="author-status">Timoniere - Fase 9/12 completate</div>
+                        </div>
+                        <div class="recovery-amount">€15.000 sentenza</div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card">
+                    <p class="testimonial-quote">"I Fiori di Loto avevano cancellato il mio giudizio critico. 'Ancora un bonifico e recuperi tutto' mi dicevano. Ho perso €23.000. Ma l'incontro con Atena (il mentore avvocato) mi ha salvato. Conciliazione bancaria PSD2: la banca ha riconosciuto la sua negligenza."</p>
+                    <div class="testimonial-author">
+                        <span class="author-badge">👑</span>
+                        <div class="author-info">
+                            <div class="author-name">Alessandro M.</div>
+                            <div class="author-status">Eroe di Itaca - 12/12 completate</div>
+                        </div>
+                        <div class="recovery-amount">€18.400 recuperati</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Report Form Section -->
+        <section id="segnala" class="section">
+            <h2 class="section-title">🚨 Arruolati negli Argonauti</h2>
+            <p class="section-subtitle">Segnala la tua truffa e inizia il viaggio verso Itaca. Diventa parte della flotta.</p>
+
+            <div class="report-form">
+                <form id="odyssey-form">
+                    <div class="form-group">
+                        <label for="current-phase">📍 In quale Fase dell'Odissea ti trovi?</label>
+                        <select id="current-phase" required>
+                            <option value="">Seleziona...</option>
+                            <option value="1">Fase 1 - Mondo Ordinario (pre-truffa)</option>
+                            <option value="2">Fase 2 - Canto delle Sirene (primo contatto)</option>
+                            <option value="3">Fase 3 - Dubbi ignorati</option>
+                            <option value="4">Fase 4 - Ho trovato una guida</option>
+                            <option value="5">Fase 5 - Primo bonifico (trasformato in "porco")</option>
+                            <option value="6">Fase 6 - Raccolta prove e alleati</option>
+                            <option value="7">Fase 7 - Preparazione denuncia</option>
+                            <option value="8">Fase 8 - Nel Labirinto (tribunale/ABF)</option>
+                            <option value="9">Fase 9 - Sentenza/accordo ottenuto</option>
+                            <option value="10">Fase 10 - Recupero in corso</option>
+                            <option value="11">Fase 11 - Capitale recuperato</option>
+                            <option value="12">Fase 12 - Aiuto altri naviganti</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="scam-type">🐷 Quale "Circe" ti ha trasformato?</label>
+                        <select id="scam-type" required>
+                            <option value="">Seleziona...</option>
+                            <option value="forex">Trading Forex/CFD falso</option>
+                            <option value="crypto">Investimenti criptovalute</option>
+                            <option value="broker">Broker non autorizzato</option>
+                            <option value="ponzi">Schema Ponzi/Piramide</option>
+                            <option value="romance">Romance Scam + investimenti</option>
+                            <option value="phishing">Phishing bancario</option>
+                            <option value="other">Altro tipo di truffa</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="amount-lost">💰 Quanto "Vello d'Oro" devi riconquistare? (€)</label>
+                        <input type="number" id="amount-lost" min="0" step="100" placeholder="Es: 15000">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="scammer-info">📞 Informazioni pubbliche sui truffatori</label>
+                        <textarea id="scammer-info" placeholder="Numero telefono, email, sito web, nome società (SOLO se già denunciati pubblicamente)"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="story">📖 La Tua Odissea (opzionale ma potente)</label>
+                        <textarea id="story" placeholder="Racconta il tuo viaggio: come sei stato contattato, quali prove hai superato, dove sei ora. La tua storia può salvare altri marinai dalle Sirene."></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="contact">📧 Email di contatto (opzionale)</label>
+                        <input type="email" id="contact" placeholder="Solo se vuoi essere ricontattato">
+                    </div>
+
+                    <button type="submit" class="submit-button">🚢 INIZIA L'ODISSEA</button>
+                </form>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-links">
+            <a href="index.html">Database Autorità Finanziarie</a>
+            <a href="#viaggio">Il Viaggio dell'Eroe</a>
+            <a href="#prove">Le Prove Mitologiche</a>
+            <a href="#argonauti">Ranghi Argonauti</a>
+        </div>
+        <p style="margin-top: 2rem; opacity: 0.8;">
+            🌊 "Polytropos" - L'uomo dai mille inganni, come Ulisse, sarà chi sconfigge i truffatori
+        </p>
+        <p style="margin-top: 1rem; font-size: 0.9rem; opacity: 0.7;">
+            © 2026 Odissea Digitale - Basato sul "Viaggio dell'Eroe" di Joseph Campbell
+        </p>
+    </footer>
+
+    <script>
+        // Progress Tracking System
+        function updateProgress() {
+            const checkboxes = document.querySelectorAll('.phase-checkbox input[type="checkbox"]');
+            let completed = 0;
+            let currentPhase = 0;
+
+            checkboxes.forEach((checkbox, index) => {
+                const phaseContent = checkbox.closest('.phase-content');
+                
+                if (checkbox.checked) {
+                    completed++;
+                    phaseContent.classList.add('completed');
+                    phaseContent.classList.remove('current');
+                } else {
+                    phaseContent.classList.remove('completed');
+                    if (currentPhase === 0) {
+                        currentPhase = index + 1;
+                        phaseContent.classList.add('current');
+                    }
+                }
+            });
+
+            // Update stats
+            document.getElementById('completed-phases').textContent = completed;
+            
+            // Update badge based on progress
+            let badge = 'Marinaio';
+            let badgeId = 'badge-marinaio';
+            
+            if (completed >= 12) {
+                badge = '👑 Eroe';
+                badgeId = 'badge-eroe';
+            } else if (completed >= 9) {
+                badge = '🛡️ Argonauta';
+                badgeId = 'badge-argonauta';
+            } else if (completed >= 6) {
+                badge = '⚓ Timoniere';
+                badgeId = 'badge-timoniere';
+            }
+            
+            document.getElementById('current-badge').textContent = badge;
+            
+            // Highlight current badge
+            document.querySelectorAll('.badge-card').forEach(card => {
+                card.classList.remove('unlocked');
+            });
+            document.getElementById(badgeId).classList.add('unlocked');
+
+            // Save progress to localStorage
+            saveProgress();
+        }
+
+        // Save progress to localStorage
+        function saveProgress() {
+            const progress = [];
+            document.querySelectorAll('.phase-checkbox input[type="checkbox"]').forEach((checkbox, index) => {
+                progress.push(checkbox.checked);
+            });
+            localStorage.setItem('odysseyProgress', JSON.stringify(progress));
+        }
+
+        // Load progress from localStorage
+        function loadProgress() {
+            const saved = localStorage.getItem('odysseyProgress');
+            if (saved) {
+                const progress = JSON.parse(saved);
+                document.querySelectorAll('.phase-checkbox input[type="checkbox"]').forEach((checkbox, index) => {
+                    if (progress[index]) {
+                        checkbox.checked = true;
+                    }
+                });
+                updateProgress();
+            }
+        }
+
+        // Form submission handler
+        document.getElementById('odyssey-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const formData = {
+                phase: document.getElementById('current-phase').value,
+                scamType: document.getElementById('scam-type').value,
+                amountLost: document.getElementById('amount-lost').value,
+                scammerInfo: document.getElementById('scammer-info').value,
+                story: document.getElementById('story').value,
+                contact: document.getElementById('contact').value,
+                timestamp: new Date().toISOString()
+            };
+
+            // Save to localStorage (in produzione: inviare a backend)
+            let reports = JSON.parse(localStorage.getItem('odysseyReports') || '[]');
+            reports.push(formData);
+            localStorage.setItem('odysseyReports', JSON.stringify(reports));
+
+            // Update trials counter
+            const trialsCount = reports.length;
+            document.getElementById('trials-overcome').textContent = trialsCount;
+
+            alert('🚢 Benvenuto nella flotta degli Argonauti!\n\nLa tua Odissea è iniziata. Riceverai aggiornamenti sulla tua email.\n\nRicorda: come Ulisse, la strada è lunga ma Itaca ti aspetta.');
+            
+            this.reset();
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            loadProgress();
+            
+            // Load trials count from localStorage
+            const reports = JSON.parse(localStorage.getItem('odysseyReports') || '[]');
+            document.getElementById('trials-overcome').textContent = reports.length;
+        });
+
+        // Service Worker Registration
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('service-worker.js')
+                .then(reg => console.log('Service Worker registered'))
+                .catch(err => console.log('Service Worker registration failed'));
+        }
+    </script>
+</body>
+</html>
