@@ -173,7 +173,17 @@
         .country-card { background: white; border: 2px solid #e0e0e0; border-radius: 12px; padding: 25px; transition: all 0.3s ease; cursor: pointer; }
         .country-card:hover { transform: translateY(-5px); box-shadow: 0 8px 20px rgba(0,0,0,0.15); border-color: #667eea; }
         .country-header { display: flex; align-items: center; margin-bottom: 15px; padding-bottom: 15px; border-bottom: 2px solid #f0f0f0; }
-        .country-flag { font-size: 3em; margin-right: 15px; }
+        .country-flag { 
+            margin-right: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .country-flag .fi {
+            width: 48px !important;
+            height: 36px !important;
+            font-size: 48px;
+        }
         .country-name { font-size: 1.5em; font-weight: bold; color: #667eea; }
         .info-row { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #f0f0f0; flex-direction: column; }
         .info-label { font-weight: 600; color: #666; margin-bottom: 5px; }
@@ -608,13 +618,22 @@
             filtered.forEach(country => {
                 const card = document.createElement('div');
                 card.className = 'country-card';
-                card.onclick = () => openModal(country.country_name); // Use a unique key like name
+                card.onclick = () => openModal(country.country_name);
                 
                 const protectionClass = `protection-${(country.protectionLevel || 'medio').toLowerCase()}`;
                 
+                // Estrai il codice paese per flag-icon
+                const countryCode = getCountryCode(country.country_name);
+                let flagHTML = '';
+                if (countryCode && countryCode !== 'CEMAC' && countryCode !== 'ECSRC') {
+                    flagHTML = `<span class="fi fi-${countryCode.toLowerCase()}"></span>`;
+                } else {
+                    flagHTML = `<span style="font-size: 3em;">🌍</span>`;
+                }
+                
                 card.innerHTML = `
                     <div class="country-header">
-                        <div class="country-flag">${country.flag}</div>
+                        <div class="country-flag">${flagHTML}</div>
                         <div class="country-name">${country.country_name}</div>
                     </div>
                     <div class="country-info">
