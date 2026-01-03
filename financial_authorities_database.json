@@ -1658,10 +1658,12 @@
       "authorityEmail": "info@cbu.uz",
       "social_links": {
         "app": "https://cbu.uz/en/services/app/",
-        "youtube_educational": "https://youtu.be/L3gVhN4heK8"
+        "youtube_educational": "https://youtu.be/L3gVhN4heK8",
+        "telegram": "https://t.me/finlituzb",
+        "financial_literacy": "https://finlit.uz/uz/news/1949794/"
       }
     },
-    "notes": "App Ufficiale CBU disponibile per download. Video educazione finanziaria antitruffa disponibile su YouTube. Sistema di vigilanza bancaria moderna con focus su protezione consumatori e alfabetizzazione finanziaria digitale."
+    "notes": "App Ufficiale CBU disponibile per download. Video educazione finanziaria antitruffa disponibile su YouTube. Canale Telegram ufficiale 'Finlit.uz - moliyaviy savodxonlik ✔' (13.662+ iscritti) - Dipartimento di Educazione Finanziaria e Divulgazione della Banca Centrale. Per migliorare l'alfabetizzazione finanziaria, è importante promuovere educazione tra donne e giovani, insegnare loro l'\"igiene informatica\" e diffondere i servizi di microfinanza. Sistema di vigilanza bancaria moderna con focus su protezione consumatori."
   },
   "Zambia": {
     "country_name": "Zambia",
