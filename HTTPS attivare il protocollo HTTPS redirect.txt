@@ -1,0 +1,22 @@
+Per attivare il protocollo HTTPS sul dominio tutelatruffe.it, è necessario seguire una procedura specifica che varia in base al servizio utilizzato da Register.it. Ecco le istruzioni per ciascuna categoria di servizio:
+
+Spazio web statico/vecchi hosting Linux:
+
+Creare un file .htaccess con il contenuto specificato e caricarlo nella cartella del sito web tramite FTP o File Manager.
+Il file .htaccess deve contenere le direttive per il redirect da HTTP a HTTPS.
+Hosting Linux Cpanel:
+
+Accedere al pannello di controllo e abilitare l'opzione "Accesso forzato in HTTPS" nella sezione di configurazione HTTPS/SSL.
+Hosting Linux WePanel:
+
+Accedere al pannello di controllo, gestire il dominio e abilitare l'opzione "Forza il reindirizzamento HTTP".
+Hosting Windows:
+
+Inserire le direttive di redirect necessarie nel file web.config.
+Website (Starter, Professional, Premium):
+
+Il redirect automatico può essere impostato solo dal Supporto Tecnico dopo aver impostato un template responsive.
+La configurazione del redirect HTTP-HTTPS dipende dal servizio Register.it utilizzato e può richiedere la modifica di file di configurazione, l'attivazione di opzioni nel pannello di controllo, o l'intervento del supporto tecnico.
+Per attivare il protocollo HTTPS sul dominio tutelatruffe.it e mantenere la configurazione di redirect attuale, è necessario installare un Certificato SSL. Se stai utilizzando lo spazio web statico, puoi valutare l'acquisto di un Certificato SSL DV da richiedere e installare direttamente dal pannello di controllo. In alternativa, se il dominio è stato acquistato con la soluzione Dominio Standard, puoi attivare il servizio gratuito Micro Hosting, che include un Certificato SSL gratuito e WordPress preinstallato. Dovrai puntare il dominio alla piattaforma Micro Hosting per permettere l'installazione del Certificato SSL e poi configurare il redirect utilizzando un plugin WordPress.
+
+Proteggi i tuoi risparmi dalle truffe online. Database ufficiale autorità UE extra UE, truffa finanziaria, form segnalazione CONSOB, MT4/WhatsApp, consulenza gratuita. Recupero capitali vittime scam, Pig Butchering. Database 108 autorità finanziarie europee. Segnala truffe Forex, Crypto, Pig Butchering. Mappa interattiva geolocalizzata. Recupera i tuoi capitali come Ulisse tornò a Itaca.
