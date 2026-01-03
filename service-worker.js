@@ -1,10 +1,11 @@
-const CACHE_NAME = 'financial-authority-v1';
+const CACHE_NAME = 'financial-authority-v2';
 const urlsToCache = [
   '/Financial-Authority-Database/',
   '/Financial-Authority-Database/index.html',
   '/Financial-Authority-Database/financial_authorities_database.json',
   '/Financial-Authority-Database/icon-192.png',
-  '/Financial-Authority-Database/icon-512.png'
+  '/Financial-Authority-Database/icon-512.png',
+  'https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.2.3/css/flag-icons.min.css'
 ];
 
 // Installazione Service Worker
