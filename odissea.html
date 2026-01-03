@@ -14,6 +14,11 @@
     <link rel="icon" type="image/png" href="icon-192.png">
     <link rel="apple-touch-icon" href="icon-512.png">
     
+    <!-- Leaflet Map CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" 
+          integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" 
+          crossorigin=""/>
+    
     <style>
         * {
             margin: 0;
@@ -649,6 +654,154 @@
         .alert-box strong {
             color: var(--odyssey-danger);
         }
+
+        /* European Scam Map */
+        .map-container {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            margin-bottom: 3rem;
+        }
+
+        #scam-map {
+            height: 600px;
+            width: 100%;
+            border-radius: 8px;
+            margin-top: 2rem;
+        }
+
+        .map-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .map-stat-card {
+            background: linear-gradient(135deg, var(--odyssey-blue), var(--odyssey-wave));
+            color: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .map-stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: var(--odyssey-gold);
+        }
+
+        .map-stat-label {
+            font-size: 0.9rem;
+            opacity: 0.9;
+            margin-top: 0.5rem;
+        }
+
+        .leaflet-popup-content {
+            font-family: inherit;
+        }
+
+        .popup-title {
+            font-weight: bold;
+            color: var(--odyssey-danger);
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .popup-info {
+            margin: 0.3rem 0;
+            font-size: 0.9rem;
+        }
+
+        .popup-info strong {
+            color: var(--odyssey-blue);
+        }
+
+        /* Expanded Form Sections */
+        .form-section {
+            background: #f8fafc;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+            border-left: 4px solid var(--odyssey-gold);
+        }
+
+        .form-section-title {
+            font-size: 1.2rem;
+            color: var(--odyssey-blue);
+            font-weight: bold;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+        }
+
+        .info-box {
+            background: #eff6ff;
+            border: 1px solid var(--odyssey-wave);
+            padding: 1rem;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+        }
+
+        .info-box strong {
+            color: var(--odyssey-wave);
+        }
+
+        .collapsible-section {
+            margin-top: 1rem;
+        }
+
+        .collapsible-header {
+            background: var(--odyssey-gold);
+            color: var(--odyssey-blue);
+            padding: 1rem;
+            cursor: pointer;
+            border-radius: 8px;
+            font-weight: bold;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s;
+        }
+
+        .collapsible-header:hover {
+            background: #c19b2f;
+        }
+
+        .collapsible-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+            background: white;
+            border-radius: 0 0 8px 8px;
+        }
+
+        .collapsible-content.active {
+            max-height: 2000px;
+            padding: 1rem;
+            border: 2px solid var(--odyssey-gold);
+            border-top: none;
+        }
+
+        .code-example {
+            background: #1e293b;
+            color: #e2e8f0;
+            padding: 1rem;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+            overflow-x: auto;
+            margin: 0.5rem 0;
+        }
     </style>
 </head>
 <body>
@@ -660,6 +813,7 @@
                 <li><a href="index.html">Database Autorità</a></li>
                 <li><a href="#viaggio">Il Viaggio</a></li>
                 <li><a href="#prove">Le Prove</a></li>
+                <li><a href="#mappa">Mappa Truffe</a></li>
                 <li><a href="#argonauti">Argonauti</a></li>
                 <li><a href="#segnala">Segnala</a></li>
             </ul>
@@ -963,6 +1117,39 @@
             </div>
         </section>
 
+        <!-- European Scam Map Section -->
+        <section id="mappa" class="section">
+            <h2 class="section-title">🗺️ Mappa Europea delle Truffe</h2>
+            <p class="section-subtitle">Geolocalizzazione delle sedi apparenti dei truffatori. Ogni pin è un Argonauta che ha segnalato.</p>
+
+            <div class="map-container">
+                <div class="map-stats">
+                    <div class="map-stat-card">
+                        <div class="map-stat-number" id="total-reports">0</div>
+                        <div class="map-stat-label">Truffe Segnalate</div>
+                    </div>
+                    <div class="map-stat-card">
+                        <div class="map-stat-number" id="countries-affected">0</div>
+                        <div class="map-stat-label">Paesi Coinvolti</div>
+                    </div>
+                    <div class="map-stat-card">
+                        <div class="map-stat-number" id="total-amount-lost">€0</div>
+                        <div class="map-stat-label">Capitali Sottratti</div>
+                    </div>
+                    <div class="map-stat-card">
+                        <div class="map-stat-number" id="argonauts-count">0</div>
+                        <div class="map-stat-label">Argonauti Attivi</div>
+                    </div>
+                </div>
+
+                <div id="scam-map"></div>
+
+                <div class="alert-box" style="margin-top: 2rem;">
+                    <strong>🛡️ Nota Importante:</strong> Le segnalazioni mostrano solo le <strong>sedi dichiarate dai truffatori</strong> nelle loro pagine web fraudolente. Queste sono quasi sempre fittizie. L'obiettivo è mappare le strategie di inganno geografico, NON perseguire individui.
+                </div>
+            </div>
+        </section>
+
         <!-- Argonauts Badge System -->
         <section id="argonauti" class="section">
             <h2 class="section-title">🏅 I Ranghi degli Argonauti</h2>
@@ -1060,60 +1247,272 @@
 
             <div class="report-form">
                 <form id="odyssey-form">
-                    <div class="form-group">
-                        <label for="current-phase">📍 In quale Fase dell'Odissea ti trovi?</label>
-                        <select id="current-phase" required>
-                            <option value="">Seleziona...</option>
-                            <option value="1">Fase 1 - Mondo Ordinario (pre-truffa)</option>
-                            <option value="2">Fase 2 - Canto delle Sirene (primo contatto)</option>
-                            <option value="3">Fase 3 - Dubbi ignorati</option>
-                            <option value="4">Fase 4 - Ho trovato una guida</option>
-                            <option value="5">Fase 5 - Primo bonifico (trasformato in "porco")</option>
-                            <option value="6">Fase 6 - Raccolta prove e alleati</option>
-                            <option value="7">Fase 7 - Preparazione denuncia</option>
-                            <option value="8">Fase 8 - Nel Labirinto (tribunale/ABF)</option>
-                            <option value="9">Fase 9 - Sentenza/accordo ottenuto</option>
-                            <option value="10">Fase 10 - Recupero in corso</option>
-                            <option value="11">Fase 11 - Capitale recuperato</option>
-                            <option value="12">Fase 12 - Aiuto altri naviganti</option>
-                        </select>
+                    <!-- SECTION 1: Current Phase -->
+                    <div class="form-section">
+                        <div class="form-section-title">
+                            <span>📍</span>
+                            <span>Il Tuo Viaggio nell'Odissea</span>
+                        </div>
+                        <div class="form-group">
+                            <label for="current-phase">In quale Fase ti trovi?</label>
+                            <select id="current-phase" required>
+                                <option value="">Seleziona...</option>
+                                <option value="1">Fase 1 - Mondo Ordinario (pre-truffa)</option>
+                                <option value="2">Fase 2 - Canto delle Sirene (primo contatto)</option>
+                                <option value="3">Fase 3 - Dubbi ignorati</option>
+                                <option value="4">Fase 4 - Ho trovato una guida</option>
+                                <option value="5">Fase 5 - Primo bonifico (trasformato in "porco")</option>
+                                <option value="6">Fase 6 - Raccolta prove e alleati</option>
+                                <option value="7">Fase 7 - Preparazione denuncia</option>
+                                <option value="8">Fase 8 - Nel Labirinto (tribunale/ABF)</option>
+                                <option value="9">Fase 9 - Sentenza/accordo ottenuto</option>
+                                <option value="10">Fase 10 - Recupero in corso</option>
+                                <option value="11">Fase 11 - Capitale recuperato</option>
+                                <option value="12">Fase 12 - Aiuto altri naviganti</option>
+                            </select>
+                        </div>
                     </div>
 
-                    <div class="form-group">
-                        <label for="scam-type">🐷 Quale "Circe" ti ha trasformato?</label>
-                        <select id="scam-type" required>
-                            <option value="">Seleziona...</option>
-                            <option value="forex">Trading Forex/CFD falso</option>
-                            <option value="crypto">Investimenti criptovalute</option>
-                            <option value="broker">Broker non autorizzato</option>
-                            <option value="ponzi">Schema Ponzi/Piramide</option>
-                            <option value="romance">Romance Scam + investimenti</option>
-                            <option value="phishing">Phishing bancario</option>
-                            <option value="other">Altro tipo di truffa</option>
-                        </select>
+                    <!-- SECTION 2: Scam Type & Amount -->
+                    <div class="form-section">
+                        <div class="form-section-title">
+                            <span>🐷</span>
+                            <span>Tipo di Truffa e Danno</span>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="scam-type">Quale "Circe" ti ha trasformato?</label>
+                                <select id="scam-type" required>
+                                    <option value="">Seleziona...</option>
+                                    <option value="forex">Trading Forex/CFD falso</option>
+                                    <option value="crypto">Investimenti criptovalute</option>
+                                    <option value="broker">Broker non autorizzato</option>
+                                    <option value="ponzi">Schema Ponzi/Piramide</option>
+                                    <option value="romance">Romance Scam + investimenti</option>
+                                    <option value="phishing">Phishing bancario</option>
+                                    <option value="investment">Falsi investimenti immobiliari/startup</option>
+                                    <option value="other">Altro tipo di truffa</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="amount-lost">Vello d'Oro da riconquistare (€)</label>
+                                <input type="number" id="amount-lost" min="0" step="100" placeholder="Es: 15000">
+                            </div>
+                        </div>
                     </div>
 
-                    <div class="form-group">
-                        <label for="amount-lost">💰 Quanto "Vello d'Oro" devi riconquistare? (€)</label>
-                        <input type="number" id="amount-lost" min="0" step="100" placeholder="Es: 15000">
+                    <!-- SECTION 3: Scammer Company Details -->
+                    <div class="form-section">
+                        <div class="form-section-title">
+                            <span>🏢</span>
+                            <span>Dati della Falsa Impresa</span>
+                        </div>
+                        <div class="form-group">
+                            <label for="company-name">Nome della società/piattaforma truffaldina *</label>
+                            <input type="text" id="company-name" placeholder="Es: FalsoTradingPro, CryptoScamLtd" required>
+                            <div class="info-box">
+                                <strong>Importante:</strong> Inserisci il nome ESATTO come appare sul sito web o nei documenti ricevuti.
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="website-url">URL della pagina web truffaldina *</label>
+                            <input type="url" id="website-url" placeholder="https://esempio-truffa.com" required>
+                            <div class="info-box">
+                                <strong>Tip:</strong> Incolla l'URL completo (incluso https://). Se il sito è stato chiuso, inserisci l'ultimo URL conosciuto.
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="company-registration">Nr. Registro Imprese dichiarato</label>
+                                <input type="text" id="company-registration" placeholder="Es: UK123456789, IT-REA-987654">
+                            </div>
+                            <div class="form-group">
+                                <label for="financial-authority-reg">Nr. Licenza Autorità Finanziaria dichiarata</label>
+                                <input type="text" id="financial-authority-reg" placeholder="Es: FCA-123456, CONSOB-XYZ">
+                            </div>
+                        </div>
                     </div>
 
-                    <div class="form-group">
-                        <label for="scammer-info">📞 Informazioni pubbliche sui truffatori</label>
-                        <textarea id="scammer-info" placeholder="Numero telefono, email, sito web, nome società (SOLO se già denunciati pubblicamente)"></textarea>
+                    <!-- SECTION 4: Geographic Location -->
+                    <div class="form-section">
+                        <div class="form-section-title">
+                            <span>📍</span>
+                            <span>Sede Geografica Dichiarata (per Mappa)</span>
+                        </div>
+                        <div class="form-group">
+                            <label for="declared-address">Indirizzo completo dichiarato nel sito web</label>
+                            <textarea id="declared-address" rows="2" placeholder="Es: 123 Fake Street, London EC1A 1BB, United Kingdom"></textarea>
+                            <div class="info-box">
+                                <strong>🗺️ Gamificazione:</strong> Questo indirizzo apparirà come <strong>pin rosso</strong> sulla Mappa Europea delle Truffe. Aiuta altri Argonauti a visualizzare la geografia dell'inganno.
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="declared-city">Città dichiarata</label>
+                                <input type="text" id="declared-city" placeholder="Es: Londra, Cipro, Malta">
+                            </div>
+                            <div class="form-group">
+                                <label for="declared-country">Paese dichiarato</label>
+                                <select id="declared-country">
+                                    <option value="">Seleziona...</option>
+                                    <option value="UK">Regno Unito</option>
+                                    <option value="CY">Cipro</option>
+                                    <option value="MT">Malta</option>
+                                    <option value="BG">Bulgaria</option>
+                                    <option value="EE">Estonia</option>
+                                    <option value="LT">Lituania</option>
+                                    <option value="CH">Svizzera</option>
+                                    <option value="LU">Lussemburgo</option>
+                                    <option value="IE">Irlanda</option>
+                                    <option value="NL">Paesi Bassi</option>
+                                    <option value="HK">Hong Kong</option>
+                                    <option value="SG">Singapore</option>
+                                    <option value="AU">Australia</option>
+                                    <option value="OTHER">Altro paese</option>
+                                </select>
+                            </div>
+                        </div>
                     </div>
 
-                    <div class="form-group">
-                        <label for="story">📖 La Tua Odissea (opzionale ma potente)</label>
-                        <textarea id="story" placeholder="Racconta il tuo viaggio: come sei stato contattato, quali prove hai superato, dove sei ora. La tua storia può salvare altri marinai dalle Sirene."></textarea>
+                    <!-- SECTION 5: MT4/MT5 Platform Details -->
+                    <div class="form-section">
+                        <div class="form-section-title">
+                            <span>📊</span>
+                            <span>Dettagli Piattaforma Trading (MT4/MT5)</span>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="mt4-account">Numero Account MT4/MT5 assegnato</label>
+                                <input type="text" id="mt4-account" placeholder="Es: 123456789">
+                            </div>
+                            <div class="form-group">
+                                <label for="mt4-server">Nome Server MT4/MT5</label>
+                                <input type="text" id="mt4-server" placeholder="Es: FakeBroker-Demo, ScamServer-Live">
+                            </div>
+                        </div>
+                        <div class="info-box">
+                            <strong>Dove trovare questi dati:</strong> Apri MT4/MT5 → Menu "Strumenti" → "Opzioni" → Tab "Server". Il nome server è visualizzato in alto a destra nella piattaforma.
+                        </div>
                     </div>
 
-                    <div class="form-group">
-                        <label for="contact">📧 Email di contatto (opzionale)</label>
-                        <input type="email" id="contact" placeholder="Solo se vuoi essere ricontattato">
+                    <!-- SECTION 6: Contact Methods -->
+                    <div class="form-section">
+                        <div class="form-section-title">
+                            <span>📱</span>
+                            <span>Metodi di Contatto dei Truffatori</span>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="whatsapp-number">Numero WhatsApp utilizzato</label>
+                                <input type="tel" id="whatsapp-number" placeholder="+44 7700 123456">
+                                <div class="info-box">
+                                    Includi il prefisso internazionale (es: +44 per UK, +357 per Cipro)
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="phone-numbers">Altri numeri telefonici</label>
+                                <input type="text" id="phone-numbers" placeholder="Separa con virgole se multipli">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="scammer-emails">Email dei "consulenti" truffatori</label>
+                            <textarea id="scammer-emails" rows="3" placeholder="Es: fake.advisor@scam.com, support@falsebroker.net (separa con virgole se multiple)"></textarea>
+                        </div>
                     </div>
 
-                    <button type="submit" class="submit-button">🚢 INIZIA L'ODISSEA</button>
+                    <!-- SECTION 7: Email Headers (Collapsible) -->
+                    <div class="collapsible-section">
+                        <div class="collapsible-header" onclick="toggleCollapsible(this)">
+                            <span>📧 Istruzioni: Come Estrarre il Codice Sorgente delle Email (Avanzato)</span>
+                            <span>▼</span>
+                        </div>
+                        <div class="collapsible-content">
+                            <p style="margin-bottom: 1rem;"><strong>Perché è importante:</strong> Gli header delle email rivelano il <strong>server di origine reale</strong>, l'indirizzo IP del mittente, e possono smascherare l'identità nascosta dei truffatori.</p>
+
+                            <h4 style="color: var(--odyssey-blue); margin-top: 1rem;">📩 Gmail (Desktop)</h4>
+                            <ol style="margin-left: 1.5rem; line-height: 1.8;">
+                                <li>Apri l'email del truffatore</li>
+                                <li>Clicca sui tre puntini verticali (⋮) in alto a destra</li>
+                                <li>Seleziona <strong>"Mostra originale"</strong></li>
+                                <li>Si apre una nuova scheda con il codice sorgente completo</li>
+                                <li>Copia tutto il testo e incollalo nel campo sottostante</li>
+                            </ol>
+
+                            <h4 style="color: var(--odyssey-blue); margin-top: 1rem;">📧 Outlook (Desktop)</h4>
+                            <ol style="margin-left: 1.5rem; line-height: 1.8;">
+                                <li>Apri l'email</li>
+                                <li>Clicca su <strong>File</strong> → <strong>Proprietà</strong></li>
+                                <li>Nella sezione "Intestazioni Internet", copia tutto il testo</li>
+                                <li>Oppure: Doppio clic sull'email → Messaggio → Azioni → Visualizza origine messaggio</li>
+                            </ol>
+
+                            <h4 style="color: var(--odyssey-blue); margin-top: 1rem;">🍎 Apple Mail (Mac/iPhone)</h4>
+                            <ol style="margin-left: 1.5rem; line-height: 1.8;">
+                                <li>Apri l'email</li>
+                                <li>Seleziona <strong>Visualizza</strong> → <strong>Messaggio</strong> → <strong>Tutti gli header</strong></li>
+                                <li>Copia il testo visualizzato</li>
+                            </ol>
+
+                            <div class="code-example" style="margin-top: 1rem;">
+Esempio di header email da cercare:
+
+<strong>Received: from</strong> scam-server.com (123.45.67.89)
+<strong>Return-Path:</strong> &lt;real-scammer@hidden-domain.com&gt;
+<strong>X-Originating-IP:</strong> [123.45.67.89]
+<strong>Authentication-Results:</strong> spf=fail smtp.mailfrom=scam.com
+                            </div>
+
+                            <div class="form-group" style="margin-top: 1.5rem;">
+                                <label for="email-headers">Incolla qui il codice sorgente completo dell'email</label>
+                                <textarea id="email-headers" rows="6" placeholder="Received: from mail.scam-broker.com by...&#10;Return-Path: <advisor@fake.com>&#10;..."></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- SECTION 8: Additional Evidence -->
+                    <div class="form-section" style="margin-top: 1.5rem;">
+                        <div class="form-section-title">
+                            <span>📎</span>
+                            <span>Prove Aggiuntive e Note</span>
+                        </div>
+                        <div class="form-group">
+                            <label for="additional-info">Screenshots, documenti, cronologia (descrizione)</label>
+                            <textarea id="additional-info" rows="4" placeholder="Descrivi qui qualsiasi altra prova in tuo possesso: screenshot della piattaforma, chat WhatsApp, contratti falsi, email ricevute. NON inviare file qui, descrivili solo. Ti contatteremo separatamente per l'invio sicuro."></textarea>
+                        </div>
+                    </div>
+
+                    <!-- SECTION 9: Your Odyssey Story -->
+                    <div class="form-section">
+                        <div class="form-section-title">
+                            <span>📖</span>
+                            <span>La Tua Odissea (Opzionale ma Potente)</span>
+                        </div>
+                        <div class="form-group">
+                            <label for="story">Racconta il tuo viaggio</label>
+                            <textarea id="story" rows="6" placeholder="Come sei stato contattato? Quali promesse ti hanno fatto? Come hai capito di essere stato truffato? Quali passi hai fatto per reagire? La tua storia può salvare altri marinai dalle Sirene."></textarea>
+                        </div>
+                    </div>
+
+                    <!-- SECTION 10: Contact -->
+                    <div class="form-section">
+                        <div class="form-section-title">
+                            <span>📧</span>
+                            <span>Rimani in Contatto (Opzionale)</span>
+                        </div>
+                        <div class="form-group">
+                            <label for="contact">La tua email</label>
+                            <input type="email" id="contact" placeholder="Solo se vuoi aggiornamenti sulla segnalazione">
+                            <div class="info-box">
+                                <strong>Privacy:</strong> La tua email NON sarà mai condivisa. Verrà usata solo per aggiornarti sul progresso della segnalazione e su sviluppi legali rilevanti.
+                            </div>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="submit-button">🚢 INVIA SEGNALAZIONE E AGGIUNGI PIN ALLA MAPPA</button>
                 </form>
             </div>
         </section>
@@ -1125,6 +1524,7 @@
             <a href="index.html">Database Autorità Finanziarie</a>
             <a href="#viaggio">Il Viaggio dell'Eroe</a>
             <a href="#prove">Le Prove Mitologiche</a>
+            <a href="#mappa">Mappa Truffe</a>
             <a href="#argonauti">Ranghi Argonauti</a>
         </div>
         <p style="margin-top: 2rem; opacity: 0.8;">
@@ -1135,7 +1535,150 @@
         </p>
     </footer>
 
+    <!-- Leaflet Map JavaScript -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" 
+            integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" 
+            crossorigin=""></script>
+
     <script>
+        // European Scam Map Initialization
+        let scamMap;
+        let markersLayer;
+
+        function initializeMap() {
+            // Center on Europe
+            scamMap = L.map('scam-map').setView([50.0, 10.0], 4);
+
+            // OpenStreetMap tiles
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '© OpenStreetMap contributors',
+                maxZoom: 18
+            }).addTo(scamMap);
+
+            // Markers layer
+            markersLayer = L.layerGroup().addTo(scamMap);
+
+            // Load existing reports
+            loadMapReports();
+        }
+
+        function loadMapReports() {
+            const reports = JSON.parse(localStorage.getItem('odysseyReports') || '[]');
+            let totalAmount = 0;
+            let countriesSet = new Set();
+            let argonautsSet = new Set();
+
+            reports.forEach(report => {
+                if (report.latitude && report.longitude) {
+                    addMarkerToMap(report);
+                }
+                
+                if (report.amountLost) {
+                    totalAmount += parseInt(report.amountLost) || 0;
+                }
+                
+                if (report.declaredCountry) {
+                    countriesSet.add(report.declaredCountry);
+                }
+                
+                if (report.contact) {
+                    argonautsSet.add(report.contact);
+                }
+            });
+
+            // Update stats
+            document.getElementById('total-reports').textContent = reports.length;
+            document.getElementById('countries-affected').textContent = countriesSet.size;
+            document.getElementById('total-amount-lost').textContent = '€' + totalAmount.toLocaleString('it-IT');
+            document.getElementById('argonauts-count').textContent = argonautsSet.size || reports.length;
+        }
+
+        function addMarkerToMap(report) {
+            const marker = L.marker([report.latitude, report.longitude], {
+                icon: L.icon({
+                    iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-red.png',
+                    shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/images/marker-shadow.png',
+                    iconSize: [25, 41],
+                    iconAnchor: [12, 41],
+                    popupAnchor: [1, -34],
+                    shadowSize: [41, 41]
+                })
+            });
+
+            const popupContent = `
+                <div class="popup-title">🚨 ${report.companyName || 'Truffa Segnalata'}</div>
+                <div class="popup-info"><strong>Tipo:</strong> ${getScamTypeLabel(report.scamType)}</div>
+                ${report.websiteUrl ? `<div class="popup-info"><strong>Sito:</strong> <a href="${report.websiteUrl}" target="_blank" rel="noopener">${report.websiteUrl}</a></div>` : ''}
+                ${report.declaredAddress ? `<div class="popup-info"><strong>Sede dichiarata:</strong> ${report.declaredAddress}</div>` : ''}
+                ${report.amountLost ? `<div class="popup-info"><strong>Importo:</strong> €${parseInt(report.amountLost).toLocaleString('it-IT')}</div>` : ''}
+                ${report.whatsappNumber ? `<div class="popup-info"><strong>WhatsApp:</strong> ${report.whatsappNumber}</div>` : ''}
+                <div class="popup-info" style="margin-top: 0.5rem; font-size: 0.8rem; color: #64748b;">Segnalato: ${new Date(report.timestamp).toLocaleDateString('it-IT')}</div>
+            `;
+
+            marker.bindPopup(popupContent);
+            marker.addTo(markersLayer);
+        }
+
+        function getScamTypeLabel(type) {
+            const labels = {
+                'forex': 'Trading Forex/CFD',
+                'crypto': 'Criptovalute',
+                'broker': 'Broker non autorizzato',
+                'ponzi': 'Schema Ponzi',
+                'romance': 'Romance Scam',
+                'phishing': 'Phishing',
+                'investment': 'Falsi investimenti',
+                'other': 'Altro'
+            };
+            return labels[type] || type;
+        }
+
+        // Geocoding function (simple country capitals fallback)
+        async function geocodeAddress(address, city, country) {
+            // Country capital coordinates (fallback se geocoding API non disponibile)
+            const countryCapitals = {
+                'UK': [51.5074, -0.1278],
+                'CY': [35.1264, 33.4299],
+                'MT': [35.8989, 14.5146],
+                'BG': [42.6977, 23.3219],
+                'EE': [59.4370, 24.7536],
+                'LT': [54.6872, 25.2797],
+                'CH': [46.9480, 7.4474],
+                'LU': [49.6116, 6.1319],
+                'IE': [53.3498, -6.2603],
+                'NL': [52.3676, 4.9041],
+                'HK': [22.3193, 114.1694],
+                'SG': [1.3521, 103.8198],
+                'AU': [-33.8688, 151.2093]
+            };
+
+            // Try nominatim API for precise geocoding
+            if (address && city) {
+                try {
+                    const query = encodeURIComponent(`${address}, ${city}`);
+                    const response = await fetch(`https://nominatim.openstreetmap.org/search?q=${query}&format=json&limit=1`);
+                    const data = await response.json();
+                    
+                    if (data && data.length > 0) {
+                        return [parseFloat(data[0].lat), parseFloat(data[0].lon)];
+                    }
+                } catch (error) {
+                    console.log('Geocoding fallback to country capital');
+                }
+            }
+
+            // Fallback to country capital
+            return countryCapitals[country] || [50.0, 10.0]; // Default Europe center
+        }
+
+        // Collapsible section toggle
+        function toggleCollapsible(header) {
+            const content = header.nextElementSibling;
+            content.classList.toggle('active');
+            const arrow = header.querySelector('span:last-child');
+            arrow.textContent = content.classList.contains('active') ? '▲' : '▼';
+        }
+
         // Progress Tracking System
         function updateProgress() {
             const checkboxes = document.querySelectorAll('.phase-checkbox input[type="checkbox"]');
@@ -1212,18 +1755,54 @@
         }
 
         // Form submission handler
-        document.getElementById('odyssey-form').addEventListener('submit', function(e) {
+        document.getElementById('odyssey-form').addEventListener('submit', async function(e) {
             e.preventDefault();
             
             const formData = {
+                // Phase & Type
                 phase: document.getElementById('current-phase').value,
                 scamType: document.getElementById('scam-type').value,
                 amountLost: document.getElementById('amount-lost').value,
-                scammerInfo: document.getElementById('scammer-info').value,
+                
+                // Company Details
+                companyName: document.getElementById('company-name').value,
+                websiteUrl: document.getElementById('website-url').value,
+                companyRegistration: document.getElementById('company-registration').value,
+                financialAuthorityReg: document.getElementById('financial-authority-reg').value,
+                
+                // Geographic
+                declaredAddress: document.getElementById('declared-address').value,
+                declaredCity: document.getElementById('declared-city').value,
+                declaredCountry: document.getElementById('declared-country').value,
+                
+                // MT4/MT5
+                mt4Account: document.getElementById('mt4-account').value,
+                mt4Server: document.getElementById('mt4-server').value,
+                
+                // Contact Methods
+                whatsappNumber: document.getElementById('whatsapp-number').value,
+                phoneNumbers: document.getElementById('phone-numbers').value,
+                scammerEmails: document.getElementById('scammer-emails').value,
+                emailHeaders: document.getElementById('email-headers').value,
+                
+                // Additional
+                additionalInfo: document.getElementById('additional-info').value,
                 story: document.getElementById('story').value,
                 contact: document.getElementById('contact').value,
+                
                 timestamp: new Date().toISOString()
             };
+
+            // Geocode address for map
+            if (formData.declaredCountry) {
+                const coords = await geocodeAddress(
+                    formData.declaredAddress, 
+                    formData.declaredCity, 
+                    formData.declaredCountry
+                );
+                formData.latitude = coords[0];
+                formData.longitude = coords[1];
+            }
 
             // Save to localStorage (in produzione: inviare a backend)
             let reports = JSON.parse(localStorage.getItem('odysseyReports') || '[]');
@@ -1231,12 +1810,29 @@
             localStorage.setItem('odysseyReports', JSON.stringify(reports));
 
             // Update trials counter
-            const trialsCount = reports.length;
-            document.getElementById('trials-overcome').textContent = trialsCount;
+            document.getElementById('trials-overcome').textContent = reports.length;
 
-            alert('🚢 Benvenuto nella flotta degli Argonauti!\n\nLa tua Odissea è iniziata. Riceverai aggiornamenti sulla tua email.\n\nRicorda: come Ulisse, la strada è lunga ma Itaca ti aspetta.');
+            // Add marker to map
+            if (formData.latitude && formData.longitude) {
+                addMarkerToMap(formData);
+                loadMapReports(); // Refresh stats
+            }
+
+            alert(`🚢 Benvenuto nella flotta degli Argonauti!
+
+La tua segnalazione è stata registrata con successo.
+${formData.declaredCountry ? '\n📍 Un nuovo pin rosso è apparso sulla Mappa Europea delle Truffe!' : ''}
+
+Riceverai aggiornamenti sulla tua email.
+
+Ricorda: come Ulisse, la strada è lunga ma Itaca ti aspetta.`);
             
             this.reset();
+            
+            // Scroll to map
+            if (formData.latitude) {
+                document.getElementById('mappa').scrollIntoView({ behavior: 'smooth' });
+            }
         });
 
         // Smooth scrolling for anchor links
@@ -1260,6 +1856,9 @@
             // Load trials count from localStorage
             const reports = JSON.parse(localStorage.getItem('odysseyReports') || '[]');
             document.getElementById('trials-overcome').textContent = reports.length;
+            
+            // Initialize map
+            initializeMap();
         });
 
         // Service Worker Registration
