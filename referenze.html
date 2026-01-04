@@ -21,10 +21,55 @@
             --ref-eu: #003399;
         }
         
+        html {
+            scroll-behavior: smooth;
+        }
+        
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             line-height: 1.6;
             color: #1e293b;
+        }
+
+        /* Ensure background stars never block interactions */
+        #starfield {
+            pointer-events: none;
+        }
+
+        .language-selector {
+            display: flex;
+            gap: 0.5rem;
+            justify-content: center;
+            margin: 1rem 0;
+        }
+
+        .lang-btn {
+            background: rgba(255,255,255,0.3);
+            border: 2px solid transparent;
+            color: white;
+            padding: 6px 12px;
+            border-radius: 15px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+
+        .lang-btn:hover {
+            background: rgba(255,255,255,0.5);
+            transform: translateY(-2px);
+        }
+
+        .lang-btn.active {
+            background: white;
+            color: var(--ref-blue);
+            border-color: white;
+        }
+
+        /* Ensure planets are always clickable above the starfield */
+        .planet {
+            z-index: 20;
+            pointer-events: auto;
         }
         
         .nav-header {
@@ -90,12 +135,78 @@
             text-align: center;
             margin: 3rem 0 2rem;
         }
+
+        /* Navigazione principale: barra superiore a scomparsa richiamabile portando il mouse sul bordo alto */
+        #main-top-nav {
+            background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+            padding: 1rem 0;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1100;
+            transform: translateY(-100%);
+            transition: transform 0.25s ease;
+        }
+
+        #main-top-nav.nav-visible {
+            transform: translateY(0);
+        }
         
         .documents-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 2rem;
             margin: 2rem 0;
+        }
+
+        /* Sezione Prevenzione Truffe: 5 banner orizzontali pieni schermo */
+        .prevenzione-banners {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            margin-top: 3rem;
+        }
+
+        .prevenzione-banner {
+            border-radius: 14px;
+            padding: 1.75rem 2rem;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+            background: white;
+            text-align: justify;
+        }
+
+        .prevenzione-banner h3,
+        .prevenzione-banner h4 {
+            margin-top: 0;
+        }
+
+        .banner-oane {
+            border-left: 6px solid #8B4789;
+        }
+
+        .banner-aarp-mental {
+            border-left: 6px solid #E13A3E;
+        }
+
+        .banner-aarp-servizi {
+            border-left: 6px solid #FFA500;
+        }
+
+        .banner-aarp-stats {
+            border-left: 6px solid #0066cc;
+        }
+
+        .banner-aarp-impatti {
+            background: linear-gradient(135deg, #DC143C 0%, #8B0000 100%);
+            color: white;
+            border-left: 6px solid #FFD700;
+        }
+
+        .banner-aarp-impatti h3,
+        .banner-aarp-impatti p {
+            color: inherit;
         }
         
         .document-card {
@@ -441,7 +552,9 @@
     <!-- Firebase SDK -->
     <script type="module">
         import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js';
-        import { getFirestore, doc, getDoc, setDoc, updateDoc, increment } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js';
+        import { getFirestore, doc, getDoc, setDoc, updateDoc, increment, collection, addDoc, getDocs, query, where } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js';
+        import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, sendEmailVerification, onAuthStateChanged, signOut } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js';
+        import { getAnalytics, logEvent } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-analytics.js';
 
         const firebaseConfig = {
             apiKey: "AIzaSyAwWuWSPsQBO0RrJFmMHJqrkMj02MgKR_8",
@@ -455,6 +568,29 @@
 
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
+        const auth = getAuth(app);
+        const analytics = getAnalytics(app);
+
+        // Espone riferimenti principali a Firestore/Auth per altri script non-module
+        window.firestoreDb = db;
+        window.firebaseAuth = auth;
+        window.fsDoc = doc;
+        window.fsGetDoc = getDoc;
+        window.fsSetDoc = setDoc;
+        window.fsUpdateDoc = updateDoc;
+        window.fsIncrement = increment;
+        window.fsCollection = collection;
+        window.fsAddDoc = addDoc;
+        window.fsGetDocs = getDocs;
+        window.fsQuery = query;
+        window.fsWhere = where;
+
+        // Analytics: Traccia pagina visitata
+        logEvent(analytics, 'page_view', {
+            page_title: 'Referenze Istituzionali',
+            page_location: window.location.href,
+            page_path: window.location.pathname
+        });
 
         window.ratingSystem = {
             db: db,
@@ -579,18 +715,95 @@
             }
         };
 
+        // 🔐 SISTEMA AUTENTICAZIONE UTENTI
+        window.authSystem = {
+            currentUser: null,
+            
+            async register(email, password) {
+                try {
+                    const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+                    await sendEmailVerification(userCredential.user);
+                    logEvent(analytics, 'sign_up', { method: 'email' });
+                    
+                    // Salva profilo utente in Firestore
+                    await setDoc(doc(db, 'users', userCredential.user.uid), {
+                        email: email,
+                        registeredAt: new Date().toISOString(),
+                        emailVerified: false,
+                        newsletter: true,
+                        watermark: `USER_${userCredential.user.uid}_${Date.now()}`
+                    });
+                    
+                    return { success: true, message: '✅ Registrazione completata! Controlla la tua email per verificare l\'account.' };
+                } catch (error) {
+                    console.error('Errore registrazione:', error);
+                    let message = 'Errore durante la registrazione';
+                    if (error.code === 'auth/email-already-in-use') message = '⚠️ Email già registrata';
+                    if (error.code === 'auth/weak-password') message = '⚠️ Password troppo debole (min 6 caratteri)';
+                    return { success: false, message };
+                }
+            },
+            
+            async login(email, password) {
+                try {
+                    const userCredential = await signInWithEmailAndPassword(auth, email, password);
+                    logEvent(analytics, 'login', { method: 'email' });
+                    return { success: true, message: '✅ Accesso effettuato!', user: userCredential.user };
+                } catch (error) {
+                    console.error('Errore login:', error);
+                    let message = 'Email o password errati';
+                    if (error.code === 'auth/user-not-found') message = '⚠️ Utente non trovato';
+                    if (error.code === 'auth/wrong-password') message = '⚠️ Password errata';
+                    return { success: false, message };
+                }
+            },
+            
+            async logout() {
+                await signOut(auth);
+                logEvent(analytics, 'logout');
+                this.currentUser = null;
+            }
+        };
+
+        // Monitora stato autenticazione
+        onAuthStateChanged(auth, async (user) => {
+            window.authSystem.currentUser = user;
+            const authBtn = document.getElementById('authButton');
+            const userInfo = document.getElementById('userInfo');
+            
+            if (user) {
+                if (authBtn) authBtn.textContent = '🔓 Logout';
+                if (userInfo) {
+                    userInfo.innerHTML = `👤 ${user.email} ${user.emailVerified ? '✅' : '⚠️ Email non verificata'}`;
+                    userInfo.style.display = 'block';
+                }
+                
+                // Watermark dinamico per utente loggato
+                console.log(`%c🔒 Sessione protetta: ${user.uid}`, 'color: green; font-weight: bold;');
+                logEvent(analytics, 'user_session', { user_id: user.uid });
+            } else {
+                if (authBtn) authBtn.textContent = '🔑 Login/Registrati';
+                if (userInfo) userInfo.style.display = 'none';
+                
+                // Watermark anonimo con timestamp univoco
+                const anonymousWatermark = `ANON_${Date.now()}_${Math.random().toString(36).substring(7)}`;
+                console.log(`%c⚠️ Sessione anonima tracciata: ${anonymousWatermark}`, 'color: orange; font-weight: bold;');
+            }
+        });
+
         document.addEventListener('DOMContentLoaded', () => {
             window.ratingSystem.initStars('rating-fca-firm-checker', 'fca-firm-checker');
             window.ratingSystem.initStars('rating-ofcom', 'ofcom-online-safety');
             window.ratingSystem.initStars('rating-compliance-corylated', 'compliance-corylated');
             window.ratingSystem.initStars('rating-dsa-eu', 'dsa-notice-action');
             window.ratingSystem.initStars('rating-agcm-italia', 'agcm-antitrust-italia');
+            window.ratingSystem.initStars('rating-adusbef', 'adusbef-consumatori');
         });
     </script>
 </head>
 <body>
-    <!-- Main Navigation -->
-    <nav style="background: linear-gradient(135deg, #1e293b 0%, #334155 100%); padding: 1rem 0; box-shadow: 0 4px 12px rgba(0,0,0,0.15); position: sticky; top: 0; z-index: 999;">
+    <!-- Main Navigation (compare quando il mouse tocca il bordo superiore) -->
+    <nav id="main-top-nav" class="nav-visible">
         <div style="max-width: 1200px; margin: 0 auto; display: flex; gap: 1.5rem; justify-content: center; align-items: center; flex-wrap: wrap; padding: 0 1rem;">
             <a href="index.html" style="color: white; text-decoration: none; font-weight: 500; font-size: 1.05rem; padding: 0.5rem 1.5rem; background: rgba(255,255,255,0.05); border-radius: 8px; transition: all 0.3s ease;" onmouseover="this.style.background='rgba(255,255,255,0.15)';" onmouseout="this.style.background='rgba(255,255,255,0.05)';">
                 🏠 Database Autorità
@@ -598,213 +811,370 @@
             <a href="odissea.html" style="color: white; text-decoration: none; font-weight: 500; font-size: 1.05rem; padding: 0.5rem 1.5rem; background: rgba(255,255,255,0.05); border-radius: 8px; transition: all 0.3s ease;" onmouseover="this.style.background='rgba(255,255,255,0.15)';" onmouseout="this.style.background='rgba(255,255,255,0.05)';">
                 🌊 Odissea Digitale
             </a>
-            <a href="referenze.html" style="color: white; text-decoration: none; font-weight: bold; font-size: 1.05rem; padding: 0.5rem 1.5rem; background: rgba(255,255,255,0.15); border-radius: 8px; transition: all 0.3s ease; border: 2px solid rgba(255,255,255,0.2);" onmouseover="this.style.background='rgba(255,255,255,0.25)';" onmouseout="this.style.background='rgba(255,255,255,0.15)';">
+            <a href="referenze.html" style="color: white; text-decoration: none; font-weight: 500; font-size: 1.05rem; padding: 0.5rem 1.5rem; background: rgba(255,255,255,0.05); border-radius: 8px; transition: all 0.3s ease;" onmouseover="this.style.background='rgba(255,255,255,0.15)';" onmouseout="this.style.background='rgba(255,255,255,0.05)';">
                 📜 Referenze Istituzionali
             </a>
+            <a href="curriculum.html" style="color: white; text-decoration: none; font-weight: bold; font-size: 1.05rem; padding: 0.5rem 1.5rem; background: rgba(255,215,0,0.15); border-radius: 8px; transition: all 0.3s ease; border: 2px solid rgba(255,215,0,0.3);" onmouseover="this.style.background='rgba(255,215,0,0.25)';" onmouseout="this.style.background='rgba(255,215,0,0.15)';">
+                👨‍⚖️ Avv Stanca - Curriculum
+            </a>
+            
+            <!-- User Info & Auth Button -->
+            <div style="display: flex; gap: 1rem; align-items: center; margin-left: auto;">
+                <span id="userInfo" style="color: #FFD700; font-size: 0.9rem; display: none;"></span>
+                <button id="authButton" onclick="toggleAuthModal()" style="background: linear-gradient(135deg, #667eea, #764ba2); color: white; border: none; padding: 0.6rem 1.2rem; border-radius: 8px; font-weight: 600; cursor: pointer; font-size: 0.95rem; transition: transform 0.2s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+                    🔑 Login/Registrati
+                </button>
+            </div>
         </div>
     </nav>
-    <nav class="nav-header">
-        <div class="nav-container">
-            <a href="index.html" class="nav-logo">🏛️ Referenze Istituzionali</a>
+    
+    <!-- Language Selector -->
+    <nav class="language-selector" role="navigation" aria-label="Language selection">
+        <button class="lang-btn active" onclick="changeLanguage('it')" aria-label="Italiano">🇮🇹 IT</button>
+        <button class="lang-btn" onclick="changeLanguage('en')" aria-label="English">🇬🇧 EN</button>
+        <button class="lang-btn" onclick="changeLanguage('fr')" aria-label="Français">🇫🇷 FR</button>
+        <button class="lang-btn" onclick="changeLanguage('de')" aria-label="Deutsch">🇩🇪 DE</button>
+        <button class="lang-btn" onclick="changeLanguage('es')" aria-label="Español">🇪🇸 ES</button>
+    </nav>
+    <!-- Sticky Menu (appare dopo scroll) -->
+    <nav id="sticky-menu" style="display: none; position: fixed; top: 0; left: 0; right: 0; background: rgba(10, 17, 40, 0.95); backdrop-filter: blur(10px); padding: 0.8rem 2rem; z-index: 999; box-shadow: 0 4px 20px rgba(0,0,0,0.3); transition: all 0.3s ease;">
+        <div style="max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
+            <div style="color: #FFD700; font-weight: bold; font-size: 1.1rem;">☀️ Security Financial</div>
+            <div style="display: flex; gap: 1.5rem; flex-wrap: wrap;">
+                <a href="#autorita-vigilanza" style="color: #87CEEB; text-decoration: none; font-size: 0.9rem; transition: color 0.3s;" onmouseover="this.style.color='#FFD700'" onmouseout="this.style.color='#87CEEB'">🪐 Autorità</a>
+                <a href="#fonti-istituzionali" style="color: #90EE90; text-decoration: none; font-size: 0.9rem; transition: color 0.3s;" onmouseover="this.style.color='#FFD700'" onmouseout="this.style.color='#90EE90'">🌍 Fonti Istituzionali</a>
+                <a href="#associazioni-consumatori" style="color: #DDA0DD; text-decoration: none; font-size: 0.9rem; transition: color 0.3s;" onmouseover="this.style.color='#FFD700'" onmouseout="this.style.color='#DDA0DD'">🛡️ Consumatori</a>
+                <a href="#forze-polizia" style="color: #38bdf8; text-decoration: none; font-size: 0.9rem; transition: color 0.3s;" onmouseover="this.style.color='#FFD700'" onmouseout="this.style.color='#38bdf8'">🚔 Forze di Polizia</a>
+                <a href="#prevenzione-truffe" style="color: #FFB6C1; text-decoration: none; font-size: 0.9rem; transition: color 0.3s;" onmouseover="this.style.color='#FFD700'" onmouseout="this.style.color='#FFB6C1'">🤝 Prevenzione Truffe</a>
+                <a href="#supporto-psicologico" style="color: #FFA07A; text-decoration: none; font-size: 0.9rem; transition: color 0.3s;" onmouseover="this.style.color='#FFD700'" onmouseout="this.style.color='#FFA07A'">💚 AARP Supporto</a>
+                <a href="#mental-health" style="color: #FF6B6B; text-decoration: none; font-size: 0.9rem; transition: color 0.3s;" onmouseover="this.style.color='#FFD700'" onmouseout="this.style.color='#FF6B6B'">🔴 Mental Health</a>
+            </div>
         </div>
     </nav>
 
-    <section class="hero">
-        <div class="hero-content">
-            <h1>Avvocato Marcello Stanca</h1>
-            <p>25 Anni di Battaglie per i Diritti dei Cittadini</p>
-            <div class="credentials-badges">
-                <div class="credential-badge">🏛️ Presidente AMEV Firenze dal 1999</div>
-                <div class="credential-badge">🇪🇺 2 Petizioni Parlamento UE Accettate</div>
-                <div class="credential-badge">🎙️ Camera Deputati</div>
+    <!-- Solar System Navigation Hero -->
+    <section style="background: #0a1128; position: relative; overflow: hidden; min-height: 70vh; display: flex; align-items: center; justify-content: center;">
+        <!-- Starfield Canvas -->
+        <canvas id="starfield" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></canvas>
+        
+        <!-- Solar System Container -->
+        <div style="position: relative; width: 100%; max-width: 1400px; height: 500px; margin: 2rem auto;">
+            <!-- Sun (Centro) -->
+            <div id="sun" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 180px; height: 180px; background: radial-gradient(circle at 30% 30%, #FFD700, #FFA500, #FF8C00); border-radius: 50%; box-shadow: 0 0 60px rgba(255, 215, 0, 0.8), 0 0 100px rgba(255, 165, 0, 0.6), inset 0 0 40px rgba(255, 140, 0, 0.4); cursor: pointer; z-index: 10; animation: sunPulse 4s ease-in-out infinite;">
+                <div style="position: absolute; bottom: -50px; left: 50%; transform: translateX(-50%); white-space: nowrap; color: #00FF7F; font-weight: bold; font-size: 1.3rem; text-shadow: 0 0 10px rgba(0, 255, 127, 0.8);">Security Financial</div>
+            </div>
+
+            <!-- Planet 1: Autorità Vigilanza (Mercurio - grigio) -->
+            <div class="planet-orbit" style="position: absolute; top: 50%; left: 50%; width: 280px; height: 140px; border: 2px solid rgba(135, 206, 235, 0.3); border-radius: 50%; transform: translate(-50%, -50%); animation: none;">
+                <a href="#autorita-vigilanza" class="planet" data-planet="mercury" style="position: absolute; top: 0; left: 50%; transform: translate(-50%, -50%); width: 45px; height: 45px; background: radial-gradient(circle at 30% 30%, #B8B8B8, #808080, #505050); border-radius: 50%; box-shadow: 0 0 18px rgba(184, 184, 184, 0.6), inset -8px -8px 16px rgba(0,0,0,0.3); cursor: pointer; text-decoration: none; animation: orbitMercury 16s linear infinite;">
+                    <span style="position: absolute; bottom: -30px; left: 50%; transform: translateX(-50%); white-space: nowrap; color: #87CEEB; font-size: 0.8rem; font-weight: 600; text-shadow: 0 0 8px rgba(135, 206, 235, 0.8);">🪐 Autorità</span>
+                </a>
+            </div>
+
+            <!-- Planet 2: Banche Centrali (Venere - verde acqua) -->
+            <div class="planet-orbit" style="position: absolute; top: 50%; left: 50%; width: 380px; height: 190px; border: 2px solid rgba(144, 238, 144, 0.3); border-radius: 50%; transform: translate(-50%, -50%); animation: none;">
+                <a href="#fonti-istituzionali" class="planet" data-planet="venus" style="position: absolute; top: 0; left: 50%; transform: translate(-50%, -50%); width: 55px; height: 55px; background: radial-gradient(circle at 30% 30%, #90EE90, #3CB371, #2E8B57); border-radius: 50%; box-shadow: 0 0 22px rgba(144, 238, 144, 0.7), inset -10px -10px 20px rgba(0,0,0,0.3); cursor: pointer; text-decoration: none; animation: orbitVenus 22s linear infinite;">
+                    <span style="position: absolute; bottom: -30px; left: 50%; transform: translateX(-50%); white-space: nowrap; color: #90EE90; font-size: 0.8rem; font-weight: 600; text-shadow: 0 0 8px rgba(144, 238, 144, 0.8);">🌍 Fonti Istituzionali</span>
+                </a>
+            </div>
+
+            <!-- Planet 3: Associazioni Consumatori (Terra - blu/viola) -->
+            <div class="planet-orbit" style="position: absolute; top: 50%; left: 50%; width: 480px; height: 240px; border: 2px solid rgba(221, 160, 221, 0.3); border-radius: 50%; transform: translate(-50%, -50%); animation: none;">
+                <a href="#associazioni-consumatori" class="planet" data-planet="earth" style="position: absolute; top: 0; left: 50%; transform: translate(-50%, -50%); width: 60px; height: 60px; background: radial-gradient(circle at 30% 30%, #DDA0DD, #9370DB, #6A5ACD); border-radius: 50%; box-shadow: 0 0 26px rgba(221, 160, 221, 0.8), inset -10px -10px 22px rgba(0,0,0,0.3); cursor: pointer; text-decoration: none; animation: orbitEarth 28s linear infinite;">
+                    <span style="position: absolute; bottom: -30px; left: 50%; transform: translateX(-50%); white-space: nowrap; color: #DDA0DD; font-size: 0.8rem; font-weight: 600; text-shadow: 0 0 8px rgba(221, 160, 221, 0.8);">🛡️ Consumatori</span>
+                </a>
+            </div>
+
+            <!-- Planet 4: Organizzazioni Tutela (Marte - rosa) -->
+            <div class="planet-orbit" style="position: absolute; top: 50%; left: 50%; width: 580px; height: 280px; border: 2px solid rgba(255, 182, 193, 0.3); border-radius: 50%; transform: translate(-50%, -50%); animation: none;">
+                <a href="#prevenzione-truffe" class="planet" data-planet="mars" style="position: absolute; top: 0; left: 50%; transform: translate(-50%, -50%); width: 50px; height: 50px; background: radial-gradient(circle at 30% 30%, #FFB6C1, #FF69B4, #FF1493); border-radius: 50%; box-shadow: 0 0 22px rgba(255, 182, 193, 0.7), inset -9px -9px 18px rgba(0,0,0,0.3); cursor: pointer; text-decoration: none; animation: orbitMars 32s linear infinite;">
+                    <span style="position: absolute; bottom: -30px; left: 50%; transform: translateX(-50%); white-space: nowrap; color: #FFB6C1; font-size: 0.8rem; font-weight: 600; text-shadow: 0 0 8px rgba(255, 182, 193, 0.8);">🤝 Prevenzione</span>
+                </a>
+            </div>
+
+            <!-- Planet 5: Supporto Psicologico (Giove - arancione) -->
+            <div class="planet-orbit" style="position: absolute; top: 50%; left: 50%; width: 680px; height: 320px; border: 2px solid rgba(255, 160, 122, 0.3); border-radius: 50%; transform: translate(-50%, -50%); animation: none;">
+                <a href="#supporto-psicologico" class="planet" data-planet="jupiter" style="position: absolute; top: 0; left: 50%; transform: translate(-50%, -50%); width: 70px; height: 70px; background: radial-gradient(circle at 30% 30%, #FFA07A, #FF8C69, #FF7F50); border-radius: 50%; box-shadow: 0 0 28px rgba(255, 160, 122, 0.8), inset -12px -12px 24px rgba(0,0,0,0.3); cursor: pointer; text-decoration: none; animation: orbitJupiter 36s linear infinite;">
+                    <span style="position: absolute; bottom: -34px; left: 50%; transform: translateX(-50%); white-space: nowrap; color: #FFA07A; font-size: 0.85rem; font-weight: 600; text-shadow: 0 0 10px rgba(255, 160, 122, 0.8);">💚 AARP Supporto</span>
+                </a>
+            </div>
+
+            <!-- Planet 6: Mental Health Impact (Pianeta Rosso) -->
+            <div class="planet-orbit" style="position: absolute; top: 50%; left: 50%; width: 780px; height: 360px; border: 2px solid rgba(255, 107, 107, 0.3); border-radius: 50%; transform: translate(-50%, -50%); animation: none;">
+                <a href="#mental-health" class="planet" data-planet="mental" style="position: absolute; top: 0; left: 50%; transform: translate(-50%, -50%); width: 60px; height: 60px; background: radial-gradient(circle at 30% 30%, #FF6B6B, #EE5A52, #DC143C); border-radius: 50%; box-shadow: 0 0 26px rgba(255, 107, 107, 0.8), inset -11px -11px 22px rgba(0,0,0,0.4); cursor: pointer; text-decoration: none; animation: orbitMental 42s linear infinite;">
+                    <span style="position: absolute; bottom: -34px; left: 50%; transform: translateX(-50%); white-space: nowrap; color: #FF6B6B; font-size: 0.85rem; font-weight: 600; text-shadow: 0 0 10px rgba(255, 107, 107, 0.8);">🔴 Mental Health Impact</span>
+                </a>
             </div>
         </div>
+
+        <!-- Admin Access Button (bottom right corner) -->
+        <button onclick="showAdminLogin()" style="position: absolute; bottom: 20px; right: 20px; background: rgba(255, 215, 0, 0.1); border: 2px solid rgba(255, 215, 0, 0.3); color: #FFD700; padding: 0.5rem 1rem; border-radius: 8px; cursor: pointer; font-size: 0.85rem; transition: all 0.3s; backdrop-filter: blur(5px);" onmouseover="this.style.background='rgba(255,215,0,0.2)'" onmouseout="this.style.background='rgba(255,215,0,0.1)'">
+            🔐 Admin Access
+        </button>
     </section>
 
-    <div class="container">
-        <!-- CASE STUDY: UPTOS -->
-        <section class="case-study">
-            <h2 class="section-title">💰 Caso UPTOS LLC: €339.000 Recuperati</h2>
-            <p class="section-subtitle">Decreto Ingiuntivo Internazionale | Italia → St Vincent/Grenadines → Estonia</p>
+    <!-- CSS Animations -->
+    <style>
+        @keyframes sunPulse {
+            0%, 100% { transform: translate(-50%, -50%) scale(1); }
+            50% { transform: translate(-50%, -50%) scale(1.05); }
+        }
+        @keyframes orbitMercury {
+            from { transform: translate(-50%, -50%) rotate(0deg) translateX(150px) rotate(0deg); }
+            to { transform: translate(-50%, -50%) rotate(360deg) translateX(150px) rotate(-360deg); }
+        }
+        @keyframes orbitVenus {
+            from { transform: translate(-50%, -50%) rotate(0deg) translateX(210px) rotate(0deg); }
+            to { transform: translate(-50%, -50%) rotate(360deg) translateX(210px) rotate(-360deg); }
+        }
+        @keyframes orbitEarth {
+            from { transform: translate(-50%, -50%) rotate(0deg) translateX(270px) rotate(0deg); }
+            to { transform: translate(-50%, -50%) rotate(360deg) translateX(270px) rotate(-360deg); }
+        }
+        @keyframes orbitMars {
+            from { transform: translate(-50%, -50%) rotate(0deg) translateX(330px) rotate(0deg); }
+            to { transform: translate(-50%, -50%) rotate(360deg) translateX(330px) rotate(-360deg); }
+        }
+        @keyframes orbitJupiter {
+            from { transform: translate(-50%, -50%) rotate(0deg) translateX(390px) rotate(0deg); }
+            to { transform: translate(-50%, -50%) rotate(360deg) translateX(390px) rotate(-360deg); }
+        }
+        @keyframes orbitMental {
+            from { transform: translate(-50%, -50%) rotate(0deg) translateX(450px) rotate(0deg); }
+            to { transform: translate(-50%, -50%) rotate(360deg) translateX(450px) rotate(-360deg); }
+        }
+        .planet:hover {
+            transform: translate(-50%, -50%) scale(1.2) !important;
+            transition: transform 0.3s ease;
+        }
+
+        /* Quando il mouse entra nell'orbita, ferma il pianeta per facilitare il click */
+        .planet-orbit:hover .planet {
+            animation-play-state: paused !important;
+        }
+
+        /* Evidenzia il pianeta quando è a fuoco da tastiera */
+        .planet:focus-visible {
+            outline: 2px solid #ffffff;
+            outline-offset: 4px;
+        }
+    </style>
+
+    <!-- Starfield JavaScript -->
+    <script>
+        // Starfield animation
+        const canvas = document.getElementById('starfield');
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        const stars = [];
+        for (let i = 0; i < 200; i++) {
+            stars.push({
+                x: Math.random() * canvas.width,
+                y: Math.random() * canvas.height,
+                radius: Math.random() * 1.5,
+                speed: Math.random() * 0.5
+            });
+        }
+
+        function drawStars() {
+            ctx.fillStyle = '#0a1128';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
             
-            <div class="case-overview">
-                <div class="case-stat">
-                    <div class="stat-number">€339.000</div>
-                    <div class="stat-label">Decreto Esecutivo</div>
-                </div>
-                <div class="case-stat">
-                    <div class="stat-number">3</div>
-                    <div class="stat-label">Giurisdizioni</div>
-                </div>
-                <div class="case-stat">
-                    <div class="stat-number">5</div>
-                    <div class="stat-label">Autorità Coinvolte</div>
-                </div>
-            </div>
-
-            <h3 style="text-align: center; color: var(--ref-blue); margin: 3rem 0 2rem;">📍 Timeline Azione Legale Transnazionale</h3>
+            ctx.fillStyle = 'white';
+            stars.forEach(star => {
+                ctx.beginPath();
+                ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
+                ctx.fill();
+                
+                star.y += star.speed;
+                if (star.y > canvas.height) star.y = 0;
+            });
             
-            <div class="timeline">
-                <div class="timeline-item">
-                    <div class="timeline-icon">🇮🇹</div>
-                    <div class="timeline-content">
-                        <h4>FASE 1: Decreto Ingiuntivo Italia</h4>
-                        <p><strong>Tribunale di Firenze</strong></p>
-                        <p>Emissione Decreto €339.000 contro UPTOS LLC (St Vincent & Grenadines)</p>
-                        <p class="timeline-doc">📄 Decreto + Traduzione Asseverata + Apostilla Procura Repubblica</p>
-                        <a href="DECRETO_ingiuntivo_UPTOS_con_traduzione_asseverata_ed_apostilla.pdf" class="doc-link" download>📥 Download Decreto</a>
-                    </div>
-                </div>
+            requestAnimationFrame(drawStars);
+        }
+        drawStars();
 
-                <div class="timeline-item">
-                    <div class="timeline-icon">🌴</div>
-                    <div class="timeline-content">
-                        <h4>FASE 2: Indagini St Vincent & Grenadines</h4>
-                        <p><strong>Financial Services Authority (FSA) + FIU</strong></p>
-                        <p>Richiesta informazioni autorità di vigilanza finanziaria caraibica</p>
-                        <p>Segnalazione UIF Antiriciclaggio per transazioni sospette</p>
-                        <p class="timeline-doc">📄 Documenti FSA + FIU + UIF Procedures</p>
-                    </div>
-                </div>
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
 
-                <div class="timeline-item">
-                    <div class="timeline-icon">🇪🇪</div>
-                    <div class="timeline-content">
-                        <h4>FASE 3: Pignoramento Estonia</h4>
-                        <p><strong>Ufficiale Giudiziario Tallinn</strong></p>
-                        <p>Esecuzione pignoramento contro <strong>Burgo Blan OÜ</strong> (complice UPTOS)</p>
-                        <p>Pubblicazione Gazzetta Ufficiale Estonia</p>
-                        <p class="timeline-doc">📄 Atti Ufficiale Giudiziario + Traduzione</p>
-                        <a href="Pignoramento Traduzione_atti_ufficiale_giudiziario_Tallinn_Estonia.pdf" class="doc-link" download>📥 Download Pignoramento</a>
-                    </div>
-                </div>
+        // Sticky menu on scroll + barra principale richiamabile
+        window.addEventListener('scroll', () => {
+            const stickyMenu = document.getElementById('sticky-menu');
+            if (window.scrollY > 800) {
+                stickyMenu.style.display = 'block';
+            } else {
+                stickyMenu.style.display = 'none';
+            }
 
-                <div class="timeline-item">
-                    <div class="timeline-icon">🇬🇧</div>
-                    <div class="timeline-content">
-                        <h4>FASE 4: Denuncia Action Fraud UK</h4>
-                        <p><strong>National Fraud & Cyber Crime Reporting Centre</strong></p>
-                        <p>Segnalazione contro Clear Junction Ltd (banca intermediaria)</p>
-                        <p>Caso preso in carico per investigazione</p>
-                        <p class="timeline-doc">📄 Conferma Action Fraud + Report Crime</p>
-                        <a href="UPTOS conferma ACTION FRAUD lavorazione caso investigativo.pdf" class="doc-link" download>📥 Download Conferma</a>
-                    </div>
-                </div>
+            const mainNav = document.getElementById('main-top-nav');
+            if (!mainNav) return;
 
-                <div class="timeline-item">
-                    <div class="timeline-icon">🇪🇪</div>
-                    <div class="timeline-content">
-                        <h4>FASE 5: UIF Estonia</h4>
-                        <p><strong>Unità Informazione Finanziaria Estonia</strong></p>
-                        <p>Segnalazione antiriciclaggio su Burgo Blan OÜ</p>
-                        <p>Richiesta blocco conti e sequestro strumenti usati per truffa</p>
-                        <p class="timeline-doc">📄 UIF Estonia Segnalazione</p>
-                    </div>
-                </div>
-            </div>
+            // In alto alla pagina la barra resta visibile
+            if (window.scrollY < 80) {
+                mainNav.classList.add('nav-visible');
+            }
+        });
 
-            <div class="legal-strategy">
-                <h3>⚖️ Strategia Legale Vincente</h3>
-                <div class="strategy-grid">
-                    <div class="strategy-card">
-                        <h4>🔨 Decreto Ingiuntivo (Art. 633 c.p.c.)</h4>
-                        <p>Procedura rapida senza contraddittorio preventivo. Esecutività immediata.</p>
-                    </div>
-                    <div class="strategy-card">
-                        <h4>🌍 Apostilla Convenzione dell'Aia</h4>
-                        <p>Validità mondiale del decreto. Riconoscimento automatico in 120 Paesi.</p>
-                    </div>
-                    <div class="strategy-card">
-                        <h4>🔗 Identificazione Complici</h4>
-                        <p>Burgo Blan OÜ (Estonia) = conto bancario utilizzato da UPTOS per incassare truffe.</p>
-                    </div>
-                    <div class="strategy-card">
-                        <h4>🎯 Multi-Giurisdizione Coordinata</h4>
-                        <p>Pressione simultanea: Italia (tribunale) + UK (polizia) + Estonia (pignoramento) + St Vincent (FSA/FIU)</p>
-                    </div>
-                </div>
-            </div>
+        // Mostra la barra principale quando il mouse tocca il bordo superiore dello schermo
+        document.addEventListener('mousemove', (event) => {
+            const mainNav = document.getElementById('main-top-nav');
+            if (!mainNav) return;
 
-            <div class="case-result">
-                <h3>✅ Risultato</h3>
-                <p style="font-size: 1.3rem; line-height: 1.8;">
-                    <strong>Sentenza esecutiva in 3 giurisdizioni</strong><br>
-                    Pignoramento pubblicato in Gazzetta Ufficiale Estonia<br>
-                    Caso investigativo attivo Action Fraud UK<br>
-                    Segnalazioni UIF antiriciclaggio in 2 Paesi
+            if (event.clientY <= 8) {
+                mainNav.classList.add('nav-visible');
+            } else if (window.scrollY > 120) {
+                // Se siamo scesi nella pagina e il mouse non è più sul bordo alto, nascondi di nuovo la barra
+                mainNav.classList.remove('nav-visible');
+            }
+        });
+
+        // Nessun handler personalizzato sui pianeti: lasciamo che i link ancora (#ancora)
+        // usino il comportamento nativo del browser, combinato con
+        // html { scroll-behavior: smooth; } per lo scroll dolce.
+
+        // Admin Login Modal
+        function showAdminLogin() {
+            const password = prompt('🔐 Inserisci la password admin:');
+            if (password === 'tutela2026') {
+                window.location.href = '#admin-panel';
+                alert('✅ Accesso autorizzato! Scroll fino alla fine della pagina per il pannello admin.');
+            } else if (password !== null) {
+                alert('❌ Password errata!');
+            }
+        }
+    </script>
+
+        <!-- Sommario testuale dei pianeti / link principali -->
+        <section id="sommario-referenze" style="background: #020617; color: #e5e7eb; padding: 3rem 1.5rem 4rem 1.5rem;">
+            <div style="max-width: 1200px; margin: 0 auto;">
+                <h2 style="text-align: center; font-size: 1.8rem; margin-bottom: 0.75rem; color: #f9fafb;">🔭 Partecipa alla missione Security Financial! Scegli il tuo Stargate !</h2>
+                <p style="text-align: center; max-width: 780px; margin: 0 auto 2.5rem auto; color: #9ca3af; line-height: 1.7;">
+                    Scegli un <strong>pianeta</strong> oppure un <strong>link testuale</strong> per raggiungere subito la sezione di tuo interesse.
+                    I colori richiamano i pianeti in orbita sopra questo sommario e ogni card è uno <strong>Stargate</strong> verso una missione Security Financial.
                 </p>
-                <div class="case-quote">
-                    <p><em>"Se ho ottenuto un decreto da €339.000 eseguibile contro un paradiso fiscale caraibico,<br>posso guidarti nel recupero dei tuoi capitali."</em></p>
-                    <p><strong>— Avv. Marcello Stanca</strong></p>
-                </div>
-            </div>
-        </section>
 
-        <!-- Media Coverage Section -->
-        <section class="media-section" style="margin-top: 5rem;">
-            <h2 class="section-title">🎙️ Interventi Pubblici & Media</h2>
-            <p class="section-subtitle">Radio Radicale, TikTok, YouTube - Divulgazione e sensibilizzazione truffe finanziarie</p>
-            
-            <div class="media-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 2rem; margin-top: 3rem;">
-                <!-- YouTube Short Card -->
-                <div class="media-card" style="background: white; border-radius: 12px; padding: 2rem; box-shadow: 0 4px 12px rgba(0,0,0,0.1); border-left: 5px solid #FF0000;">
-                    <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem;">
-                        <span style="font-size: 3rem;">📺</span>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.5rem;">
+                    <!-- Autorità -->
+                    <a href="#autorita-vigilanza" style="display: flex; align-items: center; gap: 0.8rem; padding: 1rem 1.2rem; border-radius: 12px; text-decoration: none; background: rgba(15,23,42,0.9); border-left: 4px solid #87CEEB; color: #e5e7eb;">
+                        <span style="font-size: 1.4rem;">🪐</span>
                         <div>
-                            <h3 style="color: #FF0000; margin: 0; font-size: 1.3rem;">YouTube Short</h3>
-                            <p style="margin: 0; color: #64748b; font-size: 0.9rem;">Video divulgativo truffe</p>
+                            <div style="font-weight: 700; color: #bae6fd;">Autorità di Vigilanza</div>
+                            <div style="font-size: 0.85rem; color: #9ca3af;">Scopri chi vigila su banche, mercati e pagamenti</div>
                         </div>
-                    </div>
-                    <p style="margin-bottom: 1.5rem; color: #1e293b;">
-                        <strong>Truffe finanziarie:</strong> Come riconoscerle e difendersi. Testimonianza diretta e consigli pratici.
-                    </p>
-                    <a href="https://youtube.com/shorts/XAXrJVzkQPc?si=aVIpYAGxrqIBjg2c" target="_blank" rel="noopener noreferrer" class="download-button" style="background: #FF0000; display: inline-block;">
-                        ▶️ Guarda il Video
+                    </a>
+
+                    <!-- Fonti Istituzionali -->
+                    <a href="#fonti-istituzionali" style="display: flex; align-items: center; gap: 0.8rem; padding: 1rem 1.2rem; border-radius: 12px; text-decoration: none; background: rgba(12,24,20,0.9); border-left: 4px solid #90EE90; color: #e5e7eb;">
+                        <span style="font-size: 1.4rem;">🌍</span>
+                        <div>
+                            <div style="font-weight: 700; color: #bbf7d0;">Fonti Istituzionali UE / OCSE</div>
+                            <div style="font-size: 0.85rem; color: #9ca3af;">Quadro UE/OCSE contro riciclaggio e frodi sistemiche</div>
+                        </div>
+                    </a>
+
+                    <!-- Forze di Polizia -->
+                    <a href="#forze-polizia" style="display: flex; align-items: center; gap: 0.8rem; padding: 1rem 1.2rem; border-radius: 12px; text-decoration: none; background: rgba(15,23,42,0.9); border-left: 4px solid #38bdf8; color: #e5e7eb;">
+                        <span style="font-size: 1.4rem;">🚔</span>
+                        <div>
+                            <div style="font-weight: 700; color: #bae6fd;">Forze di Polizia</div>
+                            <div style="font-size: 0.85rem; color: #9ca3af;">Contatti ufficiali per denunciare truffe e frodi digitali</div>
+                        </div>
+                    </a>
+
+                    <!-- Associazioni Consumatori -->
+                    <a href="#associazioni-consumatori" style="display: flex; align-items: center; gap: 0.8rem; padding: 1rem 1.2rem; border-radius: 12px; text-decoration: none; background: rgba(30,27,48,0.9); border-left: 4px solid #DDA0DD; color: #e5e7eb;">
+                        <span style="font-size: 1.4rem;">🛡️</span>
+                        <div>
+                            <div style="font-weight: 700; color: #e9d5ff;">Associazioni Consumatori</div>
+                            <div style="font-size: 0.85rem; color: #9ca3af;">Associazioni che difendono i correntisti nelle controversie bancarie</div>
+                        </div>
+                    </a>
+
+                    <!-- Prevenzione Truffe -->
+                    <a href="#prevenzione-truffe" style="display: flex; align-items: center; gap: 0.8rem; padding: 1rem 1.2rem; border-radius: 12px; text-decoration: none; background: rgba(39,15,26,0.9); border-left: 4px solid #FFB6C1; color: #e5e7eb;">
+                        <span style="font-size: 1.4rem;">🤝</span>
+                        <div>
+                            <div style="font-weight: 700; color: #fed7e2;">Prevenzione Truffe &amp; OANE</div>
+                            <div style="font-size: 0.85rem; color: #9ca3af;">Questionari e toolkit per misurare il rischio di essere truffati</div>
+                        </div>
+                    </a>
+
+                    <!-- Supporto Psicologico AARP -->
+                    <a href="#supporto-psicologico" style="display: flex; align-items: center; gap: 0.8rem; padding: 1rem 1.2rem; border-radius: 12px; text-decoration: none; background: rgba(38,20,12,0.9); border-left: 4px solid #FFA07A; color: #e5e7eb;">
+                        <span style="font-size: 1.4rem;">💚</span>
+                        <div>
+                            <div style="font-weight: 700; color: #fed7aa;">Supporto Psicologico AARP</div>
+                            <div style="font-size: 0.85rem; color: #9ca3af;">Helpline, gruppi di ascolto e percorsi di recupero dopo le frodi</div>
+                        </div>
+                    </a>
+
+                    <!-- Impatto Mental Health -->
+                    <a href="#mental-health" style="display: flex; align-items: center; gap: 0.8rem; padding: 1rem 1.2rem; border-radius: 12px; text-decoration: none; background: rgba(45,15,18,0.9); border-left: 4px solid #FF6B6B; color: #e5e7eb;">
+                        <span style="font-size: 1.4rem;">🔴</span>
+                        <div>
+                            <div style="font-weight: 700; color: #fecaca;">Impatto sulla Salute Mentale</div>
+                            <div style="font-size: 0.85rem; color: #9ca3af;">Ricerca clinica sugli effetti psicologici delle truffe finanziarie</div>
+                        </div>
                     </a>
                 </div>
 
-                <!-- Radio Radicale Card -->
-                <div class="media-card" style="background: white; border-radius: 12px; padding: 2rem; box-shadow: 0 4px 12px rgba(0,0,0,0.1); border-left: 5px solid #c7254e;">
-                    <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem;">
-                        <span style="font-size: 3rem;">🎙️</span>
-                        <div>
-                            <h3 style="color: #c7254e; margin: 0; font-size: 1.3rem;">Radio Radicale</h3>
-                            <p style="margin: 0; color: #64748b; font-size: 0.9rem;">Camera dei Deputati</p>
-                        </div>
-                    </div>
-                    <p style="margin-bottom: 1.5rem; color: #1e293b;">
-                        <strong>Intervento pubblico</strong> innanzi alle massime Autorità Antifrode: Carabinieri, Polizia Postale, Guardia di Finanza.
+                <!-- Accesso rapido agli Strumenti Antifrode Digitali -->
+                <div style="margin-top: 2.5rem;">
+                    <h3 style="text-align: center; font-size: 1.2rem; margin-bottom: 1rem; color: #e5e7eb;">🚀 Strumenti Antifrode Digitali – accesso rapido</h3>
+                    <p style="text-align: center; max-width: 780px; margin: 0 auto 1.5rem auto; color: #9ca3af; font-size: 0.85rem;">
+                        Raggiungi direttamente le schede di <strong>Firm Checker FCA</strong>, <strong>OFCOM Online Safety</strong>,
+                        <strong>Compliance Corylated</strong> e <strong>DSA Notice &amp; Action</strong> nella sezione Strumenti Antifrode Digitali.
                     </p>
-                    <a href="http://www.radioradicale.it/soggetti/278344/marcello-stanca" target="_blank" rel="noopener noreferrer" class="download-button" style="background: #c7254e; display: inline-block;">
-                        🎧 Ascolta l'Intervento
-                    </a>
-                </div>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 1rem;">
+                        <a href="#strumento-fca-firm-checker" style="display: flex; align-items: center; gap: 0.75rem; padding: 0.9rem 1.1rem; border-radius: 12px; text-decoration: none; background: rgba(15,23,42,0.95); border-left: 4px solid #0056D6; color: #e5e7eb;">
+                            <span style="font-size: 1.4rem;">🔍</span>
+                            <div>
+                                <div style="font-weight: 700; color: #bfdbfe; font-size: 0.95rem;">FCA Firm Checker (UK)</div>
+                                <div style="font-size: 0.8rem; color: #9ca3af;">Verifica se una banca o un intermediario è autorizzato</div>
+                            </div>
+                        </a>
 
-                <!-- TikTok Card -->
-                <div class="media-card" style="background: white; border-radius: 12px; padding: 2rem; box-shadow: 0 4px 12px rgba(0,0,0,0.1); border-left: 5px solid #000000;">
-                    <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem;">
-                        <span style="font-size: 3rem;">📱</span>
-                        <div>
-                            <h3 style="color: #000000; margin: 0; font-size: 1.3rem;">TikTok Business Verificato</h3>
-                            <p style="margin: 0; color: #64748b; font-size: 0.9rem;">@avvocato.stanca.marcello</p>
-                        </div>
-                    </div>
-                    <p style="margin-bottom: 1.5rem; color: #1e293b;">
-                        <strong>470 follower organici</strong><br>
-                        Video virale: 59.622 views ("Rischio Trading" bestseller Amazon)
-                    </p>
-                    <div style="background: #f1f5f9; padding: 1rem; border-radius: 8px;">
-                        <p style="margin: 0; font-size: 0.9rem; color: #64748b;">✓ Account Business Registrato<br>✓ Verificato 14 Marzo 2024</p>
+                        <a href="#strumento-ofcom-online-safety" style="display: flex; align-items: center; gap: 0.75rem; padding: 0.9rem 1.1rem; border-radius: 12px; text-decoration: none; background: rgba(15,23,42,0.95); border-left: 4px solid #0ea5e9; color: #e5e7eb;">
+                            <span style="font-size: 1.4rem;">🛡️</span>
+                            <div>
+                                <div style="font-weight: 700; color: #bae6fd; font-size: 0.95rem;">OFCOM Online Safety</div>
+                                <div style="font-size: 0.8rem; color: #9ca3af;">Poteri contro contenuti fraudolenti e truffe online</div>
+                            </div>
+                        </a>
+
+                        <a href="#strumento-compliance-corylated" style="display: flex; align-items: center; gap: 0.75rem; padding: 0.9rem 1.1rem; border-radius: 12px; text-decoration: none; background: rgba(15,23,42,0.95); border-left: 4px solid #0077B5; color: #e5e7eb;">
+                            <span style="font-size: 1.4rem;">📰</span>
+                            <div>
+                                <div style="font-weight: 700; color: #bfdbfe; font-size: 0.95rem;">Compliance Corylated</div>
+                                <div style="font-size: 0.8rem; color: #9ca3af;">Notizie e analisi su frodi, NCA, Stop Scams UK</div>
+                            </div>
+                        </a>
+
+                        <a href="#strumento-dsa-notice-action" style="display: flex; align-items: center; gap: 0.75rem; padding: 0.9rem 1.1rem; border-radius: 12px; text-decoration: none; background: rgba(15,23,42,0.95); border-left: 4px solid #003399; color: #e5e7eb;">
+                            <span style="font-size: 1.4rem;">🇪🇺</span>
+                            <div>
+                                <div style="font-weight: 700; color: #bfdbfe; font-size: 0.95rem;">DSA Notice &amp; Action</div>
+                                <div style="font-size: 0.8rem; color: #9ca3af;">Segnalare contenuti illegali su piattaforme digitali UE</div>
+                            </div>
+                        </a>
                     </div>
                 </div>
             </div>
         </section>
 
         <!-- Fonti Istituzionali Internazionali -->
-        <section style="margin-top: 5rem;">
+        <section id="fonti-istituzionali" style="margin-top: 5rem; scroll-margin-top: 100px;">
             <h2 class="section-title">📚 Fonti Istituzionali Internazionali</h2>
             <p class="section-subtitle">Organizzazioni sovranazionali, quadro normativo AML/CFT UE, vigilanza bancaria europea</p>
-            
+
+            <div style="text-align: center; margin-top: 1rem;">
+                <a href="#sommario-referenze" class="download-button" style="background: #020617; border: 1px solid #334155;">⬆ Torna al sommario</a>
+            </div>
+
             <div class="media-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 2rem; margin-top: 3rem;">
                 <!-- IOSCO Card -->
                 <div class="media-card" style="background: white; border-radius: 12px; padding: 2rem; box-shadow: 0 4px 12px rgba(0,0,0,0.1); border-left: 5px solid #0066cc;">
@@ -821,6 +1191,32 @@
                     <a href="IOSCO-annual-Report2022.pdf" target="_blank" class="download-button" style="background: #0066cc; display: inline-block;">
                         📥 Download Report PDF
                     </a>
+                </div>
+
+                <!-- ESMA Card (spostata accanto a IOSCO) -->
+                <div class="media-card" style="background: white; border-radius: 12px; padding: 2rem; box-shadow: 0 4px 12px rgba(0,0,0,0.1); border-left: 5px solid #003DA5;">
+                    <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem;">
+                        <span style="font-size: 3rem;">🇪🇺</span>
+                        <div>
+                            <h3 style="color: #003DA5; margin: 0; font-size: 1.3rem;">ESMA - European Securities Markets Authority</h3>
+                            <p style="margin: 0; color: #64748b; font-size: 0.9rem;">Autorità europea vigilanza mercati finanziari</p>
+                        </div>
+                    </div>
+                    <p style="margin-bottom: 1.5rem; color: #1e293b;">
+                        <strong>Natasha Cazenave - Introductory Statement</strong><br>
+                        Executive Director ESMA: trasparenza derivati, MiFIR Review, protezione investitori retail, coordinamento autorità nazionali.
+                    </p>
+                    <div style="background: #f0f4ff; padding: 1rem; border-radius: 8px; margin-bottom: 1rem;">
+                        <p style="margin: 0; font-size: 0.9rem; color: #003DA5;">📌 <strong>MiFIR Review 2025</strong><br>Final Report: derivatives transparency, CTP packages, input/output data</p>
+                    </div>
+                    <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                        <a href="ESMA_Natasha_Cazenave_introductory_statement.pdf" target="_blank" class="download-button" style="background: #003DA5; display: inline-block;">
+                            📥 Introductory Statement PDF
+                        </a>
+                        <a href="https://www.esma.europa.eu/sites/default/files/2025-12/ESMA74-276584410-10987_MiFIR_Review_Final_Report_on_derivatives__transparency__packages__CTP_input_output_.pdf" target="_blank" rel="noopener noreferrer" class="download-button" style="background: #0056D6; display: inline-block;">
+                            📄 MiFIR Review Report 2025
+                        </a>
+                    </div>
                 </div>
 
                 <!-- CEB Card -->
@@ -894,34 +1290,8 @@
                     </a>
                 </div>
 
-                <!-- ESMA Card -->
-                <div class="media-card" style="background: white; border-radius: 12px; padding: 2rem; box-shadow: 0 4px 12px rgba(0,0,0,0.1); border-left: 5px solid #003DA5;">
-                    <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem;">
-                        <span style="font-size: 3rem;">🇪🇺</span>
-                        <div>
-                            <h3 style="color: #003DA5; margin: 0; font-size: 1.3rem;">ESMA - European Securities Markets Authority</h3>
-                            <p style="margin: 0; color: #64748b; font-size: 0.9rem;">Autorità europea vigilanza mercati finanziari</p>
-                        </div>
-                    </div>
-                    <p style="margin-bottom: 1.5rem; color: #1e293b;">
-                        <strong>Natasha Cazenave - Introductory Statement</strong><br>
-                        Executive Director ESMA: trasparenza derivati, MiFIR Review, protezione investitori retail, coordinamento autorità nazionali.
-                    </p>
-                    <div style="background: #f0f4ff; padding: 1rem; border-radius: 8px; margin-bottom: 1rem;">
-                        <p style="margin: 0; font-size: 0.9rem; color: #003DA5;">📌 <strong>MiFIR Review 2025</strong><br>Final Report: derivatives transparency, CTP packages, input/output data</p>
-                    </div>
-                    <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
-                        <a href="ESMA_Natasha_Cazenave_introductory_statement.pdf" target="_blank" class="download-button" style="background: #003DA5; display: inline-block;">
-                            📥 Introductory Statement PDF
-                        </a>
-                        <a href="https://www.esma.europa.eu/sites/default/files/2025-12/ESMA74-276584410-10987_MiFIR_Review_Final_Report_on_derivatives__transparency__packages__CTP_input_output_.pdf" target="_blank" rel="noopener noreferrer" class="download-button" style="background: #0056D6; display: inline-block;">
-                            📄 MiFIR Review Report 2025
-                        </a>
-                    </div>
-                </div>
-
-                <!-- FinCoNet Card -->
-                <div class="media-card" style="background: white; border-radius: 12px; padding: 2rem; box-shadow: 0 4px 12px rgba(0,0,0,0.1); border-left: 5px solid #28A745;">
+                <!-- FinCoNet Card (banner orizzontale) -->
+                <div class="media-card" style="background: white; border-radius: 12px; padding: 2rem; box-shadow: 0 4px 12px rgba(0,0,0,0.1); border-left: 5px solid #28A745; grid-column: 1 / -1;">
                     <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem;">
                         <span style="font-size: 3rem;">🌍</span>
                         <div>
@@ -1000,8 +1370,8 @@
                     </div>
                 </div>
 
-                <!-- FCA Firm Checker Card -->
-                <div class="media-card" style="background: white; border-radius: 12px; padding: 2.5rem; box-shadow: 0 6px 20px rgba(0,0,0,0.15); border-left: 6px solid #0071CE;">
+                <!-- FCA Firm Checker Card (banner orizzontale) -->
+                <div class="media-card" style="background: white; border-radius: 12px; padding: 2.5rem; box-shadow: 0 6px 20px rgba(0,0,0,0.15); border-left: 6px solid #0071CE; grid-column: 1 / -1;">
                     <div style="display: flex; align-items: center; gap: 1.5rem; margin-bottom: 2rem;">
                         <span style="font-size: 4rem;">🇬🇧</span>
                         <div>
@@ -1067,6 +1437,12 @@
                         <p style="margin: 0; text-align: center; color: #64748b; font-size: 0.9rem;">
                             🔔 <strong>Strategia Antifrode UK</strong> - Pubblicazione attesa inizio febbraio 2026 | +14% frodi non autorizzate 2024-2025
                         </p>
+                    </div>
+
+                    <div style="margin-top: 1.5rem; text-align: center;">
+                        <a href="#sommario-referenze" class="download-button" style="background: #020617; border: 1px solid #334155; font-size: 0.85rem; padding: 0.5rem 1rem;">
+                            ⬆ Torna al sommario missioni
+                        </a>
                     </div>
                 </div>
             </div>
@@ -1280,10 +1656,14 @@
         </section>
 
         <!-- Autorità di Vigilanza -->
-        <section style="margin-top: 5rem;">
+        <section id="autorita-vigilanza" style="margin-top: 5rem; scroll-margin-top: 100px;">
             <h2 class="section-title">🏛️ Autorità di Vigilanza Finanziaria</h2>
-            <p class="section-subtitle">Enti regolatori internazionali responsabili della supervisione mercati finanziari e protezione consumatori</p>
-            
+            <p class="section-subtitle" style="font-size: 2rem;">Enti regolatori internazionali responsabili della supervisione mercati finanziari e protezione consumatori</p>
+
+            <div style="text-align: center; margin-top: 1rem;">
+                <a href="#sommario-referenze" class="download-button" style="background: #020617; border: 1px solid #334155;">⬆ Torna al sommario</a>
+            </div>
+
             <div class="media-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 2rem; margin-top: 3rem;">
                 
                 <!-- FCA UK Card -->
@@ -1301,6 +1681,28 @@
                     <div style="display: flex; gap: 0.8rem; flex-wrap: wrap;">
                         <a href="https://www.fca.org.uk/" target="_blank" rel="noopener noreferrer" style="display: inline-block; background: #0056D6; color: white; padding: 0.7rem 1.5rem; text-decoration: none; border-radius: 6px; font-size: 0.9rem; font-weight: 600;">🌐 Homepage</a>
                         <a href="https://register.fca.org.uk/s/" target="_blank" rel="noopener noreferrer" style="display: inline-block; background: #28A745; color: white; padding: 0.7rem 1.5rem; text-decoration: none; border-radius: 6px; font-size: 0.9rem; font-weight: 600;">📋 Financial Services Register</a>
+                    </div>
+                </div>
+
+                <!-- Action Fraud UK Card -->
+                <div class="media-card" style="background: white; border-radius: 12px; padding: 2.5rem; box-shadow: 0 6px 20px rgba(0,0,0,0.15); border-left: 6px solid #16a34a;">
+                    <div style="display: flex; align-items: center; gap: 1.5rem; margin-bottom: 2rem;">
+                        <span style="font-size: 3.5rem;">🇬🇧</span>
+                        <div>
+                            <h3 style="color: #16a34a; margin: 0; font-size: 1.5rem;">Action Fraud &ndash; National Reporting Centre</h3>
+                            <p style="margin: 0.3rem 0 0 0; color: #64748b; font-size: 0.95rem;">Regno Unito | Fraud &amp; Cybercrime</p>
+                        </div>
+                    </div>
+                    <p style="line-height: 1.8; color: #1e293b; margin-bottom: 1.2rem;">
+                        Action Fraud is the UK's national reporting center for fraud and cybercrime, where individuals can report incidents and seek support.
+                    </p>
+                    <div style="background: #ecfdf3; padding: 1rem; border-radius: 6px; margin-bottom: 1.5rem;">
+                        <p style="margin: 0; font-size: 0.9rem; color: #166534;">
+                            📢 Punto unico per <strong>segnalare truffe online, frodi bancarie e cybercrime</strong>, con supporto informativo dedicato alle vittime nel Regno Unito.
+                        </p>
+                    </div>
+                    <div style="display: flex; gap: 0.8rem; flex-wrap: wrap;">
+                        <a href="https://www.actionfrauds.com/" target="_blank" rel="noopener noreferrer" style="display: inline-block; background: #16a34a; color: white; padding: 0.7rem 1.5rem; text-decoration: none; border-radius: 6px; font-size: 0.9rem; font-weight: 600;">🌐 Homepage Action Fraud</a>
                     </div>
                 </div>
 
@@ -1414,7 +1816,7 @@
             
             <div class="media-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(450px, 1fr)); gap: 2rem; margin-top: 3rem;">
                 <!-- FCA Firm Checker Card -->
-                <div class="media-card" style="background: white; border-radius: 12px; padding: 2.5rem; box-shadow: 0 6px 20px rgba(0,0,0,0.15); border-left: 6px solid #0056D6; grid-column: 1 / -1;">
+                <div id="strumento-fca-firm-checker" class="media-card" style="background: white; border-radius: 12px; padding: 2.5rem; box-shadow: 0 6px 20px rgba(0,0,0,0.15); border-left: 6px solid #0056D6; grid-column: 1 / -1;">
                     <div style="display: flex; align-items: center; gap: 1.5rem; margin-bottom: 2rem;">
                         <span style="font-size: 4rem;">🇬🇧</span>
                         <div>
@@ -1537,7 +1939,7 @@
                 </div>
 
                 <!-- OFCOM - Online Safety Act Card -->
-                <div class="media-card" style="background: white; border-radius: 12px; padding: 2.5rem; box-shadow: 0 6px 20px rgba(0,0,0,0.15); border-left: 6px solid #0056D6; grid-column: 1 / -1;">
+                <div id="strumento-ofcom-online-safety" class="media-card" style="background: white; border-radius: 12px; padding: 2.5rem; box-shadow: 0 6px 20px rgba(0,0,0,0.15); border-left: 6px solid #0056D6; grid-column: 1 / -1;">
                     <div style="display: flex; align-items: center; gap: 1.5rem; margin-bottom: 2rem;">
                         <span style="font-size: 4rem;">🇬🇧</span>
                         <div>
@@ -1680,10 +2082,16 @@
                         </div>
                         <div class="vote-message" style="display: none;"></div>
                     </div>
+
+                    <div style="margin-top: 1.5rem; text-align: center;">
+                        <a href="#sommario-referenze" class="download-button" style="background: #020617; border: 1px solid #334155; font-size: 0.85rem; padding: 0.5rem 1rem;">
+                            ⬆ Torna al sommario missioni
+                        </a>
+                    </div>
                 </div>
 
                 <!-- Compliance Corylated - Media Specializzati Card -->
-                <div class="media-card" style="background: white; border-radius: 12px; padding: 2.5rem; box-shadow: 0 6px 20px rgba(0,0,0,0.15); border-left: 6px solid #0077B5; grid-column: 1 / -1;">
+                <div id="strumento-compliance-corylated" class="media-card" style="background: white; border-radius: 12px; padding: 2.5rem; box-shadow: 0 6px 20px rgba(0,0,0,0.15); border-left: 6px solid #0077B5; grid-column: 1 / -1;">
                     <div style="display: flex; align-items: center; gap: 1.5rem; margin-bottom: 2rem;">
                         <span style="font-size: 4rem;">📰</span>
                         <div>
@@ -1792,7 +2200,7 @@
                 </div>
 
                 <!-- DSA Notice and Action Mechanism - European Commission Card -->
-                <div class="media-card" style="background: white; border-radius: 12px; padding: 2.5rem; box-shadow: 0 6px 20px rgba(0,0,0,0.15); border-left: 6px solid #003399; grid-column: 1 / -1;">
+                <div id="strumento-dsa-notice-action" class="media-card" style="background: white; border-radius: 12px; padding: 2.5rem; box-shadow: 0 6px 20px rgba(0,0,0,0.15); border-left: 6px solid #003399; grid-column: 1 / -1;">
                     <div style="display: flex; align-items: center; gap: 1.5rem; margin-bottom: 2rem;">
                         <span style="font-size: 4rem;">🇪🇺</span>
                         <div>
@@ -1913,16 +2321,27 @@
                         </div>
                         <div class="vote-message" style="display: none;"></div>
                     </div>
+
+                    <div style="margin-top: 1.5rem; text-align: center;">
+                        <a href="#sommario-referenze" class="download-button" style="background: #020617; border: 1px solid #334155; font-size: 0.85rem; padding: 0.5rem 1rem;">
+                            ⬆ Torna al sommario missioni
+                        </a>
+                    </div>
                 </div>
 
                 <!-- AGCM Autorità Antitrust Italia Card -->
                 <div class="media-card" style="background: white; border-radius: 12px; padding: 2.5rem; box-shadow: 0 6px 20px rgba(0,0,0,0.15); border-left: 6px solid #009246; grid-column: 1 / -1;">
-                    <div style="display: flex; align-items: center; gap: 1.5rem; margin-bottom: 2rem;">
-                        <span style="font-size: 4rem;">🇮🇹</span>
-                        <div>
-                            <h3 style="color: #009246; margin: 0; font-size: 1.7rem;">AGCM - Autorità Garante della Concorrenza e del Mercato</h3>
-                            <p style="margin: 0.5rem 0 0 0; color: #64748b; font-size: 1.1rem; font-weight: 500;">Antitrust Italia | Tutela Consumatori e Contrasto Pratiche Commerciali Scorrette</p>
+                    <div style="display: flex; align-items: center; gap: 1.5rem; margin-bottom: 2rem; justify-content: space-between; flex-wrap: wrap;">
+                        <div style="display: flex; align-items: center; gap: 1.5rem;">
+                            <span style="font-size: 4rem;">🇮🇹</span>
+                            <div>
+                                <h3 style="color: #009246; margin: 0; font-size: 1.7rem;">AGCM - Autorità Garante della Concorrenza e del Mercato</h3>
+                                <p style="margin: 0.5rem 0 0 0; color: #64748b; font-size: 1.1rem; font-weight: 500;">Antitrust Italia | Tutela Consumatori e Contrasto Pratiche Commerciali Scorrette</p>
+                            </div>
                         </div>
+                        <a href="https://www.agcm.it/" target="_blank" rel="noopener noreferrer" style="display: inline-block; background: #009246; color: white; padding: 0.7rem 1.6rem; text-decoration: none; border-radius: 999px; font-weight: 600; font-size: 0.95rem; white-space: nowrap; box-shadow: 0 3px 10px rgba(0,146,70,0.3);" onmouseover="this.style.background='#006633'; this.style.transform='translateY(-1px)'; this.style.boxShadow='0 5px 14px rgba(0,146,70,0.4)';" onmouseout="this.style.background='#009246'; this.style.transform='translateY(0)'; this.style.boxShadow='0 3px 10px rgba(0,146,70,0.3)';">
+                            🌐 Vai al sito AGCM
+                        </a>
                     </div>
 
                     <div style="background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%); padding: 2rem; border-radius: 12px; margin-bottom: 2rem;">
@@ -1996,7 +2415,7 @@
                         <a href="https://www.facebook.com/agcm.it" target="_blank" rel="noopener noreferrer" style="display: inline-block; background: #0077B5; color: white; padding: 1rem 2rem; text-decoration: none; border-radius: 8px; font-weight: 600; transition: all 0.3s; box-shadow: 0 4px 12px rgba(0,119,181,0.3);" onmouseover="this.style.background='#005885'; this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 16px rgba(0,119,181,0.4)';" onmouseout="this.style.background='#0077B5'; this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 12px rgba(0,119,181,0.3)';">
                             📘 Facebook AGCM
                         </a>
-                        <a href="https://www.agcm.it/competenze/tutela-del-consumatore/segnalazioni" target="_blank" rel="noopener noreferrer" style="display: inline-block; background: #DC143C; color: white; padding: 1rem 2rem; text-decoration: none; border-radius: 8px; font-weight: 600; transition: all 0.3s; box-shadow: 0 4px 12px rgba(220,20,60,0.3);" onmouseover="this.style.background='#8B0000'; this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 16px rgba(220,20,60,0.4)';" onmouseout="this.style.background='#DC143C'; this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 12px rgba(220,20,60,0.3)';">
+                        <a href="https://www.agcm.it/servizi/segnala-on-line" target="_blank" rel="noopener noreferrer" style="display: inline-block; background: #DC143C; color: white; padding: 1rem 2rem; text-decoration: none; border-radius: 8px; font-weight: 600; transition: all 0.3s; box-shadow: 0 4px 12px rgba(220,20,60,0.3);" onmouseover="this.style.background='#8B0000'; this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 16px rgba(220,20,60,0.4)';" onmouseout="this.style.background='#DC143C'; this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 12px rgba(220,20,60,0.3)';">
                             📢 Segnala Pratiche Scorrette
                         </a>
                     </div>
@@ -2019,18 +2438,310 @@
                         </div>
                         <div class="vote-message" style="display: none;"></div>
                     </div>
+
+                    <div style="margin-top: 1.5rem; text-align: center;">
+                        <a href="#sommario-referenze" class="download-button" style="background: #020617; border: 1px solid #334155; font-size: 0.85rem; padding: 0.5rem 1rem;">
+                            ⬆ Torna al sommario missioni
+                        </a>
+                    </div>
                 </div>
             </div>
         </section>
 
+        <!-- Associazioni Consumatori -->
+        <section id="associazioni-consumatori" style="margin-top: 5rem; scroll-margin-top: 100px;">
+            <h2 class="section-title">🛡️ Associazioni Consumatori</h2>
+            <p class="section-subtitle">Organizzazioni di tutela e difesa dei diritti dei consumatori bancari e finanziari</p>
+
+            <div style="text-align: center; margin-top: 1rem;">
+                <a href="#sommario-referenze" class="download-button" style="background: #020617; border: 1px solid #334155;">⬆ Torna al sommario</a>
+            </div>
+
+            <div class="media-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 2rem; margin-top: 3rem;">
+                <!-- AMEV Firenze Card -->
+                <div class="media-card" style="background: white; border-radius: 12px; padding: 2.5rem; box-shadow: 0 6px 20px rgba(0,0,0,0.15); border-left: 6px solid #7C3AED;">
+                    <div style="display: flex; align-items: center; gap: 1.5rem; margin-bottom: 2rem;">
+                        <span style="font-size: 4rem;">🌐</span>
+                        <div>
+                            <h3 style="color: #4C1D95; margin: 0; font-size: 1.6rem;">AMEV Firenze</h3>
+                            <p style="margin: 0.5rem 0 0 0; color: #64748b; font-size: 1.05rem; font-weight: 500;">Associazione Amev Firenze | Promotrice Petizioni 0888/2024 e 0645/2025 al Parlamento Europeo</p>
+                        </div>
+                    </div>
+
+                    <div style="background: linear-gradient(135deg, #ede9fe 0%, #e0f2fe 100%); padding: 2rem; border-radius: 12px; margin-bottom: 2rem;">
+                        <h4 style="color: #4C1D95; margin-bottom: 1rem; font-size: 1.3rem;">🎯 Missione AMEV Firenze</h4>
+                        <p style="line-height: 1.8; color: #1e293b; margin-bottom: 1rem;">
+                            AMEV Firenze nasce per <strong>tutelare i cittadini vittime di truffe bancarie e finanziarie</strong> e promuovere regole europee
+                            che obblighino le banche a prevenire le frodi digitali, bloccare i bonifici sospetti e rimborsare le vittime vulnerabili.
+                        </p>
+                        <ul style="margin: 0 0 0 1.5rem; color: #1e293b; line-height: 1.8; font-size: 0.95rem;">
+                            <li>Azioni di advocacy presso Parlamento Europeo e istituzioni nazionali</li>
+                            <li>Educazione finanziaria e supporto alle famiglie colpite da frodi</li>
+                            <li>Costruzione di alleanze con associazioni consumatori e autorità di vigilanza</li>
+                        </ul>
+                    </div>
+
+                    <div id="petizioni-parlamento-europeo" style="background: #f9fafb; padding: 1.8rem; border-radius: 12px; margin-bottom: 2rem; border-left: 4px solid #4C1D95;">
+                        <h4 style="color: #4C1D95; margin-bottom: 0.75rem; font-size: 1.2rem;">📄 Petizioni Parlamento Europeo accolte</h4>
+                        <p style="margin: 0 0 1rem 0; font-size: 0.9rem; color: #475569; line-height: 1.7;">
+                            <strong>Conferme del Presidente della Commissione Petizioni del Parlamento Europeo</strong>, che attestano
+                            l'assegnazione delle due Petizioni <strong>0888/2024</strong> e <strong>0645/2025</strong> a <strong>tre Commissioni Legislative</strong>
+                            del Parlamento per l'esame delle proposte di tutela contro le truffe finanziarie.
+                        </p>
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem;">
+                            <!-- Petizione 0888/2024 Thumbnail -->
+                            <a href="Petizione 888-2024 risposta da Parlamento Europeo.pdf" target="_blank" class="media-card" style="display: block; background: white; border-radius: 10px; padding: 1.2rem; text-decoration: none; box-shadow: 0 4px 12px rgba(0,0,0,0.08); border-left: 4px solid #1D4ED8;">
+                                <div style="display: flex; align-items: center; gap: 0.8rem; margin-bottom: 0.5rem;">
+                                    <span style="font-size: 2rem;">🇪🇺</span>
+                                    <div>
+                                        <div style="font-weight: 700; color: #1D4ED8; font-size: 0.95rem;">Petizione 0888/2024</div>
+                                        <div style="font-size: 0.8rem; color: #64748b;">Dovere delle banche di proteggere i clienti</div>
+                                    </div>
+                                </div>
+                                <div style="font-size: 0.8rem; color: #0f172a; line-height: 1.6;">Testo ufficiale in inglese sul sito del Parlamento Europeo (PDF).</div>
+                            </a>
+
+                            <!-- Petizione 0645/2025 Thumbnail -->
+                            <a href="Parlamento Europeo accoglie Petizione 645-2025 proposta da Marcello Stanca.pdf" target="_blank" class="media-card" style="display: block; background: white; border-radius: 10px; padding: 1.2rem; text-decoration: none; box-shadow: 0 4px 12px rgba(0,0,0,0.08); border-left: 4px solid #16A34A;">
+                                <div style="display: flex; align-items: center; gap: 0.8rem; margin-bottom: 0.5rem;">
+                                    <span style="font-size: 2rem;">🇪🇺</span>
+                                    <div>
+                                        <div style="font-weight: 700; color: #16A34A; font-size: 0.95rem;">Petizione 0645/2025</div>
+                                        <div style="font-size: 0.8rem; color: #64748b;">Misure contro le truffe via bonifici e carte</div>
+                                    </div>
+                                </div>
+                                <div style="font-size: 0.8rem; color: #0f172a; line-height: 1.6;">Decisione di accoglimento e sintesi delle richieste rivolte all’UE.</div>
+                            </a>
+                        </div>
+
+                        <div style="margin-top: 1.5rem; padding-top: 1rem; border-top: 1px dashed #e2e8f0;">
+                            <p style="margin: 0 0 0.75rem 0; font-size: 0.9rem; color: #334155; font-weight: 600;">
+                                📘 Leggi qui il testo delle Petizioni accolte:
+                            </p>
+                            <div style="display: flex; flex-wrap: wrap; gap: 0.75rem;">
+                                <a href="PETITIONS EUROPARL/Petition 0888 Text approved Parlement Europeen.pdf" target="_blank" class="download-button" style="background: #1D4ED8; font-size: 0.85rem; padding: 0.6rem 1.2rem;">
+                                    0888/2024 – Testo integrale (EN, PDF)
+                                </a>
+                                <a href="PETITIONS EUROPARL/Parlement Europeen Petition 0645 french.pdf" target="_blank" class="download-button" style="background: #16A34A; font-size: 0.85rem; padding: 0.6rem 1.2rem;">
+                                    0645/2025 – Testo integrale (FR, PDF)
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div style="display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 0.5rem;">
+                        <a href="https://www.amevfirenze.it" target="_blank" rel="noopener noreferrer" style="display: inline-block; background: #4C1D95; color: white; padding: 1rem 2rem; text-decoration: none; border-radius: 8px; font-weight: 600; box-shadow: 0 4px 12px rgba(76,29,149,0.35); font-size: 0.95rem;">
+                            🌐 Visita www.amevfirenze.it
+                        </a>
+                    </div>
+
+                    <div style="margin-top: 1.5rem; text-align: center;">
+                        <a href="#sommario-referenze" class="download-button" style="background: #020617; border: 1px solid #334155; font-size: 0.85rem; padding: 0.5rem 1rem;">
+                            ⬆ Torna al sommario missioni
+                        </a>
+                    </div>
+                </div>
+
+                <!-- ADUSBEF Card -->
+                <div class="media-card" style="background: white; border-radius: 12px; padding: 2.5rem; box-shadow: 0 6px 20px rgba(0,0,0,0.15); border-left: 6px solid #1565C0;">
+                    <div style="display: flex; align-items: center; gap: 1.5rem; margin-bottom: 2rem;">
+                        <span style="font-size: 4rem;">🏦</span>
+                        <div>
+                            <h3 style="color: #1565C0; margin: 0; font-size: 1.6rem;">ADUSBEF</h3>
+                            <p style="margin: 0.5rem 0 0 0; color: #64748b; font-size: 1.1rem; font-weight: 500;">Associazione Difesa Utenti Servizi Bancari, Finanziari e Postali</p>
+                        </div>
+                    </div>
+
+                    <div style="background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%); padding: 2rem; border-radius: 12px; margin-bottom: 2rem;">
+                        <h4 style="color: #1565C0; margin-bottom: 1rem; font-size: 1.3rem;">🛡️ Tutela dei Consumatori Bancari</h4>
+                        <p style="line-height: 1.8; color: #1e293b; margin-bottom: 1rem;">
+                            <strong>ADUSBEF</strong> è l'associazione leader in Italia per la difesa dei diritti degli utenti di servizi bancari, finanziari e postali. Offre assistenza legale, consulenza e rappresentanza nelle controversie con istituti di credito.
+                        </p>
+                    </div>
+
+                    <div style="background: #f1f5f9; padding: 1.8rem; border-radius: 10px; margin-bottom: 2rem;">
+                        <h4 style="color: #1565C0; margin-bottom: 1rem; font-size: 1.2rem;">⚖️ Aree di Intervento</h4>
+                        <ul style="margin: 0 0 0 1.5rem; color: #1e293b; line-height: 1.8;">
+                            <li><strong>Anatocismo bancario</strong>: interessi su interessi</li>
+                            <li><strong>Usura bancaria</strong>: tassi superiori alla soglia legale</li>
+                            <li><strong>Pratiche bancarie scorrette</strong>: clausole vessatorie</li>
+                            <li><strong>Truffe finanziarie</strong>: investimenti illeciti e promesse false</li>
+                            <li><strong>Mutui e finanziamenti</strong>: rinegoziazione e surroga</li>
+                            <li><strong>Carte di credito</strong>: addebiti non autorizzati</li>
+                        </ul>
+                    </div>
+
+                    <div style="background: linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%); padding: 1.8rem; border-radius: 10px; margin-bottom: 2rem;">
+                        <h4 style="color: #E65100; margin-bottom: 1rem; font-size: 1.2rem;">📞 Servizi ADUSBEF</h4>
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
+                            <div style="background: white; padding: 1rem; border-radius: 8px; border: 2px solid #1565C0;">
+                                <div style="font-size: 1.5rem; margin-bottom: 0.5rem;">📧</div>
+                                <div style="font-weight: bold; color: #1565C0; font-size: 0.95rem;">Consulenza Gratuita</div>
+                            </div>
+                            <div style="background: white; padding: 1rem; border-radius: 8px; border: 2px solid #1565C0;">
+                                <div style="font-size: 1.5rem; margin-bottom: 0.5rem;">⚖️</div>
+                                <div style="font-weight: bold; color: #1565C0; font-size: 0.95rem;">Assistenza Legale</div>
+                            </div>
+                            <div style="background: white; padding: 1rem; border-radius: 8px; border: 2px solid #1565C0;">
+                                <div style="font-size: 1.5rem; margin-bottom: 0.5rem;">📊</div>
+                                <div style="font-weight: bold; color: #1565C0; font-size: 0.95rem;">Perizie Tecniche</div>
+                            </div>
+                            <div style="background: white; padding: 1rem; border-radius: 8px; border: 2px solid #1565C0;">
+                                <div style="font-size: 1.5rem; margin-bottom: 0.5rem;">🤝</div>
+                                <div style="font-weight: bold; color: #1565C0; font-size: 0.95rem;">Class Action</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div style="display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 2rem;">
+                        <a href="https://www.adusbef.it/" target="_blank" rel="noopener noreferrer" style="display: inline-block; background: #1565C0; color: white; padding: 1rem 2rem; text-decoration: none; border-radius: 8px; font-weight: 600; transition: all 0.3s; box-shadow: 0 4px 12px rgba(21,101,192,0.3);" onmouseover="this.style.background='#0D47A1'; this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 16px rgba(21,101,192,0.4)';" onmouseout="this.style.background='#1565C0'; this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 12px rgba(21,101,192,0.3)';">
+                            🌐 Sito Ufficiale ADUSBEF
+                        </a>
+                        <a href="https://www.adusbef.it/contatti/" target="_blank" rel="noopener noreferrer" style="display: inline-block; background: #0277BD; color: white; padding: 1rem 2rem; text-decoration: none; border-radius: 8px; font-weight: 600; transition: all 0.3s; box-shadow: 0 4px 12px rgba(2,119,189,0.3);" onmouseover="this.style.background='#01579B'; this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 16px rgba(2,119,189,0.4)';" onmouseout="this.style.background='#0277BD'; this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 12px rgba(2,119,189,0.3)';">
+                            📞 Contatti e Sedi
+                        </a>
+                    </div>
+
+                    <!-- Rating System ADUSBEF -->
+                    <div class="rating-container" id="rating-adusbef">
+                        <div class="rating-header">
+                            <div class="rating-title">⭐ Valuta questo contenuto</div>
+                            <div class="rating-stats">
+                                <span class="rating-average">-</span>
+                                <span class="rating-count">0 voti</span>
+                            </div>
+                        </div>
+                        <div class="stars-container">
+                            <span class="star" data-value="1">★</span>
+                            <span class="star" data-value="2">★</span>
+                            <span class="star" data-value="3">★</span>
+                            <span class="star" data-value="4">★</span>
+                            <span class="star" data-value="5">★</span>
+                        </div>
+                        <div class="vote-message" style="display: none;"></div>
+                    </div>
+
+                    <div style="margin-top: 1.5rem; text-align: center;">
+                        <a href="#sommario-referenze" class="download-button" style="background: #020617; border: 1px solid #334155; font-size: 0.85rem; padding: 0.5rem 1rem;">
+                            ⬆ Torna al sommario missioni
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Deputati e Senatori -->
+        <section id="deputati-senatori" style="margin-top: 5rem; scroll-margin-top: 100px;">
+            <h2 class="section-title">🏛️ Deputati e Senatori del Parlamento Italiano attivi contro le truffe</h2>
+            <p class="section-subtitle">Parlamentari che si sono impegnati attivamente contro truffe finanziarie e riciclaggio</p>
+
+            <div style="text-align: center; margin-top: 1rem;">
+                <a href="#sommario-referenze" class="download-button" style="background: #020617; border: 1px solid #334155;">⬆ Torna al sommario</a>
+            </div>
+
+            <div class="media-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 2rem; margin-top: 3rem;">
+                <!-- On. Letizia Giorgianni Card -->
+                <div class="media-card" style="background: white; border-radius: 12px; padding: 2.5rem; box-shadow: 0 6px 20px rgba(0,0,0,0.12); border-left: 6px solid #1D4ED8;">
+                    <div style="display: flex; align-items: center; gap: 1.5rem; margin-bottom: 1.5rem;">
+                        <span style="font-size: 3.5rem;">👩‍⚖️</span>
+                        <div>
+                            <h3 style="color: #1D4ED8; margin: 0; font-size: 1.5rem;">On. Letizia Giorgianni</h3>
+                            <p style="margin: 0.4rem 0 0 0; color: #64748b; font-size: 0.95rem; font-weight: 500;">Deputata alla Camera dei Deputati &ndash; XIX Legislatura</p>
+                        </div>
+                    </div>
+
+                    <div style="background: #eff6ff; padding: 1.5rem; border-radius: 10px; margin-bottom: 1.5rem; border-left: 4px solid #1D4ED8;">
+                        <h4 style="color: #1D4ED8; margin-bottom: 0.75rem; font-size: 1.1rem;">🎯 Impegno parlamentare contro le truffe</h4>
+                        <p style="margin: 0; color: #1e293b; font-size: 0.95rem; line-height: 1.7;">
+                            Attività in Commissione e iniziative parlamentari finalizzate al <strong>contrasto delle truffe finanziarie e del riciclaggio</strong>, con particolare attenzione alla tutela dei risparmiatori e delle vittime di frodi digitali.
+                        </p>
+                    </div>
+
+                    <div style="display: grid; grid-template-columns: 1fr; gap: 0.75rem; margin-bottom: 1.5rem;">
+                        <a href="https://www.camera.it/leg19/29?tipoAttivita=attivitanonlegislativacommissione&amp;shadow_deputato=308787&amp;idLegislatura=19" target="_blank" rel="noopener noreferrer" class="download-button" style="background: #1D4ED8; font-size: 0.9rem;">
+                            🏛️ Attività in Commissione &ndash; Camera dei Deputati
+                        </a>
+                        <a href="https://www.camera.it/leg19/29?tipoAttivita=&amp;tipoVisAtt=&amp;tipoPersona=&amp;shadow_deputato=308787&amp;idLegislatura=19" target="_blank" rel="noopener noreferrer" class="download-button" style="background: #0f172a; font-size: 0.9rem;">
+                            📄 Curriculum studi e politico &ndash; Camera.it
+                        </a>
+                    </div>
+
+                    <div style="background: #f9fafb; padding: 1.4rem; border-radius: 10px; border: 1px dashed #e2e8f0;">
+                        <h4 style="margin: 0 0 0.75rem 0; font-size: 1rem; color: #111827;">📣 Canali pubblici ufficiali</h4>
+                        <p style="margin: 0 0 0.5rem 0; font-size: 0.95rem; color: #374151;">
+                            <strong>Facebook (pagina pubblica):</strong>
+                            <br>
+                            <a href="https://www.facebook.com/LaGiorgianni" target="_blank" rel="noopener noreferrer" style="color: #1D4ED8; text-decoration: underline;">facebook.com/LaGiorgianni</a>
+                        </p>
+                        <p style="margin: 0; font-size: 0.95rem; color: #374151;">
+                            <strong>Instagram:</strong> <span style="color: #111827;">@letiziagiorgianni</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <h2 class="section-title" style="margin-top: 5rem;">📄 ATTI NORMATIVI del Parlamento Europeo</h2>
+        
+        <div class="documents-grid">
+            <!-- Petizione 0645/2025 -->
+            <div class="document-card" style="display: block; background: white; border-radius: 12px; padding: 1.5rem; box-shadow: 0 4px 12px rgba(0,0,0,0.08); border-left: 4px solid #1D4ED8;">
+                <div style="display: flex; align-items: center; gap: 0.8rem; margin-bottom: 0.5rem;">
+                    <span style="font-size: 2.2rem;">🇪🇺</span>
+                    <div>
+                        <h3 class="document-title" style="margin: 0; font-size: 1.1rem; color: #1D4ED8;">Petizione 0645/2025</h3>
+                        <p style="margin: 0.25rem 0 0 0; font-size: 0.85rem; color: #64748b;">Misure per contrastare truffe via bonifici e carte nell'UE</p>
+                    </div>
+                </div>
+                <p style="margin: 0 0 0.5rem 0; font-size: 0.8rem; color: #0f172a;"><strong>Parlamento Europeo | Gennaio 2025</strong> · Status: <span style="color: #16A34A;">ACCETTATA</span></p>
+                <a href="Parlamento Europeo accoglie Petizione 645-2025 proposta da Marcello Stanca.pdf" class="download-button" download style="margin-top: 0.75rem; font-size: 0.9rem; padding: 0.7rem 1.4rem;">
+                    📥 Leggi il testo ufficiale (PDF)
+                </a>
+            </div>
+
+            <!-- Petizione 0888/2024 -->
+            <div class="document-card" style="display: block; background: white; border-radius: 12px; padding: 1.5rem; box-shadow: 0 4px 12px rgba(0,0,0,0.08); border-left: 4px solid #0F766E;">
+                <div style="display: flex; align-items: center; gap: 0.8rem; margin-bottom: 0.5rem;">
+                    <span style="font-size: 2.2rem;">🇪🇺</span>
+                    <div>
+                        <h3 class="document-title" style="margin: 0; font-size: 1.1rem; color: #0F766E;">Petizione 0888/2024</h3>
+                        <p style="margin: 0.25rem 0 0 0; font-size: 0.85rem; color: #64748b;">Obbligo per le banche di proteggere attivamente i clienti</p>
+                    </div>
+                </div>
+                <p style="margin: 0 0 0.5rem 0; font-size: 0.8rem; color: #0f172a;"><strong>Parlamento Europeo | Novembre 2024</strong> · Status: <span style="color: #16A34A;">ACCETTATA</span></p>
+                <a href="Petizione 888-2024 risposta da Parlamento Europeo.pdf" class="download-button" download style="margin-top: 0.75rem; font-size: 0.9rem; padding: 0.7rem 1.4rem;">
+                    📥 Leggi il testo ufficiale (PDF)
+                </a>
+            </div>
+
+            <!-- Accordo UE PSD3 -->
+            <div class="document-card" style="display: block; background: white; border-radius: 12px; padding: 1.5rem; box-shadow: 0 4px 12px rgba(0,0,0,0.08); border-left: 4px solid #F59E0B;">
+                <div style="display: flex; align-items: center; gap: 0.8rem; margin-bottom: 0.5rem;">
+                    <span style="font-size: 2.2rem;">📜</span>
+                    <div>
+                        <h3 class="document-title" style="margin: 0; font-size: 1.1rem; color: #B45309;">Accordo UE PSD3</h3>
+                        <p style="margin: 0.25rem 0 0 0; font-size: 0.85rem; color: #64748b;">Nuove regole europee sui servizi di pagamento e tutela frodi</p>
+                    </div>
+                </div>
+                <p style="margin: 0 0 0.5rem 0; font-size: 0.8rem; color: #0f172a;"><strong>27 Novembre 2024</strong> · Maggiore tutela contro le frodi sui pagamenti</p>
+                <a href="Parlamento Europeo-27 nov 2025 Accordo sui servizi di pagamento_ maggiore tutela contro le frodi.pdf" class="download-button" download style="margin-top: 0.75rem; font-size: 0.9rem; padding: 0.7rem 1.4rem;">
+                    📥 Leggi il testo dell'accordo (PDF)
+                </a>
+            </div>
+        </div>
+
         <!-- Prevenzione Truffe e Supporto Vittime -->
-        <section style="margin-top: 5rem;">
+        <section id="prevenzione-truffe" style="margin-top: 5rem; scroll-margin-top: 100px;">
             <h2 class="section-title">🛡️ Prevenzione Truffe e Supporto alle Vittime</h2>
             <p class="section-subtitle">Organizzazioni internazionali specializzate in protezione consumatori anziani, autovalutazione vulnerabilità finanziaria, supporto psicologico vittime</p>
-            
-            <div class="media-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 2rem; margin-top: 3rem;">
-                <!-- Older Adult Nest Egg Card -->
-                <div class="media-card" style="background: white; border-radius: 12px; padding: 2.5rem; box-shadow: 0 6px 20px rgba(0,0,0,0.15); border-left: 6px solid #8B4789; grid-column: 1 / -1;">
+
+            <div style="text-align: center; margin-top: 1rem;">
+                <a href="#sommario-referenze" class="download-button" style="background: #020617; border: 1px solid #334155;">⬆ Torna al sommario</a>
+            </div>
+
+            <div id="supporto-psicologico" class="prevenzione-banners" style="scroll-margin-top: 120px;">
+                <!-- Banner 1: Older Adult Nest Egg (OANE) -->
+                <div class="media-card prevenzione-banner banner-oane">
                     <div style="display: flex; align-items: center; gap: 1.5rem; margin-bottom: 2rem;">
                         <span style="font-size: 4rem;">👴👵</span>
                         <div>
@@ -2135,119 +2846,1303 @@
                             📧 <strong>Newsletter Transitions</strong> - Iscriviti per ricevere aggiornamenti su eventi, ricerche, salute e benessere anziani (2x/anno)
                         </p>
                     </div>
+
+                    <div style="margin-top: 1.5rem; text-align: center;">
+                        <a href="#sommario-referenze" class="download-button" style="background: #020617; border: 1px solid #334155; font-size: 0.85rem; padding: 0.5rem 1rem;">
+                            ⬆ Torna al sommario missioni
+                        </a>
+                    </div>
                 </div>
 
-                <!-- AARP Card -->
-                <div class="media-card" style="background: white; border-radius: 12px; padding: 2.5rem; box-shadow: 0 6px 20px rgba(0,0,0,0.15); border-left: 6px solid #E13A3E;">
-                    <div style="display: flex; align-items: center; gap: 1.5rem; margin-bottom: 2rem;">
-                        <span style="font-size: 4rem;">🇺🇸</span>
-                        <div>
-                            <h3 style="color: #E13A3E; margin: 0; font-size: 1.6rem;">AARP - American Association of Retired Persons</h3>
-                            <p style="margin: 0.3rem 0 0 0; color: #64748b; font-size: 1rem;">38+ milioni di membri USA | Advocacy anziani dal 1958</p>
+                <!-- Banner 2: Programma & Profilo AARP -->
+                <div class="media-card prevenzione-banner banner-aarp-mental">
+                        <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1.25rem;">
+                            <span style="font-size: 2.5rem;">🇺🇸</span>
+                            <div>
+                                <h3 style="color: #E13A3E; margin: 0; font-size: 1.3rem;">AARP &ndash; Mental Health Impact</h3>
+                                <p style="margin: 0.25rem 0 0 0; color: #64748b; font-size: 0.9rem;">38+ milioni di membri USA | Advocacy anziani dal 1958</p>
+                            </div>
                         </div>
-                    </div>
-
-                    <div style="background: linear-gradient(135deg, #fff5f5 0%, #ffe5e5 100%); padding: 2rem; border-radius: 12px; margin-bottom: 2rem;">
-                        <h4 style="color: #E13A3E; margin-bottom: 1rem; font-size: 1.3rem;">🧠 Mental Health Impact of Scams & Fraud</h4>
-                        <p style="line-height: 1.8; color: #1e293b; margin-bottom: 1rem;">
+                        <p style="line-height: 1.8; color: #1e293b; margin-bottom: 1rem; font-size: 0.95rem;">
                             <strong>Programma specializzato</strong> sull'impatto psicologico delle truffe finanziarie sugli anziani. 
                             AARP fornisce supporto terapeutico, risorse di recupero emotivo e consulenza per affrontare trauma, vergogna e isolamento post-truffa.
                         </p>
-                        <div style="background: white; padding: 1.5rem; border-radius: 8px; border-left: 4px solid #E13A3E;">
-                            <p style="margin: 0; font-size: 0.95rem; color: #1e293b; line-height: 1.8;">
-                                ✅ <strong>Supporto psicologico specializzato</strong> - trauma da frode<br>
-                                ✅ <strong>Gruppi di supporto peer-to-peer</strong> - condivisione esperienze<br>
-                                ✅ <strong>Risorse recovery emotivo</strong> - superare vergogna e senso di colpa<br>
-                                ✅ <strong>Prevenzione isolamento sociale</strong> - mantenere relazioni familiari
+                        <div style="background: #fff5f5; padding: 1.25rem; border-radius: 8px; border-left: 4px solid #E13A3E;">
+                            <p style="margin: 0; font-size: 0.9rem; color: #1e293b; line-height: 1.8;">
+                                ✅ <strong>Supporto psicologico specializzato</strong> (trauma da frode)<br>
+                                ✅ <strong>Gruppi peer-to-peer</strong> per condividere esperienze<br>
+                                ✅ <strong>Risorse di recovery emotivo</strong> per superare vergogna e senso di colpa<br>
+                                ✅ <strong>Prevenzione isolamento sociale</strong> e mantenimento dei legami familiari
                             </p>
                         </div>
                     </div>
 
-                    <div style="background: #fff9e6; padding: 1.5rem; border-radius: 8px; border-left: 4px solid #FFA500; margin-bottom: 2rem;">
-                        <h4 style="color: #FFA500; margin-bottom: 1rem; font-size: 1.2rem;">📞 Servizi AARP Anti-Frode</h4>
-                        <div style="line-height: 1.8; color: #1e293b;">
-                            <p style="margin: 0 0 1rem 0;"><strong>🔍 Fraud Watch Network</strong> - Rete nazionale monitoraggio truffe in tempo reale</p>
-                            <p style="margin: 0 0 1rem 0;"><strong>🆘 Helpline gratuita</strong> - Consulenza telefonica per vittime e familiari</p>
-                            <p style="margin: 0 0 1rem 0;"><strong>📚 Educational Resources</strong> - Guide, webinar, workshop prevenzione</p>
-                            <p style="margin: 0;"><strong>⚖️ Advocacy legislativa</strong> - Pressione su Congresso USA per leggi protezione consumatori</p>
+                <!-- Banner 3: Servizi Anti-Frode -->
+                <div class="media-card prevenzione-banner banner-aarp-servizi">
+                        <h3 style="color: #FFA500; margin: 0 0 1rem 0; font-size: 1.3rem;">📞 Servizi AARP Anti-Frode</h3>
+                        <div style="line-height: 1.8; color: #1e293b; font-size: 0.95rem;">
+                            <p style="margin: 0 0 0.9rem 0;"><strong>🔍 Fraud Watch Network</strong> &ndash; Rete nazionale monitoraggio truffe in tempo reale</p>
+                            <p style="margin: 0 0 0.9rem 0;"><strong>🆘 Helpline gratuita</strong> &ndash; Consulenza telefonica per vittime e familiari</p>
+                            <p style="margin: 0 0 0.9rem 0;"><strong>📚 Educational Resources</strong> &ndash; Guide, webinar, workshop di prevenzione</p>
+                            <p style="margin: 0;"><strong>⚖️ Advocacy legislativa</strong> &ndash; Pressione su Congresso USA per leggi di protezione consumatori</p>
                         </div>
                     </div>
 
-                    <div style="background: #f0f9ff; padding: 1.5rem; border-radius: 8px; margin-bottom: 2rem;">
-                        <h4 style="color: #0066cc; margin-bottom: 1rem; font-size: 1.1rem;">📊 Statistiche AARP</h4>
+                <!-- Banner 4: Statistiche AARP -->
+                <div class="media-card prevenzione-banner banner-aarp-stats">
+                        <h3 style="color: #0066cc; margin: 0 0 1rem 0; font-size: 1.3rem;">📊 Statistiche AARP</h3>
                         <p style="line-height: 1.8; color: #1e293b; margin: 0; font-size: 0.95rem;">
-                            <strong>38+ milioni di membri</strong> over 50 anni | <strong>$1.7 miliardi persi annualmente</strong> da anziani USA in truffe | 
-                            <strong>60% vittime</strong> non denuncia per vergogna | <strong>25% sviluppa depressione</strong> post-frode
+                            <strong>38+ milioni di membri</strong> over 50 anni<br>
+                            <strong>$1.7 miliardi</strong> persi ogni anno da anziani USA in truffe<br>
+                            <strong>60% delle vittime</strong> non denuncia per vergogna<br>
+                            <strong>25%</strong> sviluppa depressione clinica dopo la frode
                         </p>
                     </div>
 
-                    <div style="background: linear-gradient(135deg, #DC143C 0%, #8B0000 100%); padding: 2rem; border-radius: 12px; margin-bottom: 2rem; color: white;">
-                        <h4 style="color: #FFD700; margin-bottom: 1rem; font-size: 1.3rem;">💔 Impatto Salute Mentale</h4>
-                        <p style="line-height: 1.9; margin: 0; font-size: 1.05rem;">
-                            <strong>Le vittime di truffe finanziarie sperimentano:</strong><br>
+                <!-- Banner 5: Impatto Salute Mentale -->
+                <div class="media-card prevenzione-banner banner-aarp-impatti" style="padding: 2rem; box-shadow: 0 6px 20px rgba(0,0,0,0.18);">
+                        <h3 style="color: #FFD700; margin: 0 0 1rem 0; font-size: 1.3rem;">💔 Impatto Salute Mentale</h3>
+                        <p style="line-height: 1.9; margin: 0; font-size: 0.98rem;">
+                            <strong>Le vittime di truffe finanziarie possono sperimentare:</strong><br>
                             • Trauma psicologico paragonabile ad aggressione fisica<br>
                             • Depressione clinica (25% dei casi)<br>
                             • Ansia e attacchi di panico persistenti<br>
                             • Vergogna paralizzante e isolamento sociale<br>
-                            • Peggioramento condizioni croniche preesistenti<br>
-                            • Aumento rischio suicidio in anziani vulnerabili
+                            • Peggioramento di condizioni croniche preesistenti<br>
+                            • Aumento del rischio suicidario negli anziani vulnerabili
                         </p>
                     </div>
+                </div>
+            </div>
 
-                    <div style="display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center;">
-                        <a href="https://www.aarp.org/money/scams-fraud/mental-health-impact/" target="_blank" rel="noopener noreferrer" class="download-button" style="background: #E13A3E; display: inline-block; font-size: 1.1rem; padding: 1rem 2rem;">
+            <!-- CTA e risorse aggiuntive AARP -->
+            <div style="margin-top: 2.5rem; text-align: center;">
+                    <div style="display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; margin-bottom: 1.5rem;">
+                        <a id="mental-health" href="https://www.aarp.org/money/scams-fraud/mental-health-impact/" target="_blank" rel="noopener noreferrer" class="download-button" style="background: #E13A3E; display: inline-block; font-size: 1.05rem; padding: 0.9rem 1.8rem;">
                             🧠 Mental Health Impact
                         </a>
-                        <a href="https://www.aarp.org/money/scams-fraud/" target="_blank" rel="noopener noreferrer" class="download-button" style="background: #C41E3A; display: inline-block; font-size: 1.1rem; padding: 1rem 2rem;">
+                        <a href="https://www.aarp.org/money/scams-fraud/" target="_blank" rel="noopener noreferrer" class="download-button" style="background: #C41E3A; display: inline-block; font-size: 1.05rem; padding: 0.9rem 1.8rem;">
                             🛡️ Fraud Watch Network
                         </a>
-                        <a href="https://www.aarp.org/" target="_blank" rel="noopener noreferrer" class="download-button" style="background: #A01B2E; display: inline-block; font-size: 1.1rem; padding: 1rem 2rem;">
+                        <a href="https://www.aarp.org/" target="_blank" rel="noopener noreferrer" class="download-button" style="background: #A01B2E; display: inline-block; font-size: 1.05rem; padding: 0.9rem 1.8rem;">
                             🌐 Sito Ufficiale AARP
                         </a>
                     </div>
 
-                    <div style="margin-top: 2rem; padding-top: 1.5rem; border-top: 2px solid #e2e8f0;">
-                        <p style="margin: 0; text-align: center; color: #64748b; font-size: 0.9rem;">
-                            📧 <strong>AARP The Magazine</strong> - Pubblicazione bimestrale con storie vittime, consigli sicurezza, aggiornamenti legislativi (38M copie distribuite)
-                        </p>
+                    <div style="margin-top: 1.5rem; padding-top: 1.5rem; border-top: 2px solid #e2e8f0; max-width: 800px; margin-left: auto; margin-right: auto;">
+                            <p style="margin: 0 0 0.4rem 0; text-align: center; color: #64748b; font-size: 0.9rem;">
+                                📧 <strong>AARP The Magazine</strong> &ndash; Pubblicazione bimestrale con storie di vittime, consigli di sicurezza e aggiornamenti legislativi (38M copie distribuite)
+                            </p>
+                            <p style="margin: 0; text-align: center; color: #9ca3af; font-size: 0.85rem;">
+                                ⚠️ I servizi AARP (helpline, gruppi di supporto, Fraud Watch Network) sono attivi soltanto per i residenti negli Stati Uniti.
+                                Le risorse restano però un <strong>modello di riferimento internazionale</strong> per capire come tutelare meglio le vittime di truffa.
+                            </p>
+                        </div>
+
+                    <div style="margin-top: 1.5rem;">
+                        <a href="#sommario-referenze" class="download-button" style="background: #020617; border: 1px solid #334155; font-size: 0.85rem; padding: 0.5rem 1rem;">
+                            ⬆ Torna al sommario missioni
+                        </a>
                     </div>
                 </div>
             </div>
         </section>
 
-        <h2 class="section-title" style="margin-top: 5rem;">📄 Documenti Ufficiali Parlamento Europeo</h2>
-        
-        <div class="documents-grid">
-            <div class="document-card">
-                <span style="font-size: 3rem;">🇪🇺</span>
-                <h3 class="document-title">Petizione 0645/2025</h3>
-                <p><strong>Parlamento Europeo | Gennaio 2025</strong></p>
-                <p>Misure contro truffe finanziarie UE. Status: ACCETTATA</p>
-                <a href="Parlamento Europeo accoglie Petizione 645-2025 proposta da Marcello Stanca.pdf" class="download-button" download>
-                    📥 Download PDF
-                </a>
+        <!-- Forze di Polizia – Contatti ufficiali -->
+        <section id="forze-polizia" style="margin-top: 5rem; scroll-margin-top: 100px;">
+            <h2 class="section-title">🚔 Forze di Polizia – Contatti ufficiali</h2>
+            <p class="section-subtitle" style="font-size: 2rem;">Dove denunciare truffe online, frodi bancarie e raggiri finanziari nel tuo Paese</p>
+
+            <div style="text-align: center; margin-top: 1rem;">
+                <a href="#sommario-referenze" class="download-button" style="background: #020617; border: 1px solid #334155;">⬆ Torna al sommario</a>
             </div>
 
-            <div class="document-card">
-                <span style="font-size: 3rem;">🇪🇺</span>
-                <h3 class="document-title">Petizione 0888/2024</h3>
-                <p><strong>Parlamento Europeo | Novembre 2024</strong></p>
-                <p>Dovere banche proteggere clienti. Status: ACCETTATA</p>
-                <a href="Petizione 888-2024 risposta da Parlamento Europeo.pdf" class="download-button" download>
-                    📥 Download PDF
-                </a>
+            <!-- Siti ufficiali principali Autorità italiane -->
+            <div style="margin-top: 2.5rem;">
+                <div style="text-align: center; margin-bottom: 0.25rem; font-size: 0.9rem; color: #6b7280;">
+                    🇮🇹 <strong>Italia</strong>
+                </div>
+                <h3 style="text-align: center; font-size: 1.3rem; color: #0f172a; margin-bottom: 1rem;">
+                    🌐 Siti web ufficiali delle principali Autorità italiane
+                </h3>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.5rem;">
+                    <!-- Guardia di Finanza -->
+                    <div style="background: #f9fafb; border-radius: 12px; padding: 1.5rem; box-shadow: 0 4px 12px rgba(0,0,0,0.06); border-left: 4px solid #eab308;">
+                        <h4 style="margin: 0 0 0.5rem 0; font-size: 1.05rem; color: #854d0e;">🟡 Guardia di Finanza</h4>
+                        <p style="margin: 0 0 0.5rem 0; font-size: 0.9rem; color: #111827;">
+                            Polizia economico-finanziaria specializzata in frodi fiscali, riciclaggio e reati contro il bilancio pubblico.
+                        </p>
+                        <p style="margin: 0; font-size: 0.88rem; color: #1d4ed8;">
+                            Sito ufficiale: <a href="https://www.gdf.gov.it/" target="_blank" rel="noopener noreferrer" style="color: #1d4ed8; text-decoration: underline;">https://www.gdf.gov.it/</a><br>
+                            Contatti e struttura: <a href="https://www.gdf.gov.it/it/chi-siamo" target="_blank" rel="noopener noreferrer" style="color: #1d4ed8; text-decoration: underline;">https://www.gdf.gov.it/it/chi-siamo</a>
+                        </p>
+                        <p style="margin: 0.6rem 0 0 0; font-size: 0.8rem; color: #6b7280;">
+                            Social ufficiali: sezione <strong>"Seguici su"</strong> presente nella homepage del sito.
+                        </p>
+                    </div>
+
+                    <!-- Arma dei Carabinieri -->
+                    <div style="background: #f9fafb; border-radius: 12px; padding: 1.5rem; box-shadow: 0 4px 12px rgba(0,0,0,0.06); border-left: 4px solid #1d4ed8;">
+                        <h4 style="margin: 0 0 0.5rem 0; font-size: 1.05rem; color: #1e3a8a;">🔵 Arma dei Carabinieri</h4>
+                        <p style="margin: 0 0 0.5rem 0; font-size: 0.9rem; color: #111827;">
+                            Forza di polizia a competenza generale, con reparti dedicati a truffe online e tutela del risparmio.
+                        </p>
+                        <p style="margin: 0; font-size: 0.88rem; color: #1d4ed8;">
+                            Sito ufficiale: <a href="https://www.carabinieri.it/" target="_blank" rel="noopener noreferrer" style="color: #1d4ed8; text-decoration: underline;">https://www.carabinieri.it/</a>
+                        </p>
+                        <p style="margin: 0.6rem 0 0 0; font-size: 0.8rem; color: #6b7280;">
+                            Social ufficiali: presenza attiva su <strong>Instagram</strong> e <strong>canale WhatsApp</strong> istituzionale (citati nei comunicati ufficiali).
+                        </p>
+                    </div>
+
+                    <!-- Polizia Postale e delle Comunicazioni -->
+                    <div style="background: #f9fafb; border-radius: 12px; padding: 1.5rem; box-shadow: 0 4px 12px rgba(0,0,0,0.06); border-left: 4px solid #7e22ce;">
+                        <h4 style="margin: 0 0 0.5rem 0; font-size: 1.05rem; color: #6b21a8;">🟣 Polizia Postale e delle Comunicazioni</h4>
+                        <p style="margin: 0 0 0.5rem 0; font-size: 0.9rem; color: #111827;">
+                            Reparto specializzato della Polizia di Stato per cybercrime, truffe online, phishing e frodi informatiche.
+                        </p>
+                        <p style="margin: 0; font-size: 0.88rem; color: #1d4ed8;">
+                            Sito ufficiale: <a href="https://www.commissariatodips.it/" target="_blank" rel="noopener noreferrer" style="color: #1d4ed8; text-decoration: underline;">https://www.commissariatodips.it/</a>
+                        </p>
+                        <p style="margin: 0.6rem 0 0 0; font-size: 0.8rem; color: #6b7280;">
+                            Social ufficiali: link diretti a <strong>Facebook</strong>, <strong>Twitter/X</strong> e <strong>YouTube</strong> dalla homepage.
+                        </p>
+                    </div>
+                </div>
             </div>
 
-            <div class="document-card">
-                <span style="font-size: 3rem;">📜</span>
-                <h3 class="document-title">Accordo UE PSD3</h3>
-                <p><strong>27 Novembre 2024</strong></p>
-                <p>Maggiore tutela contro le frodi - Validazione</p>
-                <a href="Parlamento Europeo-27 nov 2025 Accordo sui servizi di pagamento_ maggiore tutela contro le frodi.pdf" class="download-button" download>
-                    📥 Download PDF
-                </a>
+            <!-- Elenco dinamico forze di polizia approvate -->
+            <div id="police-forces-list" style="margin-top: 3rem; display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.5rem;">
+                <div style="background: #0f172a; color: #e5e7eb; padding: 1.5rem; border-radius: 12px; border: 1px dashed #475569; grid-column: 1 / -1; text-align: center;">
+                    <p style="margin: 0; font-size: 0.95rem;">Caricamento elenco forze di polizia in corso…</p>
+                    <p style="margin: 0.5rem 0 0 0; font-size: 0.85rem; color: #9ca3af;">Se il tuo Paese non è ancora presente, usa la bacheca legionari qui sotto.</p>
+                </div>
+            </div>
+
+            <!-- Bacheca Legionari: suggerimenti utenti in quarantena -->
+            <div style="margin-top: 3rem; background: #020617; color: #e5e7eb; padding: 2rem; border-radius: 12px; border: 1px solid #334155;">
+                <h3 style="margin-top: 0; margin-bottom: 1rem; font-size: 1.3rem;">📣 Bacheca legionari – suggerisci i contatti della tua Polizia</h3>
+                <p style="margin: 0 0 1rem 0; font-size: 0.95rem; color: #cbd5f5;">
+                    Aiutaci a completare l'elenco internazionale dei corpi di Polizia economico-finanziaria. Ogni segnalazione viene messa
+                    <strong>in quarantena</strong> e pubblicata solo dopo verifica da parte dell'amministratore.
+                </p>
+                <p style="margin: 0 0 1.5rem 0; font-size: 0.8rem; color: #9ca3af;">
+                    Il <strong>nickname</strong> viene pubblicato nel "Libro dei legionari" solo se dai il tuo consenso esplicito qui sotto.
+                    L'<strong>email</strong> non viene mai pubblicata: può essere usata solo per eventuali chiarimenti sulla segnalazione o, se lo desideri,
+                    per inviarti un <strong>diploma di ringraziamento</strong>. Puoi chiedere in qualsiasi momento la rimozione dei tuoi dati.
+                </p>
+
+                <form id="police-suggestion-form" onsubmit="submitPoliceSuggestion(event)" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem;">
+                    <div>
+                        <label for="suggest-country" style="display: block; margin-bottom: 0.3rem; font-size: 0.9rem;">🌍 Paese <span style="color: #f97316;">*</span></label>
+                        <input id="suggest-country" type="text" required placeholder="Es: Italia, Francia, Spagna" style="width: 100%; padding: 0.7rem; border-radius: 8px; border: 1px solid #475569; background: #020617; color: #e5e7eb;">
+                    </div>
+                    <div>
+                        <label for="suggest-name" style="display: block; margin-bottom: 0.3rem; font-size: 0.9rem;">🚔 Nome forza di Polizia <span style="color: #f97316;">*</span></label>
+                        <input id="suggest-name" type="text" required placeholder="Es: Guardia di Finanza, Europol" style="width: 100%; padding: 0.7rem; border-radius: 8px; border: 1px solid #475569; background: #020617; color: #e5e7eb;">
+                    </div>
+                    <div>
+                        <label for="suggest-website" style="display: block; margin-bottom: 0.3rem; font-size: 0.9rem;">🌐 Sito ufficiale <span style="color: #f97316;">*</span></label>
+                        <input id="suggest-website" type="url" required placeholder="https://..." style="width: 100%; padding: 0.7rem; border-radius: 8px; border: 1px solid #475569; background: #020617; color: #e5e7eb;">
+                    </div>
+                    <div>
+                        <label for="suggest-report" style="display: block; margin-bottom: 0.3rem; font-size: 0.9rem;">📢 Pagina per segnalare truffe (se diversa)</label>
+                        <input id="suggest-report" type="url" placeholder="URL pagina "report" / "scams"" style="width: 100%; padding: 0.7rem; border-radius: 8px; border: 1px solid #475569; background: #020617; color: #e5e7eb;">
+                    </div>
+                    <div style="grid-column: 1 / -1;">
+                        <label for="suggest-notes" style="display: block; margin-bottom: 0.3rem; font-size: 0.9rem;">📝 Note utili (facoltative)</label>
+                        <textarea id="suggest-notes" rows="3" placeholder="Es: reparto cybercrime, lingua del sito, orari sportello, ecc." style="width: 100%; padding: 0.7rem; border-radius: 8px; border: 1px solid #475569; background: #020617; color: #e5e7eb; resize: vertical;"></textarea>
+                    </div>
+                    <div>
+                        <label for="suggest-nickname" style="display: block; margin-bottom: 0.3rem; font-size: 0.9rem;">🏅 Nome / nickname per il "Libro dei Legionari"</label>
+                        <input id="suggest-nickname" type="text" placeholder="Come vuoi essere ringraziato pubblicamente" style="width: 100%; padding: 0.7rem; border-radius: 8px; border: 1px solid #475569; background: #020617; color: #e5e7eb;">
+                    </div>
+                    <div>
+                        <label for="suggest-email" style="display: block; margin-bottom: 0.3rem; font-size: 0.9rem;">📧 Email (facoltativa, non pubblicata)</label>
+                        <input id="suggest-email" type="email" placeholder="Per eventuali chiarimenti sull'indicazione" style="width: 100%; padding: 0.7rem; border-radius: 8px; border: 1px solid #475569; background: #020617; color: #e5e7eb;">
+                    </div>
+
+                    <div style="grid-column: 1 / -1; display: grid; gap: 0.4rem; font-size: 0.8rem; color: #e5e7eb; margin-top: 0.5rem;">
+                        <label style="display: flex; align-items: flex-start; gap: 0.5rem; cursor: pointer;">
+                            <input id="consent-nickname" type="checkbox" style="margin-top: 0.15rem;">
+                            <span>
+                                Acconsento alla <strong>pubblicazione del mio nome/nickname</strong> nel "Libro dei legionari" come ringraziamento pubblico
+                                per la segnalazione approvata.
+                            </span>
+                        </label>
+                        <label style="display: flex; align-items: flex-start; gap: 0.5rem; cursor: pointer;">
+                            <input id="consent-diploma" type="checkbox" style="margin-top: 0.15rem;">
+                            <span>
+                                Desidero ricevere via email, se indicata, un <strong>diploma di ringraziamento</strong> per il contributo e acconsento a
+                                utilizzare il mio indirizzo email per questa sola finalità.
+                            </span>
+                        </label>
+                    </div>
+
+                    <div style="grid-column: 1 / -1; text-align: right; margin-top: 0.5rem;">
+                        <button type="submit" style="background: linear-gradient(135deg, #38bdf8, #0ea5e9); color: white; border: none; padding: 0.8rem 1.6rem; border-radius: 999px; font-weight: 600; cursor: pointer; font-size: 0.95rem; box-shadow: 0 4px 12px rgba(56,189,248,0.4);" onmouseover="this.style.transform='translateY(-1px)'" onmouseout="this.style.transform='translateY(0)';">
+                            📨 Invia la tua segnalazione (va in quarantena)
+                        </button>
+                    </div>
+
+                    <div id="police-suggestion-message" style="grid-column: 1 / -1; margin-top: 0.5rem; display: none; padding: 0.8rem; border-radius: 8px; font-size: 0.9rem;"></div>
+                </form>
+            </div>
+
+            <!-- Libro dei Legionari -->
+            <div style="margin-top: 2rem; background: #020617; color: #e5e7eb; padding: 1.8rem; border-radius: 12px; border: 1px dashed #4b5563;">
+                <h3 style="margin-top: 0; margin-bottom: 0.75rem; font-size: 1.2rem;">🏅 Libro dei legionari</h3>
+                <p style="margin: 0 0 1rem 0; font-size: 0.9rem; color: #cbd5f5;">
+                    In questa bacheca ringraziamo i <strong>legionari</strong> che hanno segnalato contatti ufficiali affidabili delle forze di polizia. I loro contributi,
+                    dopo verifica, aiutano altri cittadini a trovare subito dove denunciare truffe e frodi.
+                </p>
+                <div id="legionary-book" style="border-top: 1px solid #334155; padding-top: 1rem; font-size: 0.9rem;"></div>
+            </div>
+
+            <!-- Informativa sintetica Privacy Bacheca Legionari -->
+            <div style="margin-top: 1.5rem; background: #020617; color: #e5e7eb; padding: 1.5rem; border-radius: 12px; border: 1px solid #1f2937; font-size: 0.8rem; line-height: 1.7;">
+                <h4 style="margin: 0 0 0.75rem 0; font-size: 0.9rem; color: #e5e7eb;">🔒 Privacy – Bacheca legionari e Libro dei legionari</h4>
+                <p style="margin: 0 0 0.4rem 0; color: #e5e7eb;">
+                    I dati inviati tramite la bacheca legionari (Paese, nome della forza di polizia, URL, note, eventuale nickname ed email) sono trattati
+                    ai soli fini di <strong>verificare le segnalazioni</strong>, <strong>pubblicare l'elenco delle forze di polizia</strong> e, se acconsenti,
+                    <strong>ringraziarti pubblicamente</strong> nel Libro dei legionari e inviarti un eventuale diploma di merito.
+                </p>
+                <p style="margin: 0 0 0.4rem 0; color: #e5e7eb;">
+                    La base giuridica del trattamento è l'<strong>interesse legittimo</strong> alla prevenzione delle truffe (per la verifica delle segnalazioni)
+                    e il tuo <strong>consenso esplicito</strong> per la pubblicazione del nickname e per l'uso dell'email ai fini del diploma.
+                </p>
+                <p style="margin: 0 0 0.4rem 0; color: #e5e7eb;">
+                    I dati sono conservati per il tempo necessario a mantenere aggiornato l'elenco e la storia delle segnalazioni e possono essere cancellati o
+                    anonimizzati su tua richiesta. Puoi esercitare i diritti di accesso, rettifica e cancellazione contattando l'Avv. Marcello Stanca attraverso
+                    i recapiti indicati sul sito ufficiale dell'AMEV Firenze.
+                </p>
+                <p style="margin: 0; color: #9ca3af;">
+                    Per un'informativa completa sul trattamento dei dati personali, puoi richiedere il testo integrale al titolare del trattamento.
+                </p>
+            </div>
+        </section>
+
+        <!-- Admin Panel -->
+        <section id="admin-panel" style="margin-top: 5rem; padding: 3rem; background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); border-radius: 12px; border: 2px solid #FFD700;">
+            <h2 style="color: #FFD700; text-align: center; font-size: 2rem; margin-bottom: 2rem;">🔐 Pannello Amministrazione</h2>
+            <p style="color: #87CEEB; text-align: center; margin-bottom: 3rem;">Gestione contenuti e link istituzionali</p>
+            
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
+                <!-- Autorità Vigilanza -->
+                <div style="background: rgba(255,255,255,0.05); padding: 2rem; border-radius: 10px; border: 1px solid rgba(135, 206, 235, 0.3);">
+                    <h3 style="color: #87CEEB; margin-bottom: 1.5rem; font-size: 1.3rem;">🪐 Autorità Vigilanza</h3>
+                    <div style="margin-bottom: 1rem;">
+                        <label style="color: white; display: block; margin-bottom: 0.5rem;">Nome Autorità:</label>
+                        <input type="text" id="admin-autorita-nome" placeholder="Es: BaFin Germania" style="width: 100%; padding: 0.8rem; border-radius: 6px; border: 1px solid #FFD700; background: rgba(255,255,255,0.1); color: white;">
+                    </div>
+                    <div style="margin-bottom: 1rem;">
+                        <label style="color: white; display: block; margin-bottom: 0.5rem;">URL:</label>
+                        <input type="url" id="admin-autorita-url" placeholder="https://..." style="width: 100%; padding: 0.8rem; border-radius: 6px; border: 1px solid #FFD700; background: rgba(255,255,255,0.1); color: white;">
+                    </div>
+                    <button onclick="addAutorityLink()" style="width: 100%; background: #87CEEB; color: #1a1a2e; padding: 0.8rem; border: none; border-radius: 6px; font-weight: bold; cursor: pointer; transition: all 0.3s;" onmouseover="this.style.background='#5FA8D3'" onmouseout="this.style.background='#87CEEB'">
+                        ➕ Aggiungi Link
+                    </button>
+                </div>
+
+                <!-- Banche Centrali -->
+                <div style="background: rgba(255,255,255,0.05); padding: 2rem; border-radius: 10px; border: 1px solid rgba(144, 238, 144, 0.3);">
+                    <h3 style="color: #90EE90; margin-bottom: 1.5rem; font-size: 1.3rem;">🌍 Banche Centrali</h3>
+                    <div style="margin-bottom: 1rem;">
+                        <label style="color: white; display: block; margin-bottom: 0.5rem;">Nome Banca:</label>
+                        <input type="text" id="admin-banca-nome" placeholder="Es: ECB" style="width: 100%; padding: 0.8rem; border-radius: 6px; border: 1px solid #FFD700; background: rgba(255,255,255,0.1); color: white;">
+                    </div>
+                    <div style="margin-bottom: 1rem;">
+                        <label style="color: white; display: block; margin-bottom: 0.5rem;">URL:</label>
+                        <input type="url" id="admin-banca-url" placeholder="https://..." style="width: 100%; padding: 0.8rem; border-radius: 6px; border: 1px solid #FFD700; background: rgba(255,255,255,0.1); color: white;">
+                    </div>
+                    <button onclick="addBankLink()" style="width: 100%; background: #90EE90; color: #1a1a2e; padding: 0.8rem; border: none; border-radius: 6px; font-weight: bold; cursor: pointer; transition: all 0.3s;" onmouseover="this.style.background='#76D275'" onmouseout="this.style.background='#90EE90'">
+                        ➕ Aggiungi Link
+                    </button>
+                </div>
+
+                <!-- Associazioni Consumatori -->
+                <div style="background: rgba(255,255,255,0.05); padding: 2rem; border-radius: 10px; border: 1px solid rgba(221, 160, 221, 0.3);">
+                    <h3 style="color: #DDA0DD; margin-bottom: 1.5rem; font-size: 1.3rem;">🛡️ Associazioni Consumatori</h3>
+                    <div style="margin-bottom: 1rem;">
+                        <label style="color: white; display: block; margin-bottom: 0.5rem;">Nome Associazione:</label>
+                        <input type="text" id="admin-consumatori-nome" placeholder="Es: Altroconsumo" style="width: 100%; padding: 0.8rem; border-radius: 6px; border: 1px solid #FFD700; background: rgba(255,255,255,0.1); color: white;">
+                    </div>
+                    <div style="margin-bottom: 1rem;">
+                        <label style="color: white; display: block; margin-bottom: 0.5rem;">URL:</label>
+                        <input type="url" id="admin-consumatori-url" placeholder="https://..." style="width: 100%; padding: 0.8rem; border-radius: 6px; border: 1px solid #FFD700; background: rgba(255,255,255,0.1); color: white;">
+                    </div>
+                    <button onclick="addConsumerLink()" style="width: 100%; background: #DDA0DD; color: #1a1a2e; padding: 0.8rem; border: none; border-radius: 6px; font-weight: bold; cursor: pointer; transition: all 0.3s;" onmouseover="this.style.background='#C77CC7'" onmouseout="this.style.background='#DDA0DD'">
+                        ➕ Aggiungi Link
+                    </button>
+                </div>
+
+                <!-- Organizzazioni Tutela -->
+                <div style="background: rgba(255,255,255,0.05); padding: 2rem; border-radius: 10px; border: 1px solid rgba(255, 182, 193, 0.3);">
+                    <h3 style="color: #FFB6C1; margin-bottom: 1.5rem; font-size: 1.3rem;">🤝 Organizzazioni Tutela</h3>
+                    <div style="margin-bottom: 1rem;">
+                        <label style="color: white; display: block; margin-bottom: 0.5rem;">Nome Organizzazione:</label>
+                        <input type="text" id="admin-tutela-nome" placeholder="Es: BEUC" style="width: 100%; padding: 0.8rem; border-radius: 6px; border: 1px solid #FFD700; background: rgba(255,255,255,0.1); color: white;">
+                    </div>
+                    <div style="margin-bottom: 1rem;">
+                        <label style="color: white; display: block; margin-bottom: 0.5rem;">URL:</label>
+                        <input type="url" id="admin-tutela-url" placeholder="https://..." style="width: 100%; padding: 0.8rem; border-radius: 6px; border: 1px solid #FFD700; background: rgba(255,255,255,0.1); color: white;">
+                    </div>
+                    <button onclick="addTutelaLink()" style="width: 100%; background: #FFB6C1; color: #1a1a2e; padding: 0.8rem; border: none; border-radius: 6px; font-weight: bold; cursor: pointer; transition: all 0.3s;" onmouseover="this.style.background='#FF91A4'" onmouseout="this.style.background='#FFB6C1'">
+                        ➕ Aggiungi Link
+                    </button>
+                </div>
+
+                <!-- Supporto Psicologico -->
+                <div style="background: rgba(255,255,255,0.05); padding: 2rem; border-radius: 10px; border: 1px solid rgba(255, 160, 122, 0.3);">
+                    <h3 style="color: #FFA07A; margin-bottom: 1.5rem; font-size: 1.3rem;">💚 Supporto Psicologico</h3>
+                    <div style="margin-bottom: 1rem;">
+                        <label style="color: white; display: block; margin-bottom: 0.5rem;">Nome Servizio:</label>
+                        <input type="text" id="admin-psico-nome" placeholder="Es: Telefono Amico" style="width: 100%; padding: 0.8rem; border-radius: 6px; border: 1px solid #FFD700; background: rgba(255,255,255,0.1); color: white;">
+                    </div>
+                    <div style="margin-bottom: 1rem;">
+                        <label style="color: white; display: block; margin-bottom: 0.5rem;">URL:</label>
+                        <input type="url" id="admin-psico-url" placeholder="https://..." style="width: 100%; padding: 0.8rem; border-radius: 6px; border: 1px solid #FFD700; background: rgba(255,255,255,0.1); color: white;">
+                    </div>
+                    <button onclick="addPsicoLink()" style="width: 100%; background: #FFA07A; color: #1a1a2e; padding: 0.8rem; border: none; border-radius: 6px; font-weight: bold; cursor: pointer; transition: all 0.3s;" onmouseover="this.style.background='#FF8A5B'" onmouseout="this.style.background='#FFA07A'">
+                        ➕ Aggiungi Link
+                    </button>
+                </div>
+
+                <!-- Mental Health Impact -->
+                <div style="background: rgba(255,255,255,0.05); padding: 2rem; border-radius: 10px; border: 1px solid rgba(255, 107, 107, 0.3);">
+                    <h3 style="color: #FF6B6B; margin-bottom: 1.5rem; font-size: 1.3rem;">🔴 Mental Health Impact</h3>
+                    <div style="margin-bottom: 1rem;">
+                        <label style="color: white; display: block; margin-bottom: 0.5rem;">Nome Risorsa:</label>
+                        <input type="text" id="admin-mental-nome" placeholder="Es: SAMHSA" style="width: 100%; padding: 0.8rem; border-radius: 6px; border: 1px solid #FFD700; background: rgba(255,255,255,0.1); color: white;">
+                    </div>
+                    <div style="margin-bottom: 1rem;">
+                        <label style="color: white; display: block; margin-bottom: 0.5rem;">URL:</label>
+                        <input type="url" id="admin-mental-url" placeholder="https://..." style="width: 100%; padding: 0.8rem; border-radius: 6px; border: 1px solid #FFD700; background: rgba(255,255,255,0.1); color: white;">
+                    </div>
+                    <button onclick="addMentalLink()" style="width: 100%; background: #FF6B6B; color: white; padding: 0.8rem; border: none; border-radius: 6px; font-weight: bold; cursor: pointer; transition: all 0.3s;" onmouseover="this.style.background='#EE5A52'" onmouseout="this.style.background='#FF6B6B'">
+                        ➕ Aggiungi Link
+                    </button>
+                </div>
+
+                <!-- Forze di Polizia (Firestore) -->
+                <div style="background: rgba(255,255,255,0.05); padding: 2rem; border-radius: 10px; border: 1px solid rgba(56, 189, 248, 0.5);">
+                    <h3 style="color: #38bdf8; margin-bottom: 1.5rem; font-size: 1.3rem;">🚔 Forze di Polizia (pubbliche)</h3>
+                    <p style="color: #e5e7eb; font-size: 0.9rem; margin-top: 0; margin-bottom: 1rem;">
+                        Inserisci o aggiorna i recapiti ufficiali delle forze di polizia economico-finanziaria. I dati vengono salvati nella collezione
+                        <strong>police_forces</strong> su Firestore e sono visibili nella sezione pubblica.
+                    </p>
+                    <div style="margin-bottom: 1rem;">
+                        <label style="color: white; display: block; margin-bottom: 0.5rem;">Paese:</label>
+                        <input type="text" id="admin-police-country" placeholder="Es: Italia" style="width: 100%; padding: 0.8rem; border-radius: 6px; border: 1px solid #38bdf8; background: rgba(15,23,42,0.7); color: white;">
+                    </div>
+                    <div style="margin-bottom: 1rem;">
+                        <label style="color: white; display: block; margin-bottom: 0.5rem;">Nome forza di Polizia:</label>
+                        <input type="text" id="admin-police-name" placeholder="Es: Guardia di Finanza" style="width: 100%; padding: 0.8rem; border-radius: 6px; border: 1px solid #38bdf8; background: rgba(15,23,42,0.7); color: white;">
+                    </div>
+                    <div style="margin-bottom: 1rem;">
+                        <label style="color: white; display: block; margin-bottom: 0.5rem;">URL sito ufficiale:</label>
+                        <input type="url" id="admin-police-website" placeholder="https://..." style="width: 100%; padding: 0.8rem; border-radius: 6px; border: 1px solid #38bdf8; background: rgba(15,23,42,0.7); color: white;">
+                    </div>
+                    <div style="margin-bottom: 1rem;">
+                        <label style="color: white; display: block; margin-bottom: 0.5rem;">URL pagina segnalazioni (se diversa):</label>
+                        <input type="url" id="admin-police-report" placeholder="URL pagina "report" / "scams"" style="width: 100%; padding: 0.8rem; border-radius: 6px; border: 1px solid #38bdf8; background: rgba(15,23,42,0.7); color: white;">
+                    </div>
+                    <div style="margin-bottom: 1rem;">
+                        <label style="color: white; display: block; margin-bottom: 0.5rem;">Tipo (nazionale / internazionale / specialistica):</label>
+                        <input type="text" id="admin-police-type" placeholder="Es: nazionale" style="width: 100%; padding: 0.8rem; border-radius: 6px; border: 1px solid #38bdf8; background: rgba(15,23,42,0.7); color: white;">
+                    </div>
+                    <button onclick="adminAddPoliceForce()" style="width: 100%; background: #38bdf8; color: #0f172a; padding: 0.8rem; border: none; border-radius: 6px; font-weight: bold; cursor: pointer; transition: all 0.3s; box-shadow: 0 4px 12px rgba(56,189,248,0.4);" onmouseover="this.style.background='#0ea5e9'" onmouseout="this.style.background='#38bdf8'">
+                        ✅ Salva/aggiungi forza di Polizia
+                    </button>
+                    <button onclick="seedInitialPoliceForces()" style="width: 100%; margin-top: 0.75rem; background: transparent; color: #38bdf8; padding: 0.6rem; border-radius: 6px; border: 1px dashed rgba(56,189,248,0.7); font-weight: 500; cursor: pointer; font-size: 0.85rem;" onmouseover="this.style.background='rgba(15,23,42,0.9)'" onmouseout="this.style.background='transparent'">
+                        📦 Carica set iniziale (Interpol, Europol, GdF, Polizia Postale, Carabinieri)
+                    </button>
+                </div>
+
+                <!-- Suggerimenti utenti (quarantena) -->
+                <div style="background: rgba(255,255,255,0.05); padding: 2rem; border-radius: 10px; border: 1px solid rgba(234, 179, 8, 0.6);">
+                    <h3 style="color: #eab308; margin-bottom: 1.5rem; font-size: 1.3rem;">🧪 Suggerimenti utenti in quarantena</h3>
+                    <p style="color: #e5e7eb; font-size: 0.9rem; margin-top: 0; margin-bottom: 1rem;">
+                        Qui compaiono le segnalazioni inviate dalla bacheca legionari (<strong>collezione police_suggestions</strong>, stato <em>pending</em>). Approva solo link
+                        ufficiali a forze di polizia e corpi investigativi.
+                    </p>
+                    <button onclick="loadPendingPoliceSuggestions()" style="margin-bottom: 1rem; background: #eab308; color: #0f172a; border: none; padding: 0.6rem 1rem; border-radius: 999px; font-weight: 600; cursor: pointer; font-size: 0.85rem;" onmouseover="this.style.background='#ca8a04'" onmouseout="this.style.background='#eab308'">
+                        🔄 Ricarica suggerimenti in quarantena
+                    </button>
+                    <div id="admin-police-suggestions-list" style="max-height: 260px; overflow-y: auto; padding-right: 0.5rem; border-top: 1px solid rgba(148,163,184,0.4); margin-top: 1rem;"></div>
+                </div>
+            </div>
+
+        </section>
+
+        <script>
+            // Admin Functions
+            const adminData = {
+                autorita: [],
+                banche: [],
+                consumatori: [],
+                tutela: [],
+                psicologico: [],
+                mentalHealth: []
+            };
+
+            // Load from localStorage
+            function loadAdminData() {
+                const saved = localStorage.getItem('adminLinks');
+                if (saved) {
+                    Object.assign(adminData, JSON.parse(saved));
+                }
+            }
+
+            // Save to localStorage
+            function saveAdminData() {
+                localStorage.setItem('adminLinks', JSON.stringify(adminData));
+            }
+
+            function addAutorityLink() {
+                const nome = document.getElementById('admin-autorita-nome').value;
+                const url = document.getElementById('admin-autorita-url').value;
+                if (nome && url) {
+                    adminData.autorita.push({ nome, url, date: new Date().toISOString() });
+                    saveAdminData();
+                    alert('✅ Link aggiunto: ' + nome);
+                    document.getElementById('admin-autorita-nome').value = '';
+                    document.getElementById('admin-autorita-url').value = '';
+                } else {
+                    alert('❌ Compila tutti i campi');
+                }
+            }
+
+            function addBankLink() {
+                const nome = document.getElementById('admin-banca-nome').value;
+                const url = document.getElementById('admin-banca-url').value;
+                if (nome && url) {
+                    adminData.banche.push({ nome, url, date: new Date().toISOString() });
+                    saveAdminData();
+                    alert('✅ Link aggiunto: ' + nome);
+                    document.getElementById('admin-banca-nome').value = '';
+                    document.getElementById('admin-banca-url').value = '';
+                } else {
+                    alert('❌ Compila tutti i campi');
+                }
+            }
+
+            function addConsumerLink() {
+                const nome = document.getElementById('admin-consumatori-nome').value;
+                const url = document.getElementById('admin-consumatori-url').value;
+                if (nome && url) {
+                    adminData.consumatori.push({ nome, url, date: new Date().toISOString() });
+                    saveAdminData();
+                    alert('✅ Link aggiunto: ' + nome);
+                    document.getElementById('admin-consumatori-nome').value = '';
+                    document.getElementById('admin-consumatori-url').value = '';
+                } else {
+                    alert('❌ Compila tutti i campi');
+                }
+            }
+
+            function addTutelaLink() {
+                const nome = document.getElementById('admin-tutela-nome').value;
+                const url = document.getElementById('admin-tutela-url').value;
+                if (nome && url) {
+                    adminData.tutela.push({ nome, url, date: new Date().toISOString() });
+                    saveAdminData();
+                    alert('✅ Link aggiunto: ' + nome);
+                    document.getElementById('admin-tutela-nome').value = '';
+                    document.getElementById('admin-tutela-url').value = '';
+                } else {
+                    alert('❌ Compila tutti i campi');
+                }
+            }
+
+            function addPsicoLink() {
+                const nome = document.getElementById('admin-psico-nome').value;
+                const url = document.getElementById('admin-psico-url').value;
+                if (nome && url) {
+                    adminData.psicologico.push({ nome, url, date: new Date().toISOString() });
+                    saveAdminData();
+                    alert('✅ Link aggiunto: ' + nome);
+                    document.getElementById('admin-psico-nome').value = '';
+                    document.getElementById('admin-psico-url').value = '';
+                } else {
+                    alert('❌ Compila tutti i campi');
+                }
+            }
+
+            function addMentalLink() {
+                const nome = document.getElementById('admin-mental-nome').value;
+                const url = document.getElementById('admin-mental-url').value;
+                if (nome && url) {
+                    adminData.mentalHealth.push({ nome, url, date: new Date().toISOString() });
+                    saveAdminData();
+                    alert('✅ Link aggiunto: ' + nome);
+                    document.getElementById('admin-mental-nome').value = '';
+                    document.getElementById('admin-mental-url').value = '';
+                } else {
+                    alert('❌ Compila tutti i campi');
+                }
+            }
+
+            // Load data on page load
+            loadAdminData();
+
+            // --- Gestione Firestore: Forze di Polizia & Suggerimenti ---
+
+            function getFirestoreOrWarn() {
+                const db = window.firestoreDb;
+                if (!db || !window.fsCollection || !window.fsAddDoc) {
+                    alert('⚠️ Servizio Firestore non disponibile. Verifica la connessione o la configurazione Firebase.');
+                    return null;
+                }
+                return db;
+            }
+
+            async function adminAddPoliceForce() {
+                const db = getFirestoreOrWarn();
+                if (!db) return;
+
+                const country = document.getElementById('admin-police-country').value.trim();
+                const name = document.getElementById('admin-police-name').value.trim();
+                const websiteUrl = document.getElementById('admin-police-website').value.trim();
+                const reportUrl = document.getElementById('admin-police-report').value.trim();
+                const type = document.getElementById('admin-police-type').value.trim() || 'nazionale';
+
+                if (!country || !name || !websiteUrl) {
+                    alert('❌ Paese, nome e sito ufficiale sono obbligatori');
+                    return;
+                }
+
+                const currentUser = window.authSystem && window.authSystem.currentUser;
+
+                try {
+                    await window.fsAddDoc(window.fsCollection(db, 'police_forces'), {
+                        country,
+                        name,
+                        websiteUrl,
+                        reportUrl: reportUrl || null,
+                        type,
+                        status: 'approved',
+                        createdAt: new Date().toISOString(),
+                        createdByUid: currentUser ? currentUser.uid : null,
+                        createdByEmail: currentUser ? currentUser.email : 'admin-local'
+                    });
+
+                    alert('✅ Forza di Polizia salvata su Firestore');
+                    document.getElementById('admin-police-country').value = '';
+                    document.getElementById('admin-police-name').value = '';
+                    document.getElementById('admin-police-website').value = '';
+                    document.getElementById('admin-police-report').value = '';
+                    document.getElementById('admin-police-type').value = '';
+
+                    if (typeof loadPublicPoliceForces === 'function') {
+                        loadPublicPoliceForces();
+                    }
+                } catch (error) {
+                    console.error('Errore salvataggio forza di polizia:', error);
+                    alert('❌ Errore nel salvataggio su Firestore');
+                }
+            }
+
+            async function loadPendingPoliceSuggestions() {
+                const db = getFirestoreOrWarn();
+                const container = document.getElementById('admin-police-suggestions-list');
+                if (!db || !container) return;
+
+                container.innerHTML = '<p style="color:#e5e7eb; font-size:0.9rem;">Caricamento suggerimenti in quarantena…</p>';
+
+                try {
+                    const q = window.fsQuery(
+                        window.fsCollection(db, 'police_suggestions'),
+                        window.fsWhere('status', '==', 'pending')
+                    );
+                    const snap = await window.fsGetDocs(q);
+
+                    if (snap.empty) {
+                        container.innerHTML = '<p style="color:#9ca3af; font-size:0.9rem;">Nessun suggerimento in quarantena al momento.</p>';
+                        return;
+                    }
+
+                    container.innerHTML = '';
+
+                    snap.forEach(docSnap => {
+                        const data = docSnap.data();
+                        const wrapper = document.createElement('div');
+                        wrapper.setAttribute('style', 'margin-bottom: 0.8rem; padding: 0.8rem; border-radius: 8px; background: rgba(15,23,42,0.9); border: 1px solid rgba(148,163,184,0.6);');
+
+                        const title = document.createElement('p');
+                        title.textContent = `${data.country || 'Paese'} – ${data.name || ''}`;
+                        title.style.margin = '0 0 0.2rem 0';
+                        title.style.color = '#e5e7eb';
+                        title.style.fontWeight = '600';
+
+                        const urls = document.createElement('p');
+                        urls.style.margin = '0 0 0.3rem 0';
+                        urls.style.fontSize = '0.8rem';
+                        urls.style.color = '#9ca3af';
+                        urls.textContent = data.websiteUrl || '';
+
+                        const meta = document.createElement('p');
+                        meta.style.margin = '0 0 0.5rem 0';
+                        meta.style.fontSize = '0.8rem';
+                        meta.style.color = '#94a3b8';
+                        const nick = data.nickname || 'anonimo';
+                        meta.textContent = `Suggerito da: ${nick}`;
+
+                        const buttonsRow = document.createElement('div');
+                        buttonsRow.style.display = 'flex';
+                        buttonsRow.style.gap = '0.5rem';
+
+                        const approveBtn = document.createElement('button');
+                        approveBtn.textContent = '✅ Approva e pubblica';
+                        approveBtn.style.background = '#22c55e';
+                        approveBtn.style.color = '#022c22';
+                        approveBtn.style.border = 'none';
+                        approveBtn.style.padding = '0.35rem 0.75rem';
+                        approveBtn.style.borderRadius = '999px';
+                        approveBtn.style.fontSize = '0.8rem';
+                        approveBtn.style.cursor = 'pointer';
+                        approveBtn.onclick = () => approvePoliceSuggestion(docSnap.id);
+
+                        const rejectBtn = document.createElement('button');
+                        rejectBtn.textContent = '🛑 Rifiuta';
+                        rejectBtn.style.background = '#ef4444';
+                        rejectBtn.style.color = '#fff';
+                        rejectBtn.style.border = 'none';
+                        rejectBtn.style.padding = '0.35rem 0.75rem';
+                        rejectBtn.style.borderRadius = '999px';
+                        rejectBtn.style.fontSize = '0.8rem';
+                        rejectBtn.style.cursor = 'pointer';
+                        rejectBtn.onclick = () => rejectPoliceSuggestion(docSnap.id);
+
+                        buttonsRow.appendChild(approveBtn);
+                        buttonsRow.appendChild(rejectBtn);
+
+                        wrapper.appendChild(title);
+                        wrapper.appendChild(urls);
+                        wrapper.appendChild(meta);
+                        wrapper.appendChild(buttonsRow);
+
+                        container.appendChild(wrapper);
+                    });
+                } catch (error) {
+                    console.error('Errore caricamento suggerimenti polizia:', error);
+                    container.innerHTML = '<p style="color:#fca5a5; font-size:0.9rem;">Errore nel caricamento dei suggerimenti.</p>';
+                }
+            }
+
+            async function approvePoliceSuggestion(id) {
+                const db = getFirestoreOrWarn();
+                if (!db) return;
+
+                try {
+                    const ref = window.fsDoc(db, 'police_suggestions', id);
+                    const snap = await window.fsGetDoc(ref);
+                    if (!snap.exists()) {
+                        alert('❌ Suggerimento non trovato');
+                        return;
+                    }
+
+                    const data = snap.data();
+                    const currentUser = window.authSystem && window.authSystem.currentUser;
+
+                    await window.fsAddDoc(window.fsCollection(db, 'police_forces'), {
+                        country: data.country || null,
+                        name: data.name || null,
+                        websiteUrl: data.websiteUrl || null,
+                        reportUrl: data.reportUrl || null,
+                        type: data.type || 'nazionale',
+                        status: 'approved',
+                        createdAt: new Date().toISOString(),
+                        createdByUid: data.suggestedByUid || null,
+                        createdByEmail: data.suggestedByEmail || null,
+                        approvedByUid: currentUser ? currentUser.uid : null,
+                        approvedByEmail: currentUser ? currentUser.email : 'admin-local'
+                    });
+
+                    await window.fsUpdateDoc(ref, {
+                        status: 'approved',
+                        moderatedAt: new Date().toISOString(),
+                        moderatedByEmail: currentUser ? currentUser.email : 'admin-local'
+                    });
+
+                    // Prepara coda per invio futuro dei diplomi legionario (solo se consenso e email presenti)
+                    if (data.consentDiploma && data.contactEmail) {
+                        try {
+                            await window.fsAddDoc(window.fsCollection(db, 'legionary_diplomas'), {
+                                suggestionId: id,
+                                country: data.country || null,
+                                policeForceName: data.name || null,
+                                nickname: data.nickname || null,
+                                email: data.contactEmail,
+                                consentDiploma: true,
+                                status: 'pending-email',
+                                template: 'cesare-scroll-v1',
+                                createdAt: new Date().toISOString(),
+                                suggestedByUid: data.suggestedByUid || null,
+                                approvedByUid: currentUser ? currentUser.uid : null,
+                                approvedByEmail: currentUser ? currentUser.email : 'admin-local'
+                            });
+                        } catch (e) {
+                            console.error('Errore creazione diploma legionario:', e);
+                        }
+                    }
+
+                    alert('✅ Suggerimento approvato e pubblicato');
+                    loadPendingPoliceSuggestions();
+                    if (typeof loadPublicPoliceForces === 'function') {
+                        loadPublicPoliceForces();
+                    }
+                    if (typeof loadLegionaryBook === 'function') {
+                        loadLegionaryBook();
+                    }
+                } catch (error) {
+                    console.error('Errore approvazione suggerimento polizia:', error);
+                    alert('❌ Errore durante l\'approvazione');
+                }
+            }
+
+            async function rejectPoliceSuggestion(id) {
+                const db = getFirestoreOrWarn();
+                if (!db) return;
+
+                if (!confirm('Sei sicuro di rifiutare questo suggerimento?')) return;
+
+                try {
+                    const ref = window.fsDoc(db, 'police_suggestions', id);
+                    const currentUser = window.authSystem && window.authSystem.currentUser;
+                    await window.fsUpdateDoc(ref, {
+                        status: 'rejected',
+                        moderatedAt: new Date().toISOString(),
+                        moderatedByEmail: currentUser ? currentUser.email : 'admin-local'
+                    });
+
+                    alert('Suggerimento rifiutato');
+                    loadPendingPoliceSuggestions();
+                } catch (error) {
+                    console.error('Errore rifiuto suggerimento polizia:', error);
+                    alert('❌ Errore durante il rifiuto');
+                }
+            }
+
+            // Seeding iniziale forze di polizia principali
+            async function seedInitialPoliceForces() {
+                const db = getFirestoreOrWarn();
+                if (!db) return;
+
+                try {
+                    const existingSnap = await window.fsGetDocs(window.fsCollection(db, 'police_forces'));
+                    if (!existingSnap.empty) {
+                        if (!confirm('Esistono già voci in police_forces. Vuoi comunque aggiungere il set iniziale (potrebbero crearsi duplicati)?')) {
+                            return;
+                        }
+                    }
+
+                    const currentUser = window.authSystem && window.authSystem.currentUser;
+                    const baseMeta = {
+                        status: 'approved',
+                        createdAt: new Date().toISOString(),
+                        createdByUid: currentUser ? currentUser.uid : null,
+                        createdByEmail: currentUser ? currentUser.email : 'admin-local-seed'
+                    };
+
+                    const seed = [
+                        {
+                            country: 'Internazionale',
+                            name: 'INTERPOL',
+                            websiteUrl: 'https://www.interpol.int',
+                            reportUrl: 'https://www.interpol.int/en/Contacts/Contact-INTERPOL',
+                            type: 'internazionale'
+                        },
+                        {
+                            country: 'Unione Europea',
+                            name: 'EUROPOL - European Union Agency for Law Enforcement Cooperation',
+                            websiteUrl: 'https://www.europol.europa.eu',
+                            reportUrl: 'https://www.europol.europa.eu/report-a-crime',
+                            type: 'UE'
+                        },
+                        {
+                            country: 'Italia',
+                            name: 'Guardia di Finanza',
+                            websiteUrl: 'https://www.gdf.gov.it',
+                            reportUrl: 'https://www.gdf.gov.it/contatti/servizi-online',
+                            type: 'nazionale'
+                        },
+                        {
+                            country: 'Italia',
+                            name: 'Polizia Postale e delle Comunicazioni',
+                            websiteUrl: 'https://www.poliziadistato.it',
+                            reportUrl: 'https://www.commissariatodips.it',
+                            type: 'specialistica'
+                        },
+                        {
+                            country: 'Italia',
+                            name: 'Arma dei Carabinieri',
+                            websiteUrl: 'https://www.carabinieri.it',
+                            reportUrl: 'https://www.carabinieri.it/internet/contattaci',
+                            type: 'nazionale'
+                        }
+                    ];
+
+                    for (const item of seed) {
+                        await window.fsAddDoc(window.fsCollection(db, 'police_forces'), {
+                            ...item,
+                            ...baseMeta
+                        });
+                    }
+
+                    alert('✅ Set iniziale forze di polizia inserito con successo');
+                    if (typeof loadPublicPoliceForces === 'function') {
+                        loadPublicPoliceForces();
+                    }
+                } catch (error) {
+                    console.error('Errore seeding forze di polizia:', error);
+                    alert('❌ Errore durante il seeding iniziale');
+                }
+            }
+        </script>
+
+        <!-- 🔐 MODAL AUTENTICAZIONE -->
+        <div id="authModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 10000; backdrop-filter: blur(5px);">
+            <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: linear-gradient(135deg, #1e293b, #334155); padding: 3rem; border-radius: 20px; box-shadow: 0 20px 60px rgba(0,0,0,0.5); max-width: 450px; width: 90%;">
+                <button onclick="toggleAuthModal()" style="position: absolute; top: 1rem; right: 1rem; background: transparent; border: none; color: white; font-size: 2rem; cursor: pointer; line-height: 1;">&times;</button>
+                
+                <h2 style="color: #FFD700; text-align: center; margin-bottom: 2rem; font-size: 1.8rem;">🔐 Area Utenti</h2>
+                
+                <!-- Tabs -->
+                <div style="display: flex; gap: 1rem; margin-bottom: 2rem;">
+                    <button id="loginTab" onclick="switchAuthTab('login')" style="flex: 1; padding: 0.8rem; background: linear-gradient(135deg, #667eea, #764ba2); color: white; border: none; border-radius: 8px; font-weight: 600; cursor: pointer;">Login</button>
+                    <button id="registerTab" onclick="switchAuthTab('register')" style="flex: 1; padding: 0.8rem; background: rgba(255,255,255,0.1); color: white; border: none; border-radius: 8px; font-weight: 600; cursor: pointer;">Registrati</button>
+                </div>
+                
+                <!-- Login Form -->
+                <div id="loginForm">
+                    <input type="email" id="loginEmail" placeholder="📧 Email" style="width: 100%; padding: 1rem; margin-bottom: 1rem; border: 2px solid rgba(255,255,255,0.2); border-radius: 8px; background: rgba(255,255,255,0.05); color: white; font-size: 1rem;">
+                    <input type="password" id="loginPassword" placeholder="🔒 Password" style="width: 100%; padding: 1rem; margin-bottom: 1.5rem; border: 2px solid rgba(255,255,255,0.2); border-radius: 8px; background: rgba(255,255,255,0.05); color: white; font-size: 1rem;">
+                    <button onclick="handleLogin()" style="width: 100%; padding: 1rem; background: linear-gradient(135deg, #10b981, #059669); color: white; border: none; border-radius: 8px; font-weight: 600; font-size: 1.1rem; cursor: pointer; transition: transform 0.2s;" onmouseover="this.style.transform='scale(1.02)'" onmouseout="this.style.transform='scale(1)'">
+                        ✅ Accedi
+                    </button>
+                </div>
+                
+                <!-- Register Form -->
+                <div id="registerForm" style="display: none;">
+                    <input type="email" id="registerEmail" placeholder="📧 Email" style="width: 100%; padding: 1rem; margin-bottom: 1rem; border: 2px solid rgba(255,255,255,0.2); border-radius: 8px; background: rgba(255,255,255,0.05); color: white; font-size: 1rem;">
+                    <input type="password" id="registerPassword" placeholder="🔒 Password (min 6 caratteri)" style="width: 100%; padding: 1rem; margin-bottom: 1rem; border: 2px solid rgba(255,255,255,0.2); border-radius: 8px; background: rgba(255,255,255,0.05); color: white; font-size: 1rem;">
+                    <label style="display: flex; align-items: center; gap: 0.5rem; color: white; margin-bottom: 1.5rem; font-size: 0.95rem;">
+                        <input type="checkbox" id="newsletterCheckbox" checked style="width: 20px; height: 20px;">
+                        <span>📬 Ricevi news e aggiornamenti</span>
+                    </label>
+                    <button onclick="handleRegister()" style="width: 100%; padding: 1rem; background: linear-gradient(135deg, #f59e0b, #d97706); color: white; border: none; border-radius: 8px; font-weight: 600; font-size: 1.1rem; cursor: pointer; transition: transform 0.2s;" onmouseover="this.style.transform='scale(1.02)'" onmouseout="this.style.transform='scale(1)'">
+                        🎉 Registrati
+                    </button>
+                    <p style="color: rgba(255,255,255,0.7); font-size: 0.85rem; margin-top: 1rem; text-align: center;">
+                        Riceverai un'email di verifica. Solo utenti verificati possono votare.
+                    </p>
+                </div>
+                
+                <div id="authMessage" style="margin-top: 1.5rem; padding: 1rem; border-radius: 8px; display: none; text-align: center; font-weight: 600;"></div>
             </div>
         </div>
+
+        <script>
+            function toggleAuthModal() {
+                const modal = document.getElementById('authModal');
+                const isVisible = modal.style.display === 'block';
+                modal.style.display = isVisible ? 'none' : 'block';
+                
+                // Se l'utente è loggato, esegui logout
+                if (window.authSystem.currentUser && isVisible) {
+                    window.authSystem.logout();
+                    showAuthMessage('✅ Logout effettuato', 'success');
+                    setTimeout(() => modal.style.display = 'none', 1500);
+                }
+            }
+
+            function switchAuthTab(tab) {
+                const loginTab = document.getElementById('loginTab');
+                const registerTab = document.getElementById('registerTab');
+                const loginForm = document.getElementById('loginForm');
+                const registerForm = document.getElementById('registerForm');
+                
+                if (tab === 'login') {
+                    loginTab.style.background = 'linear-gradient(135deg, #667eea, #764ba2)';
+                    registerTab.style.background = 'rgba(255,255,255,0.1)';
+                    loginForm.style.display = 'block';
+                    registerForm.style.display = 'none';
+                } else {
+                    registerTab.style.background = 'linear-gradient(135deg, #667eea, #764ba2)';
+                    loginTab.style.background = 'rgba(255,255,255,0.1)';
+                    registerForm.style.display = 'block';
+                    loginForm.style.display = 'none';
+                }
+            }
+
+            async function handleLogin() {
+                const email = document.getElementById('loginEmail').value;
+                const password = document.getElementById('loginPassword').value;
+                
+                if (!email || !password) {
+                    showAuthMessage('⚠️ Compila tutti i campi', 'error');
+                    return;
+                }
+                
+                const result = await window.authSystem.login(email, password);
+                showAuthMessage(result.message, result.success ? 'success' : 'error');
+                
+                if (result.success) {
+                    setTimeout(() => {
+                        document.getElementById('authModal').style.display = 'none';
+                    }, 1500);
+                }
+            }
+
+            async function handleRegister() {
+                const email = document.getElementById('registerEmail').value;
+                const password = document.getElementById('registerPassword').value;
+                
+                if (!email || !password) {
+                    showAuthMessage('⚠️ Compila tutti i campi', 'error');
+                    return;
+                }
+                
+                const result = await window.authSystem.register(email, password);
+                showAuthMessage(result.message, result.success ? 'success' : 'error');
+                
+                if (result.success) {
+                    setTimeout(() => {
+                        switchAuthTab('login');
+                    }, 2000);
+                }
+            }
+
+            function showAuthMessage(message, type) {
+                const messageEl = document.getElementById('authMessage');
+                messageEl.textContent = message;
+                messageEl.style.display = 'block';
+                messageEl.style.background = type === 'success' 
+                    ? 'linear-gradient(135deg, #10b981, #059669)' 
+                    : 'linear-gradient(135deg, #ef4444, #dc2626)';
+                messageEl.style.color = 'white';
+            }
+
+            // 🔒 PROTEZIONI ANTI-COPIA RAFFORZATE
+            (function() {
+                // Protezione 1: Disabilita copia massiva
+                let copyCount = 0;
+                document.addEventListener('copy', (e) => {
+                    copyCount++;
+                    const selection = window.getSelection().toString();
+                    
+                    if (selection.length > 800 || copyCount > 5) {
+                        e.preventDefault();
+                        console.warn('%c⚠️ PROTEZIONE COPYRIGHT ATTIVATA', 'color: red; font-size: 16px; font-weight: bold;');
+                        console.warn('© 2026 Avvocato Marcello Stanca - Copia eccessiva bloccata');
+                        alert('⚠️ Protezione Copyright: Copia eccessiva non consentita.\n\n© 2026 Avvocato Marcello Stanca - Tutti i diritti riservati');
+                    }
+                    
+                    // Watermark nella clipboard
+                    if (selection.length > 200) {
+                        const watermarkedText = selection + '\n\n---\n© 2026 Avvocato Marcello Stanca - Firenze, Italy\nFonte: ' + window.location.href + '\nData: ' + new Date().toLocaleString();
+                        e.clipboardData.setData('text/plain', watermarkedText);
+                        e.preventDefault();
+                    }
+                });
+
+                // Protezione 2: Disabilita DevTools persistente
+                setInterval(() => {
+                    const threshold = 160;
+                    if (window.outerWidth - window.innerWidth > threshold || 
+                        window.outerHeight - window.innerHeight > threshold) {
+                        console.clear();
+                        console.log('%c🔒 DATABASE PROTETTO', 'color: red; font-size: 24px; font-weight: bold;');
+                        console.log('%c© 2026 Avvocato Marcello Stanca', 'color: red; font-size: 16px;');
+                        console.log('%clawyer@marcellostanca.it', 'color: red; font-size: 14px;');
+                    }
+                }, 1000);
+
+                // Protezione 3: Blocca tasto destro su elementi sensibili
+                document.querySelectorAll('.auth-credential, .download-link, .external-link').forEach(el => {
+                    el.addEventListener('contextmenu', (e) => {
+                        e.preventDefault();
+                        console.warn('⚠️ Contenuto protetto da copyright');
+                    });
+                });
+
+                // Protezione 4: Watermark invisibile nel DOM
+                const watermark = document.createElement('meta');
+                watermark.name = 'copyright-tracking';
+                watermark.content = `SESSION_${Date.now()}_${Math.random().toString(36).substring(7)}`;
+                document.head.appendChild(watermark);
+
+                // Protezione 5: Tracking copie non autorizzate
+                window.addEventListener('beforeunload', () => {
+                    if (copyCount > 3) {
+                        console.warn(`%c⚠️ ATTIVITÀ SOSPETTA: ${copyCount} copie effettuate`, 'color: red; font-weight: bold;');
+                    }
+                });
+            })();
+        </script>
+
+        <script>
+            // Caricamento elenco pubblico forze di polizia
+            async function loadPublicPoliceForces() {
+                const container = document.getElementById('police-forces-list');
+                if (!container) return;
+
+                const db = window.firestoreDb;
+                if (!db || !window.fsCollection || !window.fsGetDocs) {
+                    container.innerHTML = '<div style="background:#0f172a; color:#e5e7eb; padding:1.5rem; border-radius:12px; border:1px dashed #475569; grid-column:1 / -1; text-align:center;">' +
+                        '<p style="margin:0; font-size:0.95rem;">Elenco non disponibile: Firestore non è raggiungibile.</p>' +
+                        '<p style="margin:0.5rem 0 0 0; font-size:0.85rem; color:#9ca3af;">Riprova più tardi o verifica la connessione.</p>' +
+                    '</div>';
+                    return;
+                }
+
+                container.innerHTML = '<div style="background:#0f172a; color:#e5e7eb; padding:1.5rem; border-radius:12px; border:1px dashed #475569; grid-column:1 / -1; text-align:center;">' +
+                    '<p style="margin:0; font-size:0.95rem;">Caricamento elenco forze di polizia in corso…</p>' +
+                    '<p style="margin:0.5rem 0 0 0; font-size:0.85rem; color:#9ca3af;">Se il tuo Paese non è ancora presente, usa la bacheca legionari qui sotto.</p>' +
+                '</div>';
+
+                try {
+                    const snap = await window.fsGetDocs(window.fsCollection(db, 'police_forces'));
+                    const forces = [];
+                    snap.forEach(docSnap => {
+                        const data = docSnap.data();
+                        if (data.status && data.status !== 'approved') return;
+                        forces.push({ id: docSnap.id, ...data });
+                    });
+
+                    if (!forces.length) {
+                        container.innerHTML = '<div style="background:#0f172a; color:#e5e7eb; padding:1.5rem; border-radius:12px; border:1px dashed #475569; grid-column:1 / -1; text-align:center;">' +
+                            '<p style="margin:0; font-size:0.95rem;">Nessuna forza di polizia pubblicata ancora.</p>' +
+                            '<p style="margin:0.5rem 0 0 0; font-size:0.85rem; color:#9ca3af;">Le prime voci appariranno dopo la moderazione delle segnalazioni.</p>' +
+                        '</div>';
+                        return;
+                    }
+
+                    forces.sort((a, b) => (a.country || '').localeCompare(b.country || ''));
+                    container.innerHTML = '';
+
+                    forces.forEach(force => {
+                        const card = document.createElement('div');
+                        card.setAttribute('style', 'background:white; border-radius:12px; padding:1.5rem; box-shadow:0 4px 12px rgba(0,0,0,0.08); border-left:4px solid #38bdf8; display:flex; flex-direction:column; gap:0.4rem;');
+
+                        const title = document.createElement('h3');
+                        title.textContent = force.name || 'Forza di Polizia';
+                        title.style.margin = '0';
+                        title.style.fontSize = '1.05rem';
+                        title.style.color = '#0f172a';
+
+                        const country = document.createElement('p');
+                        country.textContent = force.country || '';
+                        country.style.margin = '0';
+                        country.style.fontSize = '0.9rem';
+                        country.style.color = '#64748b';
+
+                        const type = document.createElement('p');
+                        type.style.margin = '0';
+                        type.style.fontSize = '0.8rem';
+                        type.style.color = '#0f766e';
+                        if (force.type) {
+                            type.textContent = `Tipo: ${force.type}`;
+                        }
+
+                        const buttonsRow = document.createElement('div');
+                        buttonsRow.style.display = 'flex';
+                        buttonsRow.style.flexWrap = 'wrap';
+                        buttonsRow.style.gap = '0.5rem';
+                        buttonsRow.style.marginTop = '0.5rem';
+
+                        if (force.websiteUrl) {
+                            const siteBtn = document.createElement('a');
+                            siteBtn.href = force.websiteUrl;
+                            siteBtn.target = '_blank';
+                            siteBtn.rel = 'noopener noreferrer';
+                            siteBtn.textContent = '🌐 Sito ufficiale';
+                            siteBtn.className = 'download-button';
+                            siteBtn.style.background = '#0ea5e9';
+                            siteBtn.style.fontSize = '0.85rem';
+                            siteBtn.style.padding = '0.55rem 1.1rem';
+                            buttonsRow.appendChild(siteBtn);
+                        }
+
+                        if (force.reportUrl) {
+                            const reportBtn = document.createElement('a');
+                            reportBtn.href = force.reportUrl;
+                            reportBtn.target = '_blank';
+                            reportBtn.rel = 'noopener noreferrer';
+                            reportBtn.textContent = '📢 Segnala truffe / frodi';
+                            reportBtn.className = 'download-button';
+                            reportBtn.style.background = '#f97316';
+                            reportBtn.style.fontSize = '0.85rem';
+                            reportBtn.style.padding = '0.55rem 1.1rem';
+                            buttonsRow.appendChild(reportBtn);
+                        }
+
+                        card.appendChild(title);
+                        card.appendChild(country);
+                        if (force.type) card.appendChild(type);
+                        card.appendChild(buttonsRow);
+
+                        container.appendChild(card);
+                    });
+                } catch (error) {
+                    console.error('Errore caricamento forze di polizia:', error);
+                    container.innerHTML = '<div style="background:#0f172a; color:#e5e7eb; padding:1.5rem; border-radius:12px; border:1px dashed #475569; grid-column:1 / -1; text-align:center;">' +
+                        '<p style="margin:0; font-size:0.95rem;">Elenco forze di polizia non disponibile in questo momento.</p>' +
+                        '<p style="margin:0.5rem 0 0 0; font-size:0.85rem; color:#9ca3af;">Puoi comunque utilizzare la bacheca legionari qui sotto oppure rivolgerti ai siti ufficiali di INTERPOL, EUROPOL, Guardia di Finanza, Polizia Postale e Carabinieri.</p>' +
+                    '</div>';
+                }
+            }
+
+            // Invio segnalazioni dalla bacheca legionari (quarantena)
+            async function submitPoliceSuggestion(event) {
+                event.preventDefault();
+
+                const db = window.firestoreDb;
+                const messageEl = document.getElementById('police-suggestion-message');
+                if (!db || !window.fsCollection || !window.fsAddDoc) {
+                    if (messageEl) {
+                        messageEl.textContent = '⚠️ Firestore non è disponibile. Riprova più tardi.';
+                        messageEl.style.display = 'block';
+                        messageEl.style.background = 'linear-gradient(135deg,#ef4444,#b91c1c)';
+                        messageEl.style.color = 'white';
+                    }
+                    return;
+                }
+
+                const country = document.getElementById('suggest-country').value.trim();
+                const name = document.getElementById('suggest-name').value.trim();
+                const websiteUrl = document.getElementById('suggest-website').value.trim();
+                const reportUrl = document.getElementById('suggest-report').value.trim();
+                const notes = document.getElementById('suggest-notes').value.trim();
+                const nickname = document.getElementById('suggest-nickname').value.trim();
+                const email = document.getElementById('suggest-email').value.trim();
+                const consentNickname = document.getElementById('consent-nickname')?.checked || false;
+                const consentDiploma = document.getElementById('consent-diploma')?.checked || false;
+
+                if (!country || !name || !websiteUrl) {
+                    if (messageEl) {
+                        messageEl.textContent = '⚠️ Compila almeno Paese, nome e sito ufficiale.';
+                        messageEl.style.display = 'block';
+                        messageEl.style.background = 'linear-gradient(135deg,#f97316,#ea580c)';
+                        messageEl.style.color = 'white';
+                    }
+                    return;
+                }
+
+                const currentUser = window.authSystem && window.authSystem.currentUser;
+
+                try {
+                    await window.fsAddDoc(window.fsCollection(db, 'police_suggestions'), {
+                        country,
+                        name,
+                        websiteUrl,
+                        reportUrl: reportUrl || null,
+                        notes: notes || null,
+                        nickname: nickname || null,
+                        contactEmail: email || null,
+                        consentNickname,
+                        consentDiploma,
+                        status: 'pending',
+                        createdAt: new Date().toISOString(),
+                        suggestedByUid: currentUser ? currentUser.uid : null,
+                        suggestedByEmail: currentUser ? currentUser.email : null
+                    });
+
+                    if (messageEl) {
+                        messageEl.textContent = '✅ Segnalazione inviata. Verrà verificata da un amministratore prima della pubblicazione.';
+                        messageEl.style.display = 'block';
+                        messageEl.style.background = 'linear-gradient(135deg,#10b981,#059669)';
+                        messageEl.style.color = 'white';
+                    }
+
+                    const form = document.getElementById('police-suggestion-form');
+                    if (form) form.reset();
+                } catch (error) {
+                    console.error('Errore invio suggerimento polizia:', error);
+                    if (messageEl) {
+                        messageEl.textContent = '❌ Errore durante l\'invio della segnalazione. Riprova più tardi.';
+                        messageEl.style.display = 'block';
+                        messageEl.style.background = 'linear-gradient(135deg,#ef4444,#b91c1c)';
+                        messageEl.style.color = 'white';
+                    }
+                }
+            }
+
+            // Libro dei Legionari – lettura dei nickname approvati
+            async function loadLegionaryBook() {
+                const container = document.getElementById('legionary-book');
+                if (!container) return;
+
+                const db = window.firestoreDb;
+                if (!db || !window.fsCollection || !window.fsGetDocs || !window.fsQuery || !window.fsWhere) {
+                    container.innerHTML = '<p style="margin:0; color:#9ca3af;">Sezione temporaneamente non disponibile (Firestore offline).</p>';
+                    return;
+                }
+
+                container.innerHTML = '<p style="margin:0; color:#9ca3af;">Caricamento contributi dei legionari…</p>';
+
+                try {
+                    const q = window.fsQuery(
+                        window.fsCollection(db, 'police_suggestions'),
+                        window.fsWhere('status', '==', 'approved')
+                    );
+                    const snap = await window.fsGetDocs(q);
+
+                    if (snap.empty) {
+                        container.innerHTML = '<p style="margin:0; color:#9ca3af;">Ancora nessun legionario registrato. Puoi essere tra i primi a contribuire con una segnalazione verificata.</p>';
+                        return;
+                    }
+
+                    const entries = [];
+                    snap.forEach(docSnap => {
+                        const data = docSnap.data();
+                        if (!data.consentNickname) return;
+                        const nickname = data.nickname || null;
+                        if (!nickname) return;
+                        entries.push({
+                            nickname,
+                            country: data.country || '',
+                            name: data.name || ''
+                        });
+                    });
+
+                    if (!entries.length) {
+                        container.innerHTML = '<p style="margin:0; color:#9ca3af;">Sono state approvate segnalazioni senza nickname pubblico. Le prossime potranno essere ringraziate qui.</p>';
+                        return;
+                    }
+
+                    entries.sort((a, b) => a.nickname.localeCompare(b.nickname));
+
+                    const list = document.createElement('ul');
+                    list.style.margin = '0';
+                    list.style.paddingLeft = '1.2rem';
+                    list.style.listStyleType = 'disc';
+
+                    entries.forEach(item => {
+                        const li = document.createElement('li');
+                        li.style.marginBottom = '0.25rem';
+                        li.style.color = '#e5e7eb';
+                        const parts = [];
+                        parts.push(item.nickname);
+                        if (item.country) parts.push(`(${item.country}` + (item.name ? ` – ${item.name}` : '') + ')');
+                        li.textContent = parts.join(' ');
+                        list.appendChild(li);
+                    });
+
+                    container.innerHTML = '';
+                    container.appendChild(list);
+                } catch (error) {
+                    console.error('Errore caricamento Libro dei legionari:', error);
+                    container.innerHTML = '<p style="margin:0; color:#fecaca;">Errore nel caricamento del Libro dei legionari.</p>';
+                }
+            }
+
+            document.addEventListener('DOMContentLoaded', () => {
+                loadPublicPoliceForces();
+                loadLegionaryBook();
+            });
+        </script>
 
         <div style="text-align: center; margin-top: 4rem;">
             <a href="index.html" class="download-button" style="font-size: 1.1rem; padding: 1.2rem 2.5rem;">
@@ -2257,6 +4152,18 @@
                 🌊 Odissea Digitale
             </a>
         </div>
-    </div>
-</body>
-</html>
+            </div>
+            <script>
+                // Language switcher (UI only)
+                let currentLanguage = 'it';
+                function changeLanguage(lang) {
+                    currentLanguage = lang;
+                    const buttons = document.querySelectorAll('.lang-btn');
+                    buttons.forEach(btn => btn.classList.remove('active'));
+                    const activeBtn = Array.from(buttons).find(btn => btn.textContent.includes(lang.toUpperCase()));
+                    if (activeBtn) activeBtn.classList.add('active');
+                    document.documentElement.lang = lang;
+                }
+            </script>
+        </body>
+        </html>
