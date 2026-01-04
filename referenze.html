@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<!-- Updated: 2026-01-04 - All sections verified -->
 <html lang="it" prefix="og: https://ogp.me/ns#">
 <head>
     <meta charset="UTF-8">
@@ -334,9 +335,274 @@
                 font-size: 2rem;
             }
         }
+
+        /* Rating Stars System */
+        .rating-container {
+            margin-top: 1.5rem;
+            padding: 1.5rem;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border-radius: 10px;
+            border-top: 3px solid #0056D6;
+        }
+
+        .rating-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .rating-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #1e293b;
+        }
+
+        .rating-stats {
+            display: flex;
+            gap: 1.5rem;
+            align-items: center;
+        }
+
+        .rating-average {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #0056D6;
+        }
+
+        .rating-count {
+            font-size: 0.95rem;
+            color: #64748b;
+        }
+
+        .stars-container {
+            display: flex;
+            gap: 0.5rem;
+            align-items: center;
+        }
+
+        .star {
+            font-size: 2rem;
+            cursor: pointer;
+            color: #cbd5e1;
+            transition: all 0.2s ease;
+            user-select: none;
+        }
+
+        .star:hover,
+        .star.hover {
+            color: #fbbf24;
+            transform: scale(1.15);
+        }
+
+        .star.filled {
+            color: #fbbf24;
+        }
+
+        .star.disabled {
+            cursor: not-allowed;
+            opacity: 0.6;
+        }
+
+        .vote-message {
+            margin-top: 0.8rem;
+            padding: 0.8rem;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            text-align: center;
+        }
+
+        .vote-success {
+            background: #d1fae5;
+            color: #065f46;
+            border-left: 4px solid #10b981;
+        }
+
+        .vote-already {
+            background: #fef3c7;
+            color: #92400e;
+            border-left: 4px solid #f59e0b;
+        }
+
+        @media (max-width: 768px) {
+            .rating-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .star {
+                font-size: 1.6rem;
+            }
+        }
     </style>
+
+    <!-- Firebase SDK -->
+    <script type="module">
+        import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js';
+        import { getFirestore, doc, getDoc, setDoc, updateDoc, increment } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js';
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyAwWuWSPsQBO0RrJFmMHJqrkMj02MgKR_8",
+            authDomain: "tutelatruffe-rating.firebaseapp.com",
+            projectId: "tutelatruffe-rating",
+            storageBucket: "tutelatruffe-rating.firebasestorage.app",
+            messagingSenderId: "186083888610",
+            appId: "1:186083888610:web:3c51689d6d36e2a6b17dbb",
+            measurementId: "G-WWXL8GWYWM"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        window.ratingSystem = {
+            db: db,
+            
+            async loadRating(contentId) {
+                try {
+                    const docRef = doc(db, 'ratings', contentId);
+                    const docSnap = await getDoc(docRef);
+                    
+                    if (docSnap.exists()) {
+                        const data = docSnap.data();
+                        return {
+                            average: data.totalRating / data.voteCount,
+                            count: data.voteCount
+                        };
+                    }
+                    return { average: 0, count: 0 };
+                } catch (error) {
+                    console.error('Error loading rating:', error);
+                    return { average: 0, count: 0 };
+                }
+            },
+
+            async submitRating(contentId, rating) {
+                const storageKey = `voted_${contentId}`;
+                if (localStorage.getItem(storageKey)) {
+                    return { success: false, message: 'Hai già votato questo contenuto' };
+                }
+
+                try {
+                    const docRef = doc(db, 'ratings', contentId);
+                    const docSnap = await getDoc(docRef);
+
+                    if (docSnap.exists()) {
+                        await updateDoc(docRef, {
+                            totalRating: increment(rating),
+                            voteCount: increment(1)
+                        });
+                    } else {
+                        await setDoc(docRef, {
+                            totalRating: rating,
+                            voteCount: 1,
+                            contentId: contentId
+                        });
+                    }
+
+                    localStorage.setItem(storageKey, 'true');
+                    return { success: true, message: 'Grazie per il tuo voto!' };
+                } catch (error) {
+                    console.error('Error submitting rating:', error);
+                    return { success: false, message: 'Errore durante il salvataggio del voto' };
+                }
+            },
+
+            initStars(containerId, contentId) {
+                const container = document.getElementById(containerId);
+                if (!container) return;
+
+                const starsContainer = container.querySelector('.stars-container');
+                const averageEl = container.querySelector('.rating-average');
+                const countEl = container.querySelector('.rating-count');
+                const messageEl = container.querySelector('.vote-message');
+
+                this.loadRating(contentId).then(data => {
+                    averageEl.textContent = data.average > 0 ? data.average.toFixed(1) : '-';
+                    countEl.textContent = `${data.count} ${data.count === 1 ? 'voto' : 'voti'}`;
+                });
+
+                const stars = starsContainer.querySelectorAll('.star');
+                const hasVoted = localStorage.getItem(`voted_${contentId}`);
+
+                if (hasVoted) {
+                    stars.forEach(star => star.classList.add('disabled'));
+                    if (messageEl) {
+                        messageEl.textContent = 'Hai già votato questo contenuto';
+                        messageEl.className = 'vote-message vote-already';
+                        messageEl.style.display = 'block';
+                    }
+                }
+
+                stars.forEach((star, index) => {
+                    star.addEventListener('mouseenter', () => {
+                        if (!hasVoted) {
+                            for (let i = 0; i <= index; i++) {
+                                stars[i].classList.add('hover');
+                            }
+                        }
+                    });
+
+                    star.addEventListener('mouseleave', () => {
+                        stars.forEach(s => s.classList.remove('hover'));
+                    });
+
+                    star.addEventListener('click', async () => {
+                        if (hasVoted) return;
+
+                        const rating = index + 1;
+                        const result = await this.submitRating(contentId, rating);
+
+                        if (result.success) {
+                            stars.forEach((s, i) => {
+                                if (i <= index) s.classList.add('filled');
+                                s.classList.add('disabled');
+                            });
+
+                            const data = await this.loadRating(contentId);
+                            averageEl.textContent = data.average.toFixed(1);
+                            countEl.textContent = `${data.count} ${data.count === 1 ? 'voto' : 'voti'}`;
+
+                            if (messageEl) {
+                                messageEl.textContent = result.message;
+                                messageEl.className = 'vote-message vote-success';
+                                messageEl.style.display = 'block';
+                            }
+                        } else if (messageEl) {
+                            messageEl.textContent = result.message;
+                            messageEl.className = 'vote-message vote-already';
+                            messageEl.style.display = 'block';
+                        }
+                    });
+                });
+            }
+        };
+
+        document.addEventListener('DOMContentLoaded', () => {
+            window.ratingSystem.initStars('rating-fca-firm-checker', 'fca-firm-checker');
+            window.ratingSystem.initStars('rating-ofcom', 'ofcom-online-safety');
+            window.ratingSystem.initStars('rating-compliance-corylated', 'compliance-corylated');
+            window.ratingSystem.initStars('rating-dsa-eu', 'dsa-notice-action');
+            window.ratingSystem.initStars('rating-agcm-italia', 'agcm-antitrust-italia');
+        });
+    </script>
 </head>
 <body>
+    <!-- Main Navigation -->
+    <nav style="background: linear-gradient(135deg, #1e293b 0%, #334155 100%); padding: 1rem 0; box-shadow: 0 4px 12px rgba(0,0,0,0.15); position: sticky; top: 0; z-index: 999;">
+        <div style="max-width: 1200px; margin: 0 auto; display: flex; gap: 1.5rem; justify-content: center; align-items: center; flex-wrap: wrap; padding: 0 1rem;">
+            <a href="index.html" style="color: white; text-decoration: none; font-weight: 500; font-size: 1.05rem; padding: 0.5rem 1.5rem; background: rgba(255,255,255,0.05); border-radius: 8px; transition: all 0.3s ease;" onmouseover="this.style.background='rgba(255,255,255,0.15)';" onmouseout="this.style.background='rgba(255,255,255,0.05)';">
+                🏠 Database Autorità
+            </a>
+            <a href="odissea.html" style="color: white; text-decoration: none; font-weight: 500; font-size: 1.05rem; padding: 0.5rem 1.5rem; background: rgba(255,255,255,0.05); border-radius: 8px; transition: all 0.3s ease;" onmouseover="this.style.background='rgba(255,255,255,0.15)';" onmouseout="this.style.background='rgba(255,255,255,0.05)';">
+                🌊 Odissea Digitale
+            </a>
+            <a href="referenze.html" style="color: white; text-decoration: none; font-weight: bold; font-size: 1.05rem; padding: 0.5rem 1.5rem; background: rgba(255,255,255,0.15); border-radius: 8px; transition: all 0.3s ease; border: 2px solid rgba(255,255,255,0.2);" onmouseover="this.style.background='rgba(255,255,255,0.25)';" onmouseout="this.style.background='rgba(255,255,255,0.15)';">
+                📜 Referenze Istituzionali
+            </a>
+        </div>
+    </nav>
     <nav class="nav-header">
         <div class="nav-container">
             <a href="index.html" class="nav-logo">🏛️ Referenze Istituzionali</a>
@@ -470,6 +736,1481 @@
                 <div class="case-quote">
                     <p><em>"Se ho ottenuto un decreto da €339.000 eseguibile contro un paradiso fiscale caraibico,<br>posso guidarti nel recupero dei tuoi capitali."</em></p>
                     <p><strong>— Avv. Marcello Stanca</strong></p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Media Coverage Section -->
+        <section class="media-section" style="margin-top: 5rem;">
+            <h2 class="section-title">🎙️ Interventi Pubblici & Media</h2>
+            <p class="section-subtitle">Radio Radicale, TikTok, YouTube - Divulgazione e sensibilizzazione truffe finanziarie</p>
+            
+            <div class="media-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 2rem; margin-top: 3rem;">
+                <!-- YouTube Short Card -->
+                <div class="media-card" style="background: white; border-radius: 12px; padding: 2rem; box-shadow: 0 4px 12px rgba(0,0,0,0.1); border-left: 5px solid #FF0000;">
+                    <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem;">
+                        <span style="font-size: 3rem;">📺</span>
+                        <div>
+                            <h3 style="color: #FF0000; margin: 0; font-size: 1.3rem;">YouTube Short</h3>
+                            <p style="margin: 0; color: #64748b; font-size: 0.9rem;">Video divulgativo truffe</p>
+                        </div>
+                    </div>
+                    <p style="margin-bottom: 1.5rem; color: #1e293b;">
+                        <strong>Truffe finanziarie:</strong> Come riconoscerle e difendersi. Testimonianza diretta e consigli pratici.
+                    </p>
+                    <a href="https://youtube.com/shorts/XAXrJVzkQPc?si=aVIpYAGxrqIBjg2c" target="_blank" rel="noopener noreferrer" class="download-button" style="background: #FF0000; display: inline-block;">
+                        ▶️ Guarda il Video
+                    </a>
+                </div>
+
+                <!-- Radio Radicale Card -->
+                <div class="media-card" style="background: white; border-radius: 12px; padding: 2rem; box-shadow: 0 4px 12px rgba(0,0,0,0.1); border-left: 5px solid #c7254e;">
+                    <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem;">
+                        <span style="font-size: 3rem;">🎙️</span>
+                        <div>
+                            <h3 style="color: #c7254e; margin: 0; font-size: 1.3rem;">Radio Radicale</h3>
+                            <p style="margin: 0; color: #64748b; font-size: 0.9rem;">Camera dei Deputati</p>
+                        </div>
+                    </div>
+                    <p style="margin-bottom: 1.5rem; color: #1e293b;">
+                        <strong>Intervento pubblico</strong> innanzi alle massime Autorità Antifrode: Carabinieri, Polizia Postale, Guardia di Finanza.
+                    </p>
+                    <a href="http://www.radioradicale.it/soggetti/278344/marcello-stanca" target="_blank" rel="noopener noreferrer" class="download-button" style="background: #c7254e; display: inline-block;">
+                        🎧 Ascolta l'Intervento
+                    </a>
+                </div>
+
+                <!-- TikTok Card -->
+                <div class="media-card" style="background: white; border-radius: 12px; padding: 2rem; box-shadow: 0 4px 12px rgba(0,0,0,0.1); border-left: 5px solid #000000;">
+                    <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem;">
+                        <span style="font-size: 3rem;">📱</span>
+                        <div>
+                            <h3 style="color: #000000; margin: 0; font-size: 1.3rem;">TikTok Business Verificato</h3>
+                            <p style="margin: 0; color: #64748b; font-size: 0.9rem;">@avvocato.stanca.marcello</p>
+                        </div>
+                    </div>
+                    <p style="margin-bottom: 1.5rem; color: #1e293b;">
+                        <strong>470 follower organici</strong><br>
+                        Video virale: 59.622 views ("Rischio Trading" bestseller Amazon)
+                    </p>
+                    <div style="background: #f1f5f9; padding: 1rem; border-radius: 8px;">
+                        <p style="margin: 0; font-size: 0.9rem; color: #64748b;">✓ Account Business Registrato<br>✓ Verificato 14 Marzo 2024</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Fonti Istituzionali Internazionali -->
+        <section style="margin-top: 5rem;">
+            <h2 class="section-title">📚 Fonti Istituzionali Internazionali</h2>
+            <p class="section-subtitle">Organizzazioni sovranazionali, quadro normativo AML/CFT UE, vigilanza bancaria europea</p>
+            
+            <div class="media-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 2rem; margin-top: 3rem;">
+                <!-- IOSCO Card -->
+                <div class="media-card" style="background: white; border-radius: 12px; padding: 2rem; box-shadow: 0 4px 12px rgba(0,0,0,0.1); border-left: 5px solid #0066cc;">
+                    <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem;">
+                        <span style="font-size: 3rem;">🌐</span>
+                        <div>
+                            <h3 style="color: #0066cc; margin: 0; font-size: 1.3rem;">IOSCO Annual Report 2022</h3>
+                            <p style="margin: 0; color: #64748b; font-size: 0.9rem;">130+ Autorità Vigilanza Globale</p>
+                        </div>
+                    </div>
+                    <p style="margin-bottom: 1.5rem; color: #1e293b;">
+                        <strong>International Organization of Securities Commissions</strong> - Coordinamento SEC, CONSOB, FCA, BaFin, AMF e tutte le autorità presenti nel database.
+                    </p>
+                    <a href="IOSCO-annual-Report2022.pdf" target="_blank" class="download-button" style="background: #0066cc; display: inline-block;">
+                        📥 Download Report PDF
+                    </a>
+                </div>
+
+                <!-- CEB Card -->
+                <div class="media-card" style="background: white; border-radius: 12px; padding: 2rem; box-shadow: 0 4px 12px rgba(0,0,0,0.1); border-left: 5px solid #003399;">
+                    <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem;">
+                        <span style="font-size: 3rem;">🏦</span>
+                        <div>
+                            <h3 style="color: #003399; margin: 0; font-size: 1.3rem;">CEB - Council of Europe Development Bank</h3>
+                            <p style="margin: 0; color: #64748b; font-size: 0.9rem;">Banca di Sviluppo Consiglio d'Europa</p>
+                        </div>
+                    </div>
+                    <p style="margin-bottom: 1.5rem; color: #1e293b;">
+                        <strong>Multilateral development bank</strong> - 42 Stati membri, progetti inclusione sociale, cooperazione internazionale, governance bancaria europea.
+                    </p>
+                    <a href="https://coebank.org/en/" target="_blank" rel="noopener noreferrer" class="download-button" style="background: #003399; display: inline-block;">
+                        🌍 Visita Sito CEB
+                    </a>
+                </div>
+
+                <!-- AMLA Card -->
+                <div class="media-card" style="background: white; border-radius: 12px; padding: 2rem; box-shadow: 0 4px 12px rgba(0,0,0,0.1); border-left: 5px solid #FFD700;">
+                    <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem;">
+                        <span style="font-size: 3rem;">⚖️</span>
+                        <div>
+                            <h3 style="color: #b8860b; margin: 0; font-size: 1.3rem;">AMLA - Autorità Antiriciclaggio UE</h3>
+                            <p style="margin: 0; color: #64748b; font-size: 0.9rem;">Operativa dal 1° luglio 2025</p>
+                        </div>
+                    </div>
+                    <p style="margin-bottom: 1.5rem; color: #1e293b;">
+                        <strong>Reg. (UE) 2024/1620</strong> - Sede Francoforte, vigilanza diretta su 40 gruppi finanziari ad alto rischio, coordinamento FIU europee.
+                    </p>
+                    <div style="background: #fffbea; padding: 1rem; border-radius: 8px; margin-bottom: 1rem;">
+                        <p style="margin: 0; font-size: 0.9rem; color: #b8860b;">📌 <strong>Single Rulebook AML/CFT</strong><br>Reg. 2024/1624 + Dir. 2024/1640</p>
+                    </div>
+                </div>
+
+                <!-- OECD SC6 Card -->
+                <div class="media-card" style="background: white; border-radius: 12px; padding: 2rem; box-shadow: 0 4px 12px rgba(0,0,0,0.1); border-left: 5px solid #0077B5;">
+                    <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem;">
+                        <span style="font-size: 3rem;">📊</span>
+                        <div>
+                            <h3 style="color: #0077B5; margin: 0; font-size: 1.3rem;">OECD SC6 Briefing</h3>
+                            <p style="margin: 0; color: #64748b; font-size: 0.9rem;">Dicembre 2025 - Aggiornamento normativo</p>
+                        </div>
+                    </div>
+                    <p style="margin-bottom: 1.5rem; color: #1e293b;">
+                        <strong>Organisation for Economic Co-operation and Development</strong> - SC6 Standing Committee: analisi comparativa sistemi fiscali, regolamentazione finanziaria internazionale, best practices OCSE.
+                    </p>
+                    <a href="OECD_OCSE_SC6_Briefing_dicembre_2025.pdf" target="_blank" class="download-button" style="background: #0077B5; display: inline-block;">
+                        📥 Download Briefing PDF
+                    </a>
+                </div>
+
+                <!-- Netherlands Investment Fraud Study Card -->
+                <div class="media-card" style="background: white; border-radius: 12px; padding: 2rem; box-shadow: 0 4px 12px rgba(0,0,0,0.1); border-left: 5px solid #FF6B35;">
+                    <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem;">
+                        <span style="font-size: 3rem;">🇳🇱</span>
+                        <div>
+                            <h3 style="color: #FF6B35; margin: 0; font-size: 1.3rem;">Hidden Scale Investment Fraud</h3>
+                            <p style="margin: 0; color: #64748b; font-size: 0.9rem;">Netherlands - Ricerca governativa</p>
+                        </div>
+                    </div>
+                    <p style="margin-bottom: 1.5rem; color: #1e293b;">
+                        <strong>Studio olandese sulla scala nascosta delle truffe d'investimento</strong> - Analisi quantitativa fenomeno, metodologia rilevamento, dark number vittime non denuncianti, raccomandazioni policy.
+                    </p>
+                    <div style="background: #fff5f0; padding: 1rem; border-radius: 8px; margin-bottom: 1rem;">
+                        <p style="margin: 0; font-size: 0.9rem; color: #FF6B35;">⚠️ <strong>Dark Number Analysis</strong><br>Vittime effettive >> denunce ufficiali</p>
+                    </div>
+                    <a href="hidden-scale-of-investment-fraud-in-the-Netherlands.pdf" target="_blank" class="download-button" style="background: #FF6B35; display: inline-block;">
+                        📥 Download Study PDF
+                    </a>
+                </div>
+
+                <!-- ESMA Card -->
+                <div class="media-card" style="background: white; border-radius: 12px; padding: 2rem; box-shadow: 0 4px 12px rgba(0,0,0,0.1); border-left: 5px solid #003DA5;">
+                    <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem;">
+                        <span style="font-size: 3rem;">🇪🇺</span>
+                        <div>
+                            <h3 style="color: #003DA5; margin: 0; font-size: 1.3rem;">ESMA - European Securities Markets Authority</h3>
+                            <p style="margin: 0; color: #64748b; font-size: 0.9rem;">Autorità europea vigilanza mercati finanziari</p>
+                        </div>
+                    </div>
+                    <p style="margin-bottom: 1.5rem; color: #1e293b;">
+                        <strong>Natasha Cazenave - Introductory Statement</strong><br>
+                        Executive Director ESMA: trasparenza derivati, MiFIR Review, protezione investitori retail, coordinamento autorità nazionali.
+                    </p>
+                    <div style="background: #f0f4ff; padding: 1rem; border-radius: 8px; margin-bottom: 1rem;">
+                        <p style="margin: 0; font-size: 0.9rem; color: #003DA5;">📌 <strong>MiFIR Review 2025</strong><br>Final Report: derivatives transparency, CTP packages, input/output data</p>
+                    </div>
+                    <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                        <a href="ESMA_Natasha_Cazenave_introductory_statement.pdf" target="_blank" class="download-button" style="background: #003DA5; display: inline-block;">
+                            📥 Introductory Statement PDF
+                        </a>
+                        <a href="https://www.esma.europa.eu/sites/default/files/2025-12/ESMA74-276584410-10987_MiFIR_Review_Final_Report_on_derivatives__transparency__packages__CTP_input_output_.pdf" target="_blank" rel="noopener noreferrer" class="download-button" style="background: #0056D6; display: inline-block;">
+                            📄 MiFIR Review Report 2025
+                        </a>
+                    </div>
+                </div>
+
+                <!-- FinCoNet Card -->
+                <div class="media-card" style="background: white; border-radius: 12px; padding: 2rem; box-shadow: 0 4px 12px rgba(0,0,0,0.1); border-left: 5px solid #28A745;">
+                    <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem;">
+                        <span style="font-size: 3rem;">🌍</span>
+                        <div>
+                            <h3 style="color: #28A745; margin: 0; font-size: 1.3rem;">FinCoNet - International Financial Consumer Protection</h3>
+                            <p style="margin: 0; color: #64748b; font-size: 0.9rem;">Rete internazionale tutela consumatori finanziari</p>
+                        </div>
+                    </div>
+                    <p style="margin-bottom: 1.5rem; color: #1e293b;">
+                        <strong>51 Members, Associates and Observers</strong><br>
+                        FinCoNet coordina enti pubblici con regime di vigilanza sulla condotta di mercato. Attualmente conta 42 Membri, 4 Associati e 5 Osservatori tra le autorità mondiali di supervisione finanziaria.
+                    </p>
+                    <div style="background: #f0fff4; padding: 1rem; border-radius: 8px; margin-bottom: 1rem;">
+                        <p style="margin: 0; font-size: 0.9rem; color: #28A745;">
+                            📊 <strong>Composizione</strong><br>
+                            42 Members | 4 Associates | 5 Observers<br>
+                            <span style="font-size: 0.85rem; color: #64748b;">Market conduct supervisory entities worldwide</span>
+                        </p>
+                    </div>
+
+                    <!-- Aggiornamento Recupero Crediti 22/12/2025 -->
+                    <div style="background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%); padding: 1.5rem; border-radius: 12px; margin-bottom: 1.5rem; border-left: 4px solid #28A745;">
+                        <h4 style="color: #1b5e20; margin-bottom: 1rem; font-size: 1.1rem;">🆕 Aggiornamento 22 Dicembre 2025 - Protezione Consumatori Vulnerabili</h4>
+                        <p style="line-height: 1.8; color: #1e293b; margin-bottom: 1rem; font-size: 0.95rem;">
+                            <strong>Stato dell'arte recupero crediti consumatori vittime truffe finanziarie:</strong>
+                        </p>
+                        
+                        <div style="background: white; padding: 1.2rem; border-radius: 8px; margin-bottom: 1rem;">
+                            <h5 style="color: #28A745; margin-bottom: 0.8rem; font-size: 1rem;">📈 Risultati Indagine FinCoNet</h5>
+                            <ul style="line-height: 1.8; color: #1e293b; margin: 0; padding-left: 1.5rem; font-size: 0.9rem;">
+                                <li><strong>Rafforzamento tutele</strong>: Quasi tutte le giurisdizioni hanno rafforzato la tutela consumatori in materia di recupero crediti negli ultimi anni</li>
+                                <li><strong>Quadro normativo</strong>: Istituito framework per regolamentare attività recupero crediti applicabile a banche, creditori non-bancari, agenzie recupero, PSP e gestori del credito</li>
+                                <li><strong>Monitoraggio</strong>: Raccolta e analisi dati reclami, ispezioni in loco/remote, revisioni tematiche</li>
+                                <li><strong>Sanzioni</strong>: Sanzioni amministrative pecuniarie (più comuni), azione penale per reati sospetti, revoca licenze agenzie recupero</li>
+                            </ul>
+                        </div>
+
+                        <div style="background: #fff9c4; padding: 1.2rem; border-radius: 8px; margin-bottom: 1rem; border-left: 3px solid #fbc02d;">
+                            <h5 style="color: #f57f17; margin-bottom: 0.8rem; font-size: 1rem;">⚠️ Problematiche Comuni</h5>
+                            <p style="margin: 0; line-height: 1.8; color: #1e293b; font-size: 0.9rem;">
+                                🔸 Pratiche abusive<br>
+                                🔸 Scarsa consapevolezza consumatori<br>
+                                🔸 Mancanza di trasparenza
+                            </p>
+                        </div>
+
+                        <div style="background: white; padding: 1.2rem; border-radius: 8px; margin-bottom: 1rem;">
+                            <h5 style="color: #28A745; margin-bottom: 0.8rem; font-size: 1rem;">✅ Approcci Vigilanza Efficaci</h5>
+                            <ul style="line-height: 1.8; color: #1e293b; margin: 0; padding-left: 1.5rem; font-size: 0.9rem;">
+                                <li>Misure esecutive rapide contro condotte illecite</li>
+                                <li>Processi di autorizzazione per gestori crediti</li>
+                                <li>Esperimenti comportamentali per aiutare consumatori a gestire debiti</li>
+                            </ul>
+                        </div>
+
+                        <div style="background: #e3f2fd; padding: 1.2rem; border-radius: 8px;">
+                            <p style="margin: 0; line-height: 1.8; color: #0d47a1; font-size: 0.9rem;">
+                                <strong>💡 Raccomandazione Chiave:</strong> Le attività di recupero crediti coinvolgono settori finanziari e non-finanziari, con più autorità (incluse forze dell'ordine). 
+                                Un <strong>approccio coordinato e completo è fondamentale</strong> per supervisione attività e sensibilizzazione consumatori.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                        <a href="FinCoNet_Webinar_Novembre_2025.pdf" target="_blank" class="download-button" style="background: #28A745; display: inline-block;">
+                            📥 Webinar Novembre 2025 PDF
+                        </a>
+                        <a href="https://www.finconet.org/" target="_blank" rel="noopener noreferrer" class="download-button" style="background: #20C997; display: inline-block;">
+                            🌐 Visita Sito FinCoNet
+                        </a>
+                        <a href="https://www.compliancecorylated.com/news/finconet-seeks-to-protect-vulnerable-customers/" target="_blank" rel="noopener noreferrer" class="download-button" style="background: #17A2B8; display: inline-block;">
+                            📰 Report 22/12/2025
+                        </a>
+                        <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Fwww.compliancecorylated.com%2Fnews%2Ffinconet-seeks-to-protect-vulnerable-customers" target="_blank" rel="noopener noreferrer" class="download-button" style="background: #0077B5; display: inline-block;">
+                            💼 Condividi su LinkedIn
+                        </a>
+                    </div>
+                </div>
+
+                <!-- FCA Firm Checker Card -->
+                <div class="media-card" style="background: white; border-radius: 12px; padding: 2.5rem; box-shadow: 0 6px 20px rgba(0,0,0,0.15); border-left: 6px solid #0071CE;">
+                    <div style="display: flex; align-items: center; gap: 1.5rem; margin-bottom: 2rem;">
+                        <span style="font-size: 4rem;">🇬🇧</span>
+                        <div>
+                            <h3 style="color: #0071CE; margin: 0; font-size: 1.6rem;">FCA - Financial Conduct Authority UK</h3>
+                            <p style="margin: 0.3rem 0 0 0; color: #64748b; font-size: 1rem;">Nuovo strumento Firm Checker | 9 Dicembre 2025</p>
+                        </div>
+                    </div>
+
+                    <div style="background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%); padding: 2rem; border-radius: 12px; margin-bottom: 2rem;">
+                        <h4 style="color: #0071CE; margin-bottom: 1rem; font-size: 1.3rem;">🔍 Firm Checker - Verifica Legittimità Istituti Finanziari</h4>
+                        <p style="line-height: 1.8; color: #1e293b; margin-bottom: 1rem;">
+                            <strong>Lanciato il 9 dicembre 2025</strong>, il nuovo strumento della FCA intensifica gli sforzi per aiutare i consumatori a:
+                        </p>
+                        <div style="background: white; padding: 1.5rem; border-radius: 8px; border-left: 4px solid #0071CE;">
+                            <ul style="line-height: 1.8; color: #1e293b; margin: 0; padding-left: 1.5rem; font-size: 0.95rem;">
+                                <li><strong>Identificare la legittimità</strong> di un istituto finanziario</li>
+                                <li><strong>Verificare i servizi autorizzati</strong> che l'istituto può erogare</li>
+                                <li><strong>Segnalazione chiara attività non autorizzate</strong> utilizzando dati del Registro Servizi Finanziari</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div style="background: #fff3e0; padding: 1.5rem; border-radius: 8px; margin-bottom: 2rem; border-left: 4px solid #FF9800;">
+                        <h4 style="color: #E65100; margin-bottom: 1rem; font-size: 1.2rem;">📊 Contesto e Necessità</h4>
+                        <p style="line-height: 1.8; color: #1e293b; margin: 0; font-size: 0.95rem;">
+                            <strong>Problema precedente</strong>: Il Registro Servizi Finanziari era criticato come difficile da usare e fonte di confusione per i consumatori - più adatto ai professionisti.<br><br>
+                            <strong>Urgenza intervento</strong>: Dati UK Finance (estate 2025) indicano <strong>+14% casi frode non autorizzata</strong> in un anno.
+                        </p>
+                    </div>
+
+                    <div style="background: #f3e5f5; padding: 1.5rem; border-radius: 8px; margin-bottom: 2rem;">
+                        <h4 style="color: #6A1B9A; margin-bottom: 1rem; font-size: 1.2rem;">🏛️ Strategia Antifrode UK - Febbraio 2026</h4>
+                        <p style="line-height: 1.8; color: #1e293b; margin: 0; font-size: 0.95rem;">
+                            Il governo UK ha annunciato il <strong>4 dicembre 2025</strong> che pubblicherà la sua <strong>attesissima Strategia Antifrode entro l'inizio di febbraio 2026</strong>. 
+                            Il lancio del Firm Checker si inserisce in questo contesto di rafforzamento tutela consumatori finanziari.
+                        </p>
+                    </div>
+
+                    <div style="background: linear-gradient(135deg, #DC143C 0%, #8B0000 100%); padding: 2rem; border-radius: 12px; margin-bottom: 2rem; color: white;">
+                        <h4 style="color: #FFD700; margin-bottom: 1rem; font-size: 1.3rem;">⚠️ Perché è Cruciale</h4>
+                        <p style="line-height: 1.9; margin: 0; font-size: 1.05rem;">
+                            <strong>Il Firm Checker rappresenta un cambio di paradigma</strong>:<br>
+                            • Sposta l'onere della verifica dall'utente vulnerabile all'autorità<br>
+                            • Rende accessibile a tutti ciò che prima era per "professionisti"<br>
+                            • Previene truffe PRIMA che avvengano (non solo recupero dopo)<br>
+                            • Modello replicabile per altre giurisdizioni europee
+                        </p>
+                    </div>
+
+                    <div style="display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center;">
+                        <a href="https://www.compliancecorylated.com/news/fca-unveils-firm-checker-in-heightened-focus-on-fraud" target="_blank" rel="noopener noreferrer" class="download-button" style="background: #0071CE; display: inline-block; font-size: 1.1rem; padding: 1rem 2rem;">
+                            📰 Report Firm Checker
+                        </a>
+                        <a href="https://www.fca.org.uk/" target="_blank" rel="noopener noreferrer" class="download-button" style="background: #0056A6; display: inline-block; font-size: 1.1rem; padding: 1rem 2rem;">
+                            🌐 Sito Ufficiale FCA
+                        </a>
+                        <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Fwww.compliancecorylated.com%2Fnews%2Ffca-unveils-firm-checker-in-heightened-focus-on-fraud" target="_blank" rel="noopener noreferrer" class="download-button" style="background: #0077B5; display: inline-block; font-size: 1.1rem; padding: 1rem 2rem;">
+                            💼 Condividi su LinkedIn
+                        </a>
+                    </div>
+
+                    <div style="margin-top: 2rem; padding-top: 1.5rem; border-top: 2px solid #e2e8f0;">
+                        <p style="margin: 0; text-align: center; color: #64748b; font-size: 0.9rem;">
+                            🔔 <strong>Strategia Antifrode UK</strong> - Pubblicazione attesa inizio febbraio 2026 | +14% frodi non autorizzate 2024-2025
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Schema AML/CFT Dettagliato -->
+            <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 3rem; border-radius: 16px; margin-top: 4rem; color: white;">
+                <h3 style="color: white; font-size: 2rem; margin-bottom: 2rem; text-align: center;">⚖️ Quadro AML/CFT Europeo (luglio 2025)</h3>
+                
+                <!-- Scheda 1: Operativa Forze dell'Ordine -->
+                <div style="background: rgba(255,255,255,0.1); padding: 2rem; border-radius: 12px; margin-bottom: 2rem; backdrop-filter: blur(10px);">
+                    <h4 style="color: #FFD700; margin-bottom: 1.5rem; font-size: 1.5rem;">📋 1. Scheda Operativa AML/CFT per Forze dell'Ordine</h4>
+                    
+                    <div style="margin-bottom: 2rem;">
+                        <h5 style="color: #FFD700; margin-bottom: 1rem;">Contesto UE - Nuovo Pacchetto AML</h5>
+                        <ul style="line-height: 1.8; color: white;">
+                            <li><strong>Reg. (UE) 2024/1624</strong>: "Single Rulebook" antiriciclaggio - norme direttamente applicabili su adeguata verifica, titolare effettivo, limiti contante, cripto, crowdfunding, calcio professionistico, beni di lusso</li>
+                            <li><strong>Dir. (UE) 2024/1640 (VI Direttiva AML)</strong>: organizza sistemi nazionali AML/CFT, FIU, accesso registri titolari effettivi e immobiliari - recepimento entro 10 luglio 2027</li>
+                            <li><strong>Reg. (UE) 2024/1620 (AMLA)</strong>: Autorità europea antiriciclaggio con sede a Francoforte</li>
+                        </ul>
+                    </div>
+
+                    <div style="margin-bottom: 2rem;">
+                        <h5 style="color: #FFD700; margin-bottom: 1rem;">Ruolo Chiave degli Attori</h5>
+                        <div style="background: rgba(255,255,255,0.05); padding: 1.5rem; border-radius: 8px; margin-bottom: 1rem;">
+                            <p style="margin-bottom: 0.5rem;"><strong>🏛️ AMLA</strong> (operativa dal 1° luglio 2025):</p>
+                            <ul style="margin-top: 0.5rem; line-height: 1.8;">
+                                <li>Supervisione <strong>diretta</strong> su ~40 gruppi finanziari ad alto rischio cross-border (dal 2028)</li>
+                                <li>Supervisione <strong>indiretta e coordinamento</strong> autorità nazionali e FIU; gestione FIU.net</li>
+                                <li>Analisi congiunte operazioni sospette transfrontaliere</li>
+                                <li>Poteri sanzione amministrativa per violazioni gravi, sistematiche o ripetute</li>
+                            </ul>
+                        </div>
+
+                        <div style="background: rgba(255,255,255,0.05); padding: 1.5rem; border-radius: 8px; margin-bottom: 1rem;">
+                            <p style="margin-bottom: 0.5rem;"><strong>🏦 BCE</strong>:</p>
+                            <ul style="margin-top: 0.5rem; line-height: 1.8;">
+                                <li>Non è autorità AML, ma integra rischi AML/CFT nella <strong>vigilanza prudenziale</strong> (autorizzazioni, SREP, governance, revoca licenza)</li>
+                                <li><strong>Protocollo d'intesa BCE–AMLA</strong> (giugno 2025): scambio informazioni, allineamento metodologie, azioni congiunte su governance e sanzioni</li>
+                            </ul>
+                        </div>
+
+                        <div style="background: rgba(255,255,255,0.05); padding: 1.5rem; border-radius: 8px;">
+                            <p style="margin-bottom: 0.5rem;"><strong>🇮🇹 Autorità Nazionali (Italia)</strong>:</p>
+                            <ul style="margin-top: 0.5rem; line-height: 1.8;">
+                                <li><strong>MEF</strong>: regia politica AML/CFT, rapporti UE/internazionali, potere sanzionatorio, Comitato Sicurezza Finanziaria</li>
+                                <li><strong>FIU nazionale</strong>: riceve/analizza segnalazioni operazioni sospette (SOS), cooperazione FIU estere e AMLA (FIU.net)</li>
+                                <li><strong>Banca d'Italia, Consob, IVASS</strong>: vigilanza AML/CFT su intermediari, manuali segnalazioni, controlli su organizzazione e presidi</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h5 style="color: #FFD700; margin-bottom: 1rem;">Punti Operativi Forze dell'Ordine</h5>
+                        <div style="background: rgba(255,215,0,0.1); padding: 1.5rem; border-radius: 8px; margin-bottom: 1rem;">
+                            <p style="margin-bottom: 0.5rem;"><strong>📂 Accesso alle Informazioni</strong>:</p>
+                            <ul style="margin-top: 0.5rem; line-height: 1.8;">
+                                <li>Registri titolari effettivi con accesso esteso a "interesse legittimo" (giornalisti, società civile)</li>
+                                <li>Punti accesso unici nazionali per registri immobiliari e conti bancari/IBAN (inclusi virtuali, cripto, cassette sicurezza)</li>
+                                <li>Accesso armonizzato registri conti bancari per autorità contrasto tramite direttiva Consiglio</li>
+                            </ul>
+                        </div>
+
+                        <div style="background: rgba(255,215,0,0.1); padding: 1.5rem; border-radius: 8px; margin-bottom: 1rem;">
+                            <p style="margin-bottom: 0.5rem;"><strong>💰 Limiti e Soglie Rilevanti</strong>:</p>
+                            <ul style="margin-top: 0.5rem; line-height: 1.8;">
+                                <li>Limite UE pagamenti contanti: <strong>€10.000</strong> (Italia: €5.000)</li>
+                                <li>Attenzione "super-ricchi" (patrimonio > €50 milioni) con misure rafforzate adeguata verifica</li>
+                            </ul>
+                        </div>
+
+                        <div style="background: rgba(255,215,0,0.1); padding: 1.5rem; border-radius: 8px;">
+                            <p style="margin-bottom: 0.5rem;"><strong>⚠️ Settori Rischio Elevato</strong>:</p>
+                            <ul style="margin-top: 0.5rem; line-height: 1.8;">
+                                <li>Cripto-asset, crowdfunding, beni di lusso</li>
+                                <li>Calcio professionistico</li>
+                                <li>Operatori residenza/cittadinanza per investimento</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Scheda 2: Diagramma Flussi AML -->
+                <div style="background: rgba(255,255,255,0.1); padding: 2rem; border-radius: 12px; margin-bottom: 2rem; backdrop-filter: blur(10px);">
+                    <h4 style="color: #FFD700; margin-bottom: 1.5rem; font-size: 1.5rem;">🔄 2. Diagramma Logico Flussi AML UE (luglio 2025)</h4>
+                    
+                    <div style="position: relative; padding-left: 2rem;">
+                        <!-- Timeline verticale -->
+                        <div style="position: absolute; left: 0; top: 0; bottom: 0; width: 3px; background: linear-gradient(to bottom, #FFD700, #FFA500);"></div>
+
+                        <!-- Step 1 -->
+                        <div style="position: relative; margin-bottom: 2rem; padding-left: 2rem;">
+                            <div style="position: absolute; left: -2rem; top: 0; width: 40px; height: 40px; background: #FFD700; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; color: #333;">1</div>
+                            <h5 style="color: #FFD700; margin-bottom: 0.5rem;">Soggetti Obbligati</h5>
+                            <p style="line-height: 1.8; color: white;">Banche, intermediari finanziari, cripto-provider, crowdfunding, calcio, beni di lusso:<br>
+                            → Raccolgono dati KYC/adeguata verifica (Reg. 2024/1624 + VI Direttiva)<br>
+                            → Monitorano operazioni<br>
+                            → Inviano <strong>segnalazioni operazioni sospette (SOS)</strong> a FIU nazionale</p>
+                        </div>
+
+                        <!-- Step 2 -->
+                        <div style="position: relative; margin-bottom: 2rem; padding-left: 2rem;">
+                            <div style="position: absolute; left: -2rem; top: 0; width: 40px; height: 40px; background: #FFD700; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; color: #333;">2</div>
+                            <h5 style="color: #FFD700; margin-bottom: 0.5rem;">FIU Nazionale</h5>
+                            <p style="line-height: 1.8; color: white;">
+                            → Riceve e analizza SOS<br>
+                            → Incrocia con registri titolari effettivi, conti bancari, immobili<br>
+                            → Condivide con altre FIU tramite <strong>FIU.net</strong> e AMLA per analisi cross-border<br>
+                            → Trasmette elementi a autorità investigative e giudiziarie nazionali</p>
+                        </div>
+
+                        <!-- Step 3 -->
+                        <div style="position: relative; margin-bottom: 2rem; padding-left: 2rem;">
+                            <div style="position: absolute; left: -2rem; top: 0; width: 40px; height: 40px; background: #FFD700; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; color: #333;">3</div>
+                            <h5 style="color: #FFD700; margin-bottom: 0.5rem;">Autorità Vigilanza Nazionali AML/CFT</h5>
+                            <p style="line-height: 1.8; color: white;">
+                            → Ricevono flussi da FIU e soggetti obbligati<br>
+                            → Vigilanza su presidi AML/CFT, organizzazione, controlli interni<br>
+                            → Contestano violazioni e trasmettono a MEF per sanzioni amministrative</p>
+                        </div>
+
+                        <!-- Step 4 -->
+                        <div style="position: relative; margin-bottom: 2rem; padding-left: 2rem;">
+                            <div style="position: absolute; left: -2rem; top: 0; width: 40px; height: 40px; background: #FFD700; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; color: #333;">4</div>
+                            <h5 style="color: #FFD700; margin-bottom: 0.5rem;">AMLA</h5>
+                            <p style="line-height: 1.8; color: white;">
+                            → Riceve dati non operativi, statistiche, analisi da FIU e autorità vigilanza<br>
+                            → Mantiene banca dati centrale accessibile ad autorità competenti<br>
+                            → Coordina analisi congiunte FIU su schemi riciclaggio transfrontalieri<br>
+                            → Emette linee guida, standard tecnici, raccomandazioni<br>
+                            → Per soggetti ad alto rischio: <strong>vigilanza diretta</strong> (ispezioni, decisioni, sanzioni)</p>
+                        </div>
+
+                        <!-- Step 5 -->
+                        <div style="position: relative; margin-bottom: 2rem; padding-left: 2rem;">
+                            <div style="position: absolute; left: -2rem; top: 0; width: 40px; height: 40px; background: #FFD700; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; color: #333;">5</div>
+                            <h5 style="color: #FFD700; margin-bottom: 0.5rem;">BCE e Vigilanza Prudenziale</h5>
+                            <p style="line-height: 1.8; color: white;">
+                            → Riceve informazioni AML/CFT da AMLA e autorità nazionali<br>
+                            → Integra rischi AML/CFT in SREP, autorizzazioni, misure prudenziali<br>
+                            → Tramite MoU BCE–AMLA (giugno 2025): coordina interventi su governance, controlli interni, restrizioni operative o revoca licenza</p>
+                        </div>
+
+                        <!-- Step 6 -->
+                        <div style="position: relative; padding-left: 2rem;">
+                            <div style="position: absolute; left: -2rem; top: 0; width: 40px; height: 40px; background: #FFD700; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; color: #333;">6</div>
+                            <h5 style="color: #FFD700; margin-bottom: 0.5rem;">Agenzie UE (Europol, Eurojust, EPPO, OLAF)</h5>
+                            <p style="line-height: 1.8; color: white;">
+                            → AMLA coopera per profili penali e criminalità organizzata<br>
+                            → Segnala inadempienze Stati membri nell'attuazione norme AML/CFT</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Scheda 3: Riassunto Normativo -->
+                <div style="background: rgba(255,255,255,0.1); padding: 2rem; border-radius: 12px; backdrop-filter: blur(10px);">
+                    <h4 style="color: #FFD700; margin-bottom: 1.5rem; font-size: 1.5rem;">📜 3. Riassunto Normativo AML Package</h4>
+                    
+                    <div style="margin-bottom: 2rem;">
+                        <div style="background: rgba(0,102,204,0.2); padding: 1.5rem; border-radius: 8px; border-left: 4px solid #0066cc; margin-bottom: 1.5rem;">
+                            <h5 style="color: #FFD700; margin-bottom: 1rem;">📘 Regolamento (UE) 2024/1624 - "Single Rulebook"</h5>
+                            <p style="margin-bottom: 1rem; color: white;"><strong>Norme direttamente applicabili su</strong>:</p>
+                            <ul style="line-height: 1.8; color: white;">
+                                <li>Adeguata verifica clientela (standard minimi, misure semplificate/rafforzate)</li>
+                                <li>Trasparenza titolare effettivo e accesso registri</li>
+                                <li>Strumenti anonimi e cripto-asset; piattaforme crowdfunding</li>
+                                <li>Estensione soggetti obbligati (cripto, crowdfunding, calcio, beni lusso, residenza/cittadinanza per investimento)</li>
+                                <li><strong>Limite uniforme UE contanti: €10.000</strong></li>
+                            </ul>
+                            <div style="background: rgba(255,215,0,0.15); padding: 1rem; border-radius: 6px; margin-top: 1rem;">
+                                <p style="margin: 0; color: white;">⏰ <strong>Applicazione: 10 luglio 2027</strong> (deroga 2029 per calcio professionistico)</p>
+                            </div>
+                        </div>
+
+                        <div style="background: rgba(0,51,153,0.2); padding: 1.5rem; border-radius: 8px; border-left: 4px solid #003399; margin-bottom: 1.5rem;">
+                            <h5 style="color: #FFD700; margin-bottom: 1rem;">📕 Direttiva (UE) 2024/1640 - VI Direttiva AML</h5>
+                            <p style="margin-bottom: 1rem; color: white;"><strong>Disciplina</strong>:</p>
+                            <ul style="line-height: 1.8; color: white;">
+                                <li>Organizzazione sistemi nazionali AML/CFT (FIU, autorità vigilanza, cooperazione)</li>
+                                <li>Accesso autorità a registri titolari effettivi e registri immobiliari</li>
+                                <li>Punti accesso unici nazionali per conti bancari e immobili</li>
+                            </ul>
+                            <div style="background: rgba(255,215,0,0.15); padding: 1rem; border-radius: 6px; margin-top: 1rem;">
+                                <p style="margin: 0; color: white;">⏰ <strong>Recepimento: 10 luglio 2027</strong><br>
+                                📌 Registri titolari effettivi: <strong>10 luglio 2026</strong><br>
+                                📌 Punti accesso immobiliari: <strong>10 luglio 2029</strong></p>
+                            </div>
+                        </div>
+
+                        <div style="background: rgba(255,215,0,0.2); padding: 1.5rem; border-radius: 8px; border-left: 4px solid #FFD700;">
+                            <h5 style="color: #FFD700; margin-bottom: 1rem;">⚖️ Regolamento (UE) 2024/1620 - AMLA</h5>
+                            <p style="margin-bottom: 1rem; color: white;"><strong>Autorità Antiriciclaggio UE - Sede Francoforte</strong></p>
+                            <ul style="line-height: 1.8; color: white;">
+                                <li><strong>19 giugno 2024</strong>: Regolamento in vigore</li>
+                                <li><strong>1° luglio 2025</strong>: Attività operative (coordinamento, supervisione indiretta)</li>
+                                <li><strong>2027</strong>: Selezione soggetti ad alto rischio per vigilanza diretta</li>
+                                <li><strong>2028</strong>: Piena vigilanza diretta su ~40 gruppi finanziari europei</li>
+                            </ul>
+                            <div style="background: rgba(255,255,255,0.1); padding: 1rem; border-radius: 6px; margin-top: 1rem;">
+                                <p style="margin-bottom: 0.5rem; color: white;"><strong>Compiti</strong>:</p>
+                                <ul style="margin-top: 0.5rem; line-height: 1.8; color: white;">
+                                    <li>Metodologia armonizzata vigilanza AML/CFT</li>
+                                    <li>Revisione autorità nazionali, risoluzione controversie transfrontaliere</li>
+                                    <li>Coordinamento FIU, gestione FIU.net, analisi congiunte</li>
+                                    <li>Poteri sanzionatori verso soggetti obbligati selezionati</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Autorità di Vigilanza -->
+        <section style="margin-top: 5rem;">
+            <h2 class="section-title">🏛️ Autorità di Vigilanza Finanziaria</h2>
+            <p class="section-subtitle">Enti regolatori internazionali responsabili della supervisione mercati finanziari e protezione consumatori</p>
+            
+            <div class="media-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 2rem; margin-top: 3rem;">
+                
+                <!-- FCA UK Card -->
+                <div class="media-card" style="background: white; border-radius: 12px; padding: 2.5rem; box-shadow: 0 6px 20px rgba(0,0,0,0.15); border-left: 6px solid #0056D6;">
+                    <div style="display: flex; align-items: center; gap: 1.5rem; margin-bottom: 2rem;">
+                        <span style="font-size: 3.5rem;">🇬🇧</span>
+                        <div>
+                            <h3 style="color: #0056D6; margin: 0; font-size: 1.5rem;">FCA - Financial Conduct Authority</h3>
+                            <p style="margin: 0.3rem 0 0 0; color: #64748b; font-size: 0.95rem;">Regno Unito</p>
+                        </div>
+                    </div>
+                    <p style="line-height: 1.8; color: #1e293b; margin-bottom: 1.5rem;">
+                        Regolatore condotta finanziaria UK. Responsabile della protezione consumatori, integrità mercati e promozione concorrenza nel settore dei servizi finanziari.
+                    </p>
+                    <div style="display: flex; gap: 0.8rem; flex-wrap: wrap;">
+                        <a href="https://www.fca.org.uk/" target="_blank" rel="noopener noreferrer" style="display: inline-block; background: #0056D6; color: white; padding: 0.7rem 1.5rem; text-decoration: none; border-radius: 6px; font-size: 0.9rem; font-weight: 600;">🌐 Homepage</a>
+                        <a href="https://register.fca.org.uk/s/" target="_blank" rel="noopener noreferrer" style="display: inline-block; background: #28A745; color: white; padding: 0.7rem 1.5rem; text-decoration: none; border-radius: 6px; font-size: 0.9rem; font-weight: 600;">📋 Financial Services Register</a>
+                    </div>
+                </div>
+
+                <!-- PRA Bank of England Card -->
+                <div class="media-card" style="background: white; border-radius: 12px; padding: 2.5rem; box-shadow: 0 6px 20px rgba(0,0,0,0.15); border-left: 6px solid #C41E3A;">
+                    <div style="display: flex; align-items: center; gap: 1.5rem; margin-bottom: 2rem;">
+                        <span style="font-size: 3.5rem;">🇬🇧</span>
+                        <div>
+                            <h3 style="color: #C41E3A; margin: 0; font-size: 1.5rem;">PRA - Prudential Regulation Authority</h3>
+                            <p style="margin: 0.3rem 0 0 0; color: #64748b; font-size: 0.95rem;">Bank of England | Regno Unito</p>
+                        </div>
+                    </div>
+                    <p style="line-height: 1.8; color: #1e293b; margin-bottom: 1rem;">
+                        Autorità finanziaria responsabile della <strong>regolamentazione prudenziale</strong> e supervisione di circa <strong>1.292 entità</strong>: banche, società credito edilizio, cooperative credito, compagnie assicurative e importanti società di investimento.
+                    </p>
+                    <div style="background: #fff3e0; padding: 1rem; border-radius: 6px; margin-bottom: 1.5rem;">
+                        <p style="margin: 0; font-size: 0.9rem; color: #1e293b;">📊 <strong>Supervisiona:</strong> 1.292 enti regolamentati per garantire sicurezza e solidità del sistema finanziario britannico</p>
+                    </div>
+                    <div style="display: flex; gap: 0.8rem; flex-wrap: wrap;">
+                        <a href="https://www.bankofengland.co.uk/prudential-regulation" target="_blank" rel="noopener noreferrer" style="display: inline-block; background: #C41E3A; color: white; padding: 0.7rem 1.5rem; text-decoration: none; border-radius: 6px; font-size: 0.9rem; font-weight: 600;">🏛️ Prudential Regulation</a>
+                    </div>
+                </div>
+
+                <!-- OFCOM UK Card -->
+                <div class="media-card" style="background: white; border-radius: 12px; padding: 2.5rem; box-shadow: 0 6px 20px rgba(0,0,0,0.15); border-left: 6px solid #0077B5;">
+                    <div style="display: flex; align-items: center; gap: 1.5rem; margin-bottom: 2rem;">
+                        <span style="font-size: 3.5rem;">🇬🇧</span>
+                        <div>
+                            <h3 style="color: #0077B5; margin: 0; font-size: 1.5rem;">OFCOM - Office of Communications</h3>
+                            <p style="margin: 0.3rem 0 0 0; color: #64748b; font-size: 0.95rem;">Regno Unito | Online Safety Act</p>
+                        </div>
+                    </div>
+                    <p style="line-height: 1.8; color: #1e293b; margin-bottom: 1.5rem;">
+                        Autorità di regolamentazione telecomunicazioni con poteri di enforcement dell'<strong>Online Safety Act</strong>. Obbliga piattaforme social a rimuovere contenuti fraudolenti e proteggere utenti UK da truffe online.
+                    </p>
+                    <div style="display: flex; gap: 0.8rem; flex-wrap: wrap;">
+                        <a href="https://www.ofcom.org.uk/" target="_blank" rel="noopener noreferrer" style="display: inline-block; background: #0077B5; color: white; padding: 0.7rem 1.5rem; text-decoration: none; border-radius: 6px; font-size: 0.9rem; font-weight: 600;">🌐 Homepage</a>
+                        <a href="https://www.ofcom.org.uk/make-a-complaint" target="_blank" rel="noopener noreferrer" style="display: inline-block; background: #DC143C; color: white; padding: 0.7rem 1.5rem; text-decoration: none; border-radius: 6px; font-size: 0.9rem; font-weight: 600;">📢 Segnalazioni</a>
+                    </div>
+                </div>
+
+                <!-- Central Bank of Ireland Card -->
+                <div class="media-card" style="background: white; border-radius: 12px; padding: 2.5rem; box-shadow: 0 6px 20px rgba(0,0,0,0.15); border-left: 6px solid #169B62;">
+                    <div style="display: flex; align-items: center; gap: 1.5rem; margin-bottom: 2rem;">
+                        <span style="font-size: 3.5rem;">🇮🇪</span>
+                        <div>
+                            <h3 style="color: #169B62; margin: 0; font-size: 1.5rem;">Central Bank of Ireland</h3>
+                            <p style="margin: 0.3rem 0 0 0; color: #64748b; font-size: 0.95rem;">Irlanda | Consumer Hub</p>
+                        </div>
+                    </div>
+                    <p style="line-height: 1.8; color: #1e293b; margin-bottom: 1rem;">
+                        Banca centrale irlandese con <strong>Consumer Hub</strong> dedicato all'educazione finanziaria. Guida esemplare per il riconoscimento e prevenzione delle truffe finanziarie.
+                    </p>
+                    <div style="background: #e8f5e9; padding: 1rem; border-radius: 6px; margin-bottom: 1.5rem;">
+                        <p style="margin: 0; font-size: 0.9rem; color: #1e293b;">📚 <strong>Risorsa chiave:</strong> "How can I avoid a financial services scam" - guida completa anti-truffe</p>
+                    </div>
+                    <div style="display: flex; gap: 0.8rem; flex-wrap: wrap;">
+                        <a href="https://www.centralbank.ie/" target="_blank" rel="noopener noreferrer" style="display: inline-block; background: #169B62; color: white; padding: 0.7rem 1.5rem; text-decoration: none; border-radius: 6px; font-size: 0.9rem; font-weight: 600;">🌐 Homepage</a>
+                        <a href="https://www.centralbank.ie/consumer-hub/explainers/how-can-i-avoid-a-financial-services-scam" target="_blank" rel="noopener noreferrer" style="display: inline-block; background: #28A745; color: white; padding: 0.7rem 1.5rem; text-decoration: none; border-radius: 6px; font-size: 0.9rem; font-weight: 600;">📖 Guida Anti-Truffe</a>
+                    </div>
+                </div>
+
+                <!-- AGCM Italia Card -->
+                <div class="media-card" style="background: white; border-radius: 12px; padding: 2.5rem; box-shadow: 0 6px 20px rgba(0,0,0,0.15); border-left: 6px solid #009246;">
+                    <div style="display: flex; align-items: center; gap: 1.5rem; margin-bottom: 2rem;">
+                        <span style="font-size: 3.5rem;">🇮🇹</span>
+                        <div>
+                            <h3 style="color: #009246; margin: 0; font-size: 1.5rem;">AGCM - Autorità Antitrust</h3>
+                            <p style="margin: 0.3rem 0 0 0; color: #64748b; font-size: 0.95rem;">Italia | Tutela Consumatori</p>
+                        </div>
+                    </div>
+                    <p style="line-height: 1.8; color: #1e293b; margin-bottom: 1rem;">
+                        Autorità Garante della Concorrenza e del Mercato. Tutela consumatori da pratiche commerciali scorrette, pubblicità ingannevole e condotte anticoncorrenziali.
+                    </p>
+                    <div style="background: #fff3e0; padding: 1rem; border-radius: 6px; margin-bottom: 1.5rem;">
+                        <p style="margin: 0; font-size: 0.9rem; color: #1e293b;">⚖️ <strong>Sanzioni:</strong> fino a €10 milioni o 10% fatturato per violazioni Codice del Consumo</p>
+                    </div>
+                    <div style="display: flex; gap: 0.8rem; flex-wrap: wrap;">
+                        <a href="https://www.agcm.it/" target="_blank" rel="noopener noreferrer" style="display: inline-block; background: #009246; color: white; padding: 0.7rem 1.5rem; text-decoration: none; border-radius: 6px; font-size: 0.9rem; font-weight: 600;">🌐 Homepage</a>
+                        <a href="https://www.facebook.com/agcm.it" target="_blank" rel="noopener noreferrer" style="display: inline-block; background: #0077B5; color: white; padding: 0.7rem 1.5rem; text-decoration: none; border-radius: 6px; font-size: 0.9rem; font-weight: 600;">📘 Facebook</a>
+                    </div>
+                </div>
+
+                <!-- MAS Singapore Card -->
+                <div class="media-card" style="background: white; border-radius: 12px; padding: 2.5rem; box-shadow: 0 6px 20px rgba(0,0,0,0.15); border-left: 6px solid #ED2939;">
+                    <div style="display: flex; align-items: center; gap: 1.5rem; margin-bottom: 2rem;">
+                        <span style="font-size: 3.5rem;">🇸🇬</span>
+                        <div>
+                            <h3 style="color: #ED2939; margin: 0; font-size: 1.5rem;">MAS - Monetary Authority of Singapore</h3>
+                            <p style="margin: 0.3rem 0 0 0; color: #64748b; font-size: 0.95rem;">Singapore</p>
+                        </div>
+                    </div>
+                    <p style="line-height: 1.8; color: #1e293b; margin-bottom: 1rem;">
+                        Autorità monetaria di Singapore con regolamentazione di altissima civiltà. Supporto psicologico vittime tramite Scamshield e app educative.
+                    </p>
+                    <div style="background: #e3f2fd; padding: 1rem; border-radius: 6px; margin-bottom: 1.5rem;">
+                        <p style="margin: 0; font-size: 0.9rem; color: #1e293b;">🚀 <strong>Innovazione 2025:</strong> DBS, OCBC, UOB implementano blocco automatico prudenziale >50% saldo</p>
+                    </div>
+                    <div style="display: flex; gap: 0.8rem; flex-wrap: wrap;">
+                        <a href="https://www.mas.gov.sg/" target="_blank" rel="noopener noreferrer" style="display: inline-block; background: #ED2939; color: white; padding: 0.7rem 1.5rem; text-decoration: none; border-radius: 6px; font-size: 0.9rem; font-weight: 600;">🌐 Homepage</a>
+                        <a href="https://www.scamshield.gov.sg/" target="_blank" rel="noopener noreferrer" style="display: inline-block; background: #28A745; color: white; padding: 0.7rem 1.5rem; text-decoration: none; border-radius: 6px; font-size: 0.9rem; font-weight: 600;">🛡️ Scamshield</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Strumenti Antifrode -->
+        <section style="margin-top: 5rem;">
+            <h2 class="section-title">🔍 Strumenti Antifrode Digitali</h2>
+            <p class="section-subtitle">Piattaforme ufficiali per verificare legittimità istituti finanziari, controllare autorizzazioni e proteggersi dalle frodi</p>
+            
+            <div class="media-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(450px, 1fr)); gap: 2rem; margin-top: 3rem;">
+                <!-- FCA Firm Checker Card -->
+                <div class="media-card" style="background: white; border-radius: 12px; padding: 2.5rem; box-shadow: 0 6px 20px rgba(0,0,0,0.15); border-left: 6px solid #0056D6; grid-column: 1 / -1;">
+                    <div style="display: flex; align-items: center; gap: 1.5rem; margin-bottom: 2rem;">
+                        <span style="font-size: 4rem;">🇬🇧</span>
+                        <div>
+                            <h3 style="color: #0056D6; margin: 0; font-size: 1.6rem;">FCA Firm Checker</h3>
+                            <p style="margin: 0.3rem 0 0 0; color: #64748b; font-size: 1rem;">Financial Conduct Authority UK | Lancio 9 dicembre 2025</p>
+                        </div>
+                    </div>
+
+                    <div style="background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%); padding: 2rem; border-radius: 12px; margin-bottom: 2rem;">
+                        <h4 style="color: #0056D6; margin-bottom: 1rem; font-size: 1.3rem;">🔎 Nuovo Strumento Verifica Legittimità Istituti Finanziari</h4>
+                        <p style="line-height: 1.8; color: #1e293b; margin-bottom: 1rem;">
+                            FCA ha presentato <strong>Firm Checker</strong>, intensificando gli sforzi per aiutare i consumatori a identificare la legittimità di un istituto finanziario e verificare i servizi autorizzati. 
+                            Lo strumento segnala chiaramente le <strong>attività non autorizzate</strong> utilizzando i dati del Registro dei Servizi Finanziari.
+                        </p>
+                    </div>
+
+                    <div style="background: white; padding: 2rem; border-radius: 12px; border-left: 4px solid #0056D6; margin-bottom: 2rem;">
+                        <h4 style="color: #0056D6; margin-bottom: 1rem; font-size: 1.2rem;">⚙️ Come Funziona Firm Checker</h4>
+                        <div style="background: #f5f5f5; padding: 1.5rem; border-radius: 8px; margin-bottom: 1rem;">
+                            <p style="margin: 0; line-height: 1.8; color: #1e293b; font-size: 0.95rem;">
+                                <strong>1️⃣ Selezione Attività</strong><br>
+                                Prima di cercare un'azienda, agli utenti viene chiesto di <strong>selezionare il tipo di attività regolamentata</strong> a cui sono interessati
+                            </p>
+                        </div>
+                        <div style="background: #f5f5f5; padding: 1.5rem; border-radius: 8px; margin-bottom: 1rem;">
+                            <p style="margin: 0; line-height: 1.8; color: #1e293b; font-size: 0.95rem;">
+                                <strong>2️⃣ Risultati Specifici</strong><br>
+                                I risultati mostrano se un'azienda è <strong>autorizzata dalla FCA per quella specifica attività</strong>
+                            </p>
+                        </div>
+                        <div style="background: #e8f5e9; padding: 1.5rem; border-radius: 8px;">
+                            <p style="margin: 0; line-height: 1.8; color: #1b5e20; font-size: 0.95rem;">
+                                <strong>✅ Risolve Confusione</strong><br>
+                                Aiuta a identificare aziende <strong>autorizzate per alcuni servizi ma non per altri</strong>, problema storico del vecchio registro
+                            </p>
+                        </div>
+                    </div>
+
+                    <div style="background: #fff3e0; padding: 2rem; border-radius: 12px; border-left: 4px solid #FF6F00; margin-bottom: 2rem;">
+                        <h4 style="color: #E65100; margin-bottom: 1rem; font-size: 1.2rem;">📊 Contesto UK - Statistiche Allarmanti</h4>
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem;">
+                            <div style="background: white; padding: 1.2rem; border-radius: 8px; text-align: center;">
+                                <p style="margin: 0; font-size: 2rem; font-weight: bold; color: #E65100;">+14%</p>
+                                <p style="margin: 0.5rem 0 0 0; font-size: 0.9rem; color: #64748b;">Frodi non autorizzate<br>(anno su anno)</p>
+                            </div>
+                            <div style="background: white; padding: 1.2rem; border-radius: 8px; text-align: center;">
+                                <p style="margin: 0; font-size: 2rem; font-weight: bold; color: #E65100;">40%</p>
+                                <p style="margin: 0.5rem 0 0 0; font-size: 0.9rem; color: #64748b;">Consumatori NON verifica<br>autenticità comunicazioni</p>
+                            </div>
+                            <div style="background: white; padding: 1.2rem; border-radius: 8px; text-align: center;">
+                                <p style="margin: 0; font-size: 1.5rem; font-weight: bold; color: #E65100;">Feb 2026</p>
+                                <p style="margin: 0.5rem 0 0 0; font-size: 0.9rem; color: #64748b;">Strategia Antifrode<br>governo UK</p>
+                            </div>
+                        </div>
+                        <div style="background: #ffebee; padding: 1.2rem; border-radius: 8px; margin-top: 1.5rem;">
+                            <p style="margin: 0; line-height: 1.8; color: #c62828; font-size: 0.95rem;">
+                                <strong>⚠️ Dati UK Finance (estate 2025):</strong> I casi di frode non autorizzata sono aumentati del <strong>14% in un anno</strong>. 
+                                Il governo UK ha annunciato (4 dicembre) la pubblicazione della <strong>Strategia Antifrode</strong> entro inizio febbraio 2026.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div style="background: linear-gradient(135deg, #DC143C 0%, #8B0000 100%); padding: 2rem; border-radius: 12px; margin-bottom: 2rem; color: white;">
+                        <h4 style="color: #FFD700; margin-bottom: 1rem; font-size: 1.3rem;">🚨 Sondaggio FCA Maggio 2025</h4>
+                        <p style="line-height: 1.9; margin: 0; font-size: 1.05rem;">
+                            <strong>Il 40% dei consumatori NON verifica l'autenticità</strong> di e-mail, messaggi o chiamate ricevute prima di fornire i propri dati personali o finanziari.
+                        </p>
+                        <div style="background: rgba(255,255,255,0.1); padding: 1.5rem; border-radius: 8px; margin-top: 1.5rem;">
+                            <p style="margin: 0; font-size: 1.1rem; font-weight: bold; color: #FFD700;">
+                                💡 Raccomandazione FCA: Utilizzare SEMPRE Firm Checker prima di rivolgersi a istituti finanziari
+                            </p>
+                        </div>
+                    </div>
+
+                    <div style="background: #f0f9ff; padding: 1.5rem; border-radius: 8px; margin-bottom: 2rem;">
+                        <h4 style="color: #0066cc; margin-bottom: 1rem; font-size: 1.1rem;">📝 Storia dello Strumento</h4>
+                        <p style="line-height: 1.8; color: #1e293b; margin: 0; font-size: 0.95rem;">
+                            In passato il <strong>Registro dei Servizi Finanziari</strong> è stato criticato perché difficile da usare e fonte di confusione per i consumatori. 
+                            L'autorità di regolamentazione ha ammesso che era <strong>più adatto ai professionisti</strong> che ai consumatori finali. 
+                            Firm Checker risolve questo problema con interfaccia user-friendly e risultati chiari.
+                        </p>
+                    </div>
+
+                    <div style="display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center;">
+                        <a href="https://www.fca.org.uk/consumers/check-firm" target="_blank" rel="noopener noreferrer" class="download-button" style="background: #0056D6; display: inline-block; font-size: 1.1rem; padding: 1rem 2rem;">
+                            🔍 Usa FCA Firm Checker
+                        </a>
+                        <a href="https://www.compliancecorylated.com/news/fca-unveils-firm-checker-in-heightened-focus-on-fraud" target="_blank" rel="noopener noreferrer" class="download-button" style="background: #0077B5; display: inline-block; font-size: 1.1rem; padding: 1rem 2rem;">
+                            📰 Leggi Articolo Completo
+                        </a>
+                        <a href="https://www.fca.org.uk/" target="_blank" rel="noopener noreferrer" class="download-button" style="background: #003DA5; display: inline-block; font-size: 1.1rem; padding: 1rem 2rem;">
+                            🌐 Sito Ufficiale FCA
+                        </a>
+                    </div>
+
+                    <div style="margin-top: 2rem; padding-top: 1.5rem; border-top: 2px solid #e2e8f0;">
+                        <p style="margin: 0; text-align: center; color: #64748b; font-size: 0.9rem;">
+                            ⚡ <strong>Aggiornamento:</strong> Il lancio di Firm Checker fa parte degli sforzi intensificati di FCA per combattere le frodi finanziarie nel Regno Unito
+                        </p>
+                    </div>
+
+                    <!-- Rating System -->
+                    <div class="rating-container" id="rating-fca-firm-checker">
+                        <div class="rating-header">
+                            <div class="rating-title">⭐ Valuta questo contenuto</div>
+                            <div class="rating-stats">
+                                <span class="rating-average">-</span>
+                                <span class="rating-count">0 voti</span>
+                            </div>
+                        </div>
+                        <div class="stars-container">
+                            <span class="star" data-value="1">★</span>
+                            <span class="star" data-value="2">★</span>
+                            <span class="star" data-value="3">★</span>
+                            <span class="star" data-value="4">★</span>
+                            <span class="star" data-value="5">★</span>
+                        </div>
+                        <div class="vote-message" style="display: none;"></div>
+                    </div>
+                </div>
+
+                <!-- OFCOM - Online Safety Act Card -->
+                <div class="media-card" style="background: white; border-radius: 12px; padding: 2.5rem; box-shadow: 0 6px 20px rgba(0,0,0,0.15); border-left: 6px solid #0056D6; grid-column: 1 / -1;">
+                    <div style="display: flex; align-items: center; gap: 1.5rem; margin-bottom: 2rem;">
+                        <span style="font-size: 4rem;">🇬🇧</span>
+                        <div>
+                            <h3 style="color: #0056D6; margin: 0; font-size: 1.7rem;">OFCOM - Office of Communications</h3>
+                            <p style="margin: 0.5rem 0 0 0; color: #64748b; font-size: 1.1rem; font-weight: 500;">Autorità di Regolamentazione Telecomunicazioni UK | Online Safety Act</p>
+                        </div>
+                    </div>
+
+                    <div style="background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%); padding: 2rem; border-radius: 12px; margin-bottom: 2rem;">
+                        <h4 style="color: #0056D6; margin-bottom: 1rem; font-size: 1.3rem;">🛡️ Protezione Consumatori dalle Frodi Online</h4>
+                        <p style="line-height: 1.8; color: #1e293b; margin-bottom: 1rem;">
+                            <strong>OFCOM</strong> ha il potere di far rispettare l'<strong>Online Safety Act</strong>, che obbliga le piattaforme social a valutare i rischi di contenuti fraudolenti, rimuoverli rapidamente e adottare misure preventive per ridurre l'esposizione degli utenti UK.
+                        </p>
+                        <p style="line-height: 1.8; color: #1e293b;">
+                            📌 Le piattaforme più grandi (Facebook, Instagram, TikTok) hanno inviato le loro valutazioni dei rischi a OFCOM, che sta conducendo un'analisi approfondita per verificare la conformità normativa.
+                        </p>
+                    </div>
+
+                    <div style="background: #f8f9fa; padding: 1.8rem; border-radius: 10px; margin-bottom: 2rem;">
+                        <h4 style="color: #0056D6; margin-bottom: 1.5rem; font-size: 1.3rem;">🏦 Caso Studio: Starling Bank - Scam Intelligence Tool</h4>
+                        <p style="line-height: 1.8; color: #1e293b; margin-bottom: 1.5rem;">
+                            La banca britannica <strong>Starling Bank</strong> ha sviluppato uno strumento di rilevamento frodi online chiamato <strong>Scam Intelligence</strong>, alimentato dal modello linguistico <strong>Gemini di Google</strong>.
+                        </p>
+                        
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; margin-bottom: 1.5rem;">
+                            <div style="background: white; padding: 1.5rem; border-radius: 10px; text-align: center; border: 2px solid #0056D6;">
+                                <div style="font-size: 2rem; margin-bottom: 0.5rem;">🔍</div>
+                                <div style="font-size: 1.5rem; font-weight: bold; color: #0056D6; margin-bottom: 0.5rem;">Analisi Immagini</div>
+                                <div style="font-size: 0.95rem; color: #64748b;">Rileva immagini sospette nei marketplace online</div>
+                            </div>
+                            <div style="background: white; padding: 1.5rem; border-radius: 10px; text-align: center; border: 2px solid #0056D6;">
+                                <div style="font-size: 2rem; margin-bottom: 0.5rem;">💬</div>
+                                <div style="font-size: 1.5rem; font-weight: bold; color: #0056D6; margin-bottom: 0.5rem;">Analisi Testi</div>
+                                <div style="font-size: 0.95rem; color: #64748b;">Identifica messaggi di potenziali truffatori</div>
+                            </div>
+                            <div style="background: white; padding: 1.5rem; border-radius: 10px; text-align: center; border: 2px solid #0056D6;">
+                                <div style="font-size: 2rem; margin-bottom: 0.5rem;">⚡</div>
+                                <div style="font-size: 1.5rem; font-weight: bold; color: #0056D6; margin-bottom: 0.5rem;">Guida Personalizzata</div>
+                                <div style="font-size: 0.95rem; color: #64748b;">Avvisi specifici per transazione</div>
+                            </div>
+                        </div>
+
+                        <div style="background: linear-gradient(135deg, #fff3cd 0%, #ffecb5 100%); padding: 1.5rem; border-radius: 10px; margin-bottom: 1rem;">
+                            <p style="margin: 0; color: #1e293b; line-height: 1.7;">
+                                <strong>📌 Esempi di Rilevamento:</strong>
+                            </p>
+                            <ul style="margin: 0.8rem 0 0 1.5rem; color: #1e293b; line-height: 1.8;">
+                                <li>Prezzo troppo conveniente per essere autentico</li>
+                                <li>Immagine nell'annuncio non originale</li>
+                                <li>Dati conto bancario non corrispondenti al venditore</li>
+                                <li>Rifiuto di utilizzare funzioni di pagamento sicuro del marketplace</li>
+                                <li>Tattiche di pressione e urgenza nelle richieste di trasferimento</li>
+                            </ul>
+                        </div>
+
+                        <p style="margin: 0; color: #0056D6; font-weight: 600; font-size: 1.05rem;">
+                            💡 "La conoscenza è potere" - Harriet Rees, CIO Starling Bank
+                        </p>
+                    </div>
+
+                    <div style="background: linear-gradient(135deg, #DC143C 0%, #8B0000 100%); padding: 2rem; border-radius: 12px; margin-bottom: 2rem; color: white;">
+                        <h4 style="color: white; margin-bottom: 1.5rem; font-size: 1.3rem;">🚨 Statistiche Frodi Acquisti UK (Gennaio-Giugno 2025)</h4>
+                        
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1.5rem;">
+                            <div style="background: rgba(255,255,255,0.15); padding: 1.5rem; border-radius: 10px; text-align: center; backdrop-filter: blur(10px);">
+                                <div style="font-size: 2.2rem; font-weight: bold; margin-bottom: 0.5rem;">£53M</div>
+                                <div style="font-size: 0.95rem; opacity: 0.95;">Persi in truffe acquisti</div>
+                            </div>
+                            <div style="background: rgba(255,255,255,0.15); padding: 1.5rem; border-radius: 10px; text-align: center; backdrop-filter: blur(10px);">
+                                <div style="font-size: 2.2rem; font-weight: bold; margin-bottom: 0.5rem;">72%</div>
+                                <div style="font-size: 0.95rem; opacity: 0.95;">Di tutte le frodi APP autorizzate</div>
+                            </div>
+                        </div>
+                        
+                        <p style="margin: 1.5rem 0 0 0; font-size: 0.95rem; opacity: 0.9; text-align: center;">
+                            📊 Fonte: UK Finance (periodo gennaio-giugno 2025)
+                        </p>
+                    </div>
+
+                    <div style="background: #fff3e0; padding: 1.8rem; border-radius: 10px; margin-bottom: 2rem; border-left: 4px solid #ff9800;">
+                        <h4 style="color: #e65100; margin-bottom: 1rem; font-size: 1.2rem;">⚠️ Facebook Marketplace: Fonte Principale Frodi</h4>
+                        <p style="line-height: 1.8; color: #1e293b; margin-bottom: 1rem;">
+                            <strong>Meta</strong> (proprietaria di Facebook) è stata identificata come la principale fonte di frodi sugli acquisti. Gli esperti di reati finanziari definiscono il Marketplace di Facebook "fonte di frustrazione".
+                        </p>
+                        <p style="line-height: 1.8; color: #1e293b; margin-bottom: 1rem;">
+                            💬 <strong>Harriet Rees (Starling Bank):</strong> "Non è giusto che annunci fraudolenti continuino a proliferare su queste piattaforme, facendo perdere alle persone il loro denaro duramente guadagnato e la loro fiducia."
+                        </p>
+                        <p style="line-height: 1.8; color: #1e293b;">
+                            💬 <strong>Ben Donaldson (UK Finance):</strong> "Il governo deve chiamare a rispondere tutte le grandi aziende tecnologiche che consentono che le loro piattaforme vengano sfruttate dai criminali."
+                        </p>
+                    </div>
+
+                    <div style="background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%); padding: 2rem; border-radius: 12px; margin-bottom: 2rem;">
+                        <h4 style="color: #2e7d32; margin-bottom: 1rem; font-size: 1.3rem;">🏛️ Posizione Governo UK</h4>
+                        <p style="line-height: 1.8; color: #1e293b;">
+                            <strong>Lord Hanson</strong>, Ministro per le Frodi del Regno Unito, ha elogiato l'iniziativa Starling: <em>"È fondamentale che ogni organizzazione aiuti le persone a evitare le truffe"</em>.
+                        </p>
+                    </div>
+
+                    <div style="background: #f1f5f9; padding: 1.8rem; border-radius: 10px; margin-bottom: 2rem;">
+                        <h4 style="color: #0056D6; margin-bottom: 1rem; font-size: 1.2rem;">📋 OFCOM: Responsabilità delle Piattaforme</h4>
+                        <p style="line-height: 1.8; color: #1e293b; margin-bottom: 1rem;">
+                            L'autorità ha confermato (3 novembre) di lavorare "alacremente" per implementare le nuove misure che i servizi online dovranno seguire:
+                        </p>
+                        <ul style="margin: 0 0 0 1.5rem; color: #1e293b; line-height: 1.8;">
+                            <li><strong>Obbligo di rimozione</strong> pubblicità fraudolente a pagamento</li>
+                            <li><strong>Valutazione rischi</strong> contenuti fraudolenti non pubblicitari</li>
+                            <li><strong>Misure preventive</strong> per ridurre esposizione utenti UK</li>
+                            <li><strong>Rimozione rapida</strong> quando individuati contenuti sospetti</li>
+                        </ul>
+                    </div>
+
+                    <div style="display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 2rem;">
+                        <a href="https://www.ofcom.org.uk/" target="_blank" rel="noopener noreferrer" style="display: inline-block; background: #0056D6; color: white; padding: 1rem 2rem; text-decoration: none; border-radius: 8px; font-weight: 600; transition: all 0.3s; box-shadow: 0 4px 12px rgba(0,86,214,0.3);" onmouseover="this.style.background='#003DA5'; this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 16px rgba(0,86,214,0.4)';" onmouseout="this.style.background='#0056D6'; this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 12px rgba(0,86,214,0.3)';">
+                            🌐 Homepage OFCOM
+                        </a>
+                        <a href="https://www.ofcom.org.uk/make-a-complaint" target="_blank" rel="noopener noreferrer" style="display: inline-block; background: #DC143C; color: white; padding: 1rem 2rem; text-decoration: none; border-radius: 8px; font-weight: 600; transition: all 0.3s; box-shadow: 0 4px 12px rgba(220,20,60,0.3);" onmouseover="this.style.background='#8B0000'; this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 16px rgba(220,20,60,0.4)';" onmouseout="this.style.background='#DC143C'; this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 12px rgba(220,20,60,0.3)';">
+                            📢 Segnala Comportamenti Illegittimi
+                        </a>
+                        <a href="https://www.ofcom.org.uk/phones-and-broadband/scam-calls-and-messages/7726-reporting-scam-texts-and-calls" target="_blank" rel="noopener noreferrer" style="display: inline-block; background: #28A745; color: white; padding: 1rem 2rem; text-decoration: none; border-radius: 8px; font-weight: 600; transition: all 0.3s; box-shadow: 0 4px 12px rgba(40,167,69,0.3);" onmouseover="this.style.background='#1e7e34'; this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 16px rgba(40,167,69,0.4)';" onmouseout="this.style.background='#28A745'; this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 12px rgba(40,167,69,0.3)';">
+                            📞 Segnala Truffe Telefoniche (7726)
+                        </a>
+                    </div>
+
+                    <!-- Rating System -->
+                    <div class="rating-container" id="rating-ofcom">
+                        <div class="rating-header">
+                            <div class="rating-title">⭐ Valuta questo contenuto</div>
+                            <div class="rating-stats">
+                                <span class="rating-average">-</span>
+                                <span class="rating-count">0 voti</span>
+                            </div>
+                        </div>
+                        <div class="stars-container">
+                            <span class="star" data-value="1">★</span>
+                            <span class="star" data-value="2">★</span>
+                            <span class="star" data-value="3">★</span>
+                            <span class="star" data-value="4">★</span>
+                            <span class="star" data-value="5">★</span>
+                        </div>
+                        <div class="vote-message" style="display: none;"></div>
+                    </div>
+                </div>
+
+                <!-- Compliance Corylated - Media Specializzati Card -->
+                <div class="media-card" style="background: white; border-radius: 12px; padding: 2.5rem; box-shadow: 0 6px 20px rgba(0,0,0,0.15); border-left: 6px solid #0077B5; grid-column: 1 / -1;">
+                    <div style="display: flex; align-items: center; gap: 1.5rem; margin-bottom: 2rem;">
+                        <span style="font-size: 4rem;">📰</span>
+                        <div>
+                            <h3 style="color: #0077B5; margin: 0; font-size: 1.7rem;">Compliance Corylated</h3>
+                            <p style="margin: 0.5rem 0 0 0; color: #64748b; font-size: 1.1rem; font-weight: 500;">Giornalismo Specializzato in Compliance, Financial Crime e Anti-Frode</p>
+                        </div>
+                    </div>
+
+                    <div style="background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%); padding: 2rem; border-radius: 12px; margin-bottom: 2rem;">
+                        <h4 style="color: #0077B5; margin-bottom: 1rem; font-size: 1.3rem;">📊 Piattaforma Informativa Anti-Frode</h4>
+                        <p style="line-height: 1.8; color: #1e293b; margin-bottom: 1rem;">
+                            <strong>Compliance Corylated</strong> pubblica articoli approfonditi su strategie di contrasto alle frodi finanziarie, collaborazioni tra autorità e settore privato, e sviluppi normativi in materia di <strong>Financial Crime</strong>.
+                        </p>
+                        <p style="line-height: 1.8; color: #1e293b;">
+                            📌 Copertura specialistica: UK Finance, FCA, OFCOM, National Crime Agency (NCA), Stop Scams UK, collaborazioni internazionali.
+                        </p>
+                    </div>
+
+                    <div style="background: #fff3e0; padding: 1.8rem; border-radius: 10px; margin-bottom: 2rem; border-left: 4px solid #ff9800;">
+                        <h4 style="color: #e65100; margin-bottom: 1rem; font-size: 1.3rem;">⚠️ Consapevolezza Post-Vittimizzazione</h4>
+                        <p style="line-height: 1.8; color: #1e293b; margin-bottom: 1rem;">
+                            💬 <strong>Dianne Doodnath</strong> (UK Finance, Responsabile Canali Pagamento a Distanza):
+                        </p>
+                        <p style="line-height: 1.8; color: #1e293b; font-style: italic; margin-bottom: 0; padding-left: 1.5rem; border-left: 3px solid #ff9800;">
+                            "Spesso i consumatori prestano attenzione alla consapevolezza delle frodi solo dopo esserne diventati vittime."
+                        </p>
+                    </div>
+
+                    <div style="background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%); padding: 2rem; border-radius: 12px; margin-bottom: 2rem;">
+                        <h4 style="color: #2e7d32; margin-bottom: 1.5rem; font-size: 1.3rem;">🛡️ Operazione NCA: Schede SIM Dirottate</h4>
+                        <p style="line-height: 1.8; color: #1e293b; margin-bottom: 1.5rem;">
+                            La <strong>National Crime Agency (NCA)</strong> ha collaborato con operatori di telecomunicazioni, Meta e <strong>Stop Scams UK</strong> per bloccare migliaia di schede SIM britanniche dirottate dalle catene di approvvigionamento UK verso il <strong>sud-est asiatico</strong>.
+                        </p>
+                        
+                        <div style="background: white; padding: 1.5rem; border-radius: 10px; margin-bottom: 1.5rem;">
+                            <p style="margin: 0 0 1rem 0; color: #1e293b; line-height: 1.8;">
+                                <strong>🎯 Scopo delle SIM dirottate:</strong>
+                            </p>
+                            <ul style="margin: 0 0 0 1.5rem; color: #1e293b; line-height: 1.8;">
+                                <li>Far sembrare i truffatori <strong>basati nel Regno Unito</strong></li>
+                                <li>Proteggere account social media dei criminali</li>
+                                <li>Eludere sistemi di rilevamento geografico</li>
+                            </ul>
+                        </div>
+
+                        <p style="margin: 0; color: #2e7d32; font-weight: 600; font-size: 1.05rem;">
+                            💬 <strong>James Babbage</strong>, Direttore Generale Minacce NCA
+                        </p>
+                    </div>
+
+                    <div style="background: #f1f5f9; padding: 1.8rem; border-radius: 10px; margin-bottom: 2rem;">
+                        <h4 style="color: #0077B5; margin-bottom: 1rem; font-size: 1.2rem;">🤝 Collaborazione Multi-Settoriale</h4>
+                        <p style="line-height: 1.8; color: #1e293b; margin-bottom: 1rem;">
+                            L'operazione dimostra l'efficacia della <strong>condivisione dati</strong> tra:
+                        </p>
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
+                            <div style="background: white; padding: 1rem; border-radius: 8px; text-align: center; border: 2px solid #0077B5;">
+                                <div style="font-size: 1.5rem; margin-bottom: 0.5rem;">🏛️</div>
+                                <div style="font-weight: bold; color: #0077B5;">National Crime Agency</div>
+                            </div>
+                            <div style="background: white; padding: 1rem; border-radius: 8px; text-align: center; border: 2px solid #0077B5;">
+                                <div style="font-size: 1.5rem; margin-bottom: 0.5rem;">📡</div>
+                                <div style="font-weight: bold; color: #0077B5;">Operatori Telecomunicazioni</div>
+                            </div>
+                            <div style="background: white; padding: 1rem; border-radius: 8px; text-align: center; border: 2px solid #0077B5;">
+                                <div style="font-size: 1.5rem; margin-bottom: 0.5rem;">💻</div>
+                                <div style="font-weight: bold; color: #0077B5;">Aziende Tech (Meta)</div>
+                            </div>
+                            <div style="background: white; padding: 1rem; border-radius: 8px; text-align: center; border: 2px solid #0077B5;">
+                                <div style="font-size: 1.5rem; margin-bottom: 0.5rem;">🛑</div>
+                                <div style="font-weight: bold; color: #0077B5;">Stop Scams UK</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div style="display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 2rem;">
+                        <a href="https://www.compliancecorylated.com/" target="_blank" rel="noopener noreferrer" style="display: inline-block; background: #0077B5; color: white; padding: 1rem 2rem; text-decoration: none; border-radius: 8px; font-weight: 600; transition: all 0.3s; box-shadow: 0 4px 12px rgba(0,119,181,0.3);" onmouseover="this.style.background='#005885'; this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 16px rgba(0,119,181,0.4)';" onmouseout="this.style.background='#0077B5'; this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 12px rgba(0,119,181,0.3)';">
+                            🌐 Homepage Compliance Corylated
+                        </a>
+                        <a href="https://www.compliancecorylated.com/topics/financial-crime/" target="_blank" rel="noopener noreferrer" style="display: inline-block; background: #DC143C; color: white; padding: 1rem 2rem; text-decoration: none; border-radius: 8px; font-weight: 600; transition: all 0.3s; box-shadow: 0 4px 12px rgba(220,20,60,0.3);" onmouseover="this.style.background='#8B0000'; this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 16px rgba(220,20,60,0.4)';" onmouseout="this.style.background='#DC143C'; this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 12px rgba(220,20,60,0.3)';">
+                            🚨 Sezione Financial Crime
+                        </a>
+                        <a href="https://www.compliancecorylated.com/news/telecom-and-tech-data-sharing-makes-real-impact%ca%bc-on-fraud/" target="_blank" rel="noopener noreferrer" style="display: inline-block; background: #28A745; color: white; padding: 1rem 2rem; text-decoration: none; border-radius: 8px; font-weight: 600; transition: all 0.3s; box-shadow: 0 4px 12px rgba(40,167,69,0.3);" onmouseover="this.style.background='#1e7e34'; this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 16px rgba(40,167,69,0.4)';" onmouseout="this.style.background='#28A745'; this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 12px rgba(40,167,69,0.3)';">
+                            📡 Articolo Condivisione Dati NCA
+                        </a>
+                    </div>
+
+                    <!-- Rating System -->
+                    <div class="rating-container" id="rating-compliance-corylated">
+                        <div class="rating-header">
+                            <div class="rating-title">⭐ Valuta questo contenuto</div>
+                            <div class="rating-stats">
+                                <span class="rating-average">-</span>
+                                <span class="rating-count">0 voti</span>
+                            </div>
+                        </div>
+                        <div class="stars-container">
+                            <span class="star" data-value="1">★</span>
+                            <span class="star" data-value="2">★</span>
+                            <span class="star" data-value="3">★</span>
+                            <span class="star" data-value="4">★</span>
+                            <span class="star" data-value="5">★</span>
+                        </div>
+                        <div class="vote-message" style="display: none;"></div>
+                    </div>
+                </div>
+
+                <!-- DSA Notice and Action Mechanism - European Commission Card -->
+                <div class="media-card" style="background: white; border-radius: 12px; padding: 2.5rem; box-shadow: 0 6px 20px rgba(0,0,0,0.15); border-left: 6px solid #003399; grid-column: 1 / -1;">
+                    <div style="display: flex; align-items: center; gap: 1.5rem; margin-bottom: 2rem;">
+                        <span style="font-size: 4rem;">🇪🇺</span>
+                        <div>
+                            <h3 style="color: #003399; margin: 0; font-size: 1.7rem;">DSA - Digital Services Act | Commissione Europea</h3>
+                            <p style="margin: 0.5rem 0 0 0; color: #64748b; font-size: 1.1rem; font-weight: 500;">Meccanismo di Notifica e Azione contro Contenuti Illegali</p>
+                        </div>
+                    </div>
+
+                    <div style="background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%); padding: 2rem; border-radius: 12px; margin-bottom: 2rem;">
+                        <h4 style="color: #003399; margin-bottom: 1rem; font-size: 1.3rem;">🛡️ Combattere le Truffe Online con DSA</h4>
+                        <p style="line-height: 1.8; color: #1e293b; margin-bottom: 1rem;">
+                            Il <strong>meccanismo di notifica e azione</strong> previsto dal Digital Services Act è uno strumento fornito dalle piattaforme per segnalare <strong>contenuti illegali</strong>, tra cui:
+                        </p>
+                        <ul style="margin: 0 0 0 1.5rem; color: #1e293b; line-height: 1.8;">
+                            <li>Truffe legate agli <strong>acquisti online</strong></li>
+                            <li><strong>Frodi finanziarie</strong></li>
+                            <li>Contenuti fraudolenti e phishing</li>
+                            <li>Pubblicità ingannevoli</li>
+                        </ul>
+                    </div>
+
+                    <div style="background: #f8f9fa; padding: 1.8rem; border-radius: 10px; margin-bottom: 2rem;">
+                        <h4 style="color: #003399; margin-bottom: 1.5rem; font-size: 1.3rem;">⚙️ Come Funziona il Meccanismo Notice-and-Action</h4>
+                        
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-bottom: 1.5rem;">
+                            <div style="background: white; padding: 1.5rem; border-radius: 10px; border-left: 4px solid #003399;">
+                                <div style="font-size: 2rem; margin-bottom: 0.8rem;">📝</div>
+                                <div style="font-weight: bold; color: #003399; margin-bottom: 0.5rem; font-size: 1.1rem;">1. Segnalazione</div>
+                                <div style="font-size: 0.95rem; color: #64748b; line-height: 1.6;">Gli utenti notificano contenuti illegali alle piattaforme tramite interfacce dedicate</div>
+                            </div>
+                            <div style="background: white; padding: 1.5rem; border-radius: 10px; border-left: 4px solid #0077B5;">
+                                <div style="font-size: 2rem; margin-bottom: 0.8rem;">🔍</div>
+                                <div style="font-weight: bold; color: #0077B5; margin-bottom: 0.5rem; font-size: 1.1rem;">2. Valutazione</div>
+                                <div style="font-size: 0.95rem; color: #64748b; line-height: 1.6;">Le piattaforme esaminano le segnalazioni e decidono se rimuovere il contenuto</div>
+                            </div>
+                            <div style="background: white; padding: 1.5rem; border-radius: 10px; border-left: 4px solid #28A745;">
+                                <div style="font-size: 2rem; margin-bottom: 0.8rem;">⚡</div>
+                                <div style="font-weight: bold; color: #28A745; margin-bottom: 0.5rem; font-size: 1.1rem;">3. Azione</div>
+                                <div style="font-size: 0.95rem; color: #64748b; line-height: 1.6;">Rimozione contenuto illegale e comunicazione all'utente segnalante</div>
+                            </div>
+                        </div>
+
+                        <div style="background: linear-gradient(135deg, #fff3cd 0%, #ffecb5 100%); padding: 1.5rem; border-radius: 10px;">
+                            <p style="margin: 0; color: #1e293b; line-height: 1.7;">
+                                <strong>📌 Piattaforme obbligate:</strong> Facebook, Instagram, TikTok, Amazon, eBay, Google, Twitter/X e tutte le piattaforme online con più di 45 milioni di utenti attivi mensili nell'UE
+                            </p>
+                        </div>
+                    </div>
+
+                    <div style="background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%); padding: 2rem; border-radius: 12px; margin-bottom: 2rem;">
+                        <h4 style="color: #2e7d32; margin-bottom: 1rem; font-size: 1.3rem;">🎯 Obiettivi del DSA</h4>
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
+                            <div style="background: white; padding: 1rem; border-radius: 8px; text-align: center; border: 2px solid #2e7d32;">
+                                <div style="font-size: 1.5rem; margin-bottom: 0.5rem;">🛡️</div>
+                                <div style="font-weight: bold; color: #2e7d32; font-size: 0.95rem;">Protezione Consumatori</div>
+                            </div>
+                            <div style="background: white; padding: 1rem; border-radius: 8px; text-align: center; border: 2px solid #2e7d32;">
+                                <div style="font-size: 1.5rem; margin-bottom: 0.5rem;">⚖️</div>
+                                <div style="font-weight: bold; color: #2e7d32; font-size: 0.95rem;">Responsabilità Piattaforme</div>
+                            </div>
+                            <div style="background: white; padding: 1rem; border-radius: 8px; text-align: center; border: 2px solid #2e7d32;">
+                                <div style="font-size: 1.5rem; margin-bottom: 0.5rem;">🔒</div>
+                                <div style="font-weight: bold; color: #2e7d32; font-size: 0.95rem;">Trasparenza Moderazione</div>
+                            </div>
+                            <div style="background: white; padding: 1rem; border-radius: 8px; text-align: center; border: 2px solid #2e7d32;">
+                                <div style="font-size: 1.5rem; margin-bottom: 0.5rem;">💪</div>
+                                <div style="font-weight: bold; color: #2e7d32; font-size: 0.95rem;">Empowerment Utenti</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div style="background: #fff3e0; padding: 1.8rem; border-radius: 10px; margin-bottom: 2rem; border-left: 4px solid #ff9800;">
+                        <h4 style="color: #e65100; margin-bottom: 1rem; font-size: 1.2rem;">📅 Timeline Applicazione DSA</h4>
+                        <ul style="margin: 0 0 0 1.5rem; color: #1e293b; line-height: 1.8;">
+                            <li><strong>25 agosto 2023</strong>: DSA in vigore per piattaforme molto grandi (>45M utenti)</li>
+                            <li><strong>17 febbraio 2024</strong>: DSA applicabile a tutte le piattaforme digitali nell'UE</li>
+                            <li><strong>Sanzioni</strong>: Fino al 6% del fatturato globale annuo per violazioni</li>
+                        </ul>
+                    </div>
+
+                    <div style="background: #f1f5f9; padding: 1.8rem; border-radius: 10px; margin-bottom: 2rem;">
+                        <h4 style="color: #003399; margin-bottom: 1rem; font-size: 1.2rem;">🔗 Complementarietà con Altri Strumenti</h4>
+                        <p style="line-height: 1.8; color: #1e293b; margin-bottom: 1rem;">
+                            Il DSA Notice-and-Action si integra con:
+                        </p>
+                        <ul style="margin: 0 0 0 1.5rem; color: #1e293b; line-height: 1.8;">
+                            <li><strong>OFCOM Online Safety Act</strong> (UK): Protezione utenti britannici</li>
+                            <li><strong>FCA Firm Checker</strong>: Verifica autorizzazioni finanziarie</li>
+                            <li><strong>AMLA</strong>: Contrasto riciclaggio e finanziamento terrorismo</li>
+                            <li><strong>Scamshield Singapore</strong>: App segnalazione truffe</li>
+                        </ul>
+                    </div>
+
+                    <div style="display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 2rem;">
+                        <a href="https://digital-strategy.ec.europa.eu/en/policies/dsa-notice-and-action-mechanism?pk_source=social_media&pk_medium=social_media_organic&pk_campaign=dsa_online_safety&pk_content=dsa_online_safety_general" target="_blank" rel="noopener noreferrer" style="display: inline-block; background: #003399; color: white; padding: 1rem 2rem; text-decoration: none; border-radius: 8px; font-weight: 600; transition: all 0.3s; box-shadow: 0 4px 12px rgba(0,51,153,0.3);" onmouseover="this.style.background='#001f5c'; this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 16px rgba(0,51,153,0.4)';" onmouseout="this.style.background='#003399'; this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 12px rgba(0,51,153,0.3)';">
+                            🇪🇺 DSA Notice & Action Mechanism
+                        </a>
+                        <a href="https://digital-strategy.ec.europa.eu/en/policies/digital-services-act-package" target="_blank" rel="noopener noreferrer" style="display: inline-block; background: #0077B5; color: white; padding: 1rem 2rem; text-decoration: none; border-radius: 8px; font-weight: 600; transition: all 0.3s; box-shadow: 0 4px 12px rgba(0,119,181,0.3);" onmouseover="this.style.background='#005885'; this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 16px rgba(0,119,181,0.4)';" onmouseout="this.style.background='#0077B5'; this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 12px rgba(0,119,181,0.3)';">
+                            📜 DSA Package Completo
+                        </a>
+                    </div>
+
+                    <!-- Rating System -->
+                    <div class="rating-container" id="rating-dsa-eu">
+                        <div class="rating-header">
+                            <div class="rating-title">⭐ Valuta questo contenuto</div>
+                            <div class="rating-stats">
+                                <span class="rating-average">-</span>
+                                <span class="rating-count">0 voti</span>
+                            </div>
+                        </div>
+                        <div class="stars-container">
+                            <span class="star" data-value="1">★</span>
+                            <span class="star" data-value="2">★</span>
+                            <span class="star" data-value="3">★</span>
+                            <span class="star" data-value="4">★</span>
+                            <span class="star" data-value="5">★</span>
+                        </div>
+                        <div class="vote-message" style="display: none;"></div>
+                    </div>
+                </div>
+
+                <!-- AGCM Autorità Antitrust Italia Card -->
+                <div class="media-card" style="background: white; border-radius: 12px; padding: 2.5rem; box-shadow: 0 6px 20px rgba(0,0,0,0.15); border-left: 6px solid #009246; grid-column: 1 / -1;">
+                    <div style="display: flex; align-items: center; gap: 1.5rem; margin-bottom: 2rem;">
+                        <span style="font-size: 4rem;">🇮🇹</span>
+                        <div>
+                            <h3 style="color: #009246; margin: 0; font-size: 1.7rem;">AGCM - Autorità Garante della Concorrenza e del Mercato</h3>
+                            <p style="margin: 0.5rem 0 0 0; color: #64748b; font-size: 1.1rem; font-weight: 500;">Antitrust Italia | Tutela Consumatori e Contrasto Pratiche Commerciali Scorrette</p>
+                        </div>
+                    </div>
+
+                    <div style="background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%); padding: 2rem; border-radius: 12px; margin-bottom: 2rem;">
+                        <h4 style="color: #009246; margin-bottom: 1rem; font-size: 1.3rem;">🛡️ Protezione Consumatori</h4>
+                        <p style="line-height: 1.8; color: #1e293b; margin-bottom: 1rem;">
+                            L'<strong>AGCM</strong> tutela i consumatori da <strong>pratiche commerciali scorrette</strong>, pubblicità ingannevole e condotte anticoncorrenziali che possono favorire truffe e raggiri nel mercato italiano.
+                        </p>
+                        <p style="line-height: 1.8; color: #1e293b;">
+                            📌 Competenze: sanzioni contro aziende che ingannano i consumatori, verifica clausole vessatorie, contrasto cartelli e abusi di posizione dominante.
+                        </p>
+                    </div>
+
+                    <div style="background: #fff3e0; padding: 1.8rem; border-radius: 10px; margin-bottom: 2rem; border-left: 4px solid #ff9800;">
+                        <h4 style="color: #e65100; margin-bottom: 1rem; font-size: 1.3rem;">⚖️ Poteri Sanzionatori</h4>
+                        <p style="line-height: 1.8; color: #1e293b; margin-bottom: 1rem;">
+                            L'Autorità può irrogare <strong>sanzioni fino a 10 milioni di euro</strong> (o fino al 10% del fatturato) per violazioni del Codice del Consumo e pratiche commerciali sleali.
+                        </p>
+                        <div style="background: white; padding: 1.5rem; border-radius: 8px; margin-top: 1rem;">
+                            <p style="margin: 0; color: #1e293b; line-height: 1.8;">
+                                <strong>Aree di intervento rilevanti anti-frode:</strong>
+                            </p>
+                            <ul style="margin: 0.8rem 0 0 1.5rem; color: #1e293b; line-height: 1.8;">
+                                <li>Pubblicità ingannevole servizi finanziari</li>
+                                <li>Pratiche aggressive vendita porta-a-porta</li>
+                                <li>False promesse investimenti</li>
+                                <li>Clausole vessatorie contratti bancari</li>
+                                <li>E-commerce fraudolento</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div style="background: #f1f5f9; padding: 1.8rem; border-radius: 10px; margin-bottom: 2rem;">
+                        <h4 style="color: #009246; margin-bottom: 1rem; font-size: 1.2rem;">📢 Segnalazioni e Reclami</h4>
+                        <p style="line-height: 1.8; color: #1e293b; margin-bottom: 1rem;">
+                            I consumatori possono segnalare all'AGCM:
+                        </p>
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
+                            <div style="background: white; padding: 1rem; border-radius: 8px; text-align: center; border: 2px solid #009246;">
+                                <div style="font-size: 1.5rem; margin-bottom: 0.5rem;">🚫</div>
+                                <div style="font-weight: bold; color: #009246; font-size: 0.95rem;">Pratiche Commerciali Scorrette</div>
+                            </div>
+                            <div style="background: white; padding: 1rem; border-radius: 8px; text-align: center; border: 2px solid #009246;">
+                                <div style="font-size: 1.5rem; margin-bottom: 0.5rem;">📺</div>
+                                <div style="font-weight: bold; color: #009246; font-size: 0.95rem;">Pubblicità Ingannevole</div>
+                            </div>
+                            <div style="background: white; padding: 1rem; border-radius: 8px; text-align: center; border: 2px solid #009246;">
+                                <div style="font-size: 1.5rem; margin-bottom: 0.5rem;">📄</div>
+                                <div style="font-weight: bold; color: #009246; font-size: 0.95rem;">Clausole Vessatorie</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div style="background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%); padding: 2rem; border-radius: 12px; margin-bottom: 2rem;">
+                        <h4 style="color: #0056D6; margin-bottom: 1rem; font-size: 1.3rem;">🤝 Collaborazioni Antifrode</h4>
+                        <p style="line-height: 1.8; color: #1e293b; margin-bottom: 1rem;">
+                            L'AGCM collabora con:
+                        </p>
+                        <ul style="margin: 0 0 0 1.5rem; color: #1e293b; line-height: 1.8;">
+                            <li><strong>CONSOB</strong>: truffe finanziarie e abusivismo</li>
+                            <li><strong>Banca d'Italia</strong>: pratiche bancarie scorrette</li>
+                            <li><strong>Guardia di Finanza</strong>: indagini penali</li>
+                            <li><strong>Commissione Europea</strong>: enforcement transfrontaliero DSA/UCPD</li>
+                            <li><strong>Network CPC</strong> (Consumer Protection Cooperation): 31 paesi UE/SEE</li>
+                        </ul>
+                    </div>
+
+                    <div style="display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 2rem;">
+                        <a href="https://www.agcm.it/" target="_blank" rel="noopener noreferrer" style="display: inline-block; background: #009246; color: white; padding: 1rem 2rem; text-decoration: none; border-radius: 8px; font-weight: 600; transition: all 0.3s; box-shadow: 0 4px 12px rgba(0,146,70,0.3);" onmouseover="this.style.background='#006633'; this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 16px rgba(0,146,70,0.4)';" onmouseout="this.style.background='#009246'; this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 12px rgba(0,146,70,0.3)';">
+                            🌐 Homepage AGCM
+                        </a>
+                        <a href="https://www.facebook.com/agcm.it" target="_blank" rel="noopener noreferrer" style="display: inline-block; background: #0077B5; color: white; padding: 1rem 2rem; text-decoration: none; border-radius: 8px; font-weight: 600; transition: all 0.3s; box-shadow: 0 4px 12px rgba(0,119,181,0.3);" onmouseover="this.style.background='#005885'; this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 16px rgba(0,119,181,0.4)';" onmouseout="this.style.background='#0077B5'; this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 12px rgba(0,119,181,0.3)';">
+                            📘 Facebook AGCM
+                        </a>
+                        <a href="https://www.agcm.it/competenze/tutela-del-consumatore/segnalazioni" target="_blank" rel="noopener noreferrer" style="display: inline-block; background: #DC143C; color: white; padding: 1rem 2rem; text-decoration: none; border-radius: 8px; font-weight: 600; transition: all 0.3s; box-shadow: 0 4px 12px rgba(220,20,60,0.3);" onmouseover="this.style.background='#8B0000'; this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 16px rgba(220,20,60,0.4)';" onmouseout="this.style.background='#DC143C'; this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 12px rgba(220,20,60,0.3)';">
+                            📢 Segnala Pratiche Scorrette
+                        </a>
+                    </div>
+
+                    <!-- Rating System -->
+                    <div class="rating-container" id="rating-agcm-italia">
+                        <div class="rating-header">
+                            <div class="rating-title">⭐ Valuta questo contenuto</div>
+                            <div class="rating-stats">
+                                <span class="rating-average">-</span>
+                                <span class="rating-count">0 voti</span>
+                            </div>
+                        </div>
+                        <div class="stars-container">
+                            <span class="star" data-value="1">★</span>
+                            <span class="star" data-value="2">★</span>
+                            <span class="star" data-value="3">★</span>
+                            <span class="star" data-value="4">★</span>
+                            <span class="star" data-value="5">★</span>
+                        </div>
+                        <div class="vote-message" style="display: none;"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Prevenzione Truffe e Supporto Vittime -->
+        <section style="margin-top: 5rem;">
+            <h2 class="section-title">🛡️ Prevenzione Truffe e Supporto alle Vittime</h2>
+            <p class="section-subtitle">Organizzazioni internazionali specializzate in protezione consumatori anziani, autovalutazione vulnerabilità finanziaria, supporto psicologico vittime</p>
+            
+            <div class="media-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 2rem; margin-top: 3rem;">
+                <!-- Older Adult Nest Egg Card -->
+                <div class="media-card" style="background: white; border-radius: 12px; padding: 2.5rem; box-shadow: 0 6px 20px rgba(0,0,0,0.15); border-left: 6px solid #8B4789; grid-column: 1 / -1;">
+                    <div style="display: flex; align-items: center; gap: 1.5rem; margin-bottom: 2rem;">
+                        <span style="font-size: 4rem;">👴👵</span>
+                        <div>
+                            <h3 style="color: #8B4789; margin: 0; font-size: 1.6rem;">Older Adult Nest Egg (OANE)</h3>
+                            <p style="margin: 0.3rem 0 0 0; color: #64748b; font-size: 1rem;">Wayne State University - Institute of Gerontology | Copyright 2026</p>
+                        </div>
+                    </div>
+
+                    <div style="background: linear-gradient(135deg, #f5f0f5 0%, #e8dde8 100%); padding: 2rem; border-radius: 12px; margin-bottom: 2rem;">
+                        <h4 style="color: #8B4789; margin-bottom: 1rem; font-size: 1.3rem;">📊 Financial Vulnerability Survey - Autovalutazione Rischio</h4>
+                        <p style="line-height: 1.8; color: #1e293b; margin-bottom: 1rem;">
+                            <strong>17 domande scientifiche</strong> per determinare il rischio di frode, truffa e sfruttamento finanziario negli anziani. 
+                            La ricerca ha identificato con successo vittime e non-vittime di sfruttamento finanziario basandosi sulle risposte al questionario.
+                        </p>
+                        <div style="background: white; padding: 1.5rem; border-radius: 8px; border-left: 4px solid #8B4789;">
+                            <p style="margin: 0; font-size: 0.95rem; color: #1e293b; line-height: 1.8;">
+                                ✅ <strong>Risultati completamente riservati</strong> - calcolo automatico<br>
+                                ✅ <strong>Report scaricabile/stampabile</strong> - non accessibile dopo<br>
+                                ✅ <strong>"Next Steps" personalizzati</strong> - suggerimenti protezione<br>
+                                ✅ <strong>Anonimato garantito</strong> - nessuna informazione identificativa raccolta
+                            </p>
+                        </div>
+                    </div>
+
+                    <div style="margin-bottom: 2rem;">
+                        <h4 style="color: #8B4789; margin-bottom: 1rem; font-size: 1.2rem;">👨‍⚕️ Dr. Peter Lichtenberg, PhD, ABPP</h4>
+                        <p style="line-height: 1.8; color: #1e293b;">
+                            <strong>Esperto nazionale USA</strong> in decisioni finanziarie e sfruttamento finanziario negli anziani. 
+                            Autore e ricercatore pluripremiato, impegnato a promuovere l'indipendenza e proteggere i più vulnerabili.
+                        </p>
+                    </div>
+
+                    <div style="background: #fff9e6; padding: 1.5rem; border-radius: 8px; border-left: 4px solid #FFA500; margin-bottom: 2rem;">
+                        <h4 style="color: #FFA500; margin-bottom: 1rem; font-size: 1.2rem;">🔧 Strumenti Disponibili</h4>
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem;">
+                            <div>
+                                <p style="margin: 0; color: #1e293b;"><strong>👴 Per Anziani:</strong></p>
+                                <ul style="margin: 0.5rem 0 0 1.2rem; line-height: 1.8; color: #64748b; font-size: 0.9rem;">
+                                    <li>Financial Vulnerability Survey</li>
+                                    <li>SAFE Financial Counseling</li>
+                                    <li>Brain Health & Aging Resources</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <p style="margin: 0; color: #1e293b;"><strong>👨‍💼 Per Professionisti:</strong></p>
+                                <ul style="margin: 0.5rem 0 0 1.2rem; line-height: 1.8; color: #64748b; font-size: 0.9rem;">
+                                    <li>Decision Tracker Tool</li>
+                                    <li>Financial Vulnerability Assessment</li>
+                                    <li>Certificazione Online</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <p style="margin: 0; color: #1e293b;"><strong>👨‍👩‍👧 Per Famiglia/Amici:</strong></p>
+                                <ul style="margin: 0.5rem 0 0 1.2rem; line-height: 1.8; color: #64748b; font-size: 0.9rem;">
+                                    <li>Interview Training</li>
+                                    <li>Learning Resources</li>
+                                    <li>FAQ & Support</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div style="background: linear-gradient(135deg, #DC143C 0%, #8B0000 100%); padding: 2rem; border-radius: 12px; margin-bottom: 2rem; color: white;">
+                        <h4 style="color: #FFD700; margin-bottom: 1rem; font-size: 1.3rem;">⚠️ RACCOMANDAZIONE CRUCIALE</h4>
+                        <p style="line-height: 1.9; margin: 0; font-size: 1.05rem;">
+                            <strong>La compilazione del Financial Vulnerability Survey dovrebbe essere imposta a tutti i clienti correntisti delle banche</strong> 
+                            per garantire che la libertà di gestione delle proprie risorse non si trasformi in una trappola finanziaria gestita da truffatori aggressivi.
+                        </p>
+                    </div>
+
+                    <div style="background: #f0f9ff; padding: 1.5rem; border-radius: 8px; margin-bottom: 2rem;">
+                        <h4 style="color: #0066cc; margin-bottom: 1rem; font-size: 1.1rem;">💼 Servizio SAFE - Supporto Consulenza Finanziaria</h4>
+                        <p style="line-height: 1.8; color: #1e293b; margin: 0; font-size: 0.95rem;">
+                            <strong>SAFE educa, guida, protegge e supporta</strong> gli anziani e i caregiver che necessitano di aiuto nella gestione delle proprie finanze. 
+                            SAFE può <strong>aiutare a prevenire frodi e furti di identità</strong>, oltre ad assistere nel <strong>recupero dell'identità e dei fondi</strong> se ne siete stati vittime.
+                        </p>
+                    </div>
+
+                    <div style="background: #fff5f0; padding: 1.5rem; border-radius: 8px; margin-bottom: 2rem;">
+                        <h4 style="color: #FF6B35; margin-bottom: 1rem; font-size: 1.1rem;">ℹ️ Disclaimer Importante</h4>
+                        <p style="line-height: 1.7; color: #64748b; margin: 0; font-size: 0.88rem;">
+                            Le valutazioni forniscono informazioni solo sulle prestazioni decisionali finanziarie e <strong>NON forniscono diagnosi o raccomandazioni terapeutiche</strong>. 
+                            Devono essere condotte da intervistatori qualificati. I report non sostituiscono il consulto con medico o professionista della salute mentale. 
+                            Le informazioni non sono state valutate da enti regolatori esterni.
+                        </p>
+                    </div>
+
+                    <div style="display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center;">
+                        <a href="Financial_Vulnerability_17_Questions_OANE.pdf" target="_blank" class="download-button" style="background: #6B238E; display: inline-block; font-size: 1.1rem; padding: 1rem 2rem;">
+                            📄 Download 17 Domande PDF
+                        </a>
+                        <a href="https://www.olderadultnestegg.com/for-older-adults/financial-vulnerability-survey/" target="_blank" rel="noopener noreferrer" class="download-button" style="background: #8B4789; display: inline-block; font-size: 1.1rem; padding: 1rem 2rem;">
+                            📝 Inizia Survey Online
+                        </a>
+                        <a href="https://www.olderadultnestegg.com/" target="_blank" rel="noopener noreferrer" class="download-button" style="background: #6A3669; display: inline-block; font-size: 1.1rem; padding: 1rem 2rem;">
+                            🌐 Sito Ufficiale OANE
+                        </a>
+                    </div>
+
+                    <div style="margin-top: 2rem; padding-top: 1.5rem; border-top: 2px solid #e2e8f0;">
+                        <p style="margin: 0; text-align: center; color: #64748b; font-size: 0.9rem;">
+                            📧 <strong>Newsletter Transitions</strong> - Iscriviti per ricevere aggiornamenti su eventi, ricerche, salute e benessere anziani (2x/anno)
+                        </p>
+                    </div>
+                </div>
+
+                <!-- AARP Card -->
+                <div class="media-card" style="background: white; border-radius: 12px; padding: 2.5rem; box-shadow: 0 6px 20px rgba(0,0,0,0.15); border-left: 6px solid #E13A3E;">
+                    <div style="display: flex; align-items: center; gap: 1.5rem; margin-bottom: 2rem;">
+                        <span style="font-size: 4rem;">🇺🇸</span>
+                        <div>
+                            <h3 style="color: #E13A3E; margin: 0; font-size: 1.6rem;">AARP - American Association of Retired Persons</h3>
+                            <p style="margin: 0.3rem 0 0 0; color: #64748b; font-size: 1rem;">38+ milioni di membri USA | Advocacy anziani dal 1958</p>
+                        </div>
+                    </div>
+
+                    <div style="background: linear-gradient(135deg, #fff5f5 0%, #ffe5e5 100%); padding: 2rem; border-radius: 12px; margin-bottom: 2rem;">
+                        <h4 style="color: #E13A3E; margin-bottom: 1rem; font-size: 1.3rem;">🧠 Mental Health Impact of Scams & Fraud</h4>
+                        <p style="line-height: 1.8; color: #1e293b; margin-bottom: 1rem;">
+                            <strong>Programma specializzato</strong> sull'impatto psicologico delle truffe finanziarie sugli anziani. 
+                            AARP fornisce supporto terapeutico, risorse di recupero emotivo e consulenza per affrontare trauma, vergogna e isolamento post-truffa.
+                        </p>
+                        <div style="background: white; padding: 1.5rem; border-radius: 8px; border-left: 4px solid #E13A3E;">
+                            <p style="margin: 0; font-size: 0.95rem; color: #1e293b; line-height: 1.8;">
+                                ✅ <strong>Supporto psicologico specializzato</strong> - trauma da frode<br>
+                                ✅ <strong>Gruppi di supporto peer-to-peer</strong> - condivisione esperienze<br>
+                                ✅ <strong>Risorse recovery emotivo</strong> - superare vergogna e senso di colpa<br>
+                                ✅ <strong>Prevenzione isolamento sociale</strong> - mantenere relazioni familiari
+                            </p>
+                        </div>
+                    </div>
+
+                    <div style="background: #fff9e6; padding: 1.5rem; border-radius: 8px; border-left: 4px solid #FFA500; margin-bottom: 2rem;">
+                        <h4 style="color: #FFA500; margin-bottom: 1rem; font-size: 1.2rem;">📞 Servizi AARP Anti-Frode</h4>
+                        <div style="line-height: 1.8; color: #1e293b;">
+                            <p style="margin: 0 0 1rem 0;"><strong>🔍 Fraud Watch Network</strong> - Rete nazionale monitoraggio truffe in tempo reale</p>
+                            <p style="margin: 0 0 1rem 0;"><strong>🆘 Helpline gratuita</strong> - Consulenza telefonica per vittime e familiari</p>
+                            <p style="margin: 0 0 1rem 0;"><strong>📚 Educational Resources</strong> - Guide, webinar, workshop prevenzione</p>
+                            <p style="margin: 0;"><strong>⚖️ Advocacy legislativa</strong> - Pressione su Congresso USA per leggi protezione consumatori</p>
+                        </div>
+                    </div>
+
+                    <div style="background: #f0f9ff; padding: 1.5rem; border-radius: 8px; margin-bottom: 2rem;">
+                        <h4 style="color: #0066cc; margin-bottom: 1rem; font-size: 1.1rem;">📊 Statistiche AARP</h4>
+                        <p style="line-height: 1.8; color: #1e293b; margin: 0; font-size: 0.95rem;">
+                            <strong>38+ milioni di membri</strong> over 50 anni | <strong>$1.7 miliardi persi annualmente</strong> da anziani USA in truffe | 
+                            <strong>60% vittime</strong> non denuncia per vergogna | <strong>25% sviluppa depressione</strong> post-frode
+                        </p>
+                    </div>
+
+                    <div style="background: linear-gradient(135deg, #DC143C 0%, #8B0000 100%); padding: 2rem; border-radius: 12px; margin-bottom: 2rem; color: white;">
+                        <h4 style="color: #FFD700; margin-bottom: 1rem; font-size: 1.3rem;">💔 Impatto Salute Mentale</h4>
+                        <p style="line-height: 1.9; margin: 0; font-size: 1.05rem;">
+                            <strong>Le vittime di truffe finanziarie sperimentano:</strong><br>
+                            • Trauma psicologico paragonabile ad aggressione fisica<br>
+                            • Depressione clinica (25% dei casi)<br>
+                            • Ansia e attacchi di panico persistenti<br>
+                            • Vergogna paralizzante e isolamento sociale<br>
+                            • Peggioramento condizioni croniche preesistenti<br>
+                            • Aumento rischio suicidio in anziani vulnerabili
+                        </p>
+                    </div>
+
+                    <div style="display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center;">
+                        <a href="https://www.aarp.org/money/scams-fraud/mental-health-impact/" target="_blank" rel="noopener noreferrer" class="download-button" style="background: #E13A3E; display: inline-block; font-size: 1.1rem; padding: 1rem 2rem;">
+                            🧠 Mental Health Impact
+                        </a>
+                        <a href="https://www.aarp.org/money/scams-fraud/" target="_blank" rel="noopener noreferrer" class="download-button" style="background: #C41E3A; display: inline-block; font-size: 1.1rem; padding: 1rem 2rem;">
+                            🛡️ Fraud Watch Network
+                        </a>
+                        <a href="https://www.aarp.org/" target="_blank" rel="noopener noreferrer" class="download-button" style="background: #A01B2E; display: inline-block; font-size: 1.1rem; padding: 1rem 2rem;">
+                            🌐 Sito Ufficiale AARP
+                        </a>
+                    </div>
+
+                    <div style="margin-top: 2rem; padding-top: 1.5rem; border-top: 2px solid #e2e8f0;">
+                        <p style="margin: 0; text-align: center; color: #64748b; font-size: 0.9rem;">
+                            📧 <strong>AARP The Magazine</strong> - Pubblicazione bimestrale con storie vittime, consigli sicurezza, aggiornamenti legislativi (38M copie distribuite)
+                        </p>
+                    </div>
                 </div>
             </div>
         </section>
