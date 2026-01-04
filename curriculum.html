@@ -27,6 +27,36 @@
             color: #1e293b;
             background: #f8fafc;
         }
+
+        .language-selector {
+            display: flex;
+            gap: 0.5rem;
+            justify-content: center;
+            margin: 1rem 0;
+        }
+
+        .lang-btn {
+            background: rgba(255,255,255,0.3);
+            border: 2px solid transparent;
+            color: white;
+            padding: 6px 12px;
+            border-radius: 15px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+
+        .lang-btn:hover {
+            background: rgba(255,255,255,0.5);
+            transform: translateY(-2px);
+        }
+
+        .lang-btn.active {
+            background: white;
+            color: var(--cv-blue);
+            border-color: white;
+        }
         
         .hero {
             background: linear-gradient(135deg, var(--cv-blue) 0%, var(--cv-eu) 100%);
@@ -407,6 +437,13 @@
 
     <!-- Hero Section -->
     <section class="hero">
+        <nav class="language-selector" role="navigation" aria-label="Language selection">
+            <button class="lang-btn active" onclick="changeLanguage('it')" aria-label="Italiano">🇮🇹 IT</button>
+            <button class="lang-btn" onclick="changeLanguage('en')" aria-label="English">🇬🇧 EN</button>
+            <button class="lang-btn" onclick="changeLanguage('fr')" aria-label="Français">🇫🇷 FR</button>
+            <button class="lang-btn" onclick="changeLanguage('de')" aria-label="Deutsch">🇩🇪 DE</button>
+            <button class="lang-btn" onclick="changeLanguage('es')" aria-label="Español">🇪🇸 ES</button>
+        </nav>
         <h1>Avvocato Marcello Stanca</h1>
         <p>25 Anni di Battaglie per i Diritti dei Cittadini</p>
         <div class="credentials-badges">
@@ -616,4 +653,16 @@
         <p style="margin: 0.5rem 0 0 0; opacity: 0.6; font-size: 0.9rem;">25 Anni al servizio della giustizia e dei diritti dei cittadini</p>
     </footer>
 </body>
+<script>
+    // Language switcher (UI only)
+    let currentLanguage = 'it';
+    function changeLanguage(lang) {
+        currentLanguage = lang;
+        const buttons = document.querySelectorAll('.lang-btn');
+        buttons.forEach(btn => btn.classList.remove('active'));
+        const activeBtn = Array.from(buttons).find(btn => btn.textContent.includes(lang.toUpperCase()));
+        if (activeBtn) activeBtn.classList.add('active');
+        document.documentElement.lang = lang;
+    }
+</script>
 </html>
