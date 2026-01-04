@@ -585,6 +585,7 @@
             window.ratingSystem.initStars('rating-compliance-corylated', 'compliance-corylated');
             window.ratingSystem.initStars('rating-dsa-eu', 'dsa-notice-action');
             window.ratingSystem.initStars('rating-agcm-italia', 'agcm-antitrust-italia');
+            window.ratingSystem.initStars('rating-adusbef', 'adusbef-consumatori');
         });
     </script>
 </head>
@@ -603,23 +604,180 @@
             </a>
         </div>
     </nav>
-    <nav class="nav-header">
-        <div class="nav-container">
-            <a href="index.html" class="nav-logo">🏛️ Referenze Istituzionali</a>
+    <!-- Sticky Menu (appare dopo scroll) -->
+    <nav id="sticky-menu" style="display: none; position: fixed; top: 0; left: 0; right: 0; background: rgba(10, 17, 40, 0.95); backdrop-filter: blur(10px); padding: 0.8rem 2rem; z-index: 999; box-shadow: 0 4px 20px rgba(0,0,0,0.3); transition: all 0.3s ease;">
+        <div style="max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
+            <div style="color: #FFD700; font-weight: bold; font-size: 1.1rem;">☀️ Security Financial</div>
+            <div style="display: flex; gap: 1.5rem; flex-wrap: wrap;">
+                <a href="#autorita-vigilanza" style="color: #87CEEB; text-decoration: none; font-size: 0.9rem; transition: color 0.3s;" onmouseover="this.style.color='#FFD700'" onmouseout="this.style.color='#87CEEB'">🪐 Autorità</a>
+                <a href="#banche-centrali" style="color: #90EE90; text-decoration: none; font-size: 0.9rem; transition: color 0.3s;" onmouseover="this.style.color='#FFD700'" onmouseout="this.style.color='#90EE90'">🌍 Fonti Istituzionali</a>
+                <a href="#associazioni-consumatori" style="color: #DDA0DD; text-decoration: none; font-size: 0.9rem; transition: color 0.3s;" onmouseover="this.style.color='#FFD700'" onmouseout="this.style.color='#DDA0DD'">🛡️ Consumatori</a>
+                <a href="#organizzazioni-tutela" style="color: #FFB6C1; text-decoration: none; font-size: 0.9rem; transition: color 0.3s;" onmouseover="this.style.color='#FFD700'" onmouseout="this.style.color='#FFB6C1'">🤝 Prevenzione Truffe</a>
+                <a href="#supporto-psicologico" style="color: #FFA07A; text-decoration: none; font-size: 0.9rem; transition: color 0.3s;" onmouseover="this.style.color='#FFD700'" onmouseout="this.style.color='#FFA07A'">💚 AARP Supporto</a>
+                <a href="#mental-health" style="color: #FF6B6B; text-decoration: none; font-size: 0.9rem; transition: color 0.3s;" onmouseover="this.style.color='#FFD700'" onmouseout="this.style.color='#FF6B6B'">🔴 Mental Health</a>
+            </div>
         </div>
     </nav>
 
-    <section class="hero">
-        <div class="hero-content">
-            <h1>Avvocato Marcello Stanca</h1>
-            <p>25 Anni di Battaglie per i Diritti dei Cittadini</p>
-            <div class="credentials-badges">
-                <div class="credential-badge">🏛️ Presidente AMEV Firenze dal 1999</div>
-                <div class="credential-badge">🇪🇺 2 Petizioni Parlamento UE Accettate</div>
-                <div class="credential-badge">🎙️ Camera Deputati</div>
+    <!-- Solar System Navigation Hero -->
+    <section style="background: #0a1128; position: relative; overflow: hidden; min-height: 100vh; display: flex; align-items: center; justify-content: center;">
+        <!-- Starfield Canvas -->
+        <canvas id="starfield" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></canvas>
+        
+        <!-- Solar System Container -->
+        <div style="position: relative; width: 100%; max-width: 1400px; height: 800px; margin: 2rem auto;">
+            <!-- Sun (Centro) -->
+            <div id="sun" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 180px; height: 180px; background: radial-gradient(circle at 30% 30%, #FFD700, #FFA500, #FF8C00); border-radius: 50%; box-shadow: 0 0 60px rgba(255, 215, 0, 0.8), 0 0 100px rgba(255, 165, 0, 0.6), inset 0 0 40px rgba(255, 140, 0, 0.4); cursor: pointer; z-index: 10; animation: sunPulse 4s ease-in-out infinite;">
+                <div style="position: absolute; bottom: -50px; left: 50%; transform: translateX(-50%); white-space: nowrap; color: #00FF7F; font-weight: bold; font-size: 1.3rem; text-shadow: 0 0 10px rgba(0, 255, 127, 0.8);">Security Financial</div>
+            </div>
+
+            <!-- Planet 1: Autorità Vigilanza (Mercurio - grigio) -->
+            <div class="planet-orbit" style="position: absolute; top: 50%; left: 50%; width: 300px; height: 200px; border: 2px solid rgba(135, 206, 235, 0.3); border-radius: 50%; transform: translate(-50%, -50%); animation: none;">
+                <a href="#autorita-vigilanza" class="planet" data-planet="mercury" style="position: absolute; top: 0; left: 50%; transform: translate(-50%, -50%); width: 60px; height: 60px; background: radial-gradient(circle at 30% 30%, #B8B8B8, #808080, #505050); border-radius: 50%; box-shadow: 0 0 20px rgba(184, 184, 184, 0.6), inset -10px -10px 20px rgba(0,0,0,0.3); cursor: pointer; text-decoration: none; animation: orbitMercury 12s linear infinite;">
+                    <span style="position: absolute; bottom: -35px; left: 50%; transform: translateX(-50%); white-space: nowrap; color: #87CEEB; font-size: 0.85rem; font-weight: 600; text-shadow: 0 0 8px rgba(135, 206, 235, 0.8);">🪐 Autorità</span>
+                </a>
+            </div>
+
+            <!-- Planet 2: Banche Centrali (Venere - verde acqua) -->
+            <div class="planet-orbit" style="position: absolute; top: 50%; left: 50%; width: 420px; height: 280px; border: 2px solid rgba(144, 238, 144, 0.3); border-radius: 50%; transform: translate(-50%, -50%); animation: none;">
+                <a href="#fonti-istituzionali" class="planet" data-planet="venus" style="position: absolute; top: 0; left: 50%; transform: translate(-50%, -50%); width: 75px; height: 75px; background: radial-gradient(circle at 30% 30%, #90EE90, #3CB371, #2E8B57); border-radius: 50%; box-shadow: 0 0 25px rgba(144, 238, 144, 0.7), inset -12px -12px 25px rgba(0,0,0,0.3); cursor: pointer; text-decoration: none; animation: orbitVenus 18s linear infinite;">
+                    <span style="position: absolute; bottom: -35px; left: 50%; transform: translateX(-50%); white-space: nowrap; color: #90EE90; font-size: 0.85rem; font-weight: 600; text-shadow: 0 0 8px rgba(144, 238, 144, 0.8);">🌍 Fonti Istituzionali</span>
+                </a>
+            </div>
+
+            <!-- Planet 3: Associazioni Consumatori (Terra - blu/viola) -->
+            <div class="planet-orbit" style="position: absolute; top: 50%; left: 50%; width: 540px; height: 360px; border: 2px solid rgba(221, 160, 221, 0.3); border-radius: 50%; transform: translate(-50%, -50%); animation: none;">
+                <a href="#associazioni-consumatori" class="planet" data-planet="earth" style="position: absolute; top: 0; left: 50%; transform: translate(-50%, -50%); width: 80px; height: 80px; background: radial-gradient(circle at 30% 30%, #DDA0DD, #9370DB, #6A5ACD); border-radius: 50%; box-shadow: 0 0 30px rgba(221, 160, 221, 0.8), inset -12px -12px 25px rgba(0,0,0,0.3); cursor: pointer; text-decoration: none; animation: orbitEarth 24s linear infinite;">
+                    <span style="position: absolute; bottom: -35px; left: 50%; transform: translateX(-50%); white-space: nowrap; color: #DDA0DD; font-size: 0.85rem; font-weight: 600; text-shadow: 0 0 8px rgba(221, 160, 221, 0.8);">🛡️ Consumatori</span>
+                </a>
+            </div>
+
+            <!-- Planet 4: Organizzazioni Tutela (Marte - rosa) -->
+            <div class="planet-orbit" style="position: absolute; top: 50%; left: 50%; width: 660px; height: 440px; border: 2px solid rgba(255, 182, 193, 0.3); border-radius: 50%; transform: translate(-50%, -50%); animation: none;">
+                <a href="#prevenzione-truffe" class="planet" data-planet="mars" style="position: absolute; top: 0; left: 50%; transform: translate(-50%, -50%); width: 70px; height: 70px; background: radial-gradient(circle at 30% 30%, #FFB6C1, #FF69B4, #FF1493); border-radius: 50%; box-shadow: 0 0 25px rgba(255, 182, 193, 0.7), inset -10px -10px 20px rgba(0,0,0,0.3); cursor: pointer; text-decoration: none; animation: orbitMars 30s linear infinite;">
+                    <span style="position: absolute; bottom: -35px; left: 50%; transform: translateX(-50%); white-space: nowrap; color: #FFB6C1; font-size: 0.85rem; font-weight: 600; text-shadow: 0 0 8px rgba(255, 182, 193, 0.8);">🤝 Prevenzione</span>
+                </a>
+            </div>
+
+            <!-- Planet 5: Supporto Psicologico (Giove - arancione) -->
+            <div class="planet-orbit" style="position: absolute; top: 50%; left: 50%; width: 780px; height: 520px; border: 2px solid rgba(255, 160, 122, 0.3); border-radius: 50%; transform: translate(-50%, -50%); animation: none;">
+                <a href="#prevenzione-truffe" class="planet" data-planet="jupiter" style="position: absolute; top: 0; left: 50%; transform: translate(-50%, -50%); width: 100px; height: 100px; background: radial-gradient(circle at 30% 30%, #FFA07A, #FF8C69, #FF7F50); border-radius: 50%; box-shadow: 0 0 35px rgba(255, 160, 122, 0.8), inset -15px -15px 30px rgba(0,0,0,0.3); cursor: pointer; text-decoration: none; animation: orbitJupiter 36s linear infinite;">
+                    <span style="position: absolute; bottom: -40px; left: 50%; transform: translateX(-50%); white-space: nowrap; color: #FFA07A; font-size: 0.9rem; font-weight: 600; text-shadow: 0 0 10px rgba(255, 160, 122, 0.8);">💚 AARP Supporto</span>
+                </a>
+            </div>
+
+            <!-- Planet 6: Mental Health Impact (Pianeta Rosso) -->
+            <div class="planet-orbit" style="position: absolute; top: 50%; left: 50%; width: 900px; height: 600px; border: 2px solid rgba(255, 107, 107, 0.3); border-radius: 50%; transform: translate(-50%, -50%); animation: none;">
+                <a href="#mental-health" class="planet" data-planet="mental" style="position: absolute; top: 0; left: 50%; transform: translate(-50%, -50%); width: 85px; height: 85px; background: radial-gradient(circle at 30% 30%, #FF6B6B, #EE5A52, #DC143C); border-radius: 50%; box-shadow: 0 0 30px rgba(255, 107, 107, 0.8), inset -12px -12px 25px rgba(0,0,0,0.4); cursor: pointer; text-decoration: none; animation: orbitMental 42s linear infinite;">
+                    <span style="position: absolute; bottom: -40px; left: 50%; transform: translateX(-50%); white-space: nowrap; color: #FF6B6B; font-size: 0.9rem; font-weight: 600; text-shadow: 0 0 10px rgba(255, 107, 107, 0.8);">🔴 Mental Health Impact</span>
+                </a>
             </div>
         </div>
+
+        <!-- Admin Access Button (bottom right corner) -->
+        <button onclick="showAdminLogin()" style="position: absolute; bottom: 20px; right: 20px; background: rgba(255, 215, 0, 0.1); border: 2px solid rgba(255, 215, 0, 0.3); color: #FFD700; padding: 0.5rem 1rem; border-radius: 8px; cursor: pointer; font-size: 0.85rem; transition: all 0.3s; backdrop-filter: blur(5px);" onmouseover="this.style.background='rgba(255,215,0,0.2)'" onmouseout="this.style.background='rgba(255,215,0,0.1)'">
+            🔐 Admin Access
+        </button>
     </section>
+
+    <!-- CSS Animations -->
+    <style>
+        @keyframes sunPulse {
+            0%, 100% { transform: translate(-50%, -50%) scale(1); }
+            50% { transform: translate(-50%, -50%) scale(1.05); }
+        }
+        @keyframes orbitMercury {
+            from { transform: translate(-50%, -50%) rotate(0deg) translateX(150px) rotate(0deg); }
+            to { transform: translate(-50%, -50%) rotate(360deg) translateX(150px) rotate(-360deg); }
+        }
+        @keyframes orbitVenus {
+            from { transform: translate(-50%, -50%) rotate(0deg) translateX(210px) rotate(0deg); }
+            to { transform: translate(-50%, -50%) rotate(360deg) translateX(210px) rotate(-360deg); }
+        }
+        @keyframes orbitEarth {
+            from { transform: translate(-50%, -50%) rotate(0deg) translateX(270px) rotate(0deg); }
+            to { transform: translate(-50%, -50%) rotate(360deg) translateX(270px) rotate(-360deg); }
+        }
+        @keyframes orbitMars {
+            from { transform: translate(-50%, -50%) rotate(0deg) translateX(330px) rotate(0deg); }
+            to { transform: translate(-50%, -50%) rotate(360deg) translateX(330px) rotate(-360deg); }
+        }
+        @keyframes orbitJupiter {
+            from { transform: translate(-50%, -50%) rotate(0deg) translateX(390px) rotate(0deg); }
+            to { transform: translate(-50%, -50%) rotate(360deg) translateX(390px) rotate(-360deg); }
+        }
+        @keyframes orbitMental {
+            from { transform: translate(-50%, -50%) rotate(0deg) translateX(450px) rotate(0deg); }
+            to { transform: translate(-50%, -50%) rotate(360deg) translateX(450px) rotate(-360deg); }
+        }
+        .planet:hover {
+            transform: translate(-50%, -50%) scale(1.2) !important;
+            transition: transform 0.3s ease;
+        }
+    </style>
+
+    <!-- Starfield JavaScript -->
+    <script>
+        // Starfield animation
+        const canvas = document.getElementById('starfield');
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        const stars = [];
+        for (let i = 0; i < 200; i++) {
+            stars.push({
+                x: Math.random() * canvas.width,
+                y: Math.random() * canvas.height,
+                radius: Math.random() * 1.5,
+                speed: Math.random() * 0.5
+            });
+        }
+
+        function drawStars() {
+            ctx.fillStyle = '#0a1128';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            
+            ctx.fillStyle = 'white';
+            stars.forEach(star => {
+                ctx.beginPath();
+                ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
+                ctx.fill();
+                
+                star.y += star.speed;
+                if (star.y > canvas.height) star.y = 0;
+            });
+            
+            requestAnimationFrame(drawStars);
+        }
+        drawStars();
+
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
+
+        // Sticky menu on scroll
+        window.addEventListener('scroll', () => {
+            const stickyMenu = document.getElementById('sticky-menu');
+            if (window.scrollY > 800) {
+                stickyMenu.style.display = 'block';
+            } else {
+                stickyMenu.style.display = 'none';
+            }
+        });
+
+        // Admin Login Modal
+        function showAdminLogin() {
+            const password = prompt('🔐 Inserisci la password admin:');
+            if (password === 'tutela2026') {
+                window.location.href = '#admin-panel';
+                alert('✅ Accesso autorizzato! Scroll fino alla fine della pagina per il pannello admin.');
+            } else if (password !== null) {
+                alert('❌ Password errata!');
+            }
+        }
+    </script>
 
     <div class="container">
         <!-- CASE STUDY: UPTOS -->
@@ -801,7 +959,7 @@
         </section>
 
         <!-- Fonti Istituzionali Internazionali -->
-        <section style="margin-top: 5rem;">
+        <section id="fonti-istituzionali" style="margin-top: 5rem; scroll-margin-top: 100px;">
             <h2 class="section-title">📚 Fonti Istituzionali Internazionali</h2>
             <p class="section-subtitle">Organizzazioni sovranazionali, quadro normativo AML/CFT UE, vigilanza bancaria europea</p>
             
@@ -1280,7 +1438,7 @@
         </section>
 
         <!-- Autorità di Vigilanza -->
-        <section style="margin-top: 5rem;">
+        <section id="autorita-vigilanza" style="margin-top: 5rem; scroll-margin-top: 100px;">
             <h2 class="section-title">🏛️ Autorità di Vigilanza Finanziaria</h2>
             <p class="section-subtitle">Enti regolatori internazionali responsabili della supervisione mercati finanziari e protezione consumatori</p>
             
@@ -2023,8 +2181,96 @@
             </div>
         </section>
 
+        <!-- Associazioni Consumatori -->
+        <section id="associazioni-consumatori" style="margin-top: 5rem; scroll-margin-top: 100px;">
+            <h2 class="section-title">🛡️ Associazioni Consumatori</h2>
+            <p class="section-subtitle">Organizzazioni di tutela e difesa dei diritti dei consumatori bancari e finanziari</p>
+            
+            <div class="media-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 2rem; margin-top: 3rem;">
+                <!-- ADUSBEF Card -->
+                <div class="media-card" style="background: white; border-radius: 12px; padding: 2.5rem; box-shadow: 0 6px 20px rgba(0,0,0,0.15); border-left: 6px solid #1565C0;">
+                    <div style="display: flex; align-items: center; gap: 1.5rem; margin-bottom: 2rem;">
+                        <span style="font-size: 4rem;">🏦</span>
+                        <div>
+                            <h3 style="color: #1565C0; margin: 0; font-size: 1.6rem;">ADUSBEF</h3>
+                            <p style="margin: 0.5rem 0 0 0; color: #64748b; font-size: 1.1rem; font-weight: 500;">Associazione Difesa Utenti Servizi Bancari, Finanziari e Postali</p>
+                        </div>
+                    </div>
+
+                    <div style="background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%); padding: 2rem; border-radius: 12px; margin-bottom: 2rem;">
+                        <h4 style="color: #1565C0; margin-bottom: 1rem; font-size: 1.3rem;">🛡️ Tutela dei Consumatori Bancari</h4>
+                        <p style="line-height: 1.8; color: #1e293b; margin-bottom: 1rem;">
+                            <strong>ADUSBEF</strong> è l'associazione leader in Italia per la difesa dei diritti degli utenti di servizi bancari, finanziari e postali. Offre assistenza legale, consulenza e rappresentanza nelle controversie con istituti di credito.
+                        </p>
+                    </div>
+
+                    <div style="background: #f1f5f9; padding: 1.8rem; border-radius: 10px; margin-bottom: 2rem;">
+                        <h4 style="color: #1565C0; margin-bottom: 1rem; font-size: 1.2rem;">⚖️ Aree di Intervento</h4>
+                        <ul style="margin: 0 0 0 1.5rem; color: #1e293b; line-height: 1.8;">
+                            <li><strong>Anatocismo bancario</strong>: interessi su interessi</li>
+                            <li><strong>Usura bancaria</strong>: tassi superiori alla soglia legale</li>
+                            <li><strong>Pratiche bancarie scorrette</strong>: clausole vessatorie</li>
+                            <li><strong>Truffe finanziarie</strong>: investimenti illeciti e promesse false</li>
+                            <li><strong>Mutui e finanziamenti</strong>: rinegoziazione e surroga</li>
+                            <li><strong>Carte di credito</strong>: addebiti non autorizzati</li>
+                        </ul>
+                    </div>
+
+                    <div style="background: linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%); padding: 1.8rem; border-radius: 10px; margin-bottom: 2rem;">
+                        <h4 style="color: #E65100; margin-bottom: 1rem; font-size: 1.2rem;">📞 Servizi ADUSBEF</h4>
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
+                            <div style="background: white; padding: 1rem; border-radius: 8px; border: 2px solid #1565C0;">
+                                <div style="font-size: 1.5rem; margin-bottom: 0.5rem;">📧</div>
+                                <div style="font-weight: bold; color: #1565C0; font-size: 0.95rem;">Consulenza Gratuita</div>
+                            </div>
+                            <div style="background: white; padding: 1rem; border-radius: 8px; border: 2px solid #1565C0;">
+                                <div style="font-size: 1.5rem; margin-bottom: 0.5rem;">⚖️</div>
+                                <div style="font-weight: bold; color: #1565C0; font-size: 0.95rem;">Assistenza Legale</div>
+                            </div>
+                            <div style="background: white; padding: 1rem; border-radius: 8px; border: 2px solid #1565C0;">
+                                <div style="font-size: 1.5rem; margin-bottom: 0.5rem;">📊</div>
+                                <div style="font-weight: bold; color: #1565C0; font-size: 0.95rem;">Perizie Tecniche</div>
+                            </div>
+                            <div style="background: white; padding: 1rem; border-radius: 8px; border: 2px solid #1565C0;">
+                                <div style="font-size: 1.5rem; margin-bottom: 0.5rem;">🤝</div>
+                                <div style="font-weight: bold; color: #1565C0; font-size: 0.95rem;">Class Action</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div style="display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 2rem;">
+                        <a href="https://www.adusbef.it/" target="_blank" rel="noopener noreferrer" style="display: inline-block; background: #1565C0; color: white; padding: 1rem 2rem; text-decoration: none; border-radius: 8px; font-weight: 600; transition: all 0.3s; box-shadow: 0 4px 12px rgba(21,101,192,0.3);" onmouseover="this.style.background='#0D47A1'; this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 16px rgba(21,101,192,0.4)';" onmouseout="this.style.background='#1565C0'; this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 12px rgba(21,101,192,0.3)';">
+                            🌐 Sito Ufficiale ADUSBEF
+                        </a>
+                        <a href="https://www.adusbef.it/contatti/" target="_blank" rel="noopener noreferrer" style="display: inline-block; background: #0277BD; color: white; padding: 1rem 2rem; text-decoration: none; border-radius: 8px; font-weight: 600; transition: all 0.3s; box-shadow: 0 4px 12px rgba(2,119,189,0.3);" onmouseover="this.style.background='#01579B'; this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 16px rgba(2,119,189,0.4)';" onmouseout="this.style.background='#0277BD'; this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 12px rgba(2,119,189,0.3)';">
+                            📞 Contatti e Sedi
+                        </a>
+                    </div>
+
+                    <!-- Rating System ADUSBEF -->
+                    <div class="rating-container" id="rating-adusbef">
+                        <div class="rating-header">
+                            <div class="rating-title">⭐ Valuta questo contenuto</div>
+                            <div class="rating-stats">
+                                <span class="rating-average">-</span>
+                                <span class="rating-count">0 voti</span>
+                            </div>
+                        </div>
+                        <div class="stars-container">
+                            <span class="star" data-value="1">★</span>
+                            <span class="star" data-value="2">★</span>
+                            <span class="star" data-value="3">★</span>
+                            <span class="star" data-value="4">★</span>
+                            <span class="star" data-value="5">★</span>
+                        </div>
+                        <div class="vote-message" style="display: none;"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <!-- Prevenzione Truffe e Supporto Vittime -->
-        <section style="margin-top: 5rem;">
+        <section id="prevenzione-truffe" style="margin-top: 5rem; scroll-margin-top: 100px;">
             <h2 class="section-title">🛡️ Prevenzione Truffe e Supporto alle Vittime</h2>
             <p class="section-subtitle">Organizzazioni internazionali specializzate in protezione consumatori anziani, autovalutazione vulnerabilità finanziaria, supporto psicologico vittime</p>
             
@@ -2195,7 +2441,7 @@
                     </div>
 
                     <div style="display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center;">
-                        <a href="https://www.aarp.org/money/scams-fraud/mental-health-impact/" target="_blank" rel="noopener noreferrer" class="download-button" style="background: #E13A3E; display: inline-block; font-size: 1.1rem; padding: 1rem 2rem;">
+                        <a id="mental-health" href="https://www.aarp.org/money/scams-fraud/mental-health-impact/" target="_blank" rel="noopener noreferrer" class="download-button" style="background: #E13A3E; display: inline-block; font-size: 1.1rem; padding: 1rem 2rem;">
                             🧠 Mental Health Impact
                         </a>
                         <a href="https://www.aarp.org/money/scams-fraud/" target="_blank" rel="noopener noreferrer" class="download-button" style="background: #C41E3A; display: inline-block; font-size: 1.1rem; padding: 1rem 2rem;">
@@ -2248,6 +2494,229 @@
                 </a>
             </div>
         </div>
+
+        <!-- Admin Panel -->
+        <section id="admin-panel" style="margin-top: 5rem; padding: 3rem; background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); border-radius: 12px; border: 2px solid #FFD700;">
+            <h2 style="color: #FFD700; text-align: center; font-size: 2rem; margin-bottom: 2rem;">🔐 Pannello Amministrazione</h2>
+            <p style="color: #87CEEB; text-align: center; margin-bottom: 3rem;">Gestione contenuti e link istituzionali</p>
+            
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
+                <!-- Autorità Vigilanza -->
+                <div style="background: rgba(255,255,255,0.05); padding: 2rem; border-radius: 10px; border: 1px solid rgba(135, 206, 235, 0.3);">
+                    <h3 style="color: #87CEEB; margin-bottom: 1.5rem; font-size: 1.3rem;">🪐 Autorità Vigilanza</h3>
+                    <div style="margin-bottom: 1rem;">
+                        <label style="color: white; display: block; margin-bottom: 0.5rem;">Nome Autorità:</label>
+                        <input type="text" id="admin-autorita-nome" placeholder="Es: BaFin Germania" style="width: 100%; padding: 0.8rem; border-radius: 6px; border: 1px solid #FFD700; background: rgba(255,255,255,0.1); color: white;">
+                    </div>
+                    <div style="margin-bottom: 1rem;">
+                        <label style="color: white; display: block; margin-bottom: 0.5rem;">URL:</label>
+                        <input type="url" id="admin-autorita-url" placeholder="https://..." style="width: 100%; padding: 0.8rem; border-radius: 6px; border: 1px solid #FFD700; background: rgba(255,255,255,0.1); color: white;">
+                    </div>
+                    <button onclick="addAutorityLink()" style="width: 100%; background: #87CEEB; color: #1a1a2e; padding: 0.8rem; border: none; border-radius: 6px; font-weight: bold; cursor: pointer; transition: all 0.3s;" onmouseover="this.style.background='#5FA8D3'" onmouseout="this.style.background='#87CEEB'">
+                        ➕ Aggiungi Link
+                    </button>
+                </div>
+
+                <!-- Banche Centrali -->
+                <div style="background: rgba(255,255,255,0.05); padding: 2rem; border-radius: 10px; border: 1px solid rgba(144, 238, 144, 0.3);">
+                    <h3 style="color: #90EE90; margin-bottom: 1.5rem; font-size: 1.3rem;">🌍 Banche Centrali</h3>
+                    <div style="margin-bottom: 1rem;">
+                        <label style="color: white; display: block; margin-bottom: 0.5rem;">Nome Banca:</label>
+                        <input type="text" id="admin-banca-nome" placeholder="Es: ECB" style="width: 100%; padding: 0.8rem; border-radius: 6px; border: 1px solid #FFD700; background: rgba(255,255,255,0.1); color: white;">
+                    </div>
+                    <div style="margin-bottom: 1rem;">
+                        <label style="color: white; display: block; margin-bottom: 0.5rem;">URL:</label>
+                        <input type="url" id="admin-banca-url" placeholder="https://..." style="width: 100%; padding: 0.8rem; border-radius: 6px; border: 1px solid #FFD700; background: rgba(255,255,255,0.1); color: white;">
+                    </div>
+                    <button onclick="addBankLink()" style="width: 100%; background: #90EE90; color: #1a1a2e; padding: 0.8rem; border: none; border-radius: 6px; font-weight: bold; cursor: pointer; transition: all 0.3s;" onmouseover="this.style.background='#76D275'" onmouseout="this.style.background='#90EE90'">
+                        ➕ Aggiungi Link
+                    </button>
+                </div>
+
+                <!-- Associazioni Consumatori -->
+                <div style="background: rgba(255,255,255,0.05); padding: 2rem; border-radius: 10px; border: 1px solid rgba(221, 160, 221, 0.3);">
+                    <h3 style="color: #DDA0DD; margin-bottom: 1.5rem; font-size: 1.3rem;">🛡️ Associazioni Consumatori</h3>
+                    <div style="margin-bottom: 1rem;">
+                        <label style="color: white; display: block; margin-bottom: 0.5rem;">Nome Associazione:</label>
+                        <input type="text" id="admin-consumatori-nome" placeholder="Es: Altroconsumo" style="width: 100%; padding: 0.8rem; border-radius: 6px; border: 1px solid #FFD700; background: rgba(255,255,255,0.1); color: white;">
+                    </div>
+                    <div style="margin-bottom: 1rem;">
+                        <label style="color: white; display: block; margin-bottom: 0.5rem;">URL:</label>
+                        <input type="url" id="admin-consumatori-url" placeholder="https://..." style="width: 100%; padding: 0.8rem; border-radius: 6px; border: 1px solid #FFD700; background: rgba(255,255,255,0.1); color: white;">
+                    </div>
+                    <button onclick="addConsumerLink()" style="width: 100%; background: #DDA0DD; color: #1a1a2e; padding: 0.8rem; border: none; border-radius: 6px; font-weight: bold; cursor: pointer; transition: all 0.3s;" onmouseover="this.style.background='#C77CC7'" onmouseout="this.style.background='#DDA0DD'">
+                        ➕ Aggiungi Link
+                    </button>
+                </div>
+
+                <!-- Organizzazioni Tutela -->
+                <div style="background: rgba(255,255,255,0.05); padding: 2rem; border-radius: 10px; border: 1px solid rgba(255, 182, 193, 0.3);">
+                    <h3 style="color: #FFB6C1; margin-bottom: 1.5rem; font-size: 1.3rem;">🤝 Organizzazioni Tutela</h3>
+                    <div style="margin-bottom: 1rem;">
+                        <label style="color: white; display: block; margin-bottom: 0.5rem;">Nome Organizzazione:</label>
+                        <input type="text" id="admin-tutela-nome" placeholder="Es: BEUC" style="width: 100%; padding: 0.8rem; border-radius: 6px; border: 1px solid #FFD700; background: rgba(255,255,255,0.1); color: white;">
+                    </div>
+                    <div style="margin-bottom: 1rem;">
+                        <label style="color: white; display: block; margin-bottom: 0.5rem;">URL:</label>
+                        <input type="url" id="admin-tutela-url" placeholder="https://..." style="width: 100%; padding: 0.8rem; border-radius: 6px; border: 1px solid #FFD700; background: rgba(255,255,255,0.1); color: white;">
+                    </div>
+                    <button onclick="addTutelaLink()" style="width: 100%; background: #FFB6C1; color: #1a1a2e; padding: 0.8rem; border: none; border-radius: 6px; font-weight: bold; cursor: pointer; transition: all 0.3s;" onmouseover="this.style.background='#FF91A4'" onmouseout="this.style.background='#FFB6C1'">
+                        ➕ Aggiungi Link
+                    </button>
+                </div>
+
+                <!-- Supporto Psicologico -->
+                <div style="background: rgba(255,255,255,0.05); padding: 2rem; border-radius: 10px; border: 1px solid rgba(255, 160, 122, 0.3);">
+                    <h3 style="color: #FFA07A; margin-bottom: 1.5rem; font-size: 1.3rem;">💚 Supporto Psicologico</h3>
+                    <div style="margin-bottom: 1rem;">
+                        <label style="color: white; display: block; margin-bottom: 0.5rem;">Nome Servizio:</label>
+                        <input type="text" id="admin-psico-nome" placeholder="Es: Telefono Amico" style="width: 100%; padding: 0.8rem; border-radius: 6px; border: 1px solid #FFD700; background: rgba(255,255,255,0.1); color: white;">
+                    </div>
+                    <div style="margin-bottom: 1rem;">
+                        <label style="color: white; display: block; margin-bottom: 0.5rem;">URL:</label>
+                        <input type="url" id="admin-psico-url" placeholder="https://..." style="width: 100%; padding: 0.8rem; border-radius: 6px; border: 1px solid #FFD700; background: rgba(255,255,255,0.1); color: white;">
+                    </div>
+                    <button onclick="addPsicoLink()" style="width: 100%; background: #FFA07A; color: #1a1a2e; padding: 0.8rem; border: none; border-radius: 6px; font-weight: bold; cursor: pointer; transition: all 0.3s;" onmouseover="this.style.background='#FF8A5B'" onmouseout="this.style.background='#FFA07A'">
+                        ➕ Aggiungi Link
+                    </button>
+                </div>
+
+                <!-- Mental Health Impact -->
+                <div style="background: rgba(255,255,255,0.05); padding: 2rem; border-radius: 10px; border: 1px solid rgba(255, 107, 107, 0.3);">
+                    <h3 style="color: #FF6B6B; margin-bottom: 1.5rem; font-size: 1.3rem;">🔴 Mental Health Impact</h3>
+                    <div style="margin-bottom: 1rem;">
+                        <label style="color: white; display: block; margin-bottom: 0.5rem;">Nome Risorsa:</label>
+                        <input type="text" id="admin-mental-nome" placeholder="Es: SAMHSA" style="width: 100%; padding: 0.8rem; border-radius: 6px; border: 1px solid #FFD700; background: rgba(255,255,255,0.1); color: white;">
+                    </div>
+                    <div style="margin-bottom: 1rem;">
+                        <label style="color: white; display: block; margin-bottom: 0.5rem;">URL:</label>
+                        <input type="url" id="admin-mental-url" placeholder="https://..." style="width: 100%; padding: 0.8rem; border-radius: 6px; border: 1px solid #FFD700; background: rgba(255,255,255,0.1); color: white;">
+                    </div>
+                    <button onclick="addMentalLink()" style="width: 100%; background: #FF6B6B; color: white; padding: 0.8rem; border: none; border-radius: 6px; font-weight: bold; cursor: pointer; transition: all 0.3s;" onmouseover="this.style.background='#EE5A52'" onmouseout="this.style.background='#FF6B6B'">
+                        ➕ Aggiungi Link
+                    </button>
+                </div>
+            </div>
+
+            <div style="margin-top: 3rem; padding: 2rem; background: rgba(255,215,0,0.1); border-radius: 10px; border: 2px solid #FFD700;">
+                <h3 style="color: #FFD700; margin-bottom: 1rem; text-align: center;">📝 Istruzioni</h3>
+                <p style="color: white; line-height: 1.8; text-align: center;">
+                    I link aggiunti verranno salvati nel localStorage del browser. Per implementazione permanente, contattare il webmaster per integrazione nel database JSON.
+                </p>
+            </div>
+        </section>
+
+        <script>
+            // Admin Functions
+            const adminData = {
+                autorita: [],
+                banche: [],
+                consumatori: [],
+                tutela: [],
+                psicologico: [],
+                mentalHealth: []
+            };
+
+            // Load from localStorage
+            function loadAdminData() {
+                const saved = localStorage.getItem('adminLinks');
+                if (saved) {
+                    Object.assign(adminData, JSON.parse(saved));
+                }
+            }
+
+            // Save to localStorage
+            function saveAdminData() {
+                localStorage.setItem('adminLinks', JSON.stringify(adminData));
+            }
+
+            function addAutorityLink() {
+                const nome = document.getElementById('admin-autorita-nome').value;
+                const url = document.getElementById('admin-autorita-url').value;
+                if (nome && url) {
+                    adminData.autorita.push({ nome, url, date: new Date().toISOString() });
+                    saveAdminData();
+                    alert('✅ Link aggiunto: ' + nome);
+                    document.getElementById('admin-autorita-nome').value = '';
+                    document.getElementById('admin-autorita-url').value = '';
+                } else {
+                    alert('❌ Compila tutti i campi');
+                }
+            }
+
+            function addBankLink() {
+                const nome = document.getElementById('admin-banca-nome').value;
+                const url = document.getElementById('admin-banca-url').value;
+                if (nome && url) {
+                    adminData.banche.push({ nome, url, date: new Date().toISOString() });
+                    saveAdminData();
+                    alert('✅ Link aggiunto: ' + nome);
+                    document.getElementById('admin-banca-nome').value = '';
+                    document.getElementById('admin-banca-url').value = '';
+                } else {
+                    alert('❌ Compila tutti i campi');
+                }
+            }
+
+            function addConsumerLink() {
+                const nome = document.getElementById('admin-consumatori-nome').value;
+                const url = document.getElementById('admin-consumatori-url').value;
+                if (nome && url) {
+                    adminData.consumatori.push({ nome, url, date: new Date().toISOString() });
+                    saveAdminData();
+                    alert('✅ Link aggiunto: ' + nome);
+                    document.getElementById('admin-consumatori-nome').value = '';
+                    document.getElementById('admin-consumatori-url').value = '';
+                } else {
+                    alert('❌ Compila tutti i campi');
+                }
+            }
+
+            function addTutelaLink() {
+                const nome = document.getElementById('admin-tutela-nome').value;
+                const url = document.getElementById('admin-tutela-url').value;
+                if (nome && url) {
+                    adminData.tutela.push({ nome, url, date: new Date().toISOString() });
+                    saveAdminData();
+                    alert('✅ Link aggiunto: ' + nome);
+                    document.getElementById('admin-tutela-nome').value = '';
+                    document.getElementById('admin-tutela-url').value = '';
+                } else {
+                    alert('❌ Compila tutti i campi');
+                }
+            }
+
+            function addPsicoLink() {
+                const nome = document.getElementById('admin-psico-nome').value;
+                const url = document.getElementById('admin-psico-url').value;
+                if (nome && url) {
+                    adminData.psicologico.push({ nome, url, date: new Date().toISOString() });
+                    saveAdminData();
+                    alert('✅ Link aggiunto: ' + nome);
+                    document.getElementById('admin-psico-nome').value = '';
+                    document.getElementById('admin-psico-url').value = '';
+                } else {
+                    alert('❌ Compila tutti i campi');
+                }
+            }
+
+            function addMentalLink() {
+                const nome = document.getElementById('admin-mental-nome').value;
+                const url = document.getElementById('admin-mental-url').value;
+                if (nome && url) {
+                    adminData.mentalHealth.push({ nome, url, date: new Date().toISOString() });
+                    saveAdminData();
+                    alert('✅ Link aggiunto: ' + nome);
+                    document.getElementById('admin-mental-nome').value = '';
+                    document.getElementById('admin-mental-url').value = '';
+                } else {
+                    alert('❌ Compila tutti i campi');
+                }
+            }
+
+            // Load data on page load
+            loadAdminData();
+        </script>
 
         <div style="text-align: center; margin-top: 4rem;">
             <a href="index.html" class="download-button" style="font-size: 1.1rem; padding: 1.2rem 2.5rem;">
