@@ -442,6 +442,8 @@
     <script type="module">
         import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js';
         import { getFirestore, doc, getDoc, setDoc, updateDoc, increment } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js';
+        import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, sendEmailVerification, onAuthStateChanged, signOut } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js';
+        import { getAnalytics, logEvent } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-analytics.js';
 
         const firebaseConfig = {
             apiKey: "AIzaSyAwWuWSPsQBO0RrJFmMHJqrkMj02MgKR_8",
@@ -455,6 +457,15 @@
 
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
+        const auth = getAuth(app);
+        const analytics = getAnalytics(app);
+
+        // Analytics: Traccia pagina visitata
+        logEvent(analytics, 'page_view', {
+            page_title: 'Referenze Istituzionali',
+            page_location: window.location.href,
+            page_path: window.location.pathname
+        });
 
         window.ratingSystem = {
             db: db,
@@ -579,6 +590,82 @@
             }
         };
 
+        // 🔐 SISTEMA AUTENTICAZIONE UTENTI
+        window.authSystem = {
+            currentUser: null,
+            
+            async register(email, password) {
+                try {
+                    const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+                    await sendEmailVerification(userCredential.user);
+                    logEvent(analytics, 'sign_up', { method: 'email' });
+                    
+                    // Salva profilo utente in Firestore
+                    await setDoc(doc(db, 'users', userCredential.user.uid), {
+                        email: email,
+                        registeredAt: new Date().toISOString(),
+                        emailVerified: false,
+                        newsletter: true,
+                        watermark: `USER_${userCredential.user.uid}_${Date.now()}`
+                    });
+                    
+                    return { success: true, message: '✅ Registrazione completata! Controlla la tua email per verificare l\'account.' };
+                } catch (error) {
+                    console.error('Errore registrazione:', error);
+                    let message = 'Errore durante la registrazione';
+                    if (error.code === 'auth/email-already-in-use') message = '⚠️ Email già registrata';
+                    if (error.code === 'auth/weak-password') message = '⚠️ Password troppo debole (min 6 caratteri)';
+                    return { success: false, message };
+                }
+            },
+            
+            async login(email, password) {
+                try {
+                    const userCredential = await signInWithEmailAndPassword(auth, email, password);
+                    logEvent(analytics, 'login', { method: 'email' });
+                    return { success: true, message: '✅ Accesso effettuato!', user: userCredential.user };
+                } catch (error) {
+                    console.error('Errore login:', error);
+                    let message = 'Email o password errati';
+                    if (error.code === 'auth/user-not-found') message = '⚠️ Utente non trovato';
+                    if (error.code === 'auth/wrong-password') message = '⚠️ Password errata';
+                    return { success: false, message };
+                }
+            },
+            
+            async logout() {
+                await signOut(auth);
+                logEvent(analytics, 'logout');
+                this.currentUser = null;
+            }
+        };
+
+        // Monitora stato autenticazione
+        onAuthStateChanged(auth, async (user) => {
+            window.authSystem.currentUser = user;
+            const authBtn = document.getElementById('authButton');
+            const userInfo = document.getElementById('userInfo');
+            
+            if (user) {
+                if (authBtn) authBtn.textContent = '🔓 Logout';
+                if (userInfo) {
+                    userInfo.innerHTML = `👤 ${user.email} ${user.emailVerified ? '✅' : '⚠️ Email non verificata'}`;
+                    userInfo.style.display = 'block';
+                }
+                
+                // Watermark dinamico per utente loggato
+                console.log(`%c🔒 Sessione protetta: ${user.uid}`, 'color: green; font-weight: bold;');
+                logEvent(analytics, 'user_session', { user_id: user.uid });
+            } else {
+                if (authBtn) authBtn.textContent = '🔑 Login/Registrati';
+                if (userInfo) userInfo.style.display = 'none';
+                
+                // Watermark anonimo con timestamp univoco
+                const anonymousWatermark = `ANON_${Date.now()}_${Math.random().toString(36).substring(7)}`;
+                console.log(`%c⚠️ Sessione anonima tracciata: ${anonymousWatermark}`, 'color: orange; font-weight: bold;');
+            }
+        });
+
         document.addEventListener('DOMContentLoaded', () => {
             window.ratingSystem.initStars('rating-fca-firm-checker', 'fca-firm-checker');
             window.ratingSystem.initStars('rating-ofcom', 'ofcom-online-safety');
@@ -605,6 +692,14 @@
             <a href="curriculum.html" style="color: white; text-decoration: none; font-weight: bold; font-size: 1.05rem; padding: 0.5rem 1.5rem; background: rgba(255,215,0,0.15); border-radius: 8px; transition: all 0.3s ease; border: 2px solid rgba(255,215,0,0.3);" onmouseover="this.style.background='rgba(255,215,0,0.25)';" onmouseout="this.style.background='rgba(255,215,0,0.15)';">
                 👨‍⚖️ Avv Stanca - Curriculum
             </a>
+            
+            <!-- User Info & Auth Button -->
+            <div style="display: flex; gap: 1rem; align-items: center; margin-left: auto;">
+                <span id="userInfo" style="color: #FFD700; font-size: 0.9rem; display: none;"></span>
+                <button id="authButton" onclick="toggleAuthModal()" style="background: linear-gradient(135deg, #667eea, #764ba2); color: white; border: none; padding: 0.6rem 1.2rem; border-radius: 8px; font-weight: 600; cursor: pointer; font-size: 0.95rem; transition: transform 0.2s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+                    🔑 Login/Registrati
+                </button>
+            </div>
         </div>
     </nav>
     <!-- Sticky Menu (appare dopo scroll) -->
@@ -2542,6 +2637,187 @@
 
             // Load data on page load
             loadAdminData();
+        </script>
+
+        <!-- 🔐 MODAL AUTENTICAZIONE -->
+        <div id="authModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 10000; backdrop-filter: blur(5px);">
+            <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: linear-gradient(135deg, #1e293b, #334155); padding: 3rem; border-radius: 20px; box-shadow: 0 20px 60px rgba(0,0,0,0.5); max-width: 450px; width: 90%;">
+                <button onclick="toggleAuthModal()" style="position: absolute; top: 1rem; right: 1rem; background: transparent; border: none; color: white; font-size: 2rem; cursor: pointer; line-height: 1;">&times;</button>
+                
+                <h2 style="color: #FFD700; text-align: center; margin-bottom: 2rem; font-size: 1.8rem;">🔐 Area Utenti</h2>
+                
+                <!-- Tabs -->
+                <div style="display: flex; gap: 1rem; margin-bottom: 2rem;">
+                    <button id="loginTab" onclick="switchAuthTab('login')" style="flex: 1; padding: 0.8rem; background: linear-gradient(135deg, #667eea, #764ba2); color: white; border: none; border-radius: 8px; font-weight: 600; cursor: pointer;">Login</button>
+                    <button id="registerTab" onclick="switchAuthTab('register')" style="flex: 1; padding: 0.8rem; background: rgba(255,255,255,0.1); color: white; border: none; border-radius: 8px; font-weight: 600; cursor: pointer;">Registrati</button>
+                </div>
+                
+                <!-- Login Form -->
+                <div id="loginForm">
+                    <input type="email" id="loginEmail" placeholder="📧 Email" style="width: 100%; padding: 1rem; margin-bottom: 1rem; border: 2px solid rgba(255,255,255,0.2); border-radius: 8px; background: rgba(255,255,255,0.05); color: white; font-size: 1rem;">
+                    <input type="password" id="loginPassword" placeholder="🔒 Password" style="width: 100%; padding: 1rem; margin-bottom: 1.5rem; border: 2px solid rgba(255,255,255,0.2); border-radius: 8px; background: rgba(255,255,255,0.05); color: white; font-size: 1rem;">
+                    <button onclick="handleLogin()" style="width: 100%; padding: 1rem; background: linear-gradient(135deg, #10b981, #059669); color: white; border: none; border-radius: 8px; font-weight: 600; font-size: 1.1rem; cursor: pointer; transition: transform 0.2s;" onmouseover="this.style.transform='scale(1.02)'" onmouseout="this.style.transform='scale(1)'">
+                        ✅ Accedi
+                    </button>
+                </div>
+                
+                <!-- Register Form -->
+                <div id="registerForm" style="display: none;">
+                    <input type="email" id="registerEmail" placeholder="📧 Email" style="width: 100%; padding: 1rem; margin-bottom: 1rem; border: 2px solid rgba(255,255,255,0.2); border-radius: 8px; background: rgba(255,255,255,0.05); color: white; font-size: 1rem;">
+                    <input type="password" id="registerPassword" placeholder="🔒 Password (min 6 caratteri)" style="width: 100%; padding: 1rem; margin-bottom: 1rem; border: 2px solid rgba(255,255,255,0.2); border-radius: 8px; background: rgba(255,255,255,0.05); color: white; font-size: 1rem;">
+                    <label style="display: flex; align-items: center; gap: 0.5rem; color: white; margin-bottom: 1.5rem; font-size: 0.95rem;">
+                        <input type="checkbox" id="newsletterCheckbox" checked style="width: 20px; height: 20px;">
+                        <span>📬 Ricevi news e aggiornamenti</span>
+                    </label>
+                    <button onclick="handleRegister()" style="width: 100%; padding: 1rem; background: linear-gradient(135deg, #f59e0b, #d97706); color: white; border: none; border-radius: 8px; font-weight: 600; font-size: 1.1rem; cursor: pointer; transition: transform 0.2s;" onmouseover="this.style.transform='scale(1.02)'" onmouseout="this.style.transform='scale(1)'">
+                        🎉 Registrati
+                    </button>
+                    <p style="color: rgba(255,255,255,0.7); font-size: 0.85rem; margin-top: 1rem; text-align: center;">
+                        Riceverai un'email di verifica. Solo utenti verificati possono votare.
+                    </p>
+                </div>
+                
+                <div id="authMessage" style="margin-top: 1.5rem; padding: 1rem; border-radius: 8px; display: none; text-align: center; font-weight: 600;"></div>
+            </div>
+        </div>
+
+        <script>
+            function toggleAuthModal() {
+                const modal = document.getElementById('authModal');
+                const isVisible = modal.style.display === 'block';
+                modal.style.display = isVisible ? 'none' : 'block';
+                
+                // Se l'utente è loggato, esegui logout
+                if (window.authSystem.currentUser && isVisible) {
+                    window.authSystem.logout();
+                    showAuthMessage('✅ Logout effettuato', 'success');
+                    setTimeout(() => modal.style.display = 'none', 1500);
+                }
+            }
+
+            function switchAuthTab(tab) {
+                const loginTab = document.getElementById('loginTab');
+                const registerTab = document.getElementById('registerTab');
+                const loginForm = document.getElementById('loginForm');
+                const registerForm = document.getElementById('registerForm');
+                
+                if (tab === 'login') {
+                    loginTab.style.background = 'linear-gradient(135deg, #667eea, #764ba2)';
+                    registerTab.style.background = 'rgba(255,255,255,0.1)';
+                    loginForm.style.display = 'block';
+                    registerForm.style.display = 'none';
+                } else {
+                    registerTab.style.background = 'linear-gradient(135deg, #667eea, #764ba2)';
+                    loginTab.style.background = 'rgba(255,255,255,0.1)';
+                    registerForm.style.display = 'block';
+                    loginForm.style.display = 'none';
+                }
+            }
+
+            async function handleLogin() {
+                const email = document.getElementById('loginEmail').value;
+                const password = document.getElementById('loginPassword').value;
+                
+                if (!email || !password) {
+                    showAuthMessage('⚠️ Compila tutti i campi', 'error');
+                    return;
+                }
+                
+                const result = await window.authSystem.login(email, password);
+                showAuthMessage(result.message, result.success ? 'success' : 'error');
+                
+                if (result.success) {
+                    setTimeout(() => {
+                        document.getElementById('authModal').style.display = 'none';
+                    }, 1500);
+                }
+            }
+
+            async function handleRegister() {
+                const email = document.getElementById('registerEmail').value;
+                const password = document.getElementById('registerPassword').value;
+                
+                if (!email || !password) {
+                    showAuthMessage('⚠️ Compila tutti i campi', 'error');
+                    return;
+                }
+                
+                const result = await window.authSystem.register(email, password);
+                showAuthMessage(result.message, result.success ? 'success' : 'error');
+                
+                if (result.success) {
+                    setTimeout(() => {
+                        switchAuthTab('login');
+                    }, 2000);
+                }
+            }
+
+            function showAuthMessage(message, type) {
+                const messageEl = document.getElementById('authMessage');
+                messageEl.textContent = message;
+                messageEl.style.display = 'block';
+                messageEl.style.background = type === 'success' 
+                    ? 'linear-gradient(135deg, #10b981, #059669)' 
+                    : 'linear-gradient(135deg, #ef4444, #dc2626)';
+                messageEl.style.color = 'white';
+            }
+
+            // 🔒 PROTEZIONI ANTI-COPIA RAFFORZATE
+            (function() {
+                // Protezione 1: Disabilita copia massiva
+                let copyCount = 0;
+                document.addEventListener('copy', (e) => {
+                    copyCount++;
+                    const selection = window.getSelection().toString();
+                    
+                    if (selection.length > 800 || copyCount > 5) {
+                        e.preventDefault();
+                        console.warn('%c⚠️ PROTEZIONE COPYRIGHT ATTIVATA', 'color: red; font-size: 16px; font-weight: bold;');
+                        console.warn('© 2026 Avvocato Marcello Stanca - Copia eccessiva bloccata');
+                        alert('⚠️ Protezione Copyright: Copia eccessiva non consentita.\n\n© 2026 Avvocato Marcello Stanca - Tutti i diritti riservati');
+                    }
+                    
+                    // Watermark nella clipboard
+                    if (selection.length > 200) {
+                        const watermarkedText = selection + '\n\n---\n© 2026 Avvocato Marcello Stanca - Firenze, Italy\nFonte: ' + window.location.href + '\nData: ' + new Date().toLocaleString();
+                        e.clipboardData.setData('text/plain', watermarkedText);
+                        e.preventDefault();
+                    }
+                });
+
+                // Protezione 2: Disabilita DevTools persistente
+                setInterval(() => {
+                    const threshold = 160;
+                    if (window.outerWidth - window.innerWidth > threshold || 
+                        window.outerHeight - window.innerHeight > threshold) {
+                        console.clear();
+                        console.log('%c🔒 DATABASE PROTETTO', 'color: red; font-size: 24px; font-weight: bold;');
+                        console.log('%c© 2026 Avvocato Marcello Stanca', 'color: red; font-size: 16px;');
+                        console.log('%clawyer@marcellostanca.it', 'color: red; font-size: 14px;');
+                    }
+                }, 1000);
+
+                // Protezione 3: Blocca tasto destro su elementi sensibili
+                document.querySelectorAll('.auth-credential, .download-link, .external-link').forEach(el => {
+                    el.addEventListener('contextmenu', (e) => {
+                        e.preventDefault();
+                        console.warn('⚠️ Contenuto protetto da copyright');
+                    });
+                });
+
+                // Protezione 4: Watermark invisibile nel DOM
+                const watermark = document.createElement('meta');
+                watermark.name = 'copyright-tracking';
+                watermark.content = `SESSION_${Date.now()}_${Math.random().toString(36).substring(7)}`;
+                document.head.appendChild(watermark);
+
+                // Protezione 5: Tracking copie non autorizzate
+                window.addEventListener('beforeunload', () => {
+                    if (copyCount > 3) {
+                        console.warn(`%c⚠️ ATTIVITÀ SOSPETTA: ${copyCount} copie effettuate`, 'color: red; font-weight: bold;');
+                    }
+                });
+            })();
         </script>
 
         <div style="text-align: center; margin-top: 4rem;">
