@@ -29,7 +29,6 @@
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             line-height: 1.6;
             color: #1e293b;
-            cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'><polygon points='4,28 16,0 20,12 32,16' fill='%23ffffff'/><polygon points='4,28 16,20 20,24' fill='%23ff6b6b'/></svg>") 4 0, auto;
         }
 
         /* Ensure background stars never block interactions */
@@ -136,12 +135,78 @@
             text-align: center;
             margin: 3rem 0 2rem;
         }
+
+        /* Navigazione principale: barra superiore a scomparsa richiamabile portando il mouse sul bordo alto */
+        #main-top-nav {
+            background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+            padding: 1rem 0;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1100;
+            transform: translateY(-100%);
+            transition: transform 0.25s ease;
+        }
+
+        #main-top-nav.nav-visible {
+            transform: translateY(0);
+        }
         
         .documents-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 2rem;
             margin: 2rem 0;
+        }
+
+        /* Sezione Prevenzione Truffe: 5 banner orizzontali pieni schermo */
+        .prevenzione-banners {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            margin-top: 3rem;
+        }
+
+        .prevenzione-banner {
+            border-radius: 14px;
+            padding: 1.75rem 2rem;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+            background: white;
+            text-align: justify;
+        }
+
+        .prevenzione-banner h3,
+        .prevenzione-banner h4 {
+            margin-top: 0;
+        }
+
+        .banner-oane {
+            border-left: 6px solid #8B4789;
+        }
+
+        .banner-aarp-mental {
+            border-left: 6px solid #E13A3E;
+        }
+
+        .banner-aarp-servizi {
+            border-left: 6px solid #FFA500;
+        }
+
+        .banner-aarp-stats {
+            border-left: 6px solid #0066cc;
+        }
+
+        .banner-aarp-impatti {
+            background: linear-gradient(135deg, #DC143C 0%, #8B0000 100%);
+            color: white;
+            border-left: 6px solid #FFD700;
+        }
+
+        .banner-aarp-impatti h3,
+        .banner-aarp-impatti p {
+            color: inherit;
         }
         
         .document-card {
@@ -737,8 +802,8 @@
     </script>
 </head>
 <body>
-    <!-- Main Navigation -->
-    <nav style="background: linear-gradient(135deg, #1e293b 0%, #334155 100%); padding: 1rem 0; box-shadow: 0 4px 12px rgba(0,0,0,0.15); position: sticky; top: 0; z-index: 999;">
+    <!-- Main Navigation (compare quando il mouse tocca il bordo superiore) -->
+    <nav id="main-top-nav" class="nav-visible">
         <div style="max-width: 1200px; margin: 0 auto; display: flex; gap: 1.5rem; justify-content: center; align-items: center; flex-wrap: wrap; padding: 0 1rem;">
             <a href="index.html" style="color: white; text-decoration: none; font-weight: 500; font-size: 1.05rem; padding: 0.5rem 1.5rem; background: rgba(255,255,255,0.05); border-radius: 8px; transition: all 0.3s ease;" onmouseover="this.style.background='rgba(255,255,255,0.15)';" onmouseout="this.style.background='rgba(255,255,255,0.05)';">
                 🏠 Database Autorità
@@ -936,13 +1001,34 @@
             canvas.height = window.innerHeight;
         });
 
-        // Sticky menu on scroll
+        // Sticky menu on scroll + barra principale richiamabile
         window.addEventListener('scroll', () => {
             const stickyMenu = document.getElementById('sticky-menu');
             if (window.scrollY > 800) {
                 stickyMenu.style.display = 'block';
             } else {
                 stickyMenu.style.display = 'none';
+            }
+
+            const mainNav = document.getElementById('main-top-nav');
+            if (!mainNav) return;
+
+            // In alto alla pagina la barra resta visibile
+            if (window.scrollY < 80) {
+                mainNav.classList.add('nav-visible');
+            }
+        });
+
+        // Mostra la barra principale quando il mouse tocca il bordo superiore dello schermo
+        document.addEventListener('mousemove', (event) => {
+            const mainNav = document.getElementById('main-top-nav');
+            if (!mainNav) return;
+
+            if (event.clientY <= 8) {
+                mainNav.classList.add('nav-visible');
+            } else if (window.scrollY > 120) {
+                // Se siamo scesi nella pagina e il mouse non è più sul bordo alto, nascondi di nuovo la barra
+                mainNav.classList.remove('nav-visible');
             }
         });
 
@@ -965,10 +1051,10 @@
         <!-- Sommario testuale dei pianeti / link principali -->
         <section id="sommario-referenze" style="background: #020617; color: #e5e7eb; padding: 3rem 1.5rem 4rem 1.5rem;">
             <div style="max-width: 1200px; margin: 0 auto;">
-                <h2 style="text-align: center; font-size: 1.8rem; margin-bottom: 0.75rem; color: #f9fafb;">🔭 Sommario missioni Security Financial</h2>
+                <h2 style="text-align: center; font-size: 1.8rem; margin-bottom: 0.75rem; color: #f9fafb;">🔭 Partecipa alla missione Security Financial! Scegli il tuo Stargate !</h2>
                 <p style="text-align: center; max-width: 780px; margin: 0 auto 2.5rem auto; color: #9ca3af; line-height: 1.7;">
                     Scegli un <strong>pianeta</strong> oppure un <strong>link testuale</strong> per raggiungere subito la sezione di tuo interesse.
-                    I colori richiamano i pianeti in orbita sopra questo sommario.
+                    I colori richiamano i pianeti in orbita sopra questo sommario e ogni card è uno <strong>Stargate</strong> verso una missione Security Financial.
                 </p>
 
                 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.5rem;">
@@ -1035,6 +1121,48 @@
                         </div>
                     </a>
                 </div>
+
+                <!-- Accesso rapido agli Strumenti Antifrode Digitali -->
+                <div style="margin-top: 2.5rem;">
+                    <h3 style="text-align: center; font-size: 1.2rem; margin-bottom: 1rem; color: #e5e7eb;">🚀 Strumenti Antifrode Digitali – accesso rapido</h3>
+                    <p style="text-align: center; max-width: 780px; margin: 0 auto 1.5rem auto; color: #9ca3af; font-size: 0.85rem;">
+                        Raggiungi direttamente le schede di <strong>Firm Checker FCA</strong>, <strong>OFCOM Online Safety</strong>,
+                        <strong>Compliance Corylated</strong> e <strong>DSA Notice &amp; Action</strong> nella sezione Strumenti Antifrode Digitali.
+                    </p>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 1rem;">
+                        <a href="#strumento-fca-firm-checker" style="display: flex; align-items: center; gap: 0.75rem; padding: 0.9rem 1.1rem; border-radius: 12px; text-decoration: none; background: rgba(15,23,42,0.95); border-left: 4px solid #0056D6; color: #e5e7eb;">
+                            <span style="font-size: 1.4rem;">🔍</span>
+                            <div>
+                                <div style="font-weight: 700; color: #bfdbfe; font-size: 0.95rem;">FCA Firm Checker (UK)</div>
+                                <div style="font-size: 0.8rem; color: #9ca3af;">Verifica se una banca o un intermediario è autorizzato</div>
+                            </div>
+                        </a>
+
+                        <a href="#strumento-ofcom-online-safety" style="display: flex; align-items: center; gap: 0.75rem; padding: 0.9rem 1.1rem; border-radius: 12px; text-decoration: none; background: rgba(15,23,42,0.95); border-left: 4px solid #0ea5e9; color: #e5e7eb;">
+                            <span style="font-size: 1.4rem;">🛡️</span>
+                            <div>
+                                <div style="font-weight: 700; color: #bae6fd; font-size: 0.95rem;">OFCOM Online Safety</div>
+                                <div style="font-size: 0.8rem; color: #9ca3af;">Poteri contro contenuti fraudolenti e truffe online</div>
+                            </div>
+                        </a>
+
+                        <a href="#strumento-compliance-corylated" style="display: flex; align-items: center; gap: 0.75rem; padding: 0.9rem 1.1rem; border-radius: 12px; text-decoration: none; background: rgba(15,23,42,0.95); border-left: 4px solid #0077B5; color: #e5e7eb;">
+                            <span style="font-size: 1.4rem;">📰</span>
+                            <div>
+                                <div style="font-weight: 700; color: #bfdbfe; font-size: 0.95rem;">Compliance Corylated</div>
+                                <div style="font-size: 0.8rem; color: #9ca3af;">Notizie e analisi su frodi, NCA, Stop Scams UK</div>
+                            </div>
+                        </a>
+
+                        <a href="#strumento-dsa-notice-action" style="display: flex; align-items: center; gap: 0.75rem; padding: 0.9rem 1.1rem; border-radius: 12px; text-decoration: none; background: rgba(15,23,42,0.95); border-left: 4px solid #003399; color: #e5e7eb;">
+                            <span style="font-size: 1.4rem;">🇪🇺</span>
+                            <div>
+                                <div style="font-weight: 700; color: #bfdbfe; font-size: 0.95rem;">DSA Notice &amp; Action</div>
+                                <div style="font-size: 0.8rem; color: #9ca3af;">Segnalare contenuti illegali su piattaforme digitali UE</div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
             </div>
         </section>
 
@@ -1063,6 +1191,32 @@
                     <a href="IOSCO-annual-Report2022.pdf" target="_blank" class="download-button" style="background: #0066cc; display: inline-block;">
                         📥 Download Report PDF
                     </a>
+                </div>
+
+                <!-- ESMA Card (spostata accanto a IOSCO) -->
+                <div class="media-card" style="background: white; border-radius: 12px; padding: 2rem; box-shadow: 0 4px 12px rgba(0,0,0,0.1); border-left: 5px solid #003DA5;">
+                    <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem;">
+                        <span style="font-size: 3rem;">🇪🇺</span>
+                        <div>
+                            <h3 style="color: #003DA5; margin: 0; font-size: 1.3rem;">ESMA - European Securities Markets Authority</h3>
+                            <p style="margin: 0; color: #64748b; font-size: 0.9rem;">Autorità europea vigilanza mercati finanziari</p>
+                        </div>
+                    </div>
+                    <p style="margin-bottom: 1.5rem; color: #1e293b;">
+                        <strong>Natasha Cazenave - Introductory Statement</strong><br>
+                        Executive Director ESMA: trasparenza derivati, MiFIR Review, protezione investitori retail, coordinamento autorità nazionali.
+                    </p>
+                    <div style="background: #f0f4ff; padding: 1rem; border-radius: 8px; margin-bottom: 1rem;">
+                        <p style="margin: 0; font-size: 0.9rem; color: #003DA5;">📌 <strong>MiFIR Review 2025</strong><br>Final Report: derivatives transparency, CTP packages, input/output data</p>
+                    </div>
+                    <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                        <a href="ESMA_Natasha_Cazenave_introductory_statement.pdf" target="_blank" class="download-button" style="background: #003DA5; display: inline-block;">
+                            📥 Introductory Statement PDF
+                        </a>
+                        <a href="https://www.esma.europa.eu/sites/default/files/2025-12/ESMA74-276584410-10987_MiFIR_Review_Final_Report_on_derivatives__transparency__packages__CTP_input_output_.pdf" target="_blank" rel="noopener noreferrer" class="download-button" style="background: #0056D6; display: inline-block;">
+                            📄 MiFIR Review Report 2025
+                        </a>
+                    </div>
                 </div>
 
                 <!-- CEB Card -->
@@ -1136,34 +1290,8 @@
                     </a>
                 </div>
 
-                <!-- ESMA Card -->
-                <div class="media-card" style="background: white; border-radius: 12px; padding: 2rem; box-shadow: 0 4px 12px rgba(0,0,0,0.1); border-left: 5px solid #003DA5;">
-                    <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem;">
-                        <span style="font-size: 3rem;">🇪🇺</span>
-                        <div>
-                            <h3 style="color: #003DA5; margin: 0; font-size: 1.3rem;">ESMA - European Securities Markets Authority</h3>
-                            <p style="margin: 0; color: #64748b; font-size: 0.9rem;">Autorità europea vigilanza mercati finanziari</p>
-                        </div>
-                    </div>
-                    <p style="margin-bottom: 1.5rem; color: #1e293b;">
-                        <strong>Natasha Cazenave - Introductory Statement</strong><br>
-                        Executive Director ESMA: trasparenza derivati, MiFIR Review, protezione investitori retail, coordinamento autorità nazionali.
-                    </p>
-                    <div style="background: #f0f4ff; padding: 1rem; border-radius: 8px; margin-bottom: 1rem;">
-                        <p style="margin: 0; font-size: 0.9rem; color: #003DA5;">📌 <strong>MiFIR Review 2025</strong><br>Final Report: derivatives transparency, CTP packages, input/output data</p>
-                    </div>
-                    <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
-                        <a href="ESMA_Natasha_Cazenave_introductory_statement.pdf" target="_blank" class="download-button" style="background: #003DA5; display: inline-block;">
-                            📥 Introductory Statement PDF
-                        </a>
-                        <a href="https://www.esma.europa.eu/sites/default/files/2025-12/ESMA74-276584410-10987_MiFIR_Review_Final_Report_on_derivatives__transparency__packages__CTP_input_output_.pdf" target="_blank" rel="noopener noreferrer" class="download-button" style="background: #0056D6; display: inline-block;">
-                            📄 MiFIR Review Report 2025
-                        </a>
-                    </div>
-                </div>
-
-                <!-- FinCoNet Card -->
-                <div class="media-card" style="background: white; border-radius: 12px; padding: 2rem; box-shadow: 0 4px 12px rgba(0,0,0,0.1); border-left: 5px solid #28A745;">
+                <!-- FinCoNet Card (banner orizzontale) -->
+                <div class="media-card" style="background: white; border-radius: 12px; padding: 2rem; box-shadow: 0 4px 12px rgba(0,0,0,0.1); border-left: 5px solid #28A745; grid-column: 1 / -1;">
                     <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem;">
                         <span style="font-size: 3rem;">🌍</span>
                         <div>
@@ -1242,8 +1370,8 @@
                     </div>
                 </div>
 
-                <!-- FCA Firm Checker Card -->
-                <div class="media-card" style="background: white; border-radius: 12px; padding: 2.5rem; box-shadow: 0 6px 20px rgba(0,0,0,0.15); border-left: 6px solid #0071CE;">
+                <!-- FCA Firm Checker Card (banner orizzontale) -->
+                <div class="media-card" style="background: white; border-radius: 12px; padding: 2.5rem; box-shadow: 0 6px 20px rgba(0,0,0,0.15); border-left: 6px solid #0071CE; grid-column: 1 / -1;">
                     <div style="display: flex; align-items: center; gap: 1.5rem; margin-bottom: 2rem;">
                         <span style="font-size: 4rem;">🇬🇧</span>
                         <div>
@@ -1530,7 +1658,7 @@
         <!-- Autorità di Vigilanza -->
         <section id="autorita-vigilanza" style="margin-top: 5rem; scroll-margin-top: 100px;">
             <h2 class="section-title">🏛️ Autorità di Vigilanza Finanziaria</h2>
-            <p class="section-subtitle">Enti regolatori internazionali responsabili della supervisione mercati finanziari e protezione consumatori</p>
+            <p class="section-subtitle" style="font-size: 2rem;">Enti regolatori internazionali responsabili della supervisione mercati finanziari e protezione consumatori</p>
 
             <div style="text-align: center; margin-top: 1rem;">
                 <a href="#sommario-referenze" class="download-button" style="background: #020617; border: 1px solid #334155;">⬆ Torna al sommario</a>
@@ -1553,6 +1681,28 @@
                     <div style="display: flex; gap: 0.8rem; flex-wrap: wrap;">
                         <a href="https://www.fca.org.uk/" target="_blank" rel="noopener noreferrer" style="display: inline-block; background: #0056D6; color: white; padding: 0.7rem 1.5rem; text-decoration: none; border-radius: 6px; font-size: 0.9rem; font-weight: 600;">🌐 Homepage</a>
                         <a href="https://register.fca.org.uk/s/" target="_blank" rel="noopener noreferrer" style="display: inline-block; background: #28A745; color: white; padding: 0.7rem 1.5rem; text-decoration: none; border-radius: 6px; font-size: 0.9rem; font-weight: 600;">📋 Financial Services Register</a>
+                    </div>
+                </div>
+
+                <!-- Action Fraud UK Card -->
+                <div class="media-card" style="background: white; border-radius: 12px; padding: 2.5rem; box-shadow: 0 6px 20px rgba(0,0,0,0.15); border-left: 6px solid #16a34a;">
+                    <div style="display: flex; align-items: center; gap: 1.5rem; margin-bottom: 2rem;">
+                        <span style="font-size: 3.5rem;">🇬🇧</span>
+                        <div>
+                            <h3 style="color: #16a34a; margin: 0; font-size: 1.5rem;">Action Fraud &ndash; National Reporting Centre</h3>
+                            <p style="margin: 0.3rem 0 0 0; color: #64748b; font-size: 0.95rem;">Regno Unito | Fraud &amp; Cybercrime</p>
+                        </div>
+                    </div>
+                    <p style="line-height: 1.8; color: #1e293b; margin-bottom: 1.2rem;">
+                        Action Fraud is the UK's national reporting center for fraud and cybercrime, where individuals can report incidents and seek support.
+                    </p>
+                    <div style="background: #ecfdf3; padding: 1rem; border-radius: 6px; margin-bottom: 1.5rem;">
+                        <p style="margin: 0; font-size: 0.9rem; color: #166534;">
+                            📢 Punto unico per <strong>segnalare truffe online, frodi bancarie e cybercrime</strong>, con supporto informativo dedicato alle vittime nel Regno Unito.
+                        </p>
+                    </div>
+                    <div style="display: flex; gap: 0.8rem; flex-wrap: wrap;">
+                        <a href="https://www.actionfrauds.com/" target="_blank" rel="noopener noreferrer" style="display: inline-block; background: #16a34a; color: white; padding: 0.7rem 1.5rem; text-decoration: none; border-radius: 6px; font-size: 0.9rem; font-weight: 600;">🌐 Homepage Action Fraud</a>
                     </div>
                 </div>
 
@@ -1666,7 +1816,7 @@
             
             <div class="media-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(450px, 1fr)); gap: 2rem; margin-top: 3rem;">
                 <!-- FCA Firm Checker Card -->
-                <div class="media-card" style="background: white; border-radius: 12px; padding: 2.5rem; box-shadow: 0 6px 20px rgba(0,0,0,0.15); border-left: 6px solid #0056D6; grid-column: 1 / -1;">
+                <div id="strumento-fca-firm-checker" class="media-card" style="background: white; border-radius: 12px; padding: 2.5rem; box-shadow: 0 6px 20px rgba(0,0,0,0.15); border-left: 6px solid #0056D6; grid-column: 1 / -1;">
                     <div style="display: flex; align-items: center; gap: 1.5rem; margin-bottom: 2rem;">
                         <span style="font-size: 4rem;">🇬🇧</span>
                         <div>
@@ -1789,7 +1939,7 @@
                 </div>
 
                 <!-- OFCOM - Online Safety Act Card -->
-                <div class="media-card" style="background: white; border-radius: 12px; padding: 2.5rem; box-shadow: 0 6px 20px rgba(0,0,0,0.15); border-left: 6px solid #0056D6; grid-column: 1 / -1;">
+                <div id="strumento-ofcom-online-safety" class="media-card" style="background: white; border-radius: 12px; padding: 2.5rem; box-shadow: 0 6px 20px rgba(0,0,0,0.15); border-left: 6px solid #0056D6; grid-column: 1 / -1;">
                     <div style="display: flex; align-items: center; gap: 1.5rem; margin-bottom: 2rem;">
                         <span style="font-size: 4rem;">🇬🇧</span>
                         <div>
@@ -1941,7 +2091,7 @@
                 </div>
 
                 <!-- Compliance Corylated - Media Specializzati Card -->
-                <div class="media-card" style="background: white; border-radius: 12px; padding: 2.5rem; box-shadow: 0 6px 20px rgba(0,0,0,0.15); border-left: 6px solid #0077B5; grid-column: 1 / -1;">
+                <div id="strumento-compliance-corylated" class="media-card" style="background: white; border-radius: 12px; padding: 2.5rem; box-shadow: 0 6px 20px rgba(0,0,0,0.15); border-left: 6px solid #0077B5; grid-column: 1 / -1;">
                     <div style="display: flex; align-items: center; gap: 1.5rem; margin-bottom: 2rem;">
                         <span style="font-size: 4rem;">📰</span>
                         <div>
@@ -2050,7 +2200,7 @@
                 </div>
 
                 <!-- DSA Notice and Action Mechanism - European Commission Card -->
-                <div class="media-card" style="background: white; border-radius: 12px; padding: 2.5rem; box-shadow: 0 6px 20px rgba(0,0,0,0.15); border-left: 6px solid #003399; grid-column: 1 / -1;">
+                <div id="strumento-dsa-notice-action" class="media-card" style="background: white; border-radius: 12px; padding: 2.5rem; box-shadow: 0 6px 20px rgba(0,0,0,0.15); border-left: 6px solid #003399; grid-column: 1 / -1;">
                     <div style="display: flex; align-items: center; gap: 1.5rem; margin-bottom: 2rem;">
                         <span style="font-size: 4rem;">🇪🇺</span>
                         <div>
@@ -2181,12 +2331,17 @@
 
                 <!-- AGCM Autorità Antitrust Italia Card -->
                 <div class="media-card" style="background: white; border-radius: 12px; padding: 2.5rem; box-shadow: 0 6px 20px rgba(0,0,0,0.15); border-left: 6px solid #009246; grid-column: 1 / -1;">
-                    <div style="display: flex; align-items: center; gap: 1.5rem; margin-bottom: 2rem;">
-                        <span style="font-size: 4rem;">🇮🇹</span>
-                        <div>
-                            <h3 style="color: #009246; margin: 0; font-size: 1.7rem;">AGCM - Autorità Garante della Concorrenza e del Mercato</h3>
-                            <p style="margin: 0.5rem 0 0 0; color: #64748b; font-size: 1.1rem; font-weight: 500;">Antitrust Italia | Tutela Consumatori e Contrasto Pratiche Commerciali Scorrette</p>
+                    <div style="display: flex; align-items: center; gap: 1.5rem; margin-bottom: 2rem; justify-content: space-between; flex-wrap: wrap;">
+                        <div style="display: flex; align-items: center; gap: 1.5rem;">
+                            <span style="font-size: 4rem;">🇮🇹</span>
+                            <div>
+                                <h3 style="color: #009246; margin: 0; font-size: 1.7rem;">AGCM - Autorità Garante della Concorrenza e del Mercato</h3>
+                                <p style="margin: 0.5rem 0 0 0; color: #64748b; font-size: 1.1rem; font-weight: 500;">Antitrust Italia | Tutela Consumatori e Contrasto Pratiche Commerciali Scorrette</p>
+                            </div>
                         </div>
+                        <a href="https://www.agcm.it/" target="_blank" rel="noopener noreferrer" style="display: inline-block; background: #009246; color: white; padding: 0.7rem 1.6rem; text-decoration: none; border-radius: 999px; font-weight: 600; font-size: 0.95rem; white-space: nowrap; box-shadow: 0 3px 10px rgba(0,146,70,0.3);" onmouseover="this.style.background='#006633'; this.style.transform='translateY(-1px)'; this.style.boxShadow='0 5px 14px rgba(0,146,70,0.4)';" onmouseout="this.style.background='#009246'; this.style.transform='translateY(0)'; this.style.boxShadow='0 3px 10px rgba(0,146,70,0.3)';">
+                            🌐 Vai al sito AGCM
+                        </a>
                     </div>
 
                     <div style="background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%); padding: 2rem; border-radius: 12px; margin-bottom: 2rem;">
@@ -2326,7 +2481,7 @@
                         </ul>
                     </div>
 
-                    <div style="background: #f9fafb; padding: 1.8rem; border-radius: 12px; margin-bottom: 2rem; border-left: 4px solid #4C1D95;">
+                    <div id="petizioni-parlamento-europeo" style="background: #f9fafb; padding: 1.8rem; border-radius: 12px; margin-bottom: 2rem; border-left: 4px solid #4C1D95;">
                         <h4 style="color: #4C1D95; margin-bottom: 0.75rem; font-size: 1.2rem;">📄 Petizioni Parlamento Europeo accolte</h4>
                         <p style="margin: 0 0 1rem 0; font-size: 0.9rem; color: #475569; line-height: 1.7;">
                             <strong>Conferme del Presidente della Commissione Petizioni del Parlamento Europeo</strong>, che attestano
@@ -2475,6 +2630,106 @@
             </div>
         </section>
 
+        <!-- Deputati e Senatori -->
+        <section id="deputati-senatori" style="margin-top: 5rem; scroll-margin-top: 100px;">
+            <h2 class="section-title">🏛️ Deputati e Senatori del Parlamento Italiano attivi contro le truffe</h2>
+            <p class="section-subtitle">Parlamentari che si sono impegnati attivamente contro truffe finanziarie e riciclaggio</p>
+
+            <div style="text-align: center; margin-top: 1rem;">
+                <a href="#sommario-referenze" class="download-button" style="background: #020617; border: 1px solid #334155;">⬆ Torna al sommario</a>
+            </div>
+
+            <div class="media-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 2rem; margin-top: 3rem;">
+                <!-- On. Letizia Giorgianni Card -->
+                <div class="media-card" style="background: white; border-radius: 12px; padding: 2.5rem; box-shadow: 0 6px 20px rgba(0,0,0,0.12); border-left: 6px solid #1D4ED8;">
+                    <div style="display: flex; align-items: center; gap: 1.5rem; margin-bottom: 1.5rem;">
+                        <span style="font-size: 3.5rem;">👩‍⚖️</span>
+                        <div>
+                            <h3 style="color: #1D4ED8; margin: 0; font-size: 1.5rem;">On. Letizia Giorgianni</h3>
+                            <p style="margin: 0.4rem 0 0 0; color: #64748b; font-size: 0.95rem; font-weight: 500;">Deputata alla Camera dei Deputati &ndash; XIX Legislatura</p>
+                        </div>
+                    </div>
+
+                    <div style="background: #eff6ff; padding: 1.5rem; border-radius: 10px; margin-bottom: 1.5rem; border-left: 4px solid #1D4ED8;">
+                        <h4 style="color: #1D4ED8; margin-bottom: 0.75rem; font-size: 1.1rem;">🎯 Impegno parlamentare contro le truffe</h4>
+                        <p style="margin: 0; color: #1e293b; font-size: 0.95rem; line-height: 1.7;">
+                            Attività in Commissione e iniziative parlamentari finalizzate al <strong>contrasto delle truffe finanziarie e del riciclaggio</strong>, con particolare attenzione alla tutela dei risparmiatori e delle vittime di frodi digitali.
+                        </p>
+                    </div>
+
+                    <div style="display: grid; grid-template-columns: 1fr; gap: 0.75rem; margin-bottom: 1.5rem;">
+                        <a href="https://www.camera.it/leg19/29?tipoAttivita=attivitanonlegislativacommissione&amp;shadow_deputato=308787&amp;idLegislatura=19" target="_blank" rel="noopener noreferrer" class="download-button" style="background: #1D4ED8; font-size: 0.9rem;">
+                            🏛️ Attività in Commissione &ndash; Camera dei Deputati
+                        </a>
+                        <a href="https://www.camera.it/leg19/29?tipoAttivita=&amp;tipoVisAtt=&amp;tipoPersona=&amp;shadow_deputato=308787&amp;idLegislatura=19" target="_blank" rel="noopener noreferrer" class="download-button" style="background: #0f172a; font-size: 0.9rem;">
+                            📄 Curriculum studi e politico &ndash; Camera.it
+                        </a>
+                    </div>
+
+                    <div style="background: #f9fafb; padding: 1.4rem; border-radius: 10px; border: 1px dashed #e2e8f0;">
+                        <h4 style="margin: 0 0 0.75rem 0; font-size: 1rem; color: #111827;">📣 Canali pubblici ufficiali</h4>
+                        <p style="margin: 0 0 0.5rem 0; font-size: 0.95rem; color: #374151;">
+                            <strong>Facebook (pagina pubblica):</strong>
+                            <br>
+                            <a href="https://www.facebook.com/LaGiorgianni" target="_blank" rel="noopener noreferrer" style="color: #1D4ED8; text-decoration: underline;">facebook.com/LaGiorgianni</a>
+                        </p>
+                        <p style="margin: 0; font-size: 0.95rem; color: #374151;">
+                            <strong>Instagram:</strong> <span style="color: #111827;">@letiziagiorgianni</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <h2 class="section-title" style="margin-top: 5rem;">📄 ATTI NORMATIVI del Parlamento Europeo</h2>
+        
+        <div class="documents-grid">
+            <!-- Petizione 0645/2025 -->
+            <div class="document-card" style="display: block; background: white; border-radius: 12px; padding: 1.5rem; box-shadow: 0 4px 12px rgba(0,0,0,0.08); border-left: 4px solid #1D4ED8;">
+                <div style="display: flex; align-items: center; gap: 0.8rem; margin-bottom: 0.5rem;">
+                    <span style="font-size: 2.2rem;">🇪🇺</span>
+                    <div>
+                        <h3 class="document-title" style="margin: 0; font-size: 1.1rem; color: #1D4ED8;">Petizione 0645/2025</h3>
+                        <p style="margin: 0.25rem 0 0 0; font-size: 0.85rem; color: #64748b;">Misure per contrastare truffe via bonifici e carte nell'UE</p>
+                    </div>
+                </div>
+                <p style="margin: 0 0 0.5rem 0; font-size: 0.8rem; color: #0f172a;"><strong>Parlamento Europeo | Gennaio 2025</strong> · Status: <span style="color: #16A34A;">ACCETTATA</span></p>
+                <a href="Parlamento Europeo accoglie Petizione 645-2025 proposta da Marcello Stanca.pdf" class="download-button" download style="margin-top: 0.75rem; font-size: 0.9rem; padding: 0.7rem 1.4rem;">
+                    📥 Leggi il testo ufficiale (PDF)
+                </a>
+            </div>
+
+            <!-- Petizione 0888/2024 -->
+            <div class="document-card" style="display: block; background: white; border-radius: 12px; padding: 1.5rem; box-shadow: 0 4px 12px rgba(0,0,0,0.08); border-left: 4px solid #0F766E;">
+                <div style="display: flex; align-items: center; gap: 0.8rem; margin-bottom: 0.5rem;">
+                    <span style="font-size: 2.2rem;">🇪🇺</span>
+                    <div>
+                        <h3 class="document-title" style="margin: 0; font-size: 1.1rem; color: #0F766E;">Petizione 0888/2024</h3>
+                        <p style="margin: 0.25rem 0 0 0; font-size: 0.85rem; color: #64748b;">Obbligo per le banche di proteggere attivamente i clienti</p>
+                    </div>
+                </div>
+                <p style="margin: 0 0 0.5rem 0; font-size: 0.8rem; color: #0f172a;"><strong>Parlamento Europeo | Novembre 2024</strong> · Status: <span style="color: #16A34A;">ACCETTATA</span></p>
+                <a href="Petizione 888-2024 risposta da Parlamento Europeo.pdf" class="download-button" download style="margin-top: 0.75rem; font-size: 0.9rem; padding: 0.7rem 1.4rem;">
+                    📥 Leggi il testo ufficiale (PDF)
+                </a>
+            </div>
+
+            <!-- Accordo UE PSD3 -->
+            <div class="document-card" style="display: block; background: white; border-radius: 12px; padding: 1.5rem; box-shadow: 0 4px 12px rgba(0,0,0,0.08); border-left: 4px solid #F59E0B;">
+                <div style="display: flex; align-items: center; gap: 0.8rem; margin-bottom: 0.5rem;">
+                    <span style="font-size: 2.2rem;">📜</span>
+                    <div>
+                        <h3 class="document-title" style="margin: 0; font-size: 1.1rem; color: #B45309;">Accordo UE PSD3</h3>
+                        <p style="margin: 0.25rem 0 0 0; font-size: 0.85rem; color: #64748b;">Nuove regole europee sui servizi di pagamento e tutela frodi</p>
+                    </div>
+                </div>
+                <p style="margin: 0 0 0.5rem 0; font-size: 0.8rem; color: #0f172a;"><strong>27 Novembre 2024</strong> · Maggiore tutela contro le frodi sui pagamenti</p>
+                <a href="Parlamento Europeo-27 nov 2025 Accordo sui servizi di pagamento_ maggiore tutela contro le frodi.pdf" class="download-button" download style="margin-top: 0.75rem; font-size: 0.9rem; padding: 0.7rem 1.4rem;">
+                    📥 Leggi il testo dell'accordo (PDF)
+                </a>
+            </div>
+        </div>
+
         <!-- Prevenzione Truffe e Supporto Vittime -->
         <section id="prevenzione-truffe" style="margin-top: 5rem; scroll-margin-top: 100px;">
             <h2 class="section-title">🛡️ Prevenzione Truffe e Supporto alle Vittime</h2>
@@ -2484,9 +2739,9 @@
                 <a href="#sommario-referenze" class="download-button" style="background: #020617; border: 1px solid #334155;">⬆ Torna al sommario</a>
             </div>
 
-            <div class="media-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 2rem; margin-top: 3rem;">
-                <!-- Older Adult Nest Egg Card -->
-                <div class="media-card" style="background: white; border-radius: 12px; padding: 2.5rem; box-shadow: 0 6px 20px rgba(0,0,0,0.15); border-left: 6px solid #8B4789; grid-column: 1 / -1;">
+            <div id="supporto-psicologico" class="prevenzione-banners" style="scroll-margin-top: 120px;">
+                <!-- Banner 1: Older Adult Nest Egg (OANE) -->
+                <div class="media-card prevenzione-banner banner-oane">
                     <div style="display: flex; align-items: center; gap: 1.5rem; margin-bottom: 2rem;">
                         <span style="font-size: 4rem;">👴👵</span>
                         <div>
@@ -2599,82 +2854,92 @@
                     </div>
                 </div>
 
-                <!-- AARP Card -->
-                <div id="supporto-psicologico" class="media-card" style="background: white; border-radius: 12px; padding: 2.5rem; box-shadow: 0 6px 20px rgba(0,0,0,0.15); border-left: 6px solid #E13A3E; scroll-margin-top: 120px;">
-                    <div style="display: flex; align-items: center; gap: 1.5rem; margin-bottom: 2rem;">
-                        <span style="font-size: 4rem;">🇺🇸</span>
-                        <div>
-                            <h3 style="color: #E13A3E; margin: 0; font-size: 1.6rem;">AARP - American Association of Retired Persons</h3>
-                            <p style="margin: 0.3rem 0 0 0; color: #64748b; font-size: 1rem;">38+ milioni di membri USA | Advocacy anziani dal 1958</p>
+                <!-- Banner 2: Programma & Profilo AARP -->
+                <div class="media-card prevenzione-banner banner-aarp-mental">
+                        <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1.25rem;">
+                            <span style="font-size: 2.5rem;">🇺🇸</span>
+                            <div>
+                                <h3 style="color: #E13A3E; margin: 0; font-size: 1.3rem;">AARP &ndash; Mental Health Impact</h3>
+                                <p style="margin: 0.25rem 0 0 0; color: #64748b; font-size: 0.9rem;">38+ milioni di membri USA | Advocacy anziani dal 1958</p>
+                            </div>
                         </div>
-                    </div>
-
-                    <div style="background: linear-gradient(135deg, #fff5f5 0%, #ffe5e5 100%); padding: 2rem; border-radius: 12px; margin-bottom: 2rem;">
-                        <h4 style="color: #E13A3E; margin-bottom: 1rem; font-size: 1.3rem;">🧠 Mental Health Impact of Scams & Fraud</h4>
-                        <p style="line-height: 1.8; color: #1e293b; margin-bottom: 1rem;">
+                        <p style="line-height: 1.8; color: #1e293b; margin-bottom: 1rem; font-size: 0.95rem;">
                             <strong>Programma specializzato</strong> sull'impatto psicologico delle truffe finanziarie sugli anziani. 
                             AARP fornisce supporto terapeutico, risorse di recupero emotivo e consulenza per affrontare trauma, vergogna e isolamento post-truffa.
                         </p>
-                        <div style="background: white; padding: 1.5rem; border-radius: 8px; border-left: 4px solid #E13A3E;">
-                            <p style="margin: 0; font-size: 0.95rem; color: #1e293b; line-height: 1.8;">
-                                ✅ <strong>Supporto psicologico specializzato</strong> - trauma da frode<br>
-                                ✅ <strong>Gruppi di supporto peer-to-peer</strong> - condivisione esperienze<br>
-                                ✅ <strong>Risorse recovery emotivo</strong> - superare vergogna e senso di colpa<br>
-                                ✅ <strong>Prevenzione isolamento sociale</strong> - mantenere relazioni familiari
+                        <div style="background: #fff5f5; padding: 1.25rem; border-radius: 8px; border-left: 4px solid #E13A3E;">
+                            <p style="margin: 0; font-size: 0.9rem; color: #1e293b; line-height: 1.8;">
+                                ✅ <strong>Supporto psicologico specializzato</strong> (trauma da frode)<br>
+                                ✅ <strong>Gruppi peer-to-peer</strong> per condividere esperienze<br>
+                                ✅ <strong>Risorse di recovery emotivo</strong> per superare vergogna e senso di colpa<br>
+                                ✅ <strong>Prevenzione isolamento sociale</strong> e mantenimento dei legami familiari
                             </p>
                         </div>
                     </div>
 
-                    <div style="background: #fff9e6; padding: 1.5rem; border-radius: 8px; border-left: 4px solid #FFA500; margin-bottom: 2rem;">
-                        <h4 style="color: #FFA500; margin-bottom: 1rem; font-size: 1.2rem;">📞 Servizi AARP Anti-Frode</h4>
-                        <div style="line-height: 1.8; color: #1e293b;">
-                            <p style="margin: 0 0 1rem 0;"><strong>🔍 Fraud Watch Network</strong> - Rete nazionale monitoraggio truffe in tempo reale</p>
-                            <p style="margin: 0 0 1rem 0;"><strong>🆘 Helpline gratuita</strong> - Consulenza telefonica per vittime e familiari</p>
-                            <p style="margin: 0 0 1rem 0;"><strong>📚 Educational Resources</strong> - Guide, webinar, workshop prevenzione</p>
-                            <p style="margin: 0;"><strong>⚖️ Advocacy legislativa</strong> - Pressione su Congresso USA per leggi protezione consumatori</p>
+                <!-- Banner 3: Servizi Anti-Frode -->
+                <div class="media-card prevenzione-banner banner-aarp-servizi">
+                        <h3 style="color: #FFA500; margin: 0 0 1rem 0; font-size: 1.3rem;">📞 Servizi AARP Anti-Frode</h3>
+                        <div style="line-height: 1.8; color: #1e293b; font-size: 0.95rem;">
+                            <p style="margin: 0 0 0.9rem 0;"><strong>🔍 Fraud Watch Network</strong> &ndash; Rete nazionale monitoraggio truffe in tempo reale</p>
+                            <p style="margin: 0 0 0.9rem 0;"><strong>🆘 Helpline gratuita</strong> &ndash; Consulenza telefonica per vittime e familiari</p>
+                            <p style="margin: 0 0 0.9rem 0;"><strong>📚 Educational Resources</strong> &ndash; Guide, webinar, workshop di prevenzione</p>
+                            <p style="margin: 0;"><strong>⚖️ Advocacy legislativa</strong> &ndash; Pressione su Congresso USA per leggi di protezione consumatori</p>
                         </div>
                     </div>
 
-                    <div style="background: #f0f9ff; padding: 1.5rem; border-radius: 8px; margin-bottom: 2rem;">
-                        <h4 style="color: #0066cc; margin-bottom: 1rem; font-size: 1.1rem;">📊 Statistiche AARP</h4>
+                <!-- Banner 4: Statistiche AARP -->
+                <div class="media-card prevenzione-banner banner-aarp-stats">
+                        <h3 style="color: #0066cc; margin: 0 0 1rem 0; font-size: 1.3rem;">📊 Statistiche AARP</h3>
                         <p style="line-height: 1.8; color: #1e293b; margin: 0; font-size: 0.95rem;">
-                            <strong>38+ milioni di membri</strong> over 50 anni | <strong>$1.7 miliardi persi annualmente</strong> da anziani USA in truffe | 
-                            <strong>60% vittime</strong> non denuncia per vergogna | <strong>25% sviluppa depressione</strong> post-frode
+                            <strong>38+ milioni di membri</strong> over 50 anni<br>
+                            <strong>$1.7 miliardi</strong> persi ogni anno da anziani USA in truffe<br>
+                            <strong>60% delle vittime</strong> non denuncia per vergogna<br>
+                            <strong>25%</strong> sviluppa depressione clinica dopo la frode
                         </p>
                     </div>
 
-                    <div style="background: linear-gradient(135deg, #DC143C 0%, #8B0000 100%); padding: 2rem; border-radius: 12px; margin-bottom: 2rem; color: white;">
-                        <h4 style="color: #FFD700; margin-bottom: 1rem; font-size: 1.3rem;">💔 Impatto Salute Mentale</h4>
-                        <p style="line-height: 1.9; margin: 0; font-size: 1.05rem;">
-                            <strong>Le vittime di truffe finanziarie sperimentano:</strong><br>
+                <!-- Banner 5: Impatto Salute Mentale -->
+                <div class="media-card prevenzione-banner banner-aarp-impatti" style="padding: 2rem; box-shadow: 0 6px 20px rgba(0,0,0,0.18);">
+                        <h3 style="color: #FFD700; margin: 0 0 1rem 0; font-size: 1.3rem;">💔 Impatto Salute Mentale</h3>
+                        <p style="line-height: 1.9; margin: 0; font-size: 0.98rem;">
+                            <strong>Le vittime di truffe finanziarie possono sperimentare:</strong><br>
                             • Trauma psicologico paragonabile ad aggressione fisica<br>
                             • Depressione clinica (25% dei casi)<br>
                             • Ansia e attacchi di panico persistenti<br>
                             • Vergogna paralizzante e isolamento sociale<br>
-                            • Peggioramento condizioni croniche preesistenti<br>
-                            • Aumento rischio suicidio in anziani vulnerabili
+                            • Peggioramento di condizioni croniche preesistenti<br>
+                            • Aumento del rischio suicidario negli anziani vulnerabili
                         </p>
                     </div>
+                </div>
+            </div>
 
-                    <div style="display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center;">
-                        <a id="mental-health" href="https://www.aarp.org/money/scams-fraud/mental-health-impact/" target="_blank" rel="noopener noreferrer" class="download-button" style="background: #E13A3E; display: inline-block; font-size: 1.1rem; padding: 1rem 2rem;">
+            <!-- CTA e risorse aggiuntive AARP -->
+            <div style="margin-top: 2.5rem; text-align: center;">
+                    <div style="display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; margin-bottom: 1.5rem;">
+                        <a id="mental-health" href="https://www.aarp.org/money/scams-fraud/mental-health-impact/" target="_blank" rel="noopener noreferrer" class="download-button" style="background: #E13A3E; display: inline-block; font-size: 1.05rem; padding: 0.9rem 1.8rem;">
                             🧠 Mental Health Impact
                         </a>
-                        <a href="https://www.aarp.org/money/scams-fraud/" target="_blank" rel="noopener noreferrer" class="download-button" style="background: #C41E3A; display: inline-block; font-size: 1.1rem; padding: 1rem 2rem;">
+                        <a href="https://www.aarp.org/money/scams-fraud/" target="_blank" rel="noopener noreferrer" class="download-button" style="background: #C41E3A; display: inline-block; font-size: 1.05rem; padding: 0.9rem 1.8rem;">
                             🛡️ Fraud Watch Network
                         </a>
-                        <a href="https://www.aarp.org/" target="_blank" rel="noopener noreferrer" class="download-button" style="background: #A01B2E; display: inline-block; font-size: 1.1rem; padding: 1rem 2rem;">
+                        <a href="https://www.aarp.org/" target="_blank" rel="noopener noreferrer" class="download-button" style="background: #A01B2E; display: inline-block; font-size: 1.05rem; padding: 0.9rem 1.8rem;">
                             🌐 Sito Ufficiale AARP
                         </a>
                     </div>
 
-                    <div style="margin-top: 2rem; padding-top: 1.5rem; border-top: 2px solid #e2e8f0;">
-                        <p style="margin: 0; text-align: center; color: #64748b; font-size: 0.9rem;">
-                            📧 <strong>AARP The Magazine</strong> - Pubblicazione bimestrale con storie vittime, consigli sicurezza, aggiornamenti legislativi (38M copie distribuite)
-                        </p>
-                    </div>
+                    <div style="margin-top: 1.5rem; padding-top: 1.5rem; border-top: 2px solid #e2e8f0; max-width: 800px; margin-left: auto; margin-right: auto;">
+                            <p style="margin: 0 0 0.4rem 0; text-align: center; color: #64748b; font-size: 0.9rem;">
+                                📧 <strong>AARP The Magazine</strong> &ndash; Pubblicazione bimestrale con storie di vittime, consigli di sicurezza e aggiornamenti legislativi (38M copie distribuite)
+                            </p>
+                            <p style="margin: 0; text-align: center; color: #9ca3af; font-size: 0.85rem;">
+                                ⚠️ I servizi AARP (helpline, gruppi di supporto, Fraud Watch Network) sono attivi soltanto per i residenti negli Stati Uniti.
+                                Le risorse restano però un <strong>modello di riferimento internazionale</strong> per capire come tutelare meglio le vittime di truffa.
+                            </p>
+                        </div>
 
-                    <div style="margin-top: 1.5rem; text-align: center;">
+                    <div style="margin-top: 1.5rem;">
                         <a href="#sommario-referenze" class="download-button" style="background: #020617; border: 1px solid #334155; font-size: 0.85rem; padding: 0.5rem 1rem;">
                             ⬆ Torna al sommario missioni
                         </a>
@@ -2686,10 +2951,64 @@
         <!-- Forze di Polizia – Contatti ufficiali -->
         <section id="forze-polizia" style="margin-top: 5rem; scroll-margin-top: 100px;">
             <h2 class="section-title">🚔 Forze di Polizia – Contatti ufficiali</h2>
-            <p class="section-subtitle">Dove denunciare truffe online, frodi bancarie e raggiri finanziari nel tuo Paese</p>
+            <p class="section-subtitle" style="font-size: 2rem;">Dove denunciare truffe online, frodi bancarie e raggiri finanziari nel tuo Paese</p>
 
             <div style="text-align: center; margin-top: 1rem;">
                 <a href="#sommario-referenze" class="download-button" style="background: #020617; border: 1px solid #334155;">⬆ Torna al sommario</a>
+            </div>
+
+            <!-- Siti ufficiali principali Autorità italiane -->
+            <div style="margin-top: 2.5rem;">
+                <div style="text-align: center; margin-bottom: 0.25rem; font-size: 0.9rem; color: #6b7280;">
+                    🇮🇹 <strong>Italia</strong>
+                </div>
+                <h3 style="text-align: center; font-size: 1.3rem; color: #0f172a; margin-bottom: 1rem;">
+                    🌐 Siti web ufficiali delle principali Autorità italiane
+                </h3>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.5rem;">
+                    <!-- Guardia di Finanza -->
+                    <div style="background: #f9fafb; border-radius: 12px; padding: 1.5rem; box-shadow: 0 4px 12px rgba(0,0,0,0.06); border-left: 4px solid #eab308;">
+                        <h4 style="margin: 0 0 0.5rem 0; font-size: 1.05rem; color: #854d0e;">🟡 Guardia di Finanza</h4>
+                        <p style="margin: 0 0 0.5rem 0; font-size: 0.9rem; color: #111827;">
+                            Polizia economico-finanziaria specializzata in frodi fiscali, riciclaggio e reati contro il bilancio pubblico.
+                        </p>
+                        <p style="margin: 0; font-size: 0.88rem; color: #1d4ed8;">
+                            Sito ufficiale: <a href="https://www.gdf.gov.it/" target="_blank" rel="noopener noreferrer" style="color: #1d4ed8; text-decoration: underline;">https://www.gdf.gov.it/</a><br>
+                            Contatti e struttura: <a href="https://www.gdf.gov.it/it/chi-siamo" target="_blank" rel="noopener noreferrer" style="color: #1d4ed8; text-decoration: underline;">https://www.gdf.gov.it/it/chi-siamo</a>
+                        </p>
+                        <p style="margin: 0.6rem 0 0 0; font-size: 0.8rem; color: #6b7280;">
+                            Social ufficiali: sezione <strong>"Seguici su"</strong> presente nella homepage del sito.
+                        </p>
+                    </div>
+
+                    <!-- Arma dei Carabinieri -->
+                    <div style="background: #f9fafb; border-radius: 12px; padding: 1.5rem; box-shadow: 0 4px 12px rgba(0,0,0,0.06); border-left: 4px solid #1d4ed8;">
+                        <h4 style="margin: 0 0 0.5rem 0; font-size: 1.05rem; color: #1e3a8a;">🔵 Arma dei Carabinieri</h4>
+                        <p style="margin: 0 0 0.5rem 0; font-size: 0.9rem; color: #111827;">
+                            Forza di polizia a competenza generale, con reparti dedicati a truffe online e tutela del risparmio.
+                        </p>
+                        <p style="margin: 0; font-size: 0.88rem; color: #1d4ed8;">
+                            Sito ufficiale: <a href="https://www.carabinieri.it/" target="_blank" rel="noopener noreferrer" style="color: #1d4ed8; text-decoration: underline;">https://www.carabinieri.it/</a>
+                        </p>
+                        <p style="margin: 0.6rem 0 0 0; font-size: 0.8rem; color: #6b7280;">
+                            Social ufficiali: presenza attiva su <strong>Instagram</strong> e <strong>canale WhatsApp</strong> istituzionale (citati nei comunicati ufficiali).
+                        </p>
+                    </div>
+
+                    <!-- Polizia Postale e delle Comunicazioni -->
+                    <div style="background: #f9fafb; border-radius: 12px; padding: 1.5rem; box-shadow: 0 4px 12px rgba(0,0,0,0.06); border-left: 4px solid #7e22ce;">
+                        <h4 style="margin: 0 0 0.5rem 0; font-size: 1.05rem; color: #6b21a8;">🟣 Polizia Postale e delle Comunicazioni</h4>
+                        <p style="margin: 0 0 0.5rem 0; font-size: 0.9rem; color: #111827;">
+                            Reparto specializzato della Polizia di Stato per cybercrime, truffe online, phishing e frodi informatiche.
+                        </p>
+                        <p style="margin: 0; font-size: 0.88rem; color: #1d4ed8;">
+                            Sito ufficiale: <a href="https://www.commissariatodips.it/" target="_blank" rel="noopener noreferrer" style="color: #1d4ed8; text-decoration: underline;">https://www.commissariatodips.it/</a>
+                        </p>
+                        <p style="margin: 0.6rem 0 0 0; font-size: 0.8rem; color: #6b7280;">
+                            Social ufficiali: link diretti a <strong>Facebook</strong>, <strong>Twitter/X</strong> e <strong>YouTube</strong> dalla homepage.
+                        </p>
+                    </div>
+                </div>
             </div>
 
             <!-- Elenco dinamico forze di polizia approvate -->
@@ -2703,9 +3022,14 @@
             <!-- Bacheca Legionari: suggerimenti utenti in quarantena -->
             <div style="margin-top: 3rem; background: #020617; color: #e5e7eb; padding: 2rem; border-radius: 12px; border: 1px solid #334155;">
                 <h3 style="margin-top: 0; margin-bottom: 1rem; font-size: 1.3rem;">📣 Bacheca legionari – suggerisci i contatti della tua Polizia</h3>
-                <p style="margin: 0 0 1.5rem 0; font-size: 0.95rem; color: #cbd5f5;">
+                <p style="margin: 0 0 1rem 0; font-size: 0.95rem; color: #cbd5f5;">
                     Aiutaci a completare l'elenco internazionale dei corpi di Polizia economico-finanziaria. Ogni segnalazione viene messa
                     <strong>in quarantena</strong> e pubblicata solo dopo verifica da parte dell'amministratore.
+                </p>
+                <p style="margin: 0 0 1.5rem 0; font-size: 0.8rem; color: #9ca3af;">
+                    Il <strong>nickname</strong> viene pubblicato nel "Libro dei legionari" solo se dai il tuo consenso esplicito qui sotto.
+                    L'<strong>email</strong> non viene mai pubblicata: può essere usata solo per eventuali chiarimenti sulla segnalazione o, se lo desideri,
+                    per inviarti un <strong>diploma di ringraziamento</strong>. Puoi chiedere in qualsiasi momento la rimozione dei tuoi dati.
                 </p>
 
                 <form id="police-suggestion-form" onsubmit="submitPoliceSuggestion(event)" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem;">
@@ -2738,6 +3062,23 @@
                         <input id="suggest-email" type="email" placeholder="Per eventuali chiarimenti sull'indicazione" style="width: 100%; padding: 0.7rem; border-radius: 8px; border: 1px solid #475569; background: #020617; color: #e5e7eb;">
                     </div>
 
+                    <div style="grid-column: 1 / -1; display: grid; gap: 0.4rem; font-size: 0.8rem; color: #e5e7eb; margin-top: 0.5rem;">
+                        <label style="display: flex; align-items: flex-start; gap: 0.5rem; cursor: pointer;">
+                            <input id="consent-nickname" type="checkbox" style="margin-top: 0.15rem;">
+                            <span>
+                                Acconsento alla <strong>pubblicazione del mio nome/nickname</strong> nel "Libro dei legionari" come ringraziamento pubblico
+                                per la segnalazione approvata.
+                            </span>
+                        </label>
+                        <label style="display: flex; align-items: flex-start; gap: 0.5rem; cursor: pointer;">
+                            <input id="consent-diploma" type="checkbox" style="margin-top: 0.15rem;">
+                            <span>
+                                Desidero ricevere via email, se indicata, un <strong>diploma di ringraziamento</strong> per il contributo e acconsento a
+                                utilizzare il mio indirizzo email per questa sola finalità.
+                            </span>
+                        </label>
+                    </div>
+
                     <div style="grid-column: 1 / -1; text-align: right; margin-top: 0.5rem;">
                         <button type="submit" style="background: linear-gradient(135deg, #38bdf8, #0ea5e9); color: white; border: none; padding: 0.8rem 1.6rem; border-radius: 999px; font-weight: 600; cursor: pointer; font-size: 0.95rem; box-shadow: 0 4px 12px rgba(56,189,248,0.4);" onmouseover="this.style.transform='translateY(-1px)'" onmouseout="this.style.transform='translateY(0)';">
                             📨 Invia la tua segnalazione (va in quarantena)
@@ -2747,56 +3088,39 @@
                     <div id="police-suggestion-message" style="grid-column: 1 / -1; margin-top: 0.5rem; display: none; padding: 0.8rem; border-radius: 8px; font-size: 0.9rem;"></div>
                 </form>
             </div>
+
+            <!-- Libro dei Legionari -->
+            <div style="margin-top: 2rem; background: #020617; color: #e5e7eb; padding: 1.8rem; border-radius: 12px; border: 1px dashed #4b5563;">
+                <h3 style="margin-top: 0; margin-bottom: 0.75rem; font-size: 1.2rem;">🏅 Libro dei legionari</h3>
+                <p style="margin: 0 0 1rem 0; font-size: 0.9rem; color: #cbd5f5;">
+                    In questa bacheca ringraziamo i <strong>legionari</strong> che hanno segnalato contatti ufficiali affidabili delle forze di polizia. I loro contributi,
+                    dopo verifica, aiutano altri cittadini a trovare subito dove denunciare truffe e frodi.
+                </p>
+                <div id="legionary-book" style="border-top: 1px solid #334155; padding-top: 1rem; font-size: 0.9rem;"></div>
+            </div>
+
+            <!-- Informativa sintetica Privacy Bacheca Legionari -->
+            <div style="margin-top: 1.5rem; background: #020617; color: #e5e7eb; padding: 1.5rem; border-radius: 12px; border: 1px solid #1f2937; font-size: 0.8rem; line-height: 1.7;">
+                <h4 style="margin: 0 0 0.75rem 0; font-size: 0.9rem; color: #e5e7eb;">🔒 Privacy – Bacheca legionari e Libro dei legionari</h4>
+                <p style="margin: 0 0 0.4rem 0; color: #e5e7eb;">
+                    I dati inviati tramite la bacheca legionari (Paese, nome della forza di polizia, URL, note, eventuale nickname ed email) sono trattati
+                    ai soli fini di <strong>verificare le segnalazioni</strong>, <strong>pubblicare l'elenco delle forze di polizia</strong> e, se acconsenti,
+                    <strong>ringraziarti pubblicamente</strong> nel Libro dei legionari e inviarti un eventuale diploma di merito.
+                </p>
+                <p style="margin: 0 0 0.4rem 0; color: #e5e7eb;">
+                    La base giuridica del trattamento è l'<strong>interesse legittimo</strong> alla prevenzione delle truffe (per la verifica delle segnalazioni)
+                    e il tuo <strong>consenso esplicito</strong> per la pubblicazione del nickname e per l'uso dell'email ai fini del diploma.
+                </p>
+                <p style="margin: 0 0 0.4rem 0; color: #e5e7eb;">
+                    I dati sono conservati per il tempo necessario a mantenere aggiornato l'elenco e la storia delle segnalazioni e possono essere cancellati o
+                    anonimizzati su tua richiesta. Puoi esercitare i diritti di accesso, rettifica e cancellazione contattando l'Avv. Marcello Stanca attraverso
+                    i recapiti indicati sul sito ufficiale dell'AMEV Firenze.
+                </p>
+                <p style="margin: 0; color: #9ca3af;">
+                    Per un'informativa completa sul trattamento dei dati personali, puoi richiedere il testo integrale al titolare del trattamento.
+                </p>
+            </div>
         </section>
-
-        <h2 class="section-title" style="margin-top: 5rem;">📄 Documenti Ufficiali Parlamento Europeo</h2>
-        
-        <div class="documents-grid">
-            <!-- Petizione 0645/2025 -->
-            <div class="document-card" style="display: block; background: white; border-radius: 12px; padding: 1.5rem; box-shadow: 0 4px 12px rgba(0,0,0,0.08); border-left: 4px solid #1D4ED8;">
-                <div style="display: flex; align-items: center; gap: 0.8rem; margin-bottom: 0.5rem;">
-                    <span style="font-size: 2.2rem;">🇪🇺</span>
-                    <div>
-                        <h3 class="document-title" style="margin: 0; font-size: 1.1rem; color: #1D4ED8;">Petizione 0645/2025</h3>
-                        <p style="margin: 0.25rem 0 0 0; font-size: 0.85rem; color: #64748b;">Misure per contrastare truffe via bonifici e carte nell'UE</p>
-                    </div>
-                </div>
-                <p style="margin: 0 0 0.5rem 0; font-size: 0.8rem; color: #0f172a;"><strong>Parlamento Europeo | Gennaio 2025</strong> · Status: <span style="color: #16A34A;">ACCETTATA</span></p>
-                <a href="Parlamento Europeo accoglie Petizione 645-2025 proposta da Marcello Stanca.pdf" class="download-button" download style="margin-top: 0.75rem; font-size: 0.9rem; padding: 0.7rem 1.4rem;">
-                    📥 Leggi il testo ufficiale (PDF)
-                </a>
-            </div>
-
-            <!-- Petizione 0888/2024 -->
-            <div class="document-card" style="display: block; background: white; border-radius: 12px; padding: 1.5rem; box-shadow: 0 4px 12px rgba(0,0,0,0.08); border-left: 4px solid #0F766E;">
-                <div style="display: flex; align-items: center; gap: 0.8rem; margin-bottom: 0.5rem;">
-                    <span style="font-size: 2.2rem;">🇪🇺</span>
-                    <div>
-                        <h3 class="document-title" style="margin: 0; font-size: 1.1rem; color: #0F766E;">Petizione 0888/2024</h3>
-                        <p style="margin: 0.25rem 0 0 0; font-size: 0.85rem; color: #64748b;">Obbligo per le banche di proteggere attivamente i clienti</p>
-                    </div>
-                </div>
-                <p style="margin: 0 0 0.5rem 0; font-size: 0.8rem; color: #0f172a;"><strong>Parlamento Europeo | Novembre 2024</strong> · Status: <span style="color: #16A34A;">ACCETTATA</span></p>
-                <a href="Petizione 888-2024 risposta da Parlamento Europeo.pdf" class="download-button" download style="margin-top: 0.75rem; font-size: 0.9rem; padding: 0.7rem 1.4rem;">
-                    📥 Leggi il testo ufficiale (PDF)
-                </a>
-            </div>
-
-            <!-- Accordo UE PSD3 -->
-            <div class="document-card" style="display: block; background: white; border-radius: 12px; padding: 1.5rem; box-shadow: 0 4px 12px rgba(0,0,0,0.08); border-left: 4px solid #F59E0B;">
-                <div style="display: flex; align-items: center; gap: 0.8rem; margin-bottom: 0.5rem;">
-                    <span style="font-size: 2.2rem;">📜</span>
-                    <div>
-                        <h3 class="document-title" style="margin: 0; font-size: 1.1rem; color: #B45309;">Accordo UE PSD3</h3>
-                        <p style="margin: 0.25rem 0 0 0; font-size: 0.85rem; color: #64748b;">Nuove regole europee sui servizi di pagamento e tutela frodi</p>
-                    </div>
-                </div>
-                <p style="margin: 0 0 0.5rem 0; font-size: 0.8rem; color: #0f172a;"><strong>27 Novembre 2024</strong> · Maggiore tutela contro le frodi sui pagamenti</p>
-                <a href="Parlamento Europeo-27 nov 2025 Accordo sui servizi di pagamento_ maggiore tutela contro le frodi.pdf" class="download-button" download style="margin-top: 0.75rem; font-size: 0.9rem; padding: 0.7rem 1.4rem;">
-                    📥 Leggi il testo dell'accordo (PDF)
-                </a>
-            </div>
-        </div>
 
         <!-- Admin Panel -->
         <section id="admin-panel" style="margin-top: 5rem; padding: 3rem; background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); border-radius: 12px; border: 2px solid #FFD700;">
@@ -2930,6 +3254,9 @@
                     <button onclick="adminAddPoliceForce()" style="width: 100%; background: #38bdf8; color: #0f172a; padding: 0.8rem; border: none; border-radius: 6px; font-weight: bold; cursor: pointer; transition: all 0.3s; box-shadow: 0 4px 12px rgba(56,189,248,0.4);" onmouseover="this.style.background='#0ea5e9'" onmouseout="this.style.background='#38bdf8'">
                         ✅ Salva/aggiungi forza di Polizia
                     </button>
+                    <button onclick="seedInitialPoliceForces()" style="width: 100%; margin-top: 0.75rem; background: transparent; color: #38bdf8; padding: 0.6rem; border-radius: 6px; border: 1px dashed rgba(56,189,248,0.7); font-weight: 500; cursor: pointer; font-size: 0.85rem;" onmouseover="this.style.background='rgba(15,23,42,0.9)'" onmouseout="this.style.background='transparent'">
+                        📦 Carica set iniziale (Interpol, Europol, GdF, Polizia Postale, Carabinieri)
+                    </button>
                 </div>
 
                 <!-- Suggerimenti utenti (quarantena) -->
@@ -2946,14 +3273,6 @@
                 </div>
             </div>
 
-            <div style="margin-top: 3rem; padding: 2rem; background: rgba(255,215,0,0.1); border-radius: 10px; border: 2px solid #FFD700;">
-                <h3 style="color: #FFD700; margin-bottom: 1rem; text-align: center;">📝 Istruzioni</h3>
-                <p style="color: white; line-height: 1.8; text-align: center;">
-                    I link delle sezioni esistenti vengono salvati nel <strong>localStorage</strong> del browser. La nuova sezione
-                    <strong>Forze di Polizia</strong> e la <strong>bacheca legionari</strong> usano invece <strong>Firestore</strong> (collezioni
-                    <code>police_forces</code> e <code>police_suggestions</code>) con moderazione in quarantena.
-                </p>
-            </div>
         </section>
 
         <script>
@@ -3246,10 +3565,35 @@
                         moderatedByEmail: currentUser ? currentUser.email : 'admin-local'
                     });
 
+                    // Prepara coda per invio futuro dei diplomi legionario (solo se consenso e email presenti)
+                    if (data.consentDiploma && data.contactEmail) {
+                        try {
+                            await window.fsAddDoc(window.fsCollection(db, 'legionary_diplomas'), {
+                                suggestionId: id,
+                                country: data.country || null,
+                                policeForceName: data.name || null,
+                                nickname: data.nickname || null,
+                                email: data.contactEmail,
+                                consentDiploma: true,
+                                status: 'pending-email',
+                                template: 'cesare-scroll-v1',
+                                createdAt: new Date().toISOString(),
+                                suggestedByUid: data.suggestedByUid || null,
+                                approvedByUid: currentUser ? currentUser.uid : null,
+                                approvedByEmail: currentUser ? currentUser.email : 'admin-local'
+                            });
+                        } catch (e) {
+                            console.error('Errore creazione diploma legionario:', e);
+                        }
+                    }
+
                     alert('✅ Suggerimento approvato e pubblicato');
                     loadPendingPoliceSuggestions();
                     if (typeof loadPublicPoliceForces === 'function') {
                         loadPublicPoliceForces();
+                    }
+                    if (typeof loadLegionaryBook === 'function') {
+                        loadLegionaryBook();
                     }
                 } catch (error) {
                     console.error('Errore approvazione suggerimento polizia:', error);
@@ -3277,6 +3621,82 @@
                 } catch (error) {
                     console.error('Errore rifiuto suggerimento polizia:', error);
                     alert('❌ Errore durante il rifiuto');
+                }
+            }
+
+            // Seeding iniziale forze di polizia principali
+            async function seedInitialPoliceForces() {
+                const db = getFirestoreOrWarn();
+                if (!db) return;
+
+                try {
+                    const existingSnap = await window.fsGetDocs(window.fsCollection(db, 'police_forces'));
+                    if (!existingSnap.empty) {
+                        if (!confirm('Esistono già voci in police_forces. Vuoi comunque aggiungere il set iniziale (potrebbero crearsi duplicati)?')) {
+                            return;
+                        }
+                    }
+
+                    const currentUser = window.authSystem && window.authSystem.currentUser;
+                    const baseMeta = {
+                        status: 'approved',
+                        createdAt: new Date().toISOString(),
+                        createdByUid: currentUser ? currentUser.uid : null,
+                        createdByEmail: currentUser ? currentUser.email : 'admin-local-seed'
+                    };
+
+                    const seed = [
+                        {
+                            country: 'Internazionale',
+                            name: 'INTERPOL',
+                            websiteUrl: 'https://www.interpol.int',
+                            reportUrl: 'https://www.interpol.int/en/Contacts/Contact-INTERPOL',
+                            type: 'internazionale'
+                        },
+                        {
+                            country: 'Unione Europea',
+                            name: 'EUROPOL - European Union Agency for Law Enforcement Cooperation',
+                            websiteUrl: 'https://www.europol.europa.eu',
+                            reportUrl: 'https://www.europol.europa.eu/report-a-crime',
+                            type: 'UE'
+                        },
+                        {
+                            country: 'Italia',
+                            name: 'Guardia di Finanza',
+                            websiteUrl: 'https://www.gdf.gov.it',
+                            reportUrl: 'https://www.gdf.gov.it/contatti/servizi-online',
+                            type: 'nazionale'
+                        },
+                        {
+                            country: 'Italia',
+                            name: 'Polizia Postale e delle Comunicazioni',
+                            websiteUrl: 'https://www.poliziadistato.it',
+                            reportUrl: 'https://www.commissariatodips.it',
+                            type: 'specialistica'
+                        },
+                        {
+                            country: 'Italia',
+                            name: 'Arma dei Carabinieri',
+                            websiteUrl: 'https://www.carabinieri.it',
+                            reportUrl: 'https://www.carabinieri.it/internet/contattaci',
+                            type: 'nazionale'
+                        }
+                    ];
+
+                    for (const item of seed) {
+                        await window.fsAddDoc(window.fsCollection(db, 'police_forces'), {
+                            ...item,
+                            ...baseMeta
+                        });
+                    }
+
+                    alert('✅ Set iniziale forze di polizia inserito con successo');
+                    if (typeof loadPublicPoliceForces === 'function') {
+                        loadPublicPoliceForces();
+                    }
+                } catch (error) {
+                    console.error('Errore seeding forze di polizia:', error);
+                    alert('❌ Errore durante il seeding iniziale');
                 }
             }
         </script>
@@ -3567,8 +3987,9 @@
                     });
                 } catch (error) {
                     console.error('Errore caricamento forze di polizia:', error);
-                    container.innerHTML = '<div style="background:#0f172a; color:#fecaca; padding:1.5rem; border-radius:12px; border:1px dashed #b91c1c; grid-column:1 / -1; text-align:center;">' +
-                        '<p style="margin:0; font-size:0.95rem;">Errore nel caricamento dell\'elenco delle forze di polizia.</p>' +
+                    container.innerHTML = '<div style="background:#0f172a; color:#e5e7eb; padding:1.5rem; border-radius:12px; border:1px dashed #475569; grid-column:1 / -1; text-align:center;">' +
+                        '<p style="margin:0; font-size:0.95rem;">Elenco forze di polizia non disponibile in questo momento.</p>' +
+                        '<p style="margin:0.5rem 0 0 0; font-size:0.85rem; color:#9ca3af;">Puoi comunque utilizzare la bacheca legionari qui sotto oppure rivolgerti ai siti ufficiali di INTERPOL, EUROPOL, Guardia di Finanza, Polizia Postale e Carabinieri.</p>' +
                     '</div>';
                 }
             }
@@ -3596,6 +4017,8 @@
                 const notes = document.getElementById('suggest-notes').value.trim();
                 const nickname = document.getElementById('suggest-nickname').value.trim();
                 const email = document.getElementById('suggest-email').value.trim();
+                const consentNickname = document.getElementById('consent-nickname')?.checked || false;
+                const consentDiploma = document.getElementById('consent-diploma')?.checked || false;
 
                 if (!country || !name || !websiteUrl) {
                     if (messageEl) {
@@ -3618,6 +4041,8 @@
                         notes: notes || null,
                         nickname: nickname || null,
                         contactEmail: email || null,
+                        consentNickname,
+                        consentDiploma,
                         status: 'pending',
                         createdAt: new Date().toISOString(),
                         suggestedByUid: currentUser ? currentUser.uid : null,
@@ -3644,8 +4069,78 @@
                 }
             }
 
+            // Libro dei Legionari – lettura dei nickname approvati
+            async function loadLegionaryBook() {
+                const container = document.getElementById('legionary-book');
+                if (!container) return;
+
+                const db = window.firestoreDb;
+                if (!db || !window.fsCollection || !window.fsGetDocs || !window.fsQuery || !window.fsWhere) {
+                    container.innerHTML = '<p style="margin:0; color:#9ca3af;">Sezione temporaneamente non disponibile (Firestore offline).</p>';
+                    return;
+                }
+
+                container.innerHTML = '<p style="margin:0; color:#9ca3af;">Caricamento contributi dei legionari…</p>';
+
+                try {
+                    const q = window.fsQuery(
+                        window.fsCollection(db, 'police_suggestions'),
+                        window.fsWhere('status', '==', 'approved')
+                    );
+                    const snap = await window.fsGetDocs(q);
+
+                    if (snap.empty) {
+                        container.innerHTML = '<p style="margin:0; color:#9ca3af;">Ancora nessun legionario registrato. Puoi essere tra i primi a contribuire con una segnalazione verificata.</p>';
+                        return;
+                    }
+
+                    const entries = [];
+                    snap.forEach(docSnap => {
+                        const data = docSnap.data();
+                        if (!data.consentNickname) return;
+                        const nickname = data.nickname || null;
+                        if (!nickname) return;
+                        entries.push({
+                            nickname,
+                            country: data.country || '',
+                            name: data.name || ''
+                        });
+                    });
+
+                    if (!entries.length) {
+                        container.innerHTML = '<p style="margin:0; color:#9ca3af;">Sono state approvate segnalazioni senza nickname pubblico. Le prossime potranno essere ringraziate qui.</p>';
+                        return;
+                    }
+
+                    entries.sort((a, b) => a.nickname.localeCompare(b.nickname));
+
+                    const list = document.createElement('ul');
+                    list.style.margin = '0';
+                    list.style.paddingLeft = '1.2rem';
+                    list.style.listStyleType = 'disc';
+
+                    entries.forEach(item => {
+                        const li = document.createElement('li');
+                        li.style.marginBottom = '0.25rem';
+                        li.style.color = '#e5e7eb';
+                        const parts = [];
+                        parts.push(item.nickname);
+                        if (item.country) parts.push(`(${item.country}` + (item.name ? ` – ${item.name}` : '') + ')');
+                        li.textContent = parts.join(' ');
+                        list.appendChild(li);
+                    });
+
+                    container.innerHTML = '';
+                    container.appendChild(list);
+                } catch (error) {
+                    console.error('Errore caricamento Libro dei legionari:', error);
+                    container.innerHTML = '<p style="margin:0; color:#fecaca;">Errore nel caricamento del Libro dei legionari.</p>';
+                }
+            }
+
             document.addEventListener('DOMContentLoaded', () => {
                 loadPublicPoliceForces();
+                loadLegionaryBook();
             });
         </script>
 
