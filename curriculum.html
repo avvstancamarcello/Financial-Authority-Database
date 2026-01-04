@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="it" prefix="og: https://ogp.me/ns#">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Avv. Marcello Stanca - Curriculum Professionale | 25 Anni di Esperienza</title>
+    <meta name="description" content="Curriculum professionale Avv. Marcello Stanca: Presidente AMEV Firenze, 2 Petizioni Parlamento Europeo, Decreto €339.000 recupero internazionale UPTOS LLC.">
+    
+    <!-- PWA -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#1a365d">
+    <link rel="icon" type="image/png" href="icon-192.png">
+    
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        :root {
+            --cv-blue: #1a365d;
+            --cv-gold: #d4af37;
+            --cv-eu: #003399;
+            --cv-green: #2e7d32;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #1e293b;
+            background: #f8fafc;
+        }
+        
+        .hero {
+            background: linear-gradient(135deg, var(--cv-blue) 0%, var(--cv-eu) 100%);
+            color: white;
+            padding: 4rem 2rem;
+            text-align: center;
+        }
+        
+        .hero h1 {
+            font-size: 2.8rem;
+            margin-bottom: 1rem;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            opacity: 0.95;
+        }
+        
+        .credentials-badges {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+        }
+        
+        .credential-badge {
+            background: rgba(255,255,255,0.15);
+            backdrop-filter: blur(10px);
+            padding: 0.8rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            border: 2px solid rgba(255,255,255,0.3);
+            transition: all 0.3s;
+        }
+        
+        .credential-badge:hover {
+            background: rgba(255,255,255,0.25);
+            transform: translateY(-2px);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+        }
+        
+        .section-title {
+            font-size: 2.2rem;
+            color: var(--cv-blue);
+            text-align: center;
+            margin: 3rem 0 2rem;
+            position: relative;
+        }
+        
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background: var(--cv-gold);
+            margin: 1rem auto 0;
+        }
+        
+        .section-subtitle {
+            text-align: center;
+            color: #64748b;
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+        }
+        
+        .case-study {
+            background: white;
+            border-radius: 16px;
+            padding: 3rem;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+            margin: 2rem 0;
+        }
+        
+        .case-overview {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+        
+        .case-stat {
+            text-align: center;
+            padding: 2rem;
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            border-radius: 12px;
+            border-left: 4px solid var(--cv-gold);
+        }
+        
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: var(--cv-blue);
+            margin-bottom: 0.5rem;
+        }
+        
+        .stat-label {
+            color: #64748b;
+            font-size: 0.95rem;
+            font-weight: 500;
+        }
+        
+        .timeline {
+            position: relative;
+            margin: 3rem 0;
+        }
+        
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: linear-gradient(180deg, var(--cv-gold), var(--cv-blue));
+            transform: translateX(-50%);
+        }
+        
+        .timeline-item {
+            display: flex;
+            gap: 2rem;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+        
+        .timeline-item:nth-child(odd) {
+            flex-direction: row;
+        }
+        
+        .timeline-item:nth-child(even) {
+            flex-direction: row-reverse;
+        }
+        
+        .timeline-icon {
+            width: 80px;
+            height: 80px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            border: 4px solid var(--cv-gold);
+            flex-shrink: 0;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .timeline-content {
+            flex: 1;
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            border: 2px solid #e2e8f0;
+            transition: all 0.3s;
+        }
+        
+        .timeline-content:hover {
+            box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+            transform: translateY(-4px);
+        }
+        
+        .timeline-content h3 {
+            color: var(--cv-blue);
+            margin-bottom: 0.5rem;
+        }
+        
+        .timeline-content h4 {
+            color: var(--cv-gold);
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+        }
+        
+        .download-button {
+            display: inline-block;
+            background: var(--cv-blue);
+            color: white;
+            padding: 0.8rem 1.8rem;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            margin-top: 1rem;
+            transition: all 0.3s;
+            box-shadow: 0 4px 12px rgba(26, 54, 93, 0.3);
+        }
+        
+        .download-button:hover {
+            background: #0f2744;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(26, 54, 93, 0.4);
+        }
+        
+        .quote-section {
+            background: linear-gradient(135deg, var(--cv-blue) 0%, var(--cv-eu) 100%);
+            color: white;
+            padding: 3rem;
+            border-radius: 16px;
+            text-align: center;
+            margin: 4rem 0;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.2);
+        }
+        
+        .quote-section blockquote {
+            font-size: 1.4rem;
+            font-style: italic;
+            line-height: 1.8;
+            margin-bottom: 1rem;
+        }
+        
+        .quote-section cite {
+            font-size: 1.1rem;
+            font-weight: 600;
+            font-style: normal;
+        }
+        
+        .strategy-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .strategy-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            border-top: 4px solid var(--cv-gold);
+            transition: all 0.3s;
+        }
+        
+        .strategy-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+        }
+        
+        .strategy-card h4 {
+            color: var(--cv-blue);
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+        
+        .strategy-card p {
+            color: #64748b;
+            line-height: 1.7;
+        }
+        
+        .results-box {
+            background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
+            padding: 2.5rem;
+            border-radius: 12px;
+            border-left: 6px solid var(--cv-green);
+            margin: 2rem 0;
+        }
+        
+        .results-box h4 {
+            color: var(--cv-green);
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .results-box ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .results-box li {
+            padding: 0.5rem 0;
+            color: #1e293b;
+            font-weight: 500;
+        }
+        
+        .results-box li::before {
+            content: '✅ ';
+            margin-right: 0.5rem;
+        }
+        
+        .media-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+        
+        .media-card {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+            border-left: 6px solid var(--cv-blue);
+        }
+        
+        .media-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 35px rgba(0,0,0,0.15);
+        }
+        
+        .media-icon {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+        
+        .media-card h3 {
+            color: var(--cv-blue);
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+        
+        .media-card p {
+            color: #64748b;
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+        }
+        
+        .media-stats {
+            background: #f8fafc;
+            padding: 1rem;
+            border-radius: 8px;
+            margin: 1rem 0;
+            text-align: center;
+        }
+        
+        @media (max-width: 768px) {
+            .timeline::before {
+                left: 40px;
+            }
+            
+            .timeline-item,
+            .timeline-item:nth-child(even) {
+                flex-direction: row;
+                padding-left: 100px;
+            }
+            
+            .timeline-icon {
+                position: absolute;
+                left: 0;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .section-title {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Main Navigation -->
+    <nav style="background: linear-gradient(135deg, #1e293b 0%, #334155 100%); padding: 1rem 0; box-shadow: 0 4px 12px rgba(0,0,0,0.15); position: sticky; top: 0; z-index: 999;">
+        <div style="max-width: 1200px; margin: 0 auto; display: flex; gap: 1.5rem; justify-content: center; align-items: center; flex-wrap: wrap; padding: 0 1rem;">
+            <a href="index.html" style="color: white; text-decoration: none; font-weight: 500; font-size: 1.05rem; padding: 0.5rem 1.5rem; background: rgba(255,255,255,0.05); border-radius: 8px; transition: all 0.3s ease;" onmouseover="this.style.background='rgba(255,255,255,0.15)';" onmouseout="this.style.background='rgba(255,255,255,0.05)';">
+                🏠 Database Autorità
+            </a>
+            <a href="odissea.html" style="color: white; text-decoration: none; font-weight: 500; font-size: 1.05rem; padding: 0.5rem 1.5rem; background: rgba(255,255,255,0.05); border-radius: 8px; transition: all 0.3s ease;" onmouseover="this.style.background='rgba(255,255,255,0.15)';" onmouseout="this.style.background='rgba(255,255,255,0.05)';">
+                🌊 Odissea Digitale
+            </a>
+            <a href="referenze.html" style="color: white; text-decoration: none; font-weight: 500; font-size: 1.05rem; padding: 0.5rem 1.5rem; background: rgba(255,255,255,0.05); border-radius: 8px; transition: all 0.3s ease;" onmouseover="this.style.background='rgba(255,255,255,0.15)';" onmouseout="this.style.background='rgba(255,255,255,0.05)';">
+                📜 Referenze Istituzionali
+            </a>
+            <a href="curriculum.html" style="color: white; text-decoration: none; font-weight: bold; font-size: 1.05rem; padding: 0.5rem 1.5rem; background: rgba(255,255,255,0.15); border-radius: 8px; transition: all 0.3s ease; border: 2px solid rgba(255,255,255,0.2);" onmouseover="this.style.background='rgba(255,255,255,0.25)';" onmouseout="this.style.background='rgba(255,255,255,0.15)';">
+                👨‍⚖️ Avv Stanca - Curriculum
+            </a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <h1>Avvocato Marcello Stanca</h1>
+        <p>25 Anni di Battaglie per i Diritti dei Cittadini</p>
+        <div class="credentials-badges">
+            <div class="credential-badge">🏛️ Presidente AMEV Firenze dal 1999</div>
+            <div class="credential-badge">🇪🇺 2 Petizioni Parlamento UE Accettate</div>
+            <div class="credential-badge">🎙️ Camera Deputati</div>
+        </div>
+    </section>
+
+    <div class="container">
+        <!-- CASE STUDY: UPTOS -->
+        <section class="case-study">
+            <h2 class="section-title">💰 Caso UPTOS LLC: €339.000 Recuperati</h2>
+            <p class="section-subtitle">Decreto Ingiuntivo Internazionale | Italia → St Vincent/Grenadines → Estonia</p>
+            
+            <div class="case-overview">
+                <div class="case-stat">
+                    <div class="stat-number">€339.000</div>
+                    <div class="stat-label">Decreto Esecutivo</div>
+                </div>
+                <div class="case-stat">
+                    <div class="stat-number">3</div>
+                    <div class="stat-label">Giurisdizioni</div>
+                </div>
+                <div class="case-stat">
+                    <div class="stat-number">5</div>
+                    <div class="stat-label">Autorità Coinvolte</div>
+                </div>
+            </div>
+
+            <h3 style="text-align: center; color: var(--cv-blue); margin: 3rem 0 2rem;">📍 Timeline Azione Legale Transnazionale</h3>
+            
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-icon">🇮🇹</div>
+                    <div class="timeline-content">
+                        <h3>FASE 1: Decreto Ingiuntivo Italia</h3>
+                        <h4>Tribunale di Firenze</h4>
+                        <p>Emissione Decreto €339.000 contro UPTOS LLC (St Vincent & Grenadines)</p>
+                        <p><strong>📄 Decreto + Traduzione Asseverata + Apostilla Procura Repubblica</strong></p>
+                        <a href="UPTOS Decreto Ingiuntivo.pdf" class="download-button" download>📥 Download Decreto</a>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-icon">🌴</div>
+                    <div class="timeline-content">
+                        <h3>FASE 2: Indagini St Vincent & Grenadines</h3>
+                        <h4>Financial Services Authority (FSA) + FIU</h4>
+                        <p>Richiesta informazioni autorità di vigilanza finanziaria caraibica</p>
+                        <p><strong>Segnalazione UIF Antiriciclaggio per transazioni sospette</strong></p>
+                        <p>📄 Documenti FSA + FIU + UIF Procedures</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-icon">🇪🇪</div>
+                    <div class="timeline-content">
+                        <h3>FASE 3: Pignoramento Estonia</h3>
+                        <h4>Ufficiale Giudiziario Tallinn</h4>
+                        <p>Esecuzione pignoramento contro Burgo Blan OÜ (complice UPTOS)</p>
+                        <p><strong>Pubblicazione Gazzetta Ufficiale Estonia</strong></p>
+                        <p>📄 Atti Ufficiale Giudiziario + Traduzione</p>
+                        <a href="UPTOS Pignoramento Estonia.pdf" class="download-button" download>📥 Download Pignoramento</a>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-icon">🇬🇧</div>
+                    <div class="timeline-content">
+                        <h3>FASE 4: Denuncia Action Fraud UK</h3>
+                        <h4>National Fraud & Cyber Crime Reporting Centre</h4>
+                        <p>Segnalazione contro Clear Junction Ltd (banca intermediaria)</p>
+                        <p><strong>Caso preso in carico per investigazione</strong></p>
+                        <p>📄 Conferma Action Fraud + Report Crime</p>
+                        <a href="UPTOS-ActionFraud.pdf" class="download-button" download>📥 Download Conferma</a>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-icon">🇪🇪</div>
+                    <div class="timeline-content">
+                        <h3>FASE 5: UIF Estonia</h3>
+                        <h4>Unità Informazione Finanziaria Estonia</h4>
+                        <p>Segnalazione antiriciclaggio su Burgo Blan OÜ</p>
+                        <p><strong>Richiesta blocco conti e sequestro strumenti usati per truffa</strong></p>
+                        <p>📄 UIF Estonia Segnalazione</p>
+                    </div>
+                </div>
+            </div>
+
+            <h3 style="text-align: center; color: var(--cv-blue); margin: 3rem 0 2rem;">⚖️ Strategia Legale Vincente</h3>
+            
+            <div class="strategy-grid">
+                <div class="strategy-card">
+                    <h4>🔨 Decreto Ingiuntivo (Art. 633 c.p.c.)</h4>
+                    <p>Procedura rapida senza contraddittorio preventivo. Esecutività immediata.</p>
+                </div>
+                
+                <div class="strategy-card">
+                    <h4>🌍 Apostilla Convenzione dell'Aia</h4>
+                    <p>Validità mondiale del decreto. Riconoscimento automatico in 120 Paesi.</p>
+                </div>
+                
+                <div class="strategy-card">
+                    <h4>🔗 Identificazione Complici</h4>
+                    <p>Burgo Blan OÜ (Estonia) = conto bancario utilizzato da UPTOS per incassare truffe.</p>
+                </div>
+                
+                <div class="strategy-card">
+                    <h4>🎯 Multi-Giurisdizione Coordinata</h4>
+                    <p>Pressione simultanea: Italia (tribunale) + UK (polizia) + Estonia (pignoramento) + St Vincent (FSA/FIU)</p>
+                </div>
+            </div>
+
+            <div class="results-box">
+                <h4>✅ Risultato</h4>
+                <ul>
+                    <li>Sentenza esecutiva in 3 giurisdizioni</li>
+                    <li>Pignoramento pubblicato in Gazzetta Ufficiale Estonia</li>
+                    <li>Caso investigativo attivo Action Fraud UK</li>
+                    <li>Segnalazioni UIF antiriciclaggio in 2 Paesi</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Quote Section -->
+        <section class="quote-section">
+            <blockquote>
+                "Se ho ottenuto un decreto da €339.000 eseguibile contro un paradiso fiscale caraibico,
+                posso guidarti nel recupero dei tuoi capitali."
+            </blockquote>
+            <cite>— Avv. Marcello Stanca</cite>
+        </section>
+
+        <!-- Interventi Pubblici & Media -->
+        <section>
+            <h2 class="section-title">🎙️ Interventi Pubblici & Media</h2>
+            <p class="section-subtitle">Radio Radicale, TikTok, YouTube - Divulgazione e sensibilizzazione truffe finanziarie</p>
+            
+            <div class="media-grid">
+                <!-- YouTube Card -->
+                <div class="media-card" style="border-left-color: #FF0000;">
+                    <div class="media-icon">📺</div>
+                    <h3>YouTube Short</h3>
+                    <p style="font-weight: 600; color: #FF0000; margin-bottom: 0.5rem;">Video divulgativo truffe</p>
+                    <p>Truffe finanziarie: Come riconoscerle e difendersi. Testimonianza diretta e consigli pratici.</p>
+                    <a href="https://youtube.com/shorts/esempio" target="_blank" rel="noopener noreferrer" class="download-button" style="background: #FF0000;">
+                        ▶️ Guarda il Video
+                    </a>
+                </div>
+
+                <!-- Radio Radicale Card -->
+                <div class="media-card" style="border-left-color: #E13A3E;">
+                    <div class="media-icon">🎙️</div>
+                    <h3>Radio Radicale</h3>
+                    <p style="font-weight: 600; color: #E13A3E; margin-bottom: 0.5rem;">Camera dei Deputati</p>
+                    <p>Intervento pubblico innanzi alle massime Autorità Antifrode: Carabinieri, Polizia Postale, Guardia di Finanza.</p>
+                    <a href="https://www.radioradicale.it/" target="_blank" rel="noopener noreferrer" class="download-button" style="background: #E13A3E;">
+                        🎧 Ascolta l'Intervento
+                    </a>
+                </div>
+
+                <!-- TikTok Card -->
+                <div class="media-card" style="border-left-color: #000000;">
+                    <div class="media-icon">📱</div>
+                    <h3>TikTok Business Verificato</h3>
+                    <p style="font-weight: 600; color: #000000; margin-bottom: 0.5rem;">@avvocato.stanca.marcello</p>
+                    <div class="media-stats">
+                        <p style="margin: 0; color: var(--cv-blue);"><strong>470 follower organici</strong></p>
+                        <p style="margin: 0.5rem 0 0 0; color: #64748b;">Video virale: <strong style="color: #000;">59.622 views</strong> ("Rischio Trading" bestseller Amazon)</p>
+                    </div>
+                    <div style="background: #e8f5e9; padding: 1rem; border-radius: 8px; margin: 1rem 0; text-align: center;">
+                        <p style="margin: 0; color: var(--cv-green); font-weight: 600;">✓ Account Business Registrato</p>
+                        <p style="margin: 0.3rem 0 0 0; color: var(--cv-green); font-weight: 600;">✓ Verificato 14 Marzo 2024</p>
+                    </div>
+                    <a href="https://www.tiktok.com/@avvocato.stanca.marcello" target="_blank" rel="noopener noreferrer" class="download-button" style="background: #000000;">
+                        📱 Segui su TikTok
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Call to Action -->
+        <div style="text-align: center; margin-top: 4rem; padding: 3rem; background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%); border-radius: 16px;">
+            <h3 style="color: var(--cv-blue); font-size: 1.8rem; margin-bottom: 1.5rem;">Hai bisogno di assistenza legale?</h3>
+            <p style="color: #64748b; font-size: 1.1rem; margin-bottom: 2rem; max-width: 600px; margin-left: auto; margin-right: auto;">
+                Affidati a un professionista con esperienza comprovata in controversie bancarie internazionali e recupero crediti transfrontalieri.
+            </p>
+            <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+                <a href="index.html" class="download-button" style="font-size: 1.1rem; padding: 1.2rem 2.5rem;">
+                    🗂️ Database Autorità
+                </a>
+                <a href="referenze.html" class="download-button" style="font-size: 1.1rem; padding: 1.2rem 2.5rem; background: var(--cv-gold); color: var(--cv-blue);">
+                    📜 Referenze Istituzionali
+                </a>
+                <a href="odissea.html" class="download-button" style="font-size: 1.1rem; padding: 1.2rem 2.5rem; background: var(--cv-eu);">
+                    🌊 Odissea Digitale
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer style="background: #1e293b; color: white; padding: 2rem; text-align: center; margin-top: 4rem;">
+        <p style="margin: 0; opacity: 0.8;">© 2026 Avv. Marcello Stanca | Tutti i diritti riservati</p>
+        <p style="margin: 0.5rem 0 0 0; opacity: 0.6; font-size: 0.9rem;">25 Anni al servizio della giustizia e dei diritti dei cittadini</p>
+    </footer>
+</body>
+</html>
