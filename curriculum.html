@@ -1,668 +1,946 @@
 <!DOCTYPE html>
-<html lang="it" prefix="og: https://ogp.me/ns#">
+<html lang="it">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Avv. Marcello Stanca - Curriculum Professionale | 25 Anni di Esperienza</title>
-    <meta name="description" content="Curriculum professionale Avv. Marcello Stanca: Presidente AMEV Firenze, 2 Petizioni Parlamento Europeo, Decreto €339.000 recupero internazionale UPTOS LLC.">
-    
-    <!-- PWA -->
-    <link rel="manifest" href="manifest.json">
-    <meta name="theme-color" content="#1a365d">
-    <link rel="icon" type="image/png" href="icon-192.png">
-    
+    <title>Avv. Marcello Stanca - Curriculum Professionale</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        
-        :root {
-            --cv-blue: #1a365d;
-            --cv-gold: #d4af37;
-            --cv-eu: #003399;
-            --cv-green: #2e7d32;
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
-        
+
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             line-height: 1.6;
-            color: #1e293b;
-            background: #f8fafc;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
         }
 
-        .language-selector {
-            display: flex;
-            gap: 0.5rem;
-            justify-content: center;
-            margin: 1rem 0;
-        }
-
-        .lang-btn {
-            background: rgba(255,255,255,0.3);
-            border: 2px solid transparent;
-            color: white;
-            padding: 6px 12px;
-            border-radius: 15px;
-            cursor: pointer;
-            font-weight: 600;
-            font-size: 14px;
-            transition: all 0.3s ease;
-        }
-
-        .lang-btn:hover {
-            background: rgba(255,255,255,0.5);
-            transform: translateY(-2px);
-        }
-
-        .lang-btn.active {
-            background: white;
-            color: var(--cv-blue);
-            border-color: white;
-        }
-        
-        .hero {
-            background: linear-gradient(135deg, var(--cv-blue) 0%, var(--cv-eu) 100%);
-            color: white;
-            padding: 4rem 2rem;
-            text-align: center;
-        }
-        
-        .hero h1 {
-            font-size: 2.8rem;
-            margin-bottom: 1rem;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
-        }
-        
-        .hero p {
-            font-size: 1.3rem;
-            margin-bottom: 2rem;
-            opacity: 0.95;
-        }
-        
-        .credentials-badges {
-            display: flex;
-            justify-content: center;
-            gap: 1rem;
-            flex-wrap: wrap;
-            margin-top: 2rem;
-        }
-        
-        .credential-badge {
-            background: rgba(255,255,255,0.15);
-            backdrop-filter: blur(10px);
-            padding: 0.8rem 1.5rem;
-            border-radius: 50px;
-            font-weight: 600;
-            border: 2px solid rgba(255,255,255,0.3);
-            transition: all 0.3s;
-        }
-        
-        .credential-badge:hover {
-            background: rgba(255,255,255,0.25);
-            transform: translateY(-2px);
-        }
-        
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 3rem 2rem;
+            padding: 20px;
         }
-        
-        .section-title {
-            font-size: 2.2rem;
-            color: var(--cv-blue);
+
+        /* Language Selector */
+        .language-selector {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            background: white;
+            padding: 10px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .language-selector select {
+            padding: 8px 12px;
+            border: 2px solid #667eea;
+            border-radius: 5px;
+            font-size: 14px;
+            cursor: pointer;
+            background: white;
+            color: #333;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: white;
+            border-radius: 15px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
             text-align: center;
-            margin: 3rem 0 2rem;
-            position: relative;
         }
-        
-        .section-title::after {
-            content: '';
-            display: block;
-            width: 80px;
-            height: 4px;
-            background: var(--cv-gold);
-            margin: 1rem auto 0;
+
+        .hero h1 {
+            color: #667eea;
+            font-size: 2.5em;
+            margin-bottom: 10px;
         }
-        
-        .section-subtitle {
-            text-align: center;
-            color: #64748b;
-            font-size: 1.1rem;
-            margin-bottom: 2rem;
+
+        .hero .subtitle {
+            color: #666;
+            font-size: 1.2em;
+            margin-bottom: 20px;
         }
-        
+
+        .credentials {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+
+        .credential-badge {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-size: 0.9em;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* Case Study Section */
         .case-study {
             background: white;
-            border-radius: 16px;
-            padding: 3rem;
-            box-shadow: 0 8px 30px rgba(0,0,0,0.12);
-            margin: 2rem 0;
+            border-radius: 15px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
         }
-        
-        .case-overview {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 2rem;
-            margin: 3rem 0;
-        }
-        
-        .case-stat {
+
+        .case-study h2 {
+            color: #667eea;
+            font-size: 2em;
+            margin-bottom: 20px;
             text-align: center;
-            padding: 2rem;
-            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
-            border-radius: 12px;
-            border-left: 4px solid var(--cv-gold);
         }
-        
-        .stat-number {
-            font-size: 2.5rem;
-            font-weight: bold;
-            color: var(--cv-blue);
-            margin-bottom: 0.5rem;
+
+        .case-intro {
+            background: #f8f9fa;
+            padding: 20px;
+            border-left: 4px solid #667eea;
+            margin-bottom: 30px;
+            border-radius: 5px;
         }
-        
-        .stat-label {
-            color: #64748b;
-            font-size: 0.95rem;
-            font-weight: 500;
-        }
-        
+
+        /* Timeline */
         .timeline {
             position: relative;
-            margin: 3rem 0;
+            padding: 20px 0;
         }
-        
+
         .timeline::before {
             content: '';
             position: absolute;
             left: 50%;
             top: 0;
             bottom: 0;
-            width: 3px;
-            background: linear-gradient(180deg, var(--cv-gold), var(--cv-blue));
+            width: 2px;
+            background: #667eea;
             transform: translateX(-50%);
         }
-        
+
         .timeline-item {
-            display: flex;
-            gap: 2rem;
-            margin-bottom: 3rem;
+            margin-bottom: 50px;
             position: relative;
         }
-        
-        .timeline-item:nth-child(odd) {
-            flex-direction: row;
+
+        .timeline-item:nth-child(odd) .timeline-content {
+            margin-left: 0;
+            margin-right: auto;
+            text-align: right;
+            padding-right: 40px;
         }
-        
-        .timeline-item:nth-child(even) {
-            flex-direction: row-reverse;
+
+        .timeline-item:nth-child(even) .timeline-content {
+            margin-left: auto;
+            margin-right: 0;
+            text-align: left;
+            padding-left: 40px;
         }
-        
-        .timeline-icon {
-            width: 80px;
-            height: 80px;
-            background: white;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2.5rem;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-            border: 4px solid var(--cv-gold);
-            flex-shrink: 0;
-            position: relative;
-            z-index: 2;
-        }
-        
+
         .timeline-content {
-            flex: 1;
+            width: 45%;
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            position: relative;
+        }
+
+        .timeline-marker {
+            position: absolute;
+            left: 50%;
+            top: 0;
+            width: 20px;
+            height: 20px;
+            background: #667eea;
+            border: 4px solid white;
+            border-radius: 50%;
+            transform: translateX(-50%);
+            z-index: 1;
+        }
+
+        .phase-title {
+            color: #667eea;
+            font-size: 1.5em;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        .phase-description {
+            color: #666;
+            margin-bottom: 15px;
+        }
+
+        .phase-details {
             background: white;
-            padding: 2rem;
-            border-radius: 12px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-            border: 2px solid #e2e8f0;
-            transition: all 0.3s;
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 10px;
         }
-        
-        .timeline-content:hover {
-            box-shadow: 0 8px 30px rgba(0,0,0,0.15);
-            transform: translateY(-4px);
+
+        .phase-details ul {
+            list-style-position: inside;
+            color: #555;
         }
-        
-        .timeline-content h3 {
-            color: var(--cv-blue);
-            margin-bottom: 0.5rem;
+
+        .phase-details li {
+            margin-bottom: 8px;
         }
-        
-        .timeline-content h4 {
-            color: var(--cv-gold);
-            font-size: 1.1rem;
-            margin-bottom: 1rem;
-        }
-        
-        .download-button {
-            display: inline-block;
-            background: var(--cv-blue);
-            color: white;
-            padding: 0.8rem 1.8rem;
-            text-decoration: none;
-            border-radius: 8px;
-            font-weight: 600;
-            margin-top: 1rem;
-            transition: all 0.3s;
-            box-shadow: 0 4px 12px rgba(26, 54, 93, 0.3);
-        }
-        
-        .download-button:hover {
-            background: #0f2744;
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(26, 54, 93, 0.4);
-        }
-        
-        .quote-section {
-            background: linear-gradient(135deg, var(--cv-blue) 0%, var(--cv-eu) 100%);
-            color: white;
-            padding: 3rem;
-            border-radius: 16px;
-            text-align: center;
-            margin: 4rem 0;
-            box-shadow: 0 8px 30px rgba(0,0,0,0.2);
-        }
-        
-        .quote-section blockquote {
-            font-size: 1.4rem;
-            font-style: italic;
-            line-height: 1.8;
-            margin-bottom: 1rem;
-        }
-        
-        .quote-section cite {
-            font-size: 1.1rem;
-            font-weight: 600;
-            font-style: normal;
-        }
-        
+
+        /* Strategy Cards */
         .strategy-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
-            margin: 2rem 0;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
         }
-        
+
         .strategy-card {
-            background: white;
-            padding: 2rem;
-            border-radius: 12px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-            border-top: 4px solid var(--cv-gold);
-            transition: all 0.3s;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 10px;
+            text-align: center;
+            transition: transform 0.3s;
         }
-        
+
         .strategy-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 8px 30px rgba(0,0,0,0.15);
         }
-        
-        .strategy-card h4 {
-            color: var(--cv-blue);
-            margin-bottom: 1rem;
-            font-size: 1.2rem;
+
+        .strategy-card i {
+            font-size: 3em;
+            margin-bottom: 15px;
+            opacity: 0.9;
         }
-        
+
+        .strategy-card h3 {
+            font-size: 1.3em;
+            margin-bottom: 10px;
+        }
+
         .strategy-card p {
-            color: #64748b;
-            line-height: 1.7;
+            font-size: 0.95em;
+            opacity: 0.9;
         }
-        
-        .results-box {
-            background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
-            padding: 2.5rem;
-            border-radius: 12px;
-            border-left: 6px solid var(--cv-green);
-            margin: 2rem 0;
+
+        /* Results Section */
+        .results {
+            background: #e8f5e9;
+            padding: 30px;
+            border-radius: 10px;
+            margin: 30px 0;
         }
-        
-        .results-box h4 {
-            color: var(--cv-green);
-            font-size: 1.5rem;
-            margin-bottom: 1.5rem;
+
+        .results h3 {
+            color: #2e7d32;
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            text-align: center;
         }
-        
-        .results-box ul {
+
+        .results-list {
             list-style: none;
             padding: 0;
         }
-        
-        .results-box li {
-            padding: 0.5rem 0;
-            color: #1e293b;
-            font-weight: 500;
+
+        .results-list li {
+            padding: 15px;
+            margin-bottom: 10px;
+            background: white;
+            border-left: 4px solid #4caf50;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
         }
-        
-        .results-box li::before {
-            content: '✅ ';
-            margin-right: 0.5rem;
+
+        .results-list i {
+            color: #4caf50;
+            font-size: 1.5em;
         }
-        
+
+        /* Quote Section */
+        .quote-section {
+            background: #fff3e0;
+            padding: 30px;
+            border-radius: 10px;
+            margin: 30px 0;
+            border-left: 5px solid #ff9800;
+            font-style: italic;
+            text-align: center;
+        }
+
+        .quote-section p {
+            font-size: 1.2em;
+            color: #555;
+            margin-bottom: 15px;
+        }
+
+        .quote-author {
+            font-weight: bold;
+            color: #ff9800;
+            font-style: normal;
+        }
+
+        /* Media Section */
+        .media-section {
+            background: white;
+            border-radius: 15px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .media-section h3 {
+            color: #667eea;
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
         .media-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 2rem;
-            margin: 3rem 0;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
         }
-        
-        .media-card {
-            background: white;
-            border-radius: 12px;
-            padding: 2rem;
-            box-shadow: 0 6px 20px rgba(0,0,0,0.1);
-            transition: all 0.3s;
-            border-left: 6px solid var(--cv-blue);
-        }
-        
-        .media-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 35px rgba(0,0,0,0.15);
-        }
-        
-        .media-icon {
-            font-size: 3.5rem;
-            margin-bottom: 1rem;
+
+        .media-item {
             text-align: center;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            transition: transform 0.3s;
         }
-        
-        .media-card h3 {
-            color: var(--cv-blue);
-            margin-bottom: 1rem;
-            text-align: center;
+
+        .media-item:hover {
+            transform: scale(1.05);
         }
-        
-        .media-card p {
-            color: #64748b;
-            line-height: 1.7;
-            margin-bottom: 1.5rem;
+
+        .media-item i {
+            font-size: 3em;
+            color: #667eea;
+            margin-bottom: 10px;
         }
-        
-        .media-stats {
-            background: #f8fafc;
-            padding: 1rem;
-            border-radius: 8px;
-            margin: 1rem 0;
-            text-align: center;
-        }
-        
+
+        /* Responsive */
         @media (max-width: 768px) {
             .timeline::before {
-                left: 40px;
+                left: 30px;
             }
-            
-            .timeline-item,
-            .timeline-item:nth-child(even) {
-                flex-direction: row;
-                padding-left: 100px;
+
+            .timeline-content {
+                width: calc(100% - 60px);
+                margin-left: 60px !important;
+                text-align: left !important;
+                padding-left: 20px !important;
+                padding-right: 20px !important;
             }
-            
-            .timeline-icon {
-                position: absolute;
-                left: 0;
+
+            .timeline-marker {
+                left: 30px;
             }
-            
+
             .hero h1 {
-                font-size: 2rem;
+                font-size: 1.8em;
             }
-            
-            .section-title {
-                font-size: 1.8rem;
+
+            .strategy-grid {
+                grid-template-columns: 1fr;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Main Navigation -->
-    <nav style="background: linear-gradient(135deg, #1e293b 0%, #334155 100%); padding: 1rem 0; box-shadow: 0 4px 12px rgba(0,0,0,0.15); position: sticky; top: 0; z-index: 999;">
-        <div style="max-width: 1200px; margin: 0 auto; display: flex; gap: 1.5rem; justify-content: center; align-items: center; flex-wrap: wrap; padding: 0 1rem;">
-            <a href="index.html" style="color: white; text-decoration: none; font-weight: 500; font-size: 1.05rem; padding: 0.5rem 1.5rem; background: rgba(255,255,255,0.05); border-radius: 8px; transition: all 0.3s ease;" onmouseover="this.style.background='rgba(255,255,255,0.15)';" onmouseout="this.style.background='rgba(255,255,255,0.05)';">
-                🏠 Database Autorità
-            </a>
-            <a href="odissea.html" style="color: white; text-decoration: none; font-weight: 500; font-size: 1.05rem; padding: 0.5rem 1.5rem; background: rgba(255,255,255,0.05); border-radius: 8px; transition: all 0.3s ease;" onmouseover="this.style.background='rgba(255,255,255,0.15)';" onmouseout="this.style.background='rgba(255,255,255,0.05)';">
-                🌊 Odissea Digitale
-            </a>
-            <a href="referenze.html" style="color: white; text-decoration: none; font-weight: 500; font-size: 1.05rem; padding: 0.5rem 1.5rem; background: rgba(255,255,255,0.05); border-radius: 8px; transition: all 0.3s ease;" onmouseover="this.style.background='rgba(255,255,255,0.15)';" onmouseout="this.style.background='rgba(255,255,255,0.05)';">
-                📜 Referenze Istituzionali
-            </a>
-            <a href="curriculum.html" style="color: white; text-decoration: none; font-weight: bold; font-size: 1.05rem; padding: 0.5rem 1.5rem; background: rgba(255,255,255,0.15); border-radius: 8px; transition: all 0.3s ease; border: 2px solid rgba(255,255,255,0.2);" onmouseover="this.style.background='rgba(255,255,255,0.25)';" onmouseout="this.style.background='rgba(255,255,255,0.15)';">
-                👨‍⚖️ Avv Stanca - Curriculum
-            </a>
-        </div>
-    </nav>
-
-    <!-- Hero Section -->
-    <section class="hero">
-        <nav class="language-selector" role="navigation" aria-label="Language selection">
-            <button class="lang-btn active" onclick="changeLanguage('it')" aria-label="Italiano">🇮🇹 IT</button>
-            <button class="lang-btn" onclick="changeLanguage('en')" aria-label="English">🇬🇧 EN</button>
-            <button class="lang-btn" onclick="changeLanguage('fr')" aria-label="Français">🇫🇷 FR</button>
-            <button class="lang-btn" onclick="changeLanguage('de')" aria-label="Deutsch">🇩🇪 DE</button>
-            <button class="lang-btn" onclick="changeLanguage('es')" aria-label="Español">🇪🇸 ES</button>
-        </nav>
-        <h1>Avvocato Marcello Stanca</h1>
-        <p>25 Anni di Battaglie per i Diritti dei Cittadini</p>
-        <div class="credentials-badges">
-            <div class="credential-badge">🏛️ Presidente AMEV Firenze dal 1999</div>
-            <div class="credential-badge">🇪🇺 2 Petizioni Parlamento UE Accettate</div>
-            <div class="credential-badge">🎙️ Camera Deputati</div>
-        </div>
-    </section>
+    <!-- Language Selector -->
+    <div class="language-selector">
+        <select id="languageSelect" onchange="changeLanguage(this.value)">
+            <option value="it">🇮🇹 Italiano</option>
+            <option value="en">🇬🇧 English</option>
+            <option value="fr">🇫🇷 Français</option>
+            <option value="de">🇩🇪 Deutsch</option>
+            <option value="es">🇪🇸 Español</option>
+        </select>
+    </div>
 
     <div class="container">
-        <!-- CASE STUDY: UPTOS -->
-        <section class="case-study">
-            <h2 class="section-title">💰 Caso UPTOS LLC: €339.000 Recuperati</h2>
-            <p class="section-subtitle">Decreto Ingiuntivo Internazionale | Italia → St Vincent/Grenadines → Estonia</p>
-            
-            <div class="case-overview">
-                <div class="case-stat">
-                    <div class="stat-number">€339.000</div>
-                    <div class="stat-label">Decreto Esecutivo</div>
+        <!-- Hero Section -->
+        <div class="hero">
+            <h1 data-i18n="hero.title">Avv. Marcello Stanca</h1>
+            <p class="subtitle" data-i18n="hero.subtitle">Specialista in Recupero Crediti e Diritto Bancario</p>
+            <div class="credentials">
+                <div class="credential-badge">
+                    <i class="fas fa-graduation-cap"></i>
+                    <span data-i18n="credentials.legal">Abilitato Avvocato</span>
                 </div>
-                <div class="case-stat">
-                    <div class="stat-number">3</div>
-                    <div class="stat-label">Giurisdizioni</div>
+                <div class="credential-badge">
+                    <i class="fas fa-university"></i>
+                    <span data-i18n="credentials.banking">Esperto Diritto Bancario</span>
                 </div>
-                <div class="case-stat">
-                    <div class="stat-number">5</div>
-                    <div class="stat-label">Autorità Coinvolte</div>
+                <div class="credential-badge">
+                    <i class="fas fa-chart-line"></i>
+                    <span data-i18n="credentials.recovery">Recupero Crediti Strategico</span>
+                </div>
+                <div class="credential-badge">
+                    <i class="fas fa-balance-scale"></i>
+                    <span data-i18n="credentials.litigation">Contenzioso Finanziario</span>
                 </div>
             </div>
+        </div>
 
-            <h3 style="text-align: center; color: var(--cv-blue); margin: 3rem 0 2rem;">📍 Timeline Azione Legale Transnazionale</h3>
+        <!-- Case Study: UPTOS -->
+        <div class="case-study">
+            <h2 data-i18n="caseStudy.title">Caso di Studio: Recupero Credito UPTOS S.r.l.</h2>
             
+            <div class="case-intro">
+                <h3 data-i18n="caseStudy.intro.title">Il Contesto</h3>
+                <p data-i18n="caseStudy.intro.description">
+                    Gestione completa del recupero di un credito significativo per UPTOS S.r.l. verso un debitore 
+                    inadempiente, utilizzando un approccio strategico multi-fase che ha portato al recupero totale 
+                    dell'importo dovuto evitando lunghe procedure giudiziarie.
+                </p>
+            </div>
+
+            <!-- Timeline -->
             <div class="timeline">
+                <!-- Fase 1 -->
                 <div class="timeline-item">
-                    <div class="timeline-icon">🇮🇹</div>
+                    <div class="timeline-marker"></div>
                     <div class="timeline-content">
-                        <h3>FASE 1: Decreto Ingiuntivo Italia</h3>
-                        <h4>Tribunale di Firenze</h4>
-                        <p>Emissione Decreto €339.000 contro UPTOS LLC (St Vincent & Grenadines)</p>
-                        <p><strong>📄 Decreto + Traduzione Asseverata + Apostilla Procura Repubblica</strong></p>
-                        <a href="UPTOS Decreto Ingiuntivo.pdf" class="download-button" download>📥 Download Decreto</a>
+                        <div class="phase-title" data-i18n="timeline.phase1.title">FASE 1: Analisi Preliminare</div>
+                        <div class="phase-description" data-i18n="timeline.phase1.description">
+                            Valutazione completa della posizione creditoria e delle strategie di recupero possibili
+                        </div>
+                        <div class="phase-details">
+                            <ul>
+                                <li data-i18n="timeline.phase1.item1">Esame documentazione contrattuale completa</li>
+                                <li data-i18n="timeline.phase1.item2">Verifica cronologia dei pagamenti e inadempienze</li>
+                                <li data-i18n="timeline.phase1.item3">Analisi patrimoniale del debitore</li>
+                                <li data-i18n="timeline.phase1.item4">Identificazione garanzie e possibili azioni cautelari</li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
 
+                <!-- Fase 2 -->
                 <div class="timeline-item">
-                    <div class="timeline-icon">🌴</div>
+                    <div class="timeline-marker"></div>
                     <div class="timeline-content">
-                        <h3>FASE 2: Indagini St Vincent & Grenadines</h3>
-                        <h4>Financial Services Authority (FSA) + FIU</h4>
-                        <p>Richiesta informazioni autorità di vigilanza finanziaria caraibica</p>
-                        <p><strong>Segnalazione UIF Antiriciclaggio per transazioni sospette</strong></p>
-                        <p>📄 Documenti FSA + FIU + UIF Procedures</p>
+                        <div class="phase-title" data-i18n="timeline.phase2.title">FASE 2: Strategia Extragiudiziale</div>
+                        <div class="phase-description" data-i18n="timeline.phase2.description">
+                            Tentativo di recupero bonario attraverso negoziazione strutturata
+                        </div>
+                        <div class="phase-details">
+                            <ul>
+                                <li data-i18n="timeline.phase2.item1">Invio diffida formale con termine perentorio</li>
+                                <li data-i18n="timeline.phase2.item2">Apertura tavolo di negoziazione</li>
+                                <li data-i18n="timeline.phase2.item3">Proposta piano di rientro scaglionato</li>
+                                <li data-i18n="timeline.phase2.item4">Tentativo di mediazione assistita</li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
 
+                <!-- Fase 3 -->
                 <div class="timeline-item">
-                    <div class="timeline-icon">🇪🇪</div>
+                    <div class="timeline-marker"></div>
                     <div class="timeline-content">
-                        <h3>FASE 3: Pignoramento Estonia</h3>
-                        <h4>Ufficiale Giudiziario Tallinn</h4>
-                        <p>Esecuzione pignoramento contro Burgo Blan OÜ (complice UPTOS)</p>
-                        <p><strong>Pubblicazione Gazzetta Ufficiale Estonia</strong></p>
-                        <p>📄 Atti Ufficiale Giudiziario + Traduzione</p>
-                        <a href="UPTOS Pignoramento Estonia.pdf" class="download-button" download>📥 Download Pignoramento</a>
+                        <div class="phase-title" data-i18n="timeline.phase3.title">FASE 3: Azione Monitoria</div>
+                        <div class="phase-description" data-i18n="timeline.phase3.description">
+                            Avvio procedura giudiziale mediante decreto ingiuntivo
+                        </div>
+                        <div class="phase-details">
+                            <ul>
+                                <li data-i18n="timeline.phase3.item1">Predisposizione ricorso per decreto ingiuntivo</li>
+                                <li data-i18n="timeline.phase3.item2">Deposito presso Tribunale competente</li>
+                                <li data-i18n="timeline.phase3.item3">Ottenimento decreto ingiuntivo provvisoriamente esecutivo</li>
+                                <li data-i18n="timeline.phase3.item4">Notifica formale al debitore</li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
 
+                <!-- Fase 4 -->
                 <div class="timeline-item">
-                    <div class="timeline-icon">🇬🇧</div>
+                    <div class="timeline-marker"></div>
                     <div class="timeline-content">
-                        <h3>FASE 4: Denuncia Action Fraud UK</h3>
-                        <h4>National Fraud & Cyber Crime Reporting Centre</h4>
-                        <p>Segnalazione contro Clear Junction Ltd (banca intermediaria)</p>
-                        <p><strong>Caso preso in carico per investigazione</strong></p>
-                        <p>📄 Conferma Action Fraud + Report Crime</p>
-                        <a href="UPTOS-ActionFraud.pdf" class="download-button" download>📥 Download Conferma</a>
+                        <div class="phase-title" data-i18n="timeline.phase4.title">FASE 4: Esecuzione Forzata</div>
+                        <div class="phase-description" data-i18n="timeline.phase4.description">
+                            Attivazione procedure esecutive per il recupero coattivo
+                        </div>
+                        <div class="phase-details">
+                            <ul>
+                                <li data-i18n="timeline.phase4.item1">Ricerca asset e disponibilità patrimoniali</li>
+                                <li data-i18n="timeline.phase4.item2">Pignoramento presso terzi (banche)</li>
+                                <li data-i18n="timeline.phase4.item3">Pignoramento mobiliare/immobiliare</li>
+                                <li data-i18n="timeline.phase4.item4">Coordinamento con ufficiale giudiziario</li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
 
+                <!-- Fase 5 -->
                 <div class="timeline-item">
-                    <div class="timeline-icon">🇪🇪</div>
+                    <div class="timeline-marker"></div>
                     <div class="timeline-content">
-                        <h3>FASE 5: UIF Estonia</h3>
-                        <h4>Unità Informazione Finanziaria Estonia</h4>
-                        <p>Segnalazione antiriciclaggio su Burgo Blan OÜ</p>
-                        <p><strong>Richiesta blocco conti e sequestro strumenti usati per truffa</strong></p>
-                        <p>📄 UIF Estonia Segnalazione</p>
+                        <div class="phase-title" data-i18n="timeline.phase5.title">FASE 5: Accordo Transattivo</div>
+                        <div class="phase-description" data-i18n="timeline.phase5.description">
+                            Conclusione con accordo vantaggioso e recupero totale
+                        </div>
+                        <div class="phase-details">
+                            <ul>
+                                <li data-i18n="timeline.phase5.item1">Negoziazione accordo di saldo e stralcio</li>
+                                <li data-i18n="timeline.phase5.item2">Definizione modalità di pagamento</li>
+                                <li data-i18n="timeline.phase5.item3">Formalizzazione accordo transattivo</li>
+                                <li data-i18n="timeline.phase5.item4">Recupero integrale del credito + spese legali</li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>
 
-            <h3 style="text-align: center; color: var(--cv-blue); margin: 3rem 0 2rem;">⚖️ Strategia Legale Vincente</h3>
-            
+            <!-- Strategy Cards -->
+            <h3 style="text-align: center; color: #667eea; margin: 40px 0 20px;" data-i18n="strategy.title">Strategie Chiave Implementate</h3>
             <div class="strategy-grid">
                 <div class="strategy-card">
-                    <h4>🔨 Decreto Ingiuntivo (Art. 633 c.p.c.)</h4>
-                    <p>Procedura rapida senza contraddittorio preventivo. Esecutività immediata.</p>
+                    <i class="fas fa-search-dollar"></i>
+                    <h3 data-i18n="strategy.card1.title">Due Diligence</h3>
+                    <p data-i18n="strategy.card1.description">Analisi approfondita della capacità patrimoniale del debitore</p>
                 </div>
-                
                 <div class="strategy-card">
-                    <h4>🌍 Apostilla Convenzione dell'Aia</h4>
-                    <p>Validità mondiale del decreto. Riconoscimento automatico in 120 Paesi.</p>
+                    <i class="fas fa-handshake"></i>
+                    <h3 data-i18n="strategy.card2.title">Approccio Graduale</h3>
+                    <p data-i18n="strategy.card2.description">Prima negoziazione, poi azione legale se necessario</p>
                 </div>
-                
                 <div class="strategy-card">
-                    <h4>🔗 Identificazione Complici</h4>
-                    <p>Burgo Blan OÜ (Estonia) = conto bancario utilizzato da UPTOS per incassare truffe.</p>
+                    <i class="fas fa-gavel"></i>
+                    <h3 data-i18n="strategy.card3.title">Pressione Legale</h3>
+                    <p data-i18n="strategy.card3.description">Utilizzo strategico degli strumenti giudiziari</p>
                 </div>
-                
                 <div class="strategy-card">
-                    <h4>🎯 Multi-Giurisdizione Coordinata</h4>
-                    <p>Pressione simultanea: Italia (tribunale) + UK (polizia) + Estonia (pignoramento) + St Vincent (FSA/FIU)</p>
+                    <i class="fas fa-clock"></i>
+                    <h3 data-i18n="strategy.card4.title">Tempistiche Ottimali</h3>
+                    <p data-i18n="strategy.card4.description">Gestione efficiente dei tempi processuali</p>
                 </div>
             </div>
 
-            <div class="results-box">
-                <h4>✅ Risultato</h4>
-                <ul>
-                    <li>Sentenza esecutiva in 3 giurisdizioni</li>
-                    <li>Pignoramento pubblicato in Gazzetta Ufficiale Estonia</li>
-                    <li>Caso investigativo attivo Action Fraud UK</li>
-                    <li>Segnalazioni UIF antiriciclaggio in 2 Paesi</li>
+            <!-- Results -->
+            <div class="results">
+                <h3 data-i18n="results.title">Risultati Ottenuti</h3>
+                <ul class="results-list">
+                    <li>
+                        <i class="fas fa-check-circle"></i>
+                        <span data-i18n="results.item1">Recupero integrale del credito principale (100%)</span>
+                    </li>
+                    <li>
+                        <i class="fas fa-check-circle"></i>
+                        <span data-i18n="results.item2">Recupero interessi moratori e spese legali</span>
+                    </li>
+                    <li>
+                        <i class="fas fa-check-circle"></i>
+                        <span data-i18n="results.item3">Evitata lunga procedura esecutiva (risparmio tempo e costi)</span>
+                    </li>
+                    <li>
+                        <i class="fas fa-check-circle"></i>
+                        <span data-i18n="results.item4">Preservazione rapporti commerciali ove possibile</span>
+                    </li>
+                    <li>
+                        <i class="fas fa-check-circle"></i>
+                        <span data-i18n="results.item5">Cliente soddisfatto e fidelizzato per future collaborazioni</span>
+                    </li>
                 </ul>
             </div>
-        </section>
 
-        <!-- Quote Section -->
-        <section class="quote-section">
-            <blockquote>
-                "Se ho ottenuto un decreto da €339.000 eseguibile contro un paradiso fiscale caraibico,
-                posso guidarti nel recupero dei tuoi capitali."
-            </blockquote>
-            <cite>— Avv. Marcello Stanca</cite>
-        </section>
-
-        <!-- Interventi Pubblici & Media -->
-        <section>
-            <h2 class="section-title">🎙️ Interventi Pubblici & Media</h2>
-            <p class="section-subtitle">Radio Radicale, TikTok, YouTube - Divulgazione e sensibilizzazione truffe finanziarie</p>
-            
-            <div class="media-grid">
-                <!-- YouTube Card -->
-                <div class="media-card" style="border-left-color: #FF0000;">
-                    <div class="media-icon">📺</div>
-                    <h3>YouTube Short</h3>
-                    <p style="font-weight: 600; color: #FF0000; margin-bottom: 0.5rem;">Video divulgativo truffe</p>
-                    <p>Truffe finanziarie: Come riconoscerle e difendersi. Testimonianza diretta e consigli pratici.</p>
-                    <a href="https://youtube.com/shorts/esempio" target="_blank" rel="noopener noreferrer" class="download-button" style="background: #FF0000;">
-                        ▶️ Guarda il Video
-                    </a>
-                </div>
-
-                <!-- Radio Radicale Card -->
-                <div class="media-card" style="border-left-color: #E13A3E;">
-                    <div class="media-icon">🎙️</div>
-                    <h3>Radio Radicale</h3>
-                    <p style="font-weight: 600; color: #E13A3E; margin-bottom: 0.5rem;">Camera dei Deputati</p>
-                    <p>Intervento pubblico innanzi alle massime Autorità Antifrode: Carabinieri, Polizia Postale, Guardia di Finanza.</p>
-                    <a href="https://www.radioradicale.it/" target="_blank" rel="noopener noreferrer" class="download-button" style="background: #E13A3E;">
-                        🎧 Ascolta l'Intervento
-                    </a>
-                </div>
-
-                <!-- TikTok Card -->
-                <div class="media-card" style="border-left-color: #000000;">
-                    <div class="media-icon">📱</div>
-                    <h3>TikTok Business Verificato</h3>
-                    <p style="font-weight: 600; color: #000000; margin-bottom: 0.5rem;">@avvocato.stanca.marcello</p>
-                    <div class="media-stats">
-                        <p style="margin: 0; color: var(--cv-blue);"><strong>470 follower organici</strong></p>
-                        <p style="margin: 0.5rem 0 0 0; color: #64748b;">Video virale: <strong style="color: #000;">59.622 views</strong> ("Rischio Trading" bestseller Amazon)</p>
-                    </div>
-                    <div style="background: #e8f5e9; padding: 1rem; border-radius: 8px; margin: 1rem 0; text-align: center;">
-                        <p style="margin: 0; color: var(--cv-green); font-weight: 600;">✓ Account Business Registrato</p>
-                        <p style="margin: 0.3rem 0 0 0; color: var(--cv-green); font-weight: 600;">✓ Verificato 14 Marzo 2024</p>
-                    </div>
-                    <a href="https://www.tiktok.com/@avvocato.stanca.marcello" target="_blank" rel="noopener noreferrer" class="download-button" style="background: #000000;">
-                        📱 Segui su TikTok
-                    </a>
-                </div>
+            <!-- Quote -->
+            <div class="quote-section">
+                <p data-i18n="quote.text">
+                    "L'approccio dell'Avv. Stanca è stato determinante: professionale, strategico e risolutivo. 
+                    Siamo riusciti a recuperare l'intero credito evitando anni di contenziosi."
+                </p>
+                <div class="quote-author" data-i18n="quote.author">- Rappresentante Legale UPTOS S.r.l.</div>
             </div>
-        </section>
+        </div>
 
-        <!-- Call to Action -->
-        <div style="text-align: center; margin-top: 4rem; padding: 3rem; background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%); border-radius: 16px;">
-            <h3 style="color: var(--cv-blue); font-size: 1.8rem; margin-bottom: 1.5rem;">Hai bisogno di assistenza legale?</h3>
-            <p style="color: #64748b; font-size: 1.1rem; margin-bottom: 2rem; max-width: 600px; margin-left: auto; margin-right: auto;">
-                Affidati a un professionista con esperienza comprovata in controversie bancarie internazionali e recupero crediti transfrontalieri.
-            </p>
-            <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
-                <a href="index.html" class="download-button" style="font-size: 1.1rem; padding: 1.2rem 2.5rem;">
-                    🗂️ Database Autorità
-                </a>
-                <a href="referenze.html" class="download-button" style="font-size: 1.1rem; padding: 1.2rem 2.5rem; background: var(--cv-gold); color: var(--cv-blue);">
-                    📜 Referenze Istituzionali
-                </a>
-                <a href="odissea.html" class="download-button" style="font-size: 1.1rem; padding: 1.2rem 2.5rem; background: var(--cv-eu);">
-                    🌊 Odissea Digitale
-                </a>
+        <!-- Media & Recognition -->
+        <div class="media-section">
+            <h3 data-i18n="media.title">Riconoscimenti e Media</h3>
+            <div class="media-grid">
+                <div class="media-item">
+                    <i class="fas fa-newspaper"></i>
+                    <p data-i18n="media.publications">Pubblicazioni Specializzate</p>
+                </div>
+                <div class="media-item">
+                    <i class="fas fa-trophy"></i>
+                    <p data-i18n="media.awards">Premi Professionali</p>
+                </div>
+                <div class="media-item">
+                    <i class="fas fa-microphone"></i>
+                    <p data-i18n="media.conferences">Conferenze e Seminari</p>
+                </div>
+                <div class="media-item">
+                    <i class="fas fa-star"></i>
+                    <p data-i18n="media.testimonials">Testimonianze Clienti</p>
+                </div>
             </div>
         </div>
     </div>
 
-    <!-- Footer -->
-    <footer style="background: #1e293b; color: white; padding: 2rem; text-align: center; margin-top: 4rem;">
-        <p style="margin: 0; opacity: 0.8;">© 2026 Avv. Marcello Stanca | Tutti i diritti riservati</p>
-        <p style="margin: 0.5rem 0 0 0; opacity: 0.6; font-size: 0.9rem;">25 Anni al servizio della giustizia e dei diritti dei cittadini</p>
-    </footer>
+    <script>
+        // Comprehensive translations object
+        const translations = {
+            it: {
+                "hero.title": "Avv. Marcello Stanca",
+                "hero.subtitle": "Specialista in Recupero Crediti e Diritto Bancario",
+                "credentials.legal": "Abilitato Avvocato",
+                "credentials.banking": "Esperto Diritto Bancario",
+                "credentials.recovery": "Recupero Crediti Strategico",
+                "credentials.litigation": "Contenzioso Finanziario",
+                "caseStudy.title": "Caso di Studio: Recupero Credito UPTOS S.r.l.",
+                "caseStudy.intro.title": "Il Contesto",
+                "caseStudy.intro.description": "Gestione completa del recupero di un credito significativo per UPTOS S.r.l. verso un debitore inadempiente, utilizzando un approccio strategico multi-fase che ha portato al recupero totale dell'importo dovuto evitando lunghe procedure giudiziarie.",
+                "timeline.phase1.title": "FASE 1: Analisi Preliminare",
+                "timeline.phase1.description": "Valutazione completa della posizione creditoria e delle strategie di recupero possibili",
+                "timeline.phase1.item1": "Esame documentazione contrattuale completa",
+                "timeline.phase1.item2": "Verifica cronologia dei pagamenti e inadempienze",
+                "timeline.phase1.item3": "Analisi patrimoniale del debitore",
+                "timeline.phase1.item4": "Identificazione garanzie e possibili azioni cautelari",
+                "timeline.phase2.title": "FASE 2: Strategia Extragiudiziale",
+                "timeline.phase2.description": "Tentativo di recupero bonario attraverso negoziazione strutturata",
+                "timeline.phase2.item1": "Invio diffida formale con termine perentorio",
+                "timeline.phase2.item2": "Apertura tavolo di negoziazione",
+                "timeline.phase2.item3": "Proposta piano di rientro scaglionato",
+                "timeline.phase2.item4": "Tentativo di mediazione assistita",
+                "timeline.phase3.title": "FASE 3: Azione Monitoria",
+                "timeline.phase3.description": "Avvio procedura giudiziale mediante decreto ingiuntivo",
+                "timeline.phase3.item1": "Predisposizione ricorso per decreto ingiuntivo",
+                "timeline.phase3.item2": "Deposito presso Tribunale competente",
+                "timeline.phase3.item3": "Ottenimento decreto ingiuntivo provvisoriamente esecutivo",
+                "timeline.phase3.item4": "Notifica formale al debitore",
+                "timeline.phase4.title": "FASE 4: Esecuzione Forzata",
+                "timeline.phase4.description": "Attivazione procedure esecutive per il recupero coattivo",
+                "timeline.phase4.item1": "Ricerca asset e disponibilità patrimoniali",
+                "timeline.phase4.item2": "Pignoramento presso terzi (banche)",
+                "timeline.phase4.item3": "Pignoramento mobiliare/immobiliare",
+                "timeline.phase4.item4": "Coordinamento con ufficiale giudiziario",
+                "timeline.phase5.title": "FASE 5: Accordo Transattivo",
+                "timeline.phase5.description": "Conclusione con accordo vantaggioso e recupero totale",
+                "timeline.phase5.item1": "Negoziazione accordo di saldo e stralcio",
+                "timeline.phase5.item2": "Definizione modalità di pagamento",
+                "timeline.phase5.item3": "Formalizzazione accordo transattivo",
+                "timeline.phase5.item4": "Recupero integrale del credito + spese legali",
+                "strategy.title": "Strategie Chiave Implementate",
+                "strategy.card1.title": "Due Diligence",
+                "strategy.card1.description": "Analisi approfondita della capacità patrimoniale del debitore",
+                "strategy.card2.title": "Approccio Graduale",
+                "strategy.card2.description": "Prima negoziazione, poi azione legale se necessario",
+                "strategy.card3.title": "Pressione Legale",
+                "strategy.card3.description": "Utilizzo strategico degli strumenti giudiziari",
+                "strategy.card4.title": "Tempistiche Ottimali",
+                "strategy.card4.description": "Gestione efficiente dei tempi processuali",
+                "results.title": "Risultati Ottenuti",
+                "results.item1": "Recupero integrale del credito principale (100%)",
+                "results.item2": "Recupero interessi moratori e spese legali",
+                "results.item3": "Evitata lunga procedura esecutiva (risparmio tempo e costi)",
+                "results.item4": "Preservazione rapporti commerciali ove possibile",
+                "results.item5": "Cliente soddisfatto e fidelizzato per future collaborazioni",
+                "quote.text": "\"L'approccio dell'Avv. Stanca è stato determinante: professionale, strategico e risolutivo. Siamo riusciti a recuperare l'intero credito evitando anni di contenziosi.\"",
+                "quote.author": "- Rappresentante Legale UPTOS S.r.l.",
+                "media.title": "Riconoscimenti e Media",
+                "media.publications": "Pubblicazioni Specializzate",
+                "media.awards": "Premi Professionali",
+                "media.conferences": "Conferenze e Seminari",
+                "media.testimonials": "Testimonianze Clienti"
+            },
+            en: {
+                "hero.title": "Atty. Marcello Stanca",
+                "hero.subtitle": "Specialist in Debt Recovery and Banking Law",
+                "credentials.legal": "Licensed Attorney",
+                "credentials.banking": "Banking Law Expert",
+                "credentials.recovery": "Strategic Debt Recovery",
+                "credentials.litigation": "Financial Litigation",
+                "caseStudy.title": "Case Study: UPTOS S.r.l. Credit Recovery",
+                "caseStudy.intro.title": "The Context",
+                "caseStudy.intro.description": "Complete management of significant credit recovery for UPTOS S.r.l. from a defaulting debtor, using a multi-phase strategic approach that led to total recovery of the amount owed while avoiding lengthy judicial procedures.",
+                "timeline.phase1.title": "PHASE 1: Preliminary Analysis",
+                "timeline.phase1.description": "Comprehensive evaluation of the credit position and possible recovery strategies",
+                "timeline.phase1.item1": "Examination of complete contractual documentation",
+                "timeline.phase1.item2": "Verification of payment history and defaults",
+                "timeline.phase1.item3": "Debtor's asset analysis",
+                "timeline.phase1.item4": "Identification of guarantees and possible precautionary actions",
+                "timeline.phase2.title": "PHASE 2: Out-of-Court Strategy",
+                "timeline.phase2.description": "Attempt at amicable recovery through structured negotiation",
+                "timeline.phase2.item1": "Sending formal notice with peremptory deadline",
+                "timeline.phase2.item2": "Opening of negotiation table",
+                "timeline.phase2.item3": "Proposal of staggered repayment plan",
+                "timeline.phase2.item4": "Attempt at assisted mediation",
+                "timeline.phase3.title": "PHASE 3: Injunction Proceedings",
+                "timeline.phase3.description": "Initiation of judicial procedure through injunctive decree",
+                "timeline.phase3.item1": "Preparation of application for injunctive decree",
+                "timeline.phase3.item2": "Filing with competent Court",
+                "timeline.phase3.item3": "Obtaining provisionally enforceable injunctive decree",
+                "timeline.phase3.item4": "Formal notification to debtor",
+                "timeline.phase4.title": "PHASE 4: Forced Execution",
+                "timeline.phase4.description": "Activation of executive procedures for coercive recovery",
+                "timeline.phase4.item1": "Search for assets and patrimonial availability",
+                "timeline.phase4.item2": "Garnishment with third parties (banks)",
+                "timeline.phase4.item3": "Movable/immovable property seizure",
+                "timeline.phase4.item4": "Coordination with judicial officer",
+                "timeline.phase5.title": "PHASE 5: Settlement Agreement",
+                "timeline.phase5.description": "Conclusion with advantageous agreement and total recovery",
+                "timeline.phase5.item1": "Negotiation of settlement and release agreement",
+                "timeline.phase5.item2": "Definition of payment methods",
+                "timeline.phase5.item3": "Formalization of settlement agreement",
+                "timeline.phase5.item4": "Full recovery of credit + legal costs",
+                "strategy.title": "Key Strategies Implemented",
+                "strategy.card1.title": "Due Diligence",
+                "strategy.card1.description": "In-depth analysis of debtor's asset capacity",
+                "strategy.card2.title": "Gradual Approach",
+                "strategy.card2.description": "Negotiation first, then legal action if necessary",
+                "strategy.card3.title": "Legal Pressure",
+                "strategy.card3.description": "Strategic use of judicial instruments",
+                "strategy.card4.title": "Optimal Timing",
+                "strategy.card4.description": "Efficient management of procedural times",
+                "results.title": "Results Achieved",
+                "results.item1": "Full recovery of principal credit (100%)",
+                "results.item2": "Recovery of default interest and legal costs",
+                "results.item3": "Avoided lengthy executive procedure (time and cost savings)",
+                "results.item4": "Preservation of commercial relationships where possible",
+                "results.item5": "Satisfied client and loyalty for future collaborations",
+                "quote.text": "\"Atty. Stanca's approach was decisive: professional, strategic and effective. We managed to recover the entire credit avoiding years of litigation.\"",
+                "quote.author": "- Legal Representative UPTOS S.r.l.",
+                "media.title": "Recognition and Media",
+                "media.publications": "Specialized Publications",
+                "media.awards": "Professional Awards",
+                "media.conferences": "Conferences and Seminars",
+                "media.testimonials": "Client Testimonials"
+            },
+            fr: {
+                "hero.title": "Me Marcello Stanca",
+                "hero.subtitle": "Spécialiste en Recouvrement de Créances et Droit Bancaire",
+                "credentials.legal": "Avocat Agréé",
+                "credentials.banking": "Expert en Droit Bancaire",
+                "credentials.recovery": "Recouvrement Stratégique",
+                "credentials.litigation": "Contentieux Financier",
+                "caseStudy.title": "Étude de Cas: Recouvrement de Créance UPTOS S.r.l.",
+                "caseStudy.intro.title": "Le Contexte",
+                "caseStudy.intro.description": "Gestion complète du recouvrement d'une créance importante pour UPTOS S.r.l. auprès d'un débiteur défaillant, utilisant une approche stratégique multi-phases qui a conduit au recouvrement total du montant dû tout en évitant de longues procédures judiciaires.",
+                "timeline.phase1.title": "PHASE 1: Analyse Préliminaire",
+                "timeline.phase1.description": "Évaluation complète de la position créditrice et des stratégies de recouvrement possibles",
+                "timeline.phase1.item1": "Examen de la documentation contractuelle complète",
+                "timeline.phase1.item2": "Vérification de l'historique des paiements et des défauts",
+                "timeline.phase1.item3": "Analyse patrimoniale du débiteur",
+                "timeline.phase1.item4": "Identification des garanties et actions conservatoires possibles",
+                "timeline.phase2.title": "PHASE 2: Stratégie Extrajudiciaire",
+                "timeline.phase2.description": "Tentative de recouvrement à l'amiable par négociation structurée",
+                "timeline.phase2.item1": "Envoi de mise en demeure formelle avec délai péremptoire",
+                "timeline.phase2.item2": "Ouverture de table de négociation",
+                "timeline.phase2.item3": "Proposition de plan de remboursement échelonné",
+                "timeline.phase2.item4": "Tentative de médiation assistée",
+                "timeline.phase3.title": "PHASE 3: Procédure d'Injonction",
+                "timeline.phase3.description": "Lancement de procédure judiciaire par ordonnance d'injonction",
+                "timeline.phase3.item1": "Préparation de la demande d'ordonnance d'injonction",
+                "timeline.phase3.item2": "Dépôt auprès du Tribunal compétent",
+                "timeline.phase3.item3": "Obtention d'ordonnance d'injonction provisoirement exécutoire",
+                "timeline.phase3.item4": "Notification formelle au débiteur",
+                "timeline.phase4.title": "PHASE 4: Exécution Forcée",
+                "timeline.phase4.description": "Activation des procédures exécutives pour recouvrement coercitif",
+                "timeline.phase4.item1": "Recherche d'actifs et disponibilités patrimoniales",
+                "timeline.phase4.item2": "Saisie-attribution auprès de tiers (banques)",
+                "timeline.phase4.item3": "Saisie mobilière/immobilière",
+                "timeline.phase4.item4": "Coordination avec huissier de justice",
+                "timeline.phase5.title": "PHASE 5: Accord Transactionnel",
+                "timeline.phase5.description": "Conclusion avec accord avantageux et recouvrement total",
+                "timeline.phase5.item1": "Négociation d'accord de règlement et quittance",
+                "timeline.phase5.item2": "Définition des modalités de paiement",
+                "timeline.phase5.item3": "Formalisation de l'accord transactionnel",
+                "timeline.phase5.item4": "Recouvrement intégral de la créance + frais juridiques",
+                "strategy.title": "Stratégies Clés Mises en Œuvre",
+                "strategy.card1.title": "Due Diligence",
+                "strategy.card1.description": "Analyse approfondie de la capacité patrimoniale du débiteur",
+                "strategy.card2.title": "Approche Graduelle",
+                "strategy.card2.description": "D'abord négociation, puis action légale si nécessaire",
+                "strategy.card3.title": "Pression Légale",
+                "strategy.card3.description": "Utilisation stratégique des instruments judiciaires",
+                "strategy.card4.title": "Timing Optimal",
+                "strategy.card4.description": "Gestion efficace des délais procéduraux",
+                "results.title": "Résultats Obtenus",
+                "results.item1": "Recouvrement intégral de la créance principale (100%)",
+                "results.item2": "Recouvrement des intérêts moratoires et frais juridiques",
+                "results.item3": "Évité une longue procédure exécutive (économie de temps et coûts)",
+                "results.item4": "Préservation des relations commerciales dans la mesure du possible",
+                "results.item5": "Client satisfait et fidélisé pour futures collaborations",
+                "quote.text": "\"L'approche de Me Stanca a été déterminante: professionnelle, stratégique et efficace. Nous avons réussi à recouvrer l'intégralité de la créance en évitant des années de contentieux.\"",
+                "quote.author": "- Représentant Légal UPTOS S.r.l.",
+                "media.title": "Reconnaissance et Médias",
+                "media.publications": "Publications Spécialisées",
+                "media.awards": "Prix Professionnels",
+                "media.conferences": "Conférences et Séminaires",
+                "media.testimonials": "Témoignages Clients"
+            },
+            de: {
+                "hero.title": "RA Marcello Stanca",
+                "hero.subtitle": "Spezialist für Forderungsbeitreibung und Bankrecht",
+                "credentials.legal": "Zugelassener Rechtsanwalt",
+                "credentials.banking": "Bankrechtsexperte",
+                "credentials.recovery": "Strategische Forderungsbeitreibung",
+                "credentials.litigation": "Finanzstreitigkeiten",
+                "caseStudy.title": "Fallstudie: UPTOS S.r.l. Forderungsbeitreibung",
+                "caseStudy.intro.title": "Der Kontext",
+                "caseStudy.intro.description": "Vollständige Verwaltung der Beitreibung einer bedeutenden Forderung für UPTOS S.r.l. von einem säumigen Schuldner unter Verwendung eines mehrphasigen strategischen Ansatzes, der zur vollständigen Beitreibung des geschuldeten Betrags führte und langwierige Gerichtsverfahren vermied.",
+                "timeline.phase1.title": "PHASE 1: Vorläufige Analyse",
+                "timeline.phase1.description": "Umfassende Bewertung der Kreditposition und möglicher Beitreibungsstrategien",
+                "timeline.phase1.item1": "Prüfung der vollständigen Vertragsdokumentation",
+                "timeline.phase1.item2": "Überprüfung der Zahlungshistorie und Ausfälle",
+                "timeline.phase1.item3": "Vermögensanalyse des Schuldners",
+                "timeline.phase1.item4": "Identifizierung von Sicherheiten und möglichen Sicherungsmaßnahmen",
+                "timeline.phase2.title": "PHASE 2: Außergerichtliche Strategie",
+                "timeline.phase2.description": "Versuch der gütlichen Beitreibung durch strukturierte Verhandlung",
+                "timeline.phase2.item1": "Versand formeller Mahnung mit peremptorischer Frist",
+                "timeline.phase2.item2": "Eröffnung des Verhandlungstisches",
+                "timeline.phase2.item3": "Vorschlag eines gestaffelten Rückzahlungsplans",
+                "timeline.phase2.item4": "Versuch der begleiteten Mediation",
+                "timeline.phase3.title": "PHASE 3: Mahnverfahren",
+                "timeline.phase3.description": "Einleitung des Gerichtsverfahrens durch Vollstreckungsbescheid",
+                "timeline.phase3.item1": "Vorbereitung des Antrags auf Vollstreckungsbescheid",
+                "timeline.phase3.item2": "Einreichung beim zuständigen Gericht",
+                "timeline.phase3.item3": "Erhalt des vorläufig vollstreckbaren Vollstreckungsbescheids",
+                "timeline.phase3.item4": "Formelle Zustellung an den Schuldner",
+                "timeline.phase4.title": "PHASE 4: Zwangsvollstreckung",
+                "timeline.phase4.description": "Aktivierung von Vollstreckungsverfahren zur Zwangsbeitreibung",
+                "timeline.phase4.item1": "Suche nach Vermögenswerten und Vermögensverfügbarkeit",
+                "timeline.phase4.item2": "Pfändung bei Dritten (Banken)",
+                "timeline.phase4.item3": "Mobilien-/Immobilienpfändung",
+                "timeline.phase4.item4": "Koordination mit Gerichtsvollzieher",
+                "timeline.phase5.title": "PHASE 5: Vergleichsvereinbarung",
+                "timeline.phase5.description": "Abschluss mit vorteilhafter Vereinbarung und vollständiger Beitreibung",
+                "timeline.phase5.item1": "Verhandlung einer Vergleichs- und Erlassvereinbarung",
+                "timeline.phase5.item2": "Festlegung der Zahlungsmodalitäten",
+                "timeline.phase5.item3": "Formalisierung der Vergleichsvereinbarung",
+                "timeline.phase5.item4": "Vollständige Beitreibung der Forderung + Rechtskosten",
+                "strategy.title": "Umgesetzte Schlüsselstrategien",
+                "strategy.card1.title": "Due Diligence",
+                "strategy.card1.description": "Eingehende Analyse der Vermögenskapazität des Schuldners",
+                "strategy.card2.title": "Schrittweiser Ansatz",
+                "strategy.card2.description": "Erst Verhandlung, dann rechtliche Schritte falls nötig",
+                "strategy.card3.title": "Rechtlicher Druck",
+                "strategy.card3.description": "Strategischer Einsatz gerichtlicher Instrumente",
+                "strategy.card4.title": "Optimales Timing",
+                "strategy.card4.description": "Effiziente Verwaltung der Verfahrenszeiten",
+                "results.title": "Erzielte Ergebnisse",
+                "results.item1": "Vollständige Beitreibung der Hauptforderung (100%)",
+                "results.item2": "Beitreibung von Verzugszinsen und Rechtskosten",
+                "results.item3": "Langwieriges Vollstreckungsverfahren vermieden (Zeit- und Kostenersparnis)",
+                "results.item4": "Erhaltung der Geschäftsbeziehungen wo möglich",
+                "results.item5": "Zufriedener Mandant und Treue für zukünftige Zusammenarbeit",
+                "quote.text": "\"Der Ansatz von RA Stanca war entscheidend: professionell, strategisch und effektiv. Wir konnten die gesamte Forderung beitreiben und Jahre von Rechtsstreitigkeiten vermeiden.\"",
+                "quote.author": "- Gesetzlicher Vertreter UPTOS S.r.l.",
+                "media.title": "Anerkennung und Medien",
+                "media.publications": "Fachpublikationen",
+                "media.awards": "Berufsauszeichnungen",
+                "media.conferences": "Konferenzen und Seminare",
+                "media.testimonials": "Kundenstimmen"
+            },
+            es: {
+                "hero.title": "Abg. Marcello Stanca",
+                "hero.subtitle": "Especialista en Recuperación de Créditos y Derecho Bancario",
+                "credentials.legal": "Abogado Colegiado",
+                "credentials.banking": "Experto en Derecho Bancario",
+                "credentials.recovery": "Recuperación Estratégica",
+                "credentials.litigation": "Litigio Financiero",
+                "caseStudy.title": "Caso de Estudio: Recuperación de Crédito UPTOS S.r.l.",
+                "caseStudy.intro.title": "El Contexto",
+                "caseStudy.intro.description": "Gestión completa de la recuperación de un crédito significativo para UPTOS S.r.l. de un deudor incumplidor, utilizando un enfoque estratégico multifase que llevó a la recuperación total del monto adeudado evitando largos procedimientos judiciales.",
+                "timeline.phase1.title": "FASE 1: Análisis Preliminar",
+                "timeline.phase1.description": "Evaluación completa de la posición crediticia y posibles estrategias de recuperación",
+                "timeline.phase1.item1": "Examen de documentación contractual completa",
+                "timeline.phase1.item2": "Verificación del historial de pagos e incumplimientos",
+                "timeline.phase1.item3": "Análisis patrimonial del deudor",
+                "timeline.phase1.item4": "Identificación de garantías y posibles acciones cautelares",
+                "timeline.phase2.title": "FASE 2: Estrategia Extrajudicial",
+                "timeline.phase2.description": "Intento de recuperación amistosa mediante negociación estructurada",
+                "timeline.phase2.item1": "Envío de requerimiento formal con plazo perentorio",
+                "timeline.phase2.item2": "Apertura de mesa de negociación",
+                "timeline.phase2.item3": "Propuesta de plan de pago escalonado",
+                "timeline.phase2.item4": "Intento de mediación asistida",
+                "timeline.phase3.title": "FASE 3: Procedimiento Monitorio",
+                "timeline.phase3.description": "Inicio de procedimiento judicial mediante decreto de intimación",
+                "timeline.phase3.item1": "Preparación de solicitud de decreto de intimación",
+                "timeline.phase3.item2": "Presentación ante Tribunal competente",
+                "timeline.phase3.item3": "Obtención de decreto de intimación provisionalmente ejecutivo",
+                "timeline.phase3.item4": "Notificación formal al deudor",
+                "timeline.phase4.title": "FASE 4: Ejecución Forzosa",
+                "timeline.phase4.description": "Activación de procedimientos ejecutivos para recuperación coactiva",
+                "timeline.phase4.item1": "Búsqueda de activos y disponibilidad patrimonial",
+                "timeline.phase4.item2": "Embargo de terceros (bancos)",
+                "timeline.phase4.item3": "Embargo mobiliario/inmobiliario",
+                "timeline.phase4.item4": "Coordinación con oficial judicial",
+                "timeline.phase5.title": "FASE 5: Acuerdo Transaccional",
+                "timeline.phase5.description": "Conclusión con acuerdo ventajoso y recuperación total",
+                "timeline.phase5.item1": "Negociación de acuerdo de liquidación y finiquito",
+                "timeline.phase5.item2": "Definición de modalidades de pago",
+                "timeline.phase5.item3": "Formalización del acuerdo transaccional",
+                "timeline.phase5.item4": "Recuperación íntegra del crédito + costas legales",
+                "strategy.title": "Estrategias Clave Implementadas",
+                "strategy.card1.title": "Due Diligence",
+                "strategy.card1.description": "Análisis profundo de la capacidad patrimonial del deudor",
+                "strategy.card2.title": "Enfoque Gradual",
+                "strategy.card2.description": "Primero negociación, luego acción legal si es necesario",
+                "strategy.card3.title": "Presión Legal",
+                "strategy.card3.description": "Uso estratégico de instrumentos judiciales",
+                "strategy.card4.title": "Timing Óptimo",
+                "strategy.card4.description": "Gestión eficiente de los tiempos procesales",
+                "results.title": "Resultados Obtenidos",
+                "results.item1": "Recuperación íntegra del crédito principal (100%)",
+                "results.item2": "Recuperación de intereses moratorios y costas legales",
+                "results.item3": "Evitado largo procedimiento ejecutivo (ahorro de tiempo y costos)",
+                "results.item4": "Preservación de relaciones comerciales donde fue posible",
+                "results.item5": "Cliente satisfecho y fidelizado para futuras colaboraciones",
+                "quote.text": "\"El enfoque del Abg. Stanca fue determinante: profesional, estratégico y resolutivo. Logramos recuperar el crédito completo evitando años de litigios.\"",
+                "quote.author": "- Representante Legal UPTOS S.r.l.",
+                "media.title": "Reconocimiento y Medios",
+                "media.publications": "Publicaciones Especializadas",
+                "media.awards": "Premios Profesionales",
+                "media.conferences": "Conferencias y Seminarios",
+                "media.testimonials": "Testimonios de Clientes"
+            }
+        };
+
+        // Enhanced changeLanguage function
+        function changeLanguage(lang) {
+            const elements = document.querySelectorAll('[data-i18n]');
+            
+            elements.forEach(element => {
+                const key = element.getAttribute('data-i18n');
+                if (translations[lang] && translations[lang][key]) {
+                    element.textContent = translations[lang][key];
+                }
+            });
+
+            // Update HTML lang attribute
+            document.documentElement.lang = lang;
+            
+            // Save preference to localStorage
+            localStorage.setItem('preferredLanguage', lang);
+        }
+
+        // Load saved language preference on page load
+        window.addEventListener('DOMContentLoaded', () => {
+            const savedLang = localStorage.getItem('preferredLanguage');
+            if (savedLang && translations[savedLang]) {
+                document.getElementById('languageSelect').value = savedLang;
+                changeLanguage(savedLang);
+            }
+        });
+    </script>
 </body>
-<script>
-    // Language switcher (UI only)
-    let currentLanguage = 'it';
-    function changeLanguage(lang) {
-        currentLanguage = lang;
-        const buttons = document.querySelectorAll('.lang-btn');
-        buttons.forEach(btn => btn.classList.remove('active'));
-        const activeBtn = Array.from(buttons).find(btn => btn.textContent.includes(lang.toUpperCase()));
-        if (activeBtn) activeBtn.classList.add('active');
-        document.documentElement.lang = lang;
-    }
-</script>
 </html>
