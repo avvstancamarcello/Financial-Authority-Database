@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Termini di Servizio - Avv. Marcello Stanca | Financial Authority Database</title>
+    <meta name="description" content="Termini di Servizio per l'utilizzo del Financial Authority Database - Database delle autorità finanziarie di 108 paesi.">
+    <meta name="author" content="Avvocato Marcello Stanca">
+    <meta name="robots" content="index, follow">
+    
+    <!-- PWA Meta Tags -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#1a365d">
+    <link rel="icon" type="image/png" href="icon-192.png">
+    <link rel="apple-touch-icon" href="icon-192.png">
+    
+    <style>
+        :root {
+            --cv-blue: #1a365d;
+            --cv-gold: #d4af37;
+            --cv-eu: #003399;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f5f5f5;
+        }
+
+        /* Navigation */
+        nav {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .nav-brand {
+            color: white;
+            font-size: 1.5rem;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s;
+            font-weight: 500;
+        }
+
+        .nav-links a:hover {
+            color: #ffd700;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+            padding: 4rem 2rem;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: #ffd700;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* Main Content */
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+            background: white;
+            margin-top: 2rem;
+            margin-bottom: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .terms-section {
+            margin-bottom: 3rem;
+        }
+
+        .terms-section h2 {
+            color: #1e3c72;
+            margin-bottom: 1rem;
+            font-size: 1.8rem;
+            border-left: 4px solid #ffd700;
+            padding-left: 1rem;
+        }
+
+        .terms-section p {
+            color: #666;
+            line-height: 1.8;
+            margin-bottom: 1rem;
+        }
+
+        .terms-section ul {
+            margin-left: 2rem;
+            color: #666;
+            line-height: 1.8;
+        }
+
+        .terms-section ul li {
+            margin-bottom: 0.5rem;
+        }
+
+        .highlight-box {
+            background: #f8f9fa;
+            border-left: 4px solid #1e3c72;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 5px;
+        }
+
+        .highlight-box strong {
+            color: #1e3c72;
+        }
+
+        .contact-info {
+            background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%);
+            padding: 2rem;
+            border-radius: 10px;
+            margin-top: 2rem;
+        }
+
+        .contact-info h3 {
+            color: #1e3c72;
+            margin-bottom: 1rem;
+        }
+
+        .contact-info p {
+            color: #333;
+            margin-bottom: 0.5rem;
+        }
+
+        .contact-info a {
+            color: #1e3c72;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .contact-info a:hover {
+            text-decoration: underline;
+        }
+
+        /* Footer */
+        footer {
+            background: #1e3c72;
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 4rem;
+        }
+
+        footer p {
+            margin-bottom: 1rem;
+        }
+
+        footer a {
+            color: #ffd700;
+            text-decoration: none;
+            margin: 0 1rem;
+            transition: color 0.3s;
+        }
+
+        footer a:hover {
+            color: white;
+        }
+
+        .footer-links {
+            margin-bottom: 1rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-container {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .nav-links {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
+
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .container {
+                padding: 2rem 1rem;
+                margin-top: 1rem;
+            }
+
+            .terms-section h2 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="nav-brand">Avv. Marcello Stanca</a>
+            <ul class="nav-links">
+                <li><a href="index.html">🏛️ Database Autorità</a></li>
+                <li><a href="odissea.html">🌊 Odissea Digitale</a></li>
+                <li><a href="referenze.html">📜 Referenze Istituzionali</a></li>
+                <li><a href="curriculum.html">👨‍⚖️ Avv Stanca - Curriculum</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <h1>Termini di Servizio</h1>
+        <p>Condizioni di utilizzo del Financial Authority Database</p>
+    </section>
+
+    <!-- Main Content -->
+    <div class="container">
+        <!-- Section 1 -->
+        <section class="terms-section">
+            <h2>1. Accettazione dei Termini</h2>
+            <p>
+                Benvenuti al <strong>Financial Authority Database</strong>. Accedendo e utilizzando questo sito web e l'applicazione 
+                Progressive Web App (PWA), l'utente accetta di essere vincolato dai presenti Termini di Servizio. 
+                Se non si accettano questi termini, si prega di non utilizzare il servizio.
+            </p>
+            <p>
+                L'utilizzo continuato del servizio costituisce accettazione di qualsiasi modifica ai presenti Termini di Servizio.
+            </p>
+        </section>
+
+        <!-- Section 2 -->
+        <section class="terms-section">
+            <h2>2. Descrizione del Servizio</h2>
+            <p>
+                Il <strong>Financial Authority Database</strong> è un database informativo che fornisce:
+            </p>
+            <ul>
+                <li>Informazioni di contatto delle autorità finanziarie di 108 paesi</li>
+                <li>Collegamenti ai siti web ufficiali delle autorità di regolamentazione finanziaria</li>
+                <li>Strumenti educativi per la protezione dei consumatori contro le frodi finanziarie</li>
+                <li>Riferimenti a organizzazioni internazionali di vigilanza finanziaria (ESMA, IOSCO, FinCoNet, ecc.)</li>
+                <li>Risorse informative sulla tutela degli investitori</li>
+            </ul>
+            <div class="highlight-box">
+                <strong>Importante:</strong> Il servizio è fornito esclusivamente a scopo informativo ed educativo. 
+                Il database raccoglie informazioni pubblicamente disponibili dalle autorità finanziarie internazionali.
+            </div>
+        </section>
+
+        <!-- Section 3 -->
+        <section class="terms-section">
+            <h2>3. Uso del Servizio</h2>
+            <p>
+                L'utente si impegna a utilizzare il servizio esclusivamente per scopi legittimi e in conformità con le leggi vigenti. 
+                È espressamente vietato:
+            </p>
+            <ul>
+                <li>Utilizzare il servizio per scopi illegali o non autorizzati</li>
+                <li>Tentare di accedere senza autorizzazione a qualsiasi parte del servizio</li>
+                <li>Interferire o interrompere il funzionamento del servizio</li>
+                <li>Copiare, modificare o distribuire il contenuto senza autorizzazione scritta</li>
+                <li>Utilizzare il servizio per trasmettere contenuti dannosi o illegali</li>
+            </ul>
+            <div class="highlight-box">
+                <strong>Disclaimer Importante:</strong> Le informazioni fornite attraverso questo servizio sono esclusivamente 
+                a scopo informativo e NON costituiscono consulenza legale, finanziaria o di investimento. Per questioni specifiche, 
+                si raccomanda di consultare un professionista qualificato.
+            </div>
+        </section>
+
+        <!-- Section 4 -->
+        <section class="terms-section">
+            <h2>4. Proprietà Intellettuale</h2>
+            <p>
+                Tutti i contenuti presenti sul sito, inclusi testi, grafica, loghi, icone, immagini, design, struttura del database 
+                e software, sono di proprietà esclusiva di <strong>Avv. Marcello Stanca</strong> o dei rispettivi proprietari e sono 
+                protetti dalle leggi italiane e internazionali sul diritto d'autore e sulla proprietà intellettuale.
+            </p>
+            <p>
+                I marchi, i loghi e i nomi delle autorità finanziarie presenti nel database appartengono ai rispettivi titolari 
+                e sono utilizzati esclusivamente a scopo informativo.
+            </p>
+            <p>
+                <strong>Copyright © 2026 Avv. Marcello Stanca</strong> - Tutti i diritti riservati.
+            </p>
+            <p>
+                È vietata la riproduzione, anche parziale, senza autorizzazione scritta, eccetto per uso personale non commerciale.
+            </p>
+        </section>
+
+        <!-- Section 5 -->
+        <section class="terms-section">
+            <h2>5. Limitazione di Responsabilità</h2>
+            <p>
+                Il servizio è fornito "così com'è" senza garanzie di alcun tipo, esplicite o implicite. 
+                <strong>Avv. Marcello Stanca</strong> non garantisce che:
+            </p>
+            <ul>
+                <li>Il servizio sarà sempre disponibile, ininterrotto o privo di errori</li>
+                <li>Le informazioni fornite siano sempre accurate, complete o aggiornate</li>
+                <li>I difetti del servizio saranno corretti</li>
+                <li>Il servizio o i server che lo rendono disponibile siano privi di virus o altri componenti dannosi</li>
+            </ul>
+            <p>
+                <strong>Avv. Marcello Stanca</strong> non è responsabile per:
+            </p>
+            <ul>
+                <li>Danni diretti, indiretti, incidentali, consequenziali o punitivi derivanti dall'uso o dall'impossibilità di utilizzare il servizio</li>
+                <li>Perdite finanziarie derivanti da decisioni prese sulla base delle informazioni fornite</li>
+                <li>Errori od omissioni nel contenuto del database</li>
+                <li>Azioni intraprese dalle autorità finanziarie o da terze parti</li>
+                <li>Contenuti presenti sui siti web esterni collegati</li>
+            </ul>
+            <div class="highlight-box">
+                <strong>Esclusione di Garanzie:</strong> L'utente utilizza il servizio a proprio rischio. Nessuna informazione 
+                o consiglio ottenuto attraverso il servizio crea alcuna garanzia non espressamente indicata nei presenti Termini.
+            </div>
+        </section>
+
+        <!-- Section 6 -->
+        <section class="terms-section">
+            <h2>6. Collegamenti Esterni</h2>
+            <p>
+                Il <strong>Financial Authority Database</strong> contiene collegamenti a siti web esterni di autorità finanziarie 
+                e organizzazioni internazionali. Questi collegamenti sono forniti esclusivamente per comodità dell'utente.
+            </p>
+            <p>
+                <strong>Avv. Marcello Stanca</strong> non ha alcun controllo sui contenuti di tali siti web esterni e non è 
+                responsabile per:
+            </p>
+            <ul>
+                <li>Il contenuto, l'accuratezza o le opinioni espresse in tali siti web</li>
+                <li>Le politiche sulla privacy o le pratiche di tali siti</li>
+                <li>Eventuali danni o perdite causati dall'utilizzo di tali siti</li>
+                <li>La disponibilità o il funzionamento di tali siti</li>
+            </ul>
+            <p>
+                L'inclusione di qualsiasi collegamento non implica approvazione, raccomandazione o responsabilità per i siti collegati. 
+                Si raccomanda agli utenti di leggere i termini di servizio e le politiche sulla privacy di ogni sito web visitato.
+            </p>
+        </section>
+
+        <!-- Section 7 -->
+        <section class="terms-section">
+            <h2>7. Modifiche ai Termini</h2>
+            <p>
+                <strong>Avv. Marcello Stanca</strong> si riserva il diritto di modificare, aggiornare o sostituire qualsiasi parte 
+                dei presenti Termini di Servizio in qualsiasi momento, a propria esclusiva discrezione.
+            </p>
+            <p>
+                Le modifiche entreranno in vigore immediatamente dopo la pubblicazione sul sito web. L'utilizzo continuato del servizio 
+                dopo tali modifiche costituisce accettazione dei nuovi termini.
+            </p>
+            <p>
+                È responsabilità dell'utente verificare periodicamente i presenti Termini di Servizio per eventuali aggiornamenti. 
+                Si consiglia di controllare questa pagina regolarmente per rimanere informati su eventuali modifiche.
+            </p>
+            <p>
+                <strong>Data ultimo aggiornamento: 6 gennaio 2026</strong>
+            </p>
+        </section>
+
+        <!-- Section 8 -->
+        <section class="terms-section">
+            <h2>8. Legge Applicabile e Giurisdizione</h2>
+            <p>
+                I presenti Termini di Servizio sono regolati e interpretati in conformità con la <strong>legislazione italiana</strong>, 
+                senza riferimento alle disposizioni in materia di conflitto di leggi.
+            </p>
+            <p>
+                Per qualsiasi controversia derivante da o in relazione ai presenti Termini di Servizio o all'utilizzo del servizio, 
+                sarà competente in via esclusiva il <strong>Foro di Firenze</strong>, Italia.
+            </p>
+            <p>
+                Il servizio è conforme al:
+            </p>
+            <ul>
+                <li><strong>GDPR</strong> (Regolamento UE 2016/679) per la protezione dei dati personali</li>
+                <li><strong>Codice del Consumo</strong> (D.Lgs. 206/2005)</li>
+                <li><strong>Codice in materia di protezione dei dati personali</strong> (D.Lgs. 196/2003)</li>
+                <li><strong>Direttiva eCommerce</strong> (D.Lgs. 70/2003)</li>
+            </ul>
+        </section>
+
+        <!-- Section 9 -->
+        <section class="terms-section">
+            <h2>9. Contatti</h2>
+            <p>
+                Per qualsiasi domanda, chiarimento o richiesta riguardante i presenti Termini di Servizio, è possibile contattare:
+            </p>
+            <div class="contact-info">
+                <h3>📞 Informazioni di Contatto</h3>
+                <p><strong>Avvocato Marcello Stanca</strong></p>
+                <p>📍 Firenze, Italia</p>
+                <p>✉️ Email: <a href="mailto:lawyer@marcellostanca.it">lawyer@marcellostanca.it</a></p>
+                <p>🌐 Website: <a href="https://avvstancamarcello.github.io/Financial-Authority-Database/" target="_blank">Financial Authority Database</a></p>
+                <p>💼 LinkedIn: <a href="https://www.linkedin.com/in/marcello-stanca/" target="_blank">linkedin.com/in/marcello-stanca</a></p>
+            </div>
+            <p style="margin-top: 1.5rem;">
+                Il titolare si impegna a rispondere a tutte le richieste entro un tempo ragionevole e comunque nei termini 
+                previsti dalla normativa vigente.
+            </p>
+        </section>
+
+        <!-- Final Notice -->
+        <div class="highlight-box" style="margin-top: 3rem;">
+            <p>
+                <strong>Nota Finale:</strong> L'utilizzo del Financial Authority Database implica la piena accettazione 
+                dei presenti Termini di Servizio. Si prega di leggerli attentamente prima di utilizzare il servizio.
+            </p>
+            <p style="margin-top: 1rem;">
+                Per informazioni sulla gestione dei dati personali, consultare la nostra 
+                <a href="privacy.html" style="color: #1e3c72; font-weight: bold;">Privacy Policy</a>.
+            </p>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-links">
+            <a href="privacy.html">Privacy Policy</a>
+            <a href="terms.html">Termini di Servizio</a>
+            <a href="index.html">Home</a>
+        </div>
+        <p>&copy; 2026 Avv. Marcello Stanca - Tutti i diritti riservati</p>
+        <p style="font-size: 0.9rem; opacity: 0.8;">Financial Authority Database - Protezione e Tutela degli Investitori</p>
+    </footer>
+</body>
+</html>
