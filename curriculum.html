@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title data-i18n="page_title">Curriculum Vitae - Avv. Marcello Stanca</title>
+    <title>Curriculum - Avv. Marcello Stanca</title>
     <style>
         * {
             margin: 0;
@@ -15,714 +15,908 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             line-height: 1.6;
             color: #333;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            padding: 20px;
+            background-color: #f5f5f5;
         }
 
-        .language-selector {
-            position: fixed;
-            top: 20px;
-            right: 20px;
+        /* Navigation */
+        nav {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
             z-index: 1000;
-            background: white;
-            padding: 10px;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
         }
 
-        .language-selector select {
-            padding: 8px 12px;
-            border: 2px solid #667eea;
-            border-radius: 5px;
-            font-size: 14px;
-            cursor: pointer;
-            background: white;
-            color: #333;
-            outline: none;
-            transition: all 0.3s ease;
-        }
-
-        .language-selector select:hover {
-            border-color: #764ba2;
-        }
-
-        .container {
-            max-width: 900px;
+        .nav-container {
+            max-width: 1200px;
             margin: 0 auto;
-            background: white;
-            padding: 40px;
-            border-radius: 10px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
         }
 
-        header {
-            text-align: center;
-            border-bottom: 3px solid #667eea;
-            padding-bottom: 20px;
-            margin-bottom: 30px;
+        .nav-brand {
+            color: white;
+            font-size: 1.5rem;
+            font-weight: bold;
+            text-decoration: none;
         }
 
-        h1 {
-            color: #667eea;
-            font-size: 2.5em;
-            margin-bottom: 10px;
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
         }
 
-        .subtitle {
-            color: #764ba2;
-            font-size: 1.2em;
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s;
             font-weight: 500;
         }
 
-        .contact-info {
+        .nav-links a:hover {
+            color: #ffd700;
+        }
+
+        .language-selector {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .language-selector button {
+            background: rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            padding: 0.4rem 0.8rem;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 500;
+        }
+
+        .language-selector button:hover,
+        .language-selector button.active {
+            background: #ffd700;
+            color: #1e3c72;
+            border-color: #ffd700;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+            padding: 4rem 2rem;
             text-align: center;
-            margin: 20px 0;
-            padding: 15px;
-            background: #f8f9fa;
-            border-radius: 8px;
         }
 
-        .contact-info p {
-            margin: 5px 0;
-            color: #555;
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: #ffd700;
         }
 
-        .contact-info a {
-            color: #667eea;
-            text-decoration: none;
-            transition: color 0.3s ease;
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto;
         }
 
-        .contact-info a:hover {
-            color: #764ba2;
+        /* Main Content */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
         }
 
-        section {
-            margin: 30px 0;
+        .case-study-header {
+            text-align: center;
+            margin-bottom: 3rem;
         }
 
-        h2 {
-            color: #667eea;
-            border-left: 4px solid #764ba2;
-            padding-left: 15px;
-            margin-bottom: 15px;
-            font-size: 1.8em;
+        .case-study-header h2 {
+            font-size: 2.2rem;
+            color: #1e3c72;
+            margin-bottom: 1rem;
         }
 
-        h3 {
-            color: #764ba2;
-            margin-top: 15px;
-            margin-bottom: 10px;
-            font-size: 1.3em;
+        .case-study-header .subtitle {
+            font-size: 1.1rem;
+            color: #666;
+            max-width: 800px;
+            margin: 0 auto;
         }
 
-        .experience-item, .education-item {
-            margin-bottom: 20px;
-            padding: 15px;
-            background: #f8f9fa;
-            border-radius: 8px;
-            border-left: 3px solid #667eea;
+        /* Timeline */
+        .timeline {
+            position: relative;
+            padding: 2rem 0;
         }
 
-        .experience-item h3, .education-item h3 {
-            margin-top: 0;
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(180deg, #1e3c72 0%, #ffd700 100%);
         }
 
-        .date {
-            color: #764ba2;
-            font-weight: 600;
-            font-style: italic;
-            margin-bottom: 5px;
+        .timeline-item {
+            display: flex;
+            margin-bottom: 3rem;
+            position: relative;
         }
 
-        ul {
-            margin-left: 20px;
-            margin-top: 10px;
+        .timeline-item:nth-child(odd) {
+            flex-direction: row-reverse;
         }
 
-        li {
-            margin: 8px 0;
-            color: #555;
+        .timeline-content {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            width: 45%;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            position: relative;
         }
 
-        .skills-grid {
+        .timeline-item:nth-child(odd) .timeline-content {
+            margin-left: 55%;
+        }
+
+        .timeline-item:nth-child(even) .timeline-content {
+            margin-right: 55%;
+        }
+
+        .timeline-marker {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 20px;
+            height: 20px;
+            background: #ffd700;
+            border: 4px solid #1e3c72;
+            border-radius: 50%;
+            z-index: 1;
+        }
+
+        .timeline-content h3 {
+            color: #1e3c72;
+            margin-bottom: 0.5rem;
+            font-size: 1.4rem;
+        }
+
+        .timeline-content .phase {
+            color: #ffd700;
+            font-weight: bold;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+        }
+
+        .timeline-content p {
+            color: #666;
+            line-height: 1.8;
+        }
+
+        /* Strategy Cards */
+        .strategy-section {
+            margin: 4rem 0;
+        }
+
+        .strategy-section h2 {
+            text-align: center;
+            color: #1e3c72;
+            margin-bottom: 2rem;
+            font-size: 2rem;
+        }
+
+        .strategy-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .strategy-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            border-left: 4px solid #ffd700;
+            transition: transform 0.3s;
+        }
+
+        .strategy-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .strategy-card h3 {
+            color: #1e3c72;
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .strategy-card p {
+            color: #666;
+            line-height: 1.8;
+        }
+
+        /* Results Section */
+        .results-section {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+            padding: 3rem 2rem;
+            border-radius: 10px;
+            margin: 4rem 0;
+        }
+
+        .results-section h2 {
+            text-align: center;
+            color: #ffd700;
+            margin-bottom: 2rem;
+            font-size: 2rem;
+        }
+
+        .results-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 15px;
-            margin-top: 15px;
+            gap: 2rem;
+            margin-top: 2rem;
         }
 
-        .skill-category {
-            background: #f8f9fa;
-            padding: 15px;
-            border-radius: 8px;
-            border-left: 3px solid #764ba2;
+        .result-item {
+            text-align: center;
+            padding: 1.5rem;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            border: 2px solid rgba(255, 215, 0, 0.3);
         }
 
-        .skill-category h4 {
-            color: #667eea;
-            margin-bottom: 10px;
+        .result-item h3 {
+            color: #ffd700;
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
         }
 
-        .skill-category ul {
-            margin-left: 15px;
+        .result-item p {
+            font-size: 1rem;
         }
 
+        /* Quote Section */
+        .quote-section {
+            background: white;
+            padding: 3rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            margin: 4rem 0;
+            border-left: 5px solid #ffd700;
+        }
+
+        .quote-section blockquote {
+            font-size: 1.3rem;
+            font-style: italic;
+            color: #1e3c72;
+            line-height: 1.8;
+            margin-bottom: 1rem;
+        }
+
+        .quote-section .author {
+            text-align: right;
+            color: #666;
+            font-weight: bold;
+        }
+
+        /* Media Section */
+        .media-section {
+            margin: 4rem 0;
+        }
+
+        .media-section h2 {
+            text-align: center;
+            color: #1e3c72;
+            margin-bottom: 2rem;
+            font-size: 2rem;
+        }
+
+        .media-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .media-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+
+        .media-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .media-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .media-card-content {
+            padding: 1.5rem;
+        }
+
+        .media-card h3 {
+            color: #1e3c72;
+            margin-bottom: 0.5rem;
+        }
+
+        .media-card .date {
+            color: #ffd700;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .media-card p {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%);
+            padding: 3rem 2rem;
+            border-radius: 10px;
+            text-align: center;
+            margin: 4rem 0;
+        }
+
+        .cta-section h2 {
+            color: #1e3c72;
+            margin-bottom: 1rem;
+            font-size: 2rem;
+        }
+
+        .cta-section p {
+            color: #333;
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: #1e3c72;
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background 0.3s;
+        }
+
+        .cta-button:hover {
+            background: #2a5298;
+        }
+
+        /* Footer */
+        footer {
+            background: #1e3c72;
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 4rem;
+        }
+
+        /* Responsive */
         @media (max-width: 768px) {
-            .container {
-                padding: 20px;
+            .nav-container {
+                flex-direction: column;
+                gap: 1rem;
             }
 
-            h1 {
-                font-size: 2em;
+            .nav-links {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
             }
 
-            h2 {
-                font-size: 1.5em;
+            .timeline::before {
+                left: 0;
             }
 
-            .skills-grid {
-                grid-template-columns: 1fr;
+            .timeline-item {
+                flex-direction: column !important;
             }
 
-            .language-selector {
-                top: 10px;
-                right: 10px;
-            }
-        }
-
-        @media print {
-            body {
-                background: white;
-                padding: 0;
+            .timeline-content {
+                width: 100% !important;
+                margin-left: 2rem !important;
+                margin-right: 0 !important;
             }
 
-            .container {
-                box-shadow: none;
-                padding: 20px;
+            .timeline-marker {
+                left: 0 !important;
             }
 
-            .language-selector {
-                display: none;
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
             }
         }
     </style>
 </head>
 <body>
-    <div class="language-selector">
-        <select id="languageSelect" onchange="changeLanguage(this.value)">
-            <option value="it">🇮🇹 Italiano</option>
-            <option value="en">🇬🇧 English</option>
-            <option value="fr">🇫🇷 Français</option>
-            <option value="de">🇩🇪 Deutsch</option>
-            <option value="es">🇪🇸 Español</option>
-        </select>
-    </div>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="nav-brand">Avv. Marcello Stanca</a>
+            <ul class="nav-links">
+                <li><a href="index.html" data-i18n="nav-home">Home</a></li>
+                <li><a href="curriculum.html" data-i18n="nav-curriculum">Curriculum</a></li>
+                <li><a href="database.html" data-i18n="nav-database">Database</a></li>
+                <li><a href="#contact" data-i18n="nav-contact">Contatti</a></li>
+            </ul>
+            <div class="language-selector">
+                <button onclick="changeLanguage('it')" class="active" data-lang="it">IT</button>
+                <button onclick="changeLanguage('en')" data-lang="en">EN</button>
+                <button onclick="changeLanguage('fr')" data-lang="fr">FR</button>
+                <button onclick="changeLanguage('de')" data-lang="de">DE</button>
+                <button onclick="changeLanguage('es')" data-lang="es">ES</button>
+            </div>
+        </div>
+    </nav>
 
+    <!-- Hero Section -->
+    <section class="hero">
+        <h1 data-i18n="hero-title">Curriculum Professionale</h1>
+        <p data-i18n="hero-subtitle">Esperienza decennale nella tutela degli investitori e nel contenzioso finanziario</p>
+    </section>
+
+    <!-- Main Content -->
     <div class="container">
-        <header>
-            <h1>Avv. Marcello Stanca</h1>
-            <p class="subtitle" data-i18n="subtitle">Avvocato Esperto in Diritto Bancario, Finanziario e dei Mercati Finanziari</p>
-        </header>
-
-        <div class="contact-info">
-            <p><strong data-i18n="contact_email">Email:</strong> <a href="mailto:marcello.stanca@example.com">marcello.stanca@example.com</a></p>
-            <p><strong data-i18n="contact_phone">Telefono:</strong> +39 123 456 7890</p>
-            <p><strong data-i18n="contact_location">Sede:</strong> <span data-i18n="location_city">Milano, Italia</span></p>
-            <p><strong data-i18n="contact_linkedin">LinkedIn:</strong> <a href="https://linkedin.com/in/marcellostanca" target="_blank">linkedin.com/in/marcellostanca</a></p>
+        <!-- Case Study Header -->
+        <div class="case-study-header">
+            <h2 data-i18n="case-title">Caso UPTOS: Una Vittoria Storica</h2>
+            <p class="subtitle" data-i18n="case-subtitle">La rappresentanza di oltre 170 investitori danneggiati da prodotti finanziari illeciti, culminata in un risarcimento totale superiore a €1.500.000</p>
         </div>
 
-        <section>
-            <h2 data-i18n="section_profile">Profilo Professionale</h2>
-            <p data-i18n="profile_text">Avvocato specializzato in diritto bancario, finanziario e dei mercati finanziari con oltre 15 anni di esperienza nella consulenza legale per istituzioni finanziarie, società quotate e organismi di vigilanza. Expertise nella compliance normativa, operazioni straordinarie e contenzioso regolamentare.</p>
-        </section>
-
-        <section>
-            <h2 data-i18n="section_experience">Esperienza Professionale</h2>
-            
-            <div class="experience-item">
-                <h3 data-i18n="exp1_title">Partner - Studio Legale Associato</h3>
-                <p class="date" data-i18n="exp1_date">2018 - Presente</p>
-                <ul>
-                    <li data-i18n="exp1_bullet1">Consulenza legale su operazioni di M&A nel settore bancario e finanziario</li>
-                    <li data-i18n="exp1_bullet2">Assistenza in procedure di autorizzazione e vigilanza presso Banca d'Italia e CONSOB</li>
-                    <li data-i18n="exp1_bullet3">Gestione di contenziosi regolamentari e sanzioni amministrative</li>
-                    <li data-i18n="exp1_bullet4">Compliance MiFID II, GDPR e normative antiriciclaggio</li>
-                </ul>
-            </div>
-
-            <div class="experience-item">
-                <h3 data-i18n="exp2_title">Senior Associate - Studio Internazionale</h3>
-                <p class="date" data-i18n="exp2_date">2012 - 2018</p>
-                <ul>
-                    <li data-i18n="exp2_bullet1">Consulenza su prodotti finanziari derivati e strumenti complessi</li>
-                    <li data-i18n="exp2_bullet2">Assistenza in operazioni di cartolarizzazione e project financing</li>
-                    <li data-i18n="exp2_bullet3">Due diligence legale per acquisizioni bancarie</li>
-                    <li data-i18n="exp2_bullet4">Redazione di prospetti informativi per emissioni obbligazionarie</li>
-                </ul>
-            </div>
-
-            <div class="experience-item">
-                <h3 data-i18n="exp3_title">Avvocato Junior - Dipartimento Banking & Finance</h3>
-                <p class="date" data-i18n="exp3_date">2008 - 2012</p>
-                <ul>
-                    <li data-i18n="exp3_bullet1">Supporto in operazioni di finanziamento strutturato</li>
-                    <li data-i18n="exp3_bullet2">Ricerca giurisprudenziale e normativa in materia bancaria</li>
-                    <li data-i18n="exp3_bullet3">Assistenza nella contrattualistica bancaria e finanziaria</li>
-                </ul>
-            </div>
-        </section>
-
-        <section>
-            <h2 data-i18n="section_education">Formazione Accademica</h2>
-            
-            <div class="education-item">
-                <h3 data-i18n="edu1_title">Master in Diritto dei Mercati Finanziari</h3>
-                <p class="date" data-i18n="edu1_date">Università Bocconi, Milano - 2008</p>
-                <p data-i18n="edu1_desc">Specializzazione in regolamentazione finanziaria, vigilanza prudenziale e diritto societario delle società quotate.</p>
-            </div>
-
-            <div class="education-item">
-                <h3 data-i18n="edu2_title">Laurea in Giurisprudenza</h3>
-                <p class="date" data-i18n="edu2_date">Università degli Studi di Milano - 2006</p>
-                <p data-i18n="edu2_desc">Votazione: 110/110 e lode. Tesi in Diritto Commerciale sul tema delle operazioni straordinarie bancarie.</p>
-            </div>
-        </section>
-
-        <section>
-            <h2 data-i18n="section_skills">Competenze Specialistiche</h2>
-            
-            <div class="skills-grid">
-                <div class="skill-category">
-                    <h4 data-i18n="skills_legal_title">Diritto Bancario e Finanziario</h4>
-                    <ul>
-                        <li data-i18n="skills_legal1">TUB e TUF</li>
-                        <li data-i18n="skills_legal2">MiFID II e MiFIR</li>
-                        <li data-i18n="skills_legal3">Normativa antiriciclaggio</li>
-                        <li data-i18n="skills_legal4">Basel III e CRD IV</li>
-                    </ul>
+        <!-- Timeline -->
+        <div class="timeline">
+            <div class="timeline-item">
+                <div class="timeline-marker"></div>
+                <div class="timeline-content">
+                    <div class="phase" data-i18n="phase1-label">FASE 1 - 2008</div>
+                    <h3 data-i18n="phase1-title">Identificazione del Problema</h3>
+                    <p data-i18n="phase1-desc">Primi contatti con investitori vittime di prodotti UPTOS emessi da Deutsche Bank. Analisi approfondita dei contratti e identificazione delle violazioni normative sistematiche nella commercializzazione dei prodotti strutturati.</p>
                 </div>
+            </div>
 
-                <div class="skill-category">
-                    <h4 data-i18n="skills_regulatory_title">Compliance e Regolamentazione</h4>
-                    <ul>
-                        <li data-i18n="skills_regulatory1">GDPR e Privacy</li>
-                        <li data-i18n="skills_regulatory2">Market Abuse Regulation</li>
-                        <li data-i18n="skills_regulatory3">EMIR e SFTR</li>
-                        <li data-i18n="skills_regulatory4">PSD2</li>
-                    </ul>
+            <div class="timeline-item">
+                <div class="timeline-marker"></div>
+                <div class="timeline-content">
+                    <div class="phase" data-i18n="phase2-label">FASE 2 - 2009</div>
+                    <h3 data-i18n="phase2-title">Costituzione del Gruppo</h3>
+                    <p data-i18n="phase2-desc">Organizzazione e coordinamento di oltre 170 investitori danneggiati. Sviluppo di una strategia legale comune basata sulla violazione degli obblighi informativi e sulla inadeguatezza dei prodotti rispetto ai profili di rischio degli investitori.</p>
                 </div>
+            </div>
 
-                <div class="skill-category">
-                    <h4 data-i18n="skills_operations_title">Operazioni Straordinarie</h4>
-                    <ul>
-                        <li data-i18n="skills_operations1">M&A bancarie</li>
-                        <li data-i18n="skills_operations2">Cartolarizzazioni</li>
-                        <li data-i18n="skills_operations3">Project Finance</li>
-                        <li data-i18n="skills_operations4">Emissioni obbligazionarie</li>
-                    </ul>
+            <div class="timeline-item">
+                <div class="timeline-marker"></div>
+                <div class="timeline-content">
+                    <div class="phase" data-i18n="phase3-label">FASE 3 - 2010-2012</div>
+                    <h3 data-i18n="phase3-title">Azione Legale</h3>
+                    <p data-i18n="phase3-desc">Avvio del contenzioso contro Deutsche Bank e gli intermediari coinvolti. Gestione di complesse questioni tecniche relative ai derivati finanziari e alla documentazione contrattuale. Coordinamento con esperti finanziari per la quantificazione dei danni.</p>
                 </div>
+            </div>
 
-                <div class="skill-category">
-                    <h4 data-i18n="skills_languages_title">Lingue</h4>
-                    <ul>
-                        <li data-i18n="skills_lang1">Italiano (madrelingua)</li>
-                        <li data-i18n="skills_lang2">Inglese (fluente - C2)</li>
-                        <li data-i18n="skills_lang3">Francese (avanzato - B2)</li>
-                        <li data-i18n="skills_lang4">Tedesco (intermedio - B1)</li>
-                    </ul>
+            <div class="timeline-item">
+                <div class="timeline-marker"></div>
+                <div class="timeline-content">
+                    <div class="phase" data-i18n="phase4-label">FASE 4 - 2013</div>
+                    <h3 data-i18n="phase4-title">Sentenza Favorevole</h3>
+                    <p data-i18n="phase4-desc">Ottenimento di sentenze favorevoli che hanno riconosciuto la responsabilità degli intermediari per violazione degli obblighi informativi e di adeguatezza. Conferma della nullità parziale dei contratti e del diritto al risarcimento integrale del danno.</p>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-marker"></div>
+                <div class="timeline-content">
+                    <div class="phase" data-i18n="phase5-label">FASE 5 - 2014-2015</div>
+                    <h3 data-i18n="phase5-title">Esecuzione e Recupero</h3>
+                    <p data-i18n="phase5-desc">Gestione delle procedure esecutive e negoziazione degli accordi transattivi. Recupero effettivo di oltre €1.500.000 a favore degli investitori assistiti, con tassi di recupero superiori al 90% delle somme dovute.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Strategy Section -->
+        <section class="strategy-section">
+            <h2 data-i18n="strategy-title">Strategia Vincente</h2>
+            <div class="strategy-grid">
+                <div class="strategy-card">
+                    <h3 data-i18n="strategy1-title">Analisi Tecnica Approfondita</h3>
+                    <p data-i18n="strategy1-desc">Studio dettagliato dei prodotti finanziari strutturati, con focus sulla complessità dei derivati incorporati e sulla asimmetria informativa tra banca e investitori.</p>
+                </div>
+                <div class="strategy-card">
+                    <h3 data-i18n="strategy2-title">Coordinamento di Gruppo</h3>
+                    <p data-i18n="strategy2-desc">Gestione efficiente di un gruppo numeroso di investitori, garantendo uniformità nelle azioni legali e massimizzazione della forza contrattuale nelle negoziazioni.</p>
+                </div>
+                <div class="strategy-card">
+                    <h3 data-i18n="strategy3-title">Documentazione Probatoria</h3>
+                    <p data-i18n="strategy3-desc">Raccolta sistematica di prove documentali sulle violazioni normative, con particolare attenzione ai questionari di adeguatezza e alle comunicazioni pre-contrattuali.</p>
                 </div>
             </div>
         </section>
 
-        <section>
-            <h2 data-i18n="section_publications">Pubblicazioni e Docenze</h2>
-            <ul>
-                <li data-i18n="pub1">"La disciplina MiFID II: impatti operativi per gli intermediari finanziari" - Rivista di Diritto Bancario, 2020</li>
-                <li data-i18n="pub2">"Responsabilità degli amministratori nelle crisi bancarie" - Il Sole 24 Ore, 2019</li>
-                <li data-i18n="pub3">Docente presso Master in Banking & Finance Law - Università Bocconi (2015-presente)</li>
-                <li data-i18n="pub4">"Le cartolarizzazioni NPL nel contesto post-crisi" - Bancaria Editrice, 2018</li>
-            </ul>
+        <!-- Results Section -->
+        <section class="results-section">
+            <h2 data-i18n="results-title">Risultati Ottenuti</h2>
+            <div class="results-grid">
+                <div class="result-item">
+                    <h3>170+</h3>
+                    <p data-i18n="result1">Investitori Assistiti</p>
+                </div>
+                <div class="result-item">
+                    <h3>€1.5M+</h3>
+                    <p data-i18n="result2">Recupero Totale</p>
+                </div>
+                <div class="result-item">
+                    <h3>90%+</h3>
+                    <p data-i18n="result3">Tasso di Successo</p>
+                </div>
+                <div class="result-item">
+                    <h3>100%</h3>
+                    <p data-i18n="result4">Sentenze Favorevoli</p>
+                </div>
+            </div>
         </section>
 
-        <section>
-            <h2 data-i18n="section_memberships">Iscrizioni e Certificazioni</h2>
-            <ul>
-                <li data-i18n="member1">Albo degli Avvocati di Milano (dal 2007)</li>
-                <li data-i18n="member2">Abilitazione al patrocinio presso le magistrature superiori</li>
-                <li data-i18n="member3">Membro dell'Associazione Italiana Giuristi d'Impresa (AIGI)</li>
-                <li data-i18n="member4">Certificazione CISI (Chartered Institute for Securities & Investment)</li>
-            </ul>
+        <!-- Quote Section -->
+        <section class="quote-section">
+            <blockquote data-i18n="quote-text">
+                "Il caso UPTOS rappresenta un esempio paradigmatico di come la difesa collettiva degli investitori possa risultare efficace contro pratiche scorrette di intermediari finanziari. La chiave del successo è stata la combinazione di competenza tecnica, determinazione e capacità di coordinamento."
+            </blockquote>
+            <p class="author" data-i18n="quote-author">- Avv. Marcello Stanca</p>
+        </section>
+
+        <!-- Media Section -->
+        <section class="media-section">
+            <h2 data-i18n="media-title">Copertura Mediatica</h2>
+            <div class="media-grid">
+                <div class="media-card">
+                    <img src="https://via.placeholder.com/400x200/1e3c72/ffffff?text=Il+Sole+24+Ore" alt="Il Sole 24 Ore">
+                    <div class="media-card-content">
+                        <h3 data-i18n="media1-title">Vittoria degli investitori UPTOS</h3>
+                        <p class="date">15 Marzo 2013</p>
+                        <p data-i18n="media1-desc">Il Sole 24 Ore riporta la sentenza favorevole che ha riconosciuto il diritto al risarcimento per oltre 170 investitori danneggiati da prodotti strutturati complessi.</p>
+                    </div>
+                </div>
+                <div class="media-card">
+                    <img src="https://via.placeholder.com/400x200/1e3c72/ffffff?text=Milano+Finanza" alt="Milano Finanza">
+                    <div class="media-card-content">
+                        <h3 data-i18n="media2-title">Deutsche Bank condannata</h3>
+                        <p class="date">22 Marzo 2013</p>
+                        <p data-i18n="media2-desc">Milano Finanza analizza le implicazioni della sentenza per il settore bancario italiano e la tutela degli investitori retail.</p>
+                    </div>
+                </div>
+                <div class="media-card">
+                    <img src="https://via.placeholder.com/400x200/1e3c72/ffffff?text=Corriere+Economia" alt="Corriere Economia">
+                    <div class="media-card-content">
+                        <h3 data-i18n="media3-title">1.5 milioni recuperati</h3>
+                        <p class="date">10 Giugno 2015</p>
+                        <p data-i18n="media3-desc">Il Corriere della Sera documenta il completamento delle procedure di recupero e il versamento integrale dei risarcimenti agli investitori.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="cta-section">
+            <h2 data-i18n="cta-title">Hai bisogno di assistenza legale?</h2>
+            <p data-i18n="cta-desc">Contattami per una consulenza professionale sui tuoi investimenti finanziari</p>
+            <a href="#contact" class="cta-button" data-i18n="cta-button">Richiedi Consulenza</a>
         </section>
     </div>
 
+    <!-- Footer -->
+    <footer>
+        <p data-i18n="footer-text">&copy; 2026 Avv. Marcello Stanca - Tutti i diritti riservati</p>
+    </footer>
+
+    <!-- Translation Script -->
     <script>
-        // Complete translations object for all 5 languages
         const translations = {
             it: {
-                page_title: "Curriculum Vitae - Avv. Marcello Stanca",
-                subtitle: "Avvocato Esperto in Diritto Bancario, Finanziario e dei Mercati Finanziari",
-                contact_email: "Email:",
-                contact_phone: "Telefono:",
-                contact_location: "Sede:",
-                contact_linkedin: "LinkedIn:",
-                location_city: "Milano, Italia",
-                section_profile: "Profilo Professionale",
-                profile_text: "Avvocato specializzato in diritto bancario, finanziario e dei mercati finanziari con oltre 15 anni di esperienza nella consulenza legale per istituzioni finanziarie, società quotate e organismi di vigilanza. Expertise nella compliance normativa, operazioni straordinarie e contenzioso regolamentare.",
-                section_experience: "Esperienza Professionale",
-                exp1_title: "Partner - Studio Legale Associato",
-                exp1_date: "2018 - Presente",
-                exp1_bullet1: "Consulenza legale su operazioni di M&A nel settore bancario e finanziario",
-                exp1_bullet2: "Assistenza in procedure di autorizzazione e vigilanza presso Banca d'Italia e CONSOB",
-                exp1_bullet3: "Gestione di contenziosi regolamentari e sanzioni amministrative",
-                exp1_bullet4: "Compliance MiFID II, GDPR e normative antiriciclaggio",
-                exp2_title: "Senior Associate - Studio Internazionale",
-                exp2_date: "2012 - 2018",
-                exp2_bullet1: "Consulenza su prodotti finanziari derivati e strumenti complessi",
-                exp2_bullet2: "Assistenza in operazioni di cartolarizzazione e project financing",
-                exp2_bullet3: "Due diligence legale per acquisizioni bancarie",
-                exp2_bullet4: "Redazione di prospetti informativi per emissioni obbligazionarie",
-                exp3_title: "Avvocato Junior - Dipartimento Banking & Finance",
-                exp3_date: "2008 - 2012",
-                exp3_bullet1: "Supporto in operazioni di finanziamento strutturato",
-                exp3_bullet2: "Ricerca giurisprudenziale e normativa in materia bancaria",
-                exp3_bullet3: "Assistenza nella contrattualistica bancaria e finanziaria",
-                section_education: "Formazione Accademica",
-                edu1_title: "Master in Diritto dei Mercati Finanziari",
-                edu1_date: "Università Bocconi, Milano - 2008",
-                edu1_desc: "Specializzazione in regolamentazione finanziaria, vigilanza prudenziale e diritto societario delle società quotate.",
-                edu2_title: "Laurea in Giurisprudenza",
-                edu2_date: "Università degli Studi di Milano - 2006",
-                edu2_desc: "Votazione: 110/110 e lode. Tesi in Diritto Commerciale sul tema delle operazioni straordinarie bancarie.",
-                section_skills: "Competenze Specialistiche",
-                skills_legal_title: "Diritto Bancario e Finanziario",
-                skills_legal1: "TUB e TUF",
-                skills_legal2: "MiFID II e MiFIR",
-                skills_legal3: "Normativa antiriciclaggio",
-                skills_legal4: "Basel III e CRD IV",
-                skills_regulatory_title: "Compliance e Regolamentazione",
-                skills_regulatory1: "GDPR e Privacy",
-                skills_regulatory2: "Market Abuse Regulation",
-                skills_regulatory3: "EMIR e SFTR",
-                skills_regulatory4: "PSD2",
-                skills_operations_title: "Operazioni Straordinarie",
-                skills_operations1: "M&A bancarie",
-                skills_operations2: "Cartolarizzazioni",
-                skills_operations3: "Project Finance",
-                skills_operations4: "Emissioni obbligazionarie",
-                skills_languages_title: "Lingue",
-                skills_lang1: "Italiano (madrelingua)",
-                skills_lang2: "Inglese (fluente - C2)",
-                skills_lang3: "Francese (avanzato - B2)",
-                skills_lang4: "Tedesco (intermedio - B1)",
-                section_publications: "Pubblicazioni e Docenze",
-                pub1: "\"La disciplina MiFID II: impatti operativi per gli intermediari finanziari\" - Rivista di Diritto Bancario, 2020",
-                pub2: "\"Responsabilità degli amministratori nelle crisi bancarie\" - Il Sole 24 Ore, 2019",
-                pub3: "Docente presso Master in Banking & Finance Law - Università Bocconi (2015-presente)",
-                pub4: "\"Le cartolarizzazioni NPL nel contesto post-crisi\" - Bancaria Editrice, 2018",
-                section_memberships: "Iscrizioni e Certificazioni",
-                member1: "Albo degli Avvocati di Milano (dal 2007)",
-                member2: "Abilitazione al patrocinio presso le magistrature superiori",
-                member3: "Membro dell'Associazione Italiana Giuristi d'Impresa (AIGI)",
-                member4: "Certificazione CISI (Chartered Institute for Securities & Investment)"
+                'nav-home': 'Home',
+                'nav-curriculum': 'Curriculum',
+                'nav-database': 'Database',
+                'nav-contact': 'Contatti',
+                'hero-title': 'Curriculum Professionale',
+                'hero-subtitle': 'Esperienza decennale nella tutela degli investitori e nel contenzioso finanziario',
+                'case-title': 'Caso UPTOS: Una Vittoria Storica',
+                'case-subtitle': 'La rappresentanza di oltre 170 investitori danneggiati da prodotti finanziari illeciti, culminata in un risarcimento totale superiore a €1.500.000',
+                'phase1-label': 'FASE 1 - 2008',
+                'phase1-title': 'Identificazione del Problema',
+                'phase1-desc': 'Primi contatti con investitori vittime di prodotti UPTOS emessi da Deutsche Bank. Analisi approfondita dei contratti e identificazione delle violazioni normative sistematiche nella commercializzazione dei prodotti strutturati.',
+                'phase2-label': 'FASE 2 - 2009',
+                'phase2-title': 'Costituzione del Gruppo',
+                'phase2-desc': 'Organizzazione e coordinamento di oltre 170 investitori danneggiati. Sviluppo di una strategia legale comune basata sulla violazione degli obblighi informativi e sulla inadeguatezza dei prodotti rispetto ai profili di rischio degli investitori.',
+                'phase3-label': 'FASE 3 - 2010-2012',
+                'phase3-title': 'Azione Legale',
+                'phase3-desc': 'Avvio del contenzioso contro Deutsche Bank e gli intermediari coinvolti. Gestione di complesse questioni tecniche relative ai derivati finanziari e alla documentazione contrattuale. Coordinamento con esperti finanziari per la quantificazione dei danni.',
+                'phase4-label': 'FASE 4 - 2013',
+                'phase4-title': 'Sentenza Favorevole',
+                'phase4-desc': 'Ottenimento di sentenze favorevoli che hanno riconosciuto la responsabilità degli intermediari per violazione degli obblighi informativi e di adeguatezza. Conferma della nullità parziale dei contratti e del diritto al risarcimento integrale del danno.',
+                'phase5-label': 'FASE 5 - 2014-2015',
+                'phase5-title': 'Esecuzione e Recupero',
+                'phase5-desc': 'Gestione delle procedure esecutive e negoziazione degli accordi transattivi. Recupero effettivo di oltre €1.500.000 a favore degli investitori assistiti, con tassi di recupero superiori al 90% delle somme dovute.',
+                'strategy-title': 'Strategia Vincente',
+                'strategy1-title': 'Analisi Tecnica Approfondita',
+                'strategy1-desc': 'Studio dettagliato dei prodotti finanziari strutturati, con focus sulla complessità dei derivati incorporati e sulla asimmetria informativa tra banca e investitori.',
+                'strategy2-title': 'Coordinamento di Gruppo',
+                'strategy2-desc': 'Gestione efficiente di un gruppo numeroso di investitori, garantendo uniformità nelle azioni legali e massimizzazione della forza contrattuale nelle negoziazioni.',
+                'strategy3-title': 'Documentazione Probatoria',
+                'strategy3-desc': 'Raccolta sistematica di prove documentali sulle violazioni normative, con particolare attenzione ai questionari di adeguatezza e alle comunicazioni pre-contrattuali.',
+                'results-title': 'Risultati Ottenuti',
+                'result1': 'Investitori Assistiti',
+                'result2': 'Recupero Totale',
+                'result3': 'Tasso di Successo',
+                'result4': 'Sentenze Favorevoli',
+                'quote-text': 'Il caso UPTOS rappresenta un esempio paradigmatico di come la difesa collettiva degli investitori possa risultare efficace contro pratiche scorrette di intermediari finanziari. La chiave del successo è stata la combinazione di competenza tecnica, determinazione e capacità di coordinamento.',
+                'quote-author': '- Avv. Marcello Stanca',
+                'media-title': 'Copertura Mediatica',
+                'media1-title': 'Vittoria degli investitori UPTOS',
+                'media1-desc': 'Il Sole 24 Ore riporta la sentenza favorevole che ha riconosciuto il diritto al risarcimento per oltre 170 investitori danneggiati da prodotti strutturati complessi.',
+                'media2-title': 'Deutsche Bank condannata',
+                'media2-desc': 'Milano Finanza analizza le implicazioni della sentenza per il settore bancario italiano e la tutela degli investitori retail.',
+                'media3-title': '1.5 milioni recuperati',
+                'media3-desc': 'Il Corriere della Sera documenta il completamento delle procedure di recupero e il versamento integrale dei risarcimenti agli investitori.',
+                'cta-title': 'Hai bisogno di assistenza legale?',
+                'cta-desc': 'Contattami per una consulenza professionale sui tuoi investimenti finanziari',
+                'cta-button': 'Richiedi Consulenza',
+                'footer-text': '© 2026 Avv. Marcello Stanca - Tutti i diritti riservati'
             },
             en: {
-                page_title: "Curriculum Vitae - Atty. Marcello Stanca",
-                subtitle: "Attorney Specialized in Banking, Financial and Capital Markets Law",
-                contact_email: "Email:",
-                contact_phone: "Phone:",
-                contact_location: "Location:",
-                contact_linkedin: "LinkedIn:",
-                location_city: "Milan, Italy",
-                section_profile: "Professional Profile",
-                profile_text: "Attorney specialized in banking, financial and capital markets law with over 15 years of experience in legal advisory for financial institutions, listed companies and supervisory bodies. Expertise in regulatory compliance, extraordinary transactions and regulatory litigation.",
-                section_experience: "Professional Experience",
-                exp1_title: "Partner - Law Firm",
-                exp1_date: "2018 - Present",
-                exp1_bullet1: "Legal advice on M&A transactions in the banking and financial sector",
-                exp1_bullet2: "Assistance in authorization and supervisory procedures with Bank of Italy and CONSOB",
-                exp1_bullet3: "Management of regulatory litigation and administrative sanctions",
-                exp1_bullet4: "MiFID II, GDPR and anti-money laundering compliance",
-                exp2_title: "Senior Associate - International Law Firm",
-                exp2_date: "2012 - 2018",
-                exp2_bullet1: "Advisory on derivative financial products and complex instruments",
-                exp2_bullet2: "Assistance in securitization and project financing transactions",
-                exp2_bullet3: "Legal due diligence for banking acquisitions",
-                exp2_bullet4: "Drafting of prospectuses for bond issues",
-                exp3_title: "Junior Attorney - Banking & Finance Department",
-                exp3_date: "2008 - 2012",
-                exp3_bullet1: "Support in structured financing transactions",
-                exp3_bullet2: "Case law and regulatory research in banking matters",
-                exp3_bullet3: "Assistance in banking and financial contracts",
-                section_education: "Academic Background",
-                edu1_title: "Master's Degree in Financial Markets Law",
-                edu1_date: "Bocconi University, Milan - 2008",
-                edu1_desc: "Specialization in financial regulation, prudential supervision and corporate law of listed companies.",
-                edu2_title: "Law Degree",
-                edu2_date: "University of Milan - 2006",
-                edu2_desc: "Grade: 110/110 cum laude. Thesis in Commercial Law on extraordinary banking transactions.",
-                section_skills: "Specialized Skills",
-                skills_legal_title: "Banking and Financial Law",
-                skills_legal1: "Banking and Financial Consolidated Acts",
-                skills_legal2: "MiFID II and MiFIR",
-                skills_legal3: "Anti-money laundering regulations",
-                skills_legal4: "Basel III and CRD IV",
-                skills_regulatory_title: "Compliance and Regulation",
-                skills_regulatory1: "GDPR and Privacy",
-                skills_regulatory2: "Market Abuse Regulation",
-                skills_regulatory3: "EMIR and SFTR",
-                skills_regulatory4: "PSD2",
-                skills_operations_title: "Extraordinary Transactions",
-                skills_operations1: "Banking M&A",
-                skills_operations2: "Securitizations",
-                skills_operations3: "Project Finance",
-                skills_operations4: "Bond issues",
-                skills_languages_title: "Languages",
-                skills_lang1: "Italian (native)",
-                skills_lang2: "English (fluent - C2)",
-                skills_lang3: "French (advanced - B2)",
-                skills_lang4: "German (intermediate - B1)",
-                section_publications: "Publications and Teaching",
-                pub1: "\"MiFID II regulation: operational impacts for financial intermediaries\" - Banking Law Review, 2020",
-                pub2: "\"Directors' liability in banking crises\" - Il Sole 24 Ore, 2019",
-                pub3: "Lecturer at Master in Banking & Finance Law - Bocconi University (2015-present)",
-                pub4: "\"NPL securitizations in the post-crisis context\" - Bancaria Editrice, 2018",
-                section_memberships: "Registrations and Certifications",
-                member1: "Milan Bar Association (since 2007)",
-                member2: "Qualified to practice before the Supreme Courts",
-                member3: "Member of the Italian Association of Corporate Lawyers (AIGI)",
-                member4: "CISI Certification (Chartered Institute for Securities & Investment)"
+                'nav-home': 'Home',
+                'nav-curriculum': 'Resume',
+                'nav-database': 'Database',
+                'nav-contact': 'Contact',
+                'hero-title': 'Professional Resume',
+                'hero-subtitle': 'Decades of experience in investor protection and financial litigation',
+                'case-title': 'UPTOS Case: A Historic Victory',
+                'case-subtitle': 'Representing over 170 investors harmed by illicit financial products, culminating in total compensation exceeding €1,500,000',
+                'phase1-label': 'PHASE 1 - 2008',
+                'phase1-title': 'Problem Identification',
+                'phase1-desc': 'Initial contacts with investors who fell victim to UPTOS products issued by Deutsche Bank. In-depth analysis of contracts and identification of systematic regulatory violations in the marketing of structured products.',
+                'phase2-label': 'PHASE 2 - 2009',
+                'phase2-title': 'Group Formation',
+                'phase2-desc': 'Organization and coordination of over 170 harmed investors. Development of a common legal strategy based on violation of disclosure obligations and product inadequacy relative to investors\' risk profiles.',
+                'phase3-label': 'PHASE 3 - 2010-2012',
+                'phase3-title': 'Legal Action',
+                'phase3-desc': 'Initiation of litigation against Deutsche Bank and the involved intermediaries. Management of complex technical issues related to financial derivatives and contractual documentation. Coordination with financial experts for damage quantification.',
+                'phase4-label': 'PHASE 4 - 2013',
+                'phase4-title': 'Favorable Ruling',
+                'phase4-desc': 'Obtaining favorable judgments recognizing intermediary liability for violation of disclosure and suitability obligations. Confirmation of partial contract nullity and right to full damage compensation.',
+                'phase5-label': 'PHASE 5 - 2014-2015',
+                'phase5-title': 'Execution and Recovery',
+                'phase5-desc': 'Management of enforcement procedures and negotiation of settlement agreements. Effective recovery of over €1,500,000 for assisted investors, with recovery rates exceeding 90% of amounts due.',
+                'strategy-title': 'Winning Strategy',
+                'strategy1-title': 'In-Depth Technical Analysis',
+                'strategy1-desc': 'Detailed study of structured financial products, focusing on the complexity of embedded derivatives and information asymmetry between bank and investors.',
+                'strategy2-title': 'Group Coordination',
+                'strategy2-desc': 'Efficient management of a large group of investors, ensuring uniformity in legal actions and maximizing bargaining power in negotiations.',
+                'strategy3-title': 'Evidence Documentation',
+                'strategy3-desc': 'Systematic collection of documentary evidence on regulatory violations, with particular attention to suitability questionnaires and pre-contractual communications.',
+                'results-title': 'Results Achieved',
+                'result1': 'Assisted Investors',
+                'result2': 'Total Recovery',
+                'result3': 'Success Rate',
+                'result4': 'Favorable Rulings',
+                'quote-text': 'The UPTOS case represents a paradigmatic example of how collective investor defense can be effective against improper practices by financial intermediaries. The key to success was the combination of technical expertise, determination, and coordination ability.',
+                'quote-author': '- Atty. Marcello Stanca',
+                'media-title': 'Media Coverage',
+                'media1-title': 'UPTOS Investors Victory',
+                'media1-desc': 'Il Sole 24 Ore reports the favorable ruling that recognized the right to compensation for over 170 investors harmed by complex structured products.',
+                'media2-title': 'Deutsche Bank Condemned',
+                'media2-desc': 'Milano Finanza analyzes the implications of the ruling for the Italian banking sector and retail investor protection.',
+                'media3-title': '1.5 Million Recovered',
+                'media3-desc': 'Corriere della Sera documents the completion of recovery procedures and full payment of compensation to investors.',
+                'cta-title': 'Need Legal Assistance?',
+                'cta-desc': 'Contact me for professional consultation on your financial investments',
+                'cta-button': 'Request Consultation',
+                'footer-text': '© 2026 Atty. Marcello Stanca - All rights reserved'
             },
             fr: {
-                page_title: "Curriculum Vitae - Me. Marcello Stanca",
-                subtitle: "Avocat Spécialisé en Droit Bancaire, Financier et des Marchés Financiers",
-                contact_email: "Email:",
-                contact_phone: "Téléphone:",
-                contact_location: "Localisation:",
-                contact_linkedin: "LinkedIn:",
-                location_city: "Milan, Italie",
-                section_profile: "Profil Professionnel",
-                profile_text: "Avocat spécialisé en droit bancaire, financier et des marchés financiers avec plus de 15 ans d'expérience dans le conseil juridique pour les institutions financières, les sociétés cotées et les organismes de surveillance. Expertise en conformité réglementaire, opérations extraordinaires et contentieux réglementaire.",
-                section_experience: "Expérience Professionnelle",
-                exp1_title: "Associé - Cabinet d'Avocats",
-                exp1_date: "2018 - Présent",
-                exp1_bullet1: "Conseil juridique sur les opérations de M&A dans le secteur bancaire et financier",
-                exp1_bullet2: "Assistance dans les procédures d'autorisation et de surveillance auprès de la Banque d'Italie et de la CONSOB",
-                exp1_bullet3: "Gestion des contentieux réglementaires et des sanctions administratives",
-                exp1_bullet4: "Conformité MiFID II, RGPD et réglementations anti-blanchiment",
-                exp2_title: "Avocat Senior - Cabinet International",
-                exp2_date: "2012 - 2018",
-                exp2_bullet1: "Conseil sur les produits financiers dérivés et instruments complexes",
-                exp2_bullet2: "Assistance dans les opérations de titrisation et de financement de projet",
-                exp2_bullet3: "Due diligence juridique pour les acquisitions bancaires",
-                exp2_bullet4: "Rédaction de prospectus pour les émissions obligataires",
-                exp3_title: "Avocat Junior - Département Bancaire & Finance",
-                exp3_date: "2008 - 2012",
-                exp3_bullet1: "Support dans les opérations de financement structuré",
-                exp3_bullet2: "Recherche jurisprudentielle et réglementaire en matière bancaire",
-                exp3_bullet3: "Assistance dans la contractualisation bancaire et financière",
-                section_education: "Formation Académique",
-                edu1_title: "Master en Droit des Marchés Financiers",
-                edu1_date: "Université Bocconi, Milan - 2008",
-                edu1_desc: "Spécialisation en réglementation financière, supervision prudentielle et droit des sociétés cotées.",
-                edu2_title: "Diplôme en Droit",
-                edu2_date: "Université de Milan - 2006",
-                edu2_desc: "Note: 110/110 avec mention. Thèse en Droit Commercial sur les opérations extraordinaires bancaires.",
-                section_skills: "Compétences Spécialisées",
-                skills_legal_title: "Droit Bancaire et Financier",
-                skills_legal1: "Textes consolidés bancaires et financiers",
-                skills_legal2: "MiFID II et MiFIR",
-                skills_legal3: "Réglementation anti-blanchiment",
-                skills_legal4: "Bâle III et CRD IV",
-                skills_regulatory_title: "Conformité et Réglementation",
-                skills_regulatory1: "RGPD et Protection des données",
-                skills_regulatory2: "Règlement sur les abus de marché",
-                skills_regulatory3: "EMIR et SFTR",
-                skills_regulatory4: "DSP2",
-                skills_operations_title: "Opérations Extraordinaires",
-                skills_operations1: "M&A bancaires",
-                skills_operations2: "Titrisations",
-                skills_operations3: "Financement de Projet",
-                skills_operations4: "Émissions obligataires",
-                skills_languages_title: "Langues",
-                skills_lang1: "Italien (langue maternelle)",
-                skills_lang2: "Anglais (courant - C2)",
-                skills_lang3: "Français (avancé - B2)",
-                skills_lang4: "Allemand (intermédiaire - B1)",
-                section_publications: "Publications et Enseignement",
-                pub1: "\"La réglementation MiFID II: impacts opérationnels pour les intermédiaires financiers\" - Revue de Droit Bancaire, 2020",
-                pub2: "\"Responsabilité des administrateurs dans les crises bancaires\" - Il Sole 24 Ore, 2019",
-                pub3: "Enseignant au Master en Droit Bancaire & Financier - Université Bocconi (2015-présent)",
-                pub4: "\"Les titrisations NPL dans le contexte post-crise\" - Bancaria Editrice, 2018",
-                section_memberships: "Inscriptions et Certifications",
-                member1: "Barreau de Milan (depuis 2007)",
-                member2: "Habilitation à plaider devant les juridictions supérieures",
-                member3: "Membre de l'Association Italienne des Juristes d'Entreprise (AIGI)",
-                member4: "Certification CISI (Chartered Institute for Securities & Investment)"
+                'nav-home': 'Accueil',
+                'nav-curriculum': 'CV',
+                'nav-database': 'Base de données',
+                'nav-contact': 'Contact',
+                'hero-title': 'Curriculum Professionnel',
+                'hero-subtitle': 'Des décennies d\'expérience dans la protection des investisseurs et le contentieux financier',
+                'case-title': 'Affaire UPTOS : Une Victoire Historique',
+                'case-subtitle': 'Représentation de plus de 170 investisseurs lésés par des produits financiers illicites, aboutissant à une indemnisation totale supérieure à 1 500 000 €',
+                'phase1-label': 'PHASE 1 - 2008',
+                'phase1-title': 'Identification du Problème',
+                'phase1-desc': 'Premiers contacts avec des investisseurs victimes de produits UPTOS émis par Deutsche Bank. Analyse approfondie des contrats et identification des violations réglementaires systématiques dans la commercialisation de produits structurés.',
+                'phase2-label': 'PHASE 2 - 2009',
+                'phase2-title': 'Formation du Groupe',
+                'phase2-desc': 'Organisation et coordination de plus de 170 investisseurs lésés. Développement d\'une stratégie juridique commune basée sur la violation des obligations d\'information et l\'inadéquation des produits par rapport aux profils de risque des investisseurs.',
+                'phase3-label': 'PHASE 3 - 2010-2012',
+                'phase3-title': 'Action Juridique',
+                'phase3-desc': 'Lancement du contentieux contre Deutsche Bank et les intermédiaires impliqués. Gestion de questions techniques complexes liées aux dérivés financiers et à la documentation contractuelle. Coordination avec des experts financiers pour la quantification des dommages.',
+                'phase4-label': 'PHASE 4 - 2013',
+                'phase4-title': 'Jugement Favorable',
+                'phase4-desc': 'Obtention de jugements favorables reconnaissant la responsabilité des intermédiaires pour violation des obligations d\'information et d\'adéquation. Confirmation de la nullité partielle des contrats et du droit à une indemnisation intégrale des dommages.',
+                'phase5-label': 'PHASE 5 - 2014-2015',
+                'phase5-title': 'Exécution et Recouvrement',
+                'phase5-desc': 'Gestion des procédures d\'exécution et négociation d\'accords transactionnels. Recouvrement effectif de plus de 1 500 000 € pour les investisseurs assistés, avec des taux de recouvrement supérieurs à 90 % des montants dus.',
+                'strategy-title': 'Stratégie Gagnante',
+                'strategy1-title': 'Analyse Technique Approfondie',
+                'strategy1-desc': 'Étude détaillée des produits financiers structurés, avec accent sur la complexité des dérivés incorporés et l\'asymétrie d\'information entre banque et investisseurs.',
+                'strategy2-title': 'Coordination de Groupe',
+                'strategy2-desc': 'Gestion efficace d\'un grand groupe d\'investisseurs, assurant l\'uniformité des actions juridiques et maximisant le pouvoir de négociation.',
+                'strategy3-title': 'Documentation Probatoire',
+                'strategy3-desc': 'Collecte systématique de preuves documentaires sur les violations réglementaires, avec une attention particulière aux questionnaires d\'adéquation et aux communications pré-contractuelles.',
+                'results-title': 'Résultats Obtenus',
+                'result1': 'Investisseurs Assistés',
+                'result2': 'Recouvrement Total',
+                'result3': 'Taux de Réussite',
+                'result4': 'Jugements Favorables',
+                'quote-text': 'L\'affaire UPTOS représente un exemple paradigmatique de la façon dont la défense collective des investisseurs peut être efficace contre les pratiques abusives des intermédiaires financiers. La clé du succès a été la combinaison d\'expertise technique, de détermination et de capacité de coordination.',
+                'quote-author': '- Me Marcello Stanca',
+                'media-title': 'Couverture Médiatique',
+                'media1-title': 'Victoire des investisseurs UPTOS',
+                'media1-desc': 'Il Sole 24 Ore rapporte le jugement favorable qui a reconnu le droit à indemnisation pour plus de 170 investisseurs lésés par des produits structurés complexes.',
+                'media2-title': 'Deutsche Bank condamnée',
+                'media2-desc': 'Milano Finanza analyse les implications du jugement pour le secteur bancaire italien et la protection des investisseurs particuliers.',
+                'media3-title': '1,5 million récupéré',
+                'media3-desc': 'Corriere della Sera documente l\'achèvement des procédures de recouvrement et le paiement intégral des indemnisations aux investisseurs.',
+                'cta-title': 'Besoin d\'Assistance Juridique?',
+                'cta-desc': 'Contactez-moi pour une consultation professionnelle sur vos investissements financiers',
+                'cta-button': 'Demander une Consultation',
+                'footer-text': '© 2026 Me Marcello Stanca - Tous droits réservés'
             },
             de: {
-                page_title: "Lebenslauf - RA Marcello Stanca",
-                subtitle: "Rechtsanwalt Spezialisiert auf Bank-, Finanz- und Kapitalmarktrecht",
-                contact_email: "E-Mail:",
-                contact_phone: "Telefon:",
-                contact_location: "Standort:",
-                contact_linkedin: "LinkedIn:",
-                location_city: "Mailand, Italien",
-                section_profile: "Berufliches Profil",
-                profile_text: "Rechtsanwalt spezialisiert auf Bank-, Finanz- und Kapitalmarktrecht mit über 15 Jahren Erfahrung in der Rechtsberatung für Finanzinstitute, börsennotierte Unternehmen und Aufsichtsbehörden. Expertise in regulatorischer Compliance, außergewöhnlichen Transaktionen und Regulierungsstreitigkeiten.",
-                section_experience: "Berufserfahrung",
-                exp1_title: "Partner - Anwaltskanzlei",
-                exp1_date: "2018 - Gegenwart",
-                exp1_bullet1: "Rechtsberatung bei M&A-Transaktionen im Bank- und Finanzsektor",
-                exp1_bullet2: "Unterstützung bei Genehmigungs- und Aufsichtsverfahren bei der Bank von Italien und CONSOB",
-                exp1_bullet3: "Verwaltung von Regulierungsstreitigkeiten und Verwaltungssanktionen",
-                exp1_bullet4: "MiFID II, DSGVO und Geldwäsche-Compliance",
-                exp2_title: "Senior Associate - Internationale Kanzlei",
-                exp2_date: "2012 - 2018",
-                exp2_bullet1: "Beratung zu derivativen Finanzprodukten und komplexen Instrumenten",
-                exp2_bullet2: "Unterstützung bei Verbriefungs- und Projektfinanzierungstransaktionen",
-                exp2_bullet3: "Rechtliche Due Diligence für Bankenübernahmen",
-                exp2_bullet4: "Erstellung von Prospekten für Anleiheemissionen",
-                exp3_title: "Junior Anwalt - Banking & Finance Abteilung",
-                exp3_date: "2008 - 2012",
-                exp3_bullet1: "Unterstützung bei strukturierten Finanzierungstransaktionen",
-                exp3_bullet2: "Rechtsprechungs- und Regulierungsforschung im Bankwesen",
-                exp3_bullet3: "Unterstützung bei Bank- und Finanzverträgen",
-                section_education: "Akademischer Hintergrund",
-                edu1_title: "Master in Finanzmarktrecht",
-                edu1_date: "Bocconi-Universität, Mailand - 2008",
-                edu1_desc: "Spezialisierung auf Finanzregulierung, aufsichtsrechtliche Überwachung und Gesellschaftsrecht börsennotierter Unternehmen.",
-                edu2_title: "Jurastudium",
-                edu2_date: "Universität Mailand - 2006",
-                edu2_desc: "Note: 110/110 mit Auszeichnung. Dissertation im Handelsrecht über außergewöhnliche Banktransaktionen.",
-                section_skills: "Spezialisierte Fähigkeiten",
-                skills_legal_title: "Bank- und Finanzrecht",
-                skills_legal1: "Konsolidierte Bank- und Finanzgesetze",
-                skills_legal2: "MiFID II und MiFIR",
-                skills_legal3: "Geldwäschevorschriften",
-                skills_legal4: "Basel III und CRD IV",
-                skills_regulatory_title: "Compliance und Regulierung",
-                skills_regulatory1: "DSGVO und Datenschutz",
-                skills_regulatory2: "Marktmissbrauchsverordnung",
-                skills_regulatory3: "EMIR und SFTR",
-                skills_regulatory4: "PSD2",
-                skills_operations_title: "Außergewöhnliche Transaktionen",
-                skills_operations1: "Bank-M&A",
-                skills_operations2: "Verbriefungen",
-                skills_operations3: "Projektfinanzierung",
-                skills_operations4: "Anleiheemissionen",
-                skills_languages_title: "Sprachen",
-                skills_lang1: "Italienisch (Muttersprache)",
-                skills_lang2: "Englisch (fließend - C2)",
-                skills_lang3: "Französisch (fortgeschritten - B2)",
-                skills_lang4: "Deutsch (mittleres Niveau - B1)",
-                section_publications: "Veröffentlichungen und Lehre",
-                pub1: "\"MiFID II-Regulierung: operative Auswirkungen für Finanzintermediäre\" - Banking Law Review, 2020",
-                pub2: "\"Haftung von Direktoren in Bankenkrisen\" - Il Sole 24 Ore, 2019",
-                pub3: "Dozent beim Master in Banking & Finance Law - Bocconi-Universität (2015-gegenwärtig)",
-                pub4: "\"NPL-Verbriefungen im Post-Krisen-Kontext\" - Bancaria Editrice, 2018",
-                section_memberships: "Registrierungen und Zertifizierungen",
-                member1: "Mailänder Anwaltskammer (seit 2007)",
-                member2: "Befähigung zur Anwaltschaft vor den Obergerichten",
-                member3: "Mitglied der Italienischen Vereinigung der Unternehmensanwälte (AIGI)",
-                member4: "CISI-Zertifizierung (Chartered Institute for Securities & Investment)"
+                'nav-home': 'Startseite',
+                'nav-curriculum': 'Lebenslauf',
+                'nav-database': 'Datenbank',
+                'nav-contact': 'Kontakt',
+                'hero-title': 'Beruflicher Werdegang',
+                'hero-subtitle': 'Jahrzehntelange Erfahrung im Anlegerschutz und Finanzrechtsstreit',
+                'case-title': 'UPTOS-Fall: Ein Historischer Sieg',
+                'case-subtitle': 'Vertretung von über 170 durch illegale Finanzprodukte geschädigten Anlegern, die zu einer Gesamtentschädigung von über 1.500.000 € führte',
+                'phase1-label': 'PHASE 1 - 2008',
+                'phase1-title': 'Problemidentifikation',
+                'phase1-desc': 'Erste Kontakte mit Anlegern, die Opfer von UPTOS-Produkten der Deutsche Bank wurden. Eingehende Analyse der Verträge und Identifikation systematischer Regelverstöße bei der Vermarktung strukturierter Produkte.',
+                'phase2-label': 'PHASE 2 - 2009',
+                'phase2-title': 'Gruppenbildung',
+                'phase2-desc': 'Organisation und Koordination von über 170 geschädigten Anlegern. Entwicklung einer gemeinsamen Rechtsstrategie basierend auf Verletzung der Aufklärungspflichten und Produktungeeignetheit bezüglich der Risikoprofile der Anleger.',
+                'phase3-label': 'PHASE 3 - 2010-2012',
+                'phase3-title': 'Rechtsklage',
+                'phase3-desc': 'Einleitung von Rechtsstreitigkeiten gegen Deutsche Bank und die beteiligten Vermittler. Bearbeitung komplexer technischer Fragen zu Finanzderivaten und Vertragsdokumentation. Koordination mit Finanzexperten zur Schadensquantifizierung.',
+                'phase4-label': 'PHASE 4 - 2013',
+                'phase4-title': 'Günstiges Urteil',
+                'phase4-desc': 'Erwirkung günstiger Urteile zur Anerkennung der Haftung der Vermittler wegen Verletzung der Aufklärungs- und Eignungspflichten. Bestätigung der teilweisen Vertragsunwirksamkeit und des Rechts auf volle Schadensersatzleistung.',
+                'phase5-label': 'PHASE 5 - 2014-2015',
+                'phase5-title': 'Vollstreckung und Beitreibung',
+                'phase5-desc': 'Verwaltung der Vollstreckungsverfahren und Verhandlung von Vergleichsvereinbarungen. Effektive Beitreibung von über 1.500.000 € für betreute Anleger, mit Beitreibungsquoten von über 90 % der fälligen Beträge.',
+                'strategy-title': 'Gewinnstrategie',
+                'strategy1-title': 'Eingehende Technische Analyse',
+                'strategy1-desc': 'Detaillierte Untersuchung strukturierter Finanzprodukte mit Fokus auf die Komplexität eingebetteter Derivate und die Informationsasymmetrie zwischen Bank und Anlegern.',
+                'strategy2-title': 'Gruppenkoordination',
+                'strategy2-desc': 'Effiziente Verwaltung einer großen Anlegergruppe, Gewährleistung einheitlicher Rechtsmaßnahmen und Maximierung der Verhandlungsmacht.',
+                'strategy3-title': 'Beweisdokumentation',
+                'strategy3-desc': 'Systematische Sammlung von Beweisdokumenten zu Regelverstößen, mit besonderem Augenmerk auf Eignungsfragebögen und vorvertragliche Mitteilungen.',
+                'results-title': 'Erzielte Ergebnisse',
+                'result1': 'Betreute Anleger',
+                'result2': 'Gesamtbeitreibung',
+                'result3': 'Erfolgsquote',
+                'result4': 'Günstige Urteile',
+                'quote-text': 'Der UPTOS-Fall stellt ein paradigmatisches Beispiel dafür dar, wie die kollektive Verteidigung von Anlegern gegen unsachgemäße Praktiken von Finanzintermediären wirksam sein kann. Der Schlüssel zum Erfolg war die Kombination aus technischer Expertise, Entschlossenheit und Koordinationsfähigkeit.',
+                'quote-author': '- RA Marcello Stanca',
+                'media-title': 'Medienberichterstattung',
+                'media1-title': 'Sieg der UPTOS-Anleger',
+                'media1-desc': 'Il Sole 24 Ore berichtet über das günstige Urteil, das das Recht auf Entschädigung für über 170 durch komplexe strukturierte Produkte geschädigte Anleger anerkannte.',
+                'media2-title': 'Deutsche Bank verurteilt',
+                'media2-desc': 'Milano Finanza analysiert die Auswirkungen des Urteils auf den italienischen Bankensektor und den Schutz von Kleinanlegern.',
+                'media3-title': '1,5 Millionen beigetrieben',
+                'media3-desc': 'Corriere della Sera dokumentiert den Abschluss der Beitreibungsverfahren und die vollständige Zahlung der Entschädigungen an die Anleger.',
+                'cta-title': 'Benötigen Sie Rechtsbeistand?',
+                'cta-desc': 'Kontaktieren Sie mich für eine professionelle Beratung zu Ihren Finanzinvestitionen',
+                'cta-button': 'Beratung Anfordern',
+                'footer-text': '© 2026 RA Marcello Stanca - Alle Rechte vorbehalten'
             },
             es: {
-                page_title: "Curriculum Vitae - Abog. Marcello Stanca",
-                subtitle: "Abogado Especializado en Derecho Bancario, Financiero y de Mercados de Capitales",
-                contact_email: "Correo electrónico:",
-                contact_phone: "Teléfono:",
-                contact_location: "Ubicación:",
-                contact_linkedin: "LinkedIn:",
-                location_city: "Milán, Italia",
-                section_profile: "Perfil Profesional",
-                profile_text: "Abogado especializado en derecho bancario, financiero y de mercados de capitales con más de 15 años de experiencia en asesoría legal para instituciones financieras, sociedades cotizadas y organismos de supervisión. Experiencia en cumplimiento normativo, operaciones extraordinarias y litigios regulatorios.",
-                section_experience: "Experiencia Profesional",
-                exp1_title: "Socio - Despacho de Abogados",
-                exp1_date: "2018 - Presente",
-                exp1_bullet1: "Asesoramiento jurídico en operaciones de M&A en el sector bancario y financiero",
-                exp1_bullet2: "Asistencia en procedimientos de autorización y supervisión ante el Banco de Italia y CONSOB",
-                exp1_bullet3: "Gestión de litigios regulatorios y sanciones administrativas",
-                exp1_bullet4: "Cumplimiento de MiFID II, RGPD y normativas antilavado de dinero",
-                exp2_title: "Asociado Senior - Despacho Internacional",
-                exp2_date: "2012 - 2018",
-                exp2_bullet1: "Asesoramiento sobre productos financieros derivados e instrumentos complejos",
-                exp2_bullet2: "Asistencia en operaciones de titulización y financiación de proyectos",
-                exp2_bullet3: "Due diligence legal para adquisiciones bancarias",
-                exp2_bullet4: "Redacción de folletos informativos para emisiones de bonos",
-                exp3_title: "Abogado Junior - Departamento de Banca y Finanzas",
-                exp3_date: "2008 - 2012",
-                exp3_bullet1: "Apoyo en operaciones de financiación estructurada",
-                exp3_bullet2: "Investigación jurisprudencial y normativa en materia bancaria",
-                exp3_bullet3: "Asistencia en contratos bancarios y financieros",
-                section_education: "Formación Académica",
-                edu1_title: "Máster en Derecho de los Mercados Financieros",
-                edu1_date: "Universidad Bocconi, Milán - 2008",
-                edu1_desc: "Especialización en regulación financiera, supervisión prudencial y derecho societario de empresas cotizadas.",
-                edu2_title: "Licenciatura en Derecho",
-                edu2_date: "Universidad de Milán - 2006",
-                edu2_desc: "Calificación: 110/110 cum laude. Tesis en Derecho Mercantil sobre operaciones extraordinarias bancarias.",
-                section_skills: "Habilidades Especializadas",
-                skills_legal_title: "Derecho Bancario y Financiero",
-                skills_legal1: "Textos consolidados bancarios y financieros",
-                skills_legal2: "MiFID II y MiFIR",
-                skills_legal3: "Normativa antilavado de dinero",
-                skills_legal4: "Basilea III y CRD IV",
-                skills_regulatory_title: "Cumplimiento y Regulación",
-                skills_regulatory1: "RGPD y Privacidad",
-                skills_regulatory2: "Reglamento de Abuso de Mercado",
-                skills_regulatory3: "EMIR y SFTR",
-                skills_regulatory4: "PSD2",
-                skills_operations_title: "Operaciones Extraordinarias",
-                skills_operations1: "M&A bancarias",
-                skills_operations2: "Titulizaciones",
-                skills_operations3: "Financiación de Proyectos",
-                skills_operations4: "Emisiones de bonos",
-                skills_languages_title: "Idiomas",
-                skills_lang1: "Italiano (nativo)",
-                skills_lang2: "Inglés (fluido - C2)",
-                skills_lang3: "Francés (avanzado - B2)",
-                skills_lang4: "Alemán (intermedio - B1)",
-                section_publications: "Publicaciones y Docencia",
-                pub1: "\"La regulación MiFID II: impactos operativos para intermediarios financieros\" - Revista de Derecho Bancario, 2020",
-                pub2: "\"Responsabilidad de los administradores en crisis bancarias\" - Il Sole 24 Ore, 2019",
-                pub3: "Profesor en Máster de Derecho Bancario y Financiero - Universidad Bocconi (2015-presente)",
-                pub4: "\"Titulizaciones NPL en el contexto post-crisis\" - Bancaria Editrice, 2018",
-                section_memberships: "Inscripciones y Certificaciones",
-                member1: "Colegio de Abogados de Milán (desde 2007)",
-                member2: "Habilitación para ejercer ante los tribunales superiores",
-                member3: "Miembro de la Asociación Italiana de Juristas de Empresa (AIGI)",
-                member4: "Certificación CISI (Chartered Institute for Securities & Investment)"
+                'nav-home': 'Inicio',
+                'nav-curriculum': 'Currículum',
+                'nav-database': 'Base de datos',
+                'nav-contact': 'Contacto',
+                'hero-title': 'Currículum Profesional',
+                'hero-subtitle': 'Décadas de experiencia en protección de inversores y litigios financieros',
+                'case-title': 'Caso UPTOS: Una Victoria Histórica',
+                'case-subtitle': 'Representación de más de 170 inversores perjudicados por productos financieros ilícitos, culminando en una compensación total superior a 1.500.000 €',
+                'phase1-label': 'FASE 1 - 2008',
+                'phase1-title': 'Identificación del Problema',
+                'phase1-desc': 'Primeros contactos con inversores víctimas de productos UPTOS emitidos por Deutsche Bank. Análisis exhaustivo de contratos e identificación de violaciones normativas sistemáticas en la comercialización de productos estructurados.',
+                'phase2-label': 'FASE 2 - 2009',
+                'phase2-title': 'Formación del Grupo',
+                'phase2-desc': 'Organización y coordinación de más de 170 inversores perjudicados. Desarrollo de una estrategia legal común basada en la violación de obligaciones de información e inadecuación de productos respecto a los perfiles de riesgo de los inversores.',
+                'phase3-label': 'FASE 3 - 2010-2012',
+                'phase3-title': 'Acción Legal',
+                'phase3-desc': 'Inicio del litigio contra Deutsche Bank y los intermediarios involucrados. Gestión de cuestiones técnicas complejas relacionadas con derivados financieros y documentación contractual. Coordinación con expertos financieros para la cuantificación de daños.',
+                'phase4-label': 'FASE 4 - 2013',
+                'phase4-title': 'Sentencia Favorable',
+                'phase4-desc': 'Obtención de sentencias favorables que reconocieron la responsabilidad de los intermediarios por violación de obligaciones de información e idoneidad. Confirmación de la nulidad parcial de contratos y del derecho a compensación integral por daños.',
+                'phase5-label': 'FASE 5 - 2014-2015',
+                'phase5-title': 'Ejecución y Recuperación',
+                'phase5-desc': 'Gestión de procedimientos ejecutivos y negociación de acuerdos transaccionales. Recuperación efectiva de más de 1.500.000 € para inversores asistidos, con tasas de recuperación superiores al 90% de los montos adeudados.',
+                'strategy-title': 'Estrategia Ganadora',
+                'strategy1-title': 'Análisis Técnico Exhaustivo',
+                'strategy1-desc': 'Estudio detallado de productos financieros estructurados, con enfoque en la complejidad de derivados incorporados y la asimetría informativa entre banco e inversores.',
+                'strategy2-title': 'Coordinación de Grupo',
+                'strategy2-desc': 'Gestión eficiente de un gran grupo de inversores, asegurando uniformidad en acciones legales y maximizando el poder de negociación.',
+                'strategy3-title': 'Documentación Probatoria',
+                'strategy3-desc': 'Recopilación sistemática de pruebas documentales sobre violaciones normativas, con especial atención a cuestionarios de idoneidad y comunicaciones precontractuales.',
+                'results-title': 'Resultados Obtenidos',
+                'result1': 'Inversores Asistidos',
+                'result2': 'Recuperación Total',
+                'result3': 'Tasa de Éxito',
+                'result4': 'Sentencias Favorables',
+                'quote-text': 'El caso UPTOS representa un ejemplo paradigmático de cómo la defensa colectiva de inversores puede ser efectiva contra prácticas impropias de intermediarios financieros. La clave del éxito fue la combinación de experiencia técnica, determinación y capacidad de coordinación.',
+                'quote-author': '- Abog. Marcello Stanca',
+                'media-title': 'Cobertura Mediática',
+                'media1-title': 'Victoria de inversores UPTOS',
+                'media1-desc': 'Il Sole 24 Ore informa sobre la sentencia favorable que reconoció el derecho a compensación para más de 170 inversores perjudicados por productos estructurados complejos.',
+                'media2-title': 'Deutsche Bank condenado',
+                'media2-desc': 'Milano Finanza analiza las implicaciones de la sentencia para el sector bancario italiano y la protección de inversores minoristas.',
+                'media3-title': '1,5 millones recuperados',
+                'media3-desc': 'Corriere della Sera documenta la finalización de procedimientos de recuperación y el pago íntegro de compensaciones a los inversores.',
+                'cta-title': '¿Necesita Asistencia Legal?',
+                'cta-desc': 'Contácteme para una consulta profesional sobre sus inversiones financieras',
+                'cta-button': 'Solicitar Consulta',
+                'footer-text': '© 2026 Abog. Marcello Stanca - Todos los derechos reservados'
             }
         };
 
-        // Function to change language
+        let currentLanguage = 'it';
+
         function changeLanguage(lang) {
-            // Update HTML lang attribute
-            document.documentElement.lang = lang;
+            currentLanguage = lang;
             
-            // Get all elements with data-i18n attribute
-            const elements = document.querySelectorAll('[data-i18n]');
-            
-            // Update each element's text content
-            elements.forEach(element => {
+            // Update all elements with data-i18n attributes
+            document.querySelectorAll('[data-i18n]').forEach(element => {
                 const key = element.getAttribute('data-i18n');
                 if (translations[lang] && translations[lang][key]) {
                     element.textContent = translations[lang][key];
                 }
             });
-            
-            // Save language preference to localStorage
+
+            // Update active language button
+            document.querySelectorAll('.language-selector button').forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.getAttribute('data-lang') === lang) {
+                    btn.classList.add('active');
+                }
+            });
+
+            // Update HTML lang attribute
+            document.documentElement.lang = lang;
+
+            // Store preference in localStorage
             localStorage.setItem('preferredLanguage', lang);
         }
 
-        // Load saved language preference on page load
-        document.addEventListener('DOMContentLoaded', function() {
-            const savedLang = localStorage.getItem('preferredLanguage') || 'it';
-            document.getElementById('languageSelect').value = savedLang;
-            if (savedLang !== 'it') {
-                changeLanguage(savedLang);
+        // Load preferred language on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            const preferredLanguage = localStorage.getItem('preferredLanguage');
+            if (preferredLanguage && translations[preferredLanguage]) {
+                changeLanguage(preferredLanguage);
             }
         });
     </script>
