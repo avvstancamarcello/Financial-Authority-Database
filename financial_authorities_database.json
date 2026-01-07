@@ -340,7 +340,210 @@
       "authorityEmail": "csa-acvm-secretariat@acvm-csa.ca",
       "social_links": {}
     },
-    "notes": "Organizzazione che raggruppa le autorità provinciali e territoriali."
+    "additional_resources": {
+      "searchAuthorizedEntities": "https://info.securities-administrators.ca/nrsmobile/nrssearch.aspx",
+      "ciro_homepage": "https://www.ciro.ca/",
+      "ciro_complaints": "https://www.ciro.ca/office-investor/how-make-complaint",
+      "ciro_statistics": "https://www.ciro.ca/office-investor/how-make-complaint/complaints-and-inquiries-statistics",
+      "territorial_authorities": "https://www.ciro.ca/office-investor/how-make-complaint/complaints-outside-ciros-jurisdiction",
+      "police_crime_statistics": "https://www.statcan.gc.ca/en/subjects-start/crime_and_justice"
+    },
+    "notes": "Organizzazione che raggruppa le autorità provinciali e territoriali. Vedere schede separate per ogni provincia/territorio."
+  },
+  "Canada - Alberta": {
+    "country_name": "Canada - Alberta",
+    "flag": "🇨🇦",
+    "isEU": false,
+    "protectionLevel": "Altissimo",
+    "financial_authority": {
+      "name": "Alberta Securities Commission",
+      "abbreviation": "ASC",
+      "homepage": "https://www.asc.ca/",
+      "fraudReportLink": "https://www.asc.ca/enforcement/file-a-complaint",
+      "authorityEmail": "complaints@asc.ca",
+      "social_links": {}
+    },
+    "notes": "Autorità provinciale Alberta. Tel: 403-355-3888 | Toll-Free: 1-877-355-4488"
+  },
+  "Canada - British Columbia": {
+    "country_name": "Canada - British Columbia",
+    "flag": "🇨🇦",
+    "isEU": false,
+    "protectionLevel": "Altissimo",
+    "financial_authority": {
+      "name": "British Columbia Securities Commission",
+      "abbreviation": "BCSC",
+      "homepage": "https://www.bcsc.bc.ca/",
+      "fraudReportLink": "https://www.bcsc.bc.ca/report-to-us/filing-a-complaint-with-the-bcsc/online-complaint",
+      "authorityEmail": "inquiries@bcsc.bc.ca",
+      "social_links": {}
+    },
+    "notes": "Autorità provinciale British Columbia. Tel: 604-899-6854 | Toll-Free: 1-800-373-6393"
+  },
+  "Canada - Manitoba": {
+    "country_name": "Canada - Manitoba",
+    "flag": "🇨🇦",
+    "isEU": false,
+    "protectionLevel": "Altissimo",
+    "financial_authority": {
+      "name": "The Manitoba Securities Commission",
+      "abbreviation": "MSC",
+      "homepage": "https://www.mbsecurities.ca/",
+      "fraudReportLink": "https://www.mbsecurities.ca/complaint.html",
+      "authorityEmail": "securities@gov.mb.ca",
+      "social_links": {}
+    },
+    "notes": "Autorità provinciale Manitoba. Tel: 204-945-2548 | Toll-Free: 1-800-655-5244"
+  },
+  "Canada - New Brunswick": {
+    "country_name": "Canada - New Brunswick",
+    "flag": "🇨🇦",
+    "isEU": false,
+    "protectionLevel": "Altissimo",
+    "financial_authority": {
+      "name": "Financial and Consumer Services Commission",
+      "abbreviation": "FCNB",
+      "homepage": "https://fcnb.ca/",
+      "fraudReportLink": "https://fcnb.ca/en/complaint",
+      "authorityEmail": "info@fcnb.ca",
+      "social_links": {}
+    },
+    "notes": "Autorità provinciale New Brunswick. Tel: 506-658-3060 | Toll-Free: 1-866-933-2222"
+  },
+  "Canada - Newfoundland and Labrador": {
+    "country_name": "Canada - Newfoundland and Labrador",
+    "flag": "🇨🇦",
+    "isEU": false,
+    "protectionLevel": "Altissimo",
+    "financial_authority": {
+      "name": "Office of the Superintendent of Securities - Newfoundland and Labrador",
+      "abbreviation": "NL Securities",
+      "homepage": "https://www.gov.nl.ca/dgsnl/securities/",
+      "fraudReportLink": "https://www.gov.nl.ca/dgsnl/securities/complaints/",
+      "authorityEmail": "securities@gov.nl.ca",
+      "social_links": {}
+    },
+    "notes": "Autorità provinciale Newfoundland and Labrador. Tel: 709-729-4189"
+  },
+  "Canada - Northwest Territories": {
+    "country_name": "Canada - Northwest Territories",
+    "flag": "🇨🇦",
+    "isEU": false,
+    "protectionLevel": "Alto",
+    "financial_authority": {
+      "name": "Office of the Superintendent of Securities - Northwest Territories",
+      "abbreviation": "NWT Securities",
+      "homepage": "https://www.justice.gov.nt.ca/en/divisions/legal-registries-division/securities-office/",
+      "fraudReportLink": "https://www.justice.gov.nt.ca/en/divisions/legal-registries-division/securities-office/",
+      "authorityEmail": "securities@gov.nt.ca",
+      "social_links": {}
+    },
+    "notes": "Autorità territoriale Northwest Territories. Tel: 867-767-9260"
+  },
+  "Canada - Nova Scotia": {
+    "country_name": "Canada - Nova Scotia",
+    "flag": "🇨🇦",
+    "isEU": false,
+    "protectionLevel": "Altissimo",
+    "financial_authority": {
+      "name": "Nova Scotia Securities Commission",
+      "abbreviation": "NSSC",
+      "homepage": "https://nssc.novascotia.ca/",
+      "fraudReportLink": "https://nssc.novascotia.ca/complaint",
+      "authorityEmail": "nssccontact@novascotia.ca",
+      "social_links": {}
+    },
+    "notes": "Autorità provinciale Nova Scotia. Tel: 902-424-7768"
+  },
+  "Canada - Nunavut": {
+    "country_name": "Canada - Nunavut",
+    "flag": "🇨🇦",
+    "isEU": false,
+    "protectionLevel": "Alto",
+    "financial_authority": {
+      "name": "Office of the Superintendent of Securities - Nunavut",
+      "abbreviation": "Nunavut Securities",
+      "homepage": "https://www.gov.nu.ca/justice/information/superintendent-securities",
+      "fraudReportLink": "https://www.gov.nu.ca/justice/information/superintendent-securities",
+      "authorityEmail": "superintendentofsecurities@gov.nu.ca",
+      "social_links": {}
+    },
+    "notes": "Autorità territoriale Nunavut. Tel: 867-975-6590"
+  },
+  "Canada - Ontario": {
+    "country_name": "Canada - Ontario",
+    "flag": "🇨🇦",
+    "isEU": false,
+    "protectionLevel": "Altissimo",
+    "financial_authority": {
+      "name": "Ontario Securities Commission",
+      "abbreviation": "OSC",
+      "homepage": "https://www.osc.ca/",
+      "fraudReportLink": "https://portal.osc.ca/contactus/",
+      "authorityEmail": "inquiries@osc.gov.on.ca",
+      "social_links": {}
+    },
+    "notes": "Autorità provinciale Ontario. Tel: 416-593-8314 | Toll-Free: 1-877-785-1555"
+  },
+  "Canada - Prince Edward Island": {
+    "country_name": "Canada - Prince Edward Island",
+    "flag": "🇨🇦",
+    "isEU": false,
+    "protectionLevel": "Altissimo",
+    "financial_authority": {
+      "name": "Office of the Superintendent of Securities - PEI",
+      "abbreviation": "PEI Securities",
+      "homepage": "https://www.princeedwardisland.ca/en/topic/office-superintendent-securities",
+      "fraudReportLink": "https://www.princeedwardisland.ca/en/information/justice-and-public-safety/securities-complaints",
+      "authorityEmail": "securities@gov.pe.ca",
+      "social_links": {}
+    },
+    "notes": "Autorità provinciale Prince Edward Island. Tel: 902-368-4550"
+  },
+  "Canada - Québec": {
+    "country_name": "Canada - Québec",
+    "flag": "🇨🇦",
+    "isEU": false,
+    "protectionLevel": "Altissimo",
+    "financial_authority": {
+      "name": "Autorité des marchés financiers",
+      "abbreviation": "AMF",
+      "homepage": "https://lautorite.qc.ca/",
+      "fraudReportLink": "https://lautorite.qc.ca/en/general-public/assistance-and-complaints/making-a-complaint",
+      "authorityEmail": "information@lautorite.qc.ca",
+      "social_links": {}
+    },
+    "notes": "Autorità provinciale Québec. Tel Montréal: 514-395-0337 | Québec City: 418-525-0337 | Toll-Free: 1-877-525-0337"
+  },
+  "Canada - Saskatchewan": {
+    "country_name": "Canada - Saskatchewan",
+    "flag": "🇨🇦",
+    "isEU": false,
+    "protectionLevel": "Altissimo",
+    "financial_authority": {
+      "name": "Financial and Consumer Affairs Authority of Saskatchewan",
+      "abbreviation": "FCAA",
+      "homepage": "https://fcaa.gov.sk.ca/",
+      "fraudReportLink": "https://fcaa.gov.sk.ca/complaints",
+      "authorityEmail": "fcaa@gov.sk.ca",
+      "social_links": {}
+    },
+    "notes": "Autorità provinciale Saskatchewan. Tel: 306-787-5645"
+  },
+  "Canada - Yukon": {
+    "country_name": "Canada - Yukon",
+    "flag": "🇨🇦",
+    "isEU": false,
+    "protectionLevel": "Alto",
+    "financial_authority": {
+      "name": "Office of the Yukon Superintendent of Securities",
+      "abbreviation": "Yukon Securities",
+      "homepage": "https://yukon.ca/en/doing-business/securities-office",
+      "fraudReportLink": "https://yukon.ca/en/doing-business/securities-office",
+      "authorityEmail": "securities@yukon.ca",
+      "social_links": {}
+    },
+    "notes": "Autorità territoriale Yukon. Tel: 867-667-5466"
   },
   "Cayman Islands": {
     "country_name": "Cayman Islands",
