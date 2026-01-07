@@ -860,8 +860,8 @@
         <!-- Solar System Container -->
         <div style="position: relative; width: 100%; max-width: 1400px; height: 500px; margin: 2rem auto;">
             <!-- Sun (Centro) -->
-            <div id="sun" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 180px; height: 180px; background: radial-gradient(circle at 30% 30%, #FFD700, #FFA500, #FF8C00); border-radius: 50%; box-shadow: 0 0 60px rgba(255, 215, 0, 0.8), 0 0 100px rgba(255, 165, 0, 0.6), inset 0 0 40px rgba(255, 140, 0, 0.4); cursor: pointer; z-index: 10; animation: sunPulse 4s ease-in-out infinite;">
-                <div style="position: absolute; bottom: -50px; left: 50%; transform: translateX(-50%); white-space: nowrap; color: #00FF7F; font-weight: bold; font-size: 1.3rem; text-shadow: 0 0 10px rgba(0, 255, 127, 0.8);">Security Financial</div>
+            <div id="sun" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 180px; height: 180px; background-image: url('financial-defense-icon.png'); background-size: cover; background-position: center; background-repeat: no-repeat; border-radius: 50%; box-shadow: 0 0 60px rgba(255, 215, 0, 0.8), 0 0 120px rgba(255, 165, 0, 0.4), 0 0 30px rgba(0, 100, 255, 0.5); animation: sunPulse 3s ease-in-out infinite, shieldGlow 2s ease-in-out infinite; cursor: pointer; z-index: 10; border: 3px solid rgba(255, 215, 0, 0.6);">
+                <div style="position: absolute; bottom: -50px; left: 50%; transform: translateX(-50%); white-space: nowrap; color: #FFD700; font-weight: bold; font-size: 1.2rem; text-shadow: 0 0 10px rgba(255, 215, 0, 0.8), 0 0 20px rgba(0, 100, 255, 0.5);">🛡️ FINANCIAL DEFENSE</div>
             </div>
 
             <!-- Planet 1: Autorità Vigilanza (Mercurio - grigio) -->
@@ -918,6 +918,18 @@
         @keyframes sunPulse {
             0%, 100% { transform: translate(-50%, -50%) scale(1); }
             50% { transform: translate(-50%, -50%) scale(1.05); }
+        }
+        @keyframes shieldGlow {
+            0%, 100% { 
+                box-shadow: 0 0 60px rgba(255, 215, 0, 0.8), 
+                            0 0 120px rgba(255, 165, 0, 0.4), 
+                            0 0 30px rgba(0, 100, 255, 0.5); 
+            }
+            50% { 
+                box-shadow: 0 0 80px rgba(255, 215, 0, 1), 
+                            0 0 140px rgba(255, 165, 0, 0.6), 
+                            0 0 50px rgba(0, 100, 255, 0.8); 
+            }
         }
         @keyframes orbitMercury {
             from { transform: translate(-50%, -50%) rotate(0deg) translateX(150px) rotate(0deg); }
