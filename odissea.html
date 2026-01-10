@@ -75,6 +75,8 @@
             line-height: 1.6;
             color: var(--text-dark);
             background: var(--bg-light);
+            /* Cursore personalizzato: gladio romano (tema legionario/eroe) */
+            cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'><defs><linearGradient id='h' x1='0' y1='0' x2='0' y2='1'><stop offset='0' stop-color='%23e5e7eb'/><stop offset='1' stop-color='%239ca3af'/></linearGradient></defs><rect x='14' y='4' width='4' height='14' rx='1' fill='url(%23h)' stroke='%234b5563' stroke-width='1'/><polygon points='16,2 18,4 14,4' fill='%234b5563'/><rect x='11' y='18' width='10' height='4' rx='2' fill='%23b45309' stroke='%237c2d12' stroke-width='1'/><rect x='12' y='22' width='8' height='4' rx='2' fill='%23f59e0b' stroke='%23b45309' stroke-width='1'/></svg>") 16 24, auto;
         }
 
         /* Header Navigation */
@@ -107,13 +109,45 @@
         }
 
         .nav-links a {
-            color: white;
+            color: #FFD700;
             text-decoration: none;
             transition: color 0.3s;
+            font-weight: 600;
         }
 
         .nav-links a:hover {
-            color: var(--odyssey-gold);
+            color: #FFA500;
+            text-shadow: 0 0 10px rgba(255,215,0,0.5);
+        }
+
+        .language-selector {
+            display: flex;
+            gap: 0.5rem;
+            justify-content: center;
+            margin: 1rem 0;
+        }
+
+        .lang-btn {
+            background: rgba(255,255,255,0.3);
+            border: 2px solid transparent;
+            color: white;
+            padding: 6px 12px;
+            border-radius: 15px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+
+        .lang-btn:hover {
+            background: rgba(255,255,255,0.5);
+            transform: translateY(-2px);
+        }
+
+        .lang-btn.active {
+            background: white;
+            color: #667eea;
+            border-color: white;
         }
 
         /* Hero Section */
@@ -840,8 +874,8 @@
 <body>
     <!-- Main Navigation -->\n    <nav style=\"background: linear-gradient(135deg, #1e293b 0%, #334155 100%); padding: 1rem 0; box-shadow: 0 4px 12px rgba(0,0,0,0.15); position: sticky; top: 0; z-index: 999;\">
         <div style=\"max-width: 1200px; margin: 0 auto; display: flex; gap: 1.5rem; justify-content: center; align-items: center; flex-wrap: wrap; padding: 0 1rem;\">
-            <a href=\"index.html\" style=\"color: white; text-decoration: none; font-weight: 500; font-size: 1.05rem; padding: 0.5rem 1.5rem; background: rgba(255,255,255,0.05); border-radius: 8px; transition: all 0.3s ease;\" onmouseover=\"this.style.background='rgba(255,255,255,0.15)';\" onmouseout=\"this.style.background='rgba(255,255,255,0.05)';\">
-                🏠 Database Autorità
+            <a href=\"https://avvstancamarcello.github.io/Financial-Authority-Database/index.html#database-search-section\" style=\"color: white; text-decoration: none; font-weight: 500; font-size: 1.05rem; padding: 0.5rem 1.5rem; background: rgba(255,255,255,0.05); border-radius: 8px; transition: all 0.3s ease;\" onmouseover=\"this.style.background='rgba(255,255,255,0.15)';\" onmouseout=\"this.style.background='rgba(255,255,255,0.05)';\">
+                🏠 Database Autorità Finanziarie (129)
             </a>
             <a href=\"odissea.html\" style=\"color: white; text-decoration: none; font-weight: bold; font-size: 1.05rem; padding: 0.5rem 1.5rem; background: rgba(255,255,255,0.15); border-radius: 8px; transition: all 0.3s ease; border: 2px solid rgba(255,255,255,0.2);\" onmouseover=\"this.style.background='rgba(255,255,255,0.25)';\" onmouseout=\"this.style.background='rgba(255,255,255,0.15)';\">
                 🌊 Odissea Digitale
@@ -849,14 +883,17 @@
             <a href=\"referenze.html\" style=\"color: white; text-decoration: none; font-weight: 500; font-size: 1.05rem; padding: 0.5rem 1.5rem; background: rgba(255,255,255,0.05); border-radius: 8px; transition: all 0.3s ease;\" onmouseover=\"this.style.background='rgba(255,255,255,0.15)';\" onmouseout=\"this.style.background='rgba(255,255,255,0.05)';\">
                 📜 Referenze Istituzionali
             </a>
+            <a href=\"curriculum.html\" style=\"color: white; text-decoration: none; font-weight: 500; font-size: 1.05rem; padding: 0.5rem 1.5rem; background: rgba(255,215,0,0.1); border-radius: 8px; transition: all 0.3s ease; border: 1px solid rgba(255,215,0,0.3);\" onmouseover=\"this.style.background='rgba(255,215,0,0.2)';\" onmouseout=\"this.style.background='rgba(255,215,0,0.1)';\">
+                👨‍⚖️ Avv Stanca - Curriculum
+            </a>
         </div>
     </nav>
     <!-- Navigation -->
     <nav class="nav-header">
         <div class="nav-container">
-            <a href=\"index.html\" class=\"nav-logo\">🌊 Odissea Digitale</a>
+            <a href=\"https://avvstancamarcello.github.io/Financial-Authority-Database/index.html#database-search-section\" class=\"nav-logo\">🌊 Odissea Digitale</a>
             <ul class=\"nav-links\">
-                <li><a href="index.html">Database Autorità</a></li>
+                <li><a href="https://avvstancamarcello.github.io/Financial-Authority-Database/index.html#database-search-section">Database Autorità Finanziarie (129)</a></li>
                 <li><a href="#viaggio">Il Viaggio</a></li>
                 <li><a href="#prove">Le Prove</a></li>
                 <li><a href="#mappa">Mappa Truffe</a></li>
@@ -869,6 +906,13 @@
     <!-- Hero Section -->
     <section class="hero">
         <div class="hero-content">
+            <nav class="language-selector" role="navigation" aria-label="Language selection">
+                <button class="lang-btn active" onclick="changeLanguage('it')" aria-label="Italiano">🇮🇹 IT</button>
+                <button class="lang-btn" onclick="changeLanguage('en')" aria-label="English">🇬🇧 EN</button>
+                <button class="lang-btn" onclick="changeLanguage('fr')" aria-label="Français">🇫🇷 FR</button>
+                <button class="lang-btn" onclick="changeLanguage('de')" aria-label="Deutsch">🇩🇪 DE</button>
+                <button class="lang-btn" onclick="changeLanguage('es')" aria-label="Español">🇪🇸 ES</button>
+            </nav>
             <h1>🌊 ODISSEA DIGITALE</h1>
             <p class="hero-subtitle">Dalla Truffa alla Riconquista</p>
             <p class="hero-quote">"Come Ulisse tornò a Itaca,<br>riporterai i tuoi capitali a casa."</p>
@@ -956,7 +1000,7 @@
                     <div class="phase-content" data-phase="4">
                         <div class="phase-number">FASE 4 - Incontro col Mentore</div>
                         <h3 class="phase-title">🦉 La Guida di Atena</h3>
-                        <p class="phase-description">Trovi il Database Financial Authority, consulti un avvocato, scopri le associazioni consumatori. La dea della saggezza ti offre gli strumenti per navigare.</p>
+                        <p class="phase-description">Trovi il <a href="https://avvstancamarcello.github.io/Financial-Authority-Database/index.html#database-search-section" style="color:#38bdf8; font-weight:600; text-decoration:underline;">Database Autorità Finanziarie (129)</a>, consulti un avvocato, scopri le associazioni consumatori. La dea della saggezza ti offre gli strumenti per navigare.</p>
                         <p class="phase-action">📝 Chi/cosa ti ha guidato nella reazione?</p>
                         <div class="phase-checkbox">
                             <input type="checkbox" id="phase4" onchange="updateProgress()">
@@ -1102,7 +1146,7 @@
                     <p class="trial-myth">"Nessun mortale resisteva al loro canto..."</p>
                     <p class="trial-modern">Chiamate da presunti broker, promesse di guadagni garantiti, pressione psicologica per "investire subito".</p>
                     <div class="trial-defense">
-                        <strong>🛡️ La Difesa di Ulisse:</strong> Come Ulisse si fece legare all'albero, tu verifica SEMPRE nel Database Financial Authority prima di qualsiasi bonifico. Metti "palline di cera" (filtri anti-spam) alle tue orecchie.
+                        <strong>🛡️ La Difesa di Ulisse:</strong> Come Ulisse si fece legare all'albero, tu verifica SEMPRE nel <a href="https://avvstancamarcello.github.io/Financial-Authority-Database/index.html#database-search-section" style="color:#38bdf8; font-weight:600; text-decoration:underline;">Database Autorità Finanziarie (129)</a> prima di qualsiasi bonifico. Metti "palline di cera" (filtri anti-spam) alle tue orecchie.
                     </div>
                 </div>
 
@@ -1567,7 +1611,7 @@ Esempio di header email da cercare:
     <!-- Footer -->
     <footer class="footer">
         <div class="footer-links">
-            <a href="index.html">Database Autorità Finanziarie</a>
+            <a href="https://avvstancamarcello.github.io/Financial-Authority-Database/index.html#database-search-section">Database Autorità Finanziarie (129)</a>
             <a href="#viaggio">Il Viaggio dell'Eroe</a>
             <a href="#prove">Le Prove Mitologiche</a>
             <a href="#mappa">Mappa Truffe</a>
@@ -1912,6 +1956,17 @@ Ricorda: come Ulisse, la strada è lunga ma Itaca ti aspetta.`);
             navigator.serviceWorker.register('service-worker.js')
                 .then(reg => console.log('Service Worker registered'))
                 .catch(err => console.log('Service Worker registration failed'));
+        }
+
+        // Language switcher (UI only)
+        let currentLanguage = 'it';
+        function changeLanguage(lang) {
+            currentLanguage = lang;
+            const buttons = document.querySelectorAll('.lang-btn');
+            buttons.forEach(btn => btn.classList.remove('active'));
+            const activeBtn = Array.from(buttons).find(btn => btn.textContent.includes(lang.toUpperCase()));
+            if (activeBtn) activeBtn.classList.add('active');
+            document.documentElement.lang = lang;
         }
     </script>
 </body>

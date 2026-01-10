@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <title>Test flag-wave Albania</title>
+
+  <!-- CDN flag-icons -->
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/flag-icons@6.6.6/css/flag-icons.min.css">
+
+  <style>
+    @keyframes flag-wave {
+      0%, 100% { transform: scale(1); filter: brightness(1); }
+      50%      { transform: scale(1.08); filter: brightness(1.25); }
+    }
+
+    .flag-item {
+      background: white;
+      border: 2px solid #e0e0e0;
+      border-radius: 10px;
+      padding: 20px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .flag-icon-wrapper {
+      display: block;
+      animation-name: flag-wave;
+      animation-duration: 2.6s;
+      animation-timing-function: ease-in-out;
+      animation-iteration-count: infinite;
+      transform-origin: 50% 50%;
+    }
+
+    .flag-icon-wrapper .fi {
+      width: 48px !important;
+      height: 36px !important;
+      font-size: 48px;
+    }
+  </style>
+</head>
+<body>
+  <div class="flag-item">
+    <span class="flag-icon-wrapper">
+      <span class="fi fi-al"></span>
+    </span>
+  </div>
+</body>
+</html>

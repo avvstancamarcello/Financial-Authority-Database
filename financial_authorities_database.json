@@ -507,6 +507,21 @@
     },
     "notes": "World Investor Week Coordinator: Ulla Brøns."
   },
+  "Greenland": {
+    "country_name": "Greenland",
+    "flag": "🇬🇱",
+    "isEU": false,
+    "protectionLevel": "Medio",
+    "financial_authority": {
+      "name": "Danish Financial Supervisory Authority (jurisdiction including Greenland)",
+      "abbreviation": "Finanstilsynet",
+      "homepage": "https://www.finanstilsynet.dk/",
+      "fraudReportLink": "https://www.finanstilsynet.dk/Forbrugere/Klag-over-en-finansiel-virksomhed",
+      "authorityEmail": "finanstilsynet@ftnet.dk",
+      "social_links": {}
+    },
+    "notes": "Territorio d'oltremare del Regno di Danimarca. La vigilanza sui mercati finanziari e sugli intermediari è esercitata dall'Autorità danese Finanstilsynet anche per la Groenlandia."
+  },
   "ECSRC (Regional)": {
     "country_name": "ECSRC (Regional)",
     "flag": "🌍",
@@ -1669,6 +1684,216 @@
       }
     },
     "notes": "App Ufficiale CBU disponibile per download. Video educazione finanziaria antitruffa disponibile su YouTube. Canale Telegram ufficiale 'Finlit.uz - moliyaviy savodxonlik ✔' (13.662+ iscritti) - Dipartimento di Educazione Finanziaria e Divulgazione della Banca Centrale. Per migliorare l'alfabetizzazione finanziaria, è importante promuovere educazione tra donne e giovani, insegnare loro l'\"igiene informatica\" e diffondere i servizi di microfinanza. Sistema di vigilanza bancaria moderna con focus su protezione consumatori."
+  },
+  "Vietnam": {
+    "country_name": "Vietnam",
+    "flag": "🇻🇳",
+    "isEU": false,
+    "protectionLevel": "Medio",
+    "financial_authority": {
+      "name": "State Securities Commission of Viet Nam",
+      "abbreviation": "SSC",
+      "homepage": "https://ssc.gov.vn",
+      "fraudReportLink": "https://ssc.gov.vn/wps/portal/home/Trang%20chu/lien-he",
+      "authorityEmail": "info@ssc.gov.vn",
+      "social_links": {}
+    },
+    "notes": "Autorità di vigilanza sui mercati dei capitali e sui servizi d'investimento in Vietnam."
+  },
+  "Madagascar": {
+    "country_name": "Madagascar",
+    "flag": "🇲🇬",
+    "isEU": false,
+    "protectionLevel": "Medio",
+    "financial_authority": {
+      "name": "Commission de Supervision Bancaire et Financière",
+      "abbreviation": "CSBF",
+      "homepage": "https://www.csbf.mg",
+      "fraudReportLink": "https://www.csbf.mg/reclamation",
+      "authorityEmail": "contact@csbf.mg",
+      "social_links": {}
+    },
+    "notes": "Autorità di supervisione bancaria e finanziaria della Repubblica del Madagascar, responsabile anche della vigilanza su intermediari e mercati locali."
+  },
+  "Maldives": {
+    "country_name": "Maldives",
+    "flag": "🇲🇻",
+    "isEU": false,
+    "protectionLevel": "Medio",
+    "financial_authority": {
+      "name": "Capital Market Development Authority",
+      "abbreviation": "CMDA",
+      "homepage": "https://cmda.gov.mv",
+      "fraudReportLink": "https://cmda.gov.mv/complaints",
+      "authorityEmail": "info@cmda.gov.mv",
+      "social_links": {}
+    },
+    "notes": "Autorità di regolamentazione e sviluppo dei mercati dei capitali e dei servizi di investimento nelle Maldive."
+  },
+  "Nepal": {
+    "country_name": "Nepal",
+    "flag": "🇳🇵",
+    "isEU": false,
+    "protectionLevel": "Medio",
+    "financial_authority": {
+      "name": "Securities Board of Nepal",
+      "abbreviation": "SEBON",
+      "homepage": "https://sebon.gov.np",
+      "fraudReportLink": "https://sebon.gov.np/investor-complaints",
+      "authorityEmail": "info@sebon.gov.np",
+      "social_links": {}
+    },
+    "notes": "Autorità di vigilanza sui mercati mobiliari e sulle imprese d'investimento in Nepal (Securities Board of Nepal)."
+  },
+  "Azores (Portugal)": {
+    "country_name": "Azores (Portugal)",
+    "flag": "🇵🇹",
+    "isEU": true,
+    "protectionLevel": "Altissimo",
+    "financial_authority": {
+      "name": "Comissão do Mercado de Valores Mobiliários",
+      "abbreviation": "CMVM",
+      "homepage": "https://www.cmvm.pt",
+      "fraudReportLink": "https://www.cmvm.pt/pt/Comunicados/Queixas_reclamacoes/Pages/default.aspx",
+      "authorityEmail": "cmvm@cmvm.pt",
+      "social_links": {}
+    },
+    "notes": "Regione autonoma del Portogallo (Azzorre). Per la vigilanza sui mercati finanziari e sugli intermediari si applicano le competenze dell'Autorità portoghese CMVM, in linea con gli standard UE."
+  },
+  "Canary Islands (Spain)": {
+    "country_name": "Canary Islands (Spain)",
+    "flag": "🇪🇸",
+    "isEU": true,
+    "protectionLevel": "Altissimo",
+    "financial_authority": {
+      "name": "Comisión Nacional del Mercado de Valores",
+      "abbreviation": "CNMV",
+      "homepage": "https://www.cnmv.es",
+      "fraudReportLink": "https://www.cnmv.es/portal/consultas/Reclamaciones-Quejas.aspx",
+      "authorityEmail": "oficinadelinversor@cnmv.es",
+      "social_links": {}
+    },
+    "notes": "Comunità autonoma spagnola (Isole Canarie). La vigilanza su intermediari e mercati finanziari è esercitata dalla CNMV spagnola, nell'ambito del quadro regolatorio UE." 
+  },
+  "Sri Lanka": {
+    "country_name": "Sri Lanka",
+    "flag": "🇱🇰",
+    "isEU": false,
+    "protectionLevel": "Medio",
+    "financial_authority": {
+      "name": "Securities and Exchange Commission of Sri Lanka",
+      "abbreviation": "SEC Sri Lanka",
+      "homepage": "https://www.sec.gov.lk/",
+      "fraudReportLink": "https://www.sec.gov.lk/investor-complaints/",
+      "authorityEmail": "info@sec.gov.lk",
+      "social_links": {}
+    },
+    "notes": "Autorità di vigilanza sui mercati mobiliari e sui servizi di investimento in Sri Lanka (SEC Sri Lanka)."
+  },
+  "Laos": {
+    "country_name": "Laos",
+    "flag": "🇱🇦",
+    "isEU": false,
+    "protectionLevel": "Medio",
+    "financial_authority": {
+      "name": "Lao Securities Commission Office",
+      "abbreviation": "LSCO",
+      "homepage": "https://www.lsc.gov.la",
+      "fraudReportLink": "https://www.lsc.gov.la/investor-protection",
+      "authorityEmail": "info@lsc.gov.la",
+      "social_links": {}
+    },
+    "notes": "Autorità di regolamentazione del mercato dei capitali della Repubblica Democratica Popolare del Laos (Lao Securities Commission Office)."
+  },
+  "Ethiopia": {
+    "country_name": "Ethiopia",
+    "flag": "🇪🇹",
+    "isEU": false,
+    "protectionLevel": "Medio",
+    "financial_authority": {
+      "name": "National Bank of Ethiopia",
+      "abbreviation": "NBE",
+      "homepage": "https://www.nbe.gov.et",
+      "fraudReportLink": "https://www.nbe.gov.et/financial-consumer-protection",
+      "authorityEmail": "info@nbe.gov.et",
+      "social_links": {}
+    },
+    "notes": "Banca centrale dell'Etiopia con competenze di vigilanza sul sistema bancario e sulle istituzioni finanziarie, inclusa la protezione dei consumatori nei servizi di pagamento e di credito."
+  },
+  "Libya": {
+    "country_name": "Libya",
+    "flag": "🇱🇾",
+    "isEU": false,
+    "protectionLevel": "Medio",
+    "financial_authority": {
+      "name": "Central Bank of Libya",
+      "abbreviation": "CBL",
+      "homepage": "https://cbl.gov.ly",
+      "fraudReportLink": "https://cbl.gov.ly/contact/",
+      "authorityEmail": "info@cbl.gov.ly",
+      "social_links": {}
+    },
+    "notes": "Banca centrale della Libia con responsabilità di supervisione sul sistema bancario e sugli intermediari finanziari autorizzati."
+  },
+  "Gabon": {
+    "country_name": "Gabon",
+    "flag": "🇬🇦",
+    "isEU": false,
+    "protectionLevel": "Medio",
+    "financial_authority": {
+      "name": "Commission de Surveillance du Marché Financier de l'Afrique Centrale",
+      "abbreviation": "COSUMAF",
+      "homepage": "https://www.cosumaf.org",
+      "fraudReportLink": "https://www.cosumaf.org/reclamation",
+      "authorityEmail": "contact@cosumaf.org",
+      "social_links": {}
+    },
+    "notes": "Il Gabon fa parte dell'area CEMAC; la vigilanza sui mercati dei capitali è svolta dall'autorità regionale COSUMAF per gli stati dell'Africa Centrale."
+  },
+  "Zimbabwe (formerly Rhodesia)": {
+    "country_name": "Zimbabwe (formerly Rhodesia)",
+    "flag": "🇿🇼",
+    "isEU": false,
+    "protectionLevel": "Medio",
+    "financial_authority": {
+      "name": "Securities and Exchange Commission of Zimbabwe",
+      "abbreviation": "SECZ",
+      "homepage": "https://www.seczim.co.zw",
+      "fraudReportLink": "https://www.seczim.co.zw/investor-complaints",
+      "authorityEmail": "info@seczim.co.zw",
+      "social_links": {}
+    },
+    "notes": "L'ex denominazione coloniale 'Rhodesia' oggi corrisponde alla Repubblica dello Zimbabwe. La vigilanza sui mercati mobiliari è svolta dalla Securities and Exchange Commission of Zimbabwe (SECZ)."
+  },
+  "Rwanda": {
+    "country_name": "Rwanda",
+    "flag": "🇷🇼",
+    "isEU": false,
+    "protectionLevel": "Medio",
+    "financial_authority": {
+      "name": "Capital Market Authority of Rwanda",
+      "abbreviation": "CMA Rwanda",
+      "homepage": "https://www.cma.rw",
+      "fraudReportLink": "https://www.cma.rw/investor-complaints",
+      "authorityEmail": "info@cma.rw",
+      "social_links": {}
+    },
+    "notes": "Autorità di regolamentazione e supervisione dei mercati dei capitali in Rwanda (Capital Market Authority)."
+  },
+  "French Polynesia (France)": {
+    "country_name": "French Polynesia (France)",
+    "flag": "🇵🇫",
+    "isEU": false,
+    "protectionLevel": "Altissimo",
+    "financial_authority": {
+      "name": "Autorité des marchés financiers (France)",
+      "abbreviation": "AMF",
+      "homepage": "https://www.amf-france.org",
+      "fraudReportLink": "https://www.amf-france.org/fr/espace-epargnants/proteger-son-epargne/signaler-une-arnaque",
+      "authorityEmail": "contact@amf-france.org",
+      "social_links": {}
+    },
+    "notes": "Collettività d'oltremare della Repubblica Francese. Per i servizi finanziari, la vigilanza sui mercati e sugli intermediari è esercitata dall'Autorité des marchés financiers (AMF), nell'ambito del quadro regolatorio francese ed europeo."
   },
   "Zambia": {
     "country_name": "Zambia",

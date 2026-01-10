@@ -1,4 +1,3 @@
-# ESEMPI DI MODIFICA JSON
 ## Financial Authority Database
 
 ---

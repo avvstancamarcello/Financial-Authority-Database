@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>Pergamena del Legionario dell'Impero</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: "Cinzel", "Times New Roman", serif;
+            background: #111827;
+            color: #1f2933;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        .page {
+            max-width: 900px;
+            width: 100%;
+        }
+
+        .parchment {
+            position: relative;
+            background: #f5e6c5;
+            background-image:
+                radial-gradient(circle at 20% 20%, rgba(255,255,255,0.4), transparent 55%),
+                radial-gradient(circle at 80% 80%, rgba(255,255,255,0.25), transparent 55%),
+                radial-gradient(circle at 0 100%, rgba(0,0,0,0.18), transparent 60%),
+                radial-gradient(circle at 100% 0, rgba(0,0,0,0.12), transparent 60%);
+            border-radius: 24px;
+            padding: 3rem 3.5rem;
+            box-shadow:
+                0 30px 80px rgba(0,0,0,0.45),
+                inset 0 0 40px rgba(0,0,0,0.25);
+            border: 4px solid rgba(120,53,15,0.7);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .parchment::before,
+        .parchment::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            right: 0;
+            height: 24px;
+            background:
+                linear-gradient(to right, rgba(0,0,0,0.3), transparent 15%, transparent 85%, rgba(0,0,0,0.3)),
+                repeating-linear-gradient(
+                    -45deg,
+                    rgba(0,0,0,0.12),
+                    rgba(0,0,0,0.12) 2px,
+                    transparent 2px,
+                    transparent 4px
+                );
+            opacity: 0.25;
+        }
+
+        .parchment::before { top: 0; }
+        .parchment::after { bottom: 0; }
+
+        .border-inner {
+            border: 2px solid rgba(148,72,18,0.5);
+            border-radius: 18px;
+            padding: 2.5rem 3rem;
+            position: relative;
+        }
+
+        .border-inner::before {
+            content: "";
+            position: absolute;
+            inset: 0.75rem;
+            border: 1px dashed rgba(120,53,15,0.4);
+            border-radius: 14px;
+            pointer-events: none;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .laurel {
+            font-size: 2.4rem;
+            letter-spacing: 0.2em;
+            color: #92400e;
+        }
+
+        .title-main {
+            margin-top: 0.5rem;
+            font-size: 1.4rem;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: #78350f;
+        }
+
+        .subtitle {
+            margin-top: 0.75rem;
+            font-size: 0.95rem;
+            color: #4b5563;
+            font-style: italic;
+        }
+
+        .decree-title {
+            text-align: center;
+            margin: 2rem 0 1.5rem 0;
+            font-size: 1.9rem;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            color: #7c2d12;
+        }
+
+        .highlight-name {
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .label-small {
+            font-size: 0.8rem;
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            color: #6b7280;
+        }
+
+        .name {
+            margin-top: 0.4rem;
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: #111827;
+        }
+
+        .name span {
+            border-bottom: 1px solid rgba(75,85,99,0.5);
+            padding: 0 0.25rem 0.15rem 0.25rem;
+        }
+
+        .body-text {
+            font-family: "Cardo", "Georgia", serif;
+            font-size: 1.02rem;
+            line-height: 1.9;
+            color: #111827;
+            margin: 0 auto 2.2rem auto;
+        }
+
+        .body-text p { margin-bottom: 0.9rem; }
+
+        .body-text strong {
+            color: #7c2d12;
+        }
+
+        .details-grid {
+            display: grid;
+            grid-template-columns: 1.5fr 1.5fr;
+            gap: 1.2rem;
+            margin-bottom: 2.5rem;
+            font-size: 0.9rem;
+            color: #374151;
+        }
+
+        .details-item {
+            border-top: 1px solid rgba(55,65,81,0.5);
+            padding-top: 0.4rem;
+        }
+
+        .details-label {
+            text-transform: uppercase;
+            letter-spacing: 0.18em;
+            font-size: 0.7rem;
+            color: #6b7280;
+            margin-bottom: 0.15rem;
+        }
+
+        .details-value {
+            font-weight: 600;
+            color: #111827;
+        }
+
+        .footer-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            gap: 2rem;
+            margin-top: 1rem;
+        }
+
+        .signature-block {
+            text-align: right;
+        }
+
+        .signature-label {
+            font-size: 0.75rem;
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+            color: #6b7280;
+            margin-bottom: 0.4rem;
+        }
+
+        .signature-name {
+            font-family: "Cinzel Decorative", "Cinzel", serif;
+            font-size: 1.3rem;
+            color: #7c2d12;
+        }
+
+        .signature-role {
+            font-size: 0.8rem;
+            color: #4b5563;
+            margin-top: 0.2rem;
+        }
+
+        .wax-seal {
+            position: relative;
+            width: 110px;
+            height: 110px;
+            border-radius: 50%;
+            background: radial-gradient(circle at 30% 30%, #fecaca, #b91c1c 55%, #7f1d1d 100%);
+            box-shadow:
+                0 12px 25px rgba(0,0,0,0.5),
+                inset 0 0 18px rgba(0,0,0,0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fee2e2;
+            font-family: "Cinzel", serif;
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 0.18em;
+            font-size: 0.7rem;
+        }
+
+        .wax-seal::before {
+            content: "";
+            position: absolute;
+            inset: 7px;
+            border-radius: 50%;
+            border: 2px solid rgba(252,231,243,0.5);
+            opacity: 0.7;
+        }
+
+        .wax-inner {
+            position: relative;
+            z-index: 1;
+        }
+
+        .seal-text-top {
+            font-size: 0.55rem;
+        }
+
+        .seal-main {
+            margin-top: 0.35rem;
+            font-size: 1.2rem;
+            letter-spacing: 0.3em;
+        }
+
+        .seal-text-bottom {
+            margin-top: 0.25rem;
+            font-size: 0.45rem;
+        }
+
+        .note-small {
+            margin-top: 1.5rem;
+            font-size: 0.7rem;
+            color: #6b7280;
+            text-align: center;
+        }
+
+        @media (max-width: 768px) {
+            .parchment {
+                padding: 1.5rem;
+            }
+            .border-inner {
+                padding: 1.5rem;
+            }
+            .details-grid {
+                grid-template-columns: 1fr;
+            }
+            .footer-row {
+                flex-direction: column-reverse;
+                align-items: center;
+            }
+            .signature-block {
+                text-align: center;
+            }
+        }
+
+        @media print {
+            body {
+                background: none;
+                padding: 0;
+            }
+            .page {
+                max-width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="page">
+    <div class="parchment">
+        <div class="border-inner">
+            <header class="header">
+                <div class="laurel">✶ SPQR ✶</div>
+                <div class="title-main">Imperium Tutelae Populorum</div>
+                <div class="subtitle">Senatus Populusque Europae grato animo ricorda i suoi difensori silenziosi</div>
+            </header>
+
+            <h1 class="decree-title">Pergamena del Legionario dell'Impero</h1>
+
+            <div class="highlight-name">
+                <div class="label-small">Conferita a</div>
+                <!-- Sostituisci {{NICKNAME}} con il nome o nickname del legionario -->
+                <div class="name"><span>{{NICKNAME}}</span></div>
+            </div>
+
+            <div class="body-text">
+                <p>
+                    In nome della <strong>Sicurezza dei Popoli dell'Impero</strong>,
+                    delle famiglie e dei risparmiatori che ogni giorno attraversano le vie
+                    digitali del commercio e della finanza,
+                    questa pergamena attesta il valore del legionario sopra indicato.
+                </p>
+                <p>
+                    Con coraggio civile e <strong>spirito di legione</strong>,
+                    il legionario ha segnalato alle autorità competenti informazioni
+                    <strong>di estrema importanza</strong> riguardanti:
+                </p>
+                <p style="margin-left: 1.2rem;">
+                    • la forza di polizia / corpo investigativo: <strong>{{POLICE_FORCE_NAME}}</strong><br>
+                    • operante nel territorio di: <strong>{{COUNTRY}}</strong>
+                </p>
+                <p>
+                    Tale contributo rafforza le difese dell'Impero contro truffe, raggiri e frodi,
+                    e aiuta altri cittadini a trovare con rapidità dove denunciare i crimini
+                    che minacciano la loro <strong>dignità</strong> e i loro <strong>risparmi</strong>.
+                </p>
+                <p>
+                    Il nome del legionario potrà essere inciso nel <strong>Libro dei Legionari</strong>
+                    quale testimonianza pubblica di gratitudine e monito a chi sfrutta la debolezza
+                    dei più fragili: l'Impero non dimentica chi si schiera dalla parte della tutela.
+                </p>
+            </div>
+
+            <div class="details-grid">
+                <div class="details-item">
+                    <div class="details-label">Data del decreto</div>
+                    <!-- Sostituisci {{DATE}} con la data di emissione, es. 04.I.MMXXVI -->
+                    <div class="details-value">{{DATE}}</div>
+                </div>
+                <div class="details-item">
+                    <div class="details-label">Provincia dell'Impero</div>
+                    <!-- Puoi usare qui il Paese del legionario o altra indicazione territoriale -->
+                    <div class="details-value">{{LEGION_PROVINCE}}</div>
+                </div>
+            </div>
+
+            <div class="footer-row">
+                <div class="wax-seal">
+                    <div class="wax-inner">
+                        <div class="seal-text-top">Senatus</div>
+                        <div class="seal-main">SPQR</div>
+                        <div class="seal-text-bottom">Tutela Populorum</div>
+                    </div>
+                </div>
+
+                <div class="signature-block">
+                    <div class="signature-label">Per mandato del Senato</div>
+                    <div class="signature-name">CESARE IMPERATOR</div>
+                    <div class="signature-role">Custos Tutelae contra Truffas &amp; Fraudes</div>
+                </div>
+            </div>
+
+            <div class="note-small">
+                Questo attestato è destinato all'uso personale del legionario che ha contribuito alla tutela
+                dei cittadini contro truffe e frodi. La sua eventuale pubblicazione su siti o cronache
+                avviene sotto la responsabilità del destinatario.
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

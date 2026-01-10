@@ -225,3 +225,42 @@ A: Modifiche minori = no cifratura. Batch update o nuovi paesi = cifra.
 ---
 
 **© 2026 Avvocato Marcello Stanca - Firenze, Italy**
+
+---
+
+## 📜 Best Practice "Marcello Stanca" (Estratto)
+
+La progettazione di questa web page e del database è stata guidata
+dal framework di regole **"Best Practice Copyright Marcello Stanca"**,
+che definisce il metodo di lavoro tra Utente e AI.
+
+Principi chiave applicati:
+
+- **Visione d'Insieme** – architettura logica definita prima del codice operativo.
+- **Memoria del Successo** – soluzioni funzionanti riusate e non riscritte da zero.
+- **Comunicazione Specifica** – spiegazione puntuale di ogni modifica al codice.
+- **Sicurezza Nativa & Validazione Input** – attenzione a dati esterni e flusso on-chain.
+- **Testing Multi-Scenario** – modifiche introdotte per piccoli passi, con verifica.
+- **Perseveranza Metodica** – evoluzione incrementale dell'interfaccia senza rotture.
+
+Per una descrizione formale, le regole sono state anche codificate
+in **Prolog** nel file `README.md` del workspace, usando il predicato
+`ms_rule/6`. Esempio di rappresentazione:
+
+```prolog
+% Regola 1 – Visione d'Insieme
+ms_rule(r1, 1, architettura_visione,
+	'Visione d\'Insieme',
+	architettura,
+	'Definizione dell\'architettura logica prima della stesura del codice.').
+
+% Regola 3 – Memoria del Successo
+ms_rule(r3, 3, architettura_visione,
+	'Memoria del Successo',
+	memoria_successo,
+	'Archiviare le soluzioni funzionanti per creare una base di conoscenza solida.').
+```
+
+Questa codifica consente, in futuro, di collegare strumenti automatici
+di verifica (linting semantico, agent AI, validatori) alle stesse regole
+di metodo che hanno guidato lo sviluppo di questa pagina.
