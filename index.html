@@ -886,7 +886,7 @@
                 <div class="search-box">
                     <input type="text" id="searchInput" data-i18n-placeholder="searchPlaceholder" placeholder="Cerca per paese o autorità..." aria-label="Search countries">
                     <button type="button" class="search-btn">Cerca</button>
-                    <button type="button" class="search-advice-btn" onclick="toggleSearchAdvice()">Perché questa ricerca è importante?</button>
+                    <button type="button" class="search-advice-btn" onclick="toggleSearchAdvice()" data-i18n="searchAdviceButton">Perché questa ricerca è importante?</button>
                 </div>
                 <div class="filter-buttons" role="group" aria-label="Filter options">
                     <button class="filter-btn active" onclick="filterCountries('all')" data-i18n="filterAll" aria-pressed="true">Tutti i Paesi</button>
@@ -995,6 +995,7 @@
                 privacyStatement: "🔒 PRIVACY: Questa app NON raccoglie dati personali degli utenti",
                 privacyLink: "Privacy Policy",
                 instructionsLabel: "Scegli la tua LINGUA, premi pulsante, e Leggi ISTRUZIONI.",
+                searchAdviceButton: "Perché questa ricerca è importante?",
                 searchAdviceTitle: "🔍 Prima di usare il tasto &quot;Cerca&quot;",
                 searchAdvice1: "Accetta con umiltà il dovere di cercare informazioni verificate.",
                 searchAdvice2: "Devi proteggerti da inganni e frodi finanziarie.",
@@ -1073,6 +1074,7 @@
                 privacyStatement: "🔒 QUYỀN RIÊNG TƯ: Ứng dụng này KHÔNG thu thập dữ liệu cá nhân của người dùng",
                 privacyLink: "Chính sách quyền riêng tư",
                 instructionsLabel: "Chọn NGÔN NGỮ của bạn, nhấn nút và đọc HƯỚNG DẪN.",
+                searchAdviceButton: "Vì sao việc tìm kiếm này lại quan trọng?",
                 searchAdviceTitle: "🔍 Trước khi dùng nút &quot;Tìm kiếm&quot;",
                 searchAdvice1: "Hãy khiêm tốn chấp nhận nghĩa vụ tìm kiếm thông tin đã được kiểm chứng.",
                 searchAdvice2: "Bạn phải tự bảo vệ mình trước lừa dối và gian lận tài chính.",
@@ -1112,6 +1114,7 @@
                 privacyStatement: "🔒 隐私：本应用程序不会收集用户的个人数据",
                 privacyLink: "隐私政策",
                 instructionsLabel: "选择你的语言，点击按钮并阅读说明。",
+                searchAdviceButton: "为什么这一步搜索如此重要？",
                 searchAdviceTitle: "🔍 在点击“搜索”按钮之前",
                 searchAdvice1: "以谦逊的态度接受自己有义务去查找经过核实的权威信息。",
                 searchAdvice2: "你必须保护自己，避免受骗和遭遇金融诈骗。",
@@ -1151,6 +1154,7 @@
                 privacyStatement: "🔒 गोपनीयता: यह ऐप उपयोगकर्ताओं का व्यक्तिगत डाटा एकत्र नहीं करता",
                 privacyLink: "गोपनीयता नीति",
                 instructionsLabel: "अपनी भाषा चुनें, बटन दबाएँ और निर्देश पढ़ें।",
+                searchAdviceButton: "यह खोज करना इतना महत्वपूर्ण क्यों है?",
                 searchAdviceTitle: "🔍 &quot;खोजें&quot; बटन दबाने से पहले",
                 searchAdvice1: "नम्रता से स्वीकार करें कि आपको सत्यापित जानकारी खोजने का कर्तव्य है।",
                 searchAdvice2: "आपको खुद को धोखे और वित्तीय ठगी से बचाना है।",
@@ -1190,6 +1194,7 @@
                 privacyStatement: "🔒 PRIVACY: This app does NOT collect user personal data",
                 privacyLink: "Privacy Policy",
                 instructionsLabel: "Read legal guide and texts in your language - On/Off",
+                searchAdviceButton: "Why is this search important?",
                 searchAdviceTitle: "🔍 Before using the &quot;Search&quot; button",
                 searchAdvice1: "Humbly accept your duty to look for verified, authoritative information.",
                 searchAdvice2: "You must protect yourself from deception and financial fraud.",
@@ -1268,6 +1273,7 @@
                 privacyStatement: "🔒 CONFIDENTIALITÉ: Cette app ne collecte PAS de données personnelles",
                 privacyLink: "Politique de Confidentialité",
                 instructionsLabel: "Lisez les instructions et textes dans votre langue - On/Off",
+                searchAdviceButton: "Pourquoi cette recherche est‑elle importante ?",
                 searchAdviceTitle: "🔍 Avant d'utiliser le bouton &quot;Rechercher&quot;",
                 searchAdvice1: "Acceptez avec humilité le devoir de rechercher des informations vérifiées et fiables.",
                 searchAdvice2: "Vous devez vous protéger contre les tromperies et les fraudes financières.",
@@ -1346,6 +1352,7 @@
                 privacyStatement: "🔒 DATENSCHUTZ: Diese App sammelt KEINE persönlichen Daten",
                 privacyLink: "Datenschutzerklärung",
                 instructionsLabel: "Anleitung und Texte in Ihrer Sprache lesen - On/Off",
+                searchAdviceButton: "Warum ist diese Suche so wichtig?",
                 searchAdviceTitle: "🔍 Bevor Sie auf &quot;Suchen&quot; klicken",
                 searchAdvice1: "Akzeptieren Sie in Demut die Pflicht, geprüfte und verlässliche Informationen zu suchen.",
                 searchAdvice2: "Sie müssen sich vor Täuschung und Finanzbetrug schützen.",
@@ -1424,6 +1431,7 @@
                 privacyStatement: "🔒 PRIVACIDAD: Esta app NO recopila datos personales",
                 privacyLink: "Política de Privacidad",
                 instructionsLabel: "Lee instrucciones y textos en tu idioma - On/Off",
+                searchAdviceButton: "¿Por qué es tan importante esta búsqueda?",
                 searchAdviceTitle: "🔍 Antes de pulsar el botón &quot;Buscar&quot;",
                 searchAdvice1: "Acepta con humildad el deber de buscar información verificada y fiable.",
                 searchAdvice2: "Debes protegerte de los engaños y de las estafas financieras.",
