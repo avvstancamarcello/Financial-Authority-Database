@@ -680,6 +680,23 @@
     </style>
 </head>
 <body itemscope itemtype="https://schema.org/WebApplication">
+    <!-- Security Banner - Prima della navigazione per massima visibilità -->
+    <aside class="security-banner" role="banner" aria-label="Security Notice" style="margin: 0; border-radius: 0;">
+        <button id="securityBannerToggle" class="security-banner-toggle" type="button" onclick="toggleSecurityBanner()" aria-expanded="false">
+            <div class="security-banner-left">
+                <span class="icon" aria-hidden="true">🛡️</span>
+                <div class="content">
+                    <h2 data-i18n="securityTitle">✅ SITO UFFICIALE LEGITTIMO - DATABASE DI PROTEZIONE DEI CONSUMATORI</h2>
+                    <p class="security-banner-subtitle">Tocca per leggere i dettagli</p>
+                </div>
+            </div>
+            <span class="chevron" aria-hidden="true">▼</span>
+        </button>
+        <div class="security-banner-body" id="securityBannerBody">
+            <p data-i18n="securityText">Accesso immediato alle home page delle Autority Finanziarie del Governo per verificare la legittimità e regolarità di imprese finanziarie, di persone ed entità che offrono servizi finanziari, e ricevono bonifici.</p>
+        </div>
+    </aside>
+    
     <!-- Main Navigation -->
     <nav style="background: linear-gradient(135deg, #1e293b 0%, #334155 100%); padding: 1rem 0; box-shadow: 0 4px 12px rgba(0,0,0,0.15); position: sticky; top: 0; z-index: 999;">
         <div style="max-width: 1200px; margin: 0 auto; display: flex; gap: 1.5rem; justify-content: center; align-items: center; flex-wrap: wrap; padding: 0 1rem;">
@@ -698,21 +715,6 @@
         </div>
     </nav>
     <div class="container">
-        <aside class="security-banner" role="banner" aria-label="Security Notice">
-            <button id="securityBannerToggle" class="security-banner-toggle" type="button" onclick="toggleSecurityBanner()" aria-expanded="false">
-                <div class="security-banner-left">
-                    <span class="icon" aria-hidden="true">🛡️</span>
-                    <div class="content">
-                        <h2 data-i18n="securityTitle">✅ SITO UFFICIALE LEGITTIMO - DATABASE DI PROTEZIONE DEI CONSUMATORI</h2>
-                        <p class="security-banner-subtitle">Tocca per leggere i dettagli</p>
-                    </div>
-                </div>
-                <span class="chevron" aria-hidden="true">▼</span>
-            </button>
-            <div class="security-banner-body" id="securityBannerBody">
-                <p data-i18n="securityText">Accesso immediato alle home page delle Autority Finanziarie del Governo per verificare la legittimità e regolarità di imprese finanziarie, di persone ed entità che offrono servizi finanziari, e ricevono bonifici.</p>
-            </div>
-        </aside>
         <div id="securityPopup" class="security-popup" role="dialog" aria-modal="false" aria-hidden="true">
             <button type="button" class="security-popup-close" onclick="toggleSecurityBanner()" aria-label="Chiudi avviso">×</button>
             <h2 data-i18n="securityTitle">✅ SITO UFFICIALE LEGITTIMO - DATABASE DI PROTEZIONE DEI CONSUMATORI</h2>
