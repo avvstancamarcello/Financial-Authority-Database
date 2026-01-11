@@ -1,12 +1,14 @@
-const CACHE_NAME = 'financial-authority-v5';
+const CACHE_NAME = 'financial-authority-v6';
 const urlsToCache = [
   '/Financial-Authority-Database/',
   '/Financial-Authority-Database/index.html',
+  '/Financial-Authority-Database/odissea.html',
   '/Financial-Authority-Database/db.enc',
   '/Financial-Authority-Database/logo_shield_financial_defense.svg',
   '/Financial-Authority-Database/logo_galaxy_yous.svg',
   '/Financial-Authority-Database/icon-192.png',
   '/Financial-Authority-Database/icon-512.png',
+  '/Financial-Authority-Database/manifest.json',
   'https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.2.3/css/flag-icons.min.css'
 ];
 
