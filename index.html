@@ -4,6 +4,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
+    <!-- Firebase SDK - TutelaTruffe-Rating -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-analytics.js";
+        
+        const firebaseConfig = {
+            apiKey: "AIzaSyAwWuWSPsQBO0RrJFmMHJqrkMj02MgKR_8",
+            authDomain: "tutelatruffe-rating.firebaseapp.com",
+            projectId: "tutelatruffe-rating",
+            storageBucket: "tutelatruffe-rating.firebasestorage.app",
+            messagingSenderId: "186083888610",
+            appId: "1:186083888610:web:3c51689d6d36e2a6b17dbb",
+            measurementId: "G-WWXL8GWYWM"
+        };
+        
+        const app = initializeApp(firebaseConfig);
+        const analytics = getAnalytics(app);
+    </script>
+    
     <!-- Flag Icons CSS Library -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.2.3/css/flag-icons.min.css">
     
@@ -22,6 +41,9 @@
     <link rel="alternate" hreflang="de" href="https://tutelatruffe.it/?lang=de">
     <link rel="alternate" hreflang="es" href="https://tutelatruffe.it/?lang=es">
     <link rel="alternate" hreflang="ar" href="https://tutelatruffe.it/?lang=ar">
+    <link rel="alternate" hreflang="zh" href="https://tutelatruffe.it/?lang=zh">
+    <link rel="alternate" hreflang="hi" href="https://tutelatruffe.it/?lang=hi">
+    <link rel="alternate" hreflang="vi" href="https://tutelatruffe.it/?lang=vi">
     <link rel="alternate" hreflang="x-default" href="https://tutelatruffe.it/">
     
     <!-- Open Graph / Facebook -->
@@ -40,6 +62,9 @@
     <meta property="og:locale:alternate" content="de_DE">
     <meta property="og:locale:alternate" content="es_ES">
     <meta property="og:locale:alternate" content="ar_QA">
+    <meta property="og:locale:alternate" content="zh_CN">
+    <meta property="og:locale:alternate" content="hi_IN">
+    <meta property="og:locale:alternate" content="vi_VN">
     <meta property="article:author" content="Avvocato Marcello Stanca">
     <meta property="article:publisher" content="https://www.linkedin.com/in/marcello-stanca/">
     
@@ -1593,7 +1618,20 @@
             // Add other languages if needed
         };
 
-        let currentLanguage = 'it';
+        // Determina la lingua iniziale dalla query string (?lang=xx), con fallback a IT
+        function getInitialLanguageFromUrl() {
+            try {
+                const params = new URLSearchParams(window.location.search || '');
+                const langParam = (params.get('lang') || '').toLowerCase();
+                const supported = ['it','en','fr','de','es','ar','zh','hi','vi'];
+                if (supported.includes(langParam)) return langParam;
+            } catch (e) {
+                console.warn('Impossibile leggere parametro lang dalla URL', e);
+            }
+            return 'it';
+        }
+
+        let currentLanguage = getInitialLanguageFromUrl();
         let currentFilter = 'all';
         // Array di paesi; inizializzato a [] per evitare errori quando i dati non sono caricati
         let countriesData = [];
@@ -2185,5 +2223,13 @@
             // Mostra banner di installazione personalizzato se necessario
         });
     </script>
+
+    <footer style="text-align:center; padding: 12px 8px 16px; font-size: 0.85rem; color:#e5e7eb;">
+        <span>© 2026 Avv. Marcello Stanca - Tutti i diritti riservati.</span>
+        <span style="margin:0 6px;">·</span>
+        <a href="privacy.html" style="color:#bfdbfe; text-decoration:underline;">Privacy</a>
+        <span style="margin:0 6px;">·</span>
+        <a href="terms.html" style="color:#bfdbfe; text-decoration:underline;">Termini di Servizio</a>
+    </footer>
 </body>
 </html>

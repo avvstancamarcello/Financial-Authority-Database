@@ -3,6 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Firebase SDK - TutelaTruffe-Rating -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-analytics.js";
+        
+        const firebaseConfig = {
+            apiKey: "AIzaSyAwWuWSPsQBO0RrJFmMHJqrkMj02MgKR_8",
+            authDomain: "tutelatruffe-rating.firebaseapp.com",
+            projectId: "tutelatruffe-rating",
+            storageBucket: "tutelatruffe-rating.firebasestorage.app",
+            messagingSenderId: "186083888610",
+            appId: "1:186083888610:web:3c51689d6d36e2a6b17dbb",
+            measurementId: "G-WWXL8GWYWM"
+        };
+        
+        const app = initializeApp(firebaseConfig);
+        const analytics = getAnalytics(app);
+    </script>
+    
     <title>🌊 Odissea Digitale - Il Viaggio dell'Eroe contro le Truffe Finanziarie</title>
     <meta name="description" content="Come Ulisse tornò a Itaca, riconquista i tuoi capitali. Un viaggio attraverso le 12 fasi dell'Eroe per sconfiggere le truffe finanziarie.">
     <meta name="keywords" content="odissea digitale, recupero truffe, viaggio eroe campbell, pig butchering, mappa truffe europa, argonauti digitali, ulisse itaca, vello oro, MT4 truffa, whatsapp scam">
