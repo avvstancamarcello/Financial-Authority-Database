@@ -679,120 +679,6 @@
                 max-height: calc(100vh - 170px);
             }
         }
-        
-        /* ⭐ CTA STYLES ⭐ */
-        .verification-cta a.cta-button {
-            position: relative;
-            overflow: hidden;
-        }
-
-        .verification-cta a.cta-button::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 0;
-            height: 0;
-            border-radius: 50%;
-            background: rgba(5, 150, 105, 0.1);
-            transform: translate(-50%, -50%);
-            transition: width 0.6s, height 0.6s;
-        }
-
-        .verification-cta a.cta-button:hover::before {
-            width: 300px;
-            height: 300px;
-        }
-
-        /* Animazione pulse per il badge */
-        @keyframes badge-pulse {
-            0%, 100% {
-                box-shadow: 0 3px 8px rgba(251, 191, 36, 0.4);
-            }
-            50% {
-                box-shadow: 0 5px 15px rgba(251, 191, 36, 0.7);
-            }
-        }
-
-        /* ========================================
-           STICKY BANNER STYLES
-           ======================================== */
-
-        /* Animazione slide-up */
-        @keyframes slideUp {
-            from { 
-                transform: translateY(100%); 
-                opacity: 0;
-            }
-            to { 
-                transform: translateY(0); 
-                opacity: 1;
-            }
-        }
-
-        /* ⭐ VARIANTE 2: Animazione shake per icona ⭐ */
-        @keyframes shake {
-            0%, 100% { transform: rotate(0deg); }
-            25% { transform: rotate(-15deg); }
-            75% { transform: rotate(15deg); }
-        }
-
-        /* Animazione pulse per attirare attenzione */
-        @keyframes bannerPulse {
-            0%, 100% {
-                box-shadow: 0 -4px 20px rgba(0,0,0,0.3);
-            }
-            50% {
-                box-shadow: 0 -6px 30px rgba(220,38,38,0.5);
-            }
-        }
-
-        #stickyVerificationBanner {
-            animation: slideUp 0.5s ease, bannerPulse 3s ease-in-out infinite 2s;
-        }
-
-        /* Responsive per mobile */
-        @media (max-width: 768px) {
-            #stickyVerificationBanner {
-                flex-direction: column;
-                padding: 15px;
-                gap: 12px;
-                text-align: center;
-            }
-            
-            #stickyVerificationBanner > div {
-                width: 100%;
-            }
-            
-            #stickyBannerCTA {
-                width: 100%;
-                padding: 12px 20px;
-                font-size: 1em;
-            }
-            
-            #stickyVerificationBanner button {
-                position: absolute;
-                top: 8px;
-                right: 8px;
-            }
-        }
-
-        /* Assicura che il banner non copra il footer */
-        footer {
-            margin-bottom: 0;
-            padding-bottom: 80px;
-        }
-
-        @media (max-width: 768px) {
-            footer {
-                padding-bottom: 120px;
-            }
-        }
-
-        /* Stile quando il banner è nascosto */
-        #stickyVerificationBanner.hidden {
-            display: none !important;
-        }
     </style>
 </head>
 <body itemscope itemtype="https://schema.org/WebApplication">
@@ -1200,10 +1086,7 @@
     <p>Se la banca non ti ha somministrato il Questionario di Adeguata Verifica (come richiesto nella mia Petizione 0645/2025) e non ti ha avvertito che il destinatario non è presente nelle "White List" delle 124 autorità, potresti avere diritto a un reclamo formale innanzi all'ABF (Arbitro Bancario Finanziario) per omessa vigilanza e violazione degli obblighi di prudenza.</p>
     <p>Ricorda Socrate: il vero saggio è colui che sa di non sapere. La conoscenza consapevole e la verifica è l'unico antivirus che i truffatori non possono hackerare.</p>
 </div>
-`,
-                bannerTitle: "Prima di trasferire denaro",
-                bannerText: "Verifica sempre l'identità del destinatario",
-                bannerCta: "Verifica Ora"
+`
             },
             ar: {
                 title: "قاعدة بيانات دولية للتحقق من الهوية المالية لمستلمي التحويلات البنكية",
@@ -1284,10 +1167,7 @@
     <p>إذا لم يقم البنك الذي تتعامل معه بتطبيق استبيان "التحقق الكافي" من ملاءمة العملية (كما طُلب في العريضة 0645/2025 المقدَّمة إلى الاتحاد الأوروبي)، ولم يحذّرك من أن المستفيد غير موجود في "القوائم البيضاء" الخاصة بالسلطات المالية في الدول الـ 124، فقد يكون لك أساس قانوني لتقديم شكوى رسمية أمام هيئات تسوية المنازعات المصرفية والمالية بسبب الإخلال بواجب الحيطة والعناية.</p>
     <p>تذكّر مقولة سقراط: "الإنسان الحكيم حقاً هو من يدرك أنه لا يعرف كل شيء". إن المعرفة الواعية والتحقّق المسبق هما برنامج الحماية الوحيد الذي لا يستطيع المحتالون اختراقه.</p>
 </div>
-`,
-                bannerTitle: "قبل تحويل الأموال",
-                bannerText: "تحقق دائمًا من هوية المستلم",
-                bannerCta: "تحقق الآن"
+`
             },
             vi: {
                 title: "Cơ sở dữ liệu quốc tế để kiểm tra định danh tài chính của người nhận chuyển khoản ngân hàng",
@@ -1329,10 +1209,7 @@
                 searchAdvice2: "Bạn phải tự bảo vệ mình trước lừa dối và gian lận tài chính.",
                 searchAdvice3: "Hãy dành thời gian trước khi thực hiện giao dịch tài chính do người lạ thúc giục.",
                 searchAdvice4: "Hãy yêu cầu ngân hàng của bạn xác nhận bằng email về tính hợp pháp của người thụ hưởng.",
-                instructionsContent: "",
-                bannerTitle: "Trước khi chuyển tiền",
-                bannerText: "Luôn xác minh danh tính người nhận",
-                bannerCta: "Xác Minh Ngay"
+                instructionsContent: ""
             },
             zh: {
                 title: "用于核查银行转账收款人金融身份的国际数据库",
@@ -1374,10 +1251,7 @@
                 searchAdvice2: "你必须保护自己，避免受骗和遭遇金融诈骗。",
                 searchAdvice3: "在按照陌生人催促进行任何金融操作之前，先冷静等待并思考。",
                 searchAdvice4: "通过电子邮件向你的银行索取关于收款人合法性的书面确认。",
-                instructionsContent: "",
-                bannerTitle: "转账前",
-                bannerText: "始终验证收款人的身份",
-                bannerCta: "立即验证"
+                instructionsContent: ""
             },
             hi: {
                 title: "अंतरराष्ट्रीय डेटाबेस – बैंक हस्तांतरण प्राप्तकर्ताओं की वित्तीय पहचान की जाँच के लिए",
@@ -1419,10 +1293,7 @@
                 searchAdvice2: "आपको खुद को धोखे और वित्तीय ठगी से बचाना है।",
                 searchAdvice3: "अजनबियों के दबाव में कोई भी वित्तीय लेनदेन करने से पहले समय लें और सोचें।",
                 searchAdvice4: "अपने बैंक से ईमेल द्वारा लाभार्थियों की वैधता की लिखित पुष्टि माँगें।",
-                instructionsContent: "",
-                bannerTitle: "पैसे ट्रांसफर करने से पहले",
-                bannerText: "हमेशा प्राप्तकर्ता की पहचान सत्यापित करें",
-                bannerCta: "अभी सत्यापित करें"
+                instructionsContent: ""
             },
             en: {
                 title: "International Banking Database",
@@ -1503,10 +1374,7 @@
     <p>If your bank has not carried out an Adequate Verification Questionnaire (as requested in my EU Petition 0645/2025) and has not warned you that the beneficiary is not listed in the “white lists” of the 124 authorities, you may have grounds for a formal complaint before the ABF (Italian Banking and Financial Ombudsman) for failure to exercise due diligence and breach of prudential obligations.</p>
     <p>Remember Socrates: the true wise person is the one who knows that they do not know. Conscious knowledge and verification are the only antivirus that scammers cannot hack.</p>
 </div>
-`,
-                bannerTitle: "Before transferring money",
-                bannerText: "Always verify the recipient's identity",
-                bannerCta: "Verify Now"
+`
             },
             fr: {
                 title: "Base de Données Bancaire Internationale",
@@ -1588,9 +1456,6 @@
     <p>Rappelez‑vous Socrate : le véritable sage est celui qui sait qu’il ne sait pas. La connaissance consciente et la vérification sont le seul antivirus que les escrocs ne peuvent pas pirater.</p>
 </div>
 `
-                bannerTitle: "Avant de transférer de l'argent",
-                bannerText: "Vérifiez toujours l'identité du destinataire",
-                bannerCta: "Vérifier Maintenant"
             },
             de: {
                 title: "Internationale Banken-Datenbank",
@@ -1672,9 +1537,6 @@
     <p>Denken Sie an Sokrates: Wahrhaft weise ist, wer weiß, dass er nichts weiß. Bewusstes Wissen und Überprüfung sind der einzige „Antivirus“, den Betrüger nicht hacken können.</p>
 </div>
 `
-                bannerTitle: "Vor der Geldüberweisung",
-                bannerText: "Überprüfen Sie immer die Identität des Empfängers",
-                bannerCta: "Jetzt Überprüfen"
             },
             es: {
                 title: "Base de Datos Bancaria Internacional",
@@ -1756,9 +1618,6 @@
     <p>Recuerda a Sócrates: el verdadero sabio es quien sabe que no sabe. El conocimiento consciente y la verificación son el único antivirus que los estafadores no pueden hackear.</p>
 </div>
 `
-                bannerTitle: "Antes de transferir dinero",
-                bannerText: "Verifica siempre la identidad del destinatario",
-                bannerCta: "Verificar Ahora"
             }
             // Add other languages if needed
         };
@@ -1974,16 +1833,6 @@
                     instructionsPopup.innerHTML = content;
                 }
             }
-
-            // Aggiorna traduzioni banner sticky
-            const bannerTitle = document.querySelector('#stickyVerificationBanner [data-i18n="bannerTitle"]');
-            const bannerText = document.querySelector('#stickyVerificationBanner [data-i18n="bannerText"]');
-            const bannerCta = document.querySelector('#stickyVerificationBanner [data-i18n="bannerCta"]');
-
-            if (bannerTitle) bannerTitle.textContent = translations[lang].bannerTitle;
-            if (bannerText) bannerText.textContent = translations[lang].bannerText;
-            if (bannerCta) bannerCta.textContent = translations[lang].bannerCta;
-
             renderAll();
         }
 
@@ -2039,17 +1888,6 @@
                             <span class="protection-badge ${protectionClass}">${getLocalizedProtectionLevel(country.protectionLevel)}</span>
                         </div>
                     </div>
-                    <!-- ⭐ NUOVO BADGE VERIFICA SICUREZZA ⭐ -->
-                    <div style="margin-top: 15px; padding-top: 15px; border-top: 2px dashed rgba(251, 191, 36, 0.3); text-align: center;">
-                        <a href="referenze.html?utm_source=index&utm_medium=card&utm_campaign=verification&country=${encodeURIComponent(country.country_name)}" 
-                           style="display: inline-block; background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%); color: #92400e; padding: 10px 18px; border-radius: 20px; font-size: 0.88em; font-weight: 700; text-decoration: none; border: 2px solid #fbbf24; transition: all 0.3s ease; box-shadow: 0 3px 8px rgba(251, 191, 36, 0.4);"
-                           onclick="event.stopPropagation(); trackCTAClick('card', '${country.country_name.replace(/'/g, "\\'")}'); return true;"
-                           onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 5px 15px rgba(251, 191, 36, 0.6)';"
-                           onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 3px 8px rgba(251, 191, 36, 0.4)';">
-                            🛡️ <span>Verifica Sicurezza</span> 🎯
-                        </a>
-                    </div>
-                    <!-- ⭐ FINE BADGE ⭐ -->
                 `;
                 grid.appendChild(card);
             });
@@ -2141,26 +1979,6 @@
                     <p><strong>${translations[currentLanguage].modalAuthority || 'Authority'}:</strong> ${country.financial_authority.name}</p>
                     <p><strong>${translations[currentLanguage].modalAbbreviation || 'Abbreviation'}:</strong> ${country.financial_authority.abbreviation}</p>
                     <p><strong>${translations[currentLanguage].protectionLevel || 'Protection'}:</strong> ${country.protectionLevel}</p>
-                    
-                    <!-- ⭐ NUOVO BLOCCO CTA - VERIFICA SICUREZZA ⭐ -->
-                    <div class="verification-cta" style="background: linear-gradient(135deg, #10b981 0%, #059669 100%); padding: 20px; border-radius: 12px; margin: 25px 0; text-align: center; box-shadow: 0 4px 15px rgba(16,185,129,0.3); border: 3px solid rgba(255,255,255,0.3);">
-                        <div style="font-size: 1.4em; margin-bottom: 12px; text-shadow: 0 2px 4px rgba(0,0,0,0.2);">
-                            ⚠️ <strong style="color: #ffffff;">Verifica ORA! prima di inviare denaro!</strong>
-                        </div>
-                        <p style="margin: 12px 0; font-size: 1em; color: rgba(255,255,255,0.95); line-height: 1.5;">
-                            🛡️ <strong>Usa il tuo Scudo Finanziario intelligente</strong> 🎯
-                        </p>
-                        <a href="referenze.html?utm_source=index&utm_medium=modal&utm_campaign=verification&country=${encodeURIComponent(country.country_name)}" 
-                           class="cta-button" 
-                           style="display: inline-block; background: white; color: #059669; padding: 14px 35px; border-radius: 25px; font-weight: 700; text-decoration: none; margin-top: 12px; transition: all 0.3s ease; box-shadow: 0 4px 12px rgba(0,0,0,0.25); font-size: 1.05em;"
-                           onclick="trackCTAClick('modal', '${country.country_name.replace(/'/g, "\\'")}'); return true;"
-                           onmouseover="this.style.transform='scale(1.05)'; this.style.boxShadow='0 6px 20px rgba(0,0,0,0.35)';"
-                           onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='0 4px 12px rgba(0,0,0,0.25)';">
-                            🏛️ <span>Chiedi conferma all'Autorità</span> →
-                        </a>
-                    </div>
-                    <!-- ⭐ FINE BLOCCO CTA ⭐ -->
-                    
                     <div class="authority-link" style="margin: 15px 0;">
                         <strong>${translations[currentLanguage].modalHomepage || 'Homepage'}:</strong><br>
                         <a href="${country.financial_authority.homepage}" target="_blank">${country.financial_authority.homepage}</a>
@@ -2408,120 +2226,6 @@
             deferredPrompt = e;
             // Mostra banner di installazione personalizzato se necessario
         });
-
-        // ========================================
-        // ⭐ MARKETING CTA TRACKING ⭐
-        // ========================================
-
-        /**
-         * Traccia i click sui CTA (Modal, Card, Sticky Banner)
-         */
-        function trackCTAClick(source, country) {
-            // Firebase Analytics
-            if (typeof analytics !== 'undefined') {
-                analytics.logEvent('verification_cta_click', {
-                    source_location: source,
-                    country: country || 'unknown',
-                    timestamp: new Date().toISOString()
-                });
-            }
-            
-            // Console log per debug
-            console.log('✅ CTA Click tracked:', source, country || 'global');
-            
-            // Ritorna true per permettere il link di funzionare
-            return true;
-        }
-
-        // ========================================
-        // ⭐ STICKY BANNER LOGIC - SCENARIO 2 ⭐
-        // ========================================
-
-        /**
-         * Mostra lo sticky banner
-         */
-        function showStickyBanner() {
-            const banner = document.getElementById('stickyVerificationBanner');
-            
-            // Controlla se l'utente ha già chiuso il banner in questa sessione
-            const bannerClosed = sessionStorage.getItem('stickyBannerClosed');
-            
-            if (!bannerClosed && banner) {
-                banner.style.display = 'flex';
-                
-                // Traccia la visualizzazione del banner
-                if (typeof analytics !== 'undefined') {
-                    analytics.logEvent('sticky_banner_shown', {
-                        timestamp: new Date().toISOString()
-                    });
-                }
-                
-                console.log('✅ Sticky Banner shown');
-            }
-        }
-
-        /**
-         * Chiude lo sticky banner e salva lo stato
-         */
-        function closeStickyBanner() {
-            const banner = document.getElementById('stickyVerificationBanner');
-            
-            if (banner) {
-                // Animazione di chiusura
-                banner.style.animation = 'slideUp 0.3s ease reverse';
-                
-                setTimeout(() => {
-                    banner.style.display = 'none';
-                    banner.classList.add('hidden');
-                }, 300);
-                
-                // Salva in sessionStorage (dura solo per questa sessione)
-                sessionStorage.setItem('stickyBannerClosed', 'true');
-                
-                // Traccia la chiusura
-                if (typeof analytics !== 'undefined') {
-                    analytics.logEvent('sticky_banner_closed', {
-                        timestamp: new Date().toISOString()
-                    });
-                }
-                
-                console.log('✅ Sticky Banner closed by user');
-            }
-        }
-
-        /**
-         * Inizializza lo sticky banner con SCENARIO 2 (User-Friendly)
-         * Mostra dopo 5 secondi O dopo scroll 30% (quello che accade prima)
-         */
-        function initStickyBanner() {
-            let bannerShown = false;
-            
-            // Opzione A: Mostra dopo 5 secondi
-            setTimeout(() => {
-                if (!bannerShown) {
-                    showStickyBanner();
-                    bannerShown = true;
-                }
-            }, 5000);
-            
-            // Opzione B: Mostra dopo scroll di 30% della pagina
-            window.addEventListener('scroll', function() {
-                if (bannerShown) return;
-                
-                const scrollPercent = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
-                
-                if (scrollPercent > 30) {
-                    showStickyBanner();
-                    bannerShown = true;
-                }
-            });
-        }
-
-        // Inizializza il banner quando la pagina è pronta
-        document.addEventListener('DOMContentLoaded', function() {
-            // Aspetta 2 secondi prima di inizializzare (migliora UX)
-            setTimeout(initStickyBanner, 2000);
-        });
     </script>
 
     <footer style="text-align:center; padding: 12px 8px 16px; font-size: 0.85rem; color:#e5e7eb;">
@@ -2531,36 +2235,5 @@
         <span style="margin:0 6px;">·</span>
         <a href="terms.html" style="color:#bfdbfe; text-decoration:underline;">Termini di Servizio</a>
     </footer>
-
-    <!-- ⭐ STICKY VERIFICATION BANNER - Always Visible ⭐ -->
-    <div id="stickyVerificationBanner" style="position: fixed; bottom: 0; left: 0; right: 0; background: linear-gradient(135deg, #dc2626 0%, #991b1b 100%); color: white; padding: 12px 20px; box-shadow: 0 -4px 20px rgba(0,0,0,0.3); z-index: 900; align-items: center; justify-content: space-between; gap: 15px; animation: slideUp 0.5s ease; display: none;">
-        <!-- ⭐ VARIANTE 2: Icona Animata ⭐ -->
-        <span style="font-size: 2em; animation: shake 0.5s infinite; flex-shrink: 0;">⚠️</span>
-        
-        <div style="flex: 1; min-width: 0;">
-            <strong style="font-size: 1.05em; display: block; margin-bottom: 4px;">
-                <span data-i18n="bannerTitle">Prima di trasferire denaro</span>
-            </strong>
-            <p style="margin: 0; font-size: 0.85em; opacity: 0.95; line-height: 1.3;" data-i18n="bannerText">
-                Verifica sempre l'identità del destinatario
-            </p>
-        </div>
-        <a href="referenze.html?utm_source=index&utm_medium=sticky_banner&utm_campaign=verification" 
-           id="stickyBannerCTA"
-           style="background: white; color: #dc2626; padding: 10px 20px; border-radius: 20px; font-weight: 700; text-decoration: none; white-space: nowrap; box-shadow: 0 3px 8px rgba(0,0,0,0.2); transition: all 0.3s ease; flex-shrink: 0;"
-           onclick="trackCTAClick('sticky_banner', 'global'); return true;"
-           onmouseover="this.style.transform='scale(1.08)'; this.style.boxShadow='0 5px 15px rgba(0,0,0,0.35)';"
-           onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='0 3px 8px rgba(0,0,0,0.2)';">
-            <span data-i18n="bannerCta">Verifica Ora</span> →
-        </a>
-        <button onclick="closeStickyBanner()" 
-                style="background: transparent; border: none; color: white; font-size: 1.5em; cursor: pointer; padding: 0 5px; line-height: 1; transition: all 0.2s ease; flex-shrink: 0;"
-                onmouseover="this.style.transform='scale(1.2)'; this.style.color='#fca5a5';"
-                onmouseout="this.style.transform='scale(1)'; this.style.color='white';"
-                aria-label="Chiudi banner">
-            ×
-        </button>
-    </div>
-    <!-- ⭐ FINE STICKY BANNER ⭐ -->
 </body>
 </html>
