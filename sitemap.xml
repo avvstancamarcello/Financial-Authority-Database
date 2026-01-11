@@ -2,41 +2,200 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:xhtml="http://www.w3.org/1999/xhtml">
     
-    <!-- Homepage principale -->
+    <!-- Homepage principale (x-default) -->
     <url>
-        <loc>https://avvstancamarcello.github.io/Financial-Authority-Database/</loc>
-        <lastmod>2026-01-02</lastmod>
+        <loc>https://avvstancamarcello.github.io/financial-authority-database/</loc>
+        <lastmod>2026-01-11</lastmod>
         <changefreq>weekly</changefreq>
         <priority>1.0</priority>
-        <!-- Link multilingua -->
-        <xhtml:link rel="alternate" hreflang="it" href="https://avvstancamarcello.github.io/Financial-Authority-Database/?lang=it"/>
-        <xhtml:link rel="alternate" hreflang="en" href="https://avvstancamarcello.github.io/Financial-Authority-Database/?lang=en"/>
-        <xhtml:link rel="alternate" hreflang="fr" href="https://avvstancamarcello.github.io/Financial-Authority-Database/?lang=fr"/>
-        <xhtml:link rel="alternate" hreflang="de" href="https://avvstancamarcello.github.io/Financial-Authority-Database/?lang=de"/>
-        <xhtml:link rel="alternate" hreflang="es" href="https://avvstancamarcello.github.io/Financial-Authority-Database/?lang=es"/>
-        <xhtml:link rel="alternate" hreflang="x-default" href="https://avvstancamarcello.github.io/Financial-Authority-Database/"/>
+        <!-- Link multilingua (tutte le 9 lingue supportate) -->
+        <xhtml:link rel="alternate" hreflang="it" href="https://avvstancamarcello.github.io/financial-authority-database/?lang=it"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://avvstancamarcello.github.io/financial-authority-database/?lang=en"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://avvstancamarcello.github.io/financial-authority-database/?lang=fr"/>
+        <xhtml:link rel="alternate" hreflang="de" href="https://avvstancamarcello.github.io/financial-authority-database/?lang=de"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://avvstancamarcello.github.io/financial-authority-database/?lang=es"/>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://avvstancamarcello.github.io/financial-authority-database/?lang=ar"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://avvstancamarcello.github.io/financial-authority-database/?lang=zh"/>
+        <xhtml:link rel="alternate" hreflang="hi" href="https://avvstancamarcello.github.io/financial-authority-database/?lang=hi"/>
+        <xhtml:link rel="alternate" hreflang="vi" href="https://avvstancamarcello.github.io/financial-authority-database/?lang=vi"/>
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://avvstancamarcello.github.io/financial-authority-database/"/>
+    </url>
+
+    <!-- Varianti linguistiche esplicite con ?lang= -->
+
+    <url>
+        <loc>https://avvstancamarcello.github.io/financial-authority-database/?lang=it</loc>
+        <lastmod>2026-01-11</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.9</priority>
+        <xhtml:link rel="alternate" hreflang="it" href="https://avvstancamarcello.github.io/financial-authority-database/?lang=it"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://avvstancamarcello.github.io/financial-authority-database/?lang=en"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://avvstancamarcello.github.io/financial-authority-database/?lang=fr"/>
+        <xhtml:link rel="alternate" hreflang="de" href="https://avvstancamarcello.github.io/financial-authority-database/?lang=de"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://avvstancamarcello.github.io/financial-authority-database/?lang=es"/>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://avvstancamarcello.github.io/financial-authority-database/?lang=ar"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://avvstancamarcello.github.io/financial-authority-database/?lang=zh"/>
+        <xhtml:link rel="alternate" hreflang="hi" href="https://avvstancamarcello.github.io/financial-authority-database/?lang=hi"/>
+        <xhtml:link rel="alternate" hreflang="vi" href="https://avvstancamarcello.github.io/financial-authority-database/?lang=vi"/>
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://avvstancamarcello.github.io/financial-authority-database/"/>
+    </url>
+
+    <url>
+        <loc>https://avvstancamarcello.github.io/financial-authority-database/?lang=en</loc>
+        <lastmod>2026-01-11</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.9</priority>
+        <xhtml:link rel="alternate" hreflang="it" href="https://avvstancamarcello.github.io/financial-authority-database/?lang=it"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://avvstancamarcello.github.io/financial-authority-database/?lang=en"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://avvstancamarcello.github.io/financial-authority-database/?lang=fr"/>
+        <xhtml:link rel="alternate" hreflang="de" href="https://avvstancamarcello.github.io/financial-authority-database/?lang=de"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://avvstancamarcello.github.io/financial-authority-database/?lang=es"/>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://avvstancamarcello.github.io/financial-authority-database/?lang=ar"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://avvstancamarcello.github.io/financial-authority-database/?lang=zh"/>
+        <xhtml:link rel="alternate" hreflang="hi" href="https://avvstancamarcello.github.io/financial-authority-database/?lang=hi"/>
+        <xhtml:link rel="alternate" hreflang="vi" href="https://avvstancamarcello.github.io/financial-authority-database/?lang=vi"/>
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://avvstancamarcello.github.io/financial-authority-database/"/>
+    </url>
+
+    <url>
+        <loc>https://avvstancamarcello.github.io/financial-authority-database/?lang=fr</loc>
+        <lastmod>2026-01-11</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.9</priority>
+        <xhtml:link rel="alternate" hreflang="it" href="https://avvstancamarcello.github.io/financial-authority-database/?lang=it"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://avvstancamarcello.github.io/financial-authority-database/?lang=en"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://avvstancamarcello.github.io/financial-authority-database/?lang=fr"/>
+        <xhtml:link rel="alternate" hreflang="de" href="https://avvstancamarcello.github.io/financial-authority-database/?lang=de"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://avvstancamarcello.github.io/financial-authority-database/?lang=es"/>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://avvstancamarcello.github.io/financial-authority-database/?lang=ar"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://avvstancamarcello.github.io/financial-authority-database/?lang=zh"/>
+        <xhtml:link rel="alternate" hreflang="hi" href="https://avvstancamarcello.github.io/financial-authority-database/?lang=hi"/>
+        <xhtml:link rel="alternate" hreflang="vi" href="https://avvstancamarcello.github.io/financial-authority-database/?lang=vi"/>
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://avvstancamarcello.github.io/financial-authority-database/"/>
+    </url>
+
+    <url>
+        <loc>https://avvstancamarcello.github.io/financial-authority-database/?lang=de</loc>
+        <lastmod>2026-01-11</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.9</priority>
+        <xhtml:link rel="alternate" hreflang="it" href="https://avvstancamarcello.github.io/financial-authority-database/?lang=it"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://avvstancamarcello.github.io/financial-authority-database/?lang=en"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://avvstancamarcello.github.io/financial-authority-database/?lang=fr"/>
+        <xhtml:link rel="alternate" hreflang="de" href="https://avvstancamarcello.github.io/financial-authority-database/?lang=de"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://avvstancamarcello.github.io/financial-authority-database/?lang=es"/>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://avvstancamarcello.github.io/financial-authority-database/?lang=ar"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://avvstancamarcello.github.io/financial-authority-database/?lang=zh"/>
+        <xhtml:link rel="alternate" hreflang="hi" href="https://avvstancamarcello.github.io/financial-authority-database/?lang=hi"/>
+        <xhtml:link rel="alternate" hreflang="vi" href="https://avvstancamarcello.github.io/financial-authority-database/?lang=vi"/>
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://avvstancamarcello.github.io/financial-authority-database/"/>
+    </url>
+
+    <url>
+        <loc>https://avvstancamarcello.github.io/financial-authority-database/?lang=es</loc>
+        <lastmod>2026-01-11</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.9</priority>
+        <xhtml:link rel="alternate" hreflang="it" href="https://avvstancamarcello.github.io/financial-authority-database/?lang=it"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://avvstancamarcello.github.io/financial-authority-database/?lang=en"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://avvstancamarcello.github.io/financial-authority-database/?lang=fr"/>
+        <xhtml:link rel="alternate" hreflang="de" href="https://avvstancamarcello.github.io/financial-authority-database/?lang=de"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://avvstancamarcello.github.io/financial-authority-database/?lang=es"/>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://avvstancamarcello.github.io/financial-authority-database/?lang=ar"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://avvstancamarcello.github.io/financial-authority-database/?lang=zh"/>
+        <xhtml:link rel="alternate" hreflang="hi" href="https://avvstancamarcello.github.io/financial-authority-database/?lang=hi"/>
+        <xhtml:link rel="alternate" hreflang="vi" href="https://avvstancamarcello.github.io/financial-authority-database/?lang=vi"/>
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://avvstancamarcello.github.io/financial-authority-database/"/>
+    </url>
+
+    <url>
+        <loc>https://avvstancamarcello.github.io/financial-authority-database/?lang=ar</loc>
+        <lastmod>2026-01-11</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.9</priority>
+        <xhtml:link rel="alternate" hreflang="it" href="https://avvstancamarcello.github.io/financial-authority-database/?lang=it"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://avvstancamarcello.github.io/financial-authority-database/?lang=en"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://avvstancamarcello.github.io/financial-authority-database/?lang=fr"/>
+        <xhtml:link rel="alternate" hreflang="de" href="https://avvstancamarcello.github.io/financial-authority-database/?lang=de"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://avvstancamarcello.github.io/financial-authority-database/?lang=es"/>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://avvstancamarcello.github.io/financial-authority-database/?lang=ar"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://avvstancamarcello.github.io/financial-authority-database/?lang=zh"/>
+        <xhtml:link rel="alternate" hreflang="hi" href="https://avvstancamarcello.github.io/financial-authority-database/?lang=hi"/>
+        <xhtml:link rel="alternate" hreflang="vi" href="https://avvstancamarcello.github.io/financial-authority-database/?lang=vi"/>
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://avvstancamarcello.github.io/financial-authority-database/"/>
+    </url>
+
+    <url>
+        <loc>https://avvstancamarcello.github.io/financial-authority-database/?lang=zh</loc>
+        <lastmod>2026-01-11</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.9</priority>
+        <xhtml:link rel="alternate" hreflang="it" href="https://avvstancamarcello.github.io/financial-authority-database/?lang=it"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://avvstancamarcello.github.io/financial-authority-database/?lang=en"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://avvstancamarcello.github.io/financial-authority-database/?lang=fr"/>
+        <xhtml:link rel="alternate" hreflang="de" href="https://avvstancamarcello.github.io/financial-authority-database/?lang=de"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://avvstancamarcello.github.io/financial-authority-database/?lang=es"/>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://avvstancamarcello.github.io/financial-authority-database/?lang=ar"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://avvstancamarcello.github.io/financial-authority-database/?lang=zh"/>
+        <xhtml:link rel="alternate" hreflang="hi" href="https://avvstancamarcello.github.io/financial-authority-database/?lang=hi"/>
+        <xhtml:link rel="alternate" hreflang="vi" href="https://avvstancamarcello.github.io/financial-authority-database/?lang=vi"/>
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://avvstancamarcello.github.io/financial-authority-database/"/>
+    </url>
+
+    <url>
+        <loc>https://avvstancamarcello.github.io/financial-authority-database/?lang=hi</loc>
+        <lastmod>2026-01-11</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.9</priority>
+        <xhtml:link rel="alternate" hreflang="it" href="https://avvstancamarcello.github.io/financial-authority-database/?lang=it"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://avvstancamarcello.github.io/financial-authority-database/?lang=en"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://avvstancamarcello.github.io/financial-authority-database/?lang=fr"/>
+        <xhtml:link rel="alternate" hreflang="de" href="https://avvstancamarcello.github.io/financial-authority-database/?lang=de"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://avvstancamarcello.github.io/financial-authority-database/?lang=es"/>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://avvstancamarcello.github.io/financial-authority-database/?lang=ar"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://avvstancamarcello.github.io/financial-authority-database/?lang=zh"/>
+        <xhtml:link rel="alternate" hreflang="hi" href="https://avvstancamarcello.github.io/financial-authority-database/?lang=hi"/>
+        <xhtml:link rel="alternate" hreflang="vi" href="https://avvstancamarcello.github.io/financial-authority-database/?lang=vi"/>
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://avvstancamarcello.github.io/financial-authority-database/"/>
+    </url>
+
+    <url>
+        <loc>https://avvstancamarcello.github.io/financial-authority-database/?lang=vi</loc>
+        <lastmod>2026-01-11</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.9</priority>
+        <xhtml:link rel="alternate" hreflang="it" href="https://avvstancamarcello.github.io/financial-authority-database/?lang=it"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://avvstancamarcello.github.io/financial-authority-database/?lang=en"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://avvstancamarcello.github.io/financial-authority-database/?lang=fr"/>
+        <xhtml:link rel="alternate" hreflang="de" href="https://avvstancamarcello.github.io/financial-authority-database/?lang=de"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://avvstancamarcello.github.io/financial-authority-database/?lang=es"/>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://avvstancamarcello.github.io/financial-authority-database/?lang=ar"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://avvstancamarcello.github.io/financial-authority-database/?lang=zh"/>
+        <xhtml:link rel="alternate" hreflang="hi" href="https://avvstancamarcello.github.io/financial-authority-database/?lang=hi"/>
+        <xhtml:link rel="alternate" hreflang="vi" href="https://avvstancamarcello.github.io/financial-authority-database/?lang=vi"/>
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://avvstancamarcello.github.io/financial-authority-database/"/>
     </url>
     
     <!-- Privacy Policy -->
     <url>
-        <loc>https://avvstancamarcello.github.io/Financial-Authority-Database/privacy.html</loc>
-        <lastmod>2026-01-02</lastmod>
+        <loc>https://avvstancamarcello.github.io/financial-authority-database/privacy.html</loc>
+        <lastmod>2026-01-11</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
     
     <!-- Database JSON (per indicizzazione contenuto) -->
     <url>
-        <loc>https://avvstancamarcello.github.io/Financial-Authority-Database/financial_authorities_database.json</loc>
-        <lastmod>2026-01-02</lastmod>
+        <loc>https://avvstancamarcello.github.io/financial-authority-database/financial_authorities_database.json</loc>
+        <lastmod>2026-01-11</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.9</priority>
     </url>
     
     <!-- Manifest PWA -->
     <url>
-        <loc>https://avvstancamarcello.github.io/Financial-Authority-Database/manifest.json</loc>
-        <lastmod>2026-01-02</lastmod>
+        <loc>https://avvstancamarcello.github.io/financial-authority-database/manifest.json</loc>
+        <lastmod>2026-01-11</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.5</priority>
     </url>

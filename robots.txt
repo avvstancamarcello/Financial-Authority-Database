@@ -17,7 +17,7 @@ Crawl-delay: 2
 Disallow: /db.enc
 
 # Sitemap
-Sitemap: https://avvstancamarcello.github.io/Financial-Authority-Database/sitemap.xml
+Sitemap: https://avvstancamarcello.github.io/financial-authority-database/sitemap.xml
 
 # Direttive specifiche per bot principali
 User-agent: Googlebot
