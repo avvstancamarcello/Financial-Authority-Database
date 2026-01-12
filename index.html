@@ -262,9 +262,14 @@
             position: absolute;
             width: 78px;
             height: 78px;
+            /* Define the hippodrome elliptical orbital path */
             offset-path: path('M 200,40 
                               A 160,80 0 0 1 200,200
                               A 160,80 0 0 1 200,40 Z');
+            /* Prevent rotation during movement */
+            offset-rotate: 0deg;
+            /* Ensure visibility above other elements */
+            z-index: 10;
             animation: hippodrome-orbit 20s linear infinite;
         }
         /* Galaxy You$ planet - starts at 0% */
@@ -605,8 +610,14 @@
         }
         /* Pulsing animation for shield planet */
         @keyframes shield-pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.12); }
+            0%, 100% { 
+                transform: scale(1); 
+                filter: drop-shadow(0 0 12px rgba(59, 130, 246, 0.8));
+            }
+            50% { 
+                transform: scale(1.12); 
+                filter: drop-shadow(0 0 20px rgba(59, 130, 246, 1));
+            }
         }
         .security-popup {
             position: absolute;
