@@ -1035,7 +1035,7 @@
         </footer>
         
         <!-- Agent 007 Sticky Banner -->
-        <a href="referenze.html" class="agent007-banner" id="agent007Banner" aria-label="Navigate to Your Financial Shield">
+        <a href="referenze.html" class="agent007-banner" id="agent007Banner" aria-label="Your Agent 007 contro le Truffe">
             <span data-i18n="agent007Banner">🕵️ Your Agent 007 contro le Truffe →</span>
         </a>
     </div>
@@ -2288,6 +2288,7 @@
             if (!flagsGrid || !agent007Banner) return;
             
             let bannerShown = false;
+            let ticking = false;
             
             function checkScroll() {
                 const flagsGridRect = flagsGrid.getBoundingClientRect();
@@ -2299,7 +2300,7 @@
                 const scrolledIntoGrid = currentScroll - flagsGridTop;
                 const scrollPercentage = (scrolledIntoGrid / flagsGridHeight) * 100;
                 
-                // Show banner after 50% scroll through grid
+                // Show banner after 50% scroll through grid (keep it visible once shown)
                 if (scrollPercentage >= 50 && !bannerShown) {
                     agent007Banner.classList.add('visible');
                     bannerShown = true;
@@ -2311,14 +2312,20 @@
                             event_label: 'Banner_Appeared_50pct_Scroll'
                         });
                     }
-                } else if (scrollPercentage < 50 && bannerShown) {
-                    agent007Banner.classList.remove('visible');
-                    bannerShown = false;
+                }
+                
+                ticking = false;
+            }
+            
+            function requestTick() {
+                if (!ticking) {
+                    window.requestAnimationFrame(checkScroll);
+                    ticking = true;
                 }
             }
             
-            // Listen to scroll events
-            window.addEventListener('scroll', checkScroll);
+            // Listen to scroll events with throttling
+            window.addEventListener('scroll', requestTick);
             
             // Track banner clicks
             agent007Banner.addEventListener('click', function() {
