@@ -1051,6 +1051,13 @@
 
         /* Galaxy You$ - Animazione su percorso ippodromo (capsule-shaped) */
         :root {
+            /* Hippodrome path coordinates:
+               - M 590 0: Start point (center-left)
+               - C 590 -50, 1010 -50, 1010 0: Top curved section (capsule end)
+               - L 1010 170: Right straight edge
+               - C 1010 220, 590 220, 590 170: Bottom curved section (capsule end)
+               - Z: Close path back to start
+               Width: 420px (1010-590), Height: 220px, Border-radius equivalent: 50px */
             --hippodrome-path: path('M 590 0 C 590 -50, 1010 -50, 1010 0 L 1010 170 C 1010 220, 590 220, 590 170 Z');
             --hippodrome-path-mobile: path('M 590 0 C 590 -40, 1010 -40, 1010 0 L 1010 170 C 1010 210, 590 210, 590 170 Z');
         }
@@ -1324,11 +1331,11 @@
                 height: 36px;
             }
             
-            /* Pianeti molto piccoli */
+            /* Pianeti molto piccoli ma con touch targets adeguati */
             .planet {
+                min-width: 73px; /* 44px / 0.6 = 73.33px to ensure 44px after scale */
+                min-height: 73px;
                 transform: translate(-50%, -50%) scale(0.6);
-                min-width: 44px;
-                min-height: 44px;
             }
             
             .planet:hover {
@@ -1409,10 +1416,10 @@
                 font-size: 0.4rem;
             }
             
-            /* Pianeti touch-friendly */
+            /* Pianeti touch-friendly - size adjusted for scale */
             .planet {
-                min-width: 44px;
-                min-height: 44px;
+                min-width: 88px; /* 44px / 0.5 = 88px to ensure 44px after scale */
+                min-height: 88px;
                 transform: translate(-50%, -50%) scale(0.5);
             }
             
