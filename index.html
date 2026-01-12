@@ -679,6 +679,49 @@
                 max-height: calc(100vh - 170px);
             }
         }
+        /* Agent 007 Banner - Sticky Bottom */
+        .agent007-banner {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(135deg, #FF6B35 0%, #FF8C00 100%);
+            color: #ffffff;
+            padding: 14px 20px;
+            text-align: center;
+            font-weight: 700;
+            font-size: 1.05rem;
+            box-shadow: 0 -4px 20px rgba(255, 107, 53, 0.6);
+            z-index: 998;
+            transform: translateY(100%);
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .agent007-banner.visible {
+            transform: translateY(0);
+        }
+
+        .agent007-banner:hover {
+            background: linear-gradient(135deg, #FF8C00 0%, #FF6B35 100%);
+            box-shadow: 0 -6px 25px rgba(255, 107, 53, 0.8);
+        }
+
+        .agent007-banner:active {
+            transform: translateY(0) scale(0.98);
+        }
+
+        @media (max-width: 768px) {
+            .agent007-banner {
+                font-size: 0.95rem;
+                padding: 12px 16px;
+            }
+        }
     </style>
 </head>
 <body itemscope itemtype="https://schema.org/WebApplication">
@@ -996,6 +1039,12 @@
                 <a href="privacy.html" style="color: #fff; text-decoration: underline;" data-i18n="privacyLink">Privacy Policy</a>
             </p>
         </footer>
+
+        <!-- Agent 007 Banner -->
+        <a href="referenze.html#scudo-finanziario" class="agent007-banner" id="agent007Banner" aria-label="Navigate to Your Financial Shield">
+            <span data-i18n="agent007Banner">🕵️ Your Agent 007 contro le Truffe →</span>
+        </a>
+
     </div>
 
     <div id="countryModal" class="modal">
@@ -1047,6 +1096,7 @@
                 searchAdvice2: "Devi proteggerti da inganni e frodi finanziarie.",
                 searchAdvice3: "Prendi tempo prima di eseguire operazioni finanziarie sollecitate da sconosciuti.",
                 searchAdvice4: "Chiedi con email conferme di legalità dei destinatari alla tua Banca.",
+                agent007Banner: "🕵️ Your Agent 007 contro le Truffe →",
                 instructionsContent: `
 <button type="button" class="instructions-popup-close" onclick="toggleInstructions()" aria-label="Chiudi guida">×</button>
 <h2>🛡️ Guida Legale Operativa – Verifica di un’Impresa Finanziaria in 5 Passi</h2>
@@ -1128,6 +1178,7 @@
                 searchAdvice2: "يجب أن تحمي نفسك من الخداع والاحتيال المالي.",
                 searchAdvice3: "خذ وقتك قبل تنفيذ أي عملية مالية يضغط عليك بها أشخاص مجهولون.",
                 searchAdvice4: "اطلب من بنكك تأكيداً كتابياً عبر البريد الإلكتروني بشرعية المستفيدين.",
+                agent007Banner: "🕵️ وكيلك 007 ضد الاحتيال ←",
                 instructionsContent: `
 <button type="button" class="instructions-popup-close" onclick="toggleInstructions()" aria-label="إغلاق الدليل">×</button>
 <h2>🛡️ دليل قانوني عملي – التحقق من شركة مالية في 5 خطوات</h2>
@@ -1209,6 +1260,7 @@
                 searchAdvice2: "Bạn phải tự bảo vệ mình trước lừa dối và gian lận tài chính.",
                 searchAdvice3: "Hãy dành thời gian trước khi thực hiện giao dịch tài chính do người lạ thúc giục.",
                 searchAdvice4: "Hãy yêu cầu ngân hàng của bạn xác nhận bằng email về tính hợp pháp của người thụ hưởng.",
+                agent007Banner: "🕵️ Đặc vụ 007 chống lừa đảo của bạn →",
                 instructionsContent: ""
             },
             zh: {
@@ -1251,6 +1303,7 @@
                 searchAdvice2: "你必须保护自己，避免受骗和遭遇金融诈骗。",
                 searchAdvice3: "在按照陌生人催促进行任何金融操作之前，先冷静等待并思考。",
                 searchAdvice4: "通过电子邮件向你的银行索取关于收款人合法性的书面确认。",
+                agent007Banner: "🕵️您的007特工对抗诈骗 →",
                 instructionsContent: ""
             },
             hi: {
@@ -1293,6 +1346,7 @@
                 searchAdvice2: "आपको खुद को धोखे और वित्तीय ठगी से बचाना है।",
                 searchAdvice3: "अजनबियों के दबाव में कोई भी वित्तीय लेनदेन करने से पहले समय लें और सोचें।",
                 searchAdvice4: "अपने बैंक से ईमेल द्वारा लाभार्थियों की वैधता की लिखित पुष्टि माँगें।",
+                agent007Banner: "🕵️ घोटालों के खिलाफ आपका एजेंट 007 →",
                 instructionsContent: ""
             },
             en: {
@@ -1335,6 +1389,7 @@
                 searchAdvice2: "You must protect yourself from deception and financial fraud.",
                 searchAdvice3: "Take your time before carrying out financial transactions pushed by strangers.",
                 searchAdvice4: "Ask your bank by email for written confirmation about the lawfulness of the beneficiaries.",
+                agent007Banner: "🕵️ Your Agent 007 against Scams →",
                 instructionsContent: `
 <button type="button" class="instructions-popup-close" onclick="toggleInstructions()" aria-label="Close guide">×</button>
 <h2>🛡️ Practical Legal Guide – Verifying a Financial Firm in 5 Steps</h2>
@@ -1416,6 +1471,7 @@
                 searchAdvice2: "Vous devez vous protéger contre les tromperies et les fraudes financières.",
                 searchAdvice3: "Prenez le temps avant d'effectuer des opérations financières sollicitées par des inconnus.",
                 searchAdvice4: "Demandez à votre banque, par email, une confirmation écrite de la légalité des bénéficiaires.",
+                agent007Banner: "🕵️ Votre Agent 007 contre les Arnaques →",
                 instructionsContent: `
 <button type="button" class="instructions-popup-close" onclick="toggleInstructions()" aria-label="Fermer le guide">×</button>
 <h2>🛡️ Guide juridique pratique – Vérifier une entreprise financière en 5 étapes</h2>
@@ -1497,6 +1553,7 @@
                 searchAdvice2: "Sie müssen sich vor Täuschung und Finanzbetrug schützen.",
                 searchAdvice3: "Nehmen Sie sich Zeit, bevor Sie auf Drängen Unbekannter finanzielle Transaktionen ausführen.",
                 searchAdvice4: "Bitten Sie Ihre Bank per E‑Mail um eine schriftliche Bestätigung der Rechtmäßigkeit der Zahlungsempfänger.",
+                agent007Banner: "🕵️ Ihr Agent 007 gegen Betrug →",
                 instructionsContent: `
 <button type="button" class="instructions-popup-close" onclick="toggleInstructions()" aria-label="Leitfaden schließen">×</button>
 <h2>🛡️ Praktischer Rechtsleitfaden – Prüfung eines Finanzunternehmens in 5 Schritten</h2>
@@ -1578,6 +1635,7 @@
                 searchAdvice2: "Debes protegerte de los engaños y de las estafas financieras.",
                 searchAdvice3: "Tómate tu tiempo antes de realizar operaciones financieras solicitadas por desconocidos.",
                 searchAdvice4: "Pide a tu banco, por correo electrónico, una confirmación escrita sobre la legalidad de los beneficiarios.",
+                agent007Banner: "🕵️ Su Agente 007 contra Estafas →",
                 instructionsContent: `
 <button type="button" class="instructions-popup-close" onclick="toggleInstructions()" aria-label="Cerrar la guía">×</button>
 <h2>🛡️ Guía jurídica práctica – Verificar una empresa financiera en 5 pasos</h2>
@@ -2218,6 +2276,75 @@
                     });
             });
         }
+
+        // ==========================================
+        // Agent 007 Banner - Scroll Trigger (50% of flags-grid)
+        // ==========================================
+        (function initAgent007Banner() {
+            const flagsGrid = document.querySelector('.flags-grid');
+            const agent007Banner = document.getElementById('agent007Banner');
+            
+            if (!flagsGrid || !agent007Banner) return;
+            
+            const SHOW_THRESHOLD = 50; // Show banner at 50% scroll
+            const HIDE_THRESHOLD = 50; // Hide banner when scrolling back above 50%
+            let hasShown = false;
+            
+            function checkScroll() {
+                const flagsGridRect = flagsGrid.getBoundingClientRect();
+                const flagsGridHeight = flagsGrid.offsetHeight;
+                const viewportHeight = window.innerHeight;
+                
+                // Calculate how much of the grid has been scrolled
+                const scrolledIntoView = viewportHeight - flagsGridRect.top;
+                const scrollPercentage = (scrolledIntoView / flagsGridHeight) * 100;
+                
+                // Show banner when threshold is reached
+                if (scrollPercentage >= SHOW_THRESHOLD && !hasShown) {
+                    agent007Banner.classList.add('visible');
+                    hasShown = true;
+                    
+                    // Firebase Analytics Event
+                    if (typeof gtag === 'function') {
+                        gtag('event', 'banner_shown', {
+                            event_category: 'Agent007_Banner',
+                            event_label: 'Scroll_Trigger_50_Percent'
+                        });
+                    }
+                }
+                // Hide when scrolling back up above threshold
+                else if (scrollPercentage < HIDE_THRESHOLD && hasShown) {
+                    agent007Banner.classList.remove('visible');
+                    hasShown = false;
+                }
+            }
+            
+            // Throttled scroll listener for performance
+            let ticking = false;
+            window.addEventListener('scroll', () => {
+                if (!ticking) {
+                    window.requestAnimationFrame(() => {
+                        checkScroll();
+                        ticking = false;
+                    });
+                    ticking = true;
+                }
+            });
+            
+            // Track Agent 007 Banner Clicks
+            agent007Banner.addEventListener('click', function() {
+                if (typeof gtag === 'function') {
+                    gtag('event', 'click', {
+                        event_category: 'Agent007_Banner',
+                        event_label: 'Navigate_to_Referenze',
+                        value: 1
+                    });
+                }
+            });
+            
+            // Check on load (in case user refreshes mid-page)
+            checkScroll();
+        })();
 
         // Prompt per installazione PWA
         let deferredPrompt;
