@@ -1051,15 +1051,15 @@
 
         /* Galaxy You$ - Animazione su percorso ippodromo (capsule-shaped) */
         :root {
-            /* Hippodrome path coordinates:
-               - M 590 0: Start point (center-left)
-               - C 590 -50, 1010 -50, 1010 0: Top curved section (capsule end)
-               - L 1010 170: Right straight edge
-               - C 1010 220, 590 220, 590 170: Bottom curved section (capsule end)
-               - Z: Close path back to start
-               Width: 420px (1010-590), Height: 220px, Border-radius equivalent: 50px */
-            --hippodrome-path: path('M 590 0 C 590 -50, 1010 -50, 1010 0 L 1010 170 C 1010 220, 590 220, 590 170 Z');
-            --hippodrome-path-mobile: path('M 590 0 C 590 -40, 1010 -40, 1010 0 L 1010 170 C 1010 210, 590 210, 590 170 Z');
+            /* Hippodrome path coordinates for full perimeter (1180x340px, border-radius 170px):
+               - M 170 0: Start point (top-left, after left semicircle)
+               - L 1010 0: Top horizontal line (width = 1180 - 2×170 = 840px)
+               - A 170 170 0 0 1 1010 340: Right semicircular arc (radius 170px, clockwise from top to bottom)
+               - L 170 340: Bottom horizontal line
+               - A 170 170 0 0 1 170 0: Left semicircular arc (radius 170px, clockwise from bottom to top)
+               - Z: Close path back to start */
+            --hippodrome-path: path('M 170 0 L 1010 0 A 170 170 0 0 1 1010 340 L 170 340 A 170 170 0 0 1 170 0 Z');
+            --hippodrome-path-mobile: path('M 170 0 L 1010 0 A 135 135 0 0 1 1010 340 L 170 340 A 135 135 0 0 1 170 0 Z');
         }
         
         .galaxy-yous-hippodrome {
