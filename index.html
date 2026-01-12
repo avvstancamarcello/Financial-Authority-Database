@@ -2286,6 +2286,8 @@
             
             if (!flagsGrid || !agent007Banner) return;
             
+            const SHOW_THRESHOLD = 50; // Show banner at 50% scroll
+            const HIDE_THRESHOLD = 50; // Hide banner when scrolling back above 50%
             let hasShown = false;
             
             function checkScroll() {
@@ -2297,8 +2299,8 @@
                 const scrolledIntoView = viewportHeight - flagsGridRect.top;
                 const scrollPercentage = (scrolledIntoView / flagsGridHeight) * 100;
                 
-                // Show banner when 50% of flags-grid is scrolled
-                if (scrollPercentage >= 50 && !hasShown) {
+                // Show banner when threshold is reached
+                if (scrollPercentage >= SHOW_THRESHOLD && !hasShown) {
                     agent007Banner.classList.add('visible');
                     hasShown = true;
                     
@@ -2310,8 +2312,8 @@
                         });
                     }
                 }
-                // Optional: hide when scrolling back up
-                else if (scrollPercentage < 40 && hasShown) {
+                // Hide when scrolling back up above threshold
+                else if (scrollPercentage < HIDE_THRESHOLD && hasShown) {
                     agent007Banner.classList.remove('visible');
                     hasShown = false;
                 }
@@ -2329,20 +2331,20 @@
                 }
             });
             
+            // Track Agent 007 Banner Clicks
+            agent007Banner.addEventListener('click', function() {
+                if (typeof gtag === 'function') {
+                    gtag('event', 'click', {
+                        event_category: 'Agent007_Banner',
+                        event_label: 'Navigate_to_Referenze',
+                        value: 1
+                    });
+                }
+            });
+            
             // Check on load (in case user refreshes mid-page)
             checkScroll();
         })();
-
-        // Track Agent 007 Banner Clicks
-        document.getElementById('agent007Banner')?.addEventListener('click', function() {
-            if (typeof gtag === 'function') {
-                gtag('event', 'click', {
-                    event_category: 'Agent007_Banner',
-                    event_label: 'Navigate_to_Referenze',
-                    value: 1
-                });
-            }
-        });
 
         // Prompt per installazione PWA
         let deferredPrompt;
