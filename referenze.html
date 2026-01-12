@@ -948,7 +948,7 @@
                 <a href="#supporto-psicologico" class="planet" data-planet="jupiter" style="position: absolute; top: 0; left: 35%; transform: translate(-50%, -50%); width: 70px; height: 70px; background: radial-gradient(circle at 30% 30%, #FFA07A, #FF8C69, #FF7F50); border-radius: 50%; box-shadow: 0 0 28px rgba(255, 160, 122, 0.8), inset -12px -12px 24px rgba(0,0,0,0.3); cursor: pointer; text-decoration: none;">
                     <span style="position: absolute; bottom: -34px; left: 50%; transform: translateX(-50%); white-space: nowrap; color: #FFA07A; font-size: 0.85rem; font-weight: 600; text-shadow: 0 0 10px rgba(255, 160, 122, 0.8);">💚 AARP Supporto</span>
                 </a>
-                <a href="#mental-health" class="planet mental-health-planet" data-planet="mental" style="position: absolute; top: 100%; left: 65%; transform: translate(-50%, -50%); width: 60px; height: 60px; background: radial-gradient(circle at 30% 30%, #FFB6C1, #FF69B4, #FF1493); border-radius: 50%; box-shadow: 0 0 30px rgba(255, 105, 180, 0.9), 0 0 50px rgba(255, 20, 147, 0.7); cursor: pointer; text-decoration: none; display: flex; align-items: center; justify-content: center; position: relative;">
+                <a href="#mental-health" class="planet mental-health-planet" data-planet="mental" style="position: absolute; top: 100%; left: 65%; transform: translate(-50%, -50%); width: 60px; height: 60px; background: radial-gradient(circle at 30% 30%, #FFB6C1, #FF69B4, #FF1493); border-radius: 50%; box-shadow: 0 0 30px rgba(255, 105, 180, 0.9), 0 0 50px rgba(255, 20, 147, 0.7); cursor: pointer; text-decoration: none; display: flex; align-items: center; justify-content: center;">
                     <!-- Croce Rossa -->
                     <span style="display: inline-block; width: 35px; height: 35px; background: #DC143C; border-radius: 50%; position: relative; font-size: 28px; line-height: 35px; text-align: center;">
                         <span style="color: white; font-weight: bold;">+</span>
@@ -4800,12 +4800,19 @@
 
             function startCountdown() {
                 timeRemaining = 38.0;
+                if (countdownInterval) {
+                    clearInterval(countdownInterval);
+                }
                 countdownInterval = setInterval(() => {
                     timeRemaining -= 0.1;
                     if (timeRemaining <= 0) {
-                        timeRemaining = 38.0; // Reset per loop
+                        clearInterval(countdownInterval);
+                        timeRemaining = 38.0;
+                        countdownElement.textContent = timeRemaining.toFixed(1) + 's';
+                        startCountdown(); // Restart countdown
+                    } else {
+                        countdownElement.textContent = timeRemaining.toFixed(1) + 's';
                     }
-                    countdownElement.textContent = timeRemaining.toFixed(1) + 's';
                 }, 100);
             }
 
@@ -4826,7 +4833,6 @@
                 youSlowdown: 13000, // 13s - You$ rallenta
                 mentalWakeup: 18000, // 18s - Mental Health si risveglia
                 mentalDepart: 20000, // 20s - Mental Health parte
-                stationArrival: 28000, // 28s - arrivo alla stazione
                 mentalReturn: 28000, // 28s - Mental Health inizia ritorno
                 cycleReset: 38000 // 38s - reset ciclo
             };
@@ -4838,11 +4844,13 @@
             // Funzione dispersione monete
             function disperseCoins() {
                 const numCoins = 12;
-                const youRect = youPlanet.getBoundingClientRect();
-                const scamRect = scamPlanet.getBoundingClientRect();
                 
                 for (let i = 0; i < numCoins; i++) {
                     setTimeout(() => {
+                        // Get fresh positions for each coin
+                        const youRect = youPlanet.getBoundingClientRect();
+                        const scamRect = scamPlanet.getBoundingClientRect();
+                        
                         const coin = document.createElement('div');
                         coin.className = 'gold-coin';
                         coin.style.cssText = `
