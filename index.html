@@ -1094,7 +1094,7 @@
                 searchAdvice2: "Devi proteggerti da inganni e frodi finanziarie.",
                 searchAdvice3: "Prendi tempo prima di eseguire operazioni finanziarie sollecitate da sconosciuti.",
                 searchAdvice4: "Chiedi con email conferme di legalità dei destinatari alla tua Banca.",
-                agent007Banner: "🕵️ Your Agent 007 contro le Truffe →",
+                agent007Banner: "🕵️ Il tuo Agente 007 contro le Truffe →",
                 instructionsContent: `
 <button type="button" class="instructions-popup-close" onclick="toggleInstructions()" aria-label="Chiudi guida">×</button>
 <h2>🛡️ Guida Legale Operativa – Verifica di un’Impresa Finanziaria in 5 Passi</h2>
@@ -1820,12 +1820,19 @@
             if (!flagsGrid || !agent007Banner) return;
             
             let hasTrackedImpression = false;
+            let flagsGridHeight = flagsGrid.offsetHeight;
+            let flagsGridTop = flagsGrid.offsetTop;
+            
+            // Recalculate dimensions on window resize
+            window.addEventListener('resize', function() {
+                flagsGridHeight = flagsGrid.offsetHeight;
+                flagsGridTop = flagsGrid.offsetTop;
+            });
             
             function checkBannerVisibility() {
                 const flagsGridRect = flagsGrid.getBoundingClientRect();
-                const flagsGridHeight = flagsGrid.offsetHeight;
-                const scrolledHeight = window.innerHeight - flagsGridRect.top;
-                const scrollPercentage = (scrolledHeight / flagsGridHeight) * 100;
+                const scrolledPastTop = Math.max(0, -flagsGridRect.top);
+                const scrollPercentage = (scrolledPastTop / flagsGridHeight) * 100;
                 
                 if (scrollPercentage >= 50) {
                     agent007Banner.classList.add('visible');
