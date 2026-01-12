@@ -906,54 +906,54 @@
         
         <!-- Solar System Container -->
         <div class="solar-system-container" style="position: relative; width: 100%; max-width: 1400px; height: 500px; margin: 2rem auto;">
-            <!-- Sun decentrato a sinistra ma al centro delle orbite -->
+            <!-- Sun off-center to the left but at the center of orbits -->
             <div id="sun" style="position: absolute; top: 50%; left: 30%; transform: translate(-50%, -50%); width: 120px; height: 120px; background: radial-gradient(circle at 30% 30%, #FFD700, #FFA500, #FF8C00); border-radius: 50%; box-shadow: 0 0 60px rgba(255, 215, 0, 0.8), 0 0 100px rgba(255, 165, 0, 0.6), inset 0 0 40px rgba(255, 140, 0, 0.4); cursor: pointer; z-index: 10; animation: sunPulse 4s ease-in-out infinite;">
-                <!-- Pupilla: scudo Financial Defense al centro del Sole -->
+                <!-- Pupil: Financial Defense shield at Sun's center -->
                 <div aria-hidden="true" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 64px; height: 64px; border-radius: 50%; background-color: rgba(15,23,42,0.9); box-shadow: 0 0 18px rgba(15,23,42,0.9); background-image: url('financial_defense_shield_final.svg'); background-size: 80%; background-position: center; background-repeat: no-repeat; border: 2px solid #00FF7F;"></div>
                 <div style="position: absolute; bottom: -50px; left: 50%; transform: translateX(-50%); white-space: nowrap; color: #00FF7F; font-weight: bold; font-size: 1.3rem; text-shadow: 0 0 10px rgba(0, 255, 127, 0.8);">Security Financial</div>
             </div>
 
-            <!-- Orbita 1: pista "capsula" interna con due pianeti (Autorità + Fonti) - percorso ippodromo (danger) -->
+            <!-- Orbit 1: inner "capsule" track with two planets (Authorities + Sources) - hippodrome path (danger) -->
             <div class="planet-orbit orbit-inner" style="position: absolute; top: 50%; left: calc(30% - 80px); width: 760px; height: 160px; border: 2px solid rgba(248, 113, 113, 0.7); border-radius: 80px; transform: translateY(-50%);">
-                <!-- Pianeta 1: Autorità Vigilanza -->
+                <!-- Planet 1: Surveillance Authorities -->
                 <a href="#autorita-vigilanza" class="planet planet-inner-a" data-planet="mercury" style="position: absolute; top: 50%; left: 50%; width: 45px; height: 45px; background: radial-gradient(circle at 30% 30%, #B8B8B8, #808080, #505050); border-radius: 50%; box-shadow: 0 0 18px rgba(184, 184, 184, 0.6), inset -8px -8px 16px rgba(0,0,0,0.3); cursor: pointer; text-decoration: none; animation: innerOrbitClockwise 40s linear infinite;">
                     <span style="position: absolute; bottom: -30px; left: 50%; transform: translateX(-50%); white-space: nowrap; color: #87CEEB; font-size: 0.8rem; font-weight: 600; text-shadow: 0 0 8px rgba(135, 206, 235, 0.8);">🪐 Autorità</span>
                 </a>
 
-                <!-- Pianeta 2: Fonti Istituzionali sulla stessa ellisse -->
+                <!-- Planet 2: Institutional Sources on the same ellipse -->
                 <a href="#fonti-istituzionali" class="planet planet-inner-b" data-planet="venus" style="position: absolute; top: 50%; left: 50%; width: 55px; height: 55px; background: radial-gradient(circle at 30% 30%, #90EE90, #3CB371, #2E8B57); border-radius: 50%; box-shadow: 0 0 22px rgba(144, 238, 144, 0.7), inset -10px -10px 20px rgba(0,0,0,0.3); cursor: pointer; text-decoration: none; animation: innerOrbitCounter 40s linear infinite;">
                     <span style="position: absolute; bottom: -30px; left: 50%; transform: translateX(-50%); white-space: nowrap; color: #90EE90; font-size: 0.8rem; font-weight: 600; text-shadow: 0 0 8px rgba(144, 238, 144, 0.8);">🌍 Fonti Istituzionali</span>
                 </a>
             </div>
 
-            <!-- Orbita 2: pista "capsula" intermedia (per i prossimi due pianeti) - percorso ippodromo (danger) -->
+            <!-- Orbit 2: intermediate "capsule" track (for the next two planets) - hippodrome path (danger) -->
             <div class="planet-orbit" style="position: absolute; top: 50%; left: calc(30% - 110px); width: 900px; height: 220px; border: 2px solid rgba(248, 113, 113, 0.7); border-radius: 110px; transform: translateY(-50%);">
             </div>
 
-            <!-- Planet 3 + 4: pista "capsula" esterna - percorso ippodromo (danger) -->
+            <!-- Planet 3 + 4: outer "capsule" track - hippodrome path (danger) -->
             <div class="planet-orbit" style="position: absolute; top: 50%; left: calc(30% - 140px); width: 1040px; height: 280px; border: 2px solid rgba(248, 113, 113, 0.7); border-radius: 140px; transform: translateY(-50%);">
                 <a href="#associazioni-consumatori" class="planet" data-planet="earth" style="position: absolute; top: 0; left: 50%; transform: translate(-50%, -50%); width: 60px; height: 60px; background: radial-gradient(circle at 30% 30%, #DDA0DD, #9370DB, #6A5ACD); border-radius: 50%; box-shadow: 0 0 26px rgba(221, 160, 221, 0.8), inset -10px -10px 22px rgba(0,0,0,0.3); cursor: pointer; text-decoration: none;">
                     <span style="position: absolute; bottom: -30px; left: 50%; transform: translateX(-50%); white-space: nowrap; color: #DDA0DD; font-size: 0.8rem; font-weight: 600; text-shadow: 0 0 8px rgba(221, 160, 221, 0.8);">🛡️ Consumatori</span>
                 </a>
             </div>
 
-                <!-- Planet 4: Organizzazioni Tutela (Marte - rosa) sulla stessa pista -->
+                <!-- Planet 4: Protection Organizations (Mars - pink) on the same track -->
                 <a href="#prevenzione-truffe" class="planet" data-planet="mars" style="position: absolute; top: 0; left: 50%; transform: translate(-50%, -50%); width: 50px; height: 50px; background: radial-gradient(circle at 30% 30%, #FFB6C1, #FF69B4, #FF1493); border-radius: 50%; box-shadow: 0 0 22px rgba(255, 182, 193, 0.7), inset -9px -9px 18px rgba(0,0,0,0.3); cursor: pointer; text-decoration: none;">
                     <span style="position: absolute; bottom: -30px; left: 50%; transform: translateX(-50%); white-space: nowrap; color: #FFB6C1; font-size: 0.8rem; font-weight: 600; text-shadow: 0 0 8px rgba(255, 182, 193, 0.8);">🤝 Prevenzione</span>
                 </a>
             </div>
 
-            <!-- Planet 5: Supporto Psicologico (Giove - arancione) e Planet 6: Mental Health Impact (rosso) su pista esterna aggiuntiva - percorso ippodromo (danger) -->
+            <!-- Planet 5: Psychological Support (Jupiter - orange) and Planet 6: Mental Health Impact (red) on additional outer track - hippodrome path (danger) -->
             <div class="planet-orbit" style="position: absolute; top: 50%; left: calc(30% - 170px); width: 1180px; height: 340px; border: 2px solid rgba(248, 113, 113, 0.7); border-radius: 170px; transform: translateY(-50%);">
                 <a href="#supporto-psicologico" class="planet" data-planet="jupiter" style="position: absolute; top: 0; left: 35%; transform: translate(-50%, -50%); width: 70px; height: 70px; background: radial-gradient(circle at 30% 30%, #FFA07A, #FF8C69, #FF7F50); border-radius: 50%; box-shadow: 0 0 28px rgba(255, 160, 122, 0.8), inset -12px -12px 24px rgba(0,0,0,0.3); cursor: pointer; text-decoration: none;">
                     <span style="position: absolute; bottom: -34px; left: 50%; transform: translateX(-50%); white-space: nowrap; color: #FFA07A; font-size: 0.85rem; font-weight: 600; text-shadow: 0 0 10px rgba(255, 160, 122, 0.8);">💚 AARP Supporto</span>
                 </a>
             </div>
 
-            <!-- Planet 6: Mental Health Impact - animazione ippodromo rosso -->
+            <!-- Planet 6: Mental Health Impact - hippodrome animation -->
             <div style="position: absolute; top: 50%; left: calc(30% - 170px); width: 1180px; height: 340px; transform: translateY(-50%);">
                 <a href="#mental-health" class="planet galaxy-yous-hippodrome mental-health-planet" data-planet="mental" style="width: 60px; height: 60px; background: radial-gradient(circle at 30% 30%, #FFB6C1, #FF69B4, #FF1493); border-radius: 50%; box-shadow: 0 0 30px rgba(255, 105, 180, 0.9), 0 0 50px rgba(255, 20, 147, 0.7); cursor: pointer; text-decoration: none; display: flex; align-items: center; justify-content: center; will-change: transform; position: absolute; animation-delay: 0s;">
-                    <!-- Croce Rossa -->
+                    <!-- Red Cross -->
                     <span style="display: inline-block; width: 35px; height: 35px; background: #DC143C; border-radius: 50%; position: relative; font-size: 28px; line-height: 35px; text-align: center;">
                         <span style="color: white; font-weight: bold;">+</span>
                     </span>
@@ -961,32 +961,32 @@
                 </a>
             </div>
 
-            <!-- Planet 7: Financial Defense Shield - animazione ippodromo rosso -->
+            <!-- Planet 7: Financial Defense Shield - hippodrome animation -->
             <div style="position: absolute; top: 50%; left: calc(30% - 170px); width: 1180px; height: 340px; transform: translateY(-50%);">
                 <a href="#you-shield" class="planet galaxy-yous-hippodrome" data-planet="defense" style="width: 90px; height: 90px; background: radial-gradient(circle at 30% 30%, #0f172a, #1d3557, #0f172a); border-radius: 50%; box-shadow: 0 0 30px rgba(56, 189, 248, 0.9), 0 0 50px rgba(34, 197, 94, 0.7); cursor: pointer; text-decoration: none; background-image: url('financial_defense_shield_final.svg'); background-size: contain; background-position: center; background-repeat: no-repeat; will-change: transform; position: absolute; animation-delay: 0s;">
                     <span style="position: absolute; bottom: -38px; left: 50%; transform: translateX(-50%); white-space: nowrap; color: #7dd3fc; font-size: 0.85rem; font-weight: 600; text-shadow: 0 0 10px rgba(56, 189, 248, 0.9);">🛡️ Financial Defense</span>
                 </a>
             </div>
 
-            <!-- Planet SCAM: Truffatore fisso (ore 3, simmetrico al Sole) -->
+            <!-- Planet SCAM: Fixed scammer (3 o'clock, symmetric to Sun) -->
             <div id="scam-planet" style="position: absolute; top: 50%; left: 85%; transform: translate(-50%, -50%); width: 110px; height: 110px; background: radial-gradient(circle at 30% 30%, #1a0000, #4a0000, #660000, #000); border-radius: 50%; box-shadow: 0 0 50px rgba(220, 38, 38, 0.9), 0 0 80px rgba(185, 28, 28, 0.6), inset 0 0 30px rgba(127, 29, 29, 0.5); z-index: 20; display: flex; align-items: center; justify-content: center; font-size: 3.5rem; animation: scamPulse 3s ease-in-out infinite;">
                 😈
                 <span style="position: absolute; bottom: -40px; left: 50%; transform: translateX(-50%); white-space: nowrap; color: #ef4444; font-size: 0.9rem; font-weight: 700; text-shadow: 0 0 12px rgba(239, 68, 68, 0.9);">⚠️ SCAM</span>
             </div>
 
-            <!-- Countdown Timer: mostra durata animazione -->
+            <!-- Countdown Timer: shows animation duration -->
             <div id="scam-countdown" style="position: absolute; top: 50%; left: 65%; transform: translate(-50%, -50%); font-size: 2.8rem; font-weight: bold; color: #00FF7F; text-shadow: 0 0 20px #00FF7F, 0 0 40px #00FF7F, 0 0 60px rgba(0, 255, 127, 0.6); font-family: 'Courier New', monospace; z-index: 25; letter-spacing: 0.1em;">
                 50.0s
             </div>
 
-            <!-- Planet 8: Galaxy You$ (bersaglio da proteggere, cometa) - animazione su percorso ippodromo rosso -->
+            <!-- Planet 8: Galaxy You$ (target to protect, comet) - hippodrome animation -->
             <!-- Wrapper container for offset-path animation -->
             <div style="position: absolute; top: 50%; left: calc(30% - 170px); width: 1180px; height: 340px; transform: translateY(-50%);">
                 <a href="#you-shield" class="planet galaxy-yous-hippodrome" data-planet="galaxy-yous" style="width: 95px; height: 95px; background: radial-gradient(circle at 30% 30%, #1e293b, #0f172a, #020617); border-radius: 50%; box-shadow: 0 0 35px rgba(251, 191, 36, 0.9), 0 0 60px rgba(249, 115, 22, 0.7); cursor: pointer; text-decoration: none; background-image: url('logo_galaxy_yous.svg'); background-size: contain; background-position: center; background-repeat: no-repeat; will-change: transform; position: absolute;">
                     <span style="position: absolute; bottom: -40px; left: 50%; transform: translateX(-50%); white-space: nowrap; color: #fbbf24; font-size: 0.85rem; font-weight: 600; text-shadow: 0 0 12px rgba(251, 191, 36, 0.9);">🎯 You$ da Proteggere</span>
                 </a>
 
-                <!-- Meteoriti puntiformi che si infrangono sul pianeta You$ -->
+                <!-- Point meteors that crash into the You$ planet -->
                 <div class="meteor" style="top: 10%; left: 5%; animation-delay: 0s;"></div>
                 <div class="meteor" style="top: -5%; left: 60%; animation-delay: 1.5s;"></div>
                 <div class="meteor" style="top: 25%; left: 95%; animation-delay: 3s;"></div>
