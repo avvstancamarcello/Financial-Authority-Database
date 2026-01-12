@@ -2283,10 +2283,11 @@
             
             if (!flagsGrid || !agent007Banner) return;
             
+            let scrollTimeout;
             function checkBannerVisibility() {
                 const flagsGridRect = flagsGrid.getBoundingClientRect();
                 const flagsGridHeight = flagsGrid.offsetHeight;
-                const scrolledHeight = window.innerHeight - flagsGridRect.top;
+                const scrolledHeight = Math.max(0, window.innerHeight - flagsGridRect.top);
                 const scrollPercentage = (scrolledHeight / flagsGridHeight) * 100;
                 
                 if (scrollPercentage >= 50) {
@@ -2296,7 +2297,15 @@
                 }
             }
             
-            window.addEventListener('scroll', checkBannerVisibility);
+            // Throttle scroll event for better performance
+            window.addEventListener('scroll', function() {
+                if (!scrollTimeout) {
+                    scrollTimeout = setTimeout(function() {
+                        checkBannerVisibility();
+                        scrollTimeout = null;
+                    }, 100);
+                }
+            });
             checkBannerVisibility(); // Check on load
             
             // Google Analytics tracking
