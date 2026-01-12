@@ -905,7 +905,7 @@
         <canvas id="starfield" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></canvas>
         
         <!-- Solar System Container -->
-        <div style="position: relative; width: 100%; max-width: 1400px; height: 500px; margin: 2rem auto;">
+        <div class="solar-system-container" style="position: relative; width: 100%; max-width: 1400px; height: 500px; margin: 2rem auto;">
             <!-- Sun decentrato a sinistra ma al centro delle orbite -->
             <div id="sun" style="position: absolute; top: 50%; left: 30%; transform: translate(-50%, -50%); width: 120px; height: 120px; background: radial-gradient(circle at 30% 30%, #FFD700, #FFA500, #FF8C00); border-radius: 50%; box-shadow: 0 0 60px rgba(255, 215, 0, 0.8), 0 0 100px rgba(255, 165, 0, 0.6), inset 0 0 40px rgba(255, 140, 0, 0.4); cursor: pointer; z-index: 10; animation: sunPulse 4s ease-in-out infinite;">
                 <!-- Pupilla: scudo Financial Defense al centro del Sole -->
@@ -960,9 +960,10 @@
                 </a>
             </div>
 
-            <!-- Planet 8: Galaxy You$ (bersaglio da proteggere, cometa) - orbita naturale 2 (gialla) -->
-            <div class="planet-orbit" style="position: absolute; top: 50%; left: 35%; width: 980px; height: 440px; border: 2px dashed rgba(250, 204, 21, 0.9); border-radius: 50%; transform: translate(-50%, -50%);">
-                <a href="#you-shield" class="planet" data-planet="galaxy-yous" style="position: absolute; top: 0; left: 50%; transform: translate(-50%, -50%); width: 95px; height: 95px; background: radial-gradient(circle at 30% 30%, #1e293b, #0f172a, #020617); border-radius: 50%; box-shadow: 0 0 35px rgba(251, 191, 36, 0.9), 0 0 60px rgba(249, 115, 22, 0.7); cursor: pointer; text-decoration: none; background-image: url('logo_galaxy_yous.svg'); background-size: contain; background-position: center; background-repeat: no-repeat;">
+            <!-- Planet 8: Galaxy You$ (bersaglio da proteggere, cometa) - animazione su percorso ippodromo rosso -->
+            <!-- Wrapper container for offset-path animation -->
+            <div style="position: absolute; top: 50%; left: calc(30% - 170px); width: 1180px; height: 340px; transform: translateY(-50%);">
+                <a href="#you-shield" class="planet galaxy-yous-hippodrome" data-planet="galaxy-yous" style="width: 95px; height: 95px; background: radial-gradient(circle at 30% 30%, #1e293b, #0f172a, #020617); border-radius: 50%; box-shadow: 0 0 35px rgba(251, 191, 36, 0.9), 0 0 60px rgba(249, 115, 22, 0.7); cursor: pointer; text-decoration: none; background-image: url('logo_galaxy_yous.svg'); background-size: contain; background-position: center; background-repeat: no-repeat; will-change: transform; position: absolute;">
                     <span style="position: absolute; bottom: -40px; left: 50%; transform: translateX(-50%); white-space: nowrap; color: #fbbf24; font-size: 0.85rem; font-weight: 600; text-shadow: 0 0 12px rgba(251, 191, 36, 0.9);">🎯 You$ da Proteggere</span>
                 </a>
 
@@ -1048,10 +1049,17 @@
             to { transform: translate(-50%, -50%) rotate(360deg); }
         }
 
-        /* Orbita ancora più esterna del pianeta Galaxy You$ (attualmente ferma) */
-        @keyframes orbitGalaxy {
-            from { transform: translate(-50%, -50%) rotate(0deg); }
-            to { transform: translate(-50%, -50%) rotate(360deg); }
+        /* Galaxy You$ - Animazione su percorso ippodromo (capsule-shaped) */
+        .galaxy-yous-hippodrome {
+            /* Crea percorso ippodromo usando offset-path */
+            offset-path: path('M 590 0 C 590 -50, 1010 -50, 1010 0 L 1010 170 C 1010 220, 590 220, 590 170 Z');
+            offset-rotate: 0deg;
+            animation: orbit-hippodrome 25s cubic-bezier(0.4, 0.0, 0.2, 1) infinite;
+        }
+        
+        @keyframes orbit-hippodrome {
+            0% { offset-distance: 0%; }
+            100% { offset-distance: 100%; }
         }
 
         /* Rivoluzione ellittica sulla prima orbita (due pianeti) */
@@ -1100,9 +1108,36 @@
                 transform: translate3d(180px, 190px, 0) scale(0.8);
             }
         }
+        /* Hover states migliorati con scale e glow più pronunciati */
         .planet:hover {
-            transform: translate(-50%, -50%) scale(1.2) !important;
-            transition: transform 0.3s ease;
+            transform: translate(-50%, -50%) scale(1.25) !important;
+            transition: transform 0.4s cubic-bezier(0.4, 0.0, 0.2, 1);
+            filter: brightness(1.2);
+        }
+        
+        /* Effetto ripple al click sui pianeti */
+        @keyframes clickRipple {
+            0% {
+                transform: translate(-50%, -50%) scale(1);
+                opacity: 0.8;
+            }
+            100% {
+                transform: translate(-50%, -50%) scale(2.5);
+                opacity: 0;
+            }
+        }
+        
+        .planet:active::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            border: 2px solid currentColor;
+            animation: clickRipple 0.6s ease-out;
+            pointer-events: none;
         }
 
         /* Quando il mouse entra nell'orbita, ferma i pianeti per facilitare il click */
@@ -1110,7 +1145,7 @@
             animation-play-state: paused !important;
         }
 
-        /* Coda di cometa per Galaxy You$ */
+        /* Coda di cometa per Galaxy You$ con effetto pulsante migliorato */
         .planet[data-planet="galaxy-yous"]::before {
             content: "";
             position: absolute;
@@ -1125,6 +1160,23 @@
             pointer-events: none;
             opacity: 0.9;
             animation: cometGlow 3.5s ease-in-out infinite;
+            will-change: opacity, filter;
+        }
+        
+        /* Effetto alone pulsante attorno a Galaxy You$ */
+        .planet[data-planet="galaxy-yous"]::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 130%;
+            height: 130%;
+            transform: translate(-50%, -50%);
+            background: radial-gradient(circle, rgba(251, 191, 36, 0.3), transparent 70%);
+            border-radius: 50%;
+            animation: galaxyPulse 4s ease-in-out infinite;
+            pointer-events: none;
+            z-index: -1;
         }
 
         @keyframes cometGlow {
@@ -1132,11 +1184,241 @@
             30% { opacity: 1; filter: blur(3px); }
             60% { opacity: 0.7; filter: blur(2.2px); }
         }
+        
+        @keyframes galaxyPulse {
+            0%, 100% { 
+                transform: translate(-50%, -50%) scale(1);
+                opacity: 0.4;
+            }
+            50% { 
+                transform: translate(-50%, -50%) scale(1.2);
+                opacity: 0.6;
+            }
+        }
 
         /* Evidenzia il pianeta quando è a fuoco da tastiera */
         .planet:focus-visible {
             outline: 2px solid #ffffff;
             outline-offset: 4px;
+        }
+        
+        /* Performance: GPU acceleration per animazioni */
+        .planet,
+        .planet-orbit,
+        .meteor {
+            will-change: transform;
+        }
+        
+        /* Supporto per prefers-reduced-motion */
+        @media (prefers-reduced-motion: reduce) {
+            .planet,
+            .meteor,
+            #sun,
+            .galaxy-yous-hippodrome {
+                animation: none !important;
+            }
+            
+            .planet[data-planet="galaxy-yous"]::before,
+            .planet[data-planet="galaxy-yous"]::after {
+                animation: none !important;
+            }
+        }
+        
+        /* ========================================
+           RESPONSIVE DESIGN - MOBILE & TABLET
+           ======================================== */
+        
+        /* Tablet (≤768px) */
+        @media (max-width: 768px) {
+            /* Solar system container ridotto */
+            .solar-system-container {
+                height: 400px !important;
+            }
+            
+            /* Sole più piccolo */
+            #sun {
+                width: 80px !important;
+                height: 80px !important;
+            }
+            
+            #sun > div[aria-hidden="true"] {
+                width: 48px !important;
+                height: 48px !important;
+            }
+            
+            /* Pianeti scalati proporzionalmente */
+            .planet {
+                transform: translate(-50%, -50%) scale(0.75) !important;
+            }
+            
+            .planet:hover {
+                transform: translate(-50%, -50%) scale(0.9) !important;
+            }
+            
+            /* Orbite ridotte */
+            .planet-orbit {
+                transform: translate(-50%, -50%) scale(0.7) !important;
+            }
+            
+            /* Galaxy You$ wrapper ridotto */
+            .galaxy-yous-hippodrome {
+                transform: scale(0.75);
+            }
+            
+            /* Etichette pianeti più piccole */
+            .planet span {
+                font-size: 0.7rem !important;
+                bottom: -25px !important;
+            }
+            
+            /* Menu sticky più compatto */
+            #sticky-menu {
+                padding: 0.5rem 1rem !important;
+            }
+            
+            #sticky-menu > div {
+                flex-direction: column;
+                gap: 0.5rem !important;
+            }
+            
+            #sticky-menu a {
+                font-size: 0.8rem !important;
+            }
+            
+            /* Main top nav più compatto */
+            .main-nav-grid {
+                grid-template-columns: repeat(2, 1fr) !important;
+                gap: 0.5rem !important;
+            }
+            
+            .main-nav-grid a,
+            .main-nav-grid button {
+                font-size: 0.85rem !important;
+                padding: 0.4rem 0.8rem !important;
+            }
+        }
+        
+        /* Mobile (≤480px) */
+        @media (max-width: 480px) {
+            /* Solar system ancora più compatto */
+            .solar-system-container {
+                height: 350px !important;
+            }
+            
+            /* Sole piccolo */
+            #sun {
+                width: 60px !important;
+                height: 60px !important;
+                left: 25% !important;
+            }
+            
+            #sun > div[aria-hidden="true"] {
+                width: 36px !important;
+                height: 36px !important;
+            }
+            
+            /* Pianeti molto piccoli */
+            .planet {
+                transform: translate(-50%, -50%) scale(0.6) !important;
+                min-width: 44px !important;
+                min-height: 44px !important;
+            }
+            
+            .planet:hover {
+                transform: translate(-50%, -50%) scale(0.75) !important;
+            }
+            
+            /* Orbite molto ridotte */
+            .planet-orbit {
+                transform: translate(-50%, -50%) scale(0.5) !important;
+            }
+            
+            /* Galaxy You$ percorso ridotto */
+            .galaxy-yous-hippodrome {
+                transform: scale(0.5);
+                offset-path: path('M 590 0 C 590 -40, 1010 -40, 1010 0 L 1010 170 C 1010 210, 590 210, 590 170 Z');
+            }
+            
+            /* Etichette ancora più compatte */
+            .planet span {
+                font-size: 0.6rem !important;
+                bottom: -20px !important;
+                white-space: normal !important;
+                max-width: 80px;
+                text-align: center;
+            }
+            
+            /* Menu navigazione mobile-friendly */
+            .main-nav-grid {
+                grid-template-columns: 1fr !important;
+            }
+            
+            /* Touch targets minimi 44x44px */
+            .planet,
+            .main-nav-grid a,
+            .main-nav-grid button,
+            .lang-btn {
+                min-width: 44px;
+                min-height: 44px;
+            }
+            
+            /* Sticky menu mobile */
+            #sticky-menu > div > div {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            #sticky-menu a {
+                padding: 0.5rem !important;
+                font-size: 0.75rem !important;
+            }
+        }
+        
+        /* Small Mobile - iPhone SE (≤375px) */
+        @media (max-width: 375px) {
+            /* Solar system minimale */
+            .solar-system-container {
+                height: 300px !important;
+            }
+            
+            /* Sole molto piccolo */
+            #sun {
+                width: 50px !important;
+                height: 50px !important;
+            }
+            
+            #sun > div[aria-hidden="true"] {
+                width: 30px !important;
+                height: 30px !important;
+            }
+            
+            /* Orbite minimali */
+            .planet-orbit {
+                transform: translate(-50%, -50%) scale(0.4) !important;
+            }
+            
+            /* Galaxy You$ percorso molto ridotto */
+            .galaxy-yous-hippodrome {
+                transform: scale(0.4);
+            }
+            
+            /* Pianeti touch-friendly */
+            .planet {
+                min-width: 44px !important;
+                min-height: 44px !important;
+                transform: translate(-50%, -50%) scale(0.5) !important;
+            }
+            
+            /* Hero section padding ridotto */
+            section[style*="min-height: 70vh"] {
+                min-height: 50vh !important;
+                padding: 1rem 0.5rem !important;
+            }
+            
+            /* Etichette pianeti compatte */
+            .planet span {
+                font-size: 0.55rem !important;
+            }
         }
     </style>
 
