@@ -4820,28 +4820,28 @@
                 }, 100);
             }
 
-            // Avvia countdown al caricamento
+            // Start countdown on load
             window.addEventListener('load', startCountdown);
             </script>
 
             <script>
-            // Elementi pianeti
+            // Planet elements
             const youPlanet = document.querySelector('[data-planet="galaxy-yous"]');
             const defensePlanet = document.querySelector('[data-planet="defense"]');
             const mentalPlanet = document.querySelector('[data-planet="mental"]');
             const scamPlanet = document.getElementById('scam-planet');
 
-            // Timeline eventi
+            // Timeline events
             const timeline = {
-                coinDispersion: 15000, // 15s - dispersione monete (30% di 50s, quando You$ è vicino a SCAM sul lato destro)
-                cycleReset: 50000 // 50s - reset ciclo
+                coinDispersion: 15000, // 15s - coin loss when You$ is near SCAM (30% of 50s cycle, right side)
+                cycleReset: 50000 // 50s - cycle reset
             };
 
-            // Variabili stato
+            // State variables
             let animationStartTime = Date.now();
             let currentCycle = 0;
 
-            // Funzione dispersione monete
+            // Coin dispersion function
             function disperseCoins() {
                 const numCoins = 12;
                 
@@ -4867,7 +4867,7 @@
                         `;
                         document.body.appendChild(coin);
                         
-                        // Animazione moneta verso SCAM
+                        // Coin animation to SCAM
                         setTimeout(() => {
                             coin.style.transition = 'all 1.5s cubic-bezier(0.4, 0, 0.2, 1)';
                             coin.style.left = (scamRect.left + scamRect.width/2) + 'px';
@@ -4875,12 +4875,12 @@
                             coin.style.opacity = '0';
                         }, 50);
                         
-                        // Rimuovi moneta dopo animazione
+                        // Remove coin after animation
                         setTimeout(() => coin.remove(), 1600);
                     }, i * 100);
                 }
                 
-                // Effetto SCAM acquisizione
+                // SCAM acquisition effect
                 scamPlanet.style.transition = 'all 0.5s';
                 scamPlanet.style.boxShadow = '0 0 100px rgba(255, 215, 0, 1), 0 0 150px rgba(255, 165, 0, 0.8)';
                 setTimeout(() => {
@@ -4888,30 +4888,20 @@
                 }, 1500);
             }
 
-            // Funzione rallentamento You$ - RIMOSSA (non più necessaria)
-
-            // Funzione risveglio Mental Health - RIMOSSA (parte subito)
-
-            // Funzione partenza Mental Health - RIMOSSA (parte subito con classe hippodrome)
-
-            // Funzione ritorno Mental Health con lacrime - RIMOSSA (segue sempre il percorso)
-
-            // CSS animazione risveglio - RIMOSSA (non più necessaria)
-
             // Timeline controller
             function runAnimationCycle() {
                 animationStartTime = Date.now();
                 
                 setTimeout(disperseCoins, timeline.coinDispersion);
                 
-                // Reset per prossimo ciclo
+                // Reset for next cycle
                 setTimeout(() => {
                     currentCycle++;
-                    runAnimationCycle(); // Ricomincia ciclo
+                    runAnimationCycle(); // Restart cycle
                 }, timeline.cycleReset);
             }
 
-            // Avvia animazione al caricamento
+            // Start animation on load
             window.addEventListener('load', () => {
                 setTimeout(runAnimationCycle, 1000);
             });
