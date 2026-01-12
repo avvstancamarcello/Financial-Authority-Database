@@ -236,6 +236,59 @@
             gap: 18px;
             flex-wrap: wrap;
         }
+        /* Hippodrome container for orbital animation */
+        .hippodrome-container {
+            position: relative;
+            width: 400px;
+            height: 240px;
+        }
+        /* Hippodrome path visualization (red line) */
+        .hippodrome-path {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+        .hippodrome-path path {
+            fill: none;
+            stroke: rgba(239, 68, 68, 0.5); /* red semi-transparent */
+            stroke-width: 3;
+            stroke-dasharray: 8, 4;
+        }
+        /* Planets on hippodrome path */
+        .hippodrome-planet {
+            position: absolute;
+            width: 78px;
+            height: 78px;
+            offset-path: path('M 200,40 
+                              A 160,80 0 0 1 200,200
+                              A 160,80 0 0 1 200,40 Z');
+            animation: hippodrome-orbit 20s linear infinite;
+        }
+        /* Galaxy You$ planet - starts at 0% */
+        .hippodrome-planet.galaxy-yous {
+            animation-delay: 0s;
+        }
+        /* Shield planet - starts at 50% (opposite side) */
+        .hippodrome-planet.shield {
+            animation-delay: -10s; /* 50% of 20s = -10s offset */
+        }
+        .hippodrome-planet img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            box-shadow: 0 0 22px rgba(248,250,252,0.7);
+        }
+        /* Pulsing for shield planet */
+        .hippodrome-planet.shield img {
+            animation: shield-pulse 2.5s ease-in-out infinite;
+        }
+        /* Galaxy You$ planet gets standard pulse */
+        .hippodrome-planet.galaxy-yous img {
+            animation: planet-pulse 1.6s ease-in-out infinite;
+        }
         .flag-orbit-container {
             position: relative;
             width: 170px;
@@ -539,6 +592,21 @@
         @keyframes flag-wave {
             0%, 100% { transform: scale(1); filter: brightness(1); }
             50% { transform: scale(1.2); filter: brightness(1.3); }
+        }
+        /* Hippodrome orbital path animation for planets */
+        @keyframes hippodrome-orbit {
+            0% { offset-distance: 0%; }
+            100% { offset-distance: 100%; }
+        }
+        /* Pulsing animation for planets on hippodrome */
+        @keyframes planet-pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.08); }
+        }
+        /* Pulsing animation for shield planet */
+        @keyframes shield-pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.12); }
         }
         .security-popup {
             position: absolute;
@@ -889,36 +957,21 @@
                         <img src="logo_galaxy_yous.svg" alt="Galaxy You$ - tutela del consumatore">
                     </div>
                 </div>
-                <div class="flag-orbit-container">
-                    <div class="flag-orbit-ring"></div>
-                    <div class="flag-orbit">
-                        <div class="flag-orbit-flag" style="transform: rotate(0deg) translate(65px) rotate(0deg);">
-                            <span class="fi fi-it"></span>
-                        </div>
-                        <div class="flag-orbit-flag" style="transform: rotate(45deg) translate(65px) rotate(-45deg);">
-                            <span class="fi fi-fr"></span>
-                        </div>
-                        <div class="flag-orbit-flag" style="transform: rotate(90deg) translate(65px) rotate(-90deg);">
-                            <span class="fi fi-de"></span>
-                        </div>
-                        <div class="flag-orbit-flag" style="transform: rotate(135deg) translate(65px) rotate(-135deg);">
-                            <span class="fi fi-es"></span>
-                        </div>
-                        <div class="flag-orbit-flag" style="transform: rotate(180deg) translate(65px) rotate(-180deg);">
-                            <span class="fi fi-gb"></span>
-                        </div>
-                        <div class="flag-orbit-flag" style="transform: rotate(225deg) translate(65px) rotate(-225deg);">
-                            <span class="fi fi-us"></span>
-                        </div>
-                        <div class="flag-orbit-flag" style="transform: rotate(270deg) translate(65px) rotate(-270deg);">
-                            <span class="fi fi-ca"></span>
-                        </div>
-                        <div class="flag-orbit-flag" style="transform: rotate(315deg) translate(65px) rotate(-315deg);">
-                            <span class="fi fi-sg"></span>
-                        </div>
+                <!-- Hippodrome orbital path container -->
+                <div class="hippodrome-container">
+                    <!-- SVG visualization of the hippodrome path (red dashed line) -->
+                    <svg class="hippodrome-path" viewBox="0 0 400 240" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M 200,40 
+                                 A 160,80 0 0 1 200,200
+                                 A 160,80 0 0 1 200,40 Z" />
+                    </svg>
+                    <!-- Galaxy You$ planet on hippodrome -->
+                    <div class="hippodrome-planet galaxy-yous">
+                        <img src="logo_galaxy_yous.svg" alt="Galaxy You$ - patrimonio utente">
                     </div>
-                    <div class="flag-orbit-center">
-                        <img src="logo_shield_financial_defense.svg" alt="Financial Defense Shield - cuore della protezione dei consumatori">
+                    <!-- Shield planet on hippodrome (50% offset) -->
+                    <div class="hippodrome-planet shield">
+                        <img src="logo_shield_financial_defense.svg" alt="Shield - guardiano protettivo">
                     </div>
                 </div>
                 <div class="flag-orbit-container">
