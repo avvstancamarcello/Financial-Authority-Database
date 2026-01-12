@@ -909,7 +909,7 @@
             <!-- Sun decentrato a sinistra ma al centro delle orbite -->
             <div id="sun" style="position: absolute; top: 50%; left: 30%; transform: translate(-50%, -50%); width: 120px; height: 120px; background: radial-gradient(circle at 30% 30%, #FFD700, #FFA500, #FF8C00); border-radius: 50%; box-shadow: 0 0 60px rgba(255, 215, 0, 0.8), 0 0 100px rgba(255, 165, 0, 0.6), inset 0 0 40px rgba(255, 140, 0, 0.4); cursor: pointer; z-index: 10; animation: sunPulse 4s ease-in-out infinite;">
                 <!-- Pupilla: scudo Financial Defense al centro del Sole -->
-                <div aria-hidden="true" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 64px; height: 64px; border-radius: 50%; background-color: rgba(15,23,42,0.9); box-shadow: 0 0 18px rgba(15,23,42,0.9); background-image: url('financial_defense_shield_final.svg'); background-size: 80%; background-position: center; background-repeat: no-repeat;"></div>
+                <div aria-hidden="true" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 64px; height: 64px; border-radius: 50%; background-color: rgba(15,23,42,0.9); box-shadow: 0 0 18px rgba(15,23,42,0.9); background-image: url('financial_defense_shield_final.svg'); background-size: 80%; background-position: center; background-repeat: no-repeat; border: 3px solid #00FF7F;"></div>
                 <div style="position: absolute; bottom: -50px; left: 50%; transform: translateX(-50%); white-space: nowrap; color: #00FF7F; font-weight: bold; font-size: 1.3rem; text-shadow: 0 0 10px rgba(0, 255, 127, 0.8);">Security Financial</div>
             </div>
 
@@ -948,7 +948,7 @@
                 <a href="#supporto-psicologico" class="planet" data-planet="jupiter" style="position: absolute; top: 0; left: 35%; transform: translate(-50%, -50%); width: 70px; height: 70px; background: radial-gradient(circle at 30% 30%, #FFA07A, #FF8C69, #FF7F50); border-radius: 50%; box-shadow: 0 0 28px rgba(255, 160, 122, 0.8), inset -12px -12px 24px rgba(0,0,0,0.3); cursor: pointer; text-decoration: none;">
                     <span style="position: absolute; bottom: -34px; left: 50%; transform: translateX(-50%); white-space: nowrap; color: #FFA07A; font-size: 0.85rem; font-weight: 600; text-shadow: 0 0 10px rgba(255, 160, 122, 0.8);">💚 AARP Supporto</span>
                 </a>
-                <a href="#mental-health" class="planet mental-health-planet" data-planet="mental" style="position: absolute; top: 100%; left: 65%; transform: translate(-50%, -50%); width: 60px; height: 60px; background: radial-gradient(circle at 30% 30%, #FFB6C1, #FF69B4, #FF1493); border-radius: 50%; box-shadow: 0 0 30px rgba(255, 105, 180, 0.9), 0 0 50px rgba(255, 20, 147, 0.7); cursor: pointer; text-decoration: none; display: flex; align-items: center; justify-content: center;">
+                <a href="#mental-health" class="planet galaxy-yous-hippodrome mental-health-planet" data-planet="mental" style="position: absolute; width: 60px; height: 60px; background: radial-gradient(circle at 30% 30%, #FFB6C1, #FF69B4, #FF1493); border-radius: 50%; box-shadow: 0 0 30px rgba(255, 105, 180, 0.9), 0 0 50px rgba(255, 20, 147, 0.7); cursor: pointer; text-decoration: none; display: flex; align-items: center; justify-content: center; animation-delay: 25s;">
                     <!-- Croce Rossa -->
                     <span style="display: inline-block; width: 35px; height: 35px; background: #DC143C; border-radius: 50%; position: relative; font-size: 28px; line-height: 35px; text-align: center;">
                         <span style="color: white; font-weight: bold;">+</span>
@@ -959,26 +959,26 @@
 
             <!-- Planet 7: Financial Defense Shield - animazione ippodromo rosso -->
             <div style="position: absolute; top: 50%; left: calc(30% - 170px); width: 1180px; height: 340px; transform: translateY(-50%);">
-                <a href="#you-shield" class="planet galaxy-yous-hippodrome" data-planet="defense" style="width: 90px; height: 90px; background: radial-gradient(circle at 30% 30%, #0f172a, #1d3557, #0f172a); border-radius: 50%; box-shadow: 0 0 30px rgba(56, 189, 248, 0.9), 0 0 50px rgba(34, 197, 94, 0.7); cursor: pointer; text-decoration: none; background-image: url('financial_defense_shield_final.svg'); background-size: contain; background-position: center; background-repeat: no-repeat; will-change: transform; position: absolute; animation-delay: 3s;">
+                <a href="#you-shield" class="planet galaxy-yous-hippodrome" data-planet="defense" style="width: 90px; height: 90px; background: radial-gradient(circle at 30% 30%, #0f172a, #1d3557, #0f172a); border-radius: 50%; box-shadow: 0 0 30px rgba(56, 189, 248, 0.9), 0 0 50px rgba(34, 197, 94, 0.7); cursor: pointer; text-decoration: none; background-image: url('financial_defense_shield_final.svg'); background-size: contain; background-position: center; background-repeat: no-repeat; will-change: transform; position: absolute; animation-delay: 0s;">
                     <span style="position: absolute; bottom: -38px; left: 50%; transform: translateX(-50%); white-space: nowrap; color: #7dd3fc; font-size: 0.85rem; font-weight: 600; text-shadow: 0 0 10px rgba(56, 189, 248, 0.9);">🛡️ Financial Defense</span>
                 </a>
             </div>
 
             <!-- Planet SCAM: Truffatore fisso (ore 3, simmetrico al Sole) -->
-            <div id="scam-planet" style="position: absolute; top: 50%; left: 70%; transform: translate(-50%, -50%); width: 110px; height: 110px; background: radial-gradient(circle at 30% 30%, #1a0000, #4a0000, #660000, #000); border-radius: 50%; box-shadow: 0 0 50px rgba(220, 38, 38, 0.9), 0 0 80px rgba(185, 28, 28, 0.6), inset 0 0 30px rgba(127, 29, 29, 0.5); z-index: 20; display: flex; align-items: center; justify-content: center; font-size: 3.5rem; animation: scamPulse 3s ease-in-out infinite;">
-                🎭
+            <div id="scam-planet" style="position: absolute; top: 50%; left: 85%; transform: translate(-50%, -50%); width: 110px; height: 110px; background: radial-gradient(circle at 30% 30%, #1a0000, #4a0000, #660000, #000); border-radius: 50%; box-shadow: 0 0 50px rgba(220, 38, 38, 0.9), 0 0 80px rgba(185, 28, 28, 0.6), inset 0 0 30px rgba(127, 29, 29, 0.5); z-index: 20; display: flex; align-items: center; justify-content: center; font-size: 3.5rem; animation: scamPulse 3s ease-in-out infinite;">
+                😈
                 <span style="position: absolute; bottom: -40px; left: 50%; transform: translateX(-50%); white-space: nowrap; color: #ef4444; font-size: 0.9rem; font-weight: 700; text-shadow: 0 0 12px rgba(239, 68, 68, 0.9);">⚠️ SCAM</span>
             </div>
 
             <!-- Countdown Timer: mostra durata animazione -->
-            <div id="scam-countdown" style="position: absolute; top: 50%; left: 65%; transform: translate(-50%, -50%); font-size: 2.8rem; font-weight: bold; color: #00FF7F; text-shadow: 0 0 20px #00FF7F, 0 0 40px #00FF7F, 0 0 60px rgba(0, 255, 127, 0.6); font-family: 'Courier New', monospace; z-index: 25; letter-spacing: 0.1em;">
-                38.0s
+            <div id="scam-countdown" style="position: absolute; top: 50%; left: 55%; transform: translate(-50%, -50%); font-size: 2.8rem; font-weight: bold; color: #00FF7F; text-shadow: 0 0 20px #00FF7F, 0 0 40px #00FF7F, 0 0 60px rgba(0, 255, 127, 0.6); font-family: 'Courier New', monospace; z-index: 25; letter-spacing: 0.1em;">
+                50.0s
             </div>
 
             <!-- Planet 8: Galaxy You$ (bersaglio da proteggere, cometa) - animazione su percorso ippodromo rosso -->
             <!-- Wrapper container for offset-path animation -->
             <div style="position: absolute; top: 50%; left: calc(30% - 170px); width: 1180px; height: 340px; transform: translateY(-50%);">
-                <a href="#you-shield" class="planet galaxy-yous-hippodrome" data-planet="galaxy-yous" style="width: 95px; height: 95px; background: radial-gradient(circle at 30% 30%, #1e293b, #0f172a, #020617); border-radius: 50%; box-shadow: 0 0 35px rgba(251, 191, 36, 0.9), 0 0 60px rgba(249, 115, 22, 0.7); cursor: pointer; text-decoration: none; background-image: url('logo_galaxy_yous.svg'); background-size: contain; background-position: center; background-repeat: no-repeat; will-change: transform; position: absolute;">
+                <a href="#you-shield" class="planet galaxy-yous-hippodrome" data-planet="galaxy-yous" style="width: 95px; height: 95px; background: radial-gradient(circle at 30% 30%, #1e293b, #0f172a, #020617); border-radius: 50%; box-shadow: 0 0 35px rgba(251, 191, 36, 0.9), 0 0 60px rgba(249, 115, 22, 0.7); cursor: pointer; text-decoration: none; background-image: url('logo_galaxy_yous.svg'); background-size: contain; background-position: center; background-repeat: no-repeat; will-change: transform; position: absolute; animation-delay: 0s;">
                     <span style="position: absolute; bottom: -40px; left: 50%; transform: translateX(-50%); white-space: nowrap; color: #fbbf24; font-size: 0.85rem; font-weight: 600; text-shadow: 0 0 12px rgba(251, 191, 36, 0.9);">🎯 You$ da Proteggere</span>
                 </a>
 
@@ -1081,7 +1081,7 @@
             /* Crea percorso ippodromo usando offset-path */
             offset-path: var(--hippodrome-path);
             offset-rotate: 0deg;
-            animation: orbit-hippodrome 25s cubic-bezier(0.4, 0.0, 0.2, 1) infinite;
+            animation: orbit-hippodrome 50s cubic-bezier(0.4, 0.0, 0.2, 1) infinite;
             will-change: offset-distance;
         }
         
@@ -4795,11 +4795,11 @@
             <script>
             // Countdown timer animation
             let countdownElement = document.getElementById('scam-countdown');
-            let timeRemaining = 38.0;
+            let timeRemaining = 50.0;
             let countdownInterval;
 
             function startCountdown() {
-                timeRemaining = 38.0;
+                timeRemaining = 50.0;
                 if (countdownInterval) {
                     clearInterval(countdownInterval);
                 }
@@ -4807,7 +4807,7 @@
                     timeRemaining -= 0.1;
                     if (timeRemaining <= 0) {
                         clearInterval(countdownInterval);
-                        timeRemaining = 38.0;
+                        timeRemaining = 50.0;
                         countdownElement.textContent = timeRemaining.toFixed(1) + 's';
                         startCountdown(); // Restart countdown
                     } else {
@@ -4829,12 +4829,12 @@
 
             // Timeline eventi
             const timeline = {
-                coinDispersion: 12000, // 12s - dispersione monete
-                youSlowdown: 13000, // 13s - You$ rallenta
-                mentalWakeup: 18000, // 18s - Mental Health si risveglia
-                mentalDepart: 20000, // 20s - Mental Health parte
-                mentalReturn: 28000, // 28s - Mental Health inizia ritorno
-                cycleReset: 38000 // 38s - reset ciclo
+                coinDispersion: 25000, // 25s - dispersione monete (quando You$ è vicino a SCAM, a metà ciclo lato destro)
+                youSlowdown: 26000, // 26s - You$ rallenta
+                mentalWakeup: 30000, // 30s - Mental Health si risveglia
+                mentalDepart: 32000, // 32s - Mental Health parte
+                mentalReturn: 42000, // 42s - Mental Health inizia ritorno
+                cycleReset: 50000 // 50s - reset ciclo
             };
 
             // Variabili stato
@@ -4890,7 +4890,7 @@
 
             // Funzione rallentamento You$
             function slowdownYou() {
-                youPlanet.style.animationDuration = '35s'; // Rallenta da 25s a 35s (-30%)
+                youPlanet.style.animationDuration = '65s'; // Rallenta da 50s a 65s (-30%)
             }
 
             // Funzione risveglio Mental Health
@@ -4903,7 +4903,7 @@
             function departMentalHealth() {
                 // Applica stessa animazione hippodrome
                 mentalPlanet.classList.add('galaxy-yous-hippodrome');
-                mentalPlanet.style.animation = 'orbit-hippodrome 15s cubic-bezier(0.4, 0, 0.2, 1) forwards';
+                mentalPlanet.style.animation = 'orbit-hippodrome 30s cubic-bezier(0.4, 0, 0.2, 1) forwards';
                 mentalPlanet.style.animationDelay = '0s';
             }
 
@@ -4971,7 +4971,7 @@
                 
                 // Reset per prossimo ciclo
                 setTimeout(() => {
-                    youPlanet.style.animationDuration = '25s'; // Ripristina velocità normale
+                    youPlanet.style.animationDuration = '50s'; // Ripristina velocità normale
                     mentalPlanet.classList.remove('galaxy-yous-hippodrome');
                     mentalPlanet.style.animation = 'none';
                     mentalPlanet.style.boxShadow = '0 0 30px rgba(255, 105, 180, 0.9)';
