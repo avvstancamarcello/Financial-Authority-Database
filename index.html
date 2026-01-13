@@ -2293,19 +2293,8 @@
             });
             
             // Log results
-            const visibleCount = document.querySelectorAll(".country-card[style='display: block;'], .country-card:not([style*='display: none'])").length;
+            const visibleCount = Array.from(cards).filter(card => card.style.display !== "none").length;
             console.log(`🔍 Search: "${searchText}" - ${visibleCount} results`);
-        }
-
-        function setupSearch() {
-            const searchInput = document.getElementById('searchInput');
-            searchInput.addEventListener('input', (e) => {
-                const searchTerm = e.target.value.toLowerCase();
-                const cards = document.querySelectorAll('.country-card');
-                cards.forEach(card => {
-                    card.style.display = card.textContent.toLowerCase().includes(searchTerm) ? 'block' : 'none';
-                });
-            });
         }
 
         function updateStats() {
