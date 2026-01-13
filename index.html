@@ -2126,7 +2126,7 @@
                     throw new Error(`HTTP error! status: ${response.status}`);
                 }
                 let data = await response.json();
-                console.log(`✅ Database caricato con successo: ${Object.keys(data).length} paesi`);
+                console.log('✅ JSON loaded successfully:', Object.keys(data).length, 'countries');
                 
                 // Aggiungi suddivisioni regionali e watermark copyright
                 data = addCanadaSubregions(data);
@@ -2134,21 +2134,35 @@
                 
                 // Converti l'oggetto in array
                 countriesData = Object.values(data);
+                console.log('✅ countriesData array created:', countriesData.length, 'items');
                 
                 // Generate both grids
                 generateFlagsGrid();           // NEW: Flags grid with FLAG_MAPPING
                 displayCountries(countriesData); // Existing: Country cards
                 updateStats();
             } catch (error) {
-                console.error('❌ Errore caricamento database:', error);
+                console.error('❌ Error loading database:', error);
                 countriesData = [];
+                
+                // Show error in flags grid
                 const flagsGrid = document.getElementById('flagsGrid');
                 if (flagsGrid) {
-                    flagsGrid.innerHTML = '<p style="color: white; text-align: center; padding: 2rem;">Errore nel caricamento del database. Ricarica la pagina.</p>';
+                    flagsGrid.innerHTML = `
+                        <p style="color: white; text-align: center; padding: 2rem;">
+                            ❌ Errore nel caricamento del database.<br>
+                            Ricarica la pagina o contatta il supporto.
+                        </p>
+                    `;
                 }
-                const gridElement = document.getElementById('countriesGrid');
-                if (gridElement) {
-                    gridElement.innerHTML = `<p style="color: red; text-align: center;">Impossibile caricare il database delle autorità finanziarie. ${error.message}</p>`;
+                
+                // Show error in cards grid
+                const cardsGrid = document.getElementById('countriesGrid');
+                if (cardsGrid) {
+                    cardsGrid.innerHTML = `
+                        <p style="color: red; text-align: center; padding: 2rem;">
+                            Impossibile caricare il database: ${error.message}
+                        </p>
+                    `;
                 }
             }
         }
