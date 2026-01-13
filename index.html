@@ -533,6 +533,43 @@
         .protection-altissimo { background: #d4edda; color: #155724; }
         .protection-alto { background: #d1ecf1; color: #0c5460; }
         .protection-medio { background: #fff3cd; color: #856404; }
+        
+        /* SEARCH SECTION */
+        .search-section {
+            text-align: center;
+            padding: 20px;
+            background: #f4f6f8;
+        }
+
+        #searchInput {
+            width: 90%;
+            max-width: 600px;
+            padding: 12px 20px;
+            font-size: 18px;
+            border-radius: 25px;
+            border: 2px solid #ccc;
+            transition: all 0.3s ease;
+        }
+
+        #searchInput:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 10px rgba(102, 126, 234, 0.3);
+        }
+
+        #searchInput::placeholder {
+            color: #999;
+        }
+
+        /* Mobile responsive */
+        @media (max-width: 768px) {
+            #searchInput {
+                width: 95%;
+                font-size: 16px;
+                padding: 10px 16px;
+            }
+        }
+        
         .flags-grid-container {
             padding: 30px;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
@@ -1002,6 +1039,16 @@
             <p class="subtitle" data-i18n="title" itemprop="description">Database Internazionale per controlli bancari sulla identità finanziaria sui destinatari di transazioni bancarie.</p>
         </header>
 
+        <!-- 🔍 SEARCH SECTION -->
+        <section class="search-section">
+            <input 
+                type="text" 
+                id="searchInput" 
+                placeholder="Cerca un Paese o Autorità..." 
+                onkeyup="filterCards()"
+                aria-label="Cerca paese o autorità finanziaria">
+        </section>
+
         <!-- Sezione Griglia Bandiere -->
         <section id="database-search-section" class="flags-grid-container">
             <h2 data-i18n="flagsGridTitle">🌍 Seleziona il tuo Paese - Database 125 Autorità Finanziarie</h2>
@@ -1016,7 +1063,7 @@
     			<p class="intro-text" data-i18n="introText">Questa pagina web offre 125 LINK diretti per accedere alle webpage delle AUTORITA' FINANZIARIE di 125 PAESI del Mondo.<br>CERCA il nome del Paese che viene dichiarato sede della impresa finanziaria, e potrai conoscere tutti i dettagli identificativi ufficiali.</p>
             <div class="search-row">
                 <div class="search-box">
-                    <input type="text" id="searchInput" data-i18n-placeholder="searchPlaceholder" placeholder="Cerca per paese o autorità..." aria-label="Search countries">
+                    <input type="text" id="searchInputOld" data-i18n-placeholder="searchPlaceholder" placeholder="Cerca per paese o autorità..." aria-label="Search countries">
                     <button type="button" class="search-btn">Cerca</button>
                     <button type="button" class="search-advice-btn" onclick="toggleSearchAdvice()" data-i18n="searchAdviceButton">Perché questa ricerca è importante?</button>
                 </div>
@@ -2068,7 +2115,6 @@
             // Assicura che all'apertura la pagina parta sempre dall'inizio (header + pulsanti principali)
             window.scrollTo(0, 0);
             changeLanguage(currentLanguage);
-            setupSearch();
             loadCountryData();
         });
 
@@ -2174,6 +2220,7 @@
             filtered.forEach(country => {
                 const card = document.createElement('div');
                 card.className = 'country-card';
+                card.setAttribute('data-name', country.country_name);
                 card.onclick = () => openModal(country.country_name);
                 
                 const protectionClass = `protection-${(country.protectionLevel || 'medio').toLowerCase()}`;
@@ -2218,6 +2265,36 @@
             const activeBtn = Array.from(document.querySelectorAll('.filter-btn')).find(btn => btn.getAttribute('onclick').includes(`'${filter}'`));
             if(activeBtn) activeBtn.classList.add('active');
             renderCountries();
+        }
+
+        /**
+         * Filter country cards by search text
+         * Searches in: country name, authority name, and card text content
+         */
+        function filterCards() {
+            const input = document.getElementById("searchInput");
+            if (!input) return;
+            
+            const searchText = input.value.toLowerCase();
+            const cards = document.querySelectorAll(".country-card");
+
+            cards.forEach(card => {
+                // Get country name from data attribute
+                const countryName = (card.getAttribute("data-name") || "").toLowerCase();
+                
+                // Get all text content (includes authority name)
+                const textContent = card.textContent.toLowerCase();
+                
+                // Match if search text is found in name OR content
+                const match = countryName.includes(searchText) || textContent.includes(searchText);
+                
+                // Show/hide card
+                card.style.display = match ? "block" : "none";
+            });
+            
+            // Log results
+            const visibleCount = document.querySelectorAll(".country-card[style='display: block;'], .country-card:not([style*='display: none'])").length;
+            console.log(`🔍 Search: "${searchText}" - ${visibleCount} results`);
         }
 
         function setupSearch() {
