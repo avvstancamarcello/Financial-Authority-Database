@@ -231,12 +231,11 @@
         header { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 22px; text-align: center; position: relative; }
         .flag-orbit-banner {
             margin: 6px auto 6px;
-            display: flex;
-            flex-direction: row;
+            display: grid;
+            grid-template-columns: 170px auto auto 170px;
             align-items: center;
-            justify-content: center;
+            justify-items: center;
             gap: 18px;
-            flex-wrap: wrap;
         }
         /* Hippodrome container for orbital animation */
         .hippodrome-container {
@@ -772,7 +771,11 @@
         @media (max-width: 768px) { 
             h1 { font-size: 1.8em; } 
             .language-selector { position: static; justify-content: center; margin-bottom: 15px; } 
-            .flag-orbit-banner { flex-direction: column; gap: 12px; }
+            .flag-orbit-banner { 
+                grid-template-columns: 1fr;
+                grid-template-rows: auto auto auto auto;
+                gap: 12px; 
+            }
             .countries-grid { grid-template-columns: 1fr; } 
             .stats { grid-template-columns: 1fr; } 
             .controls { flex-direction: column; } 
