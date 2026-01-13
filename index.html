@@ -1986,43 +1986,81 @@
         // Generate the flags grid dynamically from countryData
         function generateFlagsGrid() {
             const flagsGrid = document.getElementById('flagsGrid');
+            
+            // Check if element exists
             if (!flagsGrid) {
-                console.error('❌ Cannot generate flags grid: missing #flagsGrid element');
+                console.error('❌ #flagsGrid element not found');
                 return;
             }
             
+            // Check if data is loaded (retry if not)
             if (!countriesData || countriesData.length === 0) {
-                console.warn('⚠️ No country data available for flags grid');
-                flagsGrid.innerHTML = '<p style="color: white; text-align: center; padding: 2rem;">Caricamento in corso...</p>';
+                console.warn('⚠️ countriesData not ready, retrying in 500ms...');
+                setTimeout(generateFlagsGrid, 500);
                 return;
             }
             
-            let html = '';
+            // Sort alphabetically
             const sortedCountries = [...countriesData].sort((a, b) => 
                 a.country_name.localeCompare(b.country_name)
             );
             
+            let html = '';
             sortedCountries.forEach(country => {
                 const countryName = country.country_name;
-                const flagCode = FLAG_MAPPING[countryName] || 'un';
-                const safeCountryName = countryName.replace(/'/g, "\\'").replace(/"/g, '&quot;');
-                
-                // Get display code for the flag button
                 const flagInfo = getFlagInfo(countryName);
-                const displayCode = flagInfo.textCode;
+                const safeCountryName = countryName.replace(/'/g, "\\'").replace(/"/g, '&quot;');
+                const escapedCountryName = countryName.replace(/"/g, '&quot;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
                 
+                // Simple template: emoji + code
                 html += `
-            <div class="flag-item" onclick="openModal('${safeCountryName}')" title="Clicca per vedere ${safeCountryName}">
-                <span class="flag-icon-wrapper">
-                    <span class="fi fi-${flagCode}"></span>
-                </span>
-                <div class="flag-code">${displayCode}</div>
-            </div>
-        `;
+                    <div class="flag-item" 
+                         onclick="openModal('${safeCountryName}')" 
+                         title="Clicca per vedere ${escapedCountryName}"
+                         data-name="${escapedCountryName}"
+                         data-continent="${getContinent(countryName)}"
+                         data-language="${getLanguage(countryName)}">
+                        ${flagInfo.emoji || '🌍'} ${flagInfo.textCode}
+                    </div>
+                `;
             });
             
             flagsGrid.innerHTML = html;
             console.log(`✅ Generated ${sortedCountries.length} flag buttons in grid`);
+        }
+
+        // Helper: Get continent from country name
+        function getContinent(countryName) {
+            const continents = {
+                'Europa': ['Albania', 'Austria', 'Belgium', 'Bulgaria', 'Croatia', 'Cyprus', 'Czech Republic', 'Denmark', 'Estonia', 'Finland', 'France', 'Germany', 'Greece', 'Hungary', 'Iceland', 'Ireland', 'Italy', 'Latvia', 'Liechtenstein', 'Lithuania', 'Luxembourg', 'Malta', 'Moldova', 'Montenegro', 'Netherlands', 'North Macedonia', 'Norway', 'Poland', 'Portugal', 'Romania', 'Russia', 'San Marino', 'Serbia', 'Slovak Republic', 'Slovenia', 'Spain', 'Sweden', 'Switzerland', 'Ukraine', 'United Kingdom', 'Vatican City State'],
+                'America': ['Argentina', 'Bahamas', 'Barbados', 'Bermuda', 'Bolivia', 'Brazil', 'Canada', 'Cayman Islands', 'Chile', 'Colombia', 'Costa Rica', 'El Salvador', 'Jamaica', 'Mexico', 'Panama', 'Peru', 'Trinidad and Tobago', 'United States', 'Uruguay'],
+                'Asia': ['Armenia', 'Azerbaijan', 'Bahrain', 'Bangladesh', 'Cambodia', 'Chinese Taipei', 'Georgia', 'Hong Kong', 'India', 'Indonesia', 'Israel', 'Japan', 'Jordan', 'Kazakhstan', 'Korea, Republic of', 'Kuwait', 'Kyrgyzstan', 'Malaysia', 'Oman', 'Pakistan', 'Philippines', 'Qatar', 'Saudi Arabia', 'Singapore', 'Sri Lanka', 'Thailand', 'Turkey', 'United Arab Emirates', 'Uzbekistan', 'Vietnam'],
+                'Africa': ['Algeria', 'Angola', 'Burkina Faso', 'Côte d\'Ivoire', 'Egypt', 'Kenya', 'Morocco', 'Mozambique', 'Nigeria', 'Rwanda', 'Sierra Leone', 'South Africa', 'Tanzania', 'Tunisia', 'Uganda', 'Zambia', 'Zimbabwe'],
+                'Oceania': ['Australia', 'New Zealand']
+            };
+            
+            for (const [continent, countries] of Object.entries(continents)) {
+                if (countries.includes(countryName)) return continent;
+            }
+            return 'Altri';
+        }
+
+        // Helper: Get language from country name
+        function getLanguage(countryName) {
+            const languages = {
+                'IT': ['Italy', 'San Marino', 'Vatican City State'],
+                'EN': ['Australia', 'Bahamas', 'Barbados', 'Bermuda', 'Canada', 'Cayman Islands', 'Gibraltar', 'Guernsey', 'Hong Kong', 'India', 'Ireland', 'Isle of Man', 'Jamaica', 'Jersey', 'Kenya', 'Malta', 'Mauritius', 'New Zealand', 'Nigeria', 'Pakistan', 'Philippines', 'Singapore', 'South Africa', 'Sri Lanka', 'Trinidad and Tobago', 'Uganda', 'United Kingdom', 'United States', 'Zambia', 'Zimbabwe'],
+                'FR': ['Belgium', 'Burkina Faso', 'Côte d\'Ivoire', 'France', 'Luxembourg', 'Monaco', 'Rwanda', 'Switzerland'],
+                'DE': ['Austria', 'Germany', 'Liechtenstein', 'Switzerland'],
+                'ES': ['Argentina', 'Bolivia', 'Chile', 'Colombia', 'Costa Rica', 'El Salvador', 'Mexico', 'Panama', 'Peru', 'Spain', 'Uruguay'],
+                'PT': ['Brazil', 'Mozambique', 'Portugal'],
+                'AR': ['Algeria', 'Bahrain', 'Egypt', 'Jordan', 'Kuwait', 'Morocco', 'Oman', 'Qatar', 'Saudi Arabia', 'Tunisia', 'United Arab Emirates']
+            };
+            
+            for (const [lang, countries] of Object.entries(languages)) {
+                if (countries.includes(countryName)) return lang;
+            }
+            return 'EN'; // Default
         }
 
         // Inizializza lingua, ricerca e caricamento dati al caricamento della pagina
@@ -2416,6 +2454,16 @@
             return codes[countryName] || null;
         }
 
+        // Helper: Convert country code to emoji flag
+        function countryCodeToEmoji(code) {
+            if (!code || code.length !== 2) return null;
+            const codePoints = code
+                .toUpperCase()
+                .split('')
+                .map(char => 127397 + char.charCodeAt());
+            return String.fromCodePoint(...codePoints);
+        }
+
         function getFlagInfo(countryName) {
             const canadaSubdivisionCodes = {
                 'Canada': 'CAN',
@@ -2437,7 +2485,8 @@
             if (canadaSubdivisionCodes[countryName]) {
                 return {
                     flagCode: 'CA',
-                    textCode: canadaSubdivisionCodes[countryName]
+                    textCode: canadaSubdivisionCodes[countryName],
+                    emoji: countryCodeToEmoji('CA')
                 };
             }
 
@@ -2447,13 +2496,15 @@
             if (!baseCode) {
                 return {
                     flagCode: null,
-                    textCode: countryName.substring(0, 3).toUpperCase()
+                    textCode: countryName.substring(0, 3).toUpperCase(),
+                    emoji: null
                 };
             }
 
             return {
                 flagCode: baseCode,
-                textCode: baseCode
+                textCode: baseCode,
+                emoji: countryCodeToEmoji(baseCode)
             };
         }
 
