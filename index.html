@@ -1025,12 +1025,15 @@
             <p class="subtitle" data-i18n="title" itemprop="description">Database Internazionale per controlli bancari sulla identità finanziaria sui destinatari di transazioni bancarie.</p>
         </header>
 
-        <div class="flags-grid-container">
-            <h2 data-i18n="flagsTitle">Accesso Rapido per Paese</h2>
-            <div class="flags-grid" id="flagsGrid"></div>
-        </div>
+        <!-- Sezione Griglia Bandiere -->
+        <section id="database-search-section" class="flags-grid-container">
+            <h2 data-i18n="flagsGridTitle">🌍 138 Autorità Finanziarie Internazionali - Clicca sulla Bandiera</h2>
+            <div id="flagsGrid" class="flags-grid">
+                <!-- Le bandiere verranno generate dinamicamente da JavaScript -->
+            </div>
+        </section>
 
-        <section id="database-search-section" class="controls" role="search" aria-label="Search and filter">
+        <section class="controls" role="search" aria-label="Search and filter">
     			<p class="intro-text" data-i18n="introText">Questa pagina web offre 137 LINK diretti per accedere alle webpage delle AUTORITA' FINANZIARIE di 137 PAESI del Mondo.<br>CERCA il nome del Paese che viene dichiarato sede della impresa finanziaria, e potrai conoscere tutti i dettagli identificativi ufficiali.</p>
             <div class="search-row">
                 <div class="search-box">
@@ -1139,6 +1142,7 @@
                 euReferences: "Risorse Istituzionali di Supervisione - Unione Europea USA FBI - ScamShield",
                 euCommission: "Commissione Europea",
                 flagsTitle: "Accesso Rapido per Paese",
+                flagsGridTitle: "🌍 138 Autorità Finanziarie Internazionali - Clicca sulla Bandiera",
                 modalAuthority: "Autorità Finanziaria",
                 modalAbbreviation: "Abbreviazione",
                 modalHomepage: "Homepage",
@@ -1221,6 +1225,7 @@
                 euReferences: "مصادر الإشراف المؤسسي – الاتحاد الأوروبي، مكتب التحقيقات الفيدرالي الأمريكي، ScamShield",
                 euCommission: "المفوضية الأوروبية",
                 flagsTitle: "وصول سريع حسب الدولة",
+                flagsGridTitle: "🌍 138 سلطة مالية دولية - انقر على العلم",
                 modalAuthority: "الهيئة المالية",
                 modalAbbreviation: "الاختصار",
                 modalHomepage: "الصفحة الرئيسية",
@@ -1303,6 +1308,7 @@
                 euReferences: "Nguồn giám sát thể chế – Liên minh châu Âu, FBI Hoa Kỳ, ScamShield",
                 euCommission: "Ủy ban châu Âu",
                 flagsTitle: "Truy cập nhanh theo quốc gia",
+                flagsGridTitle: "🌍 138 Cơ quan Tài chính Quốc tế - Nhấp vào Cờ",
                 modalAuthority: "Cơ quan tài chính",
                 modalAbbreviation: "Viết tắt",
                 modalHomepage: "Trang chủ",
@@ -1346,6 +1352,7 @@
                 euReferences: "机构监管资源——欧盟、美国 FBI、ScamShield",
                 euCommission: "欧盟委员会",
                 flagsTitle: "按国家快速访问",
+                flagsGridTitle: "🌍 138个国际金融监管机构 - 点击国旗",
                 modalAuthority: "金融监管机构",
                 modalAbbreviation: "缩写",
                 modalHomepage: "主页",
@@ -1389,6 +1396,7 @@
                 euReferences: "संस्थागत पर्यवेक्षण संसाधन – यूरोपीय संघ, यूएसए FBI, ScamShield",
                 euCommission: "यूरोपीय आयोग",
                 flagsTitle: "देश के अनुसार त्वरित पहुँच",
+                flagsGridTitle: "🌍 138 अंतर्राष्ट्रीय वित्तीय प्राधिकरण - झंडे पर क्लिक करें",
                 modalAuthority: "वित्तीय प्राधिकरण",
                 modalAbbreviation: "संक्षेप",
                 modalHomepage: "मुखपृष्ठ",
@@ -1432,6 +1440,7 @@
                 euReferences: "Institutional Supervision Resources - European Union USA FBI - ScamShield",
                 euCommission: "European Commission",
                 flagsTitle: "Quick Access by Country",
+                flagsGridTitle: "🌍 138 International Financial Authorities - Click on the Flag",
                 modalAuthority: "Financial Authority",
                 modalAbbreviation: "Abbreviation",
                 modalHomepage: "Homepage",
@@ -1514,6 +1523,7 @@
                 euReferences: "Ressources de Supervision Institutionnelle - Union Européenne USA FBI - ScamShield",
                 euCommission: "Commission Européenne",
                 flagsTitle: "Accès Rapide par Pays",
+                flagsGridTitle: "🌍 138 Autorités Financières Internationales - Cliquez sur le Drapeau",
                 modalAuthority: "Autorité Financière",
                 modalAbbreviation: "Abréviation",
                 modalHomepage: "Page d'accueil",
@@ -1596,6 +1606,7 @@
                 euReferences: "Institutionelle Aufsichtsressourcen - Europäische Union USA FBI - ScamShield",
                 euCommission: "Europäische Kommission",
                 flagsTitle: "Schnellzugriff nach Land",
+                flagsGridTitle: "🌍 138 Internationale Finanzbehörden - Klicken Sie auf die Flagge",
                 modalAuthority: "Finanzbehörde",
                 modalAbbreviation: "Abkürzung",
                 modalHomepage: "Startseite",
@@ -1678,6 +1689,7 @@
                 euReferences: "Recursos de Supervisión Institucional - Unión Europea USA FBI - ScamShield",
                 euCommission: "Comisión Europea",
                 flagsTitle: "Acceso Rápido por País",
+                flagsGridTitle: "🌍 138 Autoridades Financieras Internacionales - Haga clic en la Bandera",
                 modalAuthority: "Autoridad Financiera",
                 modalAbbreviation: "Abreviatura",
                 modalHomepage: "Página Principal",
@@ -2222,24 +2234,30 @@
                 'CEMAC (Regional)': 'CEMAC', 'Chile': 'CL', 'Chinese Taipei': 'TW', 'Colombia': 'CO',
                 'Costa Rica': 'CR', 'Côte d\'Ivoire': 'CI', 'Croatia': 'HR', 'Cyprus': 'CY',
                 'Czech Republic': 'CZ', 'Denmark': 'DK', 'ECSRC (Regional)': 'ECSRC', 'Egypt': 'EG',
-                'El Salvador': 'SV', 'Estonia': 'EE', 'Finland': 'FI', 'France': 'FR', 'Georgia': 'GE',
-                'Germany': 'DE', 'Gibraltar': 'GI', 'Greece': 'GR', 'Guernsey': 'GG', 'Hong Kong': 'HK',
-                'Hungary': 'HU', 'Iceland': 'IS', 'India': 'IN', 'Indonesia': 'ID', 'Ireland': 'IE',
-                'Isle of Man': 'IM', 'Israel': 'IL', 'Italy': 'IT', 'Jamaica': 'JM', 'Japan': 'JP',
-                'Jersey': 'JE', 'Jordan': 'JO', 'Kazakhstan': 'KZ', 'Kenya': 'KE', 'Korea, Republic of': 'KR',
-                'Kuwait': 'KW', 'Kyrgyzstan': 'KG', 'Latvia': 'LV', 'Liechtenstein': 'LI', 'Lithuania': 'LT',
-                'Luxembourg': 'LU', 'Madagascar': 'MG', 'Malawi': 'MW', 'Malaysia': 'MY', 'Maldives': 'MV', 'Malta': 'MT', 'Mauritius': 'MU',
-                'Mexico': 'MX', 'Mongolia': 'MN', 'Montenegro': 'ME', 'Morocco': 'MA', 'Mozambique': 'MZ', 'Nepal': 'NP',
-                'Netherlands': 'NL', 'New Zealand': 'NZ', 'Nigeria': 'NG', 'North Macedonia': 'MK', 'Uzbekistan': 'UZ',
-                'Oman': 'OM', 'Pakistan': 'PK', 'Panama': 'PA', 'Papua New Guinea': 'PG', 'Paraguay': 'PY',
-                'Peru': 'PE', 'Poland': 'PL', 'Portugal': 'PT', 'Qatar': 'QA', 'Romania': 'RO',
-                'Saudi Arabia': 'SA', 'Serbia': 'RS', 'Singapore': 'SG', 'Slovakia': 'SK', 'Slovenia': 'SI',
-                'South Africa': 'ZA', 'Spain': 'ES', 'St. Vincent and the Grenadines': 'VC', 'Sri Lanka': 'LK', 'Sweden': 'SE',
-                'Switzerland': 'CH', 'Thailand': 'TH', 'Trinidad and Tobago': 'TT', 'Tunisia': 'TN', 'Vietnam': 'VN', 'Greenland': 'GL',
-                'Azores (Portugal)': 'PT', 'Canary Islands (Spain)': 'ES', 'Laos': 'LA', 'Ethiopia': 'ET', 'Libya': 'LY', 'Gabon': 'GA',
-                'Zimbabwe (formerly Rhodesia)': 'ZW', 'Rwanda': 'RW', 'French Polynesia (France)': 'PF',
-                'Türkiye': 'TR', 'United Arab Emirates': 'AE', 'United Kingdom': 'GB',
-                'United States of America': 'US', 'Uruguay': 'UY', 'Zambia': 'ZM'
+                'El Salvador': 'SV', 'Estonia': 'EE', 'Ethiopia': 'ET', 'Finland': 'FI', 'France': 'FR',
+                'French Polynesia (France)': 'PF', 'Gabon': 'GA', 'Georgia': 'GE',
+                'Germany': 'DE', 'Gibraltar': 'GI', 'Greece': 'GR', 'Greenland': 'GL', 'Guernsey': 'GG',
+                'Hong Kong': 'HK', 'Hungary': 'HU', 'Iceland': 'IS', 'India': 'IN', 'Indonesia': 'ID',
+                'Ireland': 'IE', 'Isle of Man': 'IM', 'Israel': 'IL', 'Italy': 'IT', 'Jamaica': 'JM',
+                'Japan': 'JP', 'Jersey': 'JE', 'Jordan': 'JO', 'Kazakhstan': 'KZ', 'Kenya': 'KE',
+                'Korea, Republic of': 'KR', 'Kuwait': 'KW', 'Kyrgyzstan': 'KG', 'Laos': 'LA', 'Latvia': 'LV',
+                'Liechtenstein': 'LI', 'Lithuania': 'LT', 'Luxembourg': 'LU', 'Libya': 'LY',
+                'Madagascar': 'MG', 'Malawi': 'MW', 'Malaysia': 'MY', 'Maldives': 'MV', 'Malta': 'MT',
+                'Mauritius': 'MU', 'Mexico': 'MX', 'Moldova': 'MD', 'Mongolia': 'MN', 'Montenegro': 'ME',
+                'Morocco': 'MA', 'Mozambique': 'MZ', 'Namibia': 'NA', 'Nepal': 'NP', 'Netherlands': 'NL',
+                'New Zealand': 'NZ', 'Nigeria': 'NG', 'North Macedonia': 'MK', 'Norway': 'NO',
+                'Oman': 'OM', 'Pakistan': 'PK', 'Palestine': 'PS', 'Panama': 'PA', 'Papua New Guinea': 'PG',
+                'Paraguay': 'PY', 'Peru': 'PE', 'Philippines': 'PH', 'Poland': 'PL', 'Portugal': 'PT',
+                'Qatar': 'QA', 'Romania': 'RO', 'Russia': 'RU', 'Rwanda': 'RW',
+                'San Marino': 'SM', 'Saudi Arabia': 'SA', 'Serbia': 'RS', 'Singapore': 'SG', 'Slovakia': 'SK',
+                'Slovenia': 'SI', 'South Africa': 'ZA', 'Spain': 'ES', 'Sri Lanka': 'LK',
+                'St. Vincent and the Grenadines': 'VC', 'Sweden': 'SE', 'Switzerland': 'CH',
+                'Tanzania': 'TZ', 'Thailand': 'TH', 'Trinidad and Tobago': 'TT', 'Tunisia': 'TN',
+                'Turkey': 'TR', 'Türkiye': 'TR', 'Uganda': 'UG', 'Ukraine': 'UA',
+                'United Arab Emirates': 'AE', 'United Kingdom': 'GB', 'United States': 'US',
+                'United States of America': 'US', 'Uruguay': 'UY', 'Uzbekistan': 'UZ', 'Vietnam': 'VN',
+                'Zambia': 'ZM', 'Zimbabwe': 'ZW', 'Zimbabwe (formerly Rhodesia)': 'ZW',
+                'Azores (Portugal)': 'PT', 'Canary Islands (Spain)': 'ES'
             };
             // Restituisce il codice ISO 3166-1 alpha-2 se noto, altrimenti null (nessuna bandiera CSS)
             return codes[countryName] || null;
