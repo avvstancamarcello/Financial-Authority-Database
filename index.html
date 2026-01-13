@@ -2820,26 +2820,13 @@
 
         async function loadCountryData() {
             try {
-                // Prova prima il database cifrato (se esiste)
-                let data;
-                try {
-                    const encResponse = await fetch('db.enc');
-                    if (encResponse.ok) {
-                        const encoded = await encResponse.text();
-                        const decoded = atob(encoded);
-                        const decrypted = xorCipher(decoded, COPYRIGHT_KEY);
-                        data = JSON.parse(decrypted);
-                        console.log('%c🔒 Database cifrato caricato', 'color: green; font-weight: bold;');
-                    } else {
-                        throw new Error('Encrypted DB not found');
-                    }
-                } catch (encError) {
-                    console.error('Errore caricamento/decifratura db.enc, uso fallback JSON:', encError);
-                    // Fallback al JSON normale
-                    const response = await fetch('financial_authorities_database.json');
-                    if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
-                    data = await response.json();
+                console.log('🔍 Caricamento database autorità finanziarie...');
+                const response = await fetch('financial_authorities_database.json');
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
                 }
+                let data = await response.json();
+                console.log(`✅ Database caricato con successo: ${Object.keys(data).length} paesi`);
                 
                 // Aggiungi suddivisioni regionali e watermark copyright
                 data = addCanadaSubregions(data);
@@ -2849,9 +2836,12 @@
                 countriesData = Object.values(data);
                 renderAll();
             } catch (error) {
-                console.error('Error loading country data:', error);
+                console.error('❌ Errore caricamento database:', error);
                 countriesData = [];
-                document.getElementById('countriesGrid').innerHTML = `<p style="color: red; text-align: center;">Could not load country data. Please check the console for errors.</p>`;
+                const gridElement = document.getElementById('countriesGrid');
+                if (gridElement) {
+                    gridElement.innerHTML = `<p style="color: red; text-align: center;">Impossibile caricare il database delle autorità finanziarie. ${error.message}</p>`;
+                }
             }
         }
 
