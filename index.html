@@ -2010,13 +2010,14 @@
                 const countryName = country.country_name;
                 const flagInfo = getFlagInfo(countryName);
                 const safeCountryName = countryName.replace(/'/g, "\\'").replace(/"/g, '&quot;');
+                const escapedCountryName = countryName.replace(/"/g, '&quot;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
                 
                 // Simple template: emoji + code
                 html += `
                     <div class="flag-item" 
                          onclick="openModal('${safeCountryName}')" 
-                         title="Clicca per vedere ${countryName}"
-                         data-name="${countryName}"
+                         title="Clicca per vedere ${escapedCountryName}"
+                         data-name="${escapedCountryName}"
                          data-continent="${getContinent(countryName)}"
                          data-language="${getLanguage(countryName)}">
                         ${flagInfo.emoji || '🌍'} ${flagInfo.textCode}
