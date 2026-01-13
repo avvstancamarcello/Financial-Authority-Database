@@ -1773,7 +1773,7 @@
       "authorityEmail": "oficinadelinversor@cnmv.es",
       "social_links": {}
     },
-    "notes": "Comunità autonoma spagnola (Isole Canarie). La vigilanza su intermediari e mercati finanziari è esercitata dalla CNMV spagnola, nell'ambito del quadro regolatorio UE." 
+    "notes": "Comunità autonoma spagnola (Isole Canarie). La vigilanza su intermediari e mercati finanziari è esercitata dalla CNMV spagnola, nell'ambito del quadro regolatorio UE."
   },
   "Sri Lanka": {
     "country_name": "Sri Lanka",
@@ -1909,5 +1909,20 @@
       "social_links": {}
     },
     "notes": "World Investor Week Coordinators: Dingase Nunkwe Makumba, Mubanga Kondolo Jr., Sitali Mwala Mugala."
+  },
+  "Vatican City State": {
+    "country_name": "Vatican City State",
+    "flag": "🇻🇦",
+    "isEU": false,
+    "protectionLevel": "Alto",
+    "financial_authority": {
+      "name": "Autorità di Supervisione e Informazione Finanziaria (Supervisory and Financial Information Authority)",
+      "abbreviation": "ASIF",
+      "homepage": "https://www.asif.va/",
+      "fraudReportLink": "https://www.asif.va/ENG/Contatti.aspx",
+      "authorityEmail": "info@asif.va",
+      "social_links": {}
+    },
+    "notes": "ASIF supervises financial entities in Vatican City State to prevent money laundering and terrorism financing."
   }
 }
