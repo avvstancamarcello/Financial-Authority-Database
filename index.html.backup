@@ -1006,7 +1006,881 @@
         <section id="database-search-section" class="flags-grid-container">
             <h2 data-i18n="flagsGridTitle">🌍 Seleziona il tuo Paese - Database 125 Autorità Finanziarie</h2>
             <div id="flagsGrid" class="flags-grid">
-                <!-- Flags generated dynamically by JavaScript -->
+        <div class="flag-item" onclick="openModal('Albania')" data-country="Albania">
+
+            <span class="flag-icon-wrapper">
+                <span class="fi fi-al"></span>
+            </span>
+            <div class="flag-code">AL</div>
+        </div>
+        <div class="flag-item" onclick="openModal('Algeria')" data-country="Algeria">
+
+            <span class="flag-icon-wrapper">
+                <span class="fi fi-dz"></span>
+            </span>
+            <div class="flag-code">DZ</div>
+        </div>
+        <div class="flag-item" onclick="openModal('Angola')" data-country="Angola">
+
+            <span class="flag-icon-wrapper">
+                <span class="fi fi-ao"></span>
+            </span>
+            <div class="flag-code">AO</div>
+        </div>
+        <div class="flag-item" onclick="openModal('Argentina')" data-country="Argentina">
+
+            <span class="flag-icon-wrapper">
+                <span class="fi fi-ar"></span>
+            </span>
+            <div class="flag-code">AR</div>
+        </div>
+        <div class="flag-item" onclick="openModal('Armenia')" data-country="Armenia">
+
+            <span class="flag-icon-wrapper">
+                <span class="fi fi-am"></span>
+            </span>
+            <div class="flag-code">AM</div>
+        </div>
+        <div class="flag-item" onclick="openModal('Australia')" data-country="Australia">
+
+            <span class="flag-icon-wrapper">
+                <span class="fi fi-au"></span>
+            </span>
+            <div class="flag-code">AU</div>
+        </div>
+        <div class="flag-item" onclick="openModal('Austria')" data-country="Austria">
+
+            <span class="flag-icon-wrapper">
+                <span class="fi fi-at"></span>
+            </span>
+            <div class="flag-code">AT</div>
+        </div>
+        <div class="flag-item" onclick="openModal('Azerbaijan')" data-country="Azerbaijan">
+
+            <span class="flag-icon-wrapper">
+                <span class="fi fi-az"></span>
+            </span>
+            <div class="flag-code">AZ</div>
+        </div>
+        <div class="flag-item" onclick="openModal('Azores (Portugal)')" data-country="Azores (Portugal)">
+
+            <span class="flag-icon-wrapper">
+                <span class="fi fi-pt"></span>
+            </span>
+            <div class="flag-code">PT</div>
+        </div>
+        <div class="flag-item" onclick="openModal('Bahamas')" data-country="Bahamas">
+
+            <span class="flag-icon-wrapper">
+                <span class="fi fi-bs"></span>
+            </span>
+            <div class="flag-code">BS</div>
+        </div>
+        <div class="flag-item" onclick="openModal('Bahrain')" data-country="Bahrain">
+
+            <span class="flag-icon-wrapper">
+                <span class="fi fi-bh"></span>
+            </span>
+            <div class="flag-code">BH</div>
+        </div>
+        <div class="flag-item" onclick="openModal('Bangladesh')" data-country="Bangladesh">
+
+            <span class="flag-icon-wrapper">
+                <span class="fi fi-bd"></span>
+            </span>
+            <div class="flag-code">BD</div>
+        </div>
+        <div class="flag-item" onclick="openModal('Barbados')" data-country="Barbados">
+
+            <span class="flag-icon-wrapper">
+                <span class="fi fi-bb"></span>
+            </span>
+            <div class="flag-code">BB</div>
+        </div>
+        <div class="flag-item" onclick="openModal('Belgium')" data-country="Belgium">
+
+            <span class="flag-icon-wrapper">
+                <span class="fi fi-be"></span>
+            </span>
+            <div class="flag-code">BE</div>
+        </div>
+        <div class="flag-item" onclick="openModal('Bermuda')" data-country="Bermuda">
+
+            <span class="flag-icon-wrapper">
+                <span class="fi fi-bm"></span>
+            </span>
+            <div class="flag-code">BM</div>
+        </div>
+        <div class="flag-item" onclick="openModal('Bolivia')" data-country="Bolivia">
+
+            <span class="flag-icon-wrapper">
+                <span class="fi fi-bo"></span>
+            </span>
+            <div class="flag-code">BO</div>
+        </div>
+        <div class="flag-item" onclick="openModal('Botswana')" data-country="Botswana">
+
+            <span class="flag-icon-wrapper">
+                <span class="fi fi-bw"></span>
+            </span>
+            <div class="flag-code">BW</div>
+        </div>
+        <div class="flag-item" onclick="openModal('Brazil')" data-country="Brazil">
+
+            <span class="flag-icon-wrapper">
+                <span class="fi fi-br"></span>
+            </span>
+            <div class="flag-code">BR</div>
+        </div>
+        <div class="flag-item" onclick="openModal('British Virgin Islands')" data-country="British Virgin Islands">
+
+            <span class="flag-icon-wrapper">
+                <span class="fi fi-vg"></span>
+            </span>
+            <div class="flag-code">VG</div>
+        </div>
+        <div class="flag-item" onclick="openModal('Bulgaria')" data-country="Bulgaria">
+
+            <span class="flag-icon-wrapper">
+                <span class="fi fi-bg"></span>
+            </span>
+            <div class="flag-code">BG</div>
+        </div>
+        <div class="flag-item" onclick="openModal('Burkina Faso')" data-country="Burkina Faso">
+
+            <span class="flag-icon-wrapper">
+                <span class="fi fi-bf"></span>
+            </span>
+            <div class="flag-code">BF</div>
+        </div>
+        <div class="flag-item" onclick="openModal('CEMAC (Regional)')" data-country="CEMAC (Regional)">
+
+            <span class="flag-icon-wrapper">
+                <span class="fi fi-cm"></span>
+            </span>
+            <div class="flag-code">CEMAC</div>
+        </div>
+        <div class="flag-item" onclick="openModal('Cambodia')" data-country="Cambodia">
+
+            <span class="flag-icon-wrapper">
+                <span class="fi fi-kh"></span>
+            </span>
+            <div class="flag-code">KH</div>
+        </div>
+        <div class="flag-item" onclick="openModal('Canada')" data-country="Canada">
+
+            <span class="flag-icon-wrapper">
+                <span class="fi fi-ca"></span>
+            </span>
+            <div class="flag-code">CA</div>
+        </div>
+        <div class="flag-item" onclick="openModal('Canary Islands (Spain)')" data-country="Canary Islands (Spain)">
+
+            <span class="flag-icon-wrapper">
+                <span class="fi fi-es"></span>
+            </span>
+            <div class="flag-code">ES</div>
+        </div>
+        <div class="flag-item" onclick="openModal('Cayman Islands')" data-country="Cayman Islands">
+
+            <span class="flag-icon-wrapper">
+                <span class="fi fi-ky"></span>
+            </span>
+            <div class="flag-code">KY</div>
+        </div>
+        <div class="flag-item" onclick="openModal('Chile')" data-country="Chile">
+
+            <span class="flag-icon-wrapper">
+                <span class="fi fi-cl"></span>
+            </span>
+            <div class="flag-code">CL</div>
+        </div>
+        <div class="flag-item" onclick="openModal('Chinese Taipei')" data-country="Chinese Taipei">
+
+            <span class="flag-icon-wrapper">
+                <span class="fi fi-tw"></span>
+            </span>
+            <div class="flag-code">TW</div>
+        </div>
+        <div class="flag-item" onclick="openModal('Colombia')" data-country="Colombia">
+
+            <span class="flag-icon-wrapper">
+                <span class="fi fi-co"></span>
+            </span>
+            <div class="flag-code">CO</div>
+        </div>
+        <div class="flag-item" onclick="openModal('Costa Rica')" data-country="Costa Rica">
+
+            <span class="flag-icon-wrapper">
+                <span class="fi fi-cr"></span>
+            </span>
+            <div class="flag-code">CR</div>
+        </div>
+        <div class="flag-item" onclick="openModal('Croatia')" data-country="Croatia">
+
+            <span class="flag-icon-wrapper">
+                <span class="fi fi-hr"></span>
+            </span>
+            <div class="flag-code">HR</div>
+        </div>
+        <div class="flag-item" onclick="openModal('Cyprus')" data-country="Cyprus">
+
+            <span class="flag-icon-wrapper">
+                <span class="fi fi-cy"></span>
+            </span>
+            <div class="flag-code">CY</div>
+        </div>
+        <div class="flag-item" onclick="openModal('Czech Republic')" data-country="Czech Republic">
+
+            <span class="flag-icon-wrapper">
+                <span class="fi fi-cz"></span>
+            </span>
+            <div class="flag-code">CZ</div>
+        </div>
+        <div class="flag-item" onclick="openModal('Côte d\'Ivoire')" data-country="Côte d'Ivoire">
+
+            <span class="flag-icon-wrapper">
+                <span class="fi fi-ci"></span>
+            </span>
+            <div class="flag-code">CI</div>
+        </div>
+        <div class="flag-item" onclick="openModal('Denmark')" data-country="Denmark">
+
+            <span class="flag-icon-wrapper">
+                <span class="fi fi-dk"></span>
+            </span>
+            <div class="flag-code">DK</div>
+        </div>
+        <div class="flag-item" onclick="openModal('ECSRC (Regional)')" data-country="ECSRC (Regional)">
+
+            <span class="flag-icon-wrapper">
+                <span class="fi fi-lc"></span>
+            </span>
+            <div class="flag-code">ECSRC</div>
+        </div>
+        <div class="flag-item" onclick="openModal('Egypt')" data-country="Egypt">
+
+            <span class="flag-icon-wrapper">
+                <span class="fi fi-eg"></span>
+            </span>
+            <div class="flag-code">EG</div>
+        </div>
+        <div class="flag-item" onclick="openModal('El Salvador')" data-country="El Salvador">
+
+            <span class="flag-icon-wrapper">
+                <span class="fi fi-sv"></span>
+            </span>
+            <div class="flag-code">SV</div>
+        </div>
+        <div class="flag-item" onclick="openModal('Estonia')" data-country="Estonia">
+
+            <span class="flag-icon-wrapper">
+                <span class="fi fi-ee"></span>
+            </span>
+            <div class="flag-code">EE</div>
+        </div>
+        <div class="flag-item" onclick="openModal('Ethiopia')" data-country="Ethiopia">
+
+            <span class="flag-icon-wrapper">
+                <span class="fi fi-et"></span>
+            </span>
+            <div class="flag-code">ET</div>
+        </div>
+        <div class="flag-item" onclick="openModal('Finland')" data-country="Finland">
+
+            <span class="flag-icon-wrapper">
+                <span class="fi fi-fi"></span>
+            </span>
+            <div class="flag-code">FI</div>
+        </div>
+        <div class="flag-item" onclick="openModal('France')" data-country="France">
+
+            <span class="flag-icon-wrapper">
+                <span class="fi fi-fr"></span>
+            </span>
+            <div class="flag-code">FR</div>
+        </div>
+        <div class="flag-item" onclick="openModal('French Polynesia (France)')" data-country="French Polynesia (France)">
+
+            <span class="flag-icon-wrapper">
+                <span class="fi fi-pf"></span>
+            </span>
+            <div class="flag-code">PF</div>
+        </div>
+        <div class="flag-item" onclick="openModal('Gabon')" data-country="Gabon">
+
+            <span class="flag-icon-wrapper">
+                <span class="fi fi-ga"></span>
+            </span>
+            <div class="flag-code">GA</div>
+        </div>
+        <div class="flag-item" onclick="openModal('Georgia')" data-country="Georgia">
+
+            <span class="flag-icon-wrapper">
+                <span class="fi fi-ge"></span>
+            </span>
+            <div class="flag-code">GE</div>
+        </div>
+        <div class="flag-item" onclick="openModal('Germany')" data-country="Germany">
+
+            <span class="flag-icon-wrapper">
+                <span class="fi fi-de"></span>
+            </span>
+            <div class="flag-code">DE</div>
+        </div>
+        <div class="flag-item" onclick="openModal('Gibraltar')" data-country="Gibraltar">
+
+            <span class="flag-icon-wrapper">
+                <span class="fi fi-gi"></span>
+            </span>
+            <div class="flag-code">GI</div>
+        </div>
+        <div class="flag-item" onclick="openModal('Greece')" data-country="Greece">
+
+            <span class="flag-icon-wrapper">
+                <span class="fi fi-gr"></span>
+            </span>
+            <div class="flag-code">GR</div>
+        </div>
+        <div class="flag-item" onclick="openModal('Greenland')" data-country="Greenland">
+
+            <span class="flag-icon-wrapper">
+                <span class="fi fi-gl"></span>
+            </span>
+            <div class="flag-code">GL</div>
+        </div>
+        <div class="flag-item" onclick="openModal('Guernsey')" data-country="Guernsey">
+
+            <span class="flag-icon-wrapper">
+                <span class="fi fi-gg"></span>
+            </span>
+            <div class="flag-code">GG</div>
+        </div>
+        <div class="flag-item" onclick="openModal('Hong Kong')" data-country="Hong Kong">
+
+            <span class="flag-icon-wrapper">
+                <span class="fi fi-hk"></span>
+            </span>
+            <div class="flag-code">HK</div>
+        </div>
+        <div class="flag-item" onclick="openModal('Hungary')" data-country="Hungary">
+
+            <span class="flag-icon-wrapper">
+                <span class="fi fi-hu"></span>
+            </span>
+            <div class="flag-code">HU</div>
+        </div>
+        <div class="flag-item" onclick="openModal('Iceland')" data-country="Iceland">
+
+            <span class="flag-icon-wrapper">
+                <span class="fi fi-is"></span>
+            </span>
+            <div class="flag-code">IS</div>
+        </div>
+        <div class="flag-item" onclick="openModal('India')" data-country="India">
+
+            <span class="flag-icon-wrapper">
+                <span class="fi fi-in"></span>
+            </span>
+            <div class="flag-code">IN</div>
+        </div>
+        <div class="flag-item" onclick="openModal('Indonesia')" data-country="Indonesia">
+
+            <span class="flag-icon-wrapper">
+                <span class="fi fi-id"></span>
+            </span>
+            <div class="flag-code">ID</div>
+        </div>
+        <div class="flag-item" onclick="openModal('Ireland')" data-country="Ireland">
+
+            <span class="flag-icon-wrapper">
+                <span class="fi fi-ie"></span>
+            </span>
+            <div class="flag-code">IE</div>
+        </div>
+        <div class="flag-item" onclick="openModal('Isle of Man')" data-country="Isle of Man">
+
+            <span class="flag-icon-wrapper">
+                <span class="fi fi-im"></span>
+            </span>
+            <div class="flag-code">IM</div>
+        </div>
+        <div class="flag-item" onclick="openModal('Israel')" data-country="Israel">
+
+            <span class="flag-icon-wrapper">
+                <span class="fi fi-il"></span>
+            </span>
+            <div class="flag-code">IL</div>
+        </div>
+        <div class="flag-item" onclick="openModal('Italy')" data-country="Italy">
+
+            <span class="flag-icon-wrapper">
+                <span class="fi fi-it"></span>
+            </span>
+            <div class="flag-code">IT</div>
+        </div>
+        <div class="flag-item" onclick="openModal('Jamaica')" data-country="Jamaica">
+
+            <span class="flag-icon-wrapper">
+                <span class="fi fi-jm"></span>
+            </span>
+            <div class="flag-code">JM</div>
+        </div>
+        <div class="flag-item" onclick="openModal('Japan')" data-country="Japan">
+
+            <span class="flag-icon-wrapper">
+                <span class="fi fi-jp"></span>
+            </span>
+            <div class="flag-code">JP</div>
+        </div>
+        <div class="flag-item" onclick="openModal('Jersey')" data-country="Jersey">
+
+            <span class="flag-icon-wrapper">
+                <span class="fi fi-je"></span>
+            </span>
+            <div class="flag-code">JE</div>
+        </div>
+        <div class="flag-item" onclick="openModal('Jordan')" data-country="Jordan">
+
+            <span class="flag-icon-wrapper">
+                <span class="fi fi-jo"></span>
+            </span>
+            <div class="flag-code">JO</div>
+        </div>
+        <div class="flag-item" onclick="openModal('Kazakhstan')" data-country="Kazakhstan">
+
+            <span class="flag-icon-wrapper">
+                <span class="fi fi-kz"></span>
+            </span>
+            <div class="flag-code">KZ</div>
+        </div>
+        <div class="flag-item" onclick="openModal('Kenya')" data-country="Kenya">
+
+            <span class="flag-icon-wrapper">
+                <span class="fi fi-ke"></span>
+            </span>
+            <div class="flag-code">KE</div>
+        </div>
+        <div class="flag-item" onclick="openModal('Korea, Republic of')" data-country="Korea, Republic of">
+
+            <span class="flag-icon-wrapper">
+                <span class="fi fi-kr"></span>
+            </span>
+            <div class="flag-code">KR</div>
+        </div>
+        <div class="flag-item" onclick="openModal('Kuwait')" data-country="Kuwait">
+
+            <span class="flag-icon-wrapper">
+                <span class="fi fi-kw"></span>
+            </span>
+            <div class="flag-code">KW</div>
+        </div>
+        <div class="flag-item" onclick="openModal('Kyrgyzstan')" data-country="Kyrgyzstan">
+
+            <span class="flag-icon-wrapper">
+                <span class="fi fi-kg"></span>
+            </span>
+            <div class="flag-code">KG</div>
+        </div>
+        <div class="flag-item" onclick="openModal('Laos')" data-country="Laos">
+
+            <span class="flag-icon-wrapper">
+                <span class="fi fi-la"></span>
+            </span>
+            <div class="flag-code">LA</div>
+        </div>
+        <div class="flag-item" onclick="openModal('Latvia')" data-country="Latvia">
+
+            <span class="flag-icon-wrapper">
+                <span class="fi fi-lv"></span>
+            </span>
+            <div class="flag-code">LV</div>
+        </div>
+        <div class="flag-item" onclick="openModal('Libya')" data-country="Libya">
+
+            <span class="flag-icon-wrapper">
+                <span class="fi fi-ly"></span>
+            </span>
+            <div class="flag-code">LY</div>
+        </div>
+        <div class="flag-item" onclick="openModal('Liechtenstein')" data-country="Liechtenstein">
+
+            <span class="flag-icon-wrapper">
+                <span class="fi fi-li"></span>
+            </span>
+            <div class="flag-code">LI</div>
+        </div>
+        <div class="flag-item" onclick="openModal('Lithuania')" data-country="Lithuania">
+
+            <span class="flag-icon-wrapper">
+                <span class="fi fi-lt"></span>
+            </span>
+            <div class="flag-code">LT</div>
+        </div>
+        <div class="flag-item" onclick="openModal('Luxembourg')" data-country="Luxembourg">
+
+            <span class="flag-icon-wrapper">
+                <span class="fi fi-lu"></span>
+            </span>
+            <div class="flag-code">LU</div>
+        </div>
+        <div class="flag-item" onclick="openModal('Madagascar')" data-country="Madagascar">
+
+            <span class="flag-icon-wrapper">
+                <span class="fi fi-mg"></span>
+            </span>
+            <div class="flag-code">MG</div>
+        </div>
+        <div class="flag-item" onclick="openModal('Malawi')" data-country="Malawi">
+
+            <span class="flag-icon-wrapper">
+                <span class="fi fi-mw"></span>
+            </span>
+            <div class="flag-code">MW</div>
+        </div>
+        <div class="flag-item" onclick="openModal('Malaysia')" data-country="Malaysia">
+
+            <span class="flag-icon-wrapper">
+                <span class="fi fi-my"></span>
+            </span>
+            <div class="flag-code">MY</div>
+        </div>
+        <div class="flag-item" onclick="openModal('Maldives')" data-country="Maldives">
+
+            <span class="flag-icon-wrapper">
+                <span class="fi fi-mv"></span>
+            </span>
+            <div class="flag-code">MV</div>
+        </div>
+        <div class="flag-item" onclick="openModal('Malta')" data-country="Malta">
+
+            <span class="flag-icon-wrapper">
+                <span class="fi fi-mt"></span>
+            </span>
+            <div class="flag-code">MT</div>
+        </div>
+        <div class="flag-item" onclick="openModal('Mauritius')" data-country="Mauritius">
+
+            <span class="flag-icon-wrapper">
+                <span class="fi fi-mu"></span>
+            </span>
+            <div class="flag-code">MU</div>
+        </div>
+        <div class="flag-item" onclick="openModal('Mexico')" data-country="Mexico">
+
+            <span class="flag-icon-wrapper">
+                <span class="fi fi-mx"></span>
+            </span>
+            <div class="flag-code">MX</div>
+        </div>
+        <div class="flag-item" onclick="openModal('Mongolia')" data-country="Mongolia">
+
+            <span class="flag-icon-wrapper">
+                <span class="fi fi-mn"></span>
+            </span>
+            <div class="flag-code">MN</div>
+        </div>
+        <div class="flag-item" onclick="openModal('Montenegro')" data-country="Montenegro">
+
+            <span class="flag-icon-wrapper">
+                <span class="fi fi-me"></span>
+            </span>
+            <div class="flag-code">ME</div>
+        </div>
+        <div class="flag-item" onclick="openModal('Morocco')" data-country="Morocco">
+
+            <span class="flag-icon-wrapper">
+                <span class="fi fi-ma"></span>
+            </span>
+            <div class="flag-code">MA</div>
+        </div>
+        <div class="flag-item" onclick="openModal('Mozambique')" data-country="Mozambique">
+
+            <span class="flag-icon-wrapper">
+                <span class="fi fi-mz"></span>
+            </span>
+            <div class="flag-code">MZ</div>
+        </div>
+        <div class="flag-item" onclick="openModal('Nepal')" data-country="Nepal">
+
+            <span class="flag-icon-wrapper">
+                <span class="fi fi-np"></span>
+            </span>
+            <div class="flag-code">NP</div>
+        </div>
+        <div class="flag-item" onclick="openModal('Netherlands')" data-country="Netherlands">
+
+            <span class="flag-icon-wrapper">
+                <span class="fi fi-nl"></span>
+            </span>
+            <div class="flag-code">NL</div>
+        </div>
+        <div class="flag-item" onclick="openModal('New Zealand')" data-country="New Zealand">
+
+            <span class="flag-icon-wrapper">
+                <span class="fi fi-nz"></span>
+            </span>
+            <div class="flag-code">NZ</div>
+        </div>
+        <div class="flag-item" onclick="openModal('Nigeria')" data-country="Nigeria">
+
+            <span class="flag-icon-wrapper">
+                <span class="fi fi-ng"></span>
+            </span>
+            <div class="flag-code">NG</div>
+        </div>
+        <div class="flag-item" onclick="openModal('North Macedonia')" data-country="North Macedonia">
+
+            <span class="flag-icon-wrapper">
+                <span class="fi fi-mk"></span>
+            </span>
+            <div class="flag-code">MK</div>
+        </div>
+        <div class="flag-item" onclick="openModal('Oman')" data-country="Oman">
+
+            <span class="flag-icon-wrapper">
+                <span class="fi fi-om"></span>
+            </span>
+            <div class="flag-code">OM</div>
+        </div>
+        <div class="flag-item" onclick="openModal('Pakistan')" data-country="Pakistan">
+
+            <span class="flag-icon-wrapper">
+                <span class="fi fi-pk"></span>
+            </span>
+            <div class="flag-code">PK</div>
+        </div>
+        <div class="flag-item" onclick="openModal('Panama')" data-country="Panama">
+
+            <span class="flag-icon-wrapper">
+                <span class="fi fi-pa"></span>
+            </span>
+            <div class="flag-code">PA</div>
+        </div>
+        <div class="flag-item" onclick="openModal('Papua New Guinea')" data-country="Papua New Guinea">
+
+            <span class="flag-icon-wrapper">
+                <span class="fi fi-pg"></span>
+            </span>
+            <div class="flag-code">PG</div>
+        </div>
+        <div class="flag-item" onclick="openModal('Paraguay')" data-country="Paraguay">
+
+            <span class="flag-icon-wrapper">
+                <span class="fi fi-py"></span>
+            </span>
+            <div class="flag-code">PY</div>
+        </div>
+        <div class="flag-item" onclick="openModal('Peru')" data-country="Peru">
+
+            <span class="flag-icon-wrapper">
+                <span class="fi fi-pe"></span>
+            </span>
+            <div class="flag-code">PE</div>
+        </div>
+        <div class="flag-item" onclick="openModal('Poland')" data-country="Poland">
+
+            <span class="flag-icon-wrapper">
+                <span class="fi fi-pl"></span>
+            </span>
+            <div class="flag-code">PL</div>
+        </div>
+        <div class="flag-item" onclick="openModal('Portugal')" data-country="Portugal">
+
+            <span class="flag-icon-wrapper">
+                <span class="fi fi-pt"></span>
+            </span>
+            <div class="flag-code">PT</div>
+        </div>
+        <div class="flag-item" onclick="openModal('Qatar')" data-country="Qatar">
+
+            <span class="flag-icon-wrapper">
+                <span class="fi fi-qa"></span>
+            </span>
+            <div class="flag-code">QA</div>
+        </div>
+        <div class="flag-item" onclick="openModal('Romania')" data-country="Romania">
+
+            <span class="flag-icon-wrapper">
+                <span class="fi fi-ro"></span>
+            </span>
+            <div class="flag-code">RO</div>
+        </div>
+        <div class="flag-item" onclick="openModal('Rwanda')" data-country="Rwanda">
+
+            <span class="flag-icon-wrapper">
+                <span class="fi fi-rw"></span>
+            </span>
+            <div class="flag-code">RW</div>
+        </div>
+        <div class="flag-item" onclick="openModal('Saudi Arabia')" data-country="Saudi Arabia">
+
+            <span class="flag-icon-wrapper">
+                <span class="fi fi-sa"></span>
+            </span>
+            <div class="flag-code">SA</div>
+        </div>
+        <div class="flag-item" onclick="openModal('Serbia')" data-country="Serbia">
+
+            <span class="flag-icon-wrapper">
+                <span class="fi fi-rs"></span>
+            </span>
+            <div class="flag-code">RS</div>
+        </div>
+        <div class="flag-item" onclick="openModal('Singapore')" data-country="Singapore">
+
+            <span class="flag-icon-wrapper">
+                <span class="fi fi-sg"></span>
+            </span>
+            <div class="flag-code">SG</div>
+        </div>
+        <div class="flag-item" onclick="openModal('Slovakia')" data-country="Slovakia">
+
+            <span class="flag-icon-wrapper">
+                <span class="fi fi-sk"></span>
+            </span>
+            <div class="flag-code">SK</div>
+        </div>
+        <div class="flag-item" onclick="openModal('Slovenia')" data-country="Slovenia">
+
+            <span class="flag-icon-wrapper">
+                <span class="fi fi-si"></span>
+            </span>
+            <div class="flag-code">SI</div>
+        </div>
+        <div class="flag-item" onclick="openModal('South Africa')" data-country="South Africa">
+
+            <span class="flag-icon-wrapper">
+                <span class="fi fi-za"></span>
+            </span>
+            <div class="flag-code">ZA</div>
+        </div>
+        <div class="flag-item" onclick="openModal('Spain')" data-country="Spain">
+
+            <span class="flag-icon-wrapper">
+                <span class="fi fi-es"></span>
+            </span>
+            <div class="flag-code">ES</div>
+        </div>
+        <div class="flag-item" onclick="openModal('Sri Lanka')" data-country="Sri Lanka">
+
+            <span class="flag-icon-wrapper">
+                <span class="fi fi-lk"></span>
+            </span>
+            <div class="flag-code">LK</div>
+        </div>
+        <div class="flag-item" onclick="openModal('St. Vincent and the Grenadines')" data-country="St. Vincent and the Grenadines">
+
+            <span class="flag-icon-wrapper">
+                <span class="fi fi-vc"></span>
+            </span>
+            <div class="flag-code">VC</div>
+        </div>
+        <div class="flag-item" onclick="openModal('Sweden')" data-country="Sweden">
+
+            <span class="flag-icon-wrapper">
+                <span class="fi fi-se"></span>
+            </span>
+            <div class="flag-code">SE</div>
+        </div>
+        <div class="flag-item" onclick="openModal('Switzerland')" data-country="Switzerland">
+
+            <span class="flag-icon-wrapper">
+                <span class="fi fi-ch"></span>
+            </span>
+            <div class="flag-code">CH</div>
+        </div>
+        <div class="flag-item" onclick="openModal('Thailand')" data-country="Thailand">
+
+            <span class="flag-icon-wrapper">
+                <span class="fi fi-th"></span>
+            </span>
+            <div class="flag-code">TH</div>
+        </div>
+        <div class="flag-item" onclick="openModal('Trinidad and Tobago')" data-country="Trinidad and Tobago">
+
+            <span class="flag-icon-wrapper">
+                <span class="fi fi-tt"></span>
+            </span>
+            <div class="flag-code">TT</div>
+        </div>
+        <div class="flag-item" onclick="openModal('Tunisia')" data-country="Tunisia">
+
+            <span class="flag-icon-wrapper">
+                <span class="fi fi-tn"></span>
+            </span>
+            <div class="flag-code">TN</div>
+        </div>
+        <div class="flag-item" onclick="openModal('Türkiye')" data-country="Türkiye">
+
+            <span class="flag-icon-wrapper">
+                <span class="fi fi-tr"></span>
+            </span>
+            <div class="flag-code">TR</div>
+        </div>
+        <div class="flag-item" onclick="openModal('United Arab Emirates')" data-country="United Arab Emirates">
+
+            <span class="flag-icon-wrapper">
+                <span class="fi fi-ae"></span>
+            </span>
+            <div class="flag-code">AE</div>
+        </div>
+        <div class="flag-item" onclick="openModal('United Kingdom')" data-country="United Kingdom">
+
+            <span class="flag-icon-wrapper">
+                <span class="fi fi-gb"></span>
+            </span>
+            <div class="flag-code">GB</div>
+        </div>
+        <div class="flag-item" onclick="openModal('United States of America')" data-country="United States of America">
+
+            <span class="flag-icon-wrapper">
+                <span class="fi fi-us"></span>
+            </span>
+            <div class="flag-code">US</div>
+        </div>
+        <div class="flag-item" onclick="openModal('Uruguay')" data-country="Uruguay">
+
+            <span class="flag-icon-wrapper">
+                <span class="fi fi-uy"></span>
+            </span>
+            <div class="flag-code">UY</div>
+        </div>
+        <div class="flag-item" onclick="openModal('Uzbekistan')" data-country="Uzbekistan">
+
+            <span class="flag-icon-wrapper">
+                <span class="fi fi-uz"></span>
+            </span>
+            <div class="flag-code">UZ</div>
+        </div>
+        <div class="flag-item" onclick="openModal('Vatican City State')" data-country="Vatican City State">
+
+            <span class="flag-icon-wrapper">
+                <span class="fi fi-va"></span>
+            </span>
+            <div class="flag-code">VA</div>
+        </div>
+        <div class="flag-item" onclick="openModal('Vietnam')" data-country="Vietnam">
+
+            <span class="flag-icon-wrapper">
+                <span class="fi fi-vn"></span>
+            </span>
+            <div class="flag-code">VN</div>
+        </div>
+        <div class="flag-item" onclick="openModal('Zambia')" data-country="Zambia">
+
+            <span class="flag-icon-wrapper">
+                <span class="fi fi-zm"></span>
+            </span>
+            <div class="flag-code">ZM</div>
+        </div>
+        <div class="flag-item" onclick="openModal('Zimbabwe (formerly Rhodesia)')" data-country="Zimbabwe (formerly Rhodesia)">
+
+            <span class="flag-icon-wrapper">
+                <span class="fi fi-zw"></span>
+            </span>
+            <div class="flag-code">ZW</div>
+        </div>
             </div>
         </section>
 
