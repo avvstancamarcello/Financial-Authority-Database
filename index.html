@@ -839,6 +839,165 @@
                 padding: 12px 16px;
             }
         }
+
+        /* ========================================
+           FILTERS SIDEBAR
+           ======================================== */
+
+        .filters-sidebar {
+            position: fixed;
+            left: 0;
+            top: 200px;
+            width: 280px;
+            background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+            color: white;
+            padding: 25px 20px;
+            border-radius: 0 15px 15px 0;
+            box-shadow: 4px 0 20px rgba(0, 0, 0, 0.3);
+            z-index: 100;
+            max-height: calc(100vh - 220px);
+            overflow-y: auto;
+        }
+
+        .sidebar-title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.3em;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid rgba(255, 215, 0, 0.3);
+        }
+
+        .sidebar-icon {
+            font-size: 1.4em;
+        }
+
+        .filter-group {
+            margin-bottom: 20px;
+        }
+
+        .filter-label {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            font-size: 0.95em;
+            color: #ffd700;
+        }
+
+        .filter-icon {
+            font-size: 1.2em;
+        }
+
+        .filter-dropdown {
+            width: 100%;
+            padding: 10px 12px;
+            border: 2px solid rgba(255, 215, 0, 0.5);
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            font-size: 0.95em;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .filter-dropdown:hover {
+            border-color: rgba(255, 215, 0, 0.8);
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .filter-dropdown:focus {
+            outline: none;
+            border-color: #ffd700;
+            box-shadow: 0 0 10px rgba(255, 215, 0, 0.4);
+        }
+
+        .filter-dropdown option {
+            background: #1e293b;
+            color: white;
+            padding: 8px;
+        }
+
+        .reset-filters-btn {
+            width: 100%;
+            padding: 12px;
+            margin-top: 20px;
+            background: linear-gradient(135deg, #f5576c 0%, #f093fb 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 1em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(245, 87, 108, 0.3);
+        }
+
+        .reset-filters-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(245, 87, 108, 0.5);
+        }
+
+        .filter-results {
+            margin-top: 20px;
+            padding: 12px;
+            background: rgba(255, 215, 0, 0.15);
+            border-radius: 8px;
+            text-align: center;
+            font-size: 0.95em;
+            border: 1px solid rgba(255, 215, 0, 0.3);
+        }
+
+        .filter-results strong {
+            color: #ffd700;
+            font-size: 1.3em;
+            margin: 0 5px;
+            transition: transform 0.2s ease;
+            display: inline-block;
+        }
+
+        /* Adjust main content to make space for sidebar */
+        .content {
+            margin-left: 300px;
+            transition: margin-left 0.3s ease;
+        }
+
+        /* ========================================
+           RESPONSIVE - MOBILE
+           ======================================== */
+
+        @media (max-width: 1024px) {
+            .filters-sidebar {
+                position: relative;
+                width: 100%;
+                left: 0;
+                top: 0;
+                border-radius: 0;
+                margin-bottom: 20px;
+            }
+            
+            .content {
+                margin-left: 0;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .sidebar-title {
+                font-size: 1.1em;
+            }
+            
+            .filter-label {
+                font-size: 0.9em;
+            }
+            
+            .filter-dropdown {
+                font-size: 0.9em;
+                padding: 8px 10px;
+            }
+        }
     </style>
 </head>
 <body itemscope itemtype="https://schema.org/WebApplication">
@@ -1211,6 +1370,78 @@
             <div class="stat-card"><div class="stat-number" id="euCountries">0</div><div class="stat-label" data-i18n="statEU">Paesi UE</div></div>
             <div class="stat-card"><div class="stat-number" id="highProtection">0</div><div class="stat-label" data-i18n="statHighProtection">Protezione Standard</div></div>
         </div>
+
+        <!-- Advanced Filters Sidebar -->
+        <aside id="filtersSidebar" class="filters-sidebar">
+            <h3 class="sidebar-title">
+                <span class="sidebar-icon">🔍</span>
+                <span data-i18n="filtersTitle">Filtri Avanzati</span>
+            </h3>
+            
+            <!-- Continent Filter -->
+            <div class="filter-group">
+                <label for="continentFilter" class="filter-label">
+                    <span class="filter-icon">🌍</span>
+                    <span data-i18n="continentLabel">Continente</span>
+                </label>
+                <select id="continentFilter" class="filter-dropdown" onchange="applyAllFilters()">
+                    <option value="" data-i18n="allContinents">Tutti i Continenti</option>
+                    <option value="Europe" data-i18n="europe">Europa</option>
+                    <option value="North America" data-i18n="northAmerica">Nord America</option>
+                    <option value="South America" data-i18n="southAmerica">Sud America</option>
+                    <option value="Asia" data-i18n="asia">Asia</option>
+                    <option value="Africa" data-i18n="africa">Africa</option>
+                    <option value="Oceania" data-i18n="oceania">Oceania</option>
+                </select>
+            </div>
+            
+            <!-- Protection Level Filter -->
+            <div class="filter-group">
+                <label for="protectionFilter" class="filter-label">
+                    <span class="filter-icon">🛡️</span>
+                    <span data-i18n="protectionLabel">Livello Protezione</span>
+                </label>
+                <select id="protectionFilter" class="filter-dropdown" onchange="applyAllFilters()">
+                    <option value="" data-i18n="allLevels">Tutti i Livelli</option>
+                    <option value="Altissimo" data-i18n="veryHigh">Altissimo</option>
+                    <option value="Alto" data-i18n="high">Alto</option>
+                    <option value="Medio" data-i18n="medium">Medio</option>
+                </select>
+            </div>
+            
+            <!-- Language Filter -->
+            <div class="filter-group">
+                <label for="languageFilter" class="filter-label">
+                    <span class="filter-icon">🗣️</span>
+                    <span data-i18n="languageLabel">Lingua Ufficiale</span>
+                </label>
+                <select id="languageFilter" class="filter-dropdown" onchange="applyAllFilters()">
+                    <option value="" data-i18n="allLanguages">Tutte le Lingue</option>
+                    <option value="it">🇮🇹 Italiano</option>
+                    <option value="en">🇬🇧 English</option>
+                    <option value="es">🇪🇸 Español</option>
+                    <option value="fr">🇫🇷 Français</option>
+                    <option value="pt">🇵🇹 Português</option>
+                    <option value="de">🇩🇪 Deutsch</option>
+                    <option value="ar">🇶🇦 العربية</option>
+                    <option value="ru">🇷🇺 Русский</option>
+                    <option value="zh">🇨🇳 中文</option>
+                    <option value="hi">🇮🇳 हिन्दी</option>
+                </select>
+            </div>
+            
+            <!-- Reset Filters Button -->
+            <button id="resetFilters" class="reset-filters-btn" onclick="resetAllFilters()">
+                <span data-i18n="resetFilters">🔄 Reset Filtri</span>
+            </button>
+            
+            <!-- Results Counter -->
+            <div id="filterResults" class="filter-results">
+                <span data-i18n="showing">Mostrando:</span>
+                <strong id="resultCount">125</strong>
+                <span data-i18n="countries">paesi</span>
+            </div>
+        </aside>
 
         <div class="content">
             <div class="countries-grid" id="countriesGrid"></div>
@@ -2206,8 +2437,9 @@
         // Helper: Get continent from country name
         function getContinent(countryName) {
             const continents = {
-                'Europa': ['Albania', 'Austria', 'Belgium', 'Bulgaria', 'Croatia', 'Cyprus', 'Czech Republic', 'Denmark', 'Estonia', 'Finland', 'France', 'Germany', 'Greece', 'Hungary', 'Iceland', 'Ireland', 'Italy', 'Latvia', 'Liechtenstein', 'Lithuania', 'Luxembourg', 'Malta', 'Moldova', 'Montenegro', 'Netherlands', 'North Macedonia', 'Norway', 'Poland', 'Portugal', 'Romania', 'Russia', 'San Marino', 'Serbia', 'Slovak Republic', 'Slovenia', 'Spain', 'Sweden', 'Switzerland', 'Ukraine', 'United Kingdom', 'Vatican City State'],
-                'America': ['Argentina', 'Bahamas', 'Barbados', 'Bermuda', 'Bolivia', 'Brazil', 'Canada', 'Cayman Islands', 'Chile', 'Colombia', 'Costa Rica', 'El Salvador', 'Jamaica', 'Mexico', 'Panama', 'Peru', 'Trinidad and Tobago', 'United States', 'Uruguay'],
+                'Europe': ['Albania', 'Austria', 'Belgium', 'Bulgaria', 'Croatia', 'Cyprus', 'Czech Republic', 'Denmark', 'Estonia', 'Finland', 'France', 'Germany', 'Greece', 'Hungary', 'Iceland', 'Ireland', 'Italy', 'Latvia', 'Liechtenstein', 'Lithuania', 'Luxembourg', 'Malta', 'Moldova', 'Montenegro', 'Netherlands', 'North Macedonia', 'Norway', 'Poland', 'Portugal', 'Romania', 'Russia', 'San Marino', 'Serbia', 'Slovak Republic', 'Slovenia', 'Spain', 'Sweden', 'Switzerland', 'Ukraine', 'United Kingdom', 'Vatican City State'],
+                'North America': ['Bahamas', 'Barbados', 'Bermuda', 'Canada', 'Cayman Islands', 'Jamaica', 'Mexico', 'Trinidad and Tobago', 'United States'],
+                'South America': ['Argentina', 'Bolivia', 'Brazil', 'Chile', 'Colombia', 'Costa Rica', 'El Salvador', 'Panama', 'Peru', 'Uruguay'],
                 'Asia': ['Armenia', 'Azerbaijan', 'Bahrain', 'Bangladesh', 'Cambodia', 'Chinese Taipei', 'Georgia', 'Hong Kong', 'India', 'Indonesia', 'Israel', 'Japan', 'Jordan', 'Kazakhstan', 'Korea, Republic of', 'Kuwait', 'Kyrgyzstan', 'Malaysia', 'Oman', 'Pakistan', 'Philippines', 'Qatar', 'Saudi Arabia', 'Singapore', 'Sri Lanka', 'Thailand', 'Turkey', 'United Arab Emirates', 'Uzbekistan', 'Vietnam'],
                 'Africa': ['Algeria', 'Angola', 'Burkina Faso', 'Côte d\'Ivoire', 'Egypt', 'Kenya', 'Morocco', 'Mozambique', 'Nigeria', 'Rwanda', 'Sierra Leone', 'South Africa', 'Tanzania', 'Tunisia', 'Uganda', 'Zambia', 'Zimbabwe'],
                 'Oceania': ['Australia', 'New Zealand']
@@ -2216,25 +2448,25 @@
             for (const [continent, countries] of Object.entries(continents)) {
                 if (countries.includes(countryName)) return continent;
             }
-            return 'Altri';
+            return 'Other';
         }
 
         // Helper: Get language from country name
         function getLanguage(countryName) {
             const languages = {
-                'IT': ['Italy', 'San Marino', 'Vatican City State'],
-                'EN': ['Australia', 'Bahamas', 'Barbados', 'Bermuda', 'Canada', 'Cayman Islands', 'Gibraltar', 'Guernsey', 'Hong Kong', 'India', 'Ireland', 'Isle of Man', 'Jamaica', 'Jersey', 'Kenya', 'Malta', 'Mauritius', 'New Zealand', 'Nigeria', 'Pakistan', 'Philippines', 'Singapore', 'South Africa', 'Sri Lanka', 'Trinidad and Tobago', 'Uganda', 'United Kingdom', 'United States', 'Zambia', 'Zimbabwe'],
-                'FR': ['Belgium', 'Burkina Faso', 'Côte d\'Ivoire', 'France', 'Luxembourg', 'Monaco', 'Rwanda', 'Switzerland'],
-                'DE': ['Austria', 'Germany', 'Liechtenstein', 'Switzerland'],
-                'ES': ['Argentina', 'Bolivia', 'Chile', 'Colombia', 'Costa Rica', 'El Salvador', 'Mexico', 'Panama', 'Peru', 'Spain', 'Uruguay'],
-                'PT': ['Brazil', 'Mozambique', 'Portugal'],
-                'AR': ['Algeria', 'Bahrain', 'Egypt', 'Jordan', 'Kuwait', 'Morocco', 'Oman', 'Qatar', 'Saudi Arabia', 'Tunisia', 'United Arab Emirates']
+                'it': ['Italy', 'San Marino', 'Vatican City State'],
+                'en': ['Australia', 'Bahamas', 'Barbados', 'Bermuda', 'Canada', 'Cayman Islands', 'Gibraltar', 'Guernsey', 'Hong Kong', 'India', 'Ireland', 'Isle of Man', 'Jamaica', 'Jersey', 'Kenya', 'Malta', 'Mauritius', 'New Zealand', 'Nigeria', 'Pakistan', 'Philippines', 'Singapore', 'South Africa', 'Sri Lanka', 'Trinidad and Tobago', 'Uganda', 'United Kingdom', 'United States', 'Zambia', 'Zimbabwe'],
+                'fr': ['Belgium', 'Burkina Faso', 'Côte d\'Ivoire', 'France', 'Luxembourg', 'Monaco', 'Rwanda', 'Switzerland'],
+                'de': ['Austria', 'Germany', 'Liechtenstein', 'Switzerland'],
+                'es': ['Argentina', 'Bolivia', 'Chile', 'Colombia', 'Costa Rica', 'El Salvador', 'Mexico', 'Panama', 'Peru', 'Spain', 'Uruguay'],
+                'pt': ['Brazil', 'Mozambique', 'Portugal'],
+                'ar': ['Algeria', 'Bahrain', 'Egypt', 'Jordan', 'Kuwait', 'Morocco', 'Oman', 'Qatar', 'Saudi Arabia', 'Tunisia', 'United Arab Emirates']
             };
             
             for (const [lang, countries] of Object.entries(languages)) {
                 if (countries.includes(countryName)) return lang;
             }
-            return 'EN'; // Default
+            return 'en'; // Default
         }
 
         // Inizializza lingua, ricerca e caricamento dati al caricamento della pagina
@@ -2362,6 +2594,10 @@
                 const card = document.createElement('div');
                 card.className = 'country-card';
                 card.setAttribute('data-name', country.country_name);
+                card.setAttribute('data-country', country.country_name);
+                card.setAttribute('data-continent', getContinent(country.country_name));
+                card.setAttribute('data-protection', country.protectionLevel || 'Medio');
+                card.setAttribute('data-language', getLanguage(country.country_name));
                 card.onclick = () => openModal(country.country_name);
                 
                 const protectionClass = `protection-${(country.protectionLevel || 'medio').toLowerCase()}`;
@@ -2413,29 +2649,84 @@
          * Searches in: country name, authority name, and card text content
          */
         function filterCards() {
-            const input = document.getElementById("searchInput");
-            if (!input) return;
-            
-            const searchText = input.value.toLowerCase();
-            const cards = document.querySelectorAll(".country-card");
+            applyAllFilters();
+        }
 
+        /**
+         * Apply all active filters (continent + protection + language + search)
+         */
+        function applyAllFilters() {
+            const continentFilter = document.getElementById('continentFilter')?.value.toLowerCase() || '';
+            const protectionFilter = document.getElementById('protectionFilter')?.value.toLowerCase() || '';
+            const languageFilter = document.getElementById('languageFilter')?.value.toLowerCase() || '';
+            const searchTerm = document.getElementById('searchInput')?.value.toLowerCase() || '';
+            
+            const cards = document.querySelectorAll('.country-card');
+            let visibleCount = 0;
+            
             cards.forEach(card => {
-                // Get country name from data attribute
-                const countryName = (card.getAttribute("data-name") || "").toLowerCase();
+                const continent = (card.dataset.continent || '').toLowerCase();
+                const protection = (card.dataset.protection || '').toLowerCase();
+                const language = (card.dataset.language || '').toLowerCase();
+                const countryName = (card.dataset.country || '').toLowerCase();
+                const authorityName = card.querySelector('.country-name')?.textContent.toLowerCase() || '';
                 
-                // Get all text content (includes authority name)
-                const textContent = card.textContent.toLowerCase();
+                // Check all filter conditions (AND logic)
+                const continentMatch = !continentFilter || continent.includes(continentFilter);
+                const protectionMatch = !protectionFilter || protection.includes(protectionFilter);
+                const languageMatch = !languageFilter || language.includes(languageFilter);
+                const searchMatch = !searchTerm || 
+                    countryName.includes(searchTerm) || 
+                    authorityName.includes(searchTerm);
                 
-                // Match if search text is found in name OR content
-                const match = countryName.includes(searchText) || textContent.includes(searchText);
-                
-                // Show/hide card
-                card.style.display = match ? "block" : "none";
+                if (continentMatch && protectionMatch && languageMatch && searchMatch) {
+                    card.style.display = 'block';
+                    visibleCount++;
+                } else {
+                    card.style.display = 'none';
+                }
             });
             
-            // Log results
-            const visibleCount = Array.from(cards).filter(card => card.style.display !== "none").length;
-            console.log(`🔍 Search: "${searchText}" - ${visibleCount} results`);
+            // Update results counter
+            updateResultsCounter(visibleCount);
+        }
+
+        /**
+         * Reset all filters to default state
+         */
+        function resetAllFilters() {
+            const continentFilter = document.getElementById('continentFilter');
+            const protectionFilter = document.getElementById('protectionFilter');
+            const languageFilter = document.getElementById('languageFilter');
+            const searchInput = document.getElementById('searchInput');
+            
+            if (continentFilter) continentFilter.value = '';
+            if (protectionFilter) protectionFilter.value = '';
+            if (languageFilter) languageFilter.value = '';
+            if (searchInput) searchInput.value = '';
+            
+            // Show all cards
+            const cards = document.querySelectorAll('.country-card');
+            cards.forEach(card => card.style.display = 'block');
+            
+            // Update counter
+            updateResultsCounter(cards.length);
+        }
+
+        /**
+         * Update the visible results counter
+         */
+        function updateResultsCounter(count) {
+            const counterElement = document.getElementById('resultCount');
+            if (counterElement) {
+                counterElement.textContent = count;
+                
+                // Add visual feedback
+                counterElement.style.transform = 'scale(1.2)';
+                setTimeout(() => {
+                    counterElement.style.transform = 'scale(1)';
+                }, 200);
+            }
         }
 
         function updateStats() {
