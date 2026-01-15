@@ -327,8 +327,8 @@
     },
     "notes": "World Investor Week Coordinator: SERC Team."
   },
-  "Canada": {
-    "country_name": "Canada",
+  "Canada - CSA (Federal)": {
+    "country_name": "Canada - CSA (Federal)",
     "flag": "🇨🇦",
     "isEU": false,
     "protectionLevel": "Altissimo",
@@ -340,7 +340,202 @@
       "authorityEmail": "csa-acvm-secretariat@acvm-csa.ca",
       "social_links": {}
     },
-    "notes": "Organizzazione che raggruppa le autorità provinciali e territoriali."
+    "notes": "Organismo federale di coordinamento che raggruppa le 13 autorità provinciali e territoriali del Canada."
+  },
+  "Canada - Alberta": {
+    "country_name": "Canada - Alberta",
+    "flag": "🇨🇦",
+    "isEU": false,
+    "protectionLevel": "Altissimo",
+    "financial_authority": {
+      "name": "Alberta Securities Commission",
+      "abbreviation": "ASC",
+      "homepage": "https://www.albertasecurities.com/",
+      "fraudReportLink": "https://www.albertasecurities.com/enforcement/investor-protection",
+      "authorityEmail": "inquiries@asc.ca",
+      "social_links": {}
+    },
+    "notes": "Autorità di regolamentazione dei titoli della provincia di Alberta."
+  },
+  "Canada - British Columbia": {
+    "country_name": "Canada - British Columbia",
+    "flag": "🇨🇦",
+    "isEU": false,
+    "protectionLevel": "Altissimo",
+    "financial_authority": {
+      "name": "British Columbia Securities Commission",
+      "abbreviation": "BCSC",
+      "homepage": "https://www.bcsc.bc.ca/",
+      "fraudReportLink": "https://www.bcsc.bc.ca/enforcement/report-a-concern",
+      "authorityEmail": "inquiries@bcsc.bc.ca",
+      "social_links": {}
+    },
+    "notes": "Autorità di regolamentazione dei titoli della provincia della British Columbia."
+  },
+  "Canada - Manitoba": {
+    "country_name": "Canada - Manitoba",
+    "flag": "🇨🇦",
+    "isEU": false,
+    "protectionLevel": "Altissimo",
+    "financial_authority": {
+      "name": "Manitoba Securities Commission",
+      "abbreviation": "MSC",
+      "homepage": "https://www.msc.gov.mb.ca/",
+      "fraudReportLink": "https://www.msc.gov.mb.ca/contact_us.html",
+      "authorityEmail": "securities@gov.mb.ca",
+      "social_links": {}
+    },
+    "notes": "Autorità di regolamentazione dei titoli della provincia del Manitoba."
+  },
+  "Canada - New Brunswick": {
+    "country_name": "Canada - New Brunswick",
+    "flag": "🇨🇦",
+    "isEU": false,
+    "protectionLevel": "Altissimo",
+    "financial_authority": {
+      "name": "Financial and Consumer Services Commission",
+      "abbreviation": "FCNB",
+      "homepage": "https://www.fcnb.ca/",
+      "fraudReportLink": "https://www.fcnb.ca/en/complaints",
+      "authorityEmail": "info@fcnb.ca",
+      "social_links": {}
+    },
+    "notes": "Autorità di regolamentazione dei servizi finanziari e dei consumatori del New Brunswick."
+  },
+  "Canada - Newfoundland and Labrador": {
+    "country_name": "Canada - Newfoundland and Labrador",
+    "flag": "🇨🇦",
+    "isEU": false,
+    "protectionLevel": "Altissimo",
+    "financial_authority": {
+      "name": "Office of the Superintendent of Securities",
+      "abbreviation": "OSS-NL",
+      "homepage": "https://www.gov.nl.ca/dgsnl/securities/",
+      "fraudReportLink": "https://www.gov.nl.ca/dgsnl/securities/contact/",
+      "authorityEmail": "securities@gov.nl.ca",
+      "social_links": {}
+    },
+    "notes": "Ufficio del Sovrintendente ai Titoli di Newfoundland and Labrador."
+  },
+  "Canada - Northwest Territories": {
+    "country_name": "Canada - Northwest Territories",
+    "flag": "🇨🇦",
+    "isEU": false,
+    "protectionLevel": "Altissimo",
+    "financial_authority": {
+      "name": "Office of the Superintendent of Securities",
+      "abbreviation": "OSS-NT",
+      "homepage": "https://www.justice.gov.nt.ca/en/securities/",
+      "fraudReportLink": "https://www.justice.gov.nt.ca/en/securities/",
+      "authorityEmail": "securities@gov.nt.ca",
+      "social_links": {}
+    },
+    "notes": "Ufficio del Sovrintendente ai Titoli dei Territori del Nord-Ovest."
+  },
+  "Canada - Nova Scotia": {
+    "country_name": "Canada - Nova Scotia",
+    "flag": "🇨🇦",
+    "isEU": false,
+    "protectionLevel": "Altissimo",
+    "financial_authority": {
+      "name": "Nova Scotia Securities Commission",
+      "abbreviation": "NSSC",
+      "homepage": "https://nssc.novascotia.ca/",
+      "fraudReportLink": "https://nssc.novascotia.ca/investor-education/report-a-concern",
+      "authorityEmail": "nssc@novascotia.ca",
+      "social_links": {}
+    },
+    "notes": "Autorità di regolamentazione dei titoli della Nova Scotia."
+  },
+  "Canada - Nunavut": {
+    "country_name": "Canada - Nunavut",
+    "flag": "🇨🇦",
+    "isEU": false,
+    "protectionLevel": "Altissimo",
+    "financial_authority": {
+      "name": "Nunavut Securities Office",
+      "abbreviation": "NSO",
+      "homepage": "https://www.gov.nu.ca/justice/securities",
+      "fraudReportLink": "https://www.gov.nu.ca/justice/securities",
+      "authorityEmail": "securities@gov.nu.ca",
+      "social_links": {}
+    },
+    "notes": "Ufficio dei Titoli del Nunavut."
+  },
+  "Canada - Ontario": {
+    "country_name": "Canada - Ontario",
+    "flag": "🇨🇦",
+    "isEU": false,
+    "protectionLevel": "Altissimo",
+    "financial_authority": {
+      "name": "Ontario Securities Commission",
+      "abbreviation": "OSC",
+      "homepage": "https://www.osc.ca/",
+      "fraudReportLink": "https://www.osc.ca/en/investors/report-a-concern",
+      "authorityEmail": "inquiries@osc.gov.on.ca",
+      "social_links": {}
+    },
+    "notes": "Principale autorità di regolamentazione dei titoli del Canada, con sede a Toronto."
+  },
+  "Canada - Prince Edward Island": {
+    "country_name": "Canada - Prince Edward Island",
+    "flag": "🇨🇦",
+    "isEU": false,
+    "protectionLevel": "Altissimo",
+    "financial_authority": {
+      "name": "Financial and Consumer Services Division",
+      "abbreviation": "FCSD-PEI",
+      "homepage": "https://www.princeedwardisland.ca/en/topic/securities-office",
+      "fraudReportLink": "https://www.princeedwardisland.ca/en/topic/securities-office",
+      "authorityEmail": "securities@gov.pe.ca",
+      "social_links": {}
+    },
+    "notes": "Divisione dei servizi finanziari e dei consumatori dell'Isola del Principe Edoardo."
+  },
+  "Canada - Quebec": {
+    "country_name": "Canada - Quebec",
+    "flag": "🇨🇦",
+    "isEU": false,
+    "protectionLevel": "Altissimo",
+    "financial_authority": {
+      "name": "Autorité des marchés financiers",
+      "abbreviation": "AMF",
+      "homepage": "https://lautorite.qc.ca/",
+      "fraudReportLink": "https://lautorite.qc.ca/en/general-public/assistance-and-complaints/file-a-complaint",
+      "authorityEmail": "information@lautorite.qc.ca",
+      "social_links": {}
+    },
+    "notes": "Autorità dei mercati finanziari del Quebec. Regolatore unico per il settore finanziario della provincia."
+  },
+  "Canada - Saskatchewan": {
+    "country_name": "Canada - Saskatchewan",
+    "flag": "🇨🇦",
+    "isEU": false,
+    "protectionLevel": "Altissimo",
+    "financial_authority": {
+      "name": "Financial and Consumer Affairs Authority of Saskatchewan",
+      "abbreviation": "FCAA",
+      "homepage": "https://fcaa.gov.sk.ca/",
+      "fraudReportLink": "https://fcaa.gov.sk.ca/securities/investor-protection",
+      "authorityEmail": "securities@gov.sk.ca",
+      "social_links": {}
+    },
+    "notes": "Autorità per gli affari finanziari e dei consumatori del Saskatchewan."
+  },
+  "Canada - Yukon": {
+    "country_name": "Canada - Yukon",
+    "flag": "🇨🇦",
+    "isEU": false,
+    "protectionLevel": "Altissimo",
+    "financial_authority": {
+      "name": "Office of the Yukon Superintendent of Securities",
+      "abbreviation": "OYSS",
+      "homepage": "https://yukon.ca/en/doing-business/securities",
+      "fraudReportLink": "https://yukon.ca/en/doing-business/securities",
+      "authorityEmail": "securities@yukon.ca",
+      "social_links": {}
+    },
+    "notes": "Ufficio del Sovrintendente ai Titoli dello Yukon."
   },
   "Cayman Islands": {
     "country_name": "Cayman Islands",
@@ -386,6 +581,21 @@
       "social_links": {}
     },
     "notes": "World Investor Week Coordinator: CMF Educa."
+  },
+  "China": {
+    "country_name": "China",
+    "flag": "🇨🇳",
+    "isEU": false,
+    "protectionLevel": "Medio",
+    "financial_authority": {
+      "name": "China Securities Regulatory Commission",
+      "abbreviation": "CSRC",
+      "homepage": "http://www.csrc.gov.cn/",
+      "fraudReportLink": "http://www.csrc.gov.cn/csrc/c100028/common_list.shtml",
+      "authorityEmail": "info@csrc.gov.cn",
+      "social_links": {}
+    },
+    "notes": "Agenzia governativa sotto il Consiglio di Stato della Repubblica Popolare Cinese. Regola l'industria dei titoli, futures e fondi di investimento. Supervisiona la Borsa di Shanghai, Shenzhen e Beijing."
   },
   "Chinese Taipei": {
     "country_name": "Chinese Taipei",
@@ -1154,6 +1364,25 @@
     },
     "notes": "World Investor Week Coordinator: BVM Team."
   },
+  "Namibia": {
+    "country_name": "Namibia",
+    "flag": "🇳🇦",
+    "isEU": false,
+    "protectionLevel": "Medio",
+    "financial_authority": {
+      "name": "Namibia Financial Institutions Supervisory Authority",
+      "abbreviation": "NAMFISA",
+      "homepage": "https://www.namfisa.com.na/",
+      "fraudReportLink": "https://www.namfisa.com.na/contact-us/",
+      "authorityEmail": "info@namfisa.com.na",
+      "social_links": {
+        "linkedin": "https://www.linkedin.com/company/namfisa/",
+        "twitter": "https://twitter.com/namfisa",
+        "youtube": "https://www.youtube.com/@namfisanamibia7634"
+      }
+    },
+    "notes": "Autorità indipendente istituita con Act No. 3 of 2001 per regolamentare e supervisionare le istituzioni finanziarie non bancarie in Namibia."
+  },
   "Netherlands": {
     "country_name": "Netherlands",
     "flag": "🇳🇱",
@@ -1243,6 +1472,24 @@
       "social_links": {}
     },
     "notes": "World Investor Week Coordinator: SECP Team."
+  },
+  "Palestine": {
+    "country_name": "Palestine",
+    "flag": "🇵🇸",
+    "isEU": false,
+    "protectionLevel": "Medio",
+    "financial_authority": {
+      "name": "Palestine Capital Market Authority",
+      "abbreviation": "PCMA",
+      "homepage": "https://www.pcma.ps/",
+      "fraudReportLink": "https://www.pcma.ps/en/home-3/",
+      "authorityEmail": "diwan@pcma.ps",
+      "social_links": {
+        "linkedin": "https://www.linkedin.com/in/pcma-palestine/",
+        "youtube": "https://www.youtube.com/channel/UCBbUALZvnr36sor3E8WhRcQ"
+      }
+    },
+    "notes": "Autorità pubblica istituita con Legge n. 13 del 2004. Regola i settori assicurativi, titoli, leasing finanziario e mutui ipotecari. Sede a Ramallah."
   },
   "Panama": {
     "country_name": "Panama",
@@ -1399,6 +1646,23 @@
       "social_links": {}
     },
     "notes": "World Investor Week Coordinator: SEC Team."
+  },
+  "Seychelles": {
+    "country_name": "Seychelles",
+    "flag": "🇸🇨",
+    "isEU": false,
+    "protectionLevel": "Medio",
+    "financial_authority": {
+      "name": "Financial Services Authority Seychelles",
+      "abbreviation": "FSA",
+      "homepage": "https://www.fsaseychelles.sc/",
+      "fraudReportLink": "https://fsaseychelles.sc/complaint-handling",
+      "authorityEmail": "enquiries@fsaseychelles.sc",
+      "social_links": {
+        "youtube": "https://www.youtube.com/channel/UCHRa9-VoK07iIJVeaLUhRUA"
+      }
+    },
+    "notes": "Autorità di regolamentazione dei servizi finanziari delle Seychelles. Sede: Bois De Rose Avenue, Victoria, Mahe."
   },
   "Singapore": {
     "country_name": "Singapore",
@@ -1617,6 +1881,21 @@
     },
     "notes": "World Investor Week Coordinator: Mohammed Al Noukhatha Al Ali."
   },
+  "Ukraine": {
+    "country_name": "Ukraine",
+    "flag": "🇺🇦",
+    "isEU": false,
+    "protectionLevel": "Medio",
+    "financial_authority": {
+      "name": "National Securities and Stock Market Commission",
+      "abbreviation": "NSSMC",
+      "homepage": "https://www.nssmc.gov.ua/",
+      "fraudReportLink": "https://www.nssmc.gov.ua/en/about-us/contacts/",
+      "authorityEmail": "office@nssmc.gov.ua",
+      "social_links": {}
+    },
+    "notes": "Commissione nazionale per i titoli e il mercato azionario dell'Ucraina, istituita nel 1995. Supervisiona i partecipanti ai mercati dei capitali ucraini, garantisce stabilità e sviluppo dei mercati e protezione degli investitori. Sede a Kiev."
+  },
   "United Kingdom": {
     "country_name": "United Kingdom",
     "flag": "🇬🇧",
@@ -1648,7 +1927,18 @@
       "authorityEmail": "DonleyO@sec.gov",
       "social_links": {}
     },
-    "notes": "Sito per investitori: https://www.investor.gov/. World Investor Week Coordinator: M. Owen Donley."
+    "investor_protection": {
+      "name": "Securities Investor Protection Corporation",
+      "abbreviation": "SIPC",
+      "homepage": "https://www.sipc.org/",
+      "description": "Organizzazione non-profit creata dal Congresso nel 1970 che protegge gli investitori in caso di fallimento di broker-dealer. Ha recuperato miliardi di dollari per gli investitori.",
+      "memberCheckLink": "https://www.sipc.org/list-of-members",
+      "claimsLink": "https://www.sipc.org/cases-and-claims",
+      "fraudAlertLink": "https://www.sipc.org/for-investors/fraud-alert",
+      "email": "asksipc@sipc.org",
+      "phone": "+1 202-371-8300"
+    },
+    "notes": "Sito per investitori: https://www.investor.gov/. World Investor Week Coordinator: M. Owen Donley. SIPC protegge i clienti di oltre 3.200 broker-dealer membri."
   },
   "Uruguay": {
     "country_name": "Uruguay",
@@ -1773,7 +2063,7 @@
       "authorityEmail": "oficinadelinversor@cnmv.es",
       "social_links": {}
     },
-    "notes": "Comunità autonoma spagnola (Isole Canarie). La vigilanza su intermediari e mercati finanziari è esercitata dalla CNMV spagnola, nell'ambito del quadro regolatorio UE."
+    "notes": "Comunità autonoma spagnola (Isole Canarie). La vigilanza su intermediari e mercati finanziari è esercitata dalla CNMV spagnola, nell'ambito del quadro regolatorio UE." 
   },
   "Sri Lanka": {
     "country_name": "Sri Lanka",
@@ -1909,20 +2199,5 @@
       "social_links": {}
     },
     "notes": "World Investor Week Coordinators: Dingase Nunkwe Makumba, Mubanga Kondolo Jr., Sitali Mwala Mugala."
-  },
-  "Vatican City State": {
-    "country_name": "Vatican City State",
-    "flag": "🇻🇦",
-    "isEU": false,
-    "protectionLevel": "Alto",
-    "financial_authority": {
-      "name": "Autorità di Supervisione e Informazione Finanziaria (Supervisory and Financial Information Authority)",
-      "abbreviation": "ASIF",
-      "homepage": "https://www.asif.va/",
-      "fraudReportLink": "https://www.asif.va/ENG/Contatti.aspx",
-      "authorityEmail": "info@asif.va",
-      "social_links": {}
-    },
-    "notes": "ASIF supervises financial entities in Vatican City State to prevent money laundering and terrorism financing."
   }
 }

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg width="512" height="512" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
-  <title id="title">Financial Defense Shield Logo</title>
-  <desc id="desc">Blue shield with a central golden dollar symbol, two traffic lights tangential to the inner shield sides, Financial Defense text inside, and three vertical golden orbits with red, yellow and green planets outside the shield.</desc>
+  <title id="title">Financial Defense Shield Logo - MS Edition</title>
+  <desc id="desc">Blue shield with Financial Defense text, copyright symbol, and M S initials for Marcello Stanca.</desc>
   <defs>
     <linearGradient id="shieldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
       <stop offset="0%" stop-color="#1d4ed8"/>
@@ -95,4 +95,5 @@
     <!-- South / bottom, inner orbit -->
     <circle cx="256" cy="466" r="20" fill="#ef4444" />
   </g>
-</svg>
+
+  </svg>

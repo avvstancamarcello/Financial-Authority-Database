@@ -1,759 +1,330 @@
 <!DOCTYPE html>
-<html lang="it" prefix="og: https://ogp.me/ns#">
+<html lang="it">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.gstatic.com https://unpkg.com https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://unpkg.com; img-src 'self' data: https:; font-src 'self' data: https://cdn.jsdelivr.net; connect-src 'self' https://www.gstatic.com https://firebase.googleapis.com https://firebaseinstallations.googleapis.com https://firebaselogging.googleapis.com https://www.google-analytics.com; frame-src 'self'; object-src 'none'; base-uri 'self';">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="google-site-verification" content="cyy_B7liLeU0oPM5epVAlJvP6XI9AwbCMIbuDzrtPFc" />
+    <title>Avv. Marcello Stanca - Curriculum | Autore RISCHIO TRADING</title>
+    <meta name="description" content="Avvocato Marcello Stanca - Firenze. Autore del Best Seller Amazon RISCHIO TRADING. Esperto indagini informatiche internazionali. Credenziali verificate da Parlamento Europeo e Ministero della Giustizia.">
+    <meta name="author" content="Avvocato Marcello Stanca">
     
-    <!-- Firebase SDK - TutelaTruffe-Rating -->
-    <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-        import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-analytics.js";
-        
-        const firebaseConfig = {
-            apiKey: "AIzaSyBUxnsm7TXXEFyN-jPtTXvy8HMMnr25JIo",
-            authDomain: "tutelatruffe-rating.firebaseapp.com",
-            projectId: "tutelatruffe-rating",
-            storageBucket: "tutelatruffe-rating.firebasestorage.app",
-            messagingSenderId: "186083888610",
-            appId: "1:186083888610:web:3c51689d6d36e2a6b17dbb",
-            measurementId: "G-WWXL8GWYWM"
-        };
-        
-        const app = initializeApp(firebaseConfig);
-        const analytics = getAnalytics(app);
-    </script>
-    
-    <title>Avv. Marcello Stanca - Curriculum Professionale | 25 Anni di Esperienza</title>
-    <meta name="description" content="Curriculum professionale Avv. Marcello Stanca: Presidente AMEV Firenze, 2 Petizioni Parlamento Europeo, Decreto €339.000 recupero internazionale UPTOS LLC.">
-    
-    <!-- PWA -->
-    <link rel="manifest" href="manifest.json">
-    <meta name="theme-color" content="#1a365d">
-    <link rel="icon" type="image/png" href="icon-192.png">
+    <!-- Open Graph -->
+    <meta property="og:title" content="Avv. Marcello Stanca - Autore RISCHIO TRADING">
+    <meta property="og:description" content="Avvocato esperto in truffe finanziarie. Autore del Best Seller Amazon RISCHIO TRADING. Credenziali verificate da Parlamento Europeo.">
+    <meta property="og:type" content="profile">
     
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        
-        :root {
-            --cv-blue: #1a365d;
-            --cv-gold: #d4af37;
-            --cv-eu: #003399;
-            --cv-green: #2e7d32;
-        }
-        
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            min-height: 100vh;
+            color: #333;
             line-height: 1.6;
-            color: #1e293b;
-            background: #f8fafc;
-            /* Cursore personalizzato: lente di ingrandimento scura (tema investigazione legale) */
-            cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'><circle cx='10' cy='10' r='6' fill='%23f9fafb' stroke='%23111827' stroke-width='2'/><line x1='14' y1='14' x2='22' y2='22' stroke='%23111827' stroke-width='3' stroke-linecap='round'/></svg>") 10 10, auto;
         }
-
-        .language-selector {
+        
+        /* Navigation */
+        .nav-bar {
+            background: linear-gradient(135deg, #1a365d 0%, #2d3748 100%);
+            padding: 12px 20px;
             display: flex;
-            gap: 0.5rem;
             justify-content: center;
-            margin: 1rem 0;
+            gap: 15px;
+            flex-wrap: wrap;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
         }
-
-        .lang-btn {
-            background: rgba(255,255,255,0.3);
-            border: 2px solid transparent;
+        .nav-bar a {
             color: white;
-            padding: 6px 12px;
-            border-radius: 15px;
-            cursor: pointer;
-            font-weight: 600;
-            font-size: 14px;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            padding: 0.5rem 1rem;
+            background: rgba(255,255,255,0.1);
+            border-radius: 8px;
             transition: all 0.3s ease;
         }
-
-        .lang-btn:hover {
-            background: rgba(255,255,255,0.5);
-            transform: translateY(-2px);
+        .nav-bar a:hover {
+            background: rgba(255,255,255,0.2);
         }
-
-        .lang-btn.active {
-            background: white;
-            color: var(--cv-blue);
-            border-color: white;
+        .nav-bar a.active {
+            background: rgba(255,215,0,0.2);
+            color: #ffd700;
+            border: 1px solid rgba(255,215,0,0.5);
         }
         
-        .hero {
-            background: linear-gradient(135deg, var(--cv-blue) 0%, var(--cv-eu) 100%);
+        /* Hero Section - Invito Acquisto Libro */
+        .hero-book {
+            background: linear-gradient(135deg, #003399 0%, #1a365d 100%);
             color: white;
-            padding: 4rem 2rem;
+            padding: 40px 20px;
             text-align: center;
+            border-bottom: 6px solid #FFCC00;
+        }
+        .hero-book h1 {
+            font-size: 2.2em;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        .hero-book .subtitle {
+            font-size: 1.3em;
+            opacity: 0.95;
+            margin-bottom: 25px;
+        }
+        .book-highlight {
+            background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+            display: inline-block;
+            padding: 20px 40px;
+            border-radius: 15px;
+            margin: 20px 0;
+            box-shadow: 0 8px 25px rgba(245, 158, 11, 0.4);
+        }
+        .book-highlight h2 {
+            font-size: 1.8em;
+            margin-bottom: 10px;
+            color: #1a1a1a;
+        }
+        .book-highlight p {
+            font-size: 1.1em;
+            color: #1a1a1a;
+            margin-bottom: 15px;
+        }
+        .buy-button {
+            display: inline-block;
+            background: #1a1a1a;
+            color: #ffd700 !important;
+            padding: 15px 35px;
+            font-size: 1.2em;
+            font-weight: 700;
+            text-decoration: none;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+        .buy-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.4);
+            background: #000;
         }
         
-        .hero h1 {
-            font-size: 2.8rem;
-            margin-bottom: 1rem;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        /* Credenziali Section */
+        .credentials-section {
+            background: linear-gradient(135deg, #003399 0%, #1a365d 100%);
+            color: white;
+            padding: 30px 20px;
+            margin-top: 0;
         }
-        
-        .hero p {
-            font-size: 1.3rem;
-            margin-bottom: 2rem;
+        .credentials-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: flex;
+            align-items: flex-start;
+            gap: 25px;
+            flex-wrap: wrap;
+        }
+        .credentials-icon {
+            font-size: 4em;
+        }
+        .credentials-content {
+            flex: 1;
+            min-width: 300px;
+        }
+        .credentials-content h2 {
+            font-size: 1.6em;
+            margin-bottom: 15px;
+            color: #FFCC00;
+        }
+        .credentials-content p {
+            font-size: 1.05em;
+            line-height: 1.7;
             opacity: 0.95;
         }
-        
-        .credentials-badges {
-            display: flex;
-            justify-content: center;
-            gap: 1rem;
-            flex-wrap: wrap;
-            margin-top: 2rem;
-        }
-        
-        .credential-badge {
-            background: rgba(255,255,255,0.15);
-            backdrop-filter: blur(10px);
-            padding: 0.8rem 1.5rem;
-            border-radius: 50px;
+        .credentials-content a {
+            color: #FFCC00;
             font-weight: 600;
-            border: 2px solid rgba(255,255,255,0.3);
-            transition: all 0.3s;
+            text-decoration: underline;
+        }
+        .credentials-content a:hover {
+            color: #fff;
         }
         
-        .credential-badge:hover {
+        /* Social Links */
+        .social-links {
+            margin-top: 20px;
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        .social-link {
+            background: rgba(255,255,255,0.15);
+            padding: 10px 20px;
+            border-radius: 8px;
+            color: white !important;
+            text-decoration: none !important;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        .social-link:hover {
             background: rgba(255,255,255,0.25);
             transform: translateY(-2px);
         }
         
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 3rem 2rem;
-        }
-        
-        .section-title {
-            font-size: 2.2rem;
-            color: var(--cv-blue);
-            text-align: center;
-            margin: 3rem 0 2rem;
-            position: relative;
-        }
-        
-        .section-title::after {
-            content: '';
-            display: block;
-            width: 80px;
-            height: 4px;
-            background: var(--cv-gold);
-            margin: 1rem auto 0;
-        }
-        
-        .section-subtitle {
-            text-align: center;
-            color: #64748b;
-            font-size: 1.1rem;
-            margin-bottom: 2rem;
-        }
-        
-        .case-study {
-            background: white;
-            border-radius: 16px;
-            padding: 3rem;
-            box-shadow: 0 8px 30px rgba(0,0,0,0.12);
-            margin: 2rem 0;
-        }
-        
-        .case-overview {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 2rem;
-            margin: 3rem 0;
-        }
-        
-        .case-stat {
-            text-align: center;
-            padding: 2rem;
-            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
-            border-radius: 12px;
-            border-left: 4px solid var(--cv-gold);
-        }
-        
-        .stat-number {
-            font-size: 2.5rem;
-            font-weight: bold;
-            color: var(--cv-blue);
-            margin-bottom: 0.5rem;
-        }
-        
-        .stat-label {
-            color: #64748b;
-            font-size: 0.95rem;
-            font-weight: 500;
-        }
-        
-        .timeline {
-            position: relative;
-            margin: 3rem 0;
-        }
-        
-        .timeline::before {
-            content: '';
-            position: absolute;
-            left: 50%;
-            top: 0;
-            bottom: 0;
-            width: 3px;
-            background: linear-gradient(180deg, var(--cv-gold), var(--cv-blue));
-            transform: translateX(-50%);
-        }
-        
-        .timeline-item {
-            display: flex;
-            gap: 2rem;
-            margin-bottom: 3rem;
-            position: relative;
-        }
-        
-        .timeline-item:nth-child(odd) {
-            flex-direction: row;
-        }
-        
-        .timeline-item:nth-child(even) {
-            flex-direction: row-reverse;
-        }
-        
-        .timeline-icon {
-            width: 80px;
-            height: 80px;
-            background: white;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2.5rem;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-            border: 4px solid var(--cv-gold);
-            flex-shrink: 0;
-            position: relative;
-            z-index: 2;
-        }
-        
-        .timeline-content {
-            flex: 1;
-            background: white;
-            padding: 2rem;
-            border-radius: 12px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-            border: 2px solid #e2e8f0;
-            transition: all 0.3s;
-        }
-        
-        .timeline-content:hover {
-            box-shadow: 0 8px 30px rgba(0,0,0,0.15);
-            transform: translateY(-4px);
-        }
-        
-        .timeline-content h3 {
-            color: var(--cv-blue);
-            margin-bottom: 0.5rem;
-        }
-        
-        .timeline-content h4 {
-            color: var(--cv-gold);
-            font-size: 1.1rem;
-            margin-bottom: 1rem;
-        }
-        
-        .download-button {
-            display: inline-block;
-            background: var(--cv-blue);
-            color: white;
-            padding: 0.8rem 1.8rem;
-            text-decoration: none;
-            border-radius: 8px;
-            font-weight: 600;
-            margin-top: 1rem;
-            transition: all 0.3s;
-            box-shadow: 0 4px 12px rgba(26, 54, 93, 0.3);
-        }
-        
-        .download-button:hover {
-            background: #0f2744;
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(26, 54, 93, 0.4);
-        }
-        
-        .quote-section {
-            background: linear-gradient(135deg, var(--cv-blue) 0%, var(--cv-eu) 100%);
-            color: white;
-            padding: 3rem;
-            border-radius: 16px;
-            text-align: center;
-            margin: 4rem 0;
-            box-shadow: 0 8px 30px rgba(0,0,0,0.2);
-        }
-        
-        .quote-section blockquote {
-            font-size: 1.4rem;
-            font-style: italic;
-            line-height: 1.8;
-            margin-bottom: 1rem;
-        }
-        
-        .quote-section cite {
-            font-size: 1.1rem;
-            font-weight: 600;
-            font-style: normal;
-        }
-        
-        .strategy-grid {
+        /* Features Grid */
+        .features {
+            max-width: 1000px;
+            margin: 40px auto;
+            padding: 0 20px;
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
-            margin: 2rem 0;
+            gap: 25px;
         }
-        
-        .strategy-card {
+        .feature-card {
             background: white;
-            padding: 2rem;
-            border-radius: 12px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-            border-top: 4px solid var(--cv-gold);
-            transition: all 0.3s;
+            border-radius: 15px;
+            padding: 25px;
+            text-align: center;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+            transition: all 0.3s ease;
         }
-        
-        .strategy-card:hover {
+        .feature-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+            box-shadow: 0 12px 35px rgba(0,0,0,0.2);
+        }
+        .feature-card .icon {
+            font-size: 3em;
+            margin-bottom: 15px;
+        }
+        .feature-card h3 {
+            color: #1a365d;
+            margin-bottom: 10px;
+            font-size: 1.3em;
+        }
+        .feature-card p {
+            color: #666;
+            font-size: 0.95em;
         }
         
-        .strategy-card h4 {
-            color: var(--cv-blue);
-            margin-bottom: 1rem;
-            font-size: 1.2rem;
-        }
-        
-        .strategy-card p {
-            color: #64748b;
-            line-height: 1.7;
-        }
-        
-        .results-box {
-            background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
-            padding: 2.5rem;
-            border-radius: 12px;
-            border-left: 6px solid var(--cv-green);
-            margin: 2rem 0;
-        }
-        
-        .results-box h4 {
-            color: var(--cv-green);
-            font-size: 1.5rem;
-            margin-bottom: 1.5rem;
-        }
-        
-        .results-box ul {
-            list-style: none;
-            padding: 0;
-        }
-        
-        .results-box li {
-            padding: 0.5rem 0;
-            color: #1e293b;
-            font-weight: 500;
-        }
-        
-        .results-box li::before {
-            content: '✅ ';
-            margin-right: 0.5rem;
-        }
-        
-        .media-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 2rem;
-            margin: 3rem 0;
-        }
-        
-        .media-card {
-            background: white;
-            border-radius: 12px;
-            padding: 2rem;
-            box-shadow: 0 6px 20px rgba(0,0,0,0.1);
-            transition: all 0.3s;
-            border-left: 6px solid var(--cv-blue);
-        }
-        
-        .media-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 35px rgba(0,0,0,0.15);
-        }
-        
-        .media-icon {
-            font-size: 3.5rem;
-            margin-bottom: 1rem;
+        /* Footer */
+        footer {
+            background: #2c3e50;
+            color: white;
             text-align: center;
+            padding: 25px 20px;
+            margin-top: 40px;
+        }
+        footer a {
+            color: #ffd700;
+            text-decoration: underline;
+        }
+        footer p {
+            margin-bottom: 10px;
+            font-size: 0.95em;
         }
         
-        .media-card h3 {
-            color: var(--cv-blue);
-            margin-bottom: 1rem;
-            text-align: center;
+        /* Back to Database Button */
+        .back-button {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white !important;
+            padding: 12px 30px;
+            font-size: 1.1em;
+            font-weight: 600;
+            text-decoration: none;
+            border-radius: 10px;
+            margin: 20px 0;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
         }
-        
-        .media-card p {
-            color: #64748b;
-            line-height: 1.7;
-            margin-bottom: 1.5rem;
-        }
-        
-        .media-stats {
-            background: #f8fafc;
-            padding: 1rem;
-            border-radius: 8px;
-            margin: 1rem 0;
-            text-align: center;
-        }
-        
-        @media (max-width: 768px) {
-            .timeline::before {
-                left: 40px;
-            }
-            
-            .timeline-item,
-            .timeline-item:nth-child(even) {
-                flex-direction: row;
-                padding-left: 100px;
-            }
-            
-            .timeline-icon {
-                position: absolute;
-                left: 0;
-            }
-            
-            .hero h1 {
-                font-size: 2rem;
-            }
-            
-            .section-title {
-                font-size: 1.8rem;
-            }
+        .back-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.5);
         }
     </style>
 </head>
 <body>
-    <!-- Main Navigation -->
-    <nav style="background: linear-gradient(135deg, #1e293b 0%, #334155 100%); padding: 1rem 0; box-shadow: 0 4px 12px rgba(0,0,0,0.15); position: sticky; top: 0; z-index: 999;">
-        <div style="max-width: 1200px; margin: 0 auto; display: flex; gap: 1.5rem; justify-content: center; align-items: center; flex-wrap: wrap; padding: 0 1rem;">
-            <a href="https://avvstancamarcello.github.io/Financial-Authority-Database/index.html#database-search-section" style="color: white; text-decoration: none; font-weight: 500; font-size: 1.05rem; padding: 0.5rem 1.5rem; background: rgba(255,255,255,0.05); border-radius: 8px; transition: all 0.3s ease;" onmouseover="this.style.background='rgba(255,255,255,0.15)';" onmouseout="this.style.background='rgba(255,255,255,0.05)';">
-                🏠 Database Autorità Finanziarie (129)
-            </a>
-            <a href="odissea.html" style="color: white; text-decoration: none; font-weight: 500; font-size: 1.05rem; padding: 0.5rem 1.5rem; background: rgba(255,255,255,0.05); border-radius: 8px; transition: all 0.3s ease;" onmouseover="this.style.background='rgba(255,255,255,0.15)';" onmouseout="this.style.background='rgba(255,255,255,0.05)';">
-                🌊 Odissea Digitale
-            </a>
-            <a href="referenze.html" style="color: white; text-decoration: none; font-weight: 500; font-size: 1.05rem; padding: 0.5rem 1.5rem; background: rgba(255,255,255,0.05); border-radius: 8px; transition: all 0.3s ease;" onmouseover="this.style.background='rgba(255,255,255,0.15)';" onmouseout="this.style.background='rgba(255,255,255,0.05)';">
-                📜 Referenze Istituzionali
-            </a>
-            <a href="curriculum.html" style="color: white; text-decoration: none; font-weight: bold; font-size: 1.05rem; padding: 0.5rem 1.5rem; background: rgba(255,255,255,0.15); border-radius: 8px; transition: all 0.3s ease; border: 2px solid rgba(255,255,255,0.2);" onmouseover="this.style.background='rgba(255,255,255,0.25)';" onmouseout="this.style.background='rgba(255,255,255,0.15)';">
-                👨‍⚖️ Avv Stanca - Curriculum
-            </a>
-        </div>
+    <!-- Navigation -->
+    <nav class="nav-bar">
+        <a href="index.html">🏦 Database Autorità Finanziarie</a>
+        <a href="#" class="active">👨‍⚖️ Avv. Stanca - Curriculum</a>
     </nav>
-
-    <!-- Hero Section -->
-    <section class="hero">
-        <nav class="language-selector" role="navigation" aria-label="Language selection">
-            <button class="lang-btn active" onclick="changeLanguage('it')" aria-label="Italiano">🇮🇹 IT</button>
-            <button class="lang-btn" onclick="changeLanguage('en')" aria-label="English">🇬🇧 EN</button>
-            <button class="lang-btn" onclick="changeLanguage('fr')" aria-label="Français">🇫🇷 FR</button>
-            <button class="lang-btn" onclick="changeLanguage('de')" aria-label="Deutsch">🇩🇪 DE</button>
-            <button class="lang-btn" onclick="changeLanguage('es')" aria-label="Español">🇪🇸 ES</button>
-        </nav>
-        <h1>Avvocato Marcello Stanca</h1>
-        <p>25 Anni di Battaglie per i Diritti dei Cittadini</p>
-        <div class="credentials-badges">
-            <div class="credential-badge">🏛️ Presidente AMEV Firenze dal 1999</div>
-            <a href="referenze.html#petizioni-parlamento-europeo" class="credential-badge" style="text-decoration: none; color: inherit;">
-                🇪🇺 2 Petizioni Parlamento UE Accettate
+    
+    <!-- Hero Section - Invito Acquisto Libro -->
+    <section class="hero-book">
+        <h1>🏛️ Autore Verificato in Parlamento Europeo e Ministero della Giustizia Italia</h1>
+        <p class="subtitle">Avvocato Marcello Stanca - 25 Anni di Battaglie per i Diritti dei Cittadini</p>
+        
+        <div class="book-highlight">
+            <h2>📚 RISCHIO TRADING</h2>
+            <p><strong>Best Seller AMAZON</strong> - La guida definitiva per proteggersi dalle truffe finanziarie online</p>
+            <p>Strumenti di Recupero per Vittime di Truffe Forex, Crypto e Pig Butchering</p>
+            <a href="https://www.amazon.it/Rischio-Trading-Attraverso-Strumenti-Recupero-ebook/dp/B0DQRB8VQY?language=en_GB#detailBullets_feature_div" target="_blank" rel="noopener noreferrer" class="buy-button">
+                🛒 ACQUISTA SU AMAZON
             </a>
-            <div class="credential-badge">🎙️ Camera Deputati</div>
         </div>
     </section>
-
-    <div class="container">
-        <!-- CASE STUDY: UPTOS -->
-        <section class="case-study">
-            <h2 class="section-title">💰 Caso UPTOS LLC: €339.000 Recuperati</h2>
-            <p class="section-subtitle">Decreto Ingiuntivo Internazionale | Italia → St Vincent/Grenadines → Estonia</p>
-            
-            <div class="case-overview">
-                <div class="case-stat">
-                    <div class="stat-number">€339.000</div>
-                    <div class="stat-label">Decreto Esecutivo</div>
-                </div>
-                <div class="case-stat">
-                    <div class="stat-number">3</div>
-                    <div class="stat-label">Giurisdizioni</div>
-                </div>
-                <div class="case-stat">
-                    <div class="stat-number">5</div>
-                    <div class="stat-label">Autorità Coinvolte</div>
-                </div>
-            </div>
-
-            <h3 style="text-align: center; color: var(--cv-blue); margin: 3rem 0 2rem;">📍 Timeline Azione Legale Transnazionale</h3>
-            
-            <div class="timeline">
-                <div class="timeline-item">
-                    <div class="timeline-icon">🇮🇹</div>
-                    <div class="timeline-content">
-                        <h3>FASE 1: Decreto Ingiuntivo Italia</h3>
-                        <h4>Tribunale di Firenze</h4>
-                        <p>Emissione Decreto €339.000 contro UPTOS LLC (St Vincent & Grenadines)</p>
-                        <p><strong>📄 Decreto + Traduzione Asseverata + Apostilla Procura Repubblica</strong></p>
-                        <a href="UPTOS Decreto Ingiuntivo.pdf" class="download-button" download>📥 Download Decreto</a>
-                    </div>
-                </div>
-
-                <div class="timeline-item">
-                    <div class="timeline-icon">🌴</div>
-                    <div class="timeline-content">
-                        <h3>FASE 2: Indagini St Vincent & Grenadines</h3>
-                        <h4>Financial Services Authority (FSA) + FIU</h4>
-                        <p>Richiesta informazioni autorità di vigilanza finanziaria caraibica</p>
-                        <p><strong>Segnalazione UIF Antiriciclaggio per transazioni sospette</strong></p>
-                        <p>📄 Documenti FSA + FIU + UIF Procedures</p>
-                    </div>
-                </div>
-
-                <div class="timeline-item">
-                    <div class="timeline-icon">🇪🇪</div>
-                    <div class="timeline-content">
-                        <h3>FASE 3: Pignoramento Estonia</h3>
-                        <h4>Ufficiale Giudiziario Tallinn</h4>
-                        <p>Esecuzione pignoramento contro Burgo Blan OÜ (complice UPTOS)</p>
-                        <p><strong>Pubblicazione Gazzetta Ufficiale Estonia</strong></p>
-                        <p>📄 Atti Ufficiale Giudiziario + Traduzione</p>
-                        <a href="UPTOS Pignoramento Estonia.pdf" class="download-button" download>📥 Download Pignoramento</a>
-                    </div>
-                </div>
-
-                <div class="timeline-item">
-                    <div class="timeline-icon">🇬🇧</div>
-                    <div class="timeline-content">
-                        <h3>FASE 4: Denuncia Action Fraud UK</h3>
-                        <h4>National Fraud & Cyber Crime Reporting Centre</h4>
-                        <p>Segnalazione contro Clear Junction Ltd (banca intermediaria)</p>
-                        <p><strong>Caso preso in carico per investigazione</strong></p>
-                        <p>📄 Conferma Action Fraud + Report Crime</p>
-                        <a href="UPTOS-ActionFraud.pdf" class="download-button" download>📥 Download Conferma</a>
-                    </div>
-                </div>
-
-                <div class="timeline-item">
-                    <div class="timeline-icon">🇪🇪</div>
-                    <div class="timeline-content">
-                        <h3>FASE 5: UIF Estonia</h3>
-                        <h4>Unità Informazione Finanziaria Estonia</h4>
-                        <p>Segnalazione antiriciclaggio su Burgo Blan OÜ</p>
-                        <p><strong>Richiesta blocco conti e sequestro strumenti usati per truffa</strong></p>
-                        <p>📄 UIF Estonia Segnalazione</p>
-                    </div>
-                </div>
-            </div>
-
-            <h3 style="text-align: center; color: var(--cv-blue); margin: 3rem 0 2rem;">⚖️ Strategia Legale Vincente</h3>
-            
-            <div class="strategy-grid">
-                <div class="strategy-card">
-                    <h4>🔨 Decreto Ingiuntivo (Art. 633 c.p.c.)</h4>
-                    <p>Procedura rapida senza contraddittorio preventivo. Esecutività immediata.</p>
-                </div>
+    
+    <!-- Credenziali Section -->
+    <section class="credentials-section">
+        <div class="credentials-container">
+            <div class="credentials-icon">🏛️</div>
+            <div class="credentials-content">
+                <h2>Credenziali Verificate</h2>
+                <p>
+                    L'Avvocato <strong>Marcello Stanca</strong> è verificabile nella pagina dell'Ordine Avvocati presso il Tribunale di Firenze 
+                    (<a href="https://www.ordineavvocatifirenze.eu/" target="_blank" rel="noopener noreferrer">Ordine Avvocati Firenze</a>)
+                    ed è esperto di <strong>INDAGINI INFORMATICHE Internazionali</strong> no limits.
+                </p>
+                <p style="margin-top: 15px;">
+                    <strong>Marcello STANCA è Author AMAZON</strong> del libro <strong>"RISCHIO TRADING"</strong>, Best Seller AMAZON 
+                    (<a href="https://www.amazon.it/Rischio-Trading-Attraverso-Strumenti-Recupero-ebook/dp/B0DQRB8VQY?language=en_GB#detailBullets_feature_div" target="_blank" rel="noopener noreferrer">vedi scheda libro</a>).
+                </p>
                 
-                <div class="strategy-card">
-                    <h4>🌍 Apostilla Convenzione dell'Aia</h4>
-                    <p>Validità mondiale del decreto. Riconoscimento automatico in 120 Paesi.</p>
+                <div class="social-links">
+                    <a href="https://www.facebook.com/avv.stanca.marcello" target="_blank" rel="noopener noreferrer" class="social-link">📘 Facebook</a>
+                    <a href="https://www.tiktok.com/@avvocato.stanca.marcello" target="_blank" rel="noopener noreferrer" class="social-link">🎵 TikTok</a>
+                    <a href="http://maps.app.goo.gl/gs4rm6vXMxJUVVhM8?g_st=aw" target="_blank" rel="noopener noreferrer" class="social-link">📍 Google Maps</a>
+                    <a href="mailto:lawyer@marcellostanca.it" class="social-link">✉️ Email</a>
                 </div>
-                
-                <div class="strategy-card">
-                    <h4>🔗 Identificazione Complici</h4>
-                    <p>Burgo Blan OÜ (Estonia) = conto bancario utilizzato da UPTOS per incassare truffe.</p>
-                </div>
-                
-                <div class="strategy-card">
-                    <h4>🎯 Multi-Giurisdizione Coordinata</h4>
-                    <p>Pressione simultanea: Italia (tribunale) + UK (polizia) + Estonia (pignoramento) + St Vincent (FSA/FIU)</p>
-                </div>
-            </div>
-
-            <div class="results-box">
-                <h4>✅ Risultato</h4>
-                <ul>
-                    <li>Sentenza esecutiva in 3 giurisdizioni</li>
-                    <li>Pignoramento pubblicato in Gazzetta Ufficiale Estonia</li>
-                    <li>Caso investigativo attivo Action Fraud UK</li>
-                    <li>Segnalazioni UIF antiriciclaggio in 2 Paesi</li>
-                </ul>
-            </div>
-        </section>
-
-        <!-- Quote Section -->
-        <section class="quote-section">
-            <blockquote>
-                "Se ho ottenuto un decreto da €339.000 eseguibile contro un paradiso fiscale caraibico,
-                posso guidarti nel recupero dei tuoi capitali."
-            </blockquote>
-            <cite>— Avv. Marcello Stanca</cite>
-        </section>
-
-        <!-- Interventi Pubblici & Media -->
-        <section>
-            <h2 class="section-title">🎙️ Interventi Pubblici & Media</h2>
-            <p class="section-subtitle">Radio Radicale, TikTok, YouTube - Divulgazione e sensibilizzazione truffe finanziarie</p>
-            
-            <div class="media-grid">
-                <!-- YouTube Card -->
-                <div class="media-card" style="border-left-color: #FF0000;">
-                    <div class="media-icon">📺</div>
-                    <h3>YouTube Short</h3>
-                    <p style="font-weight: 600; color: #FF0000; margin-bottom: 0.5rem;">Video divulgativo truffe</p>
-                    <p>Truffe finanziarie: Come riconoscerle e difendersi. Testimonianza diretta e consigli pratici.</p>
-                    <a href="https://youtube.com/shorts/esempio" target="_blank" rel="noopener noreferrer" class="download-button" style="background: #FF0000;">
-                        ▶️ Guarda il Video
-                    </a>
-                </div>
-
-                <!-- Radio Radicale Card -->
-                <div class="media-card" style="border-left-color: #E13A3E;">
-                    <div class="media-icon">🎙️</div>
-                    <h3>Radio Radicale</h3>
-                    <p style="font-weight: 600; color: #E13A3E; margin-bottom: 0.5rem;">Camera dei Deputati</p>
-                    <p>Intervento al convegno "Le Truffe finanziarie. Un fenomeno da arrestare" alla Camera dei Deputati, innanzi alle massime Autorità Antifrode: Carabinieri, Polizia Postale, Guardia di Finanza.</p>
-                    <a href="https://www.radioradicale.it/scheda/734845?i=4789472" target="_blank" rel="noopener noreferrer" class="download-button" style="background: #E13A3E;">
-                        🎧 Ascolta l'Intervento su Radio Radicale
-                    </a>
-                    <div style="margin-top: 1rem;">
-                        <iframe width="560" height="355" src="//www.radioradicale.it/scheda/734845/iframe?i=4789472" frameborder="0" allowfullscreen style="width: 100%; max-width: 560px; border-radius: 8px; border: 0;"></iframe>
-                    </div>
-                </div>
-
-                <!-- TikTok Card -->
-                <div class="media-card" style="border-left-color: #000000;">
-                    <div class="media-icon">📱</div>
-                    <h3>TikTok Business Verificato</h3>
-                    <p style="font-weight: 600; color: #000000; margin-bottom: 0.5rem;">@avvocato.stanca.marcello</p>
-                    <div class="media-stats">
-                        <p style="margin: 0; color: var(--cv-blue);"><strong>470 follower organici</strong></p>
-                        <p style="margin: 0.5rem 0 0 0; color: #64748b;">Video virale: <strong style="color: #000;">59.622 views</strong> ("Rischio Trading" bestseller Amazon)</p>
-                    </div>
-                    <div style="background: #e8f5e9; padding: 1rem; border-radius: 8px; margin: 1rem 0; text-align: center;">
-                        <p style="margin: 0; color: var(--cv-green); font-weight: 600;">✓ Account Business Registrato</p>
-                        <p style="margin: 0.3rem 0 0 0; color: var(--cv-green); font-weight: 600;">✓ Verificato 14 Marzo 2024</p>
-                    </div>
-                    <a href="https://www.tiktok.com/@avvocato.stanca.marcello" target="_blank" rel="noopener noreferrer" class="download-button" style="background: #000000;">
-                        📱 Segui su TikTok
-                    </a>
-                </div>
-            </div>
-        </section>
-
-        <!-- Pubblicazioni & Profili Autore -->
-        <section>
-            <h2 class="section-title">📚 Pubblicazioni & Profili Autore</h2>
-            <p class="section-subtitle">Libro "Rischio Trading", articoli stampa e presenza sui social</p>
-
-            <div class="media-grid">
-                <!-- Libro Rischio Trading -->
-                <div class="media-card" style="border-left-color: #2563EB;">
-                    <div class="media-icon">📘</div>
-                    <h3>Libro "Rischio Trading"</h3>
-                    <p>Manuale su come pianificare una strategia legale efficace per recuperare i capitali sottratti con truffe finanziarie.</p>
-                    <a href="https://www.amazon.de/-/en/Marcello-Stanca/dp/B0DXPBJR73" target="_blank" rel="noopener noreferrer" class="download-button" style="background: #2563EB;">
-                        📖 Acquista su Amazon
-                    </a>
-                    <div style="margin-top: 0.75rem; font-size: 0.9rem; color: #64748b;">
-                        <p style="margin: 0.25rem 0;">
-                            📌 Comunicato stampa Adnkronos sul lancio del libro:
-                            <br>
-                            <a href="https://www.adnkronos.com/immediapress/lavvocato-marcello-stanca-rischio-trading-il-bestseller-su-come-pianificare-una-strategia-legale-efficace-per-recuperare-i-capitali-sottratti-con-truffe-finanziarie_4fzg4a7Waby9cSEjPvCQwQ" target="_blank" rel="noopener noreferrer" style="color: #2563EB; text-decoration: underline;">Leggi il comunicato Adnkronos</a>
-                        </p>
-                        <p style="margin: 0.25rem 0;">
-                            📚 Profilo autore su Autostima.net:
-                            <br>
-                            <a href="https://www.autostima.net/autori/marcello-stanca/" target="_blank" rel="noopener noreferrer" style="color: #2563EB; text-decoration: underline;">Scheda autore Marcello Stanca</a>
-                        </p>
-                    </div>
-                </div>
-
-                <!-- Profili Social Professionali -->
-                <div class="media-card" style="border-left-color: #1877F2;">
-                    <div class="media-icon">👍</div>
-                    <h3>Profili Social Professionali</h3>
-                    <p>Canali utilizzati per divulgazione giuridica, educazione finanziaria e tutela dei diritti dei cittadini.</p>
-                    <a href="https://www.facebook.com/avv.stanca.marcello" target="_blank" rel="noopener noreferrer" class="download-button" style="background: #1877F2;">
-                        📘 Profilo Facebook &ndash; Marcello Avv Stanca
-                    </a>
-                    <div style="margin-top: 0.75rem; font-size: 0.9rem; color: #64748b;">
-                        <p style="margin: 0.25rem 0;">
-                            Pagina Facebook: <strong>Marcello Avv Stanca Free VAX</strong> (<span>@avvstanca</span>)
-                        </p>
-                        <p style="margin: 0.25rem 0;">
-                            🌐 Sito dedicato alla vaccinazione informata:
-                            <br>
-                            <a href="https://www.vaccinazione.it" target="_blank" rel="noopener noreferrer" style="color: #1877F2; text-decoration: underline;">www.vaccinazione.it</a>
-                        </p>
-                        <p style="margin: 0.25rem 0;">
-                            🌐 Sito professionale:
-                            <br>
-                            <a href="https://www.marcellostanca.it" target="_blank" rel="noopener noreferrer" style="color: #1877F2; text-decoration: underline;">www.marcellostanca.it</a>
-                        </p>
-                        <p style="margin: 0.25rem 0;">
-                            ✉️ Contatti e-mail:
-                            <br>
-                            <a href="mailto:avvocato@marcellostanca.it" style="color: #1877F2; text-decoration: underline;">avvocato@marcellostanca.it</a>
-                            <br>
-                            <a href="mailto:segreteria@amevfirenze.it" style="color: #1877F2; text-decoration: underline;">segreteria@amevfirenze.it</a>
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Call to Action -->
-        <div style="text-align: center; margin-top: 4rem; padding: 3rem; background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%); border-radius: 16px;">
-            <h3 style="color: var(--cv-blue); font-size: 1.8rem; margin-bottom: 1.5rem;">Hai bisogno di assistenza legale?</h3>
-            <p style="color: #64748b; font-size: 1.1rem; margin-bottom: 2rem; max-width: 600px; margin-left: auto; margin-right: auto;">
-                Affidati a un professionista con esperienza comprovata in controversie bancarie internazionali e recupero crediti transfrontalieri.
-            </p>
-            <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
-                <a href="https://avvstancamarcello.github.io/Financial-Authority-Database/index.html#database-search-section" class="download-button" style="font-size: 1.1rem; padding: 1.2rem 2.5rem;">
-                    🗂️ Database Autorità Finanziarie (129)
-                </a>
-                <a href="referenze.html" class="download-button" style="font-size: 1.1rem; padding: 1.2rem 2.5rem; background: var(--cv-gold); color: var(--cv-blue);">
-                    📜 Referenze Istituzionali
-                </a>
-                <a href="odissea.html" class="download-button" style="font-size: 1.1rem; padding: 1.2rem 2.5rem; background: var(--cv-eu);">
-                    🌊 Odissea Digitale
-                </a>
             </div>
         </div>
+    </section>
+    
+    <!-- Features Grid -->
+    <section class="features">
+        <div class="feature-card">
+            <div class="icon">🇪🇺</div>
+            <h3>Parlamento Europeo</h3>
+            <p>Petizioni accettate dal Parlamento Europeo per la tutela dei consumatori vittime di truffe finanziarie</p>
+        </div>
+        <div class="feature-card">
+            <div class="icon">⚖️</div>
+            <h3>Ministero della Giustizia</h3>
+            <p>Credenziali verificate presso il Ministero della Giustizia italiano e Tribunale di Firenze</p>
+        </div>
+        <div class="feature-card">
+            <div class="icon">🔍</div>
+            <h3>Indagini Internazionali</h3>
+            <p>Esperto in indagini informatiche transfrontaliere per il recupero di capitali da truffe online</p>
+        </div>
+        <div class="feature-card">
+            <div class="icon">📚</div>
+            <h3>Autore Amazon</h3>
+            <p>Best Seller "RISCHIO TRADING" - Guida pratica per proteggersi e recuperare dalle truffe trading</p>
+        </div>
+    </section>
+    
+    <!-- Back to Database -->
+    <div style="text-align: center; padding: 20px;">
+        <a href="index.html" class="back-button">🏦 Torna al Database Autorità Finanziarie</a>
     </div>
-
+    
     <!-- Footer -->
-    <footer style="background: #1e293b; color: white; padding: 2rem; text-align: center; margin-top: 4rem;">
-        <p style="margin: 0; opacity: 0.8;">© 2026 Avv. Marcello Stanca | Tutti i diritti riservati</p>
-        <p style="margin: 0.5rem 0 0 0; opacity: 0.6; font-size: 0.9rem;">25 Anni al servizio della giustizia e dei diritti dei cittadini</p>
+    <footer>
+        <p>© 2026 Author and Webmaster: Avvocato Marcello Stanca, Lawyer in Italy – Firenze.</p>
+        <p>Credenziali verificate da: Ministero della Giustizia (Italia), Tribunale di Firenze, Parlamento Europeo – Bruxelles.</p>
+        <p>Account Facebook e Instagram verificati da Meta. Local Guide Google Maps livello 9,5.</p>
+        <p style="margin-top: 15px; padding-top: 15px; border-top: 1px solid rgba(255,255,255,0.3);">
+            <strong>🔒 PRIVACY: Questa app NON raccoglie dati personali degli utenti</strong> | 
+            <a href="privacy.html">Privacy Policy</a>
+        </p>
     </footer>
 </body>
-<script>
-    // Language switcher (UI only)
-    let currentLanguage = 'it';
-    function changeLanguage(lang) {
-        currentLanguage = lang;
-        const buttons = document.querySelectorAll('.lang-btn');
-        buttons.forEach(btn => btn.classList.remove('active'));
-        const activeBtn = Array.from(buttons).find(btn => btn.textContent.includes(lang.toUpperCase()));
-        if (activeBtn) activeBtn.classList.add('active');
-        document.documentElement.lang = lang;
-    }
-</script>
 </html>
