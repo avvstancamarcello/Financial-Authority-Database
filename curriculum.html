@@ -237,6 +237,186 @@
             transform: translateY(-3px);
             box-shadow: 0 8px 25px rgba(102, 126, 234, 0.5);
         }
+
+        /* Petition Section */
+        .petition-section {
+            background: linear-gradient(135deg, #1a365d 0%, #2d3748 100%);
+            padding: 40px 20px;
+            margin: 0;
+            border-top: 4px solid #FFCC00;
+        }
+        .petition-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        .petition-title {
+            color: #FFCC00;
+            font-size: 1.8em;
+            margin-bottom: 10px;
+        }
+        .petition-subtitle {
+            color: white;
+            font-size: 1.1em;
+            opacity: 0.9;
+            margin-bottom: 25px;
+        }
+        .petition-status {
+            display: inline-block;
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+            padding: 8px 25px;
+            border-radius: 25px;
+            font-weight: 700;
+            font-size: 1em;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.4);
+        }
+        .petition-flags-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+            gap: 15px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .petition-flag-btn {
+            background: rgba(255,255,255,0.1);
+            border: 2px solid rgba(255,255,255,0.2);
+            border-radius: 12px;
+            padding: 15px 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+        .petition-flag-btn:hover {
+            background: rgba(255,255,255,0.2);
+            border-color: #FFCC00;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+        }
+        .petition-flag-btn .flag-emoji {
+            font-size: 2.5em;
+            display: block;
+            margin-bottom: 5px;
+        }
+        .petition-flag-btn .lang-name {
+            color: white;
+            font-size: 0.75em;
+            opacity: 0.9;
+        }
+
+        /* Modal Styles */
+        .petition-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+            z-index: 9999;
+            overflow-y: auto;
+            padding: 20px;
+        }
+        .petition-modal.active {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+        }
+        .modal-content {
+            background: white;
+            border-radius: 15px;
+            max-width: 700px;
+            width: 100%;
+            margin: 40px auto;
+            padding: 30px;
+            position: relative;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+        }
+        .modal-close {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 2em;
+            color: #666;
+            cursor: pointer;
+            transition: color 0.3s ease;
+            background: none;
+            border: none;
+        }
+        .modal-close:hover {
+            color: #c00;
+        }
+        .modal-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #eee;
+        }
+        .modal-header .flag-large {
+            font-size: 3em;
+        }
+        .modal-header h2 {
+            color: #1a365d;
+            font-size: 1.3em;
+            line-height: 1.3;
+        }
+        .modal-status {
+            display: inline-block;
+            background: #10b981;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 15px;
+            font-size: 0.9em;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+        .modal-summary {
+            color: #333;
+            font-size: 1.05em;
+            line-height: 1.7;
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 4px solid #003399;
+        }
+        .modal-footer {
+            margin-top: 25px;
+            text-align: center;
+        }
+        .modal-link {
+            display: inline-block;
+            background: linear-gradient(135deg, #003399 0%, #1a365d 100%);
+            color: white !important;
+            padding: 12px 30px;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        .modal-link:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0,51,153,0.4);
+        }
+
+        @media (max-width: 768px) {
+            .petition-flags-grid {
+                grid-template-columns: repeat(4, 1fr);
+                gap: 10px;
+            }
+            .petition-flag-btn {
+                padding: 10px 5px;
+            }
+            .petition-flag-btn .flag-emoji {
+                font-size: 2em;
+            }
+            .modal-content {
+                margin: 20px auto;
+                padding: 20px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -328,6 +508,39 @@
             <p>Best Seller "RISCHIO TRADING" - Guida pratica per proteggersi e recuperare dalle truffe trading</p>
         </div>
     </section>
+
+    <!-- European Parliament Petition Section -->
+    <section class="petition-section" id="petition">
+        <div class="petition-container">
+            <h2 class="petition-title">🇪🇺 Petizione Parlamento Europeo</h2>
+            <p class="petition-subtitle">Clicca sulla bandiera per leggere la petizione nella tua lingua</p>
+            <div class="petition-status" id="petitionStatus">✅ Stato: Approvata</div>
+            
+            <div class="petition-flags-grid" id="petitionFlagsGrid">
+                <!-- Flags will be loaded dynamically from JSON -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Petition Modal -->
+    <div class="petition-modal" id="petitionModal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closePetitionModal()">&times;</button>
+            <div class="modal-header">
+                <span class="flag-large" id="modalFlag">🇮🇹</span>
+                <h2 id="modalTitle">Titolo Petizione</h2>
+            </div>
+            <div class="modal-status" id="modalStatus">Stato: Approvata</div>
+            <div class="modal-summary" id="modalSummary">
+                Contenuto della petizione...
+            </div>
+            <div class="modal-footer">
+                <a href="https://www.europarl.europa.eu/petitions/en/petition/content/0888%252F2024/html/Petition-No-0888%252F2024-by-Marcello-Stanca-%2528Italian%2529-on-protecting-bank-customers-from-fraud-caused-by-fake-financial-operators" target="_blank" rel="noopener noreferrer" class="modal-link">
+                    🔗 Visualizza sul sito ufficiale del Parlamento Europeo
+                </a>
+            </div>
+        </div>
+    </div>
     
     <!-- Back to Database -->
     <div style="text-align: center; padding: 20px;">
@@ -344,5 +557,77 @@
             <a href="privacy.html">Privacy Policy</a>
         </p>
     </footer>
+
+    <!-- Petition Translations Script -->
+    <script>
+        let petitionData = null;
+
+        // Load petition translations from JSON
+        async function loadPetitionData() {
+            try {
+                const response = await fetch('petition_0888_translations.json');
+                petitionData = await response.json();
+                renderPetitionFlags();
+            } catch (error) {
+                console.error('Error loading petition translations:', error);
+                document.getElementById('petitionFlagsGrid').innerHTML = 
+                    '<p style="color: white; opacity: 0.7;">Caricamento traduzioni...</p>';
+            }
+        }
+
+        // Render flag buttons from JSON data
+        function renderPetitionFlags() {
+            const grid = document.getElementById('petitionFlagsGrid');
+            if (!petitionData || !petitionData.languages) return;
+
+            grid.innerHTML = petitionData.languages.map(lang => `
+                <button class="petition-flag-btn" onclick="openPetitionModal('${lang.code}')" title="${lang.name}">
+                    <span class="flag-emoji">${lang.flag}</span>
+                    <span class="lang-name">${lang.name}</span>
+                </button>
+            `).join('');
+        }
+
+        // Open modal with selected language
+        function openPetitionModal(langCode) {
+            if (!petitionData) return;
+
+            const lang = petitionData.languages.find(l => l.code === langCode);
+            const title = petitionData.title[langCode] || petitionData.title['en'];
+            const status = petitionData.status[langCode] || petitionData.status['en'];
+            const summary = petitionData.summary[langCode] || petitionData.summary['en'];
+
+            document.getElementById('modalFlag').textContent = lang ? lang.flag : '🇪🇺';
+            document.getElementById('modalTitle').textContent = title;
+            document.getElementById('modalStatus').textContent = status;
+            document.getElementById('modalSummary').textContent = summary;
+
+            document.getElementById('petitionModal').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        // Close modal
+        function closePetitionModal() {
+            document.getElementById('petitionModal').classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        // Close modal on backdrop click
+        document.getElementById('petitionModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closePetitionModal();
+            }
+        });
+
+        // Close modal on Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closePetitionModal();
+            }
+        });
+
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', loadPetitionData);
+    </script>
 </body>
 </html>
