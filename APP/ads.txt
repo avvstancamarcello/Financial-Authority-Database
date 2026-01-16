@@ -1,0 +1,27 @@
+# ads.txt - Authorized Digital Sellers for TutelaTruffe.it
+# https://tutelatruffe.it/ads.txt
+#
+# This file declares authorized sellers of digital advertising inventory.
+# Required by Google AdSense and other ad networks.
+#
+# Format: <domain>, <publisher-account-id>, <account-type>, <certification-authority-id>
+#
+# INSTRUCTIONS:
+# 1. Register for Google AdSense at https://www.google.com/adsense/
+# 2. Get your Publisher ID (starts with "pub-")
+# 3. Replace "pub-XXXXXXXXXXXXXXXX" below with your actual Publisher ID
+# 4. Upload this file to your website root: https://tutelatruffe.it/ads.txt
+#
+# ============================================================================
+
+# Google AdSense (replace with your Publisher ID)
+google.com, pub-XXXXXXXXXXXXXXXX, DIRECT, f08c47fec0942fa0
+
+# ============================================================================
+# Additional ad networks can be added below following the same format:
+# 
+# Example for other networks:
+# rubiconproject.com, XXXXXX, DIRECT, 0bfd66d529a55807
+# pubmatic.com, XXXXXX, DIRECT, 5d62403b186f2ace
+# openx.com, XXXXXX, DIRECT, 6a698e2ec38604c6
+# ============================================================================

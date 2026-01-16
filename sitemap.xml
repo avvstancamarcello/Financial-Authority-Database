@@ -133,4 +133,61 @@
         <priority>0.8</priority>
     </url>
 
+    <!-- Petition Documents JSON (24 EU languages) -->
+    <url>
+        <loc>https://tutelatruffe.it/petition_documents.json</loc>
+        <lastmod>2026-01-16</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+
+    <!-- European Parliament Petition PDF Documents - All 24 EU Languages -->
+    <!-- English -->
+    <url>
+        <loc>https://tutelatruffe.it/petitions-pdf/Home%20_%20PETI%20_%20Committees%20_%20European%20Parliament-base.pdf</loc>
+        <lastmod>2026-01-16</lastmod>
+        <changefreq>yearly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    
+    <!-- Italian -->
+    <url>
+        <loc>https://tutelatruffe.it/petitions-pdf/European_Parliament_PETITION_0888-2024_Approved-Committees.pdf</loc>
+        <lastmod>2026-01-16</lastmod>
+        <changefreq>yearly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    
+    <!-- German -->
+    <url>
+        <loc>https://tutelatruffe.it/petitions-pdf/Home%20_%20PETI%20_%20Aussch%C3%BCsse%20_%20Europ%C3%A4isches%20Parlament-deutsch.pdf</loc>
+        <lastmod>2026-01-16</lastmod>
+        <changefreq>yearly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    
+    <!-- French -->
+    <url>
+        <loc>https://tutelatruffe.it/petitions-pdf/European_Parliament_PETI_Committees_2Petition_approved.pdf</loc>
+        <lastmod>2026-01-16</lastmod>
+        <changefreq>yearly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    
+    <!-- Spanish -->
+    <url>
+        <loc>https://tutelatruffe.it/petitions-pdf/PETI_Comisiones_Parlamento_Europeo-es.pdf</loc>
+        <lastmod>2026-01-16</lastmod>
+        <changefreq>yearly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <!-- EU Parliament-Council Agreement on Bank Liability -->
+    <url>
+        <loc>https://tutelatruffe.it/petitions-pdf/Accordo%20EuroParlamento-Consiglio%2027-nov-2025%20su%20responsabilita%20Banche.pdf</loc>
+        <lastmod>2025-11-27</lastmod>
+        <changefreq>yearly</changefreq>
+        <priority>0.9</priority>
+    </url>
+
 </urlset>

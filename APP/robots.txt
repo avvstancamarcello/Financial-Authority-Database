@@ -1,0 +1,54 @@
+# robots.txt per Tutela Truffe - Financial Authority Database
+# © 2026 Avvocato Marcello Stanca - Firenze, Italy
+# Dominio: tutelatruffe.it
+
+User-agent: *
+Allow: /
+Allow: /index.html
+Allow: /referenze.html
+Allow: /curriculum.html
+Allow: /privacy.html
+Allow: /terms.html
+Allow: /manifest.json
+Allow: /icon-192.png
+Allow: /icon-512.png
+
+# Proteggi il database da scraping aggressivo
+Crawl-delay: 2
+
+# Non consentire accesso diretto al file cifrato
+Disallow: /db.enc
+
+# Sitemap - Dominio principale tutelatruffe.it
+Sitemap: https://tutelatruffe.it/sitemap.xml
+
+# Direttive specifiche per bot principali
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 1
+
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 1
+
+User-agent: Slurp
+Allow: /
+Crawl-delay: 2
+
+# Blocca scraper noti dal database JSON
+User-agent: AhrefsBot
+Disallow: /financial_authorities_database.json
+Crawl-delay: 10
+
+User-agent: SemrushBot
+Disallow: /financial_authorities_database.json
+Crawl-delay: 10
+
+User-agent: DotBot
+Disallow: /financial_authorities_database.json
+
+User-agent: MJ12bot
+Disallow: /
+
+User-agent: BLEXBot
+Disallow: /
