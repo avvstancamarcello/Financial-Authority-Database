@@ -1,0 +1,46 @@
+{
+  "petition_number": "0888/2024",
+  "status": "approved",
+  "author": "Avv. Marcello Stanca",
+  "official_url": "https://www.europarl.europa.eu/petitions/en/petition/content/0888%252F2024/html/Petition-No-0888%252F2024-by-Marcello-Stanca-%2528Italian%2529-on-protecting-bank-customers-from-fraud-caused-by-fake-financial-operators",
+  "languages": [
+    {"code": "en", "name": "English", "flag": "🇬🇧", "iso": "GB"},
+    {"code": "it", "name": "Italiano", "flag": "🇮🇹", "iso": "IT"},
+    {"code": "de", "name": "Deutsch", "flag": "🇩🇪", "iso": "DE"},
+    {"code": "fr", "name": "Français", "flag": "🇫🇷", "iso": "FR"},
+    {"code": "es", "name": "Español", "flag": "🇪🇸", "iso": "ES"},
+    {"code": "pt", "name": "Português", "flag": "🇵🇹", "iso": "PT"},
+    {"code": "nl", "name": "Nederlands", "flag": "🇳🇱", "iso": "NL"},
+    {"code": "pl", "name": "Polski", "flag": "🇵🇱", "iso": "PL"},
+    {"code": "ro", "name": "Română", "flag": "🇷🇴", "iso": "RO"},
+    {"code": "hu", "name": "Magyar", "flag": "🇭🇺", "iso": "HU"},
+    {"code": "cs", "name": "Čeština", "flag": "🇨🇿", "iso": "CZ"},
+    {"code": "el", "name": "Ελληνικά", "flag": "🇬🇷", "iso": "GR"},
+    {"code": "bg", "name": "Български", "flag": "🇧🇬", "iso": "BG"},
+    {"code": "da", "name": "Dansk", "flag": "🇩🇰", "iso": "DK"},
+    {"code": "sv", "name": "Svenska", "flag": "🇸🇪", "iso": "SE"},
+    {"code": "fi", "name": "Suomi", "flag": "🇫🇮", "iso": "FI"},
+    {"code": "sk", "name": "Slovenčina", "flag": "🇸🇰", "iso": "SK"},
+    {"code": "sl", "name": "Slovenščina", "flag": "🇸🇮", "iso": "SI"},
+    {"code": "hr", "name": "Hrvatski", "flag": "🇭🇷", "iso": "HR"},
+    {"code": "lt", "name": "Lietuvių", "flag": "🇱🇹", "iso": "LT"},
+    {"code": "lv", "name": "Latviešu", "flag": "🇱🇻", "iso": "LV"},
+    {"code": "et", "name": "Eesti", "flag": "🇪🇪", "iso": "EE"},
+    {"code": "mt", "name": "Malti", "flag": "🇲🇹", "iso": "MT"},
+    {"code": "ga", "name": "Gaeilge", "flag": "🇮🇪", "iso": "IE"}
+  ],
+  "additional_documents": [
+    {
+      "id": "agreement_2025",
+      "type": "agreement",
+      "title": "EU Parliament-Council Agreement on Bank Liability (Nov 2025)",
+      "pdf": "petitions-pdf/Accordo EuroParlamento-Consiglio 27-nov-2025 su responsabilita Banche.pdf"
+    },
+    {
+      "id": "petition_645",
+      "type": "petition",
+      "title": "Petition 0645/2025 - Follow-up petition",
+      "pdf": "petitions-pdf/EuropeanParliament_PETITION_0645-2025_Committees_page_total.pdf"
+    }
+  ]
+}

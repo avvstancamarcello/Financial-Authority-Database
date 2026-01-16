@@ -774,76 +774,152 @@
         </p>
     </footer>
 
-    <!-- Petition Documents Script -->
+    <!-- Petition Documents Script - Lazy Loading per Lingua -->
     <script>
-        let petitionDocs = null;
+        // ========================================
+        // LAZY LOADING i18n SYSTEM
+        // Carica solo il file JSON della lingua richiesta
+        // Struttura: i18n/index.json (leggero ~2KB) + i18n/{lang}.json (~1KB ciascuno)
+        // ========================================
+        
+        let i18nIndex = null;        // Indice lingue (caricato una volta)
+        let langCache = new Map();   // Cache traduzioni caricate
 
-        // Load petition documents from JSON
-        async function loadPetitionDocuments() {
+        // Rileva lingua browser o usa fallback
+        function detectUserLanguage() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const langParam = urlParams.get('lang');
+            if (langParam) return langParam;
+            
+            const browserLang = navigator.language?.split('-')[0] || 'en';
+            return browserLang;
+        }
+
+        // Carica indice lingue (leggero, ~2KB)
+        async function loadI18nIndex() {
             try {
-                const response = await fetch('petition_documents.json');
-                petitionDocs = await response.json();
+                const response = await fetch('i18n/index.json');
+                i18nIndex = await response.json();
                 renderPetitionFlags();
                 renderAdditionalDocs();
             } catch (error) {
-                console.error('Error loading petition documents:', error);
-                document.getElementById('petitionFlagsGrid').innerHTML = 
-                    '<p style="color: rgba(255,255,255,0.6);">Errore caricamento documenti</p>';
+                console.error('Error loading i18n index:', error);
+                // Fallback al vecchio sistema
+                loadLegacyPetitionDocuments();
             }
         }
 
-        // Render flag buttons from JSON documents array
+        // Fallback al sistema precedente se i18n non disponibile
+        async function loadLegacyPetitionDocuments() {
+            try {
+                const response = await fetch('petition_documents.json');
+                const legacyData = await response.json();
+                i18nIndex = {
+                    languages: legacyData.documents?.map(d => ({
+                        code: d.lang,
+                        name: d.language_name,
+                        flag: d.flag,
+                        iso: d.iso
+                    })),
+                    additional_documents: legacyData.additional_documents
+                };
+                // Popola cache con dati legacy
+                legacyData.documents?.forEach(doc => {
+                    langCache.set(doc.lang, doc);
+                });
+                renderPetitionFlags();
+                renderAdditionalDocs();
+            } catch (error) {
+                console.error('Error loading legacy documents:', error);
+                document.getElementById('petitionFlagsGrid').innerHTML = 
+                    '<p style="color: rgba(255,255,255,0.6);">Errore caricamento</p>';
+            }
+        }
+
+        // Carica traduzione singola lingua (lazy, ~1KB)
+        async function loadLanguageData(langCode) {
+            // Check cache first
+            if (langCache.has(langCode)) {
+                return langCache.get(langCode);
+            }
+
+            try {
+                const response = await fetch(`i18n/${langCode}.json`);
+                if (!response.ok) throw new Error(`Language ${langCode} not found`);
+                const langData = await response.json();
+                langCache.set(langCode, langData);  // Cache per riuso
+                return langData;
+            } catch (error) {
+                console.error(`Error loading language ${langCode}:`, error);
+                // Fallback to English
+                if (langCode !== 'en') {
+                    return loadLanguageData('en');
+                }
+                return null;
+            }
+        }
+
+        // Render griglia bandiere dall'indice
         function renderPetitionFlags() {
             const grid = document.getElementById('petitionFlagsGrid');
-            if (!petitionDocs || !petitionDocs.documents) return;
+            if (!i18nIndex || !i18nIndex.languages) return;
 
-            grid.innerHTML = petitionDocs.documents.map(doc => `
-                <button class="petition-flag-btn" onclick="openPdfModal('${doc.lang}')" title="${doc.language_name}">
-                    <span class="flag-emoji">${doc.flag}</span>
-                    <span class="lang-name">${doc.language_name}</span>
+            grid.innerHTML = i18nIndex.languages.map(lang => `
+                <button class="petition-flag-btn" onclick="openPdfModal('${lang.code}')" title="${lang.name}">
+                    <span class="flag-emoji">${lang.flag}</span>
+                    <span class="lang-name">${lang.name}</span>
                 </button>
             `).join('');
         }
 
-        // Render additional documents cards
+        // Render documenti aggiuntivi
         function renderAdditionalDocs() {
             const grid = document.getElementById('additionalDocsGrid');
-            if (!petitionDocs || !petitionDocs.additional_documents) return;
+            if (!i18nIndex || !i18nIndex.additional_documents) return;
 
-            grid.innerHTML = petitionDocs.additional_documents.map(doc => `
+            grid.innerHTML = i18nIndex.additional_documents.map(doc => `
                 <div class="doc-card" onclick="openAdditionalDoc('${encodeURIComponent(doc.pdf)}', '${doc.title}')">
                     <h4>📄 ${doc.title}</h4>
-                    <p>${doc.description}</p>
+                    <p>${doc.description || 'Documento ufficiale Parlamento Europeo'}</p>
                 </div>
             `).join('');
         }
 
-        // Open PDF modal with preview
-        function openPdfModal(langCode) {
-            if (!petitionDocs) return;
+        // Apri modal PDF (LAZY LOAD della traduzione)
+        async function openPdfModal(langCode) {
+            if (!i18nIndex) return;
 
-            const doc = petitionDocs.documents.find(d => d.lang === langCode);
-            if (!doc) return;
-
-            // Update modal content
-            document.getElementById('modalFlag').textContent = doc.flag;
-            document.getElementById('modalTitle').textContent = doc.title;
-            document.getElementById('modalStatus').textContent = '✅ Petizione Approvata - ' + doc.language_name;
-            
-            // Set PDF preview
-            const pdfPath = doc.pdf;
-            document.getElementById('pdfPreview').src = pdfPath;
-            
-            // Set action buttons
-            document.getElementById('btnOpenNewTab').href = pdfPath;
-            document.getElementById('btnDownload').href = pdfPath;
-            document.getElementById('btnDownload').download = `Petition_0888-2024_${doc.iso}.pdf`;
-
-            // Show modal
+            // Mostra loading nel modal
             document.getElementById('petitionModal').classList.add('active');
+            document.getElementById('modalTitle').textContent = 'Caricamento...';
+            document.getElementById('modalStatus').textContent = '⏳';
             document.body.style.overflow = 'hidden';
 
-            // Track language for AdSense targeting
+            // Carica SOLO la lingua richiesta (lazy)
+            const langData = await loadLanguageData(langCode);
+            if (!langData) {
+                closePetitionModal();
+                return;
+            }
+
+            // Trova ISO dall'indice
+            const langInfo = i18nIndex.languages.find(l => l.code === langCode);
+            const iso = langInfo?.iso || langCode.toUpperCase();
+
+            // Aggiorna modal content
+            document.getElementById('modalFlag').textContent = langData.flag;
+            document.getElementById('modalTitle').textContent = langData.title;
+            document.getElementById('modalStatus').textContent = langData.status;
+            
+            // Set PDF preview
+            document.getElementById('pdfPreview').src = langData.pdf;
+            
+            // Set action buttons
+            document.getElementById('btnOpenNewTab').href = langData.pdf;
+            document.getElementById('btnDownload').href = langData.pdf;
+            document.getElementById('btnDownload').download = `Petition_0888-2024_${iso}.pdf`;
+
+            // Track per Analytics/AdSense targeting
             if (typeof gtag === 'function') {
                 gtag('event', 'petition_view', {
                     'language': langCode,
@@ -852,7 +928,7 @@
             }
         }
 
-        // Open additional document
+        // Apri documento aggiuntivo
         function openAdditionalDoc(pdfPath, title) {
             const decodedPath = decodeURIComponent(pdfPath);
             
@@ -869,50 +945,45 @@
             document.body.style.overflow = 'hidden';
         }
 
-        // Close modal
+        // Chiudi modal
         function closePetitionModal() {
             document.getElementById('petitionModal').classList.remove('active');
             document.body.style.overflow = '';
-            // Clear iframe to stop loading
-            document.getElementById('pdfPreview').src = '';
+            document.getElementById('pdfPreview').src = '';  // Stop loading
         }
 
-        // Close modal on backdrop click
+        // Event listeners
         document.getElementById('petitionModal').addEventListener('click', function(e) {
-            if (e.target === this) {
-                closePetitionModal();
-            }
+            if (e.target === this) closePetitionModal();
         });
 
-        // Close modal on Escape key
         document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape') {
-                closePetitionModal();
-            }
+            if (e.key === 'Escape') closePetitionModal();
         });
 
-        // Initialize on page load
-        document.addEventListener('DOMContentLoaded', loadPetitionDocuments);
+        // Initialize - carica SOLO l'indice (~2KB)
+        document.addEventListener('DOMContentLoaded', loadI18nIndex);
+
+        // ========================================
+        // PERFORMANCE METRICS
+        // ========================================
+        // OLD: petition_documents.json = ~15KB (tutto insieme)
+        // NEW: i18n/index.json = ~2KB + i18n/{lang}.json = ~1KB on-demand
+        // 
+        // Risparmio iniziale: ~13KB (86% più leggero)
+        // Utente medio consulta 1-2 lingue: carica max ~4KB vs 15KB
+        // ========================================
 
         // ========================================
         // Google AdSense Integration (Placeholder)
         // ========================================
-        // To enable AdSense, add your publisher ID and ad slot IDs:
-        // 
-        // 1. Add this in <head>:
-        //    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossorigin="anonymous"></script>
+        // 1. Add in <head>:
+        //    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXX"></script>
         //
-        // 2. Replace adsense-container content with:
-        //    <ins class="adsbygoogle"
-        //         style="display:block"
-        //         data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
-        //         data-ad-slot="XXXXXXXXXX"
-        //         data-ad-format="auto"
-        //         data-full-width-responsive="true"></ins>
-        //    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+        // 2. Replace adsense-container with:
+        //    <ins class="adsbygoogle" data-ad-client="ca-pub-XXXXX" data-ad-slot="XXXXX"></ins>
         //
-        // Targeting Keywords: financial fraud, bank protection, investment scam, 
-        //                     consumer rights, EU regulation, legal services
+        // Targeting: financial fraud, bank protection, investment scam, EU regulation
     </script>
 </body>
 </html>
