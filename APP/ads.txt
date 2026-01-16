@@ -14,8 +14,8 @@
 #
 # ============================================================================
 
-# Google AdSense (replace with your Publisher ID)
-google.com, pub-XXXXXXXXXXXXXXXX, DIRECT, f08c47fec0942fa0
+# Google AdSense - Verified Publisher
+google.com, pub-2899281140209246, DIRECT, f08c47fec0942fa0
 
 # ============================================================================
 # Additional ad networks can be added below following the same format:
