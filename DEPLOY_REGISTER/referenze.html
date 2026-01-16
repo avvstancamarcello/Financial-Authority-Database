@@ -1,0 +1,880 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Google AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2899281140209246" crossorigin="anonymous"></script>
+    
+    <title>Risorse Istituzionali di Supervisione Finanziaria | Tutela Truffe</title>
+    <meta name="description" content="Risorse ufficiali per la supervisione finanziaria internazionale: SEC Investor.gov, ESMA, Commissione Europea, FBI IC3, SIPC, IOSCO, ScamShield. Link diretti alle autorità di controllo.">
+    <meta name="author" content="Avvocato Marcello Stanca">
+    
+    <!-- Flag Icons CSS Library -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.2.3/css/flag-icons.min.css">
+    
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            min-height: 100vh;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        /* Navigation */
+        .nav-bar {
+            background: linear-gradient(135deg, #1a365d 0%, #2d3748 100%);
+            padding: 12px 20px;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+        .nav-bar a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            padding: 0.5rem 1rem;
+            background: rgba(255,255,255,0.1);
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+        .nav-bar a:hover {
+            background: rgba(255,255,255,0.2);
+        }
+        .nav-bar a.active {
+            background: rgba(255,255,255,0.25);
+            border: 1px solid rgba(255,255,255,0.4);
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #003399 0%, #1a365d 100%);
+            color: white;
+            padding: 50px 20px;
+            text-align: center;
+            border-bottom: 6px solid #FFCC00;
+        }
+        .hero h1 {
+            font-size: 2.2em;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        .hero .subtitle {
+            font-size: 1.2em;
+            opacity: 0.95;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .hero .flags {
+            font-size: 2.5em;
+            margin-top: 20px;
+        }
+        
+        /* Resources Container */
+        .resources-container {
+            max-width: 1000px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+        
+        /* Resource Card */
+        .resource-card {
+            background: white;
+            border-radius: 15px;
+            padding: 25px 30px;
+            margin-bottom: 20px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        .resource-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 35px rgba(0,0,0,0.2);
+        }
+        .resource-icon {
+            font-size: 3em;
+            min-width: 80px;
+            text-align: center;
+        }
+        .resource-content {
+            flex: 1;
+        }
+        .resource-content h3 {
+            color: #1a365d;
+            font-size: 1.4em;
+            margin-bottom: 8px;
+        }
+        .resource-content .abbreviation {
+            color: #667eea;
+            font-weight: 600;
+            font-size: 0.9em;
+        }
+        .resource-content p {
+            color: #333;
+            margin-bottom: 12px;
+            font-size: 0.95em;
+            font-weight: 600;
+        }
+        .resource-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: linear-gradient(135deg, #00bfff 0%, #1e90ff 100%);
+            color: white !important;
+            padding: 10px 25px;
+            font-size: 1em;
+            font-weight: 600;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(30, 144, 255, 0.4);
+        }
+        .resource-link img.shield-icon {
+            width: 22px;
+            height: 22px;
+            vertical-align: middle;
+        }
+        .resource-link:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(30, 144, 255, 0.5);
+        }
+        .shield-ms-icon {
+            width: 84px;
+            height: 84px;
+            vertical-align: middle;
+            margin-left: 10px;
+        }
+        
+        /* Region Labels */
+        .region-label {
+            background: linear-gradient(135deg, #1a365d 0%, #2d3748 100%);
+            color: white;
+            padding: 15px 25px;
+            border-radius: 10px;
+            margin: 30px 0 20px 0;
+            font-size: 1.2em;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        /* Back Button */
+        .back-section {
+            text-align: center;
+            padding: 30px 20px;
+        }
+        .back-button {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white !important;
+            padding: 15px 35px;
+            font-size: 1.1em;
+            font-weight: 600;
+            text-decoration: none;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+        }
+        .back-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.5);
+        }
+        
+        /* Footer */
+        footer {
+            background: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 25px 20px;
+            margin-top: 40px;
+        }
+        footer a {
+            color: #ffd700;
+            text-decoration: underline;
+        }
+        footer p {
+            margin-bottom: 10px;
+            font-size: 0.95em;
+        }
+        
+        /* Admin Note */
+        .admin-note {
+            background: rgba(255,204,0,0.1);
+            border: 2px dashed #FFCC00;
+            border-radius: 10px;
+            padding: 15px 20px;
+            margin-top: 30px;
+            text-align: center;
+            color: #666;
+            font-size: 0.9em;
+        }
+        .admin-note strong {
+            color: #d97706;
+        }
+        
+        @media (max-width: 600px) {
+            .resource-card {
+                flex-direction: column;
+                text-align: center;
+            }
+            .resource-icon {
+                min-width: auto;
+            }
+        }
+        
+        /* Language Selector */
+        .language-selector {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 8px;
+            padding: 15px;
+            background: linear-gradient(135deg, rgba(102,126,234,0.9) 0%, rgba(118,75,162,0.9) 100%);
+        }
+        .lang-btn {
+            background: rgba(255,255,255,0.3);
+            border: 2px solid transparent;
+            color: white;
+            padding: 6px 12px;
+            border-radius: 15px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .lang-btn:hover { background: rgba(255,255,255,0.5); transform: translateY(-2px); }
+        .lang-btn.active { background: white; color: #667eea; border-color: white; }
+        .lang-flag { width: 20px; height: 15px; border-radius: 2px; }
+    </style>
+    
+    <!-- Flag Icons CSS Library -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.2.3/css/flag-icons.min.css">
+</head>
+<body>
+    <!-- Language Selector -->
+    <nav class="language-selector" role="navigation" aria-label="Language selection">
+        <button class="lang-btn active" onclick="changeLanguage('it')" aria-label="Italiano">
+            <span class="fi fi-it lang-flag" aria-hidden="true"></span><span>IT</span>
+        </button>
+        <button class="lang-btn" onclick="changeLanguage('en')" aria-label="English">
+            <span class="fi fi-gb lang-flag" aria-hidden="true"></span><span>EN</span>
+        </button>
+        <button class="lang-btn" onclick="changeLanguage('fr')" aria-label="Français">
+            <span class="fi fi-fr lang-flag" aria-hidden="true"></span><span>FR</span>
+        </button>
+        <button class="lang-btn" onclick="changeLanguage('de')" aria-label="Deutsch">
+            <span class="fi fi-de lang-flag" aria-hidden="true"></span><span>DE</span>
+        </button>
+        <button class="lang-btn" onclick="changeLanguage('es')" aria-label="Español">
+            <span class="fi fi-es lang-flag" aria-hidden="true"></span><span>ES</span>
+        </button>
+        <button class="lang-btn" onclick="changeLanguage('ar')" aria-label="العربية">
+            <span class="fi fi-qa lang-flag" aria-hidden="true"></span><span>AR</span>
+        </button>
+        <button class="lang-btn" onclick="changeLanguage('zh')" aria-label="Chinese">
+            <span class="fi fi-cn lang-flag" aria-hidden="true"></span><span>ZH</span>
+        </button>
+        <button class="lang-btn" onclick="changeLanguage('hi')" aria-label="Hindi">
+            <span class="fi fi-in lang-flag" aria-hidden="true"></span><span>HI</span>
+        </button>
+        <button class="lang-btn" onclick="changeLanguage('vi')" aria-label="Vietnamese">
+            <span class="fi fi-vn lang-flag" aria-hidden="true"></span><span>VI</span>
+        </button>
+        <button class="lang-btn" onclick="changeLanguage('pt')" aria-label="Português">
+            <span class="fi fi-pt lang-flag" aria-hidden="true"></span><span>PT</span>
+        </button>
+    </nav>
+
+    <!-- Navigation -->
+    <nav class="nav-bar">
+        <a href="index.html" data-i18n="navDatabase">🏦 Database Autorità Finanziarie</a>
+        <a href="#" class="active" data-i18n="navReferences">📜 Referenze Istituzionali</a>
+        <a href="curriculum.html" data-i18n="navLawyer">👨‍⚖️ Avv. Stanca</a>
+    </nav>
+    
+    <!-- Hero Section -->
+    <section class="hero">
+        <h1 data-i18n="heroTitle">Istituzioni Internazionali di Supervisione Finanziaria</h1>
+        <p class="subtitle" style="font-size: 1.6em; margin-top: 15px; display: flex; align-items: center; justify-content: center; gap: 15px; flex-wrap: wrap;">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/b/b7/Flag_of_Europe.svg" alt="Bandiera UE" style="width: 64px; height: 48px; border-radius: 4px; border: 3px solid #FFCC00; box-shadow: 0 2px 8px rgba(0,0,0,0.3);">
+            <span data-i18n="heroEU">Unione Europea</span>
+            <span>&bull;</span>
+            <span style="font-size: 2.5em;">🌍</span>
+            <span>&bull;</span>
+            <span>U.S.A.</span>
+            <img src="https://upload.wikimedia.org/wikipedia/commons/a/a4/Flag_of_the_United_States.svg" alt="Bandiera USA" style="width: 64px; height: 48px; border-radius: 4px; box-shadow: 0 2px 8px rgba(0,0,0,0.3);">
+        </p>
+        <p style="font-size: 1.1em; opacity: 0.9; margin-top: 10px;" data-i18n="heroSubtitle">SEC • FBI • SIPC • ScamShield - Link ufficiali alle autorità di vigilanza finanziaria internazionale</p>
+        
+        <!-- Badge Multilingua 10 Lingue -->
+        <div style="margin-top: 25px; padding: 15px 25px; background: rgba(255,255,255,0.15); border-radius: 12px; backdrop-filter: blur(10px); display: inline-block;">
+            <p style="font-size: 0.95em; margin-bottom: 10px; opacity: 0.9;">🌐 Disponibile in 10 lingue / Available in 10 languages</p>
+            <div style="display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; font-size: 1.8em;">
+                <span title="Italiano">🇮🇹</span>
+                <span title="English">🇬🇧</span>
+                <span title="Français">🇫🇷</span>
+                <span title="Deutsch">🇩🇪</span>
+                <span title="Español">🇪🇸</span>
+                <span title="العربية">🇶🇦</span>
+                <span title="中文">🇨🇳</span>
+                <span title="हिन्दी">🇮🇳</span>
+                <span title="Tiếng Việt">🇻🇳</span>
+                <span title="Português">🇧🇷</span>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Resources -->
+    <div class="resources-container">
+        
+        <!-- U.S.A. - FIRST -->
+        <div class="region-label" style="font-size: 1.4em; font-weight: 700; display: flex; align-items: center; justify-content: center; gap: 12px;">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/a/a4/Flag_of_the_United_States.svg" alt="USA" style="width: 36px; height: 24px; border-radius: 3px;">
+            <span data-i18n="regionUSA">U.S.A. - Stati Uniti d'America</span>
+        </div>
+        
+        <div class="resource-card">
+            <div class="resource-icon" style="display: flex; flex-direction: column; align-items: center; gap: 5px;">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/a/a4/Flag_of_the_United_States.svg" alt="USA" style="width: 40px; height: 28px; border-radius: 3px;">
+                <span>🕵️</span>
+            </div>
+            <div class="resource-content">
+                <h3>FBI IC3</h3>
+                <p class="abbreviation">Internet Crime Complaint Center</p>
+                <p data-i18n="descFBI">Centro di segnalazione crimini informatici dell'FBI. Report annuali sulle truffe online e frodi finanziarie internazionali.</p>
+                <a href="https://www.ic3.gov/AnnualReport/Reports" target="_blank" rel="noopener noreferrer" class="resource-link"><img src="logo_shield_financial_defense.svg" alt="" class="shield-icon">🔗 ic3.gov/AnnualReport/Reports</a>
+                <img src="logo_shield_MS.svg" alt="MS" class="shield-ms-icon" title="Financial Defense - Marcello Stanca">
+            </div>
+        </div>
+        
+        <div class="resource-card">
+            <div class="resource-icon" style="display: flex; flex-direction: column; align-items: center; gap: 5px;">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/a/a4/Flag_of_the_United_States.svg" alt="USA" style="width: 40px; height: 28px; border-radius: 3px;">
+                <span>🛡️</span>
+            </div>
+            <div class="resource-content">
+                <h3>SIPC</h3>
+                <p class="abbreviation">Securities Investor Protection Corporation</p>
+                <p data-i18n="descSIPC">Organizzazione non-profit creata dal Congresso USA nel 1970. Protegge gli investitori in caso di fallimento di broker-dealer. Ha recuperato miliardi di dollari per gli investitori. Verifica se il tuo broker è membro SIPC!</p>
+                <a href="https://www.sipc.org/" target="_blank" rel="noopener noreferrer" class="resource-link"><img src="logo_shield_financial_defense.svg" alt="" class="shield-icon">🔗 sipc.org</a>
+                <a href="https://www.sipc.org/list-of-members" target="_blank" rel="noopener noreferrer" class="resource-link" style="margin-left: 10px;"><img src="logo_shield_financial_defense.svg" alt="" class="shield-icon">📋 Lista Broker Membri</a>
+                <img src="logo_shield_MS.svg" alt="MS" class="shield-ms-icon" title="Financial Defense - Marcello Stanca">
+            </div>
+        </div>
+        
+        <div class="resource-card">
+            <div class="resource-icon" style="display: flex; flex-direction: column; align-items: center; gap: 5px;">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/a/a4/Flag_of_the_United_States.svg" alt="USA" style="width: 40px; height: 28px; border-radius: 3px;">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/24/US-SecuritiesAndExchangeCommission-Seal.svg/120px-US-SecuritiesAndExchangeCommission-Seal.svg.png" alt="SEC Emblem" style="width: 50px; height: 50px; border-radius: 50%;" onerror="this.outerHTML='🏛️'">
+            </div>
+            <div class="resource-content">
+                <h3>S.E.C. - Investor.gov</h3>
+                <p class="abbreviation">U.S. Securities and Exchange Commission</p>
+                <p data-i18n="descSEC">Portale ufficiale della SEC per gli investitori. Guida completa su come evitare le frodi, riconoscere i segnali d'allarme, proteggere i propri investimenti e segnalare attività sospette.</p>
+                <a href="https://www.investor.gov/protect-your-investments/fraud/how-avoid-fraud" target="_blank" rel="noopener noreferrer" class="resource-link"><img src="logo_shield_financial_defense.svg" alt="" class="shield-icon">🔗 investor.gov - How to Avoid Fraud</a>
+                <a href="https://www.investor.gov/protect-your-investments/fraud/types-fraud" target="_blank" rel="noopener noreferrer" class="resource-link" style="margin-left: 10px;"><img src="logo_shield_financial_defense.svg" alt="" class="shield-icon">⚠️ Tipi di Frode</a>
+                <img src="logo_shield_MS.svg" alt="MS" class="shield-ms-icon" title="Financial Defense - Marcello Stanca">
+            </div>
+        </div>
+        
+        <!-- EUROPEAN UNION - SECOND -->
+        <div class="region-label" style="background: linear-gradient(135deg, #b8860b 0%, #daa520 50%, #cd853f 100%); color: #003399; text-shadow: 1px 1px 2px rgba(255,255,255,0.5); font-size: 1.4em; font-weight: 700; display: flex; align-items: center; justify-content: center; gap: 12px;">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/b/b7/Flag_of_Europe.svg" alt="UE" style="width: 36px; height: 24px; border-radius: 3px; border: 2px solid #003399;">
+            <span data-i18n="regionEU">Unione Europea</span>
+        </div>
+        
+        <div class="resource-card">
+            <div class="resource-icon" style="display: flex; flex-direction: column; align-items: center; gap: 5px;">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/b/b7/Flag_of_Europe.svg" alt="UE" style="width: 40px; height: 28px; border-radius: 3px; border: 2px solid #FFCC00;">
+                <img src="https://www.iosco.org/v2/images/logo.svg" alt="IOSCO Logo" style="width: 60px; height: auto;" onerror="this.outerHTML='🏦'">
+            </div>
+            <div class="resource-content">
+                <h3>IOSCO</h3>
+                <p class="abbreviation">International Organization of Securities Commissions</p>
+                <p data-i18n="descIOSCO">Organizzazione internazionale delle commissioni di vigilanza sui valori mobiliari. Standard globali per la regolamentazione dei mercati finanziari.</p>
+                <a href="https://www.iosco.org" target="_blank" rel="noopener noreferrer" class="resource-link"><img src="logo_shield_financial_defense.svg" alt="" class="shield-icon">🔗 www.iosco.org</a>
+                <img src="logo_shield_MS.svg" alt="MS" class="shield-ms-icon" title="Financial Defense - Marcello Stanca">
+            </div>
+        </div>
+        
+        <div class="resource-card">
+            <div class="resource-icon" style="display: flex; flex-direction: column; align-items: center; gap: 3px;">
+                <span>🌍</span>
+                <span>🕵️</span>
+            </div>
+            <div class="resource-content">
+                <h3>IOSCO i-SCAN</h3>
+                <p class="abbreviation">International Organization of Securities Commissions</p>
+                <p data-i18n="descISCAN">Portale IOSCO per la ricerca di alert e avvisi agli investitori emessi dalle autorità di vigilanza mondiali.</p>
+                <a href="https://www.iosco.org/i-scan/" target="_blank" rel="noopener noreferrer" class="resource-link"><img src="logo_shield_financial_defense.svg" alt="" class="shield-icon">🔗 iosco.org/i-scan/</a>
+                <img src="logo_shield_MS.svg" alt="MS" class="shield-ms-icon" title="Financial Defense - Marcello Stanca">
+            </div>
+        </div>
+        
+        <div class="resource-card">
+            <div class="resource-icon" style="display: flex; flex-direction: column; align-items: center; gap: 5px;">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/b/b7/Flag_of_Europe.svg" alt="UE" style="width: 40px; height: 28px; border-radius: 3px; border: 2px solid #FFCC00;">
+                <span>🏛️</span>
+            </div>
+            <div class="resource-content">
+                <h3>ESMA</h3>
+                <p class="abbreviation">European Securities and Markets Authority</p>
+                <p data-i18n="descESMA">Autorità europea degli strumenti finanziari e dei mercati. Supervisione dei mercati finanziari dell'UE e protezione degli investitori.</p>
+                <a href="https://www.esma.europa.eu" target="_blank" rel="noopener noreferrer" class="resource-link"><img src="logo_shield_financial_defense.svg" alt="" class="shield-icon">🔗 esma.europa.eu</a>
+                <img src="logo_shield_MS.svg" alt="MS" class="shield-ms-icon" title="Financial Defense - Marcello Stanca">
+            </div>
+        </div>
+        
+        <div class="resource-card">
+            <div class="resource-icon" style="display: flex; flex-direction: column; align-items: center; gap: 5px;">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/b/b7/Flag_of_Europe.svg" alt="UE" style="width: 40px; height: 28px; border-radius: 3px; border: 2px solid #FFCC00;">
+                <span>🏛️⚖️</span>
+            </div>
+            <div class="resource-content">
+                <h3 data-i18n="titleCommEU">Commissione Europea</h3>
+                <p class="abbreviation">European Commission</p>
+                <p data-i18n="descCommEU">Organo esecutivo dell'Unione Europea. Propone la legislazione e garantisce l'applicazione dei trattati UE.</p>
+                <a href="https://commission.europa.eu" target="_blank" rel="noopener noreferrer" class="resource-link"><img src="logo_shield_financial_defense.svg" alt="" class="shield-icon">🔗 commission.europa.eu</a>
+                <img src="logo_shield_MS.svg" alt="MS" class="shield-ms-icon" title="Financial Defense - Marcello Stanca">
+            </div>
+        </div>
+        
+        <!-- ASIA-INDIAN OCEAN - THIRD -->
+        <div class="region-label"><span data-i18n="regionAsia">🌏 Asia - Oceano Indiano</span></div>
+        
+        <div class="resource-card">
+            <div class="resource-icon" style="display: flex; flex-direction: column; align-items: center; gap: 5px;">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/6/66/Flag_of_Malaysia.svg" alt="Malaysia" style="width: 40px; height: 28px; border-radius: 3px;">
+                <img src="https://www.iosco.org/v2/images/logo.svg" alt="IOSCO Logo" style="width: 50px; height: auto;" onerror="this.outerHTML='🏛️'">
+            </div>
+            <div class="resource-content">
+                <h3>IOSCO Asia Pacific Hub</h3>
+                <p class="abbreviation">Kuala Lumpur, Malaysia</p>
+                <p data-i18n="descIOSCOAsia">Hub regionale IOSCO per l'Asia-Pacifico. Centro per la formazione e condivisione delle conoscenze tra le autorità di regolamentazione dei mercati finanziari della regione.</p>
+                <a href="https://www.iosco.org.my" target="_blank" rel="noopener noreferrer" class="resource-link"><img src="logo_shield_financial_defense.svg" alt="" class="shield-icon">🔗 iosco.org.my</a>
+                <img src="logo_shield_MS.svg" alt="MS" class="shield-ms-icon" title="Financial Defense - Marcello Stanca">
+            </div>
+        </div>
+        
+        <div class="resource-card">
+            <div class="resource-icon" style="display: flex; flex-direction: column; align-items: center; gap: 5px;">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/4/48/Flag_of_Singapore.svg" alt="Singapore" style="width: 40px; height: 28px; border-radius: 3px;">
+                <span>🛡️</span>
+            </div>
+            <div class="resource-content">
+                <h3>ScamShield</h3>
+                <p class="abbreviation">Singapore Police Force</p>
+                <p data-i18n="descScamShield">App e servizio della Polizia di Singapore per proteggere i cittadini da truffe e chiamate fraudolente.</p>
+                <a href="https://www.scamshield.gov.sg/" target="_blank" rel="noopener noreferrer" class="resource-link"><img src="logo_shield_financial_defense.svg" alt="" class="shield-icon">🔗 scamshield.gov.sg</a>
+                <img src="logo_shield_MS.svg" alt="MS" class="shield-ms-icon" title="Financial Defense - Marcello Stanca">
+            </div>
+        </div>
+        
+        <div class="resource-card">
+            <div class="resource-icon" style="display: flex; flex-direction: column; align-items: center; gap: 5px;">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/f/fa/Flag_of_the_People%27s_Republic_of_China.svg" alt="Cina" style="width: 40px; height: 28px; border-radius: 3px;">
+                <span>🔍</span>
+            </div>
+            <div class="resource-content">
+                <h3>CSRC</h3>
+                <p class="abbreviation">China Securities Regulatory Commission</p>
+                <p data-i18n="descCSRC">Autorità di vigilanza sui mercati mobiliari della Repubblica Popolare Cinese. Regola e supervisiona l'emissione di titoli, futures e fondi di investimento.</p>
+                <a href="http://www.csrc.gov.cn/" target="_blank" rel="noopener noreferrer" class="resource-link"><img src="logo_shield_financial_defense.svg" alt="" class="shield-icon">🔗 csrc.gov.cn</a>
+                <img src="logo_shield_MS.svg" alt="MS" class="shield-ms-icon" title="Financial Defense - Marcello Stanca">
+            </div>
+        </div>
+        
+        <div class="resource-card">
+            <div class="resource-icon" style="display: flex; flex-direction: column; align-items: center; gap: 5px;">
+                <img src="https://upload.wikimedia.org/wikipedia/en/4/41/Flag_of_India.svg" alt="India" style="width: 40px; height: 28px; border-radius: 3px;">
+                <span>🔍</span>
+            </div>
+            <div class="resource-content">
+                <h3>SEBI</h3>
+                <p class="abbreviation">Securities and Exchange Board of India</p>
+                <p data-i18n="descSEBI">Autorità di regolamentazione dei mercati finanziari in India. Protegge gli interessi degli investitori e promuove lo sviluppo del mercato dei capitali.</p>
+                <a href="https://www.sebi.gov.in/" target="_blank" rel="noopener noreferrer" class="resource-link"><img src="logo_shield_financial_defense.svg" alt="" class="shield-icon">🔗 sebi.gov.in</a>
+                <img src="logo_shield_MS.svg" alt="MS" class="shield-ms-icon" title="Financial Defense - Marcello Stanca">
+            </div>
+        </div>
+        
+        <div class="resource-card">
+            <div class="resource-icon" style="display: flex; flex-direction: column; align-items: center; gap: 5px;">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/8/88/Flag_of_Australia_%28converted%29.svg" alt="Australia" style="width: 40px; height: 28px; border-radius: 3px;">
+                <span>🔍</span>
+            </div>
+            <div class="resource-content">
+                <h3>ASIC</h3>
+                <p class="abbreviation">Australian Securities and Investments Commission</p>
+                <p data-i18n="descASIC">Autorità di vigilanza sui mercati finanziari australiani. Protegge consumatori e investitori, regola società e servizi finanziari. Gestisce il portale Moneysmart.</p>
+                <a href="https://asic.gov.au" target="_blank" rel="noopener noreferrer" class="resource-link"><img src="logo_shield_financial_defense.svg" alt="" class="shield-icon">🔗 asic.gov.au</a>
+                <img src="logo_shield_MS.svg" alt="MS" class="shield-ms-icon" title="Financial Defense - Marcello Stanca">
+            </div>
+        </div>
+        
+        <!-- Admin Note -->
+        <div class="admin-note">
+            <strong>📝 <span data-i18n="adminNoteTitle">Nota Admin</span>:</strong> <span data-i18n="adminNoteText">Questa pagina è configurata per aggiornamenti. Per aggiungere nuove risorse, contattare il webmaster.</span>
+        </div>
+        
+    </div>
+    
+    <!-- Back to Database -->
+    <div class="back-section">
+        <a href="index.html" class="back-button" data-i18n="backToDatabase">🏦 Torna al Database Autorità Finanziarie</a>
+    </div>
+    
+    <!-- Footer -->
+    <footer>
+        <p data-i18n="footerAuthor">© 2026 Author and Webmaster: Avvocato Marcello Stanca, Lawyer in Italy – Firenze.</p>
+        <p data-i18n="footerCredentials">Credenziali verificate da: Ministero della Giustizia (Italia), Tribunale di Firenze, Parlamento Europeo – Bruxelles.</p>
+        <p style="margin-top: 15px; padding-top: 15px; border-top: 1px solid rgba(255,255,255,0.3);">
+            <strong data-i18n="privacyStatement">🔒 PRIVACY: Questa app NON raccoglie dati personali degli utenti</strong> | 
+            <a href="privacy.html" data-i18n="privacyLink">Privacy Policy</a>
+        </p>
+    </footer>
+    
+    <script>
+        const translations = {
+            it: {
+                navDatabase: "🏦 Database Autorità Finanziarie",
+                navReferences: "📜 Referenze Istituzionali",
+                navLawyer: "👨‍⚖️ Avv. Stanca",
+                heroTitle: "Istituzioni Internazionali di Supervisione Finanziaria",
+                heroEU: "Unione Europea",
+                heroSubtitle: "SEC • FBI • SIPC • ScamShield - Link ufficiali alle autorità di vigilanza finanziaria internazionale",
+                regionUSA: "U.S.A. - Stati Uniti d'America",
+                regionEU: "Unione Europea",
+                regionAsia: "Asia & Oceania",
+                adminNoteTitle: "Nota Admin",
+                adminNoteText: "Questa pagina è configurata per aggiornamenti. Per aggiungere nuove risorse, contattare il webmaster.",
+                backToDatabase: "🏦 Torna al Database Autorità Finanziarie",
+                footerAuthor: "© 2026 Author and Webmaster: Avvocato Marcello Stanca, Lawyer in Italy – Firenze.",
+                footerCredentials: "Credenziali verificate da: Ministero della Giustizia (Italia), Tribunale di Firenze, Parlamento Europeo – Bruxelles.",
+                privacyStatement: "🔒 PRIVACY: Questa app NON raccoglie dati personali degli utenti",
+                privacyLink: "Privacy Policy",
+                descFBI: "Centro di segnalazione crimini informatici dell'FBI. Report annuali sulle truffe online e frodi finanziarie internazionali.",
+                descSIPC: "Organizzazione non-profit creata dal Congresso USA nel 1970. Protegge gli investitori in caso di fallimento di broker-dealer. Ha recuperato miliardi di dollari per gli investitori. Verifica se il tuo broker è membro SIPC!",
+                descSEC: "Portale ufficiale della SEC per gli investitori. Guida completa su come evitare le frodi, riconoscere i segnali d'allarme, proteggere i propri investimenti e segnalare attività sospette.",
+                descIOSCO: "Organizzazione internazionale delle commissioni di vigilanza sui valori mobiliari. Standard globali per la regolamentazione dei mercati finanziari.",
+                descISCAN: "Portale IOSCO per la ricerca di alert e avvisi agli investitori emessi dalle autorità di vigilanza mondiali.",
+                descESMA: "Autorità europea degli strumenti finanziari e dei mercati. Supervisione dei mercati finanziari dell'UE e protezione degli investitori.",
+                titleCommEU: "Commissione Europea",
+                descCommEU: "Organo esecutivo dell'Unione Europea. Propone la legislazione e garantisce l'applicazione dei trattati UE.",
+                descIOSCOAsia: "Hub regionale IOSCO per l'Asia-Pacifico. Centro per la formazione e condivisione delle conoscenze tra le autorità di regolamentazione dei mercati finanziari della regione.",
+                descScamShield: "App e servizio della Polizia di Singapore per proteggere i cittadini da truffe e chiamate fraudolente.",
+                descCSRC: "Autorità di vigilanza sui mercati mobiliari della Repubblica Popolare Cinese. Regola e supervisiona l'emissione di titoli, futures e fondi di investimento.",
+                descSEBI: "Autorità di regolamentazione dei mercati finanziari in India. Protegge gli interessi degli investitori e promuove lo sviluppo del mercato dei capitali.",
+                descASIC: "Autorità di vigilanza sui mercati finanziari australiani. Protegge consumatori e investitori, regola società e servizi finanziari. Gestisce il portale Moneysmart."
+            },
+            en: {
+                navDatabase: "🏦 Financial Authorities Database",
+                navReferences: "📜 Institutional References",
+                navLawyer: "👨‍⚖️ Lawyer Stanca",
+                heroTitle: "International Financial Supervision Institutions",
+                heroEU: "European Union",
+                heroSubtitle: "SEC • FBI • SIPC • ScamShield - Official links to international financial supervisory authorities",
+                regionUSA: "U.S.A. - United States of America",
+                regionEU: "European Union",
+                regionAsia: "Asia & Oceania",
+                adminNoteTitle: "Admin Note",
+                adminNoteText: "This page is configured for updates. To add new resources, contact the webmaster.",
+                backToDatabase: "🏦 Back to Financial Authorities Database",
+                footerAuthor: "© 2026 Author and Webmaster: Lawyer Marcello Stanca, Italy – Florence.",
+                footerCredentials: "Credentials verified by: Ministry of Justice (Italy), Florence Court, European Parliament – Brussels.",
+                privacyStatement: "🔒 PRIVACY: This app does NOT collect personal user data",
+                privacyLink: "Privacy Policy",
+                descFBI: "FBI's Internet Crime Complaint Center. Annual reports on online scams and international financial fraud.",
+                descSIPC: "Non-profit organization created by the U.S. Congress in 1970. Protects investors in case of broker-dealer failure. Has recovered billions of dollars for investors. Check if your broker is a SIPC member!",
+                descSEC: "Official SEC portal for investors. Complete guide on how to avoid fraud, recognize warning signs, protect your investments, and report suspicious activities.",
+                descIOSCO: "International organization of securities commissions. Global standards for financial market regulation.",
+                descISCAN: "IOSCO portal for searching investor alerts and warnings issued by financial supervisory authorities worldwide.",
+                descESMA: "European Securities and Markets Authority. Financial market supervision in the EU and investor protection.",
+                titleCommEU: "European Commission",
+                descCommEU: "Executive body of the European Union. Proposes legislation and ensures the application of EU treaties.",
+                descIOSCOAsia: "IOSCO regional hub for Asia-Pacific. Center for training and knowledge sharing among financial market regulators in the region.",
+                descScamShield: "App and service by Singapore Police Force to protect citizens from scams and fraudulent calls.",
+                descCSRC: "Securities regulatory authority of the People's Republic of China. Regulates and supervises securities issuance, futures, and investment funds.",
+                descSEBI: "Financial markets regulatory authority in India. Protects investor interests and promotes capital market development.",
+                descASIC: "Australian financial markets regulatory authority. Protects consumers and investors, regulates companies and financial services. Manages the Moneysmart portal."
+            },
+            fr: {
+                navDatabase: "🏦 Base de Données des Autorités Financières",
+                navReferences: "📜 Références Institutionnelles",
+                navLawyer: "👨‍⚖️ Avocat Stanca",
+                heroTitle: "Institutions Internationales de Supervision Financière",
+                heroEU: "Union Européenne",
+                heroSubtitle: "SEC • FBI • SIPC • ScamShield - Liens officiels vers les autorités de surveillance financière internationale",
+                regionUSA: "É.-U. - États-Unis d'Amérique",
+                regionEU: "Union Européenne",
+                regionAsia: "Asie & Océanie",
+                adminNoteTitle: "Note Admin",
+                adminNoteText: "Cette page est configurée pour les mises à jour. Pour ajouter de nouvelles ressources, contactez le webmaster.",
+                backToDatabase: "🏦 Retour à la Base de Données",
+                footerAuthor: "© 2026 Auteur et Webmaster: Avocat Marcello Stanca, Italie – Florence.",
+                footerCredentials: "Références vérifiées par: Ministère de la Justice (Italie), Tribunal de Florence, Parlement Européen – Bruxelles.",
+                privacyStatement: "🔒 CONFIDENTIALITÉ: Cette app NE collecte PAS de données personnelles",
+                privacyLink: "Politique de Confidentialité",
+                descFBI: "Centre de signalement des crimes informatiques du FBI. Rapports annuels sur les escroqueries en ligne et les fraudes financières internationales.",
+                descSIPC: "Organisation à but non lucratif créée par le Congrès américain en 1970. Protège les investisseurs en cas de faillite de courtiers. A récupéré des milliards de dollars pour les investisseurs. Vérifiez si votre courtier est membre du SIPC!",
+                descSEC: "Portail officiel de la SEC pour les investisseurs. Guide complet sur comment éviter les fraudes, reconnaître les signaux d'alerte, protéger vos investissements et signaler des activités suspectes.",
+                descIOSCO: "Organisation internationale des commissions de valeurs mobilières. Normes mondiales pour la réglementation des marchés financiers.",
+                descISCAN: "Portail IOSCO pour la recherche d'alertes et d'avertissements aux investisseurs émis par les autorités de surveillance mondiales.",
+                descESMA: "Autorité européenne des marchés financiers. Supervision des marchés financiers de l'UE et protection des investisseurs.",
+                titleCommEU: "Commission Européenne",
+                descCommEU: "Organe exécutif de l'Union européenne. Propose la législation et garantit l'application des traités de l'UE.",
+                descIOSCOAsia: "Hub régional IOSCO pour l'Asie-Pacifique. Centre de formation et de partage des connaissances entre les régulateurs des marchés financiers de la région.",
+                descScamShield: "Application et service de la Police de Singapour pour protéger les citoyens contre les arnaques et les appels frauduleux.",
+                descCSRC: "Autorité de régulation des marchés de valeurs mobilières de la République populaire de Chine. Réglemente et supervise l'émission de titres, de futures et de fonds d'investissement.",
+                descSEBI: "Autorité de régulation des marchés financiers en Inde. Protège les intérêts des investisseurs et promeut le développement des marchés de capitaux.",
+                descASIC: "Autorité de régulation des marchés financiers australiens. Protège les consommateurs et les investisseurs, réglemente les sociétés et les services financiers. Gère le portail Moneysmart."
+            },
+            de: {
+                navDatabase: "🏦 Datenbank der Finanzbehörden",
+                navReferences: "📜 Institutionelle Referenzen",
+                navLawyer: "👨‍⚖️ Rechtsanwalt Stanca",
+                heroTitle: "Internationale Finanzaufsichtsinstitutionen",
+                heroEU: "Europäische Union",
+                heroSubtitle: "SEC • FBI • SIPC • ScamShield - Offizielle Links zu internationalen Finanzaufsichtsbehörden",
+                regionUSA: "USA - Vereinigte Staaten von Amerika",
+                regionEU: "Europäische Union",
+                regionAsia: "Asien & Ozeanien",
+                adminNoteTitle: "Admin-Hinweis",
+                adminNoteText: "Diese Seite ist für Aktualisierungen konfiguriert. Um neue Ressourcen hinzuzufügen, kontaktieren Sie den Webmaster.",
+                backToDatabase: "🏦 Zurück zur Datenbank",
+                footerAuthor: "© 2026 Autor und Webmaster: Rechtsanwalt Marcello Stanca, Italien – Florenz.",
+                footerCredentials: "Referenzen verifiziert von: Justizministerium (Italien), Gericht Florenz, Europäisches Parlament – Brüssel.",
+                privacyStatement: "🔒 DATENSCHUTZ: Diese App sammelt KEINE persönlichen Daten",
+                privacyLink: "Datenschutzrichtlinie",
+                descFBI: "Meldezentrum für Internetkriminalität des FBI. Jahresberichte über Online-Betrug und internationale Finanzbetrügereien.",
+                descSIPC: "Gemeinnützige Organisation, die 1970 vom US-Kongress gegründet wurde. Schützt Anleger bei Broker-Dealer-Insolvenzen. Hat Milliarden von Dollar für Anleger zurückgeholt. Prüfen Sie, ob Ihr Broker SIPC-Mitglied ist!",
+                descSEC: "Offizielles SEC-Portal für Anleger. Vollständiger Leitfaden zur Betrugsvermeidung, Erkennung von Warnsignalen, Schutz Ihrer Investitionen und Meldung verdächtiger Aktivitäten.",
+                descIOSCO: "Internationale Organisation der Wertpapieraufsichtsbehörden. Globale Standards für die Regulierung der Finanzmärkte.",
+                descISCAN: "IOSCO-Portal zur Suche nach Anleger-Warnmeldungen der Finanzaufsichtsbehörden weltweit.",
+                descESMA: "Europäische Wertpapier- und Marktaufsichtsbehörde. Finanzmarktaufsicht in der EU und Anlegerschutz.",
+                titleCommEU: "Europäische Kommission",
+                descCommEU: "Exekutivorgan der Europäischen Union. Schlägt Rechtsvorschriften vor und gewährleistet die Anwendung der EU-Verträge.",
+                descIOSCOAsia: "IOSCO-Regionalhub für Asien-Pazifik. Zentrum für Ausbildung und Wissensaustausch zwischen Finanzmarktregulierern der Region.",
+                descScamShield: "App und Dienst der Polizei von Singapur zum Schutz der Bürger vor Betrug und betrügerischen Anrufen.",
+                descCSRC: "Wertpapieraufsichtsbehörde der Volksrepublik China. Reguliert und überwacht die Ausgabe von Wertpapieren, Futures und Investmentfonds.",
+                descSEBI: "Finanzmarktaufsichtsbehörde in Indien. Schützt Anlegerinteressen und fördert die Entwicklung der Kapitalmärkte.",
+                descASIC: "Australische Finanzmarktaufsichtsbehörde. Schützt Verbraucher und Anleger, reguliert Unternehmen und Finanzdienstleistungen. Betreibt das Moneysmart-Portal."
+            },
+            es: {
+                navDatabase: "🏦 Base de Datos de Autoridades Financieras",
+                navReferences: "📜 Referencias Institucionales",
+                navLawyer: "👨‍⚖️ Abogado Stanca",
+                heroTitle: "Instituciones Internacionales de Supervisión Financiera",
+                heroEU: "Unión Europea",
+                heroSubtitle: "SEC • FBI • SIPC • ScamShield - Enlaces oficiales a autoridades de supervisión financiera internacional",
+                regionUSA: "EE.UU. - Estados Unidos de América",
+                regionEU: "Unión Europea",
+                regionAsia: "Asia y Oceanía",
+                adminNoteTitle: "Nota Admin",
+                adminNoteText: "Esta página está configurada para actualizaciones. Para agregar nuevos recursos, contacte al webmaster.",
+                backToDatabase: "🏦 Volver a la Base de Datos",
+                footerAuthor: "© 2026 Autor y Webmaster: Abogado Marcello Stanca, Italia – Florencia.",
+                footerCredentials: "Credenciales verificadas por: Ministerio de Justicia (Italia), Tribunal de Florencia, Parlamento Europeo – Bruselas.",
+                privacyStatement: "🔒 PRIVACIDAD: Esta app NO recopila datos personales",
+                privacyLink: "Política de Privacidad",
+                descFBI: "Centro de denuncias de delitos informáticos del FBI. Informes anuales sobre estafas en línea y fraudes financieros internacionales.",
+                descSIPC: "Organización sin fines de lucro creada por el Congreso de EE.UU. en 1970. Protege a los inversores en caso de quiebra de corredores. Ha recuperado miles de millones de dólares para inversores. ¡Verifique si su corredor es miembro de SIPC!",
+                descSEC: "Portal oficial de la SEC para inversores. Guía completa sobre cómo evitar fraudes, reconocer señales de alerta, proteger sus inversiones y denunciar actividades sospechosas.",
+                descIOSCO: "Organización internacional de comisiones de valores. Estándares globales para la regulación de los mercados financieros.",
+                descISCAN: "Portal IOSCO para buscar alertas y avisos a inversores emitidos por autoridades de supervisión mundiales.",
+                descESMA: "Autoridad Europea de Valores y Mercados. Supervisión de los mercados financieros de la UE y protección de los inversores.",
+                titleCommEU: "Comisión Europea",
+                descCommEU: "Órgano ejecutivo de la Unión Europea. Propone legislación y garantiza la aplicación de los tratados de la UE.",
+                descIOSCOAsia: "Hub regional de IOSCO para Asia-Pacífico. Centro de formación e intercambio de conocimientos entre reguladores de mercados financieros de la región.",
+                descScamShield: "Aplicación y servicio de la Policía de Singapur para proteger a los ciudadanos de estafas y llamadas fraudulentas.",
+                descCSRC: "Autoridad reguladora de valores de la República Popular China. Regula y supervisa la emisión de valores, futuros y fondos de inversión.",
+                descSEBI: "Autoridad reguladora de los mercados financieros en India. Protege los intereses de los inversores y promueve el desarrollo del mercado de capitales.",
+                descASIC: "Autoridad reguladora de los mercados financieros australianos. Protege a consumidores e inversores, regula empresas y servicios financieros. Gestiona el portal Moneysmart."
+            },
+            ar: {
+                navDatabase: "🏦 قاعدة بيانات السلطات المالية",
+                navReferences: "📜 المراجع المؤسسية",
+                navLawyer: "👨‍⚖️ المحامي ستانكا",
+                heroTitle: "مؤسسات الرقابة المالية الدولية",
+                heroEU: "الاتحاد الأوروبي",
+                heroSubtitle: "SEC • FBI • SIPC • ScamShield - روابط رسمية لسلطات الرقابة المالية الدولية",
+                regionUSA: "الولايات المتحدة الأمريكية",
+                regionEU: "الاتحاد الأوروبي",
+                regionAsia: "آسيا وأوقيانوسيا",
+                adminNoteTitle: "ملاحظة المسؤول",
+                adminNoteText: "هذه الصفحة مُعدة للتحديثات. لإضافة موارد جديدة، اتصل بمشرف الموقع.",
+                backToDatabase: "🏦 العودة إلى قاعدة البيانات",
+                footerAuthor: "© 2026 المؤلف ومشرف الموقع: المحامي مارسيلو ستانكا، إيطاليا – فلورنسا.",
+                footerCredentials: "أوراق الاعتماد موثقة من: وزارة العدل (إيطاليا)، محكمة فلورنسا، البرلمان الأوروبي – بروكسل.",
+                privacyStatement: "🔒 الخصوصية: هذا التطبيق لا يجمع بيانات شخصية",
+                privacyLink: "سياسة الخصوصية",
+                descFBI: "مركز شكاوى الجرائم الإلكترونية التابع لمكتب التحقيقات الفيدرالي. تقارير سنوية عن الاحتيال عبر الإنترنت والاحتيال المالي الدولي.",
+                descSIPC: "منظمة غير ربحية أنشأها الكونجرس الأمريكي عام 1970. تحمي المستثمرين في حالة إفلاس الوسطاء. استردت مليارات الدولارات للمستثمرين. تحقق مما إذا كان وسيطك عضواً في SIPC!",
+                descSEC: "البوابة الرسمية لهيئة SEC للمستثمرين. دليل شامل حول كيفية تجنب الاحتيال، التعرف على علامات التحذير، حماية استثماراتك والإبلاغ عن الأنشطة المشبوهة.",
+                descIOSCO: "المنظمة الدولية لهيئات الأوراق المالية. معايير عالمية لتنظيم الأسواق المالية.",
+                descISCAN: "بوابة IOSCO للبحث عن تنبيهات وتحذيرات المستثمرين الصادرة عن سلطات الرقابة المالية حول العالم.",
+                descESMA: "هيئة الأوراق المالية والأسواق الأوروبية. الإشراف على الأسواق المالية في الاتحاد الأوروبي وحماية المستثمرين.",
+                titleCommEU: "المفوضية الأوروبية",
+                descCommEU: "الجهاز التنفيذي للاتحاد الأوروبي. تقترح التشريعات وتضمن تطبيق معاهدات الاتحاد الأوروبي.",
+                descIOSCOAsia: "مركز IOSCO الإقليمي لآسيا والمحيط الهادئ. مركز للتدريب وتبادل المعرفة بين منظمي الأسواق المالية في المنطقة.",
+                descScamShield: "تطبيق وخدمة من شرطة سنغافورة لحماية المواطنين من الاحتيال والمكالمات الاحتيالية.",
+                descCSRC: "هيئة تنظيم الأوراق المالية لجمهورية الصين الشعبية. تنظم وتشرف على إصدار الأوراق المالية والعقود الآجلة وصناديق الاستثمار.",
+                descSEBI: "هيئة تنظيم الأسواق المالية في الهند. تحمي مصالح المستثمرين وتعزز تطوير أسواق رأس المال.",
+                descASIC: "هيئة تنظيم الأسواق المالية الأسترالية. تحمي المستهلكين والمستثمرين، تنظم الشركات والخدمات المالية. تدير بوابة Moneysmart."
+            },
+            zh: {
+                navDatabase: "🏦 金融监管机构数据库",
+                navReferences: "📜 机构参考资料",
+                navLawyer: "👨‍⚖️ 斯坦卡律师",
+                heroTitle: "国际金融监管机构",
+                heroEU: "欧盟",
+                heroSubtitle: "SEC • FBI • SIPC • ScamShield - 国际金融监管机构官方链接",
+                regionUSA: "美国",
+                regionEU: "欧盟",
+                regionAsia: "亚洲和大洋洲",
+                adminNoteTitle: "管理员备注",
+                adminNoteText: "此页面已配置为可更新。如需添加新资源，请联系网站管理员。",
+                backToDatabase: "🏦 返回数据库",
+                footerAuthor: "© 2026 作者兼网站管理员：意大利佛罗伦萨律师 Marcello Stanca。",
+                footerCredentials: "资质由意大利司法部、佛罗伦萨法院及欧洲议会（布鲁塞尔）核实。",
+                privacyStatement: "🔒 隐私：本应用程序不收集个人数据",
+                privacyLink: "隐私政策",
+                descFBI: "FBI网络犯罪投诉中心。关于网络诈骗和国际金融欺诈的年度报告。",
+                descSIPC: "美国国会于1970年成立的非营利组织。在经纪商破产时保护投资者。已为投资者追回数十亿美元。检查您的经纪商是否为SIPC会员！",
+                descSEC: "SEC投资者官方门户。关于如何避免欺诈、识别警示信号、保护您的投资和举报可疑活动的完整指南。",
+                descIOSCO: "国际证券委员会组织。金融市场监管的全球标准。",
+                descISCAN: "IOSCO门户，用于搜索全球金融监管机构发布的投资者警示和警告。",
+                descESMA: "欧洲证券和市场管理局。欧盟金融市场监管和投资者保护。",
+                titleCommEU: "欧盟委员会",
+                descCommEU: "欧盟执行机构。提出立法并确保欧盟条约的实施。",
+                descIOSCOAsia: "IOSCO亚太区域中心。该地区金融市场监管机构的培训和知识共享中心。",
+                descScamShield: "新加坡警察部队的应用程序和服务，保护公民免受诈骗和欺诈电话的侵害。",
+                descCSRC: "中华人民共和国证券监管机构。监管和监督证券、期货和投资基金的发行。",
+                descSEBI: "印度金融市场监管机构。保护投资者利益，促进资本市场发展。",
+                descASIC: "澳大利亚金融市场监管机构。保护消费者和投资者，监管公司和金融服务。管理Moneysmart门户。"
+            },
+            hi: {
+                navDatabase: "🏦 वित्तीय प्राधिकरण डेटाबेस",
+                navReferences: "📜 संस्थागत संदर्भ",
+                navLawyer: "👨‍⚖️ वकील स्टांका",
+                heroTitle: "अंतर्राष्ट्रीय वित्तीय पर्यवेक्षण संस्थान",
+                heroEU: "यूरोपीय संघ",
+                heroSubtitle: "SEC • FBI • SIPC • ScamShield - अंतर्राष्ट्रीय वित्तीय पर्यवेक्षी प्राधिकरणों के आधिकारिक लिंक",
+                regionUSA: "संयुक्त राज्य अमेरिका",
+                regionEU: "यूरोपीय संघ",
+                regionAsia: "एशिया और ओशिनिया",
+                adminNoteTitle: "व्यवस्थापक नोट",
+                adminNoteText: "यह पृष्ठ अद्यतन के लिए कॉन्फ़िगर किया गया है। नए संसाधन जोड़ने के लिए वेबमास्टर से संपर्क करें।",
+                backToDatabase: "🏦 डेटाबेस पर वापस जाएं",
+                footerAuthor: "© 2026 लेखक और वेबमास्टर: वकील मार्सेलो स्टांका, इटली – फ्लोरेंस।",
+                footerCredentials: "प्रमाण-पत्र सत्यापित: न्याय मंत्रालय (इटली), फ्लोरेंस न्यायालय, यूरोपीय संसद – ब्रुसेल्स।",
+                privacyStatement: "🔒 गोपनीयता: यह ऐप व्यक्तिगत डेटा एकत्र नहीं करता",
+                privacyLink: "गोपनीयता नीति",
+                descFBI: "FBI का इंटरनेट अपराध शिकायत केंद्र। ऑनलाइन धोखाधड़ी और अंतर्राष्ट्रीय वित्तीय धोखाधड़ी पर वार्षिक रिपोर्ट।",
+                descSIPC: "1970 में अमेरिकी कांग्रेस द्वारा बनाया गया गैर-लाभकारी संगठन। ब्रोकर-डीलर दिवालियापन में निवेशकों की सुरक्षा करता है। निवेशकों के लिए अरबों डॉलर वसूल किए हैं। जांचें कि क्या आपका ब्रोकर SIPC सदस्य है!",
+                descSEC: "निवेशकों के लिए SEC का आधिकारिक पोर्टल। धोखाधड़ी से बचने, चेतावनी संकेतों को पहचानने, अपने निवेश की सुरक्षा और संदिग्ध गतिविधियों की रिपोर्ट करने की पूर्ण मार्गदर्शिका।",
+                descIOSCO: "प्रतिभूति आयोगों का अंतर्राष्ट्रीय संगठन। वित्तीय बाजार विनियमन के लिए वैश्विक मानक।",
+                descISCAN: "विश्वभर की वित्तीय पर्यवेक्षी प्राधिकरणों द्वारा जारी निवेशक अलर्ट और चेतावनियों की खोज के लिए IOSCO पोर्टल।",
+                descESMA: "यूरोपीय प्रतिभूति और बाजार प्राधिकरण। EU में वित्तीय बाजार पर्यवेक्षण और निवेशक सुरक्षा।",
+                titleCommEU: "यूरोपीय आयोग",
+                descCommEU: "यूरोपीय संघ का कार्यकारी निकाय। कानून प्रस्तावित करता है और EU संधियों के आवेदन को सुनिश्चित करता है।",
+                descIOSCOAsia: "एशिया-प्रशांत के लिए IOSCO क्षेत्रीय हब। क्षेत्र के वित्तीय बाजार नियामकों के बीच प्रशिक्षण और ज्ञान साझाकरण का केंद्र।",
+                descScamShield: "नागरिकों को घोटालों और धोखाधड़ी कॉल से बचाने के लिए सिंगापुर पुलिस बल का ऐप और सेवा।",
+                descCSRC: "चीन जनवादी गणराज्य की प्रतिभूति नियामक प्राधिकरण। प्रतिभूतियों, वायदा और निवेश कोष के जारी करने को नियंत्रित और पर्यवेक्षण करता है।",
+                descSEBI: "भारत में वित्तीय बाजार नियामक प्राधिकरण। निवेशक हितों की रक्षा करता है और पूंजी बाजार विकास को बढ़ावा देता है।",
+                descASIC: "ऑस्ट्रेलियाई वित्तीय बाजार नियामक प्राधिकरण। उपभोक्ताओं और निवेशकों की रक्षा करता है, कंपनियों और वित्तीय सेवाओं को नियंत्रित करता है। Moneysmart पोर्टल का प्रबंधन करता है।"
+            },
+            vi: {
+                navDatabase: "🏦 Cơ sở dữ liệu Cơ quan Tài chính",
+                navReferences: "📜 Tài liệu Tham khảo Thể chế",
+                navLawyer: "👨‍⚖️ Luật sư Stanca",
+                heroTitle: "Các Tổ chức Giám sát Tài chính Quốc tế",
+                heroEU: "Liên minh Châu Âu",
+                heroSubtitle: "SEC • FBI • SIPC • ScamShield - Liên kết chính thức đến các cơ quan giám sát tài chính quốc tế",
+                regionUSA: "Hoa Kỳ",
+                regionEU: "Liên minh Châu Âu",
+                regionAsia: "Châu Á & Châu Đại Dương",
+                adminNoteTitle: "Ghi chú Quản trị",
+                adminNoteText: "Trang này được cấu hình để cập nhật. Để thêm tài nguyên mới, hãy liên hệ quản trị viên.",
+                backToDatabase: "🏦 Quay lại Cơ sở dữ liệu",
+                footerAuthor: "© 2026 Tác giả và Quản trị viên: Luật sư Marcello Stanca, Ý – Florence.",
+                footerCredentials: "Thông tin xác thực bởi: Bộ Tư pháp (Ý), Tòa án Florence, Nghị viện Châu Âu – Brussels.",
+                privacyStatement: "🔒 QUYỀN RIÊNG TƯ: Ứng dụng này KHÔNG thu thập dữ liệu cá nhân",
+                privacyLink: "Chính sách Quyền riêng tư",
+                descFBI: "Trung tâm Khiếu nại Tội phạm Internet của FBI. Báo cáo hàng năm về lừa đảo trực tuyến và gian lận tài chính quốc tế.",
+                descSIPC: "Tổ chức phi lợi nhuận được Quốc hội Hoa Kỳ thành lập năm 1970. Bảo vệ nhà đầu tư trong trường hợp môi giới phá sản. Đã thu hồi hàng tỷ đô la cho nhà đầu tư. Kiểm tra xem nhà môi giới của bạn có phải là thành viên SIPC không!",
+                descSEC: "Cổng thông tin chính thức của SEC dành cho nhà đầu tư. Hướng dẫn đầy đủ về cách tránh gian lận, nhận biết dấu hiệu cảnh báo, bảo vệ đầu tư và báo cáo hoạt động đáng ngờ.",
+                descIOSCO: "Tổ chức quốc tế các ủy ban chứng khoán. Tiêu chuẩn toàn cầu cho quy định thị trường tài chính.",
+                descISCAN: "Cổng thông tin IOSCO để tìm kiếm cảnh báo và thông báo cho nhà đầu tư do các cơ quan giám sát tài chính trên toàn thế giới ban hành.",
+                descESMA: "Cơ quan Chứng khoán và Thị trường Châu Âu. Giám sát thị trường tài chính EU và bảo vệ nhà đầu tư.",
+                titleCommEU: "Ủy ban Châu Âu",
+                descCommEU: "Cơ quan điều hành của Liên minh Châu Âu. Đề xuất luật và đảm bảo việc áp dụng các hiệp ước EU.",
+                descIOSCOAsia: "Trung tâm khu vực IOSCO cho Châu Á-Thái Bình Dương. Trung tâm đào tạo và chia sẻ kiến thức giữa các cơ quan quản lý thị trường tài chính trong khu vực.",
+                descScamShield: "Ứng dụng và dịch vụ của Lực lượng Cảnh sát Singapore để bảo vệ công dân khỏi lừa đảo và cuộc gọi gian lận.",
+                descCSRC: "Cơ quan quản lý chứng khoán của Cộng hòa Nhân dân Trung Hoa. Quản lý và giám sát việc phát hành chứng khoán, hợp đồng tương lai và quỹ đầu tư.",
+                descSEBI: "Cơ quan quản lý thị trường tài chính ở Ấn Độ. Bảo vệ lợi ích nhà đầu tư và thúc đẩy phát triển thị trường vốn.",
+                descASIC: "Cơ quan quản lý thị trường tài chính Úc. Bảo vệ người tiêu dùng và nhà đầu tư, quản lý công ty và dịch vụ tài chính. Quản lý cổng thông tin Moneysmart."
+            },
+            pt: {
+                navDatabase: "🏦 Base de Dados das Autoridades Financeiras",
+                navReferences: "📜 Referências Institucionais",
+                navLawyer: "👨‍⚖️ Advogado Stanca",
+                heroTitle: "Instituições Internacionais de Supervisão Financeira",
+                heroEU: "União Europeia",
+                heroSubtitle: "SEC • FBI • SIPC • ScamShield - Links oficiais para autoridades de supervisão financeira internacional",
+                regionUSA: "EUA - Estados Unidos da América",
+                regionEU: "União Europeia",
+                regionAsia: "Ásia e Oceania",
+                adminNoteTitle: "Nota Admin",
+                adminNoteText: "Esta página está configurada para atualizações. Para adicionar novos recursos, contacte o webmaster.",
+                backToDatabase: "🏦 Voltar à Base de Dados",
+                footerAuthor: "© 2026 Autor e Webmaster: Advogado Marcello Stanca, Itália – Florença.",
+                footerCredentials: "Credenciais verificadas por: Ministério da Justiça (Itália), Tribunal de Florença, Parlamento Europeu – Bruxelas.",
+                privacyStatement: "🔒 PRIVACIDADE: Esta app NÃO recolhe dados pessoais",
+                privacyLink: "Política de Privacidade",
+                descFBI: "Centro de Denúncias de Crimes Cibernéticos do FBI. Relatórios anuais sobre fraudes online e fraudes financeiras internacionais.",
+                descSIPC: "Organização sem fins lucrativos criada pelo Congresso dos EUA em 1970. Protege investidores em caso de falência de corretoras. Recuperou milhares de milhões de dólares para investidores. Verifique se o seu corretor é membro do SIPC!",
+                descSEC: "Portal oficial da SEC para investidores. Guia completo sobre como evitar fraudes, reconhecer sinais de alerta, proteger os seus investimentos e denunciar atividades suspeitas.",
+                descIOSCO: "Organização internacional das comissões de valores mobiliários. Normas globais para a regulação dos mercados financeiros.",
+                descISCAN: "Portal IOSCO para pesquisar alertas e avisos a investidores emitidos por autoridades de supervisão financeira em todo o mundo.",
+                descESMA: "Autoridade Europeia dos Valores Mobiliários e dos Mercados. Supervisão dos mercados financeiros da UE e proteção dos investidores.",
+                titleCommEU: "Comissão Europeia",
+                descCommEU: "Órgão executivo da União Europeia. Propõe legislação e garante a aplicação dos tratados da UE.",
+                descIOSCOAsia: "Hub regional da IOSCO para a Ásia-Pacífico. Centro de formação e partilha de conhecimentos entre reguladores de mercados financeiros da região.",
+                descScamShield: "Aplicação e serviço da Polícia de Singapura para proteger os cidadãos de fraudes e chamadas fraudulentas.",
+                descCSRC: "Autoridade reguladora de valores mobiliários da República Popular da China. Regula e supervisiona a emissão de títulos, futuros e fundos de investimento.",
+                descSEBI: "Autoridade reguladora dos mercados financeiros na Índia. Protege os interesses dos investidores e promove o desenvolvimento do mercado de capitais.",
+                descASIC: "Autoridade reguladora dos mercados financeiros australianos. Protege consumidores e investidores, regula empresas e serviços financeiros. Gere o portal Moneysmart."
+            }
+        };
+
+        let currentLanguage = 'it';
+
+        function changeLanguage(lang) {
+            currentLanguage = lang;
+            document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
+            const activeBtn = Array.from(document.querySelectorAll('.lang-btn')).find(btn => btn.textContent.includes(lang.toUpperCase()));
+            if (activeBtn) activeBtn.classList.add('active');
+            
+            document.querySelectorAll('[data-i18n]').forEach(element => {
+                const key = element.getAttribute('data-i18n');
+                if (translations[lang] && translations[lang][key]) {
+                    element.innerHTML = translations[lang][key];
+                }
+            });
+        }
+    </script>
+</body>
+</html>

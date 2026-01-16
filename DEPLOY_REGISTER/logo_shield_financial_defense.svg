@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="512" height="512" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">Financial Defense Shield Logo</title>
+  <desc id="desc">Blue shield with a central golden dollar symbol, two traffic lights tangential to the inner shield sides, Financial Defense text inside, and three vertical golden orbits with red, yellow and green planets outside the shield.</desc>
+  <defs>
+    <linearGradient id="shieldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1d4ed8"/>
+      <stop offset="60%" stop-color="#1e40af"/>
+      <stop offset="100%" stop-color="#020617"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect x="0" y="0" width="512" height="512" rx="112" fill="#020617"/>
+
+  <!-- Shield shape -->
+  <path d="M256 90
+           L156 120
+           C150 123 144 131 144 139
+           V262
+           C144 330 187 378 256 412
+           C325 378 368 330 368 262
+           V159
+           C368 151 362 143 356 140
+           Z" 
+        fill="url(#shieldGrad)" stroke="#93c5fd" stroke-width="6"/>
+
+  <!-- Dollar symbol -->
+  <text x="256" y="240" text-anchor="middle" fill="#facc15"
+        font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif"
+        font-weight="700" font-size="160">
+    $
+  </text>
+
+  <!-- Traffic light left (green on), tangent to inner left side of shield -->
+  <g>
+    <rect x="158" y="150" width="33" height="120" rx="8" fill="#020617" stroke="#e5e7eb" stroke-width="3"/>
+    <circle cx="173" cy="175" r="9" fill="#374151" />
+    <circle cx="173" cy="210" r="9" fill="#374151" />
+    <circle cx="173" cy="245" r="9" fill="#22c55e" />
+  </g>
+
+  <!-- Traffic light right (red on), tangent to inner right side of shield -->
+  <g>
+    <rect x="324" y="150" width="33" height="120" rx="8" fill="#020617" stroke="#e5e7eb" stroke-width="3"/>
+    <circle cx="339" cy="175" r="9" fill="#ef4444" />
+    <circle cx="339" cy="210" r="9" fill="#374151" />
+    <circle cx="339" cy="245" r="9" fill="#374151" />
+  </g>
+
+  <!-- Financial Defense label inside shield -->
+  <text x="256" y="310" text-anchor="middle" fill="#e5e7eb"
+        font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif"
+        font-weight="600" font-size="30" letter-spacing="2">
+    FINANCIAL
+  </text>
+  <text x="256" y="344" text-anchor="middle" fill="#e5e7eb"
+        font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif"
+        font-weight="600" font-size="28" letter-spacing="4">
+    DEFENSE
+  </text>
+  
+  <!-- Copyright symbol at the tip of the shield -->
+  <text x="256" y="400" text-anchor="middle" fill="#ffffff"
+        font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif"
+        font-weight="700" font-size="20">
+    ©
+  </text>
+
+  <!-- M and S initials for Marcello Stanca in phosphor green -->
+  <text x="180" y="390" text-anchor="middle" fill="#39ff14"
+        font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif"
+        font-weight="800" font-size="36">
+    M
+  </text>
+  <text x="332" y="390" text-anchor="middle" fill="#39ff14"
+        font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif"
+        font-weight="800" font-size="36">
+    S
+  </text>
+
+  <!-- Three vertical orbits around shield (all outside shield contour) -->
+  <g fill="none" stroke="#facc15" stroke-width="4" opacity="0.95">
+    <ellipse cx="256" cy="256" rx="170" ry="210" />
+    <ellipse cx="256" cy="256" rx="190" ry="230" />
+    <ellipse cx="256" cy="256" rx="210" ry="250" />
+  </g>
+
+  <!-- Planet spheres on distinct vertical orbits: green (east), yellow (west), red (south) -->
+  <g opacity="0.98">
+    <!-- East / right, inner orbit -->
+    <circle cx="426" cy="256" r="20" fill="#22c55e" />
+    <!-- West / left, middle orbit -->
+    <circle cx="66" cy="256" r="20" fill="#facc15" />
+    <!-- South / bottom, inner orbit -->
+    <circle cx="256" cy="466" r="20" fill="#ef4444" />
+  </g>
+</svg>
