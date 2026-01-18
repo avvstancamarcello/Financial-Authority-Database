@@ -1,6 +1,13 @@
 <!DOCTYPE html>
 <html lang="it" prefix="og: https://ogp.me/ns#">
 <head>
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-W2Q6GD42');</script>
+    <!-- End Google Tag Manager -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
@@ -655,35 +662,121 @@
             font-size: 1.1rem;
             cursor: pointer;
         }
+        /* === RESPONSIVE TABLET (768px) === */
         @media (max-width: 768px) { 
-            h1 { font-size: 1.8em; } 
-            .language-selector { position: static; justify-content: center; margin-bottom: 15px; } 
+            body { padding: 10px; }
+            h1 { font-size: 1.6em; } 
+            .language-selector { position: static; justify-content: center; margin-bottom: 15px; flex-wrap: wrap; gap: 6px; } 
             .flag-orbit-banner { flex-direction: column; gap: 12px; }
-            .countries-grid { grid-template-columns: 1fr; } 
-            .stats { grid-template-columns: 1fr; } 
-            .controls { flex-direction: column; } 
-            .search-row { flex-direction: column; align-items: stretch; }
-            .search-box { width: 100%; }
+            .flag-orbit-container { width: 140px; height: 140px; }
+            .orbit-side-icon { height: 100px; }
+            .orbit-side-icon img { height: 100px; border-radius: 25px; }
+            .countries-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; } 
+            .stats { grid-template-columns: 1fr 1fr; gap: 10px; } 
+            .stat-card { padding: 8px 10px; }
+            .stat-number { font-size: 1.3em; }
+            .controls { flex-direction: column; padding: 18px 15px; } 
+            .search-row { flex-direction: column; align-items: stretch; gap: 10px; }
+            .search-box { width: 100%; min-width: auto; }
+            .search-box input { padding: 10px 15px; font-size: 15px; }
+            .filter-buttons { justify-content: center; }
+            .filter-btn { padding: 8px 14px; font-size: 0.9em; }
+            .content { padding: 20px 15px; }
             .modal-content { 
                 max-width: 95%; 
                 width: 95%; 
-                margin: 20px auto; 
-                padding: 25px 20px; 
-                font-size: 0.95em;
+                margin: 15px auto; 
+                padding: 20px 15px; 
+                font-size: 0.92em;
             }
-            .close-modal { font-size: 25px; top: 15px; right: 15px; }
+            .close-modal { font-size: 25px; top: 12px; right: 12px; }
             .authority-link a { font-size: 0.85em; word-break: break-all; }
             .instructions-popup {
-                top: 140px;
+                top: 120px;
                 right: 50%;
                 transform: translateX(50%);
                 width: 92%;
-                max-height: calc(100vh - 170px);
+                max-height: calc(100vh - 150px);
             }
+            .security-popup { width: 90%; right: 5%; top: 50px; }
+            .referenze-badge { flex-wrap: wrap; gap: 8px; font-size: 0.85em; }
+            .intro-text { padding: 12px 15px; font-size: 0.95em; }
+            footer { padding: 15px 10px; font-size: 0.9em; }
         }
+        
+        /* === RESPONSIVE SMARTPHONE (480px) === */
+        @media (max-width: 480px) {
+            body { padding: 5px; }
+            h1 { font-size: 1.35em; line-height: 1.3; }
+            header { padding: 15px 10px; }
+            .language-selector { gap: 4px; }
+            .lang-btn { padding: 5px 8px; font-size: 0.75em; }
+            .flag-orbit-banner { gap: 8px; }
+            .flag-orbit-container { width: 110px; height: 110px; }
+            .flag-orbit-flag { width: 24px; height: 18px; }
+            .flag-orbit-flag .fi { width: 24px !important; height: 18px !important; font-size: 24px; }
+            .orbit-side-icon { height: 80px; }
+            .orbit-side-icon img { height: 80px; border-radius: 20px; }
+            .countries-grid { grid-template-columns: repeat(2, 1fr); gap: 8px; padding: 10px; }
+            .flag-item { padding: 10px 8px; min-height: 90px; }
+            .flag-icon-wrapper .fi { width: 36px !important; height: 27px !important; font-size: 36px; }
+            .flag-code { font-size: 0.8em; }
+            .stats { grid-template-columns: 1fr; gap: 8px; padding: 12px 10px; }
+            .stat-card { padding: 8px; }
+            .stat-number { font-size: 1.2em; }
+            .stat-label { font-size: 0.8em; }
+            .controls { padding: 15px 10px; gap: 12px; }
+            .search-box input { padding: 10px 12px; font-size: 14px; }
+            .search-btn, .search-advice-btn { padding: 8px 12px; font-size: 0.85em; }
+            .filter-buttons { gap: 6px; }
+            .filter-btn { padding: 7px 10px; font-size: 0.8em; }
+            .content { padding: 15px 10px; }
+            .modal-content { 
+                margin: 10px auto; 
+                padding: 15px 12px; 
+                font-size: 0.88em;
+                border-radius: 12px;
+            }
+            .close-modal { font-size: 22px; top: 10px; right: 10px; }
+            .security-banner h2 { font-size: 0.85em; }
+            .security-banner .icon { font-size: 1.2rem; }
+            .security-banner-toggle { padding: 0 0.6rem; gap: 0.4rem; }
+            .security-popup { width: 94%; right: 3%; padding: 0.8rem; }
+            .security-popup h2 { font-size: 0.9em; }
+            .security-popup p { font-size: 0.8em; }
+            .instructions-popup { width: 95%; padding: 0.9rem; }
+            .instructions-popup h2 { font-size: 0.9em; }
+            .instructions-popup p, .instructions-popup ol { font-size: 0.8em; }
+            .referenze-badge { font-size: 0.75em; padding: 6px 10px; }
+            .intro-text { padding: 10px 12px; font-size: 0.88em; }
+            .eu-references { padding: 15px 12px; margin: 12px 0; font-size: 0.9em; }
+            footer { padding: 12px 8px; font-size: 0.85em; }
+        }
+        
+        /* === RESPONSIVE SMALL PHONES (375px) === */
+        @media (max-width: 375px) {
+            h1 { font-size: 1.2em; }
+            .flag-orbit-container { width: 90px; height: 90px; }
+            .orbit-side-icon { height: 65px; }
+            .orbit-side-icon img { height: 65px; border-radius: 15px; }
+            .countries-grid { grid-template-columns: repeat(2, 1fr); gap: 6px; }
+            .flag-item { padding: 8px 5px; min-height: 80px; }
+            .flag-icon-wrapper .fi { width: 30px !important; height: 22px !important; font-size: 30px; }
+            .search-box input { font-size: 13px; }
+            .filter-btn { padding: 6px 8px; font-size: 0.75em; }
+            .modal-content { padding: 12px 10px; font-size: 0.85em; }
+        }
+        
+        /* === FIX OVERFLOW ORIZZONTALE === */
+        html, body { overflow-x: hidden; }
+        .container { overflow-x: hidden; }
     </style>
 </head>
 <body itemscope itemtype="https://schema.org/WebApplication">
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-W2Q6GD42"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
     <!-- Security Banner - Prima della navigazione per massima visibilità -->
     <aside class="security-banner" role="banner" aria-label="Security Notice" style="margin: 0; border-radius: 0;">
         <button id="securityBannerToggle" class="security-banner-toggle" type="button" onclick="toggleSecurityBanner()" aria-expanded="false">

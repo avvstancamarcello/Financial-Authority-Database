@@ -1,0 +1,20 @@
+🎯 Cos'è Google Tag Manager e cosa fa
+Google Tag Manager (GTM) è un sistema di gestione dei tag che ti permette di:
+
+Funzionalità	Descrizione
+🔧 Gestione centralizzata	Aggiungere, modificare e rimuovere tag di tracciamento (Google Analytics, Facebook Pixel, ecc.) dalla dashboard GTM senza toccare il codice
+📊 Analytics avanzato	Tracciare eventi personalizzati (click sui pulsanti, scroll, download PDF, form submit)
+🎯 Remarketing	Attivare pixel pubblicitari (Google Ads, Facebook, LinkedIn) per campagne di retargeting
+🔄 Trigger dinamici	Eseguire tag solo quando si verificano determinate condizioni (es. pagina specifica, click su elemento, tempo sulla pagina)
+📈 Conversioni	Tracciare obiettivi/conversioni senza modificare il sito
+⚡ Performance	Caricamento asincrono dei tag per non rallentare il sito
+Come funziona il codice inserito:
+Script nel <head>: Carica il container GTM in modo asincrono
+Noscript dopo <body>: Fallback per utenti con JavaScript disabilitato
+Prossimi passi consigliati:
+Accedi a tagmanager.google.com
+Seleziona il container GTM-W2Q6GD42
+Aggiungi tag per Google Analytics 4, conversioni Ads, ecc.
+Usa il "Preview mode" per testare prima di pubblicare
+============================
+Se invece io cambio il nome al profilo Google di Amev Firenze e lo sostituisco temporaneamente con "Marcello Stanca"
