@@ -542,9 +542,9 @@
         }
         .flag-code { font-weight: 600; color: #667eea; font-size: 0.9em; margin-top: 5px; }
         .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); z-index: 1000; overflow-y: auto; }
-        .modal-content { background: white; max-width: 900px; margin: 50px auto; border-radius: 15px; padding: 40px; position: relative; }
-        .close-modal { position: absolute; top: 20px; right: 20px; font-size: 30px; cursor: pointer; color: #666; transition: color 0.3s ease; }
-        .close-modal:hover { color: #f5576c; }
+        .modal-content { background: white; max-width: 900px; margin: 50px auto; border-radius: 15px; padding: 40px; padding-bottom: 80px; position: relative; }
+        .close-modal { position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%); font-size: 60px; line-height: 1; cursor: pointer; color: #dc2626; font-weight: bold; transition: all 0.3s ease; background: #fee2e2; border: 3px solid #dc2626; border-radius: 50%; width: 70px; height: 70px; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 12px rgba(220, 38, 38, 0.4); z-index: 10; }
+        .close-modal:hover { color: #fff; background: #dc2626; box-shadow: 0 6px 18px rgba(220, 38, 38, 0.6); }
         
         /* === FULL-SCREEN INSTRUCTIONS MODAL === */
         .instructions-fullscreen-modal {
@@ -857,7 +857,7 @@
                 padding: 20px 15px; 
                 font-size: 0.92em;
             }
-            .close-modal { font-size: 25px; top: 12px; right: 12px; }
+            .close-modal { font-size: 50px; width: 60px; height: 60px; bottom: 15px; }
             .authority-link a { font-size: 0.85em; word-break: break-all; }
             .instructions-popup {
                 top: 120px;
@@ -907,7 +907,7 @@
                 font-size: 0.88em;
                 border-radius: 12px;
             }
-            .close-modal { font-size: 22px; top: 10px; right: 10px; }
+            .close-modal { font-size: 44px; width: 55px; height: 55px; bottom: 12px; }
             .security-banner h2 { font-size: 0.85em; }
             .security-banner .icon { font-size: 1.2rem; }
             .security-banner-toggle { padding: 0 0.6rem; gap: 0.4rem; }
@@ -1249,7 +1249,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
     <div id="countryModal" class="modal">
         <div class="modal-content">
-            <span class="close-modal" onclick="closeModal()">×</span>
+            <!-- Pulsante close rimosso da qui - ora è posizionato in basso, sopra il banner -->
             <div id="modalContent"></div>
         </div>
     </div>
@@ -2380,8 +2380,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                         </button>
                     </div>
                 </div>
+                <!-- Pulsante Chiudi Scheda - Posizionato sopra il banner -->
+                <div style="margin-top: 25px; text-align: center;">
+                    <button onclick="closeModal()" style="background: #fee2e2; color: #dc2626; border: 3px solid #dc2626; border-radius: 50%; width: 70px; height: 70px; font-size: 40px; font-weight: bold; cursor: pointer; box-shadow: 0 4px 12px rgba(220, 38, 38, 0.4); transition: all 0.3s ease; display: inline-flex; align-items: center; justify-content: center;" onmouseover="this.style.background='#dc2626'; this.style.color='#fff';" onmouseout="this.style.background='#fee2e2'; this.style.color='#dc2626';" title="Chiudi scheda">✕</button>
+                    <p style="font-size: 0.75em; color: #6c757d; margin-top: 8px;">Clicca per chiudere</p>
+                </div>
                 <!-- AdSense Banner Space - 336x280 Large Rectangle -->
-                <div style="margin-top: 20px; padding: 15px; background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%); border-radius: 12px; text-align: center; border: 1px dashed #dee2e6;">
+                <div style="margin-top: 15px; padding: 15px; background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%); border-radius: 12px; text-align: center; border: 1px dashed #dee2e6;">
                     <p style="font-size: 0.7em; color: #6c757d; margin: 0 0 8px 0; text-transform: uppercase; letter-spacing: 1px;">Partner</p>
                     <div id="modal-ad-container" style="min-height: 250px; display: flex; align-items: center; justify-content: center; background: #fff; border-radius: 8px;">
                         <!-- Google AdSense will inject ad here -->
@@ -2493,7 +2498,8 @@ https://avvstancamarcello.github.io/Financial-Authority-Database/
         }
 
         window.onclick = (event) => {
-            if (event.target === document.getElementById('countryModal')) closeModal();
+            // Chiusura al click sullo sfondo DISABILITATA per countryModal (evita chiusure accidentali touch)
+            // if (event.target === document.getElementById('countryModal')) closeModal();
             if (event.target === document.getElementById('reportFormModal')) closeReportForm();
             if (event.target === document.getElementById('instructionsFullscreenModal')) closeInstructionsFullscreen();
         };
