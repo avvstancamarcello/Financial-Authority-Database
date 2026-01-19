@@ -37,16 +37,22 @@
         } catch (e) { /* Firebase unavailable - site continues to work */ }
     </script>
     
+    <!-- Preload Critical Resources - Core Web Vitals Optimization -->
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+    <link rel="preconnect" href="https://www.gstatic.com" crossorigin>
+    <link rel="dns-prefetch" href="https://www.googletagmanager.com">
+    <link rel="preload" href="https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.2.3/css/flag-icons.min.css" as="style">
+    <link rel="preload" href="logo_shield_financial_defense.svg" as="image" type="image/svg+xml">
+    
     <!-- Flag Icons CSS Library -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.2.3/css/flag-icons.min.css">
     
     <!-- Meta Tags SEO Base -->
-    <meta name="description" content="🌊 Database 142 autorità finanziarie europee. Segnala truffe Forex, Crypto, Pig Butchering. Mappa interattiva geolocalizzata. Recupera i tuoi capitali come Ulisse tornò a Itaca.">
-    <meta name="keywords" content="tutela truffe, truffe finanziarie, pig butchering, recupero capitali truffa, broker non autorizzato, truffa forex, truffa criptovalute, ABF banca, autorità finanziarie europa, consob, FCA, mappa truffe europa, MT4 truffa, chargeback PSD2, odissea digitale, depressione post-traumatica truffa finanziaria, PTSD vittime truffe, disturbo stress finanziario, DepressionStop, supporto psicologico vittime frodi, Dr Riccardo Simoni">
+    <meta name="description" content="Database 142 autorità finanziarie internazionali. Verifica licenze broker, segnala truffe Forex e Crypto, Pig Butchering. Protezione consumatori. Gratuito.">
+    <meta name="keywords" content="database autorità finanziarie, verifica licenza broker, truffe forex, truffe criptovalute, pig butchering, broker non autorizzato, consob, FCA, CySEC, ESMA, segnala truffa, recupero capitali truffa, ABF banca, chargeback, autorità finanziarie internazionali">
     <meta name="author" content="Avvocato Marcello Stanca">
-    <!-- GitHub Pages: noindex to avoid duplicate content with tutelatruffe.it -->
-    <meta name="robots" content="noindex, follow">
-    <meta name="googlebot" content="noindex, follow">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <meta name="googlebot" content="index, follow">
     <link rel="canonical" href="https://tutelatruffe.it/">
     
     <!-- Alternate Languages - 25 EU Languages + extras -->
@@ -128,7 +134,7 @@
     <meta name="apple-mobile-web-app-title" content="FinAuthority">
     <link rel="apple-touch-icon" href="icon-192.png">
     
-    <title>Database Autorità Finanziarie Internazionali - Protezione Consumatori</title>
+    <title>Database Autorità Finanziarie Internazionali | Verifica Licenze Broker | 142 Paesi</title>
     
     <!-- JSON-LD Structured Data -->
     <script type="application/ld+json">
@@ -200,6 +206,64 @@
             "name": "Worldwide"
         },
         "temporalCoverage": "2026"
+    }
+    </script>
+    
+    <!-- FAQ Schema JSON-LD for Rich Snippets -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": "Come verificare se un broker è autorizzato?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Cerca il paese dove il broker dichiara di avere sede legale, poi accedi al sito dell'autorità finanziaria di quel paese tramite questo database. Verifica che il nome della società e il numero di licenza siano presenti nei registri ufficiali. Se non trovi corrispondenza, non effettuare alcun bonifico."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Cosa fare se ho già inviato denaro a un broker truffa?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Contatta immediatamente la tua banca per tentare un chargeback o il blocco del bonifico. Segnala la truffa all'autorità finanziaria del paese del broker e alla Polizia Postale. Conserva tutte le prove: email, screenshot, cronologia chat, dati IBAN. Valuta un reclamo all'ABF (Arbitro Bancario Finanziario) se la banca non ha effettuato controlli adeguati."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Quali sono i segnali di una truffa Forex o Crypto?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "I segnali più comuni includono: promesse di guadagni elevati garantiti, pressione per depositare rapidamente, richiesta di bonifici verso conti esteri intestati a persone fisiche, impossibilità di prelevare i fondi, piattaforme MT4/MT5 non verificabili, contatti solo via WhatsApp o Telegram, siti web registrati da pochi mesi."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Cos'è il Pig Butchering e come riconoscerlo?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Il Pig Butchering è una truffa romantica-finanziaria dove la vittima viene ingrassata con attenzioni e piccoli guadagni iniziali, poi macellata con richieste di depositi sempre maggiori. I truffatori creano relazioni emotive via app di dating o social, poi propongono investimenti in crypto o forex tramite piattaforme false."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Quante autorità finanziarie copre questo database?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Il database include 142 autorità finanziarie nazionali di tutto il mondo, compresi tutti i 27 paesi dell'Unione Europea, Regno Unito, USA, Canada, Australia, Singapore, Giappone e molti altri. Include anche organizzazioni internazionali come ESMA, IOSCO e FBI IC3 per le segnalazioni transfrontaliere."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Questo database è gratuito e affidabile?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Sì, il database è completamente gratuito e fornisce esclusivamente link diretti ai siti ufficiali delle autorità governative. L'autore, Avvocato Marcello Stanca, è verificabile presso l'Ordine degli Avvocati di Firenze e ha presentato petizioni ufficiali al Parlamento Europeo (0888/2024 e 0645/2025) sulla protezione dei consumatori dalle truffe finanziarie."
+                }
+            }
+        ]
     }
     </script>
     
@@ -1114,7 +1178,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             </nav>
             <div class="flag-orbit-banner" aria-hidden="true">
                 <div class="orbit-side-icon orbit-side-icon-left">
-                    <img src="logo_shield_financial_defense.svg" alt="Financial Defense - tutela del consumatore">
+                    <img src="logo_shield_financial_defense.svg" alt="Financial Defense - tutela del consumatore" width="170" height="170">
                 </div>
                 <div class="flag-orbit-container">
                     <div class="flag-orbit-ring"></div>
@@ -1145,7 +1209,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                         </div>
                     </div>
                     <div class="flag-orbit-center">
-                        <img src="logo_galaxy_yous.svg" alt="Galaxy You$ - tutela del consumatore">
+                        <img src="logo_galaxy_yous.svg" alt="Galaxy You$ - tutela del consumatore" width="68" height="68">
                     </div>
                 </div>
                 <div class="flag-orbit-container">
@@ -1177,18 +1241,47 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                         </div>
                     </div>
                     <div class="flag-orbit-center">
-                        <img src="logo_shield_financial_defense.svg" alt="Financial Defense Shield - cuore della protezione dei consumatori">
+                        <img src="logo_shield_financial_defense.svg" alt="Financial Defense Shield - cuore della protezione dei consumatori" width="68" height="68">
                     </div>
                 </div>
                 <div class="orbit-side-icon orbit-side-icon-right">
-                    <img src="logo_shield_financial_defense.svg" alt="Financial Defense - tutela del consumatore">
+                    <img src="logo_shield_financial_defense.svg" alt="Financial Defense - tutela del consumatore" width="170" height="170">
                 </div>
             </div>
-            <h1 data-i18n="subtitle" itemprop="name"><span class="keyword-pulse">Autorità</span> dei Mercati <span class="keyword-pulse">Finanziari</span> di <span class="keyword-pulse">142</span> Paesi in <span class="keyword-pulse">20</span> lingue</h1>
-            <p class="subtitle" data-i18n="title" itemprop="description">Database Internazionale per controlli bancari sulla identità finanziaria sui destinatari di transazioni bancarie.</p>
+            <h1 data-i18n="subtitle" itemprop="name">Database Autorità Finanziarie Internazionali – 142 Paesi, 20 Lingue</h1>
+            <p class="subtitle" data-i18n="title" itemprop="description">Verifica licenze broker, segnala truffe Forex e Crypto, controlla l'identità finanziaria dei destinatari di bonifici bancari.</p>
         </header>
 
-        <div class="flags-grid-container">
+        <!-- TABLE OF CONTENTS - Indice Navigazione Interna SEO -->
+        <nav id="table-of-contents" aria-label="Indice della pagina" style="background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%); padding: 20px 30px; margin: 0; border-bottom: 3px solid #ffd700;">
+            <div style="max-width: 1200px; margin: 0 auto;">
+                <h2 style="color: #ffd700; font-size: 1.2em; margin: 0 0 15px 0; text-align: center;">📋 Indice Rapido – Naviga il Database</h2>
+                <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 12px;">
+                    <a href="#flags-section" style="background: rgba(255,215,0,0.15); color: #ffffff; padding: 10px 18px; border-radius: 25px; text-decoration: none; font-weight: 600; border: 1px solid rgba(255,215,0,0.4); transition: all 0.3s;">🏳️ Bandiere A-Z</a>
+                    <a href="#database-search-section" style="background: rgba(255,215,0,0.15); color: #ffffff; padding: 10px 18px; border-radius: 25px; text-decoration: none; font-weight: 600; border: 1px solid rgba(255,215,0,0.4); transition: all 0.3s;">🔍 Cerca Autorità</a>
+                    <a href="#countries-section" style="background: rgba(255,215,0,0.15); color: #ffffff; padding: 10px 18px; border-radius: 25px; text-decoration: none; font-weight: 600; border: 1px solid rgba(255,215,0,0.4); transition: all 0.3s;">🌍 Lista 142 Paesi</a>
+                    <a href="#ptsd-section" style="background: #000000; color: #00ffff; padding: 10px 18px; border-radius: 25px; text-decoration: none; font-weight: 600; border: 2px solid #00ffff; transition: all 0.3s; text-shadow: 0 0 10px rgba(0,255,255,0.8);">🧠 Depressione</a>
+                    <a href="#international-authorities" style="background: rgba(255,215,0,0.15); color: #ffffff; padding: 10px 18px; border-radius: 25px; text-decoration: none; font-weight: 600; border: 1px solid rgba(255,215,0,0.4); transition: all 0.3s;">🏛️ ESMA, FBI, IOSCO</a>
+                    <a href="#author-credentials" style="background: rgba(255,215,0,0.15); color: #ffffff; padding: 10px 18px; border-radius: 25px; text-decoration: none; font-weight: 600; border: 1px solid rgba(255,215,0,0.4); transition: all 0.3s;">👨‍⚖️ Autore Verificato</a>
+                    <a href="#faq-section" style="background: rgba(255,215,0,0.15); color: #ffffff; padding: 10px 18px; border-radius: 25px; text-decoration: none; font-weight: 600; border: 1px solid rgba(255,215,0,0.4); transition: all 0.3s;">❓ FAQ</a>
+                </div>
+            </div>
+        </nav>
+
+        <!-- AdSense Banner - Posizione Sicura dopo TOC (Responsive Leaderboard) -->
+        <div style="max-width: 1200px; margin: 15px auto; padding: 0 20px;">
+            <div style="background: #ffffff; padding: 10px; border-radius: 8px; text-align: center; border: 1px solid #e0e0e0;">
+                <ins class="adsbygoogle"
+                    style="display:block"
+                    data-ad-client="ca-pub-2899281140209246"
+                    data-ad-slot="AUTO"
+                    data-ad-format="horizontal"
+                    data-full-width-responsive="true"></ins>
+                <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+            </div>
+        </div>
+
+        <div id="flags-section" class="flags-grid-container">
             <!-- Banner Alfabeto A-Z - Sfondo Nero, Testo Verde Fosforo -->
             <div style="background: #000000; padding: 18px 20px; margin-bottom: 15px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.3); border: 2px solid #39ff14;">
                 <div style="display: flex; align-items: center; justify-content: center; gap: 12px; flex-wrap: wrap;">
@@ -1222,29 +1315,38 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     </button>
                     <button class="filter-btn" onclick="filterCountries('non-ue')" data-i18n="filterNonEU" aria-pressed="false">Paesi non-UE</button>
                 </div>
+                <!-- Filtri per Continente - SEO Improvement -->
+                <div class="filter-buttons" role="group" aria-label="Filter by continent" style="margin-top: 10px;">
+                    <span style="color: #ffd700; font-weight: 600; margin-right: 10px;">🌍 Continente:</span>
+                    <button class="filter-btn" onclick="filterCountries('europe')" aria-pressed="false">🇪🇺 Europa</button>
+                    <button class="filter-btn" onclick="filterCountries('asia')" aria-pressed="false">🌏 Asia</button>
+                    <button class="filter-btn" onclick="filterCountries('africa')" aria-pressed="false">🌍 Africa</button>
+                    <button class="filter-btn" onclick="filterCountries('americas')" aria-pressed="false">🌎 Americhe</button>
+                    <button class="filter-btn" onclick="filterCountries('oceania')" aria-pressed="false">🏝️ Oceania</button>
+                </div>
             </div>
         </section>
 
-        <div class="stats">
-            <div class="stat-card"><div class="stat-number" id="totalCountries">0</div><div class="stat-label" data-i18n="statCountries">Paesi Monitorati</div></div>
-            <div class="stat-card"><div class="stat-number" id="euCountries">0</div><div class="stat-label" data-i18n="statEU">Paesi UE</div></div>
-            <div class="stat-card"><div class="stat-number" id="highProtection">0</div><div class="stat-label" data-i18n="statHighProtection">Protezione Standard</div></div>
+        <div class="stats" style="padding: 10px 20px; display: flex; justify-content: center; align-items: center; gap: 40px; flex-wrap: wrap;">
+            <span style="font-size: 1.1em;"><strong id="totalCountries">0</strong> Paesi Monitorati</span>
+            <span style="font-size: 1.1em;"><strong id="euCountries">0</strong> Paesi UE</span>
+            <span style="font-size: 1.1em;"><strong id="highProtection">0</strong> Protezione Standard</span>
         </div>
 
         <!-- Banner PTSD - Depressione Post-Traumatica da Truffa Finanziaria -->
-        <div class="ptsd-banner">
-            <a href="referenze.html#ptsd-support" title="Supporto Psicologico Vittime Truffe - DepressionStop">
-                <span class="ptsd-icon">🧠</span>
-                <span class="ptsd-equation" data-i18n="ptsdEquation">Truffa Finanziaria = Disturbo Post-Traumatico da Stress (PTSD)</span>
-                <span class="ptsd-icon">💔➡️💪</span>
+        <section id="ptsd-section" style="background: #000000; padding: 15px 20px; margin: 0; border-top: 2px solid #00ffff; border-bottom: 2px solid #00ffff;">
+            <a href="referenze.html#ptsd-support" title="Supporto Psicologico Vittime Truffe - DepressionStop" style="display: flex; justify-content: center; align-items: center; gap: 15px; text-decoration: none; flex-wrap: wrap;">
+                <span style="font-size: 1.5em;">🧠</span>
+                <span style="color: #00ffff; font-size: 1.15em; font-weight: 700; text-shadow: 0 0 15px rgba(0,255,255,0.8), 0 0 30px rgba(0,255,255,0.5);" data-i18n="ptsdEquation">Truffa Finanziaria = Disturbo Post-Traumatico da Stress (PTSD)</span>
+                <span style="font-size: 1.5em;">💔➡️💪</span>
             </a>
-        </div>
+        </section>
 
-        <div class="content">
+        <section id="countries-section" class="content">
             <div class="countries-grid" id="countriesGrid"></div>
-        </div>
+        </section>
 
-        <div class="content">
+        <section id="international-authorities" class="content">
             <div class="eu-references">
                 <h3 data-i18n="euReferences">Organi Internazionali di Supervisione Finanziaria ed Autorità di Polizia Federale</h3>
                 <p><strong>ESMA</strong> - European Securities and Markets Authority: <a href="https://www.esma.europa.eu" target="_blank">esma.europa.eu</a></p>
@@ -1253,7 +1355,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 <p><strong>IOSCO i-SCAN</strong> - International Organization of Securities Commissions: <a href="https://www.iosco.org/i-scan/" target="_blank">iosco.org/i-scan/</a></p>
                 <p><strong>ScamShield</strong> - Singapore Police Force: <a href="https://www.scamshield.gov.sg/" target="_blank">scamshield.gov.sg</a></p>
             </div>
-        </div>
+        </section>
 
         <!-- Institutional References Banner (moved to bottom) -->
         <div id="author-credentials" style="background: linear-gradient(135deg, #003399 0%, #1a365d 100%); color: white; padding: 12px 16px; margin: 0; text-align: center; border-bottom: 4px solid #FFCC00;">
@@ -1272,6 +1374,69 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                         </p>
                     </div>
                 </div>
+            </div>
+        </div>
+
+        <!-- FAQ Section - SEO Enhancement for Rich Snippets -->
+        <section id="faq-section" itemscope itemtype="https://schema.org/FAQPage" style="background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%); padding: 40px 30px; margin: 0;">
+            <div style="max-width: 1000px; margin: 0 auto;">
+                <h2 style="color: #ffd700; text-align: center; font-size: 1.8em; margin-bottom: 30px;">❓ Domande Frequenti – FAQ</h2>
+                
+                <div itemscope itemprop="mainEntity" itemtype="https://schema.org/Question" style="background: rgba(255,255,255,0.05); border-radius: 12px; padding: 20px; margin-bottom: 15px; border-left: 4px solid #ffd700;">
+                    <h3 itemprop="name" style="color: #ffffff; margin: 0 0 10px 0; font-size: 1.1em;">Come verificare se un broker è autorizzato?</h3>
+                    <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+                        <p itemprop="text" style="color: #9ca3af; margin: 0; line-height: 1.6;">Cerca il paese dove il broker dichiara di avere sede legale, poi accedi al sito dell'autorità finanziaria di quel paese tramite questo database. Verifica che il nome della società e il numero di licenza siano presenti nei registri ufficiali. Se non trovi corrispondenza, non effettuare alcun bonifico.</p>
+                    </div>
+                </div>
+                
+                <div itemscope itemprop="mainEntity" itemtype="https://schema.org/Question" style="background: rgba(255,255,255,0.05); border-radius: 12px; padding: 20px; margin-bottom: 15px; border-left: 4px solid #ffd700;">
+                    <h3 itemprop="name" style="color: #ffffff; margin: 0 0 10px 0; font-size: 1.1em;">Cosa fare se ho già inviato denaro a un broker truffa?</h3>
+                    <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+                        <p itemprop="text" style="color: #9ca3af; margin: 0; line-height: 1.6;">Contatta immediatamente la tua banca per tentare un chargeback o il blocco del bonifico. Segnala la truffa all'autorità finanziaria del paese del broker e alla Polizia Postale. Conserva tutte le prove: email, screenshot, cronologia chat, dati IBAN. Valuta un reclamo all'ABF (Arbitro Bancario Finanziario) se la banca non ha effettuato controlli adeguati.</p>
+                    </div>
+                </div>
+                
+                <div itemscope itemprop="mainEntity" itemtype="https://schema.org/Question" style="background: rgba(255,255,255,0.05); border-radius: 12px; padding: 20px; margin-bottom: 15px; border-left: 4px solid #ffd700;">
+                    <h3 itemprop="name" style="color: #ffffff; margin: 0 0 10px 0; font-size: 1.1em;">Quali sono i segnali di una truffa Forex o Crypto?</h3>
+                    <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+                        <p itemprop="text" style="color: #9ca3af; margin: 0; line-height: 1.6;">I segnali più comuni includono: promesse di guadagni elevati garantiti, pressione per depositare rapidamente, richiesta di bonifici verso conti esteri intestati a persone fisiche, impossibilità di prelevare i fondi, piattaforme MT4/MT5 non verificabili, contatti solo via WhatsApp o Telegram, siti web registrati da pochi mesi.</p>
+                    </div>
+                </div>
+                
+                <div itemscope itemprop="mainEntity" itemtype="https://schema.org/Question" style="background: rgba(255,255,255,0.05); border-radius: 12px; padding: 20px; margin-bottom: 15px; border-left: 4px solid #ffd700;">
+                    <h3 itemprop="name" style="color: #ffffff; margin: 0 0 10px 0; font-size: 1.1em;">Cos'è il Pig Butchering e come riconoscerlo?</h3>
+                    <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+                        <p itemprop="text" style="color: #9ca3af; margin: 0; line-height: 1.6;">Il "Pig Butchering" è una truffa romantica-finanziaria dove la vittima viene "ingrassata" con attenzioni e piccoli guadagni iniziali, poi "macellata" con richieste di depositi sempre maggiori. I truffatori creano relazioni emotive via app di dating o social, poi propongono investimenti in crypto o forex tramite piattaforme false.</p>
+                    </div>
+                </div>
+                
+                <div itemscope itemprop="mainEntity" itemtype="https://schema.org/Question" style="background: rgba(255,255,255,0.05); border-radius: 12px; padding: 20px; margin-bottom: 15px; border-left: 4px solid #ffd700;">
+                    <h3 itemprop="name" style="color: #ffffff; margin: 0 0 10px 0; font-size: 1.1em;">Quante autorità finanziarie copre questo database?</h3>
+                    <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+                        <p itemprop="text" style="color: #9ca3af; margin: 0; line-height: 1.6;">Il database include 142 autorità finanziarie nazionali di tutto il mondo, compresi tutti i 27 paesi dell'Unione Europea, Regno Unito, USA, Canada, Australia, Singapore, Giappone e molti altri. Include anche organizzazioni internazionali come ESMA, IOSCO e FBI IC3 per le segnalazioni transfrontaliere.</p>
+                    </div>
+                </div>
+                
+                <div itemscope itemprop="mainEntity" itemtype="https://schema.org/Question" style="background: rgba(255,255,255,0.05); border-radius: 12px; padding: 20px; margin-bottom: 15px; border-left: 4px solid #ffd700;">
+                    <h3 itemprop="name" style="color: #ffffff; margin: 0 0 10px 0; font-size: 1.1em;">Questo database è gratuito e affidabile?</h3>
+                    <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+                        <p itemprop="text" style="color: #9ca3af; margin: 0; line-height: 1.6;">Sì, il database è completamente gratuito e fornisce esclusivamente link diretti ai siti ufficiali delle autorità governative. L'autore, Avvocato Marcello Stanca, è verificabile presso l'Ordine degli Avvocati di Firenze e ha presentato petizioni ufficiali al Parlamento Europeo (0888/2024 e 0645/2025) sulla protezione dei consumatori dalle truffe finanziarie.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- AdSense Banner - Posizione Sicura Sopra Footer (Responsive) -->
+        <div style="max-width: 1200px; margin: 30px auto; padding: 0 20px;">
+            <div style="background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%); padding: 15px; border-radius: 12px; text-align: center; border: 1px solid #dee2e6;">
+                <p style="font-size: 0.7em; color: #6c757d; margin: 0 0 8px 0; text-transform: uppercase; letter-spacing: 1px;">Annuncio</p>
+                <ins class="adsbygoogle"
+                    style="display:block"
+                    data-ad-client="ca-pub-2899281140209246"
+                    data-ad-slot="AUTO"
+                    data-ad-format="auto"
+                    data-full-width-responsive="true"></ins>
+                <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
             </div>
         </div>
 
@@ -1403,6 +1568,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 searchAdvice4: "Chiedi con email conferme di legalità dei destinatari alla tua Banca.",
                 instructionsButtonModal: "Istruzioni",
                 reportSuspectButton: "Segnala Sospetto",
+                reportAbuseButton: "Segnala l'abuso",
                 askAuthorityBtnEN: "🇬🇧 Ask this Authority for info!",
                 askAuthorityBtnNative: "Chiedi informazioni a questa Autorità!",
                 instructionsContent: `
@@ -1700,6 +1866,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 searchAdvice4: "Ask your bank by email for written confirmation about the lawfulness of the beneficiaries.",
                 instructionsButtonModal: "Instructions",
                 reportSuspectButton: "Report Suspect",
+                reportAbuseButton: "Report Abuse",
                 askAuthorityBtnEN: "🇬🇧 Ask this Authority for info!",
                 askAuthorityBtnNative: "Ask this Authority for info!",
                 instructionsContent: `
@@ -2160,6 +2327,72 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             return data;
         }
 
+        // Mappatura continenti per filtro geografico - SEO Enhancement
+        function assignContinents(countries) {
+            const continentMap = {
+                // EUROPA
+                'Albania': 'Europe', 'Andorra': 'Europe', 'Austria': 'Europe', 'Belgium': 'Europe', 'Bosnia and Herzegovina': 'Europe',
+                'Bulgaria': 'Europe', 'Croatia': 'Europe', 'Cyprus': 'Europe', 'Czech Republic': 'Europe', 'Denmark': 'Europe',
+                'Estonia': 'Europe', 'Finland': 'Europe', 'France': 'Europe', 'Germany': 'Europe', 'Greece': 'Europe',
+                'Hungary': 'Europe', 'Iceland': 'Europe', 'Ireland': 'Europe', 'Italy': 'Europe', 'Kosovo': 'Europe',
+                'Latvia': 'Europe', 'Liechtenstein': 'Europe', 'Lithuania': 'Europe', 'Luxembourg': 'Europe', 'Malta': 'Europe',
+                'Moldova': 'Europe', 'Monaco': 'Europe', 'Montenegro': 'Europe', 'Netherlands': 'Europe', 'North Macedonia': 'Europe',
+                'Norway': 'Europe', 'Poland': 'Europe', 'Portugal': 'Europe', 'Romania': 'Europe', 'Russia': 'Europe',
+                'San Marino': 'Europe', 'Serbia': 'Europe', 'Slovakia': 'Europe', 'Slovenia': 'Europe', 'Spain': 'Europe',
+                'Sweden': 'Europe', 'Switzerland': 'Europe', 'Ukraine': 'Europe', 'United Kingdom': 'Europe', 'Vatican': 'Europe',
+                'Gibraltar': 'Europe', 'Jersey': 'Europe', 'Isle of Man': 'Europe', 'Guernsey': 'Europe', 'Belarus': 'Europe',
+                // ASIA
+                'Afghanistan': 'Asia', 'Armenia': 'Asia', 'Azerbaijan': 'Asia', 'Bahrain': 'Asia', 'Bangladesh': 'Asia',
+                'Bhutan': 'Asia', 'Brunei': 'Asia', 'Cambodia': 'Asia', 'China': 'Asia', 'Georgia': 'Asia',
+                'Hong Kong': 'Asia', 'India': 'Asia', 'Indonesia': 'Asia', 'Iran': 'Asia', 'Iraq': 'Asia',
+                'Israel': 'Asia', 'Japan': 'Asia', 'Jordan': 'Asia', 'Kazakhstan': 'Asia', 'Kuwait': 'Asia',
+                'Kyrgyzstan': 'Asia', 'Laos': 'Asia', 'Lebanon': 'Asia', 'Macau': 'Asia', 'Malaysia': 'Asia',
+                'Maldives': 'Asia', 'Mongolia': 'Asia', 'Myanmar': 'Asia', 'Nepal': 'Asia', 'North Korea': 'Asia',
+                'Oman': 'Asia', 'Pakistan': 'Asia', 'Palestine': 'Asia', 'Philippines': 'Asia', 'Qatar': 'Asia',
+                'Saudi Arabia': 'Asia', 'Singapore': 'Asia', 'South Korea': 'Asia', 'Sri Lanka': 'Asia', 'Syria': 'Asia',
+                'Taiwan': 'Asia', 'Tajikistan': 'Asia', 'Thailand': 'Asia', 'Timor-Leste': 'Asia', 'Turkey': 'Asia',
+                'Turkmenistan': 'Asia', 'United Arab Emirates': 'Asia', 'Uzbekistan': 'Asia', 'Vietnam': 'Asia', 'Yemen': 'Asia',
+                // AFRICA
+                'Algeria': 'Africa', 'Angola': 'Africa', 'Benin': 'Africa', 'Botswana': 'Africa', 'Burkina Faso': 'Africa',
+                'Burundi': 'Africa', 'Cameroon': 'Africa', 'Cape Verde': 'Africa', 'Central African Republic': 'Africa', 'Chad': 'Africa',
+                'Comoros': 'Africa', 'Congo': 'Africa', 'DR Congo': 'Africa', 'Djibouti': 'Africa', 'Egypt': 'Africa',
+                'Equatorial Guinea': 'Africa', 'Eritrea': 'Africa', 'Eswatini': 'Africa', 'Ethiopia': 'Africa', 'Gabon': 'Africa',
+                'Gambia': 'Africa', 'Ghana': 'Africa', 'Guinea': 'Africa', 'Guinea-Bissau': 'Africa', 'Ivory Coast': 'Africa',
+                'Kenya': 'Africa', 'Lesotho': 'Africa', 'Liberia': 'Africa', 'Libya': 'Africa', 'Madagascar': 'Africa',
+                'Malawi': 'Africa', 'Mali': 'Africa', 'Mauritania': 'Africa', 'Mauritius': 'Africa', 'Morocco': 'Africa',
+                'Mozambique': 'Africa', 'Namibia': 'Africa', 'Niger': 'Africa', 'Nigeria': 'Africa', 'Rwanda': 'Africa',
+                'Sao Tome and Principe': 'Africa', 'Senegal': 'Africa', 'Seychelles': 'Africa', 'Sierra Leone': 'Africa', 'Somalia': 'Africa',
+                'South Africa': 'Africa', 'South Sudan': 'Africa', 'Sudan': 'Africa', 'Tanzania': 'Africa', 'Togo': 'Africa',
+                'Tunisia': 'Africa', 'Uganda': 'Africa', 'Zambia': 'Africa', 'Zimbabwe': 'Africa',
+                'CEMAC Region': 'Africa', 'ECOWAS Region': 'Africa',
+                // AMERICHE
+                'Argentina': 'Americas', 'Bahamas': 'Americas', 'Barbados': 'Americas', 'Belize': 'Americas', 'Bolivia': 'Americas',
+                'Brazil': 'Americas', 'Canada': 'Americas', 'Chile': 'Americas', 'Colombia': 'Americas', 'Costa Rica': 'Americas',
+                'Cuba': 'Americas', 'Dominica': 'Americas', 'Dominican Republic': 'Americas', 'Ecuador': 'Americas', 'El Salvador': 'Americas',
+                'Grenada': 'Americas', 'Guatemala': 'Americas', 'Guyana': 'Americas', 'Haiti': 'Americas', 'Honduras': 'Americas',
+                'Jamaica': 'Americas', 'Mexico': 'Americas', 'Nicaragua': 'Americas', 'Panama': 'Americas', 'Paraguay': 'Americas',
+                'Peru': 'Americas', 'Saint Kitts and Nevis': 'Americas', 'Saint Lucia': 'Americas', 'Saint Vincent and the Grenadines': 'Americas',
+                'Suriname': 'Americas', 'Trinidad and Tobago': 'Americas', 'United States': 'Americas', 'Uruguay': 'Americas', 'Venezuela': 'Americas',
+                'British Virgin Islands': 'Americas', 'Cayman Islands': 'Americas', 'Bermuda': 'Americas', 'Puerto Rico': 'Americas',
+                'ECSRC (Eastern Caribbean)': 'Americas',
+                // OCEANIA
+                'Australia': 'Oceania', 'Fiji': 'Oceania', 'Kiribati': 'Oceania', 'Marshall Islands': 'Oceania', 'Micronesia': 'Oceania',
+                'Nauru': 'Oceania', 'New Zealand': 'Oceania', 'Palau': 'Oceania', 'Papua New Guinea': 'Oceania', 'Samoa': 'Oceania',
+                'Solomon Islands': 'Oceania', 'Tonga': 'Oceania', 'Tuvalu': 'Oceania', 'Vanuatu': 'Oceania'
+            };
+            
+            return countries.map(country => {
+                // Cerca corrispondenza esatta o parziale (per Canada - Alberta, etc.)
+                let continent = continentMap[country.country_name];
+                if (!continent) {
+                    // Cerca per prefisso (es. "Canada - Alberta" → "Canada")
+                    const prefix = country.country_name.split(' - ')[0];
+                    continent = continentMap[prefix] || 'Other';
+                }
+                return { ...country, continent };
+            });
+        }
+
         // Inizializza lingua, ricerca e caricamento dati al caricamento della pagina
         document.addEventListener('DOMContentLoaded', () => {
             // Assicura che all'apertura la pagina parta sempre dall'inizio (header + pulsanti principali)
@@ -2171,26 +2404,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
         async function loadCountryData() {
             try {
-                // Prova prima il database cifrato (se esiste)
-                let data;
-                try {
-                    const encResponse = await fetch('db.enc');
-                    if (encResponse.ok) {
-                        const encoded = await encResponse.text();
-                        const decoded = atob(encoded);
-                        const decrypted = xorCipher(decoded, COPYRIGHT_KEY);
-                        data = JSON.parse(decrypted);
-                        console.log('%c🔒 Database cifrato caricato', 'color: green; font-weight: bold;');
-                    } else {
-                        throw new Error('Encrypted DB not found');
-                    }
-                } catch (encError) {
-                    console.error('Errore caricamento/decifratura db.enc, uso fallback JSON:', encError);
-                    // Fallback al JSON normale
-                    const response = await fetch('financial_authorities_database.json');
-                    if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
-                    data = await response.json();
-                }
+                // Carica direttamente il database JSON
+                const response = await fetch('financial_authorities_database.json');
+                if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+                let data = await response.json();
                 
                 // Aggiungi suddivisioni regionali e watermark copyright
                 data = addCanadaSubregions(data);
@@ -2198,6 +2415,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 
                 // Converti l'oggetto in array
                 countriesData = Object.values(data);
+                
+                // Assegna continente a ogni paese - SEO Enhancement
+                countriesData = assignContinents(countriesData);
+                
                 renderAll();
             } catch (error) {
                 console.error('Error loading country data:', error);
@@ -2262,6 +2483,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 if (currentFilter === 'altissimo') return country.protectionLevel === 'Altissimo';
                 if (currentFilter === 'ue') return country.isEU;
                 if (currentFilter === 'non-ue') return !country.isEU;
+                // Filtri per continente - SEO Enhancement
+                if (currentFilter === 'europe') return country.continent === 'Europe';
+                if (currentFilter === 'asia') return country.continent === 'Asia';
+                if (currentFilter === 'africa') return country.continent === 'Africa';
+                if (currentFilter === 'americas') return country.continent === 'Americas' || country.continent === 'North America' || country.continent === 'South America';
+                if (currentFilter === 'oceania') return country.continent === 'Oceania';
                 return false;
             });
 
@@ -2418,23 +2645,15 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                         <button onclick="openReportForm('${country.country_name}', '${country.financial_authority.name}', '${country.financial_authority.authorityEmail}');" style="background: #dc2626; color: #ffffff; border: 2px solid #fca5a5; border-radius: 999px; padding: 0.7rem 1.5rem; font-size: 1rem; font-weight: 600; display: inline-flex; align-items: center; gap: 8px; cursor: pointer; box-shadow: 0 4px 12px rgba(220, 38, 38, 0.4); transition: all 0.3s ease;" onmouseover="this.style.background='#b91c1c'; this.style.boxShadow='0 6px 18px rgba(220, 38, 38, 0.6)';" onmouseout="this.style.background='#dc2626'; this.style.boxShadow='0 4px 12px rgba(220, 38, 38, 0.4)';">
                             ⚠️ ${translations[currentLanguage].reportSuspectButton || 'Segnala Sospetto'}
                         </button>
+                        <button onclick="openReportForm('${country.country_name}', '${country.financial_authority.name}', '${country.financial_authority.authorityEmail}');" style="background: #000000; color: #39ff14; border: 2px solid #39ff14; border-radius: 999px; padding: 0.7rem 1.5rem; font-size: 1rem; font-weight: 600; display: inline-flex; align-items: center; gap: 8px; cursor: pointer; box-shadow: 0 4px 12px rgba(57, 255, 20, 0.4); transition: all 0.3s ease; text-shadow: 0 0 8px rgba(57,255,20,0.6);" onmouseover="this.style.background='#0a0a0a'; this.style.boxShadow='0 6px 18px rgba(57, 255, 20, 0.7)';" onmouseout="this.style.background='#000000'; this.style.boxShadow='0 4px 12px rgba(57, 255, 20, 0.4)';">
+                            🚨 ${translations[currentLanguage].reportAbuseButton || "Segnala l'abuso"}
+                        </button>
                     </div>
                 </div>
-                <!-- Pulsante Chiudi Scheda - Posizionato sopra il banner -->
+                <!-- Pulsante Chiudi Scheda -->
                 <div style="margin-top: 25px; text-align: center;">
                     <button onclick="closeModal()" style="background: #fee2e2; color: #dc2626; border: 3px solid #dc2626; border-radius: 50%; width: 70px; height: 70px; font-size: 40px; font-weight: bold; cursor: pointer; box-shadow: 0 4px 12px rgba(220, 38, 38, 0.4); transition: all 0.3s ease; display: inline-flex; align-items: center; justify-content: center;" onmouseover="this.style.background='#dc2626'; this.style.color='#fff';" onmouseout="this.style.background='#fee2e2'; this.style.color='#dc2626';" title="Chiudi scheda">✕</button>
                     <p style="font-size: 0.75em; color: #6c757d; margin-top: 8px;">Clicca per chiudere</p>
-                </div>
-                <!-- AdSense Banner Space - 336x280 Large Rectangle -->
-                <div style="margin-top: 15px; padding: 15px; background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%); border-radius: 12px; text-align: center; border: 1px dashed #dee2e6;">
-                    <p style="font-size: 0.7em; color: #6c757d; margin: 0 0 8px 0; text-transform: uppercase; letter-spacing: 1px;">Partner</p>
-                    <div id="modal-ad-container" style="min-height: 250px; display: flex; align-items: center; justify-content: center; background: #fff; border-radius: 8px;">
-                        <!-- Google AdSense will inject ad here -->
-                        <ins class="adsbygoogle"
-                            style="display:inline-block;width:336px;height:280px"
-                            data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
-                            data-ad-slot="XXXXXXXXXX"></ins>
-                    </div>
                 </div>
             `;
             modal.style.display = 'block';
@@ -2916,7 +3135,7 @@ https://avvstancamarcello.github.io/Financial-Authority-Database/
                 'Bangladesh': 'BD', 'Barbados': 'BB', 'Belgium': 'BE', 'Bermuda': 'BM', 'Bolivia': 'BO',
                 'Botswana': 'BW', 'Brazil': 'BR', 'British Virgin Islands': 'VG', 'Bulgaria': 'BG',
                 'Burkina Faso': 'BF', 'Cambodia': 'KH', 'Canada': 'CA', 'Cayman Islands': 'KY',
-                'CEMAC (Regional)': 'CEMAC', 'Chile': 'CL', 'Chinese Taipei': 'TW', 'Colombia': 'CO',
+                'CEMAC (Regional)': 'CEMAC', 'Chile': 'CL', 'China': 'CN', 'Chinese Taipei': 'TW', 'Colombia': 'CO',
                 'Costa Rica': 'CR', 'Côte d\'Ivoire': 'CI', 'Croatia': 'HR', 'Cyprus': 'CY',
                 'Czech Republic': 'CZ', 'Denmark': 'DK', 'ECSRC (Regional)': 'ECSRC', 'Egypt': 'EG',
                 'El Salvador': 'SV', 'Estonia': 'EE', 'Finland': 'FI', 'France': 'FR', 'Georgia': 'GE',
@@ -2926,13 +3145,13 @@ https://avvstancamarcello.github.io/Financial-Authority-Database/
                 'Jersey': 'JE', 'Jordan': 'JO', 'Kazakhstan': 'KZ', 'Kenya': 'KE', 'Korea, Republic of': 'KR',
                 'Kuwait': 'KW', 'Kyrgyzstan': 'KG', 'Latvia': 'LV', 'Liechtenstein': 'LI', 'Lithuania': 'LT',
                 'Luxembourg': 'LU', 'Madagascar': 'MG', 'Malawi': 'MW', 'Malaysia': 'MY', 'Maldives': 'MV', 'Malta': 'MT', 'Mauritius': 'MU',
-                'Mexico': 'MX', 'Mongolia': 'MN', 'Montenegro': 'ME', 'Morocco': 'MA', 'Mozambique': 'MZ', 'Nepal': 'NP',
+                'Mexico': 'MX', 'Mongolia': 'MN', 'Montenegro': 'ME', 'Morocco': 'MA', 'Mozambique': 'MZ', 'Namibia': 'NA', 'Nepal': 'NP',
                 'Netherlands': 'NL', 'New Zealand': 'NZ', 'Nigeria': 'NG', 'North Macedonia': 'MK', 'Uzbekistan': 'UZ',
-                'Oman': 'OM', 'Pakistan': 'PK', 'Panama': 'PA', 'Papua New Guinea': 'PG', 'Paraguay': 'PY',
+                'Oman': 'OM', 'Pakistan': 'PK', 'Palestine': 'PS', 'Panama': 'PA', 'Papua New Guinea': 'PG', 'Paraguay': 'PY',
                 'Peru': 'PE', 'Poland': 'PL', 'Portugal': 'PT', 'Qatar': 'QA', 'Romania': 'RO',
-                'Saudi Arabia': 'SA', 'Serbia': 'RS', 'Singapore': 'SG', 'Slovakia': 'SK', 'Slovenia': 'SI',
+                'Saudi Arabia': 'SA', 'Serbia': 'RS', 'Seychelles': 'SC', 'Singapore': 'SG', 'Slovakia': 'SK', 'Slovenia': 'SI',
                 'South Africa': 'ZA', 'Spain': 'ES', 'St. Vincent and the Grenadines': 'VC', 'Sri Lanka': 'LK', 'Sweden': 'SE',
-                'Switzerland': 'CH', 'Thailand': 'TH', 'Trinidad and Tobago': 'TT', 'Tunisia': 'TN', 'Vietnam': 'VN', 'Greenland': 'GL',
+                'Switzerland': 'CH', 'Thailand': 'TH', 'Trinidad and Tobago': 'TT', 'Tunisia': 'TN', 'Ukraine': 'UA', 'Vietnam': 'VN', 'Greenland': 'GL',
                 'Azores (Portugal)': 'PT', 'Canary Islands (Spain)': 'ES', 'Laos': 'LA', 'Ethiopia': 'ET', 'Libya': 'LY', 'Gabon': 'GA',
                 'Zimbabwe (formerly Rhodesia)': 'ZW', 'Rwanda': 'RW', 'French Polynesia (France)': 'PF',
                 'Türkiye': 'TR', 'United Arab Emirates': 'AE', 'United Kingdom': 'GB',

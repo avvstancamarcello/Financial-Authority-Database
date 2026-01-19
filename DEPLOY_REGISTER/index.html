@@ -1268,6 +1268,19 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             </div>
         </nav>
 
+        <!-- AdSense Banner - Posizione Sicura dopo TOC (Responsive Leaderboard) -->
+        <div style="max-width: 1200px; margin: 15px auto; padding: 0 20px;">
+            <div style="background: #ffffff; padding: 10px; border-radius: 8px; text-align: center; border: 1px solid #e0e0e0;">
+                <ins class="adsbygoogle"
+                    style="display:block"
+                    data-ad-client="ca-pub-2899281140209246"
+                    data-ad-slot="AUTO"
+                    data-ad-format="horizontal"
+                    data-full-width-responsive="true"></ins>
+                <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+            </div>
+        </div>
+
         <div id="flags-section" class="flags-grid-container">
             <!-- Banner Alfabeto A-Z - Sfondo Nero, Testo Verde Fosforo -->
             <div style="background: #000000; padding: 18px 20px; margin-bottom: 15px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.3); border: 2px solid #39ff14;">
@@ -1413,6 +1426,20 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             </div>
         </section>
 
+        <!-- AdSense Banner - Posizione Sicura Sopra Footer (Responsive) -->
+        <div style="max-width: 1200px; margin: 30px auto; padding: 0 20px;">
+            <div style="background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%); padding: 15px; border-radius: 12px; text-align: center; border: 1px solid #dee2e6;">
+                <p style="font-size: 0.7em; color: #6c757d; margin: 0 0 8px 0; text-transform: uppercase; letter-spacing: 1px;">Annuncio</p>
+                <ins class="adsbygoogle"
+                    style="display:block"
+                    data-ad-client="ca-pub-2899281140209246"
+                    data-ad-slot="AUTO"
+                    data-ad-format="auto"
+                    data-full-width-responsive="true"></ins>
+                <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+            </div>
+        </div>
+
         <footer>
             <p data-i18n="footer">© 2026 Author and Webmaster: Avvocato Marcello Stanca, Lawyer in Italy – Firenze. Credenziali verificate da: Ministero della Giustizia (Italia), Tribunale di Firenze, Parlamento Europeo – Bruxelles. Account Facebook e Instagram verificati da Meta. Local Guide Google Maps livello 9,5.</p>
             <p data-i18n="footerNote">Questo database è a scopo informativo. Verifica sempre presso le Autorità competenti. Profilo Google Maps verificato: <a href="http://maps.app.goo.gl/gs4rm6vXMxJUVVhM8?g_st=aw" target="_blank" rel="noopener" style="color: white;">Avv. Marcello Stanca su Google Maps</a>. Segnala errori della web page al webmaster: <a href="mailto:lawyer@marcellostanca.it" style="color: white;">lawyer@marcellostanca.it</a></p>
@@ -1541,6 +1568,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 searchAdvice4: "Chiedi con email conferme di legalità dei destinatari alla tua Banca.",
                 instructionsButtonModal: "Istruzioni",
                 reportSuspectButton: "Segnala Sospetto",
+                reportAbuseButton: "Segnala l'abuso",
                 askAuthorityBtnEN: "🇬🇧 Ask this Authority for info!",
                 askAuthorityBtnNative: "Chiedi informazioni a questa Autorità!",
                 instructionsContent: `
@@ -1838,6 +1866,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 searchAdvice4: "Ask your bank by email for written confirmation about the lawfulness of the beneficiaries.",
                 instructionsButtonModal: "Instructions",
                 reportSuspectButton: "Report Suspect",
+                reportAbuseButton: "Report Abuse",
                 askAuthorityBtnEN: "🇬🇧 Ask this Authority for info!",
                 askAuthorityBtnNative: "Ask this Authority for info!",
                 instructionsContent: `
@@ -2616,23 +2645,15 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                         <button onclick="openReportForm('${country.country_name}', '${country.financial_authority.name}', '${country.financial_authority.authorityEmail}');" style="background: #dc2626; color: #ffffff; border: 2px solid #fca5a5; border-radius: 999px; padding: 0.7rem 1.5rem; font-size: 1rem; font-weight: 600; display: inline-flex; align-items: center; gap: 8px; cursor: pointer; box-shadow: 0 4px 12px rgba(220, 38, 38, 0.4); transition: all 0.3s ease;" onmouseover="this.style.background='#b91c1c'; this.style.boxShadow='0 6px 18px rgba(220, 38, 38, 0.6)';" onmouseout="this.style.background='#dc2626'; this.style.boxShadow='0 4px 12px rgba(220, 38, 38, 0.4)';">
                             ⚠️ ${translations[currentLanguage].reportSuspectButton || 'Segnala Sospetto'}
                         </button>
+                        <button onclick="openReportForm('${country.country_name}', '${country.financial_authority.name}', '${country.financial_authority.authorityEmail}');" style="background: #000000; color: #39ff14; border: 2px solid #39ff14; border-radius: 999px; padding: 0.7rem 1.5rem; font-size: 1rem; font-weight: 600; display: inline-flex; align-items: center; gap: 8px; cursor: pointer; box-shadow: 0 4px 12px rgba(57, 255, 20, 0.4); transition: all 0.3s ease; text-shadow: 0 0 8px rgba(57,255,20,0.6);" onmouseover="this.style.background='#0a0a0a'; this.style.boxShadow='0 6px 18px rgba(57, 255, 20, 0.7)';" onmouseout="this.style.background='#000000'; this.style.boxShadow='0 4px 12px rgba(57, 255, 20, 0.4)';">
+                            🚨 ${translations[currentLanguage].reportAbuseButton || "Segnala l'abuso"}
+                        </button>
                     </div>
                 </div>
-                <!-- Pulsante Chiudi Scheda - Posizionato sopra il banner -->
+                <!-- Pulsante Chiudi Scheda -->
                 <div style="margin-top: 25px; text-align: center;">
                     <button onclick="closeModal()" style="background: #fee2e2; color: #dc2626; border: 3px solid #dc2626; border-radius: 50%; width: 70px; height: 70px; font-size: 40px; font-weight: bold; cursor: pointer; box-shadow: 0 4px 12px rgba(220, 38, 38, 0.4); transition: all 0.3s ease; display: inline-flex; align-items: center; justify-content: center;" onmouseover="this.style.background='#dc2626'; this.style.color='#fff';" onmouseout="this.style.background='#fee2e2'; this.style.color='#dc2626';" title="Chiudi scheda">✕</button>
                     <p style="font-size: 0.75em; color: #6c757d; margin-top: 8px;">Clicca per chiudere</p>
-                </div>
-                <!-- AdSense Banner Space - 336x280 Large Rectangle -->
-                <div style="margin-top: 15px; padding: 15px; background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%); border-radius: 12px; text-align: center; border: 1px dashed #dee2e6;">
-                    <p style="font-size: 0.7em; color: #6c757d; margin: 0 0 8px 0; text-transform: uppercase; letter-spacing: 1px;">Partner</p>
-                    <div id="modal-ad-container" style="min-height: 250px; display: flex; align-items: center; justify-content: center; background: #fff; border-radius: 8px;">
-                        <!-- Google AdSense will inject ad here -->
-                        <ins class="adsbygoogle"
-                            style="display:inline-block;width:336px;height:280px"
-                            data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
-                            data-ad-slot="XXXXXXXXXX"></ins>
-                    </div>
                 </div>
             `;
             modal.style.display = 'block';
@@ -3114,7 +3135,7 @@ https://avvstancamarcello.github.io/Financial-Authority-Database/
                 'Bangladesh': 'BD', 'Barbados': 'BB', 'Belgium': 'BE', 'Bermuda': 'BM', 'Bolivia': 'BO',
                 'Botswana': 'BW', 'Brazil': 'BR', 'British Virgin Islands': 'VG', 'Bulgaria': 'BG',
                 'Burkina Faso': 'BF', 'Cambodia': 'KH', 'Canada': 'CA', 'Cayman Islands': 'KY',
-                'CEMAC (Regional)': 'CEMAC', 'Chile': 'CL', 'Chinese Taipei': 'TW', 'Colombia': 'CO',
+                'CEMAC (Regional)': 'CEMAC', 'Chile': 'CL', 'China': 'CN', 'Chinese Taipei': 'TW', 'Colombia': 'CO',
                 'Costa Rica': 'CR', 'Côte d\'Ivoire': 'CI', 'Croatia': 'HR', 'Cyprus': 'CY',
                 'Czech Republic': 'CZ', 'Denmark': 'DK', 'ECSRC (Regional)': 'ECSRC', 'Egypt': 'EG',
                 'El Salvador': 'SV', 'Estonia': 'EE', 'Finland': 'FI', 'France': 'FR', 'Georgia': 'GE',
@@ -3124,13 +3145,13 @@ https://avvstancamarcello.github.io/Financial-Authority-Database/
                 'Jersey': 'JE', 'Jordan': 'JO', 'Kazakhstan': 'KZ', 'Kenya': 'KE', 'Korea, Republic of': 'KR',
                 'Kuwait': 'KW', 'Kyrgyzstan': 'KG', 'Latvia': 'LV', 'Liechtenstein': 'LI', 'Lithuania': 'LT',
                 'Luxembourg': 'LU', 'Madagascar': 'MG', 'Malawi': 'MW', 'Malaysia': 'MY', 'Maldives': 'MV', 'Malta': 'MT', 'Mauritius': 'MU',
-                'Mexico': 'MX', 'Mongolia': 'MN', 'Montenegro': 'ME', 'Morocco': 'MA', 'Mozambique': 'MZ', 'Nepal': 'NP',
+                'Mexico': 'MX', 'Mongolia': 'MN', 'Montenegro': 'ME', 'Morocco': 'MA', 'Mozambique': 'MZ', 'Namibia': 'NA', 'Nepal': 'NP',
                 'Netherlands': 'NL', 'New Zealand': 'NZ', 'Nigeria': 'NG', 'North Macedonia': 'MK', 'Uzbekistan': 'UZ',
-                'Oman': 'OM', 'Pakistan': 'PK', 'Panama': 'PA', 'Papua New Guinea': 'PG', 'Paraguay': 'PY',
+                'Oman': 'OM', 'Pakistan': 'PK', 'Palestine': 'PS', 'Panama': 'PA', 'Papua New Guinea': 'PG', 'Paraguay': 'PY',
                 'Peru': 'PE', 'Poland': 'PL', 'Portugal': 'PT', 'Qatar': 'QA', 'Romania': 'RO',
-                'Saudi Arabia': 'SA', 'Serbia': 'RS', 'Singapore': 'SG', 'Slovakia': 'SK', 'Slovenia': 'SI',
+                'Saudi Arabia': 'SA', 'Serbia': 'RS', 'Seychelles': 'SC', 'Singapore': 'SG', 'Slovakia': 'SK', 'Slovenia': 'SI',
                 'South Africa': 'ZA', 'Spain': 'ES', 'St. Vincent and the Grenadines': 'VC', 'Sri Lanka': 'LK', 'Sweden': 'SE',
-                'Switzerland': 'CH', 'Thailand': 'TH', 'Trinidad and Tobago': 'TT', 'Tunisia': 'TN', 'Vietnam': 'VN', 'Greenland': 'GL',
+                'Switzerland': 'CH', 'Thailand': 'TH', 'Trinidad and Tobago': 'TT', 'Tunisia': 'TN', 'Ukraine': 'UA', 'Vietnam': 'VN', 'Greenland': 'GL',
                 'Azores (Portugal)': 'PT', 'Canary Islands (Spain)': 'ES', 'Laos': 'LA', 'Ethiopia': 'ET', 'Libya': 'LY', 'Gabon': 'GA',
                 'Zimbabwe (formerly Rhodesia)': 'ZW', 'Rwanda': 'RW', 'French Polynesia (France)': 'PF',
                 'Türkiye': 'TR', 'United Arab Emirates': 'AE', 'United Kingdom': 'GB',
