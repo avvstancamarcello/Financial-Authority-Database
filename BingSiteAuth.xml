@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<users>
+    <!-- 
+    ============================================
+    BING WEBMASTER TOOLS - SITE VERIFICATION
+    ============================================
+    
+    ISTRUZIONI:
+    1. Vai su https://www.bing.com/webmasters
+    2. Accedi con account Microsoft
+    3. Aggiungi sito: https://tutelatruffe.it
+    4. Scegli "XML File" come metodo di verifica
+    5. Bing ti darà un codice tipo: 0123456789ABCDEF
+    6. Sostituisci YOUR_BING_VERIFICATION_CODE qui sotto con quel codice
+    7. Carica questo file nella root del sito
+    8. Clicca "Verify" su Bing Webmaster Tools
+    
+    Dopo la verifica, invia la sitemap:
+    - URL: https://tutelatruffe.it/sitemap.xml
+    -->
+    <user>YOUR_BING_VERIFICATION_CODE</user>
+</users>

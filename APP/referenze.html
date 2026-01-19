@@ -59,6 +59,12 @@
             border: 1px solid rgba(255,255,255,0.4);
         }
         
+        /* TOC Banner Buttons Hover */
+        .toc-banner a:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+        }
+        
         /* Hero Section */
         .hero {
             background: linear-gradient(135deg, #003399 0%, #1a365d 100%);
@@ -306,6 +312,33 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <button class="lang-btn" onclick="changeLanguage('pt')" aria-label="Português">
             <span class="fi fi-pt lang-flag" aria-hidden="true"></span><span>PT</span>
         </button>
+        <button class="lang-btn" onclick="changeLanguage('nl')" aria-label="Nederlands">
+            <span class="fi fi-nl lang-flag" aria-hidden="true"></span><span>NL</span>
+        </button>
+        <button class="lang-btn" onclick="changeLanguage('pl')" aria-label="Polski">
+            <span class="fi fi-pl lang-flag" aria-hidden="true"></span><span>PL</span>
+        </button>
+        <button class="lang-btn" onclick="changeLanguage('ro')" aria-label="Română">
+            <span class="fi fi-ro lang-flag" aria-hidden="true"></span><span>RO</span>
+        </button>
+        <button class="lang-btn" onclick="changeLanguage('el')" aria-label="Ελληνικά">
+            <span class="fi fi-gr lang-flag" aria-hidden="true"></span><span>EL</span>
+        </button>
+        <button class="lang-btn" onclick="changeLanguage('cs')" aria-label="Čeština">
+            <span class="fi fi-cz lang-flag" aria-hidden="true"></span><span>CS</span>
+        </button>
+        <button class="lang-btn" onclick="changeLanguage('hu')" aria-label="Magyar">
+            <span class="fi fi-hu lang-flag" aria-hidden="true"></span><span>HU</span>
+        </button>
+        <button class="lang-btn" onclick="changeLanguage('sv')" aria-label="Svenska">
+            <span class="fi fi-se lang-flag" aria-hidden="true"></span><span>SV</span>
+        </button>
+        <button class="lang-btn" onclick="changeLanguage('bg')" aria-label="Български">
+            <span class="fi fi-bg lang-flag" aria-hidden="true"></span><span>BG</span>
+        </button>
+        <button class="lang-btn" onclick="changeLanguage('da')" aria-label="Dansk">
+            <span class="fi fi-dk lang-flag" aria-hidden="true"></span><span>DA</span>
+        </button>
     </nav>
 
     <!-- Navigation -->
@@ -328,30 +361,34 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <img src="https://upload.wikimedia.org/wikipedia/commons/a/a4/Flag_of_the_United_States.svg" alt="Bandiera USA" style="width: 64px; height: 48px; border-radius: 4px; box-shadow: 0 2px 8px rgba(0,0,0,0.3);">
         </p>
         <p style="font-size: 1.1em; opacity: 0.9; margin-top: 10px;" data-i18n="heroSubtitle">SEC • FBI • SIPC • ScamShield - Link ufficiali alle autorità di vigilanza finanziaria internazionale</p>
-        
-        <!-- Badge Multilingua 10 Lingue -->
-        <div style="margin-top: 25px; padding: 15px 25px; background: rgba(255,255,255,0.15); border-radius: 12px; backdrop-filter: blur(10px); display: inline-block;">
-            <p style="font-size: 0.95em; margin-bottom: 10px; opacity: 0.9;">🌐 Disponibile in 10 lingue / Available in 10 languages</p>
-            <div style="display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; font-size: 1.8em;">
-                <span title="Italiano">🇮🇹</span>
-                <span title="English">🇬🇧</span>
-                <span title="Français">🇫🇷</span>
-                <span title="Deutsch">🇩🇪</span>
-                <span title="Español">🇪🇸</span>
-                <span title="العربية">🇶🇦</span>
-                <span title="中文">🇨🇳</span>
-                <span title="हिन्दी">🇮🇳</span>
-                <span title="Tiếng Việt">🇻🇳</span>
-                <span title="Português">🇧🇷</span>
-            </div>
-        </div>
     </section>
+    
+    <!-- Navigation Banner TOC -->
+    <nav class="toc-banner" style="background: linear-gradient(135deg, #1e3a5f 0%, #2d5a87 100%); padding: 20px; margin: 20px auto; max-width: 1200px; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.3); border: 2px solid #ffd700;">
+        <p style="color: #ffd700; font-size: 1.1em; margin-bottom: 15px; text-align: center; font-weight: 600;">📍 Navigazione Rapida</p>
+        <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 10px;">
+            <a href="#region-usa" style="background: linear-gradient(135deg, #1a237e 0%, #3949ab 100%); color: white; padding: 12px 20px; border-radius: 25px; text-decoration: none; font-weight: 600; display: flex; align-items: center; gap: 8px; transition: transform 0.2s, box-shadow 0.2s;">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/a/a4/Flag_of_the_United_States.svg" alt="USA" style="width: 24px; height: 16px; border-radius: 2px;">
+                U.S.A.
+            </a>
+            <a href="#region-eu" style="background: linear-gradient(135deg, #b8860b 0%, #daa520 100%); color: #003399; padding: 12px 20px; border-radius: 25px; text-decoration: none; font-weight: 600; display: flex; align-items: center; gap: 8px; transition: transform 0.2s, box-shadow 0.2s;">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/b/b7/Flag_of_Europe.svg" alt="UE" style="width: 24px; height: 16px; border-radius: 2px;">
+                Unione Europea
+            </a>
+            <a href="#region-asia" style="background: linear-gradient(135deg, #00695c 0%, #26a69a 100%); color: white; padding: 12px 20px; border-radius: 25px; text-decoration: none; font-weight: 600; display: flex; align-items: center; gap: 8px; transition: transform 0.2s, box-shadow 0.2s;">
+                🌏 Asia-Pacifico
+            </a>
+            <a href="#ptsd-support" style="background: #000000; color: #00ffff; padding: 12px 20px; border-radius: 25px; text-decoration: none; font-weight: 600; display: flex; align-items: center; gap: 8px; border: 2px solid #00ffff; box-shadow: 0 0 10px rgba(0,255,255,0.3); transition: transform 0.2s, box-shadow 0.2s;">
+                🧠 Depressione da Shock Finanziario
+            </a>
+        </div>
+    </nav>
     
     <!-- Resources -->
     <div class="resources-container">
         
         <!-- U.S.A. - FIRST -->
-        <div class="region-label" style="font-size: 1.4em; font-weight: 700; display: flex; align-items: center; justify-content: center; gap: 12px;">
+        <div id="region-usa" class="region-label" style="font-size: 1.4em; font-weight: 700; display: flex; align-items: center; justify-content: center; gap: 12px; scroll-margin-top: 80px;">
             <img src="https://upload.wikimedia.org/wikipedia/commons/a/a4/Flag_of_the_United_States.svg" alt="USA" style="width: 36px; height: 24px; border-radius: 3px;">
             <span data-i18n="regionUSA">U.S.A. - Stati Uniti d'America</span>
         </div>
@@ -401,7 +438,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         </div>
         
         <!-- EUROPEAN UNION - SECOND -->
-        <div class="region-label" style="background: linear-gradient(135deg, #b8860b 0%, #daa520 50%, #cd853f 100%); color: #003399; text-shadow: 1px 1px 2px rgba(255,255,255,0.5); font-size: 1.4em; font-weight: 700; display: flex; align-items: center; justify-content: center; gap: 12px;">
+        <div id="region-eu" class="region-label" style="background: linear-gradient(135deg, #b8860b 0%, #daa520 50%, #cd853f 100%); color: #003399; text-shadow: 1px 1px 2px rgba(255,255,255,0.5); font-size: 1.4em; font-weight: 700; display: flex; align-items: center; justify-content: center; gap: 12px; scroll-margin-top: 80px;">
             <img src="https://upload.wikimedia.org/wikipedia/commons/b/b7/Flag_of_Europe.svg" alt="UE" style="width: 36px; height: 24px; border-radius: 3px; border: 2px solid #003399;">
             <span data-i18n="regionEU">Unione Europea</span>
         </div>
@@ -463,7 +500,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         </div>
         
         <!-- ASIA-INDIAN OCEAN - THIRD -->
-        <div class="region-label"><span data-i18n="regionAsia">🌏 Asia - Oceano Indiano</span></div>
+        <div id="region-asia" class="region-label" style="scroll-margin-top: 80px;"><span data-i18n="regionAsia">🌏 Asia - Oceano Indiano</span></div>
         
         <div class="resource-card">
             <div class="resource-icon" style="display: flex; flex-direction: column; align-items: center; gap: 5px;">
@@ -543,7 +580,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </div>
     
     <!-- PTSD Support Section - Depressione Post-Traumatica da Truffa Finanziaria -->
-    <section id="ptsd-support" style="background: linear-gradient(135deg, #1e3a5f 0%, #2d5a87 50%, #1e3a5f 100%); padding: 40px 20px; margin: 30px 0; border-radius: 20px; border: 3px solid #ffd700; box-shadow: 0 10px 40px rgba(0,0,0,0.3);">
+    <section id="ptsd-support" style="scroll-margin-top: 80px; background: linear-gradient(135deg, #1e3a5f 0%, #2d5a87 50%, #1e3a5f 100%); padding: 40px 20px; margin: 30px 0; border-radius: 20px; border: 3px solid #ffd700; box-shadow: 0 10px 40px rgba(0,0,0,0.3);">
         <div style="max-width: 1000px; margin: 0 auto; text-align: center;">
             <h2 style="color: #ffd700; font-size: 1.8em; margin-bottom: 20px; text-shadow: 2px 2px 4px rgba(0,0,0,0.5);">
                 🧠 Truffa Finanziaria = Disturbo Post-Traumatico da Stress (PTSD) 💔➡️💪
@@ -910,6 +947,168 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 descCSRC: "Autoridade reguladora de valores mobiliários da República Popular da China. Regula e supervisiona a emissão de títulos, futuros e fundos de investimento.",
                 descSEBI: "Autoridade reguladora dos mercados financeiros na Índia. Protege os interesses dos investidores e promove o desenvolvimento do mercado de capitais.",
                 descASIC: "Autoridade reguladora dos mercados financeiros australianos. Protege consumidores e investidores, regula empresas e serviços financeiros. Gere o portal Moneysmart."
+            },
+            nl: {
+                navDatabase: "🏦 Database Financiële Autoriteiten",
+                navReferences: "📜 Institutionele Referenties",
+                navLawyer: "👨‍⚖️ Advocaat Stanca",
+                heroTitle: "Internationale Financiële Toezichtinstellingen",
+                heroEU: "Europese Unie",
+                heroSubtitle: "SEC • FBI • SIPC • ScamShield - Officiële links naar internationale financiële toezichthouders",
+                regionUSA: "VS - Verenigde Staten van Amerika",
+                regionEU: "Europese Unie",
+                regionAsia: "Azië & Oceanië",
+                adminNoteTitle: "Admin Notitie",
+                adminNoteText: "Deze pagina is geconfigureerd voor updates. Neem contact op met de webmaster om nieuwe bronnen toe te voegen.",
+                backToDatabase: "🏦 Terug naar Database",
+                footerAuthor: "© 2026 Auteur en Webmaster: Advocaat Marcello Stanca, Italië – Florence.",
+                footerCredentials: "Referenties geverifieerd door: Ministerie van Justitie (Italië), Rechtbank Florence, Europees Parlement – Brussel.",
+                privacyStatement: "🔒 PRIVACY: Deze app verzamelt GEEN persoonlijke gegevens",
+                privacyLink: "Privacybeleid"
+            },
+            pl: {
+                navDatabase: "🏦 Baza Danych Organów Finansowych",
+                navReferences: "📜 Referencje Instytucjonalne",
+                navLawyer: "👨‍⚖️ Adwokat Stanca",
+                heroTitle: "Międzynarodowe Instytucje Nadzoru Finansowego",
+                heroEU: "Unia Europejska",
+                heroSubtitle: "SEC • FBI • SIPC • ScamShield - Oficjalne linki do międzynarodowych organów nadzoru finansowego",
+                regionUSA: "USA - Stany Zjednoczone Ameryki",
+                regionEU: "Unia Europejska",
+                regionAsia: "Azja i Oceania",
+                adminNoteTitle: "Notatka Administratora",
+                adminNoteText: "Ta strona jest skonfigurowana do aktualizacji. Aby dodać nowe zasoby, skontaktuj się z webmasterem.",
+                backToDatabase: "🏦 Powrót do Bazy Danych",
+                footerAuthor: "© 2026 Autor i Webmaster: Adwokat Marcello Stanca, Włochy – Florencja.",
+                footerCredentials: "Referencje zweryfikowane przez: Ministerstwo Sprawiedliwości (Włochy), Sąd we Florencji, Parlament Europejski – Bruksela.",
+                privacyStatement: "🔒 PRYWATNOŚĆ: Ta aplikacja NIE zbiera danych osobowych",
+                privacyLink: "Polityka Prywatności"
+            },
+            ro: {
+                navDatabase: "🏦 Baza de Date a Autorităților Financiare",
+                navReferences: "📜 Referințe Instituționale",
+                navLawyer: "👨‍⚖️ Avocat Stanca",
+                heroTitle: "Instituții Internaționale de Supraveghere Financiară",
+                heroEU: "Uniunea Europeană",
+                heroSubtitle: "SEC • FBI • SIPC • ScamShield - Linkuri oficiale către autoritățile de supraveghere financiară internațională",
+                regionUSA: "SUA - Statele Unite ale Americii",
+                regionEU: "Uniunea Europeană",
+                regionAsia: "Asia și Oceania",
+                adminNoteTitle: "Notă Admin",
+                adminNoteText: "Această pagină este configurată pentru actualizări. Pentru a adăuga resurse noi, contactați webmasterul.",
+                backToDatabase: "🏦 Înapoi la Baza de Date",
+                footerAuthor: "© 2026 Autor și Webmaster: Avocat Marcello Stanca, Italia – Florența.",
+                footerCredentials: "Referințe verificate de: Ministerul Justiției (Italia), Tribunalul din Florența, Parlamentul European – Bruxelles.",
+                privacyStatement: "🔒 CONFIDENȚIALITATE: Această aplicație NU colectează date personale",
+                privacyLink: "Politica de Confidențialitate"
+            },
+            el: {
+                navDatabase: "🏦 Βάση Δεδομένων Χρηματοπιστωτικών Αρχών",
+                navReferences: "📜 Θεσμικές Αναφορές",
+                navLawyer: "👨‍⚖️ Δικηγόρος Stanca",
+                heroTitle: "Διεθνείς Οργανισμοί Χρηματοπιστωτικής Εποπτείας",
+                heroEU: "Ευρωπαϊκή Ένωση",
+                heroSubtitle: "SEC • FBI • SIPC • ScamShield - Επίσημοι σύνδεσμοι προς διεθνείς αρχές χρηματοπιστωτικής εποπτείας",
+                regionUSA: "ΗΠΑ - Ηνωμένες Πολιτείες Αμερικής",
+                regionEU: "Ευρωπαϊκή Ένωση",
+                regionAsia: "Ασία & Ωκεανία",
+                adminNoteTitle: "Σημείωση Διαχειριστή",
+                adminNoteText: "Αυτή η σελίδα έχει διαμορφωθεί για ενημερώσεις. Για να προσθέσετε νέους πόρους, επικοινωνήστε με τον webmaster.",
+                backToDatabase: "🏦 Επιστροφή στη Βάση Δεδομένων",
+                footerAuthor: "© 2026 Συγγραφέας και Webmaster: Δικηγόρος Marcello Stanca, Ιταλία – Φλωρεντία.",
+                footerCredentials: "Διαπιστευτήρια επαληθευμένα από: Υπουργείο Δικαιοσύνης (Ιταλία), Δικαστήριο Φλωρεντίας, Ευρωπαϊκό Κοινοβούλιο – Βρυξέλλες.",
+                privacyStatement: "🔒 ΑΠΟΡΡΗΤΟ: Αυτή η εφαρμογή ΔΕΝ συλλέγει προσωπικά δεδομένα",
+                privacyLink: "Πολιτική Απορρήτου"
+            },
+            cs: {
+                navDatabase: "🏦 Databáze Finančních Úřadů",
+                navReferences: "📜 Institucionální Reference",
+                navLawyer: "👨‍⚖️ Advokát Stanca",
+                heroTitle: "Mezinárodní Instituce Finančního Dohledu",
+                heroEU: "Evropská Unie",
+                heroSubtitle: "SEC • FBI • SIPC • ScamShield - Oficiální odkazy na mezinárodní orgány finančního dohledu",
+                regionUSA: "USA - Spojené Státy Americké",
+                regionEU: "Evropská Unie",
+                regionAsia: "Asie a Oceánie",
+                adminNoteTitle: "Poznámka Správce",
+                adminNoteText: "Tato stránka je nakonfigurována pro aktualizace. Pro přidání nových zdrojů kontaktujte webmastera.",
+                backToDatabase: "🏦 Zpět do Databáze",
+                footerAuthor: "© 2026 Autor a Webmaster: Advokát Marcello Stanca, Itálie – Florencie.",
+                footerCredentials: "Reference ověřeny: Ministerstvem spravedlnosti (Itálie), Soudem ve Florencii, Evropským parlamentem – Brusel.",
+                privacyStatement: "🔒 SOUKROMÍ: Tato aplikace NESHROMAŽĎUJE osobní údaje",
+                privacyLink: "Zásady Ochrany Osobních Údajů"
+            },
+            hu: {
+                navDatabase: "🏦 Pénzügyi Hatóságok Adatbázisa",
+                navReferences: "📜 Intézményi Referenciák",
+                navLawyer: "👨‍⚖️ Ügyvéd Stanca",
+                heroTitle: "Nemzetközi Pénzügyi Felügyeleti Intézmények",
+                heroEU: "Európai Unió",
+                heroSubtitle: "SEC • FBI • SIPC • ScamShield - Hivatalos linkek a nemzetközi pénzügyi felügyeleti hatóságokhoz",
+                regionUSA: "USA - Amerikai Egyesült Államok",
+                regionEU: "Európai Unió",
+                regionAsia: "Ázsia és Óceánia",
+                adminNoteTitle: "Admin Megjegyzés",
+                adminNoteText: "Ez az oldal frissítésekre van konfigurálva. Új erőforrások hozzáadásához forduljon a webmasterhez.",
+                backToDatabase: "🏦 Vissza az Adatbázishoz",
+                footerAuthor: "© 2026 Szerző és Webmaster: Ügyvéd Marcello Stanca, Olaszország – Firenze.",
+                footerCredentials: "Hivatkozások ellenőrizve: Igazságügyi Minisztérium (Olaszország), Firenzei Bíróság, Európai Parlament – Brüsszel.",
+                privacyStatement: "🔒 ADATVÉDELEM: Ez az alkalmazás NEM gyűjt személyes adatokat",
+                privacyLink: "Adatvédelmi Irányelvek"
+            },
+            sv: {
+                navDatabase: "🏦 Databas över Finansiella Myndigheter",
+                navReferences: "📜 Institutionella Referenser",
+                navLawyer: "👨‍⚖️ Advokat Stanca",
+                heroTitle: "Internationella Finansiella Tillsynsinstitutioner",
+                heroEU: "Europeiska Unionen",
+                heroSubtitle: "SEC • FBI • SIPC • ScamShield - Officiella länkar till internationella finansiella tillsynsmyndigheter",
+                regionUSA: "USA - Amerikas Förenta Stater",
+                regionEU: "Europeiska Unionen",
+                regionAsia: "Asien & Oceanien",
+                adminNoteTitle: "Admin Anteckning",
+                adminNoteText: "Denna sida är konfigurerad för uppdateringar. För att lägga till nya resurser, kontakta webmastern.",
+                backToDatabase: "🏦 Tillbaka till Databasen",
+                footerAuthor: "© 2026 Författare och Webmaster: Advokat Marcello Stanca, Italien – Florens.",
+                footerCredentials: "Referenser verifierade av: Justitieministeriet (Italien), Domstolen i Florens, Europaparlamentet – Bryssel.",
+                privacyStatement: "🔒 INTEGRITET: Denna app samlar INTE in personuppgifter",
+                privacyLink: "Integritetspolicy"
+            },
+            bg: {
+                navDatabase: "🏦 База Данни на Финансовите Органи",
+                navReferences: "📜 Институционални Референции",
+                navLawyer: "👨‍⚖️ Адвокат Станка",
+                heroTitle: "Международни Институции за Финансов Надзор",
+                heroEU: "Европейски Съюз",
+                heroSubtitle: "SEC • FBI • SIPC • ScamShield - Официални връзки към международни органи за финансов надзор",
+                regionUSA: "САЩ - Съединени Американски Щати",
+                regionEU: "Европейски Съюз",
+                regionAsia: "Азия и Океания",
+                adminNoteTitle: "Бележка на Администратора",
+                adminNoteText: "Тази страница е конфигурирана за актуализации. За да добавите нови ресурси, свържете се с уебмастера.",
+                backToDatabase: "🏦 Обратно към Базата Данни",
+                footerAuthor: "© 2026 Автор и Уебмастер: Адвокат Марчело Станка, Италия – Флоренция.",
+                footerCredentials: "Препоръки проверени от: Министерство на правосъдието (Италия), Съд във Флоренция, Европейски парламент – Брюксел.",
+                privacyStatement: "🔒 ПОВЕРИТЕЛНОСТ: Това приложение НЕ събира лични данни",
+                privacyLink: "Политика за Поверителност"
+            },
+            da: {
+                navDatabase: "🏦 Database over Finansielle Myndigheder",
+                navReferences: "📜 Institutionelle Referencer",
+                navLawyer: "👨‍⚖️ Advokat Stanca",
+                heroTitle: "Internationale Finansielle Tilsynsinstitutioner",
+                heroEU: "Den Europæiske Union",
+                heroSubtitle: "SEC • FBI • SIPC • ScamShield - Officielle links til internationale finansielle tilsynsmyndigheder",
+                regionUSA: "USA - Amerikas Forenede Stater",
+                regionEU: "Den Europæiske Union",
+                regionAsia: "Asien & Oceanien",
+                adminNoteTitle: "Admin Note",
+                adminNoteText: "Denne side er konfigureret til opdateringer. For at tilføje nye ressourcer, kontakt webmasteren.",
+                backToDatabase: "🏦 Tilbage til Databasen",
+                footerAuthor: "© 2026 Forfatter og Webmaster: Advokat Marcello Stanca, Italien – Firenze.",
+                footerCredentials: "Referencer verificeret af: Justitsministeriet (Italien), Retten i Firenze, Europa-Parlamentet – Bruxelles.",
+                privacyStatement: "🔒 PRIVATLIV: Denne app indsamler IKKE personlige data",
+                privacyLink: "Privatlivspolitik"
             }
         };
 

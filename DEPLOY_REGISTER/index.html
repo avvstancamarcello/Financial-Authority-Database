@@ -1260,6 +1260,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     <a href="#flags-section" style="background: rgba(255,215,0,0.15); color: #ffffff; padding: 10px 18px; border-radius: 25px; text-decoration: none; font-weight: 600; border: 1px solid rgba(255,215,0,0.4); transition: all 0.3s;">🏳️ Bandiere A-Z</a>
                     <a href="#database-search-section" style="background: rgba(255,215,0,0.15); color: #ffffff; padding: 10px 18px; border-radius: 25px; text-decoration: none; font-weight: 600; border: 1px solid rgba(255,215,0,0.4); transition: all 0.3s;">🔍 Cerca Autorità</a>
                     <a href="#countries-section" style="background: rgba(255,215,0,0.15); color: #ffffff; padding: 10px 18px; border-radius: 25px; text-decoration: none; font-weight: 600; border: 1px solid rgba(255,215,0,0.4); transition: all 0.3s;">🌍 Lista 142 Paesi</a>
+                    <a href="#ptsd-section" style="background: #000000; color: #00ffff; padding: 10px 18px; border-radius: 25px; text-decoration: none; font-weight: 600; border: 2px solid #00ffff; transition: all 0.3s; text-shadow: 0 0 10px rgba(0,255,255,0.8);">🧠 Depressione</a>
                     <a href="#international-authorities" style="background: rgba(255,215,0,0.15); color: #ffffff; padding: 10px 18px; border-radius: 25px; text-decoration: none; font-weight: 600; border: 1px solid rgba(255,215,0,0.4); transition: all 0.3s;">🏛️ ESMA, FBI, IOSCO</a>
                     <a href="#author-credentials" style="background: rgba(255,215,0,0.15); color: #ffffff; padding: 10px 18px; border-radius: 25px; text-decoration: none; font-weight: 600; border: 1px solid rgba(255,215,0,0.4); transition: all 0.3s;">👨‍⚖️ Autore Verificato</a>
                     <a href="#faq-section" style="background: rgba(255,215,0,0.15); color: #ffffff; padding: 10px 18px; border-radius: 25px; text-decoration: none; font-weight: 600; border: 1px solid rgba(255,215,0,0.4); transition: all 0.3s;">❓ FAQ</a>
@@ -1313,20 +1314,20 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             </div>
         </section>
 
-        <div class="stats">
-            <div class="stat-card"><div class="stat-number" id="totalCountries">0</div><div class="stat-label" data-i18n="statCountries">Paesi Monitorati</div></div>
-            <div class="stat-card"><div class="stat-number" id="euCountries">0</div><div class="stat-label" data-i18n="statEU">Paesi UE</div></div>
-            <div class="stat-card"><div class="stat-number" id="highProtection">0</div><div class="stat-label" data-i18n="statHighProtection">Protezione Standard</div></div>
+        <div class="stats" style="padding: 10px 20px; display: flex; justify-content: center; align-items: center; gap: 40px; flex-wrap: wrap;">
+            <span style="font-size: 1.1em;"><strong id="totalCountries">0</strong> Paesi Monitorati</span>
+            <span style="font-size: 1.1em;"><strong id="euCountries">0</strong> Paesi UE</span>
+            <span style="font-size: 1.1em;"><strong id="highProtection">0</strong> Protezione Standard</span>
         </div>
 
         <!-- Banner PTSD - Depressione Post-Traumatica da Truffa Finanziaria -->
-        <div class="ptsd-banner">
-            <a href="referenze.html#ptsd-support" title="Supporto Psicologico Vittime Truffe - DepressionStop">
-                <span class="ptsd-icon">🧠</span>
-                <span class="ptsd-equation" data-i18n="ptsdEquation">Truffa Finanziaria = Disturbo Post-Traumatico da Stress (PTSD)</span>
-                <span class="ptsd-icon">💔➡️💪</span>
+        <section id="ptsd-section" style="background: #000000; padding: 15px 20px; margin: 0; border-top: 2px solid #00ffff; border-bottom: 2px solid #00ffff;">
+            <a href="referenze.html#ptsd-support" title="Supporto Psicologico Vittime Truffe - DepressionStop" style="display: flex; justify-content: center; align-items: center; gap: 15px; text-decoration: none; flex-wrap: wrap;">
+                <span style="font-size: 1.5em;">🧠</span>
+                <span style="color: #00ffff; font-size: 1.15em; font-weight: 700; text-shadow: 0 0 15px rgba(0,255,255,0.8), 0 0 30px rgba(0,255,255,0.5);" data-i18n="ptsdEquation">Truffa Finanziaria = Disturbo Post-Traumatico da Stress (PTSD)</span>
+                <span style="font-size: 1.5em;">💔➡️💪</span>
             </a>
-        </div>
+        </section>
 
         <section id="countries-section" class="content">
             <div class="countries-grid" id="countriesGrid"></div>
@@ -2374,26 +2375,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
         async function loadCountryData() {
             try {
-                // Prova prima il database cifrato (se esiste)
-                let data;
-                try {
-                    const encResponse = await fetch('db.enc');
-                    if (encResponse.ok) {
-                        const encoded = await encResponse.text();
-                        const decoded = atob(encoded);
-                        const decrypted = xorCipher(decoded, COPYRIGHT_KEY);
-                        data = JSON.parse(decrypted);
-                        console.log('%c🔒 Database cifrato caricato', 'color: green; font-weight: bold;');
-                    } else {
-                        throw new Error('Encrypted DB not found');
-                    }
-                } catch (encError) {
-                    console.error('Errore caricamento/decifratura db.enc, uso fallback JSON:', encError);
-                    // Fallback al JSON normale
-                    const response = await fetch('financial_authorities_database.json');
-                    if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
-                    data = await response.json();
-                }
+                // Carica direttamente il database JSON
+                const response = await fetch('financial_authorities_database.json');
+                if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+                let data = await response.json();
                 
                 // Aggiungi suddivisioni regionali e watermark copyright
                 data = addCanadaSubregions(data);
