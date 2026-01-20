@@ -53,7 +53,7 @@
     <meta name="author" content="Avvocato Marcello Stanca">
     <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
     <meta name="googlebot" content="index, follow">
-    <link rel="canonical" href="https://tutelatruffe.it/">
+    <link rel="canonical" id="canonical-url" href="https://tutelatruffe.it/">
     
     <!-- Alternate Languages - 25 EU Languages + extras -->
     <link rel="alternate" hreflang="it" href="https://tutelatruffe.it/?lang=it">
@@ -2381,6 +2381,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         // Cache traduzioni on-demand
         let translationCache = {};
 
+        // Inizializza canonical URL per SEO (Google self-referencing canonical)
+        (function initCanonical() {
+            const canonicalEl = document.getElementById('canonical-url');
+            if (canonicalEl && currentLanguage !== 'it') {
+                canonicalEl.setAttribute('href', `https://tutelatruffe.it/?lang=${currentLanguage}`);
+            }
+        })();
+
         // Mappa codici lingua per API traduzione
         const langCodeMap = {
             'it': 'it', 'en': 'en', 'fr': 'fr', 'de': 'de', 'es': 'es',
@@ -2638,10 +2646,28 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         document.addEventListener('DOMContentLoaded', () => {
             // Assicura che all'apertura la pagina parta sempre dall'inizio (header + pulsanti principali)
             window.scrollTo(0, 0);
+            
+            // Aggiorna canonical URL dinamicamente in base alla lingua
+            updateCanonicalUrl();
+            
             changeLanguage(currentLanguage);
             setupSearch();
             loadCountryData();
         });
+        
+        // Funzione per aggiornare il canonical URL in base alla lingua corrente
+        function updateCanonicalUrl() {
+            const canonicalTag = document.getElementById('canonical-url');
+            if (canonicalTag) {
+                const urlParams = new URLSearchParams(window.location.search);
+                const lang = urlParams.get('lang');
+                if (lang && lang !== 'it') {
+                    canonicalTag.href = `https://tutelatruffe.it/?lang=${lang}`;
+                } else {
+                    canonicalTag.href = 'https://tutelatruffe.it/';
+                }
+            }
+        }
 
         async function loadCountryData() {
             try {
@@ -2685,6 +2711,21 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 htmlEl.lang = lang;
                 htmlEl.dir = (lang === 'ar' ? 'rtl' : 'ltr');
             }
+
+            // Aggiorna canonical URL (Google SEO - self-referencing canonical)
+            const canonicalEl = document.getElementById('canonical-url');
+            if (canonicalEl) {
+                const newCanonical = lang === 'it' 
+                    ? 'https://tutelatruffe.it/' 
+                    : `https://tutelatruffe.it/?lang=${lang}`;
+                canonicalEl.setAttribute('href', newCanonical);
+            }
+
+            // Aggiorna URL nel browser senza ricaricare
+            const newUrl = lang === 'it' 
+                ? window.location.pathname 
+                : `${window.location.pathname}?lang=${lang}`;
+            window.history.replaceState({lang: lang}, '', newUrl);
 
             document.querySelectorAll('[data-i18n]').forEach(element => {
                 const key = element.getAttribute('data-i18n');
