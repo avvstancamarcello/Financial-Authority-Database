@@ -645,6 +645,48 @@
             0%, 100% { opacity: 1; }
             50% { opacity: 0.7; }
         }
+        /* Pulsante Traduci On-Demand */
+        .translate-btn {
+            background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+            color: #fff;
+            border: 2px solid #60a5fa;
+            border-radius: 25px;
+            padding: 8px 18px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            margin-left: 10px;
+            transition: all 0.3s ease;
+            box-shadow: 0 3px 10px rgba(59, 130, 246, 0.4);
+        }
+        .translate-btn:hover {
+            background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(59, 130, 246, 0.5);
+        }
+        .translate-btn:disabled {
+            opacity: 0.6;
+            cursor: wait;
+        }
+        .translate-btn.translated {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            border-color: #34d399;
+        }
+        .translation-loading {
+            display: inline-block;
+            width: 14px;
+            height: 14px;
+            border: 2px solid #fff;
+            border-top-color: transparent;
+            border-radius: 50%;
+            animation: spin-translate 0.8s linear infinite;
+        }
+        @keyframes spin-translate {
+            to { transform: rotate(360deg); }
+        }
         .flags-grid-container {
             padding: 30px;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
@@ -2269,6 +2311,90 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         let countriesData = [];
         // Gestione intervallo per l'effetto HOLA sulle bandiere del grid
         let flagsWaveInterval = null;
+        // Cache traduzioni on-demand
+        let translationCache = {};
+
+        // Mappa codici lingua per API traduzione
+        const langCodeMap = {
+            'it': 'it', 'en': 'en', 'fr': 'fr', 'de': 'de', 'es': 'es',
+            'pt': 'pt', 'zh': 'zh-CN', 'hi': 'hi', 'ar': 'ar', 'vi': 'vi',
+            'ja': 'ja', 'ko': 'ko', 'ru': 'ru', 'pl': 'pl', 'nl': 'nl',
+            'tr': 'tr', 'th': 'th', 'id': 'id', 'ms': 'ms', 'uk': 'uk'
+        };
+
+        // Funzione traduzione on-demand usando MyMemory API (gratuita)
+        async function translateText(text, targetLang) {
+            if (!text || text.trim() === '') return text;
+            
+            const sourceLang = 'it'; // Le note sono in italiano
+            const target = langCodeMap[targetLang] || targetLang;
+            
+            // Se la lingua target è italiano, ritorna il testo originale
+            if (target === 'it') return text;
+            
+            // Controlla cache
+            const cacheKey = `${text.substring(0, 50)}_${target}`;
+            if (translationCache[cacheKey]) {
+                return translationCache[cacheKey];
+            }
+            
+            try {
+                const response = await fetch(`https://api.mymemory.translated.net/get?q=${encodeURIComponent(text)}&langpair=${sourceLang}|${target}`);
+                const data = await response.json();
+                
+                if (data.responseStatus === 200 && data.responseData && data.responseData.translatedText) {
+                    const translated = data.responseData.translatedText;
+                    translationCache[cacheKey] = translated;
+                    return translated;
+                }
+                return text; // Fallback al testo originale
+            } catch (error) {
+                console.warn('Traduzione non disponibile:', error);
+                return text;
+            }
+        }
+
+        // Funzione per tradurre le note nel popup
+        async function translateNotes(countryName) {
+            const notesContainer = document.getElementById('notesContent');
+            const translateBtn = document.getElementById('translateNotesBtn');
+            const sanctionAlert = document.getElementById('sanctionAlertText');
+            
+            if (!notesContainer || !translateBtn) return;
+            
+            // Mostra loading
+            const originalBtnText = translateBtn.innerHTML;
+            translateBtn.innerHTML = '<span class="translation-loading"></span> Traduzione...';
+            translateBtn.disabled = true;
+            
+            try {
+                // Trova il paese
+                const country = countriesData.find(c => c.country_name === countryName);
+                if (!country) return;
+                
+                // Traduci le note
+                const originalNotes = country.notes || '';
+                const translatedNotes = await translateText(originalNotes, currentLanguage);
+                notesContainer.innerHTML = translatedNotes.replace(/(https?:\/\/[^\s]+)/g, '<a href="$1" target="_blank">$1</a>');
+                
+                // Traduci anche l'alert sanzioni se presente
+                if (sanctionAlert && country.sanctioned) {
+                    const alertText = "Questo paese è soggetto a sanzioni internazionali. Le transazioni finanziarie potrebbero essere vietate o fortemente limitate.";
+                    const translatedAlert = await translateText(alertText, currentLanguage);
+                    sanctionAlert.textContent = translatedAlert;
+                }
+                
+                // Aggiorna pulsante
+                translateBtn.innerHTML = '✓ Tradotto';
+                translateBtn.classList.add('translated');
+                translateBtn.disabled = true;
+                
+            } catch (error) {
+                console.error('Errore traduzione:', error);
+                translateBtn.innerHTML = originalBtnText;
+                translateBtn.disabled = false;
+            }
+        }
 
         function toggleSecurityBanner() {
             const popup = document.getElementById('securityPopup');
@@ -2668,9 +2794,16 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 <div class="sanctioned-alert">
                     <h3>⚠️ STOPPED BY ONU ⚠️</h3>
                     <p>This country is subject to international sanctions. Financial transactions may be prohibited or severely restricted.</p>
-                    <p style="margin-top: 10px; font-size: 0.85em;">Questo paese è soggetto a sanzioni internazionali. Le transazioni finanziarie potrebbero essere vietate o fortemente limitate.</p>
+                    <p id="sanctionAlertText" style="margin-top: 10px; font-size: 0.85em;">Questo paese è soggetto a sanzioni internazionali. Le transazioni finanziarie potrebbero essere vietate o fortemente limitate.</p>
                 </div>
             ` : '';
+
+            // Testo pulsante traduci in base alla lingua
+            const translateBtnText = {
+                'it': '🌐 Traduci', 'en': '🌐 Translate', 'fr': '🌐 Traduire', 'de': '🌐 Übersetzen',
+                'es': '🌐 Traducir', 'pt': '🌐 Traduzir', 'zh': '🌐 翻译', 'hi': '🌐 अनुवाद करें',
+                'ar': '🌐 ترجم', 'vi': '🌐 Dịch', 'ja': '🌐 翻訳', 'ko': '🌐 번역'
+            };
 
             modalContent.innerHTML = `
                 ${sanctionAlertHTML}
@@ -2692,8 +2825,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     </div>
                     <p><strong>${translations[currentLanguage].modalEmail || 'Email'}:</strong> <a href="mailto:${country.financial_authority.authorityEmail}">${country.financial_authority.authorityEmail}</a></p>
                     ${socialHTML ? `<p style="margin-top:15px;"><strong>${translations[currentLanguage].modalSocial || 'Social'}:</strong> ${socialHTML}</p>` : ''}
-                    <h3 style="margin-top: 20px;">${translations[currentLanguage].modalNotes || 'Notes'}:</h3>
-                    <p>${getTranslatedNotes(country.country_name, country.notes).replace(/(https?:\/\/[^\s]+)/g, '<a href="$1" target="_blank">$1</a>')}</p>
+                    <div style="margin-top: 20px; display: flex; align-items: center; flex-wrap: wrap; gap: 10px;">
+                        <h3 style="margin: 0;">${translations[currentLanguage].modalNotes || 'Notes'}:</h3>
+                        <button id="translateNotesBtn" class="translate-btn" onclick="translateNotes('${country.country_name}')">
+                            ${translateBtnText[currentLanguage] || '🌐 Translate'}
+                        </button>
+                    </div>
+                    <p id="notesContent">${getTranslatedNotes(country.country_name, country.notes).replace(/(https?:\/\/[^\s]+)/g, '<a href="$1" target="_blank">$1</a>')}</p>
                 </div>
                 <div style="margin-top: 25px; padding-top: 20px; border-top: 2px solid #e0e0e0; text-align: center;">
                     <div style="display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-bottom: 15px;">
