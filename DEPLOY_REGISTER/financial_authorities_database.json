@@ -2199,5 +2199,762 @@
       "social_links": {}
     },
     "notes": "World Investor Week Coordinators: Dingase Nunkwe Makumba, Mubanga Kondolo Jr., Sitali Mwala Mugala."
+  },
+  "Andorra": {
+    "country_name": "Andorra",
+    "flag": "🇦🇩",
+    "isEU": false,
+    "continent": "Europe",
+    "protectionLevel": "Medio",
+    "financial_authority": {
+      "name": "Autoritat Financera Andorrana",
+      "abbreviation": "AFA",
+      "homepage": "https://www.afa.ad/",
+      "fraudReportLink": "https://www.afa.ad/consumidors/reclamacions",
+      "authorityEmail": "",
+      "social_links": {}
+    },
+    "notes": "Principato situato nei Pirenei tra Francia e Spagna. Importante centro finanziario con forte tutela della privacy bancaria."
+  },
+  "Belarus": {
+    "country_name": "Belarus",
+    "flag": "🇧🇾",
+    "isEU": false,
+    "continent": "Europe",
+    "protectionLevel": "Basso",
+    "financial_authority": {
+      "name": "National Bank of the Republic of Belarus",
+      "abbreviation": "NBRB",
+      "homepage": "https://www.nbrb.by/",
+      "fraudReportLink": "",
+      "authorityEmail": "",
+      "social_links": {}
+    },
+    "notes": "Banca centrale della Bielorussia. Website potrebbe essere inaccessibile da alcune regioni."
+  },
+  "Benin": {
+    "country_name": "Benin",
+    "flag": "🇧🇯",
+    "isEU": false,
+    "continent": "Africa",
+    "protectionLevel": "Medio",
+    "financial_authority": {
+      "name": "Banque Centrale des États de l'Afrique de l'Ouest",
+      "abbreviation": "BCEAO",
+      "homepage": "https://www.bceao.int/",
+      "fraudReportLink": "https://www.bceao.int/fr/contact",
+      "authorityEmail": "",
+      "social_links": {}
+    },
+    "notes": "Membro della zona UEMOA (Unione Economica e Monetaria Ovest Africana). La vigilanza bancaria è coordinata a livello regionale dalla BCEAO."
+  },
+  "Bhutan": {
+    "country_name": "Bhutan",
+    "flag": "🇧🇹",
+    "isEU": false,
+    "continent": "Asia",
+    "protectionLevel": "Medio",
+    "financial_authority": {
+      "name": "Royal Monetary Authority of Bhutan",
+      "abbreviation": "RMA",
+      "homepage": "https://www.rma.org.bt/",
+      "fraudReportLink": "https://www.rma.org.bt/contact_us/",
+      "authorityEmail": "",
+      "social_links": {}
+    },
+    "notes": "Regno himalayano. La RMA regola il sistema finanziario del paese con focus sulla stabilità economica."
+  },
+  "Bosnia and Herzegovina": {
+    "country_name": "Bosnia and Herzegovina",
+    "flag": "🇧🇦",
+    "isEU": false,
+    "continent": "Europe",
+    "protectionLevel": "Medio",
+    "financial_authority": {
+      "name": "Central Bank of Bosnia and Herzegovina",
+      "abbreviation": "CBBH",
+      "homepage": "https://www.cbbh.ba/",
+      "fraudReportLink": "https://www.cbbh.ba/press/faq",
+      "authorityEmail": "",
+      "social_links": {}
+    },
+    "notes": "Stato dei Balcani occidentali. Sistema finanziario regolato a livello federale."
+  },
+  "Cabo Verde": {
+    "country_name": "Cabo Verde",
+    "flag": "🇨🇻",
+    "isEU": false,
+    "continent": "Africa",
+    "protectionLevel": "Medio",
+    "financial_authority": {
+      "name": "Banco de Cabo Verde",
+      "abbreviation": "BCV",
+      "homepage": "https://www.bcv.cv/",
+      "fraudReportLink": "https://www.bcv.cv/Footer/Paginas/Contacts.aspx",
+      "authorityEmail": "",
+      "social_links": {}
+    },
+    "notes": "Arcipelago dell'Oceano Atlantico al largo dell'Africa occidentale. Sistema bancario stabile."
+  },
+  "Cameroon": {
+    "country_name": "Cameroon",
+    "flag": "🇨🇲",
+    "isEU": false,
+    "continent": "Africa",
+    "protectionLevel": "Medio",
+    "financial_authority": {
+      "name": "Banque des États de l'Afrique Centrale",
+      "abbreviation": "BEAC",
+      "homepage": "https://www.beac.int/",
+      "fraudReportLink": "https://www.beac.int/contact/",
+      "authorityEmail": "",
+      "social_links": {}
+    },
+    "notes": "Membro della zona CEMAC (Comunità Economica e Monetaria dell'Africa Centrale). Vigilanza bancaria regionale coordinata dalla BEAC e COBAC."
+  },
+  "Comoros": {
+    "country_name": "Comoros",
+    "flag": "🇰🇲",
+    "isEU": false,
+    "continent": "Africa",
+    "protectionLevel": "Medio",
+    "financial_authority": {
+      "name": "Banque Centrale des Comores",
+      "abbreviation": "BCC",
+      "homepage": "https://banque-comores.km/",
+      "fraudReportLink": "",
+      "authorityEmail": "secretariat@banque-comores.km",
+      "social_links": {}
+    },
+    "notes": "Arcipelago dell'Oceano Indiano. Sistema finanziario in via di sviluppo."
+  },
+  "Cuba": {
+    "country_name": "Cuba",
+    "flag": "🇨🇺",
+    "isEU": false,
+    "continent": "Americas",
+    "protectionLevel": "Basso",
+    "sanctioned": true,
+    "financial_authority": {
+      "name": "Banco Central de Cuba",
+      "abbreviation": "BCC",
+      "homepage": "https://www.bc.gob.cu/",
+      "fraudReportLink": "",
+      "authorityEmail": "atencionpoblacion@bc.gob.cu",
+      "social_links": {}
+    },
+    "notes": "⚠️ STOPPED BY ONU - Paese soggetto a sanzioni internazionali. Transazioni finanziarie verso Cuba sono limitate o vietate in molti paesi."
+  },
+  "Ecuador": {
+    "country_name": "Ecuador",
+    "flag": "🇪🇨",
+    "isEU": false,
+    "continent": "Americas",
+    "protectionLevel": "Medio",
+    "financial_authority": {
+      "name": "Superintendencia de Bancos del Ecuador",
+      "abbreviation": "SB",
+      "homepage": "https://www.sbs.gob.ec/",
+      "fraudReportLink": "",
+      "authorityEmail": "",
+      "social_links": {}
+    },
+    "notes": "Paese dell'America Latina. Website dell'autorità potrebbe essere temporaneamente inaccessibile."
+  },
+  "Equatorial Guinea": {
+    "country_name": "Equatorial Guinea",
+    "flag": "🇬🇶",
+    "isEU": false,
+    "continent": "Africa",
+    "protectionLevel": "Medio",
+    "financial_authority": {
+      "name": "Banque des États de l'Afrique Centrale",
+      "abbreviation": "BEAC",
+      "homepage": "https://www.beac.int/",
+      "fraudReportLink": "https://www.beac.int/contact/",
+      "authorityEmail": "",
+      "social_links": {}
+    },
+    "notes": "Membro della zona CEMAC. Unico paese africano con spagnolo come lingua ufficiale."
+  },
+  "Fiji": {
+    "country_name": "Fiji",
+    "flag": "🇫🇯",
+    "isEU": false,
+    "continent": "Oceania",
+    "protectionLevel": "Medio",
+    "financial_authority": {
+      "name": "Reserve Bank of Fiji",
+      "abbreviation": "RBF",
+      "homepage": "https://www.rbf.gov.fj/",
+      "fraudReportLink": "https://www.rbf.gov.fj/give-us-your-feedback/",
+      "authorityEmail": "",
+      "social_links": {}
+    },
+    "notes": "Arcipelago del Pacifico. Centro finanziario regionale per il Pacifico meridionale."
+  },
+  "Guatemala": {
+    "country_name": "Guatemala",
+    "flag": "🇬🇹",
+    "isEU": false,
+    "continent": "Americas",
+    "protectionLevel": "Medio",
+    "financial_authority": {
+      "name": "Superintendencia de Bancos de Guatemala",
+      "abbreviation": "SIB",
+      "homepage": "https://www.sib.gob.gt/",
+      "fraudReportLink": "",
+      "authorityEmail": "",
+      "social_links": {}
+    },
+    "notes": "Paese dell'America Centrale. Website dell'autorità potrebbe essere temporaneamente inaccessibile."
+  },
+  "Guinea": {
+    "country_name": "Guinea",
+    "flag": "🇬🇳",
+    "isEU": false,
+    "continent": "Africa",
+    "protectionLevel": "Medio",
+    "financial_authority": {
+      "name": "Banque Centrale de la République de Guinée",
+      "abbreviation": "BCRG",
+      "homepage": "https://www.bcrg-guinee.org/",
+      "fraudReportLink": "https://www.bcrg-guinee.org/nous-contacter/",
+      "authorityEmail": "webmaster@bcrg-guinee.org",
+      "social_links": {}
+    },
+    "notes": "Paese dell'Africa occidentale. Non confondere con Guinea-Bissau o Guinea Equatoriale."
+  },
+  "Guinea-Bissau": {
+    "country_name": "Guinea-Bissau",
+    "flag": "🇬🇼",
+    "isEU": false,
+    "continent": "Africa",
+    "protectionLevel": "Medio",
+    "financial_authority": {
+      "name": "Banque Centrale des États de l'Afrique de l'Ouest",
+      "abbreviation": "BCEAO",
+      "homepage": "https://www.bceao.int/",
+      "fraudReportLink": "https://www.bceao.int/fr/contact",
+      "authorityEmail": "",
+      "social_links": {}
+    },
+    "notes": "Membro della zona UEMOA. Piccolo paese lusofono dell'Africa occidentale."
+  },
+  "Guyana": {
+    "country_name": "Guyana",
+    "flag": "🇬🇾",
+    "isEU": false,
+    "continent": "Americas",
+    "protectionLevel": "Medio",
+    "financial_authority": {
+      "name": "Bank of Guyana",
+      "abbreviation": "BoG",
+      "homepage": "https://www.bankofguyana.org.gy/",
+      "fraudReportLink": "",
+      "authorityEmail": "",
+      "social_links": {}
+    },
+    "notes": "Unico paese anglofono del Sud America. Economia in forte crescita grazie alle scoperte petrolifere."
+  },
+  "Haiti": {
+    "country_name": "Haiti",
+    "flag": "🇭🇹",
+    "isEU": false,
+    "continent": "Americas",
+    "protectionLevel": "Basso",
+    "financial_authority": {
+      "name": "Banque de la République d'Haïti",
+      "abbreviation": "BRH",
+      "homepage": "https://www.brh.ht/",
+      "fraudReportLink": "https://www.brh.ht/contactez-nous2/",
+      "authorityEmail": "",
+      "social_links": {}
+    },
+    "notes": "Paese caraibico. Sistema finanziario in difficoltà a causa dell'instabilità politica."
+  },
+  "Honduras": {
+    "country_name": "Honduras",
+    "flag": "🇭🇳",
+    "isEU": false,
+    "continent": "Americas",
+    "protectionLevel": "Medio",
+    "financial_authority": {
+      "name": "Comisión Nacional de Bancos y Seguros",
+      "abbreviation": "CNBS",
+      "homepage": "https://www.cnbs.gob.hn/",
+      "fraudReportLink": "https://www.cnbs.gob.hn/reclamos",
+      "authorityEmail": "webmaster@cnbs.gob.hn",
+      "social_links": {}
+    },
+    "notes": "Paese dell'America Centrale. La CNBS supervisiona banche e assicurazioni."
+  },
+  "Iran": {
+    "country_name": "Iran",
+    "flag": "🇮🇷",
+    "isEU": false,
+    "continent": "Asia",
+    "protectionLevel": "Basso",
+    "sanctioned": true,
+    "financial_authority": {
+      "name": "Central Bank of the Islamic Republic of Iran",
+      "abbreviation": "CBI",
+      "homepage": "https://cbi.ir/",
+      "fraudReportLink": "",
+      "authorityEmail": "",
+      "social_links": {}
+    },
+    "notes": "⚠️ STOPPED BY ONU - Paese soggetto a severe sanzioni internazionali. Transazioni finanziarie verso l'Iran sono vietate o fortemente limitate nella maggior parte dei paesi occidentali."
+  },
+  "Iraq": {
+    "country_name": "Iraq",
+    "flag": "🇮🇶",
+    "isEU": false,
+    "continent": "Asia",
+    "protectionLevel": "Medio",
+    "financial_authority": {
+      "name": "Central Bank of Iraq",
+      "abbreviation": "CBI",
+      "homepage": "https://cbi.iq/",
+      "fraudReportLink": "https://cbi.iq/page/158",
+      "authorityEmail": "",
+      "social_links": {}
+    },
+    "notes": "Sistema bancario in fase di ricostruzione. La CBI gestisce la politica monetaria e la supervisione bancaria."
+  },
+  "Lebanon": {
+    "country_name": "Lebanon",
+    "flag": "🇱🇧",
+    "isEU": false,
+    "continent": "Asia",
+    "protectionLevel": "Basso",
+    "financial_authority": {
+      "name": "Banque du Liban",
+      "abbreviation": "BDL",
+      "homepage": "https://www.bdl.gov.lb/",
+      "fraudReportLink": "https://www.bdl.gov.lb/contactus.php",
+      "authorityEmail": "",
+      "social_links": {}
+    },
+    "notes": "Sistema bancario in profonda crisi dal 2019. Controlli sui capitali in vigore. Accesso ai depositi fortemente limitato."
+  },
+  "Lesotho": {
+    "country_name": "Lesotho",
+    "flag": "🇱🇸",
+    "isEU": false,
+    "continent": "Africa",
+    "protectionLevel": "Medio",
+    "financial_authority": {
+      "name": "Central Bank of Lesotho",
+      "abbreviation": "CBL",
+      "homepage": "https://centralbank.org.ls/",
+      "fraudReportLink": "",
+      "authorityEmail": "corporatecomms@centralbank.org.ls",
+      "social_links": {}
+    },
+    "notes": "Regno enclave completamente circondato dal Sudafrica. Utilizza il Loti agganciato al Rand sudafricano."
+  },
+  "Liberia": {
+    "country_name": "Liberia",
+    "flag": "🇱🇷",
+    "isEU": false,
+    "continent": "Africa",
+    "protectionLevel": "Medio",
+    "financial_authority": {
+      "name": "Central Bank of Liberia",
+      "abbreviation": "CBL",
+      "homepage": "https://www.cbl.org.lr/",
+      "fraudReportLink": "",
+      "authorityEmail": "",
+      "social_links": {}
+    },
+    "notes": "Paese dell'Africa occidentale fondato da ex schiavi americani. Sistema finanziario in via di sviluppo."
+  },
+  "Mali": {
+    "country_name": "Mali",
+    "flag": "🇲🇱",
+    "isEU": false,
+    "continent": "Africa",
+    "protectionLevel": "Medio",
+    "financial_authority": {
+      "name": "Banque Centrale des États de l'Afrique de l'Ouest",
+      "abbreviation": "BCEAO",
+      "homepage": "https://www.bceao.int/",
+      "fraudReportLink": "https://www.bceao.int/fr/contact",
+      "authorityEmail": "",
+      "social_links": {}
+    },
+    "notes": "Membro della zona UEMOA. Vasto paese del Sahel."
+  },
+  "Mauritania": {
+    "country_name": "Mauritania",
+    "flag": "🇲🇷",
+    "isEU": false,
+    "continent": "Africa",
+    "protectionLevel": "Medio",
+    "financial_authority": {
+      "name": "Banque Centrale de Mauritanie",
+      "abbreviation": "BCM",
+      "homepage": "https://www.bcm.mr/",
+      "fraudReportLink": "https://www.bcm.mr/page/contacts/33",
+      "authorityEmail": "",
+      "social_links": {}
+    },
+    "notes": "Paese dell'Africa nordoccidentale. Ponte tra Maghreb e Africa subsahariana."
+  },
+  "Moldova": {
+    "country_name": "Moldova",
+    "flag": "🇲🇩",
+    "isEU": false,
+    "continent": "Europe",
+    "protectionLevel": "Medio",
+    "financial_authority": {
+      "name": "National Bank of Moldova",
+      "abbreviation": "NBM",
+      "homepage": "https://www.bnm.md/en",
+      "fraudReportLink": "",
+      "authorityEmail": "",
+      "social_links": {}
+    },
+    "notes": "Paese dell'Europa orientale candidato UE. Sistema bancario riformato dopo scandali del 2014."
+  },
+  "Monaco": {
+    "country_name": "Monaco",
+    "flag": "🇲🇨",
+    "isEU": false,
+    "continent": "Europe",
+    "protectionLevel": "Altissimo",
+    "financial_authority": {
+      "name": "Commission de Contrôle des Activités Financières",
+      "abbreviation": "CCAF",
+      "homepage": "https://www.ccaf.mc/",
+      "fraudReportLink": "",
+      "authorityEmail": "ccaf@ccaf.mc",
+      "social_links": {}
+    },
+    "notes": "Principato sulla Costa Azzurra. Importante piazza finanziaria con rigide normative antiriciclaggio."
+  },
+  "Myanmar": {
+    "country_name": "Myanmar",
+    "flag": "🇲🇲",
+    "isEU": false,
+    "continent": "Asia",
+    "protectionLevel": "Basso",
+    "financial_authority": {
+      "name": "Central Bank of Myanmar",
+      "abbreviation": "CBM",
+      "homepage": "https://www.cbm.gov.mm/",
+      "fraudReportLink": "https://www.cbm.gov.mm/content/274",
+      "authorityEmail": "",
+      "social_links": {}
+    },
+    "notes": "Ex Birmania. Sistema finanziario sotto pressione a causa dell'instabilità politica dal 2021."
+  },
+  "Niger": {
+    "country_name": "Niger",
+    "flag": "🇳🇪",
+    "isEU": false,
+    "continent": "Africa",
+    "protectionLevel": "Medio",
+    "financial_authority": {
+      "name": "Banque Centrale des États de l'Afrique de l'Ouest",
+      "abbreviation": "BCEAO",
+      "homepage": "https://www.bceao.int/",
+      "fraudReportLink": "https://www.bceao.int/fr/contact",
+      "authorityEmail": "",
+      "social_links": {}
+    },
+    "notes": "Membro della zona UEMOA. Vasto paese del Sahel."
+  },
+  "North Korea": {
+    "country_name": "North Korea",
+    "flag": "🇰🇵",
+    "isEU": false,
+    "continent": "Asia",
+    "protectionLevel": "Basso",
+    "sanctioned": true,
+    "financial_authority": {
+      "name": "Central Bank of the Democratic People's Republic of Korea",
+      "abbreviation": "CBDPRK",
+      "homepage": "",
+      "fraudReportLink": "",
+      "authorityEmail": "",
+      "social_links": {}
+    },
+    "notes": "⚠️ STOPPED BY ONU - Paese sotto le più severe sanzioni internazionali. Qualsiasi transazione finanziaria è vietata."
+  },
+  "Philippines": {
+    "country_name": "Philippines",
+    "flag": "🇵🇭",
+    "isEU": false,
+    "continent": "Asia",
+    "protectionLevel": "Medio",
+    "financial_authority": {
+      "name": "Bangko Sentral ng Pilipinas",
+      "abbreviation": "BSP",
+      "homepage": "https://www.bsp.gov.ph/",
+      "fraudReportLink": "",
+      "authorityEmail": "bspmail@bsp.gov.ph",
+      "social_links": {}
+    },
+    "notes": "Arcipelago del Sud-Est asiatico. Sistema bancario moderno con forte protezione dei consumatori."
+  },
+  "Russia": {
+    "country_name": "Russia",
+    "flag": "🇷🇺",
+    "isEU": false,
+    "continent": "Europe",
+    "protectionLevel": "Basso",
+    "sanctioned": true,
+    "financial_authority": {
+      "name": "Central Bank of the Russian Federation",
+      "abbreviation": "CBR",
+      "homepage": "https://www.cbr.ru/eng/",
+      "fraudReportLink": "",
+      "authorityEmail": "",
+      "social_links": {}
+    },
+    "notes": "⚠️ STOPPED BY ONU - Paese soggetto a severe sanzioni internazionali dal 2022. Escluso dal sistema SWIFT. Transazioni finanziarie fortemente limitate."
+  },
+  "San Marino": {
+    "country_name": "San Marino",
+    "flag": "🇸🇲",
+    "isEU": false,
+    "continent": "Europe",
+    "protectionLevel": "Altissimo",
+    "financial_authority": {
+      "name": "Banca Centrale della Repubblica di San Marino",
+      "abbreviation": "BCSM",
+      "homepage": "https://www.bcsm.sm/",
+      "fraudReportLink": "https://www.bcsm.sm/contatti",
+      "authorityEmail": "",
+      "social_links": {}
+    },
+    "notes": "Antica repubblica enclave in Italia. Accordo monetario con l'UE, utilizza l'Euro."
+  },
+  "Senegal": {
+    "country_name": "Senegal",
+    "flag": "🇸🇳",
+    "isEU": false,
+    "continent": "Africa",
+    "protectionLevel": "Medio",
+    "financial_authority": {
+      "name": "Banque Centrale des États de l'Afrique de l'Ouest",
+      "abbreviation": "BCEAO",
+      "homepage": "https://www.bceao.int/",
+      "fraudReportLink": "https://www.bceao.int/fr/contact",
+      "authorityEmail": "",
+      "social_links": {}
+    },
+    "notes": "Membro della zona UEMOA. Sede principale della BCEAO a Dakar."
+  },
+  "Sierra Leone": {
+    "country_name": "Sierra Leone",
+    "flag": "🇸🇱",
+    "isEU": false,
+    "continent": "Africa",
+    "protectionLevel": "Medio",
+    "financial_authority": {
+      "name": "Bank of Sierra Leone",
+      "abbreviation": "BSL",
+      "homepage": "https://www.bsl.gov.sl/",
+      "fraudReportLink": "",
+      "authorityEmail": "",
+      "social_links": {}
+    },
+    "notes": "Paese dell'Africa occidentale. Sistema finanziario in via di sviluppo. Website potrebbe essere inaccessibile."
+  },
+  "Somalia": {
+    "country_name": "Somalia",
+    "flag": "🇸🇴",
+    "isEU": false,
+    "continent": "Africa",
+    "protectionLevel": "Basso",
+    "financial_authority": {
+      "name": "Central Bank of Somalia",
+      "abbreviation": "CBS",
+      "homepage": "https://centralbank.gov.so/",
+      "fraudReportLink": "https://centralbank.gov.so/contact-us/",
+      "authorityEmail": "info@centralbank.gov.so",
+      "social_links": {}
+    },
+    "notes": "Sistema finanziario in fase di ricostruzione. Economia basata principalmente su rimesse e trasferimenti mobile money."
+  },
+  "South Sudan": {
+    "country_name": "South Sudan",
+    "flag": "🇸🇸",
+    "isEU": false,
+    "continent": "Africa",
+    "protectionLevel": "Basso",
+    "financial_authority": {
+      "name": "Bank of South Sudan",
+      "abbreviation": "BSS",
+      "homepage": "https://www.banksouthsudan.org/",
+      "fraudReportLink": "",
+      "authorityEmail": "",
+      "social_links": {}
+    },
+    "notes": "Paese più giovane del mondo (indipendenza 2011). Sistema finanziario in via di sviluppo. Website potrebbe essere inaccessibile."
+  },
+  "Sudan": {
+    "country_name": "Sudan",
+    "flag": "🇸🇩",
+    "isEU": false,
+    "continent": "Africa",
+    "protectionLevel": "Basso",
+    "financial_authority": {
+      "name": "Central Bank of Sudan",
+      "abbreviation": "CBOS",
+      "homepage": "https://cbos.gov.sd/",
+      "fraudReportLink": "",
+      "authorityEmail": "info@cbos.gov.sd",
+      "social_links": {}
+    },
+    "notes": "Sistema bancario basato sulla finanza islamica. Sanzioni internazionali parzialmente rimosse nel 2020."
+  },
+  "Suriname": {
+    "country_name": "Suriname",
+    "flag": "🇸🇷",
+    "isEU": false,
+    "continent": "Americas",
+    "protectionLevel": "Medio",
+    "financial_authority": {
+      "name": "Centrale Bank van Suriname",
+      "abbreviation": "CBvS",
+      "homepage": "https://www.cbvs.sr/",
+      "fraudReportLink": "",
+      "authorityEmail": "",
+      "social_links": {}
+    },
+    "notes": "Unico paese di lingua olandese in Sud America. Ex colonia dei Paesi Bassi."
+  },
+  "Syria": {
+    "country_name": "Syria",
+    "flag": "🇸🇾",
+    "isEU": false,
+    "continent": "Asia",
+    "protectionLevel": "Basso",
+    "sanctioned": true,
+    "financial_authority": {
+      "name": "Central Bank of Syria",
+      "abbreviation": "CBS",
+      "homepage": "https://cb.gov.sy/",
+      "fraudReportLink": "",
+      "authorityEmail": "info@cb.gov.sy",
+      "social_links": {}
+    },
+    "notes": "⚠️ STOPPED BY ONU - Paese soggetto a severe sanzioni internazionali. Transazioni finanziarie verso la Siria sono vietate nella maggior parte dei paesi."
+  },
+  "Tajikistan": {
+    "country_name": "Tajikistan",
+    "flag": "🇹🇯",
+    "isEU": false,
+    "continent": "Asia",
+    "protectionLevel": "Medio",
+    "financial_authority": {
+      "name": "National Bank of Tajikistan",
+      "abbreviation": "NBT",
+      "homepage": "https://nbt.tj/en/",
+      "fraudReportLink": "",
+      "authorityEmail": "info@nbt.tj",
+      "social_links": {}
+    },
+    "notes": "Paese dell'Asia centrale. Economia dipendente dalle rimesse dei lavoratori emigrati."
+  },
+  "Tanzania": {
+    "country_name": "Tanzania",
+    "flag": "🇹🇿",
+    "isEU": false,
+    "continent": "Africa",
+    "protectionLevel": "Medio",
+    "financial_authority": {
+      "name": "Bank of Tanzania",
+      "abbreviation": "BOT",
+      "homepage": "https://www.bot.go.tz/",
+      "fraudReportLink": "",
+      "authorityEmail": "",
+      "social_links": {}
+    },
+    "notes": "Paese dell'Africa orientale. Sistema bancario in crescita. Website potrebbe essere bloccato in alcune regioni."
+  },
+  "Togo": {
+    "country_name": "Togo",
+    "flag": "🇹🇬",
+    "isEU": false,
+    "continent": "Africa",
+    "protectionLevel": "Medio",
+    "financial_authority": {
+      "name": "Banque Centrale des États de l'Afrique de l'Ouest",
+      "abbreviation": "BCEAO",
+      "homepage": "https://www.bceao.int/",
+      "fraudReportLink": "https://www.bceao.int/fr/contact",
+      "authorityEmail": "",
+      "social_links": {}
+    },
+    "notes": "Membro della zona UEMOA. Piccolo paese costiero dell'Africa occidentale."
+  },
+  "Turkmenistan": {
+    "country_name": "Turkmenistan",
+    "flag": "🇹🇲",
+    "isEU": false,
+    "continent": "Asia",
+    "protectionLevel": "Basso",
+    "financial_authority": {
+      "name": "Central Bank of Turkmenistan",
+      "abbreviation": "CBT",
+      "homepage": "https://www.cbt.tm/",
+      "fraudReportLink": "",
+      "authorityEmail": "",
+      "social_links": {}
+    },
+    "notes": "Paese dell'Asia centrale ricco di gas naturale. Economia centralizzata con limitato accesso ai mercati finanziari internazionali."
+  },
+  "Uganda": {
+    "country_name": "Uganda",
+    "flag": "🇺🇬",
+    "isEU": false,
+    "continent": "Africa",
+    "protectionLevel": "Medio",
+    "financial_authority": {
+      "name": "Bank of Uganda",
+      "abbreviation": "BOU",
+      "homepage": "https://www.bou.or.ug/",
+      "fraudReportLink": "https://www.bou.or.ug/RelatedPages/location/",
+      "authorityEmail": "",
+      "social_links": {}
+    },
+    "notes": "Paese dell'Africa orientale. Sistema bancario in crescita con forte sviluppo del mobile banking."
+  },
+  "Venezuela": {
+    "country_name": "Venezuela",
+    "flag": "🇻🇪",
+    "isEU": false,
+    "continent": "Americas",
+    "protectionLevel": "Basso",
+    "financial_authority": {
+      "name": "Superintendencia de las Instituciones del Sector Bancario",
+      "abbreviation": "SUDEBAN",
+      "homepage": "https://sudeban.gob.ve/",
+      "fraudReportLink": "",
+      "authorityEmail": "",
+      "social_links": {}
+    },
+    "notes": "Sistema bancario sotto forte controllo statale. Iperinflazione e controlli sui cambi. Website potrebbe essere inaccessibile."
+  },
+  "Yemen": {
+    "country_name": "Yemen",
+    "flag": "🇾🇪",
+    "isEU": false,
+    "continent": "Asia",
+    "protectionLevel": "Basso",
+    "financial_authority": {
+      "name": "Central Bank of Yemen",
+      "abbreviation": "CBY",
+      "homepage": "https://www.centralbank.gov.ye/",
+      "fraudReportLink": "",
+      "authorityEmail": "",
+      "social_links": {}
+    },
+    "notes": "Paese in conflitto. Sistema finanziario frammentato con due banche centrali rivali. Website spesso inaccessibile."
   }
 }

@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <title>Sanctioned Countries - Financial Authorities Under International Restrictions</title>
+    <meta name="description" content="Information about financial authorities in countries subject to UN and international sanctions. Cuba, Iran, North Korea, Russia, Syria.">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="https://avvstancamarcello.github.io/Financial-Authority-Database/Images/favicon.png">
+    
+    <!-- Flag Icons CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.0.0/css/flag-icons.min.css">
+    
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            min-height: 100vh;
+            color: #fff;
+            line-height: 1.6;
+        }
+        
+        .container { max-width: 1200px; margin: 0 auto; padding: 30px 20px; }
+        
+        header {
+            text-align: center;
+            padding: 40px 20px;
+            background: linear-gradient(135deg, #dc3545 0%, #c82333 100%);
+            border-bottom: 4px solid #ffc107;
+        }
+        
+        .warning-icon {
+            font-size: 80px;
+            margin-bottom: 20px;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.1); opacity: 0.8; }
+        }
+        
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .subtitle {
+            font-size: 1.2em;
+            opacity: 0.95;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .disclaimer {
+            background: rgba(255, 193, 7, 0.15);
+            border: 2px solid #ffc107;
+            border-radius: 15px;
+            padding: 25px;
+            margin: 30px 0;
+            text-align: center;
+        }
+        
+        .disclaimer h2 {
+            color: #ffc107;
+            margin-bottom: 15px;
+            font-size: 1.5em;
+        }
+        
+        .disclaimer p {
+            color: #fff;
+            opacity: 0.9;
+            margin-bottom: 10px;
+        }
+        
+        .countries-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 25px;
+            margin-top: 40px;
+        }
+        
+        .country-card {
+            background: rgba(255, 255, 255, 0.08);
+            border: 2px solid rgba(220, 53, 69, 0.5);
+            border-radius: 15px;
+            padding: 25px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .country-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #dc3545, #ffc107, #dc3545);
+        }
+        
+        .country-card:hover {
+            transform: translateY(-5px);
+            border-color: #dc3545;
+            box-shadow: 0 10px 30px rgba(220, 53, 69, 0.3);
+        }
+        
+        .country-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .flag-wrapper {
+            width: 60px;
+            height: 45px;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.3);
+        }
+        
+        .flag-wrapper .fi {
+            font-size: 45px;
+            line-height: 1;
+        }
+        
+        .country-name {
+            font-size: 1.5em;
+            font-weight: 700;
+        }
+        
+        .sanction-badge {
+            background: #dc3545;
+            color: #fff;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.75em;
+            font-weight: 600;
+            margin-left: auto;
+        }
+        
+        .info-section { margin-bottom: 15px; }
+        
+        .info-label {
+            color: #ffc107;
+            font-weight: 600;
+            font-size: 0.9em;
+            margin-bottom: 5px;
+            display: block;
+        }
+        
+        .info-value {
+            color: #fff;
+            opacity: 0.9;
+        }
+        
+        .authority-name {
+            font-size: 1.1em;
+            font-weight: 600;
+            color: #fff;
+        }
+        
+        .website-link {
+            display: inline-block;
+            color: #6ea8fe;
+            text-decoration: none;
+            word-break: break-all;
+            transition: color 0.3s ease;
+        }
+        
+        .website-link:hover { color: #9ec5fe; text-decoration: underline; }
+        
+        .email-link {
+            color: #6ea8fe;
+            text-decoration: none;
+        }
+        
+        .email-link:hover { text-decoration: underline; }
+        
+        .notes {
+            background: rgba(220, 53, 69, 0.15);
+            border-left: 3px solid #dc3545;
+            padding: 12px 15px;
+            border-radius: 0 8px 8px 0;
+            margin-top: 15px;
+            font-size: 0.9em;
+            color: #ffcccb;
+        }
+        
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #fff;
+            text-decoration: none;
+            padding: 15px 30px;
+            border-radius: 30px;
+            font-weight: 600;
+            margin-top: 40px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+        }
+        
+        .back-link:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.5);
+        }
+        
+        footer {
+            text-align: center;
+            padding: 40px 20px;
+            margin-top: 50px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: rgba(255,255,255,0.6);
+            font-size: 0.9em;
+        }
+        
+        footer a { color: #6ea8fe; text-decoration: none; }
+        footer a:hover { text-decoration: underline; }
+        
+        @media (max-width: 768px) {
+            h1 { font-size: 1.8em; }
+            .countries-grid { grid-template-columns: 1fr; }
+            .country-header { flex-wrap: wrap; }
+            .sanction-badge { margin-left: 0; margin-top: 10px; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="warning-icon">⚠️</div>
+        <h1>Countries Under International Sanctions</h1>
+        <p class="subtitle">Financial regulatory authorities in countries subject to UN Security Council resolutions and international sanctions regimes</p>
+    </header>
+    
+    <div class="container">
+        <div class="disclaimer">
+            <h2>⚠️ Important Legal Disclaimer</h2>
+            <p><strong>STOPPED BY ONU</strong> - These countries are subject to comprehensive international sanctions.</p>
+            <p>Financial transactions with entities in these jurisdictions may be prohibited or require special authorization.</p>
+            <p>This information is provided for educational purposes only. Always consult with qualified legal counsel before engaging in any financial activity involving sanctioned jurisdictions.</p>
+            <p style="margin-top: 15px; font-size: 0.9em; opacity: 0.8;">
+                <em>Le transazioni finanziarie con questi paesi potrebbero essere vietate o richiedere autorizzazioni speciali. Consultare sempre un legale qualificato.</em>
+            </p>
+        </div>
+        
+        <div class="countries-grid">
+            <!-- CUBA -->
+            <div class="country-card">
+                <div class="country-header">
+                    <div class="flag-wrapper"><span class="fi fi-cu"></span></div>
+                    <span class="country-name">Cuba</span>
+                    <span class="sanction-badge">SANCTIONED</span>
+                </div>
+                <div class="info-section">
+                    <span class="info-label">Financial Authority</span>
+                    <span class="authority-name">Banco Central de Cuba (BCC)</span>
+                </div>
+                <div class="info-section">
+                    <span class="info-label">Website</span>
+                    <a href="https://www.bc.gob.cu/" target="_blank" rel="noopener" class="website-link">https://www.bc.gob.cu/</a>
+                </div>
+                <div class="info-section">
+                    <span class="info-label">Contact</span>
+                    <a href="mailto:atencionpoblacion@bc.gob.cu" class="email-link">atencionpoblacion@bc.gob.cu</a>
+                </div>
+                <div class="notes">
+                    Subject to US embargo since 1962. EU maintains limited sanctions. Financial services heavily restricted internationally.
+                </div>
+            </div>
+            
+            <!-- IRAN -->
+            <div class="country-card">
+                <div class="country-header">
+                    <div class="flag-wrapper"><span class="fi fi-ir"></span></div>
+                    <span class="country-name">Iran</span>
+                    <span class="sanction-badge">SANCTIONED</span>
+                </div>
+                <div class="info-section">
+                    <span class="info-label">Financial Authority</span>
+                    <span class="authority-name">Central Bank of the Islamic Republic of Iran (CBI)</span>
+                </div>
+                <div class="info-section">
+                    <span class="info-label">Website</span>
+                    <a href="https://cbi.ir/" target="_blank" rel="noopener" class="website-link">https://cbi.ir/</a>
+                </div>
+                <div class="info-section">
+                    <span class="info-label">Contact</span>
+                    <span class="info-value">Website often inaccessible from Western countries</span>
+                </div>
+                <div class="notes">
+                    Comprehensive UN, US, and EU sanctions. Banking system largely disconnected from SWIFT. Secondary sanctions apply to third parties.
+                </div>
+            </div>
+            
+            <!-- NORTH KOREA -->
+            <div class="country-card">
+                <div class="country-header">
+                    <div class="flag-wrapper"><span class="fi fi-kp"></span></div>
+                    <span class="country-name">North Korea (DPRK)</span>
+                    <span class="sanction-badge">SANCTIONED</span>
+                </div>
+                <div class="info-section">
+                    <span class="info-label">Financial Authority</span>
+                    <span class="authority-name">Central Bank of the Democratic People's Republic of Korea</span>
+                </div>
+                <div class="info-section">
+                    <span class="info-label">Website</span>
+                    <span class="info-value">No public website available</span>
+                </div>
+                <div class="info-section">
+                    <span class="info-label">Contact</span>
+                    <span class="info-value">No public contact available</span>
+                </div>
+                <div class="notes">
+                    Most severe UN Security Council sanctions. All financial transactions effectively prohibited. Complete isolation from international financial system.
+                </div>
+            </div>
+            
+            <!-- RUSSIA -->
+            <div class="country-card">
+                <div class="country-header">
+                    <div class="flag-wrapper"><span class="fi fi-ru"></span></div>
+                    <span class="country-name">Russia</span>
+                    <span class="sanction-badge">SANCTIONED</span>
+                </div>
+                <div class="info-section">
+                    <span class="info-label">Financial Authority</span>
+                    <span class="authority-name">Central Bank of the Russian Federation (CBR)</span>
+                </div>
+                <div class="info-section">
+                    <span class="info-label">Website</span>
+                    <a href="https://www.cbr.ru/eng/" target="_blank" rel="noopener" class="website-link">https://www.cbr.ru/eng/</a>
+                </div>
+                <div class="info-section">
+                    <span class="info-label">Contact</span>
+                    <span class="info-value">Limited international accessibility</span>
+                </div>
+                <div class="notes">
+                    Comprehensive US/EU/UK sanctions since February 2022. Major banks excluded from SWIFT. Central Bank assets frozen in Western jurisdictions. Significant restrictions on all financial transactions.
+                </div>
+            </div>
+            
+            <!-- SYRIA -->
+            <div class="country-card">
+                <div class="country-header">
+                    <div class="flag-wrapper"><span class="fi fi-sy"></span></div>
+                    <span class="country-name">Syria</span>
+                    <span class="sanction-badge">SANCTIONED</span>
+                </div>
+                <div class="info-section">
+                    <span class="info-label">Financial Authority</span>
+                    <span class="authority-name">Central Bank of Syria (CBS)</span>
+                </div>
+                <div class="info-section">
+                    <span class="info-label">Website</span>
+                    <a href="https://cb.gov.sy/" target="_blank" rel="noopener" class="website-link">https://cb.gov.sy/</a>
+                </div>
+                <div class="info-section">
+                    <span class="info-label">Contact</span>
+                    <a href="mailto:info@cb.gov.sy" class="email-link">info@cb.gov.sy</a>
+                </div>
+                <div class="notes">
+                    Comprehensive US and EU sanctions. Banking sector severely restricted. Limited humanitarian exceptions. Website access may be restricted.
+                </div>
+            </div>
+        </div>
+        
+        <div style="text-align: center;">
+            <a href="index.html" class="back-link">
+                ← Back to Full Database
+            </a>
+        </div>
+    </div>
+    
+    <footer>
+        <p>This page is intentionally excluded from search engine indexing.</p>
+        <p style="margin-top: 10px;">Data sourced from public information. Last updated: January 2026</p>
+        <p style="margin-top: 15px;">
+            <a href="https://www.un.org/securitycouncil/sanctions/information" target="_blank" rel="noopener">UN Security Council Sanctions</a> |
+            <a href="https://www.sanctionsmap.eu/" target="_blank" rel="noopener">EU Sanctions Map</a> |
+            <a href="https://ofac.treasury.gov/" target="_blank" rel="noopener">US OFAC</a>
+        </p>
+        <p style="margin-top: 20px; opacity: 0.7;">© 2026 Financial Authority Database - Educational Resource</p>
+    </footer>
+</body>
+</html>
