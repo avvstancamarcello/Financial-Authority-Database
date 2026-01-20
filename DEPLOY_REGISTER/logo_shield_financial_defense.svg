@@ -1,7 +1,42 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg width="512" height="512" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
-  <title id="title">Financial Defense Shield Logo</title>
-  <desc id="desc">Blue shield with a central golden dollar symbol, two traffic lights tangential to the inner shield sides, Financial Defense text inside, and three vertical golden orbits with red, yellow and green planets outside the shield.</desc>
+<!--
+  ╔══════════════════════════════════════════════════════════════════════════════╗
+  ║  FINANCIAL DEFENSE SHIELD LOGO - PROTECTED INTELLECTUAL PROPERTY            ║
+  ╠══════════════════════════════════════════════════════════════════════════════╣
+  ║  © 2026 Avvocato Marcello Stanca - All Rights Reserved                       ║
+  ║  Author: Avvocato Marcello Stanca                                            ║
+  ║  Email: lawyer@marcellostanca.it                                             ║
+  ║  Website: https://tutelatruffe.it                                            ║
+  ║  Creation Date: January 2026                                                 ║
+  ║  License: Proprietary - Unauthorized reproduction prohibited                 ║
+  ║                                                                              ║
+  ║  LEGAL NOTICE:                                                               ║
+  ║  This logo is protected by Italian Copyright Law (L. 633/1941),              ║
+  ║  EU Directive 2001/29/EC, and International Treaties (Berne Convention).    ║
+  ║  Trademark registration pending at UIBM/EUIPO.                               ║
+  ║  Unauthorized use, reproduction, or distribution is strictly prohibited      ║
+  ║  and will be prosecuted to the fullest extent of the law.                   ║
+  ║                                                                              ║
+  ║  Digital Fingerprint: FD-SHIELD-MS-2026-IT                                   ║
+  ╚══════════════════════════════════════════════════════════════════════════════╝
+-->
+<svg width="512" height="512" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" role="img" aria-labelledby="title desc">
+  <metadata>
+    <rdf:RDF>
+      <cc:Work rdf:about="">
+        <dc:title>Financial Defense Shield Logo</dc:title>
+        <dc:creator>Avvocato Marcello Stanca</dc:creator>
+        <dc:rights>© 2026 Avvocato Marcello Stanca - All Rights Reserved</dc:rights>
+        <dc:publisher>TutelaTruffe.it</dc:publisher>
+        <dc:date>2026-01-20</dc:date>
+        <dc:format>image/svg+xml</dc:format>
+        <dc:identifier>FD-SHIELD-MS-2026-IT</dc:identifier>
+        <cc:license rdf:resource="https://tutelatruffe.it/terms.html"/>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <title id="title">Financial Defense Shield Logo - © Avv. Marcello Stanca</title>
+  <desc id="desc">Blue shield with a central golden dollar symbol, two traffic lights tangential to the inner shield sides, Financial Defense text inside, and three vertical golden orbits with red, yellow and green planets outside the shield. Protected intellectual property of Avvocato Marcello Stanca.</desc>
   <defs>
     <linearGradient id="shieldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
       <stop offset="0%" stop-color="#1d4ed8"/>
@@ -60,22 +95,20 @@
     DEFENSE
   </text>
   
-  <!-- Copyright symbol at the tip of the shield -->
-  <text x="256" y="400" text-anchor="middle" fill="#ffffff"
+  <!-- M, Copyright symbol ©, and S at the tip of the shield - Author: Marcello Stanca -->
+  <text x="218" y="398" text-anchor="middle" fill="#39ff14"
         font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif"
-        font-weight="700" font-size="20">
-    ©
-  </text>
-
-  <!-- M and S initials for Marcello Stanca in phosphor green -->
-  <text x="180" y="390" text-anchor="middle" fill="#39ff14"
-        font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif"
-        font-weight="800" font-size="36">
+        font-weight="800" font-size="32">
     M
   </text>
-  <text x="332" y="390" text-anchor="middle" fill="#39ff14"
+  <text x="256" y="402" text-anchor="middle" fill="#39ff14"
         font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif"
-        font-weight="800" font-size="36">
+        font-weight="700" font-size="40">
+    ©
+  </text>
+  <text x="294" y="398" text-anchor="middle" fill="#39ff14"
+        font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif"
+        font-weight="800" font-size="32">
     S
   </text>
 

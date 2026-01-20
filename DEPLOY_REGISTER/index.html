@@ -40,7 +40,12 @@
     <!-- Preload Critical Resources - Core Web Vitals Optimization -->
     <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
     <link rel="preconnect" href="https://www.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="dns-prefetch" href="https://www.googletagmanager.com">
+    
+    <!-- Google Fonts: Arabic (Noto Sans Arabic) + Chinese Simplified (Noto Sans SC) -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@400;600;700&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="preload" href="https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.2.3/css/flag-icons.min.css" as="style">
     <link rel="preload" href="logo_shield_financial_defense.svg" as="image" type="image/svg+xml">
     
@@ -343,6 +348,25 @@
             cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'><circle cx='10' cy='10' r='6' fill='%23f9fafb' stroke='%23111827' stroke-width='2'/><line x1='14' y1='14' x2='22' y2='22' stroke='%23111827' stroke-width='3' stroke-linecap='round'/></svg>") 10 10, auto;
         }
         body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%); color: #333; line-height: 1.6; min-height: 100vh; padding: 20px; }
+        /* Font per lingue Arabo e Cinese Semplificato */
+        html[lang="ar"] body, html[lang="ar"] input, html[lang="ar"] textarea, html[lang="ar"] button, html[lang="ar"] select { font-family: 'Noto Sans Arabic', 'Segoe UI', Tahoma, sans-serif; direction: rtl; }
+        html[lang="zh"] body, html[lang="zh"] input, html[lang="zh"] textarea, html[lang="zh"] button, html[lang="zh"] select { font-family: 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', 'Segoe UI', sans-serif; }
+        /* RTL support per arabo */
+        [dir="rtl"] .form-row { flex-direction: row-reverse; }
+        [dir="rtl"] .form-label { text-align: right; }
+        [dir="rtl"] input, [dir="rtl"] textarea { text-align: right; }
+        /* Protected Logo - Anti-copy measures */
+        .protected-logo {
+            pointer-events: none;
+            user-select: none;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            -webkit-user-drag: none;
+            -webkit-touch-callout: none;
+        }
+        .orbit-side-icon, .flag-orbit-center { pointer-events: auto; }
+        .orbit-side-icon img, .flag-orbit-center img { pointer-events: none; }
         .container { max-width: 1400px; margin: 0 auto; background: white; border-radius: 15px; box-shadow: 0 10px 40px rgba(0,0,0,0.3); overflow: hidden; position: relative; }
         .security-banner { background: transparent; color: white; border-bottom: none; padding: 8px 16px 0; display: flex; justify-content: center; }
         .security-banner-toggle {
@@ -1192,6 +1216,26 @@
         html, body { overflow-x: hidden; }
         .container { overflow-x: hidden; }
     </style>
+    
+    <!-- Logo Protection Script -->
+    <script>
+    (function() {
+        'use strict';
+        // Protect logo images from right-click and drag
+        document.addEventListener('DOMContentLoaded', function() {
+            const protectedLogos = document.querySelectorAll('.protected-logo, img[src*="logo_shield"]');
+            protectedLogos.forEach(function(img) {
+                img.addEventListener('contextmenu', function(e) { e.preventDefault(); return false; });
+                img.addEventListener('dragstart', function(e) { e.preventDefault(); return false; });
+                img.addEventListener('mousedown', function(e) { if(e.button === 2) { e.preventDefault(); return false; } });
+            });
+            // Console warning for developers
+            console.log('%c⚠️ PROTECTED INTELLECTUAL PROPERTY', 'color: #ef4444; font-size: 20px; font-weight: bold;');
+            console.log('%c© 2026 Avvocato Marcello Stanca - All Rights Reserved', 'color: #39ff14; font-size: 14px;');
+            console.log('%cThe Financial Defense Shield Logo is protected by Italian Copyright Law (L. 633/1941), EU Directive 2001/29/EC, and Berne Convention. Unauthorized reproduction is prohibited.', 'color: #fbbf24; font-size: 12px;');
+        });
+    })();
+    </script>
 </head>
 <body itemscope itemtype="https://schema.org/WebApplication">
 <!-- Google Tag Manager (noscript) -->
@@ -1336,7 +1380,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             </nav>
             <div class="flag-orbit-banner" aria-hidden="true">
                 <div class="orbit-side-icon orbit-side-icon-left">
-                    <img src="logo_shield_financial_defense.svg" alt="Financial Defense - tutela del consumatore" width="170" height="170">
+                    <img src="logo_shield_financial_defense.svg" alt="Financial Defense - tutela del consumatore" width="170" height="170" class="protected-logo" draggable="false" oncontextmenu="return false;" ondragstart="return false;" onselectstart="return false;" data-copyright="© 2026 Avv. Marcello Stanca - All Rights Reserved">
                 </div>
                 <div class="flag-orbit-container">
                     <div class="flag-orbit-ring"></div>
@@ -1399,11 +1443,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                         </div>
                     </div>
                     <div class="flag-orbit-center">
-                        <img src="logo_shield_financial_defense.svg" alt="Financial Defense Shield - cuore della protezione dei consumatori" width="68" height="68">
+                        <img src="logo_shield_financial_defense.svg" alt="Financial Defense Shield - cuore della protezione dei consumatori" width="68" height="68" class="protected-logo" draggable="false" oncontextmenu="return false;" ondragstart="return false;" onselectstart="return false;" data-copyright="© 2026 Avv. Marcello Stanca - All Rights Reserved">
                     </div>
                 </div>
                 <div class="orbit-side-icon orbit-side-icon-right">
-                    <img src="logo_shield_financial_defense.svg" alt="Financial Defense - tutela del consumatore" width="170" height="170">
+                    <img src="logo_shield_financial_defense.svg" alt="Financial Defense - tutela del consumatore" width="170" height="170" class="protected-logo" draggable="false" oncontextmenu="return false;" ondragstart="return false;" onselectstart="return false;" data-copyright="© 2026 Avv. Marcello Stanca - All Rights Reserved">
                 </div>
             </div>
             <h1 data-i18n="subtitle" itemprop="name">Database Autorità Finanziarie Internazionali – 189 Paesi, 20 Lingue</h1>
@@ -1832,6 +1876,27 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 searchAdvice3: "خذ وقتك قبل تنفيذ أي عملية مالية يضغط عليك بها أشخاص مجهولون.",
                 searchAdvice4: "اطلب من بنكك تأكيداً كتابياً عبر البريد الإلكتروني بشرعية المستفيدين.",
                 instructionsButtonModal: "تعليمات - كيفية التحقق من هذه الهيئة",
+                reportSuspectButton: "الإبلاغ عن جهة مشبوهة",
+                reportAbuseButton: "الإبلاغ عن انتهاك",
+                askAuthorityBtnEN: "🇬🇧 Ask this Authority for info!",
+                askAuthorityBtnNative: "!اطلب معلومات من هذه الهيئة",
+                // Form Segnala Abuso - labels (Arabic)
+                reportFormTitle: "⚠️ الإبلاغ عن جهة مشبوهة",
+                reportFormSubtitle: "طلب التحقق لدى الجهة المالية المختصة",
+                reportFormEmail: "📧 بريدك الإلكتروني",
+                reportFormSuspectName: "🏢 اسم الجهة المشبوهة",
+                reportFormSuspectNamePlaceholder: "مثال: TradingPro Ltd، ماريو روسّي...",
+                reportFormUrl: "🌐 الموقع الإلكتروني / الرابط المشبوه",
+                reportFormPhone: "📱 رقم واتساب / الهاتف المشبوه",
+                reportFormAmount: "💰 المبلغ المطلوب / المفقود (اختياري)",
+                reportFormIban: "🏦 رقم الآيبان واسم مستلم الحوالة المطلوبة",
+                reportFormIbanPlaceholder: "مثال: IT60X0542811101000000123456 – باسم: Mario Rossi SRL",
+                reportFormIbanNote: "⚠️ معلومة أساسية: سيتم إرسالها إلى الجهة المختصة وحفظها في قاعدة البيانات العامة \"Warning List\".",
+                reportFormDescription: "📝 وصف مختصر",
+                reportFormDescriptionPlaceholder: "صف بإيجاز كيف تم التواصل معك وماذا عُرض عليك...",
+                reportFormSubmit: "📤 إرسال طلب عبر البريد الإلكتروني",
+                reportFormCancel: "❌ إلغاء",
+                reportFormDisclaimer: "ℹ️ سيتم إرسال البيانات إلى بريدك الإلكتروني لتمكينك من التواصل مع الجهة المختصة. وستُرسل نسخة إلى المسؤول لإدراجها في قاعدة البيانات العامة \"Warning List\".",
                 instructionsContent: `
 <button type="button" class="instructions-popup-close" onclick="toggleInstructions()" aria-label="إغلاق الدليل">×</button>
 <h2>🛡️ دليل قانوني عملي – التحقق من شركة مالية في 5 خطوات</h2>
@@ -1957,6 +2022,27 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 searchAdvice3: "在按照陌生人催促进行任何金融操作之前，先冷静等待并思考。",
                 searchAdvice4: "通过电子邮件向你的银行索取关于收款人合法性的书面确认。",
                 instructionsButtonModal: "说明 - 如何验证此监管机构",
+                reportSuspectButton: "举报可疑实体",
+                reportAbuseButton: "举报滥用行为",
+                askAuthorityBtnEN: "🇬🇧 Ask this Authority for info!",
+                askAuthorityBtnNative: "向此监管机构咨询！",
+                // Form Segnala Abuso - labels (Chinese Simplified)
+                reportFormTitle: "⚠️ 举报可疑实体",
+                reportFormSubtitle: "向金融监管机构提交核查请求",
+                reportFormEmail: "📧 您的电子邮箱",
+                reportFormSuspectName: "🏢 可疑实体名称",
+                reportFormSuspectNamePlaceholder: "例如：TradingPro Ltd、Mario Rossi…",
+                reportFormUrl: "🌐 可疑网站 / URL",
+                reportFormPhone: "📱 可疑的 WhatsApp / 电话号码",
+                reportFormAmount: "💰 要求/损失金额（可选）",
+                reportFormIban: "🏦 要求转账的 IBAN 和收款人",
+                reportFormIbanPlaceholder: "例如：IT60X0542811101000000123456 – 户名：Mario Rossi SRL",
+                reportFormIbanNote: "⚠️ 重要信息：将提交给监管机构，并存入公共数据库 \"Warning List\"。",
+                reportFormDescription: "📝 简要描述",
+                reportFormDescriptionPlaceholder: "请简要说明对方如何联系您，以及向您提出了什么…",
+                reportFormSubmit: "📤 发送邮件请求",
+                reportFormCancel: "❌ 取消",
+                reportFormDisclaimer: "ℹ️ 数据将发送到您的邮箱，以便您联系监管机构。副本将发送给管理员，用于更新公共 \"Warning List\"。",
                 instructionsContent: ""
             },
             hi: {
