@@ -1619,52 +1619,52 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <div class="modal-content" style="max-width: 650px; background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%); color: #ffffff; border: 2px solid #39ff14;">
             <span class="close-modal" onclick="closeReportForm()" style="color: #39ff14;">×</span>
             <div style="text-align: center; margin-bottom: 20px;">
-                <h2 style="color: #39ff14; margin: 0;">⚠️ Segnala Entità Sospetta</h2>
-                <p style="color: #9ca3af; font-size: 0.9em;" id="reportAuthorityInfo">Richiesta di verifica all'Autorità Finanziaria</p>
+                <h2 style="color: #39ff14; margin: 0;" data-i18n="reportFormTitle">⚠️ Segnala Entità Sospetta</h2>
+                <p style="color: #9ca3af; font-size: 0.9em;" id="reportAuthorityInfo" data-i18n="reportFormSubtitle">Richiesta di verifica all'Autorità Finanziaria</p>
             </div>
             <form id="reportForm" onsubmit="submitReport(event)">
                 <div style="margin-bottom: 15px;">
-                    <label style="display: block; color: #39ff14; font-weight: 600; margin-bottom: 5px;">📧 La tua Email *</label>
+                    <label style="display: block; color: #39ff14; font-weight: 600; margin-bottom: 5px;" data-i18n="reportFormEmail">📧 La tua Email *</label>
                     <input type="email" id="userEmail" required placeholder="tuaemail@esempio.com" style="width: 100%; padding: 12px; border-radius: 8px; border: 1px solid #39ff14; background: #0a0a0a; color: white; font-size: 1em;">
                 </div>
                 <div style="margin-bottom: 15px;">
-                    <label style="display: block; color: #39ff14; font-weight: 600; margin-bottom: 5px;">🏢 Nome Entità Sospetta *</label>
-                    <input type="text" id="suspectName" required placeholder="Es: TradingPro Ltd, Mario Rossi..." style="width: 100%; padding: 12px; border-radius: 8px; border: 1px solid #39ff14; background: #0a0a0a; color: white; font-size: 1em;">
+                    <label style="display: block; color: #39ff14; font-weight: 600; margin-bottom: 5px;" data-i18n="reportFormSuspectName">🏢 Nome Entità Sospetta *</label>
+                    <input type="text" id="suspectName" required data-i18n-placeholder="reportFormSuspectNamePlaceholder" placeholder="Es: TradingPro Ltd, Mario Rossi..." style="width: 100%; padding: 12px; border-radius: 8px; border: 1px solid #39ff14; background: #0a0a0a; color: white; font-size: 1em;">
                 </div>
                 <div style="margin-bottom: 15px;">
-                    <label style="display: block; color: #39ff14; font-weight: 600; margin-bottom: 5px;">🌐 Sito Web / URL Sospetto</label>
-                    <input type="url" id="suspectUrl" placeholder="https://sito-sospetto.com" style="width: 100%; padding: 12px; border-radius: 8px; border: 1px solid #39ff14; background: #0a0a0a; color: white; font-size: 1em;">
+                    <label style="display: block; color: #39ff14; font-weight: 600; margin-bottom: 5px;" data-i18n="reportFormUrl">🌐 Sito Web / URL Sospetto</label>
+                    <input type="url" id="suspectUrl" placeholder="https://suspicious-site.com" style="width: 100%; padding: 12px; border-radius: 8px; border: 1px solid #39ff14; background: #0a0a0a; color: white; font-size: 1em;">
                 </div>
                 <div style="margin-bottom: 15px;">
-                    <label style="display: block; color: #39ff14; font-weight: 600; margin-bottom: 5px;">📱 WhatsApp / Telefono Sospetto</label>
+                    <label style="display: block; color: #39ff14; font-weight: 600; margin-bottom: 5px;" data-i18n="reportFormPhone">📱 WhatsApp / Telefono Sospetto</label>
                     <input type="text" id="suspectPhone" placeholder="+39 123 456 7890" style="width: 100%; padding: 12px; border-radius: 8px; border: 1px solid #39ff14; background: #0a0a0a; color: white; font-size: 1em;">
                 </div>
                 <div style="margin-bottom: 15px;">
-                    <label style="display: block; color: #39ff14; font-weight: 600; margin-bottom: 5px;">💰 Importo Richiesto/Perso (opzionale)</label>
-                    <input type="text" id="suspectAmount" placeholder="Es: €5.000" style="width: 100%; padding: 12px; border-radius: 8px; border: 1px solid #39ff14; background: #0a0a0a; color: white; font-size: 1em;">
+                    <label style="display: block; color: #39ff14; font-weight: 600; margin-bottom: 5px;" data-i18n="reportFormAmount">💰 Importo Richiesto/Perso (opzionale)</label>
+                    <input type="text" id="suspectAmount" placeholder="€5,000 / $5,000" style="width: 100%; padding: 12px; border-radius: 8px; border: 1px solid #39ff14; background: #0a0a0a; color: white; font-size: 1em;">
                 </div>
                 <div style="margin-bottom: 15px;">
-                    <label style="display: block; color: #ff6b6b; font-weight: 600; margin-bottom: 5px;">🏦 IBAN e Destinatario del Bonifico Richiesto *</label>
-                    <textarea id="suspectIban" required rows="2" placeholder="Es: IT60X0542811101000000123456 - intestato a: Mario Rossi SRL" style="width: 100%; padding: 12px; border-radius: 8px; border: 2px solid #ff6b6b; background: #0a0a0a; color: white; font-size: 1em; resize: vertical;"></textarea>
-                    <p style="color: #ff6b6b; font-size: 0.75em; margin-top: 5px;">⚠️ Dato fondamentale: sarà trasmesso all'Autorità e conservato nella banca dati pubblica Warning List.</p>
+                    <label style="display: block; color: #ff6b6b; font-weight: 600; margin-bottom: 5px;" data-i18n="reportFormIban">🏦 IBAN e Destinatario del Bonifico Richiesto *</label>
+                    <textarea id="suspectIban" required rows="2" data-i18n-placeholder="reportFormIbanPlaceholder" placeholder="Es: IT60X0542811101000000123456 - intestato a: Mario Rossi SRL" style="width: 100%; padding: 12px; border-radius: 8px; border: 2px solid #ff6b6b; background: #0a0a0a; color: white; font-size: 1em; resize: vertical;"></textarea>
+                    <p style="color: #ff6b6b; font-size: 0.75em; margin-top: 5px;" data-i18n="reportFormIbanNote">⚠️ Dato fondamentale: sarà trasmesso all'Autorità e conservato nella banca dati pubblica Warning List.</p>
                 </div>
                 <div style="margin-bottom: 20px;">
-                    <label style="display: block; color: #39ff14; font-weight: 600; margin-bottom: 5px;">📝 Descrizione Breve *</label>
-                    <textarea id="suspectDescription" required rows="3" placeholder="Descrivi brevemente come sei stato contattato e cosa ti hanno proposto..." style="width: 100%; padding: 12px; border-radius: 8px; border: 1px solid #39ff14; background: #0a0a0a; color: white; font-size: 1em; resize: vertical;"></textarea>
+                    <label style="display: block; color: #39ff14; font-weight: 600; margin-bottom: 5px;" data-i18n="reportFormDescription">📝 Descrizione Breve *</label>
+                    <textarea id="suspectDescription" required rows="3" data-i18n-placeholder="reportFormDescriptionPlaceholder" placeholder="Descrivi brevemente come sei stato contattato e cosa ti hanno proposto..." style="width: 100%; padding: 12px; border-radius: 8px; border: 1px solid #39ff14; background: #0a0a0a; color: white; font-size: 1em; resize: vertical;"></textarea>
                 </div>
                 <input type="hidden" id="reportCountry" value="">
                 <input type="hidden" id="reportAuthority" value="">
                 <input type="hidden" id="reportAuthorityEmail" value="">
                 <div style="display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;">
-                    <button type="submit" style="background: #39ff14; color: #000000; border: none; border-radius: 999px; padding: 0.8rem 2rem; font-size: 1.1rem; font-weight: 700; cursor: pointer; box-shadow: 0 4px 15px rgba(57, 255, 20, 0.5);">
+                    <button type="submit" style="background: #39ff14; color: #000000; border: none; border-radius: 999px; padding: 0.8rem 2rem; font-size: 1.1rem; font-weight: 700; cursor: pointer; box-shadow: 0 4px 15px rgba(57, 255, 20, 0.5);" data-i18n="reportFormSubmit">
                         📤 Genera Richiesta Email
                     </button>
-                    <button type="button" onclick="closeReportForm()" style="background: #374151; color: #ffffff; border: 1px solid #6b7280; border-radius: 999px; padding: 0.8rem 2rem; font-size: 1rem; font-weight: 600; cursor: pointer;">
+                    <button type="button" onclick="closeReportForm()" style="background: #374151; color: #ffffff; border: 1px solid #6b7280; border-radius: 999px; padding: 0.8rem 2rem; font-size: 1rem; font-weight: 600; cursor: pointer;" data-i18n="reportFormCancel">
                         ❌ Annulla
                     </button>
                 </div>
             </form>
-            <p style="text-align: center; color: #6b7280; font-size: 0.8em; margin-top: 15px;">
+            <p style="text-align: center; color: #6b7280; font-size: 0.8em; margin-top: 15px;" data-i18n="reportFormDisclaimer">
                 ℹ️ I dati saranno inviati alla tua email per permetterti di contattare l'Authority.<br>
                 Una copia sarà inviata all'amministratore per alimentare la Warning List pubblica.
             </p>
@@ -1733,6 +1733,23 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 reportAbuseButton: "Segnala l'abuso",
                 askAuthorityBtnEN: "🇬🇧 Ask this Authority for info!",
                 askAuthorityBtnNative: "Chiedi informazioni a questa Autorità!",
+                // Form Segnala Abuso - labels
+                reportFormTitle: "⚠️ Segnala Entità Sospetta",
+                reportFormSubtitle: "Richiesta di verifica all'Autorità Finanziaria",
+                reportFormEmail: "📧 La tua Email",
+                reportFormSuspectName: "🏢 Nome Entità Sospetta",
+                reportFormSuspectNamePlaceholder: "Es: TradingPro Ltd, Mario Rossi...",
+                reportFormUrl: "🌐 Sito Web / URL Sospetto",
+                reportFormPhone: "📱 WhatsApp / Telefono Sospetto",
+                reportFormAmount: "💰 Importo Richiesto/Perso (opzionale)",
+                reportFormIban: "🏦 IBAN e Destinatario del Bonifico Richiesto",
+                reportFormIbanPlaceholder: "Es: IT60X0542811101000000123456 - intestato a: Mario Rossi SRL",
+                reportFormIbanNote: "⚠️ Dato fondamentale: sarà trasmesso all'Autorità e conservato nella banca dati pubblica Warning List.",
+                reportFormDescription: "📝 Descrizione Breve",
+                reportFormDescriptionPlaceholder: "Descrivi brevemente come sei stato contattato e cosa ti hanno proposto...",
+                reportFormSubmit: "📤 Genera Richiesta Email",
+                reportFormCancel: "❌ Annulla",
+                reportFormDisclaimer: "ℹ️ I dati saranno inviati alla tua email per permetterti di contattare l'Authority. Una copia sarà inviata all'amministratore per alimentare la Warning List pubblica.",
                 instructionsContent: `
 <button type="button" class="instructions-popup-close" onclick="toggleInstructions()" aria-label="Chiudi guida">×</button>
 <h2>🛡️ Guida Legale Operativa – Verifica di un’Impresa Finanziaria in 5 Passi</h2>
@@ -2031,6 +2048,23 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 reportAbuseButton: "Report Abuse",
                 askAuthorityBtnEN: "🇬🇧 Ask this Authority for info!",
                 askAuthorityBtnNative: "Ask this Authority for info!",
+                // Report Form - labels
+                reportFormTitle: "⚠️ Report Suspicious Entity",
+                reportFormSubtitle: "Verification request to Financial Authority",
+                reportFormEmail: "📧 Your Email",
+                reportFormSuspectName: "🏢 Suspect Entity Name",
+                reportFormSuspectNamePlaceholder: "E.g.: TradingPro Ltd, John Doe...",
+                reportFormUrl: "🌐 Suspicious Website / URL",
+                reportFormPhone: "📱 WhatsApp / Suspicious Phone",
+                reportFormAmount: "💰 Amount Requested/Lost (optional)",
+                reportFormIban: "🏦 IBAN and Bank Transfer Beneficiary",
+                reportFormIbanPlaceholder: "E.g.: DE89370400440532013000 - beneficiary: John Doe Ltd",
+                reportFormIbanNote: "⚠️ Critical data: will be sent to the Authority and stored in the public Warning List database.",
+                reportFormDescription: "📝 Brief Description",
+                reportFormDescriptionPlaceholder: "Briefly describe how you were contacted and what they proposed...",
+                reportFormSubmit: "📤 Generate Email Request",
+                reportFormCancel: "❌ Cancel",
+                reportFormDisclaimer: "ℹ️ Data will be sent to your email so you can contact the Authority. A copy will be sent to the administrator to populate the public Warning List.",
                 instructionsContent: `
 <button type="button" class="instructions-popup-close" onclick="toggleInstructions()" aria-label="Close guide">×</button>
 <h2>🛡️ Practical Legal Guide – Verifying a Financial Firm in 5 Steps</h2>
@@ -2113,6 +2147,23 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 searchAdvice3: "Prenez le temps avant d'effectuer des opérations financières sollicitées par des inconnus.",
                 searchAdvice4: "Demandez à votre banque, par email, une confirmation écrite de la légalité des bénéficiaires.",
                 instructionsButtonModal: "Instructions - Comment vérifier cette Autorité",
+                // Form Signaler Abus - labels
+                reportFormTitle: "⚠️ Signaler une Entité Suspecte",
+                reportFormSubtitle: "Demande de vérification à l'Autorité Financière",
+                reportFormEmail: "📧 Votre Email",
+                reportFormSuspectName: "🏢 Nom de l'Entité Suspecte",
+                reportFormSuspectNamePlaceholder: "Ex: TradingPro Ltd, Jean Dupont...",
+                reportFormUrl: "🌐 Site Web / URL Suspect",
+                reportFormPhone: "📱 WhatsApp / Téléphone Suspect",
+                reportFormAmount: "💰 Montant Demandé/Perdu (optionnel)",
+                reportFormIban: "🏦 IBAN et Bénéficiaire du Virement Demandé",
+                reportFormIbanPlaceholder: "Ex: FR76 3000 6000 0112 3456 7890 189 - bénéficiaire: Jean Dupont SARL",
+                reportFormIbanNote: "⚠️ Donnée cruciale: sera transmise à l'Autorité et conservée dans la base de données publique Warning List.",
+                reportFormDescription: "📝 Description Brève",
+                reportFormDescriptionPlaceholder: "Décrivez brièvement comment vous avez été contacté et ce qu'ils vous ont proposé...",
+                reportFormSubmit: "📤 Générer la Demande par Email",
+                reportFormCancel: "❌ Annuler",
+                reportFormDisclaimer: "ℹ️ Les données seront envoyées à votre email pour vous permettre de contacter l'Autorité. Une copie sera envoyée à l'administrateur pour alimenter la Warning List publique.",
                 instructionsContent: `
 <button type="button" class="instructions-popup-close" onclick="toggleInstructions()" aria-label="Fermer le guide">×</button>
 <h2>🛡️ Guide juridique pratique – Vérifier une entreprise financière en 5 étapes</h2>
@@ -2195,6 +2246,23 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 searchAdvice3: "Nehmen Sie sich Zeit, bevor Sie auf Drängen Unbekannter finanzielle Transaktionen ausführen.",
                 searchAdvice4: "Bitten Sie Ihre Bank per E‑Mail um eine schriftliche Bestätigung der Rechtmäßigkeit der Zahlungsempfänger.",
                 instructionsButtonModal: "Anleitung - So überprüfen Sie diese Behörde",
+                // Missbrauch melden - Formular
+                reportFormTitle: "⚠️ Verdächtige Einheit melden",
+                reportFormSubtitle: "Überprüfungsanfrage an die Finanzaufsichtsbehörde",
+                reportFormEmail: "📧 Ihre E-Mail",
+                reportFormSuspectName: "🏢 Name der verdächtigen Einheit",
+                reportFormSuspectNamePlaceholder: "Z.B.: TradingPro Ltd, Max Mustermann...",
+                reportFormUrl: "🌐 Verdächtige Website / URL",
+                reportFormPhone: "📱 WhatsApp / Verdächtige Telefonnummer",
+                reportFormAmount: "💰 Geforderter/Verlorener Betrag (optional)",
+                reportFormIban: "🏦 IBAN und Empfänger der angeforderten Überweisung",
+                reportFormIbanPlaceholder: "Z.B.: DE89 3704 0044 0532 0130 00 - Empfänger: Max Mustermann GmbH",
+                reportFormIbanNote: "⚠️ Wichtige Daten: Werden an die Behörde übermittelt und in der öffentlichen Warnliste gespeichert.",
+                reportFormDescription: "📝 Kurze Beschreibung",
+                reportFormDescriptionPlaceholder: "Beschreiben Sie kurz, wie Sie kontaktiert wurden und was Ihnen vorgeschlagen wurde...",
+                reportFormSubmit: "📤 E-Mail-Anfrage erstellen",
+                reportFormCancel: "❌ Abbrechen",
+                reportFormDisclaimer: "ℹ️ Die Daten werden an Ihre E-Mail gesendet, damit Sie die Behörde kontaktieren können. Eine Kopie wird an den Administrator gesendet, um die öffentliche Warnliste zu ergänzen.",
                 instructionsContent: `
 <button type="button" class="instructions-popup-close" onclick="toggleInstructions()" aria-label="Leitfaden schließen">×</button>
 <h2>🛡️ Praktischer Rechtsleitfaden – Prüfung eines Finanzunternehmens in 5 Schritten</h2>
@@ -2277,6 +2345,23 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 searchAdvice3: "Tómate tu tiempo antes de realizar operaciones financieras solicitadas por desconocidos.",
                 searchAdvice4: "Pide a tu banco, por correo electrónico, una confirmación escrita sobre la legalidad de los beneficiarios.",
                 instructionsButtonModal: "Instrucciones - Cómo verificar esta Autoridad",
+                // Formulario Denunciar Abuso
+                reportFormTitle: "⚠️ Denunciar Entidad Sospechosa",
+                reportFormSubtitle: "Solicitud de verificación a la Autoridad Financiera",
+                reportFormEmail: "📧 Tu Email",
+                reportFormSuspectName: "🏢 Nombre de la Entidad Sospechosa",
+                reportFormSuspectNamePlaceholder: "Ej: TradingPro Ltd, Juan García...",
+                reportFormUrl: "🌐 Sitio Web / URL Sospechoso",
+                reportFormPhone: "📱 WhatsApp / Teléfono Sospechoso",
+                reportFormAmount: "💰 Importe Solicitado/Perdido (opcional)",
+                reportFormIban: "🏦 IBAN y Beneficiario de la Transferencia Solicitada",
+                reportFormIbanPlaceholder: "Ej: ES91 2100 0418 4502 0005 1332 - beneficiario: Juan García SL",
+                reportFormIbanNote: "⚠️ Dato fundamental: será transmitido a la Autoridad y conservado en la base de datos pública Warning List.",
+                reportFormDescription: "📝 Descripción Breve",
+                reportFormDescriptionPlaceholder: "Describe brevemente cómo te contactaron y qué te propusieron...",
+                reportFormSubmit: "📤 Generar Solicitud por Email",
+                reportFormCancel: "❌ Cancelar",
+                reportFormDisclaimer: "ℹ️ Los datos serán enviados a tu email para que puedas contactar a la Autoridad. Una copia será enviada al administrador para alimentar la Warning List pública.",
                 instructionsContent: `
 <button type="button" class="instructions-popup-close" onclick="toggleInstructions()" aria-label="Cerrar la guía">×</button>
 <h2>🛡️ Guía jurídica práctica – Verificar una empresa financiera en 5 pasos</h2>
@@ -2359,6 +2444,23 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 searchAdvice3: "Tome o seu tempo antes de efetuar operações financeiras solicitadas por desconhecidos.",
                 searchAdvice4: "Peça ao seu banco confirmação por email da legitimidade dos beneficiários.",
                 instructionsButtonModal: "Instruções - Como verificar esta Autoridade",
+                // Formulário Denunciar Abuso
+                reportFormTitle: "⚠️ Denunciar Entidade Suspeita",
+                reportFormSubtitle: "Pedido de verificação à Autoridade Financeira",
+                reportFormEmail: "📧 O seu Email",
+                reportFormSuspectName: "🏢 Nome da Entidade Suspeita",
+                reportFormSuspectNamePlaceholder: "Ex: TradingPro Ltd, João Silva...",
+                reportFormUrl: "🌐 Site Web / URL Suspeito",
+                reportFormPhone: "📱 WhatsApp / Telefone Suspeito",
+                reportFormAmount: "💰 Montante Solicitado/Perdido (opcional)",
+                reportFormIban: "🏦 IBAN e Beneficiário da Transferência Solicitada",
+                reportFormIbanPlaceholder: "Ex: PT50 0002 0123 1234 5678 9015 4 - beneficiário: João Silva Lda",
+                reportFormIbanNote: "⚠️ Dado fundamental: será transmitido à Autoridade e conservado na base de dados pública Warning List.",
+                reportFormDescription: "📝 Descrição Breve",
+                reportFormDescriptionPlaceholder: "Descreva brevemente como foi contactado e o que lhe propuseram...",
+                reportFormSubmit: "📤 Gerar Pedido por Email",
+                reportFormCancel: "❌ Cancelar",
+                reportFormDisclaimer: "ℹ️ Os dados serão enviados para o seu email para poder contactar a Autoridade. Uma cópia será enviada ao administrador para alimentar a Warning List pública.",
                 instructionsContent: ""
             }
             // Add other languages if needed
