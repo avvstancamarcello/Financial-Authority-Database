@@ -1643,6 +1643,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     <label style="display: block; color: #39ff14; font-weight: 600; margin-bottom: 5px;">💰 Importo Richiesto/Perso (opzionale)</label>
                     <input type="text" id="suspectAmount" placeholder="Es: €5.000" style="width: 100%; padding: 12px; border-radius: 8px; border: 1px solid #39ff14; background: #0a0a0a; color: white; font-size: 1em;">
                 </div>
+                <div style="margin-bottom: 15px;">
+                    <label style="display: block; color: #ff6b6b; font-weight: 600; margin-bottom: 5px;">🏦 IBAN e Destinatario del Bonifico Richiesto *</label>
+                    <textarea id="suspectIban" required rows="2" placeholder="Es: IT60X0542811101000000123456 - intestato a: Mario Rossi SRL" style="width: 100%; padding: 12px; border-radius: 8px; border: 2px solid #ff6b6b; background: #0a0a0a; color: white; font-size: 1em; resize: vertical;"></textarea>
+                    <p style="color: #ff6b6b; font-size: 0.75em; margin-top: 5px;">⚠️ Dato fondamentale: sarà trasmesso all'Autorità e conservato nella banca dati pubblica Warning List.</p>
+                </div>
                 <div style="margin-bottom: 20px;">
                     <label style="display: block; color: #39ff14; font-weight: 600; margin-bottom: 5px;">📝 Descrizione Breve *</label>
                     <textarea id="suspectDescription" required rows="3" placeholder="Descrivi brevemente come sei stato contattato e cosa ti hanno proposto..." style="width: 100%; padding: 12px; border-radius: 8px; border: 1px solid #39ff14; background: #0a0a0a; color: white; font-size: 1em; resize: vertical;"></textarea>
@@ -2995,6 +3000,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             const suspectUrl = document.getElementById('suspectUrl').value || 'Non fornito';
             const suspectPhone = document.getElementById('suspectPhone').value || 'Non fornito';
             const suspectAmount = document.getElementById('suspectAmount').value || 'Non specificato';
+            const suspectIban = document.getElementById('suspectIban').value;
             const suspectDescription = document.getElementById('suspectDescription').value;
             const countryName = document.getElementById('reportCountry').value;
             const authorityName = document.getElementById('reportAuthority').value;
@@ -3019,6 +3025,9 @@ DATI ENTITÀ DA VERIFICARE
 • Telefono/WhatsApp: ${suspectPhone}
 • Importo coinvolto: ${suspectAmount}
 
+🏦 IBAN E DESTINATARIO BONIFICO RICHIESTO:
+${suspectIban}
+
 DESCRIZIONE CONTATTO:
 ${suspectDescription}
 
@@ -3029,6 +3038,7 @@ Si chiede cortesemente di verificare:
 1. Se l'entità sopra indicata risulta regolarmente autorizzata/registrata presso codesta Autorità
 2. Se esistono warning, sanzioni o provvedimenti a carico della stessa
 3. Se l'attività descritta rientra tra quelle consentite dalla eventuale licenza
+4. Se il conto bancario indicato (IBAN) risulta associato a soggetti segnalati o sotto indagine
 
 Ringraziando per la collaborazione, si resta in attesa di cortese riscontro.
 
