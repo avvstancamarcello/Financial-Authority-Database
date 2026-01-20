@@ -95,21 +95,23 @@
     DEFENSE
   </text>
   
-  <!-- M, Copyright symbol ©, and S at the tip of the shield - Author: Marcello Stanca -->
-  <text x="218" y="398" text-anchor="middle" fill="#39ff14"
+  <!-- M and S initials aligned with traffic light bases - Author: Marcello Stanca -->
+  <text x="225" y="270" text-anchor="middle" fill="#39ff14"
         font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif"
-        font-weight="800" font-size="32">
+        font-weight="800" font-size="28">
     M
   </text>
-  <text x="256" y="402" text-anchor="middle" fill="#39ff14"
+  <text x="287" y="270" text-anchor="middle" fill="#39ff14"
         font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif"
-        font-weight="700" font-size="40">
-    ©
-  </text>
-  <text x="294" y="398" text-anchor="middle" fill="#39ff14"
-        font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif"
-        font-weight="800" font-size="32">
+        font-weight="800" font-size="28">
     S
+  </text>
+
+  <!-- Copyright symbol © at the tip of the shield -->
+  <text x="256" y="395" text-anchor="middle" fill="#39ff14"
+        font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif"
+        font-weight="700" font-size="36">
+    ©
   </text>
 
   <!-- Three vertical orbits around shield (all outside shield contour) -->
