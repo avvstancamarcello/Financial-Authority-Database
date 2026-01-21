@@ -2854,7 +2854,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             if (canonicalTag) {
                 const urlParams = new URLSearchParams(window.location.search);
                 const lang = urlParams.get('lang');
-                if (lang && lang !== 'it') {
+                if (lang && lang !== 'en') {
                     canonicalTag.href = `https://tutelatruffe.it/?lang=${lang}`;
                 } else {
                     canonicalTag.href = 'https://tutelatruffe.it/';
@@ -2908,14 +2908,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             // Aggiorna canonical URL (Google SEO - self-referencing canonical)
             const canonicalEl = document.getElementById('canonical-url');
             if (canonicalEl) {
-                const newCanonical = lang === 'it' 
+                const newCanonical = lang === 'en' 
                     ? 'https://tutelatruffe.it/' 
                     : `https://tutelatruffe.it/?lang=${lang}`;
                 canonicalEl.setAttribute('href', newCanonical);
             }
 
             // Aggiorna URL nel browser senza ricaricare
-            const newUrl = lang === 'it' 
+            const newUrl = lang === 'en' 
                 ? window.location.pathname 
                 : `${window.location.pathname}?lang=${lang}`;
             window.history.replaceState({lang: lang}, '', newUrl);
