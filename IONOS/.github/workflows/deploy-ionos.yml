@@ -1,0 +1,38 @@
+name: "🚀 Deploy to IONOS (scam-radar.com)"
+
+on:
+  push:
+    branches:
+      - principale      # usa "principale" o "main" secondo il tuo branch
+  workflow_dispatch:     # permette il deploy manuale
+
+# Blocca qualsiasi scrittura sul repository (read-only)
+permissions:
+  contents: read
+
+jobs:
+  deploy:
+    name: "📤 Upload to IONOS via SFTP"
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: "📥 Checkout repository (read-only)"
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false   # Non salva credenziali Git
+
+      - name: "📤 Deploy via SFTP"
+        uses: wlixcc/SFTP-Deploy-Action@v1.2.4
+        with:
+          server:      ${{ secrets.IONOS_FTP_HOST }}
+          username:    ${{ secrets.IONOS_FTP_USER }}
+          password:    ${{ secrets.IONOS_FTP_PASSWORD }}
+          port:        22
+          local_path:  "./"
+          remote_path: "/"
+
+      - name: "✅ Deploy completed"
+        run: |
+          echo "🎉 Deploy su www.scam-radar.com completato!"
+          echo "📅 Data: $(date)"
+          echo "⚠️ Workflow READ-ONLY: nessuna modifica al repository"

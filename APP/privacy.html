@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="it">
+<html lang="en">
 <head>
     <!-- Google Tag Manager -->
     <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -14,8 +14,75 @@
     <!-- Google AdSense -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2899281140209246" crossorigin="anonymous"></script>
     
-    <meta name="robots" content="noindex, follow">
-    <title>Informativa Privacy - Financial Authority Database / Tutela Truffe</title>
+    <meta name="robots" content="index, follow">
+    <title>Privacy Policy - Financial Authority Database / Tutela Truffe</title>
+    <meta name="description" content="Privacy Policy for the Financial Authority Database - Information on data processing, cookies, and user rights for financial fraud protection service">
+    
+    <!-- Canonical & Hreflang -->
+    <link rel="canonical" href="https://tutelatruffe.it/privacy.html">
+    <link rel="alternate" hreflang="en" href="https://tutelatruffe.it/privacy.html">
+    <link rel="alternate" hreflang="it" href="https://tutelatruffe.it/privacy.html?lang=it">
+    <link rel="alternate" hreflang="x-default" href="https://tutelatruffe.it/privacy.html">
+    
+    <!-- Schema.org Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebPage",
+        "@id": "https://tutelatruffe.it/privacy.html#webpage",
+        "url": "https://tutelatruffe.it/privacy.html",
+        "name": "Privacy Policy - Financial Authority Database",
+        "description": "Privacy Policy for the Financial Authority Database - Information on data processing, cookies, and user rights",
+        "inLanguage": ["en", "it"],
+        "datePublished": "2024-01-01",
+        "dateModified": "2026-01-21",
+        "isPartOf": {
+            "@type": "WebSite",
+            "@id": "https://tutelatruffe.it/#website",
+            "url": "https://tutelatruffe.it",
+            "name": "Tutela Truffe - Financial Authority Database",
+            "description": "Free database of financial supervisory authorities worldwide to help fraud victims",
+            "publisher": {
+                "@type": "Person",
+                "@id": "https://tutelatruffe.it/#author",
+                "name": "Avv. Marcello Stanca",
+                "email": "lawyer@marcellostanca.it",
+                "jobTitle": "Lawyer",
+                "url": "https://tutelatruffe.it"
+            }
+        },
+        "about": {
+            "@type": "Service",
+            "serviceType": "Legal Information Service",
+            "provider": {
+                "@id": "https://tutelatruffe.it/#author"
+            }
+        },
+        "mainEntity": {
+            "@type": "WebContent",
+            "about": "Privacy Policy",
+            "text": "Privacy information regarding data processing, cookies, and user rights for the Financial Authority Database"
+        },
+        "breadcrumb": {
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+                {
+                    "@type": "ListItem",
+                    "position": 1,
+                    "name": "Home",
+                    "item": "https://tutelatruffe.it/"
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 2,
+                    "name": "Privacy Policy",
+                    "item": "https://tutelatruffe.it/privacy.html"
+                }
+            ]
+        }
+    }
+    </script>
+    
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
@@ -84,6 +151,33 @@
         @media (max-width: 640px) {
             .container { padding: 18px 16px 24px; }
         }
+        
+        /* Language Switcher */
+        .lang-switcher {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 16px;
+            justify-content: flex-end;
+        }
+        .lang-btn {
+            padding: 6px 12px;
+            border: 1px solid #d1d5db;
+            border-radius: 6px;
+            background: #f9fafb;
+            cursor: pointer;
+            font-size: 0.85rem;
+            transition: all 0.2s;
+        }
+        .lang-btn:hover {
+            background: #e5e7eb;
+        }
+        .lang-btn.active {
+            background: #2563eb;
+            color: white;
+            border-color: #2563eb;
+        }
+        .lang-content { display: none; }
+        .lang-content.active { display: block; }
     </style>
 </head>
 <body>
@@ -92,25 +186,71 @@
 height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- End Google Tag Manager (noscript) -->
     <div class="container">
-        <a href="index.html" class="back-link" aria-label="Torna al Database delle Autorità Finanziarie">
+        <!-- Language Switcher -->
+        <div class="lang-switcher">
+            <button class="lang-btn active" onclick="setLanguage('en')" id="btn-en">🇬🇧 EN</button>
+            <button class="lang-btn" onclick="setLanguage('it')" id="btn-it">🇮🇹 IT</button>
+        </div>
+        
+        <a href="index.html" class="back-link" aria-label="Back to Financial Authority Database">
             <span>←</span>
-            <span>Torna al Database Autorità Finanziarie</span>
+            <span id="back-text">Back to Financial Authority Database</span>
         </a>
 
         <header>
-            <h1>Informativa Privacy</h1>
-            <p>Ultimo aggiornamento: 11 gennaio 2026</p>
+            <h1 id="page-title">Privacy Policy</h1>
+            <p id="last-update">Last updated: January 21, 2026</p>
         </header>
 
-        <main>
-            <h2>1. Titolare del trattamento</h2>
+        <!-- ENGLISH CONTENT -->
+        <main id="content-en" class="lang-content active">
+            <h2>1. Data Controller</h2>
             <p>
-                Titolare del trattamento dei dati personali &egrave; l'Avv. Marcello Stanca.
+                The Data Controller for personal data processing is Avv. Marcello Stanca.
             </p>
 
-            <h2>2. Dati trattati e finalit&agrave;</h2>
+            <h2>2. Data Processed and Purposes</h2>
             <p>
-                Il sito &egrave; prevalentemente informativo e non richiede registrazione o creazione di
+                The website is primarily informational and does not require registration or account creation.
+                Personal data processed is limited to what is technically necessary for the operation of the
+                site and security (e.g., technical logs, IP addresses in server logs) and any aggregated
+                traffic data.
+            </p>
+
+            <h2>3. Cookies and Analytics Tools</h2>
+            <p>
+                The site may use essential technical cookies and, if enabled, anonymous or aggregated
+                statistical analysis tools (such as Google Analytics 4 / Firebase Analytics) configured
+                to minimize user identifiability and without profiling for commercial purposes.
+            </p>
+
+            <h2>4. Data Retention</h2>
+            <p>
+                Technical and log data are retained for the time strictly necessary to ensure proper
+                operation of the site, security, and possible legal defense in case of abuse or cyber attacks.
+            </p>
+
+            <h2>5. User Rights and Contact</h2>
+            <p>
+                Users may request information about personal data processing and, where applicable,
+                exercise the rights provided by law (access, rectification, erasure, restriction) by contacting:
+            </p>
+            <p>
+                <strong>Avv. Marcello Stanca</strong><br>
+                E-mail: lawyer@marcellostanca.it
+            </p>
+        </main>
+
+        <!-- ITALIAN CONTENT -->
+        <main id="content-it" class="lang-content">
+            <h2>1. Titolare del trattamento</h2>
+            <p>
+                Titolare del trattamento dei dati personali è l'Avv. Marcello Stanca.
+            </p>
+
+            <h2>2. Dati trattati e finalità</h2>
+            <p>
+                Il sito è prevalentemente informativo e non richiede registrazione o creazione di
                 account. I dati personali trattati si limitano a quelli tecnicamente necessari al
                 funzionamento del sito e alla sicurezza (es. log tecnici, indirizzo IP nei log del
                 server) e ad eventuali dati aggregati di traffico.
@@ -118,9 +258,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
             <h2>3. Cookie e strumenti di analisi</h2>
             <p>
-                Il sito pu&ograve; utilizzare cookie tecnici essenziali e, se attivati, strumenti di
+                Il sito può utilizzare cookie tecnici essenziali e, se attivati, strumenti di
                 analisi statistica anonima o aggregata (ad esempio Google Analytics 4 / Firebase
-                Analytics) configurati per ridurre al minimo l'identificabilit&agrave; dell'utente e senza
+                Analytics) configurati per ridurre al minimo l'identificabilità dell'utente e senza
                 profilazione a fini commerciali.
             </p>
 
@@ -133,19 +273,78 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
             <h2>5. Diritti dell'interessato e contatti</h2>
             <p>
-                L'utente pu&ograve; chiedere informazioni sul trattamento dei dati personali e, ove
+                L'utente può chiedere informazioni sul trattamento dei dati personali e, ove
                 applicabile, esercitare i diritti previsti dalla normativa (accesso, rettifica,
                 cancellazione, limitazione) contattando:
             </p>
             <p>
-                Avv. Marcello Stanca<br>
+                <strong>Avv. Marcello Stanca</strong><br>
                 E-mail: lawyer@marcellostanca.it
             </p>
         </main>
 
         <footer>
-            <p>&copy; 2026 Avv. Marcello Stanca - Tutti i diritti riservati.</p>
+            <p>&copy; 2026 Avv. Marcello Stanca - All rights reserved / Tutti i diritti riservati.</p>
         </footer>
     </div>
+
+    <script>
+        const translations = {
+            en: {
+                pageTitle: 'Privacy Policy',
+                lastUpdate: 'Last updated: January 21, 2026',
+                backText: 'Back to Financial Authority Database'
+            },
+            it: {
+                pageTitle: 'Informativa Privacy',
+                lastUpdate: 'Ultimo aggiornamento: 21 gennaio 2026',
+                backText: 'Torna al Database Autorità Finanziarie'
+            }
+        };
+
+        function getLanguageFromUrl() {
+            const params = new URLSearchParams(window.location.search);
+            return params.get('lang') || 'en';
+        }
+
+        function setLanguage(lang) {
+            // Update URL
+            const url = new URL(window.location);
+            if (lang === 'en') {
+                url.searchParams.delete('lang');
+            } else {
+                url.searchParams.set('lang', lang);
+            }
+            window.history.replaceState({}, '', url);
+
+            // Update HTML lang
+            document.documentElement.lang = lang;
+
+            // Update buttons
+            document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
+            document.getElementById('btn-' + lang).classList.add('active');
+
+            // Update content visibility
+            document.querySelectorAll('.lang-content').forEach(el => el.classList.remove('active'));
+            document.getElementById('content-' + lang).classList.add('active');
+
+            // Update header texts
+            const t = translations[lang];
+            document.getElementById('page-title').textContent = t.pageTitle;
+            document.getElementById('last-update').textContent = t.lastUpdate;
+            document.getElementById('back-text').textContent = t.backText;
+
+            // Update title tag
+            document.title = lang === 'en' 
+                ? 'Privacy Policy - Financial Authority Database / Tutela Truffe'
+                : 'Informativa Privacy - Financial Authority Database / Tutela Truffe';
+        }
+
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            const lang = getLanguageFromUrl();
+            setLanguage(lang);
+        });
+    </script>
 </body>
 </html>

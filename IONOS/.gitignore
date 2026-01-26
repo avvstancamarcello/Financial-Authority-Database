@@ -1,0 +1,28 @@
+# ============================================
+# REPOSITORY PROTETTO - SOLO PUSH UNIDIREZIONALE
+# ============================================
+# Questo repository è configurato per:
+# ✅ Push locale → GitHub → IONOS
+# ❌ Pull da GitHub → locale (bloccato)
+# ============================================
+
+# File temporanei Windows
+*.tmp
+*.bak
+Thumbs.db
+Desktop.ini
+
+# File di sistema macOS
+.DS_Store
+
+# File di log
+*.log
+
+# Cartelle IDE
+.vscode/
+.idea/
+
+# Note personali (non deployare)
+*.notes
+*.todo
+IONOS.txt

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="it">
+<html lang="en">
 <head>
     <!-- Google Tag Manager -->
     <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -15,7 +15,74 @@
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2899281140209246" crossorigin="anonymous"></script>
     
     <meta name="robots" content="index, follow">
-    <title>Termini di Servizio - Financial Authority Database / Tutela Truffe</title>
+    <title>Terms of Service - Financial Authority Database / Tutela Truffe</title>
+    <meta name="description" content="Terms of Service for the Financial Authority Database - Free resource for financial fraud victims worldwide">
+    
+    <!-- Canonical & Hreflang -->
+    <link rel="canonical" href="https://tutelatruffe.it/terms.html">
+    <link rel="alternate" hreflang="en" href="https://tutelatruffe.it/terms.html">
+    <link rel="alternate" hreflang="it" href="https://tutelatruffe.it/terms.html?lang=it">
+    <link rel="alternate" hreflang="x-default" href="https://tutelatruffe.it/terms.html">
+    
+    <!-- Schema.org Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebPage",
+        "@id": "https://tutelatruffe.it/terms.html#webpage",
+        "url": "https://tutelatruffe.it/terms.html",
+        "name": "Terms of Service - Financial Authority Database",
+        "description": "Terms of Service for the Financial Authority Database - Free resource for financial fraud victims worldwide",
+        "inLanguage": ["en", "it"],
+        "datePublished": "2024-01-01",
+        "dateModified": "2026-01-21",
+        "isPartOf": {
+            "@type": "WebSite",
+            "@id": "https://tutelatruffe.it/#website",
+            "url": "https://tutelatruffe.it",
+            "name": "Tutela Truffe - Financial Authority Database",
+            "description": "Free database of financial supervisory authorities worldwide to help fraud victims",
+            "publisher": {
+                "@type": "Person",
+                "@id": "https://tutelatruffe.it/#author",
+                "name": "Avv. Marcello Stanca",
+                "email": "lawyer@marcellostanca.it",
+                "jobTitle": "Lawyer",
+                "url": "https://tutelatruffe.it"
+            }
+        },
+        "about": {
+            "@type": "Service",
+            "serviceType": "Legal Information Service",
+            "provider": {
+                "@id": "https://tutelatruffe.it/#author"
+            }
+        },
+        "mainEntity": {
+            "@type": "WebContent",
+            "about": "Terms of Service",
+            "text": "Terms governing the use of Financial Authority Database website and web application"
+        },
+        "breadcrumb": {
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+                {
+                    "@type": "ListItem",
+                    "position": 1,
+                    "name": "Home",
+                    "item": "https://tutelatruffe.it/"
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 2,
+                    "name": "Terms of Service",
+                    "item": "https://tutelatruffe.it/terms.html"
+                }
+            ]
+        }
+    }
+    </script>
+    
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
@@ -34,6 +101,32 @@
             box-shadow: 0 10px 30px rgba(0,0,0,0.25);
             padding: 24px 24px 32px;
         }
+        
+        /* Language Switcher */
+        .lang-switcher {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 16px;
+            justify-content: flex-end;
+        }
+        .lang-btn {
+            padding: 6px 12px;
+            border: 1px solid #d1d5db;
+            border-radius: 6px;
+            background: #f9fafb;
+            cursor: pointer;
+            font-size: 0.85rem;
+            transition: all 0.2s;
+        }
+        .lang-btn:hover {
+            background: #e5e7eb;
+        }
+        .lang-btn.active {
+            background: #2563eb;
+            color: white;
+            border-color: #2563eb;
+        }
+        
         header {
             border-bottom: 1px solid #e5e7eb;
             margin-bottom: 18px;
@@ -85,6 +178,8 @@
             font-size: 0.85rem;
             color: #6b7280;
         }
+        .lang-content { display: none; }
+        .lang-content.active { display: block; }
         @media (max-width: 640px) {
             .container { padding: 18px 16px 24px; }
         }
@@ -96,17 +191,136 @@
 height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- End Google Tag Manager (noscript) -->
     <div class="container">
-        <a href="index.html" class="back-link" aria-label="Torna al Database delle Autorità Finanziarie">
+        <!-- Language Switcher -->
+        <div class="lang-switcher">
+            <button class="lang-btn active" onclick="setLanguage('en')" id="btn-en">🇬🇧 EN</button>
+            <button class="lang-btn" onclick="setLanguage('it')" id="btn-it">🇮🇹 IT</button>
+        </div>
+        
+        <a href="index.html" class="back-link" id="back-link">
             <span>←</span>
-            <span>Torna al Database Autorità Finanziarie</span>
+            <span id="back-text">Back to Financial Authority Database</span>
         </a>
 
         <header>
-            <h1>Termini di Servizio</h1>
-            <p>Ultimo aggiornamento: 11 gennaio 2026</p>
+            <h1 id="page-title">Terms of Service</h1>
+            <p id="last-update">Last updated: January 21, 2026</p>
         </header>
 
-        <main>
+        <!-- ENGLISH CONTENT -->
+        <main id="content-en" class="lang-content active">
+            <p>
+                These Terms of Service govern the use of the website and web application
+                "Financial Authority Database" / "Tutela Truffe", which provides information about
+                financial supervisory authorities in various countries and consultation tools to protect
+                consumers who are victims of financial fraud.
+            </p>
+
+            <h2>1. Informational Nature of the Service (No Personalized Advice)</h2>
+            <p>
+                The content of this website is exclusively for informational and educational purposes. The profiles of
+                supervisory authorities, maps, reporting examples, and legal guides represent general guidance
+                to orient the user, but do not constitute in any way personalized legal advice, individual professional
+                consultation, or binding instructions for specific cases.
+            </p>
+            <p>
+                For the evaluation of individual concrete cases, it is always necessary to consult a
+                trusted professional, providing all relevant documents and information.
+            </p>
+
+            <h2>2. Permitted Use and Prohibitions</h2>
+            <p>The user agrees to use the site lawfully and respectfully, in particular to:</p>
+            <ul>
+                <li>not use the content for illegal activities or to facilitate fraud;</li>
+                <li>not attempt unauthorized access to computer systems;</li>
+                <li>not copy or mass-reuse the database content for competing services;</li>
+                <li>not alter, circumvent, or disable implemented security measures.</li>
+            </ul>
+
+            <h2>3. No User Account, No Online Payment</h2>
+            <p>
+                The site does not provide for the creation of accounts, restricted areas, or login procedures for
+                end users, nor integrated online payment systems. Access to information is free and does not
+                require registration.
+            </p>
+
+            <h2>4. Data, Sources, and Limitation of Liability</h2>
+            <p>
+                Data relating to financial authorities is collected from sources considered reliable
+                (institutional websites, national regulators, European and international bodies), but it is not
+                possible to guarantee that they are always complete, up-to-date, or error-free.
+            </p>
+            <p>
+                The author makes every reasonable effort to keep the information correct and
+                up-to-date, but assumes no responsibility for any material inaccuracies,
+                subsequent changes, or for the user's use of the information.
+            </p>
+            <p>
+                The use of the site is therefore under the sole responsibility of the user,
+                who remains obliged to always verify on the official websites of individual authorities
+                the current status of contacts, procedures, and risk warnings.
+            </p>
+
+            <h2>5. Personal Data, Cookies, and Analytics Tools</h2>
+            <p>
+                The site does not collect personal data through registration forms or restricted areas and
+                does not use profiling cookies to create individual marketing profiles.
+            </p>
+            <p>
+                The following may be used exclusively:
+            </p>
+            <ul>
+                <li>technical and security cookies, necessary for the functioning of the site and
+                    PWA features (e.g., offline saving of some resources);</li>
+                <li>possible anonymous or aggregate statistical traffic analysis tools
+                    (for example Google Analytics 4 / Firebase Analytics), configured to minimize
+                    user identifiability and without cross-referencing data for commercial profiling purposes.</li>
+            </ul>
+            <p>
+                For more details on the processing of personal data, legal bases,
+                and the rights of the data subject, a specific privacy notice is available on the
+                "Privacy Policy" page (privacy.html).
+            </p>
+
+            <h2>6. Intellectual Property</h2>
+            <p>
+                The structure of the database, editorial texts, legal descriptions, selection
+                and organization of content, as well as the source code of the web application,
+                are protected by copyright laws and remain the property of
+                Avv. Marcello Stanca, unless otherwise indicated.
+            </p>
+            <p>
+                The user is authorized to consult and use the content for personal or
+                internal professional purposes (e.g., case study, preparation of reports to
+                authorities), but not to systematically reproduce them to build databases or services
+                in competition without the author's written consent.
+            </p>
+
+            <h2>7. Changes to Terms</h2>
+            <p>
+                The author reserves the right to update these Terms of Service at any time
+                for technical, legal, or security reasons, while maintaining the goal of
+                protecting consumers from financial fraud and market abuse.
+            </p>
+            <p>
+                The updated version will be published on this same page, with an indication
+                of the last update date.
+            </p>
+
+            <h2>8. Contact</h2>
+            <p>
+                For clarification on the use of the site, to report errors in authority profiles,
+                or to exercise rights regarding personal data protection,
+                please contact:
+            </p>
+            <p>
+                <span class="section-label">Avv. Marcello Stanca</span><br>
+                E-mail: lawyer@marcellostanca.it
+            </p>
+        </main>
+
+        <!-- ITALIAN CONTENT -->
+        <main id="content-it" class="lang-content">
             <p>
                 I presenti Termini di Servizio regolano l'utilizzo del sito e dell'applicazione web
                 "Financial Authority Database" / "Tutela Truffe", che fornisce informazioni sulle
@@ -123,7 +337,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 vincolanti per casi concreti.
             </p>
             <p>
-                Per la valutazione del singolo caso concreto &egrave; sempre necessario rivolgersi ad un
+                Per la valutazione del singolo caso concreto è sempre necessario rivolgersi ad un
                 professionista di fiducia, fornendo tutti i documenti e le informazioni rilevanti.
             </p>
 
@@ -139,25 +353,25 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <h2>3. Nessun account utente, nessun pagamento online</h2>
             <p>
                 Il sito non prevede la creazione di account, aree riservate o procedure di login per
-                gli utenti finali, n&eacute; sistemi di pagamento online integrati. L'accesso alle informazioni
-                &egrave; gratuito e non richiede registrazione.
+                gli utenti finali, né sistemi di pagamento online integrati. L'accesso alle informazioni
+                è gratuito e non richiede registrazione.
             </p>
 
-            <h2>4. Dati, fonti e limitazione di responsabilit&agrave;</h2>
+            <h2>4. Dati, fonti e limitazione di responsabilità</h2>
             <p>
-                I dati relativi alle autorit&agrave; finanziarie sono raccolti da fonti ritenute affidabili
+                I dati relativi alle autorità finanziarie sono raccolti da fonti ritenute affidabili
                 (siti istituzionali, regolatori nazionali, organismi europei e internazionali), ma non
-                &egrave; possibile garantire che siano sempre completi, aggiornati o privi di errori.
+                è possibile garantire che siano sempre completi, aggiornati o privi di errori.
             </p>
             <p>
                 L'autore compie ogni ragionevole sforzo per mantenere le informazioni corrette e
-                aggiornate, ma non assume responsabilit&agrave; per eventuali inesattezze materiali,
+                aggiornate, ma non assume responsabilità per eventuali inesattezze materiali,
                 cambiamenti intervenuti successivamente o per l'uso che l'utente fa delle informazioni.
             </p>
             <p>
-                L'utilizzo del sito avviene pertanto sotto l'esclusiva responsabilit&agrave; dell'utente,
-                che resta tenuto a verificare sempre sui siti ufficiali delle singole autorit&agrave;
-                l'attualit&agrave; di recapiti, procedure e avvisi di rischio.
+                L'utilizzo del sito avviene pertanto sotto l'esclusiva responsabilità dell'utente,
+                che resta tenuto a verificare sempre sui siti ufficiali delle singole autorità
+                l'attualità di recapiti, procedure e avvisi di rischio.
             </p>
 
             <h2>5. Dati personali, cookie e strumenti di analisi</h2>
@@ -170,48 +384,48 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             </p>
             <ul>
                 <li>cookie tecnici e di sicurezza, necessari al funzionamento del sito e delle
-                    funzionalit&agrave; PWA (es. salvataggio offline di alcune risorse);</li>
+                    funzionalità PWA (es. salvataggio offline di alcune risorse);</li>
                 <li>eventuali strumenti di analisi statistica anonima o aggregata del traffico
                     (ad esempio Google Analytics 4 / Firebase Analytics), configurati per ridurre al
-                    minimo l'identificabilit&agrave; dell'utente e senza incrociare dati a fini di
+                    minimo l'identificabilità dell'utente e senza incrociare dati a fini di
                     profilazione commerciale.</li>
             </ul>
             <p>
                 Per maggiori dettagli sul trattamento dei dati personali, sulle basi giuridiche
-                e sui diritti dell'interessato, &egrave; disponibile un'informativa specifica nella pagina
-                "Informativa Privacy" (privacy.html) quando resa disponibile.
+                e sui diritti dell'interessato, è disponibile un'informativa specifica nella pagina
+                "Informativa Privacy" (privacy.html).
             </p>
 
-            <h2>6. Propriet&agrave; intellettuale</h2>
+            <h2>6. Proprietà intellettuale</h2>
             <p>
                 La struttura del database, i testi redazionali, le descrizioni giuridiche, la selezione
-                e l'organizzazione dei contenuti, nonch&eacute; il codice sorgente dell'applicazione web,
-                sono protetti dalle norme sul diritto d'autore e restano di titolarit&agrave;
+                e l'organizzazione dei contenuti, nonché il codice sorgente dell'applicazione web,
+                sono protetti dalle norme sul diritto d'autore e restano di titolarità
                 dell'Avv. Marcello Stanca, salvo diversa indicazione.
             </p>
             <p>
-                L'utente &egrave; autorizzato a consultare e utilizzare i contenuti per fini personali o
+                L'utente è autorizzato a consultare e utilizzare i contenuti per fini personali o
                 professionali interni (es. studio di un caso, preparazione di segnalazioni alle
-                autorit&agrave;), ma non a riprodurli sistematicamente per costruire banche dati o servizi
+                autorità), ma non a riprodurli sistematicamente per costruire banche dati o servizi
                 in concorrenza senza consenso scritto dell'autore.
             </p>
 
             <h2>7. Modifiche ai Termini</h2>
             <p>
-                L'autore si riserva la facolt&agrave; di aggiornare in qualsiasi momento i presenti Termini
+                L'autore si riserva la facoltà di aggiornare in qualsiasi momento i presenti Termini
                 di Servizio per motivi tecnici, legali o di sicurezza, fermo restando l'obiettivo di
                 proteggere i consumatori da frodi finanziarie e abusi di mercato.
             </p>
             <p>
-                La versione aggiornata sar&agrave; pubblicata in questa stessa pagina, con indicazione
+                La versione aggiornata sarà pubblicata in questa stessa pagina, con indicazione
                 della data di ultimo aggiornamento.
             </p>
 
             <h2>8. Contatti</h2>
             <p>
                 Per chiarimenti sull'utilizzo del sito, per segnalare errori nelle schede delle
-                autorit&agrave; o per esercitare i diritti in materia di protezione dei dati personali,
-                &egrave; possibile contattare:
+                autorità o per esercitare i diritti in materia di protezione dei dati personali,
+                è possibile contattare:
             </p>
             <p>
                 <span class="section-label">Avv. Marcello Stanca</span><br>
@@ -220,8 +434,67 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         </main>
 
         <footer>
-            <p>&copy; 2026 Avv. Marcello Stanca - Tutti i diritti riservati.</p>
+            <p>&copy; 2026 Avv. Marcello Stanca - All rights reserved / Tutti i diritti riservati.</p>
         </footer>
     </div>
+
+    <script>
+        const translations = {
+            en: {
+                pageTitle: 'Terms of Service',
+                lastUpdate: 'Last updated: January 21, 2026',
+                backText: 'Back to Financial Authority Database'
+            },
+            it: {
+                pageTitle: 'Termini di Servizio',
+                lastUpdate: 'Ultimo aggiornamento: 21 gennaio 2026',
+                backText: 'Torna al Database Autorità Finanziarie'
+            }
+        };
+
+        function getLanguageFromUrl() {
+            const params = new URLSearchParams(window.location.search);
+            return params.get('lang') || 'en';
+        }
+
+        function setLanguage(lang) {
+            // Update URL
+            const url = new URL(window.location);
+            if (lang === 'en') {
+                url.searchParams.delete('lang');
+            } else {
+                url.searchParams.set('lang', lang);
+            }
+            window.history.replaceState({}, '', url);
+
+            // Update HTML lang
+            document.documentElement.lang = lang;
+
+            // Update buttons
+            document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
+            document.getElementById('btn-' + lang).classList.add('active');
+
+            // Update content visibility
+            document.querySelectorAll('.lang-content').forEach(el => el.classList.remove('active'));
+            document.getElementById('content-' + lang).classList.add('active');
+
+            // Update header texts
+            const t = translations[lang];
+            document.getElementById('page-title').textContent = t.pageTitle;
+            document.getElementById('last-update').textContent = t.lastUpdate;
+            document.getElementById('back-text').textContent = t.backText;
+
+            // Update title tag
+            document.title = lang === 'en' 
+                ? 'Terms of Service - Financial Authority Database / Tutela Truffe'
+                : 'Termini di Servizio - Financial Authority Database / Tutela Truffe';
+        }
+
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            const lang = getLanguageFromUrl();
+            setLanguage(lang);
+        });
+    </script>
 </body>
 </html>

@@ -1,0 +1,1283 @@
+```html name=index.html url=https://github.com/avvstancamarcello/ScamRadar/blob/58246fe124b0962bdf68eac029f8013efc52f666/index.html
+<!DOCTYPE html>
+<!-- Updated: 2026-01-24 - SEO Optimized for www.scam-radar.com -->
+<html lang="en" prefix="og: https://ogp.me/ns#">
+<head>
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-W2Q6GD42');</script>
+    <!-- End Google Tag Manager -->
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.gstatic.com https://unpkg.com https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: https://www.gstatic.com https://www.googletagmanager.com https://www.google-analytics.com https://www.scam-radar.com https://www.aarp.org; font-src 'self' https://fonts.gstatic.com; connect-src 'self' https://firestore.googleapis.com https://identitytoolkit.googleapis.com https://www.googleapis.com https://region1.google-analytics.com; frame-src https://www.googletagmanager.com; object-src 'none'; base-uri 'self'; form-action 'self';">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="google-site-verification" content="cyy_B7liLeU0oPM5epVAlJvP6XI9AwbCMIbuDzrtPFc" />
+    
+    <!-- SEO: Robots & Indexing -->
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <meta name="googlebot" content="index, follow">
+    <meta name="bingbot" content="index, follow">
+    
+    <!-- SEO: Canonical URL -->
+    <link rel="canonical" href="https://www.scam-radar.com/">
+    
+    <!-- SEO: Alternate Languages (hreflang) -->
+    <link rel="alternate" hreflang="en" href="https://www.scam-radar.com/">
+    <link rel="alternate" hreflang="it" href="https://www.scam-radar.com/?lang=it">
+    <link rel="alternate" hreflang="fr" href="https://www.scam-radar.com/?lang=fr">
+    <link rel="alternate" hreflang="de" href="https://www.scam-radar.com/?lang=de">
+    <link rel="alternate" hreflang="es" href="https://www.scam-radar.com/?lang=es">
+    <link rel="alternate" hreflang="x-default" href="https://www.scam-radar.com/">
+    
+    <!-- SEO: Keywords -->
+    <meta name="keywords" content="scam radar, scam detection, fraud prevention, investment fraud, online scam, crypto scam, trading scam, financial fraud, consumer protection, OLAF, ESMA, FCA, SEC, IOSCO, financial authorities, fraud victims support, consumer rights, Avv. Marcello Stanca">
+    
+    <!-- Open Graph (Facebook, LinkedIn) -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.scam-radar.com/">
+    <meta property="og:title" content="Scam Radar - International Financial Fraud Protection Resources">
+    <meta property="og:description" content="Comprehensive institutional references for fraud victims: European Parliament, ESMA, FCA, SEC, IOSCO. 25 years fighting for consumer rights. Lawyer Marcello Stanca, petitions to the European Parliament.">
+    <meta property="og:image" content="https://www.scam-radar.com/financial_defense_shield_final.svg">
+    <meta property="og:site_name" content="Scam Radar">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:locale:alternate" content="it_IT">
+    <meta property="og:locale:alternate" content="fr_FR">
+    <meta property="og:locale:alternate" content="de_DE">
+    <meta property="og:locale:alternate" content="es_ES">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Scam Radar - International Financial Fraud Protection Resources">
+    <meta name="twitter:description" content="Comprehensive institutional references for fraud victims: European Parliament, ESMA, FCA, SEC, IOSCO. 25 years fighting for consumer rights.">
+    <meta name="twitter:image" content="https://www.scam-radar.com/financial_defense_shield_final.svg">
+    
+    <!-- Schema.org JSON-LD Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@graph": [
+            {
+                "@type": "WebPage",
+                "@id": "https://www.scam-radar.com/",
+                "url": "https://www.scam-radar.com/",
+                "name": "Scam Radar - International Financial Fraud Protection",
+                "description": "Comprehensive institutional references for fraud victims: European Parliament, ESMA, FCA, SEC, IOSCO, OLAF. Financial supervisory authorities worldwide.",
+                "inLanguage": "en",
+                "isPartOf": {
+                    "@type": "WebSite",
+                    "@id": "https://www.scam-radar.com/#website",
+                    "url": "https://www.scam-radar.com",
+                    "name": "Scam Radar",
+                    "description": "International Scam Detection and Consumer Protection Platform"
+                },
+                "breadcrumb": {
+                    "@type": "BreadcrumbList",
+                    "itemListElement": [
+                        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.scam-radar.com/"}
+                    ]
+                },
+                "datePublished": "2025-01-01",
+                "dateModified": "2026-01-24"
+            },
+            {
+                "@type": "Person",
+                "@id": "https://www.scam-radar.com/#author",
+                "name": "Avv. Marcello Stanca",
+                "jobTitle": "Lawyer & Consumer Rights Advocate",
+                "description": "President of AMEV Firenze since 1998. Author of 2 petitions accepted by the European Parliament (0888/2024, 0645/2025). Speaker at Italian Chamber of Deputies.",
+                "affiliation": {
+                    "@type": "Organization",
+                    "name": "AMEV Firenze",
+                    "description": "Association for the protection of bank fraud victims"
+                },
+                "knowsAbout": ["Financial Fraud", "Consumer Protection", "EU Law", "Bank Liability", "Investment Scams"],
+                "sameAs": [
+                    "https://www.europarl.europa.eu/petitions/en/petition/content/0888%252F2024/html/Petition-No-0888%252F2024-by-Marcello-Stanca-%2528Italian%2529-on-the-liability-of-banks-in-fraud-scams",
+                    "https://www.europarl.europa.eu/petitions/en/petition/content/0645%252F2025/html/Petition-No-0645%252F2025-by-Marcello-Stanca-%2528Italian%2529-on-mental-health-issues-of-fraud-victims"
+                ]
+            },
+            {
+                "@type": "ItemList",
+                "name": "Financial Supervisory Authorities",
+                "description": "List of international financial supervisory authorities and consumer protection resources",
+                "numberOfItems": 15,
+                "itemListElement": [
+                    {"@type": "ListItem", "position": 1, "name": "ESMA - European Securities and Markets Authority", "url": "https://www.esma.europa.eu"},
+                    {"@type": "ListItem", "position": 2, "name": "FCA - UK Financial Conduct Authority", "url": "https://www.fca.org.uk"},
+                    {"@type": "ListItem", "position": 3, "name": "SEC - U.S. Securities and Exchange Commission", "url": "https://www.sec.gov"},
+                    {"@type": "ListItem", "position": 4, "name": "IOSCO - International Organization of Securities Commissions", "url": "https://www.iosco.org"},
+                    {"@type": "ListItem", "position": 5, "name": "OLAF - European Anti-Fraud Office", "url": "https://anti-fraud.ec.europa.eu"},
+                    {"@type": "ListItem", "position": 6, "name": "FinCoNet - Financial Consumer Protection", "url": "https://www.finconet.org"},
+                    {"@type": "ListItem", "position": 7, "name": "OECD - Organisation for Economic Cooperation", "url": "https://www.oecd.org"},
+                    {"@type": "ListItem", "position": 8, "name": "Council of Europe Development Bank", "url": "https://coebank.org"},
+                    {"@type": "ListItem", "position": 9, "name": "European Parliament - Petitions Committee", "url": "https://www.europarl.europa.eu/petitions"},
+                    {"@type": "ListItem", "position": 10, "name": "FBI - Internet Crime Complaint Center", "url": "https://www.ic3.gov"}
+                ]
+            },
+            {
+                "@type": "FAQPage",
+                "mainEntity": [
+                    {
+                        "@type": "Question",
+                        "name": "What is Scam Radar?",
+                        "acceptedAnswer": {
+                            "@type": "Answer",
+                            "text": "Scam Radar is an international platform providing resources and institutional references to help victims of financial fraud. It includes links to 190+ financial supervisory authorities and consumer protection institutions worldwide."
+                        }
+                    },
+                    {
+                        "@type": "Question",
+                        "name": "How can I verify if a company is authorized to offer financial services?",
+                        "acceptedAnswer": {
+                            "@type": "Answer",
+                            "text": "Use our Financial Authorities Database to search for the regulatory authority of the country where the company claims to be registered. Each authority has a public register where you can verify licenses and warnings about fraudulent operators."
+                        }
+                    },
+                    {
+                        "@type": "Question",
+                        "name": "What is OLAF and how can it help fraud victims?",
+                        "acceptedAnswer": {
+                            "@type": "Answer",
+                            "text": "OLAF (European Anti-Fraud Office) investigates fraud, corruption, and serious misconduct within EU institutions and in the use of EU funds. You can report fraud directly to OLAF via its online reporting system."
+                        }
+                    }
+                ]
+            }
+        ]
+    }
+    </script>
+    
+    <!-- Firebase SDK inizializzato nel body per includere Firestore e Auth -->
+    
+    <title>Scam Radar - Institutional References | ESMA, FCA, SEC, OLAF, IOSCO | Consumer Protection</title>
+    <meta name="description" content="Scam Radar: Complete guide to international financial supervisory authorities (ESMA, FCA, SEC, IOSCO, OLAF). 25 years fighting fraud. European Parliament petitions on bank liability and mental health of fraud victims.">
+    
+    <!-- PWA -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#1a365d">
+    <link rel="icon" type="image/png" href="icon-192.png">
+    
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        :root {
+            --ref-blue: #1a365d;
+            --ref-gold: #d4af37;
+            --ref-eu: #003399;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #1e293b;
+        }
+
+        /* Ensure background stars never block interactions */
+        #starfield {
+            pointer-events: none;
+        }
+
+        .language-selector {
+            display: flex;
+            gap: 0.5rem;
+            justify-content: center;
+            margin: 0.4rem 0 0.6rem 0;
+        }
+
+        .lang-btn {
+            background: rgba(255,255,255,0.3);
+            border: 2px solid transparent;
+            color: white;
+            padding: 6px 12px;
+            border-radius: 15px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+
+        .lang-btn:hover {
+            background: rgba(255,255,255,0.5);
+            transform: translateY(-2px);
+        }
+
+        .lang-btn.active {
+            background: white;
+            color: var(--ref-blue);
+            border-color: white;
+        }
+
+        /* Ensure planets are always clickable above the starfield */
+        .planet {
+            z-index: 20;
+            pointer-events: auto;
+        }
+        
+        .nav-header {
+            background: var(--ref-blue);
+            color: white;
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .nav-logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--ref-gold);
+            text-decoration: none;
+        }
+        
+        .hero {
+            background: linear-gradient(135deg, var(--ref-blue), var(--ref-eu));
+            color: white;
+            padding: 4rem 2rem;
+            text-align: center;
+        }
+        
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .credentials-badges {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+        }
+        
+        .credential-badge {
+            background: rgba(255,255,255,0.15);
+            padding: 0.8rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+        }
+        
+        .section-title {
+            font-size: 2rem;
+            color: var(--ref-blue);
+            text-align: center;
+            margin: 3rem 0 2rem;
+        }
+
+        .section-subtitle {
+            max-width: 900px;
+            margin: 0 auto 1.5rem;
+            text-align: center;
+            color: #475569;
+            font-size: 0.98rem;
+        }
+
+        /* Navigazione principale: barra superiore compatta a scomparsa richiamabile portando il mouse sul bordo alto */
+        #main-top-nav {
+            background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+            padding: 0.6rem 0;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1100;
+            transform: translateY(-100%);
+            transition: transform 0.25s ease;
+        }
+
+        #main-top-nav.nav-visible {
+            transform: translateY(0);
+        }
+
+        /* Griglia a 5 colonne per i pulsanti principali */
+        .main-nav-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(5, minmax(0, 1fr));
+            gap: 0.75rem;
+            padding: 0 1rem;
+            align-items: center;
+        }
+
+        .main-nav-cell {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .documents-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        /* Sezione Prevenzione Truffe: 5 banner orizzontali pieni schermo */
+        .prevenzione-banners {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            margin-top: 3rem;
+        }
+
+        .prevenzione-banner {
+            border-radius: 14px;
+            padding: 1.75rem 2rem;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+            background: white;
+            text-align: justify;
+        }
+
+        .prevenzione-banner h3,
+        .prevenzione-banner h4 {
+            margin-top: 0;
+        }
+
+        .banner-oane {
+            border-left: 6px solid #8B4789;
+        }
+
+        .banner-aarp-mental {
+            border-left: 6px solid #E13A3E;
+        }
+
+        .banner-aarp-servizi {
+            border-left: 6px solid #FFA500;
+        }
+
+        .banner-aarp-stats {
+            border-left: 6px solid #0066cc;
+        }
+
+        .banner-aarp-impatti {
+            background: linear-gradient(135deg, #DC143C 0%, #8B0000 100%);
+            color: white;
+            border-left: 6px solid #FFD700;
+        }
+
+        .banner-aarp-impatti h3,
+        .banner-aarp-impatti p {
+            color: inherit;
+        }
+        
+        .document-card {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            border-left: 5px solid var(--ref-eu);
+        }
+        
+        .document-title {
+            font-size: 1.3rem;
+            color: var(--ref-blue);
+            margin: 1rem 0;
+            font-weight: bold;
+        }
+        
+        .download-button {
+            display: inline-block;
+            background: var(--ref-eu);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            margin-top: 1rem;
+        }
+        
+        .download-button:hover {
+            background: var(--ref-blue);
+        }
+
+        /* Case Study Styles */
+        .case-study {
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            padding: 3rem;
+            border-radius: 16px;
+            margin-bottom: 4rem;
+        }
+
+        .case-overview {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0 3rem;
+        }
+
+        .case-stat {
+            text-align: center;
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: var(--ref-gold);
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            color: #64748b;
+            font-size: 1rem;
+        }
+
+        /* Timeline */
+        .timeline {
+            position: relative;
+            padding: 2rem 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 60px;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: linear-gradient(to bottom, var(--ref-blue), var(--ref-gold));
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 3rem;
+            padding-left: 140px;
+        }
+
+        .timeline-icon {
+            position: absolute;
+            left: 20px;
+            top: 0;
+            width: 80px;
+            height: 80px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            border: 4px solid var(--ref-blue);
+        }
+
+        .timeline-content {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            border-left: 5px solid var(--ref-eu);
+        }
+
+        .timeline-content h4 {
+            color: var(--ref-blue);
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-content strong {
+            color: var(--ref-gold);
+        }
+
+        .timeline-doc {
+            background: #f1f5f9;
+            padding: 0.8rem;
+            border-radius: 8px;
+            margin-top: 1rem;
+            font-size: 0.9rem;
+            border-left: 3px solid var(--ref-gold);
+        }
+
+        .doc-link {
+            display: inline-block;
+            background: var(--ref-eu);
+            color: white;
+            padding: 0.6rem 1.2rem;
+            border-radius: 8px;
+            text-decoration: none;
+            margin-top: 0.5rem;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .doc-link:hover {
+            background: var(--ref-blue);
+        }
+
+        /* Legal Strategy */
+        .legal-strategy {
+            margin-top: 3rem;
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+        }
+
+        .legal-strategy h3 {
+            color: var(--ref-blue);
+            font-size: 1.8rem;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .strategy-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .strategy-card {
+            background: #f8fafc;
+            padding: 1.5rem;
+            border-radius: 8px;
+            border-top: 4px solid var(--ref-gold);
+        }
+
+        .strategy-card h4 {
+            color: var(--ref-blue);
+            margin-bottom: 0.8rem;
+        }
+
+        .strategy-card p {
+            color: #64748b;
+            font-size: 0.95rem;
+        }
+
+        /* Case Result */
+        .case-result {
+            background: linear-gradient(135deg, var(--ref-blue), #2563eb);
+            color: white;
+            padding: 2rem;
+            border-radius: 12px;
+            margin-top: 3rem;
+            text-align: center;
+        }
+
+        .case-result h3 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .case-quote {
+            background: rgba(255,255,255,0.1);
+            padding: 2rem;
+            border-radius: 12px;
+            margin-top: 2rem;
+            border-left: 5px solid var(--ref-gold);
+        }
+
+        .case-quote em {
+            font-size: 1.2rem;
+            line-height: 1.8;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .timeline::before {
+                left: 40px;
+            }
+
+            .timeline-item {
+                padding-left: 100px;
+            }
+
+            .timeline-icon {
+                width: 60px;
+                height: 60px;
+                left: 10px;
+                font-size: 1.8rem;
+            }
+
+            .case-study {
+                padding: 1.5rem;
+            }
+
+            .stat-number {
+                font-size: 2rem;
+            }
+        }
+
+        /* Rating Stars System */
+        .rating-container {
+            margin-top: 1.5rem;
+            padding: 1.5rem;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border-radius: 10px;
+            border-top: 3px solid #0056D6;
+        }
+
+        .rating-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .rating-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #1e293b;
+        }
+
+        .rating-stats {
+            display: flex;
+            gap: 1.5rem;
+            align-items: center;
+        }
+
+        .rating-average {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #0056D6;
+        }
+
+        .rating-count {
+            font-size: 0.95rem;
+            color: #64748b;
+        }
+
+        .stars-container {
+            display: flex;
+            gap: 0.5rem;
+            align-items: center;
+        }
+
+        .star {
+            font-size: 2rem;
+            cursor: pointer;
+            color: #cbd5e1;
+            transition: all 0.2s ease;
+            user-select: none;
+        }
+
+        .star:hover,
+        .star.hover {
+            color: #fbbf24;
+            transform: scale(1.15);
+        }
+
+        .star.filled {
+            color: #fbbf24;
+        }
+
+        .star.disabled {
+            cursor: not-allowed;
+            opacity: 0.6;
+        }
+
+        .vote-message {
+            margin-top: 0.8rem;
+            padding: 0.8rem;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            text-align: center;
+        }
+
+        .vote-success {
+            background: #d1fae5;
+            color: #065f46;
+            border-left: 4px solid #10b981;
+        }
+
+        .vote-already {
+            background: #fef3c7;
+            color: #92400e;
+            border-left: 4px solid #f59e0b;
+        }
+
+        @media (max-width: 768px) {
+            .rating-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .star {
+                font-size: 1.6rem;
+            }
+        }
+
+        /* Modal You$ - Scudo Giuridico */
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(15, 23, 42, 0.85);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+            padding: 1rem;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+        }
+
+        .modal-content {
+            max-width: 900px;
+            width: 100%;
+            background: linear-gradient(135deg, rgba(15,23,42,0.98), rgba(30,64,175,0.95));
+            border-radius: 20px;
+            padding: 2rem 1.5rem;
+            color: #e5e7eb;
+            position: relative;
+            box-shadow: 0 25px 70px rgba(0,0,0,0.8);
+            border: 1px solid rgba(148,163,184,0.6);
+            overflow-y: auto;
+            max-height: 90vh;
+        }
+
+        .modal-close-btn {
+            position: absolute;
+            top: 0.75rem;
+            right: 0.75rem;
+            background: rgba(15,23,42,0.9);
+            border: 1px solid rgba(148,163,184,0.8);
+            color: #e5e7eb;
+            border-radius: 999px;
+            padding: 0.25rem 0.65rem;
+            cursor: pointer;
+            font-size: 1.1rem;
+        }
+
+        .modal-close-btn:hover {
+            background: #b91c1c;
+            border-color: #fecaca;
+        }
+
+        .modal-title {
+            font-size: 1.6rem;
+            margin-bottom: 1rem;
+            color: #fbbf24;
+            text-align: center;
+            text-shadow: 0 0 14px rgba(251, 191, 36, 0.9);
+        }
+
+        .modal-body {
+            font-size: 0.97rem;
+            line-height: 1.8;
+            text-align: justify;
+        }
+
+        @media (max-width: 640px) {
+            .modal-content {
+                padding: 1.4rem 1rem;
+                border-radius: 16px;
+            }
+
+            .modal-title {
+                font-size: 1.3rem;
+            }
+
+            .modal-body {
+                font-size: 0.92rem;
+            }
+        }
+    </style>
+
+    <!-- Firebase SDK -->
+    <script type="module">
+        import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js';
+        import { getFirestore, doc, getDoc, setDoc, updateDoc, increment, collection, addDoc, getDocs, query, where } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js';
+        import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, sendEmailVerification, onAuthStateChanged, signOut } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js';
+        import { getAnalytics, logEvent } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-analytics.js';
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyBUxnsm7TXXEFyN-jPtTXvy8HMMnr25JIo",
+            authDomain: "tutelatruffe-rating.firebaseapp.com",
+            projectId: "tutelatruffe-rating",
+            storageBucket: "tutelatruffe-rating.firebasestorage.app",
+            messagingSenderId: "186083888610",
+            appId: "1:186083888610:web:3c51689d6d36e2a6b17dbb",
+            measurementId: "G-WWXL8GWYWM"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+        const auth = getAuth(app);
+        const analytics = getAnalytics(app);
+
+        // Espone riferimenti principali a Firestore/Auth per altri script non-module
+        window.firestoreDb = db;
+        window.firebaseAuth = auth;
+        window.fsDoc = doc;
+        window.fsGetDoc = getDoc;
+        window.fsSetDoc = setDoc;
+        window.fsUpdateDoc = updateDoc;
+        window.fsIncrement = increment;
+        window.fsCollection = collection;
+        window.fsAddDoc = addDoc;
+        window.fsGetDocs = getDocs;
+        window.fsQuery = query;
+        window.fsWhere = where;
+
+        // Analytics: Traccia pagina visitata
+        logEvent(analytics, 'page_view', {
+            page_title: 'Referenze Istituzionali',
+            page_location: window.location.href,
+            page_path: window.location.pathname
+        });
+
+        window.ratingSystem = {
+            db: db,
+            
+            async loadRating(contentId) {
+                try {
+                    const docRef = doc(db, 'ratings', contentId);
+                    const docSnap = await getDoc(docRef);
+                    
+                    if (docSnap.exists()) {
+                        const data = docSnap.data();
+                        return {
+                            average: data.totalRating / data.voteCount,
+                            count: data.voteCount
+                        };
+                    }
+                    return { average: 0, count: 0 };
+                } catch (error) {
+                    console.error('Error loading rating:', error);
+                    return { average: 0, count: 0 };
+                }
+            },
+
+            async submitRating(contentId, rating) {
+                const storageKey = `voted_${contentId}`;
+                if (localStorage.getItem(storageKey)) {
+                    return { success: false, message: 'Hai già votato questo contenuto' };
+                }
+
+                try {
+                    const docRef = doc(db, 'ratings', contentId);
+                    const docSnap = await getDoc(docRef);
+
+                    if (docSnap.exists()) {
+                        await updateDoc(docRef, {
+                            totalRating: increment(rating),
+                            voteCount: increment(1)
+                        });
+                    } else {
+                        await setDoc(docRef, {
+                            totalRating: rating,
+                            voteCount: 1,
+                            contentId: contentId
+                        });
+                    }
+
+                    localStorage.setItem(storageKey, 'true');
+                    return { success: true, message: 'Grazie per il tuo voto!' };
+                } catch (error) {
+                    console.error('Error submitting rating:', error);
+                    return { success: false, message: 'Errore durante il salvataggio del voto' };
+                }
+            },
+
+            initStars(containerId, contentId) {
+                const container = document.getElementById(containerId);
+                if (!container) return;
+
+                const starsContainer = container.querySelector('.stars-container');
+                const averageEl = container.querySelector('.rating-average');
+                const countEl = container.querySelector('.rating-count');
+                const messageEl = container.querySelector('.vote-message');
+
+                this.loadRating(contentId).then(data => {
+                    averageEl.textContent = data.average > 0 ? data.average.toFixed(1) : '-';
+                    countEl.textContent = `${data.count} ${data.count === 1 ? 'voto' : 'voti'}`;
+                });
+
+                const stars = starsContainer.querySelectorAll('.star');
+                let hasVoted = !!localStorage.getItem(`voted_${contentId}`);
+
+                if (hasVoted) {
+                    stars.forEach(star => star.classList.add('disabled'));
+                    if (messageEl) {
+                        messageEl.textContent = 'Hai già votato questo contenuto';
+                        messageEl.className = 'vote-message vote-already';
+                        messageEl.style.display = 'block';
+                    }
+                }
+
+                stars.forEach((star, index) => {
+                    star.addEventListener('mouseenter', () => {
+                        if (!hasVoted) {
+                            for (let i = 0; i <= index; i++) {
+                                stars[i].classList.add('hover');
+                            }
+                        }
+                    });
+
+                    star.addEventListener('mouseleave', () => {
+                        stars.forEach(s => s.classList.remove('hover'));
+                    });
+
+                    star.addEventListener('click', async () => {
+                        if (hasVoted) return;
+
+                        const rating = index + 1;
+                        const result = await this.submitRating(contentId, rating);
+
+                        if (result.success) {
+                            hasVoted = true;
+                            stars.forEach((s, i) => {
+                                if (i <= index) s.classList.add('filled');
+                                s.classList.add('disabled');
+                            });
+
+                            const data = await this.loadRating(contentId);
+                            averageEl.textContent = data.average.toFixed(1);
+                            countEl.textContent = `${data.count} ${data.count === 1 ? 'voto' : 'voti'}`;
+
+                            if (messageEl) {
+                                messageEl.textContent = result.message;
+                                messageEl.className = 'vote-message vote-success';
+                                messageEl.style.display = 'block';
+                            }
+                        } else if (messageEl) {
+                            messageEl.textContent = result.message;
+                            messageEl.className = 'vote-message vote-already';
+                            messageEl.style.display = 'block';
+                        }
+                    });
+                });
+            }
+        };
+
+        // 🔐 SISTEMA AUTENTICAZIONE UTENTI
+        window.authSystem = {
+            currentUser: null,
+            
+            async register(email, password) {
+                try {
+                    const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+                    await sendEmailVerification(userCredential.user);
+                    logEvent(analytics, 'sign_up', { method: 'email' });
+                    
+                    // Salva profilo utente in Firestore
+                    await setDoc(doc(db, 'users', userCredential.user.uid), {
+                        email: email,
+                        registeredAt: new Date().toISOString(),
+                        emailVerified: false,
+                        newsletter: true,
+                        watermark: `USER_${userCredential.user.uid}_${Date.now()}`
+                    });
+                    
+                    return { success: true, message: '✅ Registrazione completata! Controlla la tua email per verificare l\'account.' };
+                } catch (error) {
+                    console.error('Errore registrazione:', error);
+                    let message = 'Errore durante la registrazione';
+                    if (error.code === 'auth/email-already-in-use') message = '⚠️ Email già registrata';
+                    if (error.code === 'auth/weak-password') message = '⚠️ Password troppo debole (min 6 caratteri)';
+                    return { success: false, message };
+                }
+            },
+            
+            async login(email, password) {
+                try {
+                    const userCredential = await signInWithEmailAndPassword(auth, email, password);
+                    logEvent(analytics, 'login', { method: 'email' });
+                    return { success: true, message: '✅ Accesso effettuato!', user: userCredential.user };
+                } catch (error) {
+                    console.error('Errore login:', error);
+                    let message = 'Email o password errati';
+                    if (error.code === 'auth/user-not-found') message = '⚠️ Utente non trovato';
+                    if (error.code === 'auth/wrong-password') message = '⚠️ Password errata';
+                    return { success: false, message };
+                }
+            },
+            
+            async logout() {
+                await signOut(auth);
+                logEvent(analytics, 'logout');
+                this.currentUser = null;
+            }
+        };
+
+        // Monitora stato autenticazione
+        onAuthStateChanged(auth, async (user) => {
+            window.authSystem.currentUser = user;
+            const authBtn = document.getElementById('authButton');
+            const userInfo = document.getElementById('userInfo');
+            
+            if (user) {
+                if (authBtn) authBtn.textContent = '🔓 Logout';
+                if (userInfo) {
+                    userInfo.innerHTML = `👤 ${user.email} ${user.emailVerified ? '✅' : '⚠️ Email non verificata'}`;
+                    userInfo.style.display = 'block';
+                }
+                
+                // Watermark dinamico per utente loggato
+                console.log(`%c🔒 Sessione protetta: ${user.uid}`, 'color: green; font-weight: bold;');
+                logEvent(analytics, 'user_session', { user_id: user.uid });
+            } else {
+                if (authBtn) authBtn.textContent = '🔑 Login/Registrati';
+                if (userInfo) userInfo.style.display = 'none';
+                
+                // Watermark anonimo con timestamp univoco
+                const anonymousWatermark = `ANON_${Date.now()}_${Math.random().toString(36).substring(7)}`;
+                console.log(`%c⚠   Sessione anonima tracciata: ${anonymousWatermark}`, 'color: orange; font-weight: bold;');
+            }
+        });
+
+        document.addEventListener('DOMContentLoaded', () => {
+            window.ratingSystem.initStars('rating-fca-firm-checker', 'fca-firm-checker');
+            window.ratingSystem.initStars('rating-ofcom', 'ofcom-online-safety');
+            window.ratingSystem.initStars('rating-compliance-corylated', 'compliance-corylated');
+            window.ratingSystem.initStars('rating-dsa-eu', 'dsa-notice-action');
+            window.ratingSystem.initStars('rating-agcm-italia', 'agcm-antitrust-italia');
+            window.ratingSystem.initStars('rating-adusbef', 'adusbef-consumatori');
+        });
+    </script>
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-W2Q6GD42"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+    <!-- Main Navigation (compare quando il mouse tocca il bordo superiore) -->
+    <nav id="main-top-nav" class="nav-visible">
+        <div class="main-nav-grid">
+            <div class="main-nav-cell">
+                <a href="https://avvstancamarcello.github.io/Financial-Authority-Database/index.html#database-search-section" style="color: white; text-decoration: none; font-weight: 500; font-size: 1.02rem; padding: 0.45rem 1.4rem; background: rgba(15,23,42,0.7); border-radius: 8px;">
+                    🏠 Database Autorità Finanziarie nel Mondo (190)
+                </a>
+            </div>
+            <div class="main-nav-cell">
+                <a href="odissea.html" style="color: white; text-decoration: none; font-weight: 500; font-size: 1.02rem; padding: 0.45rem 1.4rem; background: rgba(255,255,255,0.05); border-radius: 8px;">
+                    🌊 Odissea Digitale
+                </a>
+            </div>
+            <div class="main-nav-cell">
+                <a href="referenze.html" style="color: white; text-decoration: none; font-weight: 500; font-size: 1.02rem; padding: 0.45rem 1.4rem; background: rgba(255,255,255,0.05); border-radius: 8px;">
+                    📜 Referenze Istituzionali
+                </a>
+            </div>
+            <div class="main-nav-cell">
+                <a href="curriculum.html" style="color: white; text-decoration: none; font-weight: bold; font-size: 1.02rem; padding: 0.45rem 1.4rem; background: rgba(255,215,0,0.15); border-radius: 8px;">
+                    👨‍⚖️ Avv Stanca - Curriculum
+                </a>
+            </div>
+            <div class="main-nav-cell">
+                <div style="display: flex; gap: 0.4rem; align-items: center; justify-content: center; width: 100%;">
+                    <span id="userInfo" style="color: #FFD700; font-size: 0.85rem; display: none;"></span>
+                    <button id="authButton" onclick="toggleAuthModal()" style="background: linear-gradient(135deg, #667eea, #764ba2); color: white; border: none; padding: 0.5rem 1.1rem; border-radius: 999px; cursor: pointer; font-weight: 600; font-size: 0.95rem; box-shadow: 0 4px 12px rgba(15,23,42,0.6);">
+                        🔑 Login/Registrati
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Qui ci sarebbe tutta la parte con animazione/pianeti (non modificata) -->
+
+    <!-- Sezione You$ - Il tuo Scudo Finanziario trasformata in pulsante che apre il modal -->
+    <section id="you-shield" style="background: radial-gradient(circle at top, #0f172a, #020617); color: #e5e7eb; padding: 3rem 1.5rem; border-top: 1px solid rgba(148, 163, 184, 0.4);">
+        <div id="youShieldCard"
+             style="max-width: 1100px; margin: 0 auto; background: linear-gradient(135deg, rgba(15,23,42,0.95), rgba(30,64,175,0.9)); border-radius: 20px; padding: 2.5rem 2rem; box-shadow: 0 18px 60px rgba(15,23,42,0.9); border: 1px solid rgba(148, 163, 184, 0.6); position: relative; overflow: hidden; cursor: pointer;"
+             aria-label="Apri il tuo Scudo Giuridico di Legalità You$">
+            <div style="position: absolute; inset: 0; opacity: 0.15; background: radial-gradient(circle at 20% 0%, #38bdf8, transparent 55%), radial-gradient(circle at 80% 100%, #fbbf24, transparent 55%);"></div>
+            <div style="position: relative; z-index: 1;">
+                <h2 style="font-size: 1.8rem; margin-bottom: 1rem; color: #fbbf24; text-align: center; text-shadow: 0 0 14px rgba(251, 191, 36, 0.9);">
+                    💲 You$ - Il tuo Scudo Finanziario 🛡️
+                </h2>
+                <p style="margin-top: 0.5rem; text-align: center; font-size: 0.95rem; opacity: 0.9;">
+                    Clicca per aprire lo Scudo Giuridico di Legalità dettagliato (You$).
+                </p>
+
+                <div style="margin-top: 2rem; display: flex; justify-content: center;">
+                    <a href="https://avvstancamarcello.github.io/Financial-Authority-Database/index.html#database-search-section"
+                       style="display: inline-flex; align-items: center; gap: 0.6rem; padding: 0.9rem 1.9rem; border-radius: 999px; background: linear-gradient(135deg, #22c55e, #16a34a); color: #ecfdf5; font-weight: 600; text-decoration: none; box-shadow: 0 10px 30px rgba(22, 163, 74, 0.7); border: 1px solid rgba(187, 247, 208, 0.6);"
+                       onclick="event.stopPropagation();">
+                        🔎 Apri il Database Autorità Finanziarie (190)
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modal You$ - Scudo Giuridico di Legalità -->
+    <div id="youShieldModal" class="modal-overlay" aria-hidden="true" role="dialog" aria-modal="true">
+        <div class="modal-content">
+            <button class="modal-close-btn" type="button" aria-label="Chiudi">
+                ✕
+            </button>
+            <h2 class="modal-title">💲 You$ – Il tuo SCUDO Giuridico di Legalità 🛡️</h2>
+            <div class="modal-body">
+                <p>
+                    Benvenuto nel tuo scudo finanziario! Premi il pianeta You$ per ricordarti questa procedura di autodifesa.
+                </p>
+                <br>
+                <p>
+                    <strong>1)</strong> Apri il
+                    <a href="https://avvstancamarcello.github.io/Financial-Authority-Database/index.html#database-search-section" style="color:#38bdf8; font-weight:600; text-decoration:underline;" target="_blank" rel="noopener noreferrer">
+                        Database Autorità Finanziarie (190)
+                    </a>
+                    e, con la casella di ricerca, digita il <strong>nome del Paese</strong> che i truffatori (o la pagina web da loro indicata) dichiarano come sede geografica dell'impresa (falsa) che offre servizi finanziari, criptovalute o trading online.
+                </p>
+                <p>
+                    <strong>2)</strong> Trova l'<strong>Autorità Finanziaria competente</strong> di quel Paese (banca centrale, autorità di vigilanza o regolatore dei mercati).
+                </p>
+                <p>
+                    <strong>3)</strong> Invia una e-mail all'Autorità, oppure al sito ufficiale dell'Avv. Stanca, con una domanda molto semplice, copiando e completando questo schema:
+                </p>
+                <br>
+                <p>
+                    «<strong>Dimmi se</strong> questa impresa ................ finanziaria / assicurativa esiste davvero!<br>
+                    <strong>Dimmi se</strong> è autorizzata ad offrire servizi finanziari nel mio Paese di residenza!<br>
+                    <strong>Dimmi qual è</strong> il suo indirizzo web ufficiale!<br>
+                    <strong>Dimmi qual è</strong> il suo indirizzo e-mail ufficiale!<br>
+                    <strong>Segnala</strong> l'abuso di servizio finanziario offerto, e l'eventuale clonazione di identità o di un'altra impresa legittima!<br>
+                    Potete rispondermi con e-mail a questo indirizzo: .................<br>
+                    Sono / non sono interessato ad ulteriore assistenza legale.»
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Qui nel file originale ci sono altre sezioni (case-study, timeline, ecc.) non toccate -->
+
+    <!-- Prevenzione Truffe e Supporto Vittime -->
+    <section id="prevenzione-truffe" style="margin-top: 5rem; scroll-margin-top: 100px;">
+        <h2 class="section-title">🛡️ Prevenzione Truffe e Supporto alle Vittime</h2>
+        <p class="section-subtitle">Organizzazioni internazionali specializzate in protezione consumatori anziani, autovalutazione vulnerabilità finanziaria, supporto psicologico vittime</p>
+
+        <div style="text-align: center; margin-top: 1rem;">
+            <a href="#sommario-referenze" class="download-button" style="background: #020617; border: 1px solid #334155;">⬆ Torna al sommario</a>
+        </div>
+
+        <div id="supporto-psicologico" class="prevenzione-banners" style="scroll-margin-top: 120px;">
+            <!-- Banner 1: Older Adult Nest Egg (OANE) -->
+            <div class="media-card prevenzione-banner banner-oane">
+                <!-- ... contenuto Banner 1 OANE ... -->
+            </div>
+
+            <!-- Banner 2: Programma & Profilo AARP -->
+            <div class="media-card prevenzione-banner banner-aarp-mental">
+                <!-- ... contenuto Banner 2 AARP Mental Health ... -->
+            </div>
+
+            <!-- Banner 3: Servizi Anti-Frode -->
+            <div class="media-card prevenzione-banner banner-aarp-servizi">
+                <!-- ... contenuto Banner 3 ... -->
+            </div>
+
+            <!-- Banner 4: Statistiche AARP -->
+            <div class="media-card prevenzione-banner banner-aarp-stats">
+                <!-- ... contenuto Banner 4 ... -->
+            </div>
+
+            <!-- Banner 5: Impatto Salute Mentale -->
+            <div class="media-card prevenzione-banner banner-aarp-impatti" style="padding: 2rem; box-shadow: 0 6px 20px rgba(0,0,0,0.18);">
+                <h3 style="color: #FFD700; margin: 0 0 1rem 0; font-size: 1.3rem;">💔 Impatto Salute Mentale</h3>
+                <p style="line-height: 1.9; margin: 0; font-size: 0.98rem;">
+                    <strong>Le vittime di truffe finanziarie possono sperimentare:</strong><br>
+                    • Trauma psicologico paragonabile ad aggressione fisica<br>
+                    • Depressione clinica (25% dei casi)<br>
+                    • Ansia e attacchi di panico persistenti<br>
+                    • Vergogna paralizzante e isolamento sociale<br>
+                    • Peggioramento di condizioni croniche preesistenti<br>
+                    • Aumento del rischio suicidario negli anziani vulnerabili
+                </p>
+            </div>
+        </div>
+
+        <!-- CTA e risorse aggiuntive AARP + You$ Scudo Giuridico -->
+        <div style="margin-top: 2.5rem; text-align: center;">
+            <div style="display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; margin-bottom: 1.5rem;">
+                <a id="mental-health" href="https://www.aarp.org/money/scams-fraud/mental-health-impact/" target="_blank" rel="noopener noreferrer" class="download-button" style="background: #E13A3E; display: inline-block; font-size: 1.05rem; padding: 0.9rem 1.8rem;">
+                    🧠 Mental Health Impact
+                </a>
+
+                <!-- Nuova scheda/pulsante You$ – Il tuo SCUDO Giuridico di Legalità -->
+                <button id="youShieldGridButton"
+                        type="button"
+                        class="download-button"
+                        style="background: #16a34a; display: inline-block; font-size: 1.05rem; padding: 0.9rem 1.8rem; border: none; cursor: pointer;">
+                    💲 You$ – Il tuo SCUDO Giuridico di Legalità
+                </button>
+
+                <a href="https://www.aarp.org/money/scams-fraud/" target="_blank" rel="noopener noreferrer" class="download-button" style="background: #C41E3A; display: inline-block; font-size: 1.05rem; padding: 0.9rem 1.8rem;">
+                    🛡️ Fraud Watch Network
+                </a>
+                <a href="https://www.aarp.org/" target="_blank" rel="noopener noreferrer" class="download-button" style="background: #A01B2E; display: inline-block; font-size: 1.05rem; padding: 0.9rem 1.8rem;">
+                    🌐 Sito Ufficiale AARP
+                </a>
+            </div>
+            <!-- ... altri elementi ... -->
+        </div>
+    </section>
+
+    <!-- Qui sotto prosegue il resto della pagina originale (altre sezioni, footer, ecc.) -->
+
+    <script>
+        // JS minimo per il modal You$ – Scudo Giuridico di Legalità
+        (function() {
+            const modal = document.getElementById('youShieldModal');
+            const card = document.getElementById('youShieldCard');
+            const gridButton = document.getElementById('youShieldGridButton');
+            const closeBtn = modal ? modal.querySelector('.modal-close-btn') : null;
+
+            function openModal() {
+                if (!modal) return;
+                modal.classList.add('active');
+                modal.setAttribute('aria-hidden', 'false');
+            }
+
+            function closeModal() {
+                if (!modal) return;
+                modal.classList.remove('active');
+                modal.setAttribute('aria-hidden', 'true');
+            }
+
+            if (card) {
+                card.addEventListener('click', openModal);
+            }
+
+            if (gridButton) {
+                gridButton.addEventListener('click', openModal);
+            }
+
+            if (closeBtn) {
+                closeBtn.addEventListener('click', closeModal);
+            }
+
+            if (modal) {
+                modal.addEventListener('click', (e) => {
+                    if (e.target === modal) {
+                        closeModal();
+                    }
+                });
+
+                document.addEventListener('keydown', (e) => {
+                    if (e.key === 'Escape' && modal.classList.contains('active')) {
+                        closeModal();
+                    }
+                });
+            }
+        })();
+    </script>
+</body>
+</html>
+```
