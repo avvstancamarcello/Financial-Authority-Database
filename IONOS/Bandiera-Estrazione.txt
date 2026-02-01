@@ -1,0 +1,15 @@
+[
+  {
+    "country_name": "Austria",
+    "country_code": "AT",
+    "flag": "🇦🇹",
+    "authority_abbreviation": "FMA"
+  },
+  {
+    "country_name": "Belgium",
+    "country_code": "BE",
+    "flag": "🇧🇪",
+    "authority_abbreviation": "FSMA"
+  }
+  // ... fino a 40–50 Authority
+]

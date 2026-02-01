@@ -1,0 +1,183 @@
+tre blocchi CSS indipendenti e non distruttivi:
+
+Animazione dell’ambulanza (Atto 2 → SCAM → Pianeta‑Prigione)
+
+Sbarre verdi animate del Pianeta‑Prigione
+
+Fade‑out progressivo del truffatore da SCAM mentre l’ambulanza si avvicina
+
+Tutto è progettato per integrarsi nel tuo banner senza interferire con l’ippodromo.
+
+🚑 1. CSS — Animazione dell’ambulanza
+L’ambulanza deve:
+
+muoversi in modo fluido lungo la semiretta
+
+avere una leggera oscillazione (effetto “sirena in movimento”)
+
+non lampeggiare (non è soccorso, è arresto)
+
+essere compatibile con il movimento calcolato via JS
+
+CSS
+css
+/* Contenitore ambulanza */
+#ambulance {
+    position: absolute;
+    width: 48px;
+    height: 28px;
+    transform-origin: center;
+    transition: left 0.15s linear, top 0.15s linear;
+}
+
+/* Oscillazione leggera durante il movimento */
+#ambulance.moving-to-scam,
+#ambulance.moving-to-prison {
+    animation: amb-oscillation 0.45s infinite ease-in-out;
+}
+
+@keyframes amb-oscillation {
+    0%   { transform: translateY(0px) rotate(0deg); }
+    50%  { transform: translateY(-2px) rotate(0.5deg); }
+    100% { transform: translateY(0px) rotate(0deg); }
+}
+Questa animazione è compatibile con il movimento JS:
+il JS aggiorna left e top, il CSS aggiunge solo un micro‑movimento estetico.
+
+🟩 2. CSS — Sbarre verdi animate del Pianeta‑Prigione
+Le sbarre devono:
+
+essere verticali, verdi, pulsanti
+
+dare l’idea di una prigione energetica
+
+non coprire completamente Anonimus, ma incorniciarlo
+
+HTML suggerito (non invasivo)
+html
+<div id="planet-prison">
+    <div class="bars">
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+    </div>
+    <img id="anonimus-icon" src="anonimus.png">
+</div>
+CSS
+css
+#planet-prison {
+    position: absolute;
+    width: 120px;
+    height: 120px;
+    display: none;
+    transform: translate(-50%, -50%);
+}
+
+#planet-prison .bars {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    pointer-events: none;
+}
+
+#planet-prison .bar {
+    width: 10px;
+    height: 100%;
+    background: linear-gradient(
+        to bottom,
+        rgba(0,255,0,0.9),
+        rgba(0,180,0,0.9)
+    );
+    border-radius: 4px;
+    animation: barsPulse 1.2s infinite ease-in-out;
+}
+
+@keyframes barsPulse {
+    0%   { opacity: 0.6; transform: scaleY(1); }
+    50%  { opacity: 1;   transform: scaleY(1.05); }
+    100% { opacity: 0.6; transform: scaleY(1); }
+}
+
+#anonimus-icon {
+    position: absolute;
+    width: 60%;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 1;
+}
+Le sbarre pulsano come un campo di contenimento, coerente con la tua estetica cosmica.
+
+😈 3. CSS — Fade‑out del truffatore da SCAM
+Il truffatore deve:
+
+svanire gradualmente mentre l’ambulanza si avvicina
+
+dare l’idea che “viene estratto” dal pianeta
+
+lasciare SCAM vuoto
+
+CSS
+css
+/* Icona del truffatore su SCAM */
+#scam-truffatore {
+    position: absolute;
+    width: 60%;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    transition: opacity 0.8s linear;
+}
+
+/* Classe applicata via JS quando l’ambulanza entra nella fase finale */
+#scam-truffatore.fade-out {
+    opacity: 0;
+}
+JS di supporto (non invasivo)
+javascript
+function fadeOutTruffatore() {
+    const truff = document.getElementById("scam-truffatore");
+    truff.classList.add("fade-out");
+}
+Questo effetto si attiva quando l’ambulanza entra nella fase:
+
+Codice
+Ambulanza → SCAM → Pianeta‑Prigione
+ed è perfettamente sincronizzabile con il tuo timer.
+
+🎯 RISULTATO SCENOGRAFICO
+Con questi tre blocchi CSS ottieni:
+
+🚑 Ambulanza
+movimento fluido
+
+oscillazione realistica
+
+nessuna interferenza con il motore orbitale
+
+🟩 Pianeta‑Prigione
+sbarre verdi pulsanti
+
+Anonimus imprigionato
+
+effetto “campo di contenimento”
+
+😈 Truffatore
+fade‑out elegante
+
+SCAM rimane vuoto
+
+narrativa perfetta: “estrazione del truffatore”
+
+Se vuoi, posso ora:
+
+integrare questi CSS nel codice completo dei due atti,
+
+oppure preparare la sequenza temporale completa del Secondo Atto (timeline 0–65).
+
+
+
+

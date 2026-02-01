@@ -1,0 +1,54 @@
+versione animata completa dei due atti
+Ti preparo:
+
+Struttura SVG
+
+Percorsi curvi (path) per ogni elemento
+
+CSS delle animazioni curve
+
+Timeline sincronizzata (0–130 s)
+
+Eventi scenografici (pulse, fade, respinta, arresto)
+
+1️⃣ STRUTTURA SVG (con percorsi curvi)
+Ti preparo i percorsi principali:
+
+<svg id="regia" width="1500" height="900" xmlns="http://www.w3.org/2000/svg">
+
+  <!-- Percorso principale (ippodromo) -->
+  <path id="ippodromo" d="M 300 450 
+                           C 300 200, 1200 200, 1200 450
+                           C 1200 700, 300 700, 300 450 Z"
+        fill="none" stroke="none"/>
+
+  <!-- Percorso esterno bandiere UE -->
+  <path id="ippodromoUE" d="M 250 450 
+                             C 250 150, 1250 150, 1250 450
+                             C 1250 750, 250 750, 250 450 Z"
+        fill="none" stroke="none"/>
+
+  <!-- Percorso ambulanza → SCAM -->
+  <path id="ambToScam" d="M 300 700 
+                           C 600 650, 900 550, 1050 450" 
+        fill="none" stroke="none"/>
+
+  <!-- Percorso SCAM → Prigione -->
+  <path id="scamToPrison" d="M 1050 450 
+                              C 1200 350, 1350 300, 1400 250" 
+        fill="none" stroke="none"/>
+
+  <!-- Percorso raggio respinto -->
+  <path id="laserBounce" d="M 1050 450 
+                             C 1100 400, 1150 350, 1300 200" 
+        fill="none" stroke="none"/>
+
+  <!-- Elementi animati -->
+  <circle id="you" r="20" fill="#38bdf8"/>
+  <circle id="shield" r="22" fill="#22c55e"/>
+  <circle id="wifi" r="18" fill="#4ade80"/>
+  <circle id="scam" r="28" fill="#b91c1c"/>
+  <circle id="ambulanza" r="16" fill="#fb923c"/>
+  <circle id="prigione" r="30" fill="#22c55e" opacity="0"/>
+
+</svg>

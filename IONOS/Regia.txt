@@ -1,0 +1,212 @@
+Perfetto, Marcello.
+Ora ti preparo la sequenza temporale completa del Secondo Atto (0–65 s), integrando:
+
+il nuovo ippodromo delle bandiere UE + Authority
+
+la timeline completa dei due atti
+
+la gestione del raggio giallo dimezzato e rimbalzante sul WiFi verde
+
+Il tutto in forma chiara, scenografica e tecnicamente implementabile, senza toccare il tuo motore orbitale.
+
+🕰️ TIMELINE COMPLETA – ATTO 2 (0–65 s)
+
+🕰️ TIMELINE COMPLETA – ATTO 2 (0–65 s)
+(Scudo in testa, WiFi verde attivo, raggio dimezzato e respinto, truffatore catturato)
+
+0–5 s — Avvio del ciclo protetto
+Appare lo Scudo Financial Defense in posizione 1.
+
+You$ in posizione 2, segue l’ippodromo.
+
+Il simbolo WiFi verde si attiva e pulsa.
+
+Il raggio giallo di SCAM è dimezzato e punta verso You$, ma non lo raggiunge.
+
+5–10 s — Attivazione del nuovo ippodromo UE
+Inizia la comparsa delle bandiere UE + Authority, una al secondo.
+
+Le bandiere seguono un nuovo ippodromo esterno, distinto da quello dei pianeti.
+
+10–20 s — Rimbalzo del raggio
+Il raggio giallo tocca il WiFi verde.
+
+Il WiFi genera un effetto di respinta.
+
+Il raggio rimbalza con un angolo casuale tra 30° e 150°.
+
+Il raggio si dissolve nello sfondo nero.
+
+20–30 s — Flussi banche → You$ (non verso SCAM)
+Le banche emettono flussi di monete.
+
+Le monete raggiungono You$, ma non proseguono verso SCAM.
+
+You$ resta normale, non ipnotizzato.
+
+30–40 s — Continuazione del ciclo protetto
+Il WiFi continua a respingere ogni tentativo di SCAM.
+
+Le bandiere UE + Authority continuano a comparire una al secondo.
+
+SCAM rimane isolato, impotente.
+
+40–50 s — Stabilizzazione
+Nessun raggio raggiunge You$.
+
+Nessun furto avviene.
+
+Il truffatore resta sul pianeta SCAM, ma inizia a “tremare” (fade‑out progressivo).
+
+50–60 s — Pre‑arresto
+Il truffatore su SCAM diventa semitrasparente.
+
+Il WiFi verde aumenta la pulsazione (effetto “massima difesa”).
+
+Le bandiere UE completano il giro.
+
+60–62.5 s — Ambulanza → SCAM
+L’ambulanza parte dalla sua posizione sul rettilineo inferiore.
+
+Si dirige verso SCAM lungo la semiretta.
+
+Il truffatore svanisce (fade‑out totale).
+
+62.5–65 s — SCAM → Pianeta‑Prigione
+L’ambulanza prosegue verso il Pianeta‑Prigione.
+
+Appare il Pianeta‑Prigione con tre sbarre verdi animate.
+
+L’icona Anonimus appare dietro le sbarre.
+
+SCAM rimane vuoto.
+
+Fine del ciclo.
+
+🕰️ TIMELINE COMPLETA – ATTO 1 (0–65 s)
+(Ipnosi, furto, flussi banche → SCAM, ambulanza salva la vittima)
+
+0–10 s — Avvio
+You$ segue l’ippodromo.
+
+SCAM osserva.
+
+10–20 s — Preparazione
+Il raggio giallo si attiva.
+
+Le bandiere UE compaiono una al secondo.
+
+20–30 s — Colpo di SCAM
+Il raggio colpisce You$ (55–54 s del ciclo precedente).
+
+You$ diventa IPNOS (occhi a spirale).
+
+30–40 s — Furto
+Le banche emettono flussi di monete → You$ → SCAM.
+
+SCAM si gonfia di simboli dorati $ e £.
+
+40–50 s — Ripetizione del furto
+Secondo flusso banche → You$ → SCAM.
+
+You$ resta ipnotizzato.
+
+50–60 s — Risveglio
+L’ambulanza raggiunge You$.
+
+You$ torna lucido.
+
+SCAM resta carico di simboli dorati.
+
+60–65 s — Ritorno al nastro di partenza
+You$ torna normale.
+
+SCAM si prepara al ciclo successivo.
+
+🌐 NUOVO IPPODROMO DELLE BANDIERE UE + AUTHORITY
+Struttura
+Un JSON contiene:
+
+bandiera
+
+nome Paese
+
+sigla Authority
+
+Una bandiera + Authority appare ogni secondo.
+
+Posizionamento
+Le bandiere seguono un ippodromo esterno, più grande di quello dei pianeti.
+
+Le bandiere non interferiscono con:
+
+SCAM
+
+You$
+
+Scudo
+
+WiFi
+
+Ambulanza
+
+Pianeta‑Prigione
+
+Effetto scenografico
+L’Europa “circonda” la scena.
+
+Ogni Authority appare come sentinella istituzionale.
+
+Il ritmo è costante: 1 bandiera/s.
+
+⚡ GESTIONE DEL RAGGIO GIALLO DIMMEZZATO E RIMBALZANTE
+1. Raggio dimezzato
+Calcolo vettore SCAM → You$.
+
+Lunghezza = 50% della distanza.
+
+Il raggio non raggiunge mai You$.
+
+2. Collisione con il WiFi
+Il raggio entra nel cerchio di collisione del WiFi.
+
+Si ferma.
+
+Si comprime leggermente (effetto “urto”).
+
+3. Rimbalzo
+Genero un angolo casuale tra 30° e 150°.
+
+Il raggio cambia direzione.
+
+Si allunga verso l’esterno del banner.
+
+Si dissolve (opacity → 0).
+
+4. Ripetizione
+Ogni volta che SCAM tenta di colpire You$, il WiFi lo respinge.
+
+Nessun danno raggiunge You$.
+
+🎯 RISULTATO FINALE
+Hai ora:
+
+La timeline completa dei due atti
+
+La sequenza temporale dettagliata del Secondo Atto
+
+Il nuovo ippodromo UE + Authority
+
+La gestione completa del raggio dimezzato e rimbalzante
+
+Una regia perfettamente coerente con la tua visione
+
+Quando vuoi, posso preparare:
+
+il codice JS completo dei due atti
+
+il codice CSS completo
+
+il JSON delle Authority UE
+
+il diagramma logico dei due atti

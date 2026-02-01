@@ -1,0 +1,114 @@
+Ecco una versione **più dettagliata**, con segmenti separati per ogni fase e colori coerenti con la tua scena (rosso SCAM, giallo raggio, arancio furto, verde difesa, azzurro You$, verde chiaro prigione).
+
+```svg
+<svg width="1300" height="520" xmlns="http://www.w3.org/2000/svg">
+
+  <!-- Sfondo -->
+  <rect x="0" y="0" width="1300" height="520" fill="#050816"/>
+
+  <!-- Scala temporale -->
+  <g font-family="Arial" font-size="12" fill="#ffffff">
+    <text x="200" y="30">0 s</text>
+    <text x="550" y="30">65 s</text>
+    <text x="900" y="30">130 s</text>
+    <line x1="180" y1="40" x2="1120" y2="40" stroke="#888" stroke-width="1"/>
+  </g>
+
+  <!-- Etichette righe -->
+  <g font-family="Arial" font-size="13" fill="#ffffff" text-anchor="end">
+    <text x="170" y="80">ATTO 1</text>
+    <text x="170" y="110">ATTO 2</text>
+
+    <text x="170" y="150">You$ – stato</text>
+    <text x="170" y="180">Raggio SCAM → You$ (Atto 1)</text>
+    <text x="170" y="210">Furto 1 (banca sup.)</text>
+    <text x="170" y="240">Furto 2 (banca inf.)</text>
+    <text x="170" y="270">Ambulanza – salvataggio</text>
+
+    <text x="170" y="310">Scudo (Atto 2)</text>
+    <text x="170" y="340">WiFi verde</text>
+    <text x="170" y="370">Raggio respinto (Atto 2)</text>
+    <text x="170" y="400">Flussi protetti (banche → You$)</text>
+    <text x="170" y="430">Truffatore su SCAM (fade-out)</text>
+    <text x="170" y="460">Ambulanza – arresto</text>
+    <text x="170" y="490">Pianeta Prigione</text>
+  </g>
+
+  <!-- Mapping: 0–130 s → 180–1120 px (1 s ≈ 7.23 px) -->
+  <!-- Funzione: x = 180 + t * 7.23 -->
+
+  <!-- ATTO 1 (0–65 s) -->
+  <rect x="180" y="68" width="470" height="18" fill="#b91c1c" opacity="0.8"/>
+  <!-- ATTO 2 (65–130 s) -->
+  <rect x="650" y="98" width="470" height="18" fill="#16a34a" opacity="0.8"/>
+
+  <!-- You$ – stato (Atto 1: normale → IPNOS → triste/risveglio) -->
+  <!-- 0–20 s: normale -->
+  <rect x="180" y="138" width="145" height="18" fill="#38bdf8" opacity="0.9"/>
+  <!-- 20–50 s: IPNOS -->
+  <rect x="180 + 20*7.23" y="138" width="30*7.23" height="18" fill="#0ea5e9" opacity="0.9"/>
+  <!-- 50–65 s: risveglio/ritorno -->
+  <rect x="180 + 50*7.23" y="138" width="15*7.23" height="18" fill="#38bdf8" opacity="0.9"/>
+
+  <!-- You$ – stato (Atto 2: sempre protetto) -->
+  <rect x="650" y="138" width="470" height="18" fill="#0ea5e9" opacity="0.9"/>
+
+  <!-- Raggio SCAM → You$ (Atto 1: 10–30 s) -->
+  <rect x="180 + 10*7.23" y="168" width="20*7.23" height="18" fill="#facc15" opacity="0.9"/>
+
+  <!-- Furto 1 (30–40 s) -->
+  <rect x="180 + 30*7.23" y="198" width="10*7.23" height="18" fill="#f97316" opacity="0.9"/>
+  <!-- Furto 2 (40–50 s) -->
+  <rect x="180 + 40*7.23" y="228" width="10*7.23" height="18" fill="#fb923c" opacity="0.9"/>
+
+  <!-- Ambulanza – salvataggio (50–60 s) -->
+  <rect x="180 + 50*7.23" y="258" width="10*7.23" height="18" fill="#f97316" opacity="0.9"/>
+
+  <!-- Scudo (Atto 2: 65–130 s) -->
+  <rect x="650" y="308" width="470" height="18" fill="#22c55e" opacity="0.9"/>
+
+  <!-- WiFi verde (Atto 2: 65–130 s) -->
+  <rect x="650" y="338" width="470" height="18" fill="#4ade80" opacity="0.9"/>
+
+  <!-- Raggio respinto (Atto 2: 75–85 s) -->
+  <rect x="180 + 75*7.23" y="368" width="10*7.23" height="18" fill="#eab308" opacity="0.95"/>
+
+  <!-- Flussi protetti (85–95 s) -->
+  <rect x="180 + 85*7.23" y="398" width="10*7.23" height="18" fill="#22c55e" opacity="0.95"/>
+
+  <!-- Truffatore su SCAM (fade-out: 105–115 s) -->
+  <rect x="180 + 105*7.23" y="428" width="10*7.23" height="18" fill="#f97316" opacity="0.8"/>
+
+  <!-- Ambulanza – arresto (115–125 s) -->
+  <rect x="180 + 115*7.23" y="458" width="10*7.23" height="18" fill="#fb923c" opacity="0.9"/>
+
+  <!-- Pianeta Prigione (125–130 s) -->
+  <rect x="180 + 125*7.23" y="488" width="5*7.23" height="18" fill="#22c55e" opacity="0.95"/>
+
+  <!-- Etichette interne principali -->
+  <g font-family="Arial" font-size="11" fill="#ffffff">
+    <text x="190" y="81">Atto 1: Ipnosi e furto</text>
+    <text x="660" y="111">Atto 2: Difesa, respinta, prigione</text>
+
+    <text x="190" y="153">You$ normale</text>
+    <text x="180 + 22*7.23" y="153">IPNOS</text>
+    <text x="180 + 52*7.23" y="153">Risveglio</text>
+
+    <text x="180 + 12*7.23" y="183">Raggio SCAM → You$</text>
+    <text x="180 + 31*7.23" y="213">Furto 1</text>
+    <text x="180 + 41*7.23" y="243">Furto 2</text>
+    <text x="180 + 51*7.23" y="273">Ambulanza salva vittima</text>
+
+    <text x="660" y="323">Scudo attivo</text>
+    <text x="660" y="353">WiFi difensivo</text>
+    <text x="180 + 76*7.23" y="383">Raggio respinto</text>
+    <text x="180 + 86*7.23" y="413">Flussi solo verso You$</text>
+    <text x="180 + 106*7.23" y="443">Fade-out truffatore</text>
+    <text x="180 + 116*7.23" y="473">Ambulanza → SCAM → prigione</text>
+    <text x="180 + 126*7.23" y="503">Pianeta Prigione</text>
+  </g>
+
+</svg>
+```
+
+Se vuoi, nel passo successivo possiamo allineare esattamente i secondi ai tuoi time‑lapse reali (44.7, 36.7, 27, ecc.) e usarlo come “spartito” ufficiale della regia.

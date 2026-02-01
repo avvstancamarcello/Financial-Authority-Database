@@ -1,0 +1,112 @@
+la funzione createFlagAuthorityElement(data) mostrerà:
+
+bandiera
+
+sigla Paese
+
+sigla Authority
+
+una per secondo, lungo il nuovo ippodromo esterno.
+il Secondo Atto mostra la versione protetta:
+
+scudo in testa,
+
+WiFi verde che respinge il raggio,
+
+capitali che non raggiungono SCAM,
+
+truffatore che finisce nel Pianeta Prigione.
+
+Perfetto, Marcello.  
+Adesso entriamo **nel cuore tecnico e scenografico** della deflessione del raggio giallo sul simbolo WiFi verde, così come lo hai immaginato nel **Secondo Atto**.
+
+Ti costruisco una soluzione **non distruttiva**, che:
+
+- non tocca il tuo motore di movimento  
+- non altera l’ippodromo  
+- si appoggia solo a layer grafici aggiuntivi  
+- rispetta la tua regia:  
+  **il raggio parte da SCAM → incontra il WiFi → rimbalza → si spegne fuori dal banner**
+
+E soprattutto:  
+**non raggiunge mai You$**, che resta protetto.
+
+---
+
+# 🌐 OBIETTIVO SCENOGRAFICO
+
+Nel Secondo Atto:
+
+- il raggio giallo è **dimezzato** (non arriva a You$)
+- il simbolo WiFi verde è **attivo per tutto il ciclo**
+- quando il raggio tocca il WiFi:
+  - **si deforma**
+  - **rimbalza** con un angolo casuale
+  - **si dissolve** nello sfondo nero
+- You$ non subisce alcun danno
+- SCAM resta “isolato”, impotente
+- il WiFi è il simbolo della **difesa finanziaria attiva**
+
+---
+
+# 🧠 LOGICA DELLA DEFLESSIONE
+
+La deflessione è composta da 3 fasi:
+
+### **1. Emissione del raggio corto**
+- parte da SCAM
+- punta verso You$
+- lunghezza = metà della distanza SCAM–You$
+
+### **2. Collisione con il WiFi**
+- quando la punta del raggio entra nel “cerchio di collisione” del WiFi:
+  - il raggio si ferma
+  - parte un effetto di “compressione” (leggera oscillazione)
+  - si genera un vettore di rimbalzo
+
+### **3. Rimbalzo casuale**
+- il raggio cambia direzione con un angolo casuale tra 30° e 150°
+- si allunga verso l’esterno del banner
+- si dissolve gradualmente (opacity → 0)
+
+---
+
+# 🧩 SCHELETRO TECNICO DELLA DEFLESSIONE
+
+Ti scrivo il codice in forma modulare, pronto per essere integrato nel Secondo Atto.
+
+---
+
+## **1. Calcolo del raggio corto SCAM → You$**
+
+```javascript
+function getShortLaserVector() {
+    const scamPos = getScamPosition();
+    const youPos = getYouPosition();
+
+    const dx = youPos.x - scamPos.x;
+    const dy = youPos.y - scamPos.y;
+
+    const dist = Math.sqrt(dx*dx + dy*dy);
+    const half = dist * 0.5;
+
+    const ux = dx / dist;
+    const uy = dy / dist;
+
+    return {
+        x1: scamPos.x,
+        y1: scamPos.y,
+        x2: scamPos.x + ux * half,
+        y2: scamPos.y + uy * half
+    };
+}
+```
+
+---
+
+## **2. Rilevamento collisione con il WiFi**
+
+```javascript
+function laserHitsWifi(laser) {
+    const wifiPos = getWifiPosition();
+    const wifiRadius = 40; // raggio simbolico

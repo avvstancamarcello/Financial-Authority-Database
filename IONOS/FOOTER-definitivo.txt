@@ -1,0 +1,101 @@
+FOOTER-definitivo
+<footer style="background:#0a2a43; color:#ffffff; padding:60px 20px; margin-top:60px;">
+  <div style="max-width:1200px; margin:0 auto; display:flex; flex-wrap:wrap; gap:40px; justify-content:space-between;">
+
+    <!-- COLONNA 1 – Identità -->
+    <div style="flex:1 1 280px;">
+      <h3 style="font-size:1.4rem; margin-bottom:15px; color:#ffffff;">
+        Financial Defense Shield
+      </h3>
+      <p style="line-height:1.6; font-size:1rem;">
+        Scudo digitale per la protezione degli investitori contro truffe online, 
+        piattaforme fraudolente e investimenti ad alto rischio. 
+        Il software‑legionario analizza il web 24/7 e segnala rischi con il sistema 
+        semaforico verde‑giallo‑rosso.
+      </p>
+      <p style="margin-top:15px; font-size:0.95rem; opacity:0.8;">
+        Marchio figurativo M • © • S – Paternità autoriale Marcello Stanca.
+      </p>
+    </div>
+
+    <!-- COLONNA 2 – Autorevolezza UE -->
+    <div style="flex:1 1 260px;">
+      <h3 style="font-size:1.4rem; margin-bottom:15px; color:#ffffff;">
+        Riconoscimenti istituzionali
+      </h3>
+      <p style="line-height:1.6; font-size:1rem;">
+        Le Petizioni europee presentate da Marcello Stanca:
+      </p>
+      <ul style="list-style:none; padding:0; line-height:1.8; font-size:1rem;">
+        <li>• <strong>Petizione 0888/2024</strong> – Protezione contro i falsi investimenti online</li>
+        <li>• <strong>Petizione 0645/2025</strong> – Controlli obbligatori su bonifici e carte</li>
+      </ul>
+      <p style="line-height:1.6; font-size:1rem; margin-top:10px;">
+        Entrambe accolte dal Parlamento Europeo e confluite nell’<strong>accordo del 27 novembre 2025</strong>, 
+        che ha riconosciuto la responsabilità delle banche nella prevenzione delle frodi 
+        e nella verifica dei beneficiari dei pagamenti.
+      </p>
+    </div>
+
+    <!-- COLONNA 3 – I nostri progetti -->
+    <div style="flex:1 1 240px;">
+      <h3 style="font-size:1.4rem; margin-bottom:15px; color:#ffffff;">
+        I nostri progetti
+      </h3>
+      <ul style="list-style:none; padding:0; line-height:1.8; font-size:1rem;">
+        <li><a href="https://www.tutelatruffe.it" style="color:#ffb400; text-decoration:none;" target="_blank">
+          tutelatruffe.it
+        </a></li>
+        <li><a href="https://www.scam-radar.com" style="color:#ffb400; text-decoration:none;" target="_blank">
+          scam-radar.com
+        </a></li>
+      </ul>
+      <p style="margin-top:15px; font-size:0.95rem; opacity:0.8;">
+        Piattaforme dedicate alla prevenzione delle truffe finanziarie online.
+      </p>
+    </div>
+
+    <!-- COLONNA 4 – Autore e libro -->
+    <div style="flex:1 1 260px;">
+      <h3 style="font-size:1.4rem; margin-bottom:15px; color:#ffffff;">
+        Autore e pubblicazioni
+      </h3>
+      <p style="line-height:1.6; font-size:1rem;">
+        Progetto diretto da <strong>Marcello Stanca</strong>, avvocato patrocinante in Cassazione 
+        e autore del libro:
+      </p>
+      <p style="margin-top:10px;">
+        <a href="https://www.amazon.it/dp/B0DQRB8VQY" target="_blank"
+           style="color:#ffb400; text-decoration:none; font-size:1rem;">
+          “Rischio Trading” – Bruno Editore (Amazon)
+        </a>
+      </p>
+      <p style="font-size:0.95rem; opacity:0.8; margin-top:10px;">
+        Valutazione media: ★★★★☆ (4.2 su 5) – 29 recensioni.
+      </p>
+      <p style="margin-top:10px;">
+        <a href="https://avvstancamarcello.github.io/Financial-Authority-Database/index.html#author-credentials" 
+           target="_blank" style="color:#ffb400; text-decoration:none;">
+          Credenziali autore
+        </a>
+      </p>
+    </div>
+
+  </div>
+
+  <!-- LINEA DIVISORIA -->
+  <div style="border-top:1px solid rgba(255,255,255,0.2); margin:40px 0;"></div>
+
+  <!-- SEZIONE LEGALE -->
+  <div style="max-width:1200px; margin:0 auto; text-align:center; font-size:0.9rem; line-height:1.6; opacity:0.85;">
+    <p>
+      © 2026 Financial Defense Shield – Tutti i diritti riservati.  
+      Progetto ideato e diretto da Marcello Stanca, Avvocato patrocinante in Cassazione.
+    </p>
+    <p>
+      <a href="/privacy-policy.html" style="color:#ffb400; text-decoration:none;">Privacy Policy</a> |
+      <a href="/cookie-policy.html" style="color:#ffb400; text-decoration:none;">Cookie Policy</a> |
+      <a href="/disclaimer.html" style="color:#ffb400; text-decoration:none;">Disclaimer</a>
+    </p>
+  </div>
+</footer>

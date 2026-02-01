@@ -1,0 +1,164 @@
+🧭 DIAGRAMMA LOGICO – ATTO 1
+“La vittima viene ipnotizzata e derubata”
+STATO INIZIALE (0–10 s)
+You$ → segue l’ippodromo
+
+SCAM → osserva
+
+Nessun flusso attivo
+
+Nessuna ipnosi
+
+Nessuna ambulanza in movimento
+
+FASE 1 – Preparazione del colpo (10–20 s)
+Raggio giallo si attiva
+
+Bandiere UE compaiono una al secondo
+
+SCAM prende la mira su You$
+
+FASE 2 – Ipnosi (20–30 s)
+Raggio colpisce You$
+
+You$ → diventa IPNOS (occhi a spirale)
+
+Inizia la vulnerabilità psicologica
+
+FASE 3 – Primo furto (30–40 s)
+Banca superiore → flusso monete → You$ → SCAM
+
+You$ resta ipnotizzato
+
+SCAM si gonfia di simboli $ e £
+
+FASE 4 – Secondo furto (40–50 s)
+Banca inferiore → flusso monete → You$ → SCAM
+
+SCAM accumula altri simboli dorati
+
+You$ resta in stato IPNOS
+
+FASE 5 – Risveglio (50–60 s)
+Ambulanza entra in scena
+
+Raggiunge You$
+
+You$ torna lucido
+
+SCAM resta carico di denaro rubato
+
+FASE 6 – Ritorno al nastro (60–65 s)
+You$ torna normale
+
+SCAM si prepara al ciclo successivo
+
+Fine Atto 1
+
+🧭 DIAGRAMMA LOGICO – ATTO 2
+“La vittima è protetta: il truffatore viene catturato”
+STATO INIZIALE (0–5 s)
+Scudo Financial Defense → posizione 1
+
+You$ → posizione 2
+
+WiFi verde attivo
+
+Raggio giallo dimezzato
+
+Nessuna ipnosi possibile
+
+FASE 1 – Attivazione difesa (5–10 s)
+Inizia il nuovo ippodromo UE + Authority
+
+Una bandiera + Authority ogni secondo
+
+Raggio corto punta verso You$
+
+FASE 2 – Respinta del raggio (10–20 s)
+Raggio tocca il WiFi
+
+WiFi respinge
+
+Raggio rimbalza e si dissolve
+
+Nessun danno a You$
+
+FASE 3 – Flussi protetti (20–30 s)
+Banche → flusso monete → You$
+
+Le monete non raggiungono SCAM
+
+You$ resta normale
+
+FASE 4 – Stabilità (30–40 s)
+WiFi continua a respingere
+
+Nessun furto
+
+SCAM resta isolato
+
+FASE 5 – Pre‑arresto (40–50 s)
+Truffatore su SCAM inizia fade‑out
+
+WiFi aumenta pulsazione
+
+Bandiere UE completano il giro
+
+FASE 6 – Arresto (50–60 s)
+Truffatore diventa semitrasparente
+
+Ambulanza ancora ferma
+
+SCAM vibra (effetto “collasso del potere”)
+
+FASE 7 – Estradizione (60–62.5 s)
+Ambulanza parte dal rettilineo inferiore
+
+Si dirige verso SCAM
+
+Truffatore → fade‑out totale
+
+FASE 8 – Prigione (62.5–65 s)
+Ambulanza lascia SCAM
+
+Va verso il Pianeta‑Prigione
+
+Appare Pianeta‑Prigione con sbarre verdi
+
+Anonimus dietro le sbarre
+
+SCAM rimane vuoto
+
+Fine Atto 2
+
+🧩 STRUTTURA LOGICA GLOBALE (ATTO 1 + ATTO 2)
+Codice
+INIZIO CICLO
+│
+├── ATTO 1 (65 s)
+│     ├─ Preparazione
+│     ├─ Ipnosi
+│     ├─ Furto 1
+│     ├─ Furto 2
+│     ├─ Risveglio
+│     └─ Ritorno al nastro
+│
+└── ATTO 2 (65 s)
+      ├─ Attivazione difesa
+      ├─ Respinta raggio
+      ├─ Flussi protetti
+      ├─ Stabilità
+      ├─ Pre‑arresto
+      ├─ Arresto
+      └─ Prigione
+🎯 RISULTATO
+Hai ora:
+
+la mappa logica completa dei due atti
+
+la sequenza temporale dettagliata
+
+la struttura narrativa e tecnica
+
+la coerenza con la tua regia scenografica

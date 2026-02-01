@@ -1,0 +1,2534 @@
+Perfetto, andiamo dritti al punto: ippodromo esterno con percorsi multipli per le bandiere UE + Authority, pronto da innestare nel tuo “Odissea Digitale”.
+
+Ti do:
+
+1 path principale esterno (ellisse UE)
+
+3 percorsi multipli sfalsati per dare profondità (corsie UE1, UE2, UE3)
+
+un pattern di bandiere che ruotano in loop, una per secondo, sincronizzabile con il tuo JSON di Authority
+
+animazioni basate su offset-path + offset-distance
+
+1. SVG – Percorsi multipli per le bandiere UE
+html
+<svg id="ue-orbits" width="1500" height="900" xmlns="http://www.w3.org/2000/svg">
+
+  <!-- Percorso UE – corsia 1 (più interna) -->
+  <path id="ueTrack1"
+        d="M 260 450
+           C 260 180, 1240 180, 1240 450
+           C 1240 720, 260 720, 260 450 Z"
+        fill="none" stroke="none"/>
+
+  <!-- Percorso UE – corsia 2 (media) -->
+  <path id="ueTrack2"
+        d="M 230 450
+           C 230 150, 1270 150, 1270 450
+           C 1270 750, 230 750, 230 450 Z"
+        fill="none" stroke="none"/>
+
+  <!-- Percorso UE – corsia 3 (più esterna) -->
+  <path id="ueTrack3"
+        d="M 200 450
+           C 200 120, 1300 120, 1300 450
+           C 1300 780, 200 780, 200 450 Z"
+        fill="none" stroke="none"/>
+
+  <!-- Gruppo bandiere (istanze ripetute) -->
+  <g id="ue-flags-layer">
+    <!-- Verranno popolati via JS con <image> o <rect> + sigla -->
+  </g>
+
+</svg>
+2. CSS – Animazioni curve per le bandiere
+Ogni bandiera è un piccolo “satellite” che segue una corsia diversa.
+
+css
+.ue-flag {
+  width: 40px;
+  height: 26px;
+  offset-rotate: 0deg;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+/* corsia 1 */
+.ue-flag.track1 {
+  offset-path: path("M 260 450 C 260 180, 1240 180, 1240 450 C 1240 720, 260 720, 260 450 Z");
+  animation-name: ueOrbit1;
+}
+
+/* corsia 2 */
+.ue-flag.track2 {
+  offset-path: path("M 230 450 C 230 150, 1270 150, 1270 450 C 1270 750, 230 750, 230 450 Z");
+  animation-name: ueOrbit2;
+}
+
+/* corsia 3 */
+.ue-flag.track3 {
+  offset-path: path("M 200 450 C 200 120, 1300 120, 1300 450 C 1300 780, 200 780, 200 450 Z");
+  animation-name: ueOrbit3;
+}
+
+/* durata: 65s per sincronizzarsi con un atto */
+@keyframes ueOrbit1 {
+  from { offset-distance: 0%; }
+  to   { offset-distance: 100%; }
+}
+
+@keyframes ueOrbit2 {
+  from { offset-distance: 33%; }
+  to   { offset-distance: 133%; }
+}
+
+@keyframes ueOrbit3 {
+  from { offset-distance: 66%; }
+  to   { offset-distance: 166%; }
+}
+3. JS – Popolare le bandiere da JSON (Authority + Paese)
+Qui ti do lo scheletro logico, pronto per agganciarsi al tuo file JSON:
+
+javascript
+const ueFlagsLayer = document.getElementById('ue-flags-layer');
+
+// Esempio: array da JSON
+const ueAuthorities = [
+  { code: 'CONSOB', country: 'IT', flag: 'flags/it.svg' },
+  { code: 'AMF', country: 'FR', flag: 'flags/fr.svg' },
+  { code: 'BaFin', country: 'DE', flag: 'flags/de.svg' },
+  // ...
+];
+
+const tracks = ['track1', 'track2', 'track3'];
+
+ueAuthorities.forEach((auth, index) => {
+  const img = document.createElementNS('http://www.w3.org/2000/svg', 'image');
+  img.setAttributeNS('http://www.w3.org/1999/xlink', 'href', auth.flag);
+  img.setAttribute('width', 40);
+  img.setAttribute('height', 26);
+  img.classList.add('ue-flag', tracks[index % tracks.length]);
+
+  // una bandiera al secondo: delay = index s
+  const duration = 65; // un giro per atto
+  img.style.animationDuration = duration + 's';
+  img.style.animationDelay = index + 's';
+
+  ueFlagsLayer.appendChild(img);
+});
+4. Come si integra nella tua regia
+Atto 1 (0–65 s)  
+Le bandiere ruotano sull’ippodromo UE mentre avvengono ipnosi, furti, ambulanza.
+
+Atto 2 (65–130 s)  
+Puoi:
+
+mantenere lo stesso giro (continuità istituzionale), oppure
+
+cambiare animation-delay/duration per farle “accelerare” quando entra in scena lo Scudo + WiFi.
+
+la versione con glow dinamico sincronizzato al raggio respinto
+
+la versione con rotazione 3D delle bandiere
+
+🌟 1. GLOW DINAMICO SINCRONIZZATO AL RAGGIO RESPINTO
+Quando il raggio giallo viene respinto dal WiFi verde (Atto 2, 75–85 sec), vogliamo che:
+
+tutte le Authority sovranazionali (ESMA, EBA, EIOPA, OLAF, IOSCO…)
+→ emettano un glow dorato pulsante
+
+le Authority nazionali  
+→ emettano un glow blu UE
+
+il glow inizi esattamente quando parte l’animazione del raggio respinto
+
+/* Glow dorato (organismi sovranazionali) */
+.glow-gold {
+  animation: glowGold 1.2s infinite ease-in-out;
+}
+
+@keyframes glowGold {
+  0%   { filter: drop-shadow(0 0 2px #facc15); }
+  50%  { filter: drop-shadow(0 0 8px #facc15); }
+  100% { filter: drop-shadow(0 0 2px #facc15); }
+}
+
+/* Glow blu (Authority nazionali) */
+.glow-blue {
+  animation: glowBlue 1.2s infinite ease-in-out;
+}
+
+@keyframes glowBlue {
+  0%   { filter: drop-shadow(0 0 2px #60a5fa); }
+  50%  { filter: drop-shadow(0 0 8px #60a5fa); }
+  100% { filter: drop-shadow(0 0 2px #60a5fa); }
+}
+
+JS — Attivazione sincronizzata (75–85 sec)
+javascript
+function updateGlowForLaserBounce(currentTime) {
+    ueAuthorities.forEach((auth, i) => {
+        const label = document.querySelector(`#auth-${i}`);
+
+        if (currentTime >= 75 && currentTime <= 85) {
+            if (auth.type === "sovranazionale") {
+                label.classList.add("glow-gold");
+            } else {
+                label.classList.add("glow-blue");
+            }
+        } else {
+            label.classList.remove("glow-gold", "glow-blue");
+        }
+    });
+}
+🌍 2. ROTAZIONE 3D DELLE BANDIERE UE
+Le bandiere devono:
+
+ruotare su se stesse
+
+avere un effetto 3D flip
+
+mantenere la posizione lungo la curva
+
+non interferire con la leggibilità della sigla Authority
+
+CSS — Rotazione 3D continua
+css
+.ue-flag {
+  transform-origin: center;
+  animation: rotate3D 6s linear infinite;
+}
+
+@keyframes rotate3D {
+  0%   { transform: rotateY(0deg); }
+  50%  { transform: rotateY(180deg); }
+  100% { transform: rotateY(360deg); }
+}
+Variante: rotazione più lenta per Authority sovranazionali
+css
+.ue-flag.sovranazionale {
+  animation-duration: 10s;
+}
+🌀 3. INTEGRAZIONE CON I PERCORSI MULTIPLI
+Ogni bandiera + sigla Authority è un gruppo <g> che segue la curva:
+
+html
+<g id="auth-0" class="ue-flag-group track1">
+    <image href="flags/it.svg" width="40" height="26" class="ue-flag vigilanza"/>
+    <text class="ue-label vigilanza">CONSOB</text>
+</g>
+CSS — Percorsi curvi (già pronti)
+css
+.ue-flag-group.track1 {
+  offset-path: path("M 260 450 C 260 180, 1240 180, 1240 450 C 1240 720, 260 720, 260 450 Z");
+  animation: ueOrbit1 65s linear infinite;
+}
+
+.ue-flag-group.track2 {
+  offset-path: path("M 230 450 C 230 150, 1270 150, 1270 450 C 1270 750, 230 750, 230 450 Z");
+  animation: ueOrbit2 65s linear infinite;
+}
+
+.ue-flag-group.track3 {
+  offset-path: path("M 200 450 C 200 120, 1300 120, 1300 450 C 1300 780, 200 780, 200 450 Z");
+  animation: ueOrbit3 65s linear infinite;
+}
+🎬 4. SINCRONIZZAZIONE EVENTI CHIAVE
+ESMA → entra quando appare lo Scudo (65 sec)
+javascript
+if (auth.code === "ESMA") {
+    group.style.animationDelay = "65s";
+}
+OLAF → entra quando parte l’Ambulanza verso la Prigione (115 sec)
+javascript
+if (auth.code === "OLAF") {
+    group.style.animationDelay = "115s";
+}
+Glow dinamico → attivo solo durante il rimbalzo del raggio (75–85 sec)
+javascript
+updateGlowForLaserBounce(currentTime);
+✨ 5. EFFETTO COMPLETO (come appare nella scena)
+Durante il rimbalzo del raggio (75–85 sec):
+Le bandiere continuano a orbitare su percorsi curvi multipli
+
+Le bandiere ruotano in 3D
+
+Le Authority nazionali brillano di glow blu UE
+
+Le Authority sovranazionali brillano di glow dorato
+
+ESMA entra in scena esattamente quando appare lo Scudo
+
+OLAF entra in scena quando parte l’Ambulanza verso la Prigione
+
+Il risultato è un teatro istituzionale europeo perfettamente sincronizzato con la tua narrazione.
+
+la rotazione 3D anche per le sigle Authority
+
+un effetto “onda” quando il raggio viene respinto
+
+ROTAZIONE 3D ANCHE PER LE SIGLE DELLE AUTHORITY
+Le sigle (CONSOB, ESMA, OLAF, AMF, BaFin…) devono:
+
+ruotare in 3D come le bandiere
+
+mantenere la leggibilità
+
+seguire la curva dell’orbita
+
+avere una rotazione più lenta e istituzionale rispetto alla bandiera
+
+essere sincronizzate con il glow (oro per sovranazionali, blu per vigilanza)
+
+CSS — Rotazione 3D delle sigle
+css
+.ue-label {
+  transform-origin: left center;
+  animation: rotateLabel3D 8s linear infinite;
+  backface-visibility: hidden;
+}
+
+@keyframes rotateLabel3D {
+  0%   { transform: rotateY(0deg); }
+  50%  { transform: rotateY(180deg); }
+  100% { transform: rotateY(360deg); }
+}
+Variante: rotazione più lenta per organismi sovranazionali
+css
+.ue-label.sovranazionale {
+  animation-duration: 12s;
+}
+Variante: rotazione più veloce per Authority nazionali
+css
+.ue-label.vigilanza {
+  animation-duration: 8s;
+}
+Risultato scenografico
+Le bandiere ruotano in 3D.
+
+Le sigle ruotano in 3D ma più lentamente, come se fossero “istituzioni che vigilano dall’alto”.
+
+L’effetto è elegante, autorevole, perfettamente coerente con la tua estetica.
+
+2️⃣ EFFETTO “ONDA” QUANDO IL RAGGIO VIENE RESPINTO
+Quando il raggio giallo tocca il WiFi verde (75–85 sec), vogliamo un effetto:
+
+radiale, come un’onda d’urto luminosa
+
+che parte dal WiFi
+
+si espande verso l’esterno
+
+coinvolge anche le bandiere UE (glow + micro‑scossa)
+
+sincronizzato con il rimbalzo del raggio
+
+SVG — Cerchio dell’onda
+Aggiungi questo elemento:
+
+html
+<circle id="onda" cx="0" cy="0" r="5" fill="none" stroke="#4ade80" stroke-width="3" opacity="0"/>
+Il JS posizionerà il centro dell’onda sul WiFi.
+
+CSS — Animazione dell’onda
+css
+#onda {
+  transform-origin: center;
+  animation: ondaRespinta 1.2s ease-out forwards;
+}
+
+@keyframes ondaRespinta {
+  0%   { r: 5;   opacity: 0.9; stroke-width: 3; }
+  50%  { r: 80;  opacity: 0.5; stroke-width: 2; }
+  100% { r: 160; opacity: 0;   stroke-width: 1; }
+}
+Effetto:
+Un’onda verde si espande dal WiFi come un “boom” silenzioso.
+
+3️⃣ ATTIVAZIONE DELL’ONDA AL MOMENTO DEL RIMBALZO
+javascript
+function triggerOndaRespinta(wifiX, wifiY) {
+    const onda = document.getElementById("onda");
+    onda.setAttribute("cx", wifiX);
+    onda.setAttribute("cy", wifiY);
+
+    // reset animazione
+    onda.style.animation = "none";
+    void onda.offsetWidth; // forza il reflow
+    onda.style.animation = "ondaRespinta 1.2s ease-out forwards";
+}
+Quando chiamarla:
+javascript
+if (currentTime === 75) {
+    triggerOndaRespinta(wifiPos.x, wifiPos.y);
+}
+4️⃣ MICRO‑SCOSSA DELLE BANDIERE DURANTE L’ONDA
+Quando l’onda si espande, le bandiere devono:
+
+oscillare leggermente
+
+come se fossero colpite da un’onda elettromagnetica
+
+senza perdere la loro orbita
+
+CSS — Micro‑scossa
+css
+.ue-flag-group.shake {
+  animation: shakeFlag 0.4s ease-in-out;
+}
+
+@keyframes shakeFlag {
+  0%   { transform: translateX(0px); }
+  25%  { transform: translateX(3px); }
+  50%  { transform: translateX(-3px); }
+  75%  { transform: translateX(2px); }
+  100% { transform: translateX(0px); }
+}
+JS — Attivazione della scossa
+javascript
+function shakeAllFlags() {
+    document.querySelectorAll('.ue-flag-group').forEach(g => {
+        g.classList.add('shake');
+        setTimeout(() => g.classList.remove('shake'), 400);
+    });
+}
+Quando chiamarla:
+javascript
+if (currentTime === 75) {
+    shakeAllFlags();
+}
+🎬 RISULTATO SCENOGRAFICO COMPLETO
+Quando il raggio viene respinto dal WiFi:
+Un’onda verde si espande dal WiFi
+
+Tutte le bandiere UE vibrano per 0.4 sec
+
+Le sigle Authority ruotano in 3D
+
+Le Authority nazionali brillano di glow blu
+
+Le Authority sovranazionali brillano di glow oro
+
+Il raggio giallo segue la sua curva di rimbalzo
+
+L’onda si dissolve nello spazio
+
+È un effetto cinematografico, istituzionale, potente.
+Perfettamente coerente con la tua visione.
+
+🌌 1) DISTORSIONE DELLO SPAZIO ATTORNO AL WIFI
+Effetto:
+Quando il WiFi respinge il raggio (75–85 sec), lo spazio attorno al WiFi:
+
+si incurva
+
+vibra
+
+si “piega” come un campo gravitazionale
+
+crea un effetto di lente gravitazionale (tipo Einstein ring)
+
+amplifica la potenza difensiva del WiFi
+
+STRATEGIA
+Useremo:
+
+un filtro SVG con feTurbulence + feDisplacementMap
+
+un cerchio invisibile che applica la distorsione
+
+un’animazione che aumenta la distorsione durante il rimbalzo
+
+🔧 SVG — Filtro di distorsione gravitazionale
+html
+<defs>
+  <filter id="gravity-distortion">
+    <feTurbulence type="fractalNoise" baseFrequency="0.02" numOctaves="3" result="noise"/>
+    <feDisplacementMap in="SourceGraphic" in2="noise" scale="0" id="gravity-map"/>
+  </filter>
+</defs>
+🔧 CSS — Animazione della distorsione
+css
+#gravity-field {
+  filter: url(#gravity-distortion);
+  animation: gravityPulse 1.2s ease-in-out forwards;
+}
+
+@keyframes gravityPulse {
+  0%   { filter: url(#gravity-distortion); }
+  30%  { filter: url(#gravity-distortion); }
+  50%  { filter: url(#gravity-distortion); }
+  100% { filter: url(#gravity-distortion); }
+}
+🔧 SVG — Cerchio invisibile che applica la distorsione
+html
+<circle id="gravity-field" cx="0" cy="0" r="120" fill="transparent"/>
+🔧 JS — Attivazione sincronizzata (75 sec)
+javascript
+function triggerGravityDistortion(wifiX, wifiY) {
+    const field = document.getElementById("gravity-field");
+    field.setAttribute("cx", wifiX);
+    field.setAttribute("cy", wifiY);
+
+    // reset animazione
+    field.style.animation = "none";
+    void field.offsetWidth;
+    field.style.animation = "gravityPulse 1.2s ease-in-out forwards";
+
+    // aumenta la distorsione durante il picco
+    const map = document.getElementById("gravity-map");
+    map.setAttribute("scale", "45");
+    setTimeout(() => map.setAttribute("scale", "0"), 1200);
+}
+Effetto visivo
+Lo spazio attorno al WiFi “si piega”, come se il WiFi fosse un buco nero difensivo che assorbe il raggio.
+
+💥 2) SHOCKWAVE SUL PIANETA SCAM
+Quando il raggio viene respinto, SCAM deve:
+
+subire un contraccolpo
+
+vibrare
+
+emettere un’onda rossa
+
+mostrare che la sua potenza è stata annullata
+
+prepararsi al fade‑out del truffatore
+
+🔧 SVG — Cerchio shockwave su SCAM
+html
+<circle id="scam-shockwave" cx="0" cy="0" r="5"
+        fill="none" stroke="#b91c1c" stroke-width="3" opacity="0"/>
+🔧 CSS — Animazione shockwave
+css
+#scam-shockwave {
+  transform-origin: center;
+  animation: scamShock 1s ease-out forwards;
+}
+
+@keyframes scamShock {
+  0%   { r: 5;   opacity: 0.9; stroke-width: 3; }
+  50%  { r: 60;  opacity: 0.5; stroke-width: 2; }
+  100% { r: 120; opacity: 0;   stroke-width: 1; }
+}
+🔧 CSS — Vibrazione del pianeta SCAM
+css
+#scam.shake {
+  animation: scamShake 0.4s ease-in-out;
+}
+
+@keyframes scamShake {
+  0%   { transform: translate(0,0); }
+  25%  { transform: translate(3px,-2px); }
+  50%  { transform: translate(-3px,2px); }
+  75%  { transform: translate(2px,-1px); }
+  100% { transform: translate(0,0); }
+}
+🔧 JS — Attivazione shockwave su SCAM
+javascript
+function triggerScamShockwave(scamX, scamY) {
+    const wave = document.getElementById("scam-shockwave");
+    wave.setAttribute("cx", scamX);
+    wave.setAttribute("cy", scamY);
+
+    // reset animazione
+    wave.style.animation = "none";
+    void wave.offsetWidth;
+    wave.style.animation = "scamShock 1s ease-out forwards";
+
+    // vibrazione del pianeta
+    const scam = document.getElementById("scam");
+    scam.classList.add("shake");
+    setTimeout(() => scam.classList.remove("shake"), 400);
+}
+🔧 Sincronizzazione con il rimbalzo del raggio
+javascript
+if (currentTime === 75) {
+    triggerGravityDistortion(wifiPos.x, wifiPos.y);
+    triggerScamShockwave(scamPos.x, scamPos.y);
+}
+🎬 RISULTATO SCENOGRAFICO COMPLETO
+Quando il raggio viene respinto:
+🌌 Attorno al WiFi:
+lo spazio si incurva
+
+si deforma come un campo gravitazionale
+
+l’effetto è quello di una lente gravitazionale difensiva
+
+il raggio viene deviato e respinto
+
+💥 Sul Pianeta SCAM:
+un’onda rossa si espande
+
+il pianeta vibra come colpito da un contraccolpo
+
+il truffatore inizia il suo fade‑out
+
+SCAM perde potere e si prepara all’arresto
+
+🌍 Sull’intero sistema:
+le bandiere UE vibrano
+
+le Authority brillano (oro/blu)
+
+la scena diventa un teatro cosmico istituzionale perfettamente sincronizzato
+
+🌑 EFFETTO “IMPLOSIONE” DEL TRUFFATORE SU SCAM
+Il truffatore collassa verso il centro del pianeta SCAM e scompare.
+L’implosione è composta da 3 elementi:
+
+Contrazione rapida (scale → 0)
+
+Assorbimento verso il centro (translate → 0,0)
+
+Dissolvenza (opacity → 0)
+
+🎨 CSS — Implosione del truffatore
+css
+#truffatore {
+  transform-origin: center;
+  transition: none;
+}
+
+.implode {
+  animation: implodeEffect 0.9s cubic-bezier(0.2, 0.6, 0.3, 1) forwards;
+}
+
+@keyframes implodeEffect {
+  0% {
+    opacity: 1;
+    transform: scale(1) translate(0,0);
+    filter: drop-shadow(0 0 4px rgba(255,0,0,0.4));
+  }
+  40% {
+    opacity: 0.8;
+    transform: scale(0.6) translate(0,0);
+    filter: drop-shadow(0 0 8px rgba(255,0,0,0.6));
+  }
+  70% {
+    opacity: 0.4;
+    transform: scale(0.25) translate(0,0);
+    filter: drop-shadow(0 0 12px rgba(255,0,0,0.8));
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0) translate(0,0);
+    filter: drop-shadow(0 0 0 rgba(255,0,0,0));
+  }
+}
+🧩 HTML/SVG — Elemento del truffatore
+html
+<image id="truffatore" href="icons/truffatore.svg" width="60" height="60"/>
+(Può essere <image>, <g>, <svg>, <circle> — funziona con qualsiasi elemento.)
+
+⚡ JS — Attivazione dell’implosione
+javascript
+function implodeTruffatore() {
+    const t = document.getElementById("truffatore");
+
+    // reset animazione
+    t.classList.remove("implode");
+    void t.offsetWidth; // forza reflow
+
+    // attiva implosione
+    t.classList.add("implode");
+}
+⏱️ Quando chiamarla
+Nel tuo Atto 2, l’implosione avviene esattamente quando l’ambulanza arriva su SCAM, cioè:
+
+t = 60–62.5 sec
+
+subito prima che l’ambulanza riparta verso il Pianeta‑Prigione
+
+Esempio:
+
+javascript
+if (t >= 60 && t < 62.5) {
+    implodeTruffatore();
+}
+🎬 RISULTATO SCENOGRAFICO
+Quando arriva il momento:
+
+il truffatore collassa verso il centro
+
+si contrae come risucchiato
+
+emette un ultimo bagliore rosso
+
+e scompare senza esplosioni, senza violenza
+
+lasciando SCAM vuoto, pronto per l’arresto
+
+È un effetto:
+
+elegante
+
+istituzionale
+
+simbolico
+
+perfettamente coerente con la tua estetica etica e non traumatica
+
+Perfetto, Marcello.
+Ti preparo solo il modulo “micro‑vortice rosso”, completamente autonomo, elegante, non invasivo, e perfettamente compatibile con l’effetto di implosione che hai già.
+
+È un effetto fisico, rapido, simbolico:
+un piccolo vortice rosso appare per 0.3 secondi nel punto esatto in cui il truffatore collassa, come un residuo energetico del suo potere che si dissolve.
+
+Nessun trauma, nessuna violenza: pura scenografia istituzionale.
+
+🔥 MICRO‑VORTICE ROSSO (0.3s) — MODULO COMPLETO
+1️⃣ SVG — Elemento del vortice
+Aggiungi questo elemento una sola volta nel tuo SVG:
+
+html
+<circle id="micro-vortex" cx="0" cy="0" r="5"
+        fill="none" stroke="#b91c1c" stroke-width="2" opacity="0"/>
+È invisibile finché non viene attivato.
+
+2️⃣ CSS — Animazione del vortice (0.3s)
+css
+#micro-vortex {
+  transform-origin: center;
+}
+
+.vortex-active {
+  animation: microVortex 0.3s ease-out forwards;
+}
+
+@keyframes microVortex {
+  0% {
+    r: 5;
+    opacity: 0.9;
+    stroke-width: 2;
+    transform: rotate(0deg);
+  }
+  50% {
+    r: 12;
+    opacity: 0.6;
+    stroke-width: 2;
+    transform: rotate(90deg);
+  }
+  100% {
+    r: 20;
+    opacity: 0;
+    stroke-width: 1;
+    transform: rotate(180deg);
+  }
+}
+Effetto visivo:
+si accende per un istante
+
+ruota come un piccolo tornado
+
+si espande
+
+si dissolve
+
+È un “residuo energetico” dell’implosione.
+
+3️⃣ JS — Attivazione del vortice nel punto dell’implosione
+javascript
+function triggerMicroVortex(x, y) {
+    const vortex = document.getElementById("micro-vortex");
+
+    vortex.setAttribute("cx", x);
+    vortex.setAttribute("cy", y);
+
+    vortex.classList.remove("vortex-active"); // reset
+    void vortex.offsetWidth;                  // reflow
+    vortex.classList.add("vortex-active");    // attiva
+}
+4️⃣ Sincronizzazione con l’implosione del truffatore
+Quando fai implodere il truffatore, aggiungi:
+
+javascript
+triggerImplosioneTruffatore();
+triggerMicroVortex(scamPos.x, scamPos.y);
+🎬 RISULTATO SCENOGRAFICO
+Nel momento esatto dell’implosione:
+
+il truffatore collassa
+
+un micro‑vortice rosso appare per 0.3s
+
+ruota, si espande, si dissolve
+
+SCAM rimane vuoto, pronto per l’arresto
+
+È un dettaglio minuscolo ma potentissimo:
+dà fisicità, energia, profondità alla scena, senza mai essere aggressivo.
+
+Se vuoi, posso aggiungere anche una micro‑scintilla bianca al centro del vortice, per un effetto ancora più “quantistico” ma sempre sobrio.
+
+si, dammi scintilla quantistica.
+Perfetto, Marcello.
+Ti consegno solo il modulo “scintilla quantistica”, progettato per integrarsi esattamente nel punto dell’implosione, sopra il micro‑vortice rosso, senza interferire con nulla del resto della tua regia.
+
+È un effetto brevissimo (0.18s), luminoso, pulito, istituzionale, che dà la sensazione di:
+
+un collasso quantico
+
+un ultimo fotone che si libera
+
+un residuo energetico dell’identità del truffatore
+
+un “ping” visivo che comunica fine del potere fraudolento
+
+Nessuna violenza, solo fisica scenografica.
+
+✨ SCINTILLA QUANTISTICA (0.18s)
+Modulo completo, autonomo, pronto da incollare.
+1️⃣ SVG — Elemento della scintilla
+Aggiungi questo elemento una sola volta:
+
+html
+<circle id="quantum-spark" cx="0" cy="0" r="1"
+        fill="#ffffff" opacity="0"/>
+È un punto bianco invisibile finché non viene attivato.
+
+2️⃣ CSS — Animazione della scintilla quantistica
+css
+#quantum-spark {
+  transform-origin: center;
+}
+
+.spark-active {
+  animation: quantumSpark 0.18s ease-out forwards;
+}
+
+@keyframes quantumSpark {
+  0% {
+    r: 1;
+    opacity: 1;
+    filter: drop-shadow(0 0 2px #ffffff);
+  }
+  50% {
+    r: 4;
+    opacity: 0.9;
+    filter: drop-shadow(0 0 6px #ffffff);
+  }
+  100% {
+    r: 0.5;
+    opacity: 0;
+    filter: drop-shadow(0 0 0px #ffffff);
+  }
+}
+Effetto visivo:
+un punto bianco appare
+
+si espande leggermente
+
+emette un flash quantico
+
+si richiude e scompare
+
+Durata: 0.18 secondi  
+È un “tic” di energia pura.
+
+3️⃣ JS — Attivazione della scintilla nel punto dell’implosione
+javascript
+function triggerQuantumSpark(x, y) {
+    const spark = document.getElementById("quantum-spark");
+
+    spark.setAttribute("cx", x);
+    spark.setAttribute("cy", y);
+
+    spark.classList.remove("spark-active"); // reset
+    void spark.offsetWidth;                 // reflow
+    spark.classList.add("spark-active");    // attiva
+}
+4️⃣ Sincronizzazione perfetta con implosione + micro‑vortice
+Quando fai implodere il truffatore:
+
+javascript
+triggerImplosioneTruffatore();
+triggerMicroVortex(scamPos.x, scamPos.y);
+triggerQuantumSpark(scamPos.x, scamPos.y);
+Ordine consigliato:
+
+implosione (0–0.9s)
+
+micro‑vortice rosso (0–0.3s)
+
+scintilla quantistica (0–0.18s, sovrapposta al vortice)
+
+La scintilla è l’ultimo fotone prima della scomparsa.
+
+🎬 RISULTATO SCENOGRAFICO
+Nel momento esatto in cui il truffatore collassa:
+
+il corpo implode
+
+un micro‑vortice rosso si apre
+
+una scintilla quantistica bianca emerge per 0.18s
+
+si richiude
+
+tutto scompare
+
+È un effetto minimale, elegante, fisico, che comunica:
+
+“L’identità fraudolenta è stata annullata.”
+
+È una splendida idea, Marcello — ed è anche **perfettamente coerente** con la tua estetica scenografica, con la tua filosofia educativa e con la logica istituzionale del banner.
+
+Ti propongo una soluzione **pulita, modulare, elegante**, che integra:
+
+- **personalizzazione cromatica** basata sulla lingua scelta  
+- **tripla apparizione iniziale** della bandiera dell’utente  
+- **bandiera finale di saluto**  
+- **popup istituzionale** che offre due scelte:  
+  1. **Authority nazionale** corrispondente alla lingua  
+  2. **IOSCO** come organismo sovranazionale  
+
+Il tutto senza interferire con la coreografia orbitale delle bandiere UE.
+
+---
+
+# 🌈 1) LOGICA CROMATICA: “LANG‑SYNC INTRO”
+Quando l’utente seleziona una lingua (es. IT, EN, FR, DE, ES…), il banner registra:
+
+```js
+const userLang = selectedLanguage; // es. "it"
+```
+
+Poi, **prima che inizi il ciclo orbitale**, mostriamo **tre ingressi consecutivi** della bandiera corrispondente:
+
+- IT → 🇮🇹  
+- EN → 🇬🇧 o 🇺🇸 (decidi tu)  
+- FR → 🇫🇷  
+- DE → 🇩🇪  
+- ES → 🇪🇸  
+- PT → 🇵🇹  
+- ecc.
+
+### Durata consigliata  
+Ogni bandiera dura **1 secondo**, quindi:
+
+- 3 bandiere → **3 secondi**  
+- poi parte il ciclo orbitale normale
+
+### Effetto scenografico  
+L’utente percepisce:
+
+> “Questo banner sta parlando a me, nella mia lingua.”
+
+È un gesto di accoglienza istituzionale.
+
+---
+
+# 🎌 2) IMPLEMENTAZIONE: TRIPLA BANDIERA INIZIALE
+
+### Struttura dati
+
+```js
+const langFlags = {
+  it: "flags/it.svg",
+  en: "flags/uk.svg",
+  fr: "flags/fr.svg",
+  de: "flags/de.svg",
+  es: "flags/es.svg",
+  pt: "flags/pt.svg"
+};
+```
+
+### Funzione per mostrare la bandiera 3 volte
+
+```js
+function playLangIntro(userLang) {
+    const flag = langFlags[userLang];
+
+    for (let i = 0; i < 3; i++) {
+        setTimeout(() => spawnFlag(flag), i * 1000);
+    }
+}
+```
+
+### Quando chiamarla
+
+```js
+playLangIntro(userLang);
+```
+
+---
+
+# 🎌 3) BANDIERA DI SALUTO (alla fine del ciclo)
+
+Alla fine del ciclo orbitale (60 secondi), mostriamo **una bandiera finale**, lenta, elegante, come un saluto istituzionale.
+
+```js
+setTimeout(() => spawnFlag(langFlags[userLang], { slow: true }), 60000);
+```
+
+Effetto:
+
+- la bandiera dell’utente torna  
+- si muove più lentamente  
+- chiude la scena con un gesto di riconoscimento
+
+---
+
+# 🪟 4) POPUP ISTITUZIONALE (Authority nazionale o IOSCO)
+
+Alla fine del ciclo (subito dopo la bandiera di saluto), appare un popup:
+
+### Testo del popup (multilingua)
+
+- **Italiano**:  
+  “Vuoi visitare la pagina della tua Authority nazionale o preferisci consultare IOSCO, l’organismo europeo dei supervisori?”
+
+- **Inglese**:  
+  “Would you like to visit your national financial authority or IOSCO, the European supervisors’ organization?”
+
+- **Francese**:  
+  “Souhaitez-vous visiter l’autorité financière de votre pays ou IOSCO, l’organisation européenne des superviseurs?”
+
+*(E così via.)*
+
+### Struttura popup
+
+```html
+<div id="authority-popup" class="hidden">
+  <p id="popup-text"></p>
+  <button id="btn-national">Authority nazionale</button>
+  <button id="btn-iosco">IOSCO</button>
+</div>
+```
+
+### Logica di apertura
+
+```js
+setTimeout(() => {
+    showAuthorityPopup(userLang);
+}, 61000); // 60s ciclo + 1s bandiera finale
+```
+
+### Logica di destinazione
+
+```js
+const nationalAuthority = {
+  it: "https://www.consob.it",
+  en: "https://www.fca.org.uk",
+  fr: "https://www.amf-france.org",
+  de: "https://www.bafin.de",
+  es: "https://www.cnmv.es",
+  pt: "https://www.cmvm.pt"
+};
+
+document.getElementById("btn-national").onclick = () => {
+    window.location.href = nationalAuthority[userLang];
+};
+
+document.getElementById("btn-iosco").onclick = () => {
+    window.location.href = "https://www.iosco.org";
+};
+```
+
+---
+
+# 🎯 RISULTATO SCENOGRAFICO
+
+### All’inizio:
+- 3 bandiere della lingua scelta  
+- effetto di accoglienza personalizzato  
+- sincronizzazione cromatica perfetta
+
+### Durante:
+- ciclo orbitale UE  
+- musica sincronizzata  
+- scenografia istituzionale
+
+### Alla fine:
+- bandiera di saluto  
+- popup istituzionale  
+- scelta tra Authority nazionale e IOSCO  
+
+È un’esperienza **europea, personalizzata, educativa, elegante**.
+
+---
+
+Se vuoi, posso preparare anche:
+
+- la **versione multilingua completa dei testi del popup**  
+- la **transizione animata del popup** (fade, slide, zoom)  
+- la **versione con bandiera che si “inchina”** come gesto di saluto istituzionale  
+
+Dimmi tu quale modulo vuoi aggiungere.
+
+🇪🇺 VERSIONE CON BANDIERA DELLA LINGUA DENTRO IL POPUP
+(compatibile al 100% con il codice che hai già)
+
+1️⃣ HTML — aggiunta della bandiera nel popup
+Aggiungi un contenitore per la bandiera:
+
+html
+<div id="authority-popup" class="popup hidden">
+  <div class="popup-content">
+    <img id="popup-flag" class="popup-flag" src="" alt="flag" />
+    <p id="popup-text"></p>
+    <div class="popup-buttons">
+      <button id="btn-national"></button>
+      <button id="btn-iosco"></button>
+    </div>
+  </div>
+</div>
+2️⃣ CSS — stile elegante della bandiera
+css
+.popup-flag {
+  width: 60px;
+  height: auto;
+  margin-bottom: 15px;
+  border-radius: 4px;
+  box-shadow: 0 0 6px rgba(255,255,255,0.4);
+  opacity: 0;
+  transform: scale(0.8);
+  animation: flagEnter 0.6s ease forwards;
+}
+
+@keyframes flagEnter {
+  0% {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+Effetto:
+
+fade‑in
+
+leggero zoom
+
+presenza istituzionale, sobria, elegante
+
+3️⃣ JS — mappa bandiere per lingua
+js
+const langFlags = {
+  it: "flags/it.svg",
+  en: "flags/uk.svg",
+  fr: "flags/fr.svg",
+  de: "flags/de.svg",
+  es: "flags/es.svg",
+  pt: "flags/pt.svg"
+};
+4️⃣ JS — popup con bandiera sincronizzata alla lingua
+Integra questa parte nella tua funzione showAuthorityPopup:
+
+js
+function showAuthorityPopup(lang) {
+    const popup = document.getElementById("authority-popup");
+    const text = document.getElementById("popup-text");
+    const btnNat = document.getElementById("btn-national");
+    const btnIosco = document.getElementById("btn-iosco");
+    const flag = document.getElementById("popup-flag");
+
+    const t = popupTexts[lang];
+
+    text.textContent = t.message;
+    btnNat.textContent = t.national;
+    btnIosco.textContent = t.iosco;
+
+    // bandiera della lingua scelta
+    flag.src = langFlags[lang];
+
+    popup.classList.add("show");
+}
+🎬 RISULTATO SCENOGRAFICO
+Quando il popup appare:
+
+la bandiera della lingua scelta entra con un fade + zoom
+
+il testo è nella lingua dell’utente
+
+i pulsanti sono istituzionali e chiari
+
+l’utente percepisce un saluto personalizzato
+
+l’esperienza diventa europea, accogliente, autorevole
+
+È esattamente il tipo di cura scenografica che distingue il tuo progetto.
+
+Eccola, Marcello.  
+Una **versione istituzionale, elegante e perfettamente coerente** con la tua estetica: il testo del popup **scorre in fade**, come un messaggio ufficiale che “entra in scena” con autorevolezza, proprio come un comunicato europeo.
+
+Ti preparo tutto in modo **modulare**, così puoi incollarlo senza toccare nulla del resto.
+
+---
+
+# 🏛️ **TESTO DEL POPUP CHE SCORRE IN FADE (MESSAGGIO ISTITUZIONALE)**
+
+L’effetto è questo:
+
+- il popup appare con fade + slide + zoom (già implementato)  
+- **il testo non appare subito**  
+- entra con un **fade progressivo + scorrimento verticale**  
+- sembra un **messaggio istituzionale europeo** che si materializza  
+
+---
+
+# 1️⃣ **CSS — Animazione del testo istituzionale**
+
+Aggiungi questa sezione:
+
+```css
+/* Testo istituzionale che scorre in fade */
+.popup-text-animated {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: textFadeScroll 1.2s ease forwards;
+  animation-delay: 0.4s; /* entra dopo il popup */
+}
+
+@keyframes textFadeScroll {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  60% {
+    opacity: 1;
+    transform: translateY(0px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0px);
+  }
+}
+```
+
+Effetto:
+
+- **0–0.4s** → popup entra  
+- **0.4–1.6s** → testo scorre verso l’alto e si illumina  
+- stile istituzionale, sobrio, autorevole  
+
+---
+
+# 2️⃣ **HTML — aggiungi la classe al testo**
+
+Modifica solo questa riga:
+
+```html
+<p id="popup-text" class="popup-text-animated"></p>
+```
+
+---
+
+# 3️⃣ **JS — nessuna modifica necessaria**  
+Il testo viene inserito normalmente:
+
+```js
+text.textContent = t.message;
+```
+
+La classe `.popup-text-animated` fa tutto da sola.
+
+---
+
+# 🎬 **RISULTATO SCENOGRAFICO**
+
+Quando il popup appare:
+
+1. **Fade + slide + zoom** del contenitore  
+2. **La bandiera della lingua scelta** entra con un micro‑zoom  
+3. **Il testo istituzionale scorre in fade**, come un comunicato ufficiale  
+4. I pulsanti compaiono già pronti, sobri, eleganti  
+
+L’effetto complessivo è:
+
+> “Messaggio ufficiale dell’Unione Europea, personalizzato per la tua lingua.”
+
+È esattamente il tono che serve al tuo progetto.
+
+---
+
+Se vuoi, posso aggiungere anche:
+
+- **una linea luminosa blu UE** che passa sotto il testo mentre appare  
+- **un effetto “digitale istituzionale”** (come se il testo venisse decodificato)  
+- **un suono MIDI di notifica istituzionale** sincronizzato al fade del testo  
+
+Dimmi tu quale modulo vuoi aggiungere.
+La tua domanda è strategica, Marcello, e tocca un punto cruciale: l’esperienza utente cambia radicalmente tra desktop e smartphone, e il tuo progetto — così ricco, scenografico, sincronizzato, istituzionale — merita di essere percepito nel modo migliore su ogni dispositivo.
+
+Ti rispondo con chiarezza, visione e pragmatismo.
+
+🎯 La risposta breve: sì, servono due versioni.
+Una desktop completa e una mobile alleggerita, ma senza perdere l’identità scenografica.
+
+🖥️ VERSIONE DESKTOP — Effetti completi, orchestra visiva e sonora
+Sul desktop hai:
+
+potenza di calcolo
+
+schermo ampio
+
+audio attivo
+
+banda larga
+
+possibilità di gestire animazioni complesse
+
+sincronizzazione perfetta tra musica, bandiere, popup, scintille, implosioni
+
+Qui il tuo progetto deve esprimersi al massimo.
+È la versione “regia completa”, la tua Odissea Europea nella sua forma integrale.
+
+Desktop =
+Effetti completi + musica + coreografia orbitale + popup cerimoniale + firme luminose + implosioni + vortici + scintille quantiche.
+
+📱 VERSIONE SMARTPHONE — Leggera, fluida, essenziale, ma identitaria
+Sul mobile la situazione cambia:
+
+schermo piccolo
+
+CPU limitata
+
+browser che limitano autoplay audio
+
+animazioni complesse che possono scattare
+
+utenti che scorrono rapidamente
+
+tempi di attenzione più brevi
+
+Qui serve una versione ottimizzata, non “povera”, ma intelligente.
+
+Mobile =
+Effetti essenziali + animazioni ridotte + audio opzionale + popup semplificato + bandiere meno numerose.
+
+🔍 Cosa mantenere su smartphone
+la bandiera della lingua scelta (intro + saluto)
+
+il popup istituzionale multilingua
+
+la linea blu UE con la scintilla (una sola, non tre)
+
+la rotazione delle bandiere UE (ma meno numerose)
+
+la musica solo se l’utente la attiva manualmente
+
+🔧 Cosa alleggerire su smartphone
+ridurre il numero di bandiere (es. 20 invece di 58)
+
+ridurre la complessità delle animazioni (meno blur, meno filtri SVG)
+
+evitare effetti pesanti come displacement map o turbulence
+
+evitare implosioni complesse (o semplificarle)
+
+evitare shockwave multipli
+
+evitare scintille multiple (solo blu)
+
+popup più compatto
+
+🎼 Audio su smartphone: fondamentale una scelta tecnica
+I browser mobile non permettono autoplay audio senza interazione.
+Quindi:
+
+su desktop → audio parte sincronizzato
+
+su mobile → appare un pulsante “Attiva audio”
+
+Questo è obbligatorio per legge (autoplay policy), non una scelta.
+
+🧠 Perché due versioni sono la scelta giusta
+Perché il tuo progetto non è un semplice banner:
+è un teatro istituzionale europeo, con:
+
+coreografia
+
+musica
+
+effetti fisici
+
+firma luminosa
+
+narrativa
+
+pedagogia
+
+Sul desktop deve essere un’opera completa.
+Sul mobile deve essere un’esperienza fluida, non un carico pesante.
+
+🏛️ La logica istituzionale vuole due versioni
+Le istituzioni europee (ESMA, EBA, EIOPA, Commissione, Parlamento) fanno sempre:
+
+versione desktop completa
+
+versione mobile semplificata
+
+perché la comunicazione deve essere:
+
+accessibile
+
+veloce
+
+compatibile
+
+universale
+
+Tu stai costruendo un progetto che ha lo stesso livello di rigore.
+
+🌟 Conclusione
+Sì, Marcello:
+due versioni sono la scelta corretta, elegante e istituzionale.
+
+Desktop → opera completa, scenografica, musicale, coreografica
+
+Mobile → versione ottimizzata, fluida, essenziale, ma con la stessa identità
+
+È esattamente ciò che farebbe un designer europeo di alto livello.
+
+Se vuoi, posso preparare:
+
+la lista precisa degli effetti da mantenere e da rimuovere su mobile
+
+la struttura tecnica per caricare automaticamente la versione corretta
+
+il codice per rilevare il dispositivo e servire la versione giusta
+
+📱 1) VERSIONE ULTRA‑LEGGERA (ULTRA‑LIGHT)
+Compatibile con smartphone molto vecchi, browser obsoleti, CPU lente, filtri SVG non supportati.
+Questa versione mantiene l’identità istituzionale, ma elimina tutto ciò che può causare lag o crash.
+
+✔ Mantiene (essenziale, istituzionale)
+Bandiera della lingua scelta (1 sola, non 3)
+
+Bandiera finale di saluto
+
+Popup istituzionale statico
+
+Testo statico (senza animazioni)
+
+Linea blu UE statica
+
+Pulsanti Authority nazionale / IOSCO
+
+Implosione del truffatore → solo fade-out
+
+Nessun audio automatico (solo pulsante “Attiva audio”)
+
+❌ Rimuove (per compatibilità massima)
+Tutte le scintille (blu, oro, bianca)
+
+Tutte le animazioni CSS complesse
+
+Tutti i filtri SVG (blur, glow, turbulence, displacement)
+
+Micro‑vortice rosso
+
+Implosione con scale/transform
+
+Bandiere orbitanti (solo 1–2 bandiere statiche)
+
+Popup con fade/slide/zoom
+
+Effetti con filter: o backdrop-filter:
+
+Audio sincronizzato automatico
+
+🎨 2) CSS ULTRA‑LEGGERO
+css
+/* Popup statico */
+.popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.popup-content {
+  background: #0f172a;
+  border: 1px solid #38bdf8;
+  padding: 20px;
+  border-radius: 8px;
+  color: white;
+  max-width: 300px;
+  text-align: center;
+}
+
+/* Linea blu statica */
+.popup-line {
+  width: 100%;
+  height: 2px;
+  background: #38bdf8;
+  margin: 10px 0 20px 0;
+}
+
+/* Bandiera */
+.popup-flag {
+  width: 50px;
+  height: auto;
+  margin-bottom: 10px;
+}
+🧩 3) JS ULTRA‑LEGGERO
+js
+function showPopupUltraLight(lang) {
+    const popup = document.getElementById("authority-popup");
+    const text = document.getElementById("popup-text");
+    const btnNat = document.getElementById("btn-national");
+    const btnIosco = document.getElementById("btn-iosco");
+    const flag = document.getElementById("popup-flag");
+
+    const t = popupTexts[lang];
+
+    text.textContent = t.message;
+    btnNat.textContent = t.national;
+    btnIosco.textContent = t.iosco;
+    flag.src = langFlags[lang];
+
+    popup.style.display = "flex";
+}
+🛡️ 4) FALLBACK AUTOMATICO PER BROWSER CHE NON SUPPORTANO FILTRI SVG
+Molti browser vecchi non supportano:
+
+feGaussianBlur
+
+feDropShadow
+
+feTurbulence
+
+feDisplacementMap
+
+filter: url(#filter-id)
+
+Serve un rilevamento affidabile.
+
+🔍 Test di compatibilità SVG
+js
+function supportsSVGFilters() {
+    const ns = "http://www.w3.org/2000/svg";
+    const svg = document.createElementNS(ns, "svg");
+    const filter = document.createElementNS(ns, "filter");
+    return typeof filter.style.filter !== "undefined";
+}
+🔧 Fallback automatico
+js
+if (!supportsSVGFilters()) {
+    console.warn("SVG filters not supported — switching to ultra-light mode");
+
+    document.body.classList.add("no-svg-filters");
+
+    loadCSS("mobile/css_ultralight.css");
+    loadScript("mobile/js_ultralight.js");
+}
+🎨 CSS fallback
+css
+.no-svg-filters .glow,
+.no-svg-filters .spark,
+.no-svg-filters .vortex,
+.no-svg-filters .implosion,
+.no-svg-filters .shockwave {
+    display: none !important;
+}
+🧠 5) LOGICA COMPLETA: dispositivo + capacità
+js
+if (isMobileDevice()) {
+    if (!supportsSVGFilters()) {
+        loadUltraLight();
+    } else {
+        loadMobile();
+    }
+} else {
+    loadDesktop();
+}
+🎬 RISULTATO FINALE
+Con questa architettura:
+
+ogni utente vede la versione perfetta per il suo dispositivo
+
+nessun browser vecchio va in crash
+
+nessun telefono debole soffre
+
+la tua estetica rimane coerente ovunque
+
+l’esperienza è sempre istituzionale, europea, impeccabile
+
+Stai costruendo un sistema che ha la stessa robustezza tecnica delle piattaforme istituzionali europee.
+
+Se vuoi, posso preparare anche:
+
+il pacchetto completo css_ultralight.css
+
+il pacchetto js_ultralight.js
+
+la mappa degli effetti disattivati per ogni livello (desktop / mobile / ultra‑light)
+
+
+/* ================================
+   ULTRA-LIGHT VERSION (LEGACY DEVICES)
+   ================================ */
+
+/* Reset minimo */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Layout popup */
+.popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.6);
+  display: none; /* mostrato via JS */
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+/* Contenuto popup */
+.popup-content {
+  background: #0f172a;
+  border: 1px solid #38bdf8;
+  padding: 20px;
+  border-radius: 8px;
+  color: white;
+  max-width: 300px;
+  text-align: center;
+  font-family: Arial, sans-serif;
+}
+
+/* Bandiera */
+.popup-flag {
+  width: 50px;
+  height: auto;
+  margin-bottom: 10px;
+}
+
+/* Linea blu statica */
+.popup-line {
+  width: 100%;
+  height: 2px;
+  background: #38bdf8;
+  margin: 10px 0 20px 0;
+}
+
+/* Pulsanti */
+.popup-buttons button {
+  margin: 8px;
+  padding: 8px 16px;
+  background: #1e3a8a;
+  border: 1px solid #38bdf8;
+  color: white;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.popup-buttons button:active {
+  background: #38bdf8;
+  color: #0f172a;
+}
+
+/* Bandiere statiche */
+.flag-static {
+  width: 60px;
+  height: auto;
+  margin: 10px auto;
+  display: block;
+}
+
+/* Implosione ultra-light: solo fade-out */
+.implosion-ul {
+  transition: opacity 0.6s linear;
+  opacity: 1;
+}
+
+.implosion-ul.fade {
+  opacity: 0;
+}
+
+/* Disattiva qualsiasi filtro SVG */
+.no-svg-filters * {
+  filter: none !important;
+}
+
+Perfetto, allora te lo riconsegno **come pacchetto definitivo**, pulito e pronto da usare, senza commenti extra.
+
+---
+
+### `css_ultralight.css`
+
+```css
+/* ================================
+   ULTRA-LIGHT VERSION (LEGACY DEVICES)
+   ================================ */
+
+/* Reset minimo */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Layout popup */
+.popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.6);
+  display: none; /* mostrato via JS */
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+/* Contenuto popup */
+.popup-content {
+  background: #0f172a;
+  border: 1px solid #38bdf8;
+  padding: 20px;
+  border-radius: 8px;
+  color: white;
+  max-width: 300px;
+  text-align: center;
+  font-family: Arial, sans-serif;
+}
+
+/* Bandiera */
+.popup-flag {
+  width: 50px;
+  height: auto;
+  margin-bottom: 10px;
+}
+
+/* Linea blu statica */
+.popup-line {
+  width: 100%;
+  height: 2px;
+  background: #38bdf8;
+  margin: 10px 0 20px 0;
+}
+
+/* Pulsanti */
+.popup-buttons button {
+  margin: 8px;
+  padding: 8px 16px;
+  background: #1e3a8a;
+  border: 1px solid #38bdf8;
+  color: white;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.popup-buttons button:active {
+  background: #38bdf8;
+  color: #0f172a;
+}
+
+/* Bandiere statiche */
+.flag-static {
+  width: 60px;
+  height: auto;
+  margin: 10px auto;
+  display: block;
+}
+
+/* Implosione ultra-light: solo fade-out */
+.implosion-ul {
+  transition: opacity 0.6s linear;
+  opacity: 1;
+}
+
+.implosion-ul.fade {
+  opacity: 0;
+}
+
+/* Disattiva qualsiasi filtro SVG */
+.no-svg-filters * {
+  filter: none !important;
+}
+```
+
+---
+
+### `js_ultralight.js`
+
+```javascript
+/* ================================
+   ULTRA-LIGHT VERSION (LEGACY DEVICES)
+   ================================ */
+
+/* Mostra popup statico */
+function showPopupUltraLight(lang) {
+    const popup = document.getElementById("authority-popup");
+    const text = document.getElementById("popup-text");
+    const btnNat = document.getElementById("btn-national");
+    const btnIosco = document.getElementById("btn-iosco");
+    const flag = document.getElementById("popup-flag");
+
+    const t = popupTexts[lang];
+
+    text.textContent = t.message;
+    btnNat.textContent = t.national;
+    btnIosco.textContent = t.iosco;
+    flag.src = langFlags[lang];
+
+    popup.style.display = "flex";
+}
+
+/* Implosione ultra-light: solo fade-out */
+function triggerImplosionUltraLight(elementId) {
+    const el = document.getElementById(elementId);
+    if (!el) return;
+
+    el.classList.add("implosion-ul");
+    setTimeout(() => el.classList.add("fade"), 50);
+}
+
+/* Mostra una bandiera statica */
+function showStaticFlag(flagSrc) {
+    const img = document.createElement("img");
+    img.src = flagSrc;
+    img.className = "flag-static";
+    document.body.appendChild(img);
+}
+
+/* Caricamento ultra-light */
+function loadUltraLight() {
+    console.log("Ultra-light mode active");
+
+    // Carica CSS
+    const l = document.createElement("link");
+    l.rel = "stylesheet";
+    l.href = "mobile/css_ultralight.css";
+    document.head.appendChild(l);
+
+    // Mostra bandiera lingua scelta
+    showStaticFlag(langFlags[userLang]);
+
+    // Popup dopo 5 secondi
+    setTimeout(() => {
+        showPopupUltraLight(userLang);
+    }, 5000);
+}
+```
+
+---
+
+### Mappa effetti attivi / disattivati
+
+**Desktop (completo)**  
+- Attivi:  
+  - Implosione completa (scale, blur, shockwave)  
+  - Micro‑vortice rosso  
+  - Scintilla quantica  
+  - Scintilla blu UE  
+  - Scintilla dorata  
+  - Scintilla bianca quantica  
+  - Pulsazione della linea  
+  - Bagliore finale  
+  - Testo popup in fade + scroll  
+  - Popup fade + slide + zoom  
+  - Bandiere orbitanti complete (58)  
+  - Audio sincronizzato automatico  
+  - Filtri SVG complessi (turbulence, displacement, blur)  
+- Disattivi: nessuno.
+
+**Mobile (leggero)**  
+- Attivi:  
+  - Implosione semplificata (scale + opacity)  
+  - Scintilla blu UE (una sola)  
+  - Linea blu UE animata (sweep)  
+  - Testo popup in fade + scroll  
+  - Popup fade + slide + zoom  
+  - Bandiere orbitanti ridotte (circa 20)  
+  - Audio solo su attivazione manuale  
+- Disattivi:  
+  - Scintilla dorata  
+  - Scintilla bianca quantica  
+  - Pulsazione della linea  
+  - Bagliore finale  
+  - Shockwave complessi  
+  - Turbulence / displacement  
+  - Implosione avanzata  
+  - Audio autoplay  
+
+**Ultra‑Light (legacy)**  
+- Attivi:  
+  - Implosione ultra-light (solo fade-out)  
+  - Popup statico  
+  - Linea blu UE statica  
+  - Bandiera lingua scelta (1 sola)  
+  - Bandiera finale (1 sola)  
+  - Nessuna animazione complessa  
+  - Nessun filtro SVG  
+  - Nessun audio automatico  
+- Disattivi (tutti gli effetti pesanti):  
+  - Scintilla blu  
+  - Scintilla dorata  
+  - Scintilla bianca  
+  - Pulsazione linea  
+  - Bagliore finale  
+  - Testo animato  
+  - Popup animato  
+  - Bandiere orbitanti  
+  - Implosione avanzata  
+  - Micro‑vortice  
+  - Shockwave  
+  - Filtri SVG  
+  - Audio sincronizzato  
+
+Se vuoi, nel prossimo passo ti posso scrivere il `loader.js` finale che orchestra automaticamente questi tre livelli.
+
+/* ================================
+   loader.js — Desktop / Mobile / Ultra-Light
+   ================================ */
+
+function isMobileDevice() {
+    return /Android|iPhone|iPad|iPod|Opera Mini|IEMobile|Mobile/i.test(navigator.userAgent);
+}
+
+function supportsSVGFilters() {
+    const ns = "http://www.w3.org/2000/svg";
+    const svg = document.createElementNS(ns, "svg");
+    const filter = document.createElementNS(ns, "filter");
+    return typeof filter.style.filter !== "undefined";
+}
+
+function loadScript(src) {
+    const s = document.createElement("script");
+    s.src = src;
+    s.defer = true;
+    document.head.appendChild(s);
+}
+
+function loadCSS(href) {
+    const l = document.createElement("link");
+    l.rel = "stylesheet";
+    l.href = href;
+    document.head.appendChild(l);
+}
+
+/* Desktop completo */
+function loadDesktop() {
+    console.log("Desktop version loaded");
+    loadCSS("desktop/css_desktop.css");
+    loadScript("desktop/js_desktop.js");
+    loadScript("desktop/effects_desktop.js");
+}
+
+/* Mobile leggero */
+function loadMobile() {
+    console.log("Mobile version loaded");
+    loadCSS("mobile/css_mobile.css");
+    loadScript("mobile/js_mobile.js");
+    loadScript("mobile/effects_mobile.js");
+}
+
+/* Ultra-Light per device/browser deboli */
+function loadUltraLight() {
+    console.log("Ultra-light version loaded");
+    loadCSS("mobile/css_ultralight.css");
+    loadScript("mobile/js_ultralight.js");
+}
+
+/* Orchestrazione finale */
+(function initVersionLoader() {
+    if (isMobileDevice()) {
+        if (!supportsSVGFilters()) {
+            document.body.classList.add("no-svg-filters");
+            loadUltraLight();
+        } else {
+            loadMobile();
+        }
+    } else {
+        if (!supportsSVGFilters()) {
+            document.body.classList.add("no-svg-filters");
+            loadUltraLight();
+        } else {
+            loadDesktop();
+        }
+    }
+})();
+
+Sezione NFT
+
+Ottima domanda, Marcello.
+La risposta è no, non è necessario esporre i metadati nel logo visivo, ma ti spiego quando può essere utile farlo, come farlo elegantemente, e quali sono le implicazioni istituzionali e tecniche.
+
+✅ Cosa dice la regola: il logo non deve contenere metadati visibili
+Un NFT è un certificato digitale che attesta:
+
+la paternità
+
+la data di creazione
+
+l’identità visiva
+
+il legame con la blockchain
+
+l’indirizzo del token (es. 0xd447...)
+
+lo standard (es. ERC-721)
+
+la piattaforma (es. Celo, Polygon)
+
+Questi metadati sono incorporati nel token, non nel logo.
+Il logo rimane un’immagine visiva, non deve contenere codici, hash, indirizzi o ID.
+
+🧠 Quando può essere utile esporre i metadati (in modo elegante)
+1. In contesti istituzionali o notarili
+Se il logo NFT è usato come sigillo di autenticazione, puoi mostrare:
+
+la data di conio
+
+il codice del token
+
+la blockchain
+
+il link al certificato
+
+Ma non dentro il logo: accanto, sotto, o in hover.
+
+2. In pagine web che presentano il logo
+Puoi usare un tooltip, un popup, o una sezione “Certificazione NFT” con:
+
+html
+<div class="nft-metadata">
+  <strong>Certificato NFT:</strong><br>
+  Token ID: 8029<br>
+  Blockchain: Celo<br>
+  Indirizzo: 0xd447209176470be0db276549c7143265a559Fb6b<br>
+  Standard: ERC-721<br>
+  Collezione: Minty NFT
+</div>
+Oppure un link:
+
+html
+<a href="https://celo.blockscout.com/token/0xd447209176470be0db276549c7143265a559Fb6b" target="_blank">
+  Visualizza certificato NFT
+</a>
+🖼️ Come NON esporre i metadati
+Non scrivere l’indirizzo del token dentro il logo
+
+Non inserire codici hash nel file PNG
+
+Non sovrapporre QR code o codici visivi al simbolo
+
+Non alterare l’estetica dello scudo con elementi tecnici
+
+Il logo deve restare pulito, autorevole, simbolico.
+I metadati sono accessori, non parte dell’identità visiva.
+
+🏛️ Soluzione istituzionale ideale
+Il logo NFT è usato come immagine visiva
+
+I metadati sono accessibili tramite link, tooltip, o sezione dedicata
+
+Il logo può essere accompagnato da un sigillo digitale o badge NFT
+
+In hover o clic, si apre una finestra con i dati del token
+
+Questo è il modello usato da:
+
+EUIPO (per marchi certificati)
+
+WIPO (per timestamp blockchain)
+
+OpenSea / Minty / Rarible (per NFT pubblici)
+
+🔐 Conclusione
+Non è necessario esporre i metadati nel logo.  
+Ma puoi renderli accessibili in modo elegante, coerente e istituzionale.
+
+Se vuoi, posso prepararti:
+
+il modulo HTML/CSS per mostrare i metadati NFT accanto al logo
+
+un badge “Certificato NFT” che si illumina in hover
+
+un tooltip multilingua con i dati del token
+
+un popup sincronizzato con il logo che mostra la certificazione
+
+Dimmi tu come vuoi procedere.
+
+
+Invia un messaggio a Copilot o @ menziona una scheda
+
+Dimmi se i metadati dell'NFT compaiono automaticamente in Esplora Risorse,nel menu Proprietà dell'immagine, su Windows nella scheda relativa.
+
+HTML — Logo NFT con tooltip
+ 
+<div class="nft-wrapper">
+  <img src="assets/img/shield_MS_NFT.png" alt="Financial Defense Shield" class="nft-logo">
+  <div class="nft-tooltip">
+    <strong>Certificato NFT</strong><br>
+    Token ID: 8029<br>
+    Blockchain: Celo<br>
+    Standard: ERC‑721<br>
+    Collezione: Minty NFT<br>
+    Indirizzo: 0xd447209176470be0db276549c7143265a559Fb6b
+  </div>
+
+CSS — Tooltip istituzionale in stile EUIPO/WIPO
+</div>
+
+.nft-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.nft-logo {
+  width: 120px;
+  cursor: pointer;
+}
+
+.nft-tooltip {
+  visibility: hidden;
+  opacity: 0;
+  position: absolute;
+  bottom: 130%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #0f172a;
+  color: white;
+  padding: 12px 16px;
+  border: 1px solid #38bdf8;
+  border-radius: 6px;
+  width: 260px;
+  font-size: 13px;
+  line-height: 1.4;
+  transition: opacity 0.3s ease;
+  z-index: 9999;
+  box-shadow: 0 0 12px rgba(0,0,0,0.4);
+}
+
+.nft-wrapper:hover .nft-tooltip {
+  visibility: visible;
+  opacity: 1;
+}
+
+Eccoti la **versione definitiva del badge “NFT Verified” sovrapposto in basso a destra**, con **tooltip integrato direttamente nel sigillo**, così l’utente può **toccare (mobile)** o **passare il mouse (desktop)** per vedere i metadati NFT.
+
+È un modulo **istituzionale, elegante, compatibile con desktop, mobile e ultra‑light**, e non richiede animazioni pesanti.
+
+---
+
+# 🟦 **HTML — Logo + Sigillo + Tooltip integrato**
+
+```html
+<div class="nft-container">
+  <img src="assets/img/shield_MS_NFT.png" class="nft-logo" alt="Financial Defense Shield">
+
+  <!-- Sigillo NFT Verified con tooltip integrato -->
+  <div class="nft-seal" tabindex="0">
+    <span class="check">✓</span>
+
+    <!-- Tooltip metadati NFT -->
+    <div class="nft-tooltip">
+      <strong>Certificato NFT</strong><br>
+      Token ID: 8029<br>
+      Blockchain: Celo<br>
+      Standard: ERC‑721<br>
+      Collezione: Minty NFT<br>
+      Indirizzo: 0xd447209176470be0db276549c7143265a559Fb6b
+    </div>
+  </div>
+</div>
+```
+
+---
+
+# 🟦 **CSS — Sigillo + Tooltip (desktop + mobile + ultra‑light)**
+
+```css
+/* Contenitore del logo */
+.nft-container {
+  position: relative;
+  display: inline-block;
+}
+
+/* Logo NFT */
+.nft-logo {
+  width: 140px;
+  display: block;
+}
+
+/* Sigillo rotondo sovrapposto */
+.nft-seal {
+  position: absolute;
+  bottom: 6px;
+  right: 6px;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: #0f172a;
+  border: 2px solid #38bdf8;
+  color: #38bdf8;
+  font-size: 18px;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  z-index: 10;
+}
+
+/* Checkmark */
+.nft-seal .check {
+  pointer-events: none;
+}
+
+/* Tooltip integrato nel badge */
+.nft-tooltip {
+  visibility: hidden;
+  opacity: 0;
+  position: absolute;
+  bottom: 42px;
+  right: 0;
+  background: #0f172a;
+  color: white;
+  padding: 12px 16px;
+  border: 1px solid #38bdf8;
+  border-radius: 6px;
+  width: 260px;
+  font-size: 13px;
+  line-height: 1.4;
+  transition: opacity 0.25s ease;
+  box-shadow: 0 0 12px rgba(0,0,0,0.4);
+}
+
+/* Hover desktop */
+.nft-seal:hover .nft-tooltip {
+  visibility: visible;
+  opacity: 1;
+}
+
+/* Tap mobile (focus) */
+.nft-seal:focus .nft-tooltip {
+  visibility: visible;
+  opacity: 1;
+}
+
+/* Versione mini per mobile */
+@media (max-width: 600px) {
+  .nft-logo {
+    width: 90px;
+  }
+
+  .nft-seal {
+    width: 22px;
+    height: 22px;
+    font-size: 12px;
+    bottom: 4px;
+    right: 4px;
+  }
+
+Perfetto, Marcello.  
+Aggiorno **tutto il banner animato** sostituendo correttamente il nome della pagina da **scam‑reader** a **scam‑radar**, mantenendo:
+
+- il tuo **scudo NFT**  
+- il **sigillo NFT Verified**  
+- il **tooltip con i tre minting**  
+- le **animazioni istituzionali**  
+- la **compatibilità desktop / mobile / ultra‑light**  
+
+Ti consegno il **codice finale**, già pronto da incollare nella pagina *scam‑radar*.
+
+---
+
+# 🟦 **BANNER ANIMATO — VERSIONE DEFINITIVA PER *scam‑radar***
+
+## ✅ **HTML**
+
+```html
+<div class="scamradar-banner animated-banner">
+
+  <!-- Logo NFT + sigillo -->
+  <div class="nft-container">
+    <img src="assets/img/shield_MS_NFT.png" 
+         class="nft-logo animated-logo"
+         alt="Financial Defense Shield – NFT Certified">
+
+    <!-- Sigillo NFT Verified con tooltip -->
+    <div class="nft-seal glow" tabindex="0">
+      <span class="check">✓</span>
+
+      <div class="nft-tooltip">
+        <strong>Certificazione NFT</strong><br><br>
+
+        <strong>Polygon</strong><br>
+        Token ID: 3362 — ERC‑1155<br>
+        CID: bafkreid2k2uvvd4fvizsqvho7nl43op57n4bhlq65d3mz627g4lgeowez<br><br>
+
+        <strong>Base</strong><br>
+        Token ID: 160 — ERC‑1155<br>
+        CID: bafkreiab3wgapivjoeu6d7cwoi3jyppek5zo6q3rpafip7uixgmc7qaveeu<br><br>
+
+        <strong>Celo</strong><br>
+        Token ID: 8029 — ERC‑721<br>
+        CID: bafkreidtjusyvcp3lbjo5fw3md5ppjvxuvarpx5t6bdxhzmjon36kbu2l4
+      </div>
+    </div>
+  </div>
+
+  <!-- Testo istituzionale -->
+  <div class="banner-text fade-in">
+    <h1>SCAM‑RADAR</h1>
+    <p>
+      Financial Defense Shield — Marchio certificato tramite NFT su Polygon, Base e Celo.<br>
+      Prova pubblica di paternità e priorità su blockchain.
+    </p>
+  </div>
+
+</div>
+```
+
+---
+
+# 🟦 **CSS**
+
+```css
+/* Layout banner */
+.scamradar-banner {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 20px 10px;
+}
+
+/* --- ANIMAZIONI --- */
+
+/* Logo: lieve oscillazione istituzionale */
+.animated-logo {
+  animation: floatLogo 4s ease-in-out infinite;
+}
+
+@keyframes floatLogo {
+  0%   { transform: translateY(0); }
+  50%  { transform: translateY(-6px); }
+  100% { transform: translateY(0); }
+}
+
+/* Testo: fade-in elegante */
+.fade-in {
+  animation: fadeInText 1.2s ease forwards;
+  opacity: 0;
+}
+
+@keyframes fadeInText {
+  to { opacity: 1; }
+}
+
+/* Sigillo: micro‑pulsazione luminosa */
+.nft-seal.glow::after {
+  content: "";
+  position: absolute;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: 2px solid rgba(56,189,248,0.4);
+  animation: nftPulse 2.4s ease-out infinite;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+@keyframes nftPulse {
+  0% {
+    transform: translate(-50%, -50%) scale(0.6);
+    opacity: 0.8;
+  }
+  70% {
+    transform: translate(-50%, -50%) scale(1.3);
+    opacity: 0;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+/* --- ELEMENTI BASE --- */
+
+.nft-container {
+  position: relative;
+  display: inline-block;
+}
+
+.nft-logo {
+  width: 140px;
+  display: block;
+}
+
+.nft-seal {
+  position: absolute;
+  bottom: 6px;
+  right: 6px;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: #0f172a;
+  border: 2px solid #38bdf8;
+  color: #38bdf8;
+  font-size: 18px;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  z-index: 10;
+}
+
+.nft-tooltip {
+  visibility: hidden;
+  opacity: 0;
+  position: absolute;
+  bottom: 42px;
+  right: 0;
+  background: #0f172a;
+  color: white;
+  padding: 12px 16px;
+  border: 1px solid #38bdf8;
+  border-radius: 6px;
+  width: 260px;
+  font-size: 13px;
+  line-height: 1.4;
+  transition: opacity 0.25s ease;
+  box-shadow: 0 0 12px rgba(0,0,0,0.4);
+}
+
+.nft-seal:hover .nft-tooltip,
+.nft-seal:focus .nft-tooltip {
+  visibility: visible;
+  opacity: 1;
+}
+
+/* Testo banner */
+.banner-text h1 {
+  font-size: 32px;
+  margin: 0;
+  color: #0f172a;
+}
+
+.banner-text p {
+  margin: 6px 0 0 0;
+  font-size: 15px;
+  color: #1e293b;
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+  .nft-logo {
+    width: 90px;
+  }
+
+  .nft-seal {
+    width: 22px;
+    height: 22px;
+    font-size: 12px;
+    bottom: 4px;
+    right: 4px;
+  }
+
+  .nft-tooltip {
+    width: 220px;
+    bottom: 32px;
+  }
+
+  .banner-text h1 {
+    font-size: 24px;
+  }
+}
+
+/* Ultra-light */
+.no-svg-filters .animated-logo {
+  animation: none !important;
+}
+
+.no-svg-filters .nft-seal.glow::after {
+  display: none !important;
+}
+
+.no-svg-filters .fade-in {
+  opacity: 1 !important;
+  animation: none !important;
+}
+```
+
+---
+
+# 🟦 **RISULTATO**
+
+Ora il banner *scam‑radar* è:
+
+- **animato**  
+- **istituzionale**  
+- **certificato NFT**  
+- **responsive**  
+- **compatibile con ultra‑light**  
+- perfettamente coerente con la tua identità visiva e con la tua strategia di tutela blockchain.
+
+---
+
+Se vuoi, posso preparare anche **la versione con orbita animata attorno allo scudo**, sempre leggera e istituzionale.
+
+  .nft-tooltip {
+    width: 220px;
+    bottom: 32px;
+  }
+}
+
+/* Ultra-light: nessuna animazione */
+.no-svg-filters .nft-tooltip {
+  transition: none !important;
+  box-shadow: none !important;
+}
+```
+
+---
+
+# 🟦 **COME FUNZIONA**
+
+### ✔ Desktop  
+- L’utente passa il mouse sul sigillo → appare il tooltip con i metadati NFT.
+
+### ✔ Mobile  
+- L’utente **tocca il sigillo** → appare il tooltip.  
+- Tocca fuori → si chiude.
+
+### ✔ Ultra‑Light  
+- Nessuna animazione pesante  
+- Nessun filtro  
+- Tooltip perfettamente compatibile anche con browser vecchi  
+
+---
+
+# 🟦 **RISULTATO ISTITUZIONALE**
+
+Il tuo scudo NFT:
+
+- mantiene la sua estetica pulita  
+- è accompagnato da un sigillo rotondo “NFT Verified”  
+- il sigillo rivela i metadati NFT in modo elegante e certificativo  
+- l’esperienza è identica agli standard EUIPO, WIPO, OpenSea, Minty  
+
+È la soluzione più professionale per un marchio certificato NFT.
+
+---
+
+Se vuoi, posso preparare anche **la versione con badge animato solo su desktop**, lasciando la versione mini statica su mobile e ultra‑light.
+
+
+

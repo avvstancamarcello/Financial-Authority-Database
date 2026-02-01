@@ -10,7 +10,7 @@
     })(window,document,'script','dataLayer','GTM-W2Q6GD42');</script>
     <!-- End Google Tag Manager -->
     <meta charset="UTF-8">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.gstatic.com https://unpkg.com https://cdn.jsdelivr.net https://pagead2.googlesyndication.com https://www.googletagmanager.com https://googletagmanager.com https://www.google-analytics.com https://ssl.google-analytics.com; style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://unpkg.com; img-src 'self' data: https:; font-src 'self' data: https://cdn.jsdelivr.net; connect-src 'self' https://www.gstatic.com https://firebase.googleapis.com https://firebaseinstallations.googleapis.com https://firebaselogging.googleapis.com https://firestore.googleapis.com https://www.google-analytics.com https://pagead2.googlesyndication.com https://googleads.g.doubleclick.net; frame-src 'self' https://googleads.g.doubleclick.net https://www.google.com https://tpc.googlesyndication.com; object-src 'none'; base-uri 'self';">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.gstatic.com https://unpkg.com https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://unpkg.com; img-src 'self' data: https:; font-src 'self' data: https://cdn.jsdelivr.net; connect-src 'self' https://www.gstatic.com https://firebase.googleapis.com https://firebaseinstallations.googleapis.com https://firebaselogging.googleapis.com https://www.google-analytics.com; frame-src 'self'; object-src 'none'; base-uri 'self';">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="google-site-verification" content="cyy_B7liLeU0oPM5epVAlJvP6XI9AwbCMIbuDzrtPFc" />
     
@@ -285,7 +285,7 @@
         /* Navigazione principale: barra superiore compatta a scomparsa richiamabile portando il mouse sul bordo alto */
         #main-top-nav {
             background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
-            padding: 0.6rem 0;
+            padding: 0.8rem 0;
             box-shadow: 0 4px 12px rgba(0,0,0,0.15);
             position: fixed;
             top: 0;
@@ -302,13 +302,19 @@
 
         /* Griglia a 5 colonne per i pulsanti principali */
         .main-nav-grid {
-            max-width: 1200px;
+            max-width: 100%;
             margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(5, minmax(0, 1fr));
-            gap: 0.75rem;
-            padding: 0 1rem;
+            display: flex;
+            flex-wrap: nowrap;
+            justify-content: center;
+            gap: 0.4rem;
+            padding: 0 0.5rem 0 250px;
             align-items: center;
+        }
+        
+        .main-nav-grid a, .main-nav-grid button {
+            font-size: 1.05rem !important;
+            padding: 0.42rem 0.84rem !important;
         }
 
         .main-nav-cell {
@@ -965,10 +971,92 @@
         });
     </script>
     
-    <!-- Google AdSense -->
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2899281140209246"
-         crossorigin="anonymous"></script>
-    
+    <!-- RESPONSIVE LAYOUT SCRIPT - Adattamento automatico alle dimensioni display -->
+    <script>
+        (function() {
+            // Funzione per adattare il layout alle dimensioni dello schermo
+            function adaptLayout() {
+                const viewportWidth = window.innerWidth;
+                const viewportHeight = window.innerHeight;
+                const banner = document.getElementById('solar-banner');
+                const container = document.querySelector('.solar-system-container');
+                const nav = document.getElementById('main-top-nav');
+                
+                // Calcola scale factor basato sulla larghezza del viewport
+                let scaleFactor = 1;
+                let bannerHeight = '50vh';
+                let navScale = 1;
+                
+                if (viewportWidth < 480) {
+                    // Smartphone piccolo
+                    scaleFactor = 0.35;
+                    bannerHeight = '40vh';
+                    navScale = 0.7;
+                } else if (viewportWidth < 768) {
+                    // Smartphone/Tablet portrait
+                    scaleFactor = 0.45;
+                    bannerHeight = '45vh';
+                    navScale = 0.8;
+                } else if (viewportWidth < 1024) {
+                    // Tablet landscape
+                    scaleFactor = 0.55;
+                    bannerHeight = '50vh';
+                    navScale = 0.9;
+                } else if (viewportWidth < 1280) {
+                    // Desktop piccolo
+                    scaleFactor = 0.7;
+                    bannerHeight = '55vh';
+                    navScale = 0.95;
+                } else {
+                    // Desktop grande
+                    scaleFactor = 0.85;
+                    bannerHeight = '60vh';
+                    navScale = 1;
+                }
+                
+                // Applica le trasformazioni
+                if (container) {
+                    container.style.transform = `scale(${scaleFactor})`;
+                    container.style.transformOrigin = 'center center';
+                }
+                
+                if (banner) {
+                    banner.style.minHeight = bannerHeight;
+                }
+                
+                if (nav) {
+                    nav.style.transform = `scale(${navScale})`;
+                    nav.style.transformOrigin = 'top center';
+                    // Adatta anche i pulsanti
+                    const navCells = nav.querySelectorAll('.main-nav-cell a');
+                    navCells.forEach(cell => {
+                        if (viewportWidth < 768) {
+                            cell.style.fontSize = '0.7rem';
+                            cell.style.padding = '0.3rem 0.6rem';
+                        } else {
+                            cell.style.fontSize = '0.9rem';
+                            cell.style.padding = '0.4rem 1rem';
+                        }
+                    });
+                }
+                
+                console.log(`📱 Responsive: ${viewportWidth}x${viewportHeight} → scale=${scaleFactor}`);
+            }
+            
+            // Esegui all'avvio
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', adaptLayout);
+            } else {
+                adaptLayout();
+            }
+            
+            // Esegui al resize
+            window.addEventListener('resize', adaptLayout);
+            
+            // Esegui anche dopo il caricamento completo
+            window.addEventListener('load', adaptLayout);
+        })();
+    </script>
 </head>
 <body>
 <!-- Google Tag Manager (noscript) -->
@@ -979,29 +1067,34 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <nav id="main-top-nav" class="nav-visible">
         <div class="main-nav-grid">
             <div class="main-nav-cell">
-                <a href="https://avvstancamarcello.github.io/Financial-Authority-Database/index.html#database-search-section" style="color: white; text-decoration: none; font-weight: 500; font-size: 1.02rem; padding: 0.45rem 1.4rem; background: rgba(255,255,255,0.05); border-radius: 8px; transition: all 0.3s ease; text-align: center; width: 100%; max-width: 260px;" onmouseover="this.style.background='rgba(255,255,255,0.15)';" onmouseout="this.style.background='rgba(255,255,255,0.05)';">
-                    🏠 Database Autorità Finanziarie nel Mondo (190)
+                <a href="https://avvstancamarcello.github.io/Financial-Authority-Database/index.html#database-search-section" style="color: #FFD700; text-decoration: none; font-weight: 600; font-size: 2.04rem; padding: 0.9rem 1.6rem; background: #000000; border-radius: 10px; transition: all 0.3s ease; text-align: center; white-space: nowrap; border: 2px solid #FFD700;" onmouseover="this.style.background='#1a1a1a';" onmouseout="this.style.background='#000000';">
+                    🏠 190 Financial Authorities in the World
                 </a>
             </div>
             <div class="main-nav-cell">
-                <a href="odissea.html" style="color: white; text-decoration: none; font-weight: 500; font-size: 1.02rem; padding: 0.45rem 1.4rem; background: rgba(255,255,255,0.05); border-radius: 8px; transition: all 0.3s ease; text-align: center; width: 100%; max-width: 220px;" onmouseover="this.style.background='rgba(255,255,255,0.15)';" onmouseout="this.style.background='rgba(255,255,255,0.05)';">
-                    🌊 Odissea Digitale
+                <a href="index.html" id="btn-scenario-drammatico" class="scenario-btn-active" style="color: white; text-decoration: none; font-weight: 500; font-size: 2.04rem; padding: 0.9rem 1.6rem; background: rgba(248,113,113,0.4); border-radius: 10px; transition: all 0.3s ease; text-align: center; white-space: nowrap; border: 2px solid rgba(248,113,113,0.6); animation: scenarioPulse 2s ease-in-out infinite;" onmouseover="this.style.background='rgba(248,113,113,0.5)';" onmouseout="this.style.background='rgba(248,113,113,0.4)';">
+                    ⚠️ Scenario Drammatico
                 </a>
             </div>
             <div class="main-nav-cell">
-                <a href="referenze.html" style="color: white; text-decoration: none; font-weight: 500; font-size: 1.02rem; padding: 0.45rem 1.4rem; background: rgba(255,255,255,0.05); border-radius: 8px; transition: all 0.3s ease; text-align: center; width: 100%; max-width: 260px;" onmouseover="this.style.background='rgba(255,255,255,0.15)';" onmouseout="this.style.background='rgba(255,255,255,0.05)';">
+                <a href="index-dramatic.html" id="btn-scenario-bandiere" style="color: white; text-decoration: none; font-weight: 500; font-size: 2.04rem; padding: 0.9rem 1.6rem; background: rgba(0,191,255,0.2); border-radius: 10px; transition: all 0.3s ease; text-align: center; white-space: nowrap; border: 2px solid rgba(0,191,255,0.4);" onmouseover="this.style.background='rgba(0,191,255,0.35)';" onmouseout="this.style.background='rgba(0,191,255,0.2)';">
+                    🏳️ Bandiere e Authority
+                </a>
+            </div>
+            <div class="main-nav-cell">
+                <a href="referenze.html" style="color: white; text-decoration: none; font-weight: 500; font-size: 2.04rem; padding: 0.9rem 1.6rem; background: rgba(255,255,255,0.05); border-radius: 10px; transition: all 0.3s ease; text-align: center; white-space: nowrap;" onmouseover="this.style.background='rgba(255,255,255,0.15)';" onmouseout="this.style.background='rgba(255,255,255,0.05)';">
                     📜 Referenze Istituzionali
                 </a>
             </div>
             <div class="main-nav-cell">
-                <a href="curriculum.html" style="color: white; text-decoration: none; font-weight: bold; font-size: 1.02rem; padding: 0.45rem 1.4rem; background: rgba(255,215,0,0.15); border-radius: 8px; transition: all 0.3s ease; border: 2px solid rgba(255,215,0,0.3); text-align: center; width: 100%; max-width: 280px;" onmouseover="this.style.background='rgba(255,215,0,0.25)';" onmouseout="this.style.background='rgba(255,215,0,0.15)';">
+                <a href="curriculum.html" style="color: white; text-decoration: none; font-weight: bold; font-size: 2.04rem; padding: 0.9rem 1.6rem; background: rgba(255,215,0,0.15); border-radius: 10px; transition: all 0.3s ease; border: 3px solid rgba(255,215,0,0.3); text-align: center; white-space: nowrap;" onmouseover="this.style.background='rgba(255,215,0,0.25)';" onmouseout="this.style.background='rgba(255,215,0,0.15)';">
                     👨‍⚖️ Avv Stanca - Curriculum
                 </a>
             </div>
             <div class="main-nav-cell">
-                <div style="display: flex; gap: 0.4rem; align-items: center; justify-content: center; width: 100%;">
-                    <span id="userInfo" style="color: #FFD700; font-size: 0.85rem; display: none;"></span>
-                    <button id="authButton" onclick="toggleAuthModal()" style="background: linear-gradient(135deg, #667eea, #764ba2); color: white; border: none; padding: 0.5rem 1.1rem; border-radius: 8px; font-weight: 600; cursor: pointer; font-size: 0.95rem; transition: transform 0.2s; white-space: nowrap;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+                <div style="display: flex; gap: 0.8rem; align-items: center; justify-content: center; width: 100%;">
+                    <span id="userInfo" style="color: #FFD700; font-size: 1.7rem; display: none;"></span>
+                    <button id="authButton" onclick="toggleAuthModal()" style="background: linear-gradient(135deg, #667eea, #764ba2); color: white; border: none; padding: 1rem 2.2rem; border-radius: 10px; font-weight: 600; cursor: pointer; font-size: 1.9rem; transition: transform 0.2s; white-space: nowrap;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
                         🔑 Login/Registrati
                     </button>
                 </div>
@@ -1034,12 +1127,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </nav>
 
     <!-- Solar System Navigation Hero -->
-    <section style="background: #0a1128; position: relative; overflow: hidden; min-height: 70vh; display: flex; align-items: center; justify-content: center;">
+    <section id="solar-banner" style="background: #0a1128; position: relative; overflow: hidden; min-height: 60vh; display: flex; align-items: center; justify-content: center;">
         <!-- Starfield Canvas -->
         <canvas id="starfield" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></canvas>
         
         <!-- Solar System Container -->
-        <div class="solar-system-container" style="position: relative; width: 100%; max-width: 1400px; height: 500px; margin: 2rem auto;">
+        <div class="solar-system-container" style="position: relative; width: 100%; max-width: 1400px; height: 500px; margin: 1rem auto;">
             
             <!-- MOBILE: Avviso ruota dispositivo -->
             <div class="rotate-device-notice" id="rotate-notice">
@@ -1048,72 +1141,17 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 <button class="btn-continue" onclick="document.getElementById('rotate-notice').style.display='none';">Continua comunque</button>
             </div>
             
+            <!-- FLAG CAROUSEL LINK: RIMOSSO -->
             
-            <!-- ============ BANNER VERTICALE DESTRO ============ -->
-            <!-- Barra verticale allineata con i rettilinei dell'ippodromo (340px altezza) -->
-            <div id="right-sidebar-bar" style="position: absolute; top: 50%; right: 0; transform: translateY(-50%); height: 340px; z-index: 100; display: flex; flex-direction: column; align-items: center; justify-content: space-evenly; gap: 8px; padding: 0 4px; background: linear-gradient(180deg, rgba(15, 23, 42, 0.95), rgba(30, 41, 59, 0.9)); border-radius: 0; border: 1px solid rgba(255, 215, 0, 0.5); border-right: none; box-shadow: -4px 0 20px rgba(0, 51, 153, 0.6);">
-                
-                <!-- Sede POLICE -->
-                <div id="police-station" style="display: flex; flex-direction: column; align-items: center; gap: 2px; padding: 6px; background: rgba(30, 64, 175, 0.4); border-radius: 8px; border: 1px solid rgba(59, 130, 246, 0.6);">
-                    <span style="font-size: 1.4rem;">🏛️</span>
-                    <span style="color: #60a5fa; font-size: 0.45rem; font-weight: bold; text-shadow: 0 0 5px rgba(96, 165, 250, 0.8);">POLICE</span>
-                </div>
-                
-                <!-- Financial Defense -->
-                <div id="financial-defense-icon" style="display: flex; flex-direction: column; align-items: center; gap: 2px; padding: 6px; background: rgba(22, 163, 74, 0.4); border-radius: 8px; border: 1px solid rgba(34, 197, 94, 0.6);">
-                    <span style="font-size: 1.4rem;">🛡️</span>
-                    <span style="color: #22c55e; font-size: 0.45rem; font-weight: bold; text-shadow: 0 0 5px rgba(34, 197, 94, 0.8);">Defense</span>
-                </div>
-                
-                <!-- Poliziotto Authority -->
-                <div id="police-icon-fixed" style="display: flex; flex-direction: column; align-items: center; gap: 2px; padding: 6px; background: rgba(37, 99, 235, 0.3); border-radius: 8px; border: 1px solid rgba(59, 130, 246, 0.5);">
-                    <span style="font-size: 1.4rem; filter: drop-shadow(0 0 6px rgba(59, 130, 246, 0.7));">👮</span>
-                    <span style="color: #60a5fa; font-size: 0.45rem; font-weight: bold; text-shadow: 0 0 5px rgba(96, 165, 250, 0.7);">AUTH</span>
-                </div>
-                
-                <!-- FLAG CAROUSEL LINK - Fight Scams -->
-                <a href="https://www.tutelatruffe.it" target="_blank" rel="noopener" id="flag-carousel-link" style="text-decoration: none; display: flex; flex-direction: column; align-items: center; gap: 3px; padding: 6px 8px; background: rgba(0, 51, 153, 0.5); border-radius: 8px; border: 1px solid rgba(255, 215, 0, 0.6); transition: all 0.3s ease; box-shadow: 0 0 10px rgba(255, 215, 0, 0.3);" title="Fight Scams - EU Consumer Protection">
-                    <!-- Flag carousel container -->
-                    <div style="width: 24px; height: 18px; overflow: hidden; border-radius: 3px; position: relative;">
-                        <div class="flag-scroll" style="display: flex; animation: flagScroll 12s linear infinite; position: absolute; top: 0; left: 0;">
-                            <span style="font-size: 1rem; flex-shrink: 0; width: 20px;">🇪🇺</span>
-                            <span style="font-size: 1rem; flex-shrink: 0; width: 20px;">🇮🇹</span>
-                            <span style="font-size: 1rem; flex-shrink: 0; width: 20px;">🇩🇪</span>
-                            <span style="font-size: 1rem; flex-shrink: 0; width: 20px;">🇫🇷</span>
-                            <span style="font-size: 1rem; flex-shrink: 0; width: 20px;">🇪🇸</span>
-                            <span style="font-size: 1rem; flex-shrink: 0; width: 20px;">🇵🇱</span>
-                            <span style="font-size: 1rem; flex-shrink: 0; width: 20px;">🇬🇧</span>
-                            <span style="font-size: 1rem; flex-shrink: 0; width: 20px;">🇪🇺</span>
-                        </div>
-                    </div>
-                    <!-- Label -->
-                    <span style="color: #FFD700; font-size: 0.4rem; font-weight: bold; text-transform: uppercase; text-shadow: 0 0 6px rgba(255, 215, 0, 0.8); white-space: nowrap;">⚔️ FIGHT</span>
-                </a>
-            </div>
+            <!-- Icona Poliziotto - SPOSTATA NEL BANNER DESTRO -->
             
-            <!-- PLACEHOLDER AMBULANZA RIMOSSO - l'ambulanza vera si muove lungo l'ippodromo -->
+            <!-- Sede POLICE - SPOSTATA NEL BANNER DESTRO -->
             
-            <!-- ============ BANNER GOOGLE ADSENSE (INFERIORE) ============ -->
-            <!-- Banner AdSense responsive - larghezza ippodromo -->
-            <div id="bottom-sponsor-bar" style="position: absolute; bottom: 0%; left: calc(30% - 170px); z-index: 40; display: flex; flex-direction: row; align-items: center; justify-content: center; padding: 0; background: transparent; width: 1180px; min-height: 50px; overflow: hidden;">
-                <!-- Google AdSense - Annuncio Responsive -->
-                <ins class="adsbygoogle"
-                     style="display:block; width:100%; height:50px;"
-                     data-ad-client="ca-pub-2899281140209246"
-                     data-ad-slot="auto"
-                     data-ad-format="horizontal"
-                     data-full-width-responsive="true"></ins>
-                <script>
-                     (adsbygoogle = window.adsbygoogle || []).push({});
-                </script>
-            </div>
+            <!-- Icona Financial Defense - SPOSTATA NEL BANNER DESTRO -->
+            <!-- NFT BADGE - SPOSTATO NEL BANNER DESTRO -->
             
-            <!-- Freccia lampeggiante (appare durante la pausa) -->
-            <div id="arrow-indicator" style="position: absolute; top: 50%; right: 10%; transform: translateY(-50%); z-index: 60; display: none; flex-direction: row; align-items: center; gap: 6px;">
-                <div style="background: rgba(239, 68, 68, 0.9); padding: 4px 10px; border-radius: 6px; border: 1px solid #fff; box-shadow: 0 0 15px rgba(239, 68, 68, 0.7);">
-                    <span style="color: #fff; font-size: 0.6rem; font-weight: bold; text-transform: uppercase; white-space: nowrap;">➡️ Report!</span>
-                </div>
-            </div>
+            <!-- BANNER ORIZZONTALE: RIMOSSO -->
+            <!-- FRECCIA POPUP: RIMOSSA -->
             
             <!-- Sun off-center to the left but at the center of orbits -->
             <div id="sun" style="position: absolute; top: 50%; left: 30%; transform: translate(-50%, -50%); width: 180px; height: 180px; background: radial-gradient(circle at 30% 30%, #FFD700, #FFA500, #FF8C00); border-radius: 50%; box-shadow: 0 0 80px rgba(255, 215, 0, 0.8), 0 0 120px rgba(255, 165, 0, 0.6), inset 0 0 50px rgba(255, 140, 0, 0.4); cursor: pointer; z-index: 10; animation: sunPulse 4s ease-in-out infinite;">
@@ -1146,22 +1184,25 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <!-- Orbit 1: SECURITY ZONE - inner "capsule" track with sentinel planets - GREEN hippodrome path -->
             <div class="planet-orbit orbit-inner" style="position: absolute; top: 50%; left: calc(30% - 80px); width: 760px; height: 160px; border: 3px solid rgba(0, 255, 127, 0.8); border-radius: 80px; transform: translateY(-50%); box-shadow: 0 0 15px rgba(0, 255, 127, 0.4), inset 0 0 10px rgba(0, 255, 127, 0.2);">
                 <!-- Planet 1: FINANCIAL POLICE - Icona animata GRANDE -->
-                <a href="financial_authorities_database.json" class="planet planet-inner-a planet-police" data-planet="police" style="position: absolute; top: 50%; left: 50%; width: 120px; height: 120px; background: radial-gradient(circle at 30% 30%, #1e40af, #1d4ed8, #3b82f6); border-radius: 50%; box-shadow: 0 0 35px rgba(59, 130, 246, 0.9), inset -12px -12px 24px rgba(0,0,0,0.3); cursor: pointer; text-decoration: none; animation: innerOrbitClockwise 40s linear infinite; display: flex; align-items: center; justify-content: center;">
+                <a href="financial_authorities_database.json" class="planet planet-inner-a planet-police" data-planet="police" style="position: absolute; top: 50%; left: 50%; width: 96px; height: 96px; background: radial-gradient(circle at 30% 30%, #1e40af, #1d4ed8, #3b82f6); border-radius: 50%; box-shadow: 0 0 35px rgba(59, 130, 246, 0.9), inset -12px -12px 24px rgba(0,0,0,0.3); cursor: pointer; text-decoration: none; animation: innerOrbitClockwise 40s linear infinite; display: flex; align-items: center; justify-content: center;">
                     <!-- Emoji Poliziotto - dimensione raddoppiata -->
                     <span style="font-size: 4.5rem; z-index: 2;">👮</span>
-                    <!-- Etichetta tangente all'icona (a destra) -->
-                    <span style="position: absolute; left: 100%; top: 50%; transform: translateY(-50%); white-space: nowrap; color: #60a5fa; font-size: 0.7rem; font-weight: 700; text-shadow: 0 0 10px rgba(96, 165, 250, 0.9); margin-left: 8px; background: rgba(30, 64, 175, 0.6); padding: 4px 8px; border-radius: 6px; border: 1px solid rgba(96, 165, 250, 0.5);">Financial Police</span>
+                    <!-- Etichetta tangente all'icona (a destra) - due righe -->
+                    <span style="position: absolute; left: 100%; top: 50%; transform: translateY(-50%); white-space: nowrap; color: #60a5fa; font-size: 1.4rem; font-weight: 700; text-shadow: 0 0 10px rgba(96, 165, 250, 0.9); margin-left: 8px; background: rgba(30, 64, 175, 0.6); padding: 6px 10px; border-radius: 6px; border: 1px solid rgba(96, 165, 250, 0.5); display: flex; flex-direction: column; align-items: center; line-height: 1.2;"><span>Financial</span><span>Police</span></span>
                 </a>
 
                 <!-- Planet 2: Institutional Sources on the same ellipse -->
-                <a href="#fonti-istituzionali" class="planet planet-inner-b" data-planet="venus" style="position: absolute; top: 50%; left: 50%; width: 55px; height: 55px; background: radial-gradient(circle at 30% 30%, #90EE90, #3CB371, #2E8B57); border-radius: 50%; box-shadow: 0 0 22px rgba(144, 238, 144, 0.7), inset -10px -10px 20px rgba(0,0,0,0.3); cursor: pointer; text-decoration: none; animation: innerOrbitCounter 40s linear infinite;">
-                    <span style="position: absolute; bottom: -30px; left: 50%; transform: translateX(-50%); white-space: nowrap; color: #90EE90; font-size: 0.8rem; font-weight: 600; text-shadow: 0 0 8px rgba(144, 238, 144, 0.8);">🌍 Fonti Istituzionali</span>
+                <a href="#fonti-istituzionali" class="planet planet-inner-b" data-planet="venus" style="position: absolute; top: 50%; left: 50%; width: 61px; height: 61px; background: radial-gradient(circle at 30% 30%, #90EE90, #3CB371, #2E8B57); border-radius: 50%; box-shadow: 0 0 22px rgba(144, 238, 144, 0.7), inset -10px -10px 20px rgba(0,0,0,0.3); cursor: pointer; text-decoration: none; animation: innerOrbitCounter 40s linear infinite; display: flex; align-items: center; justify-content: center;">
+                    <!-- Numero 190 all'interno della sfera - colore blu, font come Security -->
+                    <span style="font-size: 1.45rem; font-weight: bold; color: #1e40af; font-family: 'Courier New', monospace; text-shadow: 0 0 5px rgba(30, 64, 175, 0.5); z-index: 2;">190</span>
+                    <span style="position: absolute; bottom: -30px; left: 50%; transform: translateX(-50%); white-space: nowrap; color: #90EE90; font-size: 0.97rem; font-weight: 600; text-shadow: 0 0 8px rgba(144, 238, 144, 0.8);">AUTHORITIES</span>
                 </a>
                 
-                <!-- Planet 3: Consumatori - spostato qui dall'orbita esterna -->
-                <a href="#associazioni-consumatori" class="planet planet-inner-c" data-planet="earth" style="position: absolute; top: 50%; left: 50%; width: 50px; height: 50px; background: radial-gradient(circle at 30% 30%, #DDA0DD, #9370DB, #6A5ACD); border-radius: 50%; box-shadow: 0 0 22px rgba(221, 160, 221, 0.8), inset -8px -8px 18px rgba(0,0,0,0.3); cursor: pointer; text-decoration: none; animation: innerOrbitThird 40s linear infinite;">
-                    <span style="position: absolute; bottom: -30px; left: 50%; transform: translateX(-50%); white-space: nowrap; color: #DDA0DD; font-size: 0.8rem; font-weight: 600; text-shadow: 0 0 8px rgba(221, 160, 221, 0.8);">🛡️ Consumatori</span>
-                </a>
+                <!-- Planet 3: Consumers - fermo sopra Financial, sfera a sinistra dell'etichetta -->
+                <div style="position: absolute; top: calc(50% - 82px); left: calc(72% + 100px); transform: translateX(-50%); display: flex; align-items: center; gap: 8px; z-index: 30;">
+                    <a href="#associazioni-consumatori" class="planet planet-inner-c" data-planet="earth" style="width: 45px; height: 45px; background: radial-gradient(circle at 30% 30%, #E6B3FF, #CC66FF, #9933FF); border-radius: 50%; box-shadow: 0 0 30px rgba(204, 102, 255, 0.9), 0 0 60px rgba(204, 102, 255, 0.5), inset -6px -6px 15px rgba(0,0,0,0.3); cursor: pointer; text-decoration: none; flex-shrink: 0;"></a>
+                    <span style="white-space: nowrap; color: #CC66FF; font-size: 1.2rem; font-weight: 600; text-shadow: 0 0 12px rgba(204, 102, 255, 0.9), 0 0 24px rgba(204, 102, 255, 0.6);">Consumers</span>
+                </div>
             </div>
 
             <!-- Orbit 2: intermediate "capsule" track (for the next two planets) - hippodrome path (danger) -->
@@ -1179,6 +1220,39 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <div class="planet-orbit" style="position: absolute; top: 50%; left: calc(30% - 170px); width: 1180px; height: 340px; border: 2px solid rgba(248, 113, 113, 0.7); border-radius: 170px; transform: translateY(-50%); pointer-events: none;">
             </div>
             
+            <!-- ============================================ -->
+            <!-- ORBITA ESTERNA BANDIERE EUROPA GEOGRAFICA - 50 PAESI -->
+            <!-- Orbita capsula fisica PARALLELA e ESTERNA all'ippodromo pianeti -->
+            <!-- Dimensioni: 1300x420px - border-radius: 210px (capsula) -->
+            <!-- Regia: 1 bandiera/secondo + 3s Europa + 2s lingua -->
+            <!-- ============================================ -->
+            <div class="planet-orbit orbit-flags-external" id="eu-flags-orbit-track" style="position: absolute; top: 50%; left: calc(30% - 210px); width: 1300px; height: 420px; border: 2px dashed rgba(0, 191, 255, 0.6); border-radius: 210px; transform: translateY(-50%); pointer-events: none; box-shadow: 0 0 20px rgba(0, 191, 255, 0.3), inset 0 0 15px rgba(0, 191, 255, 0.1); opacity: 0.2; transition: opacity 0.5s ease;">
+                <!-- Container interno per le bandiere generate dinamicamente -->
+                <div id="eu-flags-orbit" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 15;">
+                    <!-- Le bandiere verranno generate dinamicamente via JavaScript -->
+                </div>
+            </div>
+            
+            <!-- ============================================ -->
+            <!-- NUOVA ORBITA ESTERNA GIALLA - Percorso più esterno -->
+            <!-- Orbita concentrica equidistante dall'orbita bandiere -->
+            <!-- Dimensioni: 1420x500px - border-radius: 250px (capsula) -->
+            <!-- ============================================ -->
+            <div class="planet-orbit orbit-outer-yellow" id="outer-yellow-orbit-track" style="position: absolute; top: 50%; left: calc(30% - 270px); width: 1420px; height: 500px; border: 3px dashed rgba(255, 215, 0, 0.8); border-radius: 250px; transform: translateY(-50%); pointer-events: none; box-shadow: 0 0 25px rgba(255, 215, 0, 0.4), inset 0 0 15px rgba(255, 215, 0, 0.15);">
+            </div>
+
+            <!-- Bandiera Europa (fissa) - appare per 3 secondi alla fine della sequenza -->
+            <div id="eu-flag-finale" class="eu-flag-marker" style="display: none; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 20;">
+                <span class="eu-flag-icon" style="font-size: 4rem;">🇪🇺</span>
+                <div class="eu-flag-label" style="font-size: 1.2rem; color: #003399; text-shadow: 0 0 10px #FFD700;">EUROPA</div>
+            </div>
+            
+            <!-- Bandiera Nazionale (lingua selezionata) - outro 2 secondi -->
+            <div id="national-flag-outro" class="eu-flag-marker" style="display: none; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 21;">
+                <span id="national-flag-icon" class="eu-flag-icon" style="font-size: 4rem;">🇮🇹</span>
+                <div id="national-flag-label" class="eu-flag-label" style="font-size: 1.2rem;">ITALIA</div>
+            </div>
+            
             <!-- DEPRESSION Trail: scritta che appare lettera per lettera dietro l'ambulanza -->
             <div id="depression-trail">
                 <span class="depression-letter" data-index="0">D</span>
@@ -1193,41 +1267,37 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 <span class="depression-letter" data-index="9">N</span>
             </div>
 
-            <!-- TYPEWRITER TEXT: Stringa che appare carattere per carattere sopra l'ambulanza -->
-            <div id="typewriter-container" style="position: absolute; top: 68%; left: 58%; transform: translateX(-50%); z-index: 55; pointer-events: none; text-align: center;">
-                <span id="typewriter-text" style="font-family: 'Courier New', 'Lucida Console', monospace; font-size: 1.1rem; font-weight: bold; color: #FF4500; text-shadow: 0 0 10px #FF4500, 0 0 20px rgba(255, 69, 0, 0.7); letter-spacing: 0.05em;"></span>
-                <span id="typewriter-cursor" style="display: inline-block; width: 2px; height: 1.2em; background: #FF4500; margin-left: 2px; animation: cursorBlink 0.5s step-end infinite;"></span>
-            </div>
-            
             <!-- Planet 6: Mental Health Impact - Croce Rossa (fermo, poi locomotiva) -->
-            <!-- Dimensioni ridotte del 10%: 90px -> 81px -->
             <div style="position: absolute; top: 50%; left: calc(30% - 170px); width: 1180px; height: 340px; transform: translateY(-50%);">
-                <a href="#mental-health" class="planet planet-croce-rossa" id="planet-croce-rossa" data-planet="mental" style="width: 81px; height: 81px; background: radial-gradient(circle at 30% 30%, #FFB6C1, #FF69B4, #FF1493); border-radius: 50%; box-shadow: 0 0 27px rgba(255, 105, 180, 0.9), 0 0 45px rgba(255, 20, 147, 0.7); cursor: pointer; text-decoration: none; display: flex; align-items: center; justify-content: center; will-change: transform; position: absolute;">
-                    <!-- Red Cross Icon - NASCOSTO, mostra subito ambulanza -->
-                    <span class="croce-rossa-icon" style="display: none; width: 45px; height: 45px; background: #DC143C; border-radius: 50%; position: relative; font-size: 32px; line-height: 45px; text-align: center;">
+                <a href="#mental-health" class="planet planet-croce-rossa" id="planet-croce-rossa" data-planet="mental" style="width: 90px; height: 90px; background: radial-gradient(circle at 30% 30%, #FFB6C1, #FF69B4, #FF1493); border-radius: 50%; box-shadow: 0 0 30px rgba(255, 105, 180, 0.9), 0 0 50px rgba(255, 20, 147, 0.7); cursor: pointer; text-decoration: none; display: flex; align-items: center; justify-content: center; will-change: transform; position: absolute;">
+                    <!-- Red Cross Icon -->
+                    <span class="croce-rossa-icon" style="display: inline-block; width: 50px; height: 50px; background: #DC143C; border-radius: 50%; position: relative; font-size: 36px; line-height: 50px; text-align: center;">
                         <span style="color: white; font-weight: bold;">+</span>
                     </span>
-                    <!-- Ambulanza Icon - VISIBILE di default -->
-                    <span class="ambulanza-icon" style="display: inline-block; font-size: 3.6rem;">🚑</span>
+                    <!-- Ambulanza Icon (hidden initially) - dimensione raddoppiata -->
+                    <span class="ambulanza-icon" style="display: none; font-size: 4rem;">🚑</span>
                     <!-- Punto esclamativo rosso pulsante (appare quando ambulanza scompare) -->
                     <span id="exclamation-mark" class="exclamation-mark" style="display: none; font-size: 3.5rem; color: #FF0000; text-shadow: 0 0 20px #FF0000, 0 0 40px #FF4500; font-weight: bold;">!</span>
                     <!-- Label rimossa: il simbolo ambulanza è universalmente riconosciuto -->
                 </a>
             </div>
 
-            <!-- BANCHE FRAGILI STATICHE: posizionate sulla tangente perpendicolare della curva destra dell'orbita -->
-            <!-- Calcolo tangente: orbita left=calc(30%-170px), width=1180px, border-radius=170px
-                 Bordo destro orbita = 30% - 170px + 1180px = 30% + 1010px
-                 Tangente perpendicolare = bordo destro orbita + margine sicurezza
-                 Per un banner ~1400px: tangente a ~96% (right: 4%) -->
-            <!-- Banca Fragile SUPERIORE DESTRA - tangente perpendicolare curva destra superiore -->
-            <div id="banca-fragile-top" class="banca-fragile" style="position: absolute; top: 18%; right: 0%; width: 75px; height: 65px; background-image: url('banca_fragile.svg'); background-size: contain; background-position: center; background-repeat: no-repeat; z-index: 25; cursor: pointer; filter: drop-shadow(0 0 15px rgba(220, 38, 38, 0.6));" title="Bank not secure">
-                <span style="position: absolute; bottom: -28px; left: 50%; transform: translateX(-50%); text-align: center; color: #fca5a5; font-size: 0.6rem; font-weight: 600; text-shadow: 0 0 8px rgba(239, 68, 68, 0.9); line-height: 1.2;">🏦 Bank<br>not secure</span>
+            <!-- BANCHE FRAGILI: 3 icone posizionate FUORI dall'orbita gialla, a destra -->
+            <!-- Dimensioni raddoppiate: 110x100px - Posizione fuori perimetro orbitale giallo -->
+            
+            <!-- Banca Fragile 1 - posizione colonna verticale 0 (angolo superiore destro) -->
+            <div id="banca-fragile-1" class="banca-fragile" style="position: absolute; top: 0px; left: 1520px; width: 110px; height: 100px; background-image: url('banca_fragile.svg'); background-size: contain; background-position: center; background-repeat: no-repeat; z-index: 25; cursor: pointer; filter: drop-shadow(0 0 20px rgba(220, 38, 38, 0.7));" title="Imprudent BANK">
+                <span style="position: absolute; bottom: -30px; left: 50%; transform: translateX(-50%); text-align: center; color: #fca5a5; font-size: 1.08rem; font-weight: 600; text-shadow: 0 0 8px rgba(239, 68, 68, 0.9); line-height: 1.2;">🏦 Imprudent<br>BANK</span>
             </div>
             
-            <!-- Banca Fragile INFERIORE DESTRA - tangente perpendicolare curva destra inferiore -->
-            <div id="banca-fragile-bottom" class="banca-fragile" style="position: absolute; bottom: 18%; right: 0%; width: 75px; height: 65px; background-image: url('banca_fragile.svg'); background-size: contain; background-position: center; background-repeat: no-repeat; z-index: 25; cursor: pointer; filter: drop-shadow(0 0 15px rgba(220, 38, 38, 0.6));" title="Bank not secure">
-                <span style="position: absolute; bottom: -28px; left: 50%; transform: translateX(-50%); text-align: center; color: #fca5a5; font-size: 0.6rem; font-weight: 600; text-shadow: 0 0 8px rgba(239, 68, 68, 0.9); line-height: 1.2;">🏦 Bank<br>not secure</span>
+            <!-- Banca Fragile 2 - posizione colonna verticale 0+1 (a contatto con bordo destro) -->
+            <div id="banca-fragile-2" class="banca-fragile" style="position: absolute; top: 190px; left: 1520px; width: 110px; height: 100px; background-image: url('banca_fragile.svg'); background-size: contain; background-position: center; background-repeat: no-repeat; z-index: 25; cursor: pointer; filter: drop-shadow(0 0 20px rgba(220, 38, 38, 0.7));" title="Imprudent BANK">
+                <span style="position: absolute; bottom: -30px; left: 50%; transform: translateX(-50%); text-align: center; color: #fca5a5; font-size: 1.08rem; font-weight: 600; text-shadow: 0 0 8px rgba(239, 68, 68, 0.9); line-height: 1.2;">🏦 Imprudent<br>BANK</span>
+            </div>
+            
+            <!-- Banca Fragile 3 - posizione colonna verticale 0+2 -->
+            <div id="banca-fragile-3" class="banca-fragile" style="position: absolute; top: 420px; left: 1500px; width: 110px; height: 100px; background-image: url('banca_fragile.svg'); background-size: contain; background-position: center; background-repeat: no-repeat; z-index: 25; cursor: pointer; filter: drop-shadow(0 0 20px rgba(220, 38, 38, 0.7));" title="Imprudent BANK">
+                <span style="position: absolute; bottom: -30px; left: 50%; transform: translateX(-50%); text-align: center; color: #fca5a5; font-size: 1.08rem; font-weight: 600; text-shadow: 0 0 8px rgba(239, 68, 68, 0.9); line-height: 1.2;">🏦 Imprudent<br>BANK</span>
             </div>
 
             <!-- Planet SCAM: Fixed scammer (3 o'clock, symmetric to Sun) - dimensione aumentata 15% -->
@@ -1267,9 +1337,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 <span id="pacman-3" class="pacman-emoji" style="font-size: 2.5rem; opacity: 0; transition: opacity 0.3s, transform 0.3s; transform: scale(0);">😵‍💫</span>
             </div>
 
-            <!-- Countdown Timer: shows animation duration (55s) - posizione speculare al Sole -->
+            <!-- Countdown Timer: shows animation duration (65s) - posizione speculare al Sole -->
             <div id="scam-countdown" style="position: absolute; top: 50%; left: 72%; transform: translate(-50%, -50%); font-size: 2.8rem; font-weight: bold; color: #00FF7F; text-shadow: 0 0 20px #00FF7F, 0 0 40px #00FF7F, 0 0 60px rgba(0, 255, 127, 0.6); font-family: 'Courier New', monospace; z-index: 25; letter-spacing: 0.1em;">
-                55.0s
+                65.0s
             </div>
             
             <!-- EFFETTI MONEY TRANSFER ANIMATI - Monete che volano da You$ a SCAM -->
@@ -1339,6 +1409,52 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 <line id="raggio-rosso-line" x1="0" y1="0" x2="0" y2="0" stroke="#FF0000" stroke-width="3" stroke-linecap="round" filter="url(#glow-rosso)"/>
             </svg>
 
+            <!-- SVG RETE CATTURA - Effetto lazo da SCAM verso You$ -->
+            <svg id="scam-net-svg" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 35; display: none;">
+                <defs>
+                    <filter id="glow-net">
+                        <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
+                        <feMerge>
+                            <feMergeNode in="coloredBlur"/>
+                            <feMergeNode in="SourceGraphic"/>
+                        </feMerge>
+                    </filter>
+                    <!-- Pattern per rete -->
+                    <pattern id="net-pattern" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
+                        <path d="M 0 10 L 10 0 L 20 10 L 10 20 Z" stroke="#FF0000" stroke-width="1.5" fill="none" opacity="0.8"/>
+                    </pattern>
+                </defs>
+                <!-- Triangolo rete che si espande -->
+                <polygon id="scam-net-triangle" points="0,0 0,0 0,0" fill="url(#net-pattern)" stroke="#FF3333" stroke-width="2" filter="url(#glow-net)" opacity="0"/>
+                <!-- Cerchio lazo che avvolge la preda -->
+                <ellipse id="scam-net-lasso" cx="0" cy="0" rx="0" ry="0" fill="none" stroke="#FF0000" stroke-width="4" stroke-dasharray="8,4" filter="url(#glow-net)" opacity="0"/>
+                <!-- Corda dal lazo a SCAM -->
+                <line id="scam-net-rope" x1="0" y1="0" x2="0" y2="0" stroke="#FF0000" stroke-width="3" stroke-linecap="round" filter="url(#glow-net)" opacity="0"/>
+            </svg>
+
+            <!-- SVG RETE VERTICALE - Effetto rete dal basso verso l'alto -->
+            <svg id="vertical-net-svg" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 36; display: none;">
+                <defs>
+                    <filter id="glow-vertical-net">
+                        <feGaussianBlur stdDeviation="5" result="coloredBlur"/>
+                        <feMerge>
+                            <feMergeNode in="coloredBlur"/>
+                            <feMergeNode in="SourceGraphic"/>
+                        </feMerge>
+                    </filter>
+                    <!-- Pattern rete verticale -->
+                    <pattern id="vertical-net-pattern" x="0" y="0" width="15" height="15" patternUnits="userSpaceOnUse">
+                        <line x1="0" y1="0" x2="15" y2="15" stroke="#FF0000" stroke-width="1" opacity="0.7"/>
+                        <line x1="15" y1="0" x2="0" y2="15" stroke="#FF0000" stroke-width="1" opacity="0.7"/>
+                    </pattern>
+                </defs>
+                <!-- Rettangolo rete che sale dal basso -->
+                <rect id="vertical-net-rect" x="0" y="0" width="0" height="0" fill="url(#vertical-net-pattern)" stroke="#FF3333" stroke-width="3" filter="url(#glow-vertical-net)" opacity="0"/>
+                <!-- Linee verticali della rete -->
+                <line id="vertical-net-line1" x1="0" y1="0" x2="0" y2="0" stroke="#FF0000" stroke-width="2" filter="url(#glow-vertical-net)" opacity="0"/>
+                <line id="vertical-net-line2" x1="0" y1="0" x2="0" y2="0" stroke="#FF0000" stroke-width="2" filter="url(#glow-vertical-net)" opacity="0"/>
+            </svg>
+
             <!-- SVG Lancetta gialla con onde elettromagnetiche animate (SCAM → You$) + Lazo cowboy -->
             <svg id="lancetta-svg" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 18; display: none;">
                 <defs>
@@ -1391,6 +1507,15 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     <span id="capitale-dollar-4" class="capitale-dollar" style="position: absolute; bottom: 18px; right: 15px; font-size: 1.1rem; color: #FFD700; text-shadow: 0 0 10px #FFD700, 0 0 20px #FFA500; font-weight: bold; opacity: 1; transition: opacity 0.5s;">$</span>
                     <span id="capitale-label" style="position: absolute; bottom: -18px; left: 50%; transform: translateX(-50%); white-space: nowrap; color: #fbbf24; font-size: 0.85rem; font-weight: 600; text-shadow: 0 0 12px rgba(251, 191, 36, 0.9);">💰 Capitale $</span>
                 </a>
+            </div>
+            
+            <!-- Planet 9: Scudo NFT Financial Defense - parte dopo 3 secondi (ATTO 1) o dopo 1 secondo (ATTO 2) -->
+            <!-- NFT PROTETTO: logo_shield_MS-3000.svg - Financial Defense © Marcello Stanca -->
+            <div style="position: absolute; top: 50%; left: calc(30% - 170px); width: 1180px; height: 340px; transform: translateY(-50%);">
+                <a href="#you-shield" class="planet planet-scudo" id="planet-scudo" data-planet="scudo-nft" title="🛡️ NFT Financial Defense - Protezione Registrata" style="width: 170px; height: 170px; background: radial-gradient(circle at 30% 30%, #1e40af, #1d4ed8, #3b82f6); border-radius: 50%; box-shadow: 0 0 50px rgba(59, 130, 246, 0.9), 0 0 80px rgba(30, 64, 175, 0.7); cursor: pointer; text-decoration: none; background-image: url('logo_shield_MS-3000.svg'); background-size: 70%; background-position: center; background-repeat: no-repeat; will-change: transform; position: absolute;">
+                    <span id="scudo-label" style="position: absolute; bottom: -18px; left: 50%; transform: translateX(-50%); white-space: nowrap; color: #3b82f6; font-size: 0.8rem; font-weight: 600; text-shadow: 0 0 12px rgba(59, 130, 246, 0.9);">🛡️ Scudo NFT</span>
+                </a>
+            </div>
 
                 <!-- Point meteors that crash into the You$ planet -->
                 <div class="meteor" style="top: 10%; left: 5%; animation-delay: 0s;"></div>
@@ -1449,13 +1574,22 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <div style="color: #FF6B6B;">X>&gt;1000 Y>&gt;450</div>
         </div>
 
-        <!-- Admin Access Button (bottom right corner) -->
-        <button onclick="showAdminLogin()" style="position: absolute; bottom: 20px; right: 20px; background: rgba(255, 215, 0, 0.1); border: 2px solid rgba(255, 215, 0, 0.3); color: #FFD700; padding: 0.5rem 1rem; border-radius: 8px; cursor: pointer; font-size: 0.85rem; transition: all 0.3s; backdrop-filter: blur(5px);" onmouseover="this.style.background='rgba(255,215,0,0.2)'" onmouseout="this.style.background='rgba(255,215,0,0.1)'">
-            🔐 Admin Access
-        </button>
-        
+
         <!-- BARRA CONTROLLO RIPRODUZIONE (stile YouTube) -->
-        <div id="playback-controls" style="position: absolute; bottom: 0; left: 0; right: 0; background: rgba(0,0,0,0.85); padding: 8px 20px; display: flex; align-items: center; gap: 15px; z-index: 100;">
+        <div id="playback-controls" style="position: absolute; bottom: 0; left: 350px; right: 200px; background: rgba(0,0,0,0.85); padding: 8px 20px; display: flex; align-items: center; gap: 15px; z-index: 100;">
+            <!-- PULSANTE PLAY -->
+            <button id="play-btn" onclick="startPlayAnimation()" style="background: linear-gradient(135deg, #00FF7F, #00CED1); color: #000; border: none; padding: 6px 15px; border-radius: 8px; font-weight: bold; cursor: pointer; font-size: 0.9rem; transition: transform 0.2s, box-shadow 0.2s; box-shadow: 0 0 15px rgba(0,255,127,0.5);" onmouseover="this.style.transform='scale(1.05)'; this.style.boxShadow='0 0 25px rgba(0,255,127,0.8)';" onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='0 0 15px rgba(0,255,127,0.5)';">
+                ▶️ PLAY
+            </button>
+            
+            <!-- PULSANTE STOP -->
+            <button id="stop-btn" onclick="stopAnimation()" style="background: linear-gradient(135deg, #EF4444, #DC2626); color: #fff; border: none; padding: 8px 20px; border-radius: 8px; font-weight: bold; cursor: pointer; font-size: 1rem; transition: transform 0.2s, box-shadow 0.2s; box-shadow: 0 0 15px rgba(239,68,68,0.5);" onmouseover="this.style.transform='scale(1.05)'; this.style.boxShadow='0 0 25px rgba(239,68,68,0.8)';" onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='0 0 15px rgba(239,68,68,0.5)';">
+                ⏹️ STOP
+            </button>
+            
+            <!-- INDICATORE SCENARIO CORRENTE -->
+            <span id="current-scenario-label" style="color: #F87171; font-family: 'Courier New', monospace; font-size: 0.85rem; padding: 4px 10px; background: rgba(248,113,113,0.2); border-radius: 6px; border: 1px solid rgba(248,113,113,0.4);">⚠️ Drammatico</span>
+            
             <!-- Progress Bar -->
             <div id="progress-container" style="flex: 1; height: 6px; background: rgba(255,255,255,0.3); border-radius: 3px; position: relative;">
                 <div id="progress-bar" style="height: 100%; background: #00FF7F; border-radius: 3px; width: 0%; transition: width 0.1s linear, background 0.3s;"></div>
@@ -1463,7 +1597,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             </div>
             
             <!-- Time Display -->
-            <span id="time-display" style="color: #fff; font-family: 'Courier New', monospace; font-size: 0.9rem; min-width: 100px;">55.0s / 55.0s</span>
+            <span id="time-display" style="color: #fff; font-family: 'Courier New', monospace; font-size: 0.9rem; min-width: 140px;">65.0s / 65.0s [Pronto]</span>
+            
+            <!-- Pulsante Admin -->
+            <button onclick="showAdminLogin()" style="background: rgba(255, 215, 0, 0.15); border: 2px solid rgba(255, 215, 0, 0.4); color: #FFD700; padding: 6px 15px; border-radius: 8px; cursor: pointer; font-size: 0.85rem; font-weight: 600; transition: all 0.3s; white-space: nowrap; margin-left: auto;" onmouseover="this.style.background='rgba(255,215,0,0.25)'" onmouseout="this.style.background='rgba(255,215,0,0.15)'">
+                🔐 Admin
+            </button>
             
             <!-- Loop automatico - nessun controllo manuale -->
         </div>
@@ -1657,32 +1796,21 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         }
         
         .planet-scudo.animating {
-            animation: orbit-scudo 55s linear forwards;
+            animation: orbit-scudo 65s linear forwards;
         }
         
         @keyframes orbit-scudo {
             0% { offset-distance: -3%; }
             100% { offset-distance: 97%; }
-        }        
-        /* Pianeta Croce Rossa - NUOVA STRATEGIA:
-           - Parte DAVANTI a You$ (offset 3%, You$ parte da 0%)
-           - INVISIBILE all'inizio (opacity: 0)
-           - Stessa velocità di You$ (55s)
-           - Diventa VISIBILE quando timer mostra ~20s
-           - Scompare dopo DEPRESSION */
+        }
+        
+        /* Pianeta Croce Rossa - fermo sul rettilineo inferiore, posizione di attesa per time -89s */
         .planet-croce-rossa {
             offset-path: var(--hippodrome-path);
             offset-rotate: 0deg;
-            offset-distance: 3%; /* Parte DAVANTI a You$ (che parte da 0%) */
+            offset-distance: 78%; /* Posizione: rettilineo inferiore sinistro, attesa per You$ al time -89s */
             animation: none;
-            will-change: offset-distance, opacity;
-            opacity: 0; /* INVISIBILE all'inizio */
-            transition: opacity 0.5s ease;
-        }
-        
-        /* Classe per rendere visibile l'ambulanza */
-        .planet-croce-rossa.visible {
-            opacity: 1;
+            will-change: offset-distance;
         }
         
         /* BANCHE FRAGILI STATICHE - edifici fissi negli angoli */
@@ -1695,21 +1823,22 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             filter: drop-shadow(0 0 25px rgba(220, 38, 38, 0.9)) brightness(1.1);
         }
         
-        /* Quando si attiva, l'ambulanza si muove con You$ - STESSA VELOCITÀ */
+        /* Quando si attiva, l'ambulanza si sincronizza col treno - VELOCE per emergenza */
         .planet-croce-rossa.animating {
-            /* Parte da 3% (davanti a You$), stessa durata = stesso movimento */
-            animation: orbit-croce-rossa-sync 55s linear forwards;
+            /* L'animazione partirà da dove si trova (impostato via JS) */
+            /* DIMEZZATO: 27s invece di 55s per evocare urgenza/emergenza */
+            animation: orbit-croce-rossa-sync 27s linear forwards;
         }
         
-        /* Animazione sincronizzata: parte da 3% (davanti a You$) */
+        /* Animazione sincronizzata: percorre lo stesso delta degli altri (100%) */
         @keyframes orbit-croce-rossa-sync {
-            0% { offset-distance: var(--start-position, 3%); }
-            100% { offset-distance: calc(var(--start-position, 3%) + 100%); }
+            0% { offset-distance: var(--start-position, 65%); }
+            100% { offset-distance: calc(var(--start-position, 65%) + 100%); }
         }
         
-        /* Ambulanza continua a girare - VELOCITÀ IDENTICA a You$ per movimento accostato */
+        /* Ambulanza continua a girare dopo che gli altri si fermano - VELOCE */
         .planet-ambulanza {
-            animation: orbit-ambulanza-loop 55s linear infinite;
+            animation: orbit-ambulanza-loop 27s linear infinite;
         }
         
         @keyframes orbit-ambulanza-loop {
@@ -1717,9 +1846,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             100% { offset-distance: 100%; }
         }
         
-        /* Ambulanza VELOCE nel ritorno (20s) - URGENZA per riportare il ferito */
+        /* Ambulanza VELOCE nel ritorno (15s) - URGENZA MASSIMA */
         .planet-croce-rossa.fast-return {
-            animation: orbit-croce-rossa-fast 20s linear forwards !important;
+            animation: orbit-croce-rossa-fast 15s linear forwards !important;
         }
         
         @keyframes orbit-croce-rossa-fast {
@@ -1733,39 +1862,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             50% { opacity: 0.3; transform: translateX(10px); }
         }
         
-        /* Animazione placeholder ambulanza lampeggiante */
-        @keyframes ambulancePlaceholderBlink {
-            0%, 100% { 
-                opacity: 1; 
-                border-color: rgba(239, 68, 68, 0.8);
-                box-shadow: 0 0 15px rgba(239, 68, 68, 0.6);
-            }
-            50% { 
-                opacity: 0.5; 
-                border-color: rgba(255, 255, 255, 0.9);
-                box-shadow: 0 0 25px rgba(255, 255, 255, 0.8), 0 0 40px rgba(239, 68, 68, 0.5);
-            }
-        }
-        
-        /* Stile quando ambulanza arriva al placeholder */
-        #ambulance-placeholder.ambulance-arrived {
-            animation: none;
-            background: rgba(34, 197, 94, 0.4);
-            border: 2px solid rgba(34, 197, 94, 0.9);
-            box-shadow: 0 0 20px rgba(34, 197, 94, 0.7);
-        }
-        #ambulance-placeholder.ambulance-arrived span:first-child {
-            animation: rescueComplete 0.5s ease-in-out 3;
-        }
-        @keyframes rescueComplete {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.3); }
-        }
-        
-        /* Animazione cursore typewriter */
-        @keyframes cursorBlink {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0; }
+        /* Animazione pulsante rosso per alert */
+        @keyframes pulseRed {
+            0%, 100% { transform: scale(1); box-shadow: 0 0 25px rgba(239, 68, 68, 0.9); }
+            50% { transform: scale(1.05); box-shadow: 0 0 40px rgba(239, 68, 68, 1); }
         }
         
         /* Container per scritta DEPRESSION sopra l'ippodromo (rettilineo superiore) */
@@ -2653,6 +2753,125 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             
             #you-shield p {
                 font-size: 0.9rem !important;
+            }
+        }
+
+        /* ========================================
+           BANDIERE UE - ORBITA CAPSULA ESTERNA
+           Orbita FISICA parallela e esterna all'ippodromo pianeti
+           50 paesi europei + Authority abbreviation
+           Dimensioni: 1300x420px, border-radius: 210px
+           ======================================== */
+        
+        /* Orbita capsula esterna FISICA per le bandiere */
+        .orbit-flags-external {
+            z-index: 12;
+            transition: border-color 0.5s, box-shadow 0.5s;
+        }
+        
+        /* Animazione pulsazione per pulsante scenario attivo */
+        @keyframes scenarioPulse {
+            0%, 100% { box-shadow: 0 0 10px rgba(248,113,113,0.5); transform: scale(1); }
+            50% { box-shadow: 0 0 25px rgba(248,113,113,0.9), 0 0 40px rgba(248,113,113,0.5); transform: scale(1.03); }
+        }
+        .scenario-btn-active {
+            animation: scenarioPulse 2s ease-in-out infinite !important;
+        }
+        
+        /* Evidenzia orbita durante Atto 2 */
+        .orbit-flags-external.active {
+            border-color: rgba(0, 191, 255, 0.9) !important;
+            box-shadow: 0 0 30px rgba(0, 191, 255, 0.6), inset 0 0 20px rgba(0, 191, 255, 0.2) !important;
+        }
+        
+        /* Container interno per le bandiere generate dinamicamente */
+        #eu-flags-orbit {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 15;
+        }
+        
+        /* Singola bandiera UE */
+        .eu-flag-marker {
+            position: absolute;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 3px;
+            opacity: 0;
+            transform: scale(0.3);
+            transition: opacity 0.4s ease-out, transform 0.4s ease-out;
+            pointer-events: auto;
+            cursor: pointer;
+            z-index: 16;
+        }
+        
+        .eu-flag-marker.visible {
+            opacity: 1;
+            transform: scale(1);
+        }
+        
+        .eu-flag-marker.glow {
+            filter: drop-shadow(0 0 12px rgba(0, 51, 153, 0.9)) drop-shadow(0 0 24px rgba(255, 215, 0, 0.7));
+        }
+        
+        /* Icona bandiera emoji */
+        .eu-flag-icon {
+            font-size: 1.8rem;
+            line-height: 1;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+            transition: transform 0.2s ease;
+        }
+        
+        .eu-flag-marker:hover .eu-flag-icon {
+            transform: scale(1.2);
+        }
+        
+        /* Sigla Authority sotto la bandiera - BEN VISIBILE */
+        .eu-flag-label {
+            font-size: 0.65rem;
+            font-weight: 700;
+            color: #FFD700;
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.9), 0 0 20px rgba(0, 255, 127, 0.7), 0 1px 3px rgba(0,0,0,0.9);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            white-space: nowrap;
+            background: rgba(0, 20, 60, 0.9);
+            padding: 4px 8px;
+            border-radius: 6px;
+            border: 1px solid rgba(0, 255, 127, 0.5);
+            box-shadow: 0 0 10px rgba(0, 255, 127, 0.4);
+            min-width: 40px;
+            text-align: center;
+        }
+        
+        /* Animazione pulsazione per bandiera attiva */
+        @keyframes flagPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.15); }
+        }
+        
+        .eu-flag-marker.active .eu-flag-icon {
+            animation: flagPulse 1.2s ease-in-out infinite;
+        }
+        
+        /* Responsive: nascondi bandiere su mobile portrait */
+        @media (max-width: 768px) and (orientation: portrait) {
+            #eu-flags-orbit {
+                display: none;
+            }
+        }
+        
+        @media (max-width: 768px) and (orientation: landscape) {
+            .eu-flag-icon {
+                font-size: 1.2rem;
+            }
+            .eu-flag-label {
+                font-size: 0.45rem;
             }
         }
     </style>
@@ -6096,19 +6315,313 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             const raggioRossoLine = document.getElementById('raggio-rosso-line');
             const planetVault = document.getElementById('planet-vault');
             
-            // Configurazione tempistiche (ciclo accelerato a 55s)
-            const CYCLE_DURATION = 55000; // 55 secondi per ciclo più veloce
-            const DELAY_CAPITALE = 1000; // Pianeta $ parte dopo 1 secondo
-            const DELAY_SCUDO = 3000; // Scudo parte 2 secondi DOPO il capitale (1 + 2 = 3)
-            const DELAY_VAULT = 18000; // Banca Rotta compare dopo 18 secondi
+            // Configurazione tempistiche - CICLO 2: SCENARIO PROTETTO (65 secondi)
+            // Shield in testa, You$ protetto, Bandiere Authority europee
+            const TOTAL_DURATION = 65000; // 65 secondi (singolo ciclo)
+            const ACT1_DURATION = 65000; // Durata ciclo
+            const ACT2_DURATION = 65000; // Durata ciclo
+            const CYCLE_DURATION = 65000; // Durata singolo ciclo
+            const DELAY_CAPITALE = 1000; // Atto 1: Pianeta $ parte dopo 1 secondo
+            const DELAY_SCUDO = 3000; // Atto 1: Scudo parte 2 secondi DOPO il capitale
+            const DELAY_VAULT = 18000; // Atto 1: Banca Rotta compare dopo 18 secondi
             const SEMICIRCLE_END_TIME = 17000; // Fine semicerchio destro
             const LANCETTA_START = 10000; // Lancetta appare quando $ entra nel semicerchio destro
             const LANCETTA_END = 17000; // Lancetta scompare alla fine del semicerchio
-            const POPUP_TIME = 52000; // Popup appare alla fine del percorso
+            const POPUP_TIME = 62000; // Popup alla fine Atto 1
+            
+            // ATTO 2 - Tempistiche specifiche
+            const ACT2_DELAY_SCUDO = 1000; // Atto 2: SCUDO parte per PRIMO dopo 1 secondo
+            const ACT2_DELAY_CAPITALE = 3000; // Atto 2: You$ parte 2 secondi DOPO lo scudo
+            const ACT2_FLAGS_START = 5000; // Bandiere iniziano 5s dopo Atto 2 (subito dopo Shield)
+            const FLAG_AUTHORITY_DELAY = 500; // Sigla Authority appare 0.5s dopo la bandiera
+            
+            // Stato corrente dell'atto
+            let currentAct = 1; // 1 = Atto drammatico, 2 = Atto protetto
+            let actStartTime = 0; // Timestamp inizio atto corrente
+            
+            // ============================================
+            // SISTEMA BANDIERE EUROPA GEOGRAFICA - 50 PAESI
+            // ATTIVO SOLO NELL'ATTO 2 (scenario protetto)
+            // Regia: 1 bandiera/secondo + 0.5s sigla Authority
+            // ============================================
+            
+            // Costanti bandiere - SINCRONIZZATE CON VELOCITÀ PIANETI
+            // Scudo percorre 100% in 65s = 1.538% al secondo
+            // Per 50 bandiere in 50s = 1 bandiera/secondo = 1.538% distanza tra ogni bandiera
+            const SCUDO_ORBIT_DURATION = 65000; // 65 secondi per orbita completa
+            const FLAG_SPACING_PERCENT = 1.5; // Distanza tra bandiere in % del percorso
+            const FLAG_INTERVAL = 1000; // 1 bandiera al secondo (sincronizzato con movimento)
+            const FLAG_EUROPA_DURATION = 3000; // 3 secondi bandiera Europa
+            const FLAG_NATIONAL_DURATION = 2000; // 2 secondi outro bandiera nazionale
+            const FLAGS_START_DELAY = ACT2_FLAGS_START; // Bandiere iniziano dopo Atto 2
+            
+            // Dati bandiere Europa geografica (caricati da JSON)
+            let euFlagsData = [];
+            let currentFlagIndex = -1;
+            let flagSequenceInterval = null;
+            let flagAnimationActive = false;
+            
+            // Mappatura lingua → bandiera nazionale
+            const languageToFlag = {
+                'it': { flag: '🇮🇹', name: 'ITALIA', code: 'IT' },
+                'en': { flag: '🇬🇧', name: 'UNITED KINGDOM', code: 'GB' },
+                'fr': { flag: '🇫🇷', name: 'FRANCE', code: 'FR' },
+                'de': { flag: '🇩🇪', name: 'DEUTSCHLAND', code: 'DE' },
+                'es': { flag: '🇪🇸', name: 'ESPAÑA', code: 'ES' }
+            };
+            
+            // Caricamento JSON bandiere
+            async function loadEuFlagsData() {
+                try {
+                    const response = await fetch('european_geographic_flags.json');
+                    euFlagsData = await response.json();
+                    console.log('🇪🇺 Bandiere caricate:', euFlagsData.length, 'paesi');
+                } catch (error) {
+                    console.warn('⚠️ Impossibile caricare bandiere:', error);
+                    // Fallback con dati minimi
+                    euFlagsData = [
+                        { country_code: 'IT', flag: '🇮🇹', authority_abbreviation: 'CONSOB' },
+                        { country_code: 'DE', flag: '🇩🇪', authority_abbreviation: 'BaFin' },
+                        { country_code: 'FR', flag: '🇫🇷', authority_abbreviation: 'AMF' }
+                    ];
+                }
+            }
+            
+            // Calcolo posizione bandiera su ORBITA CAPSULA ESTERNA
+            // Basato su percentuale del percorso (come offset-distance dei pianeti)
+            // percentOffset: 0-100% lungo il percorso della capsula
+            function computeFlagPositionFromPercent(percentOffset) {
+                const trackElement = document.getElementById('eu-flags-orbit-track');
+                if (!trackElement) return { x: 0, y: 0 };
+                
+                // Dimensioni dell'orbita capsula esterna
+                const containerWidth = 1300;
+                const containerHeight = 420;
+                const centerX = containerWidth / 2;
+                const centerY = containerHeight / 2;
+                
+                // Raggio degli angoli della capsula (border-radius)
+                const cornerRadius = 210;
+                
+                // Calcolo dimensioni percorso capsula
+                const straightLength = containerWidth - 2 * cornerRadius; // 880px
+                const curveLength = Math.PI * cornerRadius; // ~660px per semicerchio
+                const totalPerimeter = 2 * straightLength + 2 * curveLength; // ~3080px
+                
+                // Converti percentuale in posizione lungo il perimetro
+                // Lo Scudo parte da offset-distance: -3% e va a 97%
+                // Mappiamo 0-100% sul perimetro
+                let progress = (percentOffset / 100) * totalPerimeter;
+                
+                // Normalizza per evitare valori negativi
+                while (progress < 0) progress += totalPerimeter;
+                progress = progress % totalPerimeter;
+                
+                let x, y;
+                
+                // Segmento 1: Lato superiore (sinistra → destra)
+                if (progress < straightLength) {
+                    x = cornerRadius + progress;
+                    y = 0;
+                }
+                // Segmento 2: Curva destra
+                else if (progress < straightLength + curveLength) {
+                    const curveProgress = progress - straightLength;
+                    const angle = -Math.PI/2 + (curveProgress / curveLength) * Math.PI;
+                    x = (containerWidth - cornerRadius) + cornerRadius * Math.cos(angle);
+                    y = centerY + cornerRadius * Math.sin(angle);
+                }
+                // Segmento 3: Lato inferiore (destra → sinistra)
+                else if (progress < 2 * straightLength + curveLength) {
+                    const lineProgress = progress - straightLength - curveLength;
+                    x = (containerWidth - cornerRadius) - lineProgress;
+                    y = containerHeight;
+                }
+                // Segmento 4: Curva sinistra
+                else {
+                    const curveProgress = progress - 2 * straightLength - curveLength;
+                    const angle = Math.PI/2 + (curveProgress / curveLength) * Math.PI;
+                    x = cornerRadius + cornerRadius * Math.cos(angle);
+                    y = centerY + cornerRadius * Math.sin(angle);
+                }
+                
+                return { x: x, y: y };
+            }
+            
+            // Funzione legacy per compatibilità (usa indice invece di percentuale)
+            function computeFlagPosition(index, total) {
+                const percentOffset = (index / total) * 100;
+                return computeFlagPositionFromPercent(percentOffset);
+            }
+            
+            // Creazione elemento bandiera + Authority
+            function createFlagAuthorityElement(flagData, position) {
+                const wrapper = document.createElement('div');
+                wrapper.className = 'eu-flag-marker';
+                wrapper.style.position = 'absolute';
+                wrapper.style.left = position.x + 'px';
+                wrapper.style.top = position.y + 'px';
+                wrapper.style.transform = 'translate(-50%, -50%) scale(1)';
+                wrapper.style.opacity = '0';
+                wrapper.style.transition = 'opacity 0.5s ease-in, transform 0.3s ease-out';
+                
+                // Bandiera emoji - dimensione grande per visibilità
+                const flagIcon = document.createElement('span');
+                flagIcon.className = 'eu-flag-icon';
+                flagIcon.textContent = flagData.flag;
+                flagIcon.style.fontSize = '2.2rem';
+                
+                // Label: Codice Paese (piccolo) sopra + Sigla Authority (grande) sotto
+                const label = document.createElement('div');
+                label.className = 'eu-flag-label';
+                label.style.textAlign = 'center';
+                label.style.lineHeight = '1.3';
+                label.style.padding = '3px 6px';
+                label.style.fontSize = '0.65rem';
+                label.innerHTML = `<span style="font-size: 0.5rem; opacity: 0.8;">${flagData.country_code}</span><br><strong style="font-size: 0.7rem; color: #00FF7F;">${flagData.authority_abbreviation}</strong>`;
+                
+                wrapper.appendChild(flagIcon);
+                wrapper.appendChild(label);
+                
+                // Fade-in con scale - usa classe visible per animazione CSS
+                requestAnimationFrame(() => {
+                    wrapper.style.opacity = '1';
+                    wrapper.classList.add('visible');
+                });
+                
+                // Log per debug
+                console.log(`🏳️ ${flagData.flag} ${flagData.country_code} - ${flagData.authority_abbreviation}`);
+                
+                return wrapper;
+            }
+            
+            // Avvio sequenza bandiere sincronizzata con orbita
+            function startFlagSequence() {
+                if (flagAnimationActive || euFlagsData.length === 0) return;
+                
+                flagAnimationActive = true;
+                currentFlagIndex = 0;
+                
+                const container = document.getElementById('eu-flags-orbit');
+                if (!container) return;
+                
+                // Pulizia container
+                container.innerHTML = '';
+                
+                console.log('🏁 Avvio sequenza bandiere - ', euFlagsData.length, 'paesi');
+                
+                flagSequenceInterval = setInterval(() => {
+                    if (currentFlagIndex >= euFlagsData.length) {
+                        // Fine sequenza bandiere → mostra Europa per 3 secondi
+                        clearInterval(flagSequenceInterval);
+                        showEuropaFlag();
+                        return;
+                    }
+                    
+                    const flagData = euFlagsData[currentFlagIndex];
+                    const position = computeFlagPosition(currentFlagIndex, euFlagsData.length);
+                    const element = createFlagAuthorityElement(flagData, position);
+                    
+                    container.appendChild(element);
+                    
+                    // Evidenzia bandiera corrente (pulsazione)
+                    element.classList.add('active');
+                    setTimeout(() => element.classList.remove('active'), 800);
+                    
+                    currentFlagIndex++;
+                }, FLAG_INTERVAL);
+            }
+            
+            // Mostra bandiera Europa per 3 secondi
+            function showEuropaFlag() {
+                const europaFlag = document.getElementById('eu-flag-finale');
+                if (europaFlag) {
+                    europaFlag.style.display = 'flex';
+                    europaFlag.style.flexDirection = 'column';
+                    europaFlag.style.alignItems = 'center';
+                    europaFlag.style.animation = 'flagPulse 1s ease-in-out infinite';
+                    
+                    console.log('🇪🇺 Bandiera EUROPA - 3 secondi');
+                    
+                    setTimeout(() => {
+                        europaFlag.style.display = 'none';
+                        showNationalFlag();
+                    }, FLAG_EUROPA_DURATION);
+                }
+            }
+            
+            // Mostra bandiera nazionale (lingua selezionata) per 2 secondi outro
+            function showNationalFlag() {
+                const nationalFlag = document.getElementById('national-flag-outro');
+                const nationalIcon = document.getElementById('national-flag-icon');
+                const nationalLabel = document.getElementById('national-flag-label');
+                
+                if (nationalFlag && nationalIcon && nationalLabel) {
+                    const langData = languageToFlag[currentLanguage] || languageToFlag['it'];
+                    
+                    nationalIcon.textContent = langData.flag;
+                    nationalLabel.textContent = langData.name;
+                    
+                    nationalFlag.style.display = 'flex';
+                    nationalFlag.style.flexDirection = 'column';
+                    nationalFlag.style.alignItems = 'center';
+                    nationalFlag.style.animation = 'flagPulse 0.8s ease-in-out infinite';
+                    
+                    console.log('🏳️ Bandiera nazionale:', langData.name, '- 2 secondi outro');
+                    
+                    setTimeout(() => {
+                        nationalFlag.style.display = 'none';
+                        resetFlagSequence();
+                    }, FLAG_NATIONAL_DURATION);
+                }
+            }
+            
+            // Reset sequenza bandiere per nuovo ciclo
+            function resetFlagSequence() {
+                const container = document.getElementById('eu-flags-orbit');
+                if (container) {
+                    // Fade-out di tutte le bandiere
+                    const flags = container.querySelectorAll('.eu-flag-marker');
+                    flags.forEach(flag => {
+                        flag.style.opacity = '0';
+                    });
+                    
+                    // Pulizia dopo fade-out
+                    setTimeout(() => {
+                        container.innerHTML = '';
+                        flagAnimationActive = false;
+                        currentFlagIndex = -1;
+                        console.log('🔄 Reset bandiere completato');
+                    }, 500);
+                }
+            }
+            
+            // Stop sequenza bandiere
+            function stopFlagSequence() {
+                if (flagSequenceInterval) {
+                    clearInterval(flagSequenceInterval);
+                    flagSequenceInterval = null;
+                }
+                
+                const europaFlag = document.getElementById('eu-flag-finale');
+                const nationalFlag = document.getElementById('national-flag-outro');
+                
+                if (europaFlag) europaFlag.style.display = 'none';
+                if (nationalFlag) nationalFlag.style.display = 'none';
+                
+                resetFlagSequence();
+            }
+            
+            // Caricamento iniziale bandiere
+            loadEuFlagsData();
+            
+            // ============================================
+            // FINE SISTEMA BANDIERE
+            // ============================================
             
             // Stato animazione
             let animationPhase = 'waiting'; // waiting, running, paused, train
-            let timeRemaining = 55.0;
+            let timeRemaining = 130.0; // 130 secondi totali (65s + 65s)
             let countdownInterval;
             let lancettaInterval;
             let debugInterval; // Per il monitor di debug sempre attivo
@@ -6125,46 +6638,26 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             const TRAIN_SPACING = 8; // 8% di distanza tra ogni vagone
             
             // ============================================
-            // NUOVA STRATEGIA AMBULANZA
-            // - Parte DAVANTI a You$ (offset 3%)
-            // - INVISIBILE per i primi 35s
-            // - Diventa VISIBILE quando timer mostra ~20s
-            // - Stessa velocità di You$ = movimento sincronizzato
+            // CALCOLO POSIZIONE AMBULANZA
+            // Posizione = Rettilineo inferiore sinistro, attesa per You$ al time -89s
             // ============================================
-            function initAmbulanzaPosition() {
-                // Ambulanza parte DAVANTI a You$ (3% vs 0%)
-                const AMBULANZA_START = 3; // % davanti a You$
+            function calculateAmbulanzaPosition() {
+                // L'ambulanza attende sul rettilineo inferiore sinistro
+                // You$ la raggiunge al time -89s (countdown mostra 89.0s)
+                // Offset 78% = posizione sul rettilineo inferiore verso la curva sinistra
+                const AMBULANZA_WAIT_OFFSET = 78; // % per intercettare You$ al time -89s
+                const ambulanzaOffset = AMBULANZA_WAIT_OFFSET;
                 
                 if (planetCroceRossa) {
-                    planetCroceRossa.style.offsetDistance = AMBULANZA_START + '%';
-                    planetCroceRossa.style.setProperty('--start-position', AMBULANZA_START + '%');
-                    planetCroceRossa.style.opacity = '0'; // Invisibile all'inizio
-                    console.log('🚑 Ambulanza inizializzata a offset:', AMBULANZA_START + '% (INVISIBILE)');
+                    planetCroceRossa.style.offsetDistance = ambulanzaOffset + '%';
+                    planetCroceRossa.style.setProperty('--start-position', ambulanzaOffset + '%');
+                    console.log('🚑 Ambulanza posizionata a offset:', ambulanzaOffset + '% (attesa per time -89s)');
                 }
-                return AMBULANZA_START;
+                return ambulanzaOffset;
             }
             
-            // Funzione per mostrare l'ambulanza (chiamata a 35s)
-            // L'animazione è già partita insieme a You$ - qui solo rendiamo VISIBILE
-            function showAmbulanza() {
-                if (planetCroceRossa) {
-                    planetCroceRossa.classList.add('visible');
-                    // NON aggiungere animating qui - è già attiva dal DELAY_CAPITALE!
-                    // L'icona ambulanza è già visibile di default
-                    console.log('🚑 Ambulanza VISIBILE! (animazione già in corso da 35s)');
-                }
-            }
-            
-            // Funzione per nascondere l'ambulanza (dopo DEPRESSION)
-            function hideAmbulanza() {
-                if (planetCroceRossa) {
-                    planetCroceRossa.classList.remove('visible');
-                    console.log('🚑 Ambulanza INVISIBILE (dopo DEPRESSION)');
-                }
-            }
-            
-            // Inizializza posizione ambulanza all'avvio
-            const AMBULANZA_START_OFFSET = initAmbulanzaPosition();
+            // Calcola posizione ambulanza all'avvio
+            const AMBULANZA_START_OFFSET = calculateAmbulanzaPosition();
             
             // FUNZIONE DEBUG - Aggiorna sempre le coordinate (anche senza lancetta)
             function updateDebugMonitor() {
@@ -6340,6 +6833,293 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 }, 800);
             }
             
+            // ============================================
+            // EFFETTO RETE CATTURA - SCAM lancia lazo verso You$
+            // Animazione: 1) Lancio → 2) Avvolge → 3) Cattura (2.5s totali)
+            // ============================================
+            function triggerScamNetEffect() {
+                const netSvg = document.getElementById('scam-net-svg');
+                const netTriangle = document.getElementById('scam-net-triangle');
+                const netLasso = document.getElementById('scam-net-lasso');
+                const netRope = document.getElementById('scam-net-rope');
+                const scamPlanet = document.getElementById('scam-planet');
+                const youPlanet = document.getElementById('planet-capitale');
+                
+                if (!netSvg || !netTriangle || !netLasso || !netRope || !scamPlanet || !youPlanet) {
+                    console.log('❌ Elementi rete non trovati');
+                    return;
+                }
+                
+                // Ottieni posizioni dei pianeti
+                const scamRect = scamPlanet.getBoundingClientRect();
+                const youRect = youPlanet.getBoundingClientRect();
+                
+                const scamX = scamRect.left + scamRect.width / 2;
+                const scamY = scamRect.top + scamRect.height / 2;
+                const youX = youRect.left + youRect.width / 2;
+                const youY = youRect.top + youRect.height / 2;
+                
+                // Calcola punti del triangolo (vertice in SCAM, base attorno a You$)
+                const youRadius = youRect.width / 2 + 30; // Raggio + margine
+                const angle = Math.atan2(youY - scamY, youX - scamX);
+                const perpAngle = angle + Math.PI / 2;
+                
+                // Mostra SVG
+                netSvg.style.display = 'block';
+                
+                // === FASE 1: LANCIO (0 → 0.8s) ===
+                // Triangolo che si espande da SCAM verso You$
+                let startTime = performance.now();
+                const launchDuration = 800; // 0.8s
+                const wrapDuration = 900; // 0.9s
+                const holdDuration = 800; // 0.8s
+                
+                function animateLaunch(currentTime) {
+                    const elapsed = currentTime - startTime;
+                    const progress = Math.min(elapsed / launchDuration, 1);
+                    const easeOut = 1 - Math.pow(1 - progress, 3);
+                    
+                    // Interpola posizione del triangolo
+                    const currentX = scamX + (youX - scamX) * easeOut;
+                    const currentY = scamY + (youY - scamY) * easeOut;
+                    const currentRadius = youRadius * easeOut;
+                    
+                    // Punti del triangolo
+                    const p1x = scamX;
+                    const p1y = scamY;
+                    const p2x = currentX + Math.cos(perpAngle) * currentRadius;
+                    const p2y = currentY + Math.sin(perpAngle) * currentRadius;
+                    const p3x = currentX - Math.cos(perpAngle) * currentRadius;
+                    const p3y = currentY - Math.sin(perpAngle) * currentRadius;
+                    
+                    netTriangle.setAttribute('points', `${p1x},${p1y} ${p2x},${p2y} ${p3x},${p3y}`);
+                    netTriangle.style.opacity = 0.7 * easeOut;
+                    
+                    // Corda
+                    netRope.setAttribute('x1', scamX);
+                    netRope.setAttribute('y1', scamY);
+                    netRope.setAttribute('x2', currentX);
+                    netRope.setAttribute('y2', currentY);
+                    netRope.style.opacity = easeOut;
+                    
+                    if (progress < 1) {
+                        requestAnimationFrame(animateLaunch);
+                    } else {
+                        // === FASE 2: AVVOLGE (0.8s → 1.7s) ===
+                        startTime = performance.now();
+                        requestAnimationFrame(animateWrap);
+                    }
+                }
+                
+                function animateWrap(currentTime) {
+                    const elapsed = currentTime - startTime;
+                    const progress = Math.min(elapsed / wrapDuration, 1);
+                    const easeInOut = progress < 0.5 ? 2 * progress * progress : 1 - Math.pow(-2 * progress + 2, 2) / 2;
+                    
+                    // Triangolo si restringe e diventa lazo
+                    const shrinkFactor = 1 - easeInOut * 0.7;
+                    const p1x = scamX + (youX - scamX) * (1 - easeInOut * 0.3);
+                    const p1y = scamY + (youY - scamY) * (1 - easeInOut * 0.3);
+                    const currentRadius = youRadius * shrinkFactor;
+                    
+                    const p2x = youX + Math.cos(perpAngle) * currentRadius;
+                    const p2y = youY + Math.sin(perpAngle) * currentRadius;
+                    const p3x = youX - Math.cos(perpAngle) * currentRadius;
+                    const p3y = youY - Math.sin(perpAngle) * currentRadius;
+                    
+                    netTriangle.setAttribute('points', `${p1x},${p1y} ${p2x},${p2y} ${p3x},${p3y}`);
+                    netTriangle.style.opacity = 0.7 * (1 - easeInOut);
+                    
+                    // Lazo appare e si stringe
+                    const lassoRadius = youRadius * (1 - easeInOut * 0.4);
+                    netLasso.setAttribute('cx', youX);
+                    netLasso.setAttribute('cy', youY);
+                    netLasso.setAttribute('rx', lassoRadius);
+                    netLasso.setAttribute('ry', lassoRadius * 0.7);
+                    netLasso.style.opacity = easeInOut;
+                    netLasso.style.strokeDashoffset = (1 - easeInOut) * 100;
+                    
+                    // Corda resta collegata
+                    netRope.setAttribute('x2', youX);
+                    netRope.setAttribute('y2', youY);
+                    
+                    if (progress < 1) {
+                        requestAnimationFrame(animateWrap);
+                    } else {
+                        // === FASE 3: CATTURA/HOLD (1.7s → 2.5s) ===
+                        startTime = performance.now();
+                        requestAnimationFrame(animateHold);
+                    }
+                }
+                
+                function animateHold(currentTime) {
+                    const elapsed = currentTime - startTime;
+                    const progress = Math.min(elapsed / holdDuration, 1);
+                    
+                    // Lazo pulsa e si stringe leggermente
+                    const pulse = 1 + Math.sin(elapsed * 0.02) * 0.05;
+                    const finalRadius = youRadius * 0.6 * pulse * (1 - progress * 0.2);
+                    
+                    netLasso.setAttribute('rx', finalRadius);
+                    netLasso.setAttribute('ry', finalRadius * 0.7);
+                    
+                    // Flash rosso finale
+                    if (progress > 0.7) {
+                        const flashIntensity = (progress - 0.7) / 0.3;
+                        netLasso.style.stroke = `rgb(255, ${Math.floor(50 * (1 - flashIntensity))}, ${Math.floor(50 * (1 - flashIntensity))})`;
+                        netLasso.style.strokeWidth = 4 + flashIntensity * 4;
+                    }
+                    
+                    // Fade out finale
+                    if (progress > 0.8) {
+                        const fadeOut = (progress - 0.8) / 0.2;
+                        netLasso.style.opacity = 1 - fadeOut;
+                        netRope.style.opacity = 1 - fadeOut;
+                    }
+                    
+                    if (progress < 1) {
+                        requestAnimationFrame(animateHold);
+                    } else {
+                        // Nascondi tutto
+                        netSvg.style.display = 'none';
+                        netTriangle.style.opacity = 0;
+                        netLasso.style.opacity = 0;
+                        netRope.style.opacity = 0;
+                        netLasso.style.stroke = '#FF0000';
+                        netLasso.style.strokeWidth = '4';
+                        console.log('🕸️ RETE CATTURA completata!');
+                    }
+                }
+                
+                requestAnimationFrame(animateLaunch);
+            }
+
+            // ============================================
+            // EFFETTO RETE VERTICALE - Sale dal basso verso You$
+            // Animazione: rete rossa che sale verticalmente (2s totali)
+            // ============================================
+            function triggerVerticalNetEffect() {
+                const netSvg = document.getElementById('vertical-net-svg');
+                const netRect = document.getElementById('vertical-net-rect');
+                const netLine1 = document.getElementById('vertical-net-line1');
+                const netLine2 = document.getElementById('vertical-net-line2');
+                const youPlanet = document.getElementById('planet-capitale');
+                
+                if (!netSvg || !netRect || !youPlanet) {
+                    console.log('❌ Elementi rete verticale non trovati');
+                    return;
+                }
+                
+                // Ottieni posizione di You$
+                const youRect = youPlanet.getBoundingClientRect();
+                const youX = youRect.left + youRect.width / 2;
+                const youY = youRect.top + youRect.height / 2;
+                const youRadius = youRect.width / 2 + 20;
+                
+                // Punto di partenza: fondo schermo
+                const screenHeight = window.innerHeight;
+                const netWidth = youRadius * 2.5;
+                
+                // Mostra SVG
+                netSvg.style.display = 'block';
+                
+                // Durate animazione
+                const riseDuration = 1200; // 1.2s per salire
+                const wrapDuration = 500; // 0.5s per avvolgere
+                const fadeDuration = 300; // 0.3s per scomparire
+                
+                let startTime = performance.now();
+                
+                function animateRise(currentTime) {
+                    const elapsed = currentTime - startTime;
+                    const progress = Math.min(elapsed / riseDuration, 1);
+                    const easeOut = 1 - Math.pow(1 - progress, 3);
+                    
+                    // Rete sale dal basso
+                    const currentTop = screenHeight - (screenHeight - youY + youRadius) * easeOut;
+                    const currentHeight = (screenHeight - youY + youRadius) * easeOut;
+                    
+                    netRect.setAttribute('x', youX - netWidth / 2);
+                    netRect.setAttribute('y', currentTop);
+                    netRect.setAttribute('width', netWidth);
+                    netRect.setAttribute('height', currentHeight);
+                    netRect.style.opacity = 0.7 * easeOut;
+                    
+                    // Linee laterali
+                    netLine1.setAttribute('x1', youX - netWidth / 2);
+                    netLine1.setAttribute('y1', screenHeight);
+                    netLine1.setAttribute('x2', youX - netWidth / 2);
+                    netLine1.setAttribute('y2', currentTop);
+                    netLine1.style.opacity = easeOut;
+                    
+                    netLine2.setAttribute('x1', youX + netWidth / 2);
+                    netLine2.setAttribute('y1', screenHeight);
+                    netLine2.setAttribute('x2', youX + netWidth / 2);
+                    netLine2.setAttribute('y2', currentTop);
+                    netLine2.style.opacity = easeOut;
+                    
+                    if (progress < 1) {
+                        requestAnimationFrame(animateRise);
+                    } else {
+                        startTime = performance.now();
+                        requestAnimationFrame(animateWrap);
+                    }
+                }
+                
+                function animateWrap(currentTime) {
+                    const elapsed = currentTime - startTime;
+                    const progress = Math.min(elapsed / wrapDuration, 1);
+                    
+                    // La rete si stringe attorno a You$
+                    const shrinkFactor = 1 - progress * 0.4;
+                    const currentWidth = netWidth * shrinkFactor;
+                    
+                    netRect.setAttribute('x', youX - currentWidth / 2);
+                    netRect.setAttribute('width', currentWidth);
+                    
+                    netLine1.setAttribute('x1', youX - currentWidth / 2);
+                    netLine1.setAttribute('x2', youX - currentWidth / 2);
+                    
+                    netLine2.setAttribute('x1', youX + currentWidth / 2);
+                    netLine2.setAttribute('x2', youX + currentWidth / 2);
+                    
+                    // Flash rosso
+                    if (progress > 0.5) {
+                        const flash = (progress - 0.5) * 2;
+                        netRect.style.stroke = `rgb(255, ${Math.floor(50 * (1 - flash))}, 0)`;
+                    }
+                    
+                    if (progress < 1) {
+                        requestAnimationFrame(animateWrap);
+                    } else {
+                        startTime = performance.now();
+                        requestAnimationFrame(animateFade);
+                    }
+                }
+                
+                function animateFade(currentTime) {
+                    const elapsed = currentTime - startTime;
+                    const progress = Math.min(elapsed / fadeDuration, 1);
+                    
+                    netRect.style.opacity = 0.7 * (1 - progress);
+                    netLine1.style.opacity = 1 - progress;
+                    netLine2.style.opacity = 1 - progress;
+                    
+                    if (progress < 1) {
+                        requestAnimationFrame(animateFade);
+                    } else {
+                        netSvg.style.display = 'none';
+                        netRect.style.opacity = 0;
+                        netLine1.style.opacity = 0;
+                        netLine2.style.opacity = 0;
+                        netRect.style.stroke = '#FF3333';
+                        console.log('🕸️ RETE VERTICALE completata!');
+                    }
+                }
+                
+                requestAnimationFrame(animateRise);
+            }
+
             // Elementi $ del pianeta Capitale (cassaforte)
             const capitaleDollars = [
                 document.getElementById('capitale-dollar-1'),
@@ -6486,18 +7266,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                             }
                         }
                         
-                        // CAMBIO ASPETTO YOU$ - Al transfer 3 (indice 2), diventa 😵‍💫
-                        if (dollarsTransferred === 2) {
-                            const hypnotizedEmoji = document.getElementById('capitale-hypnotized');
-                            const capitaleLabel = document.getElementById('capitale-label');
-                            if (hypnotizedEmoji && planetCapitale) {
-                                hypnotizedEmoji.style.display = 'block';
-                                planetCapitale.style.backgroundImage = 'none';
-                                planetCapitale.style.background = 'radial-gradient(circle at 30% 30%, #2d1b4e, #1a0a2e, #0d0519)';
-                                if (capitaleLabel) capitaleLabel.textContent = '😵‍💫 Ipnotizzato';
-                                console.log('😵‍💫 YOU$ IPNOTIZZATO: Cambio aspetto al transfer 3!');
-                            }
-                        }
+                        // NOTA: L'ipnotizzazione di You$ ora avviene a -120s nel countdown
+                        // Non più al transfer 3
                         
                         // EFFETTI MONEY TRANSFER ANIMATI - Per zone EST, SUD-EST, SUD
                         // Zone: 2=EST, 3=SUD-EST, 4=SUD
@@ -6706,8 +7476,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             function checkPositionForAmbulanza() {
                 if (ambulanzaActivated || !planetCapitale || !planetCroceRossa || !scamPlanet) return;
                 
-                // CONDIZIONE 1: Devono essere completati tutti i 5 money transfer
-                if (dollarsTransferred < 5) return;
+                // CONDIZIONE 1: You$ deve essere ipnotizzato (avvenuto a -120s)
+                if (!youHypnotized) return;
                 
                 const capitaleRect = planetCapitale.getBoundingClientRect();
                 const ambulanzaRect = planetCroceRossa.getBoundingClientRect();
@@ -6716,15 +7486,15 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 const capitaleY = capitaleRect.top + capitaleRect.height / 2;
                 const ambulanzaX = ambulanzaRect.left + ambulanzaRect.width / 2;
                 
-                // CONDIZIONE 2: Il pianeta Capitale deve essere vicino all'ambulanza (distanza < 100px)
+                // CONDIZIONE 2: Il pianeta Capitale deve essere vicino all'ambulanza (distanza < 120px)
                 const distanzaX = Math.abs(capitaleX - ambulanzaX);
                 const distanzaY = Math.abs(capitaleY - (ambulanzaRect.top + ambulanzaRect.height / 2));
                 const distanzaTotale = Math.sqrt(distanzaX * distanzaX + distanzaY * distanzaY);
                 
                 // CONDIZIONE 3: Deve essere sul rettilineo inferiore (Y > 480)
-                if (capitaleY > AMBULANZA_TRIGGER_Y && distanzaTotale < 120) {
+                if (capitaleY > AMBULANZA_TRIGGER_Y && distanzaTotale < 150) {
                     ambulanzaActivated = true;
-                    console.log('🚑 AMBULANZA ATTIVATA! After 5 transfers, distanza:', Math.round(distanzaTotale), 'px');
+                    console.log('🚑 AMBULANZA ATTIVATA! You$ ipnotizzato agganciato, distanza:', Math.round(distanzaTotale), 'px');
                     
                     // COUNTER ROSSO: Pericolo critico! Perdita del capitale
                     if (countdownElement) {
@@ -6746,14 +7516,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                         ambulanzaIcon.style.fontSize = '4rem';
                     }
                     
-                    // SINCRONIZZAZIONE: L'ambulanza diventa LOCOMOTIVA del treno
-                    // Il treno è composto da: 🚑 Ambulanza (locomotiva) + 😵‍💫 You$ (vagone 1) + 🛡️ Scudo (vagone 2)
-                    console.log('🚂 TRENO FORMATO: Ambulanza 🚑 + You$ 😵‍💫 + Scudo 🛡️');
+                    // AGGANCIO TIR: You$ ipnotizzato diventa rimorchio dell'ambulanza
+                    // L'ambulanza è la motrice, You$ 😵‍💫 è il rimorchio ferito da trasportare
+                    console.log('🚛 TIR FORMATO: Ambulanza 🚑 (motrice) + You$ 😵‍💫 (rimorchio ferito)');
                     planetCroceRossa.classList.add('animating');
                     
                     // Update debug monitor
                     const statusEl = document.getElementById('debug-lancetta-status');
-                    if (statusEl) statusEl.textContent = '🚂 TRENO ATTIVO (3 vagoni)';
+                    if (statusEl) statusEl.textContent = '🚛 TIR ATTIVO (motrice + rimorchio)';
                 }
             }
             
@@ -6765,9 +7535,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             let ambulanzaNascosta = false; // Flag per nascondere ambulanza a 05.0s
             let raggioRossoAttivato = false; // Flag per raggio rosso Sole→Ambulanza
             let faseRientro = false; // Flag per fase curva di rientro
+            let scamNetTriggered = false; // Flag per effetto rete cattura SCAM→You$
+            let scamNet2Triggered = false; // Flag per secondo lancio rete a 112-110s
+            let youHypnotized = false; // Flag per You$ ipnotizzato a -120s
+            let ambulanzaPartita = false; // Flag per partenza automatica ambulanza al time -89s
+            let verticalNetTriggered = false; // Flag per rete verticale dal basso a -116s
             
             function startCountdown() {
-                timeRemaining = 65.0;
+                timeRemaining = 130.0; // 130 secondi totali (65 + 65)
                 lancettaInterrotta = false; // Reset flag ad ogni ciclo
                 lancettaMostrata = false; // Reset flag ad ogni ciclo
                 nordTransferTriggered = false; // Reset flag ad ogni ciclo
@@ -6775,6 +7550,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 ambulanzaNascosta = false; // Reset flag ad ogni ciclo
                 raggioRossoAttivato = false; // Reset flag
                 faseRientro = false; // Reset flag
+                scamNetTriggered = false; // Reset flag rete cattura
+                scamNet2Triggered = false; // Reset flag secondo lancio rete
+                youHypnotized = false; // Reset flag ipnotizzazione
+                ambulanzaPartita = false; // Reset flag partenza ambulanza
+                verticalNetTriggered = false; // Reset flag rete verticale
                 
                 // Nascondi tutti i raggi e reimposta stato iniziale
                 hideLancetta();
@@ -6787,98 +7567,189 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 countdownInterval = setInterval(() => {
                     timeRemaining -= 0.1;
                     
-                    // ====== FASE VERDE (65s → 54s): Raggio verde, protezione attiva ======
-                    // La barra resta verde, raggio verde visibile
+                    // Calcola tempo relativo all'atto corrente
+                    const actTime = currentAct === 1 ? (130 - timeRemaining) : (65 - (timeRemaining));
+                    const displayTime = currentAct === 1 ? timeRemaining : (timeRemaining);
                     
-                    // ====== FASE GIALLA (54s → 35s): Raggio giallo SCAM→You$, allerta ======
-                    // Mostra lancetta a 54.0s e nascondi raggio verde (pericolo!)
-                    if (!lancettaMostrata && timeRemaining <= 54.00 && timeRemaining > 53.90) {
-                        hideRaggioVerde(); // Protezione interrotta
-                        showLancetta();
-                        updateProgressBarColor('yellow'); // Barra GIALLA
-                        lancettaMostrata = true;
-                        console.log('🟡 FASE GIALLA: Lancetta mostrata a:', timeRemaining.toFixed(2) + 's');
-                    }
-                    
-                    // Money Transfer #1 NORD - comando a 49.0s (visibile a ~46s con 3s latenza)
-                    if (!nordTransferTriggered && timeRemaining <= 49.00 && timeRemaining > 48.90) {
-                        triggerMoneyTransferEffect('money-transfer-nord', 'flyToScamNord');
-                        nordTransferTriggered = true;
-                        console.log('Money Transfer #1 NORD comando inviato a:', timeRemaining.toFixed(2) + 's');
-                    }
-                    
-                    // ====== FASE ROSSA (35s → 15s): Punto Sud/Nadir, raggio rosso Sole→Ambulanza ======
-                    // A 35s: spegni raggio giallo, accendi raggio rosso, barra ROSSA
-                    if (!raggioRossoAttivato && timeRemaining <= 35.00 && timeRemaining > 34.90) {
-                        hideLancetta(); // Spegni raggio giallo
-                        disperseCoins(); // Effetto dispersione monete
-                        lancettaInterrotta = true;
-                        showRaggioRosso(); // Accendi raggio rosso Sole→Ambulanza
-                        setRaggioRossoColor('#FF0000'); // Rosso
-                        updateProgressBarColor('red'); // Barra ROSSA
-                        raggioRossoAttivato = true;
-                        console.log('🔴 FASE ROSSA: Punto Sud/Nadir a:', timeRemaining.toFixed(2) + 's');
-                    }
-                    
-                    // ====== DEPRESSION OLIVETTI (29s → 24s): Scrittura sotto rettilineo inferiore ======
-                    // A 29s: inizia scrittura "DEPRESSION" da destra a sinistra (N→D)
-                    if (!depressionStarted && timeRemaining <= 29.00 && timeRemaining > 28.90) {
-                        console.log('🖨️ DEPRESSION START: Inizio scrittura Olivetti a:', timeRemaining.toFixed(2) + 's');
-                        activateFastReturnAndLetters();
-                        depressionStarted = true;
-                    }
-                    
-                    // ====== FASE GIALLA RIENTRO (15s → 5s): Curva di rientro, raggio giallo ======
-                    if (!faseRientro && timeRemaining <= 15.00 && timeRemaining > 14.90) {
-                        setRaggioRossoColor('#FFD700'); // Raggio diventa giallo
-                        updateProgressBarColor('yellow'); // Barra GIALLA
-                        faseRientro = true;
-                        console.log('🟡 FASE RIENTRO: Curva verso casa a:', timeRemaining.toFixed(2) + 's');
-                    }
-                    
-                    // ====== FASE VERDE FINALE (1s → 0): Sosta, tutto verde ======
-                    // Ambulanza scompare SOLO dopo aver superato completamente DEPRESSION (dopo lettera N)
-                    // Ritardato a 1s rimanente per dare più tempo di visibilità
-                    if (!ambulanzaNascosta && timeRemaining <= 1.00 && timeRemaining > 0.90) {
-                        const ambulanzaIcon = planetCroceRossa ? planetCroceRossa.querySelector('.ambulanza-icon') : null;
-                        const croceIcon = planetCroceRossa ? planetCroceRossa.querySelector('.croce-rossa-icon') : null;
-                        const exclamationMark = planetCroceRossa ? planetCroceRossa.querySelector('.exclamation-mark') : null;
+                    // ==========================================
+                    // ATTO 1 (130s → 65s): Scenario DRAMMATICO
+                    // ==========================================
+                    if (timeRemaining > 65) {
+                        const act1Time = 130 - timeRemaining; // 0 → 65
                         
-                        // Nascondi ambulanza
-                        if (ambulanzaIcon) ambulanzaIcon.style.display = 'none';
+                        // FASE VERDE (0s → 11s): Raggio verde, protezione attiva
                         
-                        // Mostra punto esclamativo rosso pulsante
-                        if (exclamationMark) {
-                            exclamationMark.style.display = 'block';
-                            exclamationMark.classList.add('pulsing');
-                            console.log('❗ Punto esclamativo rosso ATTIVO (3 pulsazioni)');
-                            
-                            // Dopo 1 secondo (3 pulsazioni), nascondi ! e mostra croce
-                            setTimeout(() => {
-                                exclamationMark.style.display = 'none';
-                                exclamationMark.classList.remove('pulsing');
-                                if (croceIcon) croceIcon.style.display = 'block';
-                                console.log('➕ Croce rossa ripristinata');
-                            }, 1000);
-                        } else {
-                            if (croceIcon) croceIcon.style.display = 'block';
+                        // IPNOTIZZAZIONE YOU$ - a 10s (countdown 120s)
+                        if (!youHypnotized && act1Time >= 10 && act1Time < 10.1) {
+                            const hypnotizedEmoji = document.getElementById('capitale-hypnotized');
+                            const capitaleLabel = document.getElementById('capitale-label');
+                            if (hypnotizedEmoji && planetCapitale) {
+                                hypnotizedEmoji.style.display = 'block';
+                                planetCapitale.style.backgroundImage = 'none';
+                                planetCapitale.style.background = 'radial-gradient(circle at 30% 30%, #2d1b4e, #1a0a2e, #0d0519)';
+                                if (capitaleLabel) capitaleLabel.textContent = '😵‍💫 Ipnotizzato';
+                            }
+                            youHypnotized = true;
+                            console.log('😵‍💫 YOU$ IPNOTIZZATO a:', act1Time.toFixed(1) + 's (countdown: ' + timeRemaining.toFixed(1) + 's)');
                         }
                         
-                        hideRaggioRosso(); // Nascondi raggio rosso/giallo
-                        showRaggioVerde(); // Riattiva raggio verde
-                        updateProgressBarColor('green'); // Barra VERDE
-                        ambulanzaNascosta = true;
-                        console.log('🟢 FASE FINALE: Ambulanza nascosta dopo DEPRESSION a:', timeRemaining.toFixed(2) + 's');
+                        // FASE GIALLA (11s → 30s): Raggio giallo SCAM→You$, allerta
+                        if (!lancettaMostrata && act1Time >= 11 && act1Time < 11.1) {
+                            hideRaggioVerde();
+                            showLancetta();
+                            updateProgressBarColor('yellow');
+                            lancettaMostrata = true;
+                            console.log('🟡 ATTO 1 - FASE GIALLA: Lancetta a:', act1Time.toFixed(1) + 's');
+                        }
+                        
+                        // EFFETTO RETE VERTICALE DAL BASSO - a 14s (countdown 116s)
+                        if (!verticalNetTriggered && act1Time >= 14 && act1Time < 14.1) {
+                            triggerVerticalNetEffect();
+                            verticalNetTriggered = true;
+                            console.log('🕸️ RETE VERTICALE dal basso a:', act1Time.toFixed(1) + 's (countdown: ' + timeRemaining.toFixed(1) + 's)');
+                        }
+                        
+                        // Money Transfer #1 NORD - a 16s
+                        if (!nordTransferTriggered && act1Time >= 16 && act1Time < 16.1) {
+                            triggerMoneyTransferEffect('money-transfer-nord', 'flyToScamNord');
+                            nordTransferTriggered = true;
+                            console.log('💰 Money Transfer NORD a:', act1Time.toFixed(1) + 's');
+                        }
+                        
+                        // EFFETTO RETE CATTURA #1 SCAM→You$ - a 18s (countdown 112s), dura 2.5s - SOSTA PROGRAMMATA
+                        if (!scamNet2Triggered && act1Time >= 18 && act1Time < 18.1) {
+                            triggerScamNetEffect();
+                            scamNet2Triggered = true;
+                            console.log('🕸️ RETE CATTURA #1 SCAM→You$ a:', act1Time.toFixed(1) + 's (countdown: ' + timeRemaining.toFixed(1) + 's)');
+                        }
+                        
+                        // EFFETTO RETE CATTURA #2 SCAM→You$ - a 22s (countdown 108s), dura 2.5s
+                        if (!scamNetTriggered && act1Time >= 22 && act1Time < 22.1) {
+                            triggerScamNetEffect();
+                            scamNetTriggered = true;
+                            console.log('🕸️ RETE CATTURA #2 SCAM→You$ a:', act1Time.toFixed(1) + 's (countdown: ' + timeRemaining.toFixed(1) + 's)');
+                        }
+                        
+                        // FASE ROSSA (30s → 50s): Punto Sud/Nadir
+                        if (!raggioRossoAttivato && act1Time >= 30 && act1Time < 30.1) {
+                            hideLancetta();
+                            disperseCoins();
+                            lancettaInterrotta = true;
+                            showRaggioRosso();
+                            setRaggioRossoColor('#FF0000');
+                            updateProgressBarColor('red');
+                            raggioRossoAttivato = true;
+                            console.log('🔴 ATTO 1 - FASE ROSSA a:', act1Time.toFixed(1) + 's');
+                        }
+                        
+                        // DEPRESSION (36s → 41s)
+                        if (!depressionStarted && act1Time >= 36 && act1Time < 36.1) {
+                            console.log('🖨️ DEPRESSION START a:', act1Time.toFixed(1) + 's');
+                            activateFastReturnAndLetters();
+                            depressionStarted = true;
+                        }
+                        
+                        // PARTENZA AUTOMATICA AMBULANZA al time -89s (act1Time = 41s)
+                        if (!ambulanzaPartita && act1Time >= 41 && act1Time < 41.1) {
+                            ambulanzaPartita = true;
+                            ambulanzaActivated = true;
+                            console.log('🚑 AMBULANZA PARTENZA AUTOMATICA al time -89s (act1Time:', act1Time.toFixed(1) + 's)');
+                            
+                            // Trasforma Croce Rossa in Ambulanza LOCOMOTIVA
+                            const croceIcon = planetCroceRossa ? planetCroceRossa.querySelector('.croce-rossa-icon') : null;
+                            const ambulanzaIcon = planetCroceRossa ? planetCroceRossa.querySelector('.ambulanza-icon') : null;
+                            
+                            if (croceIcon) croceIcon.style.display = 'none';
+                            if (ambulanzaIcon) {
+                                ambulanzaIcon.style.display = 'block';
+                                ambulanzaIcon.style.fontSize = '4rem';
+                            }
+                            
+                            // COUNTER ROSSO: Pericolo critico!
+                            if (countdownElement) {
+                                countdownElement.style.color = '#FF4444';
+                                countdownElement.style.textShadow = '0 0 20px #FF4444, 0 0 40px #FF0000, 0 0 60px rgba(255, 0, 0, 0.6)';
+                            }
+                            
+                            // AGGANCIO TIR: Ambulanza (motrice) + You$ ipnotizzato (rimorchio)
+                            console.log('🚛 TIR FORMATO: Ambulanza 🚑 (motrice) + You$ 😵‍💫 (rimorchio ferito)');
+                            
+                            // AVVIA ANIMAZIONE AMBULANZA
+                            if (planetCroceRossa) {
+                                planetCroceRossa.style.setProperty('--start-position', '78%');
+                                planetCroceRossa.style.animation = 'none';
+                                planetCroceRossa.offsetHeight; // Force reflow
+                                planetCroceRossa.style.animation = '';
+                                planetCroceRossa.classList.add('animating');
+                                console.log('🚑 Ambulanza animazione avviata da 78%');
+                            }
+                            
+                            // Ferma il controllo posizione
+                            if (positionCheckInterval) clearInterval(positionCheckInterval);
+                            
+                            // Update debug monitor
+                            const statusEl = document.getElementById('debug-lancetta-status');
+                            if (statusEl) statusEl.textContent = '🚛 TIR ATTIVO (motrice + rimorchio)';
+                        }
+                        
+                        // FASE GIALLA RIENTRO (50s → 60s)
+                        if (!faseRientro && act1Time >= 50 && act1Time < 50.1) {
+                            setRaggioRossoColor('#FFD700');
+                            updateProgressBarColor('yellow');
+                            faseRientro = true;
+                            console.log('🟡 ATTO 1 - FASE RIENTRO a:', act1Time.toFixed(1) + 's');
+                        }
+                        
+                        // FASE VERDE FINALE (64s → 65s)
+                        if (!ambulanzaNascosta && act1Time >= 64 && act1Time < 64.1) {
+                            const ambulanzaIcon = planetCroceRossa ? planetCroceRossa.querySelector('.ambulanza-icon') : null;
+                            const croceIcon = planetCroceRossa ? planetCroceRossa.querySelector('.croce-rossa-icon') : null;
+                            const exclamationMark = planetCroceRossa ? planetCroceRossa.querySelector('.exclamation-mark') : null;
+                            
+                            if (ambulanzaIcon) ambulanzaIcon.style.display = 'none';
+                            if (exclamationMark) {
+                                exclamationMark.style.display = 'block';
+                                exclamationMark.classList.add('pulsing');
+                                setTimeout(() => {
+                                    exclamationMark.style.display = 'none';
+                                    exclamationMark.classList.remove('pulsing');
+                                    if (croceIcon) croceIcon.style.display = 'block';
+                                }, 1000);
+                            } else if (croceIcon) {
+                                croceIcon.style.display = 'block';
+                            }
+                            
+                            hideRaggioRosso();
+                            showRaggioVerde();
+                            updateProgressBarColor('green');
+                            ambulanzaNascosta = true;
+                        }
                     }
                     
+                    // ==========================================
+                    // ATTO 2 (65s → 0s): Scenario PROTETTO
+                    // Scudo in testa, bandiere Authority
+                    // ==========================================
+                    else if (timeRemaining <= 65 && timeRemaining > 0) {
+                        // Atto 2: Barra sempre VERDE (protezione attiva)
+                        if (currentAct !== 2) {
+                            // Già gestito dalla transizione
+                        }
+                    }
+                    
+                    // FINE CICLO COMPLETO (130s)
                     if (timeRemaining <= 0) {
                         clearInterval(countdownInterval);
-                        // FINE CICLO: Nascondi tutti i raggi, reset per nuovo ciclo
+                        
+                        // Reset completo
                         hideLancetta();
                         hideRaggioRosso();
                         showRaggioVerde();
                         updateProgressBarColor('green');
-                        // Reset flags per prossimo ciclo
+                        stopFlagSequence();
+                        showNavigationHeader();
+                        
+                        // Reset flags
                         lancettaInterrotta = false;
                         lancettaMostrata = false;
                         nordTransferTriggered = false;
@@ -6886,24 +7757,20 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                         ambulanzaNascosta = false;
                         raggioRossoAttivato = false;
                         faseRientro = false;
-                        depressionStarted = false; // Reset flag DEPRESSION
-                        resetDepressionEffect(); // Nascondi lettere DEPRESSION
-                        timeRemaining = 65.0;
+                        depressionStarted = false;
+                        resetDepressionEffect();
+                        currentAct = 1;
+                        timeRemaining = 130.0;
                         countdownElement.textContent = timeRemaining.toFixed(1) + 's';
                         
-                        // ============================================
-                        // 3 STEP LOGOUT - Reset automatico a FINE CICLO
-                        // ============================================
+                        // Logout e reset
                         executeStepLogout();
                         
-                        console.log('🔄 Ciclo completato - executeStepLogout eseguito');
+                        console.log('🔄 CICLO 130s COMPLETATO - Reset per nuovo ciclo');
                         
-                        // ============================================
-                        // LOOP AUTOMATICO: Riavvia dopo 5 secondi
-                        // ============================================
+                        // LOOP AUTOMATICO dopo 5 secondi
                         setTimeout(() => {
-                            console.log('🔄 LOOP AUTOMATICO: Riavvio animazione...');
-                            // Reset completo delle animazioni CSS
+                            console.log('🔄 LOOP AUTOMATICO: Riavvio ciclo 130s...');
                             if (planetCapitale) {
                                 planetCapitale.classList.remove('animating');
                                 planetCapitale.style.animation = 'none';
@@ -6922,10 +7789,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                                 planetCroceRossa.offsetHeight;
                                 planetCroceRossa.style.animation = '';
                             }
-                            // Riavvia la sequenza
                             startAnimationSequence();
-                        }, 5000); // Riavvia dopo 5 secondi
+                        }, 5000);
                     } else {
+                        // Display: mostra tempo rimanente con indicatore atto
+                        const actLabel = currentAct === 1 ? '1️⃣' : '2️⃣';
                         countdownElement.textContent = timeRemaining.toFixed(1) + 's';
                     }
                     
@@ -6949,7 +7817,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     const progress = ((65.0 - timeRemaining) / 65.0) * 100;
                     progressBar.style.width = progress + '%';
                     progressHandle.style.left = progress + '%';
-                    timeDisplay.textContent = timeRemaining.toFixed(1) + 's / 55.0s';
+                    const actLabel = 'Ciclo 2';
+                    timeDisplay.textContent = timeRemaining.toFixed(1) + 's / 65.0s [' + actLabel + ']';
                 }
             }
             
@@ -6989,8 +7858,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                         planetCroceRossa.style.animation = '';
                     }
                     
+                    // Reset bandiere Europa
+                    stopFlagSequence();
+                    
                     // Reset timer e flags
-                    timeRemaining = 65.0;
+                    timeRemaining = 130.0; // 130 secondi totali
+                    currentAct = 1; // Reset atto
                     if (countdownInterval) clearInterval(countdownInterval);
                     
                     // Avvia la sequenza completa di animazione
@@ -7021,7 +7894,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 if (positionCheckInterval) clearInterval(positionCheckInterval);
                 
                 // Reset timer
-                timeRemaining = 65.0;
+                timeRemaining = 130.0; // 130 secondi totali
+                currentAct = 1; // Reset atto
                 isPaused = false;
                 
                 // Reset TUTTE le flags
@@ -7057,6 +7931,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     planetCroceRossa.style.animation = '';
                 }
                 
+                // Reset bandiere Europa
+                stopFlagSequence();
+                
                 // Nascondi lancetta e raggio rosso
                 hideLancetta();
                 hideRaggioRosso();
@@ -7087,11 +7964,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 const clickX = event.clientX - rect.left;
                 const percentage = clickX / rect.width;
                 
-                // Calcola nuovo tempo
-                timeRemaining = 65.0 - (percentage * 65.0);
-                timeRemaining = Math.max(0, Math.min(65.0, timeRemaining));
+                // Calcola nuovo tempo (130 secondi totali)
+                timeRemaining = 130.0 - (percentage * 130.0);
+                timeRemaining = Math.max(0, Math.min(130.0, timeRemaining));
                 
-                console.log('🎯 Seek: Spostato a ' + timeRemaining.toFixed(1) + 's');
+                // Aggiorna atto corrente in base al tempo
+                currentAct = timeRemaining > 65.0 ? 1 : 2;
+                
+                console.log('🎯 Seek: Spostato a ' + timeRemaining.toFixed(1) + 's (Atto ' + currentAct + ')');
                 updateProgressBar();
             }
             
@@ -7222,7 +8102,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                             faseRientro = false;
                             depressionStarted = false; // Reset flag DEPRESSION
                             resetDepressionEffect(); // Nascondi lettere DEPRESSION
-                            timeRemaining = 65.0;
+                            timeRemaining = 130.0; // 130 secondi totali
+                            currentAct = 1;
                             
                             // ============================================
                             // 3 STEP LOGOUT - Reset automatico a FINE CICLO
@@ -7728,39 +8609,112 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 }
             }
             
-            // ============================================
-            // TYPEWRITER EFFECT - Scritta macchina da scrivere Olivetti
-            // ============================================
-            function startTypewriter() {
-                const text = "Every SCAM is serious psychological violence!";
-                const typewriterText = document.getElementById('typewriter-text');
-                const cursor = document.getElementById('typewriter-cursor');
-                if (!typewriterText) return;
+            // Sequenza principale animazione - Gestisce entrambi gli scenari
+            // SCENARIO DRAMMATICO: Solo pianeti, no bandiere
+            // SCENARIO BANDIERE: Shield in testa, You$ segue, scia bandiere
+            function startAnimationSequence() {
+                animationRunning = true;
+                animationPhase = 'running';
+                actStartTime = performance.now();
                 
-                typewriterText.textContent = '';
-                let charIndex = 0;
+                // Nascondi header durante animazione (con protezione)
+                try {
+                    hideNavigationHeader();
+                } catch(e) {
+                    console.error('hideNavigationHeader error:', e);
+                }
                 
-                const typeInterval = setInterval(() => {
-                    if (charIndex < text.length) {
-                        typewriterText.textContent += text[charIndex];
-                        charIndex++;
-                    } else {
-                        clearInterval(typeInterval);
-                        // Nascondi cursore dopo 2 secondi
-                        setTimeout(() => {
-                            if (cursor) cursor.style.display = 'none';
-                        }, 2000);
+                // Attiva pulsazione pulsante scenario
+                updateScenarioButtonState();
+                
+                // ============================================
+                // SCEGLI SCENARIO IN BASE A currentScenario
+                // ============================================
+                if (currentScenario === 'drammatico') {
+                    console.log('🚀 SCENARIO DRAMMATICO: Solo pianeti, NO bandiere');
+                    currentAct = 1;
+                    
+                    // NASCONDI orbita bandiere nello scenario drammatico
+                    const flagsOrbitTrack = document.getElementById('eu-flags-orbit-track');
+                    if (flagsOrbitTrack) {
+                        flagsOrbitTrack.style.opacity = '0.2';
+                        flagsOrbitTrack.classList.remove('active');
                     }
-                }, 500); // 2 caratteri al secondo = 500ms per carattere
+                    const flagsOrbit = document.getElementById('eu-flags-orbit');
+                    if (flagsOrbit) {
+                        flagsOrbit.innerHTML = ''; // Rimuovi tutte le bandiere
+                    }
+                    
+                    console.log('🎬 Avvio ATTO 1 - Scenario Drammatico');
+                    startCountdown();
+                    startAct1();
+                    
+                } else {
+                    console.log('🚀 SCENARIO BANDIERE: Shield + You$ + Scia Bandiere');
+                    currentAct = 2;
+                    
+                    // MOSTRA orbita bandiere
+                    const flagsOrbitTrack = document.getElementById('eu-flags-orbit-track');
+                    if (flagsOrbitTrack) {
+                        flagsOrbitTrack.style.opacity = '1';
+                        flagsOrbitTrack.classList.add('active');
+                    }
+                    
+                    console.log('🎬 Avvio ATTO 2 - Scenario Bandiere e Authority');
+                    startCountdown();
+                    startAct2();
+                }
+                
+                // DOPO 65 SECONDI → RIAVVIA CICLO (loop infinito)
+                animationLoopTimeout = setTimeout(() => {
+                    if (animationRunning) {
+                        console.log('🔄 LOOP: Riavvio scenario');
+                        resetAct1Elements(); // Reset per ripartire
+                        startAnimationSequence(); // Riavvia
+                    }
+                }, ACT1_DURATION);
             }
             
-            // Sequenza principale animazione
-            function startAnimationSequence() {
-                animationPhase = 'running';
-                startCountdown();
+            // ============================================
+            // ATTO 1 - SCENARIO DRAMMATICO (0-65s)
+            // Furto capitali, banche, ambulanza
+            // ============================================
+            function startAct1() {
+                console.log('🎬 ATTO 1: Scenario drammatico - FURTO');
+                console.log('📍 planetCapitale:', planetCapitale);
+                console.log('📍 planetScudo:', planetScudo);
                 
-                // Avvia typewriter all'inizio del ciclo
-                startTypewriter();
+                // RESET FLAG AMBULANZA per nuovo ciclo
+                ambulanzaActivated = false;
+                ambulanzaPartita = false;
+                youHypnotized = false;
+                
+                // RESET ASPETTO YOU$ - Deve partire con aspetto normale (deposito pieno)
+                const hypnotizedEmoji = document.getElementById('capitale-hypnotized');
+                const capitaleLabel = document.getElementById('capitale-label');
+                if (hypnotizedEmoji) hypnotizedEmoji.style.display = 'none';
+                if (planetCapitale) {
+                    planetCapitale.style.backgroundImage = "url('logo_galaxy_yous.svg')";
+                    planetCapitale.style.background = 'radial-gradient(circle at 30% 30%, #1e293b, #0f172a, #020617)';
+                    planetCapitale.style.backgroundImage = "url('logo_galaxy_yous.svg')";
+                    planetCapitale.style.backgroundSize = 'contain';
+                    planetCapitale.style.backgroundPosition = 'center';
+                    planetCapitale.style.backgroundRepeat = 'no-repeat';
+                }
+                if (capitaleLabel) capitaleLabel.textContent = '💰 Capitale $';
+                console.log('💰 YOU$ RESET: Aspetto normale (deposito pieno)');
+                
+                // RESET AMBULANZA - Torna a Croce Rossa e posizione iniziale
+                if (planetCroceRossa) {
+                    const croceIcon = planetCroceRossa.querySelector('.croce-rossa-icon');
+                    const ambulanzaIcon = planetCroceRossa.querySelector('.ambulanza-icon');
+                    if (croceIcon) croceIcon.style.display = 'block';
+                    if (ambulanzaIcon) ambulanzaIcon.style.display = 'none';
+                    planetCroceRossa.classList.remove('animating', 'planet-ambulanza');
+                    planetCroceRossa.style.animation = 'none';
+                    planetCroceRossa.style.offsetDistance = '78%';
+                    planetCroceRossa.offsetHeight; // Force reflow
+                }
                 
                 // Reset dollari rubati
                 stolenDollarCount = 0;
@@ -7772,107 +8726,701 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     }
                 }
                 
-                // 1. Dopo 1 secondo: parte Pianeta $ (Capitale) E AMBULANZA (invisibile)
+                // Reset posizione iniziale pianeti PRIMA di animare
+                if (planetCapitale) {
+                    planetCapitale.classList.remove('animating');
+                    planetCapitale.style.animation = 'none';
+                    planetCapitale.style.offsetDistance = '5%';
+                    planetCapitale.offsetHeight; // Force reflow
+                }
+                if (planetScudo) {
+                    planetScudo.classList.remove('animating');
+                    planetScudo.style.animation = 'none';
+                    planetScudo.style.offsetDistance = '0%';
+                    planetScudo.offsetHeight; // Force reflow
+                }
+                
+                // 1. Dopo 1 secondo: parte Pianeta $ (Capitale) - IN PRIMA POSIZIONE
                 setTimeout(() => {
                     if (planetCapitale) {
+                        planetCapitale.style.animation = ''; // Riabilita animazione CSS
                         planetCapitale.classList.add('animating');
-                    }
-                    // AMBULANZA parte INSIEME a You$ ma è INVISIBILE
-                    if (planetCroceRossa) {
-                        planetCroceRossa.classList.add('animating');
-                        planetCroceRossa.classList.remove('visible'); // Assicura invisibilità
-                        // Mostra icona ambulanza (non croce rossa)
-                        const croceIcon = planetCroceRossa.querySelector('.croce-rossa-icon');
-                        const ambulanzaIcon = planetCroceRossa.querySelector('.ambulanza-icon');
-                        if (croceIcon) croceIcon.style.display = 'none';
-                        if (ambulanzaIcon) ambulanzaIcon.style.display = 'inline-block';
-                        console.log('🚑 Ambulanza parte INVISIBILE insieme a You$');
+                        console.log('💰 Atto 1: Capitale $ parte (posizione 1)');
                     }
                 }, DELAY_CAPITALE);
                 
-                // 2. Dopo 3 secondi: parte Scudo (2 sec dopo Capitale)
+                // 2. Dopo 3 secondi: parte Scudo (IN SECONDA POSIZIONE - troppo tardi!)
                 setTimeout(() => {
                     if (planetScudo) {
+                        planetScudo.style.animation = ''; // Riabilita animazione CSS
                         planetScudo.classList.add('animating');
+                        console.log('🛡️ Atto 1: Scudo parte (posizione 2 - RITARDO)');
                     }
                 }, DELAY_SCUDO);
                 
-                // 3. Dopo 20 secondi: compare Banca Rotta (dopo le icone di dolore, vicino allo SCAM)
+                // 3. Dopo 20 secondi: compare Banca Rotta
                 setTimeout(() => {
                     if (planetVault) {
                         planetVault.classList.add('animating');
                     }
                 }, DELAY_VAULT);
                 
-                // ============================================
-                // AMBULANZA DIVENTA VISIBILE a 35s (timer mostra ~20s)
-                // ============================================
+                // DOLLARI VOLANTI - Furti durante Atto 1
                 setTimeout(() => {
-                    showAmbulanza();
-                }, 35000); // 35 secondi = timer mostra 20s
-                
-                // AMBULANZA SCOMPARE dopo DEPRESSION (a ~50s)
-                setTimeout(() => {
-                    hideAmbulanza();
-                }, 50000); // 50 secondi = dopo aver passato DEPRESSION
-                
-                // ============================================
-                // DOLLARI VOLANTI DURANTE LE PAUSE - dalle BANCHE
-                // Nuovo timing sincronizzato con keyframes:
-                // Pausa 1: 16%-19% di 55s = 8.8s-10.45s → lanciamo a 9s
-                // Pausa 2: 30%-33% di 55s = 16.5s-18.15s → lanciamo a 17s
-                // Pausa 3: rettilineo inferiore 55% = 30s → lanciamo a 30s
-                // ============================================
-                setTimeout(() => {
-                    console.log('💰 PAUSA 1: Dollari escono dalla banca superiore');
-                    flyDollarsToScam(1);
-                }, 9000); // 9 secondi = durante pausa 1
+                    if (currentAct === 1) {
+                        console.log('💰 PAUSA 1: Dollari escono dalla banca superiore');
+                        flyDollarsToScam(1);
+                    }
+                }, 9000);
                 
                 setTimeout(() => {
-                    console.log('💰 PAUSA 2: Dollari escono dalla banca inferiore');
-                    flyDollarsToScam(2);
-                }, 17000); // 17 secondi = durante pausa 2
-                
-                // Schema truffa terminato a ~30s - NO terza ondata
-                // La terza ondata è stata rimossa perché lo schema è già completo
+                    if (currentAct === 1) {
+                        console.log('💰 PAUSA 2: Dollari escono dalla banca inferiore');
+                        flyDollarsToScam(2);
+                    }
+                }, 17000);
                 
                 // ============================================
-                // PAUSA 3 SECONDI + FRECCIA LAMPEGGIANTE
+                // PAUSA 3 SECONDI + FRECCIA LAMPEGGIANTE (Solo Atto 1)
                 // Quando You$ arriva vicino al link Authority (curva sinistra ~35s)
                 // ============================================
                 setTimeout(() => {
-                    console.log('➡️ Mostra freccia indicativa verso Authority');
-                    const arrowIndicator = document.getElementById('arrow-indicator');
-                    if (arrowIndicator) {
-                        arrowIndicator.style.display = 'flex';
-                    }
-                    // Nascondi dopo 3 secondi
-                    setTimeout(() => {
+                    if (currentAct === 1) {
+                        console.log('➡️ Mostra freccia indicativa verso Authority');
+                        const arrowIndicator = document.getElementById('arrow-indicator');
                         if (arrowIndicator) {
-                            arrowIndicator.style.display = 'none';
+                            arrowIndicator.style.display = 'flex';
                         }
-                    }, 3000);
-                }, 35000); // 35 secondi = curva sinistra, vicino ai link Authority
+                        setTimeout(() => {
+                            if (arrowIndicator) {
+                                arrowIndicator.style.display = 'none';
+                            }
+                        }, 3000);
+                    }
+                }, 35000);
                 
-                // 4. Avvia controllo posizione per attivare Ambulanza
-                // L'ambulanza parte quando Capitale $ raggiunge la curva destra (X>1000, Y>450)
-                positionCheckInterval = setInterval(checkPositionForAmbulanza, 50);
-                
-                // NOTA: La lancetta gialla è ora gestita dal countdown (54s → 45s)
-                // per garantire sincronizzazione con tutte le fasi colore
-                
-                // 4. Popup alla FINE del percorso (lezione completata)
-                // DISATTIVATO PER TESTING
-                // setTimeout(showPopup, POPUP_TIME);
+                // Avvia controllo posizione per attivare Ambulanza (Solo Atto 1)
+                positionCheckInterval = setInterval(() => {
+                    if (currentAct === 1) {
+                        checkPositionForAmbulanza();
+                    }
+                }, 50);
             }
             
-            // Avvio al caricamento
+            // ============================================
+            // ATTO 2 - SCENARIO PROTETTO (65-130s)
+            // Scudo in PRIMA posizione, You$ segue, Bandiere Authority
+            // ============================================
+            function startAct2() {
+                console.log('🎬 ATTO 2: Scenario PROTETTO - SCUDO IN TESTA');
+                
+                // Nascondi elementi Atto 1
+                hideLancetta();
+                hideRaggioRosso();
+                
+                // Mostra raggio verde (protezione attiva)
+                showRaggioVerde();
+                
+                // ATTIVA ORBITA BANDIERE ESTERNA
+                const flagsOrbitTrack = document.getElementById('eu-flags-orbit-track');
+                if (flagsOrbitTrack) {
+                    flagsOrbitTrack.classList.add('active');
+                    console.log('🌐 Atto 2: Orbita bandiere ATTIVA');
+                }
+                
+                // CAMBIO ICONA SOLE: da Parlamento EU a NFT Shield
+                const sunPupil = document.querySelector('#sun > div[aria-hidden=\"true\"]');
+                if (sunPupil) {
+                    sunPupil.style.backgroundImage = "url('logo_shield_MS-3000.svg')";
+                    sunPupil.style.backgroundColor = "rgba(29, 78, 216, 0.95)"; // Blu scudo
+                    console.log('🛡️ Atto 2: Sole → NFT Shield');
+                }
+                
+                // Cambia testo PETITIONS in NFT PROTECTED
+                const petitionsText = document.querySelector('textPath[href=\"#petitionsArc\"]');
+                const numberText = document.querySelector('textPath[href=\"#numberArc\"]');
+                if (petitionsText) petitionsText.textContent = 'NFT PROTECTED';
+                if (numberText) numberText.textContent = '© 2026';
+                
+                // 1. Dopo 1 secondo: parte SCUDO - IN PRIMA POSIZIONE!
+                setTimeout(() => {
+                    if (planetScudo) {
+                        planetScudo.classList.add('animating');
+                        console.log('🛡️ Atto 2: SCUDO parte (posizione 1 - COMANDO)');
+                    } else {
+                        console.error('❌ planetScudo non trovato!');
+                    }
+                }, ACT2_DELAY_SCUDO);
+                
+                // 2. Dopo 3 secondi: parte Capitale $ - IN SECONDA POSIZIONE (protetto)
+                setTimeout(() => {
+                    if (planetCapitale) {
+                        planetCapitale.classList.add('animating');
+                        console.log('💰 Atto 2: Capitale $ parte (posizione 2 - PROTETTO)');
+                    }
+                }, ACT2_DELAY_CAPITALE);
+                
+                // 3. BANDIERE AUTHORITY - Iniziano 5 secondi dopo inizio Atto 2
+                setTimeout(() => {
+                    console.log('🏳️ Atto 2: Avvio sequenza BANDIERE + AUTHORITY');
+                    startFlagSequenceAct2();
+                }, ACT2_FLAGS_START);
+            }
+            
+            // Reset elementi Atto 1 per transizione ad Atto 2
+            function resetAct1Elements() {
+                console.log('🔄 Reset elementi Atto 1');
+                
+                // Ferma controllo ambulanza
+                if (positionCheckInterval) {
+                    clearInterval(positionCheckInterval);
+                }
+                
+                // Reset animazioni pianeti
+                if (planetCapitale) {
+                    planetCapitale.classList.remove('animating');
+                    planetCapitale.style.animation = 'none';
+                    planetCapitale.offsetHeight;
+                    planetCapitale.style.animation = '';
+                }
+                if (planetScudo) {
+                    planetScudo.classList.remove('animating');
+                    planetScudo.style.animation = 'none';
+                    planetScudo.offsetHeight;
+                    planetScudo.style.animation = '';
+                }
+                if (planetCroceRossa) {
+                    planetCroceRossa.classList.remove('animating', 'planet-ambulanza');
+                }
+                if (planetVault) {
+                    planetVault.classList.remove('animating');
+                }
+                
+                // Nascondi dollari rubati su SCAM
+                for (let i = 1; i <= 9; i++) {
+                    const stolenDollar = document.getElementById('scam-dollar-' + i);
+                    if (stolenDollar) {
+                        stolenDollar.style.opacity = '0';
+                    }
+                }
+                
+                // Nascondi emoji stupore e pacman
+                for (let i = 1; i <= 3; i++) {
+                    const stupore = document.getElementById('stupore-' + i);
+                    const pacman = document.getElementById('pacman-' + i);
+                    if (stupore) stupore.style.opacity = '0';
+                    if (pacman) pacman.style.opacity = '0';
+                }
+                
+                // Reset DEPRESSION
+                resetDepressionEffect();
+                
+                // Nascondi lancetta e raggio rosso
+                hideLancetta();
+                hideRaggioRosso();
+                
+                // DISATTIVA ORBITA BANDIERE ESTERNA
+                const flagsOrbitTrack = document.getElementById('eu-flags-orbit-track');
+                if (flagsOrbitTrack) {
+                    flagsOrbitTrack.classList.remove('active');
+                }
+                // Pulisci bandiere
+                const flagsContainer = document.getElementById('eu-flags-orbit');
+                if (flagsContainer) {
+                    flagsContainer.innerHTML = '';
+                }
+                
+                // Ripristina icona Sole: da NFT Shield a Parlamento EU
+                const sunPupil = document.querySelector('#sun > div[aria-hidden="true"]');
+                if (sunPupil) {
+                    sunPupil.style.backgroundImage = "url('european_parliament.svg')";
+                    sunPupil.style.backgroundColor = "rgba(0,51,153,0.95)";
+                }
+                // Ripristina testi PETITIONS e 645/2025
+                const petitionsText = document.querySelector('textPath[href="#petitionsArc"]');
+                const numberText = document.querySelector('textPath[href="#numberArc"]');
+                if (petitionsText) petitionsText.textContent = 'PETITIONS';
+                if (numberText) numberText.textContent = '645/2025';
+            }
+            
+            // Nascondi header navigazione durante animazione
+            function hideNavigationHeader() {
+                const header = document.querySelector('header');
+                const langSelector = document.querySelector('.language-selector');
+                if (header) {
+                    header.style.transition = 'opacity 0.5s, transform 0.5s';
+                    header.style.opacity = '0';
+                    header.style.transform = 'translateY(-100%)';
+                }
+                if (langSelector) {
+                    langSelector.style.transition = 'opacity 0.5s';
+                    langSelector.style.opacity = '0.3';
+                }
+            }
+            
+            // Mostra header navigazione
+            function showNavigationHeader() {
+                const header = document.querySelector('header');
+                const langSelector = document.querySelector('.language-selector');
+                if (header) {
+                    header.style.opacity = '1';
+                    header.style.transform = 'translateY(0)';
+                }
+                if (langSelector) {
+                    langSelector.style.opacity = '1';
+                }
+            }
+            
+            // Sequenza bandiere ATTO 2 - con immagini reali
+            function startFlagSequenceAct2() {
+                if (flagAnimationActive || euFlagsData.length === 0) return;
+                
+                flagAnimationActive = true;
+                currentFlagIndex = 0;
+                
+                const container = document.getElementById('eu-flags-orbit');
+                if (!container) return;
+                
+                container.innerHTML = '';
+                
+                // Timestamp di inizio per calcolare posizione Scudo
+                const flagsStartTime = performance.now();
+                // Offset iniziale dello Scudo quando partono le bandiere
+                // Lo Scudo parte a -3% e dopo ACT2_FLAGS_START (5s) è circa al 4.7%
+                // Velocità Scudo: 100% / 65s = 1.538%/s
+                const scudoSpeedPerSecond = 100 / 65; // ~1.538% al secondo
+                
+                console.log('🏁 ATTO 2: Sequenza bandiere SCIA - ', euFlagsData.length, 'paesi');
+                console.log('🛡️ Velocità Scudo:', scudoSpeedPerSecond.toFixed(3), '%/s');
+                
+                flagSequenceInterval = setInterval(() => {
+                    if (currentFlagIndex >= euFlagsData.length || currentAct !== 2) {
+                        clearInterval(flagSequenceInterval);
+                        if (currentAct === 2) {
+                            showEuropaFlag();
+                        }
+                        return;
+                    }
+                    
+                    const flagData = euFlagsData[currentFlagIndex];
+                    
+                    // CALCOLO POSIZIONE SCIA: ogni bandiera appare DIETRO allo Scudo
+                    // Posizione = posizione Scudo - (indice + 1) * spaziatura
+                    // La prima bandiera (indice 0) appare subito dietro lo Scudo
+                    const elapsedSeconds = (performance.now() - flagsStartTime) / 1000;
+                    
+                    // Posizione attuale dello Scudo (partito 5s prima a -3%)
+                    // Al momento in cui partono le bandiere, lo Scudo è circa al 4.7%
+                    const scudoStartOffset = -3 + (ACT2_FLAGS_START / 1000) * scudoSpeedPerSecond;
+                    const currentScudoPosition = scudoStartOffset + elapsedSeconds * scudoSpeedPerSecond;
+                    
+                    // Posizione bandiera: DIETRO allo Scudo di (indice + 1) * spaziatura
+                    const flagPosition = currentScudoPosition - (currentFlagIndex + 1) * FLAG_SPACING_PERCENT;
+                    
+                    const position = computeFlagPositionFromPercent(flagPosition);
+                    
+                    // Crea elemento bandiera (immagine reale)
+                    const element = createRealFlagElement(flagData, position);
+                    container.appendChild(element);
+                    
+                    console.log(`🏳️ Bandiera ${currentFlagIndex + 1}: ${flagData.country_code} @ ${flagPosition.toFixed(1)}% (Scudo @ ${currentScudoPosition.toFixed(1)}%)`);
+                    
+                    // Dopo 0.5 secondi: mostra sigla Authority
+                    setTimeout(() => {
+                        const label = element.querySelector('.eu-flag-label');
+                        if (label) {
+                            label.style.opacity = '1';
+                            label.style.transform = 'translateY(0)';
+                        }
+                    }, FLAG_AUTHORITY_DELAY);
+                    
+                    currentFlagIndex++;
+                }, FLAG_INTERVAL);
+            }
+            
+            // Crea elemento bandiera con IMMAGINE REALE (non emoji)
+            function createRealFlagElement(flagData, position) {
+                const wrapper = document.createElement('div');
+                wrapper.className = 'eu-flag-marker';
+                wrapper.style.position = 'absolute';
+                wrapper.style.left = position.x + 'px';
+                wrapper.style.top = position.y + 'px';
+                wrapper.style.transform = 'translate(-50%, -50%) scale(1)';
+                wrapper.style.opacity = '0';
+                wrapper.style.transition = 'opacity 0.5s ease-in';
+                
+                // Bandiera come IMMAGINE REALE (usando flagcdn.com)
+                const flagImg = document.createElement('img');
+                flagImg.className = 'eu-flag-icon';
+                flagImg.src = `https://flagcdn.com/w80/${flagData.country_code.toLowerCase()}.png`;
+                flagImg.alt = flagData.country_name;
+                flagImg.style.width = '40px';
+                flagImg.style.height = '30px';
+                flagImg.style.objectFit = 'cover';
+                flagImg.style.borderRadius = '4px';
+                flagImg.style.boxShadow = '0 2px 8px rgba(0,0,0,0.5)';
+                flagImg.onerror = () => {
+                    // Fallback a emoji se immagine non disponibile
+                    flagImg.style.display = 'none';
+                    const emoji = document.createElement('span');
+                    emoji.textContent = flagData.flag;
+                    emoji.style.fontSize = '2rem';
+                    wrapper.insertBefore(emoji, wrapper.firstChild);
+                };
+                
+                // Label Authority (nascosta inizialmente, appare dopo 0.5s)
+                const label = document.createElement('div');
+                label.className = 'eu-flag-label';
+                label.style.opacity = '0';
+                label.style.transform = 'translateY(10px)';
+                label.style.transition = 'opacity 0.3s, transform 0.3s';
+                label.innerHTML = `<strong style="color: #00FF7F; font-size: 0.75rem;">${flagData.authority_abbreviation}</strong>`;
+                
+                wrapper.appendChild(flagImg);
+                wrapper.appendChild(label);
+                
+                // Fade-in bandiera
+                requestAnimationFrame(() => {
+                    wrapper.style.opacity = '1';
+                    wrapper.classList.add('visible');
+                });
+                
+                console.log(`🏳️ ${flagData.country_code} → ${flagData.authority_abbreviation}`);
+                
+                return wrapper;
+            }
+            
+            // Avvio al caricamento - SOLO inizializzazione, non autostart
             window.addEventListener('load', () => {
-                setTimeout(startAnimationSequence, 500);
+                console.log('🎬 Pagina caricata - In attesa di PLAY');
+                // Carica dati bandiere in background
+                loadEuropeanFlags();
             });
+            
+            // Funzione chiamata dal pulsante PLAY - ESPOSTA GLOBALMENTE
+            window.startPlayAnimation = function() {
+                const playBtn = document.getElementById('play-btn');
+                if (playBtn) {
+                    playBtn.textContent = '⏸️ PLAYING...';
+                    playBtn.style.background = 'linear-gradient(135deg, #fbbf24, #f59e0b)';
+                    playBtn.disabled = true;
+                }
+                console.log('▶️ PLAY cliccato - Avvio animazione');
+                
+                // Attiva pulsazione sul pulsante dello scenario corrente
+                updateScenarioButtonState();
+                
+                setTimeout(startAnimationSequence, 300);
+            };
+            
+            // ============================================
+            // VARIABILE GLOBALE PER SCENARIO CORRENTE
+            // ============================================
+            let currentScenario = 'drammatico'; // 'drammatico' o 'bandiere'
+            let animationRunning = false;
+            let animationLoopTimeout = null;
+            
+            // ============================================
+            // FUNZIONE STOP - Ferma tutto e resetta
+            // ============================================
+            window.stopAnimation = function() {
+                console.log('⏹️ STOP cliccato - Reset animazione');
+                animationRunning = false;
+                animationPhase = 'stopped';
+                
+                // Ferma timeout loop
+                if (animationLoopTimeout) {
+                    clearTimeout(animationLoopTimeout);
+                    animationLoopTimeout = null;
+                }
+                
+                // Ferma intervalli
+                if (positionCheckInterval) {
+                    clearInterval(positionCheckInterval);
+                }
+                
+                // Reset elementi Atto 1
+                resetAct1Elements();
+                
+                // Nascondi bandiere
+                const flagsOrbit = document.getElementById('eu-flags-orbit');
+                if (flagsOrbit) {
+                    flagsOrbit.innerHTML = '';
+                }
+                const flagsOrbitTrack = document.getElementById('eu-flags-orbit-track');
+                if (flagsOrbitTrack) {
+                    flagsOrbitTrack.classList.remove('active');
+                }
+                
+                // Reset pianeti alla posizione iniziale
+                if (planetCapitale) {
+                    planetCapitale.classList.remove('animating');
+                    planetCapitale.style.animation = 'none';
+                    planetCapitale.style.transform = '';
+                    planetCapitale.style.offsetDistance = '5%'; // Posizione iniziale
+                    planetCapitale.offsetHeight; // Force reflow
+                }
+                if (planetScudo) {
+                    planetScudo.classList.remove('animating');
+                    planetScudo.style.animation = 'none';
+                    planetScudo.style.transform = '';
+                    planetScudo.style.offsetDistance = '0%'; // Posizione iniziale
+                    planetScudo.offsetHeight; // Force reflow
+                }
+                if (planetCroceRossa) {
+                    planetCroceRossa.classList.remove('animating', 'planet-ambulanza');
+                    planetCroceRossa.style.animation = 'none';
+                    planetCroceRossa.style.transform = '';
+                    planetCroceRossa.style.offsetDistance = '78%'; // Posizione iniziale area sosta
+                    planetCroceRossa.offsetHeight; // Force reflow
+                }
+                
+                // Reset pulsante PLAY
+                const playBtn = document.getElementById('play-btn');
+                if (playBtn) {
+                    playBtn.textContent = '▶️ PLAY';
+                    playBtn.style.background = 'linear-gradient(135deg, #00FF7F, #00CED1)';
+                    playBtn.disabled = false;
+                }
+                
+                // Reset progress bar
+                const progressBar = document.getElementById('progress-bar');
+                const progressHandle = document.getElementById('progress-handle');
+                if (progressBar) progressBar.style.width = '0%';
+                if (progressHandle) progressHandle.style.left = '0%';
+                
+                // Reset time display
+                const timeDisplay = document.getElementById('time-display');
+                if (timeDisplay) timeDisplay.textContent = '0.0s / 65.0s [Pronto]';
+                
+                // Rimuovi pulsazione dai pulsanti scenario
+                const btnDrammatico = document.getElementById('btn-scenario-drammatico');
+                const btnBandiere = document.getElementById('btn-scenario-bandiere');
+                if (btnDrammatico) btnDrammatico.classList.remove('scenario-btn-active');
+                if (btnBandiere) btnBandiere.classList.remove('scenario-btn-active');
+                
+                console.log('✅ Animazione fermata e resettata');
+            };
+            
+            // ============================================
+            // FUNZIONE SWITCH SCENARIO
+            // ============================================
+            window.switchToScenario = function(scenario) {
+                console.log('🔄 Switch a scenario:', scenario);
+                currentScenario = scenario;
+                
+                // Ferma animazione corrente
+                stopAnimation();
+                
+                // Aggiorna label scenario
+                updateScenarioLabel();
+                
+                // Aggiorna pulsanti
+                updateScenarioButtonState();
+                
+                // Se scenario bandiere, nascondi elementi drammatici
+                if (scenario === 'bandiere') {
+                    // Mostra orbita bandiere
+                    const flagsOrbitTrack = document.getElementById('eu-flags-orbit-track');
+                    if (flagsOrbitTrack) {
+                        flagsOrbitTrack.style.opacity = '1';
+                    }
+                } else {
+                    // Scenario drammatico: nascondi orbita bandiere
+                    const flagsOrbitTrack = document.getElementById('eu-flags-orbit-track');
+                    if (flagsOrbitTrack) {
+                        flagsOrbitTrack.style.opacity = '0.3';
+                    }
+                }
+            };
+            
+            function updateScenarioLabel() {
+                const label = document.getElementById('current-scenario-label');
+                if (label) {
+                    if (currentScenario === 'drammatico') {
+                        label.innerHTML = '⚠️ Drammatico';
+                        label.style.color = '#F87171';
+                        label.style.background = 'rgba(248,113,113,0.2)';
+                        label.style.borderColor = 'rgba(248,113,113,0.4)';
+                    } else {
+                        label.innerHTML = '🏳️ Bandiere';
+                        label.style.color = '#00BFFF';
+                        label.style.background = 'rgba(0,191,255,0.2)';
+                        label.style.borderColor = 'rgba(0,191,255,0.4)';
+                    }
+                }
+            }
+            
+            function updateScenarioButtonState() {
+                const btnDrammatico = document.getElementById('btn-scenario-drammatico');
+                const btnBandiere = document.getElementById('btn-scenario-bandiere');
+                
+                if (currentScenario === 'drammatico') {
+                    if (btnDrammatico) {
+                        btnDrammatico.classList.add('scenario-btn-active');
+                        btnDrammatico.style.background = 'rgba(248,113,113,0.4)';
+                    }
+                    if (btnBandiere) {
+                        btnBandiere.classList.remove('scenario-btn-active');
+                        btnBandiere.style.background = 'rgba(0,191,255,0.2)';
+                    }
+                } else {
+                    if (btnBandiere) {
+                        btnBandiere.classList.add('scenario-btn-active');
+                        btnBandiere.style.background = 'rgba(0,191,255,0.4)';
+                    }
+                    if (btnDrammatico) {
+                        btnDrammatico.classList.remove('scenario-btn-active');
+                        btnDrammatico.style.background = 'rgba(248,113,113,0.2)';
+                    }
+                }
+            }
             
             // Esponi funzione per popup
             window.closePopupAndStartTrain = closePopupAndStartTrain;
+            
+            // === PUNTI CONSUMERS RIMBALZANTI ===
+            (function createBouncingConsumerDots() {
+                const orbitContainer = document.querySelector('.orbit-inner');
+                if (!orbitContainer) return;
+                
+                const numDots = 50;
+                const dots = [];
+                
+                // Dimensioni dell'ippodromo verde
+                const containerWidth = 760;
+                const containerHeight = 160;
+                const borderRadius = 80;
+                const padding = 15; // Margine dai bordi
+                
+                // Crea container per i punti
+                const dotsContainer = document.createElement('div');
+                dotsContainer.style.cssText = 'position: absolute; top: 0; left: 0; width: 100%; height: 100%; overflow: hidden; border-radius: 80px; pointer-events: none;';
+                orbitContainer.appendChild(dotsContainer);
+                
+                // Crea i 25 punti
+                for (let i = 0; i < numDots; i++) {
+                    const dot = document.createElement('div');
+                    const size = 4 + Math.random() * 4; // Dimensione 4-8px
+                    
+                    dot.style.cssText = `
+                        position: absolute;
+                        width: ${size}px;
+                        height: ${size}px;
+                        background: radial-gradient(circle, #E6B3FF, #CC66FF);
+                        border-radius: 50%;
+                        box-shadow: 0 0 8px rgba(204, 102, 255, 0.9), 0 0 15px rgba(204, 102, 255, 0.5);
+                        pointer-events: none;
+                    `;
+                    
+                    dotsContainer.appendChild(dot);
+                    
+                    // Inizializza posizione e velocità random
+                    dots.push({
+                        element: dot,
+                        x: padding + Math.random() * (containerWidth - 2 * padding - size),
+                        y: padding + Math.random() * (containerHeight - 2 * padding - size),
+                        vx: (Math.random() - 0.5) * 2,
+                        vy: (Math.random() - 0.5) * 2,
+                        size: size
+                    });
+                }
+                
+                // Funzione per verificare se un punto è dentro l'ippodromo (forma capsula)
+                function isInsideHippodrome(x, y, size) {
+                    const cx = x + size / 2;
+                    const cy = y + size / 2;
+                    
+                    // Zona centrale rettangolare
+                    if (cx >= borderRadius && cx <= containerWidth - borderRadius) {
+                        return cy >= padding && cy <= containerHeight - padding;
+                    }
+                    
+                    // Semicerchio sinistro
+                    if (cx < borderRadius) {
+                        const dx = cx - borderRadius;
+                        const dy = cy - containerHeight / 2;
+                        return Math.sqrt(dx * dx + dy * dy) <= borderRadius - padding;
+                    }
+                    
+                    // Semicerchio destro
+                    if (cx > containerWidth - borderRadius) {
+                        const dx = cx - (containerWidth - borderRadius);
+                        const dy = cy - containerHeight / 2;
+                        return Math.sqrt(dx * dx + dy * dy) <= borderRadius - padding;
+                    }
+                    
+                    return true;
+                }
+                
+                // Animazione
+                function animate() {
+                    dots.forEach(dot => {
+                        // Aggiorna posizione
+                        let newX = dot.x + dot.vx;
+                        let newY = dot.y + dot.vy;
+                        
+                        // Rimbalzo sui bordi verticali (zona centrale)
+                        if (newY < padding || newY > containerHeight - padding - dot.size) {
+                            dot.vy *= -1;
+                            newY = dot.y + dot.vy;
+                        }
+                        
+                        // Rimbalzo sui bordi orizzontali
+                        if (newX < padding || newX > containerWidth - padding - dot.size) {
+                            dot.vx *= -1;
+                            newX = dot.x + dot.vx;
+                        }
+                        
+                        // Gestione semicerchi
+                        const cx = newX + dot.size / 2;
+                        const cy = newY + dot.size / 2;
+                        
+                        // Semicerchio sinistro
+                        if (cx < borderRadius) {
+                            const dx = cx - borderRadius;
+                            const dy = cy - containerHeight / 2;
+                            const dist = Math.sqrt(dx * dx + dy * dy);
+                            if (dist > borderRadius - padding - dot.size / 2) {
+                                // Rimbalzo radiale
+                                const nx = dx / dist;
+                                const ny = dy / dist;
+                                const dotProduct = dot.vx * nx + dot.vy * ny;
+                                dot.vx -= 2 * dotProduct * nx;
+                                dot.vy -= 2 * dotProduct * ny;
+                                newX = dot.x + dot.vx;
+                                newY = dot.y + dot.vy;
+                            }
+                        }
+                        
+                        // Semicerchio destro
+                        if (cx > containerWidth - borderRadius) {
+                            const dx = cx - (containerWidth - borderRadius);
+                            const dy = cy - containerHeight / 2;
+                            const dist = Math.sqrt(dx * dx + dy * dy);
+                            if (dist > borderRadius - padding - dot.size / 2) {
+                                // Rimbalzo radiale
+                                const nx = dx / dist;
+                                const ny = dy / dist;
+                                const dotProduct = dot.vx * nx + dot.vy * ny;
+                                dot.vx -= 2 * dotProduct * nx;
+                                dot.vy -= 2 * dotProduct * ny;
+                                newX = dot.x + dot.vx;
+                                newY = dot.y + dot.vy;
+                            }
+                        }
+                        
+                        dot.x = newX;
+                        dot.y = newY;
+                        dot.element.style.left = dot.x + 'px';
+                        dot.element.style.top = dot.y + 'px';
+                    });
+                    
+                    requestAnimationFrame(animate);
+                }
+                
+                animate();
+            })();
             </script>
         </body>
         </html>

@@ -1,0 +1,109 @@
+2️⃣ CSS DELLE ANIMAZIONI CURVE
+You$ – Atto 1 (0–65 s)
+Scudo + You$ – Atto 2 (65–130 s)
+
+#you {
+  offset-path: path("M 300 450 C 300 200, 1200 200, 1200 450 C 1200 700, 300 700, 300 450 Z");
+  animation: youMove 65s linear forwards, youMove2 65s linear 65s forwards;
+}
+
+@keyframes youMove {
+  from { offset-distance: 0%; }
+  to   { offset-distance: 100%; }
+}
+
+@keyframes youMove2 {
+  from { offset-distance: 0%; }
+  to   { offset-distance: 100%; }
+}
+
+Scudo. Atto 2
+
+
+#shield {
+  offset-path: path("M 300 450 C 300 200, 1200 200, 1200 450 C 1200 700, 300 700, 300 450 Z");
+  animation: shieldMove 65s linear 65s forwards;
+}
+
+@keyframes shieldMove {
+  from { offset-distance: 0%; }
+  to   { offset-distance: 100%; }
+}
+
+3️⃣ RAGGIO GIALLO DIMMEZZATO + RIMBALZO CURVO
+css
+#laser {
+  offset-path: path("M 1050 450 C 1100 400, 1150 350, 1300 200");
+  animation: laserBounce 10s ease-in-out 75s forwards;
+}
+
+@keyframes laserBounce {
+  0%   { offset-distance: 0%; opacity: 1; }
+  70%  { offset-distance: 70%; opacity: 1; }
+  100% { offset-distance: 100%; opacity: 0; }
+}
+4️⃣ AMBULANZA → SCAM → PRIGIONE (curve reali)
+css
+#ambulanza {
+  offset-path: path("M 300 700 C 600 650, 900 550, 1050 450");
+  animation: amb1 2.5s ease-in 115s forwards,
+             amb2 2.5s ease-out 117.5s forwards;
+}
+
+@keyframes amb1 {
+  from { offset-distance: 0%; }
+  to   { offset-distance: 100%; }
+}
+
+#ambulanza.phase2 {
+  offset-path: path("M 1050 450 C 1200 350, 1350 300, 1400 250");
+}
+
+@keyframes amb2 {
+  from { offset-distance: 0%; }
+  to   { offset-distance: 100%; }
+}
+5️⃣ PRIGIONE (fade‑in finale)
+css
+#prigione {
+  animation: prisonFade 3s ease-in 125s forwards;
+}
+
+@keyframes prisonFade {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+6️⃣ EVENTI SCENOGRAFICI (pulse, fade, ipnosi)
+IPNOSI (55–54 s)
+css
+#you.ipnos {
+  animation: pulse 1s infinite;
+}
+TRISTEZZA (37–65 s)
+css
+#you.triste {
+  fill: #1e3a8a;
+}
+FADE‑OUT TRUFFATORE
+css
+#scam.fade {
+  animation: fadeOut 3s ease-in 105s forwards;
+}
+🎯 COSA OTTIENI
+Con questo schema hai:
+
+due atti completi (0–130 s)
+
+movimenti curvi reali (Bezier)
+
+raggio dimezzato + rimbalzo curvo
+
+ambulanza che segue due curve distinte
+
+prigione che appare in fade‑in
+
+sincronizzazione perfetta con i tuoi time‑lapse
+
+effetti scenografici (pulse, fade, respinta, arresto)
+
+codice pronto da integrare nel banner

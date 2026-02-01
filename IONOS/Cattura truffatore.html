@@ -1,0 +1,221 @@
+Cattura truffatore
+Perfetto, Marcello.  
+Ora ti costruisco **la coreografia completa del movimento dell’ambulanza che porta il truffatore nel Pianeta‑Prigione**, in modo **non distruttivo**, perfettamente compatibile con il tuo motore di movimento e con la regia del **Secondo Atto**.
+
+Parliamo quindi di un **movimento aggiuntivo**, che:
+
+- non modifica l’ippodromo  
+- non altera il percorso degli altri oggetti  
+- si attiva **solo negli ultimi 5 secondi del Secondo Atto** (t = 60 → 65)  
+- segue una **semiretta geometrica** dal rettilineo inferiore → SCAM → Pianeta‑Prigione  
+- rappresenta la **cattura del truffatore** e la sua **estradizione cosmica**  
+- lascia il pianeta SCAM **vuoto**, come da tua regia  
+
+Ti consegno uno **scheletro tecnico completo**, pronto per essere integrato.
+
+---
+
+# 🎬 **REGIA DEL MOVIMENTO DELL’AMBULANZA (ATTO 2)**
+
+### 1. Punto di partenza  
+L’ambulanza parte dalla **sua posizione di sosta** sul rettilineo inferiore dell’ippodromo.  
+Questa posizione è già nota nel tuo debug monitor (`Amb: x,y`).
+
+### 2. Prima tappa: SCAM  
+L’ambulanza si dirige verso SCAM lungo una **semiretta**:
+
+\[
+\text{Amb} \rightarrow \text{SCAM}
+\]
+
+### 3. Seconda tappa: Pianeta‑Prigione  
+Dal centro di SCAM, l’ambulanza prosegue verso il **Pianeta‑Prigione**, posizionato sulla **stessa semiretta**, ma più distante.
+
+\[
+\text{SCAM} \rightarrow \text{PRISON}
+\]
+
+### 4. Arrivo  
+Quando l’ambulanza raggiunge il Pianeta‑Prigione:
+
+- compare l’icona **Anonimus dietro le sbarre verdi**  
+- SCAM rimane **vuoto**  
+- l’ambulanza si ferma  
+- il ciclo termina  
+
+---
+
+# 🧩 **SCHELETRO TECNICO DEL MOVIMENTO**
+
+Ti scrivo il codice in forma modulare, pronto per essere integrato nel tuo banner.
+
+---
+
+## **1. Funzione di interpolazione lineare (LERP)**
+
+Serve per muovere l’ambulanza lungo una semiretta senza toccare il motore orbitale.
+
+```javascript
+function lerp(a, b, t) {
+    return a + (b - a) * t;
+}
+
+function moveTowards(start, end, progress) {
+    return {
+        x: lerp(start.x, end.x, progress),
+        y: lerp(start.y, end.y, progress)
+    };
+}
+```
+
+---
+
+## **2. Movimento ambulanza → SCAM**
+
+```javascript
+function moveAmbulanceToScam(t) {
+    const ambStart = getAmbulanceStartPosition(); // posizione sul rettilineo inferiore
+    const scamPos = getScamPosition();
+
+    const progress = Math.min((t - 60) / 2.5, 1); // 2.5 secondi per arrivare a SCAM
+
+    const pos = moveTowards(ambStart, scamPos, progress);
+
+    ambulance.style.left = pos.x + "px";
+    ambulance.style.top = pos.y + "px";
+
+    if (progress >= 1) {
+        ambulance.dataset.phase = "at-scam";
+    }
+}
+```
+
+---
+
+## **3. Movimento SCAM → Pianeta‑Prigione**
+
+```javascript
+function moveAmbulanceToPrison(t) {
+    const scamPos = getScamPosition();
+    const prisonPos = getPrisonPlanetPosition();
+
+    const progress = Math.min((t - 62.5) / 2.5, 1); // altri 2.5 secondi
+
+    const pos = moveTowards(scamPos, prisonPos, progress);
+
+    ambulance.style.left = pos.x + "px";
+    ambulance.style.top = pos.y + "px";
+
+    if (progress >= 1) {
+        ambulance.dataset.phase = "at-prison";
+        showPrisoner();
+    }
+}
+```
+
+---
+
+## **4. Attivazione del movimento negli ultimi 5 secondi**
+
+```javascript
+function updateAmbulanceAct2(t) {
+
+    if (t < 60) {
+        // ambulanza ferma nella sua posizione di sosta
+        return;
+    }
+
+    if (t >= 60 && t < 62.5) {
+        moveAmbulanceToScam(t);
+        return;
+    }
+
+    if (t >= 62.5 && t <= 65) {
+        moveAmbulanceToPrison(t);
+        return;
+    }
+}
+```
+
+---
+
+## **5. Apparizione del Pianeta‑Prigione e del Truffatore catturato**
+
+```javascript
+function showPrisoner() {
+    prisonPlanet.style.display = "block";
+    anonimusIcon.style.display = "block";
+
+    // SCAM diventa vuoto
+    scam.el.classList.add("empty");
+}
+```
+
+---
+
+# 🏛️ **POSIZIONAMENTO DEL PIANETA‑PRIGIONE**
+
+Il Pianeta‑Prigione deve essere:
+
+- sulla **stessa semiretta** del rettilineo inferiore → SCAM  
+- più distante di SCAM rispetto all’ambulanza  
+- fuori dall’ippodromo  
+
+Formula:
+
+```javascript
+function getPrisonPlanetPosition() {
+    const scamPos = getScamPosition();
+    const ambStart = getAmbulanceStartPosition();
+
+    // vettore SCAM → ambulanza (invertito)
+    const dx = scamPos.x - ambStart.x;
+    const dy = scamPos.y - ambStart.y;
+
+    // normalizzazione
+    const dist = Math.sqrt(dx*dx + dy*dy);
+    const ux = dx / dist;
+    const uy = dy / dist;
+
+    // distanza pianeta prigione (es. 1.8x SCAM→Amb)
+    const prisonDist = dist * 1.8;
+
+    return {
+        x: scamPos.x + ux * prisonDist,
+        y: scamPos.y + uy * prisonDist
+    };
+}
+```
+
+---
+
+# 🎨 **EFFETTO SCENOGRAFICO**
+
+Durante il movimento:
+
+- l’ambulanza **non lampeggia** (non è un soccorso, è un arresto)  
+- il Pianeta‑Prigione appare con:
+  - **tre sbarre verdi verticali**
+  - **Anonimus** dietro le sbarre  
+- SCAM rimane **vuoto**, simbolo della truffa neutralizzata  
+- il WiFi verde continua a pulsare fino alla fine del ciclo  
+
+---
+
+# 🎯 **RISULTATO**
+
+Hai ora:
+
+- un movimento **perfettamente sincronizzato**  
+- una regia **coerente con il Secondo Atto**  
+- un effetto narrativo **fortissimo**:  
+  **la giustizia che cattura il truffatore e lo porta nel Pianeta‑Prigione**  
+- nessuna interferenza con il tuo motore orbitale  
+
+---
+
+Se vuoi, posso ora:
+
+- scrivere **il CSS** per l’animazione dell’ambulanza  
+- creare **le sbarre verdi animate** del Pianeta‑Prigione  
+- aggiungere **il fade‑out del truffatore da SCAM** mentre l’ambulanza si avvicina

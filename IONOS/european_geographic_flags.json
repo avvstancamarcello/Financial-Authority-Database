@@ -1,0 +1,452 @@
+[
+  {
+    "country_name": "Albania",
+    "country_code": "AL",
+    "flag": "🇦🇱",
+    "isEU": false,
+    "authority_name": "Bank of Albania",
+    "authority_abbreviation": "BoA",
+    "order": 1
+  },
+  {
+    "country_name": "Andorra",
+    "country_code": "AD",
+    "flag": "🇦🇩",
+    "isEU": false,
+    "authority_name": "Autoritat Financera Andorrana",
+    "authority_abbreviation": "AFA",
+    "order": 2
+  },
+  {
+    "country_name": "Armenia",
+    "country_code": "AM",
+    "flag": "🇦🇲",
+    "isEU": false,
+    "authority_name": "Central Bank of Armenia",
+    "authority_abbreviation": "CBA",
+    "order": 3
+  },
+  {
+    "country_name": "Austria",
+    "country_code": "AT",
+    "flag": "🇦🇹",
+    "isEU": true,
+    "authority_name": "Financial Market Authority",
+    "authority_abbreviation": "FMA",
+    "order": 4
+  },
+  {
+    "country_name": "Azerbaijan",
+    "country_code": "AZ",
+    "flag": "🇦🇿",
+    "isEU": false,
+    "authority_name": "Central Bank of the Republic of Azerbaijan",
+    "authority_abbreviation": "CBA",
+    "order": 5
+  },
+  {
+    "country_name": "Belarus",
+    "country_code": "BY",
+    "flag": "🇧🇾",
+    "isEU": false,
+    "authority_name": "National Bank of the Republic of Belarus",
+    "authority_abbreviation": "NBRB",
+    "order": 6
+  },
+  {
+    "country_name": "Belgium",
+    "country_code": "BE",
+    "flag": "🇧🇪",
+    "isEU": true,
+    "authority_name": "Financial Services and Markets Authority",
+    "authority_abbreviation": "FSMA",
+    "order": 7
+  },
+  {
+    "country_name": "Bosnia and Herzegovina",
+    "country_code": "BA",
+    "flag": "🇧🇦",
+    "isEU": false,
+    "authority_name": "Central Bank of Bosnia and Herzegovina",
+    "authority_abbreviation": "CBBH",
+    "order": 8
+  },
+  {
+    "country_name": "Bulgaria",
+    "country_code": "BG",
+    "flag": "🇧🇬",
+    "isEU": true,
+    "authority_name": "Financial Supervision Commission",
+    "authority_abbreviation": "FSC",
+    "order": 9
+  },
+  {
+    "country_name": "Croatia",
+    "country_code": "HR",
+    "flag": "🇭🇷",
+    "isEU": true,
+    "authority_name": "Croatian Financial Services Supervisory Agency",
+    "authority_abbreviation": "HANFA",
+    "order": 10
+  },
+  {
+    "country_name": "Cyprus",
+    "country_code": "CY",
+    "flag": "🇨🇾",
+    "isEU": true,
+    "authority_name": "Cyprus Securities and Exchange Commission",
+    "authority_abbreviation": "CySEC",
+    "order": 11
+  },
+  {
+    "country_name": "Czech Republic",
+    "country_code": "CZ",
+    "flag": "🇨🇿",
+    "isEU": true,
+    "authority_name": "Czech National Bank",
+    "authority_abbreviation": "CNB",
+    "order": 12
+  },
+  {
+    "country_name": "Denmark",
+    "country_code": "DK",
+    "flag": "🇩🇰",
+    "isEU": true,
+    "authority_name": "Danish Financial Supervisory Authority",
+    "authority_abbreviation": "Finanstilsynet",
+    "order": 13
+  },
+  {
+    "country_name": "Estonia",
+    "country_code": "EE",
+    "flag": "🇪🇪",
+    "isEU": true,
+    "authority_name": "Finantsinspektsioon",
+    "authority_abbreviation": "FSA",
+    "order": 14
+  },
+  {
+    "country_name": "Finland",
+    "country_code": "FI",
+    "flag": "🇫🇮",
+    "isEU": true,
+    "authority_name": "Financial Supervisory Authority",
+    "authority_abbreviation": "FIN-FSA",
+    "order": 15
+  },
+  {
+    "country_name": "France",
+    "country_code": "FR",
+    "flag": "🇫🇷",
+    "isEU": true,
+    "authority_name": "Autorité des Marchés Financiers",
+    "authority_abbreviation": "AMF",
+    "order": 16
+  },
+  {
+    "country_name": "Georgia",
+    "country_code": "GE",
+    "flag": "🇬🇪",
+    "isEU": false,
+    "authority_name": "National Bank of Georgia",
+    "authority_abbreviation": "NBG",
+    "order": 17
+  },
+  {
+    "country_name": "Germany",
+    "country_code": "DE",
+    "flag": "🇩🇪",
+    "isEU": true,
+    "authority_name": "Bundesanstalt für Finanzdienstleistungsaufsicht",
+    "authority_abbreviation": "BaFin",
+    "order": 18
+  },
+  {
+    "country_name": "Greece",
+    "country_code": "GR",
+    "flag": "🇬🇷",
+    "isEU": true,
+    "authority_name": "Hellenic Capital Market Commission",
+    "authority_abbreviation": "HCMC",
+    "order": 19
+  },
+  {
+    "country_name": "Hungary",
+    "country_code": "HU",
+    "flag": "🇭🇺",
+    "isEU": true,
+    "authority_name": "Magyar Nemzeti Bank",
+    "authority_abbreviation": "MNB",
+    "order": 20
+  },
+  {
+    "country_name": "Iceland",
+    "country_code": "IS",
+    "flag": "🇮🇸",
+    "isEU": false,
+    "authority_name": "Central Bank of Iceland",
+    "authority_abbreviation": "CBI",
+    "order": 21
+  },
+  {
+    "country_name": "Ireland",
+    "country_code": "IE",
+    "flag": "🇮🇪",
+    "isEU": true,
+    "authority_name": "Central Bank of Ireland",
+    "authority_abbreviation": "CBI",
+    "order": 22
+  },
+  {
+    "country_name": "Italy",
+    "country_code": "IT",
+    "flag": "🇮🇹",
+    "isEU": true,
+    "authority_name": "Commissione Nazionale per le Società e la Borsa",
+    "authority_abbreviation": "CONSOB",
+    "order": 23
+  },
+  {
+    "country_name": "Kazakhstan",
+    "country_code": "KZ",
+    "flag": "🇰🇿",
+    "isEU": false,
+    "authority_name": "Agency for Regulation and Development of the Financial Market",
+    "authority_abbreviation": "ARDFM",
+    "order": 24
+  },
+  {
+    "country_name": "Kosovo",
+    "country_code": "XK",
+    "flag": "🇽🇰",
+    "isEU": false,
+    "authority_name": "Central Bank of the Republic of Kosovo",
+    "authority_abbreviation": "CBK",
+    "order": 25
+  },
+  {
+    "country_name": "Latvia",
+    "country_code": "LV",
+    "flag": "🇱🇻",
+    "isEU": true,
+    "authority_name": "Latvijas Banka",
+    "authority_abbreviation": "LB",
+    "order": 26
+  },
+  {
+    "country_name": "Liechtenstein",
+    "country_code": "LI",
+    "flag": "🇱🇮",
+    "isEU": false,
+    "authority_name": "Financial Market Authority Liechtenstein",
+    "authority_abbreviation": "FMA",
+    "order": 27
+  },
+  {
+    "country_name": "Lithuania",
+    "country_code": "LT",
+    "flag": "🇱🇹",
+    "isEU": true,
+    "authority_name": "Lietuvos bankas",
+    "authority_abbreviation": "LB",
+    "order": 28
+  },
+  {
+    "country_name": "Luxembourg",
+    "country_code": "LU",
+    "flag": "🇱🇺",
+    "isEU": true,
+    "authority_name": "Commission de Surveillance du Secteur Financier",
+    "authority_abbreviation": "CSSF",
+    "order": 29
+  },
+  {
+    "country_name": "Malta",
+    "country_code": "MT",
+    "flag": "🇲🇹",
+    "isEU": true,
+    "authority_name": "Malta Financial Services Authority",
+    "authority_abbreviation": "MFSA",
+    "order": 30
+  },
+  {
+    "country_name": "Moldova",
+    "country_code": "MD",
+    "flag": "🇲🇩",
+    "isEU": false,
+    "authority_name": "National Bank of Moldova",
+    "authority_abbreviation": "NBM",
+    "order": 31
+  },
+  {
+    "country_name": "Monaco",
+    "country_code": "MC",
+    "flag": "🇲🇨",
+    "isEU": false,
+    "authority_name": "Commission de Contrôle des Activités Financières",
+    "authority_abbreviation": "CCAF",
+    "order": 32
+  },
+  {
+    "country_name": "Montenegro",
+    "country_code": "ME",
+    "flag": "🇲🇪",
+    "isEU": false,
+    "authority_name": "Capital Market Authority",
+    "authority_abbreviation": "CMA",
+    "order": 33
+  },
+  {
+    "country_name": "Netherlands",
+    "country_code": "NL",
+    "flag": "🇳🇱",
+    "isEU": true,
+    "authority_name": "Authority for the Financial Markets",
+    "authority_abbreviation": "AFM",
+    "order": 34
+  },
+  {
+    "country_name": "North Macedonia",
+    "country_code": "MK",
+    "flag": "🇲🇰",
+    "isEU": false,
+    "authority_name": "Securities and Exchange Commission",
+    "authority_abbreviation": "SEC",
+    "order": 35
+  },
+  {
+    "country_name": "Norway",
+    "country_code": "NO",
+    "flag": "🇳🇴",
+    "isEU": false,
+    "authority_name": "Finanstilsynet",
+    "authority_abbreviation": "Finanstilsynet",
+    "order": 36
+  },
+  {
+    "country_name": "Poland",
+    "country_code": "PL",
+    "flag": "🇵🇱",
+    "isEU": true,
+    "authority_name": "Polish Financial Supervision Authority",
+    "authority_abbreviation": "KNF",
+    "order": 37
+  },
+  {
+    "country_name": "Portugal",
+    "country_code": "PT",
+    "flag": "🇵🇹",
+    "isEU": true,
+    "authority_name": "Comissão do Mercado de Valores Mobiliários",
+    "authority_abbreviation": "CMVM",
+    "order": 38
+  },
+  {
+    "country_name": "Romania",
+    "country_code": "RO",
+    "flag": "🇷🇴",
+    "isEU": true,
+    "authority_name": "Financial Supervisory Authority",
+    "authority_abbreviation": "ASF",
+    "order": 39
+  },
+  {
+    "country_name": "Russia",
+    "country_code": "RU",
+    "flag": "🇷🇺",
+    "isEU": false,
+    "authority_name": "Central Bank of the Russian Federation",
+    "authority_abbreviation": "CBR",
+    "order": 40
+  },
+  {
+    "country_name": "San Marino",
+    "country_code": "SM",
+    "flag": "🇸🇲",
+    "isEU": false,
+    "authority_name": "Banca Centrale della Repubblica di San Marino",
+    "authority_abbreviation": "BCSM",
+    "order": 41
+  },
+  {
+    "country_name": "Serbia",
+    "country_code": "RS",
+    "flag": "🇷🇸",
+    "isEU": false,
+    "authority_name": "Securities Commission",
+    "authority_abbreviation": "SEC",
+    "order": 42
+  },
+  {
+    "country_name": "Slovakia",
+    "country_code": "SK",
+    "flag": "🇸🇰",
+    "isEU": true,
+    "authority_name": "National Bank of Slovakia",
+    "authority_abbreviation": "NBS",
+    "order": 43
+  },
+  {
+    "country_name": "Slovenia",
+    "country_code": "SI",
+    "flag": "🇸🇮",
+    "isEU": true,
+    "authority_name": "Securities Market Agency",
+    "authority_abbreviation": "ATVP",
+    "order": 44
+  },
+  {
+    "country_name": "Spain",
+    "country_code": "ES",
+    "flag": "🇪🇸",
+    "isEU": true,
+    "authority_name": "Comisión Nacional del Mercado de Valores",
+    "authority_abbreviation": "CNMV",
+    "order": 45
+  },
+  {
+    "country_name": "Sweden",
+    "country_code": "SE",
+    "flag": "🇸🇪",
+    "isEU": true,
+    "authority_name": "Finansinspektionen",
+    "authority_abbreviation": "FI",
+    "order": 46
+  },
+  {
+    "country_name": "Switzerland",
+    "country_code": "CH",
+    "flag": "🇨🇭",
+    "isEU": false,
+    "authority_name": "Swiss Financial Market Supervisory Authority",
+    "authority_abbreviation": "FINMA",
+    "order": 47
+  },
+  {
+    "country_name": "Turkey",
+    "country_code": "TR",
+    "flag": "🇹🇷",
+    "isEU": false,
+    "authority_name": "Capital Markets Board of Turkey",
+    "authority_abbreviation": "CMB",
+    "order": 48
+  },
+  {
+    "country_name": "Ukraine",
+    "country_code": "UA",
+    "flag": "🇺🇦",
+    "isEU": false,
+    "authority_name": "National Securities and Stock Market Commission",
+    "authority_abbreviation": "NSSMC",
+    "order": 49
+  },
+  {
+    "country_name": "United Kingdom",
+    "country_code": "GB",
+    "flag": "🇬🇧",
+    "isEU": false,
+    "authority_name": "Financial Conduct Authority",
+    "authority_abbreviation": "FCA",
+    "order": 50
+  }
+]

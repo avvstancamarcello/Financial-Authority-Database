@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+    
+    <!-- ============================================= -->
+    <!-- HOMEPAGE MULTILINGUA CON DOMINI NAZIONALI    -->
+    <!-- Generata: 2026-01-26                         -->
+    <!-- ============================================= -->
+    
+    <!-- ITALIA - Homepage principale (x-default) -->
+    <url>
+        <loc>https://tutelatruffe.it/</loc>
+        <lastmod>2026-01-26</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>1.0</priority>
+        <!-- hreflang reciproci - TUTTI i domini devono dichiararsi a vicenda -->
+        <xhtml:link rel="alternate" hreflang="it" href="https://tutelatruffe.it/"/>
+        <xhtml:link rel="alternate" hreflang="de" href="https://tutelatruffe.de/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://tutelatruffe.fr/"/>
+        <xhtml:link rel="alternate" hreflang="pl" href="https://tutelatruffe.pl/"/>
+        <xhtml:link rel="alternate" hreflang="en-GB" href="https://tutelatruffe.co.uk/"/>
+        <xhtml:link rel="alternate" hreflang="ar-EG" href="https://tutelatruffe.eg/"/>
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://tutelatruffe.it/"/>
+    </url>
+    
+    <!-- GERMANIA - tutelatruffe.de -->
+    <url>
+        <loc>https://tutelatruffe.de/</loc>
+        <lastmod>2026-01-26</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>1.0</priority>
+        <xhtml:link rel="alternate" hreflang="it" href="https://tutelatruffe.it/"/>
+        <xhtml:link rel="alternate" hreflang="de" href="https://tutelatruffe.de/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://tutelatruffe.fr/"/>
+        <xhtml:link rel="alternate" hreflang="pl" href="https://tutelatruffe.pl/"/>
+        <xhtml:link rel="alternate" hreflang="en-GB" href="https://tutelatruffe.co.uk/"/>
+        <xhtml:link rel="alternate" hreflang="ar-EG" href="https://tutelatruffe.eg/"/>
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://tutelatruffe.it/"/>
+    </url>
+    
+    <!-- FRANCIA - tutelatruffe.fr -->
+    <url>
+        <loc>https://tutelatruffe.fr/</loc>
+        <lastmod>2026-01-26</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>1.0</priority>
+        <xhtml:link rel="alternate" hreflang="it" href="https://tutelatruffe.it/"/>
+        <xhtml:link rel="alternate" hreflang="de" href="https://tutelatruffe.de/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://tutelatruffe.fr/"/>
+        <xhtml:link rel="alternate" hreflang="pl" href="https://tutelatruffe.pl/"/>
+        <xhtml:link rel="alternate" hreflang="en-GB" href="https://tutelatruffe.co.uk/"/>
+        <xhtml:link rel="alternate" hreflang="ar-EG" href="https://tutelatruffe.eg/"/>
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://tutelatruffe.it/"/>
+    </url>
+    
+    <!-- POLONIA - tutelatruffe.pl -->
+    <url>
+        <loc>https://tutelatruffe.pl/</loc>
+        <lastmod>2026-01-26</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>1.0</priority>
+        <xhtml:link rel="alternate" hreflang="it" href="https://tutelatruffe.it/"/>
+        <xhtml:link rel="alternate" hreflang="de" href="https://tutelatruffe.de/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://tutelatruffe.fr/"/>
+        <xhtml:link rel="alternate" hreflang="pl" href="https://tutelatruffe.pl/"/>
+        <xhtml:link rel="alternate" hreflang="en-GB" href="https://tutelatruffe.co.uk/"/>
+        <xhtml:link rel="alternate" hreflang="ar-EG" href="https://tutelatruffe.eg/"/>
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://tutelatruffe.it/"/>
+    </url>
+    
+    <!-- UK - tutelatruffe.co.uk -->
+    <url>
+        <loc>https://tutelatruffe.co.uk/</loc>
+        <lastmod>2026-01-26</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>1.0</priority>
+        <xhtml:link rel="alternate" hreflang="it" href="https://tutelatruffe.it/"/>
+        <xhtml:link rel="alternate" hreflang="de" href="https://tutelatruffe.de/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://tutelatruffe.fr/"/>
+        <xhtml:link rel="alternate" hreflang="pl" href="https://tutelatruffe.pl/"/>
+        <xhtml:link rel="alternate" hreflang="en-GB" href="https://tutelatruffe.co.uk/"/>
+        <xhtml:link rel="alternate" hreflang="ar-EG" href="https://tutelatruffe.eg/"/>
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://tutelatruffe.it/"/>
+    </url>
+    
+    <!-- EGITTO - tutelatruffe.eg -->
+    <url>
+        <loc>https://tutelatruffe.eg/</loc>
+        <lastmod>2026-01-26</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>1.0</priority>
+        <xhtml:link rel="alternate" hreflang="it" href="https://tutelatruffe.it/"/>
+        <xhtml:link rel="alternate" hreflang="de" href="https://tutelatruffe.de/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://tutelatruffe.fr/"/>
+        <xhtml:link rel="alternate" hreflang="pl" href="https://tutelatruffe.pl/"/>
+        <xhtml:link rel="alternate" hreflang="en-GB" href="https://tutelatruffe.co.uk/"/>
+        <xhtml:link rel="alternate" hreflang="ar-EG" href="https://tutelatruffe.eg/"/>
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://tutelatruffe.it/"/>
+    </url>
+
+    <!-- ============================================= -->
+    <!-- PAGINE SECONDARIE COMUNI                     -->
+    <!-- ============================================= -->
+    
+    <!-- Referenze Istituzionali -->
+    <url>
+        <loc>https://tutelatruffe.it/referenze.html</loc>
+        <lastmod>2026-01-26</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.9</priority>
+    </url>
+
+    <!-- Curriculum Avv. Stanca -->
+    <url>
+        <loc>https://tutelatruffe.it/curriculum.html</loc>
+        <lastmod>2026-01-26</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    
+    <!-- Privacy Policy -->
+    <url>
+        <loc>https://tutelatruffe.it/privacy.html</loc>
+        <lastmod>2026-01-26</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+
+    <!-- Terms of Service -->
+    <url>
+        <loc>https://tutelatruffe.it/terms.html</loc>
+        <lastmod>2026-01-26</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    
+    <!-- Database JSON (per indicizzazione contenuto) -->
+    <url>
+        <loc>https://tutelatruffe.it/financial_authorities_database.json</loc>
+        <lastmod>2026-01-26</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>0.9</priority>
+    </url>
+
+    <!-- Censored Countries -->
+    <url>
+        <loc>https://tutelatruffe.it/censored-countries.html</loc>
+        <lastmod>2026-01-26</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.5</priority>
+    </url>
+
+    <!-- Petition Documents JSON -->
+    <url>
+        <loc>https://tutelatruffe.it/petition_documents.json</loc>
+        <lastmod>2026-01-26</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+
+</urlset>

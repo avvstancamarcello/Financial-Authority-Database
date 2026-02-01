@@ -1,0 +1,107 @@
+Ti preparo un diagramma di Gantt completo, chiaro e leggibile, che rappresenta l’intera regia temporale dei due atti, ciascuno della durata di 65 secondi.
+
+Lo strutturo in modo che tu possa usarlo:
+
+per documentazione interna
+
+per il dossier Madrid
+
+per la programmazione del banner
+
+per la sincronizzazione degli effetti scenografici
+
+🎼 DIAGRAMMA DI GANTT – ATTO 1 + ATTO 2 (0–130 s)
+(Ogni atto dura 65 secondi. L’intero ciclo dura 130 secondi.)
+
+🟥 ATTO 1 — “La vittima viene ipnotizzata e derubata” (0–65 s)
+Codice
+TEMPO (s)   | EVENTO
+------------|--------------------------------------------------------------
+0 – 10      | Avvio ciclo: You$ normale, SCAM osserva
+10 – 20     | Attivazione raggio giallo; bandiere UE 1/s
+20 – 30     | Ipnosi: raggio colpisce You$ → stato IPNOS
+30 – 40     | Primo furto: banca sup. → You$ → SCAM (simboli dorati)
+40 – 50     | Secondo furto: banca inf. → You$ → SCAM (altri simboli)
+50 – 60     | Ambulanza raggiunge You$ → risveglio
+60 – 65     | Ritorno al nastro; reset stato You$
+🟩 ATTO 2 — “La vittima è protetta: il truffatore viene catturato” (65–130 s)
+Codice
+TEMPO (s)   | EVENTO
+------------|--------------------------------------------------------------
+65 – 70     | Scudo in testa; WiFi verde attivo; raggio dimezzato
+70 – 75     | Avvio nuovo ippodromo UE + Authority (1/s)
+75 – 85     | Raggio colpisce WiFi → respinta → rimbalzo → dissolvenza
+85 – 95     | Flussi banche → You$ (NON verso SCAM)
+95 – 105    | Stabilità: SCAM isolato; WiFi continua a respingere
+105 – 115   | Pre-arresto: truffatore su SCAM in fade-out
+115 – 125   | Arresto: ambulanza parte → SCAM → fade-out totale truffatore
+125 – 130   | Estradizione: ambulanza → Pianeta Prigione → Anonimus dietro sbarre
+🎬 DIAGRAMMA DI GANTT VISUALE (TESTUALE)
+(Ogni “█” rappresenta circa 1 secondo)
+
+🟥 ATTO 1
+You$ (normale → IPNOS → risveglio)
+Codice
+0        10        20        30        40        50        60        65
+████████████████████IIIIIIIIIIFFFFFFFFFFRRRRRRRRRRRRRRRRRRRNNNNN
+Normale          Ipnosi        Furto 1   Furto 2   Risveglio  Normale
+Raggio giallo SCAM → You$
+Codice
+10–20: ██████████  (attivazione)
+20–30: ██████████  (colpo)
+Flussi banche → You$ → SCAM
+Codice
+30–40: ██████████  (furto 1)
+40–50: ██████████  (furto 2)
+Ambulanza
+Codice
+50–60: ██████████  (salvataggio)
+🟩 ATTO 2
+Scudo Financial Defense
+Codice
+65–130: ██████████████████████████████████████████████████████████
+WiFi verde (difesa attiva)
+Codice
+65–130: ██████████████████████████████████████████████████████████
+Raggio giallo dimezzato + rimbalzo
+Codice
+75–85: ██████████  (respinta + rimbalzo + dissolvenza)
+Flussi banche → You$ (protetto)
+Codice
+85–95: ██████████
+Truffatore su SCAM (fade-out)
+Codice
+105–115: ██████████
+Ambulanza → SCAM → Pianeta Prigione
+Codice
+115–125: ██████████  (verso SCAM)
+125–130: █████       (verso prigione)
+🧩 DIAGRAMMA GANTT COMPLETO (ATTO 1 + ATTO 2)
+Codice
+SECONDI →   0------------------------65------------------------130
+
+ATTO 1      █████████████████████████
+ATTO 2                               █████████████████████████
+
+You$        NNNNNNNNNNIIIIIIIIIIFFFFFFFFFFRRRRRRRRRRNNNNNNNNNNNNNNNNNNNN
+Scudo                                   ████████████████████████████████
+WiFi                                    ████████████████████████████████
+Raggio1     ███████████████
+Raggio2                                   ██████████ (respinta)
+Furti1      ██████████
+Furti2                ██████████
+Flussi protetti                             ██████████
+Truffatore fade-out                               ██████████
+Ambulanza1            ██████████
+Ambulanza2                                   ██████████→███
+Prigione                                        ███
+🎯 RISULTATO
+Hai ora:
+
+un diagramma Gantt completo
+
+perfettamente sincronizzato con la tua regia
+
+utile per sviluppatori, designer, istituzioni, dossier
+
+pronto per essere trasformato in codice, storyboard o presentazione

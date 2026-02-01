@@ -1,0 +1,255 @@
+// ===============================
+// CONFIGURAZIONE GENERALE
+// ===============================
+
+const ACT_DURATION = 65_000; // 65 secondi in ms
+
+let currentAct = 1;
+let actStartTime = performance.now();
+
+// Riferimenti agli elementi esistenti (NON modifico il loro movimento)
+const scam = { el: document.getElementById("planet-scam") };
+const you = { el: document.getElementById("planet-you") };
+const shield = { el: document.getElementById("shield-financial-defense") };
+const ambulance = { el: document.getElementById("ambulance") };
+
+// Nuovi elementi
+const wifiSymbol = document.getElementById("wifi-green");
+const prisonPlanet = document.getElementById("planet-prison");
+const anonimusIcon = document.getElementById("anonimus-icon");
+
+// Banche (posizionate sulle diagonali, come da tua regia)
+const bankUpper = document.getElementById("bank-upper");
+const bankLower = document.getElementById("bank-lower");
+
+// Contenitore bandiere UE (nuovo ippodromo)
+const euFlagsContainer = document.getElementById("eu-flags-orbit");
+
+// ===============================
+// GESTORE ATTI
+// ===============================
+
+function getActTime() {
+    return (performance.now() - actStartTime) / 1000; // in secondi
+}
+
+function switchAct(nextAct) {
+    currentAct = nextAct;
+    actStartTime = performance.now();
+    resetVisualStates();
+}
+
+function resetVisualStates() {
+    // Ripristina icone, nasconde/mostra elementi, azzera simboli, ecc.
+    you.el.className = "you-normal";
+    wifiSymbol.style.display = "none";
+    shield.el.style.display = "none";
+    prisonPlanet.style.display = "none";
+    anonimusIcon.style.display = "none";
+    ambulance.classList.remove("moving-to-scam", "moving-to-prison");
+    clearScamSymbols();
+    clearEuFlags();
+}
+
+// ===============================
+// LOOP PRINCIPALE
+// ===============================
+
+function mainLoop() {
+    const t = getActTime(); // 0–65
+
+    if (t >= 65) {
+        // cambio atto
+        if (currentAct === 1) switchAct(2);
+        else switchAct(1);
+        requestAnimationFrame(mainLoop);
+        return;
+    }
+
+    if (currentAct === 1) {
+        updateAct1(t);
+    } else {
+        updateAct2(t);
+    }
+
+    requestAnimationFrame(mainLoop);
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+    resetVisualStates();
+    switchAct(1);
+    mainLoop();
+});
+
+// ===============================
+// ATTO 1 – SCENARIO SENZA SCUDO
+// ===============================
+
+function updateAct1(t) {
+    // 1. Lo scudo NON compare sul circuito
+    shield.el.style.display = "none";
+    wifiSymbol.style.display = "none";
+    prisonPlanet.style.display = "none";
+    anonimusIcon.style.display = "none";
+
+    // 2. Gestione raggio giallo pieno SCAM → You$
+    updateFullLaserScamToYou(t);
+
+    // 3. Flussi banche → You$ → SCAM ai tempi 44.7 e 36.7
+    const youPos = getYouPosition(); // dal tuo motore
+    tryPauseOnDiagonalAct1(t, youPos); // usa lo scheletro che abbiamo già definito
+
+    // 4. Stati di You$ (IPNOS, triste, reset)
+    updateYouStatesAct1(t);
+
+    // 5. Ambulanza lungo il percorso (come già definito nel primo atto)
+    updateAmbulanceAct1(t);
+}
+
+// ===============================
+// ATTO 2 – SCENARIO CON SCUDO + WIFI
+// ===============================
+
+function updateAct2(t) {
+    // 1. Oggetti in movimento: SCUDO (posizione 1), You$ (posizione 2)
+    shield.el.style.display = "block";
+    wifiSymbol.style.display = "block";
+
+    // Il movimento orbitale resta quello che hai già: qui solo layer visivo
+    updateShieldPositionFromEngine();
+    updateYouPositionFromEngine();
+
+    // 2. Raggio giallo dimezzato SCAM → You$
+    updateShortLaserScamToYou(t);
+
+    // 3. Simbolo WiFi verde che respinge il raggio
+    updateWifiDeflection(t);
+
+    // 4. Flussi banche → You$ (NON raggiungono SCAM)
+    const youPos = getYouPosition();
+    tryCoinFlowBanksToYouOnly(t, youPos);
+
+    // 5. Nessuna ambulanza lungo il percorso
+    if (t < 60) {
+        stopAmbulanceMovement();
+    }
+
+    // 6. Alla sosta finale (es. t > 60): ambulanza → SCAM → Pianeta Prigione
+    if (t >= 60 && t <= 65) {
+        startAmbulanceToScamAndPrison();
+    }
+
+    // 7. Pianeta Prigione con Anonimus dietro sbarre verdi
+    updatePrisonPlanetVisibility(t);
+
+    // 8. Nuovo ippodromo bandiere UE + Authority (una al secondo)
+    updateEuFlagsOrbitAct2(t);
+}
+
+// ===============================
+// DETTAGLI FUNZIONALI (SCHELETRO)
+// ===============================
+
+// --- Raggio pieno Atto 1
+function updateFullLaserScamToYou(t) {
+    // usa il tuo raggio attuale, senza modificare la logica di movimento
+    // qui puoi solo regolare visibilità, glow, ecc.
+}
+
+// --- Raggio corto Atto 2
+function updateShortLaserScamToYou(t) {
+    // stesso angolo del raggio attuale, ma lunghezza dimezzata
+    // calcolata come metà distanza SCAM–You$
+}
+
+// --- Deflessione WiFi
+function updateWifiDeflection(t) {
+    // il raggio, quando "tocca" il WiFi, cambia direzione
+    // visivamente: un segmento che rimbalza e si spegne fuori dall’ippodromo
+}
+
+// --- Flusso banche → You$ → SCAM (Atto 1)
+function tryPauseOnDiagonalAct1(t, youPos) {
+    // riusa lo scheletro che abbiamo scritto:
+    // - sosta simulata 3s
+    // - flusso monete banca → You$ → SCAM
+    // - simboli dorati su SCAM
+}
+
+// --- Flusso banche → You$ (Atto 2, NON verso SCAM)
+function tryCoinFlowBanksToYouOnly(t, youPos) {
+    // simile a Act1, ma le monete si fermano su You$
+    // nessun simbolo aggiunto su SCAM
+}
+
+// --- Stati You$ Atto 1
+function updateYouStatesAct1(t) {
+    // 55–54: colpo raggio → IPNOS
+    // fino a 27: IPNOS
+    // da -28 sec (cioè t > 37) a 65: triste
+    // a t=0 (nuovo ciclo): normal
+}
+
+// --- Ambulanza Atto 1
+function updateAmbulanceAct1(t) {
+    // logica che hai già: partenza, incontro con You$, ecc.
+}
+
+// --- Ambulanza Atto 2: verso SCAM → Prigione
+function startAmbulanceToScamAndPrison() {
+    ambulance.classList.add("moving-to-scam");
+    // al termine, moving-to-prison lungo semiretta inferiore → SCAM → prigione
+}
+
+// --- Pianeta Prigione
+function updatePrisonPlanetVisibility(t) {
+    if (t >= 60) {
+        prisonPlanet.style.display = "block";
+        anonimusIcon.style.display = "block";
+        // SCAM resta vuoto: nessuna icona anonimus su SCAM
+    }
+}
+
+// --- Bandiere UE + Authority (Atto 2)
+let euFlagsData = []; // caricate da eu_first_scene_flags.json + Authority
+let lastFlagIndex = -1;
+
+async function loadEuFlagsData() {
+    const res = await fetch("eu_first_scene_flags_act2.json");
+    euFlagsData = await res.json();
+}
+
+function updateEuFlagsOrbitAct2(t) {
+    if (!euFlagsData.length) return;
+
+    const index = Math.floor(t); // una bandiera al secondo
+
+    if (index !== lastFlagIndex && index < euFlagsData.length) {
+        lastFlagIndex = index;
+        const data = euFlagsData[index];
+        const el = createFlagAuthorityElement(data);
+        positionFlagOnNewOrbit(el, index, euFlagsData.length);
+        euFlagsContainer.appendChild(el);
+    }
+}
+
+function clearEuFlags() {
+    euFlagsContainer.innerHTML = "";
+    lastFlagIndex = -1;
+}
+
+// ===============================
+// UTILITY PLACEHOLDER
+// ===============================
+
+function getYouPosition() {
+    // legge dal tuo motore di movimento (già esistente)
+}
+
+function updateShieldPositionFromEngine() {
+    // idem, se lo fai orbitare
+}
+
+function clearScamSymbols() {
+    // rimuove simboli £/$ attorno a SCAM
+}

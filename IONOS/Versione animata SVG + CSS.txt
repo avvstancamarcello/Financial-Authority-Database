@@ -1,0 +1,177 @@
+Posso guidarti nella progettazione completa della versione animata del tuo diagramma Gantt (SVG + CSS), 
+ma devo chiarire un punto importante prima di procedere:
+
+Cosa fa questa versione animata
+✔ La barra temporale avanza
+La linea bianca si estende da sinistra a destra.
+
+✔ Ogni segmento appare al momento giusto
+Grazie alle classi .delay‑N.
+
+✔ Gli eventi critici pulsano
+raggio
+
+furti
+
+ambulanza
+
+rimbalzo
+
+✔ Gli stati emotivi di You$ cambiano nel tempo
+normale
+
+ipnotizzato
+
+triste
+
+✔ Colori coerenti con il tuo universo
+SCAM rosso
+
+difesa verde
+
+raggio giallo
+
+You$ azzurro
+<style>
+/* ========================= */
+/* ANIMAZIONI GLOBALI        */
+/* ========================= */
+
+@keyframes timeline {
+  from { width: 0%; }
+  to   { width: 100%; }
+}
+
+@keyframes pulse {
+  0%   { opacity: 0.4; }
+  50%  { opacity: 1; }
+  100% { opacity: 0.4; }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes fadeOut {
+  from { opacity: 1; }
+  to   { opacity: 0; }
+}
+
+.event {
+  animation: fadeIn 1s ease forwards;
+}
+
+.pulse {
+  animation: pulse 1.5s infinite ease-in-out;
+}
+
+/* Segmenti che si accendono nel tempo */
+.segment {
+  opacity: 0;
+  animation: fadeIn 0.8s ease forwards;
+}
+
+.segment.delay-1 { animation-delay: 1s; }
+.segment.delay-2 { animation-delay: 2s; }
+.segment.delay-3 { animation-delay: 3s; }
+.segment.delay-4 { animation-delay: 4s; }
+.segment.delay-5 { animation-delay: 5s; }
+.segment.delay-6 { animation-delay: 6s; }
+.segment.delay-7 { animation-delay: 7s; }
+.segment.delay-8 { animation-delay: 8s; }
+.segment.delay-9 { animation-delay: 9s; }
+.segment.delay-10 { animation-delay: 10s; }
+
+/* Timeline che avanza */
+#progress-bar {
+  animation: timeline 20s linear forwards;
+  transform-origin: left center;
+}
+</style>
+
+<svg width="1500" height="720" xmlns="http://www.w3.org/2000/svg">
+
+  <!-- Sfondo -->
+  <rect x="0" y="0" width="1500" height="720" fill="#050816"/>
+
+  <!-- Barra di avanzamento -->
+  <rect id="progress-bar" x="180" y="40" width="0" height="6" fill="#ffffff" opacity="0.8"/>
+
+  <!-- LEGENDA -->
+  <g font-family="Arial" font-size="14" fill="#ffffff">
+    <text x="180" y="80" font-size="18">Legenda</text>
+
+    <rect x="180" y="100" width="30" height="14" fill="#38bdf8"/>
+    <text x="220" y="112">You$ normale</text>
+
+    <rect x="180" y="130" width="30" height="14" fill="#0ea5e9"/>
+    <text x="220" y="142">You$ ipnotizzato</text>
+
+    <rect x="180" y="160" width="30" height="14" fill="#1e3a8a"/>
+    <text x="220" y="172">You$ triste</text>
+
+    <rect x="180" y="190" width="30" height="14" fill="#facc15"/>
+    <text x="220" y="202">Raggio SCAM</text>
+
+    <rect x="180" y="220" width="30" height="14" fill="#f97316"/>
+    <text x="220" y="232">Furto 1</text>
+
+    <rect x="180" y="250" width="30" height="14" fill="#fb923c"/>
+    <text x="220" y="262">Furto 2</text>
+
+    <rect x="180" y="280" width="30" height="14" fill="#22c55e"/>
+    <text x="220" y="292">Scudo</text>
+
+    <rect x="180" y="310" width="30" height="14" fill="#4ade80"/>
+    <text x="220" y="322">WiFi verde</text>
+
+    <rect x="180" y="340" width="30" height="14" fill="#eab308"/>
+    <text x="220" y="352">Raggio respinto</text>
+
+    <rect x="180" y="370" width="30" height="14" fill="#22c55e" opacity="0.7"/>
+    <text x="220" y="382">Flussi protetti</text>
+
+    <rect x="180" y="400" width="30" height="14" fill="#f97316" opacity="0.6"/>
+    <text x="220" y="412">Fade-out truffatore</text>
+
+    <rect x="180" y="430" width="30" height="14" fill="#fb923c"/>
+    <text x="220" y="442">Ambulanza</text>
+
+    <rect x="180" y="460" width="30" height="14" fill="#22c55e" opacity="0.95"/>
+    <text x="220" y="472">Pianeta Prigione</text>
+  </g>
+
+  <!-- ========================= -->
+  <!-- GANTT ANIMATO             -->
+  <!-- ========================= -->
+
+  <!-- ATTO 1 -->
+  <rect class="segment delay-1" x="180" y="520" width="470" height="18" fill="#b91c1c" opacity="0.8"/>
+
+  <!-- ATTO 2 -->
+  <rect class="segment delay-2" x="650" y="550" width="470" height="18" fill="#16a34a" opacity="0.8"/>
+
+  <!-- You$ normale (0–55 s) -->
+  <rect class="segment delay-1" x="180" y="580" width="398" height="18" fill="#38bdf8"/>
+
+  <!-- You$ IPNOS (55–27 s) -->
+  <rect class="segment delay-3 pulse" x="180 + 398" y="580" width="202" height="18" fill="#0ea5e9"/>
+
+  <!-- You$ triste (37–65 s) -->
+  <rect class="segment delay-4" x="180 + 267" y="580" width="202" height="18" fill="#1e3a8a"/>
+
+  <!-- Raggio SCAM (55–54 s) -->
+  <rect class="segment delay-3 pulse" x="180 + 397" y="610" width="7" height="18" fill="#facc15"/>
+
+  <!-- Furto 1 (44.7 s) -->
+  <rect class="segment delay-4 pulse" x="180 + 323" y="640" width="36" height="18" fill="#f97316"/>
+
+  <!-- Furto 2 (36.7 s) -->
+  <rect class="segment delay-5 pulse" x="180 + 265" y="670" width="36" height="18" fill="#fb923c"/>
+
+  <!-- Ambulanza (27 s) -->
+  <rect class="segment delay-6 pulse" x="180 + 195" y="700" width="36" height="18" fill="#fb923c"/>
+
+</svg>
+
