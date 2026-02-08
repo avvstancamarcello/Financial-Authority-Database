@@ -3028,20 +3028,24 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 return false;
             });
             
-            // Split countries: before and after Canadian provinces
-            // Canadian provinces come after "Canada" alphabetically (Canada - xxx)
+            // Split countries: before and after Canadian provinces to insert filters intermezzo
+            // Canadian provinces are named "Canada - Alberta", "Canada - British Columbia", etc.
+            // and appear alphabetically after "Canada" in the sorted list.
+            // This creates a natural visual break in the grid between early alphabetical countries
+            // (A-C including Canada and its provinces) and the rest (Chile onward).
             const beforeCanadaProvinces = [];
             const canadaProvinces = [];
             const afterCanadaProvinces = [];
-            let foundLastCanadaProvince = false;
             
             filtered.forEach(country => {
                 if (country.country_name.startsWith('Canada - ')) {
+                    // This is a Canadian province
                     canadaProvinces.push(country);
-                } else if (!foundLastCanadaProvince && canadaProvinces.length === 0) {
+                } else if (canadaProvinces.length === 0) {
+                    // Haven't reached Canadian provinces yet
                     beforeCanadaProvinces.push(country);
                 } else {
-                    foundLastCanadaProvince = true;
+                    // Past Canadian provinces
                     afterCanadaProvinces.push(country);
                 }
             });
@@ -3102,8 +3106,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 grid.appendChild(renderCountryCard(country));
             });
             
-            // Insert filters intermezzo after Canadian provinces
-            if (canadaProvinces.length > 0 && afterCanadaProvinces.length > 0) {
+            // Insert filters intermezzo after Canadian provinces (if they exist)
+            // This creates a visual "pause" in the grid and highlights the filter options
+            // We only show it if Canadian provinces exist to ensure proper positioning
+            if (canadaProvinces.length > 0) {
                 const intermezzoSection = document.createElement('div');
                 intermezzoSection.className = 'filters-intermezzo';
                 intermezzoSection.style.gridColumn = '1 / -1'; // Span all columns
@@ -3143,33 +3149,30 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         function setupSearch() {
             const searchInput = document.getElementById('searchInput');
             searchInput.addEventListener('input', (e) => {
-                const searchTerm = e.target.value.toLowerCase();
-                const cards = document.querySelectorAll('.country-card');
-                cards.forEach(card => {
-                    card.style.display = card.textContent.toLowerCase().includes(searchTerm) ? 'block' : 'none';
-                });
+                filterBySearchTerm(e.target.value);
             });
             
             // Setup top search bar
             const searchInputTop = document.getElementById('search-input-top');
             if (searchInputTop) {
                 searchInputTop.addEventListener('input', (e) => {
-                    const searchTerm = e.target.value.toLowerCase();
-                    const cards = document.querySelectorAll('.country-card');
-                    cards.forEach(card => {
-                        card.style.display = card.textContent.toLowerCase().includes(searchTerm) ? 'block' : 'none';
-                    });
+                    filterBySearchTerm(e.target.value);
                 });
             }
         }
         
-        function performSearch() {
-            const searchInputTop = document.getElementById('search-input-top');
-            const searchTerm = searchInputTop.value.toLowerCase();
+        // Shared search filtering function
+        function filterBySearchTerm(searchTerm) {
+            const term = searchTerm.toLowerCase();
             const cards = document.querySelectorAll('.country-card');
             cards.forEach(card => {
-                card.style.display = card.textContent.toLowerCase().includes(searchTerm) ? 'block' : 'none';
+                card.style.display = card.textContent.toLowerCase().includes(term) ? 'block' : 'none';
             });
+        }
+        
+        function performSearch() {
+            const searchInputTop = document.getElementById('search-input-top');
+            filterBySearchTerm(searchInputTop.value);
             
             // Scroll to countries section
             const countriesSection = document.getElementById('countries-section');
