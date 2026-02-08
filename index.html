@@ -582,7 +582,7 @@
         .search-box input::placeholder {
             color: rgba(255,255,255,0.85);
         }
-        .search-btn, .search-advice-btn {
+        .search-btn {
             padding: 10px 18px;
             border-radius: 20px;
             border: 1px solid rgba(255,215,0,0.9);
@@ -594,9 +594,109 @@
             transition: all 0.3s ease;
             box-shadow: 0 3px 6px rgba(0,0,0,0.25);
         }
-        .search-btn:hover, .search-advice-btn:hover {
+        .search-btn:hover {
             background: rgba(255,215,0,0.4);
             box-shadow: 0 4px 10px rgba(0,0,0,0.35);
+        }
+        
+        /* === NEW TOP SEARCH BAR === */
+        .search-bar-top {
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+            padding: 20px 30px;
+            border-bottom: 3px solid #0284c7;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .search-bar-top input {
+            flex: 1;
+            min-width: 250px;
+            max-width: 500px;
+            padding: 12px 20px;
+            border: 2px solid #0284c7;
+            border-radius: 25px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            color: #1f2937;
+        }
+        
+        .search-bar-top input:focus {
+            outline: none;
+            border-color: #0369a1;
+            box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.2);
+        }
+        
+        .search-bar-top input::placeholder {
+            color: #6b7280;
+        }
+        
+        .search-bar-top button {
+            padding: 12px 28px;
+            background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);
+            color: white;
+            border: none;
+            border-radius: 25px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(2, 132, 199, 0.3);
+            min-width: 44px;
+            min-height: 44px;
+        }
+        
+        .search-bar-top button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(2, 132, 199, 0.5);
+        }
+        
+        /* === FILTERS INTERMEZZO SECTION === */
+        .filters-intermezzo {
+            background: linear-gradient(135deg, #d4af37 0%, #f4e5b8 50%, #d4af37 100%);
+            padding: 30px 20px;
+            margin: 0;
+            text-align: center;
+        }
+        
+        .filters-intermezzo h3 {
+            color: #1f2937;
+            font-size: 1.5em;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+        
+        .filter-buttons-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 12px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .filter-buttons-grid .filter-btn {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(0, 0, 0, 0.15);
+            color: #1f2937;
+            border-radius: 25px;
+            padding: 12px 20px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            min-height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .filter-buttons-grid .filter-btn:hover,
+        .filter-buttons-grid .filter-btn.active {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.25);
+            background: rgba(255, 255, 255, 1);
+            border-color: #d4af37;
         }
         .search-box input:focus { 
             outline: none; 
@@ -1104,6 +1204,23 @@
             .search-box input { padding: 10px 15px; font-size: 15px; }
             .filter-buttons { justify-content: center; }
             .filter-btn { padding: 8px 14px; font-size: 0.9em; }
+            
+            /* Top Search Bar - Tablet */
+            .search-bar-top {
+                padding: 15px 20px;
+            }
+            .search-bar-top input {
+                min-width: 200px;
+            }
+            
+            /* Filters Intermezzo - Tablet */
+            .filter-buttons-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 10px;
+            }
+            .filters-intermezzo {
+                padding: 20px 15px;
+            }
             .content { padding: 20px 15px; }
             .modal-content { 
                 max-width: 95%; 
@@ -1152,9 +1269,30 @@
             .stat-label { font-size: 0.8em; }
             .controls { padding: 15px 10px; gap: 12px; }
             .search-box input { padding: 10px 12px; font-size: 14px; }
-            .search-btn, .search-advice-btn { padding: 8px 12px; font-size: 0.85em; }
+            .search-btn { padding: 8px 12px; font-size: 0.85em; }
             .filter-buttons { gap: 6px; }
             .filter-btn { padding: 7px 10px; font-size: 0.8em; }
+            
+            /* Top Search Bar - Mobile */
+            .search-bar-top {
+                padding: 15px 20px;
+                flex-direction: column;
+            }
+            .search-bar-top input {
+                min-width: 100%;
+                max-width: 100%;
+            }
+            .search-bar-top button {
+                width: 100%;
+            }
+            
+            /* Filters Intermezzo - Mobile */
+            .filter-buttons-grid {
+                grid-template-columns: 1fr;
+            }
+            .filters-intermezzo h3 {
+                font-size: 1.2em;
+            }
             .content { padding: 15px 10px; }
             .modal-content { 
                 margin: 10px auto; 
@@ -1459,13 +1597,18 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <div class="flags-grid" id="flagsGrid"></div>
         </div>
 
+        <!-- NUOVA BARRA RICERCA SUPERIORE -->
+        <div class="search-bar-top">
+            <input type="text" id="search-input-top" placeholder="🔍 Cerca paese..." aria-label="Search for a country">
+            <button type="button" onclick="performSearch()">Cerca</button>
+        </div>
+
         <section id="database-search-section" class="controls" role="search" aria-label="Search and filter">
     			<p class="intro-text" data-i18n="introText">Questa pagina web offre 189 LINK diretti per accedere alle webpage delle AUTORITA' FINANZIARIE di 189 PAESI del Mondo.<br>CERCA il nome del Paese che viene dichiarato sede della impresa finanziaria, e potrai conoscere tutti i dettagli identificativi ufficiali.</p>
             <div class="search-row">
                 <div class="search-box">
                     <input type="text" id="searchInput" data-i18n-placeholder="searchPlaceholder" placeholder="Cerca per paese o autorità..." aria-label="Search countries">
                     <button type="button" class="search-btn">Cerca</button>
-                    <button type="button" class="search-advice-btn" onclick="toggleSearchAdvice()" data-i18n="searchAdviceButton">Perché questa ricerca è importante?</button>
                 </div>
                 <div class="filter-buttons" role="group" aria-label="Filter options">
                     <button class="filter-btn active" onclick="filterCountries('all')" data-i18n="filterAll" aria-pressed="true">Tutti i Paesi</button>
@@ -2884,8 +3027,31 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 if (currentFilter === 'oceania') return country.continent === 'Oceania';
                 return false;
             });
-
+            
+            // Split countries: before and after Canadian provinces to insert filters intermezzo
+            // Canadian provinces are named "Canada - Alberta", "Canada - British Columbia", etc.
+            // and appear alphabetically after "Canada" in the sorted list.
+            // This creates a natural visual break in the grid between early alphabetical countries
+            // (A-C including Canada and its provinces) and the rest (Chile onward).
+            const beforeCanadaProvinces = [];
+            const canadaProvinces = [];
+            const afterCanadaProvinces = [];
+            
             filtered.forEach(country => {
+                if (country.country_name.startsWith('Canada - ')) {
+                    // This is a Canadian province
+                    canadaProvinces.push(country);
+                } else if (canadaProvinces.length === 0) {
+                    // Haven't reached Canadian provinces yet
+                    beforeCanadaProvinces.push(country);
+                } else {
+                    // Past Canadian provinces
+                    afterCanadaProvinces.push(country);
+                }
+            });
+            
+            // Render function for country cards
+            const renderCountryCard = (country) => {
                 const card = document.createElement('div');
                 card.className = 'country-card';
                 card.onclick = () => openModal(country.country_name);
@@ -2927,7 +3093,48 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                         </div>
                     </div>
                 `;
-                grid.appendChild(card);
+                return card;
+            };
+            
+            // Render countries before Canadian provinces
+            beforeCanadaProvinces.forEach(country => {
+                grid.appendChild(renderCountryCard(country));
+            });
+            
+            // Render Canadian provinces
+            canadaProvinces.forEach(country => {
+                grid.appendChild(renderCountryCard(country));
+            });
+            
+            // Insert filters intermezzo after Canadian provinces (if they exist)
+            // This creates a visual "pause" in the grid and highlights the filter options
+            // We only show it if Canadian provinces exist to ensure proper positioning
+            if (canadaProvinces.length > 0) {
+                const intermezzoSection = document.createElement('div');
+                intermezzoSection.className = 'filters-intermezzo';
+                intermezzoSection.style.gridColumn = '1 / -1'; // Span all columns
+                intermezzoSection.innerHTML = `
+                    <h3>🔎 Filtra per categoria</h3>
+                    <div class="filter-buttons-grid">
+                        <button class="filter-btn" onclick="filterCountries('ue')" aria-pressed="false">
+                            <span class="fi fi-eu" aria-hidden="true" style="margin-right:6px;"></span>
+                            🇪🇺 Unione Europea
+                        </button>
+                        <button class="filter-btn" onclick="filterCountries('non-ue')" aria-pressed="false">🌍 Paesi non-UE</button>
+                        <button class="filter-btn" onclick="filterCountries('altissimo')" aria-pressed="false">⭐ Protezione Elevata</button>
+                        <button class="filter-btn" onclick="filterCountries('europe')" aria-pressed="false">🇪🇺 Europa</button>
+                        <button class="filter-btn" onclick="filterCountries('asia')" aria-pressed="false">🌏 Asia</button>
+                        <button class="filter-btn" onclick="filterCountries('africa')" aria-pressed="false">🌍 Africa</button>
+                        <button class="filter-btn" onclick="filterCountries('americas')" aria-pressed="false">🌎 Americhe</button>
+                        <button class="filter-btn" onclick="filterCountries('oceania')" aria-pressed="false">🏝️ Oceania</button>
+                    </div>
+                `;
+                grid.appendChild(intermezzoSection);
+            }
+            
+            // Render countries after Canadian provinces
+            afterCanadaProvinces.forEach(country => {
+                grid.appendChild(renderCountryCard(country));
             });
         }
 
@@ -2942,12 +3149,36 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         function setupSearch() {
             const searchInput = document.getElementById('searchInput');
             searchInput.addEventListener('input', (e) => {
-                const searchTerm = e.target.value.toLowerCase();
-                const cards = document.querySelectorAll('.country-card');
-                cards.forEach(card => {
-                    card.style.display = card.textContent.toLowerCase().includes(searchTerm) ? 'block' : 'none';
-                });
+                filterBySearchTerm(e.target.value);
             });
+            
+            // Setup top search bar
+            const searchInputTop = document.getElementById('search-input-top');
+            if (searchInputTop) {
+                searchInputTop.addEventListener('input', (e) => {
+                    filterBySearchTerm(e.target.value);
+                });
+            }
+        }
+        
+        // Shared search filtering function
+        function filterBySearchTerm(searchTerm) {
+            const term = searchTerm.toLowerCase();
+            const cards = document.querySelectorAll('.country-card');
+            cards.forEach(card => {
+                card.style.display = card.textContent.toLowerCase().includes(term) ? 'block' : 'none';
+            });
+        }
+        
+        function performSearch() {
+            const searchInputTop = document.getElementById('search-input-top');
+            filterBySearchTerm(searchInputTop.value);
+            
+            // Scroll to countries section
+            const countriesSection = document.getElementById('countries-section');
+            if (countriesSection) {
+                countriesSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
         }
 
         function updateStats() {
