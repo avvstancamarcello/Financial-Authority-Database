@@ -1914,6 +1914,756 @@
     },
     "notes": "FCA Financial Services Register (https://register.fca.org.uk/s/): verifica affidabilità imprese dichiarate iscritte/regolamentate. Prudential Regulation Authority (Bank of England): supervisione prudenziale 1.292 banche, società credito edilizio, cooperative credito, assicurazioni, società investimento (https://www.bankofengland.co.uk/prudential-regulation). Sito investitori: https://www.fca.org.uk/investsmart. World Investor Week Coordinator: Sam Stoakes."
   },
+  "USA - Alabama": {
+    "country_name": "USA - Alabama",
+    "flag": "🇺🇸",
+    "isEU": false,
+    "protectionLevel": "Alto",
+    "financial_authority": {
+      "name": "Alabama Securities Commission",
+      "abbreviation": "ASC",
+      "homepage": "https://asc.alabama.gov/",
+      "fraudReportLink": "https://asc.alabama.gov/Complaints.aspx",
+      "authorityEmail": "asc@asc.alabama.gov",
+      "social_links": {}
+    },
+    "notes": "Autorità statale USA per la vigilanza dei mercati finanziari e la tutela degli investitori in Alabama."
+  },
+  "USA - Alaska": {
+    "country_name": "USA - Alaska",
+    "flag": "🇺🇸",
+    "isEU": false,
+    "protectionLevel": "Alto",
+    "financial_authority": {
+      "name": "Alaska Division of Banking and Securities",
+      "abbreviation": "AK DBS",
+      "homepage": "https://www.commerce.alaska.gov/web/dbs/",
+      "fraudReportLink": "https://www.commerce.alaska.gov/web/dbs/ConsumerResources.aspx",
+      "authorityEmail": "dbs.licensing@alaska.gov",
+      "social_links": {}
+    },
+    "notes": "Autorità statale USA per la vigilanza dei mercati finanziari e la tutela degli investitori in Alaska."
+  },
+  "USA - Arizona": {
+    "country_name": "USA - Arizona",
+    "flag": "🇺🇸",
+    "isEU": false,
+    "protectionLevel": "Alto",
+    "financial_authority": {
+      "name": "Arizona Corporation Commission, Securities Division",
+      "abbreviation": "ACC Securities",
+      "homepage": "https://azcc.gov/securities",
+      "fraudReportLink": "https://azcc.gov/securities/consumer-investor-information",
+      "authorityEmail": "info@azcc.gov",
+      "social_links": {}
+    },
+    "notes": "Autorità statale USA per la vigilanza dei mercati finanziari e la tutela degli investitori in Arizona."
+  },
+  "USA - Arkansas": {
+    "country_name": "USA - Arkansas",
+    "flag": "🇺🇸",
+    "isEU": false,
+    "protectionLevel": "Alto",
+    "financial_authority": {
+      "name": "Arkansas Securities Department",
+      "abbreviation": "ASD",
+      "homepage": "https://www.securities.arkansas.gov/",
+      "fraudReportLink": "https://www.securities.arkansas.gov/pages/file-a-complaint",
+      "authorityEmail": "info@securities.arkansas.gov",
+      "social_links": {}
+    },
+    "notes": "Autorità statale USA per la vigilanza dei mercati finanziari e la tutela degli investitori in Arkansas."
+  },
+  "USA - California": {
+    "country_name": "USA - California",
+    "flag": "🇺🇸",
+    "isEU": false,
+    "protectionLevel": "Altissimo",
+    "financial_authority": {
+      "name": "Department of Financial Protection and Innovation",
+      "abbreviation": "DFPI",
+      "homepage": "https://dfpi.ca.gov/",
+      "fraudReportLink": "https://dfpi.ca.gov/file-a-complaint/",
+      "authorityEmail": "ask.dfpi@dfpi.ca.gov",
+      "social_links": {}
+    },
+    "notes": "Autorità statale USA per la vigilanza dei mercati finanziari e la tutela degli investitori in California."
+  },
+  "USA - Colorado": {
+    "country_name": "USA - Colorado",
+    "flag": "🇺🇸",
+    "isEU": false,
+    "protectionLevel": "Alto",
+    "financial_authority": {
+      "name": "Colorado Division of Securities",
+      "abbreviation": "CDOS",
+      "homepage": "https://securities.colorado.gov/",
+      "fraudReportLink": "https://securities.colorado.gov/enforcement/file-a-complaint",
+      "authorityEmail": "dora_securitieswebsite@state.co.us",
+      "social_links": {}
+    },
+    "notes": "Autorità statale USA per la vigilanza dei mercati finanziari e la tutela degli investitori in Colorado."
+  },
+  "USA - Connecticut": {
+    "country_name": "USA - Connecticut",
+    "flag": "🇺🇸",
+    "isEU": false,
+    "protectionLevel": "Alto",
+    "financial_authority": {
+      "name": "Connecticut Department of Banking",
+      "abbreviation": "CT DOB",
+      "homepage": "https://portal.ct.gov/DOB",
+      "fraudReportLink": "https://portal.ct.gov/DOB/Consumer/Consumer-Complaints",
+      "authorityEmail": "dob.complaints@ct.gov",
+      "social_links": {}
+    },
+    "notes": "Autorità statale USA per la vigilanza dei mercati finanziari e la tutela degli investitori in Connecticut."
+  },
+  "USA - Delaware": {
+    "country_name": "USA - Delaware",
+    "flag": "🇺🇸",
+    "isEU": false,
+    "protectionLevel": "Alto",
+    "financial_authority": {
+      "name": "Delaware Department of Justice, Investor Protection Unit",
+      "abbreviation": "DE IPU",
+      "homepage": "https://attorneygeneral.delaware.gov/fraud/cpu/investor-protection-unit/",
+      "fraudReportLink": "https://attorneygeneral.delaware.gov/fraud/cpu/investor-protection-unit/",
+      "authorityEmail": "investor.protection@delaware.gov",
+      "social_links": {}
+    },
+    "notes": "Autorità statale USA per la vigilanza dei mercati finanziari e la tutela degli investitori in Delaware."
+  },
+  "USA - Florida": {
+    "country_name": "USA - Florida",
+    "flag": "🇺🇸",
+    "isEU": false,
+    "protectionLevel": "Altissimo",
+    "financial_authority": {
+      "name": "Florida Office of Financial Regulation",
+      "abbreviation": "OFR",
+      "homepage": "https://flofr.gov/",
+      "fraudReportLink": "https://flofr.gov/sitePages/FileAComplaint.htm",
+      "authorityEmail": "consumer.services@flofr.gov",
+      "social_links": {}
+    },
+    "notes": "Autorità statale USA per la vigilanza dei mercati finanziari e la tutela degli investitori in Florida."
+  },
+  "USA - Georgia": {
+    "country_name": "USA - Georgia",
+    "flag": "🇺🇸",
+    "isEU": false,
+    "protectionLevel": "Alto",
+    "financial_authority": {
+      "name": "Georgia Secretary of State, Securities Division",
+      "abbreviation": "GA Securities",
+      "homepage": "https://sos.ga.gov/securities",
+      "fraudReportLink": "https://sos.ga.gov/how-to-guide/how-guide-securities-complaints",
+      "authorityEmail": "securities@sos.ga.gov",
+      "social_links": {}
+    },
+    "notes": "Autorità statale USA per la vigilanza dei mercati finanziari e la tutela degli investitori in Georgia."
+  },
+  "USA - Hawaii": {
+    "country_name": "USA - Hawaii",
+    "flag": "🇺🇸",
+    "isEU": false,
+    "protectionLevel": "Alto",
+    "financial_authority": {
+      "name": "Hawaii Department of Commerce and Consumer Affairs, Securities Compliance Branch",
+      "abbreviation": "HI DCCA-SCB",
+      "homepage": "https://cca.hawaii.gov/sec/",
+      "fraudReportLink": "https://cca.hawaii.gov/sec/consumer/",
+      "authorityEmail": "dccascb@dcca.hawaii.gov",
+      "social_links": {}
+    },
+    "notes": "Autorità statale USA per la vigilanza dei mercati finanziari e la tutela degli investitori in Hawaii."
+  },
+  "USA - Idaho": {
+    "country_name": "USA - Idaho",
+    "flag": "🇺🇸",
+    "isEU": false,
+    "protectionLevel": "Alto",
+    "financial_authority": {
+      "name": "Idaho Department of Finance",
+      "abbreviation": "IDOF",
+      "homepage": "https://www.finance.idaho.gov/",
+      "fraudReportLink": "https://www.finance.idaho.gov/consumer-resources/file-a-complaint/",
+      "authorityEmail": "finance@finance.idaho.gov",
+      "social_links": {}
+    },
+    "notes": "Autorità statale USA per la vigilanza dei mercati finanziari e la tutela degli investitori in Idaho."
+  },
+  "USA - Illinois": {
+    "country_name": "USA - Illinois",
+    "flag": "🇺🇸",
+    "isEU": false,
+    "protectionLevel": "Alto",
+    "financial_authority": {
+      "name": "Illinois Secretary of State, Securities Department",
+      "abbreviation": "ILSOS Securities",
+      "homepage": "https://www.ilsos.gov/departments/securities/",
+      "fraudReportLink": "https://www.ilsos.gov/departments/securities/investor_education/complaints.html",
+      "authorityEmail": "securities@ilsos.gov",
+      "social_links": {}
+    },
+    "notes": "Autorità statale USA per la vigilanza dei mercati finanziari e la tutela degli investitori in Illinois."
+  },
+  "USA - Indiana": {
+    "country_name": "USA - Indiana",
+    "flag": "🇺🇸",
+    "isEU": false,
+    "protectionLevel": "Alto",
+    "financial_authority": {
+      "name": "Indiana Secretary of State, Securities Division",
+      "abbreviation": "IN Securities",
+      "homepage": "https://www.in.gov/sos/securities/",
+      "fraudReportLink": "https://www.in.gov/sos/securities/complaint/",
+      "authorityEmail": "securities@sos.in.gov",
+      "social_links": {}
+    },
+    "notes": "Autorità statale USA per la vigilanza dei mercati finanziari e la tutela degli investitori in Indiana."
+  },
+  "USA - Iowa": {
+    "country_name": "USA - Iowa",
+    "flag": "🇺🇸",
+    "isEU": false,
+    "protectionLevel": "Alto",
+    "financial_authority": {
+      "name": "Iowa Insurance Division, Securities Bureau",
+      "abbreviation": "IID Securities",
+      "homepage": "https://iid.iowa.gov/securities",
+      "fraudReportLink": "https://iid.iowa.gov/consumer-services/file-complaint",
+      "authorityEmail": "securities@iid.iowa.gov",
+      "social_links": {}
+    },
+    "notes": "Autorità statale USA per la vigilanza dei mercati finanziari e la tutela degli investitori in Iowa."
+  },
+  "USA - Kansas": {
+    "country_name": "USA - Kansas",
+    "flag": "🇺🇸",
+    "isEU": false,
+    "protectionLevel": "Alto",
+    "financial_authority": {
+      "name": "Kansas Office of the Securities Commissioner",
+      "abbreviation": "KOSC",
+      "homepage": "https://www.osbckansas.org/securities.html",
+      "fraudReportLink": "https://www.osbckansas.org/consumer-information/file-a-complaint.html",
+      "authorityEmail": "kdoc@ks.gov",
+      "social_links": {}
+    },
+    "notes": "Autorità statale USA per la vigilanza dei mercati finanziari e la tutela degli investitori in Kansas."
+  },
+  "USA - Kentucky": {
+    "country_name": "USA - Kentucky",
+    "flag": "🇺🇸",
+    "isEU": false,
+    "protectionLevel": "Alto",
+    "financial_authority": {
+      "name": "Kentucky Department of Financial Institutions, Division of Securities",
+      "abbreviation": "KDFI",
+      "homepage": "https://kfi.ky.gov/securities/Pages/default.aspx",
+      "fraudReportLink": "https://kfi.ky.gov/securities/Pages/Investor-Complaints.aspx",
+      "authorityEmail": "kfi@ky.gov",
+      "social_links": {}
+    },
+    "notes": "Autorità statale USA per la vigilanza dei mercati finanziari e la tutela degli investitori in Kentucky."
+  },
+  "USA - Louisiana": {
+    "country_name": "USA - Louisiana",
+    "flag": "🇺🇸",
+    "isEU": false,
+    "protectionLevel": "Alto",
+    "financial_authority": {
+      "name": "Louisiana Office of Financial Institutions",
+      "abbreviation": "LOFI",
+      "homepage": "https://ofi.la.gov/securities/",
+      "fraudReportLink": "https://ofi.la.gov/consumers/file-a-complaint/",
+      "authorityEmail": "officeoffinancialinstitutions@la.gov",
+      "social_links": {}
+    },
+    "notes": "Autorità statale USA per la vigilanza dei mercati finanziari e la tutela degli investitori in Louisiana."
+  },
+  "USA - Maine": {
+    "country_name": "USA - Maine",
+    "flag": "🇺🇸",
+    "isEU": false,
+    "protectionLevel": "Alto",
+    "financial_authority": {
+      "name": "Maine Office of Securities",
+      "abbreviation": "MOS",
+      "homepage": "https://www.maine.gov/pfr/securities/",
+      "fraudReportLink": "https://www.maine.gov/pfr/securities/complaint.html",
+      "authorityEmail": "securities.pfr@maine.gov",
+      "social_links": {}
+    },
+    "notes": "Autorità statale USA per la vigilanza dei mercati finanziari e la tutela degli investitori in Maine."
+  },
+  "USA - Maryland": {
+    "country_name": "USA - Maryland",
+    "flag": "🇺🇸",
+    "isEU": false,
+    "protectionLevel": "Alto",
+    "financial_authority": {
+      "name": "Maryland Office of the Attorney General, Securities Division",
+      "abbreviation": "MD Securities",
+      "homepage": "https://www.marylandattorneygeneral.gov/Pages/Securities/",
+      "fraudReportLink": "https://www.marylandattorneygeneral.gov/Pages/Securities/consumers.aspx",
+      "authorityEmail": "securities@oag.state.md.us",
+      "social_links": {}
+    },
+    "notes": "Autorità statale USA per la vigilanza dei mercati finanziari e la tutela degli investitori in Maryland."
+  },
+  "USA - Massachusetts": {
+    "country_name": "USA - Massachusetts",
+    "flag": "🇺🇸",
+    "isEU": false,
+    "protectionLevel": "Altissimo",
+    "financial_authority": {
+      "name": "Massachusetts Securities Division",
+      "abbreviation": "MSD",
+      "homepage": "https://www.sec.state.ma.us/sct/",
+      "fraudReportLink": "https://www.sec.state.ma.us/sct/complaint/complaintidx.htm",
+      "authorityEmail": "securities@sec.state.ma.us",
+      "social_links": {}
+    },
+    "notes": "Autorità statale USA per la vigilanza dei mercati finanziari e la tutela degli investitori in Massachusetts."
+  },
+  "USA - Michigan": {
+    "country_name": "USA - Michigan",
+    "flag": "🇺🇸",
+    "isEU": false,
+    "protectionLevel": "Alto",
+    "financial_authority": {
+      "name": "Michigan Department of Licensing and Regulatory Affairs, Corporations, Securities & Commercial Licensing",
+      "abbreviation": "LARA-CSCL",
+      "homepage": "https://www.michigan.gov/lara/bureau-list/cscl/securities",
+      "fraudReportLink": "https://www.michigan.gov/lara/bureau-list/cscl/complaints",
+      "authorityEmail": "Corporations@michigan.gov",
+      "social_links": {}
+    },
+    "notes": "Autorità statale USA per la vigilanza dei mercati finanziari e la tutela degli investitori in Michigan."
+  },
+  "USA - Minnesota": {
+    "country_name": "USA - Minnesota",
+    "flag": "🇺🇸",
+    "isEU": false,
+    "protectionLevel": "Alto",
+    "financial_authority": {
+      "name": "Minnesota Department of Commerce, Securities Division",
+      "abbreviation": "MN Commerce",
+      "homepage": "https://mn.gov/commerce/industries/securities/",
+      "fraudReportLink": "https://mn.gov/commerce/consumers/file-a-complaint/",
+      "authorityEmail": "consumer.protection@state.mn.us",
+      "social_links": {}
+    },
+    "notes": "Autorità statale USA per la vigilanza dei mercati finanziari e la tutela degli investitori in Minnesota."
+  },
+  "USA - Mississippi": {
+    "country_name": "USA - Mississippi",
+    "flag": "🇺🇸",
+    "isEU": false,
+    "protectionLevel": "Alto",
+    "financial_authority": {
+      "name": "Mississippi Secretary of State, Securities Division",
+      "abbreviation": "MS Securities",
+      "homepage": "https://www.sos.ms.gov/securities",
+      "fraudReportLink": "https://www.sos.ms.gov/content.aspx?page=securities-complaints",
+      "authorityEmail": "securities@sos.ms.gov",
+      "social_links": {}
+    },
+    "notes": "Autorità statale USA per la vigilanza dei mercati finanziari e la tutela degli investitori in Mississippi."
+  },
+  "USA - Missouri": {
+    "country_name": "USA - Missouri",
+    "flag": "🇺🇸",
+    "isEU": false,
+    "protectionLevel": "Alto",
+    "financial_authority": {
+      "name": "Missouri Securities Division",
+      "abbreviation": "MOSD",
+      "homepage": "https://www.sos.mo.gov/securities",
+      "fraudReportLink": "https://www.sos.mo.gov/securities/complaints",
+      "authorityEmail": "securities@sos.mo.gov",
+      "social_links": {}
+    },
+    "notes": "Autorità statale USA per la vigilanza dei mercati finanziari e la tutela degli investitori in Missouri."
+  },
+  "USA - Montana": {
+    "country_name": "USA - Montana",
+    "flag": "🇺🇸",
+    "isEU": false,
+    "protectionLevel": "Alto",
+    "financial_authority": {
+      "name": "Montana Commissioner of Securities and Insurance",
+      "abbreviation": "CSI Montana",
+      "homepage": "https://csimt.gov/securities/",
+      "fraudReportLink": "https://csimt.gov/consumer-assistance/",
+      "authorityEmail": "csi@mt.gov",
+      "social_links": {}
+    },
+    "notes": "Autorità statale USA per la vigilanza dei mercati finanziari e la tutela degli investitori in Montana."
+  },
+  "USA - Nebraska": {
+    "country_name": "USA - Nebraska",
+    "flag": "🇺🇸",
+    "isEU": false,
+    "protectionLevel": "Alto",
+    "financial_authority": {
+      "name": "Nebraska Department of Banking and Finance, Bureau of Securities",
+      "abbreviation": "NDBF Securities",
+      "homepage": "https://ndbf.nebraska.gov/bureaus/securities-bureau",
+      "fraudReportLink": "https://ndbf.nebraska.gov/consumers/file-complaint",
+      "authorityEmail": "ndbf.securities@nebraska.gov",
+      "social_links": {}
+    },
+    "notes": "Autorità statale USA per la vigilanza dei mercati finanziari e la tutela degli investitori in Nebraska."
+  },
+  "USA - Nevada": {
+    "country_name": "USA - Nevada",
+    "flag": "🇺🇸",
+    "isEU": false,
+    "protectionLevel": "Alto",
+    "financial_authority": {
+      "name": "Nevada Secretary of State, Securities Division",
+      "abbreviation": "NV Securities",
+      "homepage": "https://www.nvsos.gov/sos/securities",
+      "fraudReportLink": "https://www.nvsos.gov/sos/securities/file-a-complaint",
+      "authorityEmail": "securities@sos.nv.gov",
+      "social_links": {}
+    },
+    "notes": "Autorità statale USA per la vigilanza dei mercati finanziari e la tutela degli investitori in Nevada."
+  },
+  "USA - New Hampshire": {
+    "country_name": "USA - New Hampshire",
+    "flag": "🇺🇸",
+    "isEU": false,
+    "protectionLevel": "Alto",
+    "financial_authority": {
+      "name": "New Hampshire Bureau of Securities Regulation",
+      "abbreviation": "NH BSR",
+      "homepage": "https://sos.nh.gov/corporation-division/securities/",
+      "fraudReportLink": "https://sos.nh.gov/corporation-division/securities/consumer-information/",
+      "authorityEmail": "securities@sos.nh.gov",
+      "social_links": {}
+    },
+    "notes": "Autorità statale USA per la vigilanza dei mercati finanziari e la tutela degli investitori in New Hampshire."
+  },
+  "USA - New Jersey": {
+    "country_name": "USA - New Jersey",
+    "flag": "🇺🇸",
+    "isEU": false,
+    "protectionLevel": "Alto",
+    "financial_authority": {
+      "name": "New Jersey Bureau of Securities",
+      "abbreviation": "NJBOS",
+      "homepage": "https://www.njconsumeraffairs.gov/bos",
+      "fraudReportLink": "https://www.njconsumeraffairs.gov/bos/Pages/complaintinstructions.aspx",
+      "authorityEmail": "askconsumeraffairs@dca.njoag.gov",
+      "social_links": {}
+    },
+    "notes": "Autorità statale USA per la vigilanza dei mercati finanziari e la tutela degli investitori in New Jersey."
+  },
+  "USA - New Mexico": {
+    "country_name": "USA - New Mexico",
+    "flag": "🇺🇸",
+    "isEU": false,
+    "protectionLevel": "Alto",
+    "financial_authority": {
+      "name": "New Mexico Securities Division",
+      "abbreviation": "NM Securities",
+      "homepage": "https://www.rld.nm.gov/securities-division/",
+      "fraudReportLink": "https://www.rld.nm.gov/securities-division/filing-a-complaint/",
+      "authorityEmail": "securitiesdivision@rld.nm.gov",
+      "social_links": {}
+    },
+    "notes": "Autorità statale USA per la vigilanza dei mercati finanziari e la tutela degli investitori in New Mexico."
+  },
+  "USA - New York": {
+    "country_name": "USA - New York",
+    "flag": "🇺🇸",
+    "isEU": false,
+    "protectionLevel": "Altissimo",
+    "financial_authority": {
+      "name": "New York Office of the Attorney General, Investor Protection Bureau",
+      "abbreviation": "NY IPB",
+      "homepage": "https://ag.ny.gov/investor-protection-bureau",
+      "fraudReportLink": "https://ag.ny.gov/investor-protection-bureau/investor-complaint-form",
+      "authorityEmail": "investor.protection@ag.ny.gov",
+      "social_links": {}
+    },
+    "notes": "Autorità statale USA per la vigilanza dei mercati finanziari e la tutela degli investitori in New York."
+  },
+  "USA - North Carolina": {
+    "country_name": "USA - North Carolina",
+    "flag": "🇺🇸",
+    "isEU": false,
+    "protectionLevel": "Alto",
+    "financial_authority": {
+      "name": "North Carolina Secretary of State, Securities Division",
+      "abbreviation": "NC Securities",
+      "homepage": "https://www.sosnc.gov/divisions/securities",
+      "fraudReportLink": "https://www.sosnc.gov/divisions/securities/investor_complaints",
+      "authorityEmail": "securities@sosnc.gov",
+      "social_links": {}
+    },
+    "notes": "Autorità statale USA per la vigilanza dei mercati finanziari e la tutela degli investitori in North Carolina."
+  },
+  "USA - North Dakota": {
+    "country_name": "USA - North Dakota",
+    "flag": "🇺🇸",
+    "isEU": false,
+    "protectionLevel": "Alto",
+    "financial_authority": {
+      "name": "North Dakota Securities Department",
+      "abbreviation": "NDSD",
+      "homepage": "https://www.securities.nd.gov/",
+      "fraudReportLink": "https://www.securities.nd.gov/investors/file-complaint",
+      "authorityEmail": "ndsecurities@nd.gov",
+      "social_links": {}
+    },
+    "notes": "Autorità statale USA per la vigilanza dei mercati finanziari e la tutela degli investitori in North Dakota."
+  },
+  "USA - Ohio": {
+    "country_name": "USA - Ohio",
+    "flag": "🇺🇸",
+    "isEU": false,
+    "protectionLevel": "Alto",
+    "financial_authority": {
+      "name": "Ohio Department of Commerce, Division of Securities",
+      "abbreviation": "ODC Securities",
+      "homepage": "https://com.ohio.gov/divisions-and-programs/securities",
+      "fraudReportLink": "https://com.ohio.gov/divisions-and-programs/securities/file-a-complaint",
+      "authorityEmail": "securities@com.ohio.gov",
+      "social_links": {}
+    },
+    "notes": "Autorità statale USA per la vigilanza dei mercati finanziari e la tutela degli investitori in Ohio."
+  },
+  "USA - Oklahoma": {
+    "country_name": "USA - Oklahoma",
+    "flag": "🇺🇸",
+    "isEU": false,
+    "protectionLevel": "Alto",
+    "financial_authority": {
+      "name": "Oklahoma Department of Securities",
+      "abbreviation": "ODS",
+      "homepage": "https://www.securities.ok.gov/",
+      "fraudReportLink": "https://www.securities.ok.gov/investors/file-a-complaint",
+      "authorityEmail": "info@securities.ok.gov",
+      "social_links": {}
+    },
+    "notes": "Autorità statale USA per la vigilanza dei mercati finanziari e la tutela degli investitori in Oklahoma."
+  },
+  "USA - Oregon": {
+    "country_name": "USA - Oregon",
+    "flag": "🇺🇸",
+    "isEU": false,
+    "protectionLevel": "Alto",
+    "financial_authority": {
+      "name": "Oregon Division of Financial Regulation, Securities Section",
+      "abbreviation": "ODFR",
+      "homepage": "https://dfr.oregon.gov/insure/securities/Pages/index.aspx",
+      "fraudReportLink": "https://dfr.oregon.gov/help/complaints-licenses/Pages/index.aspx",
+      "authorityEmail": "dfr.financialserviceshelp@dcbs.oregon.gov",
+      "social_links": {}
+    },
+    "notes": "Autorità statale USA per la vigilanza dei mercati finanziari e la tutela degli investitori in Oregon."
+  },
+  "USA - Pennsylvania": {
+    "country_name": "USA - Pennsylvania",
+    "flag": "🇺🇸",
+    "isEU": false,
+    "protectionLevel": "Alto",
+    "financial_authority": {
+      "name": "Pennsylvania Department of Banking and Securities",
+      "abbreviation": "PA DoBS",
+      "homepage": "https://www.pa.gov/agencies/dobs.html",
+      "fraudReportLink": "https://www.pa.gov/services/dobs/file-a-complaint-against-a-company-or-business.html",
+      "authorityEmail": "RA-BNKSecurities@pa.gov",
+      "social_links": {}
+    },
+    "notes": "Autorità statale USA per la vigilanza dei mercati finanziari e la tutela degli investitori in Pennsylvania."
+  },
+  "USA - Rhode Island": {
+    "country_name": "USA - Rhode Island",
+    "flag": "🇺🇸",
+    "isEU": false,
+    "protectionLevel": "Alto",
+    "financial_authority": {
+      "name": "Rhode Island Department of Business Regulation, Securities Division",
+      "abbreviation": "RI DBR",
+      "homepage": "https://dbr.ri.gov/divisions/securities",
+      "fraudReportLink": "https://dbr.ri.gov/divisions/securities/investor-education",
+      "authorityEmail": "dbr.securities@dbr.ri.gov",
+      "social_links": {}
+    },
+    "notes": "Autorità statale USA per la vigilanza dei mercati finanziari e la tutela degli investitori in Rhode Island."
+  },
+  "USA - South Carolina": {
+    "country_name": "USA - South Carolina",
+    "flag": "🇺🇸",
+    "isEU": false,
+    "protectionLevel": "Alto",
+    "financial_authority": {
+      "name": "South Carolina Attorney General, Securities Division",
+      "abbreviation": "SCAG Securities",
+      "homepage": "https://www.scag.gov/about-the-office/criminal-division/securities-division/",
+      "fraudReportLink": "https://www.scag.gov/about-the-office/criminal-division/securities-division/investor-complaints/",
+      "authorityEmail": "securities@scag.gov",
+      "social_links": {}
+    },
+    "notes": "Autorità statale USA per la vigilanza dei mercati finanziari e la tutela degli investitori in South Carolina."
+  },
+  "USA - South Dakota": {
+    "country_name": "USA - South Dakota",
+    "flag": "🇺🇸",
+    "isEU": false,
+    "protectionLevel": "Alto",
+    "financial_authority": {
+      "name": "South Dakota Division of Insurance, Securities Regulation",
+      "abbreviation": "SD DOI",
+      "homepage": "https://dlr.sd.gov/insurance/securities/default.aspx",
+      "fraudReportLink": "https://dlr.sd.gov/insurance/securities/investor_information.aspx",
+      "authorityEmail": "insurance@state.sd.us",
+      "social_links": {}
+    },
+    "notes": "Autorità statale USA per la vigilanza dei mercati finanziari e la tutela degli investitori in South Dakota."
+  },
+  "USA - Tennessee": {
+    "country_name": "USA - Tennessee",
+    "flag": "🇺🇸",
+    "isEU": false,
+    "protectionLevel": "Alto",
+    "financial_authority": {
+      "name": "Tennessee Department of Commerce and Insurance, Securities Division",
+      "abbreviation": "TDCI Securities",
+      "homepage": "https://www.tn.gov/commerce/securities-division.html",
+      "fraudReportLink": "https://www.tn.gov/commerce/securities-division/consumer-resources/file-a-complaint.html",
+      "authorityEmail": "securities.1@tn.gov",
+      "social_links": {}
+    },
+    "notes": "Autorità statale USA per la vigilanza dei mercati finanziari e la tutela degli investitori in Tennessee."
+  },
+  "USA - Texas": {
+    "country_name": "USA - Texas",
+    "flag": "🇺🇸",
+    "isEU": false,
+    "protectionLevel": "Altissimo",
+    "financial_authority": {
+      "name": "Texas State Securities Board",
+      "abbreviation": "TSSB",
+      "homepage": "https://www.ssb.texas.gov/",
+      "fraudReportLink": "https://www.ssb.texas.gov/investors/file-complaint",
+      "authorityEmail": "enforcement@ssb.texas.gov",
+      "social_links": {}
+    },
+    "notes": "Autorità statale USA per la vigilanza dei mercati finanziari e la tutela degli investitori in Texas."
+  },
+  "USA - Utah": {
+    "country_name": "USA - Utah",
+    "flag": "🇺🇸",
+    "isEU": false,
+    "protectionLevel": "Alto",
+    "financial_authority": {
+      "name": "Utah Division of Securities",
+      "abbreviation": "UT Securities",
+      "homepage": "https://securities.utah.gov/",
+      "fraudReportLink": "https://securities.utah.gov/investor-resources/file-a-complaint/",
+      "authorityEmail": "securities@utah.gov",
+      "social_links": {}
+    },
+    "notes": "Autorità statale USA per la vigilanza dei mercati finanziari e la tutela degli investitori in Utah."
+  },
+  "USA - Vermont": {
+    "country_name": "USA - Vermont",
+    "flag": "🇺🇸",
+    "isEU": false,
+    "protectionLevel": "Alto",
+    "financial_authority": {
+      "name": "Vermont Department of Financial Regulation, Securities Division",
+      "abbreviation": "VT DFR",
+      "homepage": "https://dfr.vermont.gov/industry/securities",
+      "fraudReportLink": "https://dfr.vermont.gov/consumers/file-complaint",
+      "authorityEmail": "dfr.securities@vermont.gov",
+      "social_links": {}
+    },
+    "notes": "Autorità statale USA per la vigilanza dei mercati finanziari e la tutela degli investitori in Vermont."
+  },
+  "USA - Virginia": {
+    "country_name": "USA - Virginia",
+    "flag": "🇺🇸",
+    "isEU": false,
+    "protectionLevel": "Alto",
+    "financial_authority": {
+      "name": "Virginia State Corporation Commission, Division of Securities and Retail Franchising",
+      "abbreviation": "VA SCC-DSRF",
+      "homepage": "https://www.scc.virginia.gov/pages/Securities-and-Retail-Franchising",
+      "fraudReportLink": "https://www.scc.virginia.gov/pages/Enforcement-and-Complaints-Securities",
+      "authorityEmail": "sccinfo@scc.virginia.gov",
+      "social_links": {}
+    },
+    "notes": "Autorità statale USA per la vigilanza dei mercati finanziari e la tutela degli investitori in Virginia."
+  },
+  "USA - Washington": {
+    "country_name": "USA - Washington",
+    "flag": "🇺🇸",
+    "isEU": false,
+    "protectionLevel": "Alto",
+    "financial_authority": {
+      "name": "Washington State Department of Financial Institutions, Securities Division",
+      "abbreviation": "WA DFI",
+      "homepage": "https://dfi.wa.gov/securities",
+      "fraudReportLink": "https://dfi.wa.gov/consumers/complaint",
+      "authorityEmail": "CSEnforceComplaints@dfi.wa.gov",
+      "social_links": {}
+    },
+    "notes": "Autorità statale USA per la vigilanza dei mercati finanziari e la tutela degli investitori in Washington."
+  },
+  "USA - West Virginia": {
+    "country_name": "USA - West Virginia",
+    "flag": "🇺🇸",
+    "isEU": false,
+    "protectionLevel": "Alto",
+    "financial_authority": {
+      "name": "West Virginia State Auditor, Securities Commission",
+      "abbreviation": "WVSC",
+      "homepage": "https://www.wvsao.gov/securities/",
+      "fraudReportLink": "https://www.wvsao.gov/securities/complaints/",
+      "authorityEmail": "securities@wvsao.gov",
+      "social_links": {}
+    },
+    "notes": "Autorità statale USA per la vigilanza dei mercati finanziari e la tutela degli investitori in West Virginia."
+  },
+  "USA - Wisconsin": {
+    "country_name": "USA - Wisconsin",
+    "flag": "🇺🇸",
+    "isEU": false,
+    "protectionLevel": "Alto",
+    "financial_authority": {
+      "name": "Wisconsin Department of Financial Institutions, Division of Securities",
+      "abbreviation": "WDFI",
+      "homepage": "https://dfi.wi.gov/Pages/Securities/Home.aspx",
+      "fraudReportLink": "https://dfi.wi.gov/Pages/Securities/InvestorProtection/Complaints.aspx",
+      "authorityEmail": "DFISecurities@dfi.wisconsin.gov",
+      "social_links": {}
+    },
+    "notes": "Autorità statale USA per la vigilanza dei mercati finanziari e la tutela degli investitori in Wisconsin."
+  },
+  "USA - Wyoming": {
+    "country_name": "USA - Wyoming",
+    "flag": "🇺🇸",
+    "isEU": false,
+    "protectionLevel": "Alto",
+    "financial_authority": {
+      "name": "Wyoming Secretary of State, Securities Division",
+      "abbreviation": "WY Securities",
+      "homepage": "https://sos.wyo.gov/securities/",
+      "fraudReportLink": "https://sos.wyo.gov/Securities/complaints.aspx",
+      "authorityEmail": "investor.protection@wyo.gov",
+      "social_links": {}
+    },
+    "notes": "Autorità statale USA per la vigilanza dei mercati finanziari e la tutela degli investitori in Wyoming."
+  },
   "United States of America": {
     "country_name": "United States of America",
     "flag": "🇺🇸",
@@ -2063,7 +2813,7 @@
       "authorityEmail": "oficinadelinversor@cnmv.es",
       "social_links": {}
     },
-    "notes": "Comunità autonoma spagnola (Isole Canarie). La vigilanza su intermediari e mercati finanziari è esercitata dalla CNMV spagnola, nell'ambito del quadro regolatorio UE." 
+    "notes": "Comunità autonoma spagnola (Isole Canarie). La vigilanza su intermediari e mercati finanziari è esercitata dalla CNMV spagnola, nell'ambito del quadro regolatorio UE."
   },
   "Sri Lanka": {
     "country_name": "Sri Lanka",
