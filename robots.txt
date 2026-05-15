@@ -1,6 +1,6 @@
 # robots.txt per Tutela Truffe - Financial Authority Database
 # © 2026 Avvocato Marcello Stanca - Firenze, Italy
-# Dominio: tutelatruffe.it
+# Repository GitHub Pages: https://avvstancamarcello.github.io/Financial-Authority-Database/
 
 User-agent: *
 Allow: /
@@ -19,8 +19,8 @@ Crawl-delay: 2
 # Non consentire accesso diretto al file cifrato
 Disallow: /db.enc
 
-# Sitemap - Dominio principale tutelatruffe.it
-Sitemap: https://tutelatruffe.it/sitemap.xml
+# Sitemap - puntiamo alla sitemap usata da GitHub Pages
+Sitemap: https://avvstancamarcello.github.io/Financial-Authority-Database/sitemap.xml
 
 # Direttive specifiche per bot principali
 User-agent: Googlebot
