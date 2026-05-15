@@ -3,159 +3,154 @@
         xmlns:xhtml="http://www.w3.org/1999/xhtml">
     
     <!-- ============================================= -->
-    <!-- HOMEPAGE MULTILINGUA CON DOMINI NAZIONALI    -->
-    <!-- Generata: 2026-01-26                         -->
+    <!-- SITEMAP MULTILINGUA GITHUB PAGES             -->
+    <!-- Aggiornata: 2026-05-15                       -->
+    <!-- Lingue disponibili: it, en, fr, de, es, ar, zh, hi, vi, pt -->
+    <!-- Base URL: https://avvstancamarcello.github.io/Financial-Authority-Database/ -->
     <!-- ============================================= -->
     
-    <!-- ITALIA - Homepage principale (x-default) -->
     <url>
-        <loc>https://tutelatruffe.it/</loc>
-        <lastmod>2026-01-26</lastmod>
+        <loc>https://avvstancamarcello.github.io/Financial-Authority-Database/</loc>
+        <lastmod>2026-05-15</lastmod>
         <changefreq>weekly</changefreq>
         <priority>1.0</priority>
-        <!-- hreflang reciproci - TUTTI i domini devono dichiararsi a vicenda -->
-        <xhtml:link rel="alternate" hreflang="it" href="https://tutelatruffe.it/"/>
-        <xhtml:link rel="alternate" hreflang="de" href="https://tutelatruffe.de/"/>
-        <xhtml:link rel="alternate" hreflang="fr" href="https://tutelatruffe.fr/"/>
-        <xhtml:link rel="alternate" hreflang="pl" href="https://tutelatruffe.pl/"/>
-        <xhtml:link rel="alternate" hreflang="en-GB" href="https://tutelatruffe.co.uk/"/>
-        <xhtml:link rel="alternate" hreflang="ar-EG" href="https://tutelatruffe.eg/"/>
-        <xhtml:link rel="alternate" hreflang="x-default" href="https://tutelatruffe.it/"/>
+        <xhtml:link rel="alternate" hreflang="it" href="https://avvstancamarcello.github.io/Financial-Authority-Database/?lang=it"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://avvstancamarcello.github.io/Financial-Authority-Database/?lang=en"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://avvstancamarcello.github.io/Financial-Authority-Database/?lang=fr"/>
+        <xhtml:link rel="alternate" hreflang="de" href="https://avvstancamarcello.github.io/Financial-Authority-Database/?lang=de"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://avvstancamarcello.github.io/Financial-Authority-Database/?lang=es"/>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://avvstancamarcello.github.io/Financial-Authority-Database/?lang=ar"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://avvstancamarcello.github.io/Financial-Authority-Database/?lang=zh"/>
+        <xhtml:link rel="alternate" hreflang="hi" href="https://avvstancamarcello.github.io/Financial-Authority-Database/?lang=hi"/>
+        <xhtml:link rel="alternate" hreflang="vi" href="https://avvstancamarcello.github.io/Financial-Authority-Database/?lang=vi"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://avvstancamarcello.github.io/Financial-Authority-Database/?lang=pt"/>
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://avvstancamarcello.github.io/Financial-Authority-Database/?lang=en"/>
     </url>
     
-    <!-- GERMANIA - tutelatruffe.de -->
     <url>
-        <loc>https://tutelatruffe.de/</loc>
-        <lastmod>2026-01-26</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>1.0</priority>
-        <xhtml:link rel="alternate" hreflang="it" href="https://tutelatruffe.it/"/>
-        <xhtml:link rel="alternate" hreflang="de" href="https://tutelatruffe.de/"/>
-        <xhtml:link rel="alternate" hreflang="fr" href="https://tutelatruffe.fr/"/>
-        <xhtml:link rel="alternate" hreflang="pl" href="https://tutelatruffe.pl/"/>
-        <xhtml:link rel="alternate" hreflang="en-GB" href="https://tutelatruffe.co.uk/"/>
-        <xhtml:link rel="alternate" hreflang="ar-EG" href="https://tutelatruffe.eg/"/>
-        <xhtml:link rel="alternate" hreflang="x-default" href="https://tutelatruffe.it/"/>
-    </url>
-    
-    <!-- FRANCIA - tutelatruffe.fr -->
-    <url>
-        <loc>https://tutelatruffe.fr/</loc>
-        <lastmod>2026-01-26</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>1.0</priority>
-        <xhtml:link rel="alternate" hreflang="it" href="https://tutelatruffe.it/"/>
-        <xhtml:link rel="alternate" hreflang="de" href="https://tutelatruffe.de/"/>
-        <xhtml:link rel="alternate" hreflang="fr" href="https://tutelatruffe.fr/"/>
-        <xhtml:link rel="alternate" hreflang="pl" href="https://tutelatruffe.pl/"/>
-        <xhtml:link rel="alternate" hreflang="en-GB" href="https://tutelatruffe.co.uk/"/>
-        <xhtml:link rel="alternate" hreflang="ar-EG" href="https://tutelatruffe.eg/"/>
-        <xhtml:link rel="alternate" hreflang="x-default" href="https://tutelatruffe.it/"/>
-    </url>
-    
-    <!-- POLONIA - tutelatruffe.pl -->
-    <url>
-        <loc>https://tutelatruffe.pl/</loc>
-        <lastmod>2026-01-26</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>1.0</priority>
-        <xhtml:link rel="alternate" hreflang="it" href="https://tutelatruffe.it/"/>
-        <xhtml:link rel="alternate" hreflang="de" href="https://tutelatruffe.de/"/>
-        <xhtml:link rel="alternate" hreflang="fr" href="https://tutelatruffe.fr/"/>
-        <xhtml:link rel="alternate" hreflang="pl" href="https://tutelatruffe.pl/"/>
-        <xhtml:link rel="alternate" hreflang="en-GB" href="https://tutelatruffe.co.uk/"/>
-        <xhtml:link rel="alternate" hreflang="ar-EG" href="https://tutelatruffe.eg/"/>
-        <xhtml:link rel="alternate" hreflang="x-default" href="https://tutelatruffe.it/"/>
-    </url>
-    
-    <!-- UK - tutelatruffe.co.uk -->
-    <url>
-        <loc>https://tutelatruffe.co.uk/</loc>
-        <lastmod>2026-01-26</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>1.0</priority>
-        <xhtml:link rel="alternate" hreflang="it" href="https://tutelatruffe.it/"/>
-        <xhtml:link rel="alternate" hreflang="de" href="https://tutelatruffe.de/"/>
-        <xhtml:link rel="alternate" hreflang="fr" href="https://tutelatruffe.fr/"/>
-        <xhtml:link rel="alternate" hreflang="pl" href="https://tutelatruffe.pl/"/>
-        <xhtml:link rel="alternate" hreflang="en-GB" href="https://tutelatruffe.co.uk/"/>
-        <xhtml:link rel="alternate" hreflang="ar-EG" href="https://tutelatruffe.eg/"/>
-        <xhtml:link rel="alternate" hreflang="x-default" href="https://tutelatruffe.it/"/>
-    </url>
-    
-    <!-- EGITTO - tutelatruffe.eg -->
-    <url>
-        <loc>https://tutelatruffe.eg/</loc>
-        <lastmod>2026-01-26</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>1.0</priority>
-        <xhtml:link rel="alternate" hreflang="it" href="https://tutelatruffe.it/"/>
-        <xhtml:link rel="alternate" hreflang="de" href="https://tutelatruffe.de/"/>
-        <xhtml:link rel="alternate" hreflang="fr" href="https://tutelatruffe.fr/"/>
-        <xhtml:link rel="alternate" hreflang="pl" href="https://tutelatruffe.pl/"/>
-        <xhtml:link rel="alternate" hreflang="en-GB" href="https://tutelatruffe.co.uk/"/>
-        <xhtml:link rel="alternate" hreflang="ar-EG" href="https://tutelatruffe.eg/"/>
-        <xhtml:link rel="alternate" hreflang="x-default" href="https://tutelatruffe.it/"/>
-    </url>
-
-    <!-- ============================================= -->
-    <!-- PAGINE SECONDARIE COMUNI                     -->
-    <!-- ============================================= -->
-    
-    <!-- Referenze Istituzionali -->
-    <url>
-        <loc>https://tutelatruffe.it/referenze.html</loc>
-        <lastmod>2026-01-26</lastmod>
+        <loc>https://avvstancamarcello.github.io/Financial-Authority-Database/referenze.html</loc>
+        <lastmod>2026-05-15</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.9</priority>
+        <xhtml:link rel="alternate" hreflang="it" href="https://avvstancamarcello.github.io/Financial-Authority-Database/referenze.html?lang=it"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://avvstancamarcello.github.io/Financial-Authority-Database/referenze.html?lang=en"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://avvstancamarcello.github.io/Financial-Authority-Database/referenze.html?lang=fr"/>
+        <xhtml:link rel="alternate" hreflang="de" href="https://avvstancamarcello.github.io/Financial-Authority-Database/referenze.html?lang=de"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://avvstancamarcello.github.io/Financial-Authority-Database/referenze.html?lang=es"/>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://avvstancamarcello.github.io/Financial-Authority-Database/referenze.html?lang=ar"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://avvstancamarcello.github.io/Financial-Authority-Database/referenze.html?lang=zh"/>
+        <xhtml:link rel="alternate" hreflang="hi" href="https://avvstancamarcello.github.io/Financial-Authority-Database/referenze.html?lang=hi"/>
+        <xhtml:link rel="alternate" hreflang="vi" href="https://avvstancamarcello.github.io/Financial-Authority-Database/referenze.html?lang=vi"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://avvstancamarcello.github.io/Financial-Authority-Database/referenze.html?lang=pt"/>
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://avvstancamarcello.github.io/Financial-Authority-Database/referenze.html?lang=en"/>
     </url>
 
-    <!-- Curriculum Avv. Stanca -->
     <url>
-        <loc>https://tutelatruffe.it/curriculum.html</loc>
-        <lastmod>2026-01-26</lastmod>
+        <loc>https://avvstancamarcello.github.io/Financial-Authority-Database/curriculum.html</loc>
+        <lastmod>2026-05-15</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
+        <xhtml:link rel="alternate" hreflang="it" href="https://avvstancamarcello.github.io/Financial-Authority-Database/curriculum.html?lang=it"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://avvstancamarcello.github.io/Financial-Authority-Database/curriculum.html?lang=en"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://avvstancamarcello.github.io/Financial-Authority-Database/curriculum.html?lang=fr"/>
+        <xhtml:link rel="alternate" hreflang="de" href="https://avvstancamarcello.github.io/Financial-Authority-Database/curriculum.html?lang=de"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://avvstancamarcello.github.io/Financial-Authority-Database/curriculum.html?lang=es"/>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://avvstancamarcello.github.io/Financial-Authority-Database/curriculum.html?lang=ar"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://avvstancamarcello.github.io/Financial-Authority-Database/curriculum.html?lang=zh"/>
+        <xhtml:link rel="alternate" hreflang="hi" href="https://avvstancamarcello.github.io/Financial-Authority-Database/curriculum.html?lang=hi"/>
+        <xhtml:link rel="alternate" hreflang="vi" href="https://avvstancamarcello.github.io/Financial-Authority-Database/curriculum.html?lang=vi"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://avvstancamarcello.github.io/Financial-Authority-Database/curriculum.html?lang=pt"/>
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://avvstancamarcello.github.io/Financial-Authority-Database/curriculum.html?lang=en"/>
     </url>
     
-    <!-- Privacy Policy -->
     <url>
-        <loc>https://tutelatruffe.it/privacy.html</loc>
-        <lastmod>2026-01-26</lastmod>
+        <loc>https://avvstancamarcello.github.io/Financial-Authority-Database/privacy.html</loc>
+        <lastmod>2026-05-15</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
+        <xhtml:link rel="alternate" hreflang="it" href="https://avvstancamarcello.github.io/Financial-Authority-Database/privacy.html?lang=it"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://avvstancamarcello.github.io/Financial-Authority-Database/privacy.html?lang=en"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://avvstancamarcello.github.io/Financial-Authority-Database/privacy.html?lang=fr"/>
+        <xhtml:link rel="alternate" hreflang="de" href="https://avvstancamarcello.github.io/Financial-Authority-Database/privacy.html?lang=de"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://avvstancamarcello.github.io/Financial-Authority-Database/privacy.html?lang=es"/>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://avvstancamarcello.github.io/Financial-Authority-Database/privacy.html?lang=ar"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://avvstancamarcello.github.io/Financial-Authority-Database/privacy.html?lang=zh"/>
+        <xhtml:link rel="alternate" hreflang="hi" href="https://avvstancamarcello.github.io/Financial-Authority-Database/privacy.html?lang=hi"/>
+        <xhtml:link rel="alternate" hreflang="vi" href="https://avvstancamarcello.github.io/Financial-Authority-Database/privacy.html?lang=vi"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://avvstancamarcello.github.io/Financial-Authority-Database/privacy.html?lang=pt"/>
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://avvstancamarcello.github.io/Financial-Authority-Database/privacy.html?lang=en"/>
     </url>
 
-    <!-- Terms of Service -->
     <url>
-        <loc>https://tutelatruffe.it/terms.html</loc>
-        <lastmod>2026-01-26</lastmod>
+        <loc>https://avvstancamarcello.github.io/Financial-Authority-Database/terms.html</loc>
+        <lastmod>2026-05-15</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
+        <xhtml:link rel="alternate" hreflang="it" href="https://avvstancamarcello.github.io/Financial-Authority-Database/terms.html?lang=it"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://avvstancamarcello.github.io/Financial-Authority-Database/terms.html?lang=en"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://avvstancamarcello.github.io/Financial-Authority-Database/terms.html?lang=fr"/>
+        <xhtml:link rel="alternate" hreflang="de" href="https://avvstancamarcello.github.io/Financial-Authority-Database/terms.html?lang=de"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://avvstancamarcello.github.io/Financial-Authority-Database/terms.html?lang=es"/>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://avvstancamarcello.github.io/Financial-Authority-Database/terms.html?lang=ar"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://avvstancamarcello.github.io/Financial-Authority-Database/terms.html?lang=zh"/>
+        <xhtml:link rel="alternate" hreflang="hi" href="https://avvstancamarcello.github.io/Financial-Authority-Database/terms.html?lang=hi"/>
+        <xhtml:link rel="alternate" hreflang="vi" href="https://avvstancamarcello.github.io/Financial-Authority-Database/terms.html?lang=vi"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://avvstancamarcello.github.io/Financial-Authority-Database/terms.html?lang=pt"/>
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://avvstancamarcello.github.io/Financial-Authority-Database/terms.html?lang=en"/>
     </url>
     
-    <!-- Database JSON (per indicizzazione contenuto) -->
     <url>
-        <loc>https://tutelatruffe.it/financial_authorities_database.json</loc>
-        <lastmod>2026-01-26</lastmod>
+        <loc>https://avvstancamarcello.github.io/Financial-Authority-Database/financial_authorities_database.json</loc>
+        <lastmod>2026-05-15</lastmod>
         <changefreq>daily</changefreq>
         <priority>0.9</priority>
+        <xhtml:link rel="alternate" hreflang="it" href="https://avvstancamarcello.github.io/Financial-Authority-Database/financial_authorities_database.json?lang=it"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://avvstancamarcello.github.io/Financial-Authority-Database/financial_authorities_database.json?lang=en"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://avvstancamarcello.github.io/Financial-Authority-Database/financial_authorities_database.json?lang=fr"/>
+        <xhtml:link rel="alternate" hreflang="de" href="https://avvstancamarcello.github.io/Financial-Authority-Database/financial_authorities_database.json?lang=de"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://avvstancamarcello.github.io/Financial-Authority-Database/financial_authorities_database.json?lang=es"/>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://avvstancamarcello.github.io/Financial-Authority-Database/financial_authorities_database.json?lang=ar"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://avvstancamarcello.github.io/Financial-Authority-Database/financial_authorities_database.json?lang=zh"/>
+        <xhtml:link rel="alternate" hreflang="hi" href="https://avvstancamarcello.github.io/Financial-Authority-Database/financial_authorities_database.json?lang=hi"/>
+        <xhtml:link rel="alternate" hreflang="vi" href="https://avvstancamarcello.github.io/Financial-Authority-Database/financial_authorities_database.json?lang=vi"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://avvstancamarcello.github.io/Financial-Authority-Database/financial_authorities_database.json?lang=pt"/>
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://avvstancamarcello.github.io/Financial-Authority-Database/financial_authorities_database.json?lang=en"/>
     </url>
 
-    <!-- Censored Countries -->
     <url>
-        <loc>https://tutelatruffe.it/censored-countries.html</loc>
-        <lastmod>2026-01-26</lastmod>
+        <loc>https://avvstancamarcello.github.io/Financial-Authority-Database/censored-countries.html</loc>
+        <lastmod>2026-05-15</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.5</priority>
+        <xhtml:link rel="alternate" hreflang="it" href="https://avvstancamarcello.github.io/Financial-Authority-Database/censored-countries.html?lang=it"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://avvstancamarcello.github.io/Financial-Authority-Database/censored-countries.html?lang=en"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://avvstancamarcello.github.io/Financial-Authority-Database/censored-countries.html?lang=fr"/>
+        <xhtml:link rel="alternate" hreflang="de" href="https://avvstancamarcello.github.io/Financial-Authority-Database/censored-countries.html?lang=de"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://avvstancamarcello.github.io/Financial-Authority-Database/censored-countries.html?lang=es"/>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://avvstancamarcello.github.io/Financial-Authority-Database/censored-countries.html?lang=ar"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://avvstancamarcello.github.io/Financial-Authority-Database/censored-countries.html?lang=zh"/>
+        <xhtml:link rel="alternate" hreflang="hi" href="https://avvstancamarcello.github.io/Financial-Authority-Database/censored-countries.html?lang=hi"/>
+        <xhtml:link rel="alternate" hreflang="vi" href="https://avvstancamarcello.github.io/Financial-Authority-Database/censored-countries.html?lang=vi"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://avvstancamarcello.github.io/Financial-Authority-Database/censored-countries.html?lang=pt"/>
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://avvstancamarcello.github.io/Financial-Authority-Database/censored-countries.html?lang=en"/>
     </url>
 
-    <!-- Petition Documents JSON -->
     <url>
-        <loc>https://tutelatruffe.it/petition_documents.json</loc>
-        <lastmod>2026-01-26</lastmod>
+        <loc>https://avvstancamarcello.github.io/Financial-Authority-Database/petition_documents.json</loc>
+        <lastmod>2026-05-15</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
+        <xhtml:link rel="alternate" hreflang="it" href="https://avvstancamarcello.github.io/Financial-Authority-Database/petition_documents.json?lang=it"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://avvstancamarcello.github.io/Financial-Authority-Database/petition_documents.json?lang=en"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://avvstancamarcello.github.io/Financial-Authority-Database/petition_documents.json?lang=fr"/>
+        <xhtml:link rel="alternate" hreflang="de" href="https://avvstancamarcello.github.io/Financial-Authority-Database/petition_documents.json?lang=de"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://avvstancamarcello.github.io/Financial-Authority-Database/petition_documents.json?lang=es"/>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://avvstancamarcello.github.io/Financial-Authority-Database/petition_documents.json?lang=ar"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://avvstancamarcello.github.io/Financial-Authority-Database/petition_documents.json?lang=zh"/>
+        <xhtml:link rel="alternate" hreflang="hi" href="https://avvstancamarcello.github.io/Financial-Authority-Database/petition_documents.json?lang=hi"/>
+        <xhtml:link rel="alternate" hreflang="vi" href="https://avvstancamarcello.github.io/Financial-Authority-Database/petition_documents.json?lang=vi"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://avvstancamarcello.github.io/Financial-Authority-Database/petition_documents.json?lang=pt"/>
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://avvstancamarcello.github.io/Financial-Authority-Database/petition_documents.json?lang=en"/>
     </url>
 
 </urlset>
