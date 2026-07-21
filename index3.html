@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="index, follow">
+  
+  <title>AWEV - Authority in the World Effective Verify</title>
+  <meta name="description" content="Official International Database of Financial Authorities. The Global Register for KYC, AML and Regulatory Compliance.">
+  
+  <style>
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      background: #0B1F3A;
+      color: #FFFFFF;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      text-align: center;
+    }
+    .loader {
+      max-width: 600px;
+      padding: 40px;
+    }
+    .logo {
+      font-size: 32px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      margin-bottom: 10px;
+      color: #00AEEF;
+    }
+    .subtitle {
+      font-size: 14px;
+      opacity: 0.8;
+      margin-bottom: 30px;
+    }
+    .spinner {
+      border: 3px solid rgba(255,255,255,0.2);
+      border-top: 3px solid #00AEEF;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      animation: spin 1s linear infinite;
+      margin: 0 auto 20px;
+    }
+    @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+  </style>
+
+  <script>
+    (function() {
+      const host = window.location.hostname;
+      
+      // CASO 1: Entri da awev.org o www.awev.org → vai sempre in /en/
+      if (host.includes("awev.org")) {
+        window.location.replace("https://www.awev.org/en/");
+      } 
+      // CASO 2: Entri da amevfirenze.it → vai alla home con selettore 10 lingue
+      else if (host.includes("amevfirenze.it")) {
+        window.location.replace("https://www.amevfirenze.it/");
+      }
+      // CASO 3: Fallback di sicurezza → vai in EN
+      else {
+        window.location.replace("/en/");
+      }
+    })();
+  </script>
+</head>
+<body>
+  <div class="loader">
+    <div class="logo">AWEV</div>
+    <div class="subtitle">Authority in the World Effective Verify</div>
+    <div class="spinner"></div>
+    <p>Loading...</p>
+  </div>
+</body>
+</html>
