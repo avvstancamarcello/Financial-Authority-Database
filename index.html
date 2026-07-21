@@ -1,6 +1,24 @@
 <!DOCTYPE html>
 <html lang="it" prefix="og: https://ogp.me/ns#">
 <head>
+    <script>
+        (function() {
+            const { protocol, hostname, pathname, search, hash } = window.location;
+            if (protocol !== 'http:' && protocol !== 'https:') return;
+
+            const host = hostname.toLowerCase();
+            const isAwevHost = host === 'awev.org' || host === 'www.awev.org' || host.endsWith('.awev.org');
+            if (!isAwevHost) return;
+
+            const normalizedPath = pathname.replace(/\/+$/, '') || '/';
+            const targetPath = normalizedPath === '/' ? '/en/' : pathname;
+            const targetUrl = `https://www.awev.org${targetPath}${search}${hash}`;
+
+            if (window.location.href !== targetUrl) {
+                window.location.replace(targetUrl);
+            }
+        })();
+    </script>
     <!-- Google Tag Manager -->
     <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
     new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
@@ -4589,6 +4607,16 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 'es': '🌐 Traducir', 'pt': '🌐 Traduzir', 'zh': '🌐 翻译', 'hi': '🌐 अनुवाद करें',
                 'ar': '🌐 ترجم', 'vi': '🌐 Dịch', 'ja': '🌐 翻訳', 'ko': '🌐 번역'
             };
+            const escapeHtmlAttribute = (value) => String(value ?? '')
+                .replace(/&/g, '&amp;')
+                .replace(/"/g, '&quot;')
+                .replace(/'/g, '&#39;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;');
+            const safeCountryName = escapeHtmlAttribute(country.country_name);
+            const safeAuthorityName = escapeHtmlAttribute(country.financial_authority.name);
+            const safeAuthorityEmail = escapeHtmlAttribute(country.financial_authority.authorityEmail);
+            const safeCountryLanguage = escapeHtmlAttribute(getCountryLanguage(country.country_name));
 
             modalContent.innerHTML = `
                 ${sanctionAlertHTML}
@@ -4612,7 +4640,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     ${socialHTML ? `<p style="margin-top:15px;"><strong>${translations[currentLanguage].modalSocial || 'Social'}:</strong> ${socialHTML}</p>` : ''}
                     <div style="margin-top: 20px; display: flex; align-items: center; flex-wrap: wrap; gap: 10px;">
                         <h3 style="margin: 0;">${translations[currentLanguage].modalNotes || 'Notes'}:</h3>
-                        <button id="translateNotesBtn" class="translate-btn" onclick="translateNotes('${country.country_name}')">
+                        <button id="translateNotesBtn" class="translate-btn" onclick="translateNotes(this.dataset.country)" data-country="${safeCountryName}">
                             ${translateBtnText[currentLanguage] || '🌐 Translate'}
                         </button>
                     </div>
@@ -4620,18 +4648,18 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 </div>
                 <div style="margin-top: 25px; padding-top: 20px; border-top: 2px solid #e0e0e0; text-align: center;">
                     <div style="display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-bottom: 15px;">
-                        <button class="ask-authority-btn" onclick="openInstructionsFullscreen('${country.country_name}', '${country.financial_authority.name}', 'en');">
+                        <button class="ask-authority-btn" onclick="openInstructionsFullscreen(this.dataset.country, this.dataset.authorityName, this.dataset.language);" data-country="${safeCountryName}" data-authority-name="${safeAuthorityName}" data-language="en">
                             ${translations[currentLanguage].askAuthorityBtnEN || '🇬🇧 Ask this Authority for info!'}
                         </button>
-                        <button class="ask-authority-btn native-lang" onclick="openInstructionsFullscreen('${country.country_name}', '${country.financial_authority.name}', '${getCountryLanguage(country.country_name)}');">
+                        <button class="ask-authority-btn native-lang" onclick="openInstructionsFullscreen(this.dataset.country, this.dataset.authorityName, this.dataset.language);" data-country="${safeCountryName}" data-authority-name="${safeAuthorityName}" data-language="${safeCountryLanguage}">
                             ${getCountryFlag(country.country_name)} ${translations[currentLanguage].askAuthorityBtnNative || 'Chiedi informazioni a questa Autorità!'}
                         </button>
                     </div>
                     <div style="display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;">
-                        <button onclick="openReportForm('${country.country_name}', '${country.financial_authority.name}', '${country.financial_authority.authorityEmail}');" style="background: #dc2626; color: #ffffff; border: 2px solid #fca5a5; border-radius: 999px; padding: 0.7rem 1.5rem; font-size: 1rem; font-weight: 600; display: inline-flex; align-items: center; gap: 8px; cursor: pointer; box-shadow: 0 4px 12px rgba(220, 38, 38, 0.4); transition: all 0.3s ease;" onmouseover="this.style.background='#b91c1c'; this.style.boxShadow='0 6px 18px rgba(220, 38, 38, 0.6)';" onmouseout="this.style.background='#dc2626'; this.style.boxShadow='0 4px 12px rgba(220, 38, 38, 0.4)';">
+                        <button onclick="openReportForm(this.dataset.country, this.dataset.authorityName, this.dataset.authorityEmail);" data-country="${safeCountryName}" data-authority-name="${safeAuthorityName}" data-authority-email="${safeAuthorityEmail}" style="background: #dc2626; color: #ffffff; border: 2px solid #fca5a5; border-radius: 999px; padding: 0.7rem 1.5rem; font-size: 1rem; font-weight: 600; display: inline-flex; align-items: center; gap: 8px; cursor: pointer; box-shadow: 0 4px 12px rgba(220, 38, 38, 0.4); transition: all 0.3s ease;" onmouseover="this.style.background='#b91c1c'; this.style.boxShadow='0 6px 18px rgba(220, 38, 38, 0.6)';" onmouseout="this.style.background='#dc2626'; this.style.boxShadow='0 4px 12px rgba(220, 38, 38, 0.4)';">
                             ⚠️ ${translations[currentLanguage].reportSuspectButton || 'Segnala Sospetto'}
                         </button>
-                        <button onclick="openReportForm('${country.country_name}', '${country.financial_authority.name}', '${country.financial_authority.authorityEmail}');" style="background: #000000; color: #39ff14; border: 2px solid #39ff14; border-radius: 999px; padding: 0.7rem 1.5rem; font-size: 1rem; font-weight: 600; display: inline-flex; align-items: center; gap: 8px; cursor: pointer; box-shadow: 0 4px 12px rgba(57, 255, 20, 0.4); transition: all 0.3s ease; text-shadow: 0 0 8px rgba(57,255,20,0.6);" onmouseover="this.style.background='#0a0a0a'; this.style.boxShadow='0 6px 18px rgba(57, 255, 20, 0.7)';" onmouseout="this.style.background='#000000'; this.style.boxShadow='0 4px 12px rgba(57, 255, 20, 0.4)';">
+                        <button onclick="openReportForm(this.dataset.country, this.dataset.authorityName, this.dataset.authorityEmail);" data-country="${safeCountryName}" data-authority-name="${safeAuthorityName}" data-authority-email="${safeAuthorityEmail}" style="background: #000000; color: #39ff14; border: 2px solid #39ff14; border-radius: 999px; padding: 0.7rem 1.5rem; font-size: 1rem; font-weight: 600; display: inline-flex; align-items: center; gap: 8px; cursor: pointer; box-shadow: 0 4px 12px rgba(57, 255, 20, 0.4); transition: all 0.3s ease; text-shadow: 0 0 8px rgba(57,255,20,0.6);" onmouseover="this.style.background='#0a0a0a'; this.style.boxShadow='0 6px 18px rgba(57, 255, 20, 0.7)';" onmouseout="this.style.background='#000000'; this.style.boxShadow='0 4px 12px rgba(57, 255, 20, 0.4)';">
                             🚨 ${translations[currentLanguage].reportAbuseButton || "Segnala l'abuso"}
                         </button>
                     </div>
@@ -5331,7 +5359,6 @@ https://avvstancamarcello.github.io/Financial-Authority-Database/
     </footer>
 </body>
 </html>
-
 
 
 
