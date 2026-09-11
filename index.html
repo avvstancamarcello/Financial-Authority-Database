@@ -1,24 +1,6 @@
 <!DOCTYPE html>
 <html lang="it" prefix="og: https://ogp.me/ns#">
 <head>
-    <script>
-        (function() {
-            const { protocol, hostname, pathname, search, hash } = window.location;
-            if (protocol !== 'http:' && protocol !== 'https:') return;
-
-            const host = hostname.toLowerCase();
-            const isAwevHost = host === 'awev.org' || host === 'www.awev.org' || host.endsWith('.awev.org');
-            if (!isAwevHost) return;
-
-            const normalizedPath = pathname.replace(/\/+$/, '') || '/';
-            const targetPath = normalizedPath === '/' ? '/en/' : pathname;
-            const targetUrl = `https://www.awev.org${targetPath}${search}${hash}`;
-
-            if (window.location.href !== targetUrl) {
-                window.location.replace(targetUrl);
-            }
-        })();
-    </script>
     <!-- Google Tag Manager -->
     <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
     new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
