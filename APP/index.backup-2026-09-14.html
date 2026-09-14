@@ -1448,10 +1448,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <!-- Banner Alfabeto A-Z - Sfondo Nero, Testo Verde Fosforo -->
             <div style="background: #000000; padding: 18px 20px; margin-bottom: 15px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.3); border: 2px solid #39ff14;">
                 <div style="display: flex; align-items: center; justify-content: center; gap: 12px; flex-wrap: wrap;">
-                    <h2 id="azTitle" style="margin: 0; color: #39ff14; font-size: 1.4em; text-shadow: 0 0 10px rgba(57, 255, 20, 0.5);">Accedi immediatamente alle Authority tramite l'Alfabeto GRAFICO A-Z!</h2>
-                    <button id="instructionsBtn" class="instructions-toggle" type="button" onclick="toggleInstructions()" aria-controls="instructionsPopup" aria-expanded="false" style="background: #000000; color: #39ff14; border: 2px solid #39ff14; border-radius: 999px; padding: 0.5rem 1.2rem; font-size: 0.9rem; display: inline-flex; align-items: center; gap: 6px; cursor: pointer; box-shadow: 0 3px 12px rgba(57, 255, 20, 0.4); font-weight: 600;">📖 Istruzioni</button>
+                    <h2 style="margin: 0; color: #39ff14; font-size: 1.4em; text-shadow: 0 0 10px rgba(57, 255, 20, 0.5);">Accedi immediatamente alle Authority tramite l'Alfabeto GRAFICO <span style="background: #ffffff; color: #000000; font-weight: 900; font-size: 1em; padding: 6px 12px; border-radius: 8px; font-family: monospace; margin-left: 8px;">A-Z</span>!</h2>
+                    <button id="instructionsToggle" class="instructions-toggle" type="button" onclick="toggleInstructions()" aria-controls="instructionsPopup" aria-expanded="false" style="background: #000000; color: #39ff14; border: 2px solid #39ff14; border-radius: 999px; padding: 0.5rem 1.2rem; font-size: 0.9rem; display: inline-flex; align-items: center; gap: 6px; cursor: pointer; box-shadow: 0 3px 12px rgba(57, 255, 20, 0.4); font-weight: 600;">
+                        📖 Istruzioni
+                    </button>
                 </div>
-                <p id="azSubtitle" style="text-align: center; font-size: 1.1em; color: #39ff14; margin: 12px 0 0 0; opacity: 0.9;">Scorri l'Alfabeto e seleziona la Bandiera! Database più completo del mondo!</p>
+                <p style="text-align: center; font-size: 1.1em; color: #39ff14; margin: 12px 0 0 0; opacity: 0.9;">
+                    Scorri l'Alfabeto e seleziona la Bandiera!&nbsp;&nbsp;&nbsp; <span class="keyword-pulse-red">Database più completo del mondo!</span>
+                </p>
             </div>
             <div class="flags-grid" id="flagsGrid"></div>
         </div>
@@ -1722,9 +1726,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 modalNotes: "Note",
                 privacyStatement: "🔒 PRIVACY: Questa app NON raccoglie dati personali degli utenti",
                 privacyLink: "Privacy Policy",
-                azTitle: "Accedi immediatamente alle Authority tramite l'Alfabeto GRAFICO A-Z!",
-                azSubtitle: "Scorri l'Alfabeto e seleziona la Bandiera! Database più completo del mondo!",
-                instructionsLabel: "Istruzioni",
+                instructionsLabel: "Scegli la tua LINGUA, premi pulsante, e Leggi ISTRUZIONI.",
                 searchAdviceButton: "Perché questa ricerca è importante?",
                 searchAdviceTitle: "🔍 Prima di usare il tasto &quot;Cerca&quot;",
                 searchAdvice1: "Accetta con umiltà il dovere di cercare informazioni verificate.",
@@ -2039,9 +2041,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 modalNotes: "Notes",
                 privacyStatement: "🔒 PRIVACY: This app does NOT collect user personal data",
                 privacyLink: "Privacy Policy",
-                azTitle: "Access the Authorities immediately through the GRAPHIC A-Z Alphabet!",
-                azSubtitle: "Scroll through the Alphabet and select the Flag! World's most complete database!",
-                instructionsLabel: "Instructions",
+                instructionsLabel: "Read legal guide and texts in your language - On/Off",
                 searchAdviceButton: "Why is this search important?",
                 searchAdviceTitle: "🔍 Before using the &quot;Search&quot; button",
                 searchAdvice1: "Humbly accept your duty to look for verified, authoritative information.",
@@ -2144,9 +2144,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 modalNotes: "Notes",
                 privacyStatement: "🔒 CONFIDENTIALITÉ: Cette app ne collecte PAS de données personnelles",
                 privacyLink: "Politique de Confidentialité",
-                azTitle: "Accédez immédiatement aux autorités via l'alphabet GRAPHIQUE A-Z !",
-                azSubtitle: "Faites défiler l'alphabet et sélectionnez le drapeau ! La base de données la plus complète au monde !",
-                instructionsLabel: "Instructions",
+                instructionsLabel: "Lisez les instructions et textes dans votre langue - On/Off",
                 searchAdviceButton: "Pourquoi cette recherche est‑elle importante ?",
                 searchAdviceTitle: "🔍 Avant d'utiliser le bouton &quot;Rechercher&quot;",
                 searchAdvice1: "Acceptez avec humilité le devoir de rechercher des informations vérifiées et fiables.",
@@ -2245,9 +2243,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 modalNotes: "Hinweise",
                 privacyStatement: "🔒 DATENSCHUTZ: Diese App sammelt KEINE persönlichen Daten",
                 privacyLink: "Datenschutzerklärung",
-                azTitle: "Greifen Sie sofort über das GRAFISCHE A-Z-Alphabet auf die Behörden zu!",
-                azSubtitle: "Scrollen Sie durch das Alphabet und wählen Sie die Flagge aus! Die vollständigste Datenbank der Welt!",
-                instructionsLabel: "Anweisungen",
+                instructionsLabel: "Anleitung und Texte in Ihrer Sprache lesen - On/Off",
                 searchAdviceButton: "Warum ist diese Suche so wichtig?",
                 searchAdviceTitle: "🔍 Bevor Sie auf &quot;Suchen&quot; klicken",
                 searchAdvice1: "Akzeptieren Sie in Demut die Pflicht, geprüfte und verlässliche Informationen zu suchen.",
@@ -2346,9 +2342,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 modalNotes: "Notas",
                 privacyStatement: "🔒 PRIVACIDAD: Esta app NO recopila datos personales",
                 privacyLink: "Política de Privacidad",
-                azTitle: "¡Accede inmediatamente a las Autoridades mediante el Alfabeto GRÁFICO A-Z!",
-                azSubtitle: "¡Desplázate por el alfabeto y selecciona la bandera! ¡La base de datos más completa del mundo!",
-                instructionsLabel: "Instrucciones",
+                instructionsLabel: "Lee instrucciones y textos en tu idioma - On/Off",
                 searchAdviceButton: "¿Por qué es tan importante esta búsqueda?",
                 searchAdviceTitle: "🔍 Antes de pulsar el botón &quot;Buscar&quot;",
                 searchAdvice1: "Acepta con humildad el deber de buscar información verificada y fiable.",
@@ -2600,7 +2594,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
         function toggleInstructions() {
             const popup = document.getElementById('instructionsPopup');
-            const toggle = document.getElementById('instructionsBtn') || document.getElementById('instructionsToggle');
+            const toggle = document.getElementById('instructionsToggle');
             if (!popup || !toggle) return;
             const isVisible = popup.classList.toggle('visible');
             toggle.setAttribute('aria-expanded', isVisible ? 'true' : 'false');
@@ -2857,20 +2851,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     element.placeholder = translations[lang][key];
                 }
             });
-
-            const t = translations[lang] || translations.en;
-            const azTitle = document.getElementById('azTitle');
-            const azSubtitle = document.getElementById('azSubtitle');
-            const instructionsBtn = document.getElementById('instructionsBtn');
-            if (azTitle) azTitle.textContent = t.azTitle || translations.en.azTitle;
-            if (azSubtitle) azSubtitle.textContent = t.azSubtitle || translations.en.azSubtitle;
-            if (instructionsBtn) instructionsBtn.textContent = '📖 ' + (t.instructionsLabel || translations.en.instructionsLabel);
-
             // Aggiorna il contenuto del popup istruzioni, se disponibile nella lingua selezionata
             const instructionsPopup = document.getElementById('instructionsPopup');
             if (instructionsPopup) {
+                const langData = translations[lang] || translations.en;
                 const fallback = translations.en && translations.en.instructionsContent ? translations.en.instructionsContent : '';
-                const content = t && t.instructionsContent ? t.instructionsContent : fallback;
+                const content = langData && langData.instructionsContent ? langData.instructionsContent : fallback;
                 if (content) {
                     instructionsPopup.innerHTML = content;
                 }
