@@ -1354,7 +1354,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <span class="chevron" aria-hidden="true">▼</span>
         </button>
         <div class="security-banner-body" id="securityBannerBody">
-            <p data-i18n="securityText">Accesso immediato alle home page delle Autority Finanziarie del Governo per verificare la legittimità e regolarità di imprese finanziarie, di persone ed entità che offrono servizi finanziari, e ricevono bonifici.</p>
+            <p data-i18n-html="securityText">Accesso immediato alle home page delle Autority Finanziarie del Governo per verificare la legittimità e regolarità di imprese finanziarie, di persone ed entità che offrono servizi finanziari, e ricevono bonifici.</p>
         </div>
     </aside>
 
@@ -1379,51 +1379,53 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <div id="securityPopup" class="security-popup" role="dialog" aria-modal="false" aria-hidden="true">
             <button type="button" class="security-popup-close" onclick="toggleSecurityBanner()" aria-label="Chiudi avviso">×</button>
             <h2 data-i18n="securityTitle">✅ SITO UFFICIALE LEGITTIMO - DATABASE DI PROTEZIONE DEI CONSUMATORI</h2>
-            <p data-i18n="securityText">Accesso immediato alle home page delle Autority Finanziarie del Governo per verificare la legittimità e regolarità di imprese finanziarie, di persone ed entità che offrono servizi finanziari, e ricevono bonifici.</p>
+            <p data-i18n-html="securityText">Accesso immediato alle home page delle Autority Finanziarie del Governo per verificare la legittimità e regolarità di imprese finanziarie, di persone ed entità che offrono servizi finanziari, e ricevono bonifici.</p>
         </div>
         <div id="instructionsPopup" class="instructions-popup" role="dialog" aria-modal="false" aria-hidden="true">
-            <button type="button" class="instructions-popup-close" onclick="toggleInstructions()" aria-label="Chiudi guida">×</button>
-            <h2>🛡️ Guida Legale Operativa – Verifica di un’Impresa Finanziaria in 5 Passi</h2>
-            <p>In qualità di avvocato esperto e autore delle strategie descritte in "Scacco Matto alle Truffe" e nelle Petizioni UE 0888/2024 e 0645/2025, ho redatto questa guida operativa.</p>
-            <p>L'obiettivo è trasformare i 239 link del database in uno scudo attivo per proteggere il tuo capitale prima di cliccare su "invia bonifico".</p>
-            <h3>1. Identificazione del Soggetto (Il "Chi" reale)</h3>
-            <p>Prima di ogni operazione, non fidarti del nome che vedi sulla piattaforma di trading. Cerca nella pagina "Contatti" o "Termini e Condizioni" (Legal Notice) della web-page sospetta:</p>
-            <ul>
-                <li>Il nome legale completo della società (es. Brokerage LTD).</li>
-                <li>La sede legale dichiarata.</li>
-                <li>Il numero di licenza (spesso vantano licenze fittizie).</li>
-            </ul>
-            <h3>2. Interrogazione del Database (Il Metodo dei 239 link)</h3>
-            <p>Accedi al Financial Authority Database e seleziona l'autorità del Paese dove la società dichiara di avere la sede:</p>
-            <ul>
-                <li>Se dichiara sede in Italia: vai su CONSOB → Albi e Elenchi → Imprese di investimento autorizzate.</li>
-                <li>Se dichiara sede a Cipro: vai su CySEC.</li>
-                <li>Se dichiara sede nel Regno Unito: vai su FCA.</li>
-            </ul>
-            <p><strong>ATTENZIONE:</strong> se la società non compare o risulta "Warning/Alert", interrompi ogni comunicazione.</p>
-            <h3>3. La Trappola del "Clone" (Verifica dell'URL)</h3>
-            <p>Molti truffatori usano il nome di una società reale ma un sito web diverso.</p>
-            <p>Controlla che l'indirizzo web (URL) registrato nel database dell'Autorità (es. www.verobroker.com) corrisponda esattamente a quello su cui stai navigando.</p>
-            <p>Basta una lettera diversa (es. www.vero-broker.com) per essere di fronte a un clone truffaldino.</p>
-            <h3>4. Verifica dell'IBAN e del Beneficiario</h3>
-            <p>Secondo la mia tesi sostenuta al Parlamento Europeo, il bonifico è il momento del "non ritorno".</p>
-            <p><strong>Regola d'oro:</strong> se il destinatario del bonifico è una persona fisica o una società con un nome diverso da quella che gestisce la piattaforma, sei di fronte a una interposizione di persona.</p>
-            <p>Le imprese finanziarie serie hanno conti correnti intestati alla società stessa, non a "agenti" o "conti di transito" in paesi terzi (es. Lituania o Bulgaria per broker che dicono di essere inglesi).</p>
-            <h3>5. Check-up Tecnologico Finale</h3>
-            <p>Prima di inviare denaro, usa gli strumenti di reputazione menzionati nel mio libro:</p>
-            <ul>
-                <li><strong>Who.is:</strong> verifica da quanto tempo esiste il dominio del sito. Se ha meno di 6-12 mesi ed è stato registrato in modo anonimo, è quasi certamente una truffa.</li>
-                <li><strong>CheckDNS/CheckEmail:</strong> verifica se l'email del tuo "consulente" proviene da un server aziendale reale o da un servizio gratuito/anonimo.</li>
-            </ul>
-            <div class="instructions-popup-note">
-                <p><strong>⚖️ Nota Legale per l'Utente</strong></p>
-                <p>Se la banca non ti ha somministrato il Questionario di Adeguata Verifica (come richiesto nella mia Petizione 0645/2025) e non ti ha avvertito che il destinatario non è presente nelle "White List" delle 239 autorità, potresti avere diritto a un reclamo formale innanzi all'ABF (Arbitro Bancario Finanziario) per omessa vigilanza e violazione degli obblighi di prudenza.</p>
-                <p>Ricorda Socrate: il vero saggio è colui che sa di non sapere. La conoscenza consapevole e la verifica è l'unico antivirus che i truffatori non possono hackerare.</p>
+            <button type="button" class="instructions-popup-close" onclick="toggleInstructions()" data-i18n-aria-label="instructionsCloseAriaLabel" aria-label="Chiudi guida">×</button>
+            <div id="instructionsPopupContent" data-i18n-html="instructionsContent">
+                <h2>🛡️ Guida Legale Operativa – Verifica di un’Impresa Finanziaria in 5 Passi</h2>
+                <p>In qualità di avvocato esperto e autore delle strategie descritte in "Scacco Matto alle Truffe" e nelle Petizioni UE 0888/2024 e 0645/2025, ho redatto questa guida operativa.</p>
+                <p>L'obiettivo è trasformare i 239 link del database in uno scudo attivo per proteggere il tuo capitale prima di cliccare su "invia bonifico".</p>
+                <h3>1. Identificazione del Soggetto (Il "Chi" reale)</h3>
+                <p>Prima di ogni operazione, non fidarti del nome che vedi sulla piattaforma di trading. Cerca nella pagina "Contatti" o "Termini e Condizioni" (Legal Notice) della web-page sospetta:</p>
+                <ul>
+                    <li>Il nome legale completo della società (es. Brokerage LTD).</li>
+                    <li>La sede legale dichiarata.</li>
+                    <li>Il numero di licenza (spesso vantano licenze fittizie).</li>
+                </ul>
+                <h3>2. Interrogazione del Database (Il Metodo dei 239 link)</h3>
+                <p>Accedi al Financial Authority Database e seleziona l'autorità del Paese dove la società dichiara di avere la sede:</p>
+                <ul>
+                    <li>Se dichiara sede in Italia: vai su CONSOB → Albi e Elenchi → Imprese di investimento autorizzate.</li>
+                    <li>Se dichiara sede a Cipro: vai su CySEC.</li>
+                    <li>Se dichiara sede nel Regno Unito: vai su FCA.</li>
+                </ul>
+                <p><strong>ATTENZIONE:</strong> se la società non compare o risulta "Warning/Alert", interrompi ogni comunicazione.</p>
+                <h3>3. La Trappola del "Clone" (Verifica dell'URL)</h3>
+                <p>Molti truffatori usano il nome di una società reale ma un sito web diverso.</p>
+                <p>Controlla che l'indirizzo web (URL) registrato nel database dell'Autorità (es. www.verobroker.com) corrisponda esattamente a quello su cui stai navigando.</p>
+                <p>Basta una lettera diversa (es. www.vero-broker.com) per essere di fronte a un clone truffaldino.</p>
+                <h3>4. Verifica dell'IBAN e del Beneficiario</h3>
+                <p>Secondo la mia tesi sostenuta al Parlamento Europeo, il bonifico è il momento del "non ritorno".</p>
+                <p><strong>Regola d'oro:</strong> se il destinatario del bonifico è una persona fisica o una società con un nome diverso da quella che gestisce la piattaforma, sei di fronte a una interposizione di persona.</p>
+                <p>Le imprese finanziarie serie hanno conti correnti intestati alla società stessa, non a "agenti" o "conti di transito" in paesi terzi (es. Lituania o Bulgaria per broker che dicono di essere inglesi).</p>
+                <h3>5. Check-up Tecnologico Finale</h3>
+                <p>Prima di inviare denaro, usa gli strumenti di reputazione menzionati nel mio libro:</p>
+                <ul>
+                    <li><strong>Who.is:</strong> verifica da quanto tempo esiste il dominio del sito. Se ha meno di 6-12 mesi ed è stato registrato in modo anonimo, è quasi certamente una truffa.</li>
+                    <li><strong>CheckDNS/CheckEmail:</strong> verifica se l'email del tuo "consulente" proviene da un server aziendale reale o da un servizio gratuito/anonimo.</li>
+                </ul>
+                <div class="instructions-popup-note">
+                    <p><strong>⚖️ Nota Legale per l'Utente</strong></p>
+                    <p>Se la banca non ti ha somministrato il Questionario di Adeguata Verifica (come richiesto nella mia Petizione 0645/2025) e non ti ha avvertito che il destinatario non è presente nelle "White List" delle 239 autorità, potresti avere diritto a un reclamo formale innanzi all'ABF (Arbitro Bancario Finanziario) per omessa vigilanza e violazione degli obblighi di prudenza.</p>
+                    <p>Ricorda Socrate: il vero saggio è colui che sa di non sapere. La conoscenza consapevole e la verifica è l'unico antivirus che i truffatori non possono hackerare.</p>
+                </div>
             </div>
         </div>
         <div id="searchAdvicePopup" class="instructions-popup" role="dialog" aria-modal="false" aria-hidden="true">
             <button type="button" class="instructions-popup-close" onclick="toggleSearchAdvice()" aria-label="Chiudi avviso ricerca">×</button>
-            <h2 data-i18n="searchAdviceTitle">🔍 Prima di usare il tasto &quot;Cerca&quot;</h2>
+            <h2 data-i18n="searchAdviceTitle">🔍 Prima di usare il tasto "Cerca"</h2>
             <ol>
                 <li data-i18n="searchAdvice1">Accetta con umiltà il dovere di cercare informazioni verificate.</li>
                 <li data-i18n="searchAdvice2">Devi proteggerti da inganni e frodi finanziarie.</li>
@@ -1432,7 +1434,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             </ol>
         </div>
         <header role="banner">
-            <nav class="language-selector" role="navigation" aria-label="Language selection">
+            <nav class="language-selector" role="navigation" data-i18n-aria-label="languageSelectorAriaLabel" aria-label="Language selection">
                 <button class="lang-btn active" data-lang="it" onclick="changeLanguage('it')" aria-label="Italiano">
                     <span class="fi fi-it lang-flag" aria-hidden="true"></span>
                     <span>IT</span>
@@ -1453,8 +1455,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     <span class="fi fi-es lang-flag" aria-hidden="true"></span>
                     <span>ES</span>
                 </button>
-                <span class="language-hint" data-i18n="languageHint" style="margin-left: 10px; background: linear-gradient(135deg, #1e293b 0%, #334155 100%); color: #ffd700; border: 1px solid #ffd700; border-radius: 999px; padding: 0.3rem 0.9rem; font-size: 0.85rem; display: inline-flex; align-items: center; gap: 6px; cursor: default;">
-                    <span style="font-size: 1.1em;">👆</span> Scegli la tua lingua
+                <span class="language-hint" style="margin-left: 10px; background: linear-gradient(135deg, #1e293b 0%, #334155 100%); color: #ffd700; border: 1px solid #ffd700; border-radius: 999px; padding: 0.3rem 0.9rem; font-size: 0.85rem; display: inline-flex; align-items: center; gap: 6px; cursor: default;">
+                    <span aria-hidden="true">👆</span>
+                    <span data-i18n="languageHint">Scegli la tua lingua</span>
                 </span>
             </nav>
             <div class="flag-orbit-banner" aria-hidden="true">
@@ -1529,12 +1532,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     <img src="logo_shield_financial_defense.svg" alt="Financial Defense - tutela del consumatore" width="170" height="170">
                 </div>
             </div>
-            <h1 data-i18n="subtitle" itemprop="name">Database Autorità Finanziarie Internazionali – 239 Paesi, 5 Lingue</h1>
+            <h1 data-i18n-html="subtitle" itemprop="name">Database Autorità Finanziarie Internazionali – 239 Paesi, 5 Lingue</h1>
             <p class="subtitle" data-i18n="title" itemprop="description">Verifica licenze broker, segnala truffe Forex e Crypto, controlla l'identità finanziaria dei destinatari di bonifici bancari.</p>
         </header>
 
         <!-- TABLE OF CONTENTS - Indice Navigazione Interna SEO -->
-        <nav id="table-of-contents" aria-label="Indice della pagina" style="background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%); padding: 20px 30px; margin: 0; border-bottom: 3px solid #ffd700;">
+        <nav id="table-of-contents" data-i18n-aria-label="tableOfContentsAriaLabel" aria-label="Indice della pagina" style="background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%); padding: 20px 30px; margin: 0; border-bottom: 3px solid #ffd700;">
             <div style="max-width: 1200px; margin: 0 auto;">
                 <h2 data-i18n="tableOfContentsTitle" style="color: #ffd700; font-size: 1.2em; margin: 0 0 15px 0; text-align: center;">📋 Indice Rapido – Naviga il Database</h2>
                 <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 12px;">
@@ -1567,13 +1570,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <!-- Banner Alfabeto A-Z - Sfondo Nero, Testo Verde Fosforo -->
             <div style="background: #000000; padding: 18px 20px; margin-bottom: 15px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.3); border: 2px solid #39ff14;">
                 <div style="display: flex; align-items: center; justify-content: center; gap: 12px; flex-wrap: wrap;">
-                    <h2 data-i18n="azTitle" style="margin: 0; color: #39ff14; font-size: 1.4em; text-shadow: 0 0 10px rgba(57, 255, 20, 0.5);">Accedi immediatamente alle Authority tramite l'Alfabeto GRAFICO <span style="background: #ffffff; color: #000000; font-weight: 900; font-size: 1em; padding: 6px 12px; border-radius: 8px; font-family: monospace; margin-left: 8px;">A-Z</span>!</h2>
+                    <h2 style="margin: 0; color: #39ff14; font-size: 1.4em; text-shadow: 0 0 10px rgba(57, 255, 20, 0.5);"><span data-i18n="azTitlePrefix">Accedi immediatamente alle Authority tramite l'Alfabeto GRAFICO</span> <span style="background: #ffffff; color: #000000; font-weight: 900; font-size: 1em; padding: 6px 12px; border-radius: 8px; font-family: monospace; margin-left: 8px;">A-Z</span><span data-i18n="azTitleSuffix">!</span></h2>
                     <button id="instructionsToggle" class="instructions-toggle" type="button" onclick="toggleInstructions()" aria-controls="instructionsPopup" aria-expanded="false" data-i18n="instructionsButton" style="background: #000000; color: #39ff14; border: 2px solid #39ff14; border-radius: 999px; padding: 0.5rem 1.2rem; font-size: 0.9rem; display: inline-flex; align-items: center; gap: 6px; cursor: pointer; box-shadow: 0 3px 12px rgba(57, 255, 20, 0.4); font-weight: 600;">
                         📖 Istruzioni
                     </button>
                 </div>
-                <p data-i18n="azSubtitle" style="text-align: center; font-size: 1.1em; color: #39ff14; margin: 12px 0 0 0; opacity: 0.9;">
-                    Scorri l'Alfabeto e seleziona la Bandiera!&nbsp;&nbsp;&nbsp; <span class="keyword-pulse-red">Database più completo del mondo!</span>
+                <p style="text-align: center; font-size: 1.1em; color: #39ff14; margin: 12px 0 0 0; opacity: 0.9;">
+                    <span data-i18n="azSubtitlePrefix">Scorri l'Alfabeto e seleziona la Bandiera!</span>&nbsp;&nbsp;&nbsp; <span class="keyword-pulse-red" data-i18n="azSubtitleHighlight">Database più completo del mondo!</span>
                 </p>
             </div>
             <div class="flags-grid" id="flagsGrid">
@@ -2905,34 +2908,34 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
         <!-- NUOVA BARRA RICERCA SUPERIORE -->
         <div class="search-bar-top">
-            <input type="text" id="search-input-top" data-i18n-placeholder="searchPlaceholder" placeholder="🔍 Cerca paese..." aria-label="Search for a country">
+            <input type="text" id="search-input-top" data-i18n-placeholder="searchPlaceholder" data-i18n-aria-label="searchAriaLabel" placeholder="🔍 Cerca paese..." aria-label="Search for a country">
             <button type="button" onclick="performSearch()" data-i18n="searchButtonLabel">Cerca</button>
         </div>
 
-        <section id="database-search-section" class="controls" role="search" aria-label="Search and filter">
-    			<p class="intro-text" data-i18n="introText">Questa pagina web offre 239 LINK diretti per accedere alle webpage delle AUTORITA' FINANZIARIE di 239 PAESI del Mondo.<br>CERCA il nome del Paese che viene dichiarato sede della impresa finanziaria, e potrai conoscere tutti i dettagli identificativi ufficiali.</p>
+        <section id="database-search-section" class="controls" role="search" data-i18n-aria-label="databaseSearchAriaLabel" aria-label="Search and filter">
+    			<p class="intro-text" data-i18n-html="introText">Questa pagina web offre 239 LINK diretti per accedere alle webpage delle AUTORITA' FINANZIARIE di 239 PAESI del Mondo.<br>CERCA il nome del Paese che viene dichiarato sede della impresa finanziaria, e potrai conoscere tutti i dettagli identificativi ufficiali.</p>
             <div class="search-row">
                 <div class="search-box">
-                    <input type="text" id="searchInput" data-i18n-placeholder="searchPlaceholder" placeholder="Cerca per paese o autorità..." aria-label="Search countries">
+                    <input type="text" id="searchInput" data-i18n-placeholder="searchPlaceholder" data-i18n-aria-label="searchAriaLabel" placeholder="Cerca per paese o autorità..." aria-label="Search countries">
                     <button type="button" class="search-btn" data-i18n="searchButtonLabel">Cerca</button>
                 </div>
-                <div class="filter-buttons" role="group" aria-label="Filter options">
+                <div class="filter-buttons" role="group" data-i18n-aria-label="filterOptionsAriaLabel" aria-label="Filter options">
                     <button class="filter-btn active" onclick="filterCountries('all')" data-i18n="filterAll" aria-pressed="true">Tutti i Paesi</button>
                     <button class="filter-btn" onclick="filterCountries('altissimo')" data-i18n="filterHigh" aria-pressed="false">Protezione Elevata</button>
-                    <button class="filter-btn" onclick="filterCountries('ue')" data-i18n="filterEU" aria-pressed="false">
+                    <button class="filter-btn" onclick="filterCountries('ue')" aria-pressed="false">
                         <span class="fi fi-eu" aria-hidden="true" style="margin-right:6px;"></span>
-                        Paesi UE
+                        <span data-i18n="filterEU">Paesi UE</span>
                     </button>
                     <button class="filter-btn" onclick="filterCountries('non-ue')" data-i18n="filterNonEU" aria-pressed="false">Paesi non-UE</button>
                 </div>
                 <!-- Filtri per Continente - SEO Improvement -->
-                <div class="filter-buttons" role="group" aria-label="Filter by continent" style="margin-top: 10px;">
-                    <span data-i18n="continentLabel" style="color: #ffd700; font-weight: 600; margin-right: 10px;">🌍 Continente:</span>
-                    <button class="filter-btn" onclick="filterCountries('europe')" data-i18n="continentEurope" aria-pressed="false">🇪🇺 Europa</button>
-                    <button class="filter-btn" onclick="filterCountries('asia')" data-i18n="continentAsia" aria-pressed="false">🌏 Asia</button>
-                    <button class="filter-btn" onclick="filterCountries('africa')" data-i18n="continentAfrica" aria-pressed="false">🌍 Africa</button>
-                    <button class="filter-btn" onclick="filterCountries('americas')" data-i18n="continentAmericas" aria-pressed="false">🌎 Americhe</button>
-                    <button class="filter-btn" onclick="filterCountries('oceania')" data-i18n="continentOceania" aria-pressed="false">🏝️ Oceania</button>
+                <div class="filter-buttons" role="group" data-i18n-aria-label="filterContinentAriaLabel" aria-label="Filter by continent" style="margin-top: 10px;">
+                    <span style="color: #ffd700; font-weight: 600; margin-right: 10px;"><span aria-hidden="true">🌍</span> <span data-i18n="continentLabel">Continente:</span></span>
+                    <button class="filter-btn" onclick="filterCountries('europe')" aria-pressed="false"><span aria-hidden="true">🇪🇺</span> <span data-i18n="continentEurope">Europa</span></button>
+                    <button class="filter-btn" onclick="filterCountries('asia')" aria-pressed="false"><span aria-hidden="true">🌏</span> <span data-i18n="continentAsia">Asia</span></button>
+                    <button class="filter-btn" onclick="filterCountries('africa')" aria-pressed="false"><span aria-hidden="true">🌍</span> <span data-i18n="continentAfrica">Africa</span></button>
+                    <button class="filter-btn" onclick="filterCountries('americas')" aria-pressed="false"><span aria-hidden="true">🌎</span> <span data-i18n="continentAmericas">Americhe</span></button>
+                    <button class="filter-btn" onclick="filterCountries('oceania')" aria-pressed="false"><span aria-hidden="true">🏝️</span> <span data-i18n="continentOceania">Oceania</span></button>
                 </div>
             </div>
         </section>
@@ -2974,7 +2977,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     <div style="font-size: 3em;">🏛️</div>
                     <div style="flex: 1; min-width: 300px; text-align: left;">
                         <h2 data-i18n="credentialsTitle" style="margin: 0 0 8px 0; font-size: 1.6em; font-weight: 700;">Autore Verificato in Parlamento Europeo e Ministro della Giustizia in Italia</h2>
-                        <p data-i18n="credentialsBody" style="margin: 0; font-size: 1.05em; opacity: 0.95; line-height: 1.5;">
+                        <p data-i18n-html="credentialsBody" style="margin: 0; font-size: 1.05em; opacity: 0.95; line-height: 1.5;">
                             L'Author di questa pagina web, e delle pagine collegate, Avvocato Marcello Stanca è verificabile nella pagina dell'Ordine Avvocati presso il Tribunale di Firenze 
                             (<a href="https://www.ordineavvocatifirenze.eu/" target="_blank" rel="noopener noreferrer" style="color: #FFCC00; font-weight: 600; text-decoration: underline;">Ordine Avvocati Firenze</a>)
                             ed è esperto di INDAGINI INFORMATICHE Internazionali no limits. <strong>Marcello STANCA è Author AMAZON</strong> del libro <strong>"RISCHIO TRADING"</strong>, Best Seller AMAZON 
@@ -3052,7 +3055,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
         <footer>
             <p data-i18n="footer">© 2026 Author and Webmaster: Avvocato Marcello Stanca, Lawyer in Italy – Firenze. Credenziali verificate da: Ministero della Giustizia (Italia), Tribunale di Firenze, Parlamento Europeo – Bruxelles. Account Facebook e Instagram verificati da Meta. Local Guide Google Maps livello 9,5.</p>
-            <p data-i18n="footerNote">Questo database è a scopo informativo. Verifica sempre presso le Autorità competenti. Profilo Google Maps verificato: <a href="http://maps.app.goo.gl/gs4rm6vXMxJUVVhM8?g_st=aw" target="_blank" rel="noopener" style="color: white;">Avv. Marcello Stanca su Google Maps</a>. Segnala errori della web page al webmaster: <a href="mailto:lawyer@marcellostanca.it" style="color: white;">lawyer@marcellostanca.it</a></p>
+            <p data-i18n-html="footerNote">Questo database è a scopo informativo. Verifica sempre presso le Autorità competenti. Profilo Google Maps verificato: <a href="http://maps.app.goo.gl/gs4rm6vXMxJUVVhM8?g_st=aw" target="_blank" rel="noopener" style="color: white;">Avv. Marcello Stanca su Google Maps</a>. Segnala errori della web page al webmaster: <a href="mailto:lawyer@marcellostanca.it" style="color: white;">lawyer@marcellostanca.it</a></p>
             <p style="margin-top: 15px; padding-top: 15px; border-top: 1px solid rgba(255,255,255,0.3);">
                 <strong data-i18n="privacyStatement">🔒 PRIVACY: Questa app NON raccoglie dati personali degli utenti</strong> | 
                 <a href="privacy.html" style="color: #fff; text-decoration: underline;" data-i18n="privacyLink">Privacy Policy</a>
@@ -3145,7 +3148,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 subtitle: "<span class='keyword-pulse'>Autorità</span> dei Mercati <span class='keyword-pulse'>Finanziari</span> di <span class='keyword-pulse'>239</span> Paesi in <span class='keyword-pulse'>5</span> lingue",
                 securityTitle: "✅ SITO UFFICIALE LEGITTIMO - DATABASE DI PROTEZIONE DEI CONSUMATORI",
                 securityText: "Accesso immediato alle home page delle Autority Finanziarie del Governo per verificare la legittimità e regolarità di imprese finanziarie, di persone ed entità che offrono servizi finanziari, e ricevono bonifici.",
-                languageHint: "<span style='font-size: 1.1em;'>👆</span> Scegli la tua lingua",
+                languageHint: "Scegli qui la tua lingua",
+                languageSelectorAriaLabel: "Selezione lingua",
+                tableOfContentsAriaLabel: "Indice della pagina",
+                databaseSearchAriaLabel: "Ricerca e filtri",
+                filterOptionsAriaLabel: "Opzioni di filtro",
+                filterContinentAriaLabel: "Filtra per continente",
+                instructionsCloseAriaLabel: "Chiudi guida",
                 tableOfContentsTitle: "📋 Indice Rapido – Naviga il Database",
                 tocFlags: "🏳️ Bandiere A-Z",
                 tocSearch: "🔍 Cerca Autorità",
@@ -3156,17 +3165,18 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 tocFaq: "❓ FAQ",
                 introText: "Questa pagina web offre 239 link diretti per accedere alle webpage delle AUTORITA' FINANZIARIE di 239 Paesi del Mondo.<br>CERCA il nome del Paese che viene dichiarato sede della impresa finanziaria, e potrai conoscere tutti i dettagli identificativi ufficiali.",
                 searchPlaceholder: "Cerca per paese o autorità...",
+                searchAriaLabel: "Cerca per paese o autorità",
                 searchButtonLabel: "Cerca",
                 filterAll: "Tutti i Paesi",
                 filterHigh: "Protezione Elevata",
                 filterEU: "Paesi UE",
                 filterNonEU: "Paesi non-UE",
-                continentLabel: "🌍 Continente:",
-                continentEurope: "🇪🇺 Europa",
-                continentAsia: "🌏 Asia",
-                continentAfrica: "🌍 Africa",
-                continentAmericas: "🌎 Americhe",
-                continentOceania: "🏝️ Oceania",
+                continentLabel: "Continente:",
+                continentEurope: "Europa",
+                continentAsia: "Asia",
+                continentAfrica: "Africa",
+                continentAmericas: "Americhe",
+                continentOceania: "Oceania",
                 statCountries: "Paesi Monitorati",
                 statEU: "Paesi UE",
                 statHighProtection: "Protezione Standard",
@@ -3182,8 +3192,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 euCommission: "Commissione Europea",
                 flagsTitle: "Accesso Rapido per Paese",
                 flagsGridTitle: "🌍 Seleziona il tuo Paese - Database 239 Autorità Finanziarie",
-                azTitle: "Accedi immediatamente alle Authority tramite l'Alfabeto GRAFICO <span style='background: #ffffff; color: #000000; font-weight: 900; font-size: 1em; padding: 6px 12px; border-radius: 8px; font-family: monospace; margin-left: 8px;'>A-Z</span>!",
-                azSubtitle: "Scorri l'Alfabeto e seleziona la Bandiera!&nbsp;&nbsp;&nbsp; <span class='keyword-pulse-red'>Database più completo del mondo!</span>",
+                azTitlePrefix: "Accedi immediatamente alle Authority tramite l'Alfabeto GRAFICO",
+                azTitleSuffix: "!",
+                azSubtitlePrefix: "Scorri l'Alfabeto e seleziona la Bandiera!",
+                azSubtitleHighlight: "Database più completo del mondo!",
                 faqTitle: "❓ Domande Frequenti – FAQ",
                 intermezzoTitle: "🔎 Filtra per categoria",
                 modalAuthority: "Autorità Finanziaria",
@@ -3198,7 +3210,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 instructionsButton: "📖 Istruzioni",
                 instructionsLabel: "Scegli la tua LINGUA, premi pulsante, e Leggi ISTRUZIONI.",
                 searchAdviceButton: "Perché questa ricerca è importante?",
-                searchAdviceTitle: "🔍 Prima di usare il tasto &quot;Cerca&quot;",
+                searchAdviceTitle: "🔍 Prima di usare il tasto \"Cerca\"",
                 searchAdvice1: "Accetta con umiltà il dovere di cercare informazioni verificate.",
                 searchAdvice2: "Devi proteggerti da inganni e frodi finanziarie.",
                 searchAdvice3: "Prendi tempo prima di eseguire operazioni finanziarie sollecitate da sconosciuti.",
@@ -3226,7 +3238,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 reportFormCancel: "❌ Annulla",
                 reportFormDisclaimer: "ℹ️ I dati saranno inviati alla tua email per permetterti di contattare l'Authority. Una copia sarà inviata all'amministratore per alimentare la Warning List pubblica.",
                 instructionsContent: `
-<button type="button" class="instructions-popup-close" onclick="toggleInstructions()" aria-label="Chiudi guida">×</button>
 <h2>🛡️ Guida Legale Operativa – Verifica di un’Impresa Finanziaria in 5 Passi</h2>
 <p>In qualità di avvocato esperto e autore delle strategie descritte in "Scacco Matto alle Truffe" e nelle Petizioni UE 0888/2024 e 0645/2025, ho redatto questa guida operativa.</p>
 <p>L'obiettivo è trasformare i 239 link del database in uno scudo attivo per proteggere il tuo capitale prima di cliccare su "invia bonifico".</p>
@@ -3266,223 +3277,18 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </div>
 `
             },
-            ar: {
-                title: "قاعدة بيانات دولية للتحقق من الهوية المالية لمستلمي التحويلات البنكية",
-                subtitle: "<span class='keyword-pulse'>هيئات</span> أسواق <span class='keyword-pulse'>المال</span> في <span class='keyword-pulse'>239</span> دولة بـ <span class='keyword-pulse'>20</span> لغة",
-                securityTitle: "✅ موقع رسمي شرعي – قاعدة بيانات لحماية المستهلك",
-                securityText: "يوفّر هذا الموقع وصولاً فورياً إلى الصفحات الرئيسية للسلطات الرقابية المالية الحكومية للتحقق من شرعية وانتظام الشركات والأشخاص والكيانات التي تقدّم خدمات مالية وتتلقّى التحويلات البنكية.",
-                introText: "تقدّم هذه الصفحة 239 رابطاً مباشراً إلى مواقع السلطات المالية في 239 دولة حول العالم.<br>ابحث عن اسم الدولة التي يَزعم الموقع الاحتيالي أن الشركة مُسجّلة فيها، وستجد كل بيانات الهوية الرسمية.",
-                searchPlaceholder: "ابحث حسب الدولة أو الهيئة...",
-                filterAll: "جميع الدول",
-                filterHigh: "حماية مرتفعة",
-                filterEU: "دول الاتحاد الأوروبي",
-                filterNonEU: "دول خارج الاتحاد الأوروبي",
-                statCountries: "دول خاضعة للرقابة",
-                statEU: "دول الاتحاد الأوروبي",
-                statHighProtection: "حماية قياسية",
-                footer: "© 2026 المؤلف والمشرف على الموقع: المحامي مارسيلو ستانكا، محامٍ في إيطاليا – فلورنسا. تم التحقق من الاعتمادات من قبل: وزارة العدل الإيطالية، محكمة فلورنسا، والبرلمان الأوروبي – بروكسل. حسابات فيسبوك وإنستغرام موثَّقة من شركة ميتا. دليل محلّي في خرائط جوجل بمستوى 9.5.",
-                footerNote: "هذه القاعدة لأغراض معلوماتية فقط. تحقَّق دائماً من المعلومات لدى السلطات المختصة. الملف الشخصي الموثَّق على خرائط جوجل: <a href=\"http://maps.app.goo.gl/gs4rm6vXMxJUVVhM8?g_st=aw\" target=\"_blank\" rel=\"noopener\">المحامي مارسيلو ستانكا على خرائط جوجل</a>. للإبلاغ عن أي خطأ في الصفحة: <a href=\"mailto:lawyer@marcellostanca.it\">lawyer@marcellostanca.it</a>",
-                credentialsTitle: "اعتمادات مهنية موثوقة – البرلمان الأوروبي",
-                credentialsBody: "مؤلف هذه الصفحة وصفحاتها المرتبطة هو المحامي مارسيلو ستانكا، المسجَّل في نقابة المحامين في فلورنسا (<a href=\"https://www.ordineavvocatifirenze.eu/\" target=\"_blank\" rel=\"noopener noreferrer\" style=\"color: #FFCC00; font-weight: 600; text-decoration: underline;\">Ordine Avvocati Firenze</a>) والمتخصّص في التحقيقات المعلوماتية الدولية بلا حدود. <strong>مارسيلو ستانكا هو مؤلف أمازون</strong> لكتاب <strong>\"RISCHIO TRADING\"</strong>، المصنَّف ضمن الكتب الأكثر مبيعاً على أمازون (<a href=\"https://www.amazon.it/Rischio-Trading-Attraverso-Strumenti-Recupero-ebook/dp/B0DQRB8VQY?language=en_GB#detailBullets_feature_div\" target=\"_blank\" rel=\"noopener noreferrer\" style=\"color: #FFCC00; font-weight: 600; text-decoration: underline;\">انظر بطاقة الكتاب</a>). تابع المؤلف على <a href=\"https://www.facebook.com/avv.stanca.marcello\" target=\"_blank\" rel=\"noopener noreferrer\" style=\"color: #FFCC00; font-weight: 600; text-decoration: underline;\">فيسبوك</a> وعلى <a href=\"https://www.tiktok.com/@avvocato.stanca.marcello\" target=\"_blank\" rel=\"noopener noreferrer\" style=\"color: #FFCC00; font-weight: 600; text-decoration: underline;\">تيك توك</a>.",
-                authority: "الهيئة المختصة",
-                protectionLevel: "مستوى الحماية",
-                notes: "ملاحظات",
-                euReferences: "مصادر الإشراف المؤسسي – الاتحاد الأوروبي، مكتب التحقيقات الفيدرالي الأمريكي، ScamShield",
-                euCommission: "المفوضية الأوروبية",
-                flagsTitle: "وصول سريع حسب الدولة",
-                modalAuthority: "الهيئة المالية",
-                modalAbbreviation: "الاختصار",
-                modalHomepage: "الصفحة الرئيسية",
-                modalFraudReport: "الإبلاغ عن احتيال",
-                modalEmail: "البريد الإلكتروني",
-                modalSocial: "وسائل التواصل",
-                modalNotes: "ملاحظات",
-                privacyStatement: "🔒 الخصوصية: هذا التطبيق لا يجمع أي بيانات شخصية للمستخدمين",
-                privacyLink: "سياسة الخصوصية",
-                instructionsLabel: "اختر لغتك، ثم اضغط الزر واقرأ التعليمات.",
-                searchAdviceButton: "لماذا هذا البحث مهم جداً؟",
-                searchAdviceTitle: "🔍 قبل الضغط على زر &quot;بحث&quot;",
-                searchAdvice1: "اقبل بتواضع واجب البحث عن معلومات موثوقة ومُحَقَّقة.",
-                searchAdvice2: "يجب أن تحمي نفسك من الخداع والاحتيال المالي.",
-                searchAdvice3: "خذ وقتك قبل تنفيذ أي عملية مالية يضغط عليك بها أشخاص مجهولون.",
-                searchAdvice4: "اطلب من بنكك تأكيداً كتابياً عبر البريد الإلكتروني بشرعية المستفيدين.",
-                instructionsButtonModal: "تعليمات - كيفية التحقق من هذه الهيئة",
-                instructionsContent: `
-<button type="button" class="instructions-popup-close" onclick="toggleInstructions()" aria-label="إغلاق الدليل">×</button>
-<h2>🛡️ دليل قانوني عملي – التحقق من شركة مالية في 5 خطوات</h2>
-<p>بصفتي محامياً ممارساً ومؤلفاً للاستراتيجيات المعروضة في كتاب "كش ملك لعمليات الاحتيال" وفي العريضتين المقدمَتين إلى البرلمان الأوروبي 0888/2024 و 0645/2025، أقدّم هذا الدليل العملي للمستهلكين.</p>
-<p>الهدف هو تحويل روابط السلطات المالية الـ 239 في هذه القاعدة إلى درع وقائي فعّال يحمي رأس مالك قبل أن تضغط على زر "إرسال التحويل البنكي".</p>
-<h3>1. تحديد هوية الجهة (من هو الطرف الحقيقي؟)</h3>
-<p>قبل أي عملية استثمار أو تحويل، لا تثق فقط بالاسم الظاهر على منصة التداول. في الموقع المشتبه به، ابحث بدقّة في صفحات "الاتصال" أو "الشروط والأحكام" (Legal Notice):</p>
-<ul>
-    <li>الاسم القانوني الكامل للشركة (مثال: Brokerage LTD).</li>
-    <li>عنوان المقر القانوني المصرّح به.</li>
-    <li>رقم الترخيص المزعوم (كثير من المحتالين يقدّمون أرقام تراخيص وهمية أو غير موجودة).</li>
-        </ul>
-<h3>2. استخدام قاعدة البيانات (منهج الروابط الـ 239)</h3>
-<p>افتح قاعدة بيانات السلطات المالية واختر سلطة الرقابة في الدولة التي تدّعي الشركة أن مقرها القانوني فيها:</p>
-<ul>
-    <li>إذا قيل لك إن الشركة مقرّها في إيطاليا: انتقل إلى موقع CONSOB ثم إلى السجلات والقوائم الخاصة بشركات الاستثمار المرخّصة.</li>
-    <li>إذا قيل إن المقر في قبرص: انتقل إلى هيئة CySEC.</li>
-    <li>إذا قيل إن المقر في المملكة المتحدة: انتقل إلى هيئة الرقابة FCA.</li>
-</ul>
-<p><strong>تحذير مهم:</strong> إذا لم تظهر الشركة في سجلات السلطة، أو ظهرت في قسم التحذيرات والتنبيهات، فعليك إيقاف كل اتصال معها فوراً.</p>
-<h3>3. فخ "الشركة المستنسَخة" (التحقق من عنوان الموقع)</h3>
-<p>يستغل كثير من المحتالين اسم شركة حقيقية مرخّصة، لكنهم يستخدمون موقعاً إلكترونياً مختلفاً قليلاً.</p>
-<p>قارن بدقة بين عنوان الموقع (URL) المسجَّل في سجلات السلطة المالية (مثال: www.verobroker.com) وبين العنوان الذي تتصفّحه فعلياً.</p>
-<p>تغيّر حرف واحد فقط (مثل www.vero-broker.com) قد يكون دليلاً واضحاً على موقع مزيّف منسوخ عن شركة حقيقية.</p>
-<h3>4. التحقق من رقم الآيبان واسم المستفيد</h3>
-<p>وفقاً للأطروحة التي عرضتها أمام البرلمان الأوروبي، يُعتبَر التحويل البنكي نقطة "اللاعودة" في كثير من عمليات الاحتيال.</p>
-<p><strong>القاعدة الذهبية:</strong> إذا كان صاحب الحساب المستفيد شخصاً طبيعياً أو شركة باسم مختلف عن اسم المنصّة التي تتعامل معها، فهناك غالباً "شخص وسيط" يُستَخدم لإخفاء الجهة الحقيقية المستفيدة.</p>
-<p>المؤسسات المالية الجادّة تحتفظ بحسابات مصرفية باسمها القانوني مباشرة، ولا تستخدم عادة حسابات شخصية أو "حسابات عبور" في دول ثالثة (مثل ليتوانيا أو بلغاريا لشركات تدّعي أنها بريطانية).</p>
-<h3>5. فحص تقني نهائي قبل تحويل المال</h3>
-<p>قبل إرسال أي مبلغ، استخدم أدوات التحقق من السمعة الرقمية التي أشير إليها في كتابي:</p>
-<ul>
-    <li><strong>Who.is:</strong> تحقّق منذ متى تم حجز اسم النطاق للموقع. إذا كان عمر النطاق أقل من 6–12 شهراً وتم تسجيله بشكل مجهول، فهناك احتمال كبير أن يكون الموقع جزءاً من عملية احتيال.</li>
-    <li><strong>CheckDNS / CheckEmail:</strong> تحقّق ممّا إذا كان البريد الإلكتروني لمستشارك المزعوم صادراً عن خادم بريد تابع لشركة حقيقية أم عن خدمة مجانية/مجهولة يسهل إغلاقها.</li>
-</ul>
-<div class="instructions-popup-note">
-    <p><strong>⚖️ ملاحظة قانونية للمستخدم</strong></p>
-    <p>إذا لم يقم البنك الذي تتعامل معه بتطبيق استبيان "التحقق الكافي" من ملاءمة العملية (كما طُلب في العريضة 0645/2025 المقدَّمة إلى الاتحاد الأوروبي)، ولم يحذّرك من أن المستفيد غير موجود في "القوائم البيضاء" الخاصة بالسلطات المالية في الدول الـ 239، فقد يكون لك أساس قانوني لتقديم شكوى رسمية أمام هيئات تسوية المنازعات المصرفية والمالية بسبب الإخلال بواجب الحيطة والعناية.</p>
-    <p>تذكّر مقولة سقراط: "الإنسان الحكيم حقاً هو من يدرك أنه لا يعرف كل شيء". إن المعرفة الواعية والتحقّق المسبق هما برنامج الحماية الوحيد الذي لا يستطيع المحتالون اختراقه.</p>
-</div>
-`
-            },
-            vi: {
-                title: "Cơ sở dữ liệu quốc tế để kiểm tra định danh tài chính của người nhận chuyển khoản ngân hàng",
-                subtitle: "<span class='keyword-pulse'>Cơ quan</span> quản lý thị trường <span class='keyword-pulse'>tài chính</span> tại <span class='keyword-pulse'>239</span> quốc gia với <span class='keyword-pulse'>20</span> ngôn ngữ",
-                securityTitle: "✅ TRANG CHÍNH THỨC HỢP PHÁP – CƠ SỞ DỮ LIỆU BẢO VỆ NGƯỜI TIÊU DÙNG",
-                securityText: "Truy cập ngay các trang chủ của Cơ quan Giám sát Tài chính Nhà nước để kiểm tra tính hợp pháp và quy chế của các công ty tài chính, cá nhân và tổ chức cung cấp dịch vụ tài chính và nhận chuyển khoản.",
-                introText: "Trang web này cung cấp 239 ĐƯỜNG DẪN trực tiếp tới trang của CƠ QUAN TÀI CHÍNH tại 239 QUỐC GIA trên thế giới.<br>HÃY TÌM tên quốc gia được khai là trụ sở của doanh nghiệp tài chính, và bạn sẽ biết mọi thông tin nhận dạng chính thức.",
-                searchPlaceholder: "Tìm theo quốc gia hoặc cơ quan...",
-                filterAll: "Tất cả quốc gia",
-                filterHigh: "Mức bảo vệ cao",
-                filterEU: "Quốc gia EU",
-                filterNonEU: "Ngoài EU",
-                statCountries: "Quốc gia được giám sát",
-                statEU: "Quốc gia EU",
-                statHighProtection: "Mức bảo vệ cao",
-                footer: "© 2026 Tác giả và quản trị web: Luật sư Marcello Stanca, Ý (thành phố Firenze). Thông tin chứng thực bởi: Bộ Tư pháp Ý, Tòa án Firenze, Nghị viện Châu Âu – Bruxelles. Tài khoản Facebook và Instagram được Meta xác minh. Local Guide Google Maps cấp độ 9,5.",
-                footerNote: "Cơ sở dữ liệu này chỉ nhằm mục đích cung cấp thông tin. Luôn kiểm tra lại với cơ quan có thẩm quyền. Hồ sơ Google Maps đã được xác minh: <a href=\"http://maps.app.goo.gl/gs4rm6vXMxJUVVhM8?g_st=aw\" target=\"_blank\" rel=\"noopener\">Luật sư Marcello Stanca trên Google Maps</a>. Báo lỗi trang web cho: <a href=\"mailto:lawyer@marcellostanca.it\">lawyer@marcellostanca.it</a>",
-                credentialsTitle: "Chứng chỉ nghề nghiệp đã được xác minh – Nghị viện Châu Âu",
-                credentialsBody: "Tác giả của trang web này và các trang liên kết là Luật sư Marcello Stanca, có tên trong danh sách Đoàn Luật sư Firenze (<a href=\"https://www.ordineavvocatifirenze.eu/\" target=\"_blank\" rel=\"noopener noreferrer\" style=\"color: #FFCC00; font-weight: 600; text-decoration: underline;\">Ordine Avvocati Firenze</a>) và là chuyên gia về điều tra tin học quốc tế. <strong>Marcello STANCA là tác giả trên AMAZON</strong> của cuốn sách <strong>\"RISCHIO TRADING\"</strong>, best‑seller trên AMAZON (<a href=\"https://www.amazon.it/Rischio-Trading-Attraverso-Strumenti-Recupero-ebook/dp/B0DQRB8VQY?language=en_GB#detailBullets_feature_div\" target=\"_blank\" rel=\"noopener noreferrer\" style=\"color: #FFCC00; font-weight: 600; text-decoration: underline;\">xem trang sách</a>). Hãy theo dõi tác giả trên <a href=\"https://www.facebook.com/avv.stanca.marcello\" target=\"_blank\" rel=\"noopener noreferrer\" style=\"color: #FFCC00; font-weight: 600; text-decoration: underline;\">Facebook</a> và <a href=\"https://www.tiktok.com/@avvocato.stanca.marcello\" target=\"_blank\" rel=\"noopener noreferrer\" style=\"color: #FFCC00; font-weight: 600; text-decoration: underline;\">TikTok</a>.",
-                authority: "Cơ quan có thẩm quyền",
-                protectionLevel: "Mức độ bảo vệ",
-                notes: "Ghi chú",
-                euReferences: "Nguồn giám sát thể chế – Liên minh châu Âu, FBI Hoa Kỳ, ScamShield",
-                euCommission: "Ủy ban châu Âu",
-                flagsTitle: "Truy cập nhanh theo quốc gia",
-                modalAuthority: "Cơ quan tài chính",
-                modalAbbreviation: "Viết tắt",
-                modalHomepage: "Trang chủ",
-                modalFraudReport: "Báo cáo lừa đảo",
-                modalEmail: "Email",
-                modalSocial: "Mạng xã hội",
-                modalNotes: "Ghi chú",
-                privacyStatement: "🔒 QUYỀN RIÊNG TƯ: Ứng dụng này KHÔNG thu thập dữ liệu cá nhân của người dùng",
-                privacyLink: "Chính sách quyền riêng tư",
-                instructionsLabel: "Chọn NGÔN NGỮ của bạn, nhấn nút và đọc HƯỚNG DẪN.",
-                searchAdviceButton: "Vì sao việc tìm kiếm này lại quan trọng?",
-                searchAdviceTitle: "🔍 Trước khi dùng nút &quot;Tìm kiếm&quot;",
-                searchAdvice1: "Hãy khiêm tốn chấp nhận nghĩa vụ tìm kiếm thông tin đã được kiểm chứng.",
-                searchAdvice2: "Bạn phải tự bảo vệ mình trước lừa dối và gian lận tài chính.",
-                searchAdvice3: "Hãy dành thời gian trước khi thực hiện giao dịch tài chính do người lạ thúc giục.",
-                searchAdvice4: "Hãy yêu cầu ngân hàng của bạn xác nhận bằng email về tính hợp pháp của người thụ hưởng.",
-                instructionsButtonModal: "Hướng dẫn - Cách xác minh Cơ quan này",
-                instructionsContent: ""
-            },
-            zh: {
-                title: "用于核查银行转账收款人金融身份的国际数据库",
-                subtitle: "<span class='keyword-pulse'>239</span> 个国家的<span class='keyword-pulse'>金融</span>市场<span class='keyword-pulse'>监管机构</span>（提供 <span class='keyword-pulse'>20</span> 种语言）",
-                securityTitle: "✅ 官方合法网站——消费者保护数据库",
-                securityText: "直接访问各国政府金融监管机构主页，用于核查提供金融服务并接收转账的公司、个人和实体的合法性与合规性。",
-                introText: "本网页提供通往全球 239 个国家金融监管机构网站的 239 条直接链接。<br>请搜索声称为金融企业注册地的国家名称，即可了解所有官方识别信息。",
-                searchPlaceholder: "按国家或监管机构搜索...",
-                filterAll: "所有国家",
-                filterHigh: "高保护等级",
-                filterEU: "欧盟国家",
-                filterNonEU: "非欧盟国家",
-                statCountries: "监测国家数量",
-                statEU: "欧盟国家",
-                statHighProtection: "高保护等级",
-                footer: "© 2026 作者兼网站管理员：意大利佛罗伦萨律师 Marcello Stanca。资质由意大利司法部、佛罗伦萨法院及欧洲议会（布鲁塞尔）核实。Facebook 与 Instagram 账户由 Meta 认证，通过 Google 地图本地向导 9.5 级别。",
-                footerNote: "本数据库仅供信息参考之用，请务必向主管机关再次核实信息。已验证的 Google 地图个人资料：<a href=\"http://maps.app.goo.gl/gs4rm6vXMxJUVVhM8?g_st=aw\" target=\"_blank\" rel=\"noopener\">Marcello Stanca 律师（Google 地图）</a>。如发现网页错误，请发送邮件至：<a href=\"mailto:lawyer@marcellostanca.it\">lawyer@marcellostanca.it</a>",
-                credentialsTitle: "经核实的专业资历 – 欧洲议会",
-                credentialsBody: "本网页及其关联页面的作者为意大利律师 Marcello Stanca，他可在佛罗伦萨律师公会的公开名册中查到 (<a href=\"https://www.ordineavvocatifirenze.eu/\" target=\"_blank\" rel=\"noopener noreferrer\" style=\"color: #FFCC00; font-weight: 600; text-decoration: underline;\">Ordine Avvocati Firenze</a>)，专长于国际信息取证。<strong>Marcello STANCA 是亚马逊作者</strong>，著有畅销书 <strong>\"RISCHIO TRADING\"</strong>（《风险交易》）(<a href=\"https://www.amazon.it/Rischio-Trading-Attraverso-Strumenti-Recupero-ebook/dp/B0DQRB8VQY?language=en_GB#detailBullets_feature_div\" target=\"_blank\" rel=\"noopener noreferrer\" style=\"color: #FFCC00; font-weight: 600; text-decoration: underline;\">查看图书详情</a>)。欢迎在 <a href=\"https://www.facebook.com/avv.stanca.marcello\" target=\"_blank\" rel=\"noopener noreferrer\" style=\"color: #FFCC00; font-weight: 600; text-decoration: underline;\">Facebook</a> 和 <a href=\"https://www.tiktok.com/@avvocato.stanca.marcello\" target=\"_blank\" rel=\"noopener noreferrer\" style=\"color: #FFCC00; font-weight: 600; text-decoration: underline;\">TikTok</a> 关注作者。",
-                authority: "主管机构",
-                protectionLevel: "保护等级",
-                notes: "备注",
-                euReferences: "机构监管资源——欧盟、美国 FBI、ScamShield",
-                euCommission: "欧盟委员会",
-                flagsTitle: "按国家快速访问",
-                modalAuthority: "金融监管机构",
-                modalAbbreviation: "缩写",
-                modalHomepage: "主页",
-                modalFraudReport: "诈骗举报",
-                modalEmail: "电子邮箱",
-                modalSocial: "社交媒体",
-                modalNotes: "备注",
-                privacyStatement: "🔒 隐私：本应用程序不会收集用户的个人数据",
-                privacyLink: "隐私政策",
-                instructionsLabel: "选择你的语言，点击按钮并阅读说明。",
-                searchAdviceButton: "为什么这一步搜索如此重要？",
-                searchAdviceTitle: "🔍 在点击“搜索”按钮之前",
-                searchAdvice1: "以谦逊的态度接受自己有义务去查找经过核实的权威信息。",
-                searchAdvice2: "你必须保护自己，避免受骗和遭遇金融诈骗。",
-                searchAdvice3: "在按照陌生人催促进行任何金融操作之前，先冷静等待并思考。",
-                searchAdvice4: "通过电子邮件向你的银行索取关于收款人合法性的书面确认。",
-                instructionsButtonModal: "说明 - 如何验证此监管机构",
-                instructionsContent: ""
-            },
-            hi: {
-                title: "अंतरराष्ट्रीय डेटाबेस – बैंक हस्तांतरण प्राप्तकर्ताओं की वित्तीय पहचान की जाँच के लिए",
-                subtitle: "<span class='keyword-pulse'>239</span> देशों में <span class='keyword-pulse'>वित्तीय</span> बाजार <span class='keyword-pulse'>प्राधिकरण</span>, <span class='keyword-pulse'>20</span> भाषाओं में",
-                securityTitle: "✅ आधिकारिक वैध वेबसाइट – उपभोक्ता संरक्षण डेटाबेस",
-                securityText: "सरकारी वित्तीय प्राधिकरणों के होमपेज तक तुरंत पहुँच, ताकि वित्तीय सेवाएँ देने और बैंक स्थानांतरण प्राप्त करने वाली कंपनियों, व्यक्तियों और संस्थाओं की वैधता और नियमितता की जाँच की जा सके।",
-                introText: "यह वेबपेज दुनिया के 239 देशों की वित्तीय प्राधिकरण वेबसाइटों के लिए 239 प्रत्यक्ष लिंक प्रदान करता है।<br>उस देश का नाम खोजें जिसे वित्तीय कंपनी अपने पंजीकृत मुख्यालय के रूप में बताती है, और आप सभी आधिकारिक पहचान विवरण जान सकेंगे।",
-                searchPlaceholder: "देश या प्राधिकरण द्वारा खोजें...",
-                filterAll: "सभी देश",
-                filterHigh: "उच्च संरक्षण",
-                filterEU: "ईयू देश",
-                filterNonEU: "ग़ैर‑ईयू देश",
-                statCountries: "निगरानी किए गए देश",
-                statEU: "ईयू देश",
-                statHighProtection: "उच्च संरक्षण",
-                footer: "© 2026 लेखक और वेबमास्टर: वकील मारचेल्लो स्टांका, इटली (फ्लोरेंस)। प्रमाण‑पत्रों की पुष्टि: न्याय मंत्रालय (इटली), फ्लोरेंस की अदालत, यूरोपीय संसद – ब्रसेल्स। Facebook और Instagram खाते Meta द्वारा सत्यापित। Google Maps लोकल गाइड स्तर 9.5।",
-                footerNote: "यह डेटाबेस केवल जानकारी के उद्देश्य से है। हमेशा संबंधित प्राधिकरणों से दोबारा जाँच करें। सत्यापित Google Maps प्रोफ़ाइल: <a href=\"http://maps.app.goo.gl/gs4rm6vXMxJUVVhM8?g_st=aw\" target=\"_blank\" rel=\"noopener\">वकील मारचेल्लो स्टांका – Google Maps</a>। वेबपेज में त्रुटियाँ होने पर सूचित करें: <a href=\"mailto:lawyer@marcellostanca.it\">lawyer@marcellostanca.it</a>",
-                credentialsTitle: "सत्यापित पेशेवर प्रमाणपत्र – यूरोपीय संसद",
-                credentialsBody: "इस वेब पेज और इससे जुड़ी पृष्ठों के लेखक वकील मारचेल्लो स्टांका हैं, जिनका नाम फ्लोरेंस बार एसोसिएशन की सूची में दर्ज है (<a href=\"https://www.ordineavvocatifirenze.eu/\" target=\"_blank\" rel=\"noopener noreferrer\" style=\"color: #FFCC00; font-weight: 600; text-decoration: underline;\">Ordine Avvocati Firenze</a>)। वे अंतरराष्ट्रीय आईटी‑जांचों के विशेषज्ञ हैं। <strong>Marcello STANCA AMAZON लेखक हैं</strong> और उनकी पुस्तक <strong>\"RISCHIO TRADING\"</strong> AMAZON पर बेस्ट‑सेलर है (<a href=\"https://www.amazon.it/Rischio-Trading-Attraverso-Strumenti-Recupero-ebook/dp/B0DQRB8VQY?language=en_GB#detailBullets_feature_div\" target=\"_blank\" rel=\"noopener noreferrer\" style=\"color: #FFCC00; font-weight: 600; text-decoration: underline;\">किताब देखें</a>)। लेखक को <a href=\"https://www.facebook.com/avv.stanca.marcello\" target=\"_blank\" rel=\"noopener noreferrer\" style=\"color: #FFCC00; font-weight: 600; text-decoration: underline;\">Facebook</a> और <a href=\"https://www.tiktok.com/@avvocato.stanca.marcello\" target=\"_blank\" rel=\"noopener noreferrer\" style=\"color: #FFCC00; font-weight: 600; text-decoration: underline;\">TikTok</a> पर फ़ॉलो करें।",
-                authority: "संबंधित प्राधिकरण",
-                protectionLevel: "सुरक्षा स्तर",
-                notes: "टिप्पणियाँ",
-                euReferences: "संस्थागत पर्यवेक्षण संसाधन – यूरोपीय संघ, यूएसए FBI, ScamShield",
-                euCommission: "यूरोपीय आयोग",
-                flagsTitle: "देश के अनुसार त्वरित पहुँच",
-                modalAuthority: "वित्तीय प्राधिकरण",
-                modalAbbreviation: "संक्षेप",
-                modalHomepage: "मुखपृष्ठ",
-                modalFraudReport: "धोखाधड़ी रिपोर्ट",
-                modalEmail: "ईमेल",
-                modalSocial: "सोशल मीडिया",
-                modalNotes: "टिप्पणियाँ",
-                privacyStatement: "🔒 गोपनीयता: यह ऐप उपयोगकर्ताओं का व्यक्तिगत डाटा एकत्र नहीं करता",
-                privacyLink: "गोपनीयता नीति",
-                instructionsLabel: "अपनी भाषा चुनें, बटन दबाएँ और निर्देश पढ़ें।",
-                searchAdviceButton: "यह खोज करना इतना महत्वपूर्ण क्यों है?",
-                searchAdviceTitle: "🔍 &quot;खोजें&quot; बटन दबाने से पहले",
-                searchAdvice1: "नम्रता से स्वीकार करें कि आपको सत्यापित जानकारी खोजने का कर्तव्य है।",
-                searchAdvice2: "आपको खुद को धोखे और वित्तीय ठगी से बचाना है।",
-                searchAdvice3: "अजनबियों के दबाव में कोई भी वित्तीय लेनदेन करने से पहले समय लें और सोचें।",
-                searchAdvice4: "अपने बैंक से ईमेल द्वारा लाभार्थियों की वैधता की लिखित पुष्टि माँगें।",
-                instructionsButtonModal: "निर्देश - इस प्राधिकरण को कैसे सत्यापित करें",
-                instructionsContent: ""
-            },
             en: {
                 title: "International Banking Database",
                 subtitle: "<span class='keyword-pulse'>Financial</span> Market <span class='keyword-pulse'>Authorities</span> of <span class='keyword-pulse'>239</span> Countries in <span class='keyword-pulse'>5</span> languages",
                 securityTitle: "✅ OFFICIAL LEGITIMATE WEBSITE - CONSUMER PROTECTION DATABASE",
                 securityText: "This page offers an official educational database created by <strong>Lawyer Marcello Stanca in Florence - Italy</strong>. It provides consumers and bank clients with all the links to access the official pages of Financial Supervisory Authorities in 239 countries worldwide. Access to the Authorities allows verification of: <strong>1.</strong> the identity of Financial Authorities indicated to users on web pages of fake companies, <strong>2.</strong> but also the actual possession and license number granted, valid to offer financial services in the country of residence of the consumer/bank client. This page offers contact and consultation tools to protect consumer users against financial fraud.",
-                languageHint: "<span style='font-size: 1.1em;'>👆</span> Choose your language",
+                languageHint: "Choose your language here",
+                languageSelectorAriaLabel: "Language selection",
+                tableOfContentsAriaLabel: "Page index",
+                databaseSearchAriaLabel: "Search and filters",
+                filterOptionsAriaLabel: "Filter options",
+                filterContinentAriaLabel: "Filter by continent",
+                instructionsCloseAriaLabel: "Close guide",
                 tableOfContentsTitle: "📋 Quick Index – Browse the Database",
                 tocFlags: "🏳️ A-Z Flags",
                 tocSearch: "🔍 Search Authorities",
@@ -3493,17 +3299,18 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 tocFaq: "❓ FAQ",
                 introText: "This website provides links to the webpages of the Financial Authorities of 239 countries worldwide. Use it to verify the legitimacy and regularity of companies, individuals, and entities offering financial services.",
                 searchPlaceholder: "Search by country or authority...",
+                searchAriaLabel: "Search by country or authority",
                 searchButtonLabel: "Search",
                 filterAll: "All Countries",
                 filterHigh: "Highest Protection",
                 filterEU: "EU Countries",
                 filterNonEU: "Non-EU Countries",
-                continentLabel: "🌍 Continent:",
-                continentEurope: "🇪🇺 Europe",
-                continentAsia: "🌏 Asia",
-                continentAfrica: "🌍 Africa",
-                continentAmericas: "🌎 Americas",
-                continentOceania: "🏝️ Oceania",
+                continentLabel: "Continent:",
+                continentEurope: "Europe",
+                continentAsia: "Asia",
+                continentAfrica: "Africa",
+                continentAmericas: "Americas",
+                continentOceania: "Oceania",
                 statCountries: "Monitored Countries",
                 statEU: "EU Countries",
                 statHighProtection: "Highest Protection",
@@ -3519,8 +3326,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 euCommission: "European Commission",
                 flagsTitle: "Quick Access by Country",
                 flagsGridTitle: "🌍 Select your Country - 239 Financial Authorities Database",
-                azTitle: "Reach the Authorities immediately through the GRAPHIC <span style='background: #ffffff; color: #000000; font-weight: 900; font-size: 1em; padding: 6px 12px; border-radius: 8px; font-family: monospace; margin-left: 8px;'>A-Z</span> alphabet!",
-                azSubtitle: "Scroll the alphabet and select the flag!&nbsp;&nbsp;&nbsp; <span class='keyword-pulse-red'>The world's most complete database!</span>",
+                azTitlePrefix: "Reach the Authorities immediately through the GRAPHIC",
+                azTitleSuffix: " alphabet!",
+                azSubtitlePrefix: "Scroll the alphabet and select the flag!",
+                azSubtitleHighlight: "The world's most complete database!",
                 faqTitle: "❓ Frequently Asked Questions – FAQ",
                 intermezzoTitle: "🔎 Filter by category",
                 modalAuthority: "Financial Authority",
@@ -3535,7 +3344,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 instructionsButton: "📖 Instructions",
                 instructionsLabel: "Read legal guide and texts in your language - On/Off",
                 searchAdviceButton: "Why is this search important?",
-                searchAdviceTitle: "🔍 Before using the &quot;Search&quot; button",
+                searchAdviceTitle: "🔍 Before using the \"Search\" button",
                 searchAdvice1: "Humbly accept your duty to look for verified, authoritative information.",
                 searchAdvice2: "You must protect yourself from deception and financial fraud.",
                 searchAdvice3: "Take your time before carrying out financial transactions pushed by strangers.",
@@ -3563,7 +3372,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 reportFormCancel: "❌ Cancel",
                 reportFormDisclaimer: "ℹ️ Data will be sent to your email so you can contact the Authority. A copy will be sent to the administrator to populate the public Warning List.",
                 instructionsContent: `
-<button type="button" class="instructions-popup-close" onclick="toggleInstructions()" aria-label="Close guide">×</button>
 <h2>🛡️ Practical Legal Guide – Verifying a Financial Firm in 5 Steps</h2>
 <p>As a practicing lawyer and author of the strategies described in “Checkmate to Scams” and in EU Petitions 0888/2024 and 0645/2025, I have drafted this practical guide.</p>
 <p>The goal is to turn the 239 links in this database into an active shield to protect your capital before you click “send wire transfer”.</p>
@@ -3608,7 +3416,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 subtitle: "<span class='keyword-pulse'>Autorités</span> des Marchés <span class='keyword-pulse'>Financiers</span> de <span class='keyword-pulse'>239</span> Pays en <span class='keyword-pulse'>5</span> langues",
                 securityTitle: "✅ SITE OFFICIEL LÉGITIME - BASE DE DONNÉES DE PROTECTION DES CONSOMMATEURS",
                 securityText: "Cette page offre une base de données éducative officielle créée par <strong>l'Avocat Marcello Stanca à Florence - Italie</strong>. Elle fournit aux consommateurs, clients de banques, tous les liens pour accéder aux pages officielles des Autorités de Surveillance Financière de 239 pays du monde. L'accès aux Autorités permet de vérifier: <strong>1.</strong> l'identité des Autorités Financières indiquées aux utilisateurs sur des pages web de fausses entreprises, <strong>2.</strong> mais aussi la possession effective et le numéro de licence accordée, valide pour offrir des services financiers dans le pays de résidence du consommateur/client bancaire. Cette page offre des outils de contact et de consultation pour protéger les utilisateurs consommateurs contre les fraudes financières.",
-                languageHint: "<span style='font-size: 1.1em;'>👆</span> Choisissez votre langue",
+                languageHint: "Choisissez votre langue ici",
+                languageSelectorAriaLabel: "Sélection de la langue",
+                tableOfContentsAriaLabel: "Index de la page",
+                databaseSearchAriaLabel: "Recherche et filtres",
+                filterOptionsAriaLabel: "Options de filtrage",
+                filterContinentAriaLabel: "Filtrer par continent",
+                instructionsCloseAriaLabel: "Fermer le guide",
                 tableOfContentsTitle: "📋 Index rapide – Parcourir la base",
                 tocFlags: "🏳️ Drapeaux A-Z",
                 tocSearch: "🔍 Rechercher des autorités",
@@ -3619,17 +3433,18 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 tocFaq: "❓ FAQ",
                 introText: "Ce site web offre des liens pour accéder aux pages web des Autorités Financières de 239 pays du monde. Utilisez-le pour vérifier la légitimité et la régularité des entreprises, des personnes et des entités offrant des services financiers.",
                 searchPlaceholder: "Rechercher par pays ou autorité...",
+                searchAriaLabel: "Rechercher par pays ou autorité",
                 searchButtonLabel: "Rechercher",
                 filterAll: "Tous les Pays",
                 filterHigh: "Protection Maximale",
                 filterEU: "Pays UE",
                 filterNonEU: "Pays hors UE",
-                continentLabel: "🌍 Continent :",
-                continentEurope: "🇪🇺 Europe",
-                continentAsia: "🌏 Asie",
-                continentAfrica: "🌍 Afrique",
-                continentAmericas: "🌎 Amériques",
-                continentOceania: "🏝️ Océanie",
+                continentLabel: "Continent :",
+                continentEurope: "Europe",
+                continentAsia: "Asie",
+                continentAfrica: "Afrique",
+                continentAmericas: "Amériques",
+                continentOceania: "Océanie",
                 statCountries: "Pays Surveillés",
                 statEU: "Pays UE",
                 statHighProtection: "Protection Maximale",
@@ -3645,8 +3460,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 euCommission: "Commission Européenne",
                 flagsTitle: "Accès Rapide par Pays",
                 flagsGridTitle: "🌍 Sélectionnez votre pays - base de données de 239 autorités financières",
-                azTitle: "Accédez immédiatement aux autorités via l'alphabet GRAPHIQUE <span style='background: #ffffff; color: #000000; font-weight: 900; font-size: 1em; padding: 6px 12px; border-radius: 8px; font-family: monospace; margin-left: 8px;'>A-Z</span> !",
-                azSubtitle: "Faites défiler l'alphabet et sélectionnez le drapeau !&nbsp;&nbsp;&nbsp; <span class='keyword-pulse-red'>La base de données la plus complète au monde !</span>",
+                azTitlePrefix: "Accédez immédiatement aux autorités via l'alphabet GRAPHIQUE",
+                azTitleSuffix: " !",
+                azSubtitlePrefix: "Faites défiler l'alphabet et sélectionnez le drapeau !",
+                azSubtitleHighlight: "La base de données la plus complète au monde !",
                 faqTitle: "❓ Questions fréquentes – FAQ",
                 intermezzoTitle: "🔎 Filtrer par catégorie",
                 modalAuthority: "Autorité Financière",
@@ -3661,7 +3478,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 instructionsButton: "📖 Instructions",
                 instructionsLabel: "Lisez les instructions et textes dans votre langue - On/Off",
                 searchAdviceButton: "Pourquoi cette recherche est‑elle importante ?",
-                searchAdviceTitle: "🔍 Avant d'utiliser le bouton &quot;Rechercher&quot;",
+                searchAdviceTitle: "🔍 Avant d'utiliser le bouton \"Rechercher\"",
                 searchAdvice1: "Acceptez avec humilité le devoir de rechercher des informations vérifiées et fiables.",
                 searchAdvice2: "Vous devez vous protéger contre les tromperies et les fraudes financières.",
                 searchAdvice3: "Prenez le temps avant d'effectuer des opérations financières sollicitées par des inconnus.",
@@ -3685,7 +3502,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 reportFormCancel: "❌ Annuler",
                 reportFormDisclaimer: "ℹ️ Les données seront envoyées à votre email pour vous permettre de contacter l'Autorité. Une copie sera envoyée à l'administrateur pour alimenter la Warning List publique.",
                 instructionsContent: `
-<button type="button" class="instructions-popup-close" onclick="toggleInstructions()" aria-label="Fermer le guide">×</button>
 <h2>🛡️ Guide juridique pratique – Vérifier une entreprise financière en 5 étapes</h2>
 <p>En tant qu’avocat praticien et auteur des stratégies décrites dans « Échec et mat aux arnaques » et dans les Pétitions de l’UE 0888/2024 et 0645/2025, j’ai rédigé ce guide pratique.</p>
 <p>L’objectif est de transformer les 239 liens de cette base de données en un bouclier actif pour protéger votre capital avant de cliquer sur « envoyer le virement ».</p>
@@ -3730,7 +3546,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 subtitle: "<span class='keyword-pulse'>Finanzmarktaufsichtsbehörden</span> von <span class='keyword-pulse'>239</span> Ländern in <span class='keyword-pulse'>5</span> Sprachen",
                 securityTitle: "✅ OFFIZIELLE LEGITIME WEBSITE - VERBRAUCHERSCHUTZDATENBANK",
                 securityText: "Diese Seite bietet eine offizielle Bildungsdatenbank, erstellt von <strong>Rechtsanwalt Marcello Stanca in Florenz - Italien</strong>. Sie bietet Verbrauchern und Bankkunden alle Links zum Zugriff auf die offiziellen Seiten der Finanzaufsichtsbehörden in 239 Ländern weltweit. Der Zugang zu den Behörden ermöglicht die Überprüfung von: <strong>1.</strong> der Identität der Finanzaufsichtsbehörden, die Benutzern auf Webseiten gefälschter Unternehmen angegeben werden, <strong>2.</strong> aber auch des tatsächlichen Besitzes und der Lizenznummer, gültig für das Anbieten von Finanzdienstleistungen im Wohnsitzland des Verbrauchers/Bankkunden. Diese Seite bietet Kontakt- und Beratungsinstrumente zum Schutz von Verbrauchern gegen Finanzbetrug.",
-                languageHint: "<span style='font-size: 1.1em;'>👆</span> Wählen Sie Ihre Sprache",
+                languageHint: "Wählen Sie hier Ihre Sprache",
+                languageSelectorAriaLabel: "Sprachauswahl",
+                tableOfContentsAriaLabel: "Seitenindex",
+                databaseSearchAriaLabel: "Suche und Filter",
+                filterOptionsAriaLabel: "Filteroptionen",
+                filterContinentAriaLabel: "Nach Kontinent filtern",
+                instructionsCloseAriaLabel: "Leitfaden schließen",
                 tableOfContentsTitle: "📋 Schnellindex – Datenbank durchsuchen",
                 tocFlags: "🏳️ A-Z-Flaggen",
                 tocSearch: "🔍 Behörden suchen",
@@ -3741,17 +3563,18 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 tocFaq: "❓ FAQ",
                 introText: "Diese Website bietet Links zu den Webseiten der Finanzbehörden von 239 Ländern weltweit. Nutzen Sie sie, um die Legitimität und Ordnungsmäßigkeit von Unternehmen, Personen und Einrichtungen zu überprüfen, die Finanzdienstleistungen anbieten.",
                 searchPlaceholder: "Nach Land oder Behörde suchen...",
+                searchAriaLabel: "Nach Land oder Behörde suchen",
                 searchButtonLabel: "Suchen",
                 filterAll: "Alle Länder",
                 filterHigh: "Höchster Schutz",
                 filterEU: "EU-Länder",
                 filterNonEU: "Nicht-EU-Länder",
-                continentLabel: "🌍 Kontinent:",
-                continentEurope: "🇪🇺 Europa",
-                continentAsia: "🌏 Asien",
-                continentAfrica: "🌍 Afrika",
-                continentAmericas: "🌎 Amerika",
-                continentOceania: "🏝️ Ozeanien",
+                continentLabel: "Kontinent:",
+                continentEurope: "Europa",
+                continentAsia: "Asien",
+                continentAfrica: "Afrika",
+                continentAmericas: "Amerika",
+                continentOceania: "Ozeanien",
                 statCountries: "Überwachte Länder",
                 statEU: "EU-Länder",
                 statHighProtection: "Höchster Schutz",
@@ -3767,8 +3590,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 euCommission: "Europäische Kommission",
                 flagsTitle: "Schnellzugriff nach Land",
                 flagsGridTitle: "🌍 Wählen Sie Ihr Land - Datenbank mit 239 Finanzaufsichtsbehörden",
-                azTitle: "Greifen Sie sofort über das GRAFISCHE <span style='background: #ffffff; color: #000000; font-weight: 900; font-size: 1em; padding: 6px 12px; border-radius: 8px; font-family: monospace; margin-left: 8px;'>A-Z</span>-Alphabet auf die Behörden zu!",
-                azSubtitle: "Blättern Sie durch das Alphabet und wählen Sie die Flagge aus!&nbsp;&nbsp;&nbsp; <span class='keyword-pulse-red'>Die umfassendste Datenbank der Welt!</span>",
+                azTitlePrefix: "Greifen Sie sofort über das GRAFISCHE",
+                azTitleSuffix: "-Alphabet auf die Behörden zu!",
+                azSubtitlePrefix: "Blättern Sie durch das Alphabet und wählen Sie die Flagge aus!",
+                azSubtitleHighlight: "Die umfassendste Datenbank der Welt!",
                 faqTitle: "❓ Häufig gestellte Fragen – FAQ",
                 intermezzoTitle: "🔎 Nach Kategorie filtern",
                 modalAuthority: "Finanzbehörde",
@@ -3783,7 +3608,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 instructionsButton: "📖 Anleitung",
                 instructionsLabel: "Anleitung und Texte in Ihrer Sprache lesen - On/Off",
                 searchAdviceButton: "Warum ist diese Suche so wichtig?",
-                searchAdviceTitle: "🔍 Bevor Sie auf &quot;Suchen&quot; klicken",
+                searchAdviceTitle: "🔍 Bevor Sie auf \"Suchen\" klicken",
                 searchAdvice1: "Akzeptieren Sie in Demut die Pflicht, geprüfte und verlässliche Informationen zu suchen.",
                 searchAdvice2: "Sie müssen sich vor Täuschung und Finanzbetrug schützen.",
                 searchAdvice3: "Nehmen Sie sich Zeit, bevor Sie auf Drängen Unbekannter finanzielle Transaktionen ausführen.",
@@ -3807,7 +3632,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 reportFormCancel: "❌ Abbrechen",
                 reportFormDisclaimer: "ℹ️ Die Daten werden an Ihre E-Mail gesendet, damit Sie die Behörde kontaktieren können. Eine Kopie wird an den Administrator gesendet, um die öffentliche Warnliste zu ergänzen.",
                 instructionsContent: `
-<button type="button" class="instructions-popup-close" onclick="toggleInstructions()" aria-label="Leitfaden schließen">×</button>
 <h2>🛡️ Praktischer Rechtsleitfaden – Prüfung eines Finanzunternehmens in 5 Schritten</h2>
 <p>Als praktizierender Rechtsanwalt und Autor der in „Schachmatt für Betrüger“ sowie in den EU‑Petitionen 0888/2024 und 0645/2025 beschriebenen Strategien habe ich diesen Leitfaden erstellt.</p>
 <p>Ziel ist es, die 239 links dieser Datenbank in einen aktiven Schutzschild zu verwandeln, der Ihr Kapital schützt, bevor Sie auf „Überweisung senden“ klicken.</p>
@@ -3852,7 +3676,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 subtitle: "<span class='keyword-pulse'>Autoridades</span> de Mercados <span class='keyword-pulse'>Financieros</span> de <span class='keyword-pulse'>239</span> Países en <span class='keyword-pulse'>5</span> idiomas",
                 securityTitle: "✅ SITIO OFICIAL LEGÍTIMO - BASE DE DATOS DE PROTECCIÓN AL CONSUMIDOR",
                 securityText: "Esta página ofrece una base de datos educativa oficial creada por <strong>el Abogado Marcello Stanca en Florencia - Italia</strong>. Proporciona a los consumidores, clientes de bancos, todos los enlaces para acceder a las páginas oficiales de las Autoridades de Supervisión Financiera de 239 países del mundo. El acceso a las Autoridades permite verificar: <strong>1.</strong> la identidad de las Autoridades Financieras indicadas a los usuarios en páginas web de empresas falsas, <strong>2.</strong> pero también la posesión efectiva y el número de licencia otorgada, válida para ofrecer servicios financieros en el país de residencia del consumidor/cliente bancario. Esta página ofrece herramientas de contacto y consulta para proteger a los usuarios consumidores contra el fraude financiero.",
-                languageHint: "<span style='font-size: 1.1em;'>👆</span> Elige tu idioma",
+                languageHint: "Elige aquí tu idioma",
+                languageSelectorAriaLabel: "Selección de idioma",
+                tableOfContentsAriaLabel: "Índice de la página",
+                databaseSearchAriaLabel: "Búsqueda y filtros",
+                filterOptionsAriaLabel: "Opciones de filtro",
+                filterContinentAriaLabel: "Filtrar por continente",
+                instructionsCloseAriaLabel: "Cerrar la guía",
                 tableOfContentsTitle: "📋 Índice rápido – Navega por la base de datos",
                 tocFlags: "🏳️ Banderas A-Z",
                 tocSearch: "🔍 Buscar autoridades",
@@ -3863,17 +3693,18 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 tocFaq: "❓ FAQ",
                 introText: "Este sitio web ofrece enlaces a las páginas web de las Autoridades Financieras de 239 países del mundo. Úselo para verificar la legitimidad y regularidad de empresas, personas y entidades que ofrecen servicios financieros.",
                 searchPlaceholder: "Buscar por país o autoridad...",
+                searchAriaLabel: "Buscar por país o autoridad",
                 searchButtonLabel: "Buscar",
                 filterAll: "Todos los Países",
                 filterHigh: "Protección Máxima",
                 filterEU: "Países UE",
                 filterNonEU: "Países no UE",
-                continentLabel: "🌍 Continente:",
-                continentEurope: "🇪🇺 Europa",
-                continentAsia: "🌏 Asia",
-                continentAfrica: "🌍 África",
-                continentAmericas: "🌎 Américas",
-                continentOceania: "🏝️ Oceanía",
+                continentLabel: "Continente:",
+                continentEurope: "Europa",
+                continentAsia: "Asia",
+                continentAfrica: "África",
+                continentAmericas: "Américas",
+                continentOceania: "Oceanía",
                 statCountries: "Países Monitoreados",
                 statEU: "Países UE",
                 statHighProtection: "Protección Máxima",
@@ -3889,8 +3720,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 euCommission: "Comisión Europea",
                 flagsTitle: "Acceso Rápido por País",
                 flagsGridTitle: "🌍 Selecciona tu país - base de datos de 239 autoridades financieras",
-                azTitle: "Accede de inmediato a las autoridades mediante el alfabeto GRÁFICO <span style='background: #ffffff; color: #000000; font-weight: 900; font-size: 1em; padding: 6px 12px; border-radius: 8px; font-family: monospace; margin-left: 8px;'>A-Z</span>!",
-                azSubtitle: "Desplázate por el alfabeto y selecciona la bandera.&nbsp;&nbsp;&nbsp; <span class='keyword-pulse-red'>¡La base de datos más completa del mundo!</span>",
+                azTitlePrefix: "Accede de inmediato a las autoridades mediante el alfabeto GRÁFICO",
+                azTitleSuffix: "!",
+                azSubtitlePrefix: "Desplázate por el alfabeto y selecciona la bandera.",
+                azSubtitleHighlight: "¡La base de datos más completa del mundo!",
                 faqTitle: "❓ Preguntas frecuentes – FAQ",
                 intermezzoTitle: "🔎 Filtrar por categoría",
                 modalAuthority: "Autoridad Financiera",
@@ -3905,7 +3738,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 instructionsButton: "📖 Instrucciones",
                 instructionsLabel: "Lee instrucciones y textos en tu idioma - On/Off",
                 searchAdviceButton: "¿Por qué es tan importante esta búsqueda?",
-                searchAdviceTitle: "🔍 Antes de pulsar el botón &quot;Buscar&quot;",
+                searchAdviceTitle: "🔍 Antes de pulsar el botón \"Buscar\"",
                 searchAdvice1: "Acepta con humildad el deber de buscar información verificada y fiable.",
                 searchAdvice2: "Debes protegerte de los engaños y de las estafas financieras.",
                 searchAdvice3: "Tómate tu tiempo antes de realizar operaciones financieras solicitadas por desconocidos.",
@@ -3929,7 +3762,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 reportFormCancel: "❌ Cancelar",
                 reportFormDisclaimer: "ℹ️ Los datos serán enviados a tu email para que puedas contactar a la Autoridad. Una copia será enviada al administrador para alimentar la Warning List pública.",
                 instructionsContent: `
-<button type="button" class="instructions-popup-close" onclick="toggleInstructions()" aria-label="Cerrar la guía">×</button>
 <h2>🛡️ Guía jurídica práctica – Verificar una empresa financiera en 5 pasos</h2>
 <p>Como abogado en ejercicio y autor de las estrategias descritas en «Jaque mate a las estafas» y en las Peticiones de la UE 0888/2024 y 0645/2025, he redactado esta guía práctica.</p>
 <p>El objetivo es transformar los 239 enlaces de esta base de datos en un escudo activo para proteger tu capital antes de hacer clic en «enviar transferencia».</p>
@@ -3969,67 +3801,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </div>
 `
             },
-            pt: {
-                title: "Base de dados internacional para verificação da identidade financeira de destinatários de transferências bancárias",
-                subtitle: "<span class='keyword-pulse'>Autoridades</span> de Mercados <span class='keyword-pulse'>Financeiros</span> de <span class='keyword-pulse'>239</span> Países em <span class='keyword-pulse'>20</span> línguas",
-                securityTitle: "✅ SITE OFICIAL LEGÍTIMO – BASE DE DADOS DE PROTEÇÃO AO CONSUMIDOR",
-                securityText: "Acesso imediato às páginas oficiais das Autoridades Financeiras governamentais para verificar a legitimidade e regularidade de empresas, pessoas e entidades que oferecem serviços financeiros e recebem transferências.",
-                introText: "Esta página oferece 239 linkS diretos para as páginas das AUTORIDADES FINANCEIRAS de 239 países do mundo.<br>PROCURE o nome do País declarado como sede da empresa financeira, e poderá conhecer todos os detalhes identificativos oficiais.",
-                searchPlaceholder: "Procurar por país ou autoridade...",
-                filterAll: "Todos os Países",
-                filterHigh: "Proteção Elevada",
-                filterEU: "Países UE",
-                filterNonEU: "Países não-UE",
-                statCountries: "Países Monitorizados",
-                statEU: "Países UE",
-                statHighProtection: "Proteção Elevada",
-                footer: "© 2026 Autor e Webmaster: Advogado Marcello Stanca, Itália (Florença). Credenciais verificadas por: Ministério da Justiça (Itália), Tribunal de Florença, Parlamento Europeu – Bruxelas. Contas Facebook e Instagram verificadas pela Meta. Local Guide Google Maps nível 9,5.",
-                footerNote: "Esta base de dados é apenas para fins informativos. Verifique sempre junto das Autoridades competentes. Perfil Google Maps verificado: <a href=\"http://maps.app.goo.gl/gs4rm6vXMxJUVVhM8?g_st=aw\" target=\"_blank\" rel=\"noopener\">Adv. Marcello Stanca no Google Maps</a>. Reporte erros ao webmaster: <a href=\"mailto:lawyer@marcellostanca.it\">lawyer@marcellostanca.it</a>",
-                credentialsTitle: "Autor Verificado no Parlamento Europeu e Ministério da Justiça da Itália",
-                credentialsBody: "O Autor desta página web, e das páginas associadas, Advogado Marcello Stanca é verificável na página da Ordem dos Advogados do Tribunal de Florença (<a href=\"https://www.ordineavvocatifirenze.eu/\" target=\"_blank\" rel=\"noopener noreferrer\" style=\"color: #FFCC00; font-weight: 600; text-decoration: underline;\">Ordine Avvocati Firenze</a>) e é especialista em INVESTIGAÇÕES INFORMÁTICAS Internacionais. <strong>Marcello STANCA é Autor AMAZON</strong> do livro <strong>\"RISCHIO TRADING\"</strong>, Best Seller AMAZON (<a href=\"https://www.amazon.it/Rischio-Trading-Attraverso-Strumenti-Recupero-ebook/dp/B0DQRB8VQY?language=en_GB#detailBullets_feature_div\" target=\"_blank\" rel=\"noopener noreferrer\" style=\"color: #FFCC00; font-weight: 600; text-decoration: underline;\">ver ficha do livro</a>). Siga o autor no <a href=\"https://www.facebook.com/avv.stanca.marcello\" target=\"_blank\" rel=\"noopener noreferrer\" style=\"color: #FFCC00; font-weight: 600; text-decoration: underline;\">Facebook</a> e no <a href=\"https://www.tiktok.com/@avvocato.stanca.marcello\" target=\"_blank\" rel=\"noopener noreferrer\" style=\"color: #FFCC00; font-weight: 600; text-decoration: underline;\">TikTok</a>.",
-                authority: "Autoridade Competente",
-                protectionLevel: "Nível de Proteção",
-                notes: "Notas",
-                euReferences: "Recursos Institucionais de Supervisão - União Europeia USA FBI - ScamShield",
-                euCommission: "Comissão Europeia",
-                flagsTitle: "Acesso Rápido por País",
-                modalAuthority: "Autoridade Financeira",
-                modalAbbreviation: "Sigla",
-                modalHomepage: "Página Principal",
-                modalFraudReport: "Denúncia de Fraude",
-                modalEmail: "Email",
-                modalSocial: "Redes Sociais",
-                modalNotes: "Notas",
-                privacyStatement: "🔒 PRIVACIDADE: Esta app NÃO recolhe dados pessoais dos utilizadores",
-                privacyLink: "Política de Privacidade",
-                instructionsLabel: "Escolha a sua LÍNGUA, clique no botão e leia as INSTRUÇÕES.",
-                searchAdviceButton: "Por que esta pesquisa é importante?",
-                searchAdviceTitle: "🔍 Antes de usar o botão \"Pesquisar\"",
-                searchAdvice1: "Aceite com humildade o dever de procurar informação verificada.",
-                searchAdvice2: "Deve proteger-se de enganos e fraudes financeiras.",
-                searchAdvice3: "Tome o seu tempo antes de efetuar operações financeiras solicitadas por desconhecidos.",
-                searchAdvice4: "Peça ao seu banco confirmação por email da legitimidade dos beneficiários.",
-                instructionsButtonModal: "Instruções - Como verificar esta Autoridade",
-                // Formulário Denunciar Abuso
-                reportFormTitle: "⚠️ Denunciar Entidade Suspeita",
-                reportFormSubtitle: "Pedido de verificação à Autoridade Financeira",
-                reportFormEmail: "📧 O seu Email",
-                reportFormSuspectName: "🏢 Nome da Entidade Suspeita",
-                reportFormSuspectNamePlaceholder: "Ex: TradingPro Ltd, João Silva...",
-                reportFormUrl: "🌐 Site Web / URL Suspeito",
-                reportFormPhone: "📱 WhatsApp / Telefone Suspeito",
-                reportFormAmount: "💰 Montante Solicitado/Perdido (opcional)",
-                reportFormIban: "🏦 IBAN e Beneficiário da Transferência Solicitada",
-                reportFormIbanPlaceholder: "Ex: PT50 0002 0123 1234 5678 9015 4 - beneficiário: João Silva Lda",
-                reportFormIbanNote: "⚠️ Dado fundamental: será transmitido à Autoridade e conservado na base de dados pública Warning List.",
-                reportFormDescription: "📝 Descrição Breve",
-                reportFormDescriptionPlaceholder: "Descreva brevemente como foi contactado e o que lhe propuseram...",
-                reportFormSubmit: "📤 Gerar Pedido por Email",
-                reportFormCancel: "❌ Cancelar",
-                reportFormDisclaimer: "ℹ️ Os dados serão enviados para o seu email para poder contactar a Autoridade. Uma cópia será enviada ao administrador para alimentar a Warning List pública.",
-                instructionsContent: ""
-            }
-            // Add other languages if needed
+            // Supported languages only
         };
 
         const DEFAULT_LANGUAGE = 'it';
@@ -4037,7 +3809,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
         function normalizeLanguage(lang) {
             const normalized = (lang || '').toLowerCase();
-            return SUPPORTED_LANGUAGES.includes(normalized) ? normalized : DEFAULT_LANGUAGE;
+            return SUPPORTED_LANGUAGES.includes(normalized) ? normalized : null;
         }
 
         // Determina la lingua iniziale dalla query string (?lang=xx), con fallback a IT
@@ -4048,10 +3820,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             } catch (e) {
                 console.warn('Impossibile leggere parametro lang dalla URL', e);
             }
-            return DEFAULT_LANGUAGE;
+            return null;
         }
 
-        let currentLanguage = getInitialLanguageFromUrl();
+        const initialLanguageOverride = getInitialLanguageFromUrl();
+        let currentLanguage = initialLanguageOverride || DEFAULT_LANGUAGE;
         let currentFilter = 'all';
         // Array di paesi; inizializzato a [] per evitare errori quando i dati non sono caricati
         let countriesData = [];
@@ -4329,7 +4102,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             // Aggiorna canonical URL dinamicamente in base alla lingua
             updateCanonicalUrl();
             
-            changeLanguage(currentLanguage);
+            changeLanguage(currentLanguage, Boolean(initialLanguageOverride));
             setupSearch();
             loadCountryData();
         });
@@ -4379,8 +4152,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             renderFlagsGrid();
         }
 
-        function changeLanguage(lang) {
-            currentLanguage = normalizeLanguage(lang);
+        function changeLanguage(lang, updateUrl = true) {
+            currentLanguage = normalizeLanguage(lang) || DEFAULT_LANGUAGE;
             document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
             const activeBtn = document.querySelector(`.lang-btn[data-lang="${currentLanguage}"]`);
             if(activeBtn) activeBtn.classList.add('active');
@@ -4401,15 +4174,27 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             }
 
             // Aggiorna URL nel browser senza ricaricare
-            const newUrl = currentLanguage === DEFAULT_LANGUAGE 
-                ? window.location.pathname 
-               : `${window.location.pathname}?lang=${currentLanguage}`;
-            window.history.replaceState({lang: currentLanguage}, '', newUrl);
+            if (updateUrl) {
+               const nextUrl = new URL(window.location.href);
+               if (currentLanguage === DEFAULT_LANGUAGE) {
+                   nextUrl.searchParams.delete('lang');
+               } else {
+                   nextUrl.searchParams.set('lang', currentLanguage);
+               }
+               window.history.replaceState({lang: currentLanguage}, '', `${nextUrl.pathname}${nextUrl.search}${nextUrl.hash}`);
+            }
 
             const languagePack = translations[currentLanguage] || translations[DEFAULT_LANGUAGE] || {};
             const fallbackPack = translations[DEFAULT_LANGUAGE] || {};
             document.querySelectorAll('[data-i18n]').forEach(element => {
                const key = element.getAttribute('data-i18n');
+               const translatedValue = languagePack[key] ?? fallbackPack[key];
+               if (translatedValue !== undefined) {
+                   element.textContent = translatedValue;
+               }
+            });
+            document.querySelectorAll('[data-i18n-html]').forEach(element => {
+               const key = element.getAttribute('data-i18n-html');
                const translatedValue = languagePack[key] ?? fallbackPack[key];
                if (translatedValue !== undefined) {
                    element.innerHTML = translatedValue;
@@ -4422,16 +4207,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                    element.placeholder = translatedPlaceholder;
                }
             });
-            // Aggiorna il contenuto del popup istruzioni, se disponibile nella lingua selezionata
-            const instructionsPopup = document.getElementById('instructionsPopup');
-            if (instructionsPopup) {
-               const langData = translations[currentLanguage] || translations[DEFAULT_LANGUAGE];
-               const fallback = translations[DEFAULT_LANGUAGE] && translations[DEFAULT_LANGUAGE].instructionsContent ? translations[DEFAULT_LANGUAGE].instructionsContent : '';
-               const content = langData && langData.instructionsContent ? langData.instructionsContent : fallback;
-               if (content) {
-                   instructionsPopup.innerHTML = content;
-                }
-            }
+            document.querySelectorAll('[data-i18n-aria-label]').forEach(element => {
+               const key = element.getAttribute('data-i18n-aria-label');
+               const translatedAriaLabel = languagePack[key] ?? fallbackPack[key];
+               if (translatedAriaLabel !== undefined) {
+                   element.setAttribute('aria-label', translatedAriaLabel);
+               }
+            });
             renderAll();
         }
 
@@ -4550,15 +4332,15 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     <div class="filter-buttons-grid">
                         <button class="filter-btn" onclick="filterCountries('ue')" aria-pressed="false">
                             <span class="fi fi-eu" aria-hidden="true" style="margin-right:6px;"></span>
-                            ${languagePack.filterEU || 'EU Countries'}
+                            <span>${languagePack.filterEU || 'EU Countries'}</span>
                         </button>
                         <button class="filter-btn" onclick="filterCountries('non-ue')" aria-pressed="false">${languagePack.filterNonEU || 'Non-EU Countries'}</button>
-                        <button class="filter-btn" onclick="filterCountries('altissimo')" aria-pressed="false">⭐ ${languagePack.filterHigh || 'Highest Protection'}</button>
-                        <button class="filter-btn" onclick="filterCountries('europe')" aria-pressed="false">${languagePack.continentEurope || '🇪🇺 Europe'}</button>
-                        <button class="filter-btn" onclick="filterCountries('asia')" aria-pressed="false">${languagePack.continentAsia || '🌏 Asia'}</button>
-                        <button class="filter-btn" onclick="filterCountries('africa')" aria-pressed="false">${languagePack.continentAfrica || '🌍 Africa'}</button>
-                        <button class="filter-btn" onclick="filterCountries('americas')" aria-pressed="false">${languagePack.continentAmericas || '🌎 Americas'}</button>
-                        <button class="filter-btn" onclick="filterCountries('oceania')" aria-pressed="false">${languagePack.continentOceania || '🏝️ Oceania'}</button>
+                        <button class="filter-btn" onclick="filterCountries('altissimo')" aria-pressed="false"><span aria-hidden="true">⭐</span> <span>${languagePack.filterHigh || 'Highest Protection'}</span></button>
+                        <button class="filter-btn" onclick="filterCountries('europe')" aria-pressed="false"><span aria-hidden="true">🇪🇺</span> <span>${languagePack.continentEurope || 'Europe'}</span></button>
+                        <button class="filter-btn" onclick="filterCountries('asia')" aria-pressed="false"><span aria-hidden="true">🌏</span> <span>${languagePack.continentAsia || 'Asia'}</span></button>
+                        <button class="filter-btn" onclick="filterCountries('africa')" aria-pressed="false"><span aria-hidden="true">🌍</span> <span>${languagePack.continentAfrica || 'Africa'}</span></button>
+                        <button class="filter-btn" onclick="filterCountries('americas')" aria-pressed="false"><span aria-hidden="true">🌎</span> <span>${languagePack.continentAmericas || 'Americas'}</span></button>
+                        <button class="filter-btn" onclick="filterCountries('oceania')" aria-pressed="false"><span aria-hidden="true">🏝️</span> <span>${languagePack.continentOceania || 'Oceania'}</span></button>
                     </div>
                 `;
                 grid.appendChild(intermezzoSection);
@@ -5444,8 +5226,3 @@ https://avvstancamarcello.github.io/Financial-Authority-Database/
     </footer>
 </body>
 </html>
-
-
-
-
-
