@@ -4460,6 +4460,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             updateStats();
             renderCountries();
             renderFlagsGrid();
+            applyTranslations(currentLanguage);
         }
 
         function applyTranslations(lang) {
@@ -4535,7 +4536,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             window.history.replaceState({lang: lang}, '', newUrl);
 
             renderAll();
-            applyTranslations(lang);
         }
 
         function renderCountries() {
@@ -5546,7 +5546,6 @@ https://avvstancamarcello.github.io/Financial-Authority-Database/
     </footer>
 </body>
 </html>
-
 
 
 
