@@ -1556,7 +1556,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <!-- TABLE OF CONTENTS - Indice Navigazione Interna SEO -->
         <nav id="table-of-contents" aria-label="Indice della pagina" style="background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%); padding: 20px 30px; margin: 0; border-bottom: 3px solid #ffd700;">
             <div style="max-width: 1200px; margin: 0 auto;">
-                <h2 data-i18n="quickIndexTitle" style="color: #ffd700; font-size: 1.2em; margin: 0 0 15px 0; text-align: center;">📋 Indice Rapido – Naviga il Database</h2>
+                <h2 data-i18n="quickIndexTitle" data-i18n-aria-label="quickIndexTitleAriaLabel" aria-label="Indice rapido - naviga il database" style="color: #ffd700; font-size: 1.2em; margin: 0 0 15px 0; text-align: center;">📋 Indice Rapido – Naviga il Database</h2>
                 <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 12px;">
                     <a href="#flags-section" data-i18n="quickIndexFlagsLink" style="background: rgba(255,215,0,0.15); color: #ffffff; padding: 10px 18px; border-radius: 25px; text-decoration: none; font-weight: 600; border: 1px solid rgba(255,215,0,0.4); transition: all 0.3s;">🏳️ Bandiere A-Z</a>
                     <a href="#database-search-section" data-i18n="quickIndexSearchLink" style="background: rgba(255,215,0,0.15); color: #ffffff; padding: 10px 18px; border-radius: 25px; text-decoration: none; font-weight: 600; border: 1px solid rgba(255,215,0,0.4); transition: all 0.3s;">🔍 Cerca Autorità</a>
@@ -1587,7 +1587,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <!-- Banner Alfabeto A-Z - Sfondo Nero, Testo Verde Fosforo -->
             <div style="background: #000000; padding: 18px 20px; margin-bottom: 15px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.3); border: 2px solid #39ff14;">
                 <div style="display: flex; align-items: center; justify-content: center; gap: 12px; flex-wrap: wrap;">
-                    <h2 data-i18n="alphabetBannerTitle" style="margin: 0; color: #39ff14; font-size: 1.4em; text-shadow: 0 0 10px rgba(57, 255, 20, 0.5);">Accedi immediatamente alle Authority tramite l'Alfabeto GRAFICO <span style="background: #ffffff; color: #000000; font-weight: 900; font-size: 1em; padding: 6px 12px; border-radius: 8px; font-family: monospace; margin-left: 8px;">A-Z</span>!</h2>
+                    <h2 data-i18n="alphabetBannerTitle" data-i18n-aria-label="alphabetBannerTitleAriaLabel" aria-label="Accedi immediatamente alle authority tramite l'alfabeto grafico A-Z" style="margin: 0; color: #39ff14; font-size: 1.4em; text-shadow: 0 0 10px rgba(57, 255, 20, 0.5);">Accedi immediatamente alle Authority tramite l'Alfabeto GRAFICO <span style="background: #ffffff; color: #000000; font-weight: 900; font-size: 1em; padding: 6px 12px; border-radius: 8px; font-family: monospace; margin-left: 8px;">A-Z</span>!</h2>
                     <button id="instructionsToggle" class="instructions-toggle" type="button" onclick="toggleInstructions()" aria-controls="instructionsPopup" aria-expanded="false" data-i18n="instructionsButtonLabel" data-i18n-title="instructionsButtonLabel" data-i18n-aria-label="instructionsButtonAriaLabel" aria-label="Istruzioni" title="Istruzioni" style="background: #000000; color: #39ff14; border: 2px solid #39ff14; border-radius: 999px; padding: 0.5rem 1.2rem; font-size: 0.9rem; display: inline-flex; align-items: center; gap: 6px; cursor: pointer; box-shadow: 0 3px 12px rgba(57, 255, 20, 0.4); font-weight: 600;">
                         📖 Istruzioni
                     </button>
@@ -3172,6 +3172,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 filterEU: "Paesi UE",
                 filterNonEU: "Paesi non-UE",
                 quickIndexTitle: "📋 Indice Rapido – Naviga il Database",
+                quickIndexTitleAriaLabel: "Indice rapido - naviga il database",
                 quickIndexFlagsLink: "🏳️ Bandiere A-Z",
                 quickIndexSearchLink: "🔍 Cerca Autorità",
                 quickIndexCountriesLink: "🌍 Lista 239 Paesi",
@@ -3213,6 +3214,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 privacyStatement: "🔒 PRIVACY: Questa app NON raccoglie dati personali degli utenti",
                 privacyLink: "Privacy Policy",
                 alphabetBannerTitle: "Accedi immediatamente alle Authority tramite l'Alfabeto GRAFICO <span style='background: #ffffff; color: #000000; font-weight: 900; font-size: 1em; padding: 6px 12px; border-radius: 8px; font-family: monospace; margin-left: 8px;'>A-Z</span>!",
+                alphabetBannerTitleAriaLabel: "Accedi immediatamente alle authority tramite l'alfabeto grafico A-Z",
                 alphabetBannerSubtitle: "Scorri l'Alfabeto e seleziona la Bandiera!&nbsp;&nbsp;&nbsp; <span class='keyword-pulse-red'>Database più completo del mondo!</span>",
                 instructionsButtonLabel: "📖 Istruzioni",
                 instructionsButtonAriaLabel: "Istruzioni",
@@ -3298,6 +3300,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 filterEU: "دول الاتحاد الأوروبي",
                 filterNonEU: "دول خارج الاتحاد الأوروبي",
                 quickIndexTitle: "📋 فهرس سريع – تصفّح قاعدة البيانات",
+                quickIndexTitleAriaLabel: "فهرس سريع - تصفح قاعدة البيانات",
                 quickIndexFlagsLink: "🏳️ الأعلام من A إلى Z",
                 quickIndexSearchLink: "🔍 ابحث عن الهيئة",
                 quickIndexCountriesLink: "🌍 قائمة 239 دولة",
@@ -3337,6 +3340,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 privacyStatement: "🔒 الخصوصية: هذا التطبيق لا يجمع أي بيانات شخصية للمستخدمين",
                 privacyLink: "سياسة الخصوصية",
                 alphabetBannerTitle: "ادخل فوراً إلى الهيئات عبر الأبجدية الرسومية <span style='background: #ffffff; color: #000000; font-weight: 900; font-size: 1em; padding: 6px 12px; border-radius: 8px; font-family: monospace; margin-left: 8px;'>A-Z</span>!",
+                alphabetBannerTitleAriaLabel: "ادخل فوراً إلى الهيئات عبر الأبجدية الرسومية A-Z",
                 alphabetBannerSubtitle: "مرّر الأبجدية واختر العلم!&nbsp;&nbsp;&nbsp; <span class='keyword-pulse-red'>أكثر قاعدة بيانات اكتمالاً في العالم!</span>",
                 instructionsButtonLabel: "📖 تعليمات",
                 instructionsButtonAriaLabel: "تعليمات",
@@ -3401,6 +3405,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 filterEU: "Quốc gia EU",
                 filterNonEU: "Ngoài EU",
                 quickIndexTitle: "📋 Chỉ mục nhanh – Điều hướng cơ sở dữ liệu",
+                quickIndexTitleAriaLabel: "Chỉ mục nhanh - điều hướng cơ sở dữ liệu",
                 quickIndexFlagsLink: "🏳️ Cờ A-Z",
                 quickIndexSearchLink: "🔍 Tìm cơ quan",
                 quickIndexCountriesLink: "🌍 Danh sách 239 quốc gia",
@@ -3440,6 +3445,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 privacyStatement: "🔒 QUYỀN RIÊNG TƯ: Ứng dụng này KHÔNG thu thập dữ liệu cá nhân của người dùng",
                 privacyLink: "Chính sách quyền riêng tư",
                 alphabetBannerTitle: "Truy cập ngay các cơ quan qua bảng chữ cái ĐỒ HỌA <span style='background: #ffffff; color: #000000; font-weight: 900; font-size: 1em; padding: 6px 12px; border-radius: 8px; font-family: monospace; margin-left: 8px;'>A-Z</span>!",
+                alphabetBannerTitleAriaLabel: "Truy cập ngay các cơ quan qua bảng chữ cái đồ họa A-Z",
                 alphabetBannerSubtitle: "Cuộn theo bảng chữ cái và chọn lá cờ!&nbsp;&nbsp;&nbsp; <span class='keyword-pulse-red'>Cơ sở dữ liệu đầy đủ nhất thế giới!</span>",
                 instructionsButtonLabel: "📖 Hướng dẫn",
                 instructionsButtonAriaLabel: "Hướng dẫn",
@@ -3465,6 +3471,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 filterEU: "欧盟国家",
                 filterNonEU: "非欧盟国家",
                 quickIndexTitle: "📋 快速索引 – 浏览数据库",
+                quickIndexTitleAriaLabel: "快速索引 - 浏览数据库",
                 quickIndexFlagsLink: "🏳️ A-Z 旗帜",
                 quickIndexSearchLink: "🔍 搜索监管机构",
                 quickIndexCountriesLink: "🌍 239个国家列表",
@@ -3504,6 +3511,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 privacyStatement: "🔒 隐私：本应用程序不会收集用户的个人数据",
                 privacyLink: "隐私政策",
                 alphabetBannerTitle: "通过图形字母表立即访问监管机构 <span style='background: #ffffff; color: #000000; font-weight: 900; font-size: 1em; padding: 6px 12px; border-radius: 8px; font-family: monospace; margin-left: 8px;'>A-Z</span>!",
+                alphabetBannerTitleAriaLabel: "通过图形字母表立即访问监管机构 A-Z",
                 alphabetBannerSubtitle: "滚动字母表并选择国旗！&nbsp;&nbsp;&nbsp; <span class='keyword-pulse-red'>全球最完整的数据库！</span>",
                 instructionsButtonLabel: "📖 说明",
                 instructionsButtonAriaLabel: "说明",
@@ -3529,6 +3537,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 filterEU: "ईयू देश",
                 filterNonEU: "ग़ैर‑ईयू देश",
                 quickIndexTitle: "📋 त्वरित अनुक्रमणिका – डेटाबेस में नेविगेट करें",
+                quickIndexTitleAriaLabel: "त्वरित अनुक्रमणिका - डेटाबेस में नेविगेट करें",
                 quickIndexFlagsLink: "🏳️ A-Z झंडे",
                 quickIndexSearchLink: "🔍 प्राधिकरण खोजें",
                 quickIndexCountriesLink: "🌍 239 देशों की सूची",
@@ -3568,6 +3577,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 privacyStatement: "🔒 गोपनीयता: यह ऐप उपयोगकर्ताओं का व्यक्तिगत डाटा एकत्र नहीं करता",
                 privacyLink: "गोपनीयता नीति",
                 alphabetBannerTitle: "ग्राफ़िक वर्णमाला के माध्यम से प्राधिकरणों तक तुरंत पहुँचें <span style='background: #ffffff; color: #000000; font-weight: 900; font-size: 1em; padding: 6px 12px; border-radius: 8px; font-family: monospace; margin-left: 8px;'>A-Z</span>!",
+                alphabetBannerTitleAriaLabel: "ग्राफ़िक वर्णमाला A-Z के माध्यम से प्राधिकरणों तक तुरंत पहुँचें",
                 alphabetBannerSubtitle: "वर्णमाला स्क्रॉल करें और झंडा चुनें!&nbsp;&nbsp;&nbsp; <span class='keyword-pulse-red'>दुनिया का सबसे पूर्ण डेटाबेस!</span>",
                 instructionsButtonLabel: "📖 निर्देश",
                 instructionsButtonAriaLabel: "निर्देश",
@@ -3593,6 +3603,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 filterEU: "EU Countries",
                 filterNonEU: "Non-EU Countries",
                 quickIndexTitle: "📋 Quick Index – Navigate the Database",
+                quickIndexTitleAriaLabel: "Quick index - navigate the database",
                 quickIndexFlagsLink: "🏳️ A-Z Flags",
                 quickIndexSearchLink: "🔍 Search Authorities",
                 quickIndexCountriesLink: "🌍 239 Countries List",
@@ -3634,6 +3645,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 privacyStatement: "🔒 PRIVACY: This app does NOT collect user personal data",
                 privacyLink: "Privacy Policy",
                 alphabetBannerTitle: "Get immediate access to Authorities through the GRAPHIC Alphabet <span style='background: #ffffff; color: #000000; font-weight: 900; font-size: 1em; padding: 6px 12px; border-radius: 8px; font-family: monospace; margin-left: 8px;'>A-Z</span>!",
+                alphabetBannerTitleAriaLabel: "Get immediate access to authorities through the graphic alphabet A-Z",
                 alphabetBannerSubtitle: "Scroll through the alphabet and select the flag!&nbsp;&nbsp;&nbsp; <span class='keyword-pulse-red'>The world's most complete database!</span>",
                 instructionsButtonLabel: "📖 Instructions",
                 instructionsButtonAriaLabel: "Instructions",
@@ -3719,6 +3731,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 filterEU: "Pays UE",
                 filterNonEU: "Pays hors UE",
                 quickIndexTitle: "📋 Index rapide – Parcourir la base de données",
+                quickIndexTitleAriaLabel: "Index rapide - parcourir la base de données",
                 quickIndexFlagsLink: "🏳️ Drapeaux A-Z",
                 quickIndexSearchLink: "🔍 Rechercher des autorités",
                 quickIndexCountriesLink: "🌍 Liste des 239 pays",
@@ -3758,6 +3771,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 privacyStatement: "🔒 CONFIDENTIALITÉ: Cette app ne collecte PAS de données personnelles",
                 privacyLink: "Politique de Confidentialité",
                 alphabetBannerTitle: "Accédez immédiatement aux autorités grâce à l'alphabet GRAPHIQUE <span style='background: #ffffff; color: #000000; font-weight: 900; font-size: 1em; padding: 6px 12px; border-radius: 8px; font-family: monospace; margin-left: 8px;'>A-Z</span>!",
+                alphabetBannerTitleAriaLabel: "Accédez immédiatement aux autorités grâce à l'alphabet graphique A-Z",
                 alphabetBannerSubtitle: "Faites défiler l'alphabet et sélectionnez le drapeau !&nbsp;&nbsp;&nbsp; <span class='keyword-pulse-red'>La base de données la plus complète au monde !</span>",
                 instructionsButtonLabel: "📖 Instructions",
                 instructionsButtonAriaLabel: "Instructions",
@@ -3839,6 +3853,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 filterEU: "EU-Länder",
                 filterNonEU: "Nicht-EU-Länder",
                 quickIndexTitle: "📋 Schnellindex – In der Datenbank navigieren",
+                quickIndexTitleAriaLabel: "Schnellindex - in der Datenbank navigieren",
                 quickIndexFlagsLink: "🏳️ A-Z-Flaggen",
                 quickIndexSearchLink: "🔍 Behörden suchen",
                 quickIndexCountriesLink: "🌍 Liste mit 239 Ländern",
@@ -3878,6 +3893,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 privacyStatement: "🔒 DATENSCHUTZ: Diese App sammelt KEINE persönlichen Daten",
                 privacyLink: "Datenschutzerklärung",
                 alphabetBannerTitle: "Greifen Sie sofort über das GRAFISCHE Alphabet auf die Behörden zu <span style='background: #ffffff; color: #000000; font-weight: 900; font-size: 1em; padding: 6px 12px; border-radius: 8px; font-family: monospace; margin-left: 8px;'>A-Z</span>!",
+                alphabetBannerTitleAriaLabel: "Greifen Sie sofort über das grafische Alphabet A-Z auf die Behörden zu",
                 alphabetBannerSubtitle: "Blättern Sie durch das Alphabet und wählen Sie die Flagge aus!&nbsp;&nbsp;&nbsp; <span class='keyword-pulse-red'>Die vollständigste Datenbank der Welt!</span>",
                 instructionsButtonLabel: "📖 Anleitung",
                 instructionsButtonAriaLabel: "Anleitung",
@@ -3959,6 +3975,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 filterEU: "Países UE",
                 filterNonEU: "Países no UE",
                 quickIndexTitle: "📋 Índice rápido – Navega por la base de datos",
+                quickIndexTitleAriaLabel: "Índice rápido - navega por la base de datos",
                 quickIndexFlagsLink: "🏳️ Banderas A-Z",
                 quickIndexSearchLink: "🔍 Buscar autoridades",
                 quickIndexCountriesLink: "🌍 Lista de 239 países",
@@ -3998,6 +4015,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 privacyStatement: "🔒 PRIVACIDAD: Esta app NO recopila datos personales",
                 privacyLink: "Política de Privacidad",
                 alphabetBannerTitle: "Accede inmediatamente a las Autoridades mediante el alfabeto GRÁFICO <span style='background: #ffffff; color: #000000; font-weight: 900; font-size: 1em; padding: 6px 12px; border-radius: 8px; font-family: monospace; margin-left: 8px;'>A-Z</span>!",
+                alphabetBannerTitleAriaLabel: "Accede inmediatamente a las autoridades mediante el alfabeto gráfico A-Z",
                 alphabetBannerSubtitle: "Recorre el alfabeto y selecciona la bandera.&nbsp;&nbsp;&nbsp; <span class='keyword-pulse-red'>¡La base de datos más completa del mundo!</span>",
                 instructionsButtonLabel: "📖 Instrucciones",
                 instructionsButtonAriaLabel: "Instrucciones",
@@ -4079,6 +4097,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 filterEU: "Países UE",
                 filterNonEU: "Países não-UE",
                 quickIndexTitle: "📋 Índice rápido – Navegue pela base de dados",
+                quickIndexTitleAriaLabel: "Índice rápido - navegue pela base de dados",
                 quickIndexFlagsLink: "🏳️ Bandeiras A-Z",
                 quickIndexSearchLink: "🔍 Procurar autoridades",
                 quickIndexCountriesLink: "🌍 Lista de 239 países",
@@ -4118,6 +4137,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 privacyStatement: "🔒 PRIVACIDADE: Esta app NÃO recolhe dados pessoais dos utilizadores",
                 privacyLink: "Política de Privacidade",
                 alphabetBannerTitle: "Aceda imediatamente às Autoridades através do alfabeto GRÁFICO <span style='background: #ffffff; color: #000000; font-weight: 900; font-size: 1em; padding: 6px 12px; border-radius: 8px; font-family: monospace; margin-left: 8px;'>A-Z</span>!",
+                alphabetBannerTitleAriaLabel: "Aceda imediatamente às autoridades através do alfabeto gráfico A-Z",
                 alphabetBannerSubtitle: "Percorra o alfabeto e selecione a bandeira!&nbsp;&nbsp;&nbsp; <span class='keyword-pulse-red'>A base de dados mais completa do mundo!</span>",
                 instructionsButtonLabel: "📖 Instruções",
                 instructionsButtonAriaLabel: "Instruções",
@@ -4496,12 +4516,25 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         function applyTranslations(lang) {
             const langData = translations[lang] || translations.en || {};
             const fallbackData = translations.en || {};
+            const htmlKeys = new Set([
+                'subtitle',
+                'securityText',
+                'introText',
+                'footerNote',
+                'credentialsBody',
+                'alphabetBannerTitle',
+                'alphabetBannerSubtitle'
+            ]);
 
             document.querySelectorAll('[data-i18n]').forEach(element => {
                 const key = element.getAttribute('data-i18n');
                 const value = langData[key] || fallbackData[key];
                 if (value) {
-                    element.innerHTML = value;
+                    if (htmlKeys.has(key)) {
+                        element.innerHTML = value;
+                    } else {
+                        element.textContent = value;
+                    }
                 }
             });
 
@@ -4685,20 +4718,17 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 const intermezzoSection = document.createElement('div');
                 intermezzoSection.className = 'filters-intermezzo';
                 intermezzoSection.style.gridColumn = '1 / -1'; // Span all columns
-                const langData = translations[currentLanguage] || translations.en || {};
-                const fallbackData = translations.en || {};
-                const t = (key, fallback = '') => langData[key] || fallbackData[key] || fallback;
                 intermezzoSection.innerHTML = `
-                    <h3 data-i18n="filterCategoryTitle">${t('filterCategoryTitle', '🔎 Filter by category')}</h3>
+                    <h3 data-i18n="filterCategoryTitle">🔎 Filtra per categoria</h3>
                     <div class="filter-buttons-grid">
-                        <button class="filter-btn" onclick="filterCountries('ue')" aria-pressed="false"><span class="fi fi-eu" aria-hidden="true" style="margin-right:6px;"></span><span data-i18n-text="filterEU">${t('filterEU', 'EU Countries')}</span></button>
-                        <button class="filter-btn" onclick="filterCountries('non-ue')" data-i18n="filterNonEU" aria-pressed="false">${t('filterNonEU', 'Non-EU Countries')}</button>
-                        <button class="filter-btn" onclick="filterCountries('altissimo')" data-i18n="filterHigh" aria-pressed="false">${t('filterHigh', 'Highest Protection')}</button>
-                        <button class="filter-btn" onclick="filterCountries('europe')" data-i18n="filterEurope" aria-pressed="false">${t('filterEurope', '🇪🇺 Europe')}</button>
-                        <button class="filter-btn" onclick="filterCountries('asia')" data-i18n="filterAsia" aria-pressed="false">${t('filterAsia', '🌏 Asia')}</button>
-                        <button class="filter-btn" onclick="filterCountries('africa')" data-i18n="filterAfrica" aria-pressed="false">${t('filterAfrica', '🌍 Africa')}</button>
-                        <button class="filter-btn" onclick="filterCountries('americas')" data-i18n="filterAmericas" aria-pressed="false">${t('filterAmericas', '🌎 Americas')}</button>
-                        <button class="filter-btn" onclick="filterCountries('oceania')" data-i18n="filterOceania" aria-pressed="false">${t('filterOceania', '🏝️ Oceania')}</button>
+                        <button class="filter-btn" onclick="filterCountries('ue')" aria-pressed="false"><span class="fi fi-eu" aria-hidden="true" style="margin-right:6px;"></span><span data-i18n-text="filterEU">Paesi UE</span></button>
+                        <button class="filter-btn" onclick="filterCountries('non-ue')" data-i18n="filterNonEU" aria-pressed="false">Paesi non-UE</button>
+                        <button class="filter-btn" onclick="filterCountries('altissimo')" data-i18n="filterHigh" aria-pressed="false">Protezione Elevata</button>
+                        <button class="filter-btn" onclick="filterCountries('europe')" data-i18n="filterEurope" aria-pressed="false">🇪🇺 Europa</button>
+                        <button class="filter-btn" onclick="filterCountries('asia')" data-i18n="filterAsia" aria-pressed="false">🌏 Asia</button>
+                        <button class="filter-btn" onclick="filterCountries('africa')" data-i18n="filterAfrica" aria-pressed="false">🌍 Africa</button>
+                        <button class="filter-btn" onclick="filterCountries('americas')" data-i18n="filterAmericas" aria-pressed="false">🌎 Americhe</button>
+                        <button class="filter-btn" onclick="filterCountries('oceania')" data-i18n="filterOceania" aria-pressed="false">🏝️ Oceania</button>
                     </div>
                 `;
                 grid.appendChild(intermezzoSection);
@@ -5584,4 +5614,3 @@ https://avvstancamarcello.github.io/Financial-Authority-Database/
     </footer>
 </body>
 </html>
-
