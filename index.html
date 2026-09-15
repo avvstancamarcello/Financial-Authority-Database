@@ -1433,47 +1433,27 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         </div>
         <header role="banner">
             <nav class="language-selector" role="navigation" aria-label="Language selection">
-                <button class="lang-btn active" onclick="changeLanguage('it')" aria-label="Italiano">
+                <button class="lang-btn active" data-lang="it" onclick="changeLanguage('it')" aria-label="Italiano">
                     <span class="fi fi-it lang-flag" aria-hidden="true"></span>
                     <span>IT</span>
                 </button>
-                <button class="lang-btn" onclick="changeLanguage('en')" aria-label="English">
+                <button class="lang-btn" data-lang="en" onclick="changeLanguage('en')" aria-label="English">
                     <span class="fi fi-gb lang-flag" aria-hidden="true"></span>
                     <span>EN</span>
                 </button>
-                <button class="lang-btn" onclick="changeLanguage('fr')" aria-label="Français">
+                <button class="lang-btn" data-lang="fr" onclick="changeLanguage('fr')" aria-label="Français">
                     <span class="fi fi-fr lang-flag" aria-hidden="true"></span>
                     <span>FR</span>
                 </button>
-                <button class="lang-btn" onclick="changeLanguage('de')" aria-label="Deutsch">
+                <button class="lang-btn" data-lang="de" onclick="changeLanguage('de')" aria-label="Deutsch">
                     <span class="fi fi-de lang-flag" aria-hidden="true"></span>
                     <span>DE</span>
                 </button>
-                <button class="lang-btn" onclick="changeLanguage('es')" aria-label="Español">
+                <button class="lang-btn" data-lang="es" onclick="changeLanguage('es')" aria-label="Español">
                     <span class="fi fi-es lang-flag" aria-hidden="true"></span>
                     <span>ES</span>
                 </button>
-                <button class="lang-btn" onclick="changeLanguage('ar')" aria-label="العربية">
-                    <span class="fi fi-qa lang-flag" aria-hidden="true"></span>
-                    <span>AR</span>
-                </button>
-                <button class="lang-btn" onclick="changeLanguage('zh')" aria-label="Chinese">
-                    <span class="fi fi-cn lang-flag" aria-hidden="true"></span>
-                    <span>ZH</span>
-                </button>
-                <button class="lang-btn" onclick="changeLanguage('hi')" aria-label="Hindi">
-                    <span class="fi fi-in lang-flag" aria-hidden="true"></span>
-                    <span>HI</span>
-                </button>
-                <button class="lang-btn" onclick="changeLanguage('vi')" aria-label="Vietnamese">
-                    <span class="fi fi-vn lang-flag" aria-hidden="true"></span>
-                    <span>VI</span>
-                </button>
-                <button class="lang-btn" onclick="changeLanguage('pt')" aria-label="Português">
-                    <span class="fi fi-pt lang-flag" aria-hidden="true"></span>
-                    <span>PT</span>
-                </button>
-                <span class="language-hint" style="margin-left: 10px; background: linear-gradient(135deg, #1e293b 0%, #334155 100%); color: #ffd700; border: 1px solid #ffd700; border-radius: 999px; padding: 0.3rem 0.9rem; font-size: 0.85rem; display: inline-flex; align-items: center; gap: 6px; cursor: default;">
+                <span class="language-hint" data-i18n="languageHint" style="margin-left: 10px; background: linear-gradient(135deg, #1e293b 0%, #334155 100%); color: #ffd700; border: 1px solid #ffd700; border-radius: 999px; padding: 0.3rem 0.9rem; font-size: 0.85rem; display: inline-flex; align-items: center; gap: 6px; cursor: default;">
                     <span style="font-size: 1.1em;">👆</span> Scegli la tua lingua
                 </span>
             </nav>
@@ -1549,22 +1529,22 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     <img src="logo_shield_financial_defense.svg" alt="Financial Defense - tutela del consumatore" width="170" height="170">
                 </div>
             </div>
-            <h1 data-i18n="subtitle" itemprop="name">Database Autorità Finanziarie Internazionali – 239 Paesi, 20 Lingue</h1>
+            <h1 data-i18n="subtitle" itemprop="name">Database Autorità Finanziarie Internazionali – 239 Paesi, 5 Lingue</h1>
             <p class="subtitle" data-i18n="title" itemprop="description">Verifica licenze broker, segnala truffe Forex e Crypto, controlla l'identità finanziaria dei destinatari di bonifici bancari.</p>
         </header>
 
         <!-- TABLE OF CONTENTS - Indice Navigazione Interna SEO -->
         <nav id="table-of-contents" aria-label="Indice della pagina" style="background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%); padding: 20px 30px; margin: 0; border-bottom: 3px solid #ffd700;">
             <div style="max-width: 1200px; margin: 0 auto;">
-                <h2 style="color: #ffd700; font-size: 1.2em; margin: 0 0 15px 0; text-align: center;">📋 Indice Rapido – Naviga il Database</h2>
+                <h2 data-i18n="tableOfContentsTitle" style="color: #ffd700; font-size: 1.2em; margin: 0 0 15px 0; text-align: center;">📋 Indice Rapido – Naviga il Database</h2>
                 <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 12px;">
-                    <a href="#flags-section" style="background: rgba(255,215,0,0.15); color: #ffffff; padding: 10px 18px; border-radius: 25px; text-decoration: none; font-weight: 600; border: 1px solid rgba(255,215,0,0.4); transition: all 0.3s;">🏳️ Bandiere A-Z</a>
-                    <a href="#database-search-section" style="background: rgba(255,215,0,0.15); color: #ffffff; padding: 10px 18px; border-radius: 25px; text-decoration: none; font-weight: 600; border: 1px solid rgba(255,215,0,0.4); transition: all 0.3s;">🔍 Cerca Autorità</a>
-                    <a href="#countries-section" style="background: rgba(255,215,0,0.15); color: #ffffff; padding: 10px 18px; border-radius: 25px; text-decoration: none; font-weight: 600; border: 1px solid rgba(255,215,0,0.4); transition: all 0.3s;">🌍 Lista 239 Paesi</a>
-                    <a href="#ptsd-section" style="background: #000000; color: #00ffff; padding: 10px 18px; border-radius: 25px; text-decoration: none; font-weight: 600; border: 2px solid #00ffff; transition: all 0.3s; text-shadow: 0 0 10px rgba(0,255,255,0.8);">🧠 Depressione</a>
-                    <a href="#international-authorities" style="background: rgba(255,215,0,0.15); color: #ffffff; padding: 10px 18px; border-radius: 25px; text-decoration: none; font-weight: 600; border: 1px solid rgba(255,215,0,0.4); transition: all 0.3s;">🏛️ ESMA, FBI, IOSCO</a>
-                    <a href="#author-credentials" style="background: rgba(255,215,0,0.15); color: #ffffff; padding: 10px 18px; border-radius: 25px; text-decoration: none; font-weight: 600; border: 1px solid rgba(255,215,0,0.4); transition: all 0.3s;">👨‍⚖️ Autore Verificato</a>
-                    <a href="#faq-section" style="background: rgba(255,215,0,0.15); color: #ffffff; padding: 10px 18px; border-radius: 25px; text-decoration: none; font-weight: 600; border: 1px solid rgba(255,215,0,0.4); transition: all 0.3s;">❓ FAQ</a>
+                    <a href="#flags-section" data-i18n="tocFlags" style="background: rgba(255,215,0,0.15); color: #ffffff; padding: 10px 18px; border-radius: 25px; text-decoration: none; font-weight: 600; border: 1px solid rgba(255,215,0,0.4); transition: all 0.3s;">🏳️ Bandiere A-Z</a>
+                    <a href="#database-search-section" data-i18n="tocSearch" style="background: rgba(255,215,0,0.15); color: #ffffff; padding: 10px 18px; border-radius: 25px; text-decoration: none; font-weight: 600; border: 1px solid rgba(255,215,0,0.4); transition: all 0.3s;">🔍 Cerca Autorità</a>
+                    <a href="#countries-section" data-i18n="tocCountries" style="background: rgba(255,215,0,0.15); color: #ffffff; padding: 10px 18px; border-radius: 25px; text-decoration: none; font-weight: 600; border: 1px solid rgba(255,215,0,0.4); transition: all 0.3s;">🌍 Lista 239 Paesi</a>
+                    <a href="#ptsd-section" data-i18n="tocPtsd" style="background: #000000; color: #00ffff; padding: 10px 18px; border-radius: 25px; text-decoration: none; font-weight: 600; border: 2px solid #00ffff; transition: all 0.3s; text-shadow: 0 0 10px rgba(0,255,255,0.8);">🧠 Depressione</a>
+                    <a href="#international-authorities" data-i18n="tocAuthorities" style="background: rgba(255,215,0,0.15); color: #ffffff; padding: 10px 18px; border-radius: 25px; text-decoration: none; font-weight: 600; border: 1px solid rgba(255,215,0,0.4); transition: all 0.3s;">🏛️ ESMA, FBI, IOSCO</a>
+                    <a href="#author-credentials" data-i18n="tocCredentials" style="background: rgba(255,215,0,0.15); color: #ffffff; padding: 10px 18px; border-radius: 25px; text-decoration: none; font-weight: 600; border: 1px solid rgba(255,215,0,0.4); transition: all 0.3s;">👨‍⚖️ Autore Verificato</a>
+                    <a href="#faq-section" data-i18n="tocFaq" style="background: rgba(255,215,0,0.15); color: #ffffff; padding: 10px 18px; border-radius: 25px; text-decoration: none; font-weight: 600; border: 1px solid rgba(255,215,0,0.4); transition: all 0.3s;">❓ FAQ</a>
                 </div>
             </div>
         </nav>
@@ -1587,12 +1567,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <!-- Banner Alfabeto A-Z - Sfondo Nero, Testo Verde Fosforo -->
             <div style="background: #000000; padding: 18px 20px; margin-bottom: 15px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.3); border: 2px solid #39ff14;">
                 <div style="display: flex; align-items: center; justify-content: center; gap: 12px; flex-wrap: wrap;">
-                    <h2 style="margin: 0; color: #39ff14; font-size: 1.4em; text-shadow: 0 0 10px rgba(57, 255, 20, 0.5);">Accedi immediatamente alle Authority tramite l'Alfabeto GRAFICO <span style="background: #ffffff; color: #000000; font-weight: 900; font-size: 1em; padding: 6px 12px; border-radius: 8px; font-family: monospace; margin-left: 8px;">A-Z</span>!</h2>
-                    <button id="instructionsToggle" class="instructions-toggle" type="button" onclick="toggleInstructions()" aria-controls="instructionsPopup" aria-expanded="false" style="background: #000000; color: #39ff14; border: 2px solid #39ff14; border-radius: 999px; padding: 0.5rem 1.2rem; font-size: 0.9rem; display: inline-flex; align-items: center; gap: 6px; cursor: pointer; box-shadow: 0 3px 12px rgba(57, 255, 20, 0.4); font-weight: 600;">
+                    <h2 data-i18n="azTitle" style="margin: 0; color: #39ff14; font-size: 1.4em; text-shadow: 0 0 10px rgba(57, 255, 20, 0.5);">Accedi immediatamente alle Authority tramite l'Alfabeto GRAFICO <span style="background: #ffffff; color: #000000; font-weight: 900; font-size: 1em; padding: 6px 12px; border-radius: 8px; font-family: monospace; margin-left: 8px;">A-Z</span>!</h2>
+                    <button id="instructionsToggle" class="instructions-toggle" type="button" onclick="toggleInstructions()" aria-controls="instructionsPopup" aria-expanded="false" data-i18n="instructionsButton" style="background: #000000; color: #39ff14; border: 2px solid #39ff14; border-radius: 999px; padding: 0.5rem 1.2rem; font-size: 0.9rem; display: inline-flex; align-items: center; gap: 6px; cursor: pointer; box-shadow: 0 3px 12px rgba(57, 255, 20, 0.4); font-weight: 600;">
                         📖 Istruzioni
                     </button>
                 </div>
-                <p style="text-align: center; font-size: 1.1em; color: #39ff14; margin: 12px 0 0 0; opacity: 0.9;">
+                <p data-i18n="azSubtitle" style="text-align: center; font-size: 1.1em; color: #39ff14; margin: 12px 0 0 0; opacity: 0.9;">
                     Scorri l'Alfabeto e seleziona la Bandiera!&nbsp;&nbsp;&nbsp; <span class="keyword-pulse-red">Database più completo del mondo!</span>
                 </p>
             </div>
@@ -2925,8 +2905,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
         <!-- NUOVA BARRA RICERCA SUPERIORE -->
         <div class="search-bar-top">
-            <input type="text" id="search-input-top" placeholder="🔍 Cerca paese..." aria-label="Search for a country">
-            <button type="button" onclick="performSearch()">Cerca</button>
+            <input type="text" id="search-input-top" data-i18n-placeholder="searchPlaceholder" placeholder="🔍 Cerca paese..." aria-label="Search for a country">
+            <button type="button" onclick="performSearch()" data-i18n="searchButtonLabel">Cerca</button>
         </div>
 
         <section id="database-search-section" class="controls" role="search" aria-label="Search and filter">
@@ -2934,7 +2914,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <div class="search-row">
                 <div class="search-box">
                     <input type="text" id="searchInput" data-i18n-placeholder="searchPlaceholder" placeholder="Cerca per paese o autorità..." aria-label="Search countries">
-                    <button type="button" class="search-btn">Cerca</button>
+                    <button type="button" class="search-btn" data-i18n="searchButtonLabel">Cerca</button>
                 </div>
                 <div class="filter-buttons" role="group" aria-label="Filter options">
                     <button class="filter-btn active" onclick="filterCountries('all')" data-i18n="filterAll" aria-pressed="true">Tutti i Paesi</button>
@@ -2947,12 +2927,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 </div>
                 <!-- Filtri per Continente - SEO Improvement -->
                 <div class="filter-buttons" role="group" aria-label="Filter by continent" style="margin-top: 10px;">
-                    <span style="color: #ffd700; font-weight: 600; margin-right: 10px;">🌍 Continente:</span>
-                    <button class="filter-btn" onclick="filterCountries('europe')" aria-pressed="false">🇪🇺 Europa</button>
-                    <button class="filter-btn" onclick="filterCountries('asia')" aria-pressed="false">🌏 Asia</button>
-                    <button class="filter-btn" onclick="filterCountries('africa')" aria-pressed="false">🌍 Africa</button>
-                    <button class="filter-btn" onclick="filterCountries('americas')" aria-pressed="false">🌎 Americhe</button>
-                    <button class="filter-btn" onclick="filterCountries('oceania')" aria-pressed="false">🏝️ Oceania</button>
+                    <span data-i18n="continentLabel" style="color: #ffd700; font-weight: 600; margin-right: 10px;">🌍 Continente:</span>
+                    <button class="filter-btn" onclick="filterCountries('europe')" data-i18n="continentEurope" aria-pressed="false">🇪🇺 Europa</button>
+                    <button class="filter-btn" onclick="filterCountries('asia')" data-i18n="continentAsia" aria-pressed="false">🌏 Asia</button>
+                    <button class="filter-btn" onclick="filterCountries('africa')" data-i18n="continentAfrica" aria-pressed="false">🌍 Africa</button>
+                    <button class="filter-btn" onclick="filterCountries('americas')" data-i18n="continentAmericas" aria-pressed="false">🌎 Americhe</button>
+                    <button class="filter-btn" onclick="filterCountries('oceania')" data-i18n="continentOceania" aria-pressed="false">🏝️ Oceania</button>
                 </div>
             </div>
         </section>
@@ -3010,7 +2990,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <!-- FAQ Section - SEO Enhancement for Rich Snippets -->
         <section id="faq-section" itemscope itemtype="https://schema.org/FAQPage" style="background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%); padding: 40px 30px; margin: 0;">
             <div style="max-width: 1000px; margin: 0 auto;">
-                <h2 style="color: #ffd700; text-align: center; font-size: 1.8em; margin-bottom: 30px;">❓ Domande Frequenti – FAQ</h2>
+                <h2 data-i18n="faqTitle" style="color: #ffd700; text-align: center; font-size: 1.8em; margin-bottom: 30px;">❓ Domande Frequenti – FAQ</h2>
                 
                 <div itemscope itemprop="mainEntity" itemtype="https://schema.org/Question" style="background: rgba(255,255,255,0.05); border-radius: 12px; padding: 20px; margin-bottom: 15px; border-left: 4px solid #ffd700;">
                     <h3 itemprop="name" style="color: #ffffff; margin: 0 0 10px 0; font-size: 1.1em;">Come verificare se un broker è autorizzato?</h3>
@@ -3162,15 +3142,31 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         const translations = {
             it: {
                 title: "Database Internazionale per controlli bancari sulla identità finanziaria sui destinatari di transazioni bancarie.",
-                subtitle: "<span class='keyword-pulse'>Autorità</span> dei Mercati <span class='keyword-pulse'>Finanziari</span> di <span class='keyword-pulse'>239</span> Paesi in <span class='keyword-pulse'>20</span> lingue",
+                subtitle: "<span class='keyword-pulse'>Autorità</span> dei Mercati <span class='keyword-pulse'>Finanziari</span> di <span class='keyword-pulse'>239</span> Paesi in <span class='keyword-pulse'>5</span> lingue",
                 securityTitle: "✅ SITO UFFICIALE LEGITTIMO - DATABASE DI PROTEZIONE DEI CONSUMATORI",
                 securityText: "Accesso immediato alle home page delle Autority Finanziarie del Governo per verificare la legittimità e regolarità di imprese finanziarie, di persone ed entità che offrono servizi finanziari, e ricevono bonifici.",
+                languageHint: "<span style='font-size: 1.1em;'>👆</span> Scegli la tua lingua",
+                tableOfContentsTitle: "📋 Indice Rapido – Naviga il Database",
+                tocFlags: "🏳️ Bandiere A-Z",
+                tocSearch: "🔍 Cerca Autorità",
+                tocCountries: "🌍 Lista 239 Paesi",
+                tocPtsd: "🧠 Depressione",
+                tocAuthorities: "🏛️ ESMA, FBI, IOSCO",
+                tocCredentials: "👨‍⚖️ Autore Verificato",
+                tocFaq: "❓ FAQ",
                 introText: "Questa pagina web offre 239 link diretti per accedere alle webpage delle AUTORITA' FINANZIARIE di 239 Paesi del Mondo.<br>CERCA il nome del Paese che viene dichiarato sede della impresa finanziaria, e potrai conoscere tutti i dettagli identificativi ufficiali.",
                 searchPlaceholder: "Cerca per paese o autorità...",
+                searchButtonLabel: "Cerca",
                 filterAll: "Tutti i Paesi",
                 filterHigh: "Protezione Elevata",
                 filterEU: "Paesi UE",
                 filterNonEU: "Paesi non-UE",
+                continentLabel: "🌍 Continente:",
+                continentEurope: "🇪🇺 Europa",
+                continentAsia: "🌏 Asia",
+                continentAfrica: "🌍 Africa",
+                continentAmericas: "🌎 Americhe",
+                continentOceania: "🏝️ Oceania",
                 statCountries: "Paesi Monitorati",
                 statEU: "Paesi UE",
                 statHighProtection: "Protezione Standard",
@@ -3186,6 +3182,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 euCommission: "Commissione Europea",
                 flagsTitle: "Accesso Rapido per Paese",
                 flagsGridTitle: "🌍 Seleziona il tuo Paese - Database 239 Autorità Finanziarie",
+                azTitle: "Accedi immediatamente alle Authority tramite l'Alfabeto GRAFICO <span style='background: #ffffff; color: #000000; font-weight: 900; font-size: 1em; padding: 6px 12px; border-radius: 8px; font-family: monospace; margin-left: 8px;'>A-Z</span>!",
+                azSubtitle: "Scorri l'Alfabeto e seleziona la Bandiera!&nbsp;&nbsp;&nbsp; <span class='keyword-pulse-red'>Database più completo del mondo!</span>",
+                faqTitle: "❓ Domande Frequenti – FAQ",
+                intermezzoTitle: "🔎 Filtra per categoria",
                 modalAuthority: "Autorità Finanziaria",
                 modalAbbreviation: "Abbreviazione",
                 modalHomepage: "Homepage",
@@ -3195,6 +3195,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 modalNotes: "Note",
                 privacyStatement: "🔒 PRIVACY: Questa app NON raccoglie dati personali degli utenti",
                 privacyLink: "Privacy Policy",
+                instructionsButton: "📖 Istruzioni",
                 instructionsLabel: "Scegli la tua LINGUA, premi pulsante, e Leggi ISTRUZIONI.",
                 searchAdviceButton: "Perché questa ricerca è importante?",
                 searchAdviceTitle: "🔍 Prima di usare il tasto &quot;Cerca&quot;",
@@ -3478,15 +3479,31 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             },
             en: {
                 title: "International Banking Database",
-                subtitle: "<span class='keyword-pulse'>Financial</span> Market <span class='keyword-pulse'>Authorities</span> of <span class='keyword-pulse'>239</span> Countries in <span class='keyword-pulse'>20</span> languages",
+                subtitle: "<span class='keyword-pulse'>Financial</span> Market <span class='keyword-pulse'>Authorities</span> of <span class='keyword-pulse'>239</span> Countries in <span class='keyword-pulse'>5</span> languages",
                 securityTitle: "✅ OFFICIAL LEGITIMATE WEBSITE - CONSUMER PROTECTION DATABASE",
                 securityText: "This page offers an official educational database created by <strong>Lawyer Marcello Stanca in Florence - Italy</strong>. It provides consumers and bank clients with all the links to access the official pages of Financial Supervisory Authorities in 239 countries worldwide. Access to the Authorities allows verification of: <strong>1.</strong> the identity of Financial Authorities indicated to users on web pages of fake companies, <strong>2.</strong> but also the actual possession and license number granted, valid to offer financial services in the country of residence of the consumer/bank client. This page offers contact and consultation tools to protect consumer users against financial fraud.",
+                languageHint: "<span style='font-size: 1.1em;'>👆</span> Choose your language",
+                tableOfContentsTitle: "📋 Quick Index – Browse the Database",
+                tocFlags: "🏳️ A-Z Flags",
+                tocSearch: "🔍 Search Authorities",
+                tocCountries: "🌍 239 Countries List",
+                tocPtsd: "🧠 Depression",
+                tocAuthorities: "🏛️ ESMA, FBI, IOSCO",
+                tocCredentials: "👨‍⚖️ Verified Author",
+                tocFaq: "❓ FAQ",
                 introText: "This website provides links to the webpages of the Financial Authorities of 239 countries worldwide. Use it to verify the legitimacy and regularity of companies, individuals, and entities offering financial services.",
                 searchPlaceholder: "Search by country or authority...",
+                searchButtonLabel: "Search",
                 filterAll: "All Countries",
                 filterHigh: "Highest Protection",
                 filterEU: "EU Countries",
                 filterNonEU: "Non-EU Countries",
+                continentLabel: "🌍 Continent:",
+                continentEurope: "🇪🇺 Europe",
+                continentAsia: "🌏 Asia",
+                continentAfrica: "🌍 Africa",
+                continentAmericas: "🌎 Americas",
+                continentOceania: "🏝️ Oceania",
                 statCountries: "Monitored Countries",
                 statEU: "EU Countries",
                 statHighProtection: "Highest Protection",
@@ -3502,6 +3519,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 euCommission: "European Commission",
                 flagsTitle: "Quick Access by Country",
                 flagsGridTitle: "🌍 Select your Country - 239 Financial Authorities Database",
+                azTitle: "Reach the Authorities immediately through the GRAPHIC <span style='background: #ffffff; color: #000000; font-weight: 900; font-size: 1em; padding: 6px 12px; border-radius: 8px; font-family: monospace; margin-left: 8px;'>A-Z</span> alphabet!",
+                azSubtitle: "Scroll the alphabet and select the flag!&nbsp;&nbsp;&nbsp; <span class='keyword-pulse-red'>The world's most complete database!</span>",
+                faqTitle: "❓ Frequently Asked Questions – FAQ",
+                intermezzoTitle: "🔎 Filter by category",
                 modalAuthority: "Financial Authority",
                 modalAbbreviation: "Abbreviation",
                 modalHomepage: "Homepage",
@@ -3511,6 +3532,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 modalNotes: "Notes",
                 privacyStatement: "🔒 PRIVACY: This app does NOT collect user personal data",
                 privacyLink: "Privacy Policy",
+                instructionsButton: "📖 Instructions",
                 instructionsLabel: "Read legal guide and texts in your language - On/Off",
                 searchAdviceButton: "Why is this search important?",
                 searchAdviceTitle: "🔍 Before using the &quot;Search&quot; button",
@@ -3583,18 +3605,35 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             },
             fr: {
                 title: "Base de Données Bancaire Internationale",
-                subtitle: "<span class='keyword-pulse'>Autorités</span> des Marchés <span class='keyword-pulse'>Financiers</span> de <span class='keyword-pulse'>239</span> Pays en <span class='keyword-pulse'>20</span> langues",
+                subtitle: "<span class='keyword-pulse'>Autorités</span> des Marchés <span class='keyword-pulse'>Financiers</span> de <span class='keyword-pulse'>239</span> Pays en <span class='keyword-pulse'>5</span> langues",
                 securityTitle: "✅ SITE OFFICIEL LÉGITIME - BASE DE DONNÉES DE PROTECTION DES CONSOMMATEURS",
                 securityText: "Cette page offre une base de données éducative officielle créée par <strong>l'Avocat Marcello Stanca à Florence - Italie</strong>. Elle fournit aux consommateurs, clients de banques, tous les liens pour accéder aux pages officielles des Autorités de Surveillance Financière de 239 pays du monde. L'accès aux Autorités permet de vérifier: <strong>1.</strong> l'identité des Autorités Financières indiquées aux utilisateurs sur des pages web de fausses entreprises, <strong>2.</strong> mais aussi la possession effective et le numéro de licence accordée, valide pour offrir des services financiers dans le pays de résidence du consommateur/client bancaire. Cette page offre des outils de contact et de consultation pour protéger les utilisateurs consommateurs contre les fraudes financières.",
+                languageHint: "<span style='font-size: 1.1em;'>👆</span> Choisissez votre langue",
+                tableOfContentsTitle: "📋 Index rapide – Parcourir la base",
+                tocFlags: "🏳️ Drapeaux A-Z",
+                tocSearch: "🔍 Rechercher des autorités",
+                tocCountries: "🌍 Liste de 239 pays",
+                tocPtsd: "🧠 Dépression",
+                tocAuthorities: "🏛️ ESMA, FBI, IOSCO",
+                tocCredentials: "👨‍⚖️ Auteur vérifié",
+                tocFaq: "❓ FAQ",
                 introText: "Ce site web offre des liens pour accéder aux pages web des Autorités Financières de 239 pays du monde. Utilisez-le pour vérifier la légitimité et la régularité des entreprises, des personnes et des entités offrant des services financiers.",
                 searchPlaceholder: "Rechercher par pays ou autorité...",
+                searchButtonLabel: "Rechercher",
                 filterAll: "Tous les Pays",
                 filterHigh: "Protection Maximale",
                 filterEU: "Pays UE",
                 filterNonEU: "Pays hors UE",
+                continentLabel: "🌍 Continent :",
+                continentEurope: "🇪🇺 Europe",
+                continentAsia: "🌏 Asie",
+                continentAfrica: "🌍 Afrique",
+                continentAmericas: "🌎 Amériques",
+                continentOceania: "🏝️ Océanie",
                 statCountries: "Pays Surveillés",
                 statEU: "Pays UE",
                 statHighProtection: "Protection Maximale",
+                ptsdEquation: "Fraude financière = trouble de stress post-traumatique (PTSD)",
                 footer: "© 2026 Auteur et webmaster : Maître Marcello Stanca, avocat en Italie (Florence). Crédits vérifiés par : Ministère de la Justice (Italie), Tribunal de Florence, Parlement européen – Bruxelles. Comptes Facebook et Instagram vérifiés par Meta. Local Guide Google Maps niveau 9,5.",
                 footerNote: "Cette base de données est fournie à titre purement informatif. Vérifiez toujours les informations auprès des autorités compétentes. Profil Google Maps vérifié : <a href=\"http://maps.app.goo.gl/gs4rm6vXMxJUVVhM8?g_st=aw\" target=\"_blank\" rel=\"noopener\">Maître Marcello Stanca sur Google Maps</a>. Signaler les erreurs de la page au webmaster : <a href=\"mailto:lawyer@marcellostanca.it\">lawyer@marcellostanca.it</a>",
                 credentialsTitle: "Crédits professionnels vérifiés – Parlement européen",
@@ -3605,6 +3644,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 euReferences: "Ressources de Supervision Institutionnelle - Union Européenne USA FBI - ScamShield",
                 euCommission: "Commission Européenne",
                 flagsTitle: "Accès Rapide par Pays",
+                flagsGridTitle: "🌍 Sélectionnez votre pays - base de données de 239 autorités financières",
+                azTitle: "Accédez immédiatement aux autorités via l'alphabet GRAPHIQUE <span style='background: #ffffff; color: #000000; font-weight: 900; font-size: 1em; padding: 6px 12px; border-radius: 8px; font-family: monospace; margin-left: 8px;'>A-Z</span> !",
+                azSubtitle: "Faites défiler l'alphabet et sélectionnez le drapeau !&nbsp;&nbsp;&nbsp; <span class='keyword-pulse-red'>La base de données la plus complète au monde !</span>",
+                faqTitle: "❓ Questions fréquentes – FAQ",
+                intermezzoTitle: "🔎 Filtrer par catégorie",
                 modalAuthority: "Autorité Financière",
                 modalAbbreviation: "Abréviation",
                 modalHomepage: "Page d'accueil",
@@ -3614,6 +3658,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 modalNotes: "Notes",
                 privacyStatement: "🔒 CONFIDENTIALITÉ: Cette app ne collecte PAS de données personnelles",
                 privacyLink: "Politique de Confidentialité",
+                instructionsButton: "📖 Instructions",
                 instructionsLabel: "Lisez les instructions et textes dans votre langue - On/Off",
                 searchAdviceButton: "Pourquoi cette recherche est‑elle importante ?",
                 searchAdviceTitle: "🔍 Avant d'utiliser le bouton &quot;Rechercher&quot;",
@@ -3682,18 +3727,35 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             },
             de: {
                 title: "Internationale Banken-Datenbank",
-                subtitle: "<span class='keyword-pulse'>Finanzmarktaufsichtsbehörden</span> von <span class='keyword-pulse'>239</span> Ländern in <span class='keyword-pulse'>20</span> Sprachen",
+                subtitle: "<span class='keyword-pulse'>Finanzmarktaufsichtsbehörden</span> von <span class='keyword-pulse'>239</span> Ländern in <span class='keyword-pulse'>5</span> Sprachen",
                 securityTitle: "✅ OFFIZIELLE LEGITIME WEBSITE - VERBRAUCHERSCHUTZDATENBANK",
                 securityText: "Diese Seite bietet eine offizielle Bildungsdatenbank, erstellt von <strong>Rechtsanwalt Marcello Stanca in Florenz - Italien</strong>. Sie bietet Verbrauchern und Bankkunden alle Links zum Zugriff auf die offiziellen Seiten der Finanzaufsichtsbehörden in 239 Ländern weltweit. Der Zugang zu den Behörden ermöglicht die Überprüfung von: <strong>1.</strong> der Identität der Finanzaufsichtsbehörden, die Benutzern auf Webseiten gefälschter Unternehmen angegeben werden, <strong>2.</strong> aber auch des tatsächlichen Besitzes und der Lizenznummer, gültig für das Anbieten von Finanzdienstleistungen im Wohnsitzland des Verbrauchers/Bankkunden. Diese Seite bietet Kontakt- und Beratungsinstrumente zum Schutz von Verbrauchern gegen Finanzbetrug.",
+                languageHint: "<span style='font-size: 1.1em;'>👆</span> Wählen Sie Ihre Sprache",
+                tableOfContentsTitle: "📋 Schnellindex – Datenbank durchsuchen",
+                tocFlags: "🏳️ A-Z-Flaggen",
+                tocSearch: "🔍 Behörden suchen",
+                tocCountries: "🌍 Liste mit 239 Ländern",
+                tocPtsd: "🧠 Depression",
+                tocAuthorities: "🏛️ ESMA, FBI, IOSCO",
+                tocCredentials: "👨‍⚖️ Verifizierter Autor",
+                tocFaq: "❓ FAQ",
                 introText: "Diese Website bietet Links zu den Webseiten der Finanzbehörden von 239 Ländern weltweit. Nutzen Sie sie, um die Legitimität und Ordnungsmäßigkeit von Unternehmen, Personen und Einrichtungen zu überprüfen, die Finanzdienstleistungen anbieten.",
                 searchPlaceholder: "Nach Land oder Behörde suchen...",
+                searchButtonLabel: "Suchen",
                 filterAll: "Alle Länder",
                 filterHigh: "Höchster Schutz",
                 filterEU: "EU-Länder",
                 filterNonEU: "Nicht-EU-Länder",
+                continentLabel: "🌍 Kontinent:",
+                continentEurope: "🇪🇺 Europa",
+                continentAsia: "🌏 Asien",
+                continentAfrica: "🌍 Afrika",
+                continentAmericas: "🌎 Amerika",
+                continentOceania: "🏝️ Ozeanien",
                 statCountries: "Überwachte Länder",
                 statEU: "EU-Länder",
                 statHighProtection: "Höchster Schutz",
+                ptsdEquation: "Finanzbetrug = Posttraumatische Belastungsstörung (PTSD)",
                 footer: "© 2026 Autor und Webmaster: Rechtsanwalt Marcello Stanca, Italien (Florenz). Referenzen bestätigt durch: Justizministerium (Italien), Gericht Florenz, Europäisches Parlament – Brüssel. Facebook‑ und Instagram‑Konten von Meta verifiziert. Google‑Maps‑Local‑Guide auf Stufe 9,5.",
                 footerNote: "Diese Datenbank dient ausschließlich Informationszwecken. Prüfen Sie Angaben stets zusätzlich bei den zuständigen Aufsichtsbehörden. Verifiziertes Google‑Maps‑Profil: <a href=\"http://maps.app.goo.gl/gs4rm6vXMxJUVVhM8?g_st=aw\" target=\"_blank\" rel=\"noopener\">Rechtsanwalt Marcello Stanca bei Google Maps</a>. Melden Sie Webseitenfehler an: <a href=\"mailto:lawyer@marcellostanca.it\">lawyer@marcellostanca.it</a>",
                 credentialsTitle: "Bestätigte berufliche Referenzen – Europäisches Parlament",
@@ -3704,6 +3766,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 euReferences: "Institutionelle Aufsichtsressourcen - Europäische Union USA FBI - ScamShield",
                 euCommission: "Europäische Kommission",
                 flagsTitle: "Schnellzugriff nach Land",
+                flagsGridTitle: "🌍 Wählen Sie Ihr Land - Datenbank mit 239 Finanzaufsichtsbehörden",
+                azTitle: "Greifen Sie sofort über das GRAFISCHE <span style='background: #ffffff; color: #000000; font-weight: 900; font-size: 1em; padding: 6px 12px; border-radius: 8px; font-family: monospace; margin-left: 8px;'>A-Z</span>-Alphabet auf die Behörden zu!",
+                azSubtitle: "Blättern Sie durch das Alphabet und wählen Sie die Flagge aus!&nbsp;&nbsp;&nbsp; <span class='keyword-pulse-red'>Die umfassendste Datenbank der Welt!</span>",
+                faqTitle: "❓ Häufig gestellte Fragen – FAQ",
+                intermezzoTitle: "🔎 Nach Kategorie filtern",
                 modalAuthority: "Finanzbehörde",
                 modalAbbreviation: "Abkürzung",
                 modalHomepage: "Startseite",
@@ -3713,6 +3780,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 modalNotes: "Hinweise",
                 privacyStatement: "🔒 DATENSCHUTZ: Diese App sammelt KEINE persönlichen Daten",
                 privacyLink: "Datenschutzerklärung",
+                instructionsButton: "📖 Anleitung",
                 instructionsLabel: "Anleitung und Texte in Ihrer Sprache lesen - On/Off",
                 searchAdviceButton: "Warum ist diese Suche so wichtig?",
                 searchAdviceTitle: "🔍 Bevor Sie auf &quot;Suchen&quot; klicken",
@@ -3781,18 +3849,35 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             },
             es: {
                 title: "Base de Datos Bancaria Internacional",
-                subtitle: "<span class='keyword-pulse'>Autoridades</span> de Mercados <span class='keyword-pulse'>Financieros</span> de <span class='keyword-pulse'>239</span> Países en <span class='keyword-pulse'>20</span> idiomas",
+                subtitle: "<span class='keyword-pulse'>Autoridades</span> de Mercados <span class='keyword-pulse'>Financieros</span> de <span class='keyword-pulse'>239</span> Países en <span class='keyword-pulse'>5</span> idiomas",
                 securityTitle: "✅ SITIO OFICIAL LEGÍTIMO - BASE DE DATOS DE PROTECCIÓN AL CONSUMIDOR",
                 securityText: "Esta página ofrece una base de datos educativa oficial creada por <strong>el Abogado Marcello Stanca en Florencia - Italia</strong>. Proporciona a los consumidores, clientes de bancos, todos los enlaces para acceder a las páginas oficiales de las Autoridades de Supervisión Financiera de 239 países del mundo. El acceso a las Autoridades permite verificar: <strong>1.</strong> la identidad de las Autoridades Financieras indicadas a los usuarios en páginas web de empresas falsas, <strong>2.</strong> pero también la posesión efectiva y el número de licencia otorgada, válida para ofrecer servicios financieros en el país de residencia del consumidor/cliente bancario. Esta página ofrece herramientas de contacto y consulta para proteger a los usuarios consumidores contra el fraude financiero.",
+                languageHint: "<span style='font-size: 1.1em;'>👆</span> Elige tu idioma",
+                tableOfContentsTitle: "📋 Índice rápido – Navega por la base de datos",
+                tocFlags: "🏳️ Banderas A-Z",
+                tocSearch: "🔍 Buscar autoridades",
+                tocCountries: "🌍 Lista de 239 países",
+                tocPtsd: "🧠 Depresión",
+                tocAuthorities: "🏛️ ESMA, FBI, IOSCO",
+                tocCredentials: "👨‍⚖️ Autor verificado",
+                tocFaq: "❓ FAQ",
                 introText: "Este sitio web ofrece enlaces a las páginas web de las Autoridades Financieras de 239 países del mundo. Úselo para verificar la legitimidad y regularidad de empresas, personas y entidades que ofrecen servicios financieros.",
                 searchPlaceholder: "Buscar por país o autoridad...",
+                searchButtonLabel: "Buscar",
                 filterAll: "Todos los Países",
                 filterHigh: "Protección Máxima",
                 filterEU: "Países UE",
                 filterNonEU: "Países no UE",
+                continentLabel: "🌍 Continente:",
+                continentEurope: "🇪🇺 Europa",
+                continentAsia: "🌏 Asia",
+                continentAfrica: "🌍 África",
+                continentAmericas: "🌎 Américas",
+                continentOceania: "🏝️ Oceanía",
                 statCountries: "Países Monitoreados",
                 statEU: "Países UE",
                 statHighProtection: "Protección Máxima",
+                ptsdEquation: "Fraude financiera = trastorno de estrés postraumático (PTSD)",
                 footer: "© 2026 Autor y webmaster: el abogado Marcello Stanca, Italia (Florencia). Credenciales verificadas por: Ministerio de Justicia (Italia), Tribunal de Florencia, Parlamento Europeo – Bruselas. Cuentas de Facebook e Instagram verificadas por Meta. Local Guide de Google Maps nivel 9,5.",
                 footerNote: "Esta base de datos tiene un propósito exclusivamente informativo. Verifique siempre la información con las autoridades competentes. Perfil verificado en Google Maps: <a href=\"http://maps.app.goo.gl/gs4rm6vXMxJUVVhM8?g_st=aw\" target=\"_blank\" rel=\"noopener\">Abogado Marcello Stanca en Google Maps</a>. Informe errores de la página web al webmaster: <a href=\"mailto:lawyer@marcellostanca.it\">lawyer@marcellostanca.it</a>",
                 credentialsTitle: "Credenciales profesionales verificadas – Parlamento Europeo",
@@ -3803,6 +3888,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 euReferences: "Recursos de Supervisión Institucional - Unión Europea USA FBI - ScamShield",
                 euCommission: "Comisión Europea",
                 flagsTitle: "Acceso Rápido por País",
+                flagsGridTitle: "🌍 Selecciona tu país - base de datos de 239 autoridades financieras",
+                azTitle: "Accede de inmediato a las autoridades mediante el alfabeto GRÁFICO <span style='background: #ffffff; color: #000000; font-weight: 900; font-size: 1em; padding: 6px 12px; border-radius: 8px; font-family: monospace; margin-left: 8px;'>A-Z</span>!",
+                azSubtitle: "Desplázate por el alfabeto y selecciona la bandera.&nbsp;&nbsp;&nbsp; <span class='keyword-pulse-red'>¡La base de datos más completa del mundo!</span>",
+                faqTitle: "❓ Preguntas frecuentes – FAQ",
+                intermezzoTitle: "🔎 Filtrar por categoría",
                 modalAuthority: "Autoridad Financiera",
                 modalAbbreviation: "Abreviatura",
                 modalHomepage: "Página Principal",
@@ -3812,6 +3902,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 modalNotes: "Notas",
                 privacyStatement: "🔒 PRIVACIDAD: Esta app NO recopila datos personales",
                 privacyLink: "Política de Privacidad",
+                instructionsButton: "📖 Instrucciones",
                 instructionsLabel: "Lee instrucciones y textos en tu idioma - On/Off",
                 searchAdviceButton: "¿Por qué es tan importante esta búsqueda?",
                 searchAdviceTitle: "🔍 Antes de pulsar el botón &quot;Buscar&quot;",
@@ -3941,17 +4032,23 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             // Add other languages if needed
         };
 
+        const DEFAULT_LANGUAGE = 'it';
+        const SUPPORTED_LANGUAGES = ['it', 'en', 'fr', 'de', 'es'];
+
+        function normalizeLanguage(lang) {
+            const normalized = (lang || '').toLowerCase();
+            return SUPPORTED_LANGUAGES.includes(normalized) ? normalized : DEFAULT_LANGUAGE;
+        }
+
         // Determina la lingua iniziale dalla query string (?lang=xx), con fallback a IT
         function getInitialLanguageFromUrl() {
             try {
                 const params = new URLSearchParams(window.location.search || '');
-                const langParam = (params.get('lang') || '').toLowerCase();
-                const supported = ['it','en','fr','de','es','ar','zh','hi','vi','pt'];
-                if (supported.includes(langParam)) return langParam;
+                return normalizeLanguage(params.get('lang'));
             } catch (e) {
                 console.warn('Impossibile leggere parametro lang dalla URL', e);
             }
-            return 'it';
+            return DEFAULT_LANGUAGE;
         }
 
         let currentLanguage = getInitialLanguageFromUrl();
@@ -4283,52 +4380,56 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         }
 
         function changeLanguage(lang) {
-            currentLanguage = lang;
+            currentLanguage = normalizeLanguage(lang);
             document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
-            const activeBtn = Array.from(document.querySelectorAll('.lang-btn')).find(btn => btn.textContent.includes(lang.toUpperCase()));
+            const activeBtn = document.querySelector(`.lang-btn[data-lang="${currentLanguage}"]`);
             if(activeBtn) activeBtn.classList.add('active');
 
             const htmlEl = document.documentElement;
             if (htmlEl) {
-                htmlEl.lang = lang;
-                htmlEl.dir = (lang === 'ar' ? 'rtl' : 'ltr');
+                htmlEl.lang = currentLanguage;
+                htmlEl.dir = 'ltr';
             }
 
             // Aggiorna canonical URL (Google SEO - self-referencing canonical)
             const canonicalEl = document.getElementById('canonical-url');
             if (canonicalEl) {
-                const newCanonical = lang === 'it' 
+               const newCanonical = currentLanguage === DEFAULT_LANGUAGE 
                     ? 'https://tutelatruffe.it/' 
-                    : `https://tutelatruffe.it/?lang=${lang}`;
+                   : `https://tutelatruffe.it/?lang=${currentLanguage}`;
                 canonicalEl.setAttribute('href', newCanonical);
             }
 
             // Aggiorna URL nel browser senza ricaricare
-            const newUrl = lang === 'it' 
+            const newUrl = currentLanguage === DEFAULT_LANGUAGE 
                 ? window.location.pathname 
-                : `${window.location.pathname}?lang=${lang}`;
-            window.history.replaceState({lang: lang}, '', newUrl);
+               : `${window.location.pathname}?lang=${currentLanguage}`;
+            window.history.replaceState({lang: currentLanguage}, '', newUrl);
 
+            const languagePack = translations[currentLanguage] || translations[DEFAULT_LANGUAGE] || {};
+            const fallbackPack = translations[DEFAULT_LANGUAGE] || {};
             document.querySelectorAll('[data-i18n]').forEach(element => {
-                const key = element.getAttribute('data-i18n');
-                if (translations[lang] && translations[lang][key]) {
-                    element.innerHTML = translations[lang][key];
-                }
+               const key = element.getAttribute('data-i18n');
+               const translatedValue = languagePack[key] ?? fallbackPack[key];
+               if (translatedValue !== undefined) {
+                   element.innerHTML = translatedValue;
+               }
             });
-             document.querySelectorAll('[data-i18n-placeholder]').forEach(element => {
-                const key = element.getAttribute('data-i18n-placeholder');
-                if (translations[lang] && translations[lang][key]) {
-                    element.placeholder = translations[lang][key];
-                }
+            document.querySelectorAll('[data-i18n-placeholder]').forEach(element => {
+               const key = element.getAttribute('data-i18n-placeholder');
+               const translatedPlaceholder = languagePack[key] ?? fallbackPack[key];
+               if (translatedPlaceholder !== undefined) {
+                   element.placeholder = translatedPlaceholder;
+               }
             });
             // Aggiorna il contenuto del popup istruzioni, se disponibile nella lingua selezionata
             const instructionsPopup = document.getElementById('instructionsPopup');
             if (instructionsPopup) {
-                const langData = translations[lang] || translations.en;
-                const fallback = translations.en && translations.en.instructionsContent ? translations.en.instructionsContent : '';
-                const content = langData && langData.instructionsContent ? langData.instructionsContent : fallback;
-                if (content) {
-                    instructionsPopup.innerHTML = content;
+               const langData = translations[currentLanguage] || translations[DEFAULT_LANGUAGE];
+               const fallback = translations[DEFAULT_LANGUAGE] && translations[DEFAULT_LANGUAGE].instructionsContent ? translations[DEFAULT_LANGUAGE].instructionsContent : '';
+               const content = langData && langData.instructionsContent ? langData.instructionsContent : fallback;
+               if (content) {
+                   instructionsPopup.innerHTML = content;
                 }
             }
             renderAll();
@@ -4440,23 +4541,24 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             // This creates a visual "pause" in the grid and highlights the filter options
             // We only show it if Canadian provinces exist to ensure proper positioning
             if (canadaProvinces.length > 0) {
+                const languagePack = translations[currentLanguage] || translations[DEFAULT_LANGUAGE] || {};
                 const intermezzoSection = document.createElement('div');
                 intermezzoSection.className = 'filters-intermezzo';
                 intermezzoSection.style.gridColumn = '1 / -1'; // Span all columns
                 intermezzoSection.innerHTML = `
-                    <h3>🔎 Filtra per categoria</h3>
+                    <h3>${languagePack.intermezzoTitle || '🔎 Filter by category'}</h3>
                     <div class="filter-buttons-grid">
                         <button class="filter-btn" onclick="filterCountries('ue')" aria-pressed="false">
                             <span class="fi fi-eu" aria-hidden="true" style="margin-right:6px;"></span>
-                            🇪🇺 Unione Europea
+                            ${languagePack.filterEU || 'EU Countries'}
                         </button>
-                        <button class="filter-btn" onclick="filterCountries('non-ue')" aria-pressed="false">🌍 Paesi non-UE</button>
-                        <button class="filter-btn" onclick="filterCountries('altissimo')" aria-pressed="false">⭐ Protezione Elevata</button>
-                        <button class="filter-btn" onclick="filterCountries('europe')" aria-pressed="false">🇪🇺 Europa</button>
-                        <button class="filter-btn" onclick="filterCountries('asia')" aria-pressed="false">🌏 Asia</button>
-                        <button class="filter-btn" onclick="filterCountries('africa')" aria-pressed="false">🌍 Africa</button>
-                        <button class="filter-btn" onclick="filterCountries('americas')" aria-pressed="false">🌎 Americhe</button>
-                        <button class="filter-btn" onclick="filterCountries('oceania')" aria-pressed="false">🏝️ Oceania</button>
+                        <button class="filter-btn" onclick="filterCountries('non-ue')" aria-pressed="false">${languagePack.filterNonEU || 'Non-EU Countries'}</button>
+                        <button class="filter-btn" onclick="filterCountries('altissimo')" aria-pressed="false">⭐ ${languagePack.filterHigh || 'Highest Protection'}</button>
+                        <button class="filter-btn" onclick="filterCountries('europe')" aria-pressed="false">${languagePack.continentEurope || '🇪🇺 Europe'}</button>
+                        <button class="filter-btn" onclick="filterCountries('asia')" aria-pressed="false">${languagePack.continentAsia || '🌏 Asia'}</button>
+                        <button class="filter-btn" onclick="filterCountries('africa')" aria-pressed="false">${languagePack.continentAfrica || '🌍 Africa'}</button>
+                        <button class="filter-btn" onclick="filterCountries('americas')" aria-pressed="false">${languagePack.continentAmericas || '🌎 Americas'}</button>
+                        <button class="filter-btn" onclick="filterCountries('oceania')" aria-pressed="false">${languagePack.continentOceania || '🏝️ Oceania'}</button>
                     </div>
                 `;
                 grid.appendChild(intermezzoSection);
@@ -5342,7 +5444,6 @@ https://avvstancamarcello.github.io/Financial-Authority-Database/
     </footer>
 </body>
 </html>
-
 
 
 
