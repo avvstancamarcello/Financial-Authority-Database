@@ -1588,7 +1588,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <div style="background: #000000; padding: 18px 20px; margin-bottom: 15px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.3); border: 2px solid #39ff14;">
                 <div style="display: flex; align-items: center; justify-content: center; gap: 12px; flex-wrap: wrap;">
                     <h2 data-i18n="alphabetBannerTitle" style="margin: 0; color: #39ff14; font-size: 1.4em; text-shadow: 0 0 10px rgba(57, 255, 20, 0.5);">Accedi immediatamente alle Authority tramite l'Alfabeto GRAFICO <span style="background: #ffffff; color: #000000; font-weight: 900; font-size: 1em; padding: 6px 12px; border-radius: 8px; font-family: monospace; margin-left: 8px;">A-Z</span>!</h2>
-                    <button id="instructionsToggle" class="instructions-toggle" type="button" onclick="toggleInstructions()" aria-controls="instructionsPopup" aria-expanded="false" data-i18n="instructionsButtonLabel" data-i18n-title="instructionsButtonModal" title="Istruzioni" style="background: #000000; color: #39ff14; border: 2px solid #39ff14; border-radius: 999px; padding: 0.5rem 1.2rem; font-size: 0.9rem; display: inline-flex; align-items: center; gap: 6px; cursor: pointer; box-shadow: 0 3px 12px rgba(57, 255, 20, 0.4); font-weight: 600;">
+                    <button id="instructionsToggle" class="instructions-toggle" type="button" onclick="toggleInstructions()" aria-controls="instructionsPopup" aria-expanded="false" data-i18n="instructionsButtonLabel" data-i18n-title="instructionsButtonLabel" title="Istruzioni" style="background: #000000; color: #39ff14; border: 2px solid #39ff14; border-radius: 999px; padding: 0.5rem 1.2rem; font-size: 0.9rem; display: inline-flex; align-items: center; gap: 6px; cursor: pointer; box-shadow: 0 3px 12px rgba(57, 255, 20, 0.4); font-weight: 600;">
                         📖 Istruzioni
                     </button>
                 </div>
@@ -2936,7 +2936,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     <input type="text" id="searchInput" data-i18n-placeholder="searchPlaceholder" placeholder="Cerca per paese o autorità..." aria-label="Search countries">
                     <button type="button" class="search-btn">Cerca</button>
                 </div>
-                <div class="filter-buttons" role="group" aria-label="Filter options">
+                <div class="filter-buttons" role="group" data-i18n-aria-label="filterOptionsAriaLabel" aria-label="Filter options">
                     <button class="filter-btn active" onclick="filterCountries('all')" data-i18n="filterAll" aria-pressed="true">Tutti i Paesi</button>
                     <button class="filter-btn" onclick="filterCountries('altissimo')" data-i18n="filterHigh" aria-pressed="false">Protezione Elevata</button>
                     <button class="filter-btn" onclick="filterCountries('ue')" aria-pressed="false">
@@ -2946,7 +2946,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     <button class="filter-btn" onclick="filterCountries('non-ue')" data-i18n="filterNonEU" aria-pressed="false">Paesi non-UE</button>
                 </div>
                 <!-- Filtri per Continente - SEO Improvement -->
-                <div class="filter-buttons" role="group" aria-label="Filter by continent" style="margin-top: 10px;">
+                <div class="filter-buttons" role="group" data-i18n-aria-label="filterContinentAriaLabel" aria-label="Filter by continent" style="margin-top: 10px;">
                     <span data-i18n="filterContinentLabel" style="color: #ffd700; font-weight: 600; margin-right: 10px;">🌍 Continente:</span>
                     <button class="filter-btn" onclick="filterCountries('europe')" data-i18n="filterEurope" aria-pressed="false">🇪🇺 Europa</button>
                     <button class="filter-btn" onclick="filterCountries('asia')" data-i18n="filterAsia" aria-pressed="false">🌏 Asia</button>
@@ -3186,6 +3186,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 filterAfrica: "🌍 Africa",
                 filterAmericas: "🌎 Americhe",
                 filterOceania: "🏝️ Oceania",
+                filterOptionsAriaLabel: "Opzioni di filtro",
+                filterContinentAriaLabel: "Filtro per continente",
                 statCountries: "Paesi Monitorati",
                 statEU: "Paesi UE",
                 statHighProtection: "Protezione Standard",
@@ -3309,6 +3311,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 filterAfrica: "🌍 أفريقيا",
                 filterAmericas: "🌎 الأميركيتان",
                 filterOceania: "🏝️ أوقيانوسيا",
+                filterOptionsAriaLabel: "خيارات التصفية",
+                filterContinentAriaLabel: "التصفية حسب القارة",
                 statCountries: "دول خاضعة للرقابة",
                 statEU: "دول الاتحاد الأوروبي",
                 statHighProtection: "حماية قياسية",
@@ -3409,6 +3413,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 filterAfrica: "🌍 Châu Phi",
                 filterAmericas: "🌎 Châu Mỹ",
                 filterOceania: "🏝️ Châu Đại Dương",
+                filterOptionsAriaLabel: "Tùy chọn bộ lọc",
+                filterContinentAriaLabel: "Lọc theo châu lục",
                 statCountries: "Quốc gia được giám sát",
                 statEU: "Quốc gia EU",
                 statHighProtection: "Mức bảo vệ cao",
@@ -3470,6 +3476,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 filterAfrica: "🌍 非洲",
                 filterAmericas: "🌎 美洲",
                 filterOceania: "🏝️ 大洋洲",
+                filterOptionsAriaLabel: "筛选选项",
+                filterContinentAriaLabel: "按洲筛选",
                 statCountries: "监测国家数量",
                 statEU: "欧盟国家",
                 statHighProtection: "高保护等级",
@@ -3531,6 +3539,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 filterAfrica: "🌍 अफ्रीका",
                 filterAmericas: "🌎 अमेरिका",
                 filterOceania: "🏝️ ओशिनिया",
+                filterOptionsAriaLabel: "फ़िल्टर विकल्प",
+                filterContinentAriaLabel: "महाद्वीप के अनुसार फ़िल्टर",
                 statCountries: "निगरानी किए गए देश",
                 statEU: "ईयू देश",
                 statHighProtection: "उच्च संरक्षण",
@@ -3592,6 +3602,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 filterAfrica: "🌍 Africa",
                 filterAmericas: "🌎 Americas",
                 filterOceania: "🏝️ Oceania",
+                filterOptionsAriaLabel: "Filter options",
+                filterContinentAriaLabel: "Filter by continent",
                 statCountries: "Monitored Countries",
                 statEU: "EU Countries",
                 statHighProtection: "Highest Protection",
@@ -3715,6 +3727,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 filterAfrica: "🌍 Afrique",
                 filterAmericas: "🌎 Amériques",
                 filterOceania: "🏝️ Océanie",
+                filterOptionsAriaLabel: "Options de filtre",
+                filterContinentAriaLabel: "Filtrer par continent",
                 statCountries: "Pays Surveillés",
                 statEU: "Pays UE",
                 statHighProtection: "Protection Maximale",
@@ -3832,6 +3846,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 filterAfrica: "🌍 Afrika",
                 filterAmericas: "🌎 Amerika",
                 filterOceania: "🏝️ Ozeanien",
+                filterOptionsAriaLabel: "Filteroptionen",
+                filterContinentAriaLabel: "Nach Kontinent filtern",
                 statCountries: "Überwachte Länder",
                 statEU: "EU-Länder",
                 statHighProtection: "Höchster Schutz",
@@ -3949,6 +3965,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 filterAfrica: "🌍 África",
                 filterAmericas: "🌎 Américas",
                 filterOceania: "🏝️ Oceanía",
+                filterOptionsAriaLabel: "Opciones de filtro",
+                filterContinentAriaLabel: "Filtrar por continente",
                 statCountries: "Países Monitoreados",
                 statEU: "Países UE",
                 statHighProtection: "Protección Máxima",
@@ -4066,6 +4084,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 filterAfrica: "🌍 África",
                 filterAmericas: "🌎 Américas",
                 filterOceania: "🏝️ Oceânia",
+                filterOptionsAriaLabel: "Opções de filtro",
+                filterContinentAriaLabel: "Filtrar por continente",
                 statCountries: "Países Monitorizados",
                 statEU: "Países UE",
                 statHighProtection: "Proteção Elevada",
@@ -4496,6 +4516,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 const value = langData[key] || fallbackData[key];
                 if (value) {
                     element.title = value;
+                }
+            });
+
+            document.querySelectorAll('[data-i18n-aria-label]').forEach(element => {
+                const key = element.getAttribute('data-i18n-aria-label');
+                const value = langData[key] || fallbackData[key];
+                if (value) {
+                    element.setAttribute('aria-label', value);
                 }
             });
 
@@ -5546,7 +5574,6 @@ https://avvstancamarcello.github.io/Financial-Authority-Database/
     </footer>
 </body>
 </html>
-
 
 
 
