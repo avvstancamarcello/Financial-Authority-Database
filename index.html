@@ -483,7 +483,8 @@
         .language-selector-asia { background: linear-gradient(135deg, rgba(255,255,255,0.12) 0%, rgba(148,163,184,0.16) 100%); border: 1px solid rgba(255,255,255,0.16); }
         .language-selector-title { color: #ffffff; font-size: 1rem; font-weight: 700; text-align: center; margin: 0 0 0.35rem; }
         .language-selector-note { color: rgba(255,255,255,0.88); font-size: 0.82rem; text-align: center; margin: 0 0 0.9rem; }
-        .language-selector-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(88px, 1fr)); gap: 8px; }
+        .language-selector-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(88px, 1fr)); gap: 8px; list-style: none; margin: 0; padding: 0; }
+        .language-selector-item { display: contents; }
         .lang-btn { background: rgba(255,255,255,0.3); border: 2px solid transparent; color: white; padding: 10px 16px; border-radius: 20px; cursor: pointer; font-weight: 700; font-size: 16px; transition: all 0.3s ease; display: flex; align-items: center; gap: 8px; min-width: 70px; justify-content: center; }
         .lang-btn:hover { background: rgba(255,255,255,0.5); transform: translateY(-2px); }
         .lang-btn.active { background: white; color: #667eea; border-color: white; }
@@ -1453,82 +1454,116 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 <section class="language-selector-group language-selector-eu" aria-labelledby="language-selector-eu-title">
                     <h2 class="language-selector-title" id="language-selector-eu-title">AMEV – Autorità Mercati Economici Verificati (11 lingue)</h2>
                     <p class="language-selector-note">Core europeo + EN per redirect dominio AWEV</p>
-                    <div class="language-selector-grid">
+                    <ul class="language-selector-grid" role="list">
+                        <li class="language-selector-item">
                         <button class="lang-btn active" data-lang="it" onclick="changeLanguage('it')" aria-label="Italiano">
                             <span class="fi fi-it lang-flag" aria-hidden="true"></span>
                             <span>IT</span>
                         </button>
+                        </li>
+                        <li class="language-selector-item">
                         <button class="lang-btn" data-lang="es" onclick="changeLanguage('es')" aria-label="Español">
                             <span class="fi fi-es lang-flag" aria-hidden="true"></span>
                             <span>ES</span>
                         </button>
+                        </li>
+                        <li class="language-selector-item">
                         <button class="lang-btn" data-lang="fr" onclick="changeLanguage('fr')" aria-label="Français">
                             <span class="fi fi-fr lang-flag" aria-hidden="true"></span>
                             <span>FR</span>
                         </button>
+                        </li>
+                        <li class="language-selector-item">
                         <button class="lang-btn" data-lang="de" onclick="changeLanguage('de')" aria-label="Deutsch">
                             <span class="fi fi-de lang-flag" aria-hidden="true"></span>
                             <span>DE</span>
                         </button>
+                        </li>
+                        <li class="language-selector-item">
                         <button class="lang-btn" data-lang="ro" onclick="changeLanguage('ro')" aria-label="Română">
                             <span class="fi fi-ro lang-flag" aria-hidden="true"></span>
                             <span>RO</span>
                         </button>
+                        </li>
+                        <li class="language-selector-item">
                         <button class="lang-btn" data-lang="pt" onclick="changeLanguage('pt')" aria-label="Português">
                             <span class="fi fi-pt lang-flag" aria-hidden="true"></span>
                             <span>PT</span>
                         </button>
+                        </li>
+                        <li class="language-selector-item">
                         <button class="lang-btn" data-lang="nl" onclick="changeLanguage('nl')" aria-label="Nederlands">
                             <span class="fi fi-nl lang-flag" aria-hidden="true"></span>
                             <span>NL</span>
                         </button>
+                        </li>
+                        <li class="language-selector-item">
                         <button class="lang-btn" data-lang="sq" onclick="changeLanguage('sq')" aria-label="Shqip (Albania)">
                             <span class="fi fi-al lang-flag" aria-hidden="true"></span>
                             <span>AL</span>
                         </button>
+                        </li>
+                        <li class="language-selector-item">
                         <button class="lang-btn" data-lang="xk" onclick="changeLanguage('xk')" aria-label="Shqip (Kosovë)">
                             <span class="fi fi-xk lang-flag" aria-hidden="true"></span>
                             <span>XK</span>
                         </button>
+                        </li>
+                        <li class="language-selector-item">
                         <button class="lang-btn" data-lang="bs" onclick="changeLanguage('bs')" aria-label="Bosanski">
                             <span class="fi fi-ba lang-flag" aria-hidden="true"></span>
                             <span>BS</span>
                         </button>
+                        </li>
+                        <li class="language-selector-item">
                         <button class="lang-btn" data-lang="el" onclick="changeLanguage('el')" aria-label="Ελληνικά">
                             <span class="fi fi-gr lang-flag" aria-hidden="true"></span>
                             <span>EL</span>
                         </button>
+                        </li>
+                        <li class="language-selector-item">
                         <button class="lang-btn" data-lang="en" onclick="changeLanguage('en')" aria-label="English">
                             <span class="fi fi-gb lang-flag" aria-hidden="true"></span>
                             <span>EN</span>
                         </button>
-                    </div>
+                        </li>
+                    </ul>
                 </section>
                 <section class="language-selector-group language-selector-asia" id="languages-asia" aria-labelledby="language-selector-asia-title">
                     <h2 class="language-selector-title" id="language-selector-asia-title">⏳ Lingue in Corso di Traduzione</h2>
                     <p class="language-selector-note">Sezione ASIA - traduzioni disponibili, brand still work in progress</p>
-                    <div class="language-selector-grid">
+                    <ul class="language-selector-grid" role="list">
+                        <li class="language-selector-item">
                         <button class="lang-btn" data-lang="ar" onclick="changeLanguage('ar')" aria-label="العربية">
                             <span class="fi fi-qa lang-flag" aria-hidden="true"></span>
                             <span>AR</span>
                         </button>
+                        </li>
+                        <li class="language-selector-item">
                         <button class="lang-btn" data-lang="zh" onclick="changeLanguage('zh')" aria-label="Chinese">
                             <span class="fi fi-cn lang-flag" aria-hidden="true"></span>
                             <span>ZH</span>
                         </button>
+                        </li>
+                        <li class="language-selector-item">
                         <button class="lang-btn" data-lang="hi" onclick="changeLanguage('hi')" aria-label="Hindi">
                             <span class="fi fi-in lang-flag" aria-hidden="true"></span>
                             <span>HI</span>
                         </button>
+                        </li>
+                        <li class="language-selector-item">
                         <button class="lang-btn" data-lang="vi" onclick="changeLanguage('vi')" aria-label="Vietnamese">
                             <span class="fi fi-vn lang-flag" aria-hidden="true"></span>
                             <span>VI</span>
                         </button>
-                        <span class="lang-btn lang-btn-placeholder" aria-label="Prossima lingua asiatica">
+                        </li>
+                        <li class="language-selector-item" aria-hidden="true">
+                        <span class="lang-btn lang-btn-placeholder" title="Prossima lingua asiatica">
                             <span aria-hidden="true">＋</span>
                             <span>WIP</span>
                         </span>
-                    </div>
+                        </li>
+                    </ul>
                 </section>
                 <span class="language-hint" style="margin-left: 10px; background: linear-gradient(135deg, #1e293b 0%, #334155 100%); color: #ffd700; border: 1px solid #ffd700; border-radius: 999px; padding: 0.3rem 0.9rem; font-size: 0.85rem; display: inline-flex; align-items: center; gap: 6px; cursor: default;">
                     <span style="font-size: 1.1em;">👆</span> Scegli la tua lingua
@@ -4366,11 +4401,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             }
             // Add other languages if needed
         };
-        translations.ro = translations.en;
-        translations.nl = translations.en;
-        translations.el = translations.en;
-        translations.bs = translations.en;
-        translations.xk = translations.sq;
+        translations.ro = { ...translations.en };
+        translations.nl = { ...translations.en };
+        translations.el = { ...translations.en };
+        translations.bs = { ...translations.en };
+        translations.xk = { ...translations.sq };
 
         // Determina la lingua iniziale dalla query string (?lang=xx), con fallback a IT
         function getInitialLanguageFromUrl() {
