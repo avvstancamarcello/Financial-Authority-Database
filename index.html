@@ -70,7 +70,7 @@
     <link rel="alternate" hreflang="es" href="https://tutelatruffe.it/?lang=es">
     <link rel="alternate" hreflang="pt" href="https://tutelatruffe.it/?lang=pt">
     <link rel="alternate" hreflang="sq" href="https://tutelatruffe.it/?lang=sq">
-    <link rel="alternate" hreflang="xk" href="https://tutelatruffe.it/?lang=xk">
+    <link rel="alternate" hreflang="sq-XK" href="https://tutelatruffe.it/?lang=xk">
     <link rel="alternate" hreflang="nl" href="https://tutelatruffe.it/?lang=nl">
     <link rel="alternate" hreflang="ro" href="https://tutelatruffe.it/?lang=ro">
     <link rel="alternate" hreflang="hu" href="https://tutelatruffe.it/?lang=hu">
@@ -181,7 +181,7 @@
             "name": "Avvocato Marcello Stanca"
         },
         "copyrightYear": "2026",
-        "inLanguage": ["it", "en", "fr", "de", "es", "pt", "sq", "xk", "ar", "zh", "hi", "vi"],
+        "inLanguage": ["it", "en", "fr", "de", "es", "pt", "sq", "sq-XK", "ar", "zh", "hi", "vi"],
         "keywords": "autorità finanziarie, banche centrali, protezione consumatori, frodi bancarie, verifica licenze, CONSOB, SEC, FCA, BaFin",
         "aggregateRating": {
             "@type": "AggregateRating",
@@ -4445,7 +4445,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             nl: { api: 'nl', fallback: 'en', urlSupported: true },
             el: { api: 'el', fallback: 'en', urlSupported: true },
             bs: { api: 'bs', fallback: 'en', urlSupported: true },
-            xk: { api: 'sq', fallback: 'sq', urlSupported: true },
+            xk: { api: 'sq', fallback: 'sq', htmlLang: 'sq-XK', urlSupported: true },
             ar: { api: 'ar', urlSupported: true },
             zh: { api: 'zh-CN', urlSupported: true },
             hi: { api: 'hi', urlSupported: true },
@@ -4888,7 +4888,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
             const htmlEl = document.documentElement;
             if (htmlEl) {
-                htmlEl.lang = lang;
+                htmlEl.lang = localeMetadata[lang]?.htmlLang || lang;
                 htmlEl.dir = (lang === 'ar' ? 'rtl' : 'ltr');
             }
 
