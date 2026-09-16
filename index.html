@@ -5038,19 +5038,22 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 canonicalEl.setAttribute('href', newCanonical);
             }
 
-            // Aggiorna URL nel browser senza ricaricare
-            const newUrl = lang === 'it' 
-                ? window.location.pathname 
-                : `${window.location.pathname}?lang=${lang}`;
-            window.history.replaceState({lang: lang}, '', newUrl);
+            // Aggiorna URL nel browser senza ricaricare, preservando eventuali query di supporto
+            const nextUrl = new URL(window.location.href);
+            if (lang === 'it') {
+                nextUrl.searchParams.delete('lang');
+            } else {
+                nextUrl.searchParams.set('lang', lang);
+            }
+            window.history.replaceState({lang: lang}, '', `${nextUrl.pathname}${nextUrl.search}${nextUrl.hash}`);
 
             renderAll();
-            scheduleLocaleRegressionChecks(lang);
+            runLocaleRegressionChecks(lang);
         }
 
         function runLocaleRegressionChecks(lang) {
             const params = new URLSearchParams(window.location.search || '');
-            if (params.get('selftest') !== 'locale') return;
+            if (params.get('selftest') !== 'locale') return { ok: true, skipped: true, errors: [] };
 
             const expectedHtmlLang = localeMetadata[lang]?.htmlLang || localeMetadata[lang]?.api || lang;
             const expectedCanonical = lang === 'it'
@@ -5059,25 +5062,29 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             const htmlLang = document.documentElement?.lang;
             const canonicalHref = document.getElementById('canonical-url')?.getAttribute('href');
             const activeBtn = document.querySelector(`.lang-btn.active[data-lang="${lang}"]`) || document.querySelector(`.lang-btn.active[data-variant="${lang}"]`);
+            const errors = [];
 
             if (htmlLang !== expectedHtmlLang) {
-                throw new Error(`Locale self-test failed for ${lang}: expected html lang ${expectedHtmlLang}, got ${htmlLang}`);
+                errors.push(`expected html lang ${expectedHtmlLang}, got ${htmlLang}`);
             }
             if (canonicalHref !== expectedCanonical) {
-                throw new Error(`Locale self-test failed for ${lang}: expected canonical ${expectedCanonical}, got ${canonicalHref}`);
+                errors.push(`expected canonical ${expectedCanonical}, got ${canonicalHref}`);
             }
             if (!activeBtn) {
-                throw new Error(`Locale self-test failed for ${lang}: active language button not found`);
+                errors.push('active language button not found');
             }
-        }
 
-        function scheduleLocaleRegressionChecks(lang) {
-            const params = new URLSearchParams(window.location.search || '');
-            if (params.get('selftest') !== 'locale') return;
-
-            window.requestAnimationFrame(() => {
-                window.requestAnimationFrame(() => runLocaleRegressionChecks(lang));
-            });
+            const result = { ok: errors.length === 0, skipped: false, errors };
+            const htmlEl = document.documentElement;
+            if (htmlEl) {
+                htmlEl.dataset.localeSelftest = result.ok ? 'pass' : 'fail';
+                htmlEl.dataset.localeSelftestLang = lang;
+                htmlEl.dataset.localeSelftestErrors = errors.join(' | ');
+            }
+            if (!result.ok) {
+                console.error(`Locale self-test failed for ${lang}: ${errors.join('; ')}`);
+            }
+            return result;
         }
 
         function renderCountries() {
