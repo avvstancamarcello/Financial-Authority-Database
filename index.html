@@ -4571,8 +4571,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             }
             // Add other languages if needed
         };
-        // Greek EL regional variant:
-        // uses AMEA acronym (Αρχή Μεταφορών Επαληθευμένων Αγορών), not standard AMEV.
+        // Greek EL regional variant for PR #3.4:
+        // AMEA = Αρχή Μεταφορών Επαληθευμένων Αγορών (locale-specific branding for Greek).
+        // Other locales keep AMEV naming; only EL intentionally uses AMEA.
         // Defined as a post-assignment alias to keep all 240+ keys covered with minimal additive changes:
         // EN remains the base fallback while Greek-specific strings are progressively localized.
         translations.el = {
@@ -4581,7 +4582,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             subtitle: "Βάση Δεδομένων Διεθνών Χρηματοοικονομικών Αρχών – 239 χώρες",
             securityTitle: "✅ ΕΠΙΣΗΜΟΣ ΝΟΜΙΜΟΣ ΙΣΤΟΤΟΠΟΣ - ΒΑΣΗ ΠΡΟΣΤΑΣΙΑΣ ΚΑΤΑΝΑΛΩΤΗ",
             languageSelectorEuTitle: "AMEA – Αρχή Μεταφορών Επαληθευμένων Αγορών (Ελληνικά)",
-            languageSelectorEuNote: "Ευρωπαϊκός πυρήνας + EN για ανακατεύθυνση τομέα",
+            languageSelectorEuNote: "Ευρωπαϊκός πυρήνας + EN για ανακατεύθυνση τομέα (EL τοπική παραλλαγή: AMEA)",
             instructionsButtonModal: "Οδηγίες",
             askAuthorityBtnNative: "Ζητήστε πληροφορίες από αυτή την Αρχή!"
         };
