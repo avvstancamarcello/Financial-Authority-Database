@@ -200,7 +200,8 @@
             {"@type": "Language", "name": "Nederlands", "alternateName": "AMEV"},
             {"@type": "Language", "name": "Shqip (Albania/Kosovë)", "alternateName": "AMEV"},
             {"@type": "Language", "name": "Bosanski", "alternateName": "AMEV"},
-            {"@type": "Language", "name": "Ελληνικά", "alternateName": "AMEA (Greek variant)"}
+            {"@type": "Language", "name": "Ελληνικά", "alternateName": "AMEA (Greek variant)"},
+            {"@type": "Language", "name": "English", "alternateName": "AWEV"}
         ],
         "keywords": "autorità finanziarie, banche centrali, protezione consumatori, frodi bancarie, verifica licenze, CONSOB, SEC, FCA, BaFin",
         "aggregateRating": {
@@ -3796,7 +3797,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 languageSelectorEuTitle: "Select Your Language – AMEV Core (11 European Languages)",
                 languageSelectorEuNote: "European AMEV core; Greek uses AMEA variant; EN supports AWEV redirect",
                 languageSelectorAsiaTitle: "⏳ Asian Languages – Work in Progress",
-                languageSelectorAsiaNote: "ASIA section: Lingue in Corso di Traduzione (Future Expansion)",
+                languageSelectorAsiaNote: "ASIA section: languages currently being translated (Future Expansion)",
                 amevIntroTitle: "AMEV – 11 European Languages for Financial Authority Verification",
                 amevIntroSubtitle: "A multilingual, regionally-coherent brand for European financial market oversight",
                 amevIntroCore: "AMEV works across 11 European languages (IT, ES, FR, DE, RO, PT, NL, AL, XK, BS, EL). The EN variant (AWEV) extends global reach while preserving linguistic coherence and geographic accessibility.",
@@ -4685,7 +4686,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             languageSelectorEuTitle: "Selectează limba ta – AMEV Core (11 limbi europene)",
             languageSelectorEuNote: "Nucleu european AMEV; varianta greacă folosește AMEA; EN pentru redirect AWEV",
             languageSelectorAsiaTitle: "⏳ Limbi asiatice – Work in Progress",
-            languageSelectorAsiaNote: "Secțiunea ASIA: Lingue in Corso di Traduzione (Future Expansion)",
+            languageSelectorAsiaNote: "Secțiunea ASIA: limbi aflate în curs de traducere (extindere viitoare)",
             amevIntroTitle: "AMEV – 11 limbi europene pentru verificarea autorităților financiare",
             amevIntroSubtitle: "Un brand multilingv, coerent regional, pentru supravegherea piețelor financiare europene",
             amevIntroCore: "AMEV funcționează în 11 limbi europene (IT, ES, FR, DE, RO, PT, NL, AL, XK, BS, EL). Varianta EN (AWEV) extinde acoperirea globală, păstrând coerența lingvistică și accesibilitatea geografică.",
@@ -4697,7 +4698,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             amevCredibilityTitle: "De ce AMEV este un brand polivalent",
             amevCredibilityText: "Acronimul identic în 11 limbi crește memorabilitatea, accesibilitatea și alinierea cu ecosistemul de reglementare UE, oferind o identitate unificată pentru mai multe baze de date ale autorităților financiare.",
             amevTimelineText: "Implementare PR #3.1 → #3.5: AL, XK, BS, EL (AMEA), RO.",
-            amevFutureExpansion: "⏳ Future Expansion: Asian Languages – Work in Progress",
+            amevFutureExpansion: "⏳ Extindere viitoare: limbi asiatice – în curs de dezvoltare",
             amevFutureExpansionAria: "Mergi la secțiunea limbilor asiatice în curs de traducere",
             instructionsButtonModal: "Instrucțiuni",
             askAuthorityBtnNative: "Solicită informații de la această Autoritate!"
@@ -4732,14 +4733,17 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             ms: { api: 'ms', urlSupported: false },
             uk: { api: 'uk', urlSupported: false }
         };
-        const SUPPORTED_LANGUAGES = Object.entries(localeMetadata)
-            .filter(([code, meta]) => meta.urlSupported || code.includes('-'))
-            .map(([code]) => code.toLowerCase());
         const URL_LANGUAGE_ALIASES = {
             'el-gr': 'el-GR',
             'ro-ro': 'ro-RO',
             'sq-xk': 'xk'
         };
+        const SUPPORTED_LANGUAGES = [
+            ...Object.entries(localeMetadata)
+                .filter(([, meta]) => meta.urlSupported)
+                .map(([code]) => code.toLowerCase()),
+            ...Object.keys(URL_LANGUAGE_ALIASES)
+        ];
 
         function getLanguageBundle(lang = currentLanguage) {
             const visited = new Set();
