@@ -187,7 +187,7 @@
             "name": "Avvocato Marcello Stanca"
         },
         "copyrightYear": "2026",
-        "inLanguage": ["it", "es", "fr", "de", "ro", "pt", "nl", "sq", "xk", "bs", "el", "en"],
+        "inLanguage": ["it", "es", "fr", "de", "ro", "pt", "nl", "sq", "sq-XK", "bs", "el", "en"],
         "dateModified": "2026-09-16",
         "areaServed": ["Italy", "Spain", "France", "Germany", "Romania", "Portugal", "Netherlands", "Belgium", "Albania", "Kosovo", "Bosnia", "Greece"],
         "availableLanguage": [
@@ -4732,7 +4732,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             ms: { api: 'ms', urlSupported: false },
             uk: { api: 'uk', urlSupported: false }
         };
-        const SUPPORTED_LANGUAGES = ['it', 'en', 'fr', 'de', 'es', 'pt', 'nl', 'sq', 'xk', 'bs', 'el', 'ro', 'ar', 'zh', 'hi', 'vi'];
+        const SUPPORTED_LANGUAGES = Object.entries(localeMetadata)
+            .filter(([code, meta]) => meta.urlSupported || code.includes('-'))
+            .map(([code]) => code.toLowerCase());
+        const URL_LANGUAGE_ALIASES = {
+            'el-gr': 'el-GR',
+            'ro-ro': 'ro-RO',
+            'sq-xk': 'xk'
+        };
 
         function getLanguageBundle(lang = currentLanguage) {
             const visited = new Set();
@@ -4756,7 +4763,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             try {
                 const params = new URLSearchParams(window.location.search || '');
                 const langParam = (params.get('lang') || '').toLowerCase();
-                if (SUPPORTED_LANGUAGES.includes(langParam)) return langParam;
+                if (SUPPORTED_LANGUAGES.includes(langParam)) {
+                    return URL_LANGUAGE_ALIASES[langParam] || langParam;
+                }
             } catch (e) {
                 console.warn('Impossibile leggere parametro lang dalla URL', e);
             }
