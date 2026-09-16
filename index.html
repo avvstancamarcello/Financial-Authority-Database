@@ -71,6 +71,7 @@
     <link rel="alternate" hreflang="pt" href="https://tutelatruffe.it/?lang=pt">
     <link rel="alternate" hreflang="sq" href="https://tutelatruffe.it/?lang=sq">
     <link rel="alternate" hreflang="bs" href="https://tutelatruffe.it/?lang=bs">
+    <link rel="alternate" hreflang="bs-BA" href="https://tutelatruffe.it/?lang=bs">
     <link rel="alternate" hreflang="nl" href="https://tutelatruffe.it/?lang=nl">
     <link rel="alternate" hreflang="ro" href="https://tutelatruffe.it/?lang=ro">
     <link rel="alternate" hreflang="hu" href="https://tutelatruffe.it/?lang=hu">
@@ -1519,7 +1520,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                         <button class="lang-btn" data-lang="bs" onclick="changeLanguage('bs')" aria-label="Bosanski (Bosna i Hercegovina)">
                             <span class="fi fi-ba lang-flag" aria-hidden="true"></span>
                             <span aria-hidden="true">BS</span>
-                            <span class="lang-label-secondary">Bosanski</span>
+                            <span class="lang-label-secondary" aria-hidden="true">Bosanski</span>
                         </button>
                         </li>
                         <li class="language-selector-item">
@@ -5044,6 +5045,30 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             window.history.replaceState({lang: lang}, '', newUrl);
 
             renderAll();
+            runLocaleRegressionChecks(lang);
+        }
+
+        function runLocaleRegressionChecks(lang) {
+            const params = new URLSearchParams(window.location.search || '');
+            if (params.get('selftest') !== 'locale') return;
+
+            const expectedHtmlLang = localeMetadata[lang]?.htmlLang || localeMetadata[lang]?.api || lang;
+            const expectedCanonical = lang === 'it'
+                ? 'https://tutelatruffe.it/'
+                : `https://tutelatruffe.it/?lang=${lang}`;
+            const htmlLang = document.documentElement?.lang;
+            const canonicalHref = document.getElementById('canonical-url')?.getAttribute('href');
+            const activeBtn = document.querySelector(`.lang-btn.active[data-lang="${lang}"]`) || document.querySelector(`.lang-btn.active[data-variant="${lang}"]`);
+
+            if (htmlLang !== expectedHtmlLang) {
+                throw new Error(`Locale self-test failed for ${lang}: expected html lang ${expectedHtmlLang}, got ${htmlLang}`);
+            }
+            if (canonicalHref !== expectedCanonical) {
+                throw new Error(`Locale self-test failed for ${lang}: expected canonical ${expectedCanonical}, got ${canonicalHref}`);
+            }
+            if (!activeBtn) {
+                throw new Error(`Locale self-test failed for ${lang}: active language button not found`);
+            }
         }
 
         function renderCountries() {
