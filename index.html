@@ -5041,9 +5041,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             const shouldRunLocaleSelftest = new URLSearchParams(window.location.search || "").get('selftest') === "locale";
 
             // Aggiorna URL nel browser senza ricaricare
-            const newUrl = lang === 'it' 
-                ? window.location.pathname 
-                : `${window.location.pathname}?lang=${lang}`;
+            const nextParams = new URLSearchParams();
+            if (lang !== 'it') nextParams.set('lang', lang);
+            if (shouldRunLocaleSelftest) nextParams.set('selftest', 'locale');
+            const newUrl = nextParams.toString()
+                ? `${window.location.pathname}?${nextParams.toString()}`
+                : window.location.pathname;
             runLocaleRegressionChecks(lang, shouldRunLocaleSelftest);
             window.history.replaceState({lang: lang}, '', newUrl);
             renderAll();
@@ -5073,7 +5076,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             if (htmlEl) {
                 htmlEl.dataset.localeSelftest = result.ok ? 'pass' : 'fail';
                 htmlEl.dataset.localeSelftestLang = lang;
-                htmlEl.dataset.localeSelftestErrors = errors.join(' | ');
+                if (errors.length > 0) {
+                    htmlEl.dataset.localeSelftestErrors = errors.join(' | ');
+                } else {
+                    delete htmlEl.dataset.localeSelftestErrors;
+                }
             }
             if (!result.ok) {
                 console.error(`Locale self-test failed for ${lang}: ${errors.join('; ')}`);
