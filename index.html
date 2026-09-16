@@ -70,6 +70,8 @@
     <link rel="alternate" hreflang="es" href="https://tutelatruffe.it/?lang=es">
     <link rel="alternate" hreflang="pt" href="https://tutelatruffe.it/?lang=pt">
     <link rel="alternate" hreflang="sq" href="https://tutelatruffe.it/?lang=sq">
+    <link rel="alternate" hreflang="bs" href="https://tutelatruffe.it/?lang=bs">
+    <link rel="alternate" hreflang="bs-BA" href="https://tutelatruffe.it/?lang=bs">
     <link rel="alternate" hreflang="nl" href="https://tutelatruffe.it/?lang=nl">
     <link rel="alternate" hreflang="ro" href="https://tutelatruffe.it/?lang=ro">
     <link rel="alternate" hreflang="hu" href="https://tutelatruffe.it/?lang=hu">
@@ -108,6 +110,7 @@
     <meta property="og:locale:alternate" content="de_DE">
     <meta property="og:locale:alternate" content="es_ES">
     <meta property="og:locale:alternate" content="sq_AL">
+    <meta property="og:locale:alternate" content="bs_BA">
     <meta property="og:locale:alternate" content="ar_QA">
     <meta property="og:locale:alternate" content="zh_CN">
     <meta property="og:locale:alternate" content="hi_IN">
@@ -179,7 +182,7 @@
             "name": "Avvocato Marcello Stanca"
         },
         "copyrightYear": "2026",
-        "inLanguage": ["it", "en", "fr", "de", "es", "pt", "sq", "ar", "zh", "hi", "vi"],
+        "inLanguage": ["it", "en", "fr", "de", "es", "pt", "sq", "bs", "ar", "zh", "hi", "vi"],
         "keywords": "autorità finanziarie, banche centrali, protezione consumatori, frodi bancarie, verifica licenze, CONSOB, SEC, FCA, BaFin",
         "aggregateRating": {
             "@type": "AggregateRating",
@@ -1514,9 +1517,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                         </button>
                         </li>
                         <li class="language-selector-item">
-                        <button class="lang-btn" data-lang="bs" onclick="changeLanguage('bs')" aria-label="Bosanski">
+                        <button class="lang-btn" data-lang="bs" onclick="changeLanguage('bs')" aria-labelledby="language-selector-eu-bs-code language-selector-eu-bs-name">
                             <span class="fi fi-ba lang-flag" aria-hidden="true"></span>
-                            <span>BS</span>
+                            <span id="language-selector-eu-bs-code">BS</span>
+                            <span id="language-selector-eu-bs-name" class="lang-label-secondary">Bosanski</span>
                         </button>
                         </li>
                         <li class="language-selector-item">
@@ -4299,6 +4303,138 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 reportFormDisclaimer: "ℹ️ Os dados serão enviados para o seu email para poder contactar a Autoridade. Uma cópia será enviada ao administrador para alimentar a Warning List pública.",
                 instructionsContent: ""
             },
+            bs: {
+                title: "Međunarodna bankarska baza podataka za provjeru finansijskog identiteta primalaca bankovnih transfera.",
+                subtitle: "Međunarodna baza finansijskih autoriteta – 239 zemalja, s evropskim i azijskim jezičnim verzijama",
+                securityTitle: "✅ SLUŽBENA LEGITIMNA STRANICA - BAZA ZA ZAŠTITU POTROŠAČA",
+                securityText: "Ova stranica omogućava neposredan pristup službenim web stranicama državnih finansijskih autoriteta radi provjere zakonitosti i regularnosti finansijskih društava, osoba i subjekata koji nude finansijske usluge i primaju bankovne transfere.",
+                introText: "Ova web stranica nudi 239 direktnih linkova za pristup stranicama FINANSIJSKIH AUTORITETA u 239 zemalja svijeta.<br>POTRAŽI naziv zemlje za koju finansijsko društvo tvrdi da joj je sjedište i saznat ćeš sve službene identifikacijske podatke.",
+                searchPlaceholder: "Pretraži po zemlji ili autoritetu...",
+                filterAll: "Sve zemlje",
+                filterHigh: "Visoka zaštita",
+                filterEU: "Zemlje EU",
+                filterNonEU: "Zemlje izvan EU",
+                languageSelectorEuTitle: "AMEV – Evropska mreža verificiranih tržišnih autoriteta (11 jezika)",
+                languageSelectorEuNote: "AMEV evropska jezgra + EN za redirect AWEV domene",
+                languageSelectorAsiaTitle: "⏳ Jezici u prijevodu",
+                languageSelectorAsiaNote: "Sekcija ASIA - prijevodi su dostupni, brendiranje je još u toku",
+                quickIndexTitle: "Brzi indeks – pregledaj bazu",
+                quickIndexTitleAriaLabel: "Brzi indeks - pregledaj bazu",
+                quickIndexFlagsLink: "Zastave A-Z",
+                quickIndexSearchLink: "Pretraži autoritete",
+                quickIndexCountriesLink: "Lista 239 zemalja",
+                quickIndexPtsdLink: "Depresija",
+                quickIndexReferencesLink: "ESMA, FBI, IOSCO",
+                quickIndexAuthorLink: "Verificirani autor",
+                quickIndexFaqLink: "Česta pitanja",
+                pageIndexAriaLabel: "Indeks stranice",
+                filterCategoryTitle: "🔎 Filtriraj po kategoriji",
+                filterContinentLabel: "🌍 Kontinent:",
+                filterEurope: "Evropa",
+                filterAsia: "Azija",
+                filterAfrica: "Afrika",
+                filterAmericas: "Amerike",
+                filterOceania: "Oceanija",
+                filterOptionsAriaLabel: "Opcije filtera",
+                filterContinentAriaLabel: "Filter po kontinentu",
+                statCountries: "Praćene zemlje",
+                statEU: "Zemlje EU",
+                statHighProtection: "Standardna zaštita",
+                ptsdEquation: "Finansijska prevara = posttraumatski stresni poremećaj (PTSP)",
+                footer: "© 2026 Autor i webmaster: Avvocato Marcello Stanca, advokat u Italiji – Firenca. Reference su verificirane od strane Ministarstva pravde (Italija), Suda u Firenci i Evropskog parlamenta – Brisel. Facebook i Instagram nalozi verificirani od strane Mete. Google Maps Local Guide nivo 9.5.",
+                footerNote: `Ova baza podataka služi isključivo u informativne svrhe. Uvijek provjeri podatke kod nadležnih autoriteta. Verificirani Google Maps profil: <a href="http://maps.app.goo.gl/gs4rm6vXMxJUVVhM8?g_st=aw" target="_blank" rel="noopener">Avv. Marcello Stanca na Google Mapsu</a>. Prijavi greške webmasteru: <a href="mailto:lawyer@marcellostanca.it">lawyer@marcellostanca.it</a>`,
+                credentialsTitle: "Verificirani autor u Evropskom parlamentu i Ministarstvu pravde Italije",
+                credentialsBody: `Autor ove web stranice i povezanih stranica, Avvocato Marcello Stanca, provjerljiv je na stranici Advokatske komore pri Sudu u Firenci (<a href="https://www.ordineavvocatifirenze.eu/" target="_blank" rel="noopener noreferrer" style="color: #FFCC00; font-weight: 600; text-decoration: underline;">Ordine Avvocati Firenze</a>) i stručnjak je za međunarodne INFORMATIČKE ISTRAGE bez granica. <strong>Marcello STANCA je AMAZON autor</strong> knjige <strong>"RISCHIO TRADING"</strong>, AMAZON bestselera (<a href="https://www.amazon.it/Rischio-Trading-Attraverso-Strumenti-Recupero-ebook/dp/B0DQRB8VQY?language=en_GB#detailBullets_feature_div" target="_blank" rel="noopener noreferrer" style="color: #FFCC00; font-weight: 600; text-decoration: underline;">pogledaj stranicu knjige</a>). Prati autora na <a href="https://www.facebook.com/avv.stanca.marcello" target="_blank" rel="noopener noreferrer" style="color: #FFCC00; font-weight: 600; text-decoration: underline;">Facebooku</a> i na <a href="https://www.tiktok.com/@avvocato.stanca.marcello" target="_blank" rel="noopener noreferrer" style="color: #FFCC00; font-weight: 600; text-decoration: underline;">TikToku</a>. Pogledaj i PDF dokument Evropskog parlamenta: <a href="Referenze%20Istituzionali%20_%20Avv.%20Marcello%20Stanca%20-%20Parlamento%20Europeo%20&amp;%20AMEV%20Firenze.pdf" target="_blank" rel="noopener noreferrer" style="color: #FFCC00; font-weight: 600; text-decoration: underline;">Institucionalne reference Evropskog parlamenta</a>.`,
+                authority: "Nadležni autoritet",
+                protectionLevel: "Nivo zaštite",
+                notes: "Napomene",
+                euReferences: "Institucionalni resursi nadzora - Evropska unija, USA FBI - ScamShield",
+                euCommission: "Evropska komisija",
+                flagsTitle: "Brzi pristup po zemlji",
+                flagsGridTitle: "🌍 Izaberi svoju zemlju - baza 239 finansijskih autoriteta",
+                modalAuthority: "Finansijski autoritet",
+                modalAbbreviation: "Skraćenica",
+                modalHomepage: "Početna stranica",
+                modalFraudReport: "Prijava prevare",
+                modalEmail: "Email",
+                modalSocial: "Društvene mreže",
+                modalNotes: "Napomene",
+                privacyStatement: "🔒 PRIVATNOST: Ova aplikacija NE prikuplja lične podatke korisnika",
+                privacyLink: "Politika privatnosti",
+                alphabetBannerTitle: "Odmah pristupi autoritetima putem GRAFIČKOG alfabeta <span style='background: #ffffff; color: #000000; font-weight: 900; font-size: 1em; padding: 6px 12px; border-radius: 8px; font-family: monospace; margin-left: 8px;'>A-Z</span>!",
+                alphabetBannerTitleAriaLabel: "Odmah pristupi autoritetima putem grafičkog alfabeta A-Z",
+                alphabetBannerSubtitle: "Prelistaj alfabet i odaberi zastavu!&nbsp;&nbsp;&nbsp; <span class='keyword-pulse-red'>Najpotpunija baza podataka na svijetu!</span>",
+                instructionsButtonLabel: "Upute",
+                instructionsButtonAriaLabel: "Upute",
+                instructionsLabel: "Odaberi svoj JEZIK, pritisni dugme i pročitaj UPUTE.",
+                searchAdviceButton: "Zašto je ova pretraga važna?",
+                searchAdviceTitle: "🔍 Prije korištenja dugmeta &quot;Pretraži&quot;",
+                searchAdvice1: "Prihvati s poniznošću obavezu da tražiš verificirane informacije.",
+                searchAdvice2: "Moraš se zaštititi od obmana i finansijskih prevara.",
+                searchAdvice3: "Odvoji vrijeme prije nego izvršiš finansijske radnje koje traže nepoznate osobe.",
+                searchAdvice4: "Traži od svoje banke potvrdu legalnosti primatelja putem emaila.",
+                instructionsButtonModal: "Upute",
+                reportSuspectButton: "Prijavi sumnjivog",
+                reportAbuseButton: "Prijavi zloupotrebu",
+                askAuthorityBtnEN: "🇬🇧 Zatraži informacije od ovog autoriteta!",
+                askAuthorityBtnNative: "Zatraži informacije od ovog autoriteta!",
+                reportFormTitle: "⚠️ Prijavi sumnjivi subjekt",
+                reportFormSubtitle: "Zahtjev za provjeru upućen finansijskom autoritetu",
+                reportFormEmail: "📧 Tvoj email",
+                reportFormSuspectName: "🏢 Naziv sumnjivog subjekta",
+                reportFormSuspectNamePlaceholder: "Npr.: TradingPro Ltd, Amir Hadžić...",
+                reportFormUrl: "🌐 Sumnjiva web stranica / URL",
+                reportFormPhone: "📱 Sumnjivi WhatsApp / telefon",
+                reportFormAmount: "💰 Traženi/izgubljeni iznos (opcionalno)",
+                reportFormIban: "🏦 IBAN i primalac traženog transfera",
+                reportFormIbanPlaceholder: "Npr.: BA39 1290 0794 0102 8494 - primalac: Amir Hadžić d.o.o.",
+                reportFormIbanNote: "⚠️ Ključni podatak: bit će proslijeđen autoritetu i sačuvan u javnoj bazi Warning List.",
+                reportFormDescription: "📝 Kratak opis",
+                reportFormDescriptionPlaceholder: "Ukratko opiši kako su te kontaktirali i šta su ti ponudili...",
+                reportFormSubmit: "📤 Generiraj email zahtjev",
+                reportFormCancel: "❌ Otkaži",
+                reportFormDisclaimer: "ℹ️ Podaci će biti poslani na tvoj email kako bi mogao kontaktirati autoritet. Kopija će biti poslana administratoru radi dopune javne Warning List baze.",
+                instructionsContent: `
+<button type="button" class="instructions-popup-close" onclick="toggleInstructions()" aria-label="Zatvori vodič">×</button>
+<h2>🛡️ Praktični pravni vodič – provjera finansijskog društva u 5 koraka</h2>
+<p>Kao advokat praktičar i autor strategija opisanih u knjizi "Scacco Matto alle Truffe" te u peticijama EU 0888/2024 i 0645/2025, pripremio sam ovaj operativni vodič.</p>
+<p>Cilj je pretvoriti 239 linkova iz ove baze podataka u aktivni štit koji štiti tvoj kapital prije nego klikneš na "pošalji bankovni transfer".</p>
+<h3>1. Identifikacija subjekta (ko je zaista)</h3>
+<p>Prije svake radnje nemoj vjerovati samo nazivu koji vidiš na trgovačkoj platformi. Na sumnjivoj stranici pažljivo provjeri odjeljke "Kontakti" i "Uslovi korištenja" (Legal Notice):</p>
+<ul>
+    <li>Puni pravni naziv društva (npr. Brokerage LTD).</li>
+    <li>Deklarirano registrirano sjedište.</li>
+    <li>Broj licence (mnogi prevaranti navode lažne ili nepostojeće licence).</li>
+</ul>
+<h3>2. Pretraga baze podataka (metoda 239 linkova)</h3>
+<p>Otvori bazu finansijskih autoriteta i odaberi autoritet zemlje u kojoj društvo tvrdi da ima sjedište:</p>
+<ul>
+    <li>Ako tvrdi da ima sjedište u Italiji: idi na CONSOB → Registri i liste → ovlaštena investicijska društva.</li>
+    <li>Ako tvrdi da ima sjedište na Kipru: idi na CySEC.</li>
+    <li>Ako tvrdi da ima sjedište u Ujedinjenom Kraljevstvu: idi na FCA.</li>
+</ul>
+<p><strong>PAŽNJA:</strong> ako društvo nije pronađeno ili je označeno kao "Warning/Alert", odmah prekini svaku komunikaciju.</p>
+<h3>3. Zamka "klona" (provjera URL-a)</h3>
+<p>Mnogi prevaranti koriste naziv stvarnog ovlaštenog društva, ali drugu web stranicu.</p>
+<p>Provjeri da li web adresa (URL) registrirana u registru autoriteta (npr. www.verobroker.com) potpuno odgovara stranici koju posjećuješ.</p>
+<p>Dovoljno je jedno drugačije slovo (npr. www.vero-broker.com) da otkriješ prevarantski klon.</p>
+<h3>4. Provjera IBAN-a i primaoca</h3>
+<p>Prema tezi koju sam iznio u Evropskom parlamentu, bankovni transfer je tačka "bez povratka".</p>
+<p><strong>Zlatno pravilo:</strong> ako je primalac transfera fizička osoba ili društvo s imenom različitim od operatora platforme, pred sobom imaš posredovani subjekt.</p>
+<p>Ozbiljne finansijske institucije koriste bankovne račune otvorene na ime samog društva, a ne na ime "agenata" ili "tranzitnih računa" u trećim zemljama (npr. Litvanija ili Bugarska za brokere koji tvrde da su britanski).</p>
+<h3>5. Završna tehnološka provjera</h3>
+<p>Prije slanja novca koristi alate za reputaciju spomenute u mojoj knjizi:</p>
+<ul>
+    <li><strong>Who.is:</strong> provjeri koliko dugo domen postoji. Ako je mlađi od 6–12 mjeseci i registriran anonimno, gotovo sigurno je riječ o prevari.</li>
+    <li><strong>CheckDNS/CheckEmail:</strong> provjeri dolazi li email tvog "savjetnika" sa stvarnog korporativnog servera ili s besplatne/anonimne usluge.</li>
+</ul>
+<div class="instructions-popup-note">
+    <p><strong>⚖️ Pravna napomena za korisnika</strong></p>
+    <p>Ako tvoja banka nije provela Upitnik adekvatne provjere (kako je traženo u mojoj peticiji EU 0645/2025) i nije te upozorila da se primalac ne nalazi na listama odobrenih subjekata koje vodi 239 autoriteta, možeš imati osnov za formalnu žalbu pred ABF-om (talijanski bankarski i finansijski arbitražni organ) zbog izostanka dužne pažnje i povrede obaveza prudencijalnog nadzora.</p>
+    <p>Sjeti se Sokrata: istinski mudar je onaj koji zna da ne zna. Svjesno znanje i provjera jedini su antivirus koji prevaranti ne mogu hakirati.</p>
+</div>
+`
+            },
             sq: {
                 title: "Databazë ndërkombëtare bankare për verifikimin e identitetit financiar të përfituesve të transfertave bankare.",
                 subtitle: "Databaza Ndërkombëtare e Autoriteteve Financiare – 239 vende, 7 gjuhë OK dhe 14 gjuhë work in progress",
@@ -4444,7 +4580,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             ro: { api: 'ro', fallback: 'en', urlSupported: true },
             nl: { api: 'nl', fallback: 'en', urlSupported: true },
             el: { api: 'el', fallback: 'en', urlSupported: true },
-            bs: { api: 'bs', fallback: 'en', urlSupported: true },
+            bs: { api: 'bs', fallback: 'en', htmlLang: 'bs-BA', urlSupported: true },
             xk: { api: 'sq', fallback: 'sq', htmlLang: 'sq-XK', urlSupported: true },
             ar: { api: 'ar', urlSupported: true },
             zh: { api: 'zh-CN', urlSupported: true },
@@ -4907,7 +5043,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 ? window.location.pathname 
                 : `${window.location.pathname}?lang=${lang}`;
             window.history.replaceState({lang: lang}, '', newUrl);
-
             renderAll();
         }
 

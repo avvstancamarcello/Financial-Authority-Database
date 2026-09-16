@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bosnian locale regression test</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 2rem; background: #0f172a; color: #e2e8f0; }
+        .pass { color: #22c55e; }
+        .fail { color: #ef4444; }
+        code { background: rgba(255,255,255,0.08); padding: 0.15rem 0.35rem; border-radius: 4px; }
+    </style>
+</head>
+<body>
+    <h1>Bosnian locale regression test</h1>
+    <ul id="results"></ul>
+    <script>
+        const scenarios = [
+            {
+                lang: 'bs',
+                expectedHtmlLang: 'bs-BA',
+                expectedCanonical: 'https://tutelatruffe.it/?lang=bs',
+                requiredText: ['Bosanski', 'Međunarodna baza finansijskih autoriteta']
+            },
+            {
+                lang: 'ar',
+                expectedHtmlLang: 'ar',
+                expectedCanonical: 'https://tutelatruffe.it/?lang=ar',
+                requiredText: ['AR']
+            },
+            {
+                lang: 'xk',
+                expectedHtmlLang: 'sq-XK',
+                expectedCanonical: 'https://tutelatruffe.it/?lang=xk',
+                requiredText: ['XK', 'Shqip']
+            }
+        ];
+
+        const results = document.getElementById('results');
+
+        function addResult(ok, message) {
+            const li = document.createElement('li');
+            li.className = ok ? 'pass' : 'fail';
+            li.textContent = `${ok ? 'PASS' : 'FAIL'} - ${message}`;
+            results.appendChild(li);
+            if (!ok) {
+                document.body.dataset.testStatus = 'fail';
+            }
+        }
+
+        function waitForLocaleState(iframe, expectedHtmlLang, expectedCanonical, lang, attempts = 0) {
+            return new Promise((resolve, reject) => {
+                const check = () => {
+                    try {
+                        const doc = iframe.contentDocument;
+                        const html = doc?.documentElement;
+                        const canonical = doc?.getElementById('canonical-url')?.getAttribute('href');
+                        const activeButton = doc?.querySelector(`.lang-btn.active[data-lang="${lang}"]`);
+                        if (html?.lang === expectedHtmlLang && canonical === expectedCanonical && activeButton) {
+                            resolve();
+                            return;
+                        }
+                        if (attempts >= 30) {
+                            reject(new Error(`timed out waiting for ${lang} locale state`));
+                            return;
+                        }
+                        window.requestAnimationFrame(() => {
+                            waitForLocaleState(iframe, expectedHtmlLang, expectedCanonical, lang, attempts + 1).then(resolve).catch(reject);
+                        });
+                    } catch (error) {
+                        reject(error);
+                    }
+                };
+                check();
+            });
+        }
+
+        function loadScenario({ lang, expectedHtmlLang, expectedCanonical, requiredText }) {
+            return new Promise((resolve) => {
+                const iframe = document.createElement('iframe');
+                iframe.style.display = 'none';
+                iframe.src = 'index.html';
+                iframe.onload = () => {
+                    const win = iframe.contentWindow;
+                    if (typeof win.changeLanguage !== 'function') {
+                        addResult(false, `${lang}: changeLanguage is unavailable after load`);
+                        iframe.remove();
+                        resolve();
+                        return;
+                    }
+                    win.changeLanguage(lang);
+                    waitForLocaleState(iframe, expectedHtmlLang, expectedCanonical, lang).then(() => {
+                    try {
+                        const doc = iframe.contentDocument;
+                        const html = doc.documentElement;
+                        const canonical = doc.getElementById('canonical-url')?.getAttribute('href');
+                        const activeButton = doc.querySelector(`.lang-btn.active[data-lang="${lang}"]`);
+                        const asiaSection = doc.getElementById('languages-asia');
+                        const buttonText = doc.querySelector('.language-selector-eu .lang-btn[data-lang="bs"]')?.textContent || '';
+
+                        addResult(html?.lang === expectedHtmlLang, `${lang}: html lang is ${expectedHtmlLang}`);
+                        addResult(canonical === expectedCanonical, `${lang}: canonical is ${expectedCanonical}`);
+                        addResult(Boolean(activeButton), `${lang}: active language button is selected`);
+                        addResult(Boolean(asiaSection), `${lang}: ASIA anchor section remains present`);
+                        requiredText.forEach((text) => addResult(doc.body.textContent.includes(text), `${lang}: body contains ${text}`));
+                        if (lang === 'bs') {
+                            addResult(buttonText.includes('BS') && buttonText.includes('Bosanski'), 'bs: EU selector shows BS and Bosanski');
+                            addResult(doc.querySelector('link[hreflang="bs"]')?.href === 'https://tutelatruffe.it/?lang=bs', 'bs: hreflang bs points to Bosnian URL');
+                            addResult(doc.querySelector('link[hreflang="bs-BA"]')?.href === 'https://tutelatruffe.it/?lang=bs', 'bs: hreflang bs-BA points to Bosnian URL');
+                        }
+                    } catch (error) {
+                        addResult(false, `${lang}: ${error.message}`);
+                    } finally {
+                        iframe.remove();
+                        resolve();
+                    }
+                    }).catch((error) => {
+                        addResult(false, `${lang}: ${error.message}`);
+                        iframe.remove();
+                        resolve();
+                    });
+                };
+                document.body.appendChild(iframe);
+            });
+        }
+
+        (async () => {
+            document.body.dataset.testStatus = 'pass';
+            for (const scenario of scenarios) {
+                await loadScenario(scenario);
+            }
+        })();
+    </script>
+</body>
+</html>
