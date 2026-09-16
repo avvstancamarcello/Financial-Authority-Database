@@ -5047,8 +5047,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             }
             window.history.replaceState({lang: lang}, '', `${nextUrl.pathname}${nextUrl.search}${nextUrl.hash}`);
 
-            renderAll();
             runLocaleRegressionChecks(lang);
+            renderAll();
         }
 
         function runLocaleRegressionChecks(lang) {
