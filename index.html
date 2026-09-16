@@ -1500,13 +1500,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                         </button>
                         </li>
                         <li class="language-selector-item">
-                        <button class="lang-btn" data-lang="sq" onclick="changeLanguage('sq')" aria-label="Shqip (Albania)">
+                        <button class="lang-btn" data-lang="sq" data-variant="al" onclick="changeLanguage('sq')" aria-label="Shqip (Albania)">
                             <span class="fi fi-al lang-flag" aria-hidden="true"></span>
                             <span>AL</span>
                         </button>
                         </li>
                         <li class="language-selector-item">
-                        <button class="lang-btn" data-lang="xk" onclick="changeLanguage('sq', 'xk')" aria-label="Shqip (Kosovë)">
+                        <button class="lang-btn" data-lang="sq" data-variant="xk" onclick="changeLanguage('sq', 'xk')" aria-label="Shqip (Kosovë)">
                             <span class="fi fi-xk lang-flag" aria-hidden="true"></span>
                             <span>XK</span>
                         </button>
@@ -1531,7 +1531,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                         </li>
                     </ul>
                 </section>
-                <section class="language-selector-group language-selector-asia" id="languages-asia" aria-labelledby="language-selector-asia-title">
+                <section class="language-selector-group language-selector-asia" id="languages-asia" aria-labelledby="language-selector-asia-title" tabindex="-1">
                     <h2 class="language-selector-title" id="language-selector-asia-title" data-i18n-text="languageSelectorAsiaTitle">⏳ Lingue in Corso di Traduzione</h2>
                     <p class="language-selector-note" data-i18n-text="languageSelectorAsiaNote">Sezione ASIA - traduzioni disponibili, branding in progress</p>
                     <ul class="language-selector-grid" role="list">
@@ -4874,7 +4874,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         function changeLanguage(lang, selectedLang = lang) {
             currentLanguage = lang;
             document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
-            const activeBtn = Array.from(document.querySelectorAll('.lang-btn')).find(btn => btn.dataset.lang === selectedLang || btn.textContent.includes(selectedLang.toUpperCase()));
+            const activeBtn = Array.from(document.querySelectorAll('.lang-btn')).find(btn =>
+                btn.dataset.variant === selectedLang ||
+                btn.dataset.lang === selectedLang ||
+                btn.textContent.includes(selectedLang.toUpperCase())
+            );
             if(activeBtn) activeBtn.classList.add('active');
 
             const htmlEl = document.documentElement;
