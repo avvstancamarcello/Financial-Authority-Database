@@ -5045,7 +5045,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             window.history.replaceState({lang: lang}, '', newUrl);
 
             renderAll();
-            runLocaleRegressionChecks(lang);
+            scheduleLocaleRegressionChecks(lang);
         }
 
         function runLocaleRegressionChecks(lang) {
@@ -5069,6 +5069,15 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             if (!activeBtn) {
                 throw new Error(`Locale self-test failed for ${lang}: active language button not found`);
             }
+        }
+
+        function scheduleLocaleRegressionChecks(lang) {
+            const params = new URLSearchParams(window.location.search || '');
+            if (params.get('selftest') !== 'locale') return;
+
+            window.requestAnimationFrame(() => {
+                window.requestAnimationFrame(() => runLocaleRegressionChecks(lang));
+            });
         }
 
         function renderCountries() {
