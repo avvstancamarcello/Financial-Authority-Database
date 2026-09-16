@@ -77,6 +77,7 @@
     <link rel="alternate" hreflang="hu" href="https://tutelatruffe.it/?lang=hu">
     <link rel="alternate" hreflang="cs" href="https://tutelatruffe.it/?lang=cs">
     <link rel="alternate" hreflang="el" href="https://tutelatruffe.it/?lang=el">
+    <link rel="alternate" hreflang="el-GR" href="https://tutelatruffe.it/?lang=el">
     <link rel="alternate" hreflang="sv" href="https://tutelatruffe.it/?lang=sv">
     <link rel="alternate" hreflang="bg" href="https://tutelatruffe.it/?lang=bg">
     <link rel="alternate" hreflang="da" href="https://tutelatruffe.it/?lang=da">
@@ -111,6 +112,7 @@
     <meta property="og:locale:alternate" content="es_ES">
     <meta property="og:locale:alternate" content="sq_AL">
     <meta property="og:locale:alternate" content="bs_BA">
+    <meta property="og:locale:alternate" content="el_GR">
     <meta property="og:locale:alternate" content="ar_QA">
     <meta property="og:locale:alternate" content="zh_CN">
     <meta property="og:locale:alternate" content="hi_IN">
@@ -182,7 +184,7 @@
             "name": "Avvocato Marcello Stanca"
         },
         "copyrightYear": "2026",
-        "inLanguage": ["it", "en", "fr", "de", "es", "pt", "sq", "bs", "ar", "zh", "hi", "vi"],
+        "inLanguage": ["it", "en", "fr", "de", "es", "pt", "sq", "sq-XK", "bs", "el", "ar", "zh", "hi", "vi"],
         "keywords": "autorità finanziarie, banche centrali, protezione consumatori, frodi bancarie, verifica licenze, CONSOB, SEC, FCA, BaFin",
         "aggregateRating": {
             "@type": "AggregateRating",
@@ -1524,7 +1526,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                         </button>
                         </li>
                         <li class="language-selector-item">
-                        <button class="lang-btn" data-lang="el" onclick="changeLanguage('el')" aria-label="Ελληνικά">
+                        <button class="lang-btn" data-lang="el" onclick="changeLanguage('el')" aria-label="Ελληνικά (Ελλάδα)">
                             <span class="fi fi-gr lang-flag" aria-hidden="true"></span>
                             <span>EL</span>
                         </button>
@@ -4569,6 +4571,21 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             }
             // Add other languages if needed
         };
+        // Greek EL regional variant for PR #3.4:
+        // AMEA is the requirement-defined locale-specific acronym for Greek support.
+        // Other locales keep AMEV naming; only EL intentionally uses AMEA.
+        // Defined as a post-assignment alias to keep all 240+ keys covered with minimal additive changes:
+        // EN remains the base fallback while Greek-specific strings are progressively localized.
+        translations.el = {
+            title: "Διεθνής Βάση Τραπεζικών Δεδομένων",
+            subtitle: "Βάση Δεδομένων Διεθνών Χρηματοοικονομικών Αρχών – 239 χώρες",
+            securityTitle: "✅ ΕΠΙΣΗΜΟΣ ΝΟΜΙΜΟΣ ΙΣΤΟΤΟΠΟΣ - ΒΑΣΗ ΠΡΟΣΤΑΣΙΑΣ ΚΑΤΑΝΑΛΩΤΗ",
+            languageSelectorEuTitle: "AMEA – Επαληθευμένες Αρχές Οικονομικής Αγοράς (Ελληνικά)",
+            languageSelectorEuNote: "Ευρωπαϊκός πυρήνας + EN για ανακατεύθυνση τομέα AWEV",
+            instructionsButtonModal: "Οδηγίες",
+            askAuthorityBtnNative: "Ζητήστε πληροφορίες από αυτή την Αρχή!"
+        };
+        translations['el-GR'] = translations.el;
         const localeMetadata = {
             it: { api: 'it', urlSupported: true },
             en: { api: 'en', urlSupported: true },
@@ -4580,6 +4597,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             ro: { api: 'ro', fallback: 'en', urlSupported: true },
             nl: { api: 'nl', fallback: 'en', urlSupported: true },
             el: { api: 'el', fallback: 'en', urlSupported: true },
+            'el-GR': { api: 'el', fallback: 'el', htmlLang: 'el-GR', urlSupported: false },
             bs: { api: 'bs', fallback: 'en', htmlLang: 'bs-BA', urlSupported: true },
             xk: { api: 'sq', fallback: 'sq', htmlLang: 'sq-XK', urlSupported: true },
             ar: { api: 'ar', urlSupported: true },
@@ -4598,13 +4616,20 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         };
 
         function getLanguageBundle(lang = currentLanguage) {
-            let resolvedLang = lang;
             const visited = new Set();
-            while (resolvedLang && !translations[resolvedLang] && !visited.has(resolvedLang)) {
+            const chain = [];
+            let resolvedLang = lang;
+            while (resolvedLang && !visited.has(resolvedLang)) {
+                chain.push(resolvedLang);
                 visited.add(resolvedLang);
                 resolvedLang = localeMetadata[resolvedLang]?.fallback;
             }
-            return translations[lang] || translations[resolvedLang] || translations.en || {};
+            if (!chain.includes('en')) chain.push('en');
+            const mergedBundle = {};
+            for (let i = chain.length - 1; i >= 0; i -= 1) {
+                Object.assign(mergedBundle, translations[chain[i]] || {});
+            }
+            return mergedBundle;
         }
 
         // Determina la lingua iniziale dalla query string (?lang=xx), con fallback a IT
