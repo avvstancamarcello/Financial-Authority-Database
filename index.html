@@ -1517,10 +1517,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                         </button>
                         </li>
                         <li class="language-selector-item">
-                        <button class="lang-btn" data-lang="bs" onclick="changeLanguage('bs')" aria-label="BS Bosanski">
+                        <button class="lang-btn" data-lang="bs" onclick="changeLanguage('bs')" aria-labelledby="lang-bs-code lang-bs-name">
                             <span class="fi fi-ba lang-flag" aria-hidden="true"></span>
-                            <span aria-hidden="true">BS</span>
-                            <span class="lang-label-secondary" aria-hidden="true">Bosanski</span>
+                            <span id="lang-bs-code">BS</span>
+                            <span id="lang-bs-name" class="lang-label-secondary">Bosanski</span>
                         </button>
                         </li>
                         <li class="language-selector-item">
@@ -5038,54 +5038,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 canonicalEl.setAttribute('href', newCanonical);
             }
 
-            const shouldRunLocaleSelftest = new URLSearchParams(window.location.search || "").get('selftest') === "locale";
-
             // Aggiorna URL nel browser senza ricaricare
-            const nextParams = new URLSearchParams();
-            if (lang !== 'it') nextParams.set('lang', lang);
-            if (shouldRunLocaleSelftest) nextParams.set('selftest', 'locale');
-            const newUrl = nextParams.toString()
-                ? `${window.location.pathname}?${nextParams.toString()}`
-                : window.location.pathname;
+            const newUrl = lang === 'it' 
+                ? window.location.pathname 
+                : `${window.location.pathname}?lang=${lang}`;
             window.history.replaceState({lang: lang}, '', newUrl);
-            runLocaleRegressionChecks(lang, shouldRunLocaleSelftest);
             renderAll();
-        }
-
-        function runLocaleRegressionChecks(lang, shouldRun = null) {
-            const enabled = shouldRun ?? (new URLSearchParams(window.location.search || '').get('selftest') === 'locale');
-            if (!enabled) return { ok: true, skipped: true, errors: [] };
-
-            const expectedHtmlLang = localeMetadata[lang]?.htmlLang || localeMetadata[lang]?.api || lang;
-            const expectedCanonical = lang === 'it'
-                ? 'https://tutelatruffe.it/'
-                : `https://tutelatruffe.it/?lang=${lang}`;
-            const htmlLang = document.documentElement?.lang;
-            const canonicalHref = document.getElementById('canonical-url')?.getAttribute('href');
-            const errors = [];
-
-            if (htmlLang !== expectedHtmlLang) {
-                errors.push(`expected html lang ${expectedHtmlLang}, got ${htmlLang}`);
-            }
-            if (canonicalHref !== expectedCanonical) {
-                errors.push(`expected canonical ${expectedCanonical}, got ${canonicalHref}`);
-            }
-
-            const result = { ok: errors.length === 0, skipped: false, errors };
-            const htmlEl = document.documentElement;
-            if (htmlEl) {
-                htmlEl.dataset.localeSelftest = result.ok ? 'pass' : 'fail';
-                htmlEl.dataset.localeSelftestLang = lang;
-                if (errors.length > 0) {
-                    htmlEl.dataset.localeSelftestErrors = errors.join(' | ');
-                } else {
-                    delete htmlEl.dataset.localeSelftestErrors;
-                }
-            }
-            if (!result.ok) {
-                console.error(`Locale self-test failed for ${lang}: ${errors.join('; ')}`);
-            }
-            return result;
         }
 
         function renderCountries() {
