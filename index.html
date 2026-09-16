@@ -4431,16 +4431,36 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             }
             // Add other languages if needed
         };
-        const localeFallbacks = {
-            ro: 'en',
-            nl: 'en',
-            el: 'en',
-            bs: 'en',
-            xk: 'sq'
+        const localeMetadata = {
+            it: { api: 'it', urlSupported: true },
+            en: { api: 'en', urlSupported: true },
+            fr: { api: 'fr', urlSupported: true },
+            de: { api: 'de', urlSupported: true },
+            es: { api: 'es', urlSupported: true },
+            pt: { api: 'pt', urlSupported: true },
+            sq: { api: 'sq', urlSupported: true },
+            ro: { api: 'ro', fallback: 'en', urlSupported: true },
+            nl: { api: 'nl', fallback: 'en', urlSupported: true },
+            el: { api: 'el', fallback: 'en', urlSupported: true },
+            bs: { api: 'bs', fallback: 'en', urlSupported: true },
+            xk: { api: 'sq', fallback: 'sq', urlSupported: false },
+            ar: { api: 'ar', urlSupported: true },
+            zh: { api: 'zh-CN', urlSupported: true },
+            hi: { api: 'hi', urlSupported: true },
+            vi: { api: 'vi', urlSupported: true },
+            ja: { api: 'ja', urlSupported: false },
+            ko: { api: 'ko', urlSupported: false },
+            ru: { api: 'ru', urlSupported: false },
+            pl: { api: 'pl', urlSupported: false },
+            tr: { api: 'tr', urlSupported: false },
+            th: { api: 'th', urlSupported: false },
+            id: { api: 'id', urlSupported: false },
+            ms: { api: 'ms', urlSupported: false },
+            uk: { api: 'uk', urlSupported: false }
         };
 
         function getLanguageBundle(lang = currentLanguage) {
-            const resolvedLang = localeFallbacks[lang] || lang;
+            const resolvedLang = localeMetadata[lang]?.fallback || lang;
             return translations[lang] || translations[resolvedLang] || translations.en || {};
         }
 
@@ -4449,7 +4469,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             try {
                 const params = new URLSearchParams(window.location.search || '');
                 const langParam = (params.get('lang') || '').toLowerCase();
-                const supported = ['it','en','fr','de','es','pt','sq','nl','ro','el','bs','ar','zh','hi','vi'];
+                const supported = Object.entries(localeMetadata)
+                    .filter(([, meta]) => meta.urlSupported)
+                    .map(([code]) => code);
                 if (supported.includes(langParam)) return langParam;
             } catch (e) {
                 console.warn('Impossibile leggere parametro lang dalla URL', e);
@@ -4474,21 +4496,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             }
         })();
 
-        // Mappa codici lingua per API traduzione
-        const langCodeMap = {
-            'it': 'it', 'en': 'en', 'fr': 'fr', 'de': 'de', 'es': 'es',
-            'pt': 'pt', 'sq': 'sq', 'ro': 'ro', 'el': 'el', 'bs': 'bs', 'xk': 'sq',
-            'zh': 'zh-CN', 'hi': 'hi', 'ar': 'ar', 'vi': 'vi',
-            'ja': 'ja', 'ko': 'ko', 'ru': 'ru', 'pl': 'pl', 'nl': 'nl',
-            'tr': 'tr', 'th': 'th', 'id': 'id', 'ms': 'ms', 'uk': 'uk'
-        };
-
         // Funzione traduzione on-demand usando MyMemory API (gratuita)
         async function translateText(text, targetLang) {
             if (!text || text.trim() === '') return text;
             
             const sourceLang = 'it'; // Le note sono in italiano
-            const target = langCodeMap[targetLang] || targetLang;
+            const target = localeMetadata[targetLang]?.api || targetLang;
             
             // Se la lingua target è italiano, ritorna il testo originale
             if (target === 'it') return text;
