@@ -4573,7 +4573,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         };
         // Greek EL regional variant:
         // uses AMEA acronym (Αρχή Μεταφορών Επαληθευμένων Αγορών), not standard AMEV.
-        // Keep full key coverage by inheriting EN while progressively localizing Greek strings.
+        // Defined as a post-assignment alias to keep all 240+ keys covered with minimal additive changes:
+        // EN remains the base fallback while Greek-specific strings are progressively localized.
         translations.el = {
             ...translations.en,
             title: "Διεθνής Βάση Τραπεζικών Δεδομένων",
