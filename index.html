@@ -488,6 +488,7 @@
         .language-selector-item .lang-btn,
         .language-selector-item .lang-btn-placeholder { width: 100%; }
         .lang-btn { background: rgba(255,255,255,0.3); border: 2px solid transparent; color: white; padding: 10px 16px; border-radius: 20px; cursor: pointer; font-weight: 700; font-size: 16px; transition: all 0.3s ease; display: flex; align-items: center; gap: 8px; min-width: 70px; justify-content: center; }
+        .lang-label-secondary { font-size: 0.72em; }
         .lang-btn:hover { background: rgba(255,255,255,0.5); transform: translateY(-2px); }
         .lang-btn.active { background: white; color: #667eea; border-color: white; }
         .lang-btn:focus-visible { outline: 2px solid #ffffff; outline-offset: 2px; }
@@ -1506,9 +1507,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                         </button>
                         </li>
                         <li class="language-selector-item">
-                        <button class="lang-btn" data-lang="sq" data-variant="xk" onclick="changeLanguage('sq', 'xk')" aria-label="Shqip (Kosovë)">
+                        <button class="lang-btn" data-lang="xk" onclick="changeLanguage('xk')" aria-label="Shqip (Kosovë)">
                             <span class="fi fi-xk lang-flag" aria-hidden="true"></span>
-                            <span>XK</span>
+                            <span aria-hidden="true">XK</span>
+                            <span class="lang-label-secondary">Shqip</span>
                         </button>
                         </li>
                         <li class="language-selector-item">
@@ -4443,7 +4445,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             nl: { api: 'nl', fallback: 'en', urlSupported: true },
             el: { api: 'el', fallback: 'en', urlSupported: true },
             bs: { api: 'bs', fallback: 'en', urlSupported: true },
-            xk: { api: 'sq', fallback: 'sq', urlSupported: false },
+            xk: { api: 'sq', fallback: 'sq', htmlLang: 'sq-XK', urlSupported: true },
             ar: { api: 'ar', urlSupported: true },
             zh: { api: 'zh-CN', urlSupported: true },
             hi: { api: 'hi', urlSupported: true },
@@ -4612,8 +4614,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         };
 
         function getTranslatedNotes(countryName, notes) {
-            if (countryNotesTranslations[countryName] && countryNotesTranslations[countryName][currentLanguage]) {
-                return countryNotesTranslations[countryName][currentLanguage];
+            const notesTranslations = countryNotesTranslations[countryName];
+            const notesLanguage = notesTranslations && notesTranslations[currentLanguage]
+                ? currentLanguage
+                : localeMetadata[currentLanguage]?.fallback || currentLanguage;
+            if (notesTranslations && notesTranslations[notesLanguage]) {
+                return notesTranslations[notesLanguage];
             }
             return notes; // Ritorna il testo originale se non c'è traduzione
         }
@@ -4883,7 +4889,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
             const htmlEl = document.documentElement;
             if (htmlEl) {
-                htmlEl.lang = lang;
+                htmlEl.lang = localeMetadata[lang]?.htmlLang || localeMetadata[lang]?.api || lang;
                 htmlEl.dir = (lang === 'ar' ? 'rtl' : 'ltr');
             }
 
@@ -5107,7 +5113,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 if (currentLanguage === 'de') return 'Standardschutz';
                 if (currentLanguage === 'es') return 'Protección estándar';
                 if (currentLanguage === 'pt') return 'Proteção padrão';
-                if (currentLanguage === 'sq') return 'Mbrojtje standarde';
+                if (currentLanguage === 'sq' || currentLanguage === 'xk') return 'Mbrojtje standarde';
                 if (currentLanguage === 'zh') return '标准保护等级';
                 if (currentLanguage === 'hi') return 'मानक सुरक्षा';
                 if (currentLanguage === 'vi') return 'Bảo vệ tiêu chuẩn';
@@ -5160,7 +5166,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             // Testo pulsante traduci in base alla lingua
             const translateBtnText = {
                 'it': '🌐 Traduci', 'en': '🌐 Translate', 'fr': '🌐 Traduire', 'de': '🌐 Übersetzen',
-                'es': '🌐 Traducir', 'pt': '🌐 Traduzir', 'sq': '🌐 Përkthe', 'zh': '🌐 翻译', 'hi': '🌐 अनुवाद करें',
+                'es': '🌐 Traducir', 'pt': '🌐 Traduzir', 'sq': '🌐 Përkthe', 'xk': '🌐 Përkthe', 'zh': '🌐 翻译', 'hi': '🌐 अनुवाद करें',
                 'ar': '🌐 ترجم', 'vi': '🌐 Dịch', 'ja': '🌐 翻訳', 'ko': '🌐 번역'
             };
             const escapeHtmlAttribute = (value) => String(value ?? '')
