@@ -4366,6 +4366,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             }
             // Add other languages if needed
         };
+        translations.ro = translations.en;
+        translations.nl = translations.en;
+        translations.el = translations.en;
+        translations.bs = translations.en;
+        translations.xk = translations.sq;
 
         // Determina la lingua iniziale dalla query string (?lang=xx), con fallback a IT
         function getInitialLanguageFromUrl() {
@@ -5084,7 +5089,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 <div class="country-info" style="margin-top: 20px;">
                     <p><strong>${currentTranslations.modalAuthority || 'Authority'}:</strong> ${country.financial_authority.name}</p>
                     <p><strong>${currentTranslations.modalAbbreviation || 'Abbreviation'}:</strong> ${country.financial_authority.abbreviation}</p>
-                    <p><strong>${currentTranslations.protectionLevel || 'Protection'}:</strong> ${country.protectionLevel}${country.sanctioned ? ' <span class="sanctioned-badge">⚠️ ONU SANCTIONS</span>' : ''}</p>
+                    <p><strong>${currentTranslations.protectionLevel || 'Protection'}:</strong> ${getLocalizedProtectionLevel(country.protectionLevel)}${country.sanctioned ? ' <span class="sanctioned-badge">⚠️ ONU SANCTIONS</span>' : ''}</p>
                     <div class="authority-link" style="margin: 15px 0;">
                         <strong>${currentTranslations.modalHomepage || 'Homepage'}:</strong><br>
                         <a href="${country.financial_authority.homepage}" target="_blank">${country.financial_authority.homepage || 'N/A'}</a>
