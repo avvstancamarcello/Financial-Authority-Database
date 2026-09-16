@@ -77,6 +77,7 @@
     <link rel="alternate" hreflang="hu" href="https://tutelatruffe.it/?lang=hu">
     <link rel="alternate" hreflang="cs" href="https://tutelatruffe.it/?lang=cs">
     <link rel="alternate" hreflang="el" href="https://tutelatruffe.it/?lang=el">
+    <link rel="alternate" hreflang="el-GR" href="https://tutelatruffe.it/?lang=el">
     <link rel="alternate" hreflang="sv" href="https://tutelatruffe.it/?lang=sv">
     <link rel="alternate" hreflang="bg" href="https://tutelatruffe.it/?lang=bg">
     <link rel="alternate" hreflang="da" href="https://tutelatruffe.it/?lang=da">
@@ -111,6 +112,7 @@
     <meta property="og:locale:alternate" content="es_ES">
     <meta property="og:locale:alternate" content="sq_AL">
     <meta property="og:locale:alternate" content="bs_BA">
+    <meta property="og:locale:alternate" content="el_GR">
     <meta property="og:locale:alternate" content="ar_QA">
     <meta property="og:locale:alternate" content="zh_CN">
     <meta property="og:locale:alternate" content="hi_IN">
@@ -182,7 +184,14 @@
             "name": "Avvocato Marcello Stanca"
         },
         "copyrightYear": "2026",
-        "inLanguage": ["it", "en", "fr", "de", "es", "pt", "sq", "bs", "ar", "zh", "hi", "vi"],
+        "inLanguage": ["it", "en", "fr", "de", "es", "pt", "sq", "xk", "bs", "el", "el-GR", "ar", "zh", "hi", "vi"],
+        "additionalProperty": [
+            {
+                "@type": "PropertyValue",
+                "name": "EL acronym variant",
+                "value": "Greek locale (el) uses AMEA regional acronym: Arχή Metaforών Epalithevμένων Agorών"
+            }
+        ],
         "keywords": "autorità finanziarie, banche centrali, protezione consumatori, frodi bancarie, verifica licenze, CONSOB, SEC, FCA, BaFin",
         "aggregateRating": {
             "@type": "AggregateRating",
@@ -1524,7 +1533,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                         </button>
                         </li>
                         <li class="language-selector-item">
-                        <button class="lang-btn" data-lang="el" onclick="changeLanguage('el')" aria-label="Ελληνικά">
+                        <button class="lang-btn" data-lang="el" onclick="changeLanguage('el')" aria-label="Ελληνικά (Ελλάδα)">
                             <span class="fi fi-gr lang-flag" aria-hidden="true"></span>
                             <span>EL</span>
                         </button>
@@ -4569,6 +4578,19 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             }
             // Add other languages if needed
         };
+        // Greek EL regional variant:
+        // uses AMEA acronym (Arχή Metaforών Epalithevμένων Agorών), not standard AMEV.
+        // Keep full key coverage by inheriting EN while progressively localizing Greek strings.
+        translations.el = {
+            ...translations.en,
+            title: "Διεθνής Βάση Τραπεζικών Δεδομένων",
+            subtitle: "Βάση Δεδομένων Διεθνών Χρηματοοικονομικών Αρχών – 239 χώρες, 8 γλώσσες πλήρεις και 14 σε εξέλιξη",
+            securityTitle: "✅ ΕΠΙΣΗΜΟΣ ΝΟΜΙΜΟΣ ΙΣΤΟΤΟΠΟΣ - ΒΑΣΗ ΠΡΟΣΤΑΣΙΑΣ ΚΑΤΑΝΑΛΩΤΗ",
+            languageSelectorEuTitle: "AMEA – Αρχή Μεταφορών Επαληθευμένων Αγορών (περιφερειακή παραλλαγή EL)",
+            languageSelectorEuNote: "Ευρωπαϊκός πυρήνας + EN για ανακατεύθυνση τομέα AWEV",
+            instructionsButtonModal: "Οδηγίες",
+            askAuthorityBtnNative: "Ζητήστε πληροφορίες από αυτή την Αρχή!"
+        };
         const localeMetadata = {
             it: { api: 'it', urlSupported: true },
             en: { api: 'en', urlSupported: true },
@@ -4579,7 +4601,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             sq: { api: 'sq', urlSupported: true },
             ro: { api: 'ro', fallback: 'en', urlSupported: true },
             nl: { api: 'nl', fallback: 'en', urlSupported: true },
-            el: { api: 'el', fallback: 'en', urlSupported: true },
+            el: { api: 'el', fallback: 'en', htmlLang: 'el-GR', urlSupported: true },
             bs: { api: 'bs', fallback: 'en', htmlLang: 'bs-BA', urlSupported: true },
             xk: { api: 'sq', fallback: 'sq', htmlLang: 'sq-XK', urlSupported: true },
             ar: { api: 'ar', urlSupported: true },
