@@ -5049,9 +5049,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             renderAll();
         }
 
-        function runLocaleRegressionChecks(lang) {
-            const params = new URLSearchParams(window.location.search || '');
-            if (params.get('selftest') !== 'locale') return { ok: true, skipped: true, errors: [] };
+        function runLocaleRegressionChecks(lang, shouldRun = null) {
+            const enabled = shouldRun ?? (new URLSearchParams(window.location.search || '').get('selftest') === 'locale');
+            if (!enabled) return { ok: true, skipped: true, errors: [] };
 
             const expectedHtmlLang = localeMetadata[lang]?.htmlLang || localeMetadata[lang]?.api || lang;
             const expectedCanonical = lang === 'it'
