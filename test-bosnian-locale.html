@@ -82,9 +82,13 @@
                 iframe.src = 'index.html';
                 iframe.onload = () => {
                     const win = iframe.contentWindow;
-                    if (typeof win.changeLanguage === 'function') {
-                        win.changeLanguage(lang);
+                    if (typeof win.changeLanguage !== 'function') {
+                        addResult(false, `${lang}: changeLanguage is unavailable after load`);
+                        iframe.remove();
+                        resolve();
+                        return;
                     }
+                    win.changeLanguage(lang);
                     waitForLocaleState(iframe, expectedHtmlLang, expectedCanonical, lang).then(() => {
                     try {
                         const doc = iframe.contentDocument;
