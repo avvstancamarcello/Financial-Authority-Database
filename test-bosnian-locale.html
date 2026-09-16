@@ -48,6 +48,33 @@
             }
         }
 
+        function waitForLocaleState(iframe, expectedHtmlLang, expectedCanonical, lang, attempts = 0) {
+            return new Promise((resolve, reject) => {
+                const check = () => {
+                    try {
+                        const doc = iframe.contentDocument;
+                        const html = doc?.documentElement;
+                        const canonical = doc?.getElementById('canonical-url')?.getAttribute('href');
+                        const activeButton = doc?.querySelector(`.lang-btn.active[data-lang="${lang}"]`);
+                        if (html?.lang === expectedHtmlLang && canonical === expectedCanonical && activeButton) {
+                            resolve();
+                            return;
+                        }
+                        if (attempts >= 30) {
+                            reject(new Error(`timed out waiting for ${lang} locale state`));
+                            return;
+                        }
+                        window.requestAnimationFrame(() => {
+                            waitForLocaleState(iframe, expectedHtmlLang, expectedCanonical, lang, attempts + 1).then(resolve).catch(reject);
+                        });
+                    } catch (error) {
+                        reject(error);
+                    }
+                };
+                check();
+            });
+        }
+
         function loadScenario({ lang, expectedHtmlLang, expectedCanonical, requiredText }) {
             return new Promise((resolve) => {
                 const iframe = document.createElement('iframe');
@@ -58,7 +85,7 @@
                     if (typeof win.changeLanguage === 'function') {
                         win.changeLanguage(lang);
                     }
-                    window.setTimeout(() => {
+                    waitForLocaleState(iframe, expectedHtmlLang, expectedCanonical, lang).then(() => {
                     try {
                         const doc = iframe.contentDocument;
                         const html = doc.documentElement;
@@ -83,7 +110,11 @@
                         iframe.remove();
                         resolve();
                     }
-                    }, 50);
+                    }).catch((error) => {
+                        addResult(false, `${lang}: ${error.message}`);
+                        iframe.remove();
+                        resolve();
+                    });
                 };
                 document.body.appendChild(iframe);
             });
