@@ -4443,7 +4443,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             nl: { api: 'nl', fallback: 'en', urlSupported: true },
             el: { api: 'el', fallback: 'en', urlSupported: true },
             bs: { api: 'bs', fallback: 'en', urlSupported: true },
-            xk: { api: 'sq', fallback: 'sq', urlSupported: true },
+            xk: { api: 'sq', fallback: 'sq', htmlLang: 'sq-XK', urlSupported: true },
             ar: { api: 'ar', urlSupported: true },
             zh: { api: 'zh-CN', urlSupported: true },
             hi: { api: 'hi', urlSupported: true },
@@ -4886,7 +4886,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
             const htmlEl = document.documentElement;
             if (htmlEl) {
-                htmlEl.lang = localeMetadata[lang]?.api || lang;
+                htmlEl.lang = localeMetadata[lang]?.htmlLang || localeMetadata[lang]?.api || lang;
                 htmlEl.dir = (lang === 'ar' ? 'rtl' : 'ltr');
             }
 
