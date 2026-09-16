@@ -5047,8 +5047,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             const newUrl = nextParams.toString()
                 ? `${window.location.pathname}?${nextParams.toString()}`
                 : window.location.pathname;
-            runLocaleRegressionChecks(lang, shouldRunLocaleSelftest);
             window.history.replaceState({lang: lang}, '', newUrl);
+            runLocaleRegressionChecks(lang, shouldRunLocaleSelftest);
             renderAll();
         }
 
