@@ -5038,16 +5038,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 canonicalEl.setAttribute('href', newCanonical);
             }
 
-            // Aggiorna URL nel browser senza ricaricare, preservando eventuali query di supporto
-            const nextUrl = new URL(window.location.href);
-            if (lang === 'it') {
-                nextUrl.searchParams.delete('lang');
-            } else {
-                nextUrl.searchParams.set('lang', lang);
-            }
-            window.history.replaceState({lang: lang}, '', `${nextUrl.pathname}${nextUrl.search}${nextUrl.hash}`);
+            const shouldRunLocaleSelftest = new URLSearchParams(window.location.search || "").get('selftest') === "locale";
 
-            runLocaleRegressionChecks(lang);
+            // Aggiorna URL nel browser senza ricaricare
+            const newUrl = lang === 'it' 
+                ? window.location.pathname 
+                : `${window.location.pathname}?lang=${lang}`;
+            runLocaleRegressionChecks(lang, shouldRunLocaleSelftest);
+            window.history.replaceState({lang: lang}, '', newUrl);
             renderAll();
         }
 
