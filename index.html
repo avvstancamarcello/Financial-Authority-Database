@@ -484,7 +484,9 @@
         .language-selector-title { color: #ffffff; font-size: 1rem; font-weight: 700; text-align: center; margin: 0 0 0.35rem; }
         .language-selector-note { color: rgba(255,255,255,0.88); font-size: 0.82rem; text-align: center; margin: 0 0 0.9rem; }
         .language-selector-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(88px, 1fr)); gap: 8px; list-style: none; margin: 0; padding: 0; }
-        .language-selector-item { display: contents; }
+        .language-selector-item { list-style: none; }
+        .language-selector-item .lang-btn,
+        .language-selector-item .lang-btn-placeholder { width: 100%; }
         .lang-btn { background: rgba(255,255,255,0.3); border: 2px solid transparent; color: white; padding: 10px 16px; border-radius: 20px; cursor: pointer; font-weight: 700; font-size: 16px; transition: all 0.3s ease; display: flex; align-items: center; gap: 8px; min-width: 70px; justify-content: center; }
         .lang-btn:hover { background: rgba(255,255,255,0.5); transform: translateY(-2px); }
         .lang-btn.active { background: white; color: #667eea; border-color: white; }
@@ -1452,8 +1454,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <header role="banner">
             <nav class="language-selector" role="navigation" aria-label="Language selection">
                 <section class="language-selector-group language-selector-eu" aria-labelledby="language-selector-eu-title">
-                    <h2 class="language-selector-title" id="language-selector-eu-title">AMEV – Autorità Mercati Economici Verificati (11 lingue)</h2>
-                    <p class="language-selector-note">Core europeo + EN per redirect dominio AWEV</p>
+                    <h2 class="language-selector-title" id="language-selector-eu-title" data-i18n-text="languageSelectorEuTitle">AMEV – Autorità Mercati Economici Verificati (11 lingue)</h2>
+                    <p class="language-selector-note" data-i18n-text="languageSelectorEuNote">Core europeo + EN per redirect dominio AWEV</p>
                     <ul class="language-selector-grid" role="list">
                         <li class="language-selector-item">
                         <button class="lang-btn active" data-lang="it" onclick="changeLanguage('it')" aria-label="Italiano">
@@ -1504,7 +1506,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                         </button>
                         </li>
                         <li class="language-selector-item">
-                        <button class="lang-btn" data-lang="xk" onclick="changeLanguage('xk')" aria-label="Shqip (Kosovë)">
+                        <button class="lang-btn" data-lang="xk" onclick="changeLanguage('sq', 'xk')" aria-label="Shqip (Kosovë)">
                             <span class="fi fi-xk lang-flag" aria-hidden="true"></span>
                             <span>XK</span>
                         </button>
@@ -1530,8 +1532,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     </ul>
                 </section>
                 <section class="language-selector-group language-selector-asia" id="languages-asia" aria-labelledby="language-selector-asia-title">
-                    <h2 class="language-selector-title" id="language-selector-asia-title">⏳ Lingue in Corso di Traduzione</h2>
-                    <p class="language-selector-note">Sezione ASIA - traduzioni disponibili, brand still work in progress</p>
+                    <h2 class="language-selector-title" id="language-selector-asia-title" data-i18n-text="languageSelectorAsiaTitle">⏳ Lingue in Corso di Traduzione</h2>
+                    <p class="language-selector-note" data-i18n-text="languageSelectorAsiaNote">Sezione ASIA - traduzioni disponibili, branding in progress</p>
                     <ul class="language-selector-grid" role="list">
                         <li class="language-selector-item">
                         <button class="lang-btn" data-lang="ar" onclick="changeLanguage('ar')" aria-label="العربية">
@@ -1557,8 +1559,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                             <span>VI</span>
                         </button>
                         </li>
-                        <li class="language-selector-item" aria-hidden="true">
-                        <span class="lang-btn lang-btn-placeholder" title="Prossima lingua asiatica">
+                        <li class="language-selector-item">
+                        <span class="lang-btn lang-btn-placeholder" aria-hidden="true" title="Prossima lingua asiatica">
                             <span aria-hidden="true">＋</span>
                             <span>WIP</span>
                         </span>
@@ -3264,6 +3266,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 filterHigh: "Protezione Elevata",
                 filterEU: "Paesi UE",
                 filterNonEU: "Paesi non-UE",
+                languageSelectorEuTitle: "AMEV – Autorità Mercati Economici Verificati (11 lingue)",
+                languageSelectorEuNote: "Core europeo + EN per redirect dominio AWEV",
+                languageSelectorAsiaTitle: "⏳ Lingue in Corso di Traduzione",
+                languageSelectorAsiaNote: "Sezione ASIA - traduzioni disponibili, branding in progress",
                 quickIndexTitle: "Indice Rapido – Naviga il Database",
                 quickIndexTitleAriaLabel: "Indice rapido - naviga il database",
                 quickIndexFlagsLink: "Bandiere A-Z",
@@ -3700,6 +3706,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 filterHigh: "Highest Protection",
                 filterEU: "EU Countries",
                 filterNonEU: "Non-EU Countries",
+                languageSelectorEuTitle: "AMEV – Verified Economic Market Authorities (11 languages)",
+                languageSelectorEuNote: "European core + EN for AWEV domain redirect",
+                languageSelectorAsiaTitle: "⏳ Languages in Translation",
+                languageSelectorAsiaNote: "ASIA section - translations available, branding still in progress",
                 quickIndexTitle: "Quick Index – Navigate the Database",
                 quickIndexTitleAriaLabel: "Quick index - navigate the database",
                 quickIndexFlagsLink: "A-Z Flags",
@@ -3829,6 +3839,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 filterHigh: "Protection Maximale",
                 filterEU: "Pays UE",
                 filterNonEU: "Pays hors UE",
+                languageSelectorEuTitle: "AMEV – Autorités Marchés Économiques Vérifiés (11 langues)",
+                languageSelectorEuNote: "Noyau européen + EN pour la redirection du domaine AWEV",
+                languageSelectorAsiaTitle: "⏳ Langues en cours de traduction",
+                languageSelectorAsiaNote: "Section ASIE - traductions disponibles, image de marque encore en cours",
                 quickIndexTitle: "Index rapide – Parcourir la base de données",
                 quickIndexTitleAriaLabel: "Index rapide - parcourir la base de données",
                 quickIndexFlagsLink: "Drapeaux A-Z",
@@ -3952,6 +3966,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 filterHigh: "Höchster Schutz",
                 filterEU: "EU-Länder",
                 filterNonEU: "Nicht-EU-Länder",
+                languageSelectorEuTitle: "AMEV – Verifizierte Wirtschaftsmarktbehörden (11 Sprachen)",
+                languageSelectorEuNote: "Europäischer Kern + EN für die AWEV-Domain-Weiterleitung",
+                languageSelectorAsiaTitle: "⏳ Sprachen in Übersetzung",
+                languageSelectorAsiaNote: "ASIEN-Bereich - Übersetzungen verfügbar, Branding noch in Arbeit",
                 quickIndexTitle: "Schnellindex – In der Datenbank navigieren",
                 quickIndexTitleAriaLabel: "Schnellindex - in der Datenbank navigieren",
                 quickIndexFlagsLink: "A-Z-Flaggen",
@@ -4075,6 +4093,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 filterHigh: "Protección Máxima",
                 filterEU: "Países UE",
                 filterNonEU: "Países no UE",
+                languageSelectorEuTitle: "AMEV – Autoridades Mercados Económicos Verificados (11 idiomas)",
+                languageSelectorEuNote: "Núcleo europeo + EN para la redirección del dominio AWEV",
+                languageSelectorAsiaTitle: "⏳ Idiomas en traducción",
+                languageSelectorAsiaNote: "Sección ASIA - traducciones disponibles, branding aún en progreso",
                 quickIndexTitle: "Índice rápido – Navega por la base de datos",
                 quickIndexTitleAriaLabel: "Índice rápido - navega por la base de datos",
                 quickIndexFlagsLink: "Banderas A-Z",
@@ -4198,6 +4220,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 filterHigh: "Proteção Elevada",
                 filterEU: "Países UE",
                 filterNonEU: "Países não-UE",
+                languageSelectorEuTitle: "AMEV – Autoridades Mercados Económicos Verificados (11 idiomas)",
+                languageSelectorEuNote: "Núcleo europeu + EN para redirecionamento do domínio AWEV",
+                languageSelectorAsiaTitle: "⏳ Idiomas em tradução",
+                languageSelectorAsiaNote: "Secção ÁSIA - traduções disponíveis, branding ainda em progresso",
                 quickIndexTitle: "Índice rápido – Navegue pela base de dados",
                 quickIndexTitleAriaLabel: "Índice rápido - navegue pela base de dados",
                 quickIndexFlagsLink: "Bandeiras A-Z",
@@ -4282,6 +4308,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 filterHigh: "Mbrojtje e lartë",
                 filterEU: "Vendet e BE-së",
                 filterNonEU: "Vendet jashtë BE-së",
+                languageSelectorEuTitle: "AMEV – Autoritetet e Tregjeve Ekonomike të Verifikuara (11 gjuhë)",
+                languageSelectorEuNote: "Bërthama evropiane + EN për ridrejtimin e domenit AWEV",
+                languageSelectorAsiaTitle: "⏳ Gjuhë në përkthim",
+                languageSelectorAsiaNote: "Seksioni AZI - përkthimet janë të disponueshme, branding-u ende në progres",
                 quickIndexTitle: "Indeks i shpejtë – Shfleto databazën",
                 quickIndexTitleAriaLabel: "Indeks i shpejtë - shfleto databazën",
                 quickIndexFlagsLink: "Flamujt A-Z",
@@ -4401,18 +4431,25 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             }
             // Add other languages if needed
         };
-        translations.ro = { ...translations.en };
-        translations.nl = { ...translations.en };
-        translations.el = { ...translations.en };
-        translations.bs = { ...translations.en };
-        translations.xk = { ...translations.sq };
+        const localeFallbacks = {
+            ro: 'en',
+            nl: 'en',
+            el: 'en',
+            bs: 'en',
+            xk: 'sq'
+        };
+
+        function getLanguageBundle(lang = currentLanguage) {
+            const resolvedLang = localeFallbacks[lang] || lang;
+            return translations[lang] || translations[resolvedLang] || translations.en || {};
+        }
 
         // Determina la lingua iniziale dalla query string (?lang=xx), con fallback a IT
         function getInitialLanguageFromUrl() {
             try {
                 const params = new URLSearchParams(window.location.search || '');
                 const langParam = (params.get('lang') || '').toLowerCase();
-                const supported = ['it','en','fr','de','es','pt','sq','nl','ro','el','bs','xk','ar','zh','hi','vi'];
+                const supported = ['it','en','fr','de','es','pt','sq','nl','ro','el','bs','ar','zh','hi','vi'];
                 if (supported.includes(langParam)) return langParam;
             } catch (e) {
                 console.warn('Impossibile leggere parametro lang dalla URL', e);
@@ -4751,7 +4788,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         }
 
         function applyTranslations(lang) {
-            const langData = translations[lang] || translations.en || {};
+            const langData = getLanguageBundle(lang);
             const fallbackData = translations.en || {};
             const htmlKeys = new Set([
                 'subtitle',
@@ -4816,10 +4853,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             }
         }
 
-        function changeLanguage(lang) {
+        function changeLanguage(lang, selectedLang = lang) {
             currentLanguage = lang;
             document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
-            const activeBtn = Array.from(document.querySelectorAll('.lang-btn')).find(btn => btn.dataset.lang === lang || btn.textContent.includes(lang.toUpperCase()));
+            const activeBtn = Array.from(document.querySelectorAll('.lang-btn')).find(btn => btn.dataset.lang === selectedLang || btn.textContent.includes(selectedLang.toUpperCase()));
             if(activeBtn) activeBtn.classList.add('active');
 
             const htmlEl = document.documentElement;
@@ -4896,7 +4933,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 card.className = 'country-card';
                 card.dataset.countryName = country.country_name;
                 card.onclick = () => openModal(country.country_name);
-                const currentTranslations = translations[currentLanguage] || translations.en || {};
+                const currentTranslations = getLanguageBundle(currentLanguage);
                 
                 const protectionClass = `protection-${(country.protectionLevel || 'medio').toLowerCase()}`;
                 
@@ -5064,7 +5101,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             
             const modal = document.getElementById('countryModal');
             const modalContent = document.getElementById('modalContent');
-            const currentTranslations = translations[currentLanguage] || translations.en || {};
+            const currentTranslations = getLanguageBundle(currentLanguage);
 
             // Bandiera nel popup: stessa icona del grid ma dimensione maggiore
             const flagInfo = getFlagInfo(country.country_name);
