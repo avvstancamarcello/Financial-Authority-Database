@@ -198,14 +198,16 @@
             {"@type": "Language", "name": "Română", "alternateName": "AMEV"},
             {"@type": "Language", "name": "Português", "alternateName": "AMEV"},
             {"@type": "Language", "name": "Nederlands", "alternateName": "AMEV"},
-            {"@type": "Language", "name": "Shqip (Albania/Kosovë)", "alternateName": "AMEV"},
+            {"@type": "Language", "name": "Shqip (Albania)", "alternateName": "AMEV"},
+            {"@type": "Language", "name": "Shqip (Kosovë)", "alternateName": "AMEV", "identifier": "sq-XK"},
             {"@type": "Language", "name": "Bosanski", "alternateName": "AMEV"},
             {"@type": "Language", "name": "Ελληνικά", "alternateName": "AMEA (Greek variant)"},
             {"@type": "Language", "name": "English", "alternateName": "AWEV"},
             {"@type": "Language", "name": "العربية", "alternateName": "ASIA WIP"},
             {"@type": "Language", "name": "中文", "alternateName": "ASIA WIP"},
             {"@type": "Language", "name": "हिन्दी", "alternateName": "ASIA WIP"},
-            {"@type": "Language", "name": "Tiếng Việt", "alternateName": "ASIA WIP"}
+            {"@type": "Language", "name": "Tiếng Việt", "alternateName": "ASIA WIP"},
+            {"@type": "Language", "name": "Română (România)", "alternateName": "AMEV", "identifier": "ro-RO"}
         ],
         "keywords": "autorità finanziarie, banche centrali, protezione consumatori, frodi bancarie, verifica licenze, CONSOB, SEC, FCA, BaFin",
         "aggregateRating": {
@@ -539,6 +541,7 @@
         .amev-introduction h3 { margin: 0.9rem 0 0.35rem; color: #fef08a; font-size: 1rem; }
         .amev-introduction ul { margin: 0.25rem 0 0.6rem 1.1rem; padding: 0; }
         .amev-introduction li { margin-bottom: 0.3rem; }
+        .amev-introduction .amev-region-label { font-weight: 700; }
         .amev-introduction .amev-anchor-link {
             display: inline-block;
             margin-top: 0.55rem;
@@ -1519,10 +1522,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 <p data-i18n-text="amevIntroCore">AMEV unisce 11 lingue europee (IT, ES, FR, DE, RO, PT, NL, AL, XK, BS, EL), mantiene la variante EN come AWEV per il contesto globale e offre coerenza linguistica con accessibilità geografica.</p>
                 <h3 data-i18n-text="amevCoverageTitle">Copertura geografica AMEV</h3>
                 <ul>
-                    <li data-i18n-text="amevCoverageWest">🇪🇺 <strong>Europa Occidentale</strong>: Italia, Spagna, Francia, Germania, Paesi Bassi, Belgio</li>
-                    <li data-i18n-text="amevCoverageSouth">🇪🇺 <strong>Europa Meridionale</strong>: Portogallo, Grecia</li>
-                    <li data-i18n-text="amevCoverageEast">🇪🇺 <strong>Europa Orientale</strong>: Romania</li>
-                    <li data-i18n-text="amevCoverageBalkans">🇪🇺 <strong>Balcani</strong>: Albania, Kosovo, Bosnia</li>
+                    <li><span class="amev-region-label" data-i18n-text="amevCoverageWestLabel">🇪🇺 Europa Occidentale:</span> <span data-i18n-text="amevCoverageWestCountries">Italia, Spagna, Francia, Germania, Paesi Bassi, Belgio</span></li>
+                    <li><span class="amev-region-label" data-i18n-text="amevCoverageSouthLabel">🇪🇺 Europa Meridionale:</span> <span data-i18n-text="amevCoverageSouthCountries">Portogallo, Grecia</span></li>
+                    <li><span class="amev-region-label" data-i18n-text="amevCoverageEastLabel">🇪🇺 Europa Orientale:</span> <span data-i18n-text="amevCoverageEastCountries">Romania</span></li>
+                    <li><span class="amev-region-label" data-i18n-text="amevCoverageBalkansLabel">🇪🇺 Balcani:</span> <span data-i18n-text="amevCoverageBalkansCountries">Albania, Kosovo, Bosnia</span></li>
                 </ul>
                 <h3 data-i18n-text="amevCredibilityTitle">Perché AMEV è un brand polivalente</h3>
                 <p data-i18n-text="amevCredibilityText">Acronimo identico in 11 lingue europee, memorabile e accessibile per mercati diversi: AMEV/AMEA allinea il database al contesto regolatorio UE e crea un unico punto di ingresso per la verifica delle autorità finanziarie.</p>
@@ -3357,6 +3360,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 amevCoverageSouth: "🇪🇺 Europa Meridionale: Portogallo, Grecia",
                 amevCoverageEast: "🇪🇺 Europa Orientale: Romania",
                 amevCoverageBalkans: "🇪🇺 Balcani: Albania, Kosovo, Bosnia",
+                amevCoverageWestLabel: "🇪🇺 Europa Occidentale:",
+                amevCoverageWestCountries: "Italia, Spagna, Francia, Germania, Paesi Bassi, Belgio",
+                amevCoverageSouthLabel: "🇪🇺 Europa Meridionale:",
+                amevCoverageSouthCountries: "Portogallo, Grecia",
+                amevCoverageEastLabel: "🇪🇺 Europa Orientale:",
+                amevCoverageEastCountries: "Romania",
+                amevCoverageBalkansLabel: "🇪🇺 Balcani:",
+                amevCoverageBalkansCountries: "Albania, Kosovo, Bosnia",
                 amevCredibilityTitle: "Perché AMEV è un brand polivalente",
                 amevCredibilityText: "L'acronimo identico in 11 lingue migliora memorabilità e accessibilità, rafforza l'allineamento con l'ecosistema regolatorio UE e supporta più database di autorità con un unico marchio.",
                 amevTimelineText: "Rollout PR #3.1 → #3.5: AL, XK, BS, EL (AMEA), RO.",
@@ -3810,6 +3821,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 amevCoverageSouth: "🇪🇺 Southern Europe: Portugal, Greece",
                 amevCoverageEast: "🇪🇺 Eastern Europe: Romania",
                 amevCoverageBalkans: "🇪🇺 Balkans: Albania, Kosovo, Bosnia",
+                amevCoverageWestLabel: "🇪🇺 Western Europe:",
+                amevCoverageWestCountries: "Italy, Spain, France, Germany, Netherlands, Belgium",
+                amevCoverageSouthLabel: "🇪🇺 Southern Europe:",
+                amevCoverageSouthCountries: "Portugal, Greece",
+                amevCoverageEastLabel: "🇪🇺 Eastern Europe:",
+                amevCoverageEastCountries: "Romania",
+                amevCoverageBalkansLabel: "🇪🇺 Balkans:",
+                amevCoverageBalkansCountries: "Albania, Kosovo, Bosnia",
                 amevCredibilityTitle: "Why AMEV is a polyvalent brand",
                 amevCredibilityText: "A shared acronym in 11 languages increases memorability, improves accessibility across diverse markets, aligns with the EU regulatory ecosystem, and supports multiple authority databases under one unified identity.",
                 amevTimelineText: "PR #3.1 → #3.5 rollout: AL, XK, BS, EL (AMEA), RO.",
@@ -4701,6 +4720,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             amevCoverageSouth: "🇪🇺 Europa de Sud: Portugalia, Grecia",
             amevCoverageEast: "🇪🇺 Europa de Est: România",
             amevCoverageBalkans: "🇪🇺 Balcani: Albania, Kosovo, Bosnia",
+            amevCoverageWestLabel: "🇪🇺 Europa de Vest:",
+            amevCoverageWestCountries: "Italia, Spania, Franța, Germania, Țările de Jos, Belgia",
+            amevCoverageSouthLabel: "🇪🇺 Europa de Sud:",
+            amevCoverageSouthCountries: "Portugalia, Grecia",
+            amevCoverageEastLabel: "🇪🇺 Europa de Est:",
+            amevCoverageEastCountries: "România",
+            amevCoverageBalkansLabel: "🇪🇺 Balcani:",
+            amevCoverageBalkansCountries: "Albania, Kosovo, Bosnia",
             amevCredibilityTitle: "De ce AMEV este un brand polivalent",
             amevCredibilityText: "Acronimul identic în 11 limbi crește memorabilitatea, accesibilitatea și alinierea cu ecosistemul de reglementare UE, oferind o identitate unificată pentru mai multe baze de date ale autorităților financiare.",
             amevTimelineText: "Implementare PR #3.1 → #3.5: AL, XK, BS, EL (AMEA), RO.",
