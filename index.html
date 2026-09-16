@@ -1506,7 +1506,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                         </button>
                         </li>
                         <li class="language-selector-item">
-                        <button class="lang-btn" data-lang="xk" onclick="changeLanguage('xk')">
+                        <button class="lang-btn" data-lang="xk" onclick="changeLanguage('xk')" aria-label="Shqip (Kosovë)">
                             <span class="fi fi-xk lang-flag" aria-hidden="true"></span>
                             <span aria-hidden="true">XK</span>
                             <span style="font-size: 0.72em;">Shqip</span>
@@ -4613,11 +4613,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         };
 
         function getTranslatedNotes(countryName, notes) {
-            const notesLanguage = translations[currentLanguage]
+            const notesTranslations = countryNotesTranslations[countryName];
+            const notesLanguage = notesTranslations && notesTranslations[currentLanguage]
                 ? currentLanguage
                 : localeMetadata[currentLanguage]?.fallback || currentLanguage;
-            if (countryNotesTranslations[countryName] && countryNotesTranslations[countryName][notesLanguage]) {
-                return countryNotesTranslations[countryName][notesLanguage];
+            if (notesTranslations && notesTranslations[notesLanguage]) {
+                return notesTranslations[notesLanguage];
             }
             return notes; // Ritorna il testo originale se non c'è traduzione
         }
