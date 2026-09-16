@@ -4577,7 +4577,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         // Defined as a post-assignment alias to keep all 240+ keys covered with minimal additive changes:
         // EN remains the base fallback while Greek-specific strings are progressively localized.
         translations.el = {
-            ...translations.en,
             title: "Διεθνής Βάση Τραπεζικών Δεδομένων",
             subtitle: "Βάση Δεδομένων Διεθνών Χρηματοοικονομικών Αρχών – 239 χώρες",
             securityTitle: "✅ ΕΠΙΣΗΜΟΣ ΝΟΜΙΜΟΣ ΙΣΤΟΤΟΠΟΣ - ΒΑΣΗ ΠΡΟΣΤΑΣΙΑΣ ΚΑΤΑΝΑΛΩΤΗ",
@@ -4598,7 +4597,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             ro: { api: 'ro', fallback: 'en', urlSupported: true },
             nl: { api: 'nl', fallback: 'en', urlSupported: true },
             el: { api: 'el', fallback: 'en', urlSupported: true },
-            'el-gr': { api: 'el', fallback: 'el', htmlLang: 'el-GR', urlSupported: false },
+            'el-GR': { api: 'el', fallback: 'el', htmlLang: 'el-GR', urlSupported: false },
             bs: { api: 'bs', fallback: 'en', htmlLang: 'bs-BA', urlSupported: true },
             xk: { api: 'sq', fallback: 'sq', htmlLang: 'sq-XK', urlSupported: true },
             ar: { api: 'ar', urlSupported: true },
@@ -4617,13 +4616,20 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         };
 
         function getLanguageBundle(lang = currentLanguage) {
-            let resolvedLang = lang;
             const visited = new Set();
-            while (resolvedLang && !translations[resolvedLang] && !visited.has(resolvedLang)) {
+            const chain = [];
+            let resolvedLang = lang;
+            while (resolvedLang && !visited.has(resolvedLang)) {
+                chain.push(resolvedLang);
                 visited.add(resolvedLang);
                 resolvedLang = localeMetadata[resolvedLang]?.fallback;
             }
-            return translations[lang] || translations[resolvedLang] || translations.en || {};
+            if (!chain.includes('en')) chain.push('en');
+            const mergedBundle = {};
+            for (let i = chain.length - 1; i >= 0; i -= 1) {
+                Object.assign(mergedBundle, translations[chain[i]] || {});
+            }
+            return mergedBundle;
         }
 
         // Determina la lingua iniziale dalla query string (?lang=xx), con fallback a IT
