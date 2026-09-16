@@ -4460,7 +4460,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         };
 
         function getLanguageBundle(lang = currentLanguage) {
-            const resolvedLang = localeMetadata[lang]?.fallback || lang;
+            let resolvedLang = lang;
+            const visited = new Set();
+            while (resolvedLang && !translations[resolvedLang] && !visited.has(resolvedLang)) {
+                visited.add(resolvedLang);
+                resolvedLang = localeMetadata[resolvedLang]?.fallback;
+            }
             return translations[lang] || translations[resolvedLang] || translations.en || {};
         }
 
