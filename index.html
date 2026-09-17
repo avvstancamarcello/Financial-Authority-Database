@@ -49,7 +49,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.2.3/css/flag-icons.min.css">
     
     <!-- Meta Tags SEO Base -->
-    <meta id="meta-description" name="description" content="Database 239 autorità finanziarie internazionali. AMEV in 11 lingue europee: verifica licenze broker, segnala truffe Forex e Crypto, protezione consumatori.">
+    <meta id="meta-description" name="description" content="Database 239 autorità finanziarie internazionali. Verifica licenze broker, controlla identità e legittimità di imprese finanziarie e usa i percorsi lingua AMEV / AMEA / AWEV per prevenire frodi.">
     <meta name="keywords" content="AMEV, European, Financial Authority, multilingual, database autorità finanziarie, verifica licenza broker, truffe forex, truffe criptovalute, broker non autorizzato, CONSOB, FCA, CySEC, ESMA, ABF banca">
     <meta name="author" content="Avvocato Marcello Stanca">
     <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
@@ -101,7 +101,7 @@
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://tutelatruffe.it/">
     <meta id="meta-og-title" property="og:title" content="Tutela Truffe | Database Autorità Finanziarie UE - Odissea Digitale">
-    <meta id="meta-og-description" property="og:description" content="🌍 Database 239 autorità finanziarie internazionali con AMEV in 11 lingue europee. Verifica licenze broker e segnala truffe Forex/Crypto.">
+    <meta id="meta-og-description" property="og:description" content="🌍 Database di 239 autorità finanziarie internazionali. Verifica licenze broker, identità delle imprese e percorsi lingua AMEV / AMEA / AWEV per prevenire frodi Forex/Crypto.">
     <meta property="og:image" content="https://tutelatruffe.it/icon-512.png">
     <meta property="og:image:width" content="512">
     <meta property="og:image:height" content="512">
@@ -335,7 +335,7 @@
             {
                 "@type": "PropertyValue",
                 "name": "Languages Supported",
-                "value": "AMEV core: 11 lingue europee + EN (AWEV)"
+                "value": "AMEV European core + AMEA (Greek) + AWEV (English/global)"
             }
         ],
         "creator": {
@@ -426,7 +426,7 @@
         .security-banner strong { font-weight: 700; text-decoration: underline; }
         header { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 22px; text-align: center; position: relative; }
         .flag-orbit-banner {
-            margin: 6px auto 6px;
+            margin: 6px auto 14px;
             display: flex;
             flex-direction: row;
             align-items: center;
@@ -505,16 +505,38 @@
             border-radius: 18px;
             display: block;
         }
-        .language-selector { justify-content: center; margin-top: 15px; display: flex; gap: 12px; background: rgba(255,255,255,0.2); padding: 14px 16px; border-radius: 25px; backdrop-filter: blur(10px); flex-wrap: wrap; max-width: 920px; margin-left: auto; margin-right: auto; }
-        .language-selector-group { flex: 1 1 320px; border-radius: 22px; padding: 14px; }
+        .language-selector {
+            margin: 16px auto 0;
+            display: grid;
+            gap: 10px;
+            background: transparent;
+            padding: 0;
+            max-width: 980px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .language-selector-group { width: 100%; border-radius: 18px; padding: 12px 14px; }
         .language-selector-eu { background: linear-gradient(135deg, rgba(15,23,42,0.28) 0%, rgba(30,64,175,0.24) 100%); border: 1px solid rgba(255,255,255,0.28); }
-        .language-selector-asia { background: linear-gradient(135deg, rgba(255,255,255,0.12) 0%, rgba(148,163,184,0.16) 100%); border: 1px solid rgba(255,255,255,0.16); }
+        .language-selector-asia {
+            background: linear-gradient(135deg, rgba(255,255,255,0.12) 0%, rgba(148,163,184,0.16) 100%);
+            border: 1px solid rgba(255,255,255,0.16);
+            max-width: 720px;
+            margin: 0 auto;
+        }
         .language-selector-title { color: #ffffff; font-size: 1rem; font-weight: 700; text-align: center; margin: 0 0 0.35rem; }
-        .language-selector-note { color: rgba(255,255,255,0.88); font-size: 0.82rem; text-align: center; margin: 0 0 0.9rem; }
-        .language-selector-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(88px, 1fr)); gap: 8px; list-style: none; margin: 0; padding: 0; }
-        .language-selector-item { list-style: none; }
+        .language-selector-note { color: rgba(255,255,255,0.88); font-size: 0.82rem; text-align: center; margin: 0 0 0.75rem; }
+        .language-selector-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 8px;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+        .language-selector-item { list-style: none; flex: 0 0 auto; }
         .language-selector-item .lang-btn,
-        .language-selector-item .lang-btn-placeholder { width: 100%; }
+        .language-selector-item .lang-btn-placeholder { width: auto; min-width: 94px; }
         .lang-btn { background: rgba(255,255,255,0.3); border: 2px solid transparent; color: white; padding: 10px 16px; border-radius: 20px; cursor: pointer; font-weight: 700; font-size: 16px; transition: all 0.3s ease; display: flex; align-items: center; gap: 8px; min-width: 70px; justify-content: center; }
         .lang-label-secondary { font-size: 0.72em; }
         .lang-btn:hover { background: rgba(255,255,255,0.5); transform: translateY(-2px); }
@@ -522,11 +544,11 @@
         .lang-btn:focus-visible { outline: 2px solid #ffffff; outline-offset: 2px; }
         .language-selector-asia .lang-btn { background: rgba(255,255,255,0.18); color: rgba(255,255,255,0.95); }
         .language-selector-asia .lang-btn:hover { background: rgba(255,255,255,0.3); }
-        .lang-btn-placeholder { opacity: 0.7; cursor: default; pointer-events: none; }
+        .lang-btn-placeholder { opacity: 0.72; cursor: default; pointer-events: none; justify-content: center; min-width: 94px; }
         .lang-flag { width: 28px !important; height: 21px !important; font-size: 28px; display: inline-block; }
         .amev-introduction {
             max-width: 920px;
-            margin: 0 auto 14px;
+            margin: 16px auto 0;
             padding: 18px 20px;
             border-radius: 20px;
             border: 1px solid rgba(255,255,255,0.35);
@@ -1267,8 +1289,12 @@
         @media (max-width: 768px) { 
             body { padding: 10px; }
             h1 { font-size: 1.6em; } 
-            .language-selector { position: static; justify-content: center; margin-bottom: 15px; flex-wrap: wrap; gap: 10px; padding: 12px 10px; } 
-            .language-selector-group { flex-basis: 100%; }
+            .language-selector { position: static; margin-top: 14px; gap: 8px; }
+            .language-selector-group { width: 100%; padding: 12px; }
+            .language-selector-item { flex: 1 1 120px; }
+            .language-selector-item .lang-btn,
+            .language-selector-item .lang-btn-placeholder { width: 100%; min-width: 0; }
+            .language-selector-asia { max-width: 100%; }
             .amev-introduction { padding: 16px 14px; border-radius: 16px; }
             .amev-introduction h2 { font-size: 1.08rem; }
             .amev-introduction h3 { font-size: 0.96rem; }
@@ -1334,14 +1360,17 @@
             body { padding: 5px; }
             h1 { font-size: 1.35em; line-height: 1.3; }
             header { padding: 15px 10px; }
-            .language-selector { gap: 8px; padding: 10px 8px; max-width: 100%; }
-            .amev-introduction { padding: 14px 12px; margin-bottom: 10px; }
+            .language-selector { gap: 8px; max-width: 100%; }
+            .amev-introduction { padding: 14px 12px; margin-top: 12px; }
             .amev-introduction h2 { font-size: 1rem; }
             .amev-introduction p, .amev-introduction li { font-size: 0.9rem; }
             .language-selector-group { padding: 12px 10px; }
             .language-selector-title { font-size: 0.92rem; }
             .language-selector-note { font-size: 0.78rem; }
-            .language-selector-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+            .language-selector-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+            .language-selector-item { min-width: 0; }
+            .language-selector-item .lang-btn,
+            .language-selector-item .lang-btn-placeholder { width: 100%; min-width: 0; }
             .lang-btn { padding: 12px 14px; font-size: 1em; min-width: 60px; border-radius: 12px; }
             .lang-flag { width: 24px !important; height: 18px !important; font-size: 24px; }
             .language-hint { display: none; }
@@ -1523,27 +1552,85 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             </ol>
         </div>
         <header role="banner">
-            <section class="amev-introduction" aria-labelledby="amev-introduction-title">
-                <h2 id="amev-introduction-title" data-i18n-text="amevIntroTitle">AMEV – 11 European Languages for Financial Authority Verification</h2>
-                <p class="amev-subtitle" data-i18n-text="amevIntroSubtitle">A multilingual, regionally-coherent brand for European financial market oversight</p>
-                <p data-i18n-text="amevIntroCore">AMEV works across 11 European languages (IT, ES, FR, DE, RO, PT, NL, AL, XK, BS, EL). The EN variant (AWEV) extends global reach while preserving linguistic coherence and geographic accessibility.</p>
-                <h3 data-i18n-text="amevCoverageTitle">AMEV geographic coverage</h3>
-                <ul>
-                    <li><span class="amev-region-label" data-i18n-text="amevCoverageWestLabel">🇪🇺 Western Europe:</span> <span data-i18n-text="amevCoverageWestCountries">Italy, Spain, France, Germany, Netherlands, Belgium</span></li>
-                    <li><span class="amev-region-label" data-i18n-text="amevCoverageSouthLabel">🇪🇺 Southern Europe:</span> <span data-i18n-text="amevCoverageSouthCountries">Portugal, Greece</span></li>
-                    <li><span class="amev-region-label" data-i18n-text="amevCoverageEastLabel">🇪🇺 Eastern Europe:</span> <span data-i18n-text="amevCoverageEastCountries">Romania</span></li>
-                    <li><span class="amev-region-label" data-i18n-text="amevCoverageBalkansLabel">🇪🇺 Balkans:</span> <span data-i18n-text="amevCoverageBalkansCountries">Albania, Kosovo, Bosnia</span></li>
-                </ul>
-                <h3 data-i18n-text="amevCredibilityTitle">Why AMEV is a polyvalent brand</h3>
-                <p data-i18n-text="amevCredibilityText">A shared acronym in 11 languages increases memorability, improves accessibility across diverse markets, aligns with the EU regulatory ecosystem, and supports multiple authority databases under one unified identity.</p>
-                <p data-i18n-text="amevTimelineText">PR #3.1 → #3.5 rollout: AL, XK, BS, EL (AMEA), RO.</p>
-                <a href="#languages-asia" class="amev-anchor-link" data-i18n-text="amevFutureExpansion" data-i18n-aria-label="amevFutureExpansionAria">⏳ Future Expansion: Asian Languages – Work in Progress</a>
-            </section>
-            <nav class="language-selector" role="navigation" data-i18n-aria-label="languageSelectionAriaLabel" aria-label="Language selection">
+            <div class="flag-orbit-banner" aria-hidden="true">
+                <div class="orbit-side-icon orbit-side-icon-left">
+                    <img src="logo_shield_financial_defense.svg" data-i18n-alt="consumerProtectionShieldAlt" alt="Financial Defense - consumer protection" width="170" height="170">
+                </div>
+                <div class="flag-orbit-container">
+                    <div class="flag-orbit-ring"></div>
+                    <div class="flag-orbit">
+                        <div class="flag-orbit-flag" style="transform: rotate(0deg) translate(65px) rotate(0deg);">
+                            <span class="fi fi-it"></span>
+                        </div>
+                        <div class="flag-orbit-flag" style="transform: rotate(45deg) translate(65px) rotate(-45deg);">
+                            <span class="fi fi-fr"></span>
+                        </div>
+                        <div class="flag-orbit-flag" style="transform: rotate(90deg) translate(65px) rotate(-90deg);">
+                            <span class="fi fi-de"></span>
+                        </div>
+                        <div class="flag-orbit-flag" style="transform: rotate(135deg) translate(65px) rotate(-135deg);">
+                            <span class="fi fi-es"></span>
+                        </div>
+                        <div class="flag-orbit-flag" style="transform: rotate(180deg) translate(65px) rotate(-180deg);">
+                            <span class="fi fi-gb"></span>
+                        </div>
+                        <div class="flag-orbit-flag" style="transform: rotate(225deg) translate(65px) rotate(-225deg);">
+                            <span class="fi fi-us"></span>
+                        </div>
+                        <div class="flag-orbit-flag" style="transform: rotate(270deg) translate(65px) rotate(-270deg);">
+                            <span class="fi fi-ca"></span>
+                        </div>
+                        <div class="flag-orbit-flag" style="transform: rotate(315deg) translate(65px) rotate(-315deg);">
+                            <span class="fi fi-sg"></span>
+                        </div>
+                    </div>
+                    <div class="flag-orbit-center">
+                        <img src="logo_galaxy_yous.svg" data-i18n-alt="consumerProtectionGalaxyAlt" alt="Galaxy You$ - consumer protection" width="68" height="68">
+                    </div>
+                </div>
+                <div class="flag-orbit-container">
+                    <div class="flag-orbit-ring"></div>
+                    <div class="flag-orbit">
+                        <div class="flag-orbit-flag" style="transform: rotate(0deg) translate(65px) rotate(0deg);">
+                            <span class="fi fi-it"></span>
+                        </div>
+                        <div class="flag-orbit-flag" style="transform: rotate(45deg) translate(65px) rotate(-45deg);">
+                            <span class="fi fi-fr"></span>
+                        </div>
+                        <div class="flag-orbit-flag" style="transform: rotate(90deg) translate(65px) rotate(-90deg);">
+                            <span class="fi fi-de"></span>
+                        </div>
+                        <div class="flag-orbit-flag" style="transform: rotate(135deg) translate(65px) rotate(-135deg);">
+                            <span class="fi fi-es"></span>
+                        </div>
+                        <div class="flag-orbit-flag" style="transform: rotate(180deg) translate(65px) rotate(-180deg);">
+                            <span class="fi fi-gb"></span>
+                        </div>
+                        <div class="flag-orbit-flag" style="transform: rotate(225deg) translate(65px) rotate(-225deg);">
+                            <span class="fi fi-us"></span>
+                        </div>
+                        <div class="flag-orbit-flag" style="transform: rotate(270deg) translate(65px) rotate(-270deg);">
+                            <span class="fi fi-ca"></span>
+                        </div>
+                        <div class="flag-orbit-flag" style="transform: rotate(315deg) translate(65px) rotate(-315deg);">
+                            <span class="fi fi-sg"></span>
+                        </div>
+                    </div>
+                    <div class="flag-orbit-center">
+                        <img src="logo_shield_financial_defense.svg" data-i18n-alt="consumerProtectionCoreShieldAlt" alt="Financial Defense Shield - consumer protection core" width="68" height="68">
+                    </div>
+                </div>
+                <div class="orbit-side-icon orbit-side-icon-right">
+                    <img src="logo_shield_financial_defense.svg" data-i18n-alt="consumerProtectionShieldAlt" alt="Financial Defense - consumer protection" width="170" height="170">
+                </div>
+            </div>
+            <h1 data-i18n="landingHeroTitle" itemprop="name">Database Autorità Finanziarie Internazionali – percorsi multilingue per 239 Paesi</h1>
+            <p class="subtitle" data-i18n="landingHeroSubtitle" itemprop="description">Verifica licenze broker, segnala truffe Forex e Crypto, controlla l'identità finanziaria dei destinatari di bonifici bancari.</p>
+            <nav class="language-selector" data-layout="compact" role="navigation" data-i18n-aria-label="languageSelectionAriaLabel" aria-label="Language selection">
                 <section class="language-selector-group language-selector-eu" aria-labelledby="language-selector-eu-title">
-                    <h2 class="language-selector-title" id="language-selector-eu-title" data-i18n-text="languageSelectorEuTitle">Seleziona la Tua Lingua – AMEV Core (11 Lingue Europee)</h2>
-                    <p class="language-selector-note" data-i18n-text="languageSelectorEuNote">Core AMEV europeo; variante greca AMEA; EN supporta redirect dominio AWEV</p>
-                    <ul class="language-selector-grid" role="list">
+                    <h2 class="language-selector-title" id="language-selector-eu-title" data-i18n-text="languageSelectorEuTitle">Seleziona la tua lingua – accessi AMEV / AMEA / AWEV</h2>
+                    <p class="language-selector-note" data-i18n-text="languageSelectorEuNote">AMEV per il core europeo supportato; AMEA per il greco; AWEV per il percorso inglese/globale usato anche dall'area olandese.</p>
+                    <ul class="language-selector-grid" data-layout="row-wrap" role="list">
                         <li class="language-selector-item">
                         <button class="lang-btn active" data-lang="it" onclick="changeLanguage('it')" data-i18n-aria-label="languageButtonItAriaLabel" aria-label="Italian">
                             <span class="fi fi-it lang-flag" aria-hidden="true"></span>
@@ -1620,10 +1707,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                         </li>
                     </ul>
                 </section>
-                <section class="language-selector-group language-selector-asia" id="languages-asia" aria-labelledby="language-selector-asia-title" tabindex="-1">
-                    <h2 class="language-selector-title" id="language-selector-asia-title" data-i18n-text="languageSelectorAsiaTitle">⏳ Lingue Asiatiche – Work in Progress</h2>
-                    <p class="language-selector-note" data-i18n-text="languageSelectorAsiaNote">Sezione ASIA: Lingue in Corso di Traduzione (Future Expansion)</p>
-                    <ul class="language-selector-grid" role="list">
+                <section class="language-selector-group language-selector-asia" id="languages-asia" data-placeholder="compact" aria-labelledby="language-selector-asia-title" tabindex="-1">
+                    <h2 class="language-selector-title" id="language-selector-asia-title" data-i18n-text="languageSelectorAsiaTitle">⏳ Pulsanti lingua futuri – Work in Progress</h2>
+                    <p class="language-selector-note" data-i18n-text="languageSelectorAsiaNote">Area compatta riservata ai prossimi pulsanti lingua già previsti per le espansioni future.</p>
+                    <ul class="language-selector-grid" data-layout="row-wrap" role="list">
                         <li class="language-selector-item">
                         <button class="lang-btn" data-lang="ar" onclick="changeLanguage('ar')" data-i18n-aria-label="languageButtonArAriaLabel" aria-label="Arabic">
                             <span class="fi fi-qa lang-flag" aria-hidden="true"></span>
@@ -1660,80 +1747,22 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     <span style="font-size: 1.1em;">👆</span> <span data-i18n-text="chooseLanguageHint">Scegli la tua lingua</span>
                 </span>
             </nav>
-            <div class="flag-orbit-banner" aria-hidden="true">
-                <div class="orbit-side-icon orbit-side-icon-left">
-                    <img src="logo_shield_financial_defense.svg" data-i18n-alt="consumerProtectionShieldAlt" alt="Financial Defense - consumer protection" width="170" height="170">
-                </div>
-                <div class="flag-orbit-container">
-                    <div class="flag-orbit-ring"></div>
-                    <div class="flag-orbit">
-                        <div class="flag-orbit-flag" style="transform: rotate(0deg) translate(65px) rotate(0deg);">
-                            <span class="fi fi-it"></span>
-                        </div>
-                        <div class="flag-orbit-flag" style="transform: rotate(45deg) translate(65px) rotate(-45deg);">
-                            <span class="fi fi-fr"></span>
-                        </div>
-                        <div class="flag-orbit-flag" style="transform: rotate(90deg) translate(65px) rotate(-90deg);">
-                            <span class="fi fi-de"></span>
-                        </div>
-                        <div class="flag-orbit-flag" style="transform: rotate(135deg) translate(65px) rotate(-135deg);">
-                            <span class="fi fi-es"></span>
-                        </div>
-                        <div class="flag-orbit-flag" style="transform: rotate(180deg) translate(65px) rotate(-180deg);">
-                            <span class="fi fi-gb"></span>
-                        </div>
-                        <div class="flag-orbit-flag" style="transform: rotate(225deg) translate(65px) rotate(-225deg);">
-                            <span class="fi fi-us"></span>
-                        </div>
-                        <div class="flag-orbit-flag" style="transform: rotate(270deg) translate(65px) rotate(-270deg);">
-                            <span class="fi fi-ca"></span>
-                        </div>
-                        <div class="flag-orbit-flag" style="transform: rotate(315deg) translate(65px) rotate(-315deg);">
-                            <span class="fi fi-sg"></span>
-                        </div>
-                    </div>
-                    <div class="flag-orbit-center">
-                        <img src="logo_galaxy_yous.svg" data-i18n-alt="consumerProtectionGalaxyAlt" alt="Galaxy You$ - consumer protection" width="68" height="68">
-                    </div>
-                </div>
-                <div class="flag-orbit-container">
-                    <div class="flag-orbit-ring"></div>
-                    <div class="flag-orbit">
-                        <div class="flag-orbit-flag" style="transform: rotate(0deg) translate(65px) rotate(0deg);">
-                            <span class="fi fi-it"></span>
-                        </div>
-                        <div class="flag-orbit-flag" style="transform: rotate(45deg) translate(65px) rotate(-45deg);">
-                            <span class="fi fi-fr"></span>
-                        </div>
-                        <div class="flag-orbit-flag" style="transform: rotate(90deg) translate(65px) rotate(-90deg);">
-                            <span class="fi fi-de"></span>
-                        </div>
-                        <div class="flag-orbit-flag" style="transform: rotate(135deg) translate(65px) rotate(-135deg);">
-                            <span class="fi fi-es"></span>
-                        </div>
-                        <div class="flag-orbit-flag" style="transform: rotate(180deg) translate(65px) rotate(-180deg);">
-                            <span class="fi fi-gb"></span>
-                        </div>
-                        <div class="flag-orbit-flag" style="transform: rotate(225deg) translate(65px) rotate(-225deg);">
-                            <span class="fi fi-us"></span>
-                        </div>
-                        <div class="flag-orbit-flag" style="transform: rotate(270deg) translate(65px) rotate(-270deg);">
-                            <span class="fi fi-ca"></span>
-                        </div>
-                        <div class="flag-orbit-flag" style="transform: rotate(315deg) translate(65px) rotate(-315deg);">
-                            <span class="fi fi-sg"></span>
-                        </div>
-                    </div>
-                    <div class="flag-orbit-center">
-                        <img src="logo_shield_financial_defense.svg" data-i18n-alt="consumerProtectionCoreShieldAlt" alt="Financial Defense Shield - consumer protection core" width="68" height="68">
-                    </div>
-                </div>
-                <div class="orbit-side-icon orbit-side-icon-right">
-                    <img src="logo_shield_financial_defense.svg" data-i18n-alt="consumerProtectionShieldAlt" alt="Financial Defense - consumer protection" width="170" height="170">
-                </div>
-            </div>
-            <h1 data-i18n="subtitle" itemprop="name">Database Autorità Finanziarie Internazionali – 239 Paesi, 7 lingue OK e 14 lingue work in progress</h1>
-            <p class="subtitle" data-i18n="title" itemprop="description">Verifica licenze broker, segnala truffe Forex e Crypto, controlla l'identità finanziaria dei destinatari di bonifici bancari.</p>
+            <section class="amev-introduction" aria-labelledby="amev-introduction-title">
+                <h2 id="amev-introduction-title" data-i18n-text="amevIntroTitle">AMEV, AMEA e AWEV – verifica le autorità finanziarie nella lingua corretta</h2>
+                <p class="amev-subtitle" data-i18n-text="amevIntroSubtitle">Un naming orientato all'utente per controllare se un'impresa di servizi finanziari è legittima, registrata e correttamente identificata.</p>
+                <p data-i18n-text="amevIntroCore">AMEV è usato solo nei percorsi linguistici europei in cui l'acronimo resta coerente. La Grecia usa la variante AMEA, mentre l'inglese usa AWEV per la verifica worldwide e supporta anche l'attuale esperienza per l'area olandese.</p>
+                <h3 data-i18n-text="amevCoverageTitle">Copertura attuale del naming</h3>
+                <ul>
+                    <li><span class="amev-region-label" data-i18n-text="amevCoverageWestLabel">AMEV core europeo:</span> <span data-i18n-text="amevCoverageWestCountries">percorsi utente in italiano, spagnolo, francese, tedesco, portoghese, romeno e bosniaco</span></li>
+                    <li><span class="amev-region-label" data-i18n-text="amevCoverageSouthLabel">Variante AMEA:</span> <span data-i18n-text="amevCoverageSouthCountries">percorso di verifica greco / area ellenica</span></li>
+                    <li><span class="amev-region-label" data-i18n-text="amevCoverageEastLabel">Variante AWEV:</span> <span data-i18n-text="amevCoverageEastCountries">percorso inglese per verifiche worldwide, usato anche per l'attuale area olandese</span></li>
+                    <li><span class="amev-region-label" data-i18n-text="amevCoverageBalkansLabel">Spazio riservato:</span> <span data-i18n-text="amevCoverageBalkansCountries">il selettore compatto mantiene posto per nuovi pulsanti lingua in futuro</span></li>
+                </ul>
+                <h3 data-i18n-text="amevCredibilityTitle">Perché questo naming aiuta la verifica</h3>
+                <p data-i18n-text="amevCredibilityText">La famiglia AMEV / AMEA / AWEV mantiene la pagina focalizzata sul tuo obiettivo: scegliere il percorso linguistico corretto, aprire l'autorità competente e verificare legittimità e identità dell'impresa prima di inviare denaro.</p>
+                <p data-i18n-text="amevTimelineText">Configurazione attuale: AMEV per il core europeo supportato, AMEA per il greco, AWEV per l'inglese/globale, con pulsanti aggiuntivi riservati alle future espansioni.</p>
+                <a href="#languages-asia" class="amev-anchor-link" data-i18n-text="amevFutureExpansion" data-i18n-aria-label="amevFutureExpansionAria">⏳ Area compatta riservata ai futuri pulsanti lingua</a>
+            </section>
         </header>
 
         <!-- TABLE OF CONTENTS - Indice Navigazione Interna SEO -->
@@ -3346,7 +3375,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         const translations = {
             it: {
                 title: "Database Internazionale per controlli bancari sulla identità finanziaria sui destinatari di transazioni bancarie.",
-                subtitle: "Database Autorità Finanziarie Internazionali – 239 Paesi, 7 lingue OK e 14 lingue work in progress",
+                subtitle: "Database Autorità Finanziarie Internazionali – percorsi multilingue per 239 Paesi",
                 securityTitle: "✅ SITO UFFICIALE LEGITTIMO - DATABASE DI PROTEZIONE DEI CONSUMATORI",
                 securityText: "Accesso immediato alle home page delle Autority Finanziarie del Governo per verificare la legittimità e regolarità di imprese finanziarie, di persone ed entità che offrono servizi finanziari, e ricevono bonifici.",
                 securityNoticeAriaLabel: "Avviso di sicurezza",
@@ -3360,34 +3389,34 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 filterHigh: "Protezione Elevata",
                 filterEU: "Paesi UE",
                 filterNonEU: "Paesi non-UE",
-                languageSelectorEuTitle: "Seleziona la Tua Lingua – AMEV Core (11 Lingue Europee)",
-                languageSelectorEuNote: "Core AMEV europeo; variante greca AMEA; EN per redirect dominio AWEV",
-                languageSelectorAsiaTitle: "⏳ Lingue Asiatiche – Work in Progress",
-                languageSelectorAsiaNote: "Sezione ASIA: Lingue in Corso di Traduzione (Future Expansion)",
+                languageSelectorEuTitle: "Seleziona la tua lingua – accessi AMEV / AMEA / AWEV",
+                languageSelectorEuNote: "AMEV per il core europeo supportato; AMEA per il greco; AWEV per il percorso inglese/globale usato anche dall'area olandese.",
+                languageSelectorAsiaTitle: "⏳ Pulsanti lingua futuri – Work in Progress",
+                languageSelectorAsiaNote: "Area compatta riservata ai prossimi pulsanti lingua già previsti per le espansioni future.",
                 languageSelectionAriaLabel: "Selezione lingua",
-                upcomingAsianLanguageTitle: "Prossima lingua asiatica",
+                upcomingAsianLanguageTitle: "Pulsante lingua futuro",
                 chooseLanguageHint: "Scegli la tua lingua",
-                amevIntroTitle: "AMEV – 11 Lingue Europee per la Verifica delle Autorità Finanziarie",
-                amevIntroSubtitle: "Un brand multilingue e geograficamente coerente per la vigilanza dei mercati finanziari europei",
-                amevIntroCore: "AMEV copre 11 lingue europee (IT, ES, FR, DE, RO, PT, NL, AL, XK, BS, EL). La variante EN (AWEV) mantiene la reach globale combinando coerenza linguistica e accessibilità geografica.",
-                amevCoverageTitle: "Copertura geografica AMEV",
+                amevIntroTitle: "AMEV, AMEA e AWEV – verifica le autorità finanziarie nella lingua corretta",
+                amevIntroSubtitle: "Un naming orientato all'utente per controllare se un'impresa di servizi finanziari è legittima, registrata e correttamente identificata.",
+                amevIntroCore: "AMEV è usato solo nei percorsi linguistici europei in cui l'acronimo resta coerente. La Grecia usa la variante AMEA, mentre l'inglese usa AWEV per la verifica worldwide e supporta anche l'attuale esperienza per l'area olandese.",
+                amevCoverageTitle: "Copertura attuale del naming",
                 amevCoverageWest: "🇪🇺 Europa Occidentale: Italia, Spagna, Francia, Germania, Paesi Bassi, Belgio",
                 amevCoverageSouth: "🇪🇺 Europa Meridionale: Portogallo, Grecia",
                 amevCoverageEast: "🇪🇺 Europa Orientale: Romania",
                 amevCoverageBalkans: "🇪🇺 Balcani: Albania, Kosovo, Bosnia",
-                amevCoverageWestLabel: "🇪🇺 Europa Occidentale:",
-                amevCoverageWestCountries: "Italia, Spagna, Francia, Germania, Paesi Bassi, Belgio",
-                amevCoverageSouthLabel: "🇪🇺 Europa Meridionale:",
-                amevCoverageSouthCountries: "Portogallo, Grecia",
-                amevCoverageEastLabel: "🇪🇺 Europa Orientale:",
-                amevCoverageEastCountries: "Romania",
-                amevCoverageBalkansLabel: "🇪🇺 Balcani:",
-                amevCoverageBalkansCountries: "Albania, Kosovo, Bosnia",
-                amevCredibilityTitle: "Perché AMEV è un brand polivalente",
-                amevCredibilityText: "L'acronimo identico in 11 lingue migliora memorabilità e accessibilità, rafforza l'allineamento con l'ecosistema regolatorio UE e supporta più database di autorità con un unico marchio.",
-                amevTimelineText: "Rollout PR #3.1 → #3.5: AL, XK, BS, EL (AMEA), RO.",
-                amevFutureExpansion: "⏳ Future Expansion: Asian Languages – Work in Progress",
-                amevFutureExpansionAria: "Vai alla sezione lingue asiatiche in corso di traduzione",
+                amevCoverageWestLabel: "AMEV core europeo:",
+                amevCoverageWestCountries: "percorsi utente in italiano, spagnolo, francese, tedesco, portoghese, romeno e bosniaco",
+                amevCoverageSouthLabel: "Variante AMEA:",
+                amevCoverageSouthCountries: "percorso di verifica greco / area ellenica",
+                amevCoverageEastLabel: "Variante AWEV:",
+                amevCoverageEastCountries: "percorso inglese per verifiche worldwide, usato anche per l'attuale area olandese",
+                amevCoverageBalkansLabel: "Spazio riservato:",
+                amevCoverageBalkansCountries: "il selettore compatto mantiene posto per nuovi pulsanti lingua in futuro",
+                amevCredibilityTitle: "Perché questo naming aiuta la verifica",
+                amevCredibilityText: "La famiglia AMEV / AMEA / AWEV mantiene la pagina focalizzata sul tuo obiettivo: scegliere il percorso linguistico corretto, aprire l'autorità competente e verificare legittimità e identità dell'impresa prima di inviare denaro.",
+                amevTimelineText: "Configurazione attuale: AMEV per il core europeo supportato, AMEA per il greco, AWEV per l'inglese/globale, con pulsanti aggiuntivi riservati alle future espansioni.",
+                amevFutureExpansion: "⏳ Area compatta riservata ai futuri pulsanti lingua",
+                amevFutureExpansionAria: "Vai all'area compatta riservata ai futuri pulsanti lingua",
                 quickIndexTitle: "Indice Rapido – Naviga il Database",
                 quickIndexTitleAriaLabel: "Indice rapido - naviga il database",
                 quickIndexFlagsLink: "Bandiere A-Z",
@@ -3507,9 +3536,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 consumerProtectionGalaxyAlt: "Galaxy You$ - tutela del consumatore",
                 consumerProtectionCoreShieldAlt: "Financial Defense Shield - cuore della protezione dei consumatori",
                 documentTitle: "Database Autorità Finanziarie Internazionali | Verifica Licenze Broker | 239 Paesi",
-                metaDescription: "Database 239 autorità finanziarie internazionali. AMEV in 11 lingue europee: verifica licenze broker, segnala truffe Forex e Crypto, protezione consumatori.",
+                metaDescription: "Database 239 autorità finanziarie internazionali. Verifica licenze broker, controlla identità e legittimità di imprese finanziarie e usa i percorsi lingua AMEV / AMEA / AWEV per prevenire frodi.",
                 ogTitle: "Tutela Truffe | Database Autorità Finanziarie UE - Odissea Digitale",
-                ogDescription: "🌍 Database 239 autorità finanziarie internazionali con AMEV in 11 lingue europee. Verifica licenze broker e segnala truffe Forex/Crypto.",
+                ogDescription: "🌍 Database di 239 autorità finanziarie internazionali. Verifica licenze broker, identità delle imprese e percorsi lingua AMEV / AMEA / AWEV per prevenire frodi Forex/Crypto.",
                 ogImageAlt: "Tutela Truffe - Database Autorità Finanziarie e Mappa Europea Truffe",
                 twitterTitle: "🌊 Odissea Digitale | Recupera i Tuoi Capitali dalle Truffe",
                 twitterDescription: "Database 239 Autorità Internazionali + Mappa Truffe Geolocalizzata. Segnala Forex/Crypto/Pig Butchering. Come Ulisse tornò a Itaca, riconquista il tuo Vello d'Oro.",
@@ -3877,7 +3906,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             },
             en: {
                 title: "International Banking Database",
-                subtitle: "International Financial Authorities Database – 239 Countries, 7 languages OK and 14 languages work in progress",
+                subtitle: "International Financial Authorities Database – multilingual verification paths for 239 countries",
                 securityTitle: "✅ OFFICIAL LEGITIMATE WEBSITE - CONSUMER PROTECTION DATABASE",
                 securityText: "This page offers an official educational database created by <strong>Lawyer Marcello Stanca in Florence - Italy</strong>. It provides consumers and bank clients with all the links to access the official pages of Financial Supervisory Authorities in 239 countries worldwide. Access to the Authorities allows verification of: <strong>1.</strong> the identity of Financial Authorities indicated to users on web pages of fake companies, <strong>2.</strong> but also the actual possession and license number granted, valid to offer financial services in the country of residence of the consumer/bank client. This page offers contact and consultation tools to protect consumer users against financial fraud.",
                 securityNoticeAriaLabel: "Security notice",
@@ -3891,34 +3920,34 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 filterHigh: "Highest Protection",
                 filterEU: "EU Countries",
                 filterNonEU: "Non-EU Countries",
-                languageSelectorEuTitle: "Select Your Language – AMEV Core (11 European Languages)",
-                languageSelectorEuNote: "European AMEV core; Greek uses AMEA variant; EN supports AWEV redirect",
-                languageSelectorAsiaTitle: "⏳ Asian Languages – Work in Progress",
-                languageSelectorAsiaNote: "ASIA section: languages currently being translated (Future Expansion)",
+                languageSelectorEuTitle: "Select your language – AMEV / AMEA / AWEV access",
+                languageSelectorEuNote: "AMEV covers the supported European core; Greek uses AMEA, while AWEV is the English/global path also used for the current Dutch-area experience.",
+                languageSelectorAsiaTitle: "⏳ Future language buttons – Work in Progress",
+                languageSelectorAsiaNote: "Compact reserved area for the next language buttons already planned for future expansion.",
                 languageSelectionAriaLabel: "Language selection",
-                upcomingAsianLanguageTitle: "Next Asian language",
+                upcomingAsianLanguageTitle: "Future language button",
                 chooseLanguageHint: "Choose your language",
-                amevIntroTitle: "AMEV – 11 European Languages for Financial Authority Verification",
-                amevIntroSubtitle: "A multilingual, regionally-coherent brand for European financial market oversight",
-                amevIntroCore: "AMEV works across 11 European languages (IT, ES, FR, DE, RO, PT, NL, AL, XK, BS, EL). The EN variant (AWEV) extends global reach while preserving linguistic coherence and geographic accessibility.",
-                amevCoverageTitle: "AMEV geographic coverage",
+                amevIntroTitle: "AMEV, AMEA and AWEV – verify financial authorities in the right language",
+                amevIntroSubtitle: "A user-focused naming family for checking whether a financial-services provider is legitimate, registered and correctly identified.",
+                amevIntroCore: "AMEV is used only where the current European-language path keeps that acronym coherent. Greek is presented as AMEA, while English uses AWEV for worldwide financial-authority verification and currently also supports Dutch-area users.",
+                amevCoverageTitle: "Current naming coverage",
                 amevCoverageWest: "🇪🇺 Western Europe: Italy, Spain, France, Germany, Netherlands, Belgium",
                 amevCoverageSouth: "🇪🇺 Southern Europe: Portugal, Greece",
                 amevCoverageEast: "🇪🇺 Eastern Europe: Romania",
                 amevCoverageBalkans: "🇪🇺 Balkans: Albania, Kosovo, Bosnia",
-                amevCoverageWestLabel: "🇪🇺 Western Europe:",
-                amevCoverageWestCountries: "Italy, Spain, France, Germany, Netherlands, Belgium",
-                amevCoverageSouthLabel: "🇪🇺 Southern Europe:",
-                amevCoverageSouthCountries: "Portugal, Greece",
-                amevCoverageEastLabel: "🇪🇺 Eastern Europe:",
-                amevCoverageEastCountries: "Romania",
-                amevCoverageBalkansLabel: "🇪🇺 Balkans:",
-                amevCoverageBalkansCountries: "Albania, Kosovo, Bosnia",
-                amevCredibilityTitle: "Why AMEV is a polyvalent brand",
-                amevCredibilityText: "A shared acronym in 11 languages increases memorability, improves accessibility across diverse markets, aligns with the EU regulatory ecosystem, and supports multiple authority databases under one unified identity.",
-                amevTimelineText: "PR #3.1 → #3.5 rollout: AL, XK, BS, EL (AMEA), RO.",
-                amevFutureExpansion: "⏳ Future Expansion: Asian Languages – Work in Progress",
-                amevFutureExpansionAria: "Go to the Asian languages work-in-progress section",
+                amevCoverageWestLabel: "AMEV European core:",
+                amevCoverageWestCountries: "Italian, Spanish, French, German, Portuguese, Romanian and Bosnian user paths",
+                amevCoverageSouthLabel: "AMEA variant:",
+                amevCoverageSouthCountries: "Greek / Hellenic-area verification path",
+                amevCoverageEastLabel: "AWEV variant:",
+                amevCoverageEastCountries: "English path for worldwide checks, also used for the current Dutch-area experience",
+                amevCoverageBalkansLabel: "Reserved space:",
+                amevCoverageBalkansCountries: "the compact selector keeps room for future language buttons",
+                amevCredibilityTitle: "Why this naming supports verification",
+                amevCredibilityText: "The AMEV / AMEA / AWEV naming family keeps the page focused on your goal: choose the right language path, open the relevant authority, and verify the provider's legal identity and legitimacy before sending money.",
+                amevTimelineText: "Current setup: AMEV for the supported European core, AMEA for Greek, AWEV for English/global routing, with extra buttons reserved for future expansion.",
+                amevFutureExpansion: "⏳ Compact area reserved for future language buttons",
+                amevFutureExpansionAria: "Go to the compact area reserved for future language buttons",
                 quickIndexTitle: "Quick Index – Navigate the Database",
                 quickIndexTitleAriaLabel: "Quick index - navigate the database",
                 quickIndexFlagsLink: "A-Z Flags",
@@ -4042,9 +4071,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 consumerProtectionGalaxyAlt: "Galaxy You$ - consumer protection",
                 consumerProtectionCoreShieldAlt: "Financial Defense Shield - consumer protection core",
                 documentTitle: "International Financial Authorities Database | Verify Broker Licenses | 239 Countries",
-                metaDescription: "Database of 239 international financial authorities. AMEV in 11 European languages: verify broker licenses, report Forex and Crypto scams, consumer protection.",
+                metaDescription: "Database of 239 international financial authorities. Verify broker licenses, confirm a financial-services provider's identity, and use the AMEV / AMEA / AWEV language paths for fraud prevention.",
                 ogTitle: "Scam Protection | EU Financial Authorities Database - Digital Odyssey",
-                ogDescription: "🌍 Database of 239 international financial authorities with AMEV in 11 European languages. Verify broker licenses and report Forex/Crypto scams.",
+                ogDescription: "🌍 Database of 239 international financial authorities. Verify broker licenses, company identities, and AMEV / AMEA / AWEV language paths for Forex/Crypto fraud prevention.",
                 ogImageAlt: "Scam Protection - Financial Authorities Database and European Scam Map",
                 twitterTitle: "🌊 Digital Odyssey | Recover Your Capital from Scams",
                 twitterDescription: "Database of 239 international authorities + geolocated scam map. Report Forex/Crypto/Pig Butchering scams and verify financial operators.",
@@ -4105,7 +4134,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             },
             fr: {
                 title: "Base de Données Bancaire Internationale",
-                subtitle: "Base de Données des Autorités Financières Internationales – 239 Pays, 7 langues OK et 14 langues en cours",
+                subtitle: "Base de Données des Autorités Financières Internationales – parcours multilingues pour 239 pays",
                 securityTitle: "✅ SITE OFFICIEL LÉGITIME - BASE DE DONNÉES DE PROTECTION DES CONSOMMATEURS",
                 securityText: "Cette page offre une base de données éducative officielle créée par <strong>l'Avocat Marcello Stanca à Florence - Italie</strong>. Elle fournit aux consommateurs, clients de banques, tous les liens pour accéder aux pages officielles des Autorités de Surveillance Financière de 239 pays du monde. L'accès aux Autorités permet de vérifier: <strong>1.</strong> l'identité des Autorités Financières indiquées aux utilisateurs sur des pages web de fausses entreprises, <strong>2.</strong> mais aussi la possession effective et le numéro de licence accordée, valide pour offrir des services financiers dans le pays de résidence du consommateur/client bancaire. Cette page offre des outils de contact et de consultation pour protéger les utilisateurs consommateurs contre les fraudes financières.",
                 introText: "Ce site web offre des liens pour accéder aux pages web des Autorités Financières de 239 pays du monde. Utilisez-le pour vérifier la légitimité et la régularité des entreprises, des personnes et des entités offrant des services financiers.",
@@ -4114,8 +4143,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 filterHigh: "Protection Maximale",
                 filterEU: "Pays UE",
                 filterNonEU: "Pays hors UE",
-                languageSelectorEuTitle: "AMEV – Autorités Marchés Économiques Vérifiés (11 langues)",
-                languageSelectorEuNote: "Noyau européen + EN pour la redirection du domaine AWEV",
+                languageSelectorEuTitle: "AMEV / AMEA / AWEV – accès linguistique",
+                languageSelectorEuNote: "AMEV pour le noyau européen pris en charge ; AMEA pour le grec ; AWEV pour le parcours anglais/global utilisé aussi pour la zone néerlandaise actuelle.",
                 languageSelectorAsiaTitle: "⏳ Langues en cours de traduction",
                 languageSelectorAsiaNote: "Section ASIE - traductions disponibles, image de marque encore en cours",
                 quickIndexTitle: "Index rapide – Parcourir la base de données",
@@ -4233,7 +4262,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             },
             de: {
                 title: "Internationale Banken-Datenbank",
-                subtitle: "Internationale Datenbank der Finanzaufsichtsbehörden – 239 Länder, 7 Sprachen OK und 14 Sprachen in Arbeit",
+                subtitle: "Internationale Datenbank der Finanzaufsichtsbehörden – mehrsprachige Verifizierungswege für 239 Länder",
                 securityTitle: "✅ OFFIZIELLE LEGITIME WEBSITE - VERBRAUCHERSCHUTZDATENBANK",
                 securityText: "Diese Seite bietet eine offizielle Bildungsdatenbank, erstellt von <strong>Rechtsanwalt Marcello Stanca in Florenz - Italien</strong>. Sie bietet Verbrauchern und Bankkunden alle Links zum Zugriff auf die offiziellen Seiten der Finanzaufsichtsbehörden in 239 Ländern weltweit. Der Zugang zu den Behörden ermöglicht die Überprüfung von: <strong>1.</strong> der Identität der Finanzaufsichtsbehörden, die Benutzern auf Webseiten gefälschter Unternehmen angegeben werden, <strong>2.</strong> aber auch des tatsächlichen Besitzes und der Lizenznummer, gültig für das Anbieten von Finanzdienstleistungen im Wohnsitzland des Verbrauchers/Bankkunden. Diese Seite bietet Kontakt- und Beratungsinstrumente zum Schutz von Verbrauchern gegen Finanzbetrug.",
                 introText: "Diese Website bietet Links zu den Webseiten der Finanzbehörden von 239 Ländern weltweit. Nutzen Sie sie, um die Legitimität und Ordnungsmäßigkeit von Unternehmen, Personen und Einrichtungen zu überprüfen, die Finanzdienstleistungen anbieten.",
@@ -4242,8 +4271,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 filterHigh: "Höchster Schutz",
                 filterEU: "EU-Länder",
                 filterNonEU: "Nicht-EU-Länder",
-                languageSelectorEuTitle: "AMEV – Verifizierte Wirtschaftsmarktbehörden (11 Sprachen)",
-                languageSelectorEuNote: "Europäischer Kern + EN für die AWEV-Domain-Weiterleitung",
+                languageSelectorEuTitle: "AMEV / AMEA / AWEV – Sprachauswahl",
+                languageSelectorEuNote: "AMEV für den unterstützten europäischen Kern, AMEA für Griechisch und AWEV für den englischen/globalen Pfad, der derzeit auch den niederländischen Bereich abdeckt.",
                 languageSelectorAsiaTitle: "⏳ Sprachen in Übersetzung",
                 languageSelectorAsiaNote: "ASIEN-Bereich - Übersetzungen verfügbar, Branding noch in Arbeit",
                 quickIndexTitle: "Schnellindex – In der Datenbank navigieren",
@@ -4361,7 +4390,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             },
             es: {
                 title: "Base de Datos Bancaria Internacional",
-                subtitle: "Base de Datos de Autoridades Financieras Internacionales – 239 Países, 7 idiomas OK y 14 idiomas en progreso",
+                subtitle: "Base de Datos de Autoridades Financieras Internacionales – rutas multilingües de verificación para 239 países",
                 securityTitle: "✅ SITIO OFICIAL LEGÍTIMO - BASE DE DATOS DE PROTECCIÓN AL CONSUMIDOR",
                 securityText: "Esta página ofrece una base de datos educativa oficial creada por <strong>el Abogado Marcello Stanca en Florencia - Italia</strong>. Proporciona a los consumidores, clientes de bancos, todos los enlaces para acceder a las páginas oficiales de las Autoridades de Supervisión Financiera de 239 países del mundo. El acceso a las Autoridades permite verificar: <strong>1.</strong> la identidad de las Autoridades Financieras indicadas a los usuarios en páginas web de empresas falsas, <strong>2.</strong> pero también la posesión efectiva y el número de licencia otorgada, válida para ofrecer servicios financieros en el país de residencia del consumidor/cliente bancario. Esta página ofrece herramientas de contacto y consulta para proteger a los usuarios consumidores contra el fraude financiero.",
                 introText: "Este sitio web ofrece enlaces a las páginas web de las Autoridades Financieras de 239 países del mundo. Úselo para verificar la legitimidad y regularidad de empresas, personas y entidades que ofrecen servicios financieros.",
@@ -4370,8 +4399,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 filterHigh: "Protección Máxima",
                 filterEU: "Países UE",
                 filterNonEU: "Países no UE",
-                languageSelectorEuTitle: "AMEV – Autoridades Mercados Económicos Verificados (11 idiomas)",
-                languageSelectorEuNote: "Núcleo europeo + EN para la redirección del dominio AWEV",
+                languageSelectorEuTitle: "AMEV / AMEA / AWEV – acceso por idioma",
+                languageSelectorEuNote: "AMEV para el núcleo europeo compatible; AMEA para griego; AWEV para la ruta inglesa/global usada también por el área neerlandesa actual.",
                 languageSelectorAsiaTitle: "⏳ Idiomas en traducción",
                 languageSelectorAsiaNote: "Sección ASIA - traducciones disponibles, branding aún en progreso",
                 quickIndexTitle: "Índice rápido – Navega por la base de datos",
@@ -4489,7 +4518,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             },
             pt: {
                 title: "Base de dados internacional para verificação da identidade financeira de destinatários de transferências bancárias",
-                subtitle: "Base de Dados de Autoridades Financeiras Internacionais – 239 Países, 7 idiomas OK e 14 idiomas em andamento",
+                subtitle: "Base de Dados de Autoridades Financeiras Internacionais – percursos multilingues de verificação para 239 países",
                 securityTitle: "✅ SITE OFICIAL LEGÍTIMO – BASE DE DADOS DE PROTEÇÃO AO CONSUMIDOR",
                 securityText: "Acesso imediato às páginas oficiais das Autoridades Financeiras governamentais para verificar a legitimidade e regularidade de empresas, pessoas e entidades que oferecem serviços financeiros e recebem transferências.",
                 introText: "Esta página oferece 239 linkS diretos para as páginas das AUTORIDADES FINANCEIRAS de 239 países do mundo.<br>PROCURE o nome do País declarado como sede da empresa financeira, e poderá conhecer todos os detalhes identificativos oficiais.",
@@ -4498,8 +4527,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 filterHigh: "Proteção Elevada",
                 filterEU: "Países UE",
                 filterNonEU: "Países não-UE",
-                languageSelectorEuTitle: "AMEV – Autoridades Mercados Económicos Verificados (11 idiomas)",
-                languageSelectorEuNote: "Núcleo europeu + EN para redirecionamento do domínio AWEV",
+                languageSelectorEuTitle: "AMEV / AMEA / AWEV – acesso por idioma",
+                languageSelectorEuNote: "AMEV para o núcleo europeu compatível; AMEA para grego; AWEV para o percurso inglês/global usado também pela área neerlandesa atual.",
                 languageSelectorAsiaTitle: "⏳ Idiomas em tradução",
                 languageSelectorAsiaNote: "Secção ÁSIA - traduções disponíveis, branding ainda em progresso",
                 quickIndexTitle: "Índice rápido – Navegue pela base de dados",
@@ -4586,8 +4615,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 filterHigh: "Visoka zaštita",
                 filterEU: "Zemlje EU",
                 filterNonEU: "Zemlje izvan EU",
-                languageSelectorEuTitle: "AMEV – Evropska mreža verificiranih tržišnih autoriteta (11 jezika)",
-                languageSelectorEuNote: "AMEV evropska jezgra + EN za redirect AWEV domene",
+                languageSelectorEuTitle: "AMEV / AMEA / AWEV – jezični pristup",
+                languageSelectorEuNote: "AMEV za podržanu evropsku jezgru, AMEA za grčki i AWEV za engleski/globalni put koji trenutno služi i nizozemskom području.",
                 languageSelectorAsiaTitle: "⏳ Jezici u prijevodu",
                 languageSelectorAsiaNote: "Sekcija ASIA - prijevodi su dostupni, brendiranje je još u toku",
                 quickIndexTitle: "Brzi indeks – pregledaj bazu",
@@ -4709,7 +4738,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             },
             sq: {
                 title: "Databazë ndërkombëtare bankare për verifikimin e identitetit financiar të përfituesve të transfertave bankare.",
-                subtitle: "Databaza Ndërkombëtare e Autoriteteve Financiare – 239 vende, 7 gjuhë OK dhe 14 gjuhë work in progress",
+                subtitle: "Databaza Ndërkombëtare e Autoriteteve Financiare – rrugë shumëgjuhëshe verifikimi për 239 vende",
                 securityTitle: "✅ FAQE ZYRTARE LEGJITIME - DATABAZË PËR MBROJTJEN E KONSUMATORIT",
                 securityText: "Kjo faqe ofron akses të menjëhershëm në faqet zyrtare të Autoriteteve Financiare qeveritare për të verifikuar legjitimitetin dhe rregullsinë e shoqërive, personave dhe entiteteve që ofrojnë shërbime financiare dhe marrin transferta bankare.",
                 introText: "Kjo faqe web ofron 239 lidhje direkte për të hyrë në faqet e AUTORITETEVE FINANCIARE të 239 vendeve të botës.<br>KËRKO emrin e vendit që deklarohet si seli e shoqërisë financiare dhe do të njohësh të gjitha të dhënat zyrtare identifikuese.",
@@ -4718,8 +4747,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 filterHigh: "Mbrojtje e lartë",
                 filterEU: "Vendet e BE-së",
                 filterNonEU: "Vendet jashtë BE-së",
-                languageSelectorEuTitle: "AMEV – Autoritetet e Tregjeve Ekonomike të Verifikuara (11 gjuhë)",
-                languageSelectorEuNote: "Bërthama evropiane + EN për ridrejtimin e domenit AWEV",
+                languageSelectorEuTitle: "AMEV / AMEA / AWEV – qasje sipas gjuhës",
+                languageSelectorEuNote: "AMEV për bërthamën evropiane të mbështetur, AMEA për greqishten dhe AWEV për rrugën angleze/globale që përdoret edhe për zonën aktuale holandeze.",
                 languageSelectorAsiaTitle: "⏳ Gjuhë në përkthim",
                 languageSelectorAsiaNote: "Seksioni AZI - përkthimet janë të disponueshme, branding-u ende në progres",
                 quickIndexTitle: "Indeks i shpejtë – Shfleto databazën",
@@ -4841,17 +4870,67 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             }
             // Add other languages if needed
         };
+        translations.it.landingHeroTitle = "Database Autorità Finanziarie Internazionali – percorsi multilingue per 239 Paesi";
+        translations.it.landingHeroSubtitle = "Verifica licenze broker, segnala truffe Forex e Crypto, controlla l'identità finanziaria dei destinatari di bonifici bancari.";
+        translations.en.landingHeroTitle = "International Financial Authorities Database – multilingual verification paths for 239 countries";
+        translations.en.landingHeroSubtitle = "Verify broker licenses, report Forex/Crypto scams, and check the financial identity of payment beneficiaries.";
+        translations.fr.landingHeroTitle = "Base de Données des Autorités Financières Internationales – parcours multilingues pour 239 pays";
+        translations.fr.landingHeroSubtitle = "Vérifiez les licences de courtage, signalez les fraudes Forex/Crypto et contrôlez l'identité financière des bénéficiaires de paiement.";
+        translations.de.landingHeroTitle = "Internationale Datenbank der Finanzaufsichtsbehörden – mehrsprachige Verifizierungswege für 239 Länder";
+        translations.de.landingHeroSubtitle = "Prüfen Sie Brokerlizenzen, melden Sie Forex-/Krypto-Betrug und kontrollieren Sie die finanzielle Identität von Zahlungsempfängern.";
+        translations.es.landingHeroTitle = "Base de Datos de Autoridades Financieras Internacionales – rutas multilingües de verificación para 239 países";
+        translations.es.landingHeroSubtitle = "Verifique licencias de bróker, denuncie fraudes Forex/Crypto y controle la identidad financiera de los beneficiarios de pagos.";
+        translations.pt.landingHeroTitle = "Base de Dados de Autoridades Financeiras Internacionais – percursos multilingues de verificação para 239 países";
+        translations.pt.landingHeroSubtitle = "Verifique licenças de corretoras, denuncie fraudes Forex/Crypto e confirme a identidade financeira dos beneficiários de pagamentos.";
+        translations.bs.landingHeroTitle = "Međunarodna baza finansijskih autoriteta – višejezični putevi provjere za 239 zemalja";
+        translations.bs.landingHeroSubtitle = "Provjerite licence brokera, prijavite Forex/Crypto prevare i provjerite finansijski identitet primalaca uplata.";
+        translations.sq.landingHeroTitle = "Databaza Ndërkombëtare e Autoriteteve Financiare – rrugë shumëgjuhëshe verifikimi për 239 vende";
+        translations.sq.landingHeroSubtitle = "Verifikoni licencat e brokerëve, raportoni mashtrimet Forex/Crypto dhe kontrolloni identitetin financiar të përfituesve të pagesave.";
         // Greek EL regional variant for PR #3.4:
         // AMEA is the requirement-defined locale-specific acronym for Greek support.
         // Other locales keep AMEV naming; only EL intentionally uses AMEA.
         // Defined as a post-assignment alias to keep all 240+ keys covered with minimal additive changes:
         // EN remains the base fallback while Greek-specific strings are progressively localized.
         translations.el = {
+            ...translations.en,
             title: "Διεθνής Βάση Τραπεζικών Δεδομένων",
             subtitle: "Βάση Δεδομένων Διεθνών Χρηματοοικονομικών Αρχών – 239 χώρες",
             securityTitle: "✅ ΕΠΙΣΗΜΟΣ ΝΟΜΙΜΟΣ ΙΣΤΟΤΟΠΟΣ - ΒΑΣΗ ΠΡΟΣΤΑΣΙΑΣ ΚΑΤΑΝΑΛΩΤΗ",
-            languageSelectorEuTitle: "AMEA – Επαληθευμένες Αρχές Οικονομικής Αγοράς (Ελληνικά)",
-            languageSelectorEuNote: "Ευρωπαϊκός πυρήνας + EN για ανακατεύθυνση τομέα AWEV",
+            securityText: "Αυτή η σελίδα προσφέρει άμεση πρόσβαση στις επίσημες σελίδες των κρατικών χρηματοοικονομικών αρχών, ώστε να επαληθεύετε τη νομιμότητα και την κανονικότητα εταιρειών, προσώπων και οντοτήτων που προσφέρουν χρηματοοικονομικές υπηρεσίες και λαμβάνουν τραπεζικά εμβάσματα.",
+            securityBannerSubtitle: "Πατήστε για να διαβάσετε τις λεπτομέρειες",
+            landingHeroTitle: "Βάση Δεδομένων Διεθνών Χρηματοοικονομικών Αρχών – 239 χώρες",
+            landingHeroSubtitle: "Επαληθεύστε άδειες μεσιτών, αναφέρετε απάτες Forex/Crypto και ελέγξτε τη χρηματοοικονομική ταυτότητα των δικαιούχων πληρωμών.",
+            languageSelectionAriaLabel: "Επιλογή γλώσσας",
+            languageSelectorEuTitle: "AMEV / AMEA / AWEV – επιλογή γλώσσας",
+            languageSelectorEuNote: "AMEV για τον υποστηριζόμενο ευρωπαϊκό πυρήνα, AMEA για τα ελληνικά και AWEV για τη διεθνή αγγλική διαδρομή που χρησιμοποιείται και για την ολλανδική περιοχή.",
+            languageSelectorAsiaTitle: "⏳ Μελλοντικά κουμπιά γλώσσας – Work in Progress",
+            languageSelectorAsiaNote: "Συμπαγής δεσμευμένη περιοχή για τα επόμενα κουμπιά γλώσσας που έχουν ήδη προβλεφθεί για μελλοντική επέκταση.",
+            upcomingAsianLanguageTitle: "Μελλοντικό κουμπί γλώσσας",
+            chooseLanguageHint: "Επιλέξτε τη γλώσσα σας",
+            amevIntroTitle: "AMEV, AMEA και AWEV – επαληθεύστε τις χρηματοοικονομικές αρχές στη σωστή γλώσσα",
+            amevIntroSubtitle: "Μια οικογένεια ονοματοδοσίας προσανατολισμένη στον χρήστη για να ελέγχετε αν ένας πάροχος χρηματοοικονομικών υπηρεσιών είναι νόμιμος, καταχωρισμένος και σωστά ταυτοποιημένος.",
+            amevIntroCore: "Το AMEV χρησιμοποιείται μόνο όπου η τρέχουσα ευρωπαϊκή γλωσσική διαδρομή διατηρεί συνεκτικό αυτό το ακρωνύμιο. Για τα ελληνικά χρησιμοποιείται το AMEA, ενώ στα αγγλικά χρησιμοποιείται το AWEV για παγκόσμια επαλήθευση χρηματοοικονομικών αρχών και για την τρέχουσα εμπειρία της ολλανδικής περιοχής.",
+            amevCoverageTitle: "Τρέχουσα κάλυψη ονοματοδοσίας",
+            amevCoverageWestLabel: "Ευρωπαϊκός πυρήνας AMEV:",
+            amevCoverageWestCountries: "διαδρομές χρήστη στα ιταλικά, ισπανικά, γαλλικά, γερμανικά, πορτογαλικά, ρουμανικά και βοσνιακά",
+            amevCoverageSouthLabel: "Παραλλαγή AMEA:",
+            amevCoverageSouthCountries: "διαδρομή επαλήθευσης για τα ελληνικά / την ελληνική περιοχή",
+            amevCoverageEastLabel: "Παραλλαγή AWEV:",
+            amevCoverageEastCountries: "αγγλική διαδρομή για παγκόσμιους ελέγχους, που χρησιμοποιείται και για την τρέχουσα ολλανδική εμπειρία",
+            amevCoverageBalkansLabel: "Δεσμευμένος χώρος:",
+            amevCoverageBalkansCountries: "ο συμπαγής επιλογέας κρατά χώρο για μελλοντικά κουμπιά γλώσσας",
+            amevCredibilityTitle: "Γιατί αυτή η ονοματοδοσία βοηθά την επαλήθευση",
+            amevCredibilityText: "Η οικογένεια ονοματοδοσίας AMEV / AMEA / AWEV κρατά τη σελίδα εστιασμένη στον στόχο σας: να επιλέξετε τη σωστή γλωσσική διαδρομή, να ανοίξετε τη σχετική αρχή και να επαληθεύσετε τη νομική ταυτότητα και τη νομιμότητα του παρόχου πριν στείλετε χρήματα.",
+            amevTimelineText: "Τρέχουσα διαμόρφωση: AMEV για τον υποστηριζόμενο ευρωπαϊκό πυρήνα, AMEA για τα ελληνικά, AWEV για την αγγλική/παγκόσμια δρομολόγηση, με επιπλέον κουμπιά δεσμευμένα για μελλοντική επέκταση.",
+            amevFutureExpansion: "⏳ Συμπαγής περιοχή δεσμευμένη για μελλοντικά κουμπιά γλώσσας",
+            amevFutureExpansionAria: "Μετάβαση στη συμπαγή περιοχή που έχει δεσμευτεί για μελλοντικά κουμπιά γλώσσας",
+            navDatabase: "🏠 Βάση Δεδομένων Χρηματοοικονομικών Αρχών (239)",
+            navOdyssey: "🌊 Ψηφιακή Οδύσσεια",
+            navReferences: "📜 Θεσμικές Αναφορές",
+            navAuthor: "👨‍⚖️🏛️ Δικηγόρος Marcello Stanca Ιταλία",
+            consumerProtectionShieldAlt: "Financial Defense - προστασία καταναλωτή",
+            consumerProtectionGalaxyAlt: "Galaxy You$ - προστασία καταναλωτή",
+            consumerProtectionCoreShieldAlt: "Financial Defense Shield - πυρήνας προστασίας καταναλωτή",
             instructionsButtonModal: "Οδηγίες",
             askAuthorityBtnNative: "Ζητήστε πληροφορίες από αυτή την Αρχή!"
         };
@@ -4861,33 +4940,35 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         translations.ro = {
             ...translations.en,
             title: "Bază de date bancară internațională pentru verificarea identității financiare a beneficiarilor transferurilor bancare.",
-            subtitle: "Baza de date a autorităților financiare internaționale – 239 țări, 11 limbi europene AMEV + EN",
+            subtitle: "Baza de date a autorităților financiare internaționale – 239 țări, verificare multilingvă pentru autorități financiare",
             securityTitle: "✅ SITE OFICIAL LEGITIM - BAZĂ DE DATE PENTRU PROTECȚIA CONSUMATORILOR",
-            languageSelectorEuTitle: "Selectează limba ta – AMEV Core (11 limbi europene)",
-            languageSelectorEuNote: "Nucleu european AMEV; varianta greacă folosește AMEA; EN pentru redirect AWEV",
-            languageSelectorAsiaTitle: "⏳ Limbi asiatice – Work in Progress",
-            languageSelectorAsiaNote: "Secțiunea ASIA: limbi aflate în curs de traducere (extindere viitoare)",
-            amevIntroTitle: "AMEV – 11 limbi europene pentru verificarea autorităților financiare",
-            amevIntroSubtitle: "Un brand multilingv, coerent regional, pentru supravegherea piețelor financiare europene",
-            amevIntroCore: "AMEV funcționează în 11 limbi europene (IT, ES, FR, DE, RO, PT, NL, AL, XK, BS, EL). Varianta EN (AWEV) extinde acoperirea globală, păstrând coerența lingvistică și accesibilitatea geografică.",
-            amevCoverageTitle: "Acoperire geografică AMEV",
+            landingHeroTitle: "Baza de date a autorităților financiare internaționale – 239 țări, verificare multilingvă pentru autorități financiare",
+            landingHeroSubtitle: "Verifică licențele brokerilor, raportează fraude Forex/Crypto și controlează identitatea financiară a beneficiarilor plăților.",
+            languageSelectorEuTitle: "Selectează limba – acces AMEV / AMEA / AWEV",
+            languageSelectorEuNote: "AMEV pentru nucleul european suportat; AMEA pentru greacă; AWEV pentru traseul englez/global folosit și pentru experiența actuală a zonei olandeze.",
+            languageSelectorAsiaTitle: "⏳ Viitoare butoane de limbă – Work in Progress",
+            languageSelectorAsiaNote: "Zonă compactă rezervată pentru următoarele butoane de limbă planificate pentru extinderi viitoare.",
+            amevIntroTitle: "AMEV, AMEA și AWEV – verifică autoritățile financiare în limba potrivită",
+            amevIntroSubtitle: "O familie de denumiri orientată spre utilizator pentru a verifica dacă un furnizor de servicii financiare este legitim, înregistrat și corect identificat.",
+            amevIntroCore: "AMEV este folosit doar acolo unde traseul lingvistic european păstrează coerent acest acronim. Grecia folosește varianta AMEA, iar engleza folosește AWEV pentru verificare worldwide și pentru experiența actuală din zona olandeză.",
+            amevCoverageTitle: "Acoperirea actuală a denumirilor",
             amevCoverageWest: "🇪🇺 Europa de Vest: Italia, Spania, Franța, Germania, Țările de Jos, Belgia",
             amevCoverageSouth: "🇪🇺 Europa de Sud: Portugalia, Grecia",
             amevCoverageEast: "🇪🇺 Europa de Est: România",
             amevCoverageBalkans: "🇪🇺 Balcani: Albania, Kosovo, Bosnia",
-            amevCoverageWestLabel: "🇪🇺 Europa de Vest:",
-            amevCoverageWestCountries: "Italia, Spania, Franța, Germania, Țările de Jos, Belgia",
-            amevCoverageSouthLabel: "🇪🇺 Europa de Sud:",
-            amevCoverageSouthCountries: "Portugalia, Grecia",
-            amevCoverageEastLabel: "🇪🇺 Europa de Est:",
-            amevCoverageEastCountries: "România",
-            amevCoverageBalkansLabel: "🇪🇺 Balcani:",
-            amevCoverageBalkansCountries: "Albania, Kosovo, Bosnia",
-            amevCredibilityTitle: "De ce AMEV este un brand polivalent",
-            amevCredibilityText: "Acronimul identic în 11 limbi crește memorabilitatea, accesibilitatea și alinierea cu ecosistemul de reglementare UE, oferind o identitate unificată pentru mai multe baze de date ale autorităților financiare.",
-            amevTimelineText: "Implementare PR #3.1 → #3.5: AL, XK, BS, EL (AMEA), RO.",
-            amevFutureExpansion: "⏳ Extindere viitoare: limbi asiatice – în curs de dezvoltare",
-            amevFutureExpansionAria: "Mergi la secțiunea limbilor asiatice în curs de traducere",
+            amevCoverageWestLabel: "Nucleul european AMEV:",
+            amevCoverageWestCountries: "trasee pentru utilizatori în italiană, spaniolă, franceză, germană, portugheză, română și bosniacă",
+            amevCoverageSouthLabel: "Varianta AMEA:",
+            amevCoverageSouthCountries: "traseul de verificare grec / elenic",
+            amevCoverageEastLabel: "Varianta AWEV:",
+            amevCoverageEastCountries: "traseul englez pentru verificări worldwide, folosit și pentru experiența actuală a zonei olandeze",
+            amevCoverageBalkansLabel: "Spațiu rezervat:",
+            amevCoverageBalkansCountries: "selectorul compact păstrează loc pentru viitoare butoane de limbă",
+            amevCredibilityTitle: "De ce această denumire ajută verificarea",
+            amevCredibilityText: "Familia AMEV / AMEA / AWEV păstrează pagina concentrată pe scopul tău: alegi traseul lingvistic potrivit, deschizi autoritatea relevantă și verifici identitatea legală și legitimitatea furnizorului înainte de a trimite bani.",
+            amevTimelineText: "Configurația actuală: AMEV pentru nucleul european suportat, AMEA pentru greacă, AWEV pentru rutarea engleză/globală, cu butoane suplimentare rezervate pentru extinderi viitoare.",
+            amevFutureExpansion: "⏳ Zonă compactă rezervată viitoarelor butoane de limbă",
+            amevFutureExpansionAria: "Mergi la zona compactă rezervată viitoarelor butoane de limbă",
             instructionsButtonModal: "Instrucțiuni",
             askAuthorityBtnNative: "Solicită informații de la această Autoritate!"
         };
