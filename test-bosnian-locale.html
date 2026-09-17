@@ -231,6 +231,16 @@
                         const euGrid = doc.querySelector('.language-selector-eu .language-selector-grid');
                         const asiaGrid = doc.querySelector('.language-selector-asia .language-selector-grid');
                         const reservedPlaceholder = doc.querySelector('.language-selector-asia .lang-btn-placeholder');
+                        const euButtons = Array.from(doc.querySelectorAll('.language-selector-eu .lang-btn[data-lang]'));
+                        const euDataLangOrder = euButtons.map((btn) => btn.getAttribute('data-lang'));
+                        const euVisibleCodeOrder = euButtons.map((btn) => {
+                            if (btn.dataset.lang === 'sq') return 'AL';
+                            if (btn.dataset.lang === 'xk') return 'XK';
+                            const codeFromLabel = (btn.textContent || '').trim().split(/\s+/)[0];
+                            return (codeFromLabel || '').toUpperCase();
+                        });
+                        const expectedEuDataLangOrder = ['en', 'es', 'pt', 'fr', 'de', 'it', 'nl', 'ro', 'el', 'sq', 'xk', 'bs'];
+                        const expectedEuVisibleCodeOrder = ['EN', 'ES', 'PT', 'FR', 'DE', 'IT', 'NL', 'RO', 'EL', 'AL', 'XK', 'BS'];
 
                         addResult(html?.lang === expectedHtmlLang, `${lang}: html lang is ${expectedHtmlLang}`);
                         addResult(canonical === expectedCanonical, `${lang}: canonical is ${expectedCanonical}`);
@@ -256,6 +266,9 @@
                         addResult(euGrid?.dataset.layout === 'row-wrap', `${lang}: EU language buttons are grouped as horizontal row wraps`);
                         addResult(asiaGrid?.dataset.layout === 'row-wrap', `${lang}: reserved future-language buttons are grouped as horizontal row wraps`);
                         addResult(asiaSection?.dataset.placeholder === 'compact' && reservedPlaceholder?.textContent?.includes('WIP'), `${lang}: future-language placeholder remains marked as a compact reserved area`);
+                        addResult(JSON.stringify(euDataLangOrder) === JSON.stringify(expectedEuDataLangOrder), `${lang}: EU language data-lang DOM order matches EN, ES, PT, FR, DE, IT, NL, RO, EL, AL, XK, BS`);
+                        addResult(JSON.stringify(euVisibleCodeOrder) === JSON.stringify(expectedEuVisibleCodeOrder), `${lang}: EU language visible code order matches EN, ES, PT, FR, DE, IT, NL, RO, EL, AL, XK, BS`);
+                        addResult((new Set(euDataLangOrder)).size === euDataLangOrder.length, `${lang}: EU language selector has no duplicate buttons`);
                         const translationMap = win.eval('translations');
                         const staleLandingClaims = obsoleteLandingClaimLocales.flatMap((locale) => obsoleteLandingClaimKeys
                             .map((key) => `${locale}.${key}: ${translationMap?.[locale]?.[key] || ''}`)
