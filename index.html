@@ -1433,13 +1433,13 @@
 height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- End Google Tag Manager (noscript) -->
     <!-- Security Banner - Prima della navigazione per massima visibilità -->
-    <aside class="security-banner" role="banner" aria-label="Security Notice" style="margin: 0; border-radius: 0;">
+    <aside class="security-banner" role="banner" data-i18n-aria-label="securityNoticeAriaLabel" aria-label="Security Notice" style="margin: 0; border-radius: 0;">
         <button id="securityBannerToggle" class="security-banner-toggle" type="button" onclick="toggleSecurityBanner()" aria-expanded="false">
             <div class="security-banner-left">
                 <span class="icon" aria-hidden="true">🛡️</span>
                 <div class="content">
                     <h2 data-i18n="securityTitle">✅ SITO UFFICIALE LEGITTIMO - DATABASE DI PROTEZIONE DEI CONSUMATORI</h2>
-                    <p class="security-banner-subtitle">Tocca per leggere i dettagli</p>
+                    <p class="security-banner-subtitle" data-i18n-text="securityBannerSubtitle">Tocca per leggere i dettagli</p>
                 </div>
             </div>
             <span class="chevron" aria-hidden="true">▼</span>
@@ -1453,27 +1453,27 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <nav style="background: linear-gradient(135deg, #1e293b 0%, #334155 100%); padding: 1rem 0; box-shadow: 0 4px 12px rgba(0,0,0,0.15); position: sticky; top: 0; z-index: 999;">
         <div style="max-width: 1200px; margin: 0 auto; display: flex; gap: 1.5rem; justify-content: center; align-items: center; flex-wrap: wrap; padding: 0 1rem;">
             <a href="https://avvstancamarcello.github.io/Financial-Authority-Database/index.html#database-search-section" style="color: white; text-decoration: none; font-weight: bold; font-size: 1.05rem; padding: 0.5rem 1.5rem; background: rgba(255,255,255,0.15); border-radius: 8px; transition: all 0.3s ease; border: 2px solid rgba(255,255,255,0.2);" onmouseover="this.style.background='rgba(255,255,255,0.25)';" onmouseout="this.style.background='rgba(255,255,255,0.15)';">
-                🏠 Database Autorità Finanziarie (239)
+                <span data-i18n-text="navDatabase">🏠 Database Autorità Finanziarie (239)</span>
             </a>
             <a href="odissea.html" style="color: white; text-decoration: none; font-weight: 500; font-size: 1.05rem; padding: 0.5rem 1.5rem; background: rgba(255,255,255,0.05); border-radius: 8px; transition: all 0.3s ease;" onmouseover="this.style.background='rgba(255,255,255,0.15)';" onmouseout="this.style.background='rgba(255,255,255,0.05)';">
-                🌊 Odissea Digitale
+                <span data-i18n-text="navOdyssey">🌊 Odissea Digitale</span>
             </a>
             <a href="referenze.html" style="color: white; text-decoration: none; font-weight: 500; font-size: 1.05rem; padding: 0.5rem 1.5rem; background: rgba(255,255,255,0.05); border-radius: 8px; transition: all 0.3s ease;" onmouseover="this.style.background='rgba(255,255,255,0.15)';" onmouseout="this.style.background='rgba(255,255,255,0.05)';">
-                📜 Referenze Istituzionali
+                <span data-i18n-text="navReferences">📜 Referenze Istituzionali</span>
             </a>
             <a href="curriculum.html" style="color: #ffd700; text-decoration: none; font-weight: 600; font-size: 1.05rem; padding: 0.5rem 1.5rem; background: rgba(255,215,0,0.1); border-radius: 8px; transition: all 0.3s ease; border: 1px solid rgba(255,215,0,0.7);" onmouseover="this.style.background='rgba(255,215,0,0.25)';" onmouseout="this.style.background='rgba(255,215,0,0.1)';">
-                👨‍⚖️🏛️ Lawyer Marcello Stanca Italy
+                <span data-i18n-text="navAuthor">👨‍⚖️🏛️ Lawyer Marcello Stanca Italy</span>
             </a>
         </div>
     </nav>
     <div class="container">
         <div id="securityPopup" class="security-popup" role="dialog" aria-modal="false" aria-hidden="true">
-            <button type="button" class="security-popup-close" onclick="toggleSecurityBanner()" aria-label="Chiudi avviso">×</button>
+            <button type="button" class="security-popup-close" onclick="toggleSecurityBanner()" data-i18n-aria-label="closeNoticeAriaLabel" aria-label="Chiudi avviso">×</button>
             <h2 data-i18n="securityTitle">✅ SITO UFFICIALE LEGITTIMO - DATABASE DI PROTEZIONE DEI CONSUMATORI</h2>
             <p data-i18n="securityText">Accesso immediato alle home page delle Autority Finanziarie del Governo per verificare la legittimità e regolarità di imprese finanziarie, di persone ed entità che offrono servizi finanziari, e ricevono bonifici.</p>
         </div>
         <div id="instructionsPopup" class="instructions-popup" role="dialog" aria-modal="false" aria-hidden="true">
-            <button type="button" class="instructions-popup-close" onclick="toggleInstructions()" aria-label="Chiudi guida">×</button>
+            <button type="button" class="instructions-popup-close" onclick="toggleInstructions()" data-i18n-aria-label="closeGuideAriaLabel" aria-label="Chiudi guida">×</button>
             <h2>🛡️ Guida Legale Operativa – Verifica di un’Impresa Finanziaria in 5 Passi</h2>
             <p>In qualità di avvocato esperto e autore delle strategie descritte in "Scacco Matto alle Truffe" e nelle Petizioni UE 0888/2024 e 0645/2025, ho redatto questa guida operativa.</p>
             <p>L'obiettivo è trasformare i 239 link del database in uno scudo attivo per proteggere il tuo capitale prima di cliccare su "invia bonifico".</p>
@@ -1513,7 +1513,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             </div>
         </div>
         <div id="searchAdvicePopup" class="instructions-popup" role="dialog" aria-modal="false" aria-hidden="true">
-            <button type="button" class="instructions-popup-close" onclick="toggleSearchAdvice()" aria-label="Chiudi avviso ricerca">×</button>
+            <button type="button" class="instructions-popup-close" onclick="toggleSearchAdvice()" data-i18n-aria-label="closeSearchAdviceAriaLabel" aria-label="Chiudi avviso ricerca">×</button>
             <h2 data-i18n="searchAdviceTitle">🔍 Prima di usare il tasto &quot;Cerca&quot;</h2>
             <ol>
                 <li data-i18n="searchAdvice1">Accetta con umiltà il dovere di cercare informazioni verificate.</li>
@@ -1539,7 +1539,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 <p data-i18n-text="amevTimelineText">PR #3.1 → #3.5 rollout: AL, XK, BS, EL (AMEA), RO.</p>
                 <a href="#languages-asia" class="amev-anchor-link" data-i18n-text="amevFutureExpansion" data-i18n-aria-label="amevFutureExpansionAria">⏳ Future Expansion: Asian Languages – Work in Progress</a>
             </section>
-            <nav class="language-selector" role="navigation" aria-label="Language selection">
+            <nav class="language-selector" role="navigation" data-i18n-aria-label="languageSelectionAriaLabel" aria-label="Language selection">
                 <section class="language-selector-group language-selector-eu" aria-labelledby="language-selector-eu-title">
                     <h2 class="language-selector-title" id="language-selector-eu-title" data-i18n-text="languageSelectorEuTitle">Seleziona la Tua Lingua – AMEV Core (11 Lingue Europee)</h2>
                     <p class="language-selector-note" data-i18n-text="languageSelectorEuNote">Core AMEV europeo; variante greca AMEA; EN supporta redirect dominio AWEV</p>
@@ -1649,7 +1649,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                         </button>
                         </li>
                         <li class="language-selector-item">
-                        <span class="lang-btn lang-btn-placeholder" aria-hidden="true" title="Prossima lingua asiatica">
+                        <span class="lang-btn lang-btn-placeholder" aria-hidden="true" data-i18n-title="upcomingAsianLanguageTitle" title="Prossima lingua asiatica">
                             <span aria-hidden="true">＋</span>
                             <span>WIP</span>
                         </span>
@@ -1657,7 +1657,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     </ul>
                 </section>
                 <span class="language-hint" style="margin-left: 10px; background: linear-gradient(135deg, #1e293b 0%, #334155 100%); color: #ffd700; border: 1px solid #ffd700; border-radius: 999px; padding: 0.3rem 0.9rem; font-size: 0.85rem; display: inline-flex; align-items: center; gap: 6px; cursor: default;">
-                    <span style="font-size: 1.1em;">👆</span> Scegli la tua lingua
+                    <span style="font-size: 1.1em;">👆</span> <span data-i18n-text="chooseLanguageHint">Scegli la tua lingua</span>
                 </span>
             </nav>
             <div class="flag-orbit-banner" aria-hidden="true">
@@ -3109,8 +3109,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
         <!-- NUOVA BARRA RICERCA SUPERIORE -->
         <div class="search-bar-top">
-            <input type="text" id="search-input-top" placeholder="🔍 Cerca paese..." aria-label="Search for a country">
-            <button type="button" onclick="performSearch()">Cerca</button>
+            <input type="text" id="search-input-top" data-i18n-placeholder="searchCountryPlaceholder" data-i18n-aria-label="searchCountryAriaLabel" placeholder="🔍 Cerca paese..." aria-label="Search for a country">
+            <button type="button" onclick="performSearch()" data-i18n-text="searchButton">Cerca</button>
         </div>
 
         <section id="database-search-section" class="controls" role="search" aria-label="Search and filter">
@@ -3118,7 +3118,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <div class="search-row">
                 <div class="search-box">
                     <input type="text" id="searchInput" data-i18n-placeholder="searchPlaceholder" placeholder="Cerca per paese o autorità..." aria-label="Search countries">
-                    <button type="button" class="search-btn">Cerca</button>
+                    <button type="button" class="search-btn" data-i18n-text="searchButton">Cerca</button>
                 </div>
                 <div class="filter-buttons" role="group" data-i18n-aria-label="filterOptionsAriaLabel" aria-label="Filter options">
                     <button class="filter-btn active" onclick="filterCountries('all')" data-i18n="filterAll" aria-pressed="true">Tutti i Paesi</button>
@@ -3349,8 +3349,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 subtitle: "Database Autorità Finanziarie Internazionali – 239 Paesi, 7 lingue OK e 14 lingue work in progress",
                 securityTitle: "✅ SITO UFFICIALE LEGITTIMO - DATABASE DI PROTEZIONE DEI CONSUMATORI",
                 securityText: "Accesso immediato alle home page delle Autority Finanziarie del Governo per verificare la legittimità e regolarità di imprese finanziarie, di persone ed entità che offrono servizi finanziari, e ricevono bonifici.",
+                securityNoticeAriaLabel: "Avviso di sicurezza",
+                securityBannerSubtitle: "Tocca per leggere i dettagli",
                 introText: "Questa pagina web offre 239 link diretti per accedere alle webpage delle AUTORITA' FINANZIARIE di 239 Paesi del Mondo.<br>CERCA il nome del Paese che viene dichiarato sede della impresa finanziaria, e potrai conoscere tutti i dettagli identificativi ufficiali.",
                 searchPlaceholder: "Cerca per paese o autorità...",
+                searchCountryPlaceholder: "🔍 Cerca paese...",
+                searchCountryAriaLabel: "Cerca un paese",
+                searchButton: "Cerca",
                 filterAll: "Tutti i Paesi",
                 filterHigh: "Protezione Elevata",
                 filterEU: "Paesi UE",
@@ -3359,6 +3364,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 languageSelectorEuNote: "Core AMEV europeo; variante greca AMEA; EN per redirect dominio AWEV",
                 languageSelectorAsiaTitle: "⏳ Lingue Asiatiche – Work in Progress",
                 languageSelectorAsiaNote: "Sezione ASIA: Lingue in Corso di Traduzione (Future Expansion)",
+                languageSelectionAriaLabel: "Selezione lingua",
+                upcomingAsianLanguageTitle: "Prossima lingua asiatica",
+                chooseLanguageHint: "Scegli la tua lingua",
                 amevIntroTitle: "AMEV – 11 Lingue Europee per la Verifica delle Autorità Finanziarie",
                 amevIntroSubtitle: "Un brand multilingue e geograficamente coerente per la vigilanza dei mercati finanziari europei",
                 amevIntroCore: "AMEV copre 11 lingue europee (IT, ES, FR, DE, RO, PT, NL, AL, XK, BS, EL). La variante EN (AWEV) mantiene la reach globale combinando coerenza linguistica e accessibilità geografica.",
@@ -3389,6 +3397,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 quickIndexReferencesLink: "ESMA, FBI, IOSCO",
                 quickIndexAuthorLink: "Autore Verificato",
                 quickIndexFaqLink: "FAQ",
+                navDatabase: "🏠 Database Autorità Finanziarie (239)",
+                navOdyssey: "🌊 Odissea Digitale",
+                navReferences: "📜 Referenze Istituzionali",
+                navAuthor: "👨‍⚖️🏛️ Lawyer Marcello Stanca Italy",
                 pageIndexAriaLabel: "Indice della pagina",
                 filterCategoryTitle: "🔎 Filtra per categoria",
                 filterContinentLabel: "🌍 Continente:",
@@ -3429,6 +3441,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 instructionsButtonLabel: "Istruzioni",
                 instructionsButtonAriaLabel: "Istruzioni",
                 instructionsLabel: "Scegli la tua LINGUA, premi pulsante, e Leggi ISTRUZIONI.",
+                closeNoticeAriaLabel: "Chiudi avviso",
+                closeGuideAriaLabel: "Chiudi guida",
+                closeSearchAdviceAriaLabel: "Chiudi avviso ricerca",
                 searchAdviceButton: "Perché questa ricerca è importante?",
                 searchAdviceTitle: "🔍 Prima di usare il tasto &quot;Cerca&quot;",
                 searchAdvice1: "Accetta con umiltà il dovere di cercare informazioni verificate.",
@@ -3457,6 +3472,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 reportFormSubmit: "📤 Genera Richiesta Email",
                 reportFormCancel: "❌ Annulla",
                 reportFormDisclaimer: "ℹ️ I dati saranno inviati alla tua email per permetterti di contattare l'Authority. Una copia sarà inviata all'amministratore per alimentare la Warning List pubblica.",
+                modalCloseTitle: "Chiudi scheda",
+                modalCloseHint: "Clicca per chiudere",
+                reportAuthorityInfoPrefix: "Richiesta di verifica a",
+                notProvided: "Non fornito",
+                notSpecified: "Non specificato",
+                reportPreparedAlert: "✅ Due email sono state preparate:\n\n1. Per l'Authority Finanziaria ({authorityName})\n2. Per l'Amministratore (Warning List)\n\nInvia entrambe dal tuo client email!",
+                translateLoading: "Traduzione...",
+                translateDone: "✓ Tradotto",
                 instructionsContent: `
 <button type="button" class="instructions-popup-close" onclick="toggleInstructions()" aria-label="Chiudi guida">×</button>
 <h2>🛡️ Guida Legale Operativa – Verifica di un’Impresa Finanziaria in 5 Passi</h2>
@@ -3810,8 +3833,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 subtitle: "International Financial Authorities Database – 239 Countries, 7 languages OK and 14 languages work in progress",
                 securityTitle: "✅ OFFICIAL LEGITIMATE WEBSITE - CONSUMER PROTECTION DATABASE",
                 securityText: "This page offers an official educational database created by <strong>Lawyer Marcello Stanca in Florence - Italy</strong>. It provides consumers and bank clients with all the links to access the official pages of Financial Supervisory Authorities in 239 countries worldwide. Access to the Authorities allows verification of: <strong>1.</strong> the identity of Financial Authorities indicated to users on web pages of fake companies, <strong>2.</strong> but also the actual possession and license number granted, valid to offer financial services in the country of residence of the consumer/bank client. This page offers contact and consultation tools to protect consumer users against financial fraud.",
+                securityNoticeAriaLabel: "Security notice",
+                securityBannerSubtitle: "Tap to read details",
                 introText: "This website provides links to the webpages of the Financial Authorities of 239 countries worldwide. Use it to verify the legitimacy and regularity of companies, individuals, and entities offering financial services.",
                 searchPlaceholder: "Search by country or authority...",
+                searchCountryPlaceholder: "🔍 Search country...",
+                searchCountryAriaLabel: "Search for a country",
+                searchButton: "Search",
                 filterAll: "All Countries",
                 filterHigh: "Highest Protection",
                 filterEU: "EU Countries",
@@ -3820,6 +3848,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 languageSelectorEuNote: "European AMEV core; Greek uses AMEA variant; EN supports AWEV redirect",
                 languageSelectorAsiaTitle: "⏳ Asian Languages – Work in Progress",
                 languageSelectorAsiaNote: "ASIA section: languages currently being translated (Future Expansion)",
+                languageSelectionAriaLabel: "Language selection",
+                upcomingAsianLanguageTitle: "Next Asian language",
+                chooseLanguageHint: "Choose your language",
                 amevIntroTitle: "AMEV – 11 European Languages for Financial Authority Verification",
                 amevIntroSubtitle: "A multilingual, regionally-coherent brand for European financial market oversight",
                 amevIntroCore: "AMEV works across 11 European languages (IT, ES, FR, DE, RO, PT, NL, AL, XK, BS, EL). The EN variant (AWEV) extends global reach while preserving linguistic coherence and geographic accessibility.",
@@ -3850,6 +3881,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 quickIndexReferencesLink: "ESMA, FBI, IOSCO",
                 quickIndexAuthorLink: "Verified Author",
                 quickIndexFaqLink: "FAQ",
+                navDatabase: "🏠 Financial Authorities Database (239)",
+                navOdyssey: "🌊 Digital Odyssey",
+                navReferences: "📜 Institutional References",
+                navAuthor: "👨‍⚖️🏛️ Lawyer Marcello Stanca Italy",
                 pageIndexAriaLabel: "Page index",
                 filterCategoryTitle: "🔎 Filter by category",
                 filterContinentLabel: "🌍 Continent:",
@@ -3890,6 +3925,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 instructionsButtonLabel: "Instructions",
                 instructionsButtonAriaLabel: "Instructions",
                 instructionsLabel: "Read legal guide and texts in your language - On/Off",
+                closeNoticeAriaLabel: "Close notice",
+                closeGuideAriaLabel: "Close guide",
+                closeSearchAdviceAriaLabel: "Close search notice",
                 searchAdviceButton: "Why is this search important?",
                 searchAdviceTitle: "🔍 Before using the &quot;Search&quot; button",
                 searchAdvice1: "Humbly accept your duty to look for verified, authoritative information.",
@@ -3922,6 +3960,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 reportFormSubmit: "📤 Generate Email Request",
                 reportFormCancel: "❌ Cancel",
                 reportFormDisclaimer: "ℹ️ Data will be sent to your email so you can contact the Authority. A copy will be sent to the administrator to populate the public Warning List.",
+                modalCloseTitle: "Close card",
+                modalCloseHint: "Click to close",
+                reportAuthorityInfoPrefix: "Verification request to",
+                notProvided: "Not provided",
+                notSpecified: "Not specified",
+                reportPreparedAlert: "✅ Two emails are ready:\n\n1. For the Financial Authority ({authorityName})\n2. For the Administrator (Warning List)\n\nSend both from your email client!",
+                translateLoading: "Translating...",
+                translateDone: "✓ Translated",
                 instructionsContent: `
 <button type="button" class="instructions-popup-close" onclick="toggleInstructions()" aria-label="Close guide">×</button>
 <h2>🛡️ Practical Legal Guide – Verifying a Financial Firm in 5 Steps</h2>
@@ -4875,12 +4921,16 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             const notesContainer = document.getElementById('notesContent');
             const translateBtn = document.getElementById('translateNotesBtn');
             const sanctionAlert = document.getElementById('sanctionAlertText');
+            const currentTranslations = getLanguageBundle(currentLanguage);
             
             if (!notesContainer || !translateBtn) return;
             
             // Mostra loading
             const originalBtnText = translateBtn.innerHTML;
-            translateBtn.innerHTML = '<span class="translation-loading"></span> Traduzione...';
+            const translateLoadingText = currentTranslations.translateLoading || 'Traduzione...';
+            translateBtn.innerHTML = '<span class="translation-loading"></span> <span class="translation-loading-text"></span>';
+            const loadingTextNode = translateBtn.querySelector('.translation-loading-text');
+            if (loadingTextNode) loadingTextNode.textContent = translateLoadingText;
             translateBtn.disabled = true;
             
             try {
@@ -4901,7 +4951,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 }
                 
                 // Aggiorna pulsante
-                translateBtn.innerHTML = '✓ Tradotto';
+                translateBtn.textContent = currentTranslations.translateDone || '✓ Tradotto';
                 translateBtn.classList.add('translated');
                 translateBtn.disabled = true;
                 
@@ -5208,6 +5258,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 const content = langData.instructionsContent || fallbackData.instructionsContent || '';
                 if (content) {
                     instructionsPopup.innerHTML = content;
+                    const instructionsCloseButton = instructionsPopup.querySelector('.instructions-popup-close');
+                    if (instructionsCloseButton) {
+                        instructionsCloseButton.setAttribute('aria-label', langData.closeGuideAriaLabel || fallbackData.closeGuideAriaLabel || 'Close guide');
+                    }
                 }
             }
         }
@@ -5562,10 +5616,21 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 </div>
                 <!-- Pulsante Chiudi Scheda -->
                 <div style="margin-top: 25px; text-align: center;">
-                    <button onclick="closeModal()" style="background: #fee2e2; color: #dc2626; border: 3px solid #dc2626; border-radius: 50%; width: 70px; height: 70px; font-size: 40px; font-weight: bold; cursor: pointer; box-shadow: 0 4px 12px rgba(220, 38, 38, 0.4); transition: all 0.3s ease; display: inline-flex; align-items: center; justify-content: center;" onmouseover="this.style.background='#dc2626'; this.style.color='#fff';" onmouseout="this.style.background='#fee2e2'; this.style.color='#dc2626';" title="Chiudi scheda">✕</button>
-                    <p style="font-size: 0.75em; color: #6c757d; margin-top: 8px;">Clicca per chiudere</p>
+                    <button id="modalCloseButton" onclick="closeModal()" style="background: #fee2e2; color: #dc2626; border: 3px solid #dc2626; border-radius: 50%; width: 70px; height: 70px; font-size: 40px; font-weight: bold; cursor: pointer; box-shadow: 0 4px 12px rgba(220, 38, 38, 0.4); transition: all 0.3s ease; display: inline-flex; align-items: center; justify-content: center;" onmouseover="this.style.background='#dc2626'; this.style.color='#fff';" onmouseout="this.style.background='#fee2e2'; this.style.color='#dc2626';" title="Chiudi scheda" aria-label="Chiudi scheda">✕</button>
+                    <p id="modalCloseHintText" style="font-size: 0.75em; color: #6c757d; margin-top: 8px;">Clicca per chiudere</p>
                 </div>
             `;
+            const modalTranslations = getLanguageBundle(currentLanguage);
+            const modalCloseText = modalTranslations.modalCloseTitle || 'Chiudi scheda';
+            const modalCloseButton = document.getElementById('modalCloseButton');
+            if (modalCloseButton) {
+                modalCloseButton.setAttribute('title', modalCloseText);
+                modalCloseButton.setAttribute('aria-label', modalCloseText);
+            }
+            const modalCloseHintText = document.getElementById('modalCloseHintText');
+            if (modalCloseHintText) {
+                modalCloseHintText.textContent = modalTranslations.modalCloseHint || 'Clicca per chiudere';
+            }
             modal.style.display = 'block';
         }
 
@@ -5575,10 +5640,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
         // === REPORT FORM FUNCTIONS ===
         function openReportForm(countryName, authorityName, authorityEmail) {
+            const currentTranslations = getLanguageBundle(currentLanguage);
             document.getElementById('reportCountry').value = countryName;
             document.getElementById('reportAuthority').value = authorityName;
             document.getElementById('reportAuthorityEmail').value = authorityEmail;
-            document.getElementById('reportAuthorityInfo').textContent = `Richiesta di verifica a: ${authorityName} (${countryName})`;
+            const reportPrefix = currentTranslations.reportAuthorityInfoPrefix || 'Richiesta di verifica a';
+            document.getElementById('reportAuthorityInfo').textContent = `${reportPrefix}: ${authorityName} (${countryName})`;
             document.getElementById('reportFormModal').style.display = 'block';
             document.getElementById('countryModal').style.display = 'none';
         }
@@ -5590,12 +5657,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
         function submitReport(event) {
             event.preventDefault();
+            const currentTranslations = getLanguageBundle(currentLanguage);
             
             const userEmail = document.getElementById('userEmail').value;
             const suspectName = document.getElementById('suspectName').value;
-            const suspectUrl = document.getElementById('suspectUrl').value || 'Non fornito';
-            const suspectPhone = document.getElementById('suspectPhone').value || 'Non fornito';
-            const suspectAmount = document.getElementById('suspectAmount').value || 'Non specificato';
+            const suspectUrl = document.getElementById('suspectUrl').value || (currentTranslations.notProvided || 'Non fornito');
+            const suspectPhone = document.getElementById('suspectPhone').value || (currentTranslations.notProvided || 'Non fornito');
+            const suspectAmount = document.getElementById('suspectAmount').value || (currentTranslations.notSpecified || 'Non specificato');
             const suspectIban = document.getElementById('suspectIban').value;
             const suspectDescription = document.getElementById('suspectDescription').value;
             const countryName = document.getElementById('reportCountry').value;
@@ -5666,7 +5734,9 @@ https://avvstancamarcello.github.io/Financial-Authority-Database/
             }, 1000);
 
             // Mostra conferma
-            alert('✅ Due email sono state preparate:\n\n1. Per l\'Authority Finanziaria (' + authorityName + ')\n2. Per l\'Amministratore (Warning List)\n\nInvia entrambe dal tuo client email!');
+            const reportPreparedAlert = (currentTranslations.reportPreparedAlert || "✅ Due email sono state preparate:\n\n1. Per l'Authority Finanziaria ({authorityName})\n2. Per l'Amministratore (Warning List)\n\nInvia entrambe dal tuo client email!")
+                .replace('{authorityName}', authorityName);
+            alert(reportPreparedAlert);
             
             closeReportForm();
         }
