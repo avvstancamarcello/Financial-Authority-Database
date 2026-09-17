@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>i18n baseline regression test</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 2rem; background: #0f172a; color: #e2e8f0; }
+        .pass { color: #22c55e; }
+        .fail { color: #ef4444; }
+    </style>
+</head>
+<body>
+    <h1>i18n baseline regression test</h1>
+    <ul id="results"></ul>
+    <script>
+        const results = document.getElementById('results');
+        const scenarios = [
+            {
+                lang: 'en',
+                expectedHtmlLang: 'en',
+                expectedDir: 'ltr',
+                expectedOgLocale: 'en_US',
+                expectedTitle: 'International Financial Authorities Database | Verify Broker Licences | 239 Countries',
+                expectedDescription: 'Database of financial authorities for 239 countries and jurisdictions. Verify broker licences, find official fraud-reporting channels and consumer-protection contacts.',
+                expectedFaqTitle: '❓ Frequently asked questions – FAQ',
+                expectedFaqQuestion: 'How can I check whether a broker is authorised?',
+                expectedProtectionLabel: 'Highest Protection',
+                expectedSanctionBadge: 'UN Sanctions',
+                forbiddenText: ['Domande frequenti', 'ONU SANCTIONS']
+            },
+            {
+                lang: 'it',
+                selectedLang: 'it',
+                expectedHtmlLang: 'it',
+                expectedDir: 'ltr',
+                expectedOgLocale: 'it_IT',
+                expectedTitle: 'Database internazionale delle autorità finanziarie | Verifica licenze broker | 239 paesi',
+                expectedDescription: 'Database delle autorità finanziarie per 239 paesi e giurisdizioni. Verifica licenze broker, trova canali ufficiali per segnalare frodi e contatti per la tutela dei consumatori.',
+                expectedFaqTitle: '❓ Domande frequenti – FAQ',
+                expectedFaqQuestion: 'Come posso verificare se un broker è autorizzato?',
+                expectedProtectionLabel: 'Altissimo',
+                expectedSanctionBadge: 'Sanzioni ONU',
+                forbiddenText: ['ONU SANCTIONS']
+            },
+            {
+                lang: 'ro-RO',
+                selectedLang: 'ro',
+                expectedHtmlLang: 'ro-RO',
+                expectedDir: 'ltr',
+                expectedOgLocale: 'ro_RO',
+                expectedTitle: 'International Financial Authorities Database | Verify Broker Licences | 239 Countries',
+                expectedDescription: 'Database of financial authorities for 239 countries and jurisdictions. Verify broker licences, find official fraud-reporting channels and consumer-protection contacts.',
+                expectedFaqTitle: '❓ Frequently asked questions – FAQ',
+                expectedFaqQuestion: 'How can I check whether a broker is authorised?',
+                expectedProtectionLabel: 'Highest Protection',
+                expectedSanctionBadge: 'UN Sanctions',
+                forbiddenText: ['ONU SANCTIONS']
+            }
+        ];
+
+        function addResult(ok, message) {
+            const li = document.createElement('li');
+            li.className = ok ? 'pass' : 'fail';
+            li.textContent = `${ok ? 'PASS' : 'FAIL'} - ${message}`;
+            results.appendChild(li);
+            if (!ok) document.body.dataset.testStatus = 'fail';
+        }
+
+        function waitForReady(iframe, lang, attempts = 0) {
+            return new Promise((resolve, reject) => {
+                try {
+                    const doc = iframe.contentDocument;
+                    const win = iframe.contentWindow;
+                    const faqScript = doc?.getElementById('faq-jsonld')?.textContent || '';
+                    const protectionLink = doc?.getElementById('protection-source-link')?.getAttribute('href');
+                    const faqItems = doc?.querySelectorAll('#faq-content [itemprop="mainEntity"]') || [];
+                    const totalCountries = Number(doc?.getElementById('totalCountries')?.textContent || '0');
+                    if (doc?.documentElement?.lang === lang && typeof win?.openModal === 'function' && faqScript && protectionLink && faqItems.length === 6 && totalCountries > 0) {
+                        resolve();
+                        return;
+                    }
+                    if (attempts >= 80) {
+                        reject(new Error(`timed out waiting for ${lang} baseline state`));
+                        return;
+                    }
+                    window.setTimeout(() => {
+                        waitForReady(iframe, lang, attempts + 1).then(resolve).catch(reject);
+                    }, 100);
+                } catch (error) {
+                    reject(error);
+                }
+            });
+        }
+
+        async function runScenario(scenario) {
+            const iframe = document.createElement('iframe');
+            iframe.style.display = 'none';
+            iframe.src = 'index.html';
+            document.body.appendChild(iframe);
+
+            await new Promise((resolve) => {
+                iframe.onload = resolve;
+            });
+
+            const win = iframe.contentWindow;
+            win.changeLanguage(scenario.lang, scenario.selectedLang || scenario.lang);
+            await waitForReady(iframe, scenario.lang);
+
+            const doc = iframe.contentDocument;
+            const description = doc.querySelector('meta[name="description"]')?.content;
+            const ogTitle = doc.querySelector('meta[property="og:title"]')?.content;
+            const twitterTitle = doc.querySelector('meta[name="twitter:title"]')?.content;
+            const ogLocale = doc.querySelector('meta[property="og:locale"]')?.content;
+            const protectionLink = doc.getElementById('protection-source-link')?.getAttribute('href');
+            const protectionHeading = doc.getElementById('protection-source-title')?.textContent.trim();
+            const statsText = doc.querySelector('.stats')?.textContent || '';
+            const faqTitle = doc.querySelector('#faq-section h2')?.textContent.trim();
+            const faqQuestion = doc.querySelector('#faq-content [itemprop="name"]')?.textContent.trim();
+            const faqJson = JSON.parse(doc.getElementById('faq-jsonld').textContent || '{}');
+            const visibleSectionsText = [
+                doc.querySelector('header')?.textContent || '',
+                doc.getElementById('table-of-contents')?.textContent || '',
+                doc.querySelector('.stats')?.textContent || '',
+                doc.getElementById('flags-section')?.textContent || '',
+                doc.getElementById('faq-section')?.textContent || '',
+                doc.querySelector('footer')?.textContent || ''
+            ].join(' ');
+
+            addResult(doc.title === scenario.expectedTitle, `${scenario.lang}: document title localized`);
+            addResult(description === scenario.expectedDescription, `${scenario.lang}: meta description localized`);
+            addResult(ogTitle === (scenario.lang === 'it' ? 'Database internazionale delle autorità finanziarie' : 'International Financial Authorities Database'), `${scenario.lang}: og:title localized`);
+            addResult(twitterTitle === (scenario.lang === 'it' ? 'Database internazionale delle autorità finanziarie' : 'International Financial Authorities Database'), `${scenario.lang}: twitter:title localized`);
+            addResult(doc.documentElement.lang === scenario.expectedHtmlLang, `${scenario.lang}: html lang updated`);
+            addResult(doc.documentElement.dir === scenario.expectedDir, `${scenario.lang}: dir updated`);
+            addResult(ogLocale === scenario.expectedOgLocale, `${scenario.lang}: og:locale updated`);
+            addResult(protectionHeading.length > 0, `${scenario.lang}: protection source note rendered`);
+            addResult(protectionLink === 'protection_levels.csv', `${scenario.lang}: protection source link uses fallback URL`);
+            addResult(statsText.includes(scenario.expectedProtectionLabel), `${scenario.lang}: stats label uses expected protection terminology`);
+            addResult(faqTitle === scenario.expectedFaqTitle, `${scenario.lang}: FAQ heading localized`);
+            addResult(faqQuestion === scenario.expectedFaqQuestion, `${scenario.lang}: visible FAQ rendered from locale source`);
+            addResult(Array.isArray(faqJson.mainEntity) && faqJson.mainEntity[0]?.name === scenario.expectedFaqQuestion, `${scenario.lang}: FAQ JSON-LD matches visible FAQ source`);
+
+            win.openModal('Cuba');
+            const modalText = doc.getElementById('modalContent')?.textContent || '';
+            addResult(modalText.includes(scenario.expectedSanctionBadge), `${scenario.lang}: sanction badge localized in modal`);
+            scenario.forbiddenText.forEach((text) => addResult(!modalText.includes(text) && !visibleSectionsText.includes(text), `${scenario.lang}: does not contain residual text ${text}`));
+
+            iframe.remove();
+        }
+
+        (async () => {
+            document.body.dataset.testStatus = 'pass';
+            for (const scenario of scenarios) {
+                try {
+                    await runScenario(scenario);
+                } catch (error) {
+                    addResult(false, `${scenario.lang}: ${error.message}`);
+                }
+            }
+        })();
+    </script>
+</body>
+</html>
