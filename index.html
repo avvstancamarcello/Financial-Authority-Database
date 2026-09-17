@@ -534,6 +534,21 @@
             margin: 0;
             padding: 0;
         }
+        .language-selector-grid-area-row { list-style: none; flex: 0 0 100%; width: 100%; margin: 0 0 0.35rem; }
+        .language-selector-grid-area-label {
+            margin: 0;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            gap: 10px;
+            color: #e2e8f0;
+            font-weight: 800;
+            font-size: clamp(1rem, 2.3vw, 1.7rem);
+            line-height: 1.2;
+            text-wrap: balance;
+        }
+        .language-selector-grid-area-label .language-selector-area-icon { font-size: 2em; line-height: 1; }
+        .language-selector-grid-area-separator { margin: 0 2px; }
         .language-selector-item { list-style: none; flex: 0 0 auto; }
         .language-selector-item .lang-btn,
         .language-selector-item .lang-btn-placeholder { width: auto; min-width: 94px; }
@@ -549,13 +564,39 @@
         .amev-introduction {
             max-width: 920px;
             margin: 16px auto 0;
-            padding: 18px 20px;
+            padding: 12px 14px;
             border-radius: 20px;
             border: 1px solid rgba(255,255,255,0.35);
             background: linear-gradient(135deg, rgba(10,20,40,0.82) 0%, rgba(16,86,173,0.65) 55%, rgba(253,204,13,0.18) 100%);
             color: #f8fafc;
             box-shadow: 0 8px 30px rgba(15,23,42,0.28);
         }
+        .amev-introduction-toggle {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            padding: 10px 12px;
+            border-radius: 14px;
+            border: 1px solid rgba(255,255,255,0.4);
+            background: rgba(15,23,42,0.48);
+            color: #ffffff;
+            cursor: pointer;
+            font: inherit;
+            text-align: left;
+        }
+        .amev-introduction-toggle:focus-visible { outline: 2px solid #fef08a; outline-offset: 2px; }
+        .amev-introduction-toggle-summary { display: grid; gap: 2px; }
+        .amev-introduction-toggle-title { font-size: 1rem; font-weight: 800; }
+        .amev-introduction-toggle-action { font-size: 0.82rem; color: #dbeafe; }
+        .amev-introduction-toggle-action-expanded { display: none; }
+        .amev-introduction-toggle[aria-expanded="true"] .amev-introduction-toggle-action-collapsed { display: none; }
+        .amev-introduction-toggle[aria-expanded="true"] .amev-introduction-toggle-action-expanded { display: inline; }
+        .amev-introduction-toggle-chevron { font-size: 1.15rem; transition: transform 0.2s ease; }
+        .amev-introduction-toggle[aria-expanded="true"] .amev-introduction-toggle-chevron { transform: rotate(180deg); }
+        .amev-introduction-content { margin-top: 0.9rem; }
+        .amev-introduction-content[hidden] { display: none; }
         .amev-introduction h2 { margin: 0 0 0.45rem; color: #ffffff; font-size: 1.25rem; }
         .amev-introduction .amev-subtitle { margin: 0 0 0.6rem; color: #dbeafe; font-weight: 600; }
         .amev-introduction p { margin: 0.35rem 0; line-height: 1.55; }
@@ -1295,6 +1336,7 @@
             .language-selector-item .lang-btn,
             .language-selector-item .lang-btn-placeholder { width: 100%; min-width: 0; }
             .language-selector-asia { max-width: 100%; }
+            .language-selector-grid-area-label { font-size: clamp(0.95rem, 3.2vw, 1.45rem); }
             .amev-introduction { padding: 16px 14px; border-radius: 16px; }
             .amev-introduction h2 { font-size: 1.08rem; }
             .amev-introduction h3 { font-size: 0.96rem; }
@@ -1368,6 +1410,8 @@
             .language-selector-title { font-size: 0.92rem; }
             .language-selector-note { font-size: 0.78rem; }
             .language-selector-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+            .language-selector-grid-area-row { grid-column: 1 / -1; }
+            .language-selector-grid-area-label { font-size: clamp(0.9rem, 4.6vw, 1.2rem); gap: 8px; }
             .language-selector-item { min-width: 0; }
             .language-selector-item .lang-btn,
             .language-selector-item .lang-btn-placeholder { width: 100%; min-width: 0; }
@@ -1630,11 +1674,15 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 <section class="language-selector-group language-selector-eu" aria-labelledby="language-selector-eu-title">
                     <h2 class="language-selector-title" id="language-selector-eu-title" data-i18n-text="languageSelectorEuTitle">Seleziona la tua lingua – accessi AMEV / AMEA / AWEV</h2>
                     <p class="language-selector-note" data-i18n-text="languageSelectorEuNote">AMEV per il core europeo supportato; AMEA per il greco; AWEV per il percorso inglese/globale usato anche dall'area olandese.</p>
-                    <p class="language-selector-area-label" id="language-selector-eu-area-label" style="margin: 0 0 0.6rem; display: inline-flex; align-items: center; gap: 8px; font-size: 0.85rem; font-weight: 700; color: #cbd5e1;">
-                        <span class="fi fi-eu language-selector-area-icon" aria-hidden="true"></span>
-                        <span data-i18n-text="languageAreaEu">Area UE</span>
-                    </p>
                     <ul class="language-selector-grid" data-layout="row-wrap" role="list">
+                        <li class="language-selector-grid-area-row" id="language-selector-eu-area-label">
+                            <p class="language-selector-grid-area-label language-selector-grid-area-label-eu">
+                                <span class="fi fi-eu language-selector-area-icon" aria-hidden="true"></span>
+                                <span data-i18n-text="languageAreaEu">AREA UE</span>
+                                <span class="language-selector-grid-area-separator" aria-hidden="true">-</span>
+                                <span data-i18n-text="languagePrompt">Seleziona la tua lingua - accesso landing page AMEV - AMEA - AWEV</span>
+                            </p>
+                        </li>
                         <li class="language-selector-item">
                         <button class="lang-btn" data-lang="en" onclick="changeLanguage('en')" data-i18n-aria-label="languageButtonEnAriaLabel" aria-label="English">
                             <span class="fi fi-gb lang-flag" aria-hidden="true"></span>
@@ -1714,10 +1762,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 <section class="language-selector-group language-selector-asia" id="languages-asia" data-placeholder="compact" aria-labelledby="language-selector-asia-title" tabindex="-1">
                     <h2 class="language-selector-title" id="language-selector-asia-title" data-i18n-text="languageSelectorAsiaTitle">⏳ Pulsanti lingua futuri – Work in Progress</h2>
                     <p class="language-selector-note" data-i18n-text="languageSelectorAsiaNote">Area compatta riservata ai prossimi pulsanti lingua già previsti per le espansioni future.</p>
-                    <p class="language-selector-area-label" id="language-selector-asia-area-label" style="margin: 0 0 0.6rem; display: inline-flex; align-items: center; gap: 8px; font-size: 0.85rem; font-weight: 700; color: #cbd5e1;">
-                        <span data-i18n-text="languageAreaAsia">Area ASIA</span>
-                    </p>
                     <ul class="language-selector-grid" data-layout="row-wrap" role="list">
+                        <li class="language-selector-grid-area-row" id="language-selector-asia-area-label">
+                            <p class="language-selector-grid-area-label language-selector-grid-area-label-asia">
+                                <span data-i18n-text="languageAreaAsia">Area ASIA</span>
+                            </p>
+                        </li>
                         <li class="language-selector-item">
                         <button class="lang-btn" data-lang="ar" onclick="changeLanguage('ar')" data-i18n-aria-label="languageButtonArAriaLabel" aria-label="Arabic">
                             <span class="fi fi-qa lang-flag" aria-hidden="true"></span>
@@ -1754,21 +1804,33 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     <span style="font-size: 1.1em;">👆</span> <span data-i18n-text="chooseLanguageHint">Scegli la tua lingua</span>
                 </span>
             </nav>
-            <section class="amev-introduction" aria-labelledby="amev-introduction-title">
-                <h2 id="amev-introduction-title" data-i18n-text="amevIntroTitle">AMEV, AMEA e AWEV – verifica le autorità finanziarie nella lingua corretta</h2>
-                <p class="amev-subtitle" data-i18n-text="amevIntroSubtitle">Un naming orientato all'utente per controllare se un'impresa di servizi finanziari è legittima, registrata e correttamente identificata.</p>
-                <p data-i18n-text="amevIntroCore">AMEV è usato solo nei percorsi linguistici europei in cui l'acronimo resta coerente. La Grecia usa la variante AMEA, mentre l'inglese usa AWEV per la verifica worldwide e supporta anche l'attuale esperienza per l'area olandese.</p>
-                <h3 data-i18n-text="amevCoverageTitle">Copertura attuale del naming</h3>
-                <ul>
-                    <li><span class="amev-region-label" data-i18n-text="amevCoverageWestLabel">AMEV core europeo:</span> <span data-i18n-text="amevCoverageWestCountries">percorsi utente in italiano, spagnolo, francese, tedesco, portoghese, romeno e bosniaco</span></li>
-                    <li><span class="amev-region-label" data-i18n-text="amevCoverageSouthLabel">Variante AMEA:</span> <span data-i18n-text="amevCoverageSouthCountries">percorso di verifica greco / area ellenica</span></li>
-                    <li><span class="amev-region-label" data-i18n-text="amevCoverageEastLabel">Variante AWEV:</span> <span data-i18n-text="amevCoverageEastCountries">percorso inglese per verifiche worldwide, usato anche per l'attuale area olandese</span></li>
-                    <li><span class="amev-region-label" data-i18n-text="amevCoverageBalkansLabel">Spazio riservato:</span> <span data-i18n-text="amevCoverageBalkansCountries">il selettore compatto mantiene posto per nuovi pulsanti lingua in futuro</span></li>
-                </ul>
-                <h3 data-i18n-text="amevCredibilityTitle">Perché questo naming aiuta la verifica</h3>
-                <p data-i18n-text="amevCredibilityText">La famiglia AMEV / AMEA / AWEV mantiene la pagina focalizzata sul tuo obiettivo: scegliere il percorso linguistico corretto, aprire l'autorità competente e verificare legittimità e identità dell'impresa prima di inviare denaro.</p>
-                <p data-i18n-text="amevTimelineText">Configurazione attuale: AMEV per il core europeo supportato, AMEA per il greco, AWEV per l'inglese/globale, con pulsanti aggiuntivi riservati alle future espansioni.</p>
-                <a href="#languages-asia" class="amev-anchor-link" data-i18n-text="amevFutureExpansion" data-i18n-aria-label="amevFutureExpansionAria">⏳ Area compatta riservata ai futuri pulsanti lingua</a>
+            <section class="amev-introduction" aria-labelledby="amev-introduction-toggle-label">
+                <button type="button" id="amev-introduction-toggle" class="amev-introduction-toggle" aria-expanded="false" aria-controls="amev-introduction-content" onclick="toggleAmevIntroduction()">
+                    <span class="amev-introduction-toggle-summary">
+                        <span id="amev-introduction-toggle-label" class="amev-introduction-toggle-title" data-i18n-text="amevInfoSummary">AMEV / AMEA / AWEV - Informazioni essenziali</span>
+                        <span class="amev-introduction-toggle-action">
+                            <span class="amev-introduction-toggle-action-collapsed" data-i18n-text="amevInfoExpand">Mostra dettagli</span>
+                            <span class="amev-introduction-toggle-action-expanded" data-i18n-text="amevInfoCollapse">Nascondi dettagli</span>
+                        </span>
+                    </span>
+                    <span class="amev-introduction-toggle-chevron" aria-hidden="true">⌄</span>
+                </button>
+                <div id="amev-introduction-content" class="amev-introduction-content" hidden>
+                    <h2 id="amev-introduction-title" data-i18n-text="amevIntroTitle">AMEV, AMEA e AWEV – verifica le autorità finanziarie nella lingua corretta</h2>
+                    <p class="amev-subtitle" data-i18n-text="amevIntroSubtitle">Un naming orientato all'utente per controllare se un'impresa di servizi finanziari è legittima, registrata e correttamente identificata.</p>
+                    <p data-i18n-text="amevIntroCore">AMEV è usato solo nei percorsi linguistici europei in cui l'acronimo resta coerente. La Grecia usa la variante AMEA, mentre l'inglese usa AWEV per la verifica worldwide e supporta anche l'attuale esperienza per l'area olandese.</p>
+                    <h3 data-i18n-text="amevCoverageTitle">Copertura attuale del naming</h3>
+                    <ul>
+                        <li><span class="amev-region-label" data-i18n-text="amevCoverageWestLabel">AMEV core europeo:</span> <span data-i18n-text="amevCoverageWestCountries">percorsi utente in italiano, spagnolo, francese, tedesco, portoghese, romeno e bosniaco</span></li>
+                        <li><span class="amev-region-label" data-i18n-text="amevCoverageSouthLabel">Variante AMEA:</span> <span data-i18n-text="amevCoverageSouthCountries">percorso di verifica greco / area ellenica</span></li>
+                        <li><span class="amev-region-label" data-i18n-text="amevCoverageEastLabel">Variante AWEV:</span> <span data-i18n-text="amevCoverageEastCountries">percorso inglese per verifiche worldwide, usato anche per l'attuale area olandese</span></li>
+                        <li><span class="amev-region-label" data-i18n-text="amevCoverageBalkansLabel">Spazio riservato:</span> <span data-i18n-text="amevCoverageBalkansCountries">il selettore compatto mantiene posto per nuovi pulsanti lingua in futuro</span></li>
+                    </ul>
+                    <h3 data-i18n-text="amevCredibilityTitle">Perché questo naming aiuta la verifica</h3>
+                    <p data-i18n-text="amevCredibilityText">La famiglia AMEV / AMEA / AWEV mantiene la pagina focalizzata sul tuo obiettivo: scegliere il percorso linguistico corretto, aprire l'autorità competente e verificare legittimità e identità dell'impresa prima di inviare denaro.</p>
+                    <p data-i18n-text="amevTimelineText">Configurazione attuale: AMEV per il core europeo supportato, AMEA per il greco, AWEV per l'inglese/globale, con pulsanti aggiuntivi riservati alle future espansioni.</p>
+                    <a href="#languages-asia" class="amev-anchor-link" data-i18n-text="amevFutureExpansion" data-i18n-aria-label="amevFutureExpansionAria">⏳ Area compatta riservata ai futuri pulsanti lingua</a>
+                </div>
             </section>
         </header>
 
@@ -3403,8 +3465,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 languageSelectionAriaLabel: "Selezione lingua",
                 upcomingAsianLanguageTitle: "Pulsante lingua futuro",
                 chooseLanguageHint: "Scegli la tua lingua",
-                languageAreaEu: "Area UE",
+                languageAreaEu: "AREA UE",
+                languagePrompt: "Seleziona la tua lingua - accesso landing page AMEV - AMEA - AWEV",
                 languageAreaAsia: "Area ASIA",
+                amevInfoSummary: "AMEV / AMEA / AWEV - Informazioni essenziali",
+                amevInfoExpand: "Mostra dettagli",
+                amevInfoCollapse: "Nascondi dettagli",
                 amevIntroTitle: "AMEV, AMEA e AWEV – verifica le autorità finanziarie nella lingua corretta",
                 amevIntroSubtitle: "Un naming orientato all'utente per controllare se un'impresa di servizi finanziari è legittima, registrata e correttamente identificata.",
                 amevIntroCore: "AMEV è usato solo nei percorsi linguistici europei in cui l'acronimo resta coerente. La Grecia usa la variante AMEA, mentre l'inglese usa AWEV per la verifica worldwide e supporta anche l'attuale esperienza per l'area olandese.",
@@ -3618,7 +3684,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 filterEU: "دول الاتحاد الأوروبي",
                 filterNonEU: "دول خارج الاتحاد الأوروبي",
                 languageAreaEu: "منطقة الاتحاد الأوروبي",
+                languagePrompt: "اختر لغتك - الوصول إلى صفحة الهبوط AMEV - AMEA - AWEV",
                 languageAreaAsia: "منطقة آسيا",
+                amevInfoSummary: "AMEV / AMEA / AWEV - معلومات أساسية",
+                amevInfoExpand: "إظهار التفاصيل",
+                amevInfoCollapse: "إخفاء التفاصيل",
                 quickIndexTitle: "فهرس سريع – تصفّح قاعدة البيانات",
                 quickIndexTitleAriaLabel: "فهرس سريع - تصفح قاعدة البيانات",
                 quickIndexFlagsLink: "الأعلام من A إلى Z",
@@ -3726,7 +3796,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 filterEU: "Quốc gia EU",
                 filterNonEU: "Ngoài EU",
                 languageAreaEu: "Khu vực EU",
+                languagePrompt: "Chọn ngôn ngữ của bạn - truy cập trang đích AMEV - AMEA - AWEV",
                 languageAreaAsia: "Khu vực Châu Á",
+                amevInfoSummary: "AMEV / AMEA / AWEV - Thông tin cần thiết",
+                amevInfoExpand: "Hiển thị chi tiết",
+                amevInfoCollapse: "Ẩn chi tiết",
                 quickIndexTitle: "Chỉ mục nhanh – Điều hướng cơ sở dữ liệu",
                 quickIndexTitleAriaLabel: "Chỉ mục nhanh - điều hướng cơ sở dữ liệu",
                 quickIndexFlagsLink: "Cờ A-Z",
@@ -3795,7 +3869,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 filterEU: "欧盟国家",
                 filterNonEU: "非欧盟国家",
                 languageAreaEu: "欧盟区域",
+                languagePrompt: "选择你的语言 - 访问 AMEV - AMEA - AWEV 落地页",
                 languageAreaAsia: "亚洲区域",
+                amevInfoSummary: "AMEV / AMEA / AWEV - 关键信息",
+                amevInfoExpand: "显示详情",
+                amevInfoCollapse: "隐藏详情",
                 quickIndexTitle: "快速索引 – 浏览数据库",
                 quickIndexTitleAriaLabel: "快速索引 - 浏览数据库",
                 quickIndexFlagsLink: "A-Z 旗帜",
@@ -3864,7 +3942,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 filterEU: "ईयू देश",
                 filterNonEU: "ग़ैर‑ईयू देश",
                 languageAreaEu: "यूरोपीय संघ क्षेत्र",
+                languagePrompt: "अपनी भाषा चुनें - AMEV - AMEA - AWEV लैंडिंग पेज एक्सेस",
                 languageAreaAsia: "एशिया क्षेत्र",
+                amevInfoSummary: "AMEV / AMEA / AWEV - आवश्यक जानकारी",
+                amevInfoExpand: "विवरण दिखाएँ",
+                amevInfoCollapse: "विवरण छिपाएँ",
                 quickIndexTitle: "त्वरित अनुक्रमणिका – डेटाबेस में नेविगेट करें",
                 quickIndexTitleAriaLabel: "त्वरित अनुक्रमणिका - डेटाबेस में नेविगेट करें",
                 quickIndexFlagsLink: "A-Z झंडे",
@@ -3945,7 +4027,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 upcomingAsianLanguageTitle: "Future language button",
                 chooseLanguageHint: "Choose your language",
                 languageAreaEu: "EU area",
+                languagePrompt: "Select your language - AMEV - AMEA - AWEV landing page access",
                 languageAreaAsia: "ASIA area",
+                amevInfoSummary: "AMEV / AMEA / AWEV - Essential information",
+                amevInfoExpand: "Show details",
+                amevInfoCollapse: "Hide details",
                 amevIntroTitle: "AMEV, AMEA and AWEV – verify financial authorities in the right language",
                 amevIntroSubtitle: "A user-focused naming family for checking whether a financial-services provider is legitimate, registered and correctly identified.",
                 amevIntroCore: "AMEV is used only where the current European-language path keeps that acronym coherent. Greek is presented as AMEA, while English uses AWEV for worldwide financial-authority verification and currently also supports Dutch-area users.",
@@ -4167,7 +4253,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 languageSelectorAsiaTitle: "⏳ Langues en cours de traduction",
                 languageSelectorAsiaNote: "Section ASIE - traductions disponibles, image de marque encore en cours",
                 languageAreaEu: "Zone UE",
+                languagePrompt: "Sélectionnez votre langue - accès à la landing page AMEV - AMEA - AWEV",
                 languageAreaAsia: "Zone ASIE",
+                amevInfoSummary: "AMEV / AMEA / AWEV - Informations essentielles",
+                amevInfoExpand: "Afficher les détails",
+                amevInfoCollapse: "Masquer les détails",
                 quickIndexTitle: "Index rapide – Parcourir la base de données",
                 quickIndexTitleAriaLabel: "Index rapide - parcourir la base de données",
                 quickIndexFlagsLink: "Drapeaux A-Z",
@@ -4297,7 +4387,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 languageSelectorAsiaTitle: "⏳ Sprachen in Übersetzung",
                 languageSelectorAsiaNote: "ASIEN-Bereich - Übersetzungen verfügbar, Branding noch in Arbeit",
                 languageAreaEu: "EU-Bereich",
+                languagePrompt: "Wähle deine Sprache - Zugriff auf die Landingpage AMEV - AMEA - AWEV",
                 languageAreaAsia: "ASIEN-Bereich",
+                amevInfoSummary: "AMEV / AMEA / AWEV - Wichtige Informationen",
+                amevInfoExpand: "Details anzeigen",
+                amevInfoCollapse: "Details ausblenden",
                 quickIndexTitle: "Schnellindex – In der Datenbank navigieren",
                 quickIndexTitleAriaLabel: "Schnellindex - in der Datenbank navigieren",
                 quickIndexFlagsLink: "A-Z-Flaggen",
@@ -4427,7 +4521,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 languageSelectorAsiaTitle: "⏳ Idiomas en traducción",
                 languageSelectorAsiaNote: "Sección ASIA - traducciones disponibles, branding aún en progreso",
                 languageAreaEu: "Área UE",
+                languagePrompt: "Selecciona tu idioma - acceso a la landing page AMEV - AMEA - AWEV",
                 languageAreaAsia: "Área ASIA",
+                amevInfoSummary: "AMEV / AMEA / AWEV - Información esencial",
+                amevInfoExpand: "Mostrar detalles",
+                amevInfoCollapse: "Ocultar detalles",
                 quickIndexTitle: "Índice rápido – Navega por la base de datos",
                 quickIndexTitleAriaLabel: "Índice rápido - navega por la base de datos",
                 quickIndexFlagsLink: "Banderas A-Z",
@@ -4557,7 +4655,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 languageSelectorAsiaTitle: "⏳ Idiomas em tradução",
                 languageSelectorAsiaNote: "Secção ÁSIA - traduções disponíveis, branding ainda em progresso",
                 languageAreaEu: "Área UE",
+                languagePrompt: "Selecione o seu idioma - acesso à landing page AMEV - AMEA - AWEV",
                 languageAreaAsia: "Área ÁSIA",
+                amevInfoSummary: "AMEV / AMEA / AWEV - Informações essenciais",
+                amevInfoExpand: "Mostrar detalhes",
+                amevInfoCollapse: "Ocultar detalhes",
                 quickIndexTitle: "Índice rápido – Navegue pela base de dados",
                 quickIndexTitleAriaLabel: "Índice rápido - navegue pela base de dados",
                 quickIndexFlagsLink: "Bandeiras A-Z",
@@ -4647,7 +4749,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 languageSelectorAsiaTitle: "⏳ Jezici u prijevodu",
                 languageSelectorAsiaNote: "Sekcija ASIA - prijevodi su dostupni, brendiranje je još u toku",
                 languageAreaEu: "Područje EU",
+                languagePrompt: "Odaberi jezik - pristup landing stranici AMEV - AMEA - AWEV",
                 languageAreaAsia: "Područje AZIJA",
+                amevInfoSummary: "AMEV / AMEA / AWEV - Osnovne informacije",
+                amevInfoExpand: "Prikaži detalje",
+                amevInfoCollapse: "Sakrij detalje",
                 quickIndexTitle: "Brzi indeks – pregledaj bazu",
                 quickIndexTitleAriaLabel: "Brzi indeks - pregledaj bazu",
                 quickIndexFlagsLink: "Zastave A-Z",
@@ -4781,7 +4887,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 languageSelectorAsiaTitle: "⏳ Gjuhë në përkthim",
                 languageSelectorAsiaNote: "Seksioni AZI - përkthimet janë të disponueshme, branding-u ende në progres",
                 languageAreaEu: "Zona BE",
+                languagePrompt: "Zgjidh gjuhën tënde - hyrje në landing page AMEV - AMEA - AWEV",
                 languageAreaAsia: "Zona AZIA",
+                amevInfoSummary: "AMEV / AMEA / AWEV - Informacion thelbësor",
+                amevInfoExpand: "Shfaq detajet",
+                amevInfoCollapse: "Fshih detajet",
                 quickIndexTitle: "Indeks i shpejtë – Shfleto databazën",
                 quickIndexTitleAriaLabel: "Indeks i shpejtë - shfleto databazën",
                 quickIndexFlagsLink: "Flamujt A-Z",
@@ -4949,7 +5059,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             upcomingAsianLanguageTitle: "Μελλοντικό κουμπί γλώσσας",
             chooseLanguageHint: "Επιλέξτε τη γλώσσα σας",
             languageAreaEu: "Περιοχή ΕΕ",
+            languagePrompt: "Επιλέξτε τη γλώσσα σας - πρόσβαση στη landing page AMEV - AMEA - AWEV",
             languageAreaAsia: "Περιοχή ΑΣΙΑ",
+            amevInfoSummary: "AMEV / AMEA / AWEV - Βασικές πληροφορίες",
+            amevInfoExpand: "Εμφάνιση λεπτομερειών",
+            amevInfoCollapse: "Απόκρυψη λεπτομερειών",
             amevIntroTitle: "AMEV, AMEA και AWEV – επαληθεύστε τις χρηματοοικονομικές αρχές στη σωστή γλώσσα",
             amevIntroSubtitle: "Μια οικογένεια ονοματοδοσίας προσανατολισμένη στον χρήστη για να ελέγχετε αν ένας πάροχος χρηματοοικονομικών υπηρεσιών είναι νόμιμος, καταχωρισμένος και σωστά ταυτοποιημένος.",
             amevIntroCore: "Το AMEV χρησιμοποιείται μόνο όπου η τρέχουσα ευρωπαϊκή γλωσσική διαδρομή διατηρεί συνεκτικό αυτό το ακρωνύμιο. Για τα ελληνικά χρησιμοποιείται το AMEA, ενώ στα αγγλικά χρησιμοποιείται το AWEV για παγκόσμια επαλήθευση χρηματοοικονομικών αρχών και για την τρέχουσα εμπειρία της ολλανδικής περιοχής.",
@@ -4992,7 +5106,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             languageSelectorAsiaTitle: "⏳ Viitoare butoane de limbă – Work in Progress",
             languageSelectorAsiaNote: "Zonă compactă rezervată pentru următoarele butoane de limbă planificate pentru extinderi viitoare.",
             languageAreaEu: "Zona UE",
+            languagePrompt: "Selectează limba - acces la landing page AMEV - AMEA - AWEV",
             languageAreaAsia: "Zona ASIA",
+            amevInfoSummary: "AMEV / AMEA / AWEV - Informații esențiale",
+            amevInfoExpand: "Afișează detalii",
+            amevInfoCollapse: "Ascunde detalii",
             amevIntroTitle: "AMEV, AMEA și AWEV – verifică autoritățile financiare în limba potrivită",
             amevIntroSubtitle: "O familie de denumiri orientată spre utilizator pentru a verifica dacă un furnizor de servicii financiare este legitim, înregistrat și corect identificat.",
             amevIntroCore: "AMEV este folosit doar acolo unde traseul lingvistic european păstrează coerent acest acronim. Grecia folosește varianta AMEA, iar engleza folosește AWEV pentru verificare worldwide și pentru experiența actuală din zona olandeză.",
@@ -5194,6 +5312,16 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             const isVisible = popup.classList.toggle('visible');
             toggle.setAttribute('aria-expanded', isVisible ? 'true' : 'false');
             popup.setAttribute('aria-hidden', isVisible ? 'false' : 'true');
+        }
+
+        function toggleAmevIntroduction() {
+            const content = document.getElementById('amev-introduction-content');
+            const toggle = document.getElementById('amev-introduction-toggle');
+            if (!content || !toggle) return;
+            const isExpanded = toggle.getAttribute('aria-expanded') === 'true';
+            const nextExpanded = !isExpanded;
+            toggle.setAttribute('aria-expanded', nextExpanded ? 'true' : 'false');
+            content.hidden = !nextExpanded;
         }
 
         function toggleSearchAdvice() {

@@ -125,7 +125,8 @@
             faqQuestion1: "How can I verify whether a broker is authorized?",
             navReferences: "📜 International Financial Supervision Institutions",
             languageAreaEu: "EU area",
-            languageAreaAsia: "ASIA area"
+            languageAreaAsia: "ASIA area",
+            languagePrompt: "Select your language - AMEV - AMEA - AWEV landing page access"
         };
         const obsoleteNavReferences = "📜 Referenze Istituzionali";
         const obsoleteLandingClaimPattern = /\b11\b[\s\S]{0,120}\b(?:AMEV|languages?|lingue|langues|Sprachen|idiomas|línguas|limbi|jezika|gjuhë|γλώσσες)\b/i;
@@ -243,6 +244,7 @@
                         const euAreaLabel = doc.getElementById('language-selector-eu-area-label');
                         const asiaAreaLabel = doc.getElementById('language-selector-asia-area-label');
                         const euAreaText = euAreaLabel?.querySelector('[data-i18n-text="languageAreaEu"]')?.textContent?.trim() || '';
+                        const euPromptText = euAreaLabel?.querySelector('[data-i18n-text="languagePrompt"]')?.textContent?.trim() || '';
                         const asiaAreaText = asiaAreaLabel?.querySelector('[data-i18n-text="languageAreaAsia"]')?.textContent?.trim() || '';
                         const euAreaIcon = euAreaLabel?.querySelector('.language-selector-area-icon.fi.fi-eu');
                         const asiaFlagClasses = Array.from(doc.querySelectorAll('.language-selector-asia .lang-btn .lang-flag')).map((flag) =>
@@ -260,6 +262,14 @@
                         const expectedEuDataLangOrder = ['en', 'es', 'pt', 'fr', 'de', 'it', 'nl', 'ro', 'el', 'sq', 'xk', 'bs'];
                         const expectedEuVisibleCodeOrder = ['EN', 'ES', 'PT', 'FR', 'DE', 'IT', 'NL', 'RO', 'EL', 'AL', 'XK', 'BS'];
                         const expectedAsiaFlagClasses = ['fi-qa', 'fi-cn', 'fi-in', 'fi-vn'];
+                        const translationMap = win.eval('translations');
+                        const euFirstGridRow = euGrid?.firstElementChild;
+                        const asiaFirstGridRow = asiaGrid?.firstElementChild;
+                        const euGridAreaMessage = (euAreaLabel?.textContent || '').replace(/\s+/g, ' ').replace(/\s*-\s*/g, ' - ').trim();
+                        const expectedEuGridAreaMessage = `${translationMap?.[lang]?.languageAreaEu || translationMap?.en?.languageAreaEu || ''} - ${translationMap?.[lang]?.languagePrompt || translationMap?.en?.languagePrompt || ''}`.trim();
+                        const styleText = Array.from(doc.querySelectorAll('style')).map((styleTag) => styleTag.textContent || '').join('\n');
+                        const amevDisclosureToggle = doc.getElementById('amev-introduction-toggle');
+                        const amevDisclosureContent = doc.getElementById('amev-introduction-content');
 
                         addResult(html?.lang === expectedHtmlLang, `${lang}: html lang is ${expectedHtmlLang}`);
                         addResult(canonical === expectedCanonical, `${lang}: canonical is ${expectedCanonical}`);
@@ -294,24 +304,41 @@
                         addResult(JSON.stringify(euDataLangOrder) === JSON.stringify(expectedEuDataLangOrder), `${lang}: EU language data-lang DOM order matches EN, ES, PT, FR, DE, IT, NL, RO, EL, AL, XK, BS`);
                         addResult(JSON.stringify(euVisibleCodeOrder) === JSON.stringify(expectedEuVisibleCodeOrder), `${lang}: EU language visible code order matches EN, ES, PT, FR, DE, IT, NL, RO, EL, AL, XK, BS`);
                         addResult((new Set(euDataLangOrder)).size === euDataLangOrder.length, `${lang}: EU language selector has no duplicate buttons`);
-                        const translationMap = win.eval('translations');
                         if (lang === 'it') {
                             const labelLocales = Object.keys(translationMap || {}).filter((locale) =>
                                 translationMap?.[locale] && typeof translationMap[locale] === 'object'
                             );
                             const missingAreaLabelLocales = labelLocales.filter((locale) =>
-                                !translationMap?.[locale]?.languageAreaEu || !translationMap?.[locale]?.languageAreaAsia
+                                !translationMap?.[locale]?.languageAreaEu || !translationMap?.[locale]?.languageAreaAsia || !translationMap?.[locale]?.languagePrompt || !translationMap?.[locale]?.amevInfoSummary || !translationMap?.[locale]?.amevInfoExpand || !translationMap?.[locale]?.amevInfoCollapse
                             );
-                            addResult(missingAreaLabelLocales.length === 0, 'it: all translation bundles define languageAreaEu and languageAreaAsia');
+                            addResult(missingAreaLabelLocales.length === 0, 'it: all translation bundles define area-row and AMEV disclosure keys');
                         }
                         addResult(Boolean(euAreaLabel), `${lang}: EU area label is present`);
                         addResult(Boolean(asiaAreaLabel), `${lang}: ASIA area label is present`);
+                        addResult(euFirstGridRow?.id === 'language-selector-eu-area-label' && euFirstGridRow?.classList.contains('language-selector-grid-area-row'), `${lang}: EU area row is inside the EU grid as its first full-width row`);
+                        addResult(asiaFirstGridRow?.id === 'language-selector-asia-area-label' && asiaFirstGridRow?.classList.contains('language-selector-grid-area-row'), `${lang}: ASIA area row is inside the ASIA grid as its first full-width row`);
                         addResult(Boolean(euAreaIcon) && euAreaIcon.getAttribute('aria-hidden') === 'true', `${lang}: EU area label has a decorative aria-hidden EU icon`);
                         addResult(Boolean(euAreaText), `${lang}: EU area label keeps accessible text next to the icon`);
+                        addResult(Boolean(euPromptText), `${lang}: EU area row includes the localized language prompt text`);
                         addResult(euAreaText === (translationMap?.[lang]?.languageAreaEu || translationMap?.en?.languageAreaEu || ''), `${lang}: EU area label is localized via runtime i18n`);
+                        addResult(euPromptText === (translationMap?.[lang]?.languagePrompt || translationMap?.en?.languagePrompt || ''), `${lang}: EU prompt is localized via runtime i18n`);
+                        addResult(euGridAreaMessage === expectedEuGridAreaMessage, `${lang}: EU first-row message combines localized AREA UE + prompt text`);
                         addResult(asiaAreaText === (translationMap?.[lang]?.languageAreaAsia || translationMap?.en?.languageAreaAsia || ''), `${lang}: ASIA area label is localized via runtime i18n`);
                         addResult(!asiaAreaLabel?.querySelector('.language-selector-area-icon'), `${lang}: ASIA area label has no aggregated icon`);
                         addResult(JSON.stringify(asiaFlagClasses) === JSON.stringify(expectedAsiaFlagClasses), `${lang}: ASIA buttons keep only the existing per-language flags (QA, CN, IN, VN)`);
+                        addResult(/\.language-selector-grid-area-label\s*\{[\s\S]*font-size:\s*clamp\(1rem,\s*2\.3vw,\s*1\.7rem\)/.test(styleText), `${lang}: area-row labels use the doubled-sized responsive font rule`);
+                        addResult(/\.language-selector-grid-area-label\s+\.language-selector-area-icon\s*\{[\s\S]*font-size:\s*2em/.test(styleText), `${lang}: EU icon uses the doubled-size style rule`);
+                        addResult(asiaAreaLabel?.querySelector('.language-selector-grid-area-label')?.classList.contains('language-selector-grid-area-label-asia'), `${lang}: ASIA row uses the area-row doubled-size label class`);
+                        addResult(amevDisclosureToggle?.tagName === 'BUTTON' && amevDisclosureToggle?.type === 'button', `${lang}: AMEV info uses a semantic disclosure button`);
+                        addResult(amevDisclosureToggle?.getAttribute('aria-controls') === 'amev-introduction-content', `${lang}: AMEV disclosure button references stable aria-controls content id`);
+                        addResult(amevDisclosureToggle?.getAttribute('aria-expanded') === 'false' && amevDisclosureContent?.hidden === true, `${lang}: AMEV information starts collapsed and compact`);
+                        addResult(Boolean(amevDisclosureToggle?.querySelector('[data-i18n-text="amevInfoSummary"]')) && Boolean(amevDisclosureToggle?.querySelector('[data-i18n-text="amevInfoExpand"]')) && Boolean(amevDisclosureToggle?.querySelector('[data-i18n-text="amevInfoCollapse"]')), `${lang}: AMEV disclosure summary and controls are runtime-localized`);
+                        amevDisclosureToggle?.click();
+                        addResult(amevDisclosureToggle?.getAttribute('aria-expanded') === 'true' && amevDisclosureContent?.hidden === false, `${lang}: AMEV disclosure expands in place when activated`);
+                        amevDisclosureToggle?.click();
+                        addResult(amevDisclosureToggle?.getAttribute('aria-expanded') === 'false' && amevDisclosureContent?.hidden === true, `${lang}: AMEV disclosure collapses when activated again`);
+                        amevDisclosureToggle?.click();
+                        addResult(amevDisclosureToggle?.getAttribute('aria-expanded') === 'true' && amevDisclosureContent?.hidden === false, `${lang}: AMEV disclosure can be re-opened before language switching`);
                         const staleLandingClaims = obsoleteLandingClaimLocales.flatMap((locale) => obsoleteLandingClaimKeys
                             .map((key) => `${locale}.${key}: ${translationMap?.[locale]?.[key] || ''}`)
                             .filter((entry) => obsoleteLandingClaimPattern.test(entry)));
@@ -362,7 +389,13 @@
                         addResult((switchedFaqSchema?.mainEntity?.[0]?.name || '') === expectedEnState.faqQuestion1, `${lang}→en: FAQ JSON-LD updates on language switch`);
                         addResult((switchedDoc.querySelector('nav a[href="referenze.html"] span')?.textContent || '').trim() === expectedEnState.navReferences, `${lang}→en: references nav label updates to the full EN label`);
                         addResult((switchedDoc.querySelector('#language-selector-eu-area-label [data-i18n-text="languageAreaEu"]')?.textContent || '').trim() === expectedEnState.languageAreaEu, `${lang}→en: EU area label updates on language switch`);
+                        addResult((switchedDoc.querySelector('#language-selector-eu-area-label [data-i18n-text="languagePrompt"]')?.textContent || '').trim() === expectedEnState.languagePrompt, `${lang}→en: EU prompt updates on language switch`);
                         addResult((switchedDoc.querySelector('#language-selector-asia-area-label [data-i18n-text="languageAreaAsia"]')?.textContent || '').trim() === expectedEnState.languageAreaAsia, `${lang}→en: ASIA area label updates on language switch`);
+                        const switchedDisclosureToggle = switchedDoc.getElementById('amev-introduction-toggle');
+                        const switchedDisclosureContent = switchedDoc.getElementById('amev-introduction-content');
+                        addResult(switchedDisclosureToggle?.getAttribute('aria-expanded') === 'true' && switchedDisclosureContent?.hidden === false, `${lang}→en: AMEV disclosure state remains expanded after runtime language switch`);
+                        switchedDisclosureToggle?.click();
+                        addResult(switchedDisclosureToggle?.getAttribute('aria-expanded') === 'false' && switchedDisclosureContent?.hidden === true, `${lang}→en: AMEV disclosure remains operable after language switch`);
                     } catch (error) {
                         addResult(false, `${lang}: ${error.message}`);
                     } finally {
