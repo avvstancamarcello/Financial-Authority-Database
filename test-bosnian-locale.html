@@ -112,6 +112,21 @@
             twitterImageAlt: "Scam Protection - European Financial Scam Map",
             faqQuestion1: "How can I verify whether a broker is authorized?"
         };
+        const obsoleteLandingClaimPattern = /\b11\b[\s\S]{0,120}\b(?:AMEV|languages?|lingue|langues|Sprachen|idiomas|línguas|limbi|jezika|gjuhë|γλώσσες)\b/i;
+        const obsoleteLandingClaimLocales = ['it', 'en', 'fr', 'de', 'es', 'pt', 'bs', 'sq', 'ro', 'el'];
+        const obsoleteLandingClaimKeys = [
+            'landingHeroTitle',
+            'landingHeroSubtitle',
+            'languageSelectorEuNote',
+            'amevIntroTitle',
+            'amevIntroSubtitle',
+            'amevIntroCore',
+            'amevCoverageTitle',
+            'amevCoverageWestCountries',
+            'amevCoverageEastCountries',
+            'amevCredibilityText',
+            'amevTimelineText'
+        ];
 
         const results = document.getElementById('results');
 
@@ -233,7 +248,11 @@
                         addResult(euGrid?.dataset.layout === 'row-wrap', `${lang}: EU language buttons are grouped as horizontal row wraps`);
                         addResult(asiaGrid?.dataset.layout === 'row-wrap', `${lang}: reserved future-language buttons are grouped as horizontal row wraps`);
                         addResult(asiaSection?.dataset.placeholder === 'compact' && reservedPlaceholder?.textContent?.includes('WIP'), `${lang}: future-language placeholder remains marked as a compact reserved area`);
-                        addResult((doc.querySelector('#amev-introduction-title')?.textContent || '').includes('AME') && !(doc.body.textContent.includes('11 European languages') || doc.body.textContent.includes('11 lingue europee')), `${lang}: updated AMEV/AMEA/AWEV landing copy replaces the obsolete 11-language claim`);
+                        const translationMap = win.eval('translations');
+                        const staleLandingClaims = obsoleteLandingClaimLocales.flatMap((locale) => obsoleteLandingClaimKeys
+                            .map((key) => `${locale}.${key}: ${translationMap?.[locale]?.[key] || ''}`)
+                            .filter((entry) => obsoleteLandingClaimPattern.test(entry)));
+                        addResult((doc.querySelector('#amev-introduction-title')?.textContent || '').includes('AME') && staleLandingClaims.length === 0, `${lang}: updated AMEV/AMEA/AWEV landing copy replaces obsolete 11-language claims across localized landing strings`);
                         if (lang === 'bs') {
                             addResult(buttonText.includes('BS') && buttonText.includes('Bosanski'), 'bs: EU selector shows BS and Bosanski');
                             addResult(doc.querySelector('link[hreflang="bs"]')?.href === 'https://tutelatruffe.it/?lang=bs', 'bs: hreflang bs points to Bosnian URL');
