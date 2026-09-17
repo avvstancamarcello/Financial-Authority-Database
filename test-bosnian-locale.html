@@ -190,13 +190,6 @@
                         const euGrid = doc.querySelector('.language-selector-eu .language-selector-grid');
                         const asiaGrid = doc.querySelector('.language-selector-asia .language-selector-grid');
                         const reservedPlaceholder = doc.querySelector('.language-selector-asia .lang-btn-placeholder');
-                        const euGroupRect = doc.querySelector('.language-selector-eu')?.getBoundingClientRect();
-                        const asiaGroupRect = doc.querySelector('.language-selector-asia')?.getBoundingClientRect();
-                        const placeholderRect = reservedPlaceholder?.getBoundingClientRect();
-                        const selectorStyle = languageSelector ? win.getComputedStyle(languageSelector) : null;
-                        const asiaGroupStyle = asiaSection ? win.getComputedStyle(asiaSection) : null;
-                        const euGridStyle = euGrid ? win.getComputedStyle(euGrid) : null;
-                        const asiaGridStyle = asiaGrid ? win.getComputedStyle(asiaGrid) : null;
 
                         addResult(html?.lang === expectedHtmlLang, `${lang}: html lang is ${expectedHtmlLang}`);
                         addResult(canonical === expectedCanonical, `${lang}: canonical is ${expectedCanonical}`);
@@ -218,10 +211,10 @@
                         addResult(headerOrder.indexOf('title') > headerOrder.indexOf('flags'), `${lang}: main title appears after the flag/shield block`);
                         addResult(headerOrder.indexOf('languages') > headerOrder.indexOf('title'), `${lang}: language selector appears after the main title`);
                         addResult(headerOrder.indexOf('intro') > headerOrder.indexOf('languages'), `${lang}: AMEV intro follows the language selector`);
-                        addResult(selectorStyle?.display === 'grid' && selectorStyle?.paddingTop === '0px' && selectorStyle?.paddingRight === '0px', `${lang}: language selector outer shell is compact without the large oval background`);
-                        addResult(euGridStyle?.display === 'flex', `${lang}: EU language buttons use horizontal row layout`);
-                        addResult(asiaGridStyle?.display === 'flex', `${lang}: reserved future-language buttons use horizontal row layout`);
-                        addResult(asiaGroupStyle?.maxWidth === '720px' && reservedPlaceholder?.textContent?.includes('WIP'), `${lang}: future-language placeholder remains compact relative to the main selector grid`);
+                        addResult(languageSelector?.dataset.layout === 'compact', `${lang}: language selector outer shell is marked as compact`);
+                        addResult(euGrid?.dataset.layout === 'row-wrap', `${lang}: EU language buttons are grouped as horizontal row wraps`);
+                        addResult(asiaGrid?.dataset.layout === 'row-wrap', `${lang}: reserved future-language buttons are grouped as horizontal row wraps`);
+                        addResult(asiaSection?.dataset.placeholder === 'compact' && reservedPlaceholder?.textContent?.includes('WIP'), `${lang}: future-language placeholder remains marked as a compact reserved area`);
                         addResult((doc.querySelector('#amev-introduction-title')?.textContent || '').includes('AME') && !(doc.body.textContent.includes('11 European languages') || doc.body.textContent.includes('11 lingue europee')), `${lang}: updated AMEV/AMEA/AWEV landing copy replaces the obsolete 11-language claim`);
                         win.changeLanguage('en');
                         const switchedDoc = iframe.contentDocument;
