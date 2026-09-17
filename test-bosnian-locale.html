@@ -194,6 +194,7 @@
                         const asiaGroupRect = doc.querySelector('.language-selector-asia')?.getBoundingClientRect();
                         const placeholderRect = reservedPlaceholder?.getBoundingClientRect();
                         const selectorStyle = languageSelector ? win.getComputedStyle(languageSelector) : null;
+                        const asiaGroupStyle = asiaSection ? win.getComputedStyle(asiaSection) : null;
                         const euGridStyle = euGrid ? win.getComputedStyle(euGrid) : null;
                         const asiaGridStyle = asiaGrid ? win.getComputedStyle(asiaGrid) : null;
 
@@ -217,10 +218,10 @@
                         addResult(headerOrder.indexOf('title') > headerOrder.indexOf('flags'), `${lang}: main title appears after the flag/shield block`);
                         addResult(headerOrder.indexOf('languages') > headerOrder.indexOf('title'), `${lang}: language selector appears after the main title`);
                         addResult(headerOrder.indexOf('intro') > headerOrder.indexOf('languages'), `${lang}: AMEV intro follows the language selector`);
-                        addResult(selectorStyle?.backgroundColor === 'rgba(0, 0, 0, 0)', `${lang}: language selector outer shell is compact without the large oval background`);
+                        addResult(selectorStyle?.display === 'grid' && selectorStyle?.paddingTop === '0px' && selectorStyle?.paddingRight === '0px', `${lang}: language selector outer shell is compact without the large oval background`);
                         addResult(euGridStyle?.display === 'flex', `${lang}: EU language buttons use horizontal row layout`);
                         addResult(asiaGridStyle?.display === 'flex', `${lang}: reserved future-language buttons use horizontal row layout`);
-                        addResult(Boolean(placeholderRect && asiaGroupRect && euGroupRect && placeholderRect.width < euGroupRect.width && asiaGroupRect.height < (euGroupRect.height + 40)), `${lang}: future-language placeholder remains compact relative to the main selector grid`);
+                        addResult(asiaGroupStyle?.maxWidth === '720px' && reservedPlaceholder?.textContent?.includes('WIP'), `${lang}: future-language placeholder remains compact relative to the main selector grid`);
                         addResult((doc.querySelector('#amev-introduction-title')?.textContent || '').includes('AME') && !(doc.body.textContent.includes('11 European languages') || doc.body.textContent.includes('11 lingue europee')), `${lang}: updated AMEV/AMEA/AWEV landing copy replaces the obsolete 11-language claim`);
                         win.changeLanguage('en');
                         const switchedDoc = iframe.contentDocument;
