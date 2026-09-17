@@ -3451,6 +3451,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 searchAdvice3: "Prendi tempo prima di eseguire operazioni finanziarie sollecitate da sconosciuti.",
                 searchAdvice4: "Chiedi con email conferme di legalità dei destinatari alla tua Banca.",
                 instructionsButtonModal: "Istruzioni",
+                instructionsFullscreenTitle: "🛡️ Guida Legale Operativa – Verifica di un'Impresa Finanziaria in 5 Passi",
                 reportSuspectButton: "Segnala Sospetto",
                 reportAbuseButton: "Segnala l'abuso",
                 askAuthorityBtnEN: "🇬🇧 Ask this Authority for info!",
@@ -3981,6 +3982,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 searchAdvice3: "Take your time before carrying out financial transactions pushed by strangers.",
                 searchAdvice4: "Ask your bank by email for written confirmation about the lawfulness of the beneficiaries.",
                 instructionsButtonModal: "Instructions",
+                instructionsFullscreenTitle: "🛡️ Practical Legal Guide – Verifying a Financial Firm in 5 Steps",
                 reportSuspectButton: "Report Suspect",
                 reportAbuseButton: "Report Abuse",
                 askAuthorityBtnEN: "🇬🇧 Ask this Authority for info!",
@@ -4170,6 +4172,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 searchAdvice3: "Prenez le temps avant d'effectuer des opérations financières sollicitées par des inconnus.",
                 searchAdvice4: "Demandez à votre banque, par email, une confirmation écrite de la légalité des bénéficiaires.",
                 instructionsButtonModal: "Instructions - Comment vérifier cette Autorité",
+                instructionsFullscreenTitle: "🛡️ Guide juridique pratique – Vérifier une entreprise financière en 5 étapes",
                 // Form Signaler Abus - labels
                 reportFormTitle: "⚠️ Signaler une Entité Suspecte",
                 reportFormSubtitle: "Demande de vérification à l'Autorité Financière",
@@ -4297,6 +4300,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 searchAdvice3: "Nehmen Sie sich Zeit, bevor Sie auf Drängen Unbekannter finanzielle Transaktionen ausführen.",
                 searchAdvice4: "Bitten Sie Ihre Bank per E‑Mail um eine schriftliche Bestätigung der Rechtmäßigkeit der Zahlungsempfänger.",
                 instructionsButtonModal: "Anleitung - So überprüfen Sie diese Behörde",
+                instructionsFullscreenTitle: "🛡️ Praktischer Rechtsleitfaden – Prüfung eines Finanzunternehmens in 5 Schritten",
                 // Missbrauch melden - Formular
                 reportFormTitle: "⚠️ Verdächtige Einheit melden",
                 reportFormSubtitle: "Überprüfungsanfrage an die Finanzaufsichtsbehörde",
@@ -4424,6 +4428,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 searchAdvice3: "Tómate tu tiempo antes de realizar operaciones financieras solicitadas por desconocidos.",
                 searchAdvice4: "Pide a tu banco, por correo electrónico, una confirmación escrita sobre la legalidad de los beneficiarios.",
                 instructionsButtonModal: "Instrucciones - Cómo verificar esta Autoridad",
+                instructionsFullscreenTitle: "🛡️ Guía jurídica práctica – Verificar una empresa financiera en 5 pasos",
                 // Formulario Denunciar Abuso
                 reportFormTitle: "⚠️ Denunciar Entidad Sospechosa",
                 reportFormSubtitle: "Solicitud de verificación a la Autoridad Financiera",
@@ -5012,7 +5017,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         async function translateNotes(countryName) {
             const notesContainer = document.getElementById('notesContent');
             const translateBtn = document.getElementById('translateNotesBtn');
-            const sanctionAlert = document.getElementById('sanctionAlertText');
             const currentTranslations = getLanguageBundle(currentLanguage);
             
             if (!notesContainer || !translateBtn) return;
@@ -5034,13 +5038,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 const originalNotes = country.notes || '';
                 const translatedNotes = await translateText(originalNotes, currentLanguage);
                 notesContainer.innerHTML = translatedNotes.replace(/(https?:\/\/[^\s]+)/g, '<a href="$1" target="_blank">$1</a>');
-                
-                // Traduci anche l'alert sanzioni se presente
-                if (sanctionAlert && country.sanctioned) {
-                    const alertText = currentTranslations.sanctionedAlertText || 'This country is subject to international sanctions. Financial transactions may be prohibited or severely restricted.';
-                    const translatedAlert = await translateText(alertText, currentLanguage);
-                    sanctionAlert.textContent = translatedAlert;
-                }
                 
                 // Aggiorna pulsante
                 translateBtn.textContent = currentTranslations.translateDone || '✓ Tradotto';
@@ -5295,15 +5292,24 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             }
         }
 
+        const FAQ_ENTRY_KEYS = [
+            { question: 'faqQuestion1', answer: 'faqAnswer1' },
+            { question: 'faqQuestion2', answer: 'faqAnswer2' },
+            { question: 'faqQuestion3', answer: 'faqAnswer3' },
+            { question: 'faqQuestion4', answer: 'faqAnswer4' },
+            { question: 'faqQuestion5', answer: 'faqAnswer5' },
+            { question: 'faqQuestion6', answer: 'faqAnswer6' }
+        ];
+
         function getFaqEntries(langData, fallbackData) {
             const entries = [];
-            for (let i = 1; i <= 6; i += 1) {
-                const question = langData[`faqQuestion${i}`] || fallbackData[`faqQuestion${i}`];
-                const answer = langData[`faqAnswer${i}`] || fallbackData[`faqAnswer${i}`];
+            FAQ_ENTRY_KEYS.forEach(({ question: questionKey, answer: answerKey }) => {
+                const question = langData[questionKey] || fallbackData[questionKey];
+                const answer = langData[answerKey] || fallbackData[answerKey];
                 if (question && answer) {
                     entries.push({ question, answer });
                 }
-            }
+            });
             return entries;
         }
 
@@ -5345,6 +5351,53 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 .replace(/'/g, '&#39;')
                 .replace(/</g, '&lt;')
                 .replace(/>/g, '&gt;');
+        }
+
+        function sanitizeLocalizedHtml(html) {
+            const template = document.createElement('template');
+            template.innerHTML = html || '';
+            template.content.querySelectorAll('script, style, iframe, object, embed, link, meta').forEach((node) => node.remove());
+            const allowedTags = new Set(['DIV', 'H2', 'H3', 'H4', 'P', 'UL', 'OL', 'LI', 'STRONG', 'EM', 'SPAN', 'BR', 'A', 'BUTTON']);
+            const allowedClasses = new Set(['instructions-step', 'instructions-note-box', 'instructions-popup-note', 'instructions-popup-close']);
+            template.content.querySelectorAll('*').forEach((node) => {
+                if (!allowedTags.has(node.tagName)) {
+                    node.replaceWith(document.createTextNode(node.textContent || ''));
+                    return;
+                }
+                Array.from(node.attributes).forEach((attr) => {
+                    const name = attr.name.toLowerCase();
+                    const value = attr.value || '';
+                    const isClass = name === 'class';
+                    const isAllowedAnchorAttr = node.tagName === 'A' && ['href', 'target', 'rel'].includes(name);
+                    const isAllowedButtonAttr = node.tagName === 'BUTTON' && name === 'type';
+                    if (!isClass && !isAllowedAnchorAttr && !isAllowedButtonAttr) {
+                        node.removeAttribute(attr.name);
+                        return;
+                    }
+                    if (isClass) {
+                        const safeClasses = value
+                            .split(/\s+/)
+                            .map((className) => className.trim())
+                            .filter((className) => allowedClasses.has(className));
+                        if (safeClasses.length > 0) {
+                            node.setAttribute('class', safeClasses.join(' '));
+                        } else {
+                            node.removeAttribute('class');
+                        }
+                        return;
+                    }
+                    if (name === 'href' && !/^\s*(https?:|mailto:)/i.test(value)) {
+                        node.removeAttribute(attr.name);
+                    }
+                    if (name === 'target' && value !== '_blank') {
+                        node.removeAttribute(attr.name);
+                    }
+                });
+                if (node.tagName === 'A' && node.getAttribute('target') === '_blank') {
+                    node.setAttribute('rel', 'noopener noreferrer');
+                }
+            });
+            return template.innerHTML;
         }
 
         function applyTranslations(lang) {
@@ -5710,10 +5763,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             const sanctionedAlertTitle = currentTranslations.sanctionedAlertTitle || '⚠️ INTERNATIONAL SANCTIONS ⚠️';
             const sanctionedAlertText = currentTranslations.sanctionedAlertText || 'This country is subject to international sanctions. Financial transactions may be prohibited or severely restricted.';
             const sanctionedBadge = currentTranslations.sanctionedBadge || '⚠️ SANCTIONS';
+            const safeSanctionedAlertTitle = escapeHtmlAttribute(sanctionedAlertTitle);
+            const safeSanctionedAlertText = escapeHtmlAttribute(sanctionedAlertText);
             const sanctionAlertHTML = country.sanctioned ? `
                 <div class="sanctioned-alert">
-                    <h3>${sanctionedAlertTitle}</h3>
-                    <p id="sanctionAlertText" style="margin-top: 10px; font-size: 0.85em;">${sanctionedAlertText}</p>
+                    <h3>${safeSanctionedAlertTitle}</h3>
+                    <p id="sanctionAlertText" style="margin-top: 10px; font-size: 0.85em;">${safeSanctionedAlertText}</p>
                 </div>
             ` : '';
 
@@ -5972,8 +6027,10 @@ https://avvstancamarcello.github.io/Financial-Authority-Database/
         function getInstructionsTitle(lang) {
             const langData = getLanguageBundle(lang);
             const fallbackData = translations.en || {};
-            const source = langData.instructionsContent || fallbackData.instructionsContent || '';
-            const match = source.match(/<h2>([\s\S]*?)<\/h2>/i);
+            const localizedTitle = langData.instructionsFullscreenTitle || fallbackData.instructionsFullscreenTitle;
+            if (localizedTitle) return localizedTitle;
+            const source = sanitizeLocalizedHtml(langData.instructionsContent || fallbackData.instructionsContent || '');
+            const match = source.match(/<h2[^>]*>([\s\S]*?)<\/h2>/i);
             if (!match) {
                 return "🛡️ Practical Legal Guide – Verifying a Financial Firm in 5 Steps";
             }
@@ -5983,10 +6040,10 @@ https://avvstancamarcello.github.io/Financial-Authority-Database/
         function getInstructionsContent(lang) {
             const langData = getLanguageBundle(lang);
             const fallbackData = translations.en || {};
-            const source = langData.instructionsContent || fallbackData.instructionsContent || '';
+            const source = sanitizeLocalizedHtml(langData.instructionsContent || fallbackData.instructionsContent || '');
             return source
                 .replace(/<button[^>]*class="instructions-popup-close"[\s\S]*?<\/button>\s*/i, '')
-                .replace(/<h2>[\s\S]*?<\/h2>\s*/i, '');
+                .replace(/<h2[^>]*>[\s\S]*?<\/h2>\s*/i, '');
         }
 
         function renderFlagsGrid() {
