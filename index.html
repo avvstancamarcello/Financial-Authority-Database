@@ -4941,10 +4941,23 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             }
         }
 
+        function getFaqEntries(lang = currentLanguage) {
+            const visited = new Set();
+            let candidate = lang;
+            while (candidate && !visited.has(candidate)) {
+                if (faqContent[candidate]) {
+                    return faqContent[candidate];
+                }
+                visited.add(candidate);
+                candidate = localeMetadata[candidate]?.fallback;
+            }
+            return faqContent.en || [];
+        }
+
         function renderFaqSection(lang = currentLanguage) {
             const faqContainer = document.getElementById('faq-content');
             if (!faqContainer) return;
-            const items = faqContent[lang] || faqContent.en || [];
+            const items = getFaqEntries(lang);
             faqContainer.innerHTML = '';
             items.forEach(({ question, answer }) => {
                 const questionCard = document.createElement('div');
@@ -4986,7 +4999,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         function updateFaqJsonLd(lang = currentLanguage) {
             const faqJsonLd = document.getElementById('faq-jsonld');
             if (!faqJsonLd) return;
-            const items = faqContent[lang] || faqContent.en || [];
+            const items = getFaqEntries(lang);
             const payload = {
                 '@context': 'https://schema.org',
                 '@type': 'FAQPage',

@@ -31,6 +31,7 @@
             },
             {
                 lang: 'it',
+                selectedLang: 'it',
                 expectedHtmlLang: 'it',
                 expectedDir: 'ltr',
                 expectedOgLocale: 'it_IT',
@@ -40,6 +41,20 @@
                 expectedFaqQuestion: 'Come posso verificare se un broker è autorizzato?',
                 expectedProtectionLabel: 'Altissimo',
                 expectedSanctionBadge: 'Sanzioni ONU',
+                forbiddenText: ['ONU SANCTIONS']
+            },
+            {
+                lang: 'ro-RO',
+                selectedLang: 'ro',
+                expectedHtmlLang: 'ro-RO',
+                expectedDir: 'ltr',
+                expectedOgLocale: 'ro_RO',
+                expectedTitle: 'International Financial Authorities Database | Verify Broker Licences | 239 Countries',
+                expectedDescription: 'Database of financial authorities for 239 countries and jurisdictions. Verify broker licences, find official fraud-reporting channels and consumer-protection contacts.',
+                expectedFaqTitle: '❓ Frequently asked questions – FAQ',
+                expectedFaqQuestion: 'How can I check whether a broker is authorised?',
+                expectedProtectionLabel: 'Highest Protection',
+                expectedSanctionBadge: 'UN Sanctions',
                 forbiddenText: ['ONU SANCTIONS']
             }
         ];
@@ -89,7 +104,7 @@
             });
 
             const win = iframe.contentWindow;
-            win.changeLanguage(scenario.lang);
+            win.changeLanguage(scenario.lang, scenario.selectedLang || scenario.lang);
             await waitForReady(iframe, scenario.lang);
 
             const doc = iframe.contentDocument;
@@ -114,8 +129,8 @@
 
             addResult(doc.title === scenario.expectedTitle, `${scenario.lang}: document title localized`);
             addResult(description === scenario.expectedDescription, `${scenario.lang}: meta description localized`);
-            addResult(ogTitle === (scenario.lang === 'en' ? 'International Financial Authorities Database' : 'Database internazionale delle autorità finanziarie'), `${scenario.lang}: og:title localized`);
-            addResult(twitterTitle === (scenario.lang === 'en' ? 'International Financial Authorities Database' : 'Database internazionale delle autorità finanziarie'), `${scenario.lang}: twitter:title localized`);
+            addResult(ogTitle === (scenario.lang === 'it' ? 'Database internazionale delle autorità finanziarie' : 'International Financial Authorities Database'), `${scenario.lang}: og:title localized`);
+            addResult(twitterTitle === (scenario.lang === 'it' ? 'Database internazionale delle autorità finanziarie' : 'International Financial Authorities Database'), `${scenario.lang}: twitter:title localized`);
             addResult(doc.documentElement.lang === scenario.expectedHtmlLang, `${scenario.lang}: html lang updated`);
             addResult(doc.documentElement.dir === scenario.expectedDir, `${scenario.lang}: dir updated`);
             addResult(ogLocale === scenario.expectedOgLocale, `${scenario.lang}: og:locale updated`);
