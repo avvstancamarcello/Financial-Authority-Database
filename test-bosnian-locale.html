@@ -239,6 +239,8 @@
                         }
                         if (lang === 'el') {
                             addResult((doc.querySelector('#amev-introduction-title')?.textContent || '').includes('AMEV, AMEA και AWEV'), 'el: Greek AMEV intro title is localized');
+                            addResult((doc.querySelector('h1[itemprop="name"]')?.textContent || '').includes('Χρηματοοικονομικών Αρχών'), 'el: Greek landing heading is localized');
+                            addResult((doc.querySelector('p[itemprop="description"]')?.textContent || '').includes('άδειες μεσιτών'), 'el: Greek landing subtitle is localized');
                             addResult((doc.querySelector('.amev-anchor-link')?.textContent || '').includes('μελλοντικά κουμπιά γλώσσας'), 'el: Greek future-language link is localized');
                         }
                         win.changeLanguage('en');
