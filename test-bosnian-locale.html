@@ -296,11 +296,13 @@
                         addResult((new Set(euDataLangOrder)).size === euDataLangOrder.length, `${lang}: EU language selector has no duplicate buttons`);
                         const translationMap = win.eval('translations');
                         if (lang === 'it') {
-                            const labelLocales = ['it', 'en', 'fr', 'de', 'es', 'pt', 'bs', 'sq', 'ro', 'el', 'ar', 'zh', 'hi', 'vi'];
+                            const labelLocales = Object.keys(translationMap || {}).filter((locale) =>
+                                translationMap?.[locale] && typeof translationMap[locale] === 'object'
+                            );
                             const missingAreaLabelLocales = labelLocales.filter((locale) =>
                                 !translationMap?.[locale]?.languageAreaEu || !translationMap?.[locale]?.languageAreaAsia
                             );
-                            addResult(missingAreaLabelLocales.length === 0, 'it: all supported locale bundles define languageAreaEu and languageAreaAsia');
+                            addResult(missingAreaLabelLocales.length === 0, 'it: all translation bundles define languageAreaEu and languageAreaAsia');
                         }
                         addResult(Boolean(euAreaLabel), `${lang}: EU area label is present`);
                         addResult(Boolean(asiaAreaLabel), `${lang}: ASIA area label is present`);
