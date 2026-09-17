@@ -17,24 +17,83 @@
     <script>
         const scenarios = [
             {
+                lang: 'it',
+                expectedHtmlLang: 'it',
+                expectedCanonical: 'https://tutelatruffe.it/',
+                expectedTitle: "Database Autorità Finanziarie Internazionali | Verifica Licenze Broker | 239 Paesi",
+                expectedOgTitle: "Tutela Truffe | Database Autorità Finanziarie UE - Odissea Digitale",
+                expectedOgDescription: "🌍 Database 239 autorità finanziarie internazionali con AMEV in 11 lingue europee. Verifica licenze broker e segnala truffe Forex/Crypto.",
+                expectedOgImageAlt: "Tutela Truffe - Database Autorità Finanziarie e Mappa Europea Truffe",
+                expectedTwitterTitle: "🌊 Odissea Digitale | Recupera i Tuoi Capitali dalle Truffe",
+                expectedTwitterDescription: "Database 239 Autorità Internazionali + Mappa Truffe Geolocalizzata. Segnala Forex/Crypto/Pig Butchering. Come Ulisse tornò a Itaca, riconquista il tuo Vello d'Oro.",
+                expectedTwitterImageAlt: "Tutela Truffe - Mappa Europea Truffe Finanziarie",
+                expectedFaqHeading: "❓ Domande Frequenti – FAQ",
+                expectedFaqQuestion1: "Come verificare se un broker è autorizzato?",
+                expectedMetaDescriptionIncludes: "Database 239 autorità finanziarie internazionali",
+                requiredText: ['Italiano', 'Domande Frequenti']
+            },
+            {
                 lang: 'bs',
                 expectedHtmlLang: 'bs-BA',
                 expectedCanonical: 'https://tutelatruffe.it/?lang=bs',
+                expectedTitle: "International Financial Authorities Database | Verify Broker Licenses | 239 Countries",
+                expectedOgTitle: "Scam Protection | EU Financial Authorities Database - Digital Odyssey",
+                expectedOgDescription: "🌍 Database of 239 international financial authorities with AMEV in 11 European languages. Verify broker licenses and report Forex/Crypto scams.",
+                expectedOgImageAlt: "Scam Protection - Financial Authorities Database and European Scam Map",
+                expectedTwitterTitle: "🌊 Digital Odyssey | Recover Your Capital from Scams",
+                expectedTwitterDescription: "Database of 239 international authorities + geolocated scam map. Report Forex/Crypto/Pig Butchering scams and verify financial operators.",
+                expectedTwitterImageAlt: "Scam Protection - European Financial Scam Map",
+                expectedFaqHeading: "❓ Frequently Asked Questions – FAQ",
+                expectedFaqQuestion1: "How can I verify whether a broker is authorized?",
+                expectedMetaDescriptionIncludes: "Database of 239 international financial authorities",
                 requiredText: ['Bosanski', 'Međunarodna baza finansijskih autoriteta']
             },
             {
                 lang: 'ar',
                 expectedHtmlLang: 'ar',
                 expectedCanonical: 'https://tutelatruffe.it/?lang=ar',
+                expectedTitle: "International Financial Authorities Database | Verify Broker Licenses | 239 Countries",
+                expectedOgTitle: "Scam Protection | EU Financial Authorities Database - Digital Odyssey",
+                expectedOgDescription: "🌍 Database of 239 international financial authorities with AMEV in 11 European languages. Verify broker licenses and report Forex/Crypto scams.",
+                expectedOgImageAlt: "Scam Protection - Financial Authorities Database and European Scam Map",
+                expectedTwitterTitle: "🌊 Digital Odyssey | Recover Your Capital from Scams",
+                expectedTwitterDescription: "Database of 239 international authorities + geolocated scam map. Report Forex/Crypto/Pig Butchering scams and verify financial operators.",
+                expectedTwitterImageAlt: "Scam Protection - European Financial Scam Map",
+                expectedFaqHeading: "❓ Frequently Asked Questions – FAQ",
+                expectedFaqQuestion1: "How can I verify whether a broker is authorized?",
+                expectedMetaDescriptionIncludes: "Database of 239 international financial authorities",
                 requiredText: ['AR']
             },
             {
                 lang: 'xk',
                 expectedHtmlLang: 'sq-XK',
                 expectedCanonical: 'https://tutelatruffe.it/?lang=xk',
+                expectedTitle: "International Financial Authorities Database | Verify Broker Licenses | 239 Countries",
+                expectedOgTitle: "Scam Protection | EU Financial Authorities Database - Digital Odyssey",
+                expectedOgDescription: "🌍 Database of 239 international financial authorities with AMEV in 11 European languages. Verify broker licenses and report Forex/Crypto scams.",
+                expectedOgImageAlt: "Scam Protection - Financial Authorities Database and European Scam Map",
+                expectedTwitterTitle: "🌊 Digital Odyssey | Recover Your Capital from Scams",
+                expectedTwitterDescription: "Database of 239 international authorities + geolocated scam map. Report Forex/Crypto/Pig Butchering scams and verify financial operators.",
+                expectedTwitterImageAlt: "Scam Protection - European Financial Scam Map",
+                expectedFaqHeading: "❓ Frequently Asked Questions – FAQ",
+                expectedFaqQuestion1: "How can I verify whether a broker is authorized?",
+                expectedMetaDescriptionIncludes: "Database of 239 international financial authorities",
                 requiredText: ['XK', 'Shqip']
             }
         ];
+        const expectedEnState = {
+            htmlLang: 'en',
+            canonical: 'https://tutelatruffe.it/?lang=en',
+            title: "International Financial Authorities Database | Verify Broker Licenses | 239 Countries",
+            ogTitle: "Scam Protection | EU Financial Authorities Database - Digital Odyssey",
+            ogDescription: "🌍 Database of 239 international financial authorities with AMEV in 11 European languages. Verify broker licenses and report Forex/Crypto scams.",
+            metaDescriptionIncludes: "Database of 239 international financial authorities",
+            ogImageAlt: "Scam Protection - Financial Authorities Database and European Scam Map",
+            twitterTitle: "🌊 Digital Odyssey | Recover Your Capital from Scams",
+            twitterDescription: "Database of 239 international authorities + geolocated scam map. Report Forex/Crypto/Pig Butchering scams and verify financial operators.",
+            twitterImageAlt: "Scam Protection - European Financial Scam Map",
+            faqQuestion1: "How can I verify whether a broker is authorized?"
+        };
 
         const results = document.getElementById('results');
 
@@ -75,7 +134,7 @@
             });
         }
 
-        function loadScenario({ lang, expectedHtmlLang, expectedCanonical, requiredText }) {
+        function loadScenario({ lang, expectedHtmlLang, expectedCanonical, expectedTitle, expectedOgTitle, expectedOgDescription, expectedOgImageAlt, expectedTwitterTitle, expectedTwitterDescription, expectedTwitterImageAlt, expectedFaqHeading, expectedFaqQuestion1, expectedMetaDescriptionIncludes, requiredText }) {
             return new Promise((resolve) => {
                 const iframe = document.createElement('iframe');
                 iframe.style.display = 'none';
@@ -94,15 +153,62 @@
                         const doc = iframe.contentDocument;
                         const html = doc.documentElement;
                         const canonical = doc.getElementById('canonical-url')?.getAttribute('href');
+                        const metaDescription = doc.getElementById('meta-description')?.getAttribute('content') || '';
+                        const metaOgTitle = doc.getElementById('meta-og-title')?.getAttribute('content') || '';
+                        const metaOgDescription = doc.getElementById('meta-og-description')?.getAttribute('content') || '';
+                        const metaOgImageAlt = doc.getElementById('meta-og-image-alt')?.getAttribute('content') || '';
+                        const metaTwitterTitle = doc.getElementById('meta-twitter-title')?.getAttribute('content') || '';
+                        const metaTwitterDescription = doc.getElementById('meta-twitter-description')?.getAttribute('content') || '';
+                        const metaTwitterImageAlt = doc.getElementById('meta-twitter-image-alt')?.getAttribute('content') || '';
+                        const faqHeading = doc.querySelector('#faq-section [data-i18n-text=\"faqSectionTitle\"]')?.textContent?.trim();
+                        const faqSchemaRaw = doc.getElementById('faq-schema-jsonld')?.textContent || '';
+                        let faqSchema = null;
+                        try {
+                            faqSchema = faqSchemaRaw ? JSON.parse(faqSchemaRaw) : null;
+                        } catch (parseError) {
+                            addResult(false, `${lang}: FAQ JSON-LD parse error (${parseError.message})`);
+                        }
                         const activeButton = doc.querySelector(`.lang-btn.active[data-lang="${lang}"]`);
                         const asiaSection = doc.getElementById('languages-asia');
                         const buttonText = doc.querySelector('.language-selector-eu .lang-btn[data-lang="bs"]')?.textContent || '';
+                        const firstQuestion = faqSchema?.mainEntity?.[0]?.name || '';
 
                         addResult(html?.lang === expectedHtmlLang, `${lang}: html lang is ${expectedHtmlLang}`);
                         addResult(canonical === expectedCanonical, `${lang}: canonical is ${expectedCanonical}`);
+                        addResult(doc.title === expectedTitle, `${lang}: document.title is localized`);
+                        addResult(metaDescription.includes(expectedMetaDescriptionIncludes), `${lang}: meta description is localized/fallback`);
+                        addResult(metaOgTitle === expectedOgTitle, `${lang}: og:title is localized/fallback`);
+                        addResult(metaOgDescription === expectedOgDescription, `${lang}: og:description is localized/fallback`);
+                        addResult(metaOgImageAlt === expectedOgImageAlt, `${lang}: og:image:alt is localized/fallback`);
+                        addResult(metaTwitterTitle === expectedTwitterTitle, `${lang}: twitter:title is localized/fallback`);
+                        addResult(metaTwitterDescription === expectedTwitterDescription, `${lang}: twitter:description is localized/fallback`);
+                        addResult(metaTwitterImageAlt === expectedTwitterImageAlt, `${lang}: twitter:image:alt is localized/fallback`);
+                        addResult(faqHeading === expectedFaqHeading, `${lang}: FAQ heading is localized/fallback`);
+                        addResult(firstQuestion === expectedFaqQuestion1, `${lang}: FAQ JSON-LD is localized/fallback`);
                         addResult(Boolean(activeButton), `${lang}: active language button is selected`);
                         addResult(Boolean(asiaSection), `${lang}: ASIA anchor section remains present`);
                         requiredText.forEach((text) => addResult(doc.body.textContent.includes(text), `${lang}: body contains ${text}`));
+                        addResult(typeof win.getInstructionsContent === 'function', `${lang}: instructions localization runtime is available`);
+                        win.changeLanguage('en');
+                        const switchedDoc = iframe.contentDocument;
+                        const switchedFaqSchemaRaw = switchedDoc.getElementById('faq-schema-jsonld')?.textContent || '';
+                        let switchedFaqSchema = null;
+                        try {
+                            switchedFaqSchema = switchedFaqSchemaRaw ? JSON.parse(switchedFaqSchemaRaw) : null;
+                        } catch (parseError) {
+                            addResult(false, `${lang}→en: FAQ JSON-LD parse error (${parseError.message})`);
+                        }
+                        addResult(switchedDoc.documentElement?.lang === expectedEnState.htmlLang, `${lang}→en: html lang updates on language switch`);
+                        addResult(switchedDoc.getElementById('canonical-url')?.getAttribute('href') === expectedEnState.canonical, `${lang}→en: canonical updates on language switch`);
+                        addResult(switchedDoc.title === expectedEnState.title, `${lang}→en: document.title updates on language switch`);
+                        addResult((switchedDoc.getElementById('meta-description')?.getAttribute('content') || '').includes(expectedEnState.metaDescriptionIncludes), `${lang}→en: meta description updates on language switch`);
+                        addResult(switchedDoc.getElementById('meta-og-title')?.getAttribute('content') === expectedEnState.ogTitle, `${lang}→en: og:title updates on language switch`);
+                        addResult(switchedDoc.getElementById('meta-og-description')?.getAttribute('content') === expectedEnState.ogDescription, `${lang}→en: og:description updates on language switch`);
+                        addResult(switchedDoc.getElementById('meta-og-image-alt')?.getAttribute('content') === expectedEnState.ogImageAlt, `${lang}→en: og:image:alt updates on language switch`);
+                        addResult(switchedDoc.getElementById('meta-twitter-title')?.getAttribute('content') === expectedEnState.twitterTitle, `${lang}→en: twitter:title updates on language switch`);
+                        addResult(switchedDoc.getElementById('meta-twitter-description')?.getAttribute('content') === expectedEnState.twitterDescription, `${lang}→en: twitter:description updates on language switch`);
+                        addResult(switchedDoc.getElementById('meta-twitter-image-alt')?.getAttribute('content') === expectedEnState.twitterImageAlt, `${lang}→en: twitter:image:alt updates on language switch`);
+                        addResult((switchedFaqSchema?.mainEntity?.[0]?.name || '') === expectedEnState.faqQuestion1, `${lang}→en: FAQ JSON-LD updates on language switch`);
                         if (lang === 'bs') {
                             addResult(buttonText.includes('BS') && buttonText.includes('Bosanski'), 'bs: EU selector shows BS and Bosanski');
                             addResult(doc.querySelector('link[hreflang="bs"]')?.href === 'https://tutelatruffe.it/?lang=bs', 'bs: hreflang bs points to Bosnian URL');
