@@ -64,6 +64,14 @@
                 expectedMetaDescriptionIncludes: "AMEV / AMEA / AWEV language paths",
                 expectedHeroTitle: "Βάση Δεδομένων Διεθνών Χρηματοοικονομικών Αρχών – 239 χώρες",
                 expectedHeroSubtitle: "Επαληθεύστε άδειες μεσιτών, αναφέρετε απάτες Forex/Crypto και ελέγξτε τη χρηματοοικονομική ταυτότητα των δικαιούχων πληρωμών.",
+                expectedLanguageSelectorTitle: "AMEV / AMEA / AWEV – επιλογή γλώσσας",
+                expectedLanguageSelectorNote: "AMEV για τον υποστηριζόμενο ευρωπαϊκό πυρήνα, AMEA για τα ελληνικά και AWEV για τη διεθνή αγγλική διαδρομή που χρησιμοποιείται και για την ολλανδική περιοχή.",
+                expectedFutureLanguagesTitle: "⏳ Μελλοντικά κουμπιά γλώσσας – Work in Progress",
+                expectedFutureLanguagesNote: "Συμπαγής δεσμευμένη περιοχή για τα επόμενα κουμπιά γλώσσας που έχουν ήδη προβλεφθεί για μελλοντική επέκταση.",
+                expectedChooseLanguageHint: "Επιλέξτε τη γλώσσα σας",
+                expectedNavDatabase: "🏠 Βάση Δεδομένων Χρηματοοικονομικών Αρχών (239)",
+                expectedNavOdyssey: "🌊 Ψηφιακή Οδύσσεια",
+                expectedNavReferences: "📜 Θεσμικές Αναφορές",
                 requiredText: ['Ελληνικά']
             },
             {
@@ -167,7 +175,7 @@
             });
         }
 
-        function loadScenario({ lang, expectedHtmlLang, expectedCanonical, expectedTitle, expectedOgTitle, expectedOgDescription, expectedOgImageAlt, expectedTwitterTitle, expectedTwitterDescription, expectedTwitterImageAlt, expectedFaqHeading, expectedFaqQuestion1, expectedMetaDescriptionIncludes, expectedHeroTitle, expectedHeroSubtitle, requiredText }) {
+        function loadScenario({ lang, expectedHtmlLang, expectedCanonical, expectedTitle, expectedOgTitle, expectedOgDescription, expectedOgImageAlt, expectedTwitterTitle, expectedTwitterDescription, expectedTwitterImageAlt, expectedFaqHeading, expectedFaqQuestion1, expectedMetaDescriptionIncludes, expectedHeroTitle, expectedHeroSubtitle, expectedLanguageSelectorTitle, expectedLanguageSelectorNote, expectedFutureLanguagesTitle, expectedFutureLanguagesNote, expectedChooseLanguageHint, expectedNavDatabase, expectedNavOdyssey, expectedNavReferences, requiredText }) {
             return new Promise((resolve) => {
                 const iframe = document.createElement('iframe');
                 iframe.style.position = 'absolute';
@@ -262,6 +270,14 @@
                             addResult((doc.querySelector('#amev-introduction-title')?.textContent || '').includes('AMEV, AMEA και AWEV'), 'el: Greek AMEV intro title is localized');
                             addResult((doc.querySelector('h1[itemprop="name"]')?.textContent || '').trim() === expectedHeroTitle, 'el: Greek landing heading matches the localized hero title');
                             addResult((doc.querySelector('p[itemprop="description"]')?.textContent || '').trim() === expectedHeroSubtitle, 'el: Greek landing subtitle matches the localized hero subtitle');
+                            addResult((doc.querySelector('#language-selector-eu-title')?.textContent || '').trim() === expectedLanguageSelectorTitle, 'el: Greek EU selector title is localized');
+                            addResult((doc.querySelector('.language-selector-eu .language-selector-note')?.textContent || '').trim() === expectedLanguageSelectorNote, 'el: Greek EU selector note is localized');
+                            addResult((doc.querySelector('#language-selector-asia-title')?.textContent || '').trim() === expectedFutureLanguagesTitle, 'el: Greek future-language title is localized');
+                            addResult((doc.querySelector('.language-selector-asia .language-selector-note')?.textContent || '').trim() === expectedFutureLanguagesNote, 'el: Greek future-language note is localized');
+                            addResult((doc.querySelector('.language-hint [data-i18n-text=\"chooseLanguageHint\"]')?.textContent || '').trim() === expectedChooseLanguageHint, 'el: Greek choose-language hint is localized');
+                            addResult((doc.querySelector('nav a[href*=\"#database-search-section\"] span')?.textContent || '').trim() === expectedNavDatabase, 'el: Greek database nav label is localized');
+                            addResult((doc.querySelector('nav a[href=\"odissea.html\"] span')?.textContent || '').trim() === expectedNavOdyssey, 'el: Greek odyssey nav label is localized');
+                            addResult((doc.querySelector('nav a[href=\"referenze.html\"] span')?.textContent || '').trim() === expectedNavReferences, 'el: Greek references nav label is localized');
                             addResult((doc.querySelector('.amev-anchor-link')?.textContent || '').includes('μελλοντικά κουμπιά γλώσσας'), 'el: Greek future-language link is localized');
                         }
                         win.changeLanguage('en');
