@@ -4,6 +4,10 @@ Questo documento descrive le **Best Practice "Copyright Marcello Stanca"**
 che hanno guidato la realizzazione della web page `index.html` e, più in generale,
 la collaborazione tra Utente e AI in questo progetto.
 
+## Nota operativa: sorgente livelli di protezione
+
+Nel file root `index.html`, la costante `PROTECTION_LEVELS_SOURCE_URL` controlla il link pubblico alla tabella amministrativa dei livelli di protezione. Gli amministratori possono lasciarla puntata al fallback locale `protection_levels.csv` oppure sostituirla con un URL pubblico di Google Drive o Airtable mantenuto dagli amministratori.
+
 Le regole sono espresse sia in linguaggio naturale sia in forma di
 **asserzioni Prolog**, così da poterle utilizzare come base per motori di
 regole, validatori automatici o strumenti di analisi statica.
