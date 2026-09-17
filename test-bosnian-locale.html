@@ -62,6 +62,8 @@
                 expectedFaqHeading: "❓ Frequently Asked Questions – FAQ",
                 expectedFaqQuestion1: "How can I verify whether a broker is authorized?",
                 expectedMetaDescriptionIncludes: "AMEV / AMEA / AWEV language paths",
+                expectedHeroTitle: "Βάση Δεδομένων Διεθνών Χρηματοοικονομικών Αρχών – 239 χώρες",
+                expectedHeroSubtitle: "Επαληθεύστε άδειες μεσιτών, αναφέρετε απάτες Forex/Crypto και ελέγξτε τη χρηματοοικονομική ταυτότητα των δικαιούχων πληρωμών.",
                 requiredText: ['Ελληνικά']
             },
             {
@@ -150,7 +152,7 @@
             });
         }
 
-        function loadScenario({ lang, expectedHtmlLang, expectedCanonical, expectedTitle, expectedOgTitle, expectedOgDescription, expectedOgImageAlt, expectedTwitterTitle, expectedTwitterDescription, expectedTwitterImageAlt, expectedFaqHeading, expectedFaqQuestion1, expectedMetaDescriptionIncludes, requiredText }) {
+        function loadScenario({ lang, expectedHtmlLang, expectedCanonical, expectedTitle, expectedOgTitle, expectedOgDescription, expectedOgImageAlt, expectedTwitterTitle, expectedTwitterDescription, expectedTwitterImageAlt, expectedFaqHeading, expectedFaqQuestion1, expectedMetaDescriptionIncludes, expectedHeroTitle, expectedHeroSubtitle, requiredText }) {
             return new Promise((resolve) => {
                 const iframe = document.createElement('iframe');
                 iframe.style.position = 'absolute';
@@ -239,8 +241,8 @@
                         }
                         if (lang === 'el') {
                             addResult((doc.querySelector('#amev-introduction-title')?.textContent || '').includes('AMEV, AMEA και AWEV'), 'el: Greek AMEV intro title is localized');
-                            addResult((doc.querySelector('h1[itemprop="name"]')?.textContent || '').includes('Χρηματοοικονομικών Αρχών'), 'el: Greek landing heading is localized');
-                            addResult((doc.querySelector('p[itemprop="description"]')?.textContent || '').includes('άδειες μεσιτών'), 'el: Greek landing subtitle is localized');
+                            addResult((doc.querySelector('h1[itemprop="name"]')?.textContent || '').trim() === expectedHeroTitle, 'el: Greek landing heading matches the localized hero title');
+                            addResult((doc.querySelector('p[itemprop="description"]')?.textContent || '').trim() === expectedHeroSubtitle, 'el: Greek landing subtitle matches the localized hero subtitle');
                             addResult((doc.querySelector('.amev-anchor-link')?.textContent || '').includes('μελλοντικά κουμπιά γλώσσας'), 'el: Greek future-language link is localized');
                         }
                         win.changeLanguage('en');
