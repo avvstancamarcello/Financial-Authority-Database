@@ -49,6 +49,22 @@
                 requiredText: ['Bosanski', 'Međunarodna baza finansijskih autoriteta']
             },
             {
+                lang: 'el',
+                expectedHtmlLang: 'el',
+                expectedCanonical: 'https://tutelatruffe.it/?lang=el',
+                expectedTitle: "International Financial Authorities Database | Verify Broker Licenses | 239 Countries",
+                expectedOgTitle: "Scam Protection | EU Financial Authorities Database - Digital Odyssey",
+                expectedOgDescription: "🌍 Database of 239 international financial authorities. Verify broker licenses, company identities, and AMEV / AMEA / AWEV language paths for Forex/Crypto fraud prevention.",
+                expectedOgImageAlt: "Scam Protection - Financial Authorities Database and European Scam Map",
+                expectedTwitterTitle: "🌊 Digital Odyssey | Recover Your Capital from Scams",
+                expectedTwitterDescription: "Database of 239 international authorities + geolocated scam map. Report Forex/Crypto/Pig Butchering scams and verify financial operators.",
+                expectedTwitterImageAlt: "Scam Protection - European Financial Scam Map",
+                expectedFaqHeading: "❓ Frequently Asked Questions – FAQ",
+                expectedFaqQuestion1: "How can I verify whether a broker is authorized?",
+                expectedMetaDescriptionIncludes: "AMEV / AMEA / AWEV language paths",
+                requiredText: ['Ελληνικά']
+            },
+            {
                 lang: 'ar',
                 expectedHtmlLang: 'ar',
                 expectedCanonical: 'https://tutelatruffe.it/?lang=ar',
@@ -216,6 +232,15 @@
                         addResult(asiaGrid?.dataset.layout === 'row-wrap', `${lang}: reserved future-language buttons are grouped as horizontal row wraps`);
                         addResult(asiaSection?.dataset.placeholder === 'compact' && reservedPlaceholder?.textContent?.includes('WIP'), `${lang}: future-language placeholder remains marked as a compact reserved area`);
                         addResult((doc.querySelector('#amev-introduction-title')?.textContent || '').includes('AME') && !(doc.body.textContent.includes('11 European languages') || doc.body.textContent.includes('11 lingue europee')), `${lang}: updated AMEV/AMEA/AWEV landing copy replaces the obsolete 11-language claim`);
+                        if (lang === 'bs') {
+                            addResult(buttonText.includes('BS') && buttonText.includes('Bosanski'), 'bs: EU selector shows BS and Bosanski');
+                            addResult(doc.querySelector('link[hreflang="bs"]')?.href === 'https://tutelatruffe.it/?lang=bs', 'bs: hreflang bs points to Bosnian URL');
+                            addResult(doc.querySelector('link[hreflang="bs-BA"]')?.href === 'https://tutelatruffe.it/?lang=bs', 'bs: hreflang bs-BA points to Bosnian URL');
+                        }
+                        if (lang === 'el') {
+                            addResult((doc.querySelector('#amev-introduction-title')?.textContent || '').includes('AMEV, AMEA και AWEV'), 'el: Greek AMEV intro title is localized');
+                            addResult((doc.querySelector('.amev-anchor-link')?.textContent || '').includes('μελλοντικά κουμπιά γλώσσας'), 'el: Greek future-language link is localized');
+                        }
                         win.changeLanguage('en');
                         const switchedDoc = iframe.contentDocument;
                         const switchedFaqSchemaRaw = switchedDoc.getElementById('faq-schema-jsonld')?.textContent || '';
@@ -236,11 +261,6 @@
                         addResult(switchedDoc.getElementById('meta-twitter-description')?.getAttribute('content') === expectedEnState.twitterDescription, `${lang}→en: twitter:description updates on language switch`);
                         addResult(switchedDoc.getElementById('meta-twitter-image-alt')?.getAttribute('content') === expectedEnState.twitterImageAlt, `${lang}→en: twitter:image:alt updates on language switch`);
                         addResult((switchedFaqSchema?.mainEntity?.[0]?.name || '') === expectedEnState.faqQuestion1, `${lang}→en: FAQ JSON-LD updates on language switch`);
-                        if (lang === 'bs') {
-                            addResult(buttonText.includes('BS') && buttonText.includes('Bosanski'), 'bs: EU selector shows BS and Bosanski');
-                            addResult(doc.querySelector('link[hreflang="bs"]')?.href === 'https://tutelatruffe.it/?lang=bs', 'bs: hreflang bs points to Bosnian URL');
-                            addResult(doc.querySelector('link[hreflang="bs-BA"]')?.href === 'https://tutelatruffe.it/?lang=bs', 'bs: hreflang bs-BA points to Bosnian URL');
-                        }
                     } catch (error) {
                         addResult(false, `${lang}: ${error.message}`);
                     } finally {
