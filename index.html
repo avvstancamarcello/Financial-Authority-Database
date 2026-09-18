@@ -5494,15 +5494,15 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             }
         };
         Object.entries(medusaCtaLocaleOverrides).forEach(([locale, override]) => {
+            if (translations[locale]) {
+                Object.assign(translations[locale], override);
+                return;
+            }
             translations[locale] = {
-                ...(translations[locale] || translations.en || {}),
+                ...(translations.en || {}),
                 ...override
             };
         });
-        translations['el-GR'] = translations.el;
-        translations.xk = translations.sq;
-        translations['sq-XK'] = translations.sq;
-        translations['ro-RO'] = translations.ro;
         const localeMetadata = {
             it: { api: 'it', urlSupported: true },
             en: { api: 'en', urlSupported: true },
