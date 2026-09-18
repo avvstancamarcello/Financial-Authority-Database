@@ -3187,6 +3187,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             const reducedMotionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
             let pointerFrame = null;
             let pendingMotion = null;
+            let motionEnabled = false;
             const resetMedusaMotion = () => {
                 pendingMotion = null;
                 if (pointerFrame) {
@@ -3204,14 +3205,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 medusaCta.style.setProperty('--medusa-rotate-y', pendingMotion.rotateY);
                 medusaCta.style.setProperty('--snake-shift', pendingMotion.snakeShift);
             };
-            if (reducedMotionQuery.matches) {
-                resetMedusaMotion();
-                medusaCta.addEventListener('focus', resetMedusaMotion, true);
-                medusaCta.addEventListener('mouseleave', resetMedusaMotion);
-                medusaCta.addEventListener('blur', resetMedusaMotion, true);
-                return;
-            }
-            medusaCta.addEventListener('mousemove', (event) => {
+            const handlePointerMove = (event) => {
+                if (!motionEnabled) return;
                 const rect = medusaCta.getBoundingClientRect();
                 const xRatio = (event.clientX - rect.left) / rect.width - 0.5;
                 const yRatio = (event.clientY - rect.top) / rect.height - 0.5;
@@ -3223,7 +3218,23 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 if (!pointerFrame) {
                     pointerFrame = requestAnimationFrame(flushMedusaMotion);
                 }
-            });
+            };
+            const syncMotionPreference = () => {
+                resetMedusaMotion();
+                if (reducedMotionQuery.matches) {
+                    if (motionEnabled) {
+                        medusaCta.removeEventListener('mousemove', handlePointerMove);
+                        motionEnabled = false;
+                    }
+                    return;
+                }
+                if (!motionEnabled) {
+                    medusaCta.addEventListener('mousemove', handlePointerMove);
+                    motionEnabled = true;
+                }
+            };
+            syncMotionPreference();
+            reducedMotionQuery.addEventListener('change', syncMotionPreference);
             medusaCta.addEventListener('focus', resetMedusaMotion, true);
             medusaCta.addEventListener('mouseleave', resetMedusaMotion);
             medusaCta.addEventListener('blur', resetMedusaMotion, true);
@@ -4044,4 +4055,3 @@ https://avvstancamarcello.github.io/Financial-Authority-Database/
     </footer>
 </body>
 </html>
-
