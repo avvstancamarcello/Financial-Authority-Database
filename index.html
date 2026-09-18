@@ -6365,9 +6365,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             }
             const medusaNote = medusaCta.querySelector('[data-medusa-cta-note]');
             if (medusaNote) {
-                window.__medusaCtaNoteIdCounter = (window.__medusaCtaNoteIdCounter || 0) + 1;
+                const defaultMedusaNoteId = 'caravaggio-medusa-note';
+                const existingMedusaNote = document.getElementById(defaultMedusaNoteId);
                 if (!medusaNote.id) {
-                    medusaNote.id = `caravaggio-medusa-note-${window.__medusaCtaNoteIdCounter}`;
+                    medusaNote.id = !existingMedusaNote || existingMedusaNote === medusaNote
+                        ? defaultMedusaNoteId
+                        : `${defaultMedusaNoteId}-${Array.from(document.querySelectorAll('[data-medusa-cta-note]')).indexOf(medusaNote) + 1}`;
                 }
                 medusaCta.setAttribute('aria-describedby', medusaNote.id);
             }
@@ -6396,6 +6399,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 medusaCta.style.setProperty('--medusa-rotate-x', pendingMotion.rotateX);
                 medusaCta.style.setProperty('--medusa-rotate-y', pendingMotion.rotateY);
                 medusaCta.style.setProperty('--snake-shift', pendingMotion.snakeShift);
+            };
+            const handleFocus = () => {
+                refreshBounds();
+                resetMedusaMotion();
             };
             const handlePointerMove = (event) => {
                 if (!motionEnabled) return;
@@ -6433,7 +6440,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 reducedMotionQuery.addListener(syncMotionPreference);
             }
             medusaCta.addEventListener('mouseenter', refreshBounds);
-            medusaCta.addEventListener('focus', resetMedusaMotion, true);
+            medusaCta.addEventListener('focus', handleFocus, true);
             medusaCta.addEventListener('mouseleave', resetMedusaMotion);
             medusaCta.addEventListener('blur', resetMedusaMotion, true);
             const cleanup = () => {
@@ -6444,7 +6451,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 }
                 medusaCta.removeEventListener('mousemove', handlePointerMove);
                 medusaCta.removeEventListener('mouseenter', refreshBounds);
-                medusaCta.removeEventListener('focus', resetMedusaMotion, true);
+                medusaCta.removeEventListener('focus', handleFocus, true);
                 medusaCta.removeEventListener('mouseleave', resetMedusaMotion);
                 medusaCta.removeEventListener('blur', resetMedusaMotion, true);
                 resetMedusaMotion();
