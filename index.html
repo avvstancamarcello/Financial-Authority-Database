@@ -818,6 +818,12 @@
             gap: 6px;
             min-width: 0;
         }
+        .medusa-cta-meta {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
         .medusa-cta-label {
             font-size: 1rem;
             font-weight: 700;
@@ -834,6 +840,24 @@
             color: #f8d774;
             font-size: 0.8rem;
             letter-spacing: 0.03em;
+        }
+        .medusa-cta-new-tab-note {
+            font-size: 0.76rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            color: rgba(255,245,209,0.88);
+        }
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
         }
         .medusa-cta-snake-trail {
             position: absolute;
@@ -1602,6 +1626,7 @@
             }
             .medusa-cta-label { font-size: 0.92rem; }
             .medusa-cta-badge { font-size: 0.74rem; }
+            .medusa-cta-new-tab-note { font-size: 0.7rem; }
             .medusa-cta-snake-trail { right: 10px; }
             .filter-buttons { gap: 6px; }
             .filter-btn { padding: 7px 10px; font-size: 0.8em; }
@@ -3386,7 +3411,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     <input type="text" id="searchInput" data-i18n-placeholder="searchPlaceholder" data-i18n-aria-label="searchCountriesAriaLabel" placeholder="Cerca per paese o autorità..." aria-label="Search countries">
                     <button type="button" class="search-btn" data-i18n-text="searchButton">Cerca</button>
                 </div>
-                <a id="caravaggio-medusa-link" class="medusa-cta" href="https://www.tutelatruffe.it/" target="_blank" rel="noopener noreferrer" data-i18n-aria-label="medusaCtaAriaLabel" data-i18n-title="medusaCtaTitle" aria-label="Apri www.tutelatruffe.it - Codice Caravaggio" title="Apri il Codice Caravaggio su www.tutelatruffe.it">
+                <a id="caravaggio-medusa-link" class="medusa-cta" href="https://www.tutelatruffe.it/" target="_blank" rel="noopener noreferrer" data-i18n-aria-label="medusaCtaAriaLabel" data-i18n-title="medusaCtaTitle" aria-label="Apri www.tutelatruffe.it - Codice Caravaggio" title="Apri il Codice Caravaggio su www.tutelatruffe.it (si apre in una nuova scheda)" aria-describedby="caravaggio-medusa-note">
                     <span class="medusa-cta-icon" aria-hidden="true">
                         <svg viewBox="0 0 96 96" aria-hidden="true" focusable="false">
                             <path class="medusa-serpent snake-1" d="M21 23c-6-8 1-15 10-16 6 0 10 5 9 10-1 6-6 8-12 9" fill="none" stroke="#d6a23b" stroke-width="4" stroke-linecap="round"/>
@@ -3403,7 +3428,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     </span>
                     <span class="medusa-cta-copy">
                         <span class="medusa-cta-label" data-i18n-text="medusaCtaLabel">🔱 Codice Caravaggio - Lotta alle Meduse del Web</span>
-                        <span class="medusa-cta-badge" data-i18n-text="medusaCtaUrl">www.tutelatruffe.it</span>
+                        <span class="medusa-cta-meta">
+                            <span class="medusa-cta-badge" data-i18n-text="medusaCtaUrl">www.tutelatruffe.it</span>
+                            <span class="medusa-cta-new-tab-note" data-i18n-text="medusaCtaNewTab">Nuova scheda</span>
+                        </span>
+                        <span id="caravaggio-medusa-note" class="sr-only" data-i18n-text="medusaCtaNewTabSr">(si apre in una nuova scheda)</span>
                     </span>
                     <span class="medusa-cta-snake-trail" aria-hidden="true">
                         <span></span>
@@ -5342,6 +5371,138 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         };
         translations.ro.navReferences = "📜 Instituții internaționale de supraveghere financiară";
         translations['ro-RO'] = translations.ro;
+        const medusaCtaLocaleOverrides = {
+            it: {
+                medusaCtaLabel: "🔱 Codice Caravaggio - Lotta alle Meduse del Web",
+                medusaCtaTitle: "Apri il Codice Caravaggio su www.tutelatruffe.it (si apre in una nuova scheda)",
+                medusaCtaAriaLabel: "Apri www.tutelatruffe.it - Codice Caravaggio",
+                medusaCtaUrl: "www.tutelatruffe.it",
+                medusaCtaNewTab: "Nuova scheda",
+                medusaCtaNewTabSr: "(si apre in una nuova scheda)"
+            },
+            en: {
+                medusaCtaLabel: "🔱 Codice Caravaggio - Fight the Web Medusas",
+                medusaCtaTitle: "Open the Codice Caravaggio on www.tutelatruffe.it (opens in a new tab)",
+                medusaCtaAriaLabel: "Open www.tutelatruffe.it - Codice Caravaggio",
+                medusaCtaUrl: "www.tutelatruffe.it",
+                medusaCtaNewTab: "New tab",
+                medusaCtaNewTabSr: "(opens in a new tab)"
+            },
+            nl: {
+                medusaCtaLabel: "🔱 Codice Caravaggio - Bestrijd de webmedusa's",
+                medusaCtaTitle: "Open de Codice Caravaggio op www.tutelatruffe.it (opent in een nieuw tabblad)",
+                medusaCtaAriaLabel: "Open www.tutelatruffe.it - Codice Caravaggio",
+                medusaCtaUrl: "www.tutelatruffe.it",
+                medusaCtaNewTab: "Nieuw tabblad",
+                medusaCtaNewTabSr: "(opent in een nieuw tabblad)"
+            },
+            fr: {
+                medusaCtaLabel: "🔱 Codice Caravaggio - Combattez les méduses du Web",
+                medusaCtaTitle: "Ouvrir le Codice Caravaggio sur www.tutelatruffe.it (s'ouvre dans un nouvel onglet)",
+                medusaCtaAriaLabel: "Ouvrir www.tutelatruffe.it - Codice Caravaggio",
+                medusaCtaUrl: "www.tutelatruffe.it",
+                medusaCtaNewTab: "Nouvel onglet",
+                medusaCtaNewTabSr: "(s'ouvre dans un nouvel onglet)"
+            },
+            de: {
+                medusaCtaLabel: "🔱 Codice Caravaggio - Kampf gegen die Web-Medusen",
+                medusaCtaTitle: "Öffnen Sie den Codice Caravaggio auf www.tutelatruffe.it (wird in einem neuen Tab geöffnet)",
+                medusaCtaAriaLabel: "Öffnen Sie www.tutelatruffe.it - Codice Caravaggio",
+                medusaCtaUrl: "www.tutelatruffe.it",
+                medusaCtaNewTab: "Neuer Tab",
+                medusaCtaNewTabSr: "(wird in einem neuen Tab geöffnet)"
+            },
+            es: {
+                medusaCtaLabel: "🔱 Codice Caravaggio - Lucha contra las medusas de la web",
+                medusaCtaTitle: "Abrir Codice Caravaggio en www.tutelatruffe.it (se abre en una nueva pestaña)",
+                medusaCtaAriaLabel: "Abrir www.tutelatruffe.it - Codice Caravaggio",
+                medusaCtaUrl: "www.tutelatruffe.it",
+                medusaCtaNewTab: "Nueva pestaña",
+                medusaCtaNewTabSr: "(se abre en una nueva pestaña)"
+            },
+            pt: {
+                medusaCtaLabel: "🔱 Codice Caravaggio - Luta contra as medusas da web",
+                medusaCtaTitle: "Abrir o Codice Caravaggio em www.tutelatruffe.it (abre em um novo separador)",
+                medusaCtaAriaLabel: "Abrir www.tutelatruffe.it - Codice Caravaggio",
+                medusaCtaUrl: "www.tutelatruffe.it",
+                medusaCtaNewTab: "Novo separador",
+                medusaCtaNewTabSr: "(abre em um novo separador)"
+            },
+            bs: {
+                medusaCtaLabel: "🔱 Codice Caravaggio - Borba protiv meduza na webu",
+                medusaCtaTitle: "Otvori Codice Caravaggio na www.tutelatruffe.it (otvara se u novoj kartici)",
+                medusaCtaAriaLabel: "Otvori www.tutelatruffe.it - Codice Caravaggio",
+                medusaCtaUrl: "www.tutelatruffe.it",
+                medusaCtaNewTab: "Nova kartica",
+                medusaCtaNewTabSr: "(otvara se u novoj kartici)"
+            },
+            sq: {
+                medusaCtaLabel: "🔱 Codice Caravaggio - Lufta kundër meduzave të uebit",
+                medusaCtaTitle: "Hap Codice Caravaggio në www.tutelatruffe.it (hapet në një skedë të re)",
+                medusaCtaAriaLabel: "Hap www.tutelatruffe.it - Codice Caravaggio",
+                medusaCtaUrl: "www.tutelatruffe.it",
+                medusaCtaNewTab: "Skedë e re",
+                medusaCtaNewTabSr: "(hapet në një skedë të re)"
+            },
+            ro: {
+                medusaCtaLabel: "🔱 Codice Caravaggio - Lupta împotriva meduzelor web",
+                medusaCtaTitle: "Deschide Codice Caravaggio pe www.tutelatruffe.it (se deschide într-o filă nouă)",
+                medusaCtaAriaLabel: "Deschide www.tutelatruffe.it - Codice Caravaggio",
+                medusaCtaUrl: "www.tutelatruffe.it",
+                medusaCtaNewTab: "Filă nouă",
+                medusaCtaNewTabSr: "(se deschide într-o filă nouă)"
+            },
+            el: {
+                medusaCtaLabel: "🔱 Codice Caravaggio - Καταπολέμηση των μεδουσών του ιστού",
+                medusaCtaTitle: "Άνοιγμα του Codice Caravaggio στο www.tutelatruffe.it (ανοίγει σε νέα καρτέλα)",
+                medusaCtaAriaLabel: "Άνοιγμα www.tutelatruffe.it - Codice Caravaggio",
+                medusaCtaUrl: "www.tutelatruffe.it",
+                medusaCtaNewTab: "Νέα καρτέλα",
+                medusaCtaNewTabSr: "(ανοίγει σε νέα καρτέλα)"
+            },
+            ar: {
+                medusaCtaLabel: "🔱 Codice Caravaggio - مكافحة قناديل الويب",
+                medusaCtaTitle: "افتح Codice Caravaggio على www.tutelatruffe.it (يُفتح في علامة تبويب جديدة)",
+                medusaCtaAriaLabel: "افتح www.tutelatruffe.it - Codice Caravaggio",
+                medusaCtaUrl: "www.tutelatruffe.it",
+                medusaCtaNewTab: "علامة تبويب جديدة",
+                medusaCtaNewTabSr: "(يُفتح في علامة تبويب جديدة)"
+            },
+            zh: {
+                medusaCtaLabel: "🔱 Codice Caravaggio - 对抗网络水母",
+                medusaCtaTitle: "在 www.tutelatruffe.it 打开 Codice Caravaggio（将在新标签页中打开）",
+                medusaCtaAriaLabel: "打开 www.tutelatruffe.it - Codice Caravaggio",
+                medusaCtaUrl: "www.tutelatruffe.it",
+                medusaCtaNewTab: "新标签页",
+                medusaCtaNewTabSr: "（将在新标签页中打开）"
+            },
+            hi: {
+                medusaCtaLabel: "🔱 Codice Caravaggio - वेब मेडुसा के खिलाफ लड़ाई",
+                medusaCtaTitle: "www.tutelatruffe.it पर Codice Caravaggio खोलें (नई टैब में खुलेगा)",
+                medusaCtaAriaLabel: "www.tutelatruffe.it खोलें - Codice Caravaggio",
+                medusaCtaUrl: "www.tutelatruffe.it",
+                medusaCtaNewTab: "नई टैब",
+                medusaCtaNewTabSr: "(नई टैब में खुलेगा)"
+            },
+            vi: {
+                medusaCtaLabel: "🔱 Codice Caravaggio - Chống lại sứa trên web",
+                medusaCtaTitle: "Mở Codice Caravaggio trên www.tutelatruffe.it (mở trong thẻ mới)",
+                medusaCtaAriaLabel: "Mở www.tutelatruffe.it - Codice Caravaggio",
+                medusaCtaUrl: "www.tutelatruffe.it",
+                medusaCtaNewTab: "Thẻ mới",
+                medusaCtaNewTabSr: "(mở trong thẻ mới)"
+            }
+        };
+        Object.entries(medusaCtaLocaleOverrides).forEach(([locale, override]) => {
+            translations[locale] = {
+                ...(translations[locale] || translations.en || {}),
+                ...override
+            };
+        });
+        translations['el-GR'] = translations.el;
+        translations.xk = translations.sq;
+        translations['sq-XK'] = translations.sq;
+        translations['ro-RO'] = translations.ro;
         const localeMetadata = {
             it: { api: 'it', urlSupported: true },
             en: { api: 'en', urlSupported: true },
@@ -6199,8 +6360,15 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         function setupMedusaCta() {
             const medusaCta = document.getElementById('caravaggio-medusa-link');
             if (!medusaCta) return;
+            if (typeof medusaCta._medusaCtaCleanup === 'function') {
+                medusaCta._medusaCtaCleanup();
+            }
+            const reducedMotionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+            const supportsMediaQueryEvents = typeof reducedMotionQuery.addEventListener === 'function';
             let pointerFrame = null;
             let pendingMotion = null;
+            let motionEnabled = false;
+            let cachedRect = null;
             const resetMedusaMotion = () => {
                 pendingMotion = null;
                 if (pointerFrame) {
@@ -6211,6 +6379,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 medusaCta.style.setProperty('--medusa-rotate-y', '0deg');
                 medusaCta.style.setProperty('--snake-shift', '0px');
             };
+            const refreshBounds = () => {
+                cachedRect = medusaCta.getBoundingClientRect();
+            };
             const flushMedusaMotion = () => {
                 pointerFrame = null;
                 if (!pendingMotion) return;
@@ -6218,8 +6389,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 medusaCta.style.setProperty('--medusa-rotate-y', pendingMotion.rotateY);
                 medusaCta.style.setProperty('--snake-shift', pendingMotion.snakeShift);
             };
-            medusaCta.addEventListener('mousemove', (event) => {
-                const rect = medusaCta.getBoundingClientRect();
+            const handlePointerMove = (event) => {
+                if (!motionEnabled) return;
+                const rect = cachedRect || medusaCta.getBoundingClientRect();
                 const xRatio = (event.clientX - rect.left) / rect.width - 0.5;
                 const yRatio = (event.clientY - rect.top) / rect.height - 0.5;
                 pendingMotion = {
@@ -6230,9 +6402,48 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 if (!pointerFrame) {
                     pointerFrame = requestAnimationFrame(flushMedusaMotion);
                 }
-            });
+            };
+            const syncMotionPreference = () => {
+                resetMedusaMotion();
+                if (reducedMotionQuery.matches) {
+                    if (motionEnabled) {
+                        medusaCta.removeEventListener('mousemove', handlePointerMove);
+                        motionEnabled = false;
+                    }
+                    return;
+                }
+                if (!motionEnabled) {
+                    refreshBounds();
+                    medusaCta.addEventListener('mousemove', handlePointerMove);
+                    motionEnabled = true;
+                }
+            };
+            syncMotionPreference();
+            if (supportsMediaQueryEvents) {
+                reducedMotionQuery.addEventListener('change', syncMotionPreference);
+            } else {
+                reducedMotionQuery.addListener(syncMotionPreference);
+            }
+            medusaCta.addEventListener('mouseenter', refreshBounds);
+            medusaCta.addEventListener('focus', resetMedusaMotion, true);
             medusaCta.addEventListener('mouseleave', resetMedusaMotion);
             medusaCta.addEventListener('blur', resetMedusaMotion, true);
+            window.addEventListener('resize', refreshBounds);
+            const cleanup = () => {
+                if (supportsMediaQueryEvents) {
+                    reducedMotionQuery.removeEventListener('change', syncMotionPreference);
+                } else {
+                    reducedMotionQuery.removeListener(syncMotionPreference);
+                }
+                medusaCta.removeEventListener('mousemove', handlePointerMove);
+                medusaCta.removeEventListener('mouseenter', refreshBounds);
+                medusaCta.removeEventListener('focus', resetMedusaMotion, true);
+                medusaCta.removeEventListener('mouseleave', resetMedusaMotion);
+                medusaCta.removeEventListener('blur', resetMedusaMotion, true);
+                window.removeEventListener('resize', refreshBounds);
+                resetMedusaMotion();
+            };
+            medusaCta._medusaCtaCleanup = cleanup;
         }
 
         function updateStats() {
