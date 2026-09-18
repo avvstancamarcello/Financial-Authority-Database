@@ -6315,16 +6315,25 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             const medusaNote = medusaCta.querySelector('[data-medusa-cta-note]');
             if (medusaNote) {
                 const defaultMedusaNoteId = 'caravaggio-medusa-note';
+                const setMedusaDescription = (ctaElement, noteId) => {
+                    if (!ctaElement) return;
+                    const currentIds = (ctaElement.getAttribute('aria-describedby') || '')
+                        .split(/\s+/)
+                        .filter(Boolean)
+                        .filter((id) => !/^caravaggio-medusa-note(?:-\d+)?$/.test(id));
+                    currentIds.push(noteId);
+                    ctaElement.setAttribute('aria-describedby', currentIds.join(' '));
+                };
                 const duplicateRootNotes = Array.from(document.querySelectorAll(`.medusa-cta #${defaultMedusaNoteId}`));
                 if (duplicateRootNotes.length > 1) {
                     duplicateRootNotes.forEach((noteElement, index) => {
                         const noteId = index === 0 ? defaultMedusaNoteId : `${defaultMedusaNoteId}-${index + 1}`;
                         noteElement.id = noteId;
-                        noteElement.closest('.medusa-cta')?.setAttribute('aria-describedby', noteId);
+                        setMedusaDescription(noteElement.closest('.medusa-cta'), noteId);
                     });
                 } else {
                     medusaNote.id = defaultMedusaNoteId;
-                    medusaNote.closest('.medusa-cta')?.setAttribute('aria-describedby', defaultMedusaNoteId);
+                    setMedusaDescription(medusaNote.closest('.medusa-cta'), defaultMedusaNoteId);
                 }
             }
             const reducedMotionQuery = typeof window.matchMedia === 'function'
