@@ -1660,7 +1660,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     <button type="button" class="search-btn">Cerca</button>
                     <button type="button" class="search-advice-btn" onclick="toggleSearchAdvice()" data-i18n="searchAdviceButton">Perché questa ricerca è importante?</button>
                 </div>
-                <a id="caravaggio-medusa-link" class="medusa-cta" href="https://www.tutelatruffe.it/" target="_blank" rel="noopener noreferrer" data-i18n-title="medusaCtaTitle" title="Apri il Codice Caravaggio su www.tutelatruffe.it (si apre in una nuova scheda)">
+                <a id="caravaggio-medusa-link" class="medusa-cta" href="https://www.tutelatruffe.it/" target="_blank" rel="noopener noreferrer" data-i18n-title="medusaCtaTitle" title="Apri il Codice Caravaggio su www.tutelatruffe.it (si apre in una nuova scheda)" aria-describedby="caravaggio-medusa-note">
                     <span class="medusa-cta-icon" aria-hidden="true">
                         <svg viewBox="0 0 96 96" aria-hidden="true" focusable="false">
                             <path class="medusa-serpent snake-1" d="M21 23c-6-8 1-15 10-16 6 0 10 5 9 10-1 6-6 8-12 9" fill="none" stroke="#d6a23b" stroke-width="4" stroke-linecap="round"/>
@@ -1681,7 +1681,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                             <span class="medusa-cta-badge" data-i18n-text="medusaCtaUrl">www.tutelatruffe.it</span>
                             <span class="medusa-cta-new-tab-note" data-i18n-text="medusaCtaNewTab">Nuova scheda</span>
                         </span>
-                        <span class="sr-only" data-i18n-text="medusaCtaNewTabSr">(si apre in una nuova scheda)</span>
                     </span>
                     <span class="medusa-cta-snake-trail" aria-hidden="true">
                         <span></span>
@@ -1689,6 +1688,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                         <span></span>
                     </span>
                 </a>
+                <span id="caravaggio-medusa-note" class="sr-only" data-i18n-text="medusaCtaNewTabSr">(si apre in una nuova scheda)</span>
                 <div class="filter-buttons" role="group" aria-label="Filter options">
                     <button class="filter-btn active" onclick="filterCountries('all')" data-i18n="filterAll" aria-pressed="true">Tutti i Paesi</button>
                     <button class="filter-btn" onclick="filterCountries('altissimo')" data-i18n="filterHigh" aria-pressed="false">Protezione Elevata</button>
@@ -3284,7 +3284,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             medusaCta.addEventListener('mouseleave', resetMedusaMotion);
             medusaCta.addEventListener('blur', resetMedusaMotion, true);
             window.addEventListener('resize', refreshBounds);
-            window.addEventListener('scroll', refreshBounds, true);
             const cleanup = () => {
                 if (supportsMediaQueryEvents) {
                     reducedMotionQuery.removeEventListener('change', syncMotionPreference);
@@ -3297,7 +3296,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 medusaCta.removeEventListener('mouseleave', resetMedusaMotion);
                 medusaCta.removeEventListener('blur', resetMedusaMotion, true);
                 window.removeEventListener('resize', refreshBounds);
-                window.removeEventListener('scroll', refreshBounds, true);
                 window.removeEventListener('pagehide', cleanup);
                 motionEnabled = false;
                 cachedRect = null;
