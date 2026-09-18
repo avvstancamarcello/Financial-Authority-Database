@@ -818,6 +818,12 @@
             gap: 6px;
             min-width: 0;
         }
+        .medusa-cta-meta {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
         .medusa-cta-label {
             font-size: 1rem;
             font-weight: 700;
@@ -834,6 +840,24 @@
             color: #f8d774;
             font-size: 0.8rem;
             letter-spacing: 0.03em;
+        }
+        .medusa-cta-new-tab-note {
+            font-size: 0.76rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            color: rgba(255,245,209,0.88);
+        }
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
         }
         .medusa-cta-snake-trail {
             position: absolute;
@@ -1602,6 +1626,7 @@
             }
             .medusa-cta-label { font-size: 0.92rem; }
             .medusa-cta-badge { font-size: 0.74rem; }
+            .medusa-cta-new-tab-note { font-size: 0.7rem; }
             .medusa-cta-snake-trail { right: 10px; }
             .filter-buttons { gap: 6px; }
             .filter-btn { padding: 7px 10px; font-size: 0.8em; }
@@ -3386,7 +3411,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     <input type="text" id="searchInput" data-i18n-placeholder="searchPlaceholder" data-i18n-aria-label="searchCountriesAriaLabel" placeholder="Cerca per paese o autorità..." aria-label="Search countries">
                     <button type="button" class="search-btn" data-i18n-text="searchButton">Cerca</button>
                 </div>
-                <a id="caravaggio-medusa-link" class="medusa-cta" href="https://www.tutelatruffe.it/" target="_blank" rel="noopener noreferrer" data-i18n-aria-label="medusaCtaAriaLabel" data-i18n-title="medusaCtaTitle" aria-label="Apri www.tutelatruffe.it - Codice Caravaggio" title="Apri il Codice Caravaggio su www.tutelatruffe.it">
+                <a id="caravaggio-medusa-link" class="medusa-cta" href="https://www.tutelatruffe.it/" target="_blank" rel="noopener noreferrer" data-i18n-aria-label="medusaCtaAriaLabel" data-i18n-title="medusaCtaTitle" aria-label="Apri www.tutelatruffe.it - Codice Caravaggio" title="Apri il Codice Caravaggio su www.tutelatruffe.it (si apre in una nuova scheda)" aria-describedby="caravaggio-medusa-note">
                     <span class="medusa-cta-icon" aria-hidden="true">
                         <svg viewBox="0 0 96 96" aria-hidden="true" focusable="false">
                             <path class="medusa-serpent snake-1" d="M21 23c-6-8 1-15 10-16 6 0 10 5 9 10-1 6-6 8-12 9" fill="none" stroke="#d6a23b" stroke-width="4" stroke-linecap="round"/>
@@ -3403,7 +3428,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     </span>
                     <span class="medusa-cta-copy">
                         <span class="medusa-cta-label" data-i18n-text="medusaCtaLabel">🔱 Codice Caravaggio - Lotta alle Meduse del Web</span>
-                        <span class="medusa-cta-badge" data-i18n-text="medusaCtaUrl">www.tutelatruffe.it</span>
+                        <span class="medusa-cta-meta">
+                            <span class="medusa-cta-badge" data-i18n-text="medusaCtaUrl">www.tutelatruffe.it</span>
+                            <span class="medusa-cta-new-tab-note" data-i18n-text="medusaCtaNewTab">Nuova scheda</span>
+                        </span>
+                        <span id="caravaggio-medusa-note" class="sr-only" data-medusa-cta-note data-i18n-text="medusaCtaNewTabSr">(si apre in una nuova scheda)</span>
                     </span>
                     <span class="medusa-cta-snake-trail" aria-hidden="true">
                         <span></span>
@@ -3648,9 +3677,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 searchCountryAriaLabel: "Cerca un paese",
                 searchButton: "Cerca",
                 medusaCtaLabel: "🔱 Codice Caravaggio - Lotta alle Meduse del Web",
-                medusaCtaTitle: "Apri il Codice Caravaggio su www.tutelatruffe.it",
+                medusaCtaTitle: "Apri il Codice Caravaggio su www.tutelatruffe.it (si apre in una nuova scheda)",
                 medusaCtaAriaLabel: "Apri www.tutelatruffe.it - Codice Caravaggio",
                 medusaCtaUrl: "www.tutelatruffe.it",
+                medusaCtaNewTab: "Nuova scheda",
+                medusaCtaNewTabSr: "(si apre in una nuova scheda)",
                 filterAll: "Tutti i Paesi",
                 filterHigh: "Protezione Elevata",
                 filterEU: "Paesi UE",
@@ -3876,6 +3907,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 securityText: "يوفّر هذا الموقع وصولاً فورياً إلى الصفحات الرئيسية للسلطات الرقابية المالية الحكومية للتحقق من شرعية وانتظام الشركات والأشخاص والكيانات التي تقدّم خدمات مالية وتتلقّى التحويلات البنكية.",
                 introText: "تقدّم هذه الصفحة 239 رابطاً مباشراً إلى مواقع السلطات المالية في 239 دولة حول العالم.<br>ابحث عن اسم الدولة التي يَزعم الموقع الاحتيالي أن الشركة مُسجّلة فيها، وستجد كل بيانات الهوية الرسمية.",
                 searchPlaceholder: "ابحث حسب الدولة أو الهيئة...",
+                medusaCtaLabel: "🔱 Codice Caravaggio - مكافحة قناديل الويب",
+                medusaCtaTitle: "افتح Codice Caravaggio على www.tutelatruffe.it (يُفتح في علامة تبويب جديدة)",
+                medusaCtaAriaLabel: "افتح www.tutelatruffe.it - Codice Caravaggio",
+                medusaCtaUrl: "www.tutelatruffe.it",
+                medusaCtaNewTab: "علامة تبويب جديدة",
+                medusaCtaNewTabSr: "(يُفتح في علامة تبويب جديدة)",
                 filterAll: "جميع الدول",
                 filterHigh: "حماية مرتفعة",
                 filterEU: "دول الاتحاد الأوروبي",
@@ -3988,6 +4025,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 securityText: "Truy cập ngay các trang chủ của Cơ quan Giám sát Tài chính Nhà nước để kiểm tra tính hợp pháp và quy chế của các công ty tài chính, cá nhân và tổ chức cung cấp dịch vụ tài chính và nhận chuyển khoản.",
                 introText: "Trang web này cung cấp 239 ĐƯỜNG DẪN trực tiếp tới trang của CƠ QUAN TÀI CHÍNH tại 239 QUỐC GIA trên thế giới.<br>HÃY TÌM tên quốc gia được khai là trụ sở của doanh nghiệp tài chính, và bạn sẽ biết mọi thông tin nhận dạng chính thức.",
                 searchPlaceholder: "Tìm theo quốc gia hoặc cơ quan...",
+                medusaCtaLabel: "🔱 Codice Caravaggio - Chống lại sứa trên web",
+                medusaCtaTitle: "Mở Codice Caravaggio trên www.tutelatruffe.it (mở trong thẻ mới)",
+                medusaCtaAriaLabel: "Mở www.tutelatruffe.it - Codice Caravaggio",
+                medusaCtaUrl: "www.tutelatruffe.it",
+                medusaCtaNewTab: "Thẻ mới",
+                medusaCtaNewTabSr: "(mở trong thẻ mới)",
                 filterAll: "Tất cả quốc gia",
                 filterHigh: "Mức bảo vệ cao",
                 filterEU: "Quốc gia EU",
@@ -4061,6 +4104,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 securityText: "直接访问各国政府金融监管机构主页，用于核查提供金融服务并接收转账的公司、个人和实体的合法性与合规性。",
                 introText: "本网页提供通往全球 239 个国家金融监管机构网站的 239 条直接链接。<br>请搜索声称为金融企业注册地的国家名称，即可了解所有官方识别信息。",
                 searchPlaceholder: "按国家或监管机构搜索...",
+                medusaCtaLabel: "🔱 Codice Caravaggio - 对抗网络水母",
+                medusaCtaTitle: "在 www.tutelatruffe.it 打开 Codice Caravaggio（将在新标签页中打开）",
+                medusaCtaAriaLabel: "打开 www.tutelatruffe.it - Codice Caravaggio",
+                medusaCtaUrl: "www.tutelatruffe.it",
+                medusaCtaNewTab: "新标签页",
+                medusaCtaNewTabSr: "（将在新标签页中打开）",
                 filterAll: "所有国家",
                 filterHigh: "高保护等级",
                 filterEU: "欧盟国家",
@@ -4134,6 +4183,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 securityText: "सरकारी वित्तीय प्राधिकरणों के होमपेज तक तुरंत पहुँच, ताकि वित्तीय सेवाएँ देने और बैंक स्थानांतरण प्राप्त करने वाली कंपनियों, व्यक्तियों और संस्थाओं की वैधता और नियमितता की जाँच की जा सके।",
                 introText: "यह वेबपेज दुनिया के 239 देशों की वित्तीय प्राधिकरण वेबसाइटों के लिए 239 प्रत्यक्ष लिंक प्रदान करता है।<br>उस देश का नाम खोजें जिसे वित्तीय कंपनी अपने पंजीकृत मुख्यालय के रूप में बताती है, और आप सभी आधिकारिक पहचान विवरण जान सकेंगे।",
                 searchPlaceholder: "देश या प्राधिकरण द्वारा खोजें...",
+                medusaCtaLabel: "🔱 Codice Caravaggio - वेब मेडुसा के खिलाफ लड़ाई",
+                medusaCtaTitle: "www.tutelatruffe.it पर Codice Caravaggio खोलें (नई टैब में खुलेगा)",
+                medusaCtaAriaLabel: "www.tutelatruffe.it खोलें - Codice Caravaggio",
+                medusaCtaUrl: "www.tutelatruffe.it",
+                medusaCtaNewTab: "नई टैब",
+                medusaCtaNewTabSr: "(नई टैब में खुलेगा)",
                 filterAll: "सभी देश",
                 filterHigh: "उच्च संरक्षण",
                 filterEU: "ईयू देश",
@@ -4212,10 +4267,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 searchCountryPlaceholder: "🔍 Search country...",
                 searchCountryAriaLabel: "Search for a country",
                 searchButton: "Search",
-                medusaCtaLabel: "🔱 Codice Caravaggio - Lotta alle Meduse del Web",
-                medusaCtaTitle: "Open the Codice Caravaggio on www.tutelatruffe.it",
+                medusaCtaLabel: "🔱 Codice Caravaggio - Fight the Web Medusas",
+                medusaCtaTitle: "Open the Codice Caravaggio on www.tutelatruffe.it (opens in a new tab)",
                 medusaCtaAriaLabel: "Open www.tutelatruffe.it - Codice Caravaggio",
                 medusaCtaUrl: "www.tutelatruffe.it",
+                medusaCtaNewTab: "New tab",
+                medusaCtaNewTabSr: "(opens in a new tab)",
                 filterAll: "All Countries",
                 filterHigh: "Highest Protection",
                 filterEU: "EU Countries",
@@ -4445,6 +4502,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 securityText: "Cette page offre une base de données éducative officielle créée par <strong>l'Avocat Marcello Stanca à Florence - Italie</strong>. Elle fournit aux consommateurs, clients de banques, tous les liens pour accéder aux pages officielles des Autorités de Surveillance Financière de 239 pays du monde. L'accès aux Autorités permet de vérifier: <strong>1.</strong> l'identité des Autorités Financières indiquées aux utilisateurs sur des pages web de fausses entreprises, <strong>2.</strong> mais aussi la possession effective et le numéro de licence accordée, valide pour offrir des services financiers dans le pays de résidence du consommateur/client bancaire. Cette page offre des outils de contact et de consultation pour protéger les utilisateurs consommateurs contre les fraudes financières.",
                 introText: "Ce site web offre des liens pour accéder aux pages web des Autorités Financières de 239 pays du monde. Utilisez-le pour vérifier la légitimité et la régularité des entreprises, des personnes et des entités offrant des services financiers.",
                 searchPlaceholder: "Rechercher par pays ou autorité...",
+                medusaCtaLabel: "🔱 Codice Caravaggio - Combattez les méduses du Web",
+                medusaCtaTitle: "Ouvrir le Codice Caravaggio sur www.tutelatruffe.it (s'ouvre dans un nouvel onglet)",
+                medusaCtaAriaLabel: "Ouvrir www.tutelatruffe.it - Codice Caravaggio",
+                medusaCtaUrl: "www.tutelatruffe.it",
+                medusaCtaNewTab: "Nouvel onglet",
+                medusaCtaNewTabSr: "(s'ouvre dans un nouvel onglet)",
                 filterAll: "Tous les Pays",
                 filterHigh: "Protection Maximale",
                 filterEU: "Pays UE",
@@ -4579,6 +4642,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 securityText: "Diese Seite bietet eine offizielle Bildungsdatenbank, erstellt von <strong>Rechtsanwalt Marcello Stanca in Florenz - Italien</strong>. Sie bietet Verbrauchern und Bankkunden alle Links zum Zugriff auf die offiziellen Seiten der Finanzaufsichtsbehörden in 239 Ländern weltweit. Der Zugang zu den Behörden ermöglicht die Überprüfung von: <strong>1.</strong> der Identität der Finanzaufsichtsbehörden, die Benutzern auf Webseiten gefälschter Unternehmen angegeben werden, <strong>2.</strong> aber auch des tatsächlichen Besitzes und der Lizenznummer, gültig für das Anbieten von Finanzdienstleistungen im Wohnsitzland des Verbrauchers/Bankkunden. Diese Seite bietet Kontakt- und Beratungsinstrumente zum Schutz von Verbrauchern gegen Finanzbetrug.",
                 introText: "Diese Website bietet Links zu den Webseiten der Finanzbehörden von 239 Ländern weltweit. Nutzen Sie sie, um die Legitimität und Ordnungsmäßigkeit von Unternehmen, Personen und Einrichtungen zu überprüfen, die Finanzdienstleistungen anbieten.",
                 searchPlaceholder: "Nach Land oder Behörde suchen...",
+                medusaCtaLabel: "🔱 Codice Caravaggio - Kampf gegen die Web-Medusen",
+                medusaCtaTitle: "Öffnen Sie den Codice Caravaggio auf www.tutelatruffe.it (wird in einem neuen Tab geöffnet)",
+                medusaCtaAriaLabel: "Öffnen Sie www.tutelatruffe.it - Codice Caravaggio",
+                medusaCtaUrl: "www.tutelatruffe.it",
+                medusaCtaNewTab: "Neuer Tab",
+                medusaCtaNewTabSr: "(wird in einem neuen Tab geöffnet)",
                 filterAll: "Alle Länder",
                 filterHigh: "Höchster Schutz",
                 filterEU: "EU-Länder",
@@ -4713,6 +4782,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 securityText: "Esta página ofrece una base de datos educativa oficial creada por <strong>el Abogado Marcello Stanca en Florencia - Italia</strong>. Proporciona a los consumidores, clientes de bancos, todos los enlaces para acceder a las páginas oficiales de las Autoridades de Supervisión Financiera de 239 países del mundo. El acceso a las Autoridades permite verificar: <strong>1.</strong> la identidad de las Autoridades Financieras indicadas a los usuarios en páginas web de empresas falsas, <strong>2.</strong> pero también la posesión efectiva y el número de licencia otorgada, válida para ofrecer servicios financieros en el país de residencia del consumidor/cliente bancario. Esta página ofrece herramientas de contacto y consulta para proteger a los usuarios consumidores contra el fraude financiero.",
                 introText: "Este sitio web ofrece enlaces a las páginas web de las Autoridades Financieras de 239 países del mundo. Úselo para verificar la legitimidad y regularidad de empresas, personas y entidades que ofrecen servicios financieros.",
                 searchPlaceholder: "Buscar por país o autoridad...",
+                medusaCtaLabel: "🔱 Codice Caravaggio - Lucha contra las medusas de la web",
+                medusaCtaTitle: "Abrir Codice Caravaggio en www.tutelatruffe.it (se abre en una nueva pestaña)",
+                medusaCtaAriaLabel: "Abrir www.tutelatruffe.it - Codice Caravaggio",
+                medusaCtaUrl: "www.tutelatruffe.it",
+                medusaCtaNewTab: "Nueva pestaña",
+                medusaCtaNewTabSr: "(se abre en una nueva pestaña)",
                 filterAll: "Todos los Países",
                 filterHigh: "Protección Máxima",
                 filterEU: "Países UE",
@@ -4847,6 +4922,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 securityText: "Acesso imediato às páginas oficiais das Autoridades Financeiras governamentais para verificar a legitimidade e regularidade de empresas, pessoas e entidades que oferecem serviços financeiros e recebem transferências.",
                 introText: "Esta página oferece 239 linkS diretos para as páginas das AUTORIDADES FINANCEIRAS de 239 países do mundo.<br>PROCURE o nome do País declarado como sede da empresa financeira, e poderá conhecer todos os detalhes identificativos oficiais.",
                 searchPlaceholder: "Procurar por país ou autoridade...",
+                medusaCtaLabel: "🔱 Codice Caravaggio - Luta contra as medusas da web",
+                medusaCtaTitle: "Abrir o Codice Caravaggio em www.tutelatruffe.it (abre em um novo separador)",
+                medusaCtaAriaLabel: "Abrir www.tutelatruffe.it - Codice Caravaggio",
+                medusaCtaUrl: "www.tutelatruffe.it",
+                medusaCtaNewTab: "Novo separador",
+                medusaCtaNewTabSr: "(abre em um novo separador)",
                 filterAll: "Todos os Países",
                 filterHigh: "Proteção Elevada",
                 filterEU: "Países UE",
@@ -4941,10 +5022,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 securityText: "Ova stranica omogućava neposredan pristup službenim web stranicama državnih finansijskih autoriteta radi provjere zakonitosti i regularnosti finansijskih društava, osoba i subjekata koji nude finansijske usluge i primaju bankovne transfere.",
                 introText: "Ova web stranica nudi 239 direktnih linkova za pristup stranicama FINANSIJSKIH AUTORITETA u 239 zemalja svijeta.<br>POTRAŽI naziv zemlje za koju finansijsko društvo tvrdi da joj je sjedište i saznat ćeš sve službene identifikacijske podatke.",
                 searchPlaceholder: "Pretraži po zemlji ili autoritetu...",
-                medusaCtaLabel: "🔱 Codice Caravaggio - Lotta alle Meduse del Web",
-                medusaCtaTitle: "Otvori Codice Caravaggio na www.tutelatruffe.it",
+                medusaCtaLabel: "🔱 Codice Caravaggio - Borba protiv meduza na webu",
+                medusaCtaTitle: "Otvori Codice Caravaggio na www.tutelatruffe.it (otvara se u novoj kartici)",
                 medusaCtaAriaLabel: "Otvori www.tutelatruffe.it - Codice Caravaggio",
                 medusaCtaUrl: "www.tutelatruffe.it",
+                medusaCtaNewTab: "Nova kartica",
+                medusaCtaNewTabSr: "(otvara se u novoj kartici)",
                 filterAll: "Sve zemlje",
                 filterHigh: "Visoka zaštita",
                 filterEU: "Zemlje EU",
@@ -5083,6 +5166,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 securityText: "Kjo faqe ofron akses të menjëhershëm në faqet zyrtare të Autoriteteve Financiare qeveritare për të verifikuar legjitimitetin dhe rregullsinë e shoqërive, personave dhe entiteteve që ofrojnë shërbime financiare dhe marrin transferta bankare.",
                 introText: "Kjo faqe web ofron 239 lidhje direkte për të hyrë në faqet e AUTORITETEVE FINANCIARE të 239 vendeve të botës.<br>KËRKO emrin e vendit që deklarohet si seli e shoqërisë financiare dhe do të njohësh të gjitha të dhënat zyrtare identifikuese.",
                 searchPlaceholder: "Kërko sipas vendit ose autoritetit...",
+                medusaCtaLabel: "🔱 Codice Caravaggio - Lufta kundër meduzave të uebit",
+                medusaCtaTitle: "Hap Codice Caravaggio në www.tutelatruffe.it (hapet në një skedë të re)",
+                medusaCtaAriaLabel: "Hap www.tutelatruffe.it - Codice Caravaggio",
+                medusaCtaUrl: "www.tutelatruffe.it",
+                medusaCtaNewTab: "Skedë e re",
+                medusaCtaNewTabSr: "(hapet në një skedë të re)",
                 filterAll: "Të gjitha vendet",
                 filterHigh: "Mbrojtje e lartë",
                 filterEU: "Vendet e BE-së",
@@ -5263,6 +5352,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             languageSelectorAsiaNote: "Συμπαγής δεσμευμένη περιοχή για τα επόμενα κουμπιά γλώσσας που έχουν ήδη προβλεφθεί για μελλοντική επέκταση.",
             upcomingAsianLanguageTitle: "Μελλοντικό κουμπί γλώσσας",
             chooseLanguageHint: "Επιλέξτε τη γλώσσα σας",
+            medusaCtaLabel: "🔱 Codice Caravaggio - Καταπολέμηση των μεδουσών του ιστού",
+            medusaCtaTitle: "Άνοιγμα του Codice Caravaggio στο www.tutelatruffe.it (ανοίγει σε νέα καρτέλα)",
+            medusaCtaAriaLabel: "Άνοιγμα www.tutelatruffe.it - Codice Caravaggio",
+            medusaCtaUrl: "www.tutelatruffe.it",
+            medusaCtaNewTab: "Νέα καρτέλα",
+            medusaCtaNewTabSr: "(ανοίγει σε νέα καρτέλα)",
             languageAreaEu: "Περιοχή ΕΕ",
             languagePrompt: "Επιλέξτε τη γλώσσα σας - πρόσβαση στη landing page AMEV - AMEA - AWEV",
             languageAreaAsia: "Περιοχή ΑΣΙΑ",
@@ -5310,6 +5405,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             languageSelectorEuNote: "AMEV pentru nucleul european suportat; AMEA pentru greacă; AWEV pentru traseul englez/global folosit și pentru experiența actuală a zonei olandeze.",
             languageSelectorAsiaTitle: "⏳ Viitoare butoane de limbă – Work in Progress",
             languageSelectorAsiaNote: "Zonă compactă rezervată pentru următoarele butoane de limbă planificate pentru extinderi viitoare.",
+            medusaCtaLabel: "🔱 Codice Caravaggio - Lupta împotriva meduzelor web",
+            medusaCtaTitle: "Deschide Codice Caravaggio pe www.tutelatruffe.it (se deschide într-o filă nouă)",
+            medusaCtaAriaLabel: "Deschide www.tutelatruffe.it - Codice Caravaggio",
+            medusaCtaUrl: "www.tutelatruffe.it",
+            medusaCtaNewTab: "Filă nouă",
+            medusaCtaNewTabSr: "(se deschide într-o filă nouă)",
             languageAreaEu: "Zona UE",
             languagePrompt: "Selectează limba - acces la landing page AMEV - AMEA - AWEV",
             languageAreaAsia: "Zona ASIA",
@@ -5342,6 +5443,15 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         };
         translations.ro.navReferences = "📜 Instituții internaționale de supraveghere financiară";
         translations['ro-RO'] = translations.ro;
+        translations.nl = {
+            ...(translations.nl || translations.en),
+            medusaCtaLabel: "🔱 Codice Caravaggio - Bestrijd de webmedusa's",
+            medusaCtaTitle: "Open de Codice Caravaggio op www.tutelatruffe.it (opent in een nieuw tabblad)",
+            medusaCtaAriaLabel: "Open www.tutelatruffe.it - Codice Caravaggio",
+            medusaCtaUrl: "www.tutelatruffe.it",
+            medusaCtaNewTab: "Nieuw tabblad",
+            medusaCtaNewTabSr: "(opent in een nieuw tabblad)"
+        };
         const localeMetadata = {
             it: { api: 'it', urlSupported: true },
             en: { api: 'en', urlSupported: true },
@@ -6199,8 +6309,32 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         function setupMedusaCta() {
             const medusaCta = document.getElementById('caravaggio-medusa-link');
             if (!medusaCta) return;
+            if (typeof medusaCta._medusaCtaCleanup === 'function') {
+                medusaCta._medusaCtaCleanup();
+            }
+            const medusaNote = medusaCta.querySelector('[data-medusa-cta-note]');
+            if (medusaNote) {
+                const defaultMedusaNoteId = 'caravaggio-medusa-note';
+                const setMedusaDescription = (ctaElement, noteId) => {
+                    if (!ctaElement) return;
+                    const currentIds = (ctaElement.getAttribute('aria-describedby') || '')
+                        .split(/\s+/)
+                        .filter(Boolean)
+                        .filter((id) => !/^caravaggio-medusa-note(?:-\d+)?$/.test(id));
+                    currentIds.push(noteId);
+                    ctaElement.setAttribute('aria-describedby', currentIds.join(' '));
+                };
+                medusaNote.id = defaultMedusaNoteId;
+                setMedusaDescription(medusaCta, defaultMedusaNoteId);
+            }
+            const reducedMotionQuery = typeof window.matchMedia === 'function'
+                ? window.matchMedia('(prefers-reduced-motion: reduce)')
+                : null;
+            const supportsMediaQueryEvents = typeof reducedMotionQuery?.addEventListener === 'function';
             let pointerFrame = null;
             let pendingMotion = null;
+            let motionEnabled = false;
+            let cachedRect = null;
             const resetMedusaMotion = () => {
                 pendingMotion = null;
                 if (pointerFrame) {
@@ -6211,6 +6345,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 medusaCta.style.setProperty('--medusa-rotate-y', '0deg');
                 medusaCta.style.setProperty('--snake-shift', '0px');
             };
+            const refreshBounds = () => {
+                cachedRect = medusaCta.getBoundingClientRect();
+            };
             const flushMedusaMotion = () => {
                 pointerFrame = null;
                 if (!pendingMotion) return;
@@ -6218,8 +6355,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 medusaCta.style.setProperty('--medusa-rotate-y', pendingMotion.rotateY);
                 medusaCta.style.setProperty('--snake-shift', pendingMotion.snakeShift);
             };
-            medusaCta.addEventListener('mousemove', (event) => {
-                const rect = medusaCta.getBoundingClientRect();
+            const handleFocus = () => {
+                refreshBounds();
+                resetMedusaMotion();
+            };
+            const handlePointerMove = (event) => {
+                if (!motionEnabled) return;
+                const rect = cachedRect || medusaCta.getBoundingClientRect();
                 const xRatio = (event.clientX - rect.left) / rect.width - 0.5;
                 const yRatio = (event.clientY - rect.top) / rect.height - 0.5;
                 pendingMotion = {
@@ -6230,9 +6372,46 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 if (!pointerFrame) {
                     pointerFrame = requestAnimationFrame(flushMedusaMotion);
                 }
-            });
+            };
+            const syncMotionPreference = () => {
+                resetMedusaMotion();
+                if (reducedMotionQuery?.matches) {
+                    if (motionEnabled) {
+                        medusaCta.removeEventListener('mousemove', handlePointerMove);
+                        motionEnabled = false;
+                    }
+                    return;
+                }
+                if (!motionEnabled) {
+                    refreshBounds();
+                    medusaCta.addEventListener('mousemove', handlePointerMove);
+                    motionEnabled = true;
+                }
+            };
+            syncMotionPreference();
+            if (supportsMediaQueryEvents) {
+                reducedMotionQuery.addEventListener('change', syncMotionPreference);
+            } else if (reducedMotionQuery && typeof reducedMotionQuery.addListener === 'function') {
+                reducedMotionQuery.addListener(syncMotionPreference);
+            }
+            medusaCta.addEventListener('mouseenter', refreshBounds);
+            medusaCta.addEventListener('focus', handleFocus, true);
             medusaCta.addEventListener('mouseleave', resetMedusaMotion);
             medusaCta.addEventListener('blur', resetMedusaMotion, true);
+            const cleanup = () => {
+                if (supportsMediaQueryEvents) {
+                    reducedMotionQuery.removeEventListener('change', syncMotionPreference);
+                } else if (reducedMotionQuery && typeof reducedMotionQuery.removeListener === 'function') {
+                    reducedMotionQuery.removeListener(syncMotionPreference);
+                }
+                medusaCta.removeEventListener('mousemove', handlePointerMove);
+                medusaCta.removeEventListener('mouseenter', refreshBounds);
+                medusaCta.removeEventListener('focus', handleFocus, true);
+                medusaCta.removeEventListener('mouseleave', resetMedusaMotion);
+                medusaCta.removeEventListener('blur', resetMedusaMotion, true);
+                resetMedusaMotion();
+            };
+            medusaCta._medusaCtaCleanup = cleanup;
         }
 
         function updateStats() {
