@@ -46,11 +46,11 @@
     
     <!-- Google Fonts: Arabic (Noto Sans Arabic) + Chinese Simplified (Noto Sans SC) -->
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@400;600;700&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
-    <link rel="preload" href="https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.2.3/css/flag-icons.min.css" as="style">
+    <link id="flag-icons-css" rel="preload" href="https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.2.3/css/flag-icons.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'" onerror="this.onerror=null;this.rel='stylesheet'">
     <link rel="preload" href="logo_shield_financial_defense.svg" as="image" type="image/svg+xml">
     
     <!-- Flag Icons CSS Library -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.2.3/css/flag-icons.min.css">
+    <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.2.3/css/flag-icons.min.css"></noscript>
     
     <!-- Meta Tags SEO Base -->
     <meta name="description" content="Tutela Truffe - Database 239 autorità finanziarie internazionali. Verifica licenze broker, segnala truffe Forex e Crypto, Pig Butchering. Protezione consumatori. Gratuito.">
@@ -2724,6 +2724,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         let countriesData = [];
         // Gestione intervallo per l'effetto HOLA sulle bandiere del grid
         let flagsWaveInterval = null;
+        // Rendere il grid bandiere non critico per il primo paint
+        let hasRenderedFlagsGrid = false;
+        let pendingFlagsGridRender = false;
         // Cache traduzioni on-demand
         let translationCache = {};
 
@@ -2992,6 +2995,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         document.addEventListener('DOMContentLoaded', () => {
             // Assicura che all'apertura la pagina parta sempre dall'inizio (header + pulsanti principali)
             window.scrollTo(0, 0);
+            ensureFlagIconsFallbackStylesheet();
             
             // Aggiorna canonical URL dinamicamente in base alla lingua
             updateCanonicalUrl();
@@ -3041,10 +3045,44 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             }
         }
 
+        function ensureFlagIconsFallbackStylesheet() {
+            const flagIconsLink = document.getElementById('flag-icons-css');
+            if (!flagIconsLink) return;
+            window.setTimeout(() => {
+                if (flagIconsLink.rel !== 'stylesheet') {
+                    flagIconsLink.rel = 'stylesheet';
+                }
+            }, 3000);
+        }
+
         function renderAll() {
             updateStats();
             renderCountries();
-            renderFlagsGrid();
+            scheduleFlagsGridRender();
+        }
+
+        function scheduleFlagsGridRender() {
+            if (hasRenderedFlagsGrid) {
+                renderFlagsGrid();
+                return;
+            }
+
+            if (pendingFlagsGridRender) {
+                return;
+            }
+
+            pendingFlagsGridRender = true;
+            const renderWhenIdle = () => {
+                pendingFlagsGridRender = false;
+                hasRenderedFlagsGrid = true;
+                renderFlagsGrid();
+            };
+
+            if ('requestIdleCallback' in window) {
+                requestIdleCallback(renderWhenIdle, { timeout: 2000 });
+            } else {
+                setTimeout(renderWhenIdle, 0);
+            }
         }
 
         function changeLanguage(lang) {
