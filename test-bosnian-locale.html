@@ -304,7 +304,8 @@
                         const medusaIcon = medusaCta?.querySelector('.medusa-cta-icon');
                         const medusaSvg = medusaIcon?.querySelector('svg');
                         const medusaNewTabNote = medusaCta?.querySelector('.medusa-cta-new-tab-note');
-                        const medusaNewTabSr = medusaCta?.querySelector('#caravaggio-medusa-note.sr-only');
+                        const medusaDescriptionId = medusaCta?.getAttribute('aria-describedby') || '';
+                        const medusaNewTabSr = Array.from(medusaCta?.querySelectorAll('.sr-only') || []).find((element) => element.id === medusaDescriptionId);
                         const medusaRelTokens = new Set((medusaCta?.getAttribute('rel') || '').split(/\s+/).filter(Boolean));
                         const euFirstGridRow = euGrid?.firstElementChild;
                         const asiaFirstGridRow = asiaGrid?.firstElementChild;
@@ -335,7 +336,7 @@
                         addResult(medusaCta?.querySelector('.medusa-cta-badge')?.textContent?.trim() === expectedMedusaBadge, `${lang}: Codice Caravaggio CTA badge matches expected localized/fallback value`);
                         addResult(medusaNewTabNote?.textContent?.trim() === expectedMedusaNewTab, `${lang}: Codice Caravaggio CTA visible new-tab note matches expected localized/fallback value`);
                         addResult(medusaNewTabSr?.textContent?.trim() === expectedMedusaNewTabSr, `${lang}: Codice Caravaggio CTA screen-reader new-tab note matches expected localized/fallback value`);
-                        addResult(medusaCta?.getAttribute('aria-describedby') === 'caravaggio-medusa-note', `${lang}: Codice Caravaggio CTA exposes its screen-reader new-tab note via aria-describedby`);
+                        addResult(Boolean(medusaDescriptionId) && Boolean(medusaNewTabSr), `${lang}: Codice Caravaggio CTA exposes its screen-reader new-tab note via aria-describedby`);
                         addResult(medusaIcon?.getAttribute('aria-hidden') === 'true' && medusaSvg?.getAttribute('aria-hidden') === 'true', `${lang}: Codice Caravaggio decorative icon and SVG are hidden from assistive technology`);
                         addResult(firstQuestion === expectedFaqQuestion1, `${lang}: FAQ JSON-LD is localized/fallback`);
                         addResult(Boolean(activeButton), `${lang}: active language button is selected`);
@@ -457,7 +458,9 @@
                         addResult((switchedDoc.getElementById('caravaggio-medusa-link')?.getAttribute('aria-label') || '').trim() === expectedEnState.medusaAriaLabel, `${lang}→en: Codice Caravaggio aria-label updates on language switch`);
                         addResult((switchedDoc.querySelector('#caravaggio-medusa-link .medusa-cta-badge')?.textContent || '').trim() === expectedEnState.medusaBadge, `${lang}→en: Codice Caravaggio badge updates on language switch`);
                         addResult((switchedDoc.querySelector('#caravaggio-medusa-link .medusa-cta-new-tab-note')?.textContent || '').trim() === expectedEnState.medusaNewTab, `${lang}→en: Codice Caravaggio visible new-tab note updates on language switch`);
-                        addResult((switchedDoc.getElementById('caravaggio-medusa-note')?.textContent || '').trim() === expectedEnState.medusaNewTabSr, `${lang}→en: Codice Caravaggio screen-reader new-tab note updates on language switch`);
+                        const switchedMedusaDescriptionId = switchedDoc.getElementById('caravaggio-medusa-link')?.getAttribute('aria-describedby') || '';
+                        const switchedMedusaSrNote = Array.from(switchedDoc.querySelectorAll('#caravaggio-medusa-link .sr-only')).find((element) => element.id === switchedMedusaDescriptionId);
+                        addResult((switchedMedusaSrNote?.textContent || '').trim() === expectedEnState.medusaNewTabSr, `${lang}→en: Codice Caravaggio screen-reader new-tab note updates on language switch`);
                         const switchedDisclosureToggle = switchedDoc.getElementById('amev-introduction-toggle');
                         const switchedDisclosureContent = switchedDoc.getElementById('amev-introduction-content');
                         addResult(switchedDisclosureToggle?.getAttribute('aria-expanded') === 'true' && switchedDisclosureContent?.hidden === false, `${lang}→en: AMEV disclosure state remains expanded after runtime language switch`);

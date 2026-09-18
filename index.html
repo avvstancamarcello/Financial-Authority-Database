@@ -3411,7 +3411,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     <input type="text" id="searchInput" data-i18n-placeholder="searchPlaceholder" data-i18n-aria-label="searchCountriesAriaLabel" placeholder="Cerca per paese o autorità..." aria-label="Search countries">
                     <button type="button" class="search-btn" data-i18n-text="searchButton">Cerca</button>
                 </div>
-                <a id="caravaggio-medusa-link" class="medusa-cta" href="https://www.tutelatruffe.it/" target="_blank" rel="noopener noreferrer" data-i18n-aria-label="medusaCtaAriaLabel" data-i18n-title="medusaCtaTitle" aria-label="Apri www.tutelatruffe.it - Codice Caravaggio" title="Apri il Codice Caravaggio su www.tutelatruffe.it (si apre in una nuova scheda)" aria-describedby="caravaggio-medusa-note">
+                <a id="caravaggio-medusa-link" class="medusa-cta" href="https://www.tutelatruffe.it/" target="_blank" rel="noopener noreferrer" data-i18n-aria-label="medusaCtaAriaLabel" data-i18n-title="medusaCtaTitle" aria-label="Apri www.tutelatruffe.it - Codice Caravaggio" title="Apri il Codice Caravaggio su www.tutelatruffe.it (si apre in una nuova scheda)">
                     <span class="medusa-cta-icon" aria-hidden="true">
                         <svg viewBox="0 0 96 96" aria-hidden="true" focusable="false">
                             <path class="medusa-serpent snake-1" d="M21 23c-6-8 1-15 10-16 6 0 10 5 9 10-1 6-6 8-12 9" fill="none" stroke="#d6a23b" stroke-width="4" stroke-linecap="round"/>
@@ -3432,7 +3432,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                             <span class="medusa-cta-badge" data-i18n-text="medusaCtaUrl">www.tutelatruffe.it</span>
                             <span class="medusa-cta-new-tab-note" data-i18n-text="medusaCtaNewTab">Nuova scheda</span>
                         </span>
-                        <span id="caravaggio-medusa-note" class="sr-only" data-i18n-text="medusaCtaNewTabSr">(si apre in una nuova scheda)</span>
+                        <span class="sr-only" data-medusa-cta-note data-i18n-text="medusaCtaNewTabSr">(si apre in una nuova scheda)</span>
                     </span>
                     <span class="medusa-cta-snake-trail" aria-hidden="true">
                         <span></span>
@@ -6362,6 +6362,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             if (!medusaCta) return;
             if (typeof medusaCta._medusaCtaCleanup === 'function') {
                 medusaCta._medusaCtaCleanup();
+            }
+            const medusaNote = medusaCta.querySelector('[data-medusa-cta-note]');
+            if (medusaNote) {
+                window.__medusaCtaNoteIdCounter = (window.__medusaCtaNoteIdCounter || 0) + 1;
+                if (!medusaNote.id) {
+                    medusaNote.id = `caravaggio-medusa-note-${window.__medusaCtaNoteIdCounter}`;
+                }
+                medusaCta.setAttribute('aria-describedby', medusaNote.id);
             }
             const reducedMotionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
             const supportsMediaQueryEvents = typeof reducedMotionQuery.addEventListener === 'function';
