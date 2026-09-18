@@ -42,11 +42,11 @@
     <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
     <link rel="preconnect" href="https://www.gstatic.com" crossorigin>
     <link rel="dns-prefetch" href="https://www.googletagmanager.com">
-    <link rel="preload" href="https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.2.3/css/flag-icons.min.css" as="style">
+    <link id="flag-icons-css" rel="preload" href="https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.2.3/css/flag-icons.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'" onerror="this.onerror=null;this.rel='stylesheet'">
     <link rel="preload" href="logo_shield_financial_defense.svg" as="image" type="image/svg+xml">
     
     <!-- Flag Icons CSS Library -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.2.3/css/flag-icons.min.css">
+    <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.2.3/css/flag-icons.min.css"></noscript>
     
     <!-- Meta Tags SEO Base -->
     <meta id="meta-description" name="description" content="Database 239 autorità finanziarie internazionali. Verifica licenze broker, controlla identità e legittimità di imprese finanziarie e usa i percorsi lingua AMEV / AMEA / AWEV per prevenire frodi.">
@@ -5420,6 +5420,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         let countriesData = [];
         // Gestione intervallo per l'effetto HOLA sulle bandiere del grid
         let flagsWaveInterval = null;
+        // Rendere il grid bandiere non critico per il primo paint
+        let hasRenderedFlagsGrid = false;
+        let pendingFlagsGridRender = false;
         // Cache traduzioni on-demand
         let translationCache = {};
 
@@ -5690,6 +5693,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         document.addEventListener('DOMContentLoaded', () => {
             // Assicura che all'apertura la pagina parta sempre dall'inizio (header + pulsanti principali)
             window.scrollTo(0, 0);
+            ensureFlagIconsFallbackStylesheet();
             
             // Aggiorna canonical URL dinamicamente in base alla lingua
             updateCanonicalUrl();
@@ -5739,11 +5743,45 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             }
         }
 
+        function ensureFlagIconsFallbackStylesheet() {
+            const flagIconsLink = document.getElementById('flag-icons-css');
+            if (!flagIconsLink) return;
+            window.setTimeout(() => {
+                if (flagIconsLink.rel !== 'stylesheet') {
+                    flagIconsLink.rel = 'stylesheet';
+                }
+            }, 3000);
+        }
+
         function renderAll() {
             updateStats();
             renderCountries();
-            renderFlagsGrid();
+            scheduleFlagsGridRender();
             applyTranslations(currentLanguage);
+        }
+
+        function scheduleFlagsGridRender() {
+            if (hasRenderedFlagsGrid) {
+                renderFlagsGrid();
+                return;
+            }
+
+            if (pendingFlagsGridRender) {
+                return;
+            }
+
+            pendingFlagsGridRender = true;
+            const renderWhenIdle = () => {
+                pendingFlagsGridRender = false;
+                hasRenderedFlagsGrid = true;
+                renderFlagsGrid();
+            };
+
+            if ('requestIdleCallback' in window) {
+                requestIdleCallback(renderWhenIdle, { timeout: 2000 });
+            } else {
+                setTimeout(renderWhenIdle, 0);
+            }
         }
 
         function setMetaContent(id, value) {
