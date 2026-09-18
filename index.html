@@ -694,10 +694,9 @@
         }
         .search-row {
             display: flex;
+            flex-direction: column;
             gap: 14px;
-            flex-wrap: wrap;
-            align-items: center;
-            justify-content: space-between;
+            align-items: stretch;
         }
         .search-box { 
             flex: 1; 
@@ -734,6 +733,76 @@
         .search-btn:hover {
             background: rgba(255,215,0,0.4);
             box-shadow: 0 4px 10px rgba(0,0,0,0.35);
+        }
+        .actions-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 12px;
+            width: 100%;
+            min-width: 0;
+            align-items: stretch;
+        }
+        .actions-grid > * {
+            min-width: 0;
+        }
+        .actions-grid .medusa-cta {
+            width: 100%;
+            min-width: 0;
+        }
+        .actions-grid-filter-group {
+            grid-column: 1 / -1;
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 12px;
+            min-width: 0;
+        }
+        .actions-grid .filter-btn,
+        .scam-radar-cta {
+            width: 100%;
+            min-width: 0;
+            min-height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            line-height: 1.3;
+        }
+        .scam-radar-cta {
+            padding: 10px 20px;
+            border: 1px solid rgba(255,215,0,0.7);
+            background: rgba(255,215,0,0.1);
+            color: #ffffff;
+            border-radius: 20px;
+            text-decoration: none;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        .scam-radar-cta-copy {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .scam-radar-cta-new-tab {
+            font-size: 0.78rem;
+            padding: 2px 8px;
+            border-radius: 999px;
+            border: 1px solid rgba(255,215,0,0.5);
+            background: rgba(255,215,0,0.16);
+        }
+        .scam-radar-cta:hover,
+        .scam-radar-cta:focus-visible {
+            background: rgba(255,215,0,0.25);
+            color: #ffffff;
+            border-color: rgba(255,215,0,0.95);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(255,215,0,0.35);
+        }
+        .scam-radar-cta:focus-visible {
+            outline: 2px solid rgba(255,215,0,0.9);
+            outline-offset: 2px;
         }
         .medusa-cta {
             --medusa-rotate-x: 0deg;
@@ -1526,9 +1595,11 @@
             .stat-card { padding: 8px 10px; }
             .stat-number { font-size: 1.3em; }
             .controls { flex-direction: column; padding: 18px 15px; } 
-            .search-row { flex-direction: column; align-items: stretch; gap: 10px; }
+            .search-row { gap: 10px; }
             .search-box { width: 100%; min-width: auto; }
             .search-box input { padding: 10px 15px; font-size: 15px; }
+            .actions-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+            .actions-grid-filter-group { gap: 10px; }
             .medusa-cta { min-width: 100%; width: 100%; }
             .filter-buttons { justify-content: center; }
             .filter-btn { padding: 8px 14px; font-size: 0.9em; }
@@ -1610,6 +1681,8 @@
             .controls { padding: 15px 10px; gap: 12px; }
             .search-box input { padding: 10px 12px; font-size: 14px; }
             .search-btn { padding: 8px 12px; font-size: 0.85em; }
+            .actions-grid { grid-template-columns: 1fr; }
+            .actions-grid-filter-group { grid-template-columns: 1fr; }
             .medusa-cta {
                 min-width: 100%;
                 padding: 12px 14px;
@@ -3411,6 +3484,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     <input type="text" id="searchInput" data-i18n-placeholder="searchPlaceholder" data-i18n-aria-label="searchCountriesAriaLabel" placeholder="Cerca per paese o autorità..." aria-label="Search countries">
                     <button type="button" class="search-btn" data-i18n-text="searchButton">Cerca</button>
                 </div>
+                <div class="actions-grid">
                 <a id="caravaggio-medusa-link" class="medusa-cta" href="https://www.tutelatruffe.it/" target="_blank" rel="noopener noreferrer" data-i18n-aria-label="medusaCtaAriaLabel" data-i18n-title="medusaCtaTitle" aria-label="Apri www.tutelatruffe.it - Codice Caravaggio" title="Apri il Codice Caravaggio su www.tutelatruffe.it (si apre in una nuova scheda)" aria-describedby="caravaggio-medusa-note">
                     <span class="medusa-cta-icon" aria-hidden="true">
                         <svg viewBox="0 0 96 96" aria-hidden="true" focusable="false">
@@ -3440,24 +3514,26 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                         <span></span>
                     </span>
                 </a>
-                <div class="filter-buttons" role="group" data-i18n-aria-label="filterOptionsAriaLabel" aria-label="Filter options">
-                    <button class="filter-btn active" onclick="filterCountries('all')" data-i18n="filterAll" aria-pressed="true">Tutti i Paesi</button>
-                    <button class="filter-btn" onclick="filterCountries('altissimo')" data-i18n="filterHigh" aria-pressed="false">Protezione Elevata</button>
-                    <button class="filter-btn" onclick="filterCountries('ue')" aria-pressed="false">
-                        <span class="fi fi-eu" aria-hidden="true" style="margin-right:6px;"></span>
-                        <span data-i18n-text="filterEU">Paesi UE</span>
-                    </button>
-                    <button class="filter-btn" onclick="filterCountries('non-ue')" data-i18n="filterNonEU" aria-pressed="false">Paesi non-UE</button>
+                    <a class="scam-radar-cta" href="https://www.scam-radar.com/" target="_blank" rel="noopener noreferrer" data-i18n-aria-label="scamRadarCtaAriaLabel" data-i18n-title="scamRadarCtaTitle" aria-label="Scam Radar (si apre in una nuova scheda / opens in a new tab)" title="Scam Radar (si apre in una nuova scheda / opens in a new tab)"><span class="scam-radar-cta-copy"><span data-i18n-text="scamRadarCtaLabel">🛰️ Scam Radar</span><span class="scam-radar-cta-new-tab" data-i18n-text="medusaCtaNewTab" aria-hidden="true">Nuova scheda</span></span></a>
+                    <div class="actions-grid-filter-group" role="group" data-i18n-aria-label="filterOptionsAriaLabel" aria-label="Filter options">
+                        <button class="filter-btn active" onclick="filterCountries('all')" data-i18n="filterAll" aria-pressed="true">Tutti i Paesi</button>
+                        <button class="filter-btn" onclick="filterCountries('altissimo')" data-i18n="filterHigh" aria-pressed="false">Protezione Elevata</button>
+                        <button class="filter-btn" onclick="filterCountries('ue')" aria-pressed="false">
+                            <span class="fi fi-eu" aria-hidden="true" style="margin-right:6px;"></span>
+                            <span data-i18n-text="filterEU">Paesi UE</span>
+                        </button>
+                        <button class="filter-btn" onclick="filterCountries('non-ue')" data-i18n="filterNonEU" aria-pressed="false">Paesi non-UE</button>
+                    </div>
                 </div>
-                <!-- Filtri per Continente - SEO Improvement -->
-                <div class="filter-buttons" role="group" data-i18n-aria-label="filterContinentAriaLabel" aria-label="Filter by continent" style="margin-top: 10px;">
-                    <span data-i18n="filterContinentLabel" style="color: #ffd700; font-weight: 600; margin-right: 10px;">🌍 Continente:</span>
-                    <button class="filter-btn" onclick="filterCountries('europe')" aria-pressed="false"><span aria-hidden="true">🇪🇺</span><span data-i18n-text="filterEurope">Europa</span></button>
-                    <button class="filter-btn" onclick="filterCountries('asia')" aria-pressed="false"><span aria-hidden="true">🌏</span><span data-i18n-text="filterAsia">Asia</span></button>
-                    <button class="filter-btn" onclick="filterCountries('africa')" aria-pressed="false"><span aria-hidden="true">🌍</span><span data-i18n-text="filterAfrica">Africa</span></button>
-                    <button class="filter-btn" onclick="filterCountries('americas')" aria-pressed="false"><span aria-hidden="true">🌎</span><span data-i18n-text="filterAmericas">Americhe</span></button>
-                    <button class="filter-btn" onclick="filterCountries('oceania')" aria-pressed="false"><span aria-hidden="true">🏝️</span><span data-i18n-text="filterOceania">Oceania</span></button>
-                </div>
+            </div>
+            <!-- Filtri per Continente - SEO Improvement -->
+            <div class="filter-buttons" role="group" data-i18n-aria-label="filterContinentAriaLabel" aria-label="Filter by continent" style="margin-top: 10px;">
+                <span data-i18n="filterContinentLabel" style="color: #ffd700; font-weight: 600; margin-right: 10px;">🌍 Continente:</span>
+                <button class="filter-btn" onclick="filterCountries('europe')" aria-pressed="false"><span aria-hidden="true">🇪🇺</span><span data-i18n-text="filterEurope">Europa</span></button>
+                <button class="filter-btn" onclick="filterCountries('asia')" aria-pressed="false"><span aria-hidden="true">🌏</span><span data-i18n-text="filterAsia">Asia</span></button>
+                <button class="filter-btn" onclick="filterCountries('africa')" aria-pressed="false"><span aria-hidden="true">🌍</span><span data-i18n-text="filterAfrica">Africa</span></button>
+                <button class="filter-btn" onclick="filterCountries('americas')" aria-pressed="false"><span aria-hidden="true">🌎</span><span data-i18n-text="filterAmericas">Americhe</span></button>
+                <button class="filter-btn" onclick="filterCountries('oceania')" aria-pressed="false"><span aria-hidden="true">🏝️</span><span data-i18n-text="filterOceania">Oceania</span></button>
             </div>
         </section>
 
@@ -3682,6 +3758,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 medusaCtaUrl: "www.tutelatruffe.it",
                 medusaCtaNewTab: "Nuova scheda",
                 medusaCtaNewTabSr: "(si apre in una nuova scheda)",
+                scamRadarCtaLabel: "🛰️ Scam Radar",
+                scamRadarCtaTitle: "Apri Scam Radar in una nuova scheda",
+                scamRadarCtaAriaLabel: "Apri Scam Radar in una nuova scheda",
                 filterAll: "Tutti i Paesi",
                 filterHigh: "Protezione Elevata",
                 filterEU: "Paesi UE",
@@ -4273,6 +4352,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 medusaCtaUrl: "www.tutelatruffe.it",
                 medusaCtaNewTab: "New tab",
                 medusaCtaNewTabSr: "(opens in a new tab)",
+                scamRadarCtaLabel: "🛰️ Scam Radar",
+                scamRadarCtaTitle: "Open Scam Radar in a new tab",
+                scamRadarCtaAriaLabel: "Open Scam Radar in a new tab",
                 filterAll: "All Countries",
                 filterHigh: "Highest Protection",
                 filterEU: "EU Countries",
