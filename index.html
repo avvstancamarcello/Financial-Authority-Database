@@ -6315,9 +6315,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             const medusaNote = medusaCta.querySelector('[data-medusa-cta-note]');
             if (medusaNote) {
                 const defaultMedusaNoteId = 'caravaggio-medusa-note';
-                const ctaNotes = Array.from(document.querySelectorAll('.medusa-cta [data-medusa-cta-note]'));
-                if (ctaNotes.length > 1) {
-                    medusaNote.id = `${defaultMedusaNoteId}-${ctaNotes.indexOf(medusaNote) + 1}`;
+                const duplicateRootNotes = Array.from(document.querySelectorAll(`.medusa-cta #${defaultMedusaNoteId}`));
+                if (duplicateRootNotes.length > 1) {
+                    const duplicateIndex = duplicateRootNotes.indexOf(medusaNote);
+                    medusaNote.id = duplicateIndex <= 0 ? defaultMedusaNoteId : `${defaultMedusaNoteId}-${duplicateIndex + 1}`;
                 } else {
                     medusaNote.id = defaultMedusaNoteId;
                 }
