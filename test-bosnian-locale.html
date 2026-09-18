@@ -267,7 +267,15 @@
                         const referencesNavLink = doc.querySelector('nav a[href="referenze.html"]');
                         const referencesNavLabel = referencesNavLink?.querySelector('span')?.textContent?.trim() || '';
                         const header = doc.querySelector('header[role="banner"]');
-                        const appIndexHtml = lang === 'it' ? await fetch('./APP/index.html', { cache: 'no-store' }).then((response) => response.text()) : '';
+                        let appIndexHtml = '';
+                        if (lang === 'it') {
+                            const appIndexResponse = await fetch('./APP/index.html', { cache: 'no-store' });
+                            addResult(appIndexResponse.ok, 'it: APP/index.html reference file loads successfully');
+                            if (!appIndexResponse.ok) {
+                                throw new Error(`APP/index.html failed to load (${appIndexResponse.status})`);
+                            }
+                            appIndexHtml = await appIndexResponse.text();
+                        }
                         const headerOrder = Array.from(header?.children || []).map((element) => {
                             if (element.classList.contains('flag-orbit-banner')) return 'flags';
                             if (element.matches('h1')) return 'title';
