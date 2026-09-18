@@ -6315,16 +6315,18 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             const medusaNote = medusaCta.querySelector('[data-medusa-cta-note]');
             if (medusaNote) {
                 const defaultMedusaNoteId = 'caravaggio-medusa-note';
-                const duplicateNotes = Array.from(document.querySelectorAll('[data-medusa-cta-note]'));
-                if (duplicateNotes.length > 1) {
-                    medusaNote.id = `${defaultMedusaNoteId}-${duplicateNotes.indexOf(medusaNote) + 1}`;
+                const ctaNotes = Array.from(document.querySelectorAll('.medusa-cta [data-medusa-cta-note]'));
+                if (ctaNotes.length > 1) {
+                    medusaNote.id = `${defaultMedusaNoteId}-${ctaNotes.indexOf(medusaNote) + 1}`;
                 } else {
                     medusaNote.id = defaultMedusaNoteId;
                 }
                 medusaCta.setAttribute('aria-describedby', medusaNote.id);
             }
-            const reducedMotionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
-            const supportsMediaQueryEvents = typeof reducedMotionQuery.addEventListener === 'function';
+            const reducedMotionQuery = typeof window.matchMedia === 'function'
+                ? window.matchMedia('(prefers-reduced-motion: reduce)')
+                : null;
+            const supportsMediaQueryEvents = typeof reducedMotionQuery?.addEventListener === 'function';
             let pointerFrame = null;
             let pendingMotion = null;
             let motionEnabled = false;
@@ -6385,7 +6387,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             syncMotionPreference();
             if (supportsMediaQueryEvents) {
                 reducedMotionQuery.addEventListener('change', syncMotionPreference);
-            } else {
+            } else if (reducedMotionQuery && typeof reducedMotionQuery.addListener === 'function') {
                 reducedMotionQuery.addListener(syncMotionPreference);
             }
             medusaCta.addEventListener('mouseenter', refreshBounds);
@@ -6395,7 +6397,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             const cleanup = () => {
                 if (supportsMediaQueryEvents) {
                     reducedMotionQuery.removeEventListener('change', syncMotionPreference);
-                } else {
+                } else if (reducedMotionQuery && typeof reducedMotionQuery.removeListener === 'function') {
                     reducedMotionQuery.removeListener(syncMotionPreference);
                 }
                 medusaCta.removeEventListener('mousemove', handlePointerMove);
