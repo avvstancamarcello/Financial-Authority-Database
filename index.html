@@ -6372,7 +6372,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             };
             const syncMotionPreference = () => {
                 resetMedusaMotion();
-                if (reducedMotionQuery.matches) {
+                if (reducedMotionQuery?.matches) {
                     if (motionEnabled) {
                         medusaCta.removeEventListener('mousemove', handlePointerMove);
                         motionEnabled = false;
