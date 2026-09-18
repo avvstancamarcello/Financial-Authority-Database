@@ -599,6 +599,155 @@
             background: rgba(255,215,0,0.4);
             box-shadow: 0 4px 10px rgba(0,0,0,0.35);
         }
+        .medusa-cta {
+            --medusa-rotate-x: 0deg;
+            --medusa-rotate-y: 0deg;
+            --snake-shift: 0px;
+            position: relative;
+            flex: 1 1 420px;
+            min-width: 300px;
+            display: inline-flex;
+            align-items: center;
+            gap: 14px;
+            padding: 12px 18px;
+            border-radius: 24px;
+            border: 1px solid rgba(212,175,55,0.85);
+            background:
+                radial-gradient(circle at top left, rgba(255,215,0,0.28), transparent 42%),
+                linear-gradient(135deg, #060606 0%, #24180d 45%, #0d0d0d 100%);
+            color: #fff5d1;
+            text-decoration: none;
+            overflow: hidden;
+            box-shadow: 0 10px 24px rgba(0,0,0,0.32), inset 0 0 0 1px rgba(255,255,255,0.06);
+            transform: perspective(900px) rotateX(var(--medusa-rotate-x)) rotateY(var(--medusa-rotate-y));
+            transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
+        }
+        .medusa-cta::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(120deg, transparent 18%, rgba(255,215,0,0.22) 50%, transparent 82%);
+            transform: translateX(-120%);
+            transition: transform 0.55s ease;
+        }
+        .medusa-cta:hover,
+        .medusa-cta:focus-visible {
+            border-color: rgba(255,215,0,1);
+            box-shadow: 0 14px 28px rgba(0,0,0,0.42), 0 0 18px rgba(212,175,55,0.35);
+        }
+        .medusa-cta:hover::before,
+        .medusa-cta:focus-visible::before {
+            transform: translateX(120%);
+        }
+        .medusa-cta:focus-visible {
+            outline: 2px solid rgba(255,215,0,0.9);
+            outline-offset: 3px;
+        }
+        .medusa-cta-icon {
+            position: relative;
+            z-index: 1;
+            width: 64px;
+            height: 64px;
+            min-width: 64px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: radial-gradient(circle at 35% 30%, #f5d67b 0%, #9a6b20 40%, #130d08 78%, #000 100%);
+            border: 1px solid rgba(255,215,0,0.55);
+            box-shadow: inset 0 0 18px rgba(0,0,0,0.55), 0 0 12px rgba(212,175,55,0.35);
+        }
+        .medusa-cta-icon svg {
+            width: 54px;
+            height: 54px;
+            overflow: visible;
+        }
+        .medusa-serpent {
+            transform-box: fill-box;
+            transform-origin: center;
+            animation: medusaSerpentFloat 4.2s ease-in-out infinite;
+        }
+        .medusa-serpent.snake-1 { animation-delay: -0.2s; }
+        .medusa-serpent.snake-2 { animation-delay: -1.2s; }
+        .medusa-serpent.snake-3 { animation-delay: -2.1s; }
+        .medusa-serpent.snake-4 { animation-delay: -3.1s; }
+        .medusa-cta:hover .medusa-serpent {
+            animation-duration: 1.8s;
+        }
+        .medusa-cta-copy {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            min-width: 0;
+        }
+        .medusa-cta-label {
+            font-size: 1rem;
+            font-weight: 700;
+            line-height: 1.35;
+            text-wrap: balance;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.65);
+        }
+        .medusa-cta-badge {
+            align-self: flex-start;
+            padding: 4px 10px;
+            border-radius: 999px;
+            background: rgba(255,215,0,0.14);
+            border: 1px solid rgba(255,215,0,0.35);
+            color: #f8d774;
+            font-size: 0.8rem;
+            letter-spacing: 0.03em;
+        }
+        .medusa-cta-snake-trail {
+            position: absolute;
+            right: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            opacity: 0.82;
+            pointer-events: none;
+        }
+        .medusa-cta-snake-trail span {
+            width: 42px;
+            height: 8px;
+            border-top: 2px solid rgba(255,215,0,0.65);
+            border-radius: 999px;
+            animation: medusaTrailWave 2.8s ease-in-out infinite;
+            transform: translateX(var(--snake-shift));
+        }
+        .medusa-cta-snake-trail span:nth-child(2) { animation-delay: -0.9s; width: 30px; }
+        .medusa-cta-snake-trail span:nth-child(3) { animation-delay: -1.6s; width: 36px; }
+        @keyframes medusaSerpentFloat {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-3px) rotate(6deg); }
+        }
+        @keyframes medusaTrailWave {
+            0%, 100% { opacity: 0.45; }
+            50% { opacity: 1; }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .medusa-cta,
+            .medusa-cta::before {
+                transition: none;
+            }
+            .medusa-cta,
+            .medusa-cta:hover,
+            .medusa-cta:focus-visible {
+                transform: none;
+            }
+            .medusa-cta::before,
+            .medusa-cta:hover::before,
+            .medusa-cta:focus-visible::before {
+                transform: none;
+            }
+            .medusa-serpent,
+            .medusa-cta-snake-trail span {
+                animation: none;
+            }
+        }
         .search-box input:focus { 
             outline: none; 
             border-color: rgba(255,215,0,0.9); 
@@ -1103,6 +1252,7 @@
             .search-row { flex-direction: column; align-items: stretch; gap: 10px; }
             .search-box { width: 100%; min-width: auto; }
             .search-box input { padding: 10px 15px; font-size: 15px; }
+            .medusa-cta { min-width: 100%; width: 100%; }
             .filter-buttons { justify-content: center; }
             .filter-btn { padding: 8px 14px; font-size: 0.9em; }
             .content { padding: 20px 15px; }
@@ -1154,6 +1304,23 @@
             .controls { padding: 15px 10px; gap: 12px; }
             .search-box input { padding: 10px 12px; font-size: 14px; }
             .search-btn, .search-advice-btn { padding: 8px 12px; font-size: 0.85em; }
+            .medusa-cta {
+                min-width: 100%;
+                padding: 12px 14px;
+                gap: 12px;
+            }
+            .medusa-cta-icon {
+                width: 56px;
+                height: 56px;
+                min-width: 56px;
+            }
+            .medusa-cta-icon svg {
+                width: 48px;
+                height: 48px;
+            }
+            .medusa-cta-label { font-size: 0.92rem; }
+            .medusa-cta-badge { font-size: 0.74rem; }
+            .medusa-cta-snake-trail { right: 10px; }
             .filter-buttons { gap: 6px; }
             .filter-btn { padding: 7px 10px; font-size: 0.8em; }
             .content { padding: 15px 10px; }
@@ -1468,6 +1635,31 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     <button type="button" class="search-btn">Cerca</button>
                     <button type="button" class="search-advice-btn" onclick="toggleSearchAdvice()" data-i18n="searchAdviceButton">Perché questa ricerca è importante?</button>
                 </div>
+                <a id="caravaggio-medusa-link" class="medusa-cta" href="https://www.tutelatruffe.it/" target="_blank" rel="noopener noreferrer" data-i18n-aria-label="medusaCtaAriaLabel" data-i18n-title="medusaCtaTitle" aria-label="Apri www.tutelatruffe.it - Codice Caravaggio" title="Apri il Codice Caravaggio su www.tutelatruffe.it">
+                    <span class="medusa-cta-icon" aria-hidden="true">
+                        <svg viewBox="0 0 96 96" aria-hidden="true" focusable="false">
+                            <path class="medusa-serpent snake-1" d="M21 23c-6-8 1-15 10-16 6 0 10 5 9 10-1 6-6 8-12 9" fill="none" stroke="#d6a23b" stroke-width="4" stroke-linecap="round"/>
+                            <path class="medusa-serpent snake-2" d="M46 17c0-10 11-16 20-11 6 3 8 12 2 17-5 5-12 3-18 1" fill="none" stroke="#d6a23b" stroke-width="4" stroke-linecap="round"/>
+                            <path class="medusa-serpent snake-3" d="M69 28c6-8 17-6 20 2 2 6-1 12-8 14-7 2-13-3-16-8" fill="none" stroke="#d6a23b" stroke-width="4" stroke-linecap="round"/>
+                            <path class="medusa-serpent snake-4" d="M30 25c3 8 1 15-5 21" fill="none" stroke="#d6a23b" stroke-width="3.2" stroke-linecap="round"/>
+                            <path d="M24 38c2-11 14-19 25-19s23 8 25 19c2 14-8 31-25 31S22 52 24 38Z" fill="#17110a" stroke="#d6a23b" stroke-width="3.2"/>
+                            <path d="M36 44c4-4 8-6 13-6 4 0 9 2 12 6" fill="none" stroke="#f4d16b" stroke-width="3" stroke-linecap="round"/>
+                            <circle cx="41" cy="44" r="2.4" fill="#f7e3a9"/>
+                            <circle cx="57" cy="44" r="2.4" fill="#f7e3a9"/>
+                            <path d="M41 56c5 3 10 3 15 0" fill="none" stroke="#f7e3a9" stroke-width="3" stroke-linecap="round"/>
+                            <path d="M48 64l-2 7 8-3" fill="none" stroke="#f7e3a9" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </span>
+                    <span class="medusa-cta-copy">
+                        <span class="medusa-cta-label" data-i18n-text="medusaCtaLabel">🔱 Codice Caravaggio - Lotta alle Meduse del Web</span>
+                        <span class="medusa-cta-badge" data-i18n-text="medusaCtaUrl">www.tutelatruffe.it</span>
+                    </span>
+                    <span class="medusa-cta-snake-trail" aria-hidden="true">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </span>
+                </a>
                 <div class="filter-buttons" role="group" aria-label="Filter options">
                     <button class="filter-btn active" onclick="filterCountries('all')" data-i18n="filterAll" aria-pressed="true">Tutti i Paesi</button>
                     <button class="filter-btn" onclick="filterCountries('altissimo')" data-i18n="filterHigh" aria-pressed="false">Protezione Elevata</button>
@@ -1733,6 +1925,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 searchAdvice2: "Devi proteggerti da inganni e frodi finanziarie.",
                 searchAdvice3: "Prendi tempo prima di eseguire operazioni finanziarie sollecitate da sconosciuti.",
                 searchAdvice4: "Chiedi con email conferme di legalità dei destinatari alla tua Banca.",
+                medusaCtaLabel: "🔱 Codice Caravaggio - Lotta alle Meduse del Web",
+                medusaCtaTitle: "Apri il Codice Caravaggio su www.tutelatruffe.it",
+                medusaCtaAriaLabel: "Apri www.tutelatruffe.it - Codice Caravaggio",
+                medusaCtaUrl: "www.tutelatruffe.it",
                 instructionsButtonModal: "Istruzioni",
                 reportSuspectButton: "Segnala Sospetto",
                 reportAbuseButton: "Segnala l'abuso",
@@ -2048,6 +2244,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 searchAdvice2: "You must protect yourself from deception and financial fraud.",
                 searchAdvice3: "Take your time before carrying out financial transactions pushed by strangers.",
                 searchAdvice4: "Ask your bank by email for written confirmation about the lawfulness of the beneficiaries.",
+                medusaCtaLabel: "🔱 Codice Caravaggio - Fight the Web Medusas",
+                medusaCtaTitle: "Open the Codice Caravaggio on www.tutelatruffe.it",
+                medusaCtaAriaLabel: "Open www.tutelatruffe.it - Codice Caravaggio",
+                medusaCtaUrl: "www.tutelatruffe.it",
                 instructionsButtonModal: "Instructions",
                 reportSuspectButton: "Report Suspect",
                 reportAbuseButton: "Report Abuse",
@@ -2764,6 +2964,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             
             changeLanguage(currentLanguage);
             setupSearch();
+            setupMedusaCta();
             loadCountryData();
         });
         
@@ -2851,10 +3052,31 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     element.placeholder = translations[lang][key];
                 }
             });
-            // Aggiorna il contenuto del popup istruzioni, se disponibile nella lingua selezionata
-            const instructionsPopup = document.getElementById('instructionsPopup');
-            if (instructionsPopup) {
-                const langData = translations[lang] || translations.en;
+             document.querySelectorAll('[data-i18n-text]').forEach(element => {
+                 const key = element.getAttribute('data-i18n-text');
+                 const value = (translations[lang] && translations[lang][key]) || (translations.en && translations.en[key]);
+                 if (value) {
+                     element.textContent = value;
+                 }
+             });
+             document.querySelectorAll('[data-i18n-title]').forEach(element => {
+                 const key = element.getAttribute('data-i18n-title');
+                 const value = (translations[lang] && translations[lang][key]) || (translations.en && translations.en[key]);
+                 if (value) {
+                     element.title = value;
+                 }
+             });
+             document.querySelectorAll('[data-i18n-aria-label]').forEach(element => {
+                 const key = element.getAttribute('data-i18n-aria-label');
+                 const value = (translations[lang] && translations[lang][key]) || (translations.en && translations.en[key]);
+                 if (value) {
+                     element.setAttribute('aria-label', value);
+                 }
+             });
+             // Aggiorna il contenuto del popup istruzioni, se disponibile nella lingua selezionata
+             const instructionsPopup = document.getElementById('instructionsPopup');
+             if (instructionsPopup) {
+                 const langData = translations[lang] || translations.en;
                 const fallback = translations.en && translations.en.instructionsContent ? translations.en.instructionsContent : '';
                 const content = langData && langData.instructionsContent ? langData.instructionsContent : fallback;
                 if (content) {
@@ -2957,6 +3179,45 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     card.style.display = match ? 'block' : 'none';
                 });
             });
+        }
+
+        function setupMedusaCta() {
+            const medusaCta = document.getElementById('caravaggio-medusa-link');
+            if (!medusaCta) return;
+            let pointerFrame = null;
+            let pendingMotion = null;
+            const resetMedusaMotion = () => {
+                pendingMotion = null;
+                if (pointerFrame) {
+                    cancelAnimationFrame(pointerFrame);
+                    pointerFrame = null;
+                }
+                medusaCta.style.setProperty('--medusa-rotate-x', '0deg');
+                medusaCta.style.setProperty('--medusa-rotate-y', '0deg');
+                medusaCta.style.setProperty('--snake-shift', '0px');
+            };
+            const flushMedusaMotion = () => {
+                pointerFrame = null;
+                if (!pendingMotion) return;
+                medusaCta.style.setProperty('--medusa-rotate-x', pendingMotion.rotateX);
+                medusaCta.style.setProperty('--medusa-rotate-y', pendingMotion.rotateY);
+                medusaCta.style.setProperty('--snake-shift', pendingMotion.snakeShift);
+            };
+            medusaCta.addEventListener('mousemove', (event) => {
+                const rect = medusaCta.getBoundingClientRect();
+                const xRatio = (event.clientX - rect.left) / rect.width - 0.5;
+                const yRatio = (event.clientY - rect.top) / rect.height - 0.5;
+                pendingMotion = {
+                    rotateX: `${(yRatio * -8).toFixed(2)}deg`,
+                    rotateY: `${(xRatio * 10).toFixed(2)}deg`,
+                    snakeShift: `${Math.abs(xRatio * 10).toFixed(2)}px`
+                };
+                if (!pointerFrame) {
+                    pointerFrame = requestAnimationFrame(flushMedusaMotion);
+                }
+            });
+            medusaCta.addEventListener('mouseleave', resetMedusaMotion);
+            medusaCta.addEventListener('blur', resetMedusaMotion, true);
         }
 
         function updateStats() {
@@ -3774,11 +4035,6 @@ https://avvstancamarcello.github.io/Financial-Authority-Database/
     </footer>
 </body>
 </html>
-
-
-
-
-
 
 
 
