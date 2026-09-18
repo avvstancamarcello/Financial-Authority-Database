@@ -216,6 +216,7 @@
                         const metaTwitterDescription = doc.getElementById('meta-twitter-description')?.getAttribute('content') || '';
                         const metaTwitterImageAlt = doc.getElementById('meta-twitter-image-alt')?.getAttribute('content') || '';
                         const faqHeading = doc.querySelector('#faq-section [data-i18n-text=\"faqSectionTitle\"]')?.textContent?.trim();
+                        const medusaCta = doc.getElementById('caravaggio-medusa-link');
                         const faqSchemaRaw = doc.getElementById('faq-schema-jsonld')?.textContent || '';
                         let faqSchema = null;
                         try {
@@ -282,6 +283,9 @@
                         addResult(metaTwitterDescription === expectedTwitterDescription, `${lang}: twitter:description is localized/fallback`);
                         addResult(metaTwitterImageAlt === expectedTwitterImageAlt, `${lang}: twitter:image:alt is localized/fallback`);
                         addResult(faqHeading === expectedFaqHeading, `${lang}: FAQ heading is localized/fallback`);
+                        addResult(Boolean(medusaCta), `${lang}: Codice Caravaggio CTA exists`);
+                        addResult(medusaCta?.href === 'https://www.tutelatruffe.it/', `${lang}: Codice Caravaggio CTA points to tutelatruffe.it`);
+                        addResult((medusaCta?.textContent || '').includes('Codice Caravaggio'), `${lang}: Codice Caravaggio CTA label is present`);
                         addResult(firstQuestion === expectedFaqQuestion1, `${lang}: FAQ JSON-LD is localized/fallback`);
                         addResult(Boolean(activeButton), `${lang}: active language button is selected`);
                         addResult(Boolean(asiaSection), `${lang}: ASIA anchor section remains present`);
