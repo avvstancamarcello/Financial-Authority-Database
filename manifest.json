@@ -6,7 +6,6 @@
   "display": "standalone",
   "background_color": "#667eea",
   "theme_color": "#667eea",
-  "_comment": "Keep icon entries aligned with root/APP PWA metadata updates.",
   "icons": [
     {
       "src": "/Financial-Authority-Database/icon-96.png",
