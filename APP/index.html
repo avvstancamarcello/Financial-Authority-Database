@@ -3216,6 +3216,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     pointerFrame = requestAnimationFrame(flushMedusaMotion);
                 }
             });
+            medusaCta.addEventListener('focus', resetMedusaMotion, true);
             medusaCta.addEventListener('mouseleave', resetMedusaMotion);
             medusaCta.addEventListener('blur', resetMedusaMotion, true);
         }
@@ -4035,6 +4036,5 @@ https://avvstancamarcello.github.io/Financial-Authority-Database/
     </footer>
 </body>
 </html>
-
 
 
