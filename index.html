@@ -6428,7 +6428,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             medusaCta.addEventListener('focus', resetMedusaMotion, true);
             medusaCta.addEventListener('mouseleave', resetMedusaMotion);
             medusaCta.addEventListener('blur', resetMedusaMotion, true);
-            window.addEventListener('resize', refreshBounds);
             const cleanup = () => {
                 if (supportsMediaQueryEvents) {
                     reducedMotionQuery.removeEventListener('change', syncMotionPreference);
@@ -6440,7 +6439,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 medusaCta.removeEventListener('focus', resetMedusaMotion, true);
                 medusaCta.removeEventListener('mouseleave', resetMedusaMotion);
                 medusaCta.removeEventListener('blur', resetMedusaMotion, true);
-                window.removeEventListener('resize', refreshBounds);
                 resetMedusaMotion();
             };
             medusaCta._medusaCtaCleanup = cleanup;
