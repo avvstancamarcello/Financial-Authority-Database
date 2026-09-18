@@ -29,6 +29,7 @@
                 expectedTwitterImageAlt: "Tutela Truffe - Mappa Europea Truffe Finanziarie",
                 expectedFaqHeading: "❓ Domande Frequenti – FAQ",
                 expectedFaqQuestion1: "Come verificare se un broker è autorizzato?",
+                expectedMedusaLabel: "🔱 Codice Caravaggio - Lotta alle Meduse del Web",
                 expectedMetaDescriptionIncludes: "percorsi lingua AMEV / AMEA / AWEV",
                 expectedNavReferences: "📜 Istituzioni internazionali di vigilanza finanziaria",
                 requiredText: ['Italiano', 'Domande Frequenti']
@@ -46,6 +47,7 @@
                 expectedTwitterImageAlt: "Scam Protection - European Financial Scam Map",
                 expectedFaqHeading: "❓ Frequently Asked Questions – FAQ",
                 expectedFaqQuestion1: "How can I verify whether a broker is authorized?",
+                expectedMedusaLabel: "🔱 Codice Caravaggio - Lotta alle Meduse del Web",
                 expectedMetaDescriptionIncludes: "AMEV / AMEA / AWEV language paths",
                 expectedNavReferences: "📜 Međunarodne institucije za finansijski nadzor",
                 requiredText: ['Bosanski', 'Međunarodna baza finansijskih autoriteta']
@@ -63,6 +65,7 @@
                 expectedTwitterImageAlt: "Scam Protection - European Financial Scam Map",
                 expectedFaqHeading: "❓ Frequently Asked Questions – FAQ",
                 expectedFaqQuestion1: "How can I verify whether a broker is authorized?",
+                expectedMedusaLabel: "🔱 Codice Caravaggio - Lotta alle Meduse del Web",
                 expectedMetaDescriptionIncludes: "AMEV / AMEA / AWEV language paths",
                 expectedHeroTitle: "Βάση Δεδομένων Διεθνών Χρηματοοικονομικών Αρχών – 239 χώρες",
                 expectedHeroSubtitle: "Επαληθεύστε άδειες μεσιτών, αναφέρετε απάτες Forex/Crypto και ελέγξτε τη χρηματοοικονομική ταυτότητα των δικαιούχων πληρωμών.",
@@ -89,6 +92,7 @@
                 expectedTwitterImageAlt: "Scam Protection - European Financial Scam Map",
                 expectedFaqHeading: "❓ Frequently Asked Questions – FAQ",
                 expectedFaqQuestion1: "How can I verify whether a broker is authorized?",
+                expectedMedusaLabel: "🔱 Codice Caravaggio - Lotta alle Meduse del Web",
                 expectedMetaDescriptionIncludes: "AMEV / AMEA / AWEV language paths",
                 expectedNavReferences: "📜 International Financial Supervision Institutions",
                 requiredText: ['AR']
@@ -106,6 +110,7 @@
                 expectedTwitterImageAlt: "Scam Protection - European Financial Scam Map",
                 expectedFaqHeading: "❓ Frequently Asked Questions – FAQ",
                 expectedFaqQuestion1: "How can I verify whether a broker is authorized?",
+                expectedMedusaLabel: "🔱 Codice Caravaggio - Lotta alle Meduse del Web",
                 expectedMetaDescriptionIncludes: "AMEV / AMEA / AWEV language paths",
                 expectedNavReferences: "📜 Institucione ndërkombëtare të mbikëqyrjes financiare",
                 requiredText: ['XK', 'Shqip']
@@ -184,7 +189,7 @@
             });
         }
 
-        function loadScenario({ lang, expectedHtmlLang, expectedCanonical, expectedTitle, expectedOgTitle, expectedOgDescription, expectedOgImageAlt, expectedTwitterTitle, expectedTwitterDescription, expectedTwitterImageAlt, expectedFaqHeading, expectedFaqQuestion1, expectedMetaDescriptionIncludes, expectedHeroTitle, expectedHeroSubtitle, expectedLanguageSelectorTitle, expectedLanguageSelectorNote, expectedFutureLanguagesTitle, expectedFutureLanguagesNote, expectedChooseLanguageHint, expectedNavDatabase, expectedNavOdyssey, expectedNavReferences, requiredText }) {
+        function loadScenario({ lang, expectedHtmlLang, expectedCanonical, expectedTitle, expectedOgTitle, expectedOgDescription, expectedOgImageAlt, expectedTwitterTitle, expectedTwitterDescription, expectedTwitterImageAlt, expectedFaqHeading, expectedFaqQuestion1, expectedMedusaLabel, expectedMetaDescriptionIncludes, expectedHeroTitle, expectedHeroSubtitle, expectedLanguageSelectorTitle, expectedLanguageSelectorNote, expectedFutureLanguagesTitle, expectedFutureLanguagesNote, expectedChooseLanguageHint, expectedNavDatabase, expectedNavOdyssey, expectedNavReferences, requiredText }) {
             return new Promise((resolve) => {
                 const iframe = document.createElement('iframe');
                 iframe.style.position = 'absolute';
@@ -285,7 +290,7 @@
                         addResult(faqHeading === expectedFaqHeading, `${lang}: FAQ heading is localized/fallback`);
                         addResult(Boolean(medusaCta), `${lang}: Codice Caravaggio CTA exists`);
                         addResult(medusaCta?.href === 'https://www.tutelatruffe.it/', `${lang}: Codice Caravaggio CTA points to tutelatruffe.it`);
-                        addResult((medusaCta?.textContent || '').includes('Codice Caravaggio'), `${lang}: Codice Caravaggio CTA label is present`);
+                        addResult(medusaCta?.querySelector('.medusa-cta-label')?.textContent?.trim() === expectedMedusaLabel, `${lang}: Codice Caravaggio CTA label matches expected localized/fallback value`);
                         addResult(firstQuestion === expectedFaqQuestion1, `${lang}: FAQ JSON-LD is localized/fallback`);
                         addResult(Boolean(activeButton), `${lang}: active language button is selected`);
                         addResult(Boolean(asiaSection), `${lang}: ASIA anchor section remains present`);

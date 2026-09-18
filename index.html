@@ -3389,7 +3389,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     </span>
                     <span class="medusa-cta-copy">
                         <span class="medusa-cta-label" data-i18n-text="medusaCtaLabel">🔱 Codice Caravaggio - Lotta alle Meduse del Web</span>
-                        <span class="medusa-cta-badge">www.tutelatruffe.it</span>
+                        <span class="medusa-cta-badge" data-i18n-text="medusaCtaUrl">www.tutelatruffe.it</span>
                     </span>
                     <span class="medusa-cta-snake-trail" aria-hidden="true">
                         <span></span>
@@ -3636,6 +3636,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 medusaCtaLabel: "🔱 Codice Caravaggio - Lotta alle Meduse del Web",
                 medusaCtaTitle: "Apri il Codice Caravaggio su www.tutelatruffe.it",
                 medusaCtaAriaLabel: "Apri www.tutelatruffe.it - Codice Caravaggio",
+                medusaCtaUrl: "www.tutelatruffe.it",
                 filterAll: "Tutti i Paesi",
                 filterHigh: "Protezione Elevata",
                 filterEU: "Paesi UE",
@@ -4200,6 +4201,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 medusaCtaLabel: "🔱 Codice Caravaggio - Lotta alle Meduse del Web",
                 medusaCtaTitle: "Open the Codice Caravaggio on www.tutelatruffe.it",
                 medusaCtaAriaLabel: "Open www.tutelatruffe.it - Codice Caravaggio",
+                medusaCtaUrl: "www.tutelatruffe.it",
                 filterAll: "All Countries",
                 filterHigh: "Highest Protection",
                 filterEU: "EU Countries",
@@ -6141,18 +6143,37 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         function setupMedusaCta() {
             const medusaCta = document.getElementById('caravaggio-medusa-link');
             if (!medusaCta) return;
+            let pointerFrame = null;
+            let pendingMotion = null;
             const resetMedusaMotion = () => {
+                pendingMotion = null;
+                if (pointerFrame) {
+                    cancelAnimationFrame(pointerFrame);
+                    pointerFrame = null;
+                }
                 medusaCta.style.setProperty('--medusa-rotate-x', '0deg');
                 medusaCta.style.setProperty('--medusa-rotate-y', '0deg');
                 medusaCta.style.setProperty('--snake-shift', '0px');
+            };
+            const flushMedusaMotion = () => {
+                pointerFrame = null;
+                if (!pendingMotion) return;
+                medusaCta.style.setProperty('--medusa-rotate-x', pendingMotion.rotateX);
+                medusaCta.style.setProperty('--medusa-rotate-y', pendingMotion.rotateY);
+                medusaCta.style.setProperty('--snake-shift', pendingMotion.snakeShift);
             };
             medusaCta.addEventListener('mousemove', (event) => {
                 const rect = medusaCta.getBoundingClientRect();
                 const xRatio = (event.clientX - rect.left) / rect.width - 0.5;
                 const yRatio = (event.clientY - rect.top) / rect.height - 0.5;
-                medusaCta.style.setProperty('--medusa-rotate-x', `${(yRatio * -8).toFixed(2)}deg`);
-                medusaCta.style.setProperty('--medusa-rotate-y', `${(xRatio * 10).toFixed(2)}deg`);
-                medusaCta.style.setProperty('--snake-shift', `${Math.abs(xRatio * 10).toFixed(2)}px`);
+                pendingMotion = {
+                    rotateX: `${(yRatio * -8).toFixed(2)}deg`,
+                    rotateY: `${(xRatio * 10).toFixed(2)}deg`,
+                    snakeShift: `${Math.abs(xRatio * 10).toFixed(2)}px`
+                };
+                if (!pointerFrame) {
+                    pointerFrame = requestAnimationFrame(flushMedusaMotion);
+                }
             });
             medusaCta.addEventListener('mouseleave', resetMedusaMotion);
             medusaCta.addEventListener('blur', resetMedusaMotion, true);
