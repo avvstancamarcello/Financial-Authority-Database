@@ -6323,9 +6323,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     currentIds.push(noteId);
                     ctaElement.setAttribute('aria-describedby', currentIds.join(' '));
                 };
-                const duplicateRootNotes = Array.from(document.querySelectorAll(`.medusa-cta #${defaultMedusaNoteId}`));
-                if (duplicateRootNotes.length > 1) {
-                    duplicateRootNotes.forEach((noteElement, index) => {
+                const ctaNotes = Array.from(document.querySelectorAll('.medusa-cta [data-medusa-cta-note]'));
+                if (ctaNotes.length > 1) {
+                    ctaNotes.forEach((noteElement, index) => {
                         const noteId = index === 0 ? defaultMedusaNoteId : `${defaultMedusaNoteId}-${index + 1}`;
                         noteElement.id = noteId;
                         setMedusaDescription(noteElement.closest('.medusa-cta'), noteId);
