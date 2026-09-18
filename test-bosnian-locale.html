@@ -199,6 +199,48 @@
             }
         }
 
+        function getVisibilitySnapshot(win, element) {
+            if (!win || !element) return null;
+            const computed = win.getComputedStyle(element);
+            const rect = element.getBoundingClientRect();
+            return {
+                display: computed.display,
+                visibility: computed.visibility,
+                opacity: computed.opacity,
+                overflow: computed.overflow,
+                width: rect.width,
+                height: rect.height,
+                minWidth: computed.minWidth,
+                order: computed.order,
+                position: computed.position,
+                zIndex: computed.zIndex,
+                left: rect.left,
+                right: rect.right,
+                top: rect.top,
+                bottom: rect.bottom,
+                gridTemplateColumns: computed.gridTemplateColumns
+            };
+        }
+
+        function hasInlineHiddenStyle(element) {
+            return /\b(?:display\s*:\s*none|visibility\s*:\s*hidden|opacity\s*:\s*0(?:[;\\s]|$))/i.test(element?.getAttribute('style') || '');
+        }
+
+        function countGridTracks(gridTemplateColumns) {
+            if (!gridTemplateColumns || gridTemplateColumns === 'none') return 0;
+            return gridTemplateColumns.trim().split(/\s+/).length;
+        }
+
+        function setIframeViewport(iframe, width, height) {
+            iframe.style.width = `${width}px`;
+            iframe.style.height = `${height}px`;
+            return new Promise((resolve) => {
+                window.requestAnimationFrame(() => {
+                    window.requestAnimationFrame(resolve);
+                });
+            });
+        }
+
         function waitForLocaleState(iframe, expectedHtmlLang, expectedCanonical, lang, attempts = 0) {
             return new Promise((resolve, reject) => {
                 const check = () => {
@@ -259,6 +301,9 @@
                         const metaTwitterImageAlt = doc.getElementById('meta-twitter-image-alt')?.getAttribute('content') || '';
                         const faqHeading = doc.querySelector('#faq-section [data-i18n-text=\"faqSectionTitle\"]')?.textContent?.trim();
                         const medusaCta = doc.getElementById('caravaggio-medusa-link');
+                        const scamRadarCta = doc.querySelector('.scam-radar-cta');
+                        const actionsGrid = doc.querySelector('.actions-grid');
+                        const actionsGridFilterGroup = doc.querySelector('.actions-grid-filter-group');
                         const faqSchemaRaw = doc.getElementById('faq-schema-jsonld')?.textContent || '';
                         let faqSchema = null;
                         try {
@@ -316,6 +361,17 @@
                         const medusaNewTabNote = medusaCta?.querySelector('.medusa-cta-new-tab-note');
                         const medusaNewTabSr = medusaCta?.querySelector('#caravaggio-medusa-note.sr-only');
                         const medusaRelTokens = new Set((medusaCta?.getAttribute('rel') || '').split(/\s+/).filter(Boolean));
+                        const scamRadarLabel = scamRadarCta?.querySelector('[data-i18n-text="scamRadarCtaLabel"]');
+                        const scamRadarNewTab = scamRadarCta?.querySelector('.scam-radar-cta-new-tab');
+                        const scamRadarRelTokens = new Set((scamRadarCta?.getAttribute('rel') || '').split(/\s+/).filter(Boolean));
+                        const expectedScamRadarLabel = translationMap?.[lang]?.scamRadarCtaLabel || translationMap?.en?.scamRadarCtaLabel || '';
+                        const expectedScamRadarTitle = translationMap?.[lang]?.scamRadarCtaTitle || translationMap?.en?.scamRadarCtaTitle || '';
+                        const expectedScamRadarAriaLabel = translationMap?.[lang]?.scamRadarCtaAriaLabel || translationMap?.en?.scamRadarCtaAriaLabel || '';
+                        const expectedScamRadarNewTab = translationMap?.[lang]?.medusaCtaNewTab || translationMap?.en?.medusaCtaNewTab || '';
+                        const medusaVisibility = getVisibilitySnapshot(win, medusaCta);
+                        const scamRadarVisibility = getVisibilitySnapshot(win, scamRadarCta);
+                        const actionsGridVisibility = getVisibilitySnapshot(win, actionsGrid);
+                        const filterGroupVisibility = getVisibilitySnapshot(win, actionsGridFilterGroup);
                         const euFirstGridRow = euGrid?.firstElementChild;
                         const asiaFirstGridRow = asiaGrid?.firstElementChild;
                         const euGridAreaMessage = (euAreaLabel?.textContent || '').replace(/\s+/g, ' ').replace(/\s*-\s*/g, ' - ').trim();
@@ -347,6 +403,21 @@
                         addResult(medusaNewTabSr?.textContent?.trim() === expectedMedusaNewTabSr, `${lang}: Codice Caravaggio CTA screen-reader new-tab note matches expected localized/fallback value`);
                         addResult(medusaCta?.getAttribute('aria-describedby') === 'caravaggio-medusa-note' && Boolean(medusaNewTabSr), `${lang}: Codice Caravaggio CTA exposes its screen-reader new-tab note via aria-describedby`);
                         addResult(medusaIcon?.getAttribute('aria-hidden') === 'true' && medusaSvg?.getAttribute('aria-hidden') === 'true', `${lang}: Codice Caravaggio decorative icon and SVG are hidden from assistive technology`);
+                        addResult(Boolean(scamRadarCta), `${lang}: Scam Radar CTA exists`);
+                        addResult(scamRadarCta?.href === 'https://www.scam-radar.com/', `${lang}: Scam Radar CTA points to scam-radar.com`);
+                        addResult(scamRadarCta?.getAttribute('target') === '_blank', `${lang}: Scam Radar CTA opens in a new tab`);
+                        addResult(scamRadarRelTokens.has('noopener') && scamRadarRelTokens.has('noreferrer'), `${lang}: Scam Radar CTA rel includes noopener and noreferrer`);
+                        addResult(scamRadarLabel?.textContent?.trim() === expectedScamRadarLabel, `${lang}: Scam Radar CTA label matches expected localized/fallback value`);
+                        addResult((scamRadarCta?.getAttribute('title') || '').trim() === expectedScamRadarTitle, `${lang}: Scam Radar CTA title matches expected localized/fallback value`);
+                        addResult((scamRadarCta?.getAttribute('aria-label') || '').trim() === expectedScamRadarAriaLabel, `${lang}: Scam Radar CTA aria-label matches expected localized/fallback value`);
+                        addResult((scamRadarNewTab?.textContent || '').trim() === expectedScamRadarNewTab, `${lang}: Scam Radar CTA visible new-tab note matches expected localized/fallback value`);
+                        addResult(actionsGridVisibility?.display === 'grid', `${lang}: top actions grid keeps grid display`);
+                        addResult(filterGroupVisibility?.display === 'grid', `${lang}: filter CTA group keeps grid display`);
+                        addResult(!medusaCta?.hidden && !hasInlineHiddenStyle(medusaCta), `${lang}: Codice Caravaggio CTA has no hidden attribute or inline hidden style`);
+                        addResult(!scamRadarCta?.hidden && !hasInlineHiddenStyle(scamRadarCta), `${lang}: Scam Radar CTA has no hidden attribute or inline hidden style`);
+                        addResult(medusaVisibility?.display !== 'none' && medusaVisibility?.visibility !== 'hidden' && medusaVisibility?.opacity !== '0' && medusaVisibility?.width > 0 && medusaVisibility?.height > 0, `${lang}: Codice Caravaggio CTA remains visibly rendered in the root layout`);
+                        addResult(scamRadarVisibility?.display !== 'none' && scamRadarVisibility?.visibility !== 'hidden' && scamRadarVisibility?.opacity !== '0' && scamRadarVisibility?.width > 0 && scamRadarVisibility?.height > 0, `${lang}: Scam Radar CTA remains visibly rendered in the root layout`);
+                        addResult(filterGroupVisibility?.top >= scamRadarVisibility?.bottom, `${lang}: filter group stays after the two top CTAs instead of overlapping them`);
                         addResult(firstQuestion === expectedFaqQuestion1, `${lang}: FAQ JSON-LD is localized/fallback`);
                         addResult(Boolean(activeButton), `${lang}: active language button is selected`);
                         addResult(Boolean(asiaSection), `${lang}: ASIA anchor section remains present`);
@@ -468,6 +539,33 @@
                         addResult((switchedDoc.querySelector('#caravaggio-medusa-link .medusa-cta-badge')?.textContent || '').trim() === expectedEnState.medusaBadge, `${lang}→en: Codice Caravaggio badge updates on language switch`);
                         addResult((switchedDoc.querySelector('#caravaggio-medusa-link .medusa-cta-new-tab-note')?.textContent || '').trim() === expectedEnState.medusaNewTab, `${lang}→en: Codice Caravaggio visible new-tab note updates on language switch`);
                         addResult((switchedDoc.getElementById('caravaggio-medusa-note')?.textContent || '').trim() === expectedEnState.medusaNewTabSr, `${lang}→en: Codice Caravaggio screen-reader new-tab note updates on language switch`);
+                        addResult((switchedDoc.querySelector('.scam-radar-cta [data-i18n-text="scamRadarCtaLabel"]')?.textContent || '').trim() === (translationMap?.en?.scamRadarCtaLabel || ''), `${lang}→en: Scam Radar label updates on language switch`);
+                        addResult((switchedDoc.querySelector('.scam-radar-cta')?.getAttribute('title') || '').trim() === (translationMap?.en?.scamRadarCtaTitle || ''), `${lang}→en: Scam Radar title updates on language switch`);
+                        addResult((switchedDoc.querySelector('.scam-radar-cta')?.getAttribute('aria-label') || '').trim() === (translationMap?.en?.scamRadarCtaAriaLabel || ''), `${lang}→en: Scam Radar aria-label updates on language switch`);
+                        addResult((switchedDoc.querySelector('.scam-radar-cta .scam-radar-cta-new-tab')?.textContent || '').trim() === expectedEnState.medusaNewTab, `${lang}→en: Scam Radar new-tab note updates on language switch`);
+                        if (lang === 'it') {
+                            const responsiveViewports = [
+                                { label: 'desktop', width: 1440, height: 2400, expectedTracks: 2, expectStackedCtas: false },
+                                { label: 'tablet', width: 768, height: 1800, expectedTracks: 2, expectStackedCtas: false },
+                                { label: 'mobile', width: 390, height: 1800, expectedTracks: 1, expectStackedCtas: true }
+                            ];
+                            for (const viewport of responsiveViewports) {
+                                await setIframeViewport(iframe, viewport.width, viewport.height);
+                                const responsiveMedusa = getVisibilitySnapshot(switchedDoc.defaultView, switchedDoc.getElementById('caravaggio-medusa-link'));
+                                const responsiveScam = getVisibilitySnapshot(switchedDoc.defaultView, switchedDoc.querySelector('.scam-radar-cta'));
+                                const responsiveGrid = getVisibilitySnapshot(switchedDoc.defaultView, switchedDoc.querySelector('.actions-grid'));
+                                const responsiveFilterGroup = getVisibilitySnapshot(switchedDoc.defaultView, switchedDoc.querySelector('.actions-grid-filter-group'));
+                                addResult(countGridTracks(responsiveGrid?.gridTemplateColumns) === viewport.expectedTracks, `it: ${viewport.label} top actions grid keeps the expected CTA track count`);
+                                addResult(responsiveMedusa?.display !== 'none' && responsiveScam?.display !== 'none' && responsiveMedusa?.width > 0 && responsiveScam?.width > 0, `it: ${viewport.label} keeps both top CTAs rendered with non-zero size`);
+                                if (viewport.expectStackedCtas) {
+                                    addResult(responsiveScam?.top >= responsiveMedusa?.bottom, `it: ${viewport.label} stacks Scam Radar below Codice Caravaggio`);
+                                    addResult(responsiveFilterGroup?.top >= responsiveScam?.bottom, `it: ${viewport.label} keeps filter buttons below both CTAs`);
+                                } else {
+                                    addResult(responsiveScam?.top === responsiveMedusa?.top && responsiveScam?.left > responsiveMedusa?.left, `it: ${viewport.label} keeps the two top CTAs side by side`);
+                                    addResult(responsiveFilterGroup?.top >= responsiveMedusa?.bottom, `it: ${viewport.label} keeps filter buttons on the row below the two CTAs`);
+                                }
+                            }
+                        }
                         const switchedDisclosureToggle = switchedDoc.getElementById('amev-introduction-toggle');
                         const switchedDisclosureContent = switchedDoc.getElementById('amev-introduction-content');
                         addResult(switchedDisclosureToggle?.getAttribute('aria-expanded') === 'true' && switchedDisclosureContent?.hidden === false, `${lang}→en: AMEV disclosure state remains expanded after runtime language switch`);
