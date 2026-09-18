@@ -180,6 +180,12 @@
             'amevCredibilityText',
             'amevTimelineText'
         ];
+        const appIndexHtmlPromise = fetch('./APP/index.html', { cache: 'no-store' }).then(async (response) => {
+            if (!response.ok) {
+                throw new Error(`APP/index.html failed to load (${response.status})`);
+            }
+            return response.text();
+        });
 
         const results = document.getElementById('results');
 
@@ -269,12 +275,8 @@
                         const header = doc.querySelector('header[role="banner"]');
                         let appIndexHtml = '';
                         if (lang === 'it') {
-                            const appIndexResponse = await fetch('./APP/index.html', { cache: 'no-store' });
-                            addResult(appIndexResponse.ok, 'it: APP/index.html reference file loads successfully');
-                            if (!appIndexResponse.ok) {
-                                throw new Error(`APP/index.html failed to load (${appIndexResponse.status})`);
-                            }
-                            appIndexHtml = await appIndexResponse.text();
+                            appIndexHtml = await appIndexHtmlPromise;
+                            addResult(true, 'it: APP/index.html reference file loads successfully');
                         }
                         const headerOrder = Array.from(header?.children || []).map((element) => {
                             if (element.classList.contains('flag-orbit-banner')) return 'flags';
