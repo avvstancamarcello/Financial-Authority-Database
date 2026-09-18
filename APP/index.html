@@ -1651,7 +1651,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                         </svg>
                     </span>
                     <span class="medusa-cta-copy">
-                        <span class="medusa-cta-label" data-i18n-text="medusaCtaLabel">🔱 Codice Caravaggio - Lotta alle Meduse del Web</span>
+                        <span class="medusa-cta-label" data-i18n-text="medusaCtaLabel">🔱 Codice Caravaggio - Lotta alle Meduse del Web ↗</span>
                         <span class="medusa-cta-badge" data-i18n-text="medusaCtaUrl">www.tutelatruffe.it ↗</span>
                     </span>
                     <span class="medusa-cta-snake-trail" aria-hidden="true">
@@ -1925,7 +1925,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 searchAdvice2: "Devi proteggerti da inganni e frodi finanziarie.",
                 searchAdvice3: "Prendi tempo prima di eseguire operazioni finanziarie sollecitate da sconosciuti.",
                 searchAdvice4: "Chiedi con email conferme di legalità dei destinatari alla tua Banca.",
-                medusaCtaLabel: "🔱 Codice Caravaggio - Lotta alle Meduse del Web",
+                medusaCtaLabel: "🔱 Codice Caravaggio - Lotta alle Meduse del Web ↗",
                 medusaCtaTitle: "Apri il Codice Caravaggio su www.tutelatruffe.it (si apre in una nuova scheda)",
                 medusaCtaAriaLabel: "Apri www.tutelatruffe.it - Codice Caravaggio (si apre in una nuova scheda)",
                 medusaCtaUrl: "www.tutelatruffe.it ↗",
@@ -2244,7 +2244,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 searchAdvice2: "You must protect yourself from deception and financial fraud.",
                 searchAdvice3: "Take your time before carrying out financial transactions pushed by strangers.",
                 searchAdvice4: "Ask your bank by email for written confirmation about the lawfulness of the beneficiaries.",
-                medusaCtaLabel: "🔱 Codice Caravaggio - Fight the Web Medusas",
+                medusaCtaLabel: "🔱 Codice Caravaggio - Fight the Web Medusas ↗",
                 medusaCtaTitle: "Open the Codice Caravaggio on www.tutelatruffe.it (opens in a new tab)",
                 medusaCtaAriaLabel: "Open www.tutelatruffe.it - Codice Caravaggio (opens in a new tab)",
                 medusaCtaUrl: "www.tutelatruffe.it ↗",
@@ -3184,6 +3184,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         function setupMedusaCta() {
             const medusaCta = document.getElementById('caravaggio-medusa-link');
             if (!medusaCta) return;
+            if (medusaCta.dataset.medusaCtaInitialized === 'true') return;
+            medusaCta.dataset.medusaCtaInitialized = 'true';
             const reducedMotionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
             let pointerFrame = null;
             let pendingMotion = null;
