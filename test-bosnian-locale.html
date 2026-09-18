@@ -371,8 +371,7 @@
                             const labelLocales = Object.keys(translationMap || {}).filter((locale) =>
                                 translationMap?.[locale] && typeof translationMap[locale] === 'object'
                             );
-                            const fullyLocalizedAreaLocales = labelLocales.filter((locale) => locale !== 'nl');
-                            const missingAreaLabelLocales = fullyLocalizedAreaLocales.filter((locale) =>
+                            const missingAreaLabelLocales = labelLocales.filter((locale) =>
                                 !translationMap?.[locale]?.languageAreaEu || !translationMap?.[locale]?.languageAreaAsia || !translationMap?.[locale]?.languagePrompt || !translationMap?.[locale]?.amevInfoSummary || !translationMap?.[locale]?.amevInfoExpand || !translationMap?.[locale]?.amevInfoCollapse
                             );
                             const requiredMedusaKeys = ['medusaCtaLabel', 'medusaCtaTitle', 'medusaCtaAriaLabel', 'medusaCtaUrl', 'medusaCtaNewTab', 'medusaCtaNewTabSr'];
