@@ -30,6 +30,9 @@
                 expectedFaqHeading: "❓ Domande Frequenti – FAQ",
                 expectedFaqQuestion1: "Come verificare se un broker è autorizzato?",
                 expectedMedusaLabel: "🔱 Codice Caravaggio - Lotta alle Meduse del Web",
+                expectedMedusaTitle: "Apri il Codice Caravaggio su www.tutelatruffe.it",
+                expectedMedusaAriaLabel: "Apri www.tutelatruffe.it - Codice Caravaggio",
+                expectedMedusaBadge: "www.tutelatruffe.it",
                 expectedMetaDescriptionIncludes: "percorsi lingua AMEV / AMEA / AWEV",
                 expectedNavReferences: "📜 Istituzioni internazionali di vigilanza finanziaria",
                 requiredText: ['Italiano', 'Domande Frequenti']
@@ -48,6 +51,9 @@
                 expectedFaqHeading: "❓ Frequently Asked Questions – FAQ",
                 expectedFaqQuestion1: "How can I verify whether a broker is authorized?",
                 expectedMedusaLabel: "🔱 Codice Caravaggio - Lotta alle Meduse del Web",
+                expectedMedusaTitle: "Open the Codice Caravaggio on www.tutelatruffe.it",
+                expectedMedusaAriaLabel: "Open www.tutelatruffe.it - Codice Caravaggio",
+                expectedMedusaBadge: "www.tutelatruffe.it",
                 expectedMetaDescriptionIncludes: "AMEV / AMEA / AWEV language paths",
                 expectedNavReferences: "📜 Međunarodne institucije za finansijski nadzor",
                 requiredText: ['Bosanski', 'Međunarodna baza finansijskih autoriteta']
@@ -66,6 +72,9 @@
                 expectedFaqHeading: "❓ Frequently Asked Questions – FAQ",
                 expectedFaqQuestion1: "How can I verify whether a broker is authorized?",
                 expectedMedusaLabel: "🔱 Codice Caravaggio - Lotta alle Meduse del Web",
+                expectedMedusaTitle: "Open the Codice Caravaggio on www.tutelatruffe.it",
+                expectedMedusaAriaLabel: "Open www.tutelatruffe.it - Codice Caravaggio",
+                expectedMedusaBadge: "www.tutelatruffe.it",
                 expectedMetaDescriptionIncludes: "AMEV / AMEA / AWEV language paths",
                 expectedHeroTitle: "Βάση Δεδομένων Διεθνών Χρηματοοικονομικών Αρχών – 239 χώρες",
                 expectedHeroSubtitle: "Επαληθεύστε άδειες μεσιτών, αναφέρετε απάτες Forex/Crypto και ελέγξτε τη χρηματοοικονομική ταυτότητα των δικαιούχων πληρωμών.",
@@ -93,6 +102,9 @@
                 expectedFaqHeading: "❓ Frequently Asked Questions – FAQ",
                 expectedFaqQuestion1: "How can I verify whether a broker is authorized?",
                 expectedMedusaLabel: "🔱 Codice Caravaggio - Lotta alle Meduse del Web",
+                expectedMedusaTitle: "Open the Codice Caravaggio on www.tutelatruffe.it",
+                expectedMedusaAriaLabel: "Open www.tutelatruffe.it - Codice Caravaggio",
+                expectedMedusaBadge: "www.tutelatruffe.it",
                 expectedMetaDescriptionIncludes: "AMEV / AMEA / AWEV language paths",
                 expectedNavReferences: "📜 International Financial Supervision Institutions",
                 requiredText: ['AR']
@@ -111,6 +123,9 @@
                 expectedFaqHeading: "❓ Frequently Asked Questions – FAQ",
                 expectedFaqQuestion1: "How can I verify whether a broker is authorized?",
                 expectedMedusaLabel: "🔱 Codice Caravaggio - Lotta alle Meduse del Web",
+                expectedMedusaTitle: "Open the Codice Caravaggio on www.tutelatruffe.it",
+                expectedMedusaAriaLabel: "Open www.tutelatruffe.it - Codice Caravaggio",
+                expectedMedusaBadge: "www.tutelatruffe.it",
                 expectedMetaDescriptionIncludes: "AMEV / AMEA / AWEV language paths",
                 expectedNavReferences: "📜 Institucione ndërkombëtare të mbikëqyrjes financiare",
                 requiredText: ['XK', 'Shqip']
@@ -189,7 +204,7 @@
             });
         }
 
-        function loadScenario({ lang, expectedHtmlLang, expectedCanonical, expectedTitle, expectedOgTitle, expectedOgDescription, expectedOgImageAlt, expectedTwitterTitle, expectedTwitterDescription, expectedTwitterImageAlt, expectedFaqHeading, expectedFaqQuestion1, expectedMedusaLabel, expectedMetaDescriptionIncludes, expectedHeroTitle, expectedHeroSubtitle, expectedLanguageSelectorTitle, expectedLanguageSelectorNote, expectedFutureLanguagesTitle, expectedFutureLanguagesNote, expectedChooseLanguageHint, expectedNavDatabase, expectedNavOdyssey, expectedNavReferences, requiredText }) {
+        function loadScenario({ lang, expectedHtmlLang, expectedCanonical, expectedTitle, expectedOgTitle, expectedOgDescription, expectedOgImageAlt, expectedTwitterTitle, expectedTwitterDescription, expectedTwitterImageAlt, expectedFaqHeading, expectedFaqQuestion1, expectedMedusaLabel, expectedMedusaTitle, expectedMedusaAriaLabel, expectedMedusaBadge, expectedMetaDescriptionIncludes, expectedHeroTitle, expectedHeroSubtitle, expectedLanguageSelectorTitle, expectedLanguageSelectorNote, expectedFutureLanguagesTitle, expectedFutureLanguagesNote, expectedChooseLanguageHint, expectedNavDatabase, expectedNavOdyssey, expectedNavReferences, requiredText }) {
             return new Promise((resolve) => {
                 const iframe = document.createElement('iframe');
                 iframe.style.position = 'absolute';
@@ -291,6 +306,9 @@
                         addResult(Boolean(medusaCta), `${lang}: Codice Caravaggio CTA exists`);
                         addResult(medusaCta?.href === 'https://www.tutelatruffe.it/', `${lang}: Codice Caravaggio CTA points to tutelatruffe.it`);
                         addResult(medusaCta?.querySelector('.medusa-cta-label')?.textContent?.trim() === expectedMedusaLabel, `${lang}: Codice Caravaggio CTA label matches expected localized/fallback value`);
+                        addResult(medusaCta?.getAttribute('title') === expectedMedusaTitle, `${lang}: Codice Caravaggio CTA title matches expected localized/fallback value`);
+                        addResult(medusaCta?.getAttribute('aria-label') === expectedMedusaAriaLabel, `${lang}: Codice Caravaggio CTA aria-label matches expected localized/fallback value`);
+                        addResult(medusaCta?.querySelector('.medusa-cta-badge')?.textContent?.trim() === expectedMedusaBadge, `${lang}: Codice Caravaggio CTA badge matches expected localized/fallback value`);
                         addResult(firstQuestion === expectedFaqQuestion1, `${lang}: FAQ JSON-LD is localized/fallback`);
                         addResult(Boolean(activeButton), `${lang}: active language button is selected`);
                         addResult(Boolean(asiaSection), `${lang}: ASIA anchor section remains present`);
