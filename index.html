@@ -6363,7 +6363,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 const sanctionIconTitle = currentTranslations.sanctionedIconTitle || '⚠️ Country subject to international sanctions';
                 const sanctionedBadge = currentTranslations.sanctionedBadge || '⚠️ SANCTIONS';
                 const sanctionIcon = country.sanctioned ? `<div class="sanctioned-icon" title="${escapeHtmlAttribute(sanctionIconTitle)}">!</div>` : '';
-                const hasItalyOrbitalView = country.country_name === 'Italy' && Boolean(country.has_orbital_view);
+                const hasItalyOrbitalView = country.country_name === 'Italy'
+                    && Boolean(country.has_orbital_view)
+                    && hasValidConsobOrbitalSrc(country.modal);
                 const orbitalModalSrc = resolveConsobOrbitalSrc(country.modal);
                 const orbitalThumbnailHtml = hasItalyOrbitalView && country.thumbnail ? `
                     <button
@@ -6637,6 +6639,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             return CONSOB_ORBITAL_ALLOWED_SOURCES.has(source) ? source : CONSOB_ORBITAL_FALLBACK_SRC;
         }
 
+        function hasValidConsobOrbitalSrc(candidateSource) {
+            const source = String(candidateSource || '').trim();
+            return CONSOB_ORBITAL_ALLOWED_SOURCES.has(source);
+        }
+
         function setupItalyOrbitalDialog() {
             if (window.__consobOrbitalDialogSetupDone) return;
 
@@ -6667,7 +6674,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         function openItalyOrbitalDialog(modalSrc) {
             const dialog = document.getElementById('consobOrbitalDialog');
             const frame = document.getElementById('consobOrbitalFrame');
-            const src = modalSrc || CONSOB_ORBITAL_FALLBACK_SRC;
+            const src = resolveConsobOrbitalSrc(modalSrc);
             if (frame) {
                 frame.src = src;
             }
