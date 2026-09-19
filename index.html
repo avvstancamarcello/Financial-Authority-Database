@@ -6365,7 +6365,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 const sanctionedBadge = currentTranslations.sanctionedBadge || '⚠️ SANCTIONS';
                 const sanctionIcon = country.sanctioned ? `<div class="sanctioned-icon" title="${escapeHtmlAttribute(sanctionIconTitle)}">!</div>` : '';
                 const orbitalModalSrc = resolveConsobOrbitalSrc(country.modal);
-                const hasItalyOrbitalView = country.country_name === 'Italy'
+                const hasItalyOrbitalView = (country.financial_authority?.abbreviation === 'CONSOB')
                     && Boolean(country.has_orbital_view)
                     && Boolean(country.thumbnail)
                     && Boolean(orbitalModalSrc);
@@ -6632,7 +6632,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         }
 
         const CONSOB_ORBITAL_FALLBACK_SRC = 'authority/IT-CONSOB.html';
-        const CONSOB_ORBITAL_ALLOWED_PATHS = new Set(['/authority/IT-CONSOB.html']);
+        const CONSOB_ORBITAL_ALLOWED_PATHS = new Set([
+            new URL('/authority/IT-CONSOB.html', window.location.origin).pathname,
+            new URL(CONSOB_ORBITAL_FALLBACK_SRC, window.location.href).pathname
+        ]);
 
         function resolveConsobOrbitalSrc(candidateSource, { allowFallback = false } = {}) {
             const source = String(candidateSource || '').trim();
@@ -6686,13 +6689,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             if (dialog.open && typeof dialog.close === 'function') {
                 dialog.close();
             }
-            if (frame) {
-                frame.src = src;
-            }
             if (typeof dialog.showModal === 'function') {
                 if (!dialog.open) {
                     try {
                         dialog.showModal();
+                        if (frame) {
+                            frame.src = src;
+                        }
                     } catch (error) {
                         window.open(src, '_blank', 'noopener');
                     }
