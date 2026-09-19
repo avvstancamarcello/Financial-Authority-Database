@@ -5702,6 +5702,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         let pendingFlagsGridRender = false;
         // Cache traduzioni on-demand
         let translationCache = {};
+        let isConsobOrbitalDialogSetup = false;
 
         // Inizializza canonical URL per SEO (Google self-referencing canonical)
         (function initCanonical() {
@@ -6364,8 +6365,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 const sanctionedBadge = currentTranslations.sanctionedBadge || '⚠️ SANCTIONS';
                 const sanctionIcon = country.sanctioned ? `<div class="sanctioned-icon" title="${escapeHtmlAttribute(sanctionIconTitle)}">!</div>` : '';
                 const hasItalyOrbitalView = country.country_name === 'Italy'
-                    && Boolean(country.has_orbital_view)
-                    && hasValidConsobOrbitalSrc(country.modal);
+                    && Boolean(country.has_orbital_view);
                 const orbitalModalSrc = resolveConsobOrbitalSrc(country.modal);
                 const orbitalThumbnailHtml = hasItalyOrbitalView && country.thumbnail ? `
                     <button
@@ -6639,19 +6639,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             return CONSOB_ORBITAL_ALLOWED_SOURCES.has(source) ? source : CONSOB_ORBITAL_FALLBACK_SRC;
         }
 
-        function hasValidConsobOrbitalSrc(candidateSource) {
-            const source = String(candidateSource || '').trim();
-            return CONSOB_ORBITAL_ALLOWED_SOURCES.has(source);
-        }
-
         function setupItalyOrbitalDialog() {
-            if (window.__consobOrbitalDialogSetupDone) return;
+            if (isConsobOrbitalDialogSetup) return;
 
             const grid = document.getElementById('countriesGrid');
             const dialog = document.getElementById('consobOrbitalDialog');
             const closeButton = document.getElementById('consobOrbitalCloseButton');
             if (!grid || !dialog) return;
-            window.__consobOrbitalDialogSetupDone = true;
+            isConsobOrbitalDialogSetup = true;
 
             grid.addEventListener('click', (event) => {
                 const trigger = event.target.closest('[data-orbital-trigger="consob"]');
