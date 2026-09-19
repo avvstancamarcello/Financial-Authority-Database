@@ -6637,7 +6637,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         function resolveConsobOrbitalSrc(candidateSource, { allowFallback = false } = {}) {
             const source = String(candidateSource || '').trim();
             if (!source) return allowFallback ? CONSOB_ORBITAL_FALLBACK_SRC : '';
-            if (/^(https?:|\/\/|data:|javascript:|vbscript:)/i.test(source)) return '';
             if (CONSOB_ORBITAL_ALLOWED_SOURCES.has(source)) return source;
             return '';
         }
@@ -6654,14 +6653,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             grid.addEventListener('click', (event) => {
                 const trigger = event.target.closest('[data-orbital-trigger="consob"]');
                 if (!trigger) return;
-                event.preventDefault();
-                event.stopPropagation();
-                openItalyOrbitalDialog(trigger.getAttribute('data-orbital-src') || CONSOB_ORBITAL_FALLBACK_SRC);
-            });
-            grid.addEventListener('keydown', (event) => {
-                const trigger = event.target.closest('[data-orbital-trigger="consob"]');
-                if (!trigger) return;
-                if (event.key !== 'Enter' && event.key !== ' ') return;
                 event.preventDefault();
                 event.stopPropagation();
                 openItalyOrbitalDialog(trigger.getAttribute('data-orbital-src') || CONSOB_ORBITAL_FALLBACK_SRC);
@@ -6694,11 +6685,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     try {
                         dialog.showModal();
                     } catch (error) {
-                        dialog.setAttribute('open', 'open');
+                        window.open(src, '_blank', 'noopener');
                     }
                 }
             } else {
-                dialog.setAttribute('open', 'open');
+                window.open(src, '_blank', 'noopener');
             }
         }
 
