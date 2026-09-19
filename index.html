@@ -6365,12 +6365,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 const sanctionedBadge = currentTranslations.sanctionedBadge || '⚠️ SANCTIONS';
                 const sanctionIcon = country.sanctioned ? `<div class="sanctioned-icon" title="${escapeHtmlAttribute(sanctionIconTitle)}">!</div>` : '';
                 const orbitalModalSrc = resolveConsobOrbitalSrc(country.modal);
-                const rawOrbitalModalSrc = String(country.modal || '').trim();
                 const hasItalyOrbitalView = country.country_name === 'Italy'
                     && Boolean(country.has_orbital_view)
                     && Boolean(country.thumbnail)
-                    && Boolean(rawOrbitalModalSrc)
-                    && orbitalModalSrc === rawOrbitalModalSrc;
+                    && Boolean(orbitalModalSrc);
                 const orbitalThumbnailHtml = hasItalyOrbitalView ? `
                     <button
                         type="button"
@@ -6636,11 +6634,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         const CONSOB_ORBITAL_FALLBACK_SRC = 'authority/IT-CONSOB.html';
         const CONSOB_ORBITAL_ALLOWED_SOURCES = new Set([CONSOB_ORBITAL_FALLBACK_SRC]);
 
-        function resolveConsobOrbitalSrc(candidateSource) {
+        function resolveConsobOrbitalSrc(candidateSource, { allowFallback = false } = {}) {
             const source = String(candidateSource || '').trim();
-            if (!source) return CONSOB_ORBITAL_FALLBACK_SRC;
-            if (/^(https?:|\/\/|data:|javascript:|vbscript:)/i.test(source)) return CONSOB_ORBITAL_FALLBACK_SRC;
-            return CONSOB_ORBITAL_ALLOWED_SOURCES.has(source) ? source : CONSOB_ORBITAL_FALLBACK_SRC;
+            if (!source) return allowFallback ? CONSOB_ORBITAL_FALLBACK_SRC : '';
+            if (/^(https?:|\/\/|data:|javascript:|vbscript:)/i.test(source)) return allowFallback ? CONSOB_ORBITAL_FALLBACK_SRC : '';
+            if (CONSOB_ORBITAL_ALLOWED_SOURCES.has(source)) return source;
+            return allowFallback ? CONSOB_ORBITAL_FALLBACK_SRC : '';
         }
 
         function setupItalyOrbitalDialog() {
@@ -6673,7 +6672,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         function openItalyOrbitalDialog(modalSrc) {
             const dialog = document.getElementById('consobOrbitalDialog');
             const frame = document.getElementById('consobOrbitalFrame');
-            const src = resolveConsobOrbitalSrc(modalSrc);
+            const src = resolveConsobOrbitalSrc(modalSrc, { allowFallback: true });
             if (!dialog) {
                 window.open(src, '_blank', 'noopener');
                 return;
