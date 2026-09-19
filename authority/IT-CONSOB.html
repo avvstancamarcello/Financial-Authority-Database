@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <title>CONSOB – Orbital WebApp Italia</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description"
+        content="Orbital WebApp dedicata alla Commissione Nazionale per le Società e la Borsa (CONSOB), Autorità di vigilanza sui mercati finanziari in Italia.">
+  <style>
+    :root {
+      --consob-blue: #004080;
+      --consob-light: #f5f8ff;
+      --consob-border: #d0d8ea;
+      --consob-danger: #b00020;
+      --consob-safe: #007e33;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+                   Roboto, sans-serif;
+      background: radial-gradient(circle at top, #f0f6ff 0, #e3ebf7 40%, #d7e0f0 100%);
+      color: #111827;
+    }
+
+    header {
+      padding: 16px 20px;
+      background: rgba(0, 64, 128, 0.9);
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+    }
+
+    header .title-block {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    header .flag {
+      font-size: 28px;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 1.4rem;
+    }
+
+    header p {
+      margin: 2px 0 0;
+      font-size: 0.85rem;
+      opacity: 0.9;
+    }
+
+    main {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 20px 16px 32px;
+    }
+
+    .card {
+      background: #ffffff;
+      border-radius: 18px;
+      box-shadow: 0 12px 30px rgba(15, 23, 42, 0.18);
+      border: 1px solid var(--consob-border);
+      padding: 20px 18px 22px;
+    }
+
+    .card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 12px;
+      flex-wrap: wrap;
+    }
+
+    .card-header h2 {
+      margin: 0;
+      font-size: 1.2rem;
+      color: var(--consob-blue);
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      font-size: 0.8rem;
+      background: #e0f2fe;
+      color: #0f172a;
+      border: 1px solid #bae6fd;
+    }
+
+    .badge span.dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #22c55e;
+    }
+
+    dl {
+      margin: 0;
+      display: grid;
+      grid-template-columns: minmax(0, 180px) minmax(0, 1fr);
+      row-gap: 8px;
+      column-gap: 12px;
+      font-size: 0.92rem;
+    }
+
+    dt {
+      font-weight: 600;
+      color: #374151;
+    }
+
+    dd {
+      margin: 0;
+      color: #111827;
+      word-break: break-word;
+    }
+
+    a {
+      color: var(--consob-blue);
+      text-decoration: none;
+    }
+
+    a:hover,
+    a:focus-visible {
+      text-decoration: underline;
+    }
+
+    .note-block {
+      margin-top: 14px;
+      padding: 10px 12px;
+      border-radius: 12px;
+      background: var(--consob-light);
+      border: 1px solid var(--consob-border);
+      font-size: 0.9rem;
+    }
+
+    .note-block strong {
+      display: block;
+      margin-bottom: 4px;
+      color: #1f2937;
+    }
+
+    .actions {
+      margin-top: 18px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .btn {
+      border: none;
+      border-radius: 999px;
+      padding: 8px 14px;
+      font-size: 0.85rem;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    .btn:focus-visible {
+      outline: 2px solid #2563eb;
+      outline-offset: 2px;
+    }
+
+    .btn-primary {
+      background: var(--consob-blue);
+      color: #ffffff;
+    }
+
+    .btn-outline {
+      background: #ffffff;
+      color: var(--consob-blue);
+      border: 1px solid var(--consob-blue);
+    }
+
+    .btn-danger {
+      background: var(--consob-danger);
+      color: #ffffff;
+    }
+
+    .btn-safe {
+      background: var(--consob-safe);
+      color: #ffffff;
+    }
+
+    .section {
+      margin-top: 24px;
+      padding-top: 12px;
+      border-top: 1px dashed #cbd5e1;
+    }
+
+    .section h3 {
+      margin: 0 0 8px;
+      font-size: 1rem;
+      color: #0f172a;
+    }
+
+    .section p {
+      margin: 4px 0;
+      font-size: 0.9rem;
+      color: #374151;
+    }
+
+    footer {
+      margin-top: 26px;
+      font-size: 0.75rem;
+      color: #6b7280;
+      text-align: center;
+    }
+
+    @media (max-width: 640px) {
+      dl {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      .card-header {
+        align-items: flex-start;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="title-block">
+      <span class="flag" aria-hidden="true">🇮🇹</span>
+      <div>
+        <h1>Italia – CONSOB Orbital WebApp</h1>
+        <p>Commissione Nazionale per le Società e la Borsa · Autorità di vigilanza sui mercati finanziari</p>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <article class="card" aria-labelledby="consob-title">
+      <div class="card-header">
+        <h2 id="consob-title">Scheda orbitale Italia · CONSOB</h2>
+        <div class="badge" aria-label="Livello di protezione orbitale altissimo">
+          <span class="dot"></span>
+          <span>Livello di protezione: <strong>Altissimo</strong></span>
+        </div>
+      </div>
+
+      <dl>
+        <dt>Autorità Finanziaria</dt>
+        <dd>Commissione Nazionale per le Società e la Borsa (CONSOB)</dd>
+
+        <dt>Abbreviazione</dt>
+        <dd>CONSOB</dd>
+
+        <dt>Homepage ufficiale</dt>
+        <dd>
+          <a href="https://www.consob.it/" target="_blank" rel="noopener noreferrer">
+            https://www.consob.it/
+          </a>
+        </dd>
+
+        <dt>Segnalazione frodi</dt>
+        <dd>
+          <a href="https://www.consob.it/web/area-pubblica/esposti"
+             target="_blank" rel="noopener noreferrer">
+            https://www.consob.it/web/area-pubblica/esposti
+          </a>
+        </dd>
+
+        <dt>Email istituzionale</dt>
+        <dd>
+          <a href="mailto:consob@pec.consob.it">consob@pec.consob.it</a>
+        </dd>
+      </dl>
+
+      <div class="note-block">
+        <strong>Note orbitale</strong>
+        <p>
+          World Investor Week Coordinator: CONSOB Team.  
+          Questa scheda orbitale collega direttamente l’utente ai canali ufficiali di vigilanza,
+          segnalazione e informazione, integrando la CONSOB nel Database Orbitale delle Autorità
+          Finanziarie Internazionali.
+        </p>
+      </div>
+
+      <div class="actions" aria-label="Azioni rapide CONSOB">
+        <a class="btn btn-primary"
+           href="https://www.consob.it/web/area-pubblica/esposti"
+           target="_blank" rel="noopener noreferrer">
+          📨 Invia un esposto alla CONSOB
+        </a>
+
+        <a class="btn btn-outline"
+           href="https://www.consob.it/web/area-pubblica/esposti"
+           target="_blank" rel="noopener noreferrer">
+          ⚖️ Verifica un sospetto su un intermediario
+        </a>
+
+        <a class="btn btn-danger"
+           href="https://www.consob.it/web/area-pubblica/esposti"
+           target="_blank" rel="noopener noreferrer">
+          ⚠️ Segnala una possibile truffa
+        </a>
+
+        <a class="btn btn-safe"
+           href="https://www.consob.it/"
+           target="_blank" rel="noopener noreferrer">
+          ✅ Accedi alle informazioni ufficiali CONSOB
+        </a>
+      </div>
+
+      <section class="section">
+        <h3>Ruolo della CONSOB nel sistema orbitale</h3>
+        <p>
+          La CONSOB è l’Autorità italiana preposta alla vigilanza sui mercati finanziari, alla tutela
+          degli investitori e alla trasparenza delle informazioni diffuse dagli emittenti quotati.
+        </p>
+        <p>
+          All’interno del Database Orbitale, la scheda Italia funge da nodo centrale per:
+        </p>
+        <p>
+          – la verifica delle licenze dei broker operanti in Italia;<br>
+          – la segnalazione di abusi, truffe e pratiche scorrette;<br>
+          – il collegamento con campagne internazionali come la World Investor Week;<br>
+          – l’educazione finanziaria e la prevenzione dei rischi per i risparmiatori.
+        </p>
+      </section>
+
+      <section class="section">
+        <h3>Avvertenza</h3>
+        <p>
+          Questa WebApp orbitale non sostituisce in alcun modo le comunicazioni ufficiali della CONSOB
+          né costituisce consulenza finanziaria. I link e i riferimenti sono forniti per facilitare
+          l’accesso ai canali istituzionali di vigilanza e segnalazione.
+        </p>
+      </section>
+    </article>
+
+    <footer>
+      Orbital WebApp Italia · CONSOB · Database Autorità Finanziarie Internazionali ·
+      Copyright © Avv. Marcello Stanca – Tutti i diritti riservati.
+    </footer>
+  </main>
+</body>
+</html>
