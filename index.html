@@ -6686,15 +6686,17 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 window.open(src, '_blank', 'noopener');
                 return;
             }
+            if (!frame) {
+                window.open(src, '_blank', 'noopener');
+                return;
+            }
             if (typeof dialog.showModal === 'function') {
                 try {
                     if (dialog.open && typeof dialog.close === 'function') {
                         dialog.close();
                     }
                     dialog.showModal();
-                    if (frame) {
-                        frame.src = src;
-                    }
+                    frame.src = src;
                 } catch (error) {
                     window.open(src, '_blank', 'noopener');
                 }
