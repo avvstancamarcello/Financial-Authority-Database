@@ -6686,19 +6686,17 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 window.open(src, '_blank', 'noopener');
                 return;
             }
-            if (dialog.open && typeof dialog.close === 'function') {
-                dialog.close();
-            }
             if (typeof dialog.showModal === 'function') {
-                if (!dialog.open) {
-                    try {
-                        dialog.showModal();
-                        if (frame) {
-                            frame.src = src;
-                        }
-                    } catch (error) {
-                        window.open(src, '_blank', 'noopener');
+                try {
+                    if (dialog.open && typeof dialog.close === 'function') {
+                        dialog.close();
                     }
+                    dialog.showModal();
+                    if (frame) {
+                        frame.src = src;
+                    }
+                } catch (error) {
+                    window.open(src, '_blank', 'noopener');
                 }
             } else {
                 window.open(src, '_blank', 'noopener');
