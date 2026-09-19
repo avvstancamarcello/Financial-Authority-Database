@@ -6675,12 +6675,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             const dialog = document.getElementById('consobOrbitalDialog');
             const frame = document.getElementById('consobOrbitalFrame');
             const src = resolveConsobOrbitalSrc(modalSrc);
-            if (frame) {
-                frame.src = src;
-            }
             if (!dialog) {
                 window.open(src, '_blank', 'noopener');
                 return;
+            }
+            if (frame) {
+                frame.src = src;
             }
             if (typeof dialog.showModal === 'function') {
                 if (!dialog.open) {
