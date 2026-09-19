@@ -6632,13 +6632,19 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         }
 
         const CONSOB_ORBITAL_FALLBACK_SRC = 'authority/IT-CONSOB.html';
-        const CONSOB_ORBITAL_ALLOWED_SOURCES = new Set([CONSOB_ORBITAL_FALLBACK_SRC]);
+        const CONSOB_ORBITAL_ALLOWED_PATHS = new Set(['/authority/IT-CONSOB.html']);
 
         function resolveConsobOrbitalSrc(candidateSource, { allowFallback = false } = {}) {
             const source = String(candidateSource || '').trim();
             if (!source) return allowFallback ? CONSOB_ORBITAL_FALLBACK_SRC : '';
-            if (CONSOB_ORBITAL_ALLOWED_SOURCES.has(source)) return source;
-            return '';
+            try {
+                const url = new URL(source, window.location.href);
+                if (url.origin !== window.location.origin) return '';
+                if (!CONSOB_ORBITAL_ALLOWED_PATHS.has(url.pathname)) return '';
+                return `${url.pathname}${url.search}${url.hash}`;
+            } catch (error) {
+                return '';
+            }
         }
 
         function setupItalyOrbitalDialog() {
@@ -6676,6 +6682,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             if (!dialog) {
                 window.open(src, '_blank', 'noopener');
                 return;
+            }
+            if (dialog.open && typeof dialog.close === 'function') {
+                dialog.close();
             }
             if (frame) {
                 frame.src = src;
