@@ -1187,6 +1187,84 @@
             z-index: 10;
         }
         .country-card { position: relative; }
+        .orbital-thumbnail-trigger {
+            display: inline-flex;
+            margin-top: 16px;
+            padding: 0;
+            border: none;
+            background: transparent;
+            border-radius: 12px;
+            cursor: pointer;
+            box-shadow: 0 8px 18px rgba(15, 23, 42, 0.22);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .orbital-thumbnail-trigger img {
+            display: block;
+            width: min(100%, 320px);
+            max-width: 100%;
+            aspect-ratio: 16 / 9;
+            object-fit: cover;
+            border-radius: 12px;
+        }
+        .orbital-thumbnail-trigger:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 24px rgba(15, 23, 42, 0.28);
+        }
+        .orbital-thumbnail-trigger:focus-visible {
+            outline: 3px solid #1d4ed8;
+            outline-offset: 3px;
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .orbital-thumbnail-trigger {
+                transition: none;
+            }
+            .orbital-thumbnail-trigger:hover {
+                transform: none;
+            }
+        }
+        #consobOrbitalDialog {
+            width: 100vw;
+            height: 100vh;
+            max-width: none;
+            max-height: none;
+            margin: 0;
+            padding: 0;
+            border: none;
+            background: #000;
+            overflow: hidden;
+        }
+        #consobOrbitalDialog::backdrop {
+            background: rgba(3, 7, 18, 0.88);
+        }
+        .consob-orbital-shell {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+        .consob-orbital-frame {
+            width: 100%;
+            height: 100%;
+            border: none;
+            background: #000;
+        }
+        .consob-orbital-close {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            z-index: 2;
+            border: 1px solid rgba(255, 255, 255, 0.55);
+            border-radius: 999px;
+            background: rgba(15, 23, 42, 0.8);
+            color: #fff;
+            font-size: 0.95rem;
+            font-weight: 600;
+            padding: 0.45rem 0.9rem;
+            cursor: pointer;
+        }
+        .consob-orbital-close:focus-visible {
+            outline: 3px solid #93c5fd;
+            outline-offset: 2px;
+        }
         .sanctioned-alert {
             background: linear-gradient(135deg, #dc3545 0%, #c82333 100%);
             color: #fff;
@@ -3738,6 +3816,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         </div>
     </div>
 
+    <dialog id="consobOrbitalDialog" aria-label="CONSOB orbital experience">
+        <div class="consob-orbital-shell">
+            <button type="button" id="consobOrbitalCloseButton" class="consob-orbital-close" aria-label="Close CONSOB orbital dialog">Close</button>
+            <iframe id="consobOrbitalFrame" class="consob-orbital-frame" src="about:blank" title="CONSOB orbital view" loading="lazy" allowfullscreen></iframe>
+        </div>
+    </dialog>
+
     <script>
         const translations = {
             it: {
@@ -5617,6 +5702,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         let pendingFlagsGridRender = false;
         // Cache traduzioni on-demand
         let translationCache = {};
+        let isConsobOrbitalDialogSetup = false;
 
         // Inizializza canonical URL per SEO (Google self-referencing canonical)
         (function initCanonical() {
@@ -5893,6 +5979,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             changeLanguage(currentLanguage);
             setupSearch();
             setupMedusaCta();
+            setupItalyOrbitalDialog();
             loadCountryData();
         });
         
@@ -6277,6 +6364,22 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 const sanctionIconTitle = currentTranslations.sanctionedIconTitle || '⚠️ Country subject to international sanctions';
                 const sanctionedBadge = currentTranslations.sanctionedBadge || '⚠️ SANCTIONS';
                 const sanctionIcon = country.sanctioned ? `<div class="sanctioned-icon" title="${escapeHtmlAttribute(sanctionIconTitle)}">!</div>` : '';
+                const orbitalModalSrc = resolveConsobOrbitalSrc(country.modal);
+                const hasItalyOrbitalView = (orbitalModalSrc === '/authority/IT-CONSOB.html')
+                    && Boolean(country.has_orbital_view)
+                    && Boolean(country.thumbnail)
+                    && Boolean(orbitalModalSrc);
+                const orbitalThumbnailHtml = hasItalyOrbitalView ? `
+                    <button
+                        type="button"
+                        class="orbital-thumbnail-trigger"
+                        data-orbital-trigger="consob"
+                        data-orbital-src="${escapeHtmlAttribute(orbitalModalSrc)}"
+                        aria-label="Open CONSOB orbital dialog"
+                    >
+                        <img src="${escapeHtmlAttribute(country.thumbnail)}" alt="CONSOB orbital preview thumbnail">
+                    </button>
+                ` : '';
                 
                 card.innerHTML = `
                     ${sanctionIcon}
@@ -6295,6 +6398,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                             ${country.sanctioned ? `<span class="sanctioned-badge">${sanctionedBadge}</span>` : ''}
                         </div>
                     </div>
+                    ${orbitalThumbnailHtml}
                 `;
                 card.dataset.searchText = `${country.country_name} ${country.financial_authority.name} ${country.financial_authority.abbreviation}`.toLowerCase();
                 return card;
@@ -6525,6 +6629,94 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 return 'Standard Protection';
             }
             return level;
+        }
+
+        const CONSOB_ORBITAL_FALLBACK_SRC = 'authority/IT-CONSOB.html';
+        const CONSOB_ORBITAL_ALLOWED_PATHS = new Set([
+            new URL('/authority/IT-CONSOB.html', window.location.origin).pathname,
+            new URL(CONSOB_ORBITAL_FALLBACK_SRC, window.location.href).pathname
+        ]);
+
+        function resolveConsobOrbitalSrc(candidateSource, { allowFallback = false } = {}) {
+            const source = String(candidateSource || '').trim();
+            if (!source) return allowFallback ? CONSOB_ORBITAL_FALLBACK_SRC : '';
+            try {
+                const url = new URL(source, window.location.href);
+                if (url.origin !== window.location.origin) return '';
+                if (!CONSOB_ORBITAL_ALLOWED_PATHS.has(url.pathname)) return '';
+                return url.pathname;
+            } catch (error) {
+                return '';
+            }
+        }
+
+        function setupItalyOrbitalDialog() {
+            if (isConsobOrbitalDialogSetup) return;
+
+            const grid = document.getElementById('countriesGrid');
+            const dialog = document.getElementById('consobOrbitalDialog');
+            const closeButton = document.getElementById('consobOrbitalCloseButton');
+            if (!grid || !dialog) return;
+            isConsobOrbitalDialogSetup = true;
+
+            grid.addEventListener('click', (event) => {
+                const trigger = event.target.closest('[data-orbital-trigger="consob"]');
+                if (!trigger) return;
+                event.preventDefault();
+                event.stopPropagation();
+                openItalyOrbitalDialog(trigger.getAttribute('data-orbital-src') || CONSOB_ORBITAL_FALLBACK_SRC);
+            });
+
+            if (closeButton) {
+                closeButton.addEventListener('click', closeItalyOrbitalDialog);
+            }
+            dialog.addEventListener('click', (event) => {
+                if (event.target === dialog) {
+                    closeItalyOrbitalDialog();
+                }
+            });
+        }
+
+        function openItalyOrbitalDialog(modalSrc) {
+            const dialog = document.getElementById('consobOrbitalDialog');
+            const frame = document.getElementById('consobOrbitalFrame');
+            const src = resolveConsobOrbitalSrc(modalSrc, { allowFallback: true });
+            if (!src) return;
+            if (!dialog) {
+                window.open(src, '_blank', 'noopener');
+                return;
+            }
+            if (!frame) {
+                window.open(src, '_blank', 'noopener');
+                return;
+            }
+            if (typeof dialog.showModal === 'function') {
+                try {
+                    if (dialog.open && typeof dialog.close === 'function') {
+                        dialog.close();
+                    }
+                    dialog.showModal();
+                    frame.src = src;
+                } catch (error) {
+                    window.open(src, '_blank', 'noopener');
+                }
+            } else {
+                window.open(src, '_blank', 'noopener');
+            }
+        }
+
+        function closeItalyOrbitalDialog() {
+            const dialog = document.getElementById('consobOrbitalDialog');
+            const frame = document.getElementById('consobOrbitalFrame');
+            if (frame) {
+                frame.src = 'about:blank';
+            }
+            if (!dialog) return;
+            if (typeof dialog.close === 'function' && dialog.open) {
+                dialog.close();
+                return;
+            }
+            dialog.removeAttribute('open');
         }
 
         function openModal(countryName) {
