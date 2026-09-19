@@ -6365,7 +6365,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 const sanctionedBadge = currentTranslations.sanctionedBadge || '⚠️ SANCTIONS';
                 const sanctionIcon = country.sanctioned ? `<div class="sanctioned-icon" title="${escapeHtmlAttribute(sanctionIconTitle)}">!</div>` : '';
                 const orbitalModalSrc = resolveConsobOrbitalSrc(country.modal);
-                const hasItalyOrbitalView = (country.financial_authority?.abbreviation === 'CONSOB')
+                const hasItalyOrbitalView = (country.country_name === 'Italy')
+                    && (country.financial_authority?.abbreviation === 'CONSOB')
                     && Boolean(country.has_orbital_view)
                     && Boolean(country.thumbnail)
                     && Boolean(orbitalModalSrc);
@@ -6644,7 +6645,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 const url = new URL(source, window.location.href);
                 if (url.origin !== window.location.origin) return '';
                 if (!CONSOB_ORBITAL_ALLOWED_PATHS.has(url.pathname)) return '';
-                return `${url.pathname}${url.search}${url.hash}`;
+                return url.pathname;
             } catch (error) {
                 return '';
             }
