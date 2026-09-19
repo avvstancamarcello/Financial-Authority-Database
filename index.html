@@ -6364,10 +6364,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 const sanctionIconTitle = currentTranslations.sanctionedIconTitle || '⚠️ Country subject to international sanctions';
                 const sanctionedBadge = currentTranslations.sanctionedBadge || '⚠️ SANCTIONS';
                 const sanctionIcon = country.sanctioned ? `<div class="sanctioned-icon" title="${escapeHtmlAttribute(sanctionIconTitle)}">!</div>` : '';
-                const hasItalyOrbitalView = country.country_name === 'Italy'
-                    && Boolean(country.has_orbital_view);
                 const orbitalModalSrc = resolveConsobOrbitalSrc(country.modal);
-                const orbitalThumbnailHtml = hasItalyOrbitalView && country.thumbnail ? `
+                const rawOrbitalModalSrc = String(country.modal || '').trim();
+                const hasItalyOrbitalView = country.country_name === 'Italy'
+                    && Boolean(country.has_orbital_view)
+                    && Boolean(country.thumbnail)
+                    && Boolean(rawOrbitalModalSrc)
+                    && orbitalModalSrc === rawOrbitalModalSrc;
+                const orbitalThumbnailHtml = hasItalyOrbitalView ? `
                     <button
                         type="button"
                         class="orbital-thumbnail-trigger"
