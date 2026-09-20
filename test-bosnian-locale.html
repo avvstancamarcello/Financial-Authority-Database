@@ -241,6 +241,30 @@
             });
         }
 
+        function waitForCondition(check, { attempts = 60, errorMessage = 'timed out waiting for condition' } = {}) {
+            return new Promise((resolve, reject) => {
+                const poll = (remaining) => {
+                    let passed = false;
+                    try {
+                        passed = Boolean(check());
+                    } catch (error) {
+                        reject(error);
+                        return;
+                    }
+                    if (passed) {
+                        resolve();
+                        return;
+                    }
+                    if (remaining <= 0) {
+                        reject(new Error(errorMessage));
+                        return;
+                    }
+                    window.requestAnimationFrame(() => poll(remaining - 1));
+                };
+                poll(attempts);
+            });
+        }
+
         function waitForLocaleState(iframe, expectedHtmlLang, expectedCanonical, lang, attempts = 0) {
             return new Promise((resolve, reject) => {
                 const check = () => {
@@ -454,6 +478,28 @@
                             addResult(missingAreaLabelLocales.length === 0, 'it: all translation bundles define area-row and AMEV disclosure keys');
                             addResult(missingMedusaLocales.length === 0, 'it: all translation bundles define Codice Caravaggio CTA keys');
                             addResult(appIndexHtml.includes('aria-describedby="caravaggio-medusa-note"') && appIndexHtml.includes('data-i18n-text="medusaCtaNewTab"') && appIndexHtml.includes('data-i18n-text="medusaCtaNewTabSr"'), 'it: APP reference CTA markup remains intact');
+                            await waitForCondition(() => typeof win.openModal === 'function' && Array.isArray(win.countriesData) && win.countriesData.some((country) => country.country_name === 'Italy'), {
+                                errorMessage: 'Italy country data did not finish loading'
+                            });
+                            win.openModal('Italy');
+                            const italyModalTrigger = doc.querySelector('#modalContent [data-orbital-trigger="consob"]');
+                            const italyModalTriggerImage = italyModalTrigger?.querySelector('img');
+                            const italyCountryModal = doc.getElementById('countryModal');
+                            addResult(italyCountryModal?.style.display === 'block', 'it: Italy country modal opens for dynamic details');
+                            addResult(Boolean(italyModalTrigger), 'it: Italy country modal renders the CONSOB orbital preview trigger');
+                            addResult(italyModalTriggerImage?.getAttribute('src') === '/authority/preview-consob.png', 'it: Italy country modal uses the shared CONSOB orbital thumbnail asset');
+                            italyModalTrigger?.click();
+                            await waitForCondition(() => {
+                                const orbitalDialog = doc.getElementById('consobOrbitalDialog');
+                                const orbitalFrame = doc.getElementById('consobOrbitalFrame');
+                                return Boolean(orbitalDialog?.open) && (orbitalFrame?.getAttribute('src') || '').endsWith('/authority/IT-CONSOB.html');
+                            }, {
+                                errorMessage: 'CONSOB orbital dialog did not open from Italy modal preview'
+                            });
+                            addResult(doc.getElementById('consobOrbitalDialog')?.open === true, 'it: Italy modal CONSOB preview opens the native fullscreen orbital dialog');
+                            addResult((doc.getElementById('consobOrbitalFrame')?.getAttribute('src') || '').endsWith('/authority/IT-CONSOB.html'), 'it: Italy modal CONSOB preview loads the allowlisted orbital iframe source');
+                            win.closeItalyOrbitalDialog();
+                            win.closeModal();
                         }
                         addResult(Boolean(euAreaLabel), `${lang}: EU area label is present`);
                         addResult(Boolean(asiaAreaLabel), `${lang}: ASIA area label is present`);
