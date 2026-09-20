@@ -6365,9 +6365,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 const sanctionedBadge = currentTranslations.sanctionedBadge || '⚠️ SANCTIONS';
                 const sanctionIcon = country.sanctioned ? `<div class="sanctioned-icon" title="${escapeHtmlAttribute(sanctionIconTitle)}">!</div>` : '';
                 const orbitalModalSrc = resolveConsobOrbitalSrc(country.modal);
+                const orbitalThumbnailSrc = resolveConsobOrbitalThumbnailSrc(country.thumbnail);
                 const hasItalyOrbitalView = (orbitalModalSrc === '/authority/IT-CONSOB.html')
                     && Boolean(country.has_orbital_view)
-                    && Boolean(country.thumbnail)
+                    && Boolean(orbitalThumbnailSrc)
                     && Boolean(orbitalModalSrc);
                 const orbitalThumbnailHtml = hasItalyOrbitalView ? `
                     <button
@@ -6377,7 +6378,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                         data-orbital-src="${escapeHtmlAttribute(orbitalModalSrc)}"
                         aria-label="Open CONSOB orbital dialog"
                     >
-                        <img src="${escapeHtmlAttribute(country.thumbnail)}" alt="CONSOB orbital preview thumbnail">
+                        <img src="${escapeHtmlAttribute(orbitalThumbnailSrc)}" alt="CONSOB orbital preview thumbnail">
                     </button>
                 ` : '';
                 
@@ -6632,9 +6633,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         }
 
         const CONSOB_ORBITAL_FALLBACK_SRC = 'authority/IT-CONSOB.html';
+        const CONSOB_ORBITAL_THUMBNAIL_FALLBACK_SRC = 'authority/preview-consob.png';
         const CONSOB_ORBITAL_ALLOWED_PATHS = new Set([
             new URL('/authority/IT-CONSOB.html', window.location.origin).pathname,
             new URL(CONSOB_ORBITAL_FALLBACK_SRC, window.location.href).pathname
+        ]);
+        const CONSOB_ORBITAL_ALLOWED_THUMBNAIL_PATHS = new Set([
+            new URL('/authority/preview-consob.png', window.location.origin).pathname,
+            new URL(CONSOB_ORBITAL_THUMBNAIL_FALLBACK_SRC, window.location.href).pathname
         ]);
 
         function resolveConsobOrbitalSrc(candidateSource, { allowFallback = false } = {}) {
@@ -6644,6 +6650,19 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 const url = new URL(source, window.location.href);
                 if (url.origin !== window.location.origin) return '';
                 if (!CONSOB_ORBITAL_ALLOWED_PATHS.has(url.pathname)) return '';
+                return url.pathname;
+            } catch (error) {
+                return '';
+            }
+        }
+
+        function resolveConsobOrbitalThumbnailSrc(candidateSource, { allowFallback = false } = {}) {
+            const source = String(candidateSource || '').trim();
+            if (!source) return allowFallback ? CONSOB_ORBITAL_THUMBNAIL_FALLBACK_SRC : '';
+            try {
+                const url = new URL(source, window.location.href);
+                if (url.origin !== window.location.origin) return '';
+                if (!CONSOB_ORBITAL_ALLOWED_THUMBNAIL_PATHS.has(url.pathname)) return '';
                 return url.pathname;
             } catch (error) {
                 return '';
@@ -6769,6 +6788,27 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 'es': '🌐 Traducir', 'pt': '🌐 Traduzir', 'sq': '🌐 Përkthe', 'xk': '🌐 Përkthe', 'zh': '🌐 翻译', 'hi': '🌐 अनुवाद करें',
                 'ar': '🌐 ترجم', 'vi': '🌐 Dịch', 'ja': '🌐 翻訳', 'ko': '🌐 번역'
             };
+            const orbitalModalSrc = resolveConsobOrbitalSrc(country.modal);
+            const orbitalThumbnailSrc = resolveConsobOrbitalThumbnailSrc(country.thumbnail);
+            const hasItalyOrbitalView = (orbitalModalSrc === '/authority/IT-CONSOB.html')
+                && Boolean(country.has_orbital_view)
+                && Boolean(orbitalThumbnailSrc)
+                && Boolean(orbitalModalSrc);
+            const orbitalPreviewHtml = hasItalyOrbitalView ? `
+                <div style="margin: 20px 0 0;">
+                    <p style="margin: 0 0 10px;"><strong>CONSOB Orbital Preview:</strong></p>
+                    <button
+                        type="button"
+                        class="orbital-thumbnail-trigger"
+                        data-orbital-trigger="consob"
+                        data-orbital-src="${escapeHtmlAttribute(orbitalModalSrc)}"
+                        aria-label="Open CONSOB orbital dialog"
+                        onclick="openItalyOrbitalDialog(this.dataset.orbitalSrc); return false;"
+                    >
+                        <img src="${escapeHtmlAttribute(orbitalThumbnailSrc)}" alt="CONSOB orbital preview thumbnail">
+                    </button>
+                </div>
+            ` : '';
             const safeCountryName = escapeHtmlAttribute(country.country_name);
             const safeAuthorityName = escapeHtmlAttribute(country.financial_authority.name);
             const safeAuthorityEmail = escapeHtmlAttribute(country.financial_authority.authorityEmail);
@@ -6794,6 +6834,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     </div>
                     <p><strong>${currentTranslations.modalEmail || 'Email'}:</strong> <a href="mailto:${country.financial_authority.authorityEmail}">${country.financial_authority.authorityEmail}</a></p>
                     ${socialHTML ? `<p style="margin-top:15px;"><strong>${currentTranslations.modalSocial || 'Social'}:</strong> ${socialHTML}</p>` : ''}
+                    ${orbitalPreviewHtml}
                     <div style="margin-top: 20px; display: flex; align-items: center; flex-wrap: wrap; gap: 10px;">
                         <h3 style="margin: 0;">${currentTranslations.modalNotes || 'Notes'}:</h3>
                         <button id="translateNotesBtn" class="translate-btn" onclick="translateNotes(this.dataset.country)" data-country="${safeCountryName}">
