@@ -5,7 +5,7 @@
   <title>CONSOB – Orbital WebApp Italia</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description"
-        content="Orbital WebApp dedicata alla Commissione Nazionale per le Società e la Borsa (CONSOB), Autorità di vigilanza sui mercati finanziari in Italia.">
+        content="Scheda orbitale dedicata alla Commissione Nazionale per le Società e la Borsa (CONSOB), con miniatura orbitale, sezioni informative, link istituzionali e strumenti di vigilanza.">
   <style>
     :root {
       --consob-blue: #004080;
@@ -13,6 +13,7 @@
       --consob-border: #d0d8ea;
       --consob-danger: #b00020;
       --consob-safe: #007e33;
+      --orbit-bg: #eef3ff;
     }
 
     * { box-sizing: border-box; }
@@ -100,6 +101,14 @@
       height: 8px;
       border-radius: 50%;
       background: #22c55e;
+    }
+
+    /* Miniatura orbitale */
+    .thumbnail {
+      width: 100%;
+      border-radius: 14px;
+      margin: 14px 0 18px;
+      border: 1px solid var(--consob-border);
     }
 
     dl {
@@ -237,6 +246,9 @@
 
   <main>
     <article class="card" aria-labelledby="consob-title">
+
+      <img src="../preview-consob.png" alt="Miniatura orbitale CONSOB" class="thumbnail">
+
       <div class="card-header">
         <h2 id="consob-title">Scheda orbitale Italia · CONSOB</h2>
         <div class="badge" aria-label="Livello di protezione orbitale altissimo">
@@ -276,7 +288,6 @@
       <div class="note-block">
         <strong>Note orbitale</strong>
         <p>
-          World Investor Week Coordinator: CONSOB Team.  
           Questa scheda orbitale collega direttamente l’utente ai canali ufficiali di vigilanza,
           segnalazione e informazione, integrando la CONSOB nel Database Orbitale delle Autorità
           Finanziarie Internazionali.
@@ -309,31 +320,47 @@
         </a>
       </div>
 
+      <!-- SEZIONI ORBITALI A–H -->
       <section class="section">
-        <h3>Ruolo della CONSOB nel sistema orbitale</h3>
-        <p>
-          La CONSOB è l’Autorità italiana preposta alla vigilanza sui mercati finanziari, alla tutela
-          degli investitori e alla trasparenza delle informazioni diffuse dagli emittenti quotati.
-        </p>
-        <p>
-          All’interno del Database Orbitale, la scheda Italia funge da nodo centrale per:
-        </p>
-        <p>
-          – la verifica delle licenze dei broker operanti in Italia;<br>
-          – la segnalazione di abusi, truffe e pratiche scorrette;<br>
-          – il collegamento con campagne internazionali come la World Investor Week;<br>
-          – l’educazione finanziaria e la prevenzione dei rischi per i risparmiatori.
-        </p>
+        <h3>A. Consumer Alerts & Avvisi ai Risparmiatori</h3>
+        <p><a href="https://www.consob.it/web/area-pubblica/occhio-alle-truffe" target="_blank">Occhio alle Truffe</a></p>
+        <p><a href="https://www.esma.europa.eu/investor-corner/warning-and-publications-investors" target="_blank">ESMA – Warnings</a></p>
       </section>
 
       <section class="section">
-        <h3>Avvertenza</h3>
-        <p>
-          Questa WebApp orbitale non sostituisce in alcun modo le comunicazioni ufficiali della CONSOB
-          né costituisce consulenza finanziaria. I link e i riferimenti sono forniti per facilitare
-          l’accesso ai canali istituzionali di vigilanza e segnalazione.
-        </p>
+        <h3>B. Enforcement Actions & Provvedimenti</h3>
+        <p><a href="https://www.consob.it/web/area-pubblica/oscuramenti" target="_blank">Ordini di oscuramento</a></p>
+        <p><a href="https://www.consob.it/web/area-pubblica/bollettino" target="_blank">Bollettino e Provvedimenti</a></p>
       </section>
+
+      <section class="section">
+        <h3>C. Licenze & Registri Ufficiali</h3>
+        <p><a href="https://www.consob.it/web/area-pubblica/imprese-di-investimento1" target="_blank">Albo Imprese di Investimento</a></p>
+        <p><a href="https://www.consob.it/documents/d/asset-library-1912910/elenco_siti_web_sim_iscritte_all_albo_20250220" target="_blank">Elenco siti SIM</a></p>
+      </section>
+
+      <section class="section">
+        <h3>D. Broker non Autorizzati</h3>
+        <p><a href="https://www.consob.it/web/area-pubblica/oscuramenti" target="_blank">Elenco piattaforme abusive</a></p>
+      </section>
+
+      <section class="section">
+        <h3>E–F–I–L. Statistiche, Trend, Report</h3>
+        <p><a href="https://www.consob.it/web/consob/relazione-annuale" target="_blank">Relazione Annuale</a></p>
+        <p><a href="https://www.consob.it/web/area-pubblica/quaderni-di-finanza" target="_blank">Quaderni di Finanza</a></p>
+      </section>
+
+      <section class="section">
+        <h3>G. Cyber Fraud & Phishing</h3>
+        <p><a href="https://www.consob.it/web/consob/notizie" target="_blank">Comunicati su phishing e impersonation</a></p>
+      </section>
+
+      <section class="section">
+        <h3>H. Antiriciclaggio & Antiterrorismo</h3>
+        <p><a href="https://www.consob.it/web/area-pubblica/antiriciclaggio-nazionale-primaria" target="_blank">Normativa nazionale</a></p>
+        <p><a href="https://www.consob.it/web/area-pubblica/antiriciclaggio-normativa-europea" target="_blank">Normativa europea</a></p>
+      </section>
+
     </article>
 
     <footer>
