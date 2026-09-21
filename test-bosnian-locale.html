@@ -17,24 +17,175 @@
     <script>
         const scenarios = [
             {
+                lang: 'it',
+                expectedHtmlLang: 'it',
+                expectedCanonical: 'https://tutelatruffe.it/',
+                expectedTitle: "Database Autorità Finanziarie Internazionali | Verifica Licenze Broker | 239 Paesi",
+                expectedOgTitle: "Tutela Truffe | Database Autorità Finanziarie UE - Odissea Digitale",
+                expectedOgDescription: "🌍 Database di 239 autorità finanziarie internazionali. Verifica licenze broker, identità delle imprese e percorsi lingua AMEV / AMEA / AWEV per prevenire frodi Forex/Crypto.",
+                expectedOgImageAlt: "Tutela Truffe - Database Autorità Finanziarie e Mappa Europea Truffe",
+                expectedTwitterTitle: "🌊 Odissea Digitale | Recupera i Tuoi Capitali dalle Truffe",
+                expectedTwitterDescription: "Database 239 Autorità Internazionali + Mappa Truffe Geolocalizzata. Segnala Forex/Crypto/Pig Butchering. Come Ulisse tornò a Itaca, riconquista il tuo Vello d'Oro.",
+                expectedTwitterImageAlt: "Tutela Truffe - Mappa Europea Truffe Finanziarie",
+                expectedFaqHeading: "❓ Domande Frequenti – FAQ",
+                expectedFaqQuestion1: "Come verificare se un broker è autorizzato?",
+                expectedMedusaLabel: "🔱 Codice Caravaggio - Lotta alle Meduse del Web",
+                expectedMedusaTitle: "Apri il Codice Caravaggio su www.tutelatruffe.it (si apre in una nuova scheda)",
+                expectedMedusaAriaLabel: "Apri www.tutelatruffe.it - Codice Caravaggio",
+                expectedMedusaBadge: "www.tutelatruffe.it",
+                expectedMedusaNewTab: "Nuova scheda",
+                expectedMedusaNewTabSr: "(si apre in una nuova scheda)",
+                expectedMetaDescriptionIncludes: "percorsi lingua AMEV / AMEA / AWEV",
+                expectedNavReferences: "📜 Istituzioni internazionali di vigilanza finanziaria",
+                requiredText: ['Italiano', 'Domande Frequenti']
+            },
+            {
                 lang: 'bs',
                 expectedHtmlLang: 'bs-BA',
                 expectedCanonical: 'https://tutelatruffe.it/?lang=bs',
+                expectedTitle: "International Financial Authorities Database | Verify Broker Licenses | 239 Countries",
+                expectedOgTitle: "Scam Protection | EU Financial Authorities Database - Digital Odyssey",
+                expectedOgDescription: "🌍 Database of 239 international financial authorities. Verify broker licenses, company identities, and AMEV / AMEA / AWEV language paths for Forex/Crypto fraud prevention.",
+                expectedOgImageAlt: "Scam Protection - Financial Authorities Database and European Scam Map",
+                expectedTwitterTitle: "🌊 Digital Odyssey | Recover Your Capital from Scams",
+                expectedTwitterDescription: "Database of 239 international authorities + geolocated scam map. Report Forex/Crypto/Pig Butchering scams and verify financial operators.",
+                expectedTwitterImageAlt: "Scam Protection - European Financial Scam Map",
+                expectedFaqHeading: "❓ Frequently Asked Questions – FAQ",
+                expectedFaqQuestion1: "How can I verify whether a broker is authorized?",
+                expectedMedusaLabel: "🔱 Codice Caravaggio - Borba protiv meduza na webu",
+                expectedMedusaTitle: "Otvori Codice Caravaggio na www.tutelatruffe.it (otvara se u novoj kartici)",
+                expectedMedusaAriaLabel: "Otvori www.tutelatruffe.it - Codice Caravaggio",
+                expectedMedusaBadge: "www.tutelatruffe.it",
+                expectedMedusaNewTab: "Nova kartica",
+                expectedMedusaNewTabSr: "(otvara se u novoj kartici)",
+                expectedMetaDescriptionIncludes: "AMEV / AMEA / AWEV language paths",
+                expectedNavReferences: "📜 Međunarodne institucije za finansijski nadzor",
                 requiredText: ['Bosanski', 'Međunarodna baza finansijskih autoriteta']
+            },
+            {
+                lang: 'el',
+                expectedHtmlLang: 'el',
+                expectedCanonical: 'https://tutelatruffe.it/?lang=el',
+                expectedTitle: "International Financial Authorities Database | Verify Broker Licenses | 239 Countries",
+                expectedOgTitle: "Scam Protection | EU Financial Authorities Database - Digital Odyssey",
+                expectedOgDescription: "🌍 Database of 239 international financial authorities. Verify broker licenses, company identities, and AMEV / AMEA / AWEV language paths for Forex/Crypto fraud prevention.",
+                expectedOgImageAlt: "Scam Protection - Financial Authorities Database and European Scam Map",
+                expectedTwitterTitle: "🌊 Digital Odyssey | Recover Your Capital from Scams",
+                expectedTwitterDescription: "Database of 239 international authorities + geolocated scam map. Report Forex/Crypto/Pig Butchering scams and verify financial operators.",
+                expectedTwitterImageAlt: "Scam Protection - European Financial Scam Map",
+                expectedFaqHeading: "❓ Frequently Asked Questions – FAQ",
+                expectedFaqQuestion1: "How can I verify whether a broker is authorized?",
+                expectedMedusaLabel: "🔱 Codice Caravaggio - Καταπολέμηση των μεδουσών του ιστού",
+                expectedMedusaTitle: "Άνοιγμα του Codice Caravaggio στο www.tutelatruffe.it (ανοίγει σε νέα καρτέλα)",
+                expectedMedusaAriaLabel: "Άνοιγμα www.tutelatruffe.it - Codice Caravaggio",
+                expectedMedusaBadge: "www.tutelatruffe.it",
+                expectedMedusaNewTab: "Νέα καρτέλα",
+                expectedMedusaNewTabSr: "(ανοίγει σε νέα καρτέλα)",
+                expectedMetaDescriptionIncludes: "AMEV / AMEA / AWEV language paths",
+                expectedHeroTitle: "Βάση Δεδομένων Διεθνών Χρηματοοικονομικών Αρχών – 239 χώρες",
+                expectedHeroSubtitle: "Επαληθεύστε άδειες μεσιτών, αναφέρετε απάτες Forex/Crypto και ελέγξτε τη χρηματοοικονομική ταυτότητα των δικαιούχων πληρωμών.",
+                expectedLanguageSelectorTitle: "AMEV / AMEA / AWEV – επιλογή γλώσσας",
+                expectedLanguageSelectorNote: "AMEV για τον υποστηριζόμενο ευρωπαϊκό πυρήνα, AMEA για τα ελληνικά και AWEV για τη διεθνή αγγλική διαδρομή που χρησιμοποιείται και για την ολλανδική περιοχή.",
+                expectedFutureLanguagesTitle: "⏳ Μελλοντικά κουμπιά γλώσσας – Work in Progress",
+                expectedFutureLanguagesNote: "Συμπαγής δεσμευμένη περιοχή για τα επόμενα κουμπιά γλώσσας που έχουν ήδη προβλεφθεί για μελλοντική επέκταση.",
+                expectedChooseLanguageHint: "Επιλέξτε τη γλώσσα σας",
+                expectedNavDatabase: "🏠 Βάση Δεδομένων Χρηματοοικονομικών Αρχών (239)",
+                expectedNavOdyssey: "🌊 Ψηφιακή Οδύσσεια",
+                expectedNavReferences: "📜 Διεθνείς θεσμοί χρηματοοικονομικής εποπτείας",
+                requiredText: ['Ελληνικά']
             },
             {
                 lang: 'ar',
                 expectedHtmlLang: 'ar',
                 expectedCanonical: 'https://tutelatruffe.it/?lang=ar',
+                expectedTitle: "International Financial Authorities Database | Verify Broker Licenses | 239 Countries",
+                expectedOgTitle: "Scam Protection | EU Financial Authorities Database - Digital Odyssey",
+                expectedOgDescription: "🌍 Database of 239 international financial authorities. Verify broker licenses, company identities, and AMEV / AMEA / AWEV language paths for Forex/Crypto fraud prevention.",
+                expectedOgImageAlt: "Scam Protection - Financial Authorities Database and European Scam Map",
+                expectedTwitterTitle: "🌊 Digital Odyssey | Recover Your Capital from Scams",
+                expectedTwitterDescription: "Database of 239 international authorities + geolocated scam map. Report Forex/Crypto/Pig Butchering scams and verify financial operators.",
+                expectedTwitterImageAlt: "Scam Protection - European Financial Scam Map",
+                expectedFaqHeading: "❓ Frequently Asked Questions – FAQ",
+                expectedFaqQuestion1: "How can I verify whether a broker is authorized?",
+                expectedMedusaLabel: "🔱 Codice Caravaggio - مكافحة قناديل الويب",
+                expectedMedusaTitle: "افتح Codice Caravaggio على www.tutelatruffe.it (يُفتح في علامة تبويب جديدة)",
+                expectedMedusaAriaLabel: "افتح www.tutelatruffe.it - Codice Caravaggio",
+                expectedMedusaBadge: "www.tutelatruffe.it",
+                expectedMedusaNewTab: "علامة تبويب جديدة",
+                expectedMedusaNewTabSr: "(يُفتح في علامة تبويب جديدة)",
+                expectedMetaDescriptionIncludes: "AMEV / AMEA / AWEV language paths",
+                expectedNavReferences: "📜 International Financial Supervision Institutions",
                 requiredText: ['AR']
             },
             {
                 lang: 'xk',
                 expectedHtmlLang: 'sq-XK',
                 expectedCanonical: 'https://tutelatruffe.it/?lang=xk',
+                expectedTitle: "International Financial Authorities Database | Verify Broker Licenses | 239 Countries",
+                expectedOgTitle: "Scam Protection | EU Financial Authorities Database - Digital Odyssey",
+                expectedOgDescription: "🌍 Database of 239 international financial authorities. Verify broker licenses, company identities, and AMEV / AMEA / AWEV language paths for Forex/Crypto fraud prevention.",
+                expectedOgImageAlt: "Scam Protection - Financial Authorities Database and European Scam Map",
+                expectedTwitterTitle: "🌊 Digital Odyssey | Recover Your Capital from Scams",
+                expectedTwitterDescription: "Database of 239 international authorities + geolocated scam map. Report Forex/Crypto/Pig Butchering scams and verify financial operators.",
+                expectedTwitterImageAlt: "Scam Protection - European Financial Scam Map",
+                expectedFaqHeading: "❓ Frequently Asked Questions – FAQ",
+                expectedFaqQuestion1: "How can I verify whether a broker is authorized?",
+                expectedMedusaLabel: "🔱 Codice Caravaggio - Lufta kundër meduzave të uebit",
+                expectedMedusaTitle: "Hap Codice Caravaggio në www.tutelatruffe.it (hapet në një skedë të re)",
+                expectedMedusaAriaLabel: "Hap www.tutelatruffe.it - Codice Caravaggio",
+                expectedMedusaBadge: "www.tutelatruffe.it",
+                expectedMedusaNewTab: "Skedë e re",
+                expectedMedusaNewTabSr: "(hapet në një skedë të re)",
+                expectedMetaDescriptionIncludes: "AMEV / AMEA / AWEV language paths",
+                expectedNavReferences: "📜 Institucione ndërkombëtare të mbikëqyrjes financiare",
                 requiredText: ['XK', 'Shqip']
             }
         ];
+        const expectedEnState = {
+            htmlLang: 'en',
+            canonical: 'https://tutelatruffe.it/?lang=en',
+            title: "International Financial Authorities Database | Verify Broker Licenses | 239 Countries",
+            ogTitle: "Scam Protection | EU Financial Authorities Database - Digital Odyssey",
+            ogDescription: "🌍 Database of 239 international financial authorities. Verify broker licenses, company identities, and AMEV / AMEA / AWEV language paths for Forex/Crypto fraud prevention.",
+            metaDescriptionIncludes: "AMEV / AMEA / AWEV language paths",
+            ogImageAlt: "Scam Protection - Financial Authorities Database and European Scam Map",
+            twitterTitle: "🌊 Digital Odyssey | Recover Your Capital from Scams",
+            twitterDescription: "Database of 239 international authorities + geolocated scam map. Report Forex/Crypto/Pig Butchering scams and verify financial operators.",
+            twitterImageAlt: "Scam Protection - European Financial Scam Map",
+            faqQuestion1: "How can I verify whether a broker is authorized?",
+            navReferences: "📜 International Financial Supervision Institutions",
+            medusaLabel: "🔱 Codice Caravaggio - Fight the Web Medusas",
+            medusaTitle: "Open the Codice Caravaggio on www.tutelatruffe.it (opens in a new tab)",
+            medusaAriaLabel: "Open www.tutelatruffe.it - Codice Caravaggio",
+            medusaBadge: "www.tutelatruffe.it",
+            medusaNewTab: "New tab",
+            medusaNewTabSr: "(opens in a new tab)",
+            languageAreaEu: "EU area",
+            languageAreaAsia: "ASIA area",
+            languagePrompt: "Select your language - AMEV - AMEA - AWEV landing page access"
+        };
+        const obsoleteNavReferences = "📜 Referenze Istituzionali";
+        const obsoleteLandingClaimPattern = /\b11\b[\s\S]{0,120}\b(?:AMEV|languages?|lingue|langues|Sprachen|idiomas|línguas|limbi|jezika|gjuhë|γλώσσες)\b/i;
+        const obsoleteLandingClaimLocales = ['it', 'en', 'fr', 'de', 'es', 'pt', 'bs', 'sq', 'ro', 'el'];
+        const obsoleteLandingClaimKeys = [
+            'landingHeroTitle',
+            'landingHeroSubtitle',
+            'languageSelectorEuNote',
+            'amevIntroTitle',
+            'amevIntroSubtitle',
+            'amevIntroCore',
+            'amevCoverageTitle',
+            'amevCoverageWestCountries',
+            'amevCoverageEastCountries',
+            'amevCredibilityText',
+            'amevTimelineText'
+        ];
+        const appIndexHtmlPromise = fetch('./APP/index.html', { cache: 'no-store' }).then(async (response) => {
+            if (!response.ok) {
+                throw new Error(`APP/index.html failed to load (${response.status})`);
+            }
+            return response.text();
+        });
 
         const results = document.getElementById('results');
 
@@ -46,6 +197,72 @@
             if (!ok) {
                 document.body.dataset.testStatus = 'fail';
             }
+        }
+
+        function getVisibilitySnapshot(win, element) {
+            if (!win || !element) return null;
+            const computed = win.getComputedStyle(element);
+            const rect = element.getBoundingClientRect();
+            return {
+                display: computed.display,
+                visibility: computed.visibility,
+                opacity: computed.opacity,
+                overflow: computed.overflow,
+                width: rect.width,
+                height: rect.height,
+                minWidth: computed.minWidth,
+                order: computed.order,
+                position: computed.position,
+                zIndex: computed.zIndex,
+                left: rect.left,
+                right: rect.right,
+                top: rect.top,
+                bottom: rect.bottom,
+                gridTemplateColumns: computed.gridTemplateColumns
+            };
+        }
+
+        function hasInlineHiddenStyle(element) {
+            return /\b(?:display\s*:\s*none|visibility\s*:\s*hidden|opacity\s*:\s*0(?:[;\\s]|$))/i.test(element?.getAttribute('style') || '');
+        }
+
+        function countGridTracks(gridTemplateColumns) {
+            if (!gridTemplateColumns || gridTemplateColumns === 'none') return 0;
+            return gridTemplateColumns.trim().split(/\s+/).length;
+        }
+
+        function setIframeViewport(iframe, width, height) {
+            iframe.style.width = `${width}px`;
+            iframe.style.height = `${height}px`;
+            return new Promise((resolve) => {
+                window.requestAnimationFrame(() => {
+                    window.requestAnimationFrame(resolve);
+                });
+            });
+        }
+
+        function waitForCondition(check, { attempts = 60, errorMessage = 'timed out waiting for condition' } = {}) {
+            return new Promise((resolve, reject) => {
+                const poll = (remaining) => {
+                    let passed = false;
+                    try {
+                        passed = Boolean(check());
+                    } catch (error) {
+                        reject(error);
+                        return;
+                    }
+                    if (passed) {
+                        resolve();
+                        return;
+                    }
+                    if (remaining <= 0) {
+                        reject(new Error(errorMessage));
+                        return;
+                    }
+                    window.requestAnimationFrame(() => poll(remaining - 1));
+                };
+                poll(attempts);
+            });
         }
 
         function waitForLocaleState(iframe, expectedHtmlLang, expectedCanonical, lang, attempts = 0) {
@@ -75,10 +292,15 @@
             });
         }
 
-        function loadScenario({ lang, expectedHtmlLang, expectedCanonical, requiredText }) {
+        function loadScenario({ lang, expectedHtmlLang, expectedCanonical, expectedTitle, expectedOgTitle, expectedOgDescription, expectedOgImageAlt, expectedTwitterTitle, expectedTwitterDescription, expectedTwitterImageAlt, expectedFaqHeading, expectedFaqQuestion1, expectedMedusaLabel, expectedMedusaTitle, expectedMedusaAriaLabel, expectedMedusaBadge, expectedMedusaNewTab, expectedMedusaNewTabSr, expectedMetaDescriptionIncludes, expectedHeroTitle, expectedHeroSubtitle, expectedLanguageSelectorTitle, expectedLanguageSelectorNote, expectedFutureLanguagesTitle, expectedFutureLanguagesNote, expectedChooseLanguageHint, expectedNavDatabase, expectedNavOdyssey, expectedNavReferences, requiredText }) {
             return new Promise((resolve) => {
                 const iframe = document.createElement('iframe');
-                iframe.style.display = 'none';
+                iframe.style.position = 'absolute';
+                iframe.style.left = '-9999px';
+                iframe.style.top = '0';
+                iframe.style.width = '1440px';
+                iframe.style.height = '2400px';
+                iframe.style.visibility = 'hidden';
                 iframe.src = 'index.html';
                 iframe.onload = () => {
                     const win = iframe.contentWindow;
@@ -89,25 +311,312 @@
                         return;
                     }
                     win.changeLanguage(lang);
-                    waitForLocaleState(iframe, expectedHtmlLang, expectedCanonical, lang).then(() => {
+                    waitForLocaleState(iframe, expectedHtmlLang, expectedCanonical, lang).then(async () => {
                     try {
                         const doc = iframe.contentDocument;
                         const html = doc.documentElement;
                         const canonical = doc.getElementById('canonical-url')?.getAttribute('href');
+                        const metaDescription = doc.getElementById('meta-description')?.getAttribute('content') || '';
+                        const metaOgTitle = doc.getElementById('meta-og-title')?.getAttribute('content') || '';
+                        const metaOgDescription = doc.getElementById('meta-og-description')?.getAttribute('content') || '';
+                        const metaOgImageAlt = doc.getElementById('meta-og-image-alt')?.getAttribute('content') || '';
+                        const metaTwitterTitle = doc.getElementById('meta-twitter-title')?.getAttribute('content') || '';
+                        const metaTwitterDescription = doc.getElementById('meta-twitter-description')?.getAttribute('content') || '';
+                        const metaTwitterImageAlt = doc.getElementById('meta-twitter-image-alt')?.getAttribute('content') || '';
+                        const faqHeading = doc.querySelector('#faq-section [data-i18n-text=\"faqSectionTitle\"]')?.textContent?.trim();
+                        const medusaCta = doc.getElementById('caravaggio-medusa-link');
+                        const scamRadarCta = doc.querySelector('.scam-radar-cta');
+                        const actionsGrid = doc.querySelector('.actions-grid');
+                        const actionsGridFilterGroup = doc.querySelector('.actions-grid-filter-group');
+                        const faqSchemaRaw = doc.getElementById('faq-schema-jsonld')?.textContent || '';
+                        let faqSchema = null;
+                        try {
+                            faqSchema = faqSchemaRaw ? JSON.parse(faqSchemaRaw) : null;
+                        } catch (parseError) {
+                            addResult(false, `${lang}: FAQ JSON-LD parse error (${parseError.message})`);
+                        }
                         const activeButton = doc.querySelector(`.lang-btn.active[data-lang="${lang}"]`);
                         const asiaSection = doc.getElementById('languages-asia');
                         const buttonText = doc.querySelector('.language-selector-eu .lang-btn[data-lang="bs"]')?.textContent || '';
+                        const firstQuestion = faqSchema?.mainEntity?.[0]?.name || '';
+                        const referencesNavLink = doc.querySelector('nav a[href="referenze.html"]');
+                        const referencesNavLabel = referencesNavLink?.querySelector('span')?.textContent?.trim() || '';
+                        const header = doc.querySelector('header[role="banner"]');
+                        let appIndexHtml = '';
+                        if (lang === 'it') {
+                            appIndexHtml = await appIndexHtmlPromise;
+                            addResult(true, 'it: APP/index.html reference file loads successfully');
+                        }
+                        const headerOrder = Array.from(header?.children || []).map((element) => {
+                            if (element.classList.contains('flag-orbit-banner')) return 'flags';
+                            if (element.matches('h1')) return 'title';
+                            if (element.classList.contains('subtitle')) return 'subtitle';
+                            if (element.classList.contains('language-selector')) return 'languages';
+                            if (element.classList.contains('amev-introduction')) return 'intro';
+                            return element.tagName.toLowerCase();
+                        });
+                        const languageSelector = doc.querySelector('.language-selector');
+                        const euGrid = doc.querySelector('.language-selector-eu .language-selector-grid');
+                        const asiaGrid = doc.querySelector('.language-selector-asia .language-selector-grid');
+                        const euAreaLabel = doc.getElementById('language-selector-eu-area-label');
+                        const asiaAreaLabel = doc.getElementById('language-selector-asia-area-label');
+                        const euAreaText = euAreaLabel?.querySelector('[data-i18n-text="languageAreaEu"]')?.textContent?.trim() || '';
+                        const euPromptText = euAreaLabel?.querySelector('[data-i18n-text="languagePrompt"]')?.textContent?.trim() || '';
+                        const asiaAreaText = asiaAreaLabel?.querySelector('[data-i18n-text="languageAreaAsia"]')?.textContent?.trim() || '';
+                        const euAreaIcon = euAreaLabel?.querySelector('.language-selector-area-icon.fi.fi-eu');
+                        const asiaFlagClasses = Array.from(doc.querySelectorAll('.language-selector-asia .lang-btn .lang-flag')).map((flag) =>
+                            Array.from(flag.classList).find((className) => className.startsWith('fi-') && className !== 'fi')
+                        );
+                        const reservedPlaceholder = doc.querySelector('.language-selector-asia .lang-btn-placeholder');
+                        const euButtons = Array.from(doc.querySelectorAll('.language-selector-eu .lang-btn[data-lang]'));
+                        const euDataLangOrder = euButtons.map((btn) => btn.getAttribute('data-lang'));
+                        const euVisibleCodeOrder = euButtons.map((btn) => {
+                            if (btn.dataset.lang === 'sq') return 'AL';
+                            if (btn.dataset.lang === 'xk') return 'XK';
+                            const codeFromLabel = (btn.textContent || '').trim().split(/\s+/)[0];
+                            return (codeFromLabel || '').toUpperCase();
+                        });
+                        const expectedEuDataLangOrder = ['en', 'es', 'pt', 'fr', 'de', 'it', 'nl', 'ro', 'el', 'sq', 'xk', 'bs'];
+                        const expectedEuVisibleCodeOrder = ['EN', 'ES', 'PT', 'FR', 'DE', 'IT', 'NL', 'RO', 'EL', 'AL', 'XK', 'BS'];
+                        const expectedAsiaFlagClasses = ['fi-qa', 'fi-cn', 'fi-in', 'fi-vn'];
+                        const translationMap = win.eval('translations');
+                        const medusaIcon = medusaCta?.querySelector('.medusa-cta-icon');
+                        const medusaSvg = medusaIcon?.querySelector('svg');
+                        const medusaNewTabNote = medusaCta?.querySelector('.medusa-cta-new-tab-note');
+                        const medusaNewTabSr = medusaCta?.querySelector('#caravaggio-medusa-note.sr-only');
+                        const medusaRelTokens = new Set((medusaCta?.getAttribute('rel') || '').split(/\s+/).filter(Boolean));
+                        const scamRadarLabel = scamRadarCta?.querySelector('[data-i18n-text="scamRadarCtaLabel"]');
+                        const scamRadarNewTab = scamRadarCta?.querySelector('.scam-radar-cta-new-tab');
+                        const scamRadarRelTokens = new Set((scamRadarCta?.getAttribute('rel') || '').split(/\s+/).filter(Boolean));
+                        const expectedScamRadarLabel = translationMap?.[lang]?.scamRadarCtaLabel || translationMap?.en?.scamRadarCtaLabel || '';
+                        const expectedScamRadarTitle = translationMap?.[lang]?.scamRadarCtaTitle || translationMap?.en?.scamRadarCtaTitle || '';
+                        const expectedScamRadarAriaLabel = translationMap?.[lang]?.scamRadarCtaAriaLabel || translationMap?.en?.scamRadarCtaAriaLabel || '';
+                        const expectedScamRadarNewTab = translationMap?.[lang]?.medusaCtaNewTab || translationMap?.en?.medusaCtaNewTab || '';
+                        const medusaVisibility = getVisibilitySnapshot(win, medusaCta);
+                        const scamRadarVisibility = getVisibilitySnapshot(win, scamRadarCta);
+                        const actionsGridVisibility = getVisibilitySnapshot(win, actionsGrid);
+                        const filterGroupVisibility = getVisibilitySnapshot(win, actionsGridFilterGroup);
+                        const euFirstGridRow = euGrid?.firstElementChild;
+                        const asiaFirstGridRow = asiaGrid?.firstElementChild;
+                        const euGridAreaMessage = (euAreaLabel?.textContent || '').replace(/\s+/g, ' ').replace(/\s*-\s*/g, ' - ').trim();
+                        const expectedEuGridAreaMessage = `${translationMap?.[lang]?.languageAreaEu || translationMap?.en?.languageAreaEu || ''} - ${translationMap?.[lang]?.languagePrompt || translationMap?.en?.languagePrompt || ''}`.trim();
+                        const styleText = Array.from(doc.querySelectorAll('style')).map((styleTag) => styleTag.textContent || '').join('\n');
+                        const amevDisclosureToggle = doc.getElementById('amev-introduction-toggle');
+                        const amevDisclosureContent = doc.getElementById('amev-introduction-content');
 
                         addResult(html?.lang === expectedHtmlLang, `${lang}: html lang is ${expectedHtmlLang}`);
                         addResult(canonical === expectedCanonical, `${lang}: canonical is ${expectedCanonical}`);
+                        addResult(doc.title === expectedTitle, `${lang}: document.title is localized`);
+                        addResult(metaDescription.includes(expectedMetaDescriptionIncludes), `${lang}: meta description is localized/fallback`);
+                        addResult(metaOgTitle === expectedOgTitle, `${lang}: og:title is localized/fallback`);
+                        addResult(metaOgDescription === expectedOgDescription, `${lang}: og:description is localized/fallback`);
+                        addResult(metaOgImageAlt === expectedOgImageAlt, `${lang}: og:image:alt is localized/fallback`);
+                        addResult(metaTwitterTitle === expectedTwitterTitle, `${lang}: twitter:title is localized/fallback`);
+                        addResult(metaTwitterDescription === expectedTwitterDescription, `${lang}: twitter:description is localized/fallback`);
+                        addResult(metaTwitterImageAlt === expectedTwitterImageAlt, `${lang}: twitter:image:alt is localized/fallback`);
+                        addResult(faqHeading === expectedFaqHeading, `${lang}: FAQ heading is localized/fallback`);
+                        addResult(Boolean(medusaCta), `${lang}: Codice Caravaggio CTA exists`);
+                        addResult(medusaCta?.href === 'https://www.tutelatruffe.it/', `${lang}: Codice Caravaggio CTA points to tutelatruffe.it`);
+                        addResult(medusaCta?.getAttribute('target') === '_blank', `${lang}: Codice Caravaggio CTA opens in a new tab`);
+                        addResult(medusaRelTokens.has('noopener') && medusaRelTokens.has('noreferrer'), `${lang}: Codice Caravaggio CTA rel includes noopener and noreferrer`);
+                        addResult(medusaCta?.querySelector('.medusa-cta-label')?.textContent?.trim() === expectedMedusaLabel, `${lang}: Codice Caravaggio CTA label matches expected localized/fallback value`);
+                        addResult(medusaCta?.getAttribute('title') === expectedMedusaTitle, `${lang}: Codice Caravaggio CTA title matches expected localized/fallback value`);
+                        addResult(medusaCta?.getAttribute('aria-label') === expectedMedusaAriaLabel, `${lang}: Codice Caravaggio CTA aria-label matches expected localized/fallback value`);
+                        addResult(medusaCta?.querySelector('.medusa-cta-badge')?.textContent?.trim() === expectedMedusaBadge, `${lang}: Codice Caravaggio CTA badge matches expected localized/fallback value`);
+                        addResult(medusaNewTabNote?.textContent?.trim() === expectedMedusaNewTab, `${lang}: Codice Caravaggio CTA visible new-tab note matches expected localized/fallback value`);
+                        addResult(medusaNewTabSr?.textContent?.trim() === expectedMedusaNewTabSr, `${lang}: Codice Caravaggio CTA screen-reader new-tab note matches expected localized/fallback value`);
+                        addResult(medusaCta?.getAttribute('aria-describedby') === 'caravaggio-medusa-note' && Boolean(medusaNewTabSr), `${lang}: Codice Caravaggio CTA exposes its screen-reader new-tab note via aria-describedby`);
+                        addResult(medusaIcon?.getAttribute('aria-hidden') === 'true' && medusaSvg?.getAttribute('aria-hidden') === 'true', `${lang}: Codice Caravaggio decorative icon and SVG are hidden from assistive technology`);
+                        addResult(Boolean(scamRadarCta), `${lang}: Scam Radar CTA exists`);
+                        addResult(scamRadarCta?.href === 'https://www.scam-radar.com/', `${lang}: Scam Radar CTA points to scam-radar.com`);
+                        addResult(scamRadarCta?.getAttribute('target') === '_blank', `${lang}: Scam Radar CTA opens in a new tab`);
+                        addResult(scamRadarRelTokens.has('noopener') && scamRadarRelTokens.has('noreferrer'), `${lang}: Scam Radar CTA rel includes noopener and noreferrer`);
+                        addResult(scamRadarLabel?.textContent?.trim() === expectedScamRadarLabel, `${lang}: Scam Radar CTA label matches expected localized/fallback value`);
+                        addResult((scamRadarCta?.getAttribute('title') || '').trim() === expectedScamRadarTitle, `${lang}: Scam Radar CTA title matches expected localized/fallback value`);
+                        addResult((scamRadarCta?.getAttribute('aria-label') || '').trim() === expectedScamRadarAriaLabel, `${lang}: Scam Radar CTA aria-label matches expected localized/fallback value`);
+                        addResult((scamRadarNewTab?.textContent || '').trim() === expectedScamRadarNewTab, `${lang}: Scam Radar CTA visible new-tab note matches expected localized/fallback value`);
+                        addResult(actionsGridVisibility?.display === 'grid', `${lang}: top actions grid keeps grid display`);
+                        addResult(filterGroupVisibility?.display === 'grid', `${lang}: filter CTA group keeps grid display`);
+                        addResult(!medusaCta?.hidden && !hasInlineHiddenStyle(medusaCta), `${lang}: Codice Caravaggio CTA has no hidden attribute or inline hidden style`);
+                        addResult(!scamRadarCta?.hidden && !hasInlineHiddenStyle(scamRadarCta), `${lang}: Scam Radar CTA has no hidden attribute or inline hidden style`);
+                        addResult(medusaVisibility?.display !== 'none' && medusaVisibility?.visibility !== 'hidden' && medusaVisibility?.opacity !== '0' && medusaVisibility?.width > 0 && medusaVisibility?.height > 0, `${lang}: Codice Caravaggio CTA remains visibly rendered in the root layout`);
+                        addResult(scamRadarVisibility?.display !== 'none' && scamRadarVisibility?.visibility !== 'hidden' && scamRadarVisibility?.opacity !== '0' && scamRadarVisibility?.width > 0 && scamRadarVisibility?.height > 0, `${lang}: Scam Radar CTA remains visibly rendered in the root layout`);
+                        addResult(filterGroupVisibility?.top >= scamRadarVisibility?.bottom, `${lang}: filter group stays after the two top CTAs instead of overlapping them`);
+                        addResult(firstQuestion === expectedFaqQuestion1, `${lang}: FAQ JSON-LD is localized/fallback`);
                         addResult(Boolean(activeButton), `${lang}: active language button is selected`);
                         addResult(Boolean(asiaSection), `${lang}: ASIA anchor section remains present`);
+                        addResult(Boolean(referencesNavLink), `${lang}: references navigation link exists`);
+                        addResult(referencesNavLink?.getAttribute('href') === 'referenze.html', `${lang}: references navigation link still points to referenze.html`);
+                        if (expectedNavReferences) {
+                            addResult(referencesNavLabel === expectedNavReferences, `${lang}: references nav label matches expected localized/fallback value`);
+                        }
+                        addResult(referencesNavLabel !== obsoleteNavReferences, `${lang}: references nav runtime label is not the obsolete Italian copy`);
                         requiredText.forEach((text) => addResult(doc.body.textContent.includes(text), `${lang}: body contains ${text}`));
+                        addResult(typeof win.getInstructionsContent === 'function', `${lang}: instructions localization runtime is available`);
+                        addResult(headerOrder.indexOf('flags') === 0, `${lang}: shields and flag carousels render first in the landing header`);
+                        addResult(headerOrder.indexOf('title') > headerOrder.indexOf('flags'), `${lang}: main title appears after the flag/shield block`);
+                        addResult(headerOrder.indexOf('languages') > headerOrder.indexOf('title'), `${lang}: language selector appears after the main title`);
+                        addResult(headerOrder.indexOf('intro') > headerOrder.indexOf('languages'), `${lang}: AMEV intro follows the language selector`);
+                        addResult(languageSelector?.dataset.layout === 'compact', `${lang}: language selector outer shell is marked as compact`);
+                        addResult(euGrid?.dataset.layout === 'row-wrap', `${lang}: EU language buttons are grouped as horizontal row wraps`);
+                        addResult(asiaGrid?.dataset.layout === 'row-wrap', `${lang}: reserved future-language buttons are grouped as horizontal row wraps`);
+                        addResult(asiaSection?.dataset.placeholder === 'compact' && reservedPlaceholder?.textContent?.includes('WIP'), `${lang}: future-language placeholder remains marked as a compact reserved area`);
+                        addResult(JSON.stringify(euDataLangOrder) === JSON.stringify(expectedEuDataLangOrder), `${lang}: EU language data-lang DOM order matches EN, ES, PT, FR, DE, IT, NL, RO, EL, AL, XK, BS`);
+                        addResult(JSON.stringify(euVisibleCodeOrder) === JSON.stringify(expectedEuVisibleCodeOrder), `${lang}: EU language visible code order matches EN, ES, PT, FR, DE, IT, NL, RO, EL, AL, XK, BS`);
+                        addResult((new Set(euDataLangOrder)).size === euDataLangOrder.length, `${lang}: EU language selector has no duplicate buttons`);
+                        if (lang === 'it') {
+                            const labelLocales = Object.keys(translationMap || {}).filter((locale) =>
+                                translationMap?.[locale] && typeof translationMap[locale] === 'object'
+                            );
+                            const missingAreaLabelLocales = labelLocales.filter((locale) =>
+                                !translationMap?.[locale]?.languageAreaEu || !translationMap?.[locale]?.languageAreaAsia || !translationMap?.[locale]?.languagePrompt || !translationMap?.[locale]?.amevInfoSummary || !translationMap?.[locale]?.amevInfoExpand || !translationMap?.[locale]?.amevInfoCollapse
+                            );
+                            const requiredMedusaKeys = ['medusaCtaLabel', 'medusaCtaTitle', 'medusaCtaAriaLabel', 'medusaCtaUrl', 'medusaCtaNewTab', 'medusaCtaNewTabSr'];
+                            const missingMedusaLocales = labelLocales.filter((locale) =>
+                                requiredMedusaKeys.some((key) => typeof translationMap?.[locale]?.[key] !== 'string' || !translationMap[locale][key].trim())
+                            );
+                            addResult(missingAreaLabelLocales.length === 0, 'it: all translation bundles define area-row and AMEV disclosure keys');
+                            addResult(missingMedusaLocales.length === 0, 'it: all translation bundles define Codice Caravaggio CTA keys');
+                            addResult(appIndexHtml.includes('aria-describedby="caravaggio-medusa-note"') && appIndexHtml.includes('data-i18n-text="medusaCtaNewTab"') && appIndexHtml.includes('data-i18n-text="medusaCtaNewTabSr"'), 'it: APP reference CTA markup remains intact');
+                            await waitForCondition(() => typeof win.openModal === 'function' && Array.isArray(win.countriesData) && win.countriesData.some((country) => country.country_name === 'Italy'), {
+                                errorMessage: 'Italy country data did not finish loading'
+                            });
+                            win.openModal('Italy');
+                            const italyModalTrigger = doc.querySelector('#modalContent [data-orbital-trigger="consob"]');
+                            const italyModalTriggerImage = italyModalTrigger?.querySelector('img');
+                            const italyCountryModal = doc.getElementById('countryModal');
+                            addResult(italyCountryModal?.style.display === 'block', 'it: Italy country modal opens for dynamic details');
+                            addResult(Boolean(italyModalTrigger), 'it: Italy country modal renders the CONSOB orbital preview trigger');
+                            addResult(italyModalTriggerImage?.getAttribute('src') === '/authority/preview-consob.png', 'it: Italy country modal uses the shared CONSOB orbital thumbnail asset');
+                            italyModalTrigger?.click();
+                            await waitForCondition(() => {
+                                const orbitalDialog = doc.getElementById('consobOrbitalDialog');
+                                const orbitalFrame = doc.getElementById('consobOrbitalFrame');
+                                return Boolean(orbitalDialog?.open) && (orbitalFrame?.getAttribute('src') || '').endsWith('/authority/IT-CONSOB.html');
+                            }, {
+                                errorMessage: 'CONSOB orbital dialog did not open from Italy modal preview'
+                            });
+                            addResult(doc.getElementById('consobOrbitalDialog')?.open === true, 'it: Italy modal CONSOB preview opens the native fullscreen orbital dialog');
+                            addResult((doc.getElementById('consobOrbitalFrame')?.getAttribute('src') || '').endsWith('/authority/IT-CONSOB.html'), 'it: Italy modal CONSOB preview loads the allowlisted orbital iframe source');
+                            win.closeItalyOrbitalDialog();
+                            win.closeModal();
+                        }
+                        addResult(Boolean(euAreaLabel), `${lang}: EU area label is present`);
+                        addResult(Boolean(asiaAreaLabel), `${lang}: ASIA area label is present`);
+                        addResult(euFirstGridRow?.id === 'language-selector-eu-area-label' && euFirstGridRow?.classList.contains('language-selector-grid-area-row'), `${lang}: EU area row is inside the EU grid as its first full-width row`);
+                        addResult(asiaFirstGridRow?.id === 'language-selector-asia-area-label' && asiaFirstGridRow?.classList.contains('language-selector-grid-area-row'), `${lang}: ASIA area row is inside the ASIA grid as its first full-width row`);
+                        addResult(Boolean(euAreaIcon) && euAreaIcon.getAttribute('aria-hidden') === 'true', `${lang}: EU area label has a decorative aria-hidden EU icon`);
+                        addResult(Boolean(euAreaText), `${lang}: EU area label keeps accessible text next to the icon`);
+                        addResult(Boolean(euPromptText), `${lang}: EU area row includes the localized language prompt text`);
+                        addResult(euAreaText === (translationMap?.[lang]?.languageAreaEu || translationMap?.en?.languageAreaEu || ''), `${lang}: EU area label is localized via runtime i18n`);
+                        addResult(euPromptText === (translationMap?.[lang]?.languagePrompt || translationMap?.en?.languagePrompt || ''), `${lang}: EU prompt is localized via runtime i18n`);
+                        addResult(euGridAreaMessage === expectedEuGridAreaMessage, `${lang}: EU first-row message combines localized AREA UE + prompt text`);
+                        addResult(asiaAreaText === (translationMap?.[lang]?.languageAreaAsia || translationMap?.en?.languageAreaAsia || ''), `${lang}: ASIA area label is localized via runtime i18n`);
+                        addResult(!asiaAreaLabel?.querySelector('.language-selector-area-icon'), `${lang}: ASIA area label has no aggregated icon`);
+                        addResult(JSON.stringify(asiaFlagClasses) === JSON.stringify(expectedAsiaFlagClasses), `${lang}: ASIA buttons keep only the existing per-language flags (QA, CN, IN, VN)`);
+                        addResult(/\.language-selector-grid-area-label\s*\{[\s\S]*font-size:\s*clamp\(1rem,\s*2\.3vw,\s*1\.7rem\)/.test(styleText), `${lang}: area-row labels use the doubled-sized responsive font rule`);
+                        addResult(/\.language-selector-grid-area-label\s+\.language-selector-area-icon\s*\{[\s\S]*font-size:\s*2em/.test(styleText), `${lang}: EU icon uses the doubled-size style rule`);
+                        addResult(asiaAreaLabel?.querySelector('.language-selector-grid-area-label')?.classList.contains('language-selector-grid-area-label-asia'), `${lang}: ASIA row uses the area-row doubled-size label class`);
+                        addResult(amevDisclosureToggle?.tagName === 'BUTTON' && amevDisclosureToggle?.type === 'button', `${lang}: AMEV info uses a semantic disclosure button`);
+                        addResult(amevDisclosureToggle?.getAttribute('aria-controls') === 'amev-introduction-content', `${lang}: AMEV disclosure button references stable aria-controls content id`);
+                        addResult(amevDisclosureToggle?.getAttribute('aria-expanded') === 'false' && amevDisclosureContent?.hidden === true, `${lang}: AMEV information starts collapsed and compact`);
+                        addResult(Boolean(amevDisclosureToggle?.querySelector('[data-i18n-text="amevInfoSummary"]')) && Boolean(amevDisclosureToggle?.querySelector('[data-i18n-text="amevInfoExpand"]')) && Boolean(amevDisclosureToggle?.querySelector('[data-i18n-text="amevInfoCollapse"]')), `${lang}: AMEV disclosure summary and controls are runtime-localized`);
+                        amevDisclosureToggle?.click();
+                        addResult(amevDisclosureToggle?.getAttribute('aria-expanded') === 'true' && amevDisclosureContent?.hidden === false, `${lang}: AMEV disclosure expands in place when activated`);
+                        amevDisclosureToggle?.click();
+                        addResult(amevDisclosureToggle?.getAttribute('aria-expanded') === 'false' && amevDisclosureContent?.hidden === true, `${lang}: AMEV disclosure collapses when activated again`);
+                        amevDisclosureToggle?.click();
+                        addResult(amevDisclosureToggle?.getAttribute('aria-expanded') === 'true' && amevDisclosureContent?.hidden === false, `${lang}: AMEV disclosure can be re-opened before language switching`);
+                        const staleLandingClaims = obsoleteLandingClaimLocales.flatMap((locale) => obsoleteLandingClaimKeys
+                            .map((key) => `${locale}.${key}: ${translationMap?.[locale]?.[key] || ''}`)
+                            .filter((entry) => obsoleteLandingClaimPattern.test(entry)));
+                        const navReferencesLocales = ['it', 'en', 'fr', 'de', 'es', 'pt', 'bs', 'sq', 'ro', 'el', 'ar', 'zh', 'hi', 'vi'];
+                        const staleNavReferencesLocales = navReferencesLocales.filter((locale) =>
+                            (translationMap?.[locale]?.navReferences || '').trim() === obsoleteNavReferences
+                        );
+                        addResult((doc.querySelector('#amev-introduction-title')?.textContent || '').includes('AME') && staleLandingClaims.length === 0, `${lang}: updated AMEV/AMEA/AWEV landing copy replaces obsolete 11-language claims across localized landing strings`);
+                        addResult(staleNavReferencesLocales.length === 0, `${lang}: localized/fallback navReferences bundles do not contain obsolete "Referenze Istituzionali" label`);
                         if (lang === 'bs') {
                             addResult(buttonText.includes('BS') && buttonText.includes('Bosanski'), 'bs: EU selector shows BS and Bosanski');
                             addResult(doc.querySelector('link[hreflang="bs"]')?.href === 'https://tutelatruffe.it/?lang=bs', 'bs: hreflang bs points to Bosnian URL');
                             addResult(doc.querySelector('link[hreflang="bs-BA"]')?.href === 'https://tutelatruffe.it/?lang=bs', 'bs: hreflang bs-BA points to Bosnian URL');
                         }
+                        if (lang === 'el') {
+                            addResult((doc.querySelector('#amev-introduction-title')?.textContent || '').includes('AMEV, AMEA και AWEV'), 'el: Greek AMEV intro title is localized');
+                            addResult((doc.querySelector('h1[itemprop="name"]')?.textContent || '').trim() === expectedHeroTitle, 'el: Greek landing heading matches the localized hero title');
+                            addResult((doc.querySelector('p[itemprop="description"]')?.textContent || '').trim() === expectedHeroSubtitle, 'el: Greek landing subtitle matches the localized hero subtitle');
+                            addResult((doc.querySelector('#language-selector-eu-title')?.textContent || '').trim() === expectedLanguageSelectorTitle, 'el: Greek EU selector title is localized');
+                            addResult((doc.querySelector('.language-selector-eu .language-selector-note')?.textContent || '').trim() === expectedLanguageSelectorNote, 'el: Greek EU selector note is localized');
+                            addResult((doc.querySelector('#language-selector-asia-title')?.textContent || '').trim() === expectedFutureLanguagesTitle, 'el: Greek future-language title is localized');
+                            addResult((doc.querySelector('.language-selector-asia .language-selector-note')?.textContent || '').trim() === expectedFutureLanguagesNote, 'el: Greek future-language note is localized');
+                            addResult((doc.querySelector('.language-hint [data-i18n-text=\"chooseLanguageHint\"]')?.textContent || '').trim() === expectedChooseLanguageHint, 'el: Greek choose-language hint is localized');
+                            addResult((doc.querySelector('nav a[href*=\"#database-search-section\"] span')?.textContent || '').trim() === expectedNavDatabase, 'el: Greek database nav label is localized');
+                            addResult((doc.querySelector('nav a[href=\"odissea.html\"] span')?.textContent || '').trim() === expectedNavOdyssey, 'el: Greek odyssey nav label is localized');
+                            addResult((doc.querySelector('nav a[href=\"referenze.html\"] span')?.textContent || '').trim() === expectedNavReferences, 'el: Greek references nav label is localized');
+                            addResult((doc.querySelector('.amev-anchor-link')?.textContent || '').includes('μελλοντικά κουμπιά γλώσσας'), 'el: Greek future-language link is localized');
+                        }
+                        win.changeLanguage('en');
+                        const switchedDoc = iframe.contentDocument;
+                        const switchedFaqSchemaRaw = switchedDoc.getElementById('faq-schema-jsonld')?.textContent || '';
+                        let switchedFaqSchema = null;
+                        try {
+                            switchedFaqSchema = switchedFaqSchemaRaw ? JSON.parse(switchedFaqSchemaRaw) : null;
+                        } catch (parseError) {
+                            addResult(false, `${lang}→en: FAQ JSON-LD parse error (${parseError.message})`);
+                        }
+                        addResult(switchedDoc.documentElement?.lang === expectedEnState.htmlLang, `${lang}→en: html lang updates on language switch`);
+                        addResult(switchedDoc.getElementById('canonical-url')?.getAttribute('href') === expectedEnState.canonical, `${lang}→en: canonical updates on language switch`);
+                        addResult(switchedDoc.title === expectedEnState.title, `${lang}→en: document.title updates on language switch`);
+                        addResult((switchedDoc.getElementById('meta-description')?.getAttribute('content') || '').includes(expectedEnState.metaDescriptionIncludes), `${lang}→en: meta description updates on language switch`);
+                        addResult(switchedDoc.getElementById('meta-og-title')?.getAttribute('content') === expectedEnState.ogTitle, `${lang}→en: og:title updates on language switch`);
+                        addResult(switchedDoc.getElementById('meta-og-description')?.getAttribute('content') === expectedEnState.ogDescription, `${lang}→en: og:description updates on language switch`);
+                        addResult(switchedDoc.getElementById('meta-og-image-alt')?.getAttribute('content') === expectedEnState.ogImageAlt, `${lang}→en: og:image:alt updates on language switch`);
+                        addResult(switchedDoc.getElementById('meta-twitter-title')?.getAttribute('content') === expectedEnState.twitterTitle, `${lang}→en: twitter:title updates on language switch`);
+                        addResult(switchedDoc.getElementById('meta-twitter-description')?.getAttribute('content') === expectedEnState.twitterDescription, `${lang}→en: twitter:description updates on language switch`);
+                        addResult(switchedDoc.getElementById('meta-twitter-image-alt')?.getAttribute('content') === expectedEnState.twitterImageAlt, `${lang}→en: twitter:image:alt updates on language switch`);
+                        addResult((switchedFaqSchema?.mainEntity?.[0]?.name || '') === expectedEnState.faqQuestion1, `${lang}→en: FAQ JSON-LD updates on language switch`);
+                        addResult((switchedDoc.querySelector('nav a[href="referenze.html"] span')?.textContent || '').trim() === expectedEnState.navReferences, `${lang}→en: references nav label updates to the full EN label`);
+                        addResult((switchedDoc.querySelector('#language-selector-eu-area-label [data-i18n-text="languageAreaEu"]')?.textContent || '').trim() === expectedEnState.languageAreaEu, `${lang}→en: EU area label updates on language switch`);
+                        addResult((switchedDoc.querySelector('#language-selector-eu-area-label [data-i18n-text="languagePrompt"]')?.textContent || '').trim() === expectedEnState.languagePrompt, `${lang}→en: EU prompt updates on language switch`);
+                        addResult((switchedDoc.querySelector('#language-selector-asia-area-label [data-i18n-text="languageAreaAsia"]')?.textContent || '').trim() === expectedEnState.languageAreaAsia, `${lang}→en: ASIA area label updates on language switch`);
+                        addResult((switchedDoc.querySelector('#caravaggio-medusa-link .medusa-cta-label')?.textContent || '').trim() === expectedEnState.medusaLabel, `${lang}→en: Codice Caravaggio label updates on language switch`);
+                        addResult((switchedDoc.getElementById('caravaggio-medusa-link')?.getAttribute('title') || '').trim() === expectedEnState.medusaTitle, `${lang}→en: Codice Caravaggio title updates on language switch`);
+                        addResult((switchedDoc.getElementById('caravaggio-medusa-link')?.getAttribute('aria-label') || '').trim() === expectedEnState.medusaAriaLabel, `${lang}→en: Codice Caravaggio aria-label updates on language switch`);
+                        addResult((switchedDoc.querySelector('#caravaggio-medusa-link .medusa-cta-badge')?.textContent || '').trim() === expectedEnState.medusaBadge, `${lang}→en: Codice Caravaggio badge updates on language switch`);
+                        addResult((switchedDoc.querySelector('#caravaggio-medusa-link .medusa-cta-new-tab-note')?.textContent || '').trim() === expectedEnState.medusaNewTab, `${lang}→en: Codice Caravaggio visible new-tab note updates on language switch`);
+                        addResult((switchedDoc.getElementById('caravaggio-medusa-note')?.textContent || '').trim() === expectedEnState.medusaNewTabSr, `${lang}→en: Codice Caravaggio screen-reader new-tab note updates on language switch`);
+                        addResult((switchedDoc.querySelector('.scam-radar-cta [data-i18n-text="scamRadarCtaLabel"]')?.textContent || '').trim() === (translationMap?.en?.scamRadarCtaLabel || ''), `${lang}→en: Scam Radar label updates on language switch`);
+                        addResult((switchedDoc.querySelector('.scam-radar-cta')?.getAttribute('title') || '').trim() === (translationMap?.en?.scamRadarCtaTitle || ''), `${lang}→en: Scam Radar title updates on language switch`);
+                        addResult((switchedDoc.querySelector('.scam-radar-cta')?.getAttribute('aria-label') || '').trim() === (translationMap?.en?.scamRadarCtaAriaLabel || ''), `${lang}→en: Scam Radar aria-label updates on language switch`);
+                        addResult((switchedDoc.querySelector('.scam-radar-cta .scam-radar-cta-new-tab')?.textContent || '').trim() === expectedEnState.medusaNewTab, `${lang}→en: Scam Radar new-tab note updates on language switch`);
+                        if (lang === 'it') {
+                            const responsiveViewports = [
+                                { label: 'desktop', width: 1440, height: 2400, expectedTracks: 2, expectStackedCtas: false },
+                                { label: 'tablet', width: 768, height: 1800, expectedTracks: 2, expectStackedCtas: false },
+                                { label: 'mobile', width: 390, height: 1800, expectedTracks: 1, expectStackedCtas: true }
+                            ];
+                            for (const viewport of responsiveViewports) {
+                                await setIframeViewport(iframe, viewport.width, viewport.height);
+                                const responsiveMedusa = getVisibilitySnapshot(switchedDoc.defaultView, switchedDoc.getElementById('caravaggio-medusa-link'));
+                                const responsiveScam = getVisibilitySnapshot(switchedDoc.defaultView, switchedDoc.querySelector('.scam-radar-cta'));
+                                const responsiveGrid = getVisibilitySnapshot(switchedDoc.defaultView, switchedDoc.querySelector('.actions-grid'));
+                                const responsiveFilterGroup = getVisibilitySnapshot(switchedDoc.defaultView, switchedDoc.querySelector('.actions-grid-filter-group'));
+                                addResult(countGridTracks(responsiveGrid?.gridTemplateColumns) === viewport.expectedTracks, `it: ${viewport.label} top actions grid keeps the expected CTA track count`);
+                                addResult(responsiveMedusa?.display !== 'none' && responsiveScam?.display !== 'none' && responsiveMedusa?.width > 0 && responsiveScam?.width > 0, `it: ${viewport.label} keeps both top CTAs rendered with non-zero size`);
+                                if (viewport.expectStackedCtas) {
+                                    addResult(responsiveScam?.top >= responsiveMedusa?.bottom, `it: ${viewport.label} stacks Scam Radar below Codice Caravaggio`);
+                                    addResult(responsiveFilterGroup?.top >= responsiveScam?.bottom, `it: ${viewport.label} keeps filter buttons below both CTAs`);
+                                } else {
+                                    addResult(responsiveScam?.top === responsiveMedusa?.top && responsiveScam?.left > responsiveMedusa?.left, `it: ${viewport.label} keeps the two top CTAs side by side`);
+                                    addResult(responsiveFilterGroup?.top >= responsiveMedusa?.bottom, `it: ${viewport.label} keeps filter buttons on the row below the two CTAs`);
+                                }
+                            }
+                        }
+                        const switchedDisclosureToggle = switchedDoc.getElementById('amev-introduction-toggle');
+                        const switchedDisclosureContent = switchedDoc.getElementById('amev-introduction-content');
+                        addResult(switchedDisclosureToggle?.getAttribute('aria-expanded') === 'true' && switchedDisclosureContent?.hidden === false, `${lang}→en: AMEV disclosure state remains expanded after runtime language switch`);
+                        switchedDisclosureToggle?.click();
+                        addResult(switchedDisclosureToggle?.getAttribute('aria-expanded') === 'false' && switchedDisclosureContent?.hidden === true, `${lang}→en: AMEV disclosure remains operable after language switch`);
                     } catch (error) {
                         addResult(false, `${lang}: ${error.message}`);
                     } finally {
