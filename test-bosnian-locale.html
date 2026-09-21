@@ -20,6 +20,8 @@
                 lang: 'it',
                 expectedHtmlLang: 'it',
                 expectedCanonical: 'https://tutelatruffe.it/',
+                expectedDir: 'ltr',
+                expectedOgLocale: 'it_IT',
                 expectedTitle: "Database Autorità Finanziarie Internazionali | Verifica Licenze Broker | 239 Paesi",
                 expectedOgTitle: "Tutela Truffe | Database Autorità Finanziarie UE - Odissea Digitale",
                 expectedOgDescription: "🌍 Database di 239 autorità finanziarie internazionali. Verifica licenze broker, identità delle imprese e percorsi lingua AMEV / AMEA / AWEV per prevenire frodi Forex/Crypto.",
@@ -43,6 +45,8 @@
                 lang: 'bs',
                 expectedHtmlLang: 'bs-BA',
                 expectedCanonical: 'https://tutelatruffe.it/?lang=bs',
+                expectedDir: 'ltr',
+                expectedOgLocale: 'bs_BA',
                 expectedTitle: "International Financial Authorities Database | Verify Broker Licenses | 239 Countries",
                 expectedOgTitle: "Scam Protection | EU Financial Authorities Database - Digital Odyssey",
                 expectedOgDescription: "🌍 Database of 239 international financial authorities. Verify broker licenses, company identities, and AMEV / AMEA / AWEV language paths for Forex/Crypto fraud prevention.",
@@ -66,6 +70,8 @@
                 lang: 'el',
                 expectedHtmlLang: 'el',
                 expectedCanonical: 'https://tutelatruffe.it/?lang=el',
+                expectedDir: 'ltr',
+                expectedOgLocale: 'el_GR',
                 expectedTitle: "International Financial Authorities Database | Verify Broker Licenses | 239 Countries",
                 expectedOgTitle: "Scam Protection | EU Financial Authorities Database - Digital Odyssey",
                 expectedOgDescription: "🌍 Database of 239 international financial authorities. Verify broker licenses, company identities, and AMEV / AMEA / AWEV language paths for Forex/Crypto fraud prevention.",
@@ -98,6 +104,8 @@
                 lang: 'ar',
                 expectedHtmlLang: 'ar',
                 expectedCanonical: 'https://tutelatruffe.it/?lang=ar',
+                expectedDir: 'rtl',
+                expectedOgLocale: 'ar_EG',
                 expectedTitle: "International Financial Authorities Database | Verify Broker Licenses | 239 Countries",
                 expectedOgTitle: "Scam Protection | EU Financial Authorities Database - Digital Odyssey",
                 expectedOgDescription: "🌍 Database of 239 international financial authorities. Verify broker licenses, company identities, and AMEV / AMEA / AWEV language paths for Forex/Crypto fraud prevention.",
@@ -121,6 +129,8 @@
                 lang: 'xk',
                 expectedHtmlLang: 'sq-XK',
                 expectedCanonical: 'https://tutelatruffe.it/?lang=xk',
+                expectedDir: 'ltr',
+                expectedOgLocale: 'sq_XK',
                 expectedTitle: "International Financial Authorities Database | Verify Broker Licenses | 239 Countries",
                 expectedOgTitle: "Scam Protection | EU Financial Authorities Database - Digital Odyssey",
                 expectedOgDescription: "🌍 Database of 239 international financial authorities. Verify broker licenses, company identities, and AMEV / AMEA / AWEV language paths for Forex/Crypto fraud prevention.",
@@ -292,7 +302,7 @@
             });
         }
 
-        function loadScenario({ lang, expectedHtmlLang, expectedCanonical, expectedTitle, expectedOgTitle, expectedOgDescription, expectedOgImageAlt, expectedTwitterTitle, expectedTwitterDescription, expectedTwitterImageAlt, expectedFaqHeading, expectedFaqQuestion1, expectedMedusaLabel, expectedMedusaTitle, expectedMedusaAriaLabel, expectedMedusaBadge, expectedMedusaNewTab, expectedMedusaNewTabSr, expectedMetaDescriptionIncludes, expectedHeroTitle, expectedHeroSubtitle, expectedLanguageSelectorTitle, expectedLanguageSelectorNote, expectedFutureLanguagesTitle, expectedFutureLanguagesNote, expectedChooseLanguageHint, expectedNavDatabase, expectedNavOdyssey, expectedNavReferences, requiredText }) {
+        function loadScenario({ lang, expectedHtmlLang, expectedCanonical, expectedDir, expectedOgLocale, expectedTitle, expectedOgTitle, expectedOgDescription, expectedOgImageAlt, expectedTwitterTitle, expectedTwitterDescription, expectedTwitterImageAlt, expectedFaqHeading, expectedFaqQuestion1, expectedMedusaLabel, expectedMedusaTitle, expectedMedusaAriaLabel, expectedMedusaBadge, expectedMedusaNewTab, expectedMedusaNewTabSr, expectedMetaDescriptionIncludes, expectedHeroTitle, expectedHeroSubtitle, expectedLanguageSelectorTitle, expectedLanguageSelectorNote, expectedFutureLanguagesTitle, expectedFutureLanguagesNote, expectedChooseLanguageHint, expectedNavDatabase, expectedNavOdyssey, expectedNavReferences, requiredText }) {
             return new Promise((resolve) => {
                 const iframe = document.createElement('iframe');
                 iframe.style.position = 'absolute';
@@ -316,10 +326,22 @@
                         const doc = iframe.contentDocument;
                         const html = doc.documentElement;
                         const canonical = doc.getElementById('canonical-url')?.getAttribute('href');
+                        const seoPreview = typeof win.getSeoMetadata === 'function' ? win.getSeoMetadata(lang) : null;
+                        const expectedResolvedTitle = seoPreview?.title || expectedTitle;
+                        const expectedResolvedDescription = seoPreview?.description || '';
+                        const expectedResolvedOgTitle = seoPreview?.ogTitle || expectedOgTitle;
+                        const expectedResolvedOgDescription = seoPreview?.ogDescription || expectedOgDescription;
+                        const expectedResolvedOgImageAlt = seoPreview?.ogImageAlt || expectedOgImageAlt;
+                        const expectedResolvedTwitterTitle = seoPreview?.twitterTitle || expectedTwitterTitle;
+                        const expectedResolvedTwitterDescription = seoPreview?.twitterDescription || expectedTwitterDescription;
+                        const expectedResolvedTwitterImageAlt = seoPreview?.twitterImageAlt || expectedTwitterImageAlt;
                         const metaDescription = doc.getElementById('meta-description')?.getAttribute('content') || '';
+                        const metaOgUrl = doc.getElementById('meta-og-url')?.getAttribute('content') || '';
+                        const metaOgLocale = doc.getElementById('meta-og-locale')?.getAttribute('content') || '';
                         const metaOgTitle = doc.getElementById('meta-og-title')?.getAttribute('content') || '';
                         const metaOgDescription = doc.getElementById('meta-og-description')?.getAttribute('content') || '';
                         const metaOgImageAlt = doc.getElementById('meta-og-image-alt')?.getAttribute('content') || '';
+                        const metaTwitterUrl = doc.getElementById('meta-twitter-url')?.getAttribute('content') || '';
                         const metaTwitterTitle = doc.getElementById('meta-twitter-title')?.getAttribute('content') || '';
                         const metaTwitterDescription = doc.getElementById('meta-twitter-description')?.getAttribute('content') || '';
                         const metaTwitterImageAlt = doc.getElementById('meta-twitter-image-alt')?.getAttribute('content') || '';
@@ -334,6 +356,19 @@
                             faqSchema = faqSchemaRaw ? JSON.parse(faqSchemaRaw) : null;
                         } catch (parseError) {
                             addResult(false, `${lang}: FAQ JSON-LD parse error (${parseError.message})`);
+                        }
+                        const webAppSchemaRaw = doc.getElementById('webapp-jsonld')?.textContent || '';
+                        const websiteSchemaRaw = doc.getElementById('website-jsonld')?.textContent || '';
+                        const datasetSchemaRaw = doc.getElementById('dataset-jsonld')?.textContent || '';
+                        let webAppSchema = null;
+                        let websiteSchema = null;
+                        let datasetSchema = null;
+                        try {
+                            webAppSchema = webAppSchemaRaw ? JSON.parse(webAppSchemaRaw) : null;
+                            websiteSchema = websiteSchemaRaw ? JSON.parse(websiteSchemaRaw) : null;
+                            datasetSchema = datasetSchemaRaw ? JSON.parse(datasetSchemaRaw) : null;
+                        } catch (parseError) {
+                            addResult(false, `${lang}: SEO JSON-LD parse error (${parseError.message})`);
                         }
                         const activeButton = doc.querySelector(`.lang-btn.active[data-lang="${lang}"]`);
                         const asiaSection = doc.getElementById('languages-asia');
@@ -408,16 +443,21 @@
                         const amevDisclosureToggle = doc.getElementById('amev-introduction-toggle');
                         const amevDisclosureContent = doc.getElementById('amev-introduction-content');
 
+                        addResult(typeof win.getSeoMetadata === 'function', `${lang}: centralized SEO metadata helper is available`);
                         addResult(html?.lang === expectedHtmlLang, `${lang}: html lang is ${expectedHtmlLang}`);
+                        addResult(html?.dir === expectedDir, `${lang}: html dir is ${expectedDir}`);
                         addResult(canonical === expectedCanonical, `${lang}: canonical is ${expectedCanonical}`);
-                        addResult(doc.title === expectedTitle, `${lang}: document.title is localized`);
-                        addResult(metaDescription.includes(expectedMetaDescriptionIncludes), `${lang}: meta description is localized/fallback`);
-                        addResult(metaOgTitle === expectedOgTitle, `${lang}: og:title is localized/fallback`);
-                        addResult(metaOgDescription === expectedOgDescription, `${lang}: og:description is localized/fallback`);
-                        addResult(metaOgImageAlt === expectedOgImageAlt, `${lang}: og:image:alt is localized/fallback`);
-                        addResult(metaTwitterTitle === expectedTwitterTitle, `${lang}: twitter:title is localized/fallback`);
-                        addResult(metaTwitterDescription === expectedTwitterDescription, `${lang}: twitter:description is localized/fallback`);
-                        addResult(metaTwitterImageAlt === expectedTwitterImageAlt, `${lang}: twitter:image:alt is localized/fallback`);
+                        addResult(doc.title === expectedResolvedTitle, `${lang}: document.title is localized`);
+                        addResult(metaDescription === expectedResolvedDescription || metaDescription.includes(expectedMetaDescriptionIncludes), `${lang}: meta description is localized/fallback`);
+                        addResult(metaOgUrl === expectedCanonical, `${lang}: og:url stays aligned with canonical`);
+                        addResult(metaOgLocale === expectedOgLocale, `${lang}: og:locale is ${expectedOgLocale}`);
+                        addResult(metaOgTitle === expectedResolvedOgTitle, `${lang}: og:title is localized/fallback`);
+                        addResult(metaOgDescription === expectedResolvedOgDescription, `${lang}: og:description is localized/fallback`);
+                        addResult(metaOgImageAlt === expectedResolvedOgImageAlt, `${lang}: og:image:alt is localized/fallback`);
+                        addResult(metaTwitterUrl === expectedCanonical, `${lang}: twitter:url stays aligned with canonical`);
+                        addResult(metaTwitterTitle === expectedResolvedTwitterTitle, `${lang}: twitter:title is localized/fallback`);
+                        addResult(metaTwitterDescription === expectedResolvedTwitterDescription, `${lang}: twitter:description is localized/fallback`);
+                        addResult(metaTwitterImageAlt === expectedResolvedTwitterImageAlt, `${lang}: twitter:image:alt is localized/fallback`);
                         addResult(faqHeading === expectedFaqHeading, `${lang}: FAQ heading is localized/fallback`);
                         addResult(Boolean(medusaCta), `${lang}: Codice Caravaggio CTA exists`);
                         addResult(medusaCta?.href === 'https://www.tutelatruffe.it/', `${lang}: Codice Caravaggio CTA points to tutelatruffe.it`);
@@ -447,6 +487,16 @@
                         addResult(scamRadarVisibility?.display !== 'none' && scamRadarVisibility?.visibility !== 'hidden' && scamRadarVisibility?.opacity !== '0' && scamRadarVisibility?.width > 0 && scamRadarVisibility?.height > 0, `${lang}: Scam Radar CTA remains visibly rendered in the root layout`);
                         addResult(filterGroupVisibility?.top >= scamRadarVisibility?.bottom, `${lang}: filter group stays after the two top CTAs instead of overlapping them`);
                         addResult(firstQuestion === expectedFaqQuestion1, `${lang}: FAQ JSON-LD is localized/fallback`);
+                        addResult(doc.querySelectorAll('script#webapp-jsonld[type="application/ld+json"]').length === 1, `${lang}: WebApplication JSON-LD script id remains unique`);
+                        addResult(doc.querySelectorAll('script#website-jsonld[type="application/ld+json"]').length === 1, `${lang}: WebSite JSON-LD script id remains unique`);
+                        addResult(doc.querySelectorAll('script#dataset-jsonld[type="application/ld+json"]').length === 1, `${lang}: Dataset JSON-LD script id remains unique`);
+                        addResult(webAppSchema?.url === expectedCanonical, `${lang}: WebApplication JSON-LD url follows canonical`);
+                        addResult(webAppSchema?.inLanguage === expectedHtmlLang, `${lang}: WebApplication JSON-LD inLanguage follows html lang`);
+                        addResult(websiteSchema?.url === expectedCanonical, `${lang}: WebSite JSON-LD url follows canonical`);
+                        addResult(websiteSchema?.inLanguage === expectedHtmlLang, `${lang}: WebSite JSON-LD inLanguage follows html lang`);
+                        addResult(datasetSchema?.url === expectedCanonical, `${lang}: Dataset JSON-LD url follows canonical`);
+                        addResult(datasetSchema?.inLanguage === expectedHtmlLang, `${lang}: Dataset JSON-LD inLanguage follows html lang`);
+                        addResult((datasetSchema?.distribution?.contentUrl || '').includes('financial_authorities_database.json'), `${lang}: Dataset JSON-LD keeps the downloadable database URL`);
                         addResult(Boolean(activeButton), `${lang}: active language button is selected`);
                         addResult(Boolean(asiaSection), `${lang}: ASIA anchor section remains present`);
                         addResult(Boolean(referencesNavLink), `${lang}: references navigation link exists`);
@@ -514,6 +564,14 @@
                             addResult((doc.getElementById('consobOrbitalFrame')?.getAttribute('src') || '').endsWith('/authority/IT-CONSOB.html'), 'it: Italy modal CONSOB preview loads the allowlisted orbital iframe source');
                             win.closeItalyOrbitalDialog();
                             win.closeModal();
+                            win.changeLanguage('de');
+                            await waitForLocaleState(iframe, 'de', 'https://tutelatruffe.de/', 'de');
+                            addResult(iframe.contentDocument?.getElementById('canonical-url')?.getAttribute('href') === 'https://tutelatruffe.de/', 'it→de: canonical prefers the dedicated German domain');
+                            addResult(iframe.contentDocument?.getElementById('meta-og-url')?.getAttribute('content') === 'https://tutelatruffe.de/', 'it→de: og:url follows the dedicated German canonical');
+                            addResult(iframe.contentDocument?.getElementById('meta-twitter-url')?.getAttribute('content') === 'https://tutelatruffe.de/', 'it→de: twitter:url follows the dedicated German canonical');
+                            addResult(iframe.contentDocument?.getElementById('meta-og-locale')?.getAttribute('content') === 'de_DE', 'it→de: og:locale switches to de_DE');
+                            win.changeLanguage('it');
+                            await waitForLocaleState(iframe, 'it', 'https://tutelatruffe.it/', 'it');
                         }
                         addResult(Boolean(euAreaLabel), `${lang}: EU area label is present`);
                         addResult(Boolean(asiaAreaLabel), `${lang}: ASIA area label is present`);
@@ -578,17 +636,40 @@
                         } catch (parseError) {
                             addResult(false, `${lang}→en: FAQ JSON-LD parse error (${parseError.message})`);
                         }
+                        const switchedWebAppSchemaRaw = switchedDoc.getElementById('webapp-jsonld')?.textContent || '';
+                        const switchedWebsiteSchemaRaw = switchedDoc.getElementById('website-jsonld')?.textContent || '';
+                        const switchedDatasetSchemaRaw = switchedDoc.getElementById('dataset-jsonld')?.textContent || '';
+                        let switchedWebAppSchema = null;
+                        let switchedWebsiteSchema = null;
+                        let switchedDatasetSchema = null;
+                        try {
+                            switchedWebAppSchema = switchedWebAppSchemaRaw ? JSON.parse(switchedWebAppSchemaRaw) : null;
+                            switchedWebsiteSchema = switchedWebsiteSchemaRaw ? JSON.parse(switchedWebsiteSchemaRaw) : null;
+                            switchedDatasetSchema = switchedDatasetSchemaRaw ? JSON.parse(switchedDatasetSchemaRaw) : null;
+                        } catch (parseError) {
+                            addResult(false, `${lang}→en: SEO JSON-LD parse error (${parseError.message})`);
+                        }
                         addResult(switchedDoc.documentElement?.lang === expectedEnState.htmlLang, `${lang}→en: html lang updates on language switch`);
+                        addResult(switchedDoc.documentElement?.dir === 'ltr', `${lang}→en: html dir resets to ltr on language switch`);
                         addResult(switchedDoc.getElementById('canonical-url')?.getAttribute('href') === expectedEnState.canonical, `${lang}→en: canonical updates on language switch`);
                         addResult(switchedDoc.title === expectedEnState.title, `${lang}→en: document.title updates on language switch`);
                         addResult((switchedDoc.getElementById('meta-description')?.getAttribute('content') || '').includes(expectedEnState.metaDescriptionIncludes), `${lang}→en: meta description updates on language switch`);
+                        addResult((switchedDoc.getElementById('meta-og-url')?.getAttribute('content') || '') === expectedEnState.canonical, `${lang}→en: og:url updates on language switch`);
+                        addResult((switchedDoc.getElementById('meta-og-locale')?.getAttribute('content') || '') === 'en_US', `${lang}→en: og:locale updates on language switch`);
                         addResult(switchedDoc.getElementById('meta-og-title')?.getAttribute('content') === expectedEnState.ogTitle, `${lang}→en: og:title updates on language switch`);
                         addResult(switchedDoc.getElementById('meta-og-description')?.getAttribute('content') === expectedEnState.ogDescription, `${lang}→en: og:description updates on language switch`);
                         addResult(switchedDoc.getElementById('meta-og-image-alt')?.getAttribute('content') === expectedEnState.ogImageAlt, `${lang}→en: og:image:alt updates on language switch`);
+                        addResult((switchedDoc.getElementById('meta-twitter-url')?.getAttribute('content') || '') === expectedEnState.canonical, `${lang}→en: twitter:url updates on language switch`);
                         addResult(switchedDoc.getElementById('meta-twitter-title')?.getAttribute('content') === expectedEnState.twitterTitle, `${lang}→en: twitter:title updates on language switch`);
                         addResult(switchedDoc.getElementById('meta-twitter-description')?.getAttribute('content') === expectedEnState.twitterDescription, `${lang}→en: twitter:description updates on language switch`);
                         addResult(switchedDoc.getElementById('meta-twitter-image-alt')?.getAttribute('content') === expectedEnState.twitterImageAlt, `${lang}→en: twitter:image:alt updates on language switch`);
                         addResult((switchedFaqSchema?.mainEntity?.[0]?.name || '') === expectedEnState.faqQuestion1, `${lang}→en: FAQ JSON-LD updates on language switch`);
+                        addResult(switchedWebAppSchema?.url === expectedEnState.canonical, `${lang}→en: WebApplication JSON-LD url updates on language switch`);
+                        addResult(switchedWebAppSchema?.inLanguage === expectedEnState.htmlLang, `${lang}→en: WebApplication JSON-LD language updates on language switch`);
+                        addResult(switchedWebsiteSchema?.url === expectedEnState.canonical, `${lang}→en: WebSite JSON-LD url updates on language switch`);
+                        addResult(switchedWebsiteSchema?.inLanguage === expectedEnState.htmlLang, `${lang}→en: WebSite JSON-LD language updates on language switch`);
+                        addResult(switchedDatasetSchema?.url === expectedEnState.canonical, `${lang}→en: Dataset JSON-LD url updates on language switch`);
+                        addResult(switchedDatasetSchema?.inLanguage === expectedEnState.htmlLang, `${lang}→en: Dataset JSON-LD language updates on language switch`);
                         addResult((switchedDoc.querySelector('nav a[href="referenze.html"] span')?.textContent || '').trim() === expectedEnState.navReferences, `${lang}→en: references nav label updates to the full EN label`);
                         addResult((switchedDoc.querySelector('.security-banner-subtitle')?.textContent || '').trim() === (translationMap?.en?.securityBannerSubtitle || ''), `${lang}→en: security banner subtitle updates on language switch`);
                         addResult((switchedDoc.querySelector('.language-hint [data-i18n-text="chooseLanguageHint"]')?.textContent || '').trim() === (translationMap?.en?.chooseLanguageHint || ''), `${lang}→en: choose-language hint updates on language switch`);
