@@ -6201,15 +6201,25 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             const normalizedLang = normalizeLanguageCode(lang);
             const htmlLang = getHtmlLangForLocale(normalizedLang).toLowerCase();
             const alternateLinks = Array.from(document.querySelectorAll('link[rel="alternate"][hreflang][href]'));
-            const candidates = Array.from(new Set([
+            const exactCandidates = Array.from(new Set([
                 htmlLang,
-                normalizedLang.toLowerCase(),
+                normalizedLang.toLowerCase()
+            ].filter(Boolean)));
+            for (const candidate of exactCandidates) {
+                const exactMatch = alternateLinks.find((link) => (link.getAttribute('hreflang') || '').toLowerCase() === candidate);
+                if (exactMatch?.href) {
+                    return exactMatch.href;
+                }
+            }
+            const fallbackCandidates = Array.from(new Set([
                 htmlLang.split('-')[0],
                 normalizedLang.toLowerCase().split('-')[0]
             ].filter(Boolean)));
-            const matchingAlternate = alternateLinks.find((link) => candidates.includes((link.getAttribute('hreflang') || '').toLowerCase()));
-            if (matchingAlternate?.href) {
-                return matchingAlternate.href;
+            for (const candidate of fallbackCandidates) {
+                const fallbackMatch = alternateLinks.find((link) => (link.getAttribute('hreflang') || '').toLowerCase() === candidate);
+                if (fallbackMatch?.href) {
+                    return fallbackMatch.href;
+                }
             }
             const urlLangParam = getUrlLanguageParam(normalizedLang);
             return urlLangParam ? `${SEO_SITE_ROOT}?lang=${encodeURIComponent(urlLangParam)}` : SEO_SITE_ROOT;
