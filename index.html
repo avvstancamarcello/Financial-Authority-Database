@@ -6769,7 +6769,19 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                             <span class="protection-badge ${protectionClass}">${getLocalizedProtectionLevel(country.protectionLevel)}</span>
                             ${country.sanctioned ? `<span class="sanctioned-badge">${sanctionedBadge}</span>` : ''}
                         </div>
+					</div>
+					<div class="modal-uk">
+                      <h2>United Kingdom – FCA</h2>
+					  
+                      <div class="orbital-box">
+                        <img src="authority/preview-fca.png"
+                             alt="FCA Orbital Preview"
+                             class="orbital-thumbnail"
+                             onclick="openOrbitalWebApp('authority/UK-FCA.html')">
+                      </div>
+
                     </div>
+
                     ${orbitalThumbnailHtml}
                 `;
                 const searchAliases = getCountrySearchAliases(country.country_name);
