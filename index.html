@@ -2536,7 +2536,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <span class="flag-icon-wrapper">
                 <span class="fi fi-es"></span>
             </span>
-            <div class="flag-code">ES</div>
+            <div class="flag-code">ES-CN</div>
+            <span style="display: inline-block; margin-top: 4px; padding: 2px 8px; border-radius: 999px; background: rgba(30,41,59,0.12); color: #1e293b; font-size: 0.7em; font-weight: 700;">Canarie</span>
         </div>
         <div class="flag-item" onclick="openModal(this.dataset.country)" data-country="Cayman Islands">
 
@@ -6039,6 +6040,21 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             applyTranslations(currentLanguage);
         }
 
+        function getCountryGridMarker(countryName) {
+            if (countryName === 'Canary Islands (Spain)') return 'Canarie';
+            return '';
+        }
+
+        function getCountrySearchAliases(countryName) {
+            if (countryName === 'Canary Islands (Spain)') {
+                return 'canarie isole canarie canary canary islands es-cn ic';
+            }
+            if (countryName === 'Spain') {
+                return 'spagna espana españa reino de espana';
+            }
+            return '';
+        }
+
         function scheduleFlagsGridRender() {
             if (hasRenderedFlagsGrid) {
                 renderFlagsGrid();
@@ -6343,6 +6359,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 card.dataset.countryName = country.country_name;
                 card.onclick = () => openModal(country.country_name);
                 const currentTranslations = getLanguageBundle(currentLanguage);
+                const countryMarker = getCountryGridMarker(country.country_name);
                 
                 const protectionClass = `protection-${(country.protectionLevel || 'medio').toLowerCase()}`;
                 
@@ -6386,7 +6403,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     ${sanctionIcon}
                     <div class="country-header">
                         <div class="country-flag">${flagHTML}</div>
-                        <div class="country-name">${country.country_name}</div>
+                        <div class="country-name">${country.country_name}${countryMarker ? ` <span style="display:inline-block; margin-left:8px; padding:2px 8px; border-radius:999px; background:rgba(30,41,59,0.12); color:#1e293b; font-size:0.55em; font-weight:700; vertical-align:middle;">${countryMarker}</span>` : ''}</div>
                     </div>
                     <div class="country-info">
                         <div class="info-row">
@@ -6401,7 +6418,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     </div>
                     ${orbitalThumbnailHtml}
                 `;
-                card.dataset.searchText = `${country.country_name} ${country.financial_authority.name} ${country.financial_authority.abbreviation}`.toLowerCase();
+                const searchAliases = getCountrySearchAliases(country.country_name);
+                card.dataset.searchText = `${country.country_name} ${country.financial_authority.name} ${country.financial_authority.abbreviation} ${searchAliases}`.toLowerCase();
                 return card;
             };
             
@@ -6813,12 +6831,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             const safeAuthorityName = escapeHtmlAttribute(country.financial_authority.name);
             const safeAuthorityEmail = escapeHtmlAttribute(country.financial_authority.authorityEmail);
             const safeCountryLanguage = escapeHtmlAttribute(getCountryLanguage(country.country_name));
+            const countryMarker = getCountryGridMarker(country.country_name);
 
             modalContent.innerHTML = `
                 ${sanctionAlertHTML}
                 <div class="country-header">
                     <div class="country-flag">${modalFlagHTML}</div>
-                    <div class="country-name">${country.country_name}</div>
+                    <div class="country-name">${country.country_name}${countryMarker ? ` <span style="display:inline-block; margin-left:8px; padding:3px 10px; border-radius:999px; background:rgba(30,41,59,0.12); color:#1e293b; font-size:0.55em; font-weight:700; vertical-align:middle;">${countryMarker}</span>` : ''}</div>
                 </div>
                 <div class="country-info" style="margin-top: 20px;">
                     <p><strong>${currentTranslations.modalAuthority || 'Authority'}:</strong> ${country.financial_authority.name}</p>
@@ -7066,7 +7085,9 @@ https://avvstancamarcello.github.io/Financial-Authority-Database/
             if (!match) {
                 return "🛡️ Practical Legal Guide – Verifying a Financial Firm in 5 Steps";
             }
-            return match[1].replace(/<[^>]*>/g, '').trim();
+            const titleTemplate = document.createElement('template');
+            titleTemplate.innerHTML = match[1];
+            return (titleTemplate.content.textContent || '').trim();
         }
 
         function getInstructionsContent(lang) {
@@ -7112,6 +7133,7 @@ https://avvstancamarcello.github.io/Financial-Authority-Database/
                 flagItem.innerHTML = `
                     ${flagHTML}
                     <span class="flag-code">${displayCode}</span>
+                    ${country.country_name === 'Canary Islands (Spain)' ? '<span style="display:inline-block; margin-top:4px; padding:2px 8px; border-radius:999px; background:rgba(30,41,59,0.12); color:#1e293b; font-size:0.7em; font-weight:700;">Canarie</span>' : ''}
                 `;
                 
                 grid.appendChild(flagItem);
@@ -7294,6 +7316,13 @@ https://avvstancamarcello.github.io/Financial-Authority-Database/
                 return {
                     flagCode: 'US',
                     textCode: usaSubdivisionCodes[countryName]
+                };
+            }
+
+            if (countryName === 'Canary Islands (Spain)') {
+                return {
+                    flagCode: 'ES',
+                    textCode: 'ES-CN'
                 };
             }
 
