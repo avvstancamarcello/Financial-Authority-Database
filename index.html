@@ -6455,11 +6455,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             };
         }
 
-        function updateStructuredData(metadata, faqEntries) {
+        function updateStructuredData(metadata, faqEntries = []) {
             updateJsonLdScript('webapp-jsonld', buildWebApplicationStructuredData(metadata));
             updateJsonLdScript('website-jsonld', buildWebsiteStructuredData(metadata));
             updateJsonLdScript('dataset-jsonld', buildDatasetStructuredData(metadata));
-            updateJsonLdScript('faq-schema-jsonld', buildFaqStructuredData(faqEntries, metadata));
+            if (faqEntries.length) {
+                updateJsonLdScript('faq-schema-jsonld', buildFaqStructuredData(faqEntries, metadata));
+            }
         }
 
         function updateLocalizedMetadata(langData, fallbackData, lang = currentLanguage) {
@@ -6486,7 +6488,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
         function updateFaqSchema(langData, fallbackData, metadata = getSeoMetadata(currentLanguage)) {
             const faqEntries = getFaqEntries(langData, fallbackData);
-            if (!faqEntries.length) return;
             updateStructuredData(metadata, faqEntries);
         }
 
