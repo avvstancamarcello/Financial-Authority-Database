@@ -6261,6 +6261,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             return scriptEl;
         }
 
+        function removeJsonLdScript(id) {
+            const scriptEl = document.getElementById(id);
+            if (scriptEl) {
+                scriptEl.remove();
+            }
+        }
+
         function buildSeoAuthorEntity() {
             return {
                 '@type': 'Person',
@@ -6461,6 +6468,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             updateJsonLdScript('dataset-jsonld', buildDatasetStructuredData(metadata));
             if (faqEntries.length) {
                 updateJsonLdScript('faq-schema-jsonld', buildFaqStructuredData(faqEntries, metadata));
+            } else {
+                removeJsonLdScript('faq-schema-jsonld');
             }
         }
 
@@ -6647,10 +6656,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
             updateCanonicalUrl(normalizedLang);
 
-            const urlLangParam = getUrlLanguageParam(normalizedLang);
-            const newUrl = !urlLangParam
-                ? window.location.pathname
-                : `${window.location.pathname}?lang=${encodeURIComponent(urlLangParam)}`;
+            const canonicalUrl = new URL(getCanonicalUrlForLang(normalizedLang));
+            const newUrl = `${canonicalUrl.pathname}${canonicalUrl.search}${canonicalUrl.hash}`;
             window.history.replaceState({lang: normalizedLang}, '', newUrl);
             renderAll();
         }
