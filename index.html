@@ -99,7 +99,7 @@
     
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://tutelatruffe.it/">
+    <meta id="meta-og-url" property="og:url" content="https://tutelatruffe.it/">
     <meta id="meta-og-title" property="og:title" content="Tutela Truffe | Database Autorità Finanziarie UE - Odissea Digitale">
     <meta id="meta-og-description" property="og:description" content="🌍 Database di 239 autorità finanziarie internazionali. Verifica licenze broker, identità delle imprese e percorsi lingua AMEV / AMEA / AWEV per prevenire frodi Forex/Crypto.">
     <meta property="og:image" content="https://tutelatruffe.it/icon-512.png">
@@ -107,7 +107,7 @@
     <meta property="og:image:height" content="512">
     <meta id="meta-og-image-alt" property="og:image:alt" content="Tutela Truffe - Database Autorità Finanziarie e Mappa Europea Truffe">
     <meta property="og:site_name" content="Tutela Truffe">
-    <meta property="og:locale" content="it_IT">
+    <meta id="meta-og-locale" property="og:locale" content="it_IT">
     <meta property="og:locale:alternate" content="en_US">
     <meta property="og:locale:alternate" content="fr_FR">
     <meta property="og:locale:alternate" content="de_DE">
@@ -116,7 +116,7 @@
     <meta property="og:locale:alternate" content="ro_RO">
     <meta property="og:locale:alternate" content="bs_BA">
     <meta property="og:locale:alternate" content="el_GR">
-    <meta property="og:locale:alternate" content="ar_QA">
+    <meta property="og:locale:alternate" content="ar_EG">
     <meta property="og:locale:alternate" content="zh_CN">
     <meta property="og:locale:alternate" content="hi_IN">
     <meta property="og:locale:alternate" content="vi_VN">
@@ -125,7 +125,7 @@
     
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:url" content="https://tutelatruffe.it/">
+    <meta id="meta-twitter-url" name="twitter:url" content="https://tutelatruffe.it/">
     <meta id="meta-twitter-title" name="twitter:title" content="🌊 Odissea Digitale | Recupera i Tuoi Capitali dalle Truffe">
     <meta id="meta-twitter-description" name="twitter:description" content="Database 239 Autorità Internazionali + Mappa Truffe Geolocalizzata. Segnala Forex/Crypto/Pig Butchering. Come Ulisse tornò a Itaca, riconquista il tuo Vello d'Oro.">
     <meta name="twitter:image" content="https://tutelatruffe.it/icon-512.png">
@@ -153,14 +153,14 @@
     
     <!-- JSON-LD Structured Data -->
     <!-- Maintenance note: keep inLanguage aligned between root and APP JSON-LD metadata -->
-    <script type="application/ld+json">
+    <script id="webapp-jsonld" type="application/ld+json">
     {
         "@context": "https://schema.org",
         "@type": "WebApplication",
         "name": "Financial Authority Database",
         "alternateName": "Database Autorità Finanziarie Internazionali",
-        "url": "https://avvstancamarcello.github.io/Financial-Authority-Database/",
-        "description": "Database ufficiale delle Autorità Finanziarie di 239 Paesi. Verifica licenze bancarie, segnala frodi, proteggi i tuoi investimenti.",
+        "url": "https://tutelatruffe.it/",
+        "description": "Database 239 autorità finanziarie internazionali. Verifica licenze broker, controlla identità e legittimità di imprese finanziarie e usa i percorsi lingua AMEV / AMEA / AWEV per prevenire frodi.",
         "applicationCategory": "FinanceApplication",
         "operatingSystem": "Web, iOS, Android",
         "offers": {
@@ -189,7 +189,7 @@
         },
         "copyrightYear": "2026",
         "inLanguage": ["it", "es", "fr", "de", "ro", "pt", "nl", "sq", "sq-XK", "bs", "el", "en", "ar", "zh", "hi", "vi"],
-        "dateModified": "2026-09-16",
+        "dateModified": "2026-09-21",
         "areaServed": "Worldwide",
         "availableLanguage": [
             {"@type": "Language", "name": "Italiano"},
@@ -218,30 +218,25 @@
     }
     </script>
     
-    <script type="application/ld+json">
+    <script id="website-jsonld" type="application/ld+json">
     {
         "@context": "https://schema.org",
-        "@type": "Dataset",
-        "name": "International Financial Authorities Database",
-        "description": "Database completo di 239 autorità finanziarie nazionali con informazioni di contatto, link ufficiali e procedure di segnalazione frodi",
-        "url": "https://avvstancamarcello.github.io/Financial-Authority-Database/",
-        "keywords": ["financial authorities", "central banks", "consumer protection", "fraud reporting"],
-        "license": "https://avvstancamarcello.github.io/Financial-Authority-Database/privacy.html",
-        "creator": {
-            "@type": "Person",
-            "name": "Avvocato Marcello Stanca",
-            "email": "lawyer@marcellostanca.it"
+        "@type": "WebSite",
+        "name": "Tutela Truffe - Database Autorità Finanziarie Internazionali",
+        "alternateName": "Database Autorità Finanziarie Internazionali",
+        "url": "https://tutelatruffe.it/",
+        "description": "Database 239 autorità finanziarie internazionali. Verifica licenze broker, controlla identità e legittimità di imprese finanziarie e usa i percorsi lingua AMEV / AMEA / AWEV per prevenire frodi.",
+        "inLanguage": "it",
+        "publisher": {
+            "@type": "Organization",
+            "name": "TutelaTruffe.it",
+            "url": "https://tutelatruffe.it/"
         },
-        "distribution": {
-            "@type": "DataDownload",
-            "encodingFormat": "application/json",
-            "contentUrl": "financial_authorities_database.json"
-        },
-        "spatialCoverage": {
-            "@type": "Place",
-            "name": "Worldwide"
-        },
-        "temporalCoverage": "2026"
+        "about": [
+            "Verifica licenze broker",
+            "Autorità finanziarie internazionali",
+            "Segnalazione frodi finanziarie"
+        ]
     }
     </script>
     
@@ -304,7 +299,7 @@
     </script>
     
     <!-- Dataset Schema - Copertura mondiale 239 paesi -->
-    <script type="application/ld+json">
+    <script id="dataset-jsonld" type="application/ld+json">
     {
         "@context": "https://schema.org",
         "@type": "Dataset",
@@ -317,7 +312,7 @@
         "license": "https://creativecommons.org/licenses/by-nc/4.0/",
         "isAccessibleForFree": true,
         "datePublished": "2024-12-01",
-        "dateModified": "2026-09-16",
+        "dateModified": "2026-09-21",
         "spatialCoverage": {
             "@type": "Place",
             "name": "Worldwide",
@@ -5756,8 +5751,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         // Inizializza canonical URL per SEO (Google self-referencing canonical)
         (function initCanonical() {
             const canonicalEl = document.getElementById('canonical-url');
-            if (canonicalEl && currentLanguage !== 'it') {
-                canonicalEl.setAttribute('href', `https://tutelatruffe.it/?lang=${currentLanguage}`);
+            if (canonicalEl) {
+                canonicalEl.setAttribute('href', getCanonicalUrlForLang(currentLanguage));
             }
         })();
 
@@ -6033,16 +6028,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         });
         
         // Funzione per aggiornare il canonical URL in base alla lingua corrente
-        function updateCanonicalUrl() {
+        function updateCanonicalUrl(lang = currentLanguage) {
             const canonicalTag = document.getElementById('canonical-url');
             if (canonicalTag) {
-                const urlParams = new URLSearchParams(window.location.search);
-                const lang = urlParams.get('lang');
-                if (lang && lang !== 'it') {
-                    canonicalTag.href = `https://tutelatruffe.it/?lang=${lang}`;
-                } else {
-                    canonicalTag.href = 'https://tutelatruffe.it/';
-                }
+                canonicalTag.setAttribute('href', getCanonicalUrlForLang(lang));
             }
         }
 
@@ -6127,13 +6116,48 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             }
         }
 
-        function setMetaContent(id, value) {
-            const element = document.getElementById(id);
-            if (element && value) {
-                element.setAttribute('content', value);
-            }
-        }
-
+        const SEO_LAST_MODIFIED = '2026-09-21';
+        const SEO_SITE_ROOT = 'https://tutelatruffe.it/';
+        const SEO_DATASET_URL = 'https://tutelatruffe.it/financial_authorities_database.json';
+        const SEO_SUPPORTED_LANGUAGE_ENTRIES = [
+            { code: 'it', name: 'Italiano' },
+            { code: 'en', name: 'English' },
+            { code: 'fr', name: 'Français' },
+            { code: 'de', name: 'Deutsch' },
+            { code: 'es', name: 'Español' },
+            { code: 'pt', name: 'Português' },
+            { code: 'ro-RO', name: 'Română (România)' },
+            { code: 'nl', name: 'Nederlands' },
+            { code: 'sq', name: 'Shqip (Albania)' },
+            { code: 'sq-XK', name: 'Shqip (Kosovë)' },
+            { code: 'bs-BA', name: 'Bosanski' },
+            { code: 'el', name: 'Ελληνικά' },
+            { code: 'ar', name: 'العربية' },
+            { code: 'zh-CN', name: '中文' },
+            { code: 'hi', name: 'हिन्दी' },
+            { code: 'vi', name: 'Tiếng Việt' }
+        ];
+        const OG_LOCALE_BY_LANGUAGE = {
+            it: 'it_IT',
+            en: 'en_US',
+            fr: 'fr_FR',
+            de: 'de_DE',
+            es: 'es_ES',
+            pt: 'pt_PT',
+            ro: 'ro_RO',
+            'ro-RO': 'ro_RO',
+            nl: 'nl_NL',
+            sq: 'sq_AL',
+            xk: 'sq_XK',
+            'sq-XK': 'sq_XK',
+            bs: 'bs_BA',
+            el: 'el_GR',
+            'el-GR': 'el_GR',
+            ar: 'ar_EG',
+            zh: 'zh_CN',
+            hi: 'hi_IN',
+            vi: 'vi_VN'
+        };
         const FAQ_ENTRY_KEYS = [
             { question: 'faqQuestion1', answer: 'faqAnswer1' },
             { question: 'faqQuestion2', answer: 'faqAnswer2' },
@@ -6142,6 +6166,124 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             { question: 'faqQuestion5', answer: 'faqAnswer5' },
             { question: 'faqQuestion6', answer: 'faqAnswer6' }
         ];
+
+        function normalizeLanguageCode(lang = currentLanguage) {
+            const raw = String(lang || '').trim();
+            if (!raw) return 'it';
+            const lower = raw.toLowerCase();
+            if (URL_LANGUAGE_ALIASES[lower]) {
+                return URL_LANGUAGE_ALIASES[lower];
+            }
+            const directMatch = Object.keys(localeMetadata).find((code) => code.toLowerCase() === lower);
+            return directMatch || 'it';
+        }
+
+        function getHtmlLangForLocale(lang = currentLanguage) {
+            const normalizedLang = normalizeLanguageCode(lang);
+            return localeMetadata[normalizedLang]?.htmlLang || localeMetadata[normalizedLang]?.api || normalizedLang;
+        }
+
+        function getTextDirectionForLang(lang = currentLanguage) {
+            return normalizeLanguageCode(lang) === 'ar' ? 'rtl' : 'ltr';
+        }
+
+        function getUrlLanguageParam(lang = currentLanguage) {
+            const normalizedLang = normalizeLanguageCode(lang);
+            if (normalizedLang === 'it') return '';
+            if (localeMetadata[normalizedLang]?.urlSupported) return normalizedLang;
+            if (normalizedLang === 'ro-RO') return 'ro';
+            if (normalizedLang === 'el-GR') return 'el';
+            if (normalizedLang === 'sq-XK') return 'xk';
+            return normalizedLang;
+        }
+
+        function getCanonicalUrlForLang(lang = currentLanguage) {
+            const normalizedLang = normalizeLanguageCode(lang);
+            const htmlLang = getHtmlLangForLocale(normalizedLang).toLowerCase();
+            const alternateLinks = Array.from(document.querySelectorAll('link[rel="alternate"][hreflang][href]'));
+            const candidates = Array.from(new Set([
+                htmlLang,
+                normalizedLang.toLowerCase(),
+                htmlLang.split('-')[0],
+                normalizedLang.toLowerCase().split('-')[0]
+            ].filter(Boolean)));
+            const matchingAlternate = alternateLinks.find((link) => candidates.includes((link.getAttribute('hreflang') || '').toLowerCase()));
+            if (matchingAlternate?.href) {
+                return matchingAlternate.href;
+            }
+            const urlLangParam = getUrlLanguageParam(normalizedLang);
+            return urlLangParam ? `${SEO_SITE_ROOT}?lang=${encodeURIComponent(urlLangParam)}` : SEO_SITE_ROOT;
+        }
+
+        function getOgLocaleForLang(lang = currentLanguage) {
+            const normalizedLang = normalizeLanguageCode(lang);
+            return OG_LOCALE_BY_LANGUAGE[normalizedLang] || getHtmlLangForLocale(normalizedLang).replace('-', '_');
+        }
+
+        function updateMetaTag(selectorOrId, attr, value) {
+            if (value === undefined || value === null || value === '') return null;
+            const element = selectorOrId.startsWith('#')
+                ? document.querySelector(selectorOrId)
+                : document.getElementById(selectorOrId) || document.querySelector(selectorOrId);
+            if (!element) return null;
+            element.setAttribute(attr, value);
+            return element;
+        }
+
+        function updateTitleTag(value) {
+            if (!value) return;
+            document.title = value;
+            const titleElement = document.getElementById('page-title') || document.querySelector('title');
+            if (titleElement) {
+                titleElement.textContent = value;
+            }
+        }
+
+        function updateJsonLdScript(id, data) {
+            let scriptEl = document.getElementById(id);
+            if (!scriptEl) {
+                scriptEl = document.createElement('script');
+                scriptEl.type = 'application/ld+json';
+                scriptEl.id = id;
+                document.head.appendChild(scriptEl);
+            }
+            scriptEl.textContent = JSON.stringify(data, null, 4);
+            return scriptEl;
+        }
+
+        function buildSeoAuthorEntity() {
+            return {
+                '@type': 'Person',
+                name: 'Avvocato Marcello Stanca',
+                alternateName: 'Lawyer Marcello Stanca',
+                email: 'lawyer@marcellostanca.it',
+                jobTitle: 'Avvocato',
+                url: `${SEO_SITE_ROOT}curriculum.html`,
+                sameAs: [
+                    'https://www.linkedin.com/in/marcellostanca/',
+                    'https://www.ordineavvocatifirenze.eu/',
+                    'https://www.facebook.com/avv.stanca.marcello',
+                    'https://www.tiktok.com/@avvocato.stanca.marcello'
+                ],
+                address: {
+                    '@type': 'PostalAddress',
+                    addressLocality: 'Firenze',
+                    addressCountry: 'IT'
+                }
+            };
+        }
+
+        function buildSeoPublisherEntity() {
+            return {
+                '@type': 'Organization',
+                name: 'TutelaTruffe.it',
+                url: SEO_SITE_ROOT,
+                logo: {
+                    '@type': 'ImageObject',
+                    url: `${SEO_SITE_ROOT}icon-512.png`
+                }
+            };
+        }
 
         function getFaqEntries(langData, fallbackData) {
             const entries = [];
@@ -6155,25 +6297,143 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             return entries;
         }
 
-        function updateLocalizedMetadata(langData, fallbackData) {
-            document.title = langData.documentTitle || fallbackData.documentTitle || document.title;
-            setMetaContent('meta-description', langData.metaDescription || fallbackData.metaDescription);
-            setMetaContent('meta-og-title', langData.ogTitle || fallbackData.ogTitle);
-            setMetaContent('meta-og-description', langData.ogDescription || fallbackData.ogDescription);
-            setMetaContent('meta-og-image-alt', langData.ogImageAlt || fallbackData.ogImageAlt);
-            setMetaContent('meta-twitter-title', langData.twitterTitle || fallbackData.twitterTitle);
-            setMetaContent('meta-twitter-description', langData.twitterDescription || fallbackData.twitterDescription);
-            setMetaContent('meta-twitter-image-alt', langData.twitterImageAlt || fallbackData.twitterImageAlt);
+        function getSeoMetadata(lang = currentLanguage) {
+            const normalizedLang = normalizeLanguageCode(lang);
+            const langData = getLanguageBundle(normalizedLang);
+            const italianData = translations.it || {};
+            const englishData = translations.en || {};
+            const title = langData.documentTitle || langData.landingHeroTitle || italianData.documentTitle || englishData.documentTitle || document.title;
+            const description = langData.metaDescription || langData.landingHeroSubtitle || italianData.metaDescription || englishData.metaDescription || '';
+            const ogTitle = langData.ogTitle || title;
+            const ogDescription = langData.ogDescription || description;
+            const heroTitle = langData.landingHeroTitle || italianData.landingHeroTitle || englishData.landingHeroTitle || title;
+            return {
+                lang: normalizedLang,
+                htmlLang: getHtmlLangForLocale(normalizedLang),
+                dir: getTextDirectionForLang(normalizedLang),
+                canonicalUrl: getCanonicalUrlForLang(normalizedLang),
+                ogLocale: getOgLocaleForLang(normalizedLang),
+                title,
+                description,
+                ogTitle,
+                ogDescription,
+                ogImageAlt: langData.ogImageAlt || heroTitle || ogTitle,
+                twitterTitle: langData.twitterTitle || title,
+                twitterDescription: langData.twitterDescription || description,
+                twitterImageAlt: langData.twitterImageAlt || langData.ogImageAlt || heroTitle || title,
+                heroTitle,
+                heroSubtitle: langData.landingHeroSubtitle || italianData.landingHeroSubtitle || englishData.landingHeroSubtitle || description,
+                siteName: normalizedLang === 'it' ? 'Tutela Truffe' : 'Financial Authority Database',
+                inLanguage: getHtmlLangForLocale(normalizedLang)
+            };
         }
 
-        function updateFaqSchema(langData, fallbackData) {
-            const faqSchemaEl = document.getElementById('faq-schema-jsonld');
-            if (!faqSchemaEl) return;
-            const faqEntries = getFaqEntries(langData, fallbackData);
-            if (!faqEntries.length) return;
-            const faqSchema = {
+        function buildWebApplicationStructuredData(metadata) {
+            return {
+                '@context': 'https://schema.org',
+                '@type': 'WebApplication',
+                '@id': `${metadata.canonicalUrl}#webapp`,
+                name: metadata.heroTitle,
+                alternateName: metadata.title,
+                url: metadata.canonicalUrl,
+                description: metadata.description,
+                applicationCategory: 'FinanceApplication',
+                operatingSystem: 'Any',
+                isAccessibleForFree: true,
+                inLanguage: metadata.inLanguage,
+                availableLanguage: SEO_SUPPORTED_LANGUAGE_ENTRIES.map(({ code, name }) => ({
+                    '@type': 'Language',
+                    identifier: code,
+                    name
+                })),
+                offers: {
+                    '@type': 'Offer',
+                    price: '0',
+                    priceCurrency: 'EUR'
+                },
+                author: buildSeoAuthorEntity(),
+                creator: buildSeoAuthorEntity(),
+                publisher: buildSeoPublisherEntity(),
+                dateModified: SEO_LAST_MODIFIED,
+                areaServed: 'Worldwide',
+                keywords: [
+                    'financial authorities',
+                    'broker license verification',
+                    'fraud reporting',
+                    'consumer protection',
+                    'pig butchering'
+                ]
+            };
+        }
+
+        function buildWebsiteStructuredData(metadata) {
+            return {
+                '@context': 'https://schema.org',
+                '@type': 'WebSite',
+                '@id': `${metadata.canonicalUrl}#website`,
+                name: metadata.siteName,
+                alternateName: metadata.heroTitle,
+                url: metadata.canonicalUrl,
+                description: metadata.description,
+                inLanguage: metadata.inLanguage,
+                isAccessibleForFree: true,
+                publisher: buildSeoPublisherEntity(),
+                author: buildSeoAuthorEntity(),
+                about: [
+                    metadata.heroTitle,
+                    metadata.heroSubtitle,
+                    metadata.description
+                ]
+            };
+        }
+
+        function buildDatasetStructuredData(metadata) {
+            return {
+                '@context': 'https://schema.org',
+                '@type': 'Dataset',
+                '@id': `${metadata.canonicalUrl}#dataset`,
+                name: metadata.heroTitle,
+                alternateName: metadata.title,
+                description: metadata.description,
+                url: metadata.canonicalUrl,
+                identifier: SEO_DATASET_URL,
+                inLanguage: metadata.inLanguage,
+                isAccessibleForFree: true,
+                creator: buildSeoAuthorEntity(),
+                author: buildSeoAuthorEntity(),
+                publisher: buildSeoPublisherEntity(),
+                datePublished: '2024-12-01',
+                dateModified: SEO_LAST_MODIFIED,
+                spatialCoverage: {
+                    '@type': 'Place',
+                    name: 'Worldwide'
+                },
+                distribution: {
+                    '@type': 'DataDownload',
+                    encodingFormat: 'application/json',
+                    contentUrl: SEO_DATASET_URL
+                },
+                variableMeasured: [
+                    {
+                        '@type': 'PropertyValue',
+                        name: 'Countries Covered',
+                        value: '239'
+                    },
+                    {
+                        '@type': 'PropertyValue',
+                        name: 'Languages Supported',
+                        value: String(SEO_SUPPORTED_LANGUAGE_ENTRIES.length)
+                    }
+                ]
+            };
+        }
+
+        function buildFaqStructuredData(faqEntries, metadata) {
+            return {
                 '@context': 'https://schema.org',
                 '@type': 'FAQPage',
+                '@id': `${metadata.canonicalUrl}#faq`,
+                inLanguage: metadata.inLanguage,
                 mainEntity: faqEntries.map(({ question, answer }) => ({
                     '@type': 'Question',
                     name: question,
@@ -6183,7 +6443,41 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     }
                 }))
             };
-            faqSchemaEl.textContent = JSON.stringify(faqSchema, null, 4);
+        }
+
+        function updateStructuredData(metadata, faqEntries) {
+            updateJsonLdScript('webapp-jsonld', buildWebApplicationStructuredData(metadata));
+            updateJsonLdScript('website-jsonld', buildWebsiteStructuredData(metadata));
+            updateJsonLdScript('dataset-jsonld', buildDatasetStructuredData(metadata));
+            updateJsonLdScript('faq-schema-jsonld', buildFaqStructuredData(faqEntries, metadata));
+        }
+
+        function updateLocalizedMetadata(langData, fallbackData, lang = currentLanguage) {
+            const metadata = getSeoMetadata(lang);
+            const htmlEl = document.documentElement;
+            if (htmlEl) {
+                htmlEl.lang = metadata.htmlLang;
+                htmlEl.dir = metadata.dir;
+            }
+            updateTitleTag(metadata.title);
+            updateMetaTag('meta-description', 'content', metadata.description);
+            updateMetaTag('meta-og-title', 'content', metadata.ogTitle);
+            updateMetaTag('meta-og-description', 'content', metadata.ogDescription);
+            updateMetaTag('meta-og-image-alt', 'content', metadata.ogImageAlt);
+            updateMetaTag('meta-og-url', 'content', metadata.canonicalUrl);
+            updateMetaTag('meta-og-locale', 'content', metadata.ogLocale);
+            updateMetaTag('meta-twitter-title', 'content', metadata.twitterTitle);
+            updateMetaTag('meta-twitter-description', 'content', metadata.twitterDescription);
+            updateMetaTag('meta-twitter-image-alt', 'content', metadata.twitterImageAlt);
+            updateMetaTag('meta-twitter-url', 'content', metadata.canonicalUrl);
+            updateMetaTag('canonical-url', 'href', metadata.canonicalUrl);
+            return metadata;
+        }
+
+        function updateFaqSchema(langData, fallbackData, metadata = getSeoMetadata(currentLanguage)) {
+            const faqEntries = getFaqEntries(langData, fallbackData);
+            if (!faqEntries.length) return;
+            updateStructuredData(metadata, faqEntries);
         }
 
         function escapeHtmlAttribute(value) {
@@ -6319,40 +6613,34 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 }
             }
 
-            updateLocalizedMetadata(langData, fallbackData);
-            updateFaqSchema(langData, fallbackData);
+            const metadata = updateLocalizedMetadata(langData, fallbackData, lang);
+            updateFaqSchema(langData, fallbackData, metadata);
         }
 
         function changeLanguage(lang, selectedLang = lang) {
-            currentLanguage = lang;
+            const normalizedLang = normalizeLanguageCode(lang);
+            currentLanguage = normalizedLang;
             document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
             const activeBtn = Array.from(document.querySelectorAll('.lang-btn')).find(btn =>
                 btn.dataset.variant === selectedLang ||
                 btn.dataset.lang === selectedLang ||
-                btn.textContent.includes(selectedLang.toUpperCase())
+                btn.textContent.includes(String(selectedLang).toUpperCase())
             );
             if(activeBtn) activeBtn.classList.add('active');
 
             const htmlEl = document.documentElement;
             if (htmlEl) {
-                htmlEl.lang = localeMetadata[lang]?.htmlLang || localeMetadata[lang]?.api || lang;
-                htmlEl.dir = (lang === 'ar' ? 'rtl' : 'ltr');
+                htmlEl.lang = getHtmlLangForLocale(normalizedLang);
+                htmlEl.dir = getTextDirectionForLang(normalizedLang);
             }
 
-            // Aggiorna canonical URL (Google SEO - self-referencing canonical)
-            const canonicalEl = document.getElementById('canonical-url');
-            if (canonicalEl) {
-                const newCanonical = lang === 'it' 
-                    ? 'https://tutelatruffe.it/' 
-                    : `https://tutelatruffe.it/?lang=${lang}`;
-                canonicalEl.setAttribute('href', newCanonical);
-            }
+            updateCanonicalUrl(normalizedLang);
 
-            // Aggiorna URL nel browser senza ricaricare
-            const newUrl = lang === 'it' 
-                ? window.location.pathname 
-                : `${window.location.pathname}?lang=${lang}`;
-            window.history.replaceState({lang: lang}, '', newUrl);
+            const urlLangParam = getUrlLanguageParam(normalizedLang);
+            const newUrl = !urlLangParam
+                ? window.location.pathname
+                : `${window.location.pathname}?lang=${encodeURIComponent(urlLangParam)}`;
+            window.history.replaceState({lang: normalizedLang}, '', newUrl);
             renderAll();
         }
 
