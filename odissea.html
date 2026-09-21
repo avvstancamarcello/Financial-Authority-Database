@@ -1694,13 +1694,17 @@ Esempio di header email da cercare:
             let countriesSet = new Set();
             let argonautsSet = new Set();
 
+            if (markersLayer) {
+                markersLayer.clearLayers();
+            }
+
             reports.forEach(report => {
                 if (report.latitude && report.longitude) {
                     addMarkerToMap(report);
                 }
                 
                 if (report.amountLost) {
-                    totalAmount += parseInt(report.amountLost) || 0;
+                    totalAmount += parseAmountLost(report.amountLost);
                 }
                 
                 if (report.declaredCountry) {
@@ -1715,7 +1719,7 @@ Esempio di header email da cercare:
             // Update stats
             document.getElementById('total-reports').textContent = reports.length;
             document.getElementById('countries-affected').textContent = countriesSet.size;
-            document.getElementById('total-amount-lost').textContent = '€' + totalAmount.toLocaleString('it-IT');
+            document.getElementById('total-amount-lost').textContent = formatEuroAmount(totalAmount);
             document.getElementById('argonauts-count').textContent = argonautsSet.size || reports.length;
         }
 
@@ -1736,7 +1740,7 @@ Esempio di header email da cercare:
                 <div class="popup-info"><strong>Tipo:</strong> ${getScamTypeLabel(report.scamType)}</div>
                 ${report.websiteUrl ? `<div class="popup-info"><strong>Sito:</strong> <a href="${report.websiteUrl}" target="_blank" rel="noopener">${report.websiteUrl}</a></div>` : ''}
                 ${report.declaredAddress ? `<div class="popup-info"><strong>Sede dichiarata:</strong> ${report.declaredAddress}</div>` : ''}
-                ${report.amountLost ? `<div class="popup-info"><strong>Importo:</strong> €${parseInt(report.amountLost).toLocaleString('it-IT')}</div>` : ''}
+                ${report.amountLost ? `<div class="popup-info"><strong>Importo:</strong> ${formatEuroAmount(report.amountLost)}</div>` : ''}
                 ${report.whatsappNumber ? `<div class="popup-info"><strong>WhatsApp:</strong> ${report.whatsappNumber}</div>` : ''}
                 <div class="popup-info" style="margin-top: 0.5rem; font-size: 0.8rem; color: #64748b;">Segnalato: ${new Date(report.timestamp).toLocaleDateString('it-IT')}</div>
             `;
@@ -1757,6 +1761,20 @@ Esempio di header email da cercare:
                 'other': 'Altro'
             };
             return labels[type] || type;
+        }
+
+        function parseAmountLost(value) {
+            const numericValue = Number.parseFloat(value);
+            return Number.isFinite(numericValue) ? numericValue : 0;
+        }
+
+        function formatEuroAmount(value) {
+            return new Intl.NumberFormat('it-IT', {
+                style: 'currency',
+                currency: 'EUR',
+                minimumFractionDigits: 0,
+                maximumFractionDigits: 0
+            }).format(parseAmountLost(value));
         }
 
         // Geocoding function (simple country capitals fallback)
@@ -1938,11 +1956,7 @@ Esempio di header email da cercare:
             // Update trials counter
             document.getElementById('trials-overcome').textContent = reports.length;
 
-            // Add marker to map
-            if (formData.latitude && formData.longitude) {
-                addMarkerToMap(formData);
-                loadMapReports(); // Refresh stats
-            }
+            loadMapReports();
 
             alert(`🚢 Benvenuto nella flotta degli Argonauti!
 
