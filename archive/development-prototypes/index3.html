@@ -53,11 +53,11 @@
       const host = window.location.hostname;
       
       // CASO 1: Entri da awev.org o www.awev.org → vai sempre in /en/
-      if (host.includes("awev.org")) {
+      if (/(^|\.)awev\.org$/i.test(host)) {
         window.location.replace("https://www.awev.org/en/");
       } 
       // CASO 2: Entri da amevfirenze.it → vai alla home con selettore 10 lingue
-      else if (host.includes("amevfirenze.it")) {
+      else if (/(^|\.)amevfirenze\.it$/i.test(host)) {
         window.location.replace("https://www.amevfirenze.it/");
       }
       // CASO 3: Fallback di sicurezza → vai in EN

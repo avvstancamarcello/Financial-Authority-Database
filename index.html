@@ -7085,7 +7085,9 @@ https://avvstancamarcello.github.io/Financial-Authority-Database/
             if (!match) {
                 return "🛡️ Practical Legal Guide – Verifying a Financial Firm in 5 Steps";
             }
-            return match[1].replace(/<[^>]*>/g, '').trim();
+            const titleTemplate = document.createElement('template');
+            titleTemplate.innerHTML = match[1];
+            return (titleTemplate.content.textContent || '').trim();
         }
 
         function getInstructionsContent(lang) {
