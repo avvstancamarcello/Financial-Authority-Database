@@ -1908,12 +1908,16 @@
       "name": "Financial Conduct Authority",
       "abbreviation": "FCA",
       "homepage": "https://www.fca.org.uk/",
-      "fraudReportLink": "https://register.fca.org.uk/s/",
-      "authorityEmail": "sam.stoakes@fca.org.uk",
+      "fraudReportLink": "https://www.fca.org.uk/consumers/report-scam-us",
+      "authorityEmail": "consumer.queries@fca.org.uk",
       "social_links": {
         "fca_register": "https://register.fca.org.uk/s/",
         "prudential_regulation": "https://www.bankofengland.co.uk/prudential-regulation"
-      }
+      },
+       "protectionLevel": "High",
+       "thumbnail": "authority/preview-fca.png",
+       "modal": "authority/UK-FCA.html",
+       "has_orbital_view": true
     },
     "notes": "FCA Financial Services Register (https://register.fca.org.uk/s/): verifica affidabilità imprese dichiarate iscritte/regolamentate. Prudential Regulation Authority (Bank of England): supervisione prudenziale 1.292 banche, società credito edilizio, cooperative credito, assicurazioni, società investimento (https://www.bankofengland.co.uk/prudential-regulation). Sito investitori: https://www.fca.org.uk/investsmart. World Investor Week Coordinator: Sam Stoakes."
   },
