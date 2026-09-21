@@ -392,6 +392,10 @@
                         const expectedScamRadarTitle = translationMap?.[lang]?.scamRadarCtaTitle || translationMap?.en?.scamRadarCtaTitle || '';
                         const expectedScamRadarAriaLabel = translationMap?.[lang]?.scamRadarCtaAriaLabel || translationMap?.en?.scamRadarCtaAriaLabel || '';
                         const expectedScamRadarNewTab = translationMap?.[lang]?.medusaCtaNewTab || translationMap?.en?.medusaCtaNewTab || '';
+                        const expectedSecurityBannerSubtitle = translationMap?.[lang]?.securityBannerSubtitle || translationMap?.en?.securityBannerSubtitle || '';
+                        const expectedChooseLanguageHintText = translationMap?.[lang]?.chooseLanguageHint || translationMap?.en?.chooseLanguageHint || '';
+                        const expectedSearchCountryPlaceholder = translationMap?.[lang]?.searchCountryPlaceholder || translationMap?.en?.searchCountryPlaceholder || '';
+                        const expectedSearchButtonText = translationMap?.[lang]?.searchButton || translationMap?.en?.searchButton || '';
                         const medusaVisibility = getVisibilitySnapshot(win, medusaCta);
                         const scamRadarVisibility = getVisibilitySnapshot(win, scamRadarCta);
                         const actionsGridVisibility = getVisibilitySnapshot(win, actionsGrid);
@@ -447,6 +451,11 @@
                         addResult(Boolean(asiaSection), `${lang}: ASIA anchor section remains present`);
                         addResult(Boolean(referencesNavLink), `${lang}: references navigation link exists`);
                         addResult(referencesNavLink?.getAttribute('href') === 'referenze.html', `${lang}: references navigation link still points to referenze.html`);
+                        addResult((doc.querySelector('.security-banner-subtitle')?.textContent || '').trim() === expectedSecurityBannerSubtitle, `${lang}: security banner subtitle is localized`);
+                        addResult((doc.querySelector('.language-hint [data-i18n-text="chooseLanguageHint"]')?.textContent || '').trim() === expectedChooseLanguageHintText, `${lang}: choose-language hint is localized`);
+                        addResult((doc.getElementById('search-input-top')?.getAttribute('placeholder') || '').trim() === expectedSearchCountryPlaceholder, `${lang}: top search placeholder is localized`);
+                        addResult((doc.querySelector('#database-search-section > div:first-of-type button[data-i18n-text="searchButton"]')?.textContent || '').trim() === expectedSearchButtonText, `${lang}: top search button is localized`);
+                        addResult((doc.querySelector('#database-search-section .search-btn[data-i18n-text="searchButton"]')?.textContent || '').trim() === expectedSearchButtonText, `${lang}: main search button is localized`);
                         if (expectedNavReferences) {
                             addResult(referencesNavLabel === expectedNavReferences, `${lang}: references nav label matches expected localized/fallback value`);
                         }
@@ -471,11 +480,16 @@
                             const missingAreaLabelLocales = labelLocales.filter((locale) =>
                                 !translationMap?.[locale]?.languageAreaEu || !translationMap?.[locale]?.languageAreaAsia || !translationMap?.[locale]?.languagePrompt || !translationMap?.[locale]?.amevInfoSummary || !translationMap?.[locale]?.amevInfoExpand || !translationMap?.[locale]?.amevInfoCollapse
                             );
+                            const requiredLocalizedUiKeys = ['securityBannerSubtitle', 'chooseLanguageHint', 'searchCountryPlaceholder', 'searchButton'];
+                            const missingLocalizedUiLocales = labelLocales.filter((locale) =>
+                                requiredLocalizedUiKeys.some((key) => typeof translationMap?.[locale]?.[key] !== 'string' || !translationMap[locale][key].trim())
+                            );
                             const requiredMedusaKeys = ['medusaCtaLabel', 'medusaCtaTitle', 'medusaCtaAriaLabel', 'medusaCtaUrl', 'medusaCtaNewTab', 'medusaCtaNewTabSr'];
                             const missingMedusaLocales = labelLocales.filter((locale) =>
                                 requiredMedusaKeys.some((key) => typeof translationMap?.[locale]?.[key] !== 'string' || !translationMap[locale][key].trim())
                             );
                             addResult(missingAreaLabelLocales.length === 0, 'it: all translation bundles define area-row and AMEV disclosure keys');
+                            addResult(missingLocalizedUiLocales.length === 0, 'it: all translation bundles define the localized security subtitle and search UI keys');
                             addResult(missingMedusaLocales.length === 0, 'it: all translation bundles define Codice Caravaggio CTA keys');
                             addResult(appIndexHtml.includes('aria-describedby="caravaggio-medusa-note"') && appIndexHtml.includes('data-i18n-text="medusaCtaNewTab"') && appIndexHtml.includes('data-i18n-text="medusaCtaNewTabSr"'), 'it: APP reference CTA markup remains intact');
                             await waitForCondition(() => typeof win.openModal === 'function' && Array.isArray(win.countriesData) && win.countriesData.some((country) => country.country_name === 'Italy'), {
@@ -576,6 +590,11 @@
                         addResult(switchedDoc.getElementById('meta-twitter-image-alt')?.getAttribute('content') === expectedEnState.twitterImageAlt, `${lang}→en: twitter:image:alt updates on language switch`);
                         addResult((switchedFaqSchema?.mainEntity?.[0]?.name || '') === expectedEnState.faqQuestion1, `${lang}→en: FAQ JSON-LD updates on language switch`);
                         addResult((switchedDoc.querySelector('nav a[href="referenze.html"] span')?.textContent || '').trim() === expectedEnState.navReferences, `${lang}→en: references nav label updates to the full EN label`);
+                        addResult((switchedDoc.querySelector('.security-banner-subtitle')?.textContent || '').trim() === (translationMap?.en?.securityBannerSubtitle || ''), `${lang}→en: security banner subtitle updates on language switch`);
+                        addResult((switchedDoc.querySelector('.language-hint [data-i18n-text="chooseLanguageHint"]')?.textContent || '').trim() === (translationMap?.en?.chooseLanguageHint || ''), `${lang}→en: choose-language hint updates on language switch`);
+                        addResult((switchedDoc.getElementById('search-input-top')?.getAttribute('placeholder') || '').trim() === (translationMap?.en?.searchCountryPlaceholder || ''), `${lang}→en: top search placeholder updates on language switch`);
+                        addResult((switchedDoc.querySelector('#database-search-section > div:first-of-type button[data-i18n-text="searchButton"]')?.textContent || '').trim() === (translationMap?.en?.searchButton || ''), `${lang}→en: top search button updates on language switch`);
+                        addResult((switchedDoc.querySelector('#database-search-section .search-btn[data-i18n-text="searchButton"]')?.textContent || '').trim() === (translationMap?.en?.searchButton || ''), `${lang}→en: main search button updates on language switch`);
                         addResult((switchedDoc.querySelector('#language-selector-eu-area-label [data-i18n-text="languageAreaEu"]')?.textContent || '').trim() === expectedEnState.languageAreaEu, `${lang}→en: EU area label updates on language switch`);
                         addResult((switchedDoc.querySelector('#language-selector-eu-area-label [data-i18n-text="languagePrompt"]')?.textContent || '').trim() === expectedEnState.languagePrompt, `${lang}→en: EU prompt updates on language switch`);
                         addResult((switchedDoc.querySelector('#language-selector-asia-area-label [data-i18n-text="languageAreaAsia"]')?.textContent || '').trim() === expectedEnState.languageAreaAsia, `${lang}→en: ASIA area label updates on language switch`);
