@@ -6735,60 +6735,21 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 const sanctionIconTitle = currentTranslations.sanctionedIconTitle || '⚠️ Subject to UN sanctions';
                 const sanctionedBadge = currentTranslations.sanctionedBadge || '⚠️ UN SANCTIONS';
                 const sanctionIcon = country.sanctioned ? `<div class="sanctioned-icon" title="${escapeHtmlAttribute(sanctionIconTitle)}">!</div>` : '';
-                const orbitalModalSrc = resolveConsobOrbitalSrc(country.modal);
-                const orbitalThumbnailSrc = resolveConsobOrbitalThumbnailSrc(country.thumbnail);
-                const isItalyOrbital = (orbitalModalSrc === '/authority/IT-CONSOB.html');
-                const isUkOrbital = (orbitalModalSrc === '/authority/UK-FCA.html');
-
-                const hasOrbitalView = (isItalyOrbital || isUkOrbital)
-                    && Boolean(country.has_orbital_view)
-                    && Boolean(orbitalThumbnailSrc)
-                    && Boolean(orbitalModalSrc);
+                const data = authorities[country.code];
+                const hasOrbitalView = Boolean(data.has_orbital_view);
 
                 const orbitalThumbnailHtml = hasOrbitalView ? `
-                    <button
-                       type="button"
-                       class="orbital-thumbnail-trigger"
-                       data-orbital-trigger="${isItalyOrbital ? 'consob' : 'fca'}"
-                       data-orbital-src="${escapeHtmlAttribute(orbitalModalSrc)}"
-                       aria-label="Open ${isItalyOrbital ? 'CONSOB' : 'FCA'} orbital dialog"
-                    >
-                       <img src="${escapeHtmlAttribute(orbitalThumbnailSrc)}" alt="${isItalyOrbital ? 'CONSOB' : 'FCA'} orbital preview thumbnail">
-                    </button>
-                ` : '';
-
-                
-                card.innerHTML = `
-                    ${sanctionIcon}
-                    <div class="country-header">
-                        <div class="country-flag">${flagHTML}</div>
-                        <div class="country-name">${country.country_name}${countryMarker ? ` <span style="display:inline-block; margin-left:8px; padding:2px 8px; border-radius:999px; background:rgba(30,41,59,0.12); color:#1e293b; font-size:0.55em; font-weight:700; vertical-align:middle;">${countryMarker}</span>` : ''}</div>
-                    </div>
-                    <div class="country-info">
-                        <div class="info-row">
-                        <span class="info-label">${currentTranslations.authority || 'Authority'}:</span>
-                            <span class="info-value">${country.financial_authority.name} (${country.financial_authority.abbreviation})</span>
-                        </div>
-                        <div class="info-row">
-                        <span class="info-label">${currentTranslations.protectionLevel || 'Protection'}:</span>
-                            <span class="protection-badge ${protectionClass}">${getLocalizedProtectionLevel(country.protectionLevel)}</span>
-                            ${country.sanctioned ? `<span class="sanctioned-badge">${sanctionedBadge}</span>` : ''}
-                        </div>
-					</div>
-					<div class="modal-uk">
-                      <h2>United Kingdom – FCA</h2>
-					  
-                      <div class="orbital-box">
-                        <img src="authority/preview-fca.png"
-                             alt="FCA Orbital Preview"
-                             class="orbital-thumbnail"
-                             onclick="openOrbitalWebApp('authority/UK-FCA.html')">
-                      </div>
-
-                    </div>
-
-                    ${orbitalThumbnailHtml}
-                `;
+                <button
+                    type="button"
+                    class="orbital-thumbnail-trigger"
+                    data-orbital-trigger="${data.authority.toLowerCase()}"
+                    data-orbital-src="${escapeHtmlAttribute(data.orbital_src)}"
+                    aria-label="Open ${data.authority} orbital dialog"
+                >
+                <img src="${escapeHtmlAttribute(data.orbital_thumbnail)}" alt="${data.authority} orbital preview">
+                </button>
+            ` : '';
+ 
                 const searchAliases = getCountrySearchAliases(country.country_name);
                 card.dataset.searchText = `${country.country_name} ${country.financial_authority.name} ${country.financial_authority.abbreviation} ${searchAliases}`.toLowerCase();
                 return card;
