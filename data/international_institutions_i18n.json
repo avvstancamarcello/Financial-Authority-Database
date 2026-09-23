@@ -1,0 +1,208 @@
+{
+  "schemaVersion": "1.0.0",
+  "metadata": {
+    "lastVerified": "2026-09-23",
+    "locales": [
+      "it",
+      "en"
+    ]
+  },
+  "strings": {
+    "category.financial_supervision.label": {
+      "it": "Vigilanza finanziaria",
+      "en": "Financial supervision"
+    },
+    "category.financial_supervision.description": {
+      "it": "Autorità o organismi di vigilanza sui mercati e sui servizi finanziari.",
+      "en": "Authorities or bodies supervising financial markets and services."
+    },
+    "category.aml_cft_policy.label": {
+      "it": "Politiche AML/CFT/CPF",
+      "en": "AML/CFT/CPF policy"
+    },
+    "category.aml_cft_policy.description": {
+      "it": "Organismi di standard-setting e valutazione per antiriciclaggio, contrasto al finanziamento del terrorismo e della proliferazione.",
+      "en": "Standard-setting and evaluation bodies for anti-money laundering, counter-terrorist financing, and counter-proliferation financing."
+    },
+    "category.fiu_cooperation.label": {
+      "it": "Cooperazione UIF/FIU",
+      "en": "FIU cooperation"
+    },
+    "category.fiu_cooperation.description": {
+      "it": "Reti e unità di intelligence finanziaria per lo scambio informativo AML/CFT.",
+      "en": "Financial intelligence networks and units for AML/CFT information exchange."
+    },
+    "category.investigation_anti_fraud.label": {
+      "it": "Indagini e antifrode",
+      "en": "Investigation and anti-fraud"
+    },
+    "category.investigation_anti_fraud.description": {
+      "it": "Servizi di segnalazione, investigazione amministrativa o raccolta alert antifrode.",
+      "en": "Reporting services, administrative investigation, or anti-fraud alert aggregation."
+    },
+    "category.consumer_protection.label": {
+      "it": "Tutela del consumatore/investitore",
+      "en": "Consumer/investor protection"
+    },
+    "category.consumer_protection.description": {
+      "it": "Strutture di protezione investitori e servizi pubblici di prevenzione truffe.",
+      "en": "Investor protection structures and public anti-scam services."
+    },
+    "type.intergovernmental_standard_setter.label": {
+      "it": "Organismo intergovernativo di standard-setting",
+      "en": "Intergovernmental standard-setting body"
+    },
+    "type.fiu_network.label": {
+      "it": "Rete globale di UIF",
+      "en": "Global FIU network"
+    },
+    "type.national_fiu.label": {
+      "it": "UIF nazionale",
+      "en": "National FIU"
+    },
+    "type.regional_fatf_style_body.label": {
+      "it": "FSRB (FATF-Style Regional Body)",
+      "en": "FSRB (FATF-Style Regional Body)"
+    },
+    "type.international_standard_setter.label": {
+      "it": "Organizzazione internazionale di standard",
+      "en": "International standard-setting organization"
+    },
+    "type.alerts_aggregation_portal.label": {
+      "it": "Portale di aggregazione alert",
+      "en": "Alerts aggregation portal"
+    },
+    "type.supranational_financial_supervisor.label": {
+      "it": "Supervisore finanziario sovranazionale",
+      "en": "Supranational financial supervisor"
+    },
+    "type.supranational_executive_body.label": {
+      "it": "Istituzione esecutiva sovranazionale",
+      "en": "Supranational executive body"
+    },
+    "type.anti_fraud_investigation_office.label": {
+      "it": "Ufficio investigativo antifrode",
+      "en": "Anti-fraud investigation office"
+    },
+    "type.national_regulator.label": {
+      "it": "Autorità nazionale di regolazione",
+      "en": "National regulator"
+    },
+    "type.national_law_enforcement_reporting_center.label": {
+      "it": "Centro nazionale di segnalazione investigativa",
+      "en": "National law-enforcement reporting center"
+    },
+    "type.investor_protection_fund.label": {
+      "it": "Fondo/ente di protezione investitori",
+      "en": "Investor protection fund/entity"
+    },
+    "type.consumer_protection_service.label": {
+      "it": "Servizio nazionale di tutela antifrode",
+      "en": "National anti-scam protection service"
+    },
+    "type.investor_education_portal.label": {
+      "it": "Portale di educazione e tutela investitori",
+      "en": "Investor education and protection portal"
+    },
+    "institution.fatf_gafi.description": {
+      "it": "Il FATF/GAFI è un organismo intergovernativo globale che definisce standard AML/CFT/CPF (Raccomandazioni FATF), coordina valutazioni reciproche e pubblica liste di giurisdizioni ad alto rischio o sotto monitoraggio rafforzato. Non è una polizia sovranazionale, non sequestra beni direttamente e non emana leggi nazionali vincolanti.",
+      "en": "FATF/GAFI is a global intergovernmental body that sets AML/CFT/CPF standards (the FATF Recommendations), coordinates mutual evaluations, and publishes high-risk and increased-monitoring jurisdiction lists. It is not a supranational police force, cannot directly seize assets, and does not enact binding national legislation."
+    },
+    "institution.egmont_group.description": {
+      "it": "L'Egmont Group è una rete globale di Unità di Informazione Finanziaria (UIF/FIU) che facilita lo scambio sicuro di informazioni e la cooperazione operativa contro riciclaggio e finanziamento del terrorismo.",
+      "en": "The Egmont Group is a global network of Financial Intelligence Units (FIUs) that facilitates secure information exchange and operational cooperation against money laundering and terrorist financing."
+    },
+    "institution.it_uif.description": {
+      "it": "La UIF è l'Unità di Informazione Finanziaria italiana, istituita presso la Banca d'Italia. Riceve e analizza segnalazioni di operazioni sospette e coopera con autorità competenti nazionali e internazionali (inclusi FATF/GAFI, Egmont Group e MONEYVAL). Non rappresenta una UIF globale: ogni Paese ha la propria FIU/UIF.",
+      "en": "UIF is Italy’s national Financial Intelligence Unit, established within the Bank of Italy context. It receives and analyzes suspicious transaction reports and cooperates with competent national and international authorities (including FATF/GAFI, the Egmont Group, and MONEYVAL). It is not a global single authority: each country has its own FIU."
+    },
+    "institution.moneyval.description": {
+      "it": "MONEYVAL è il comitato del Consiglio d'Europa che valuta la conformità AML/CFT delle giurisdizioni partecipanti secondo gli standard FATF.",
+      "en": "MONEYVAL is the Council of Europe body that evaluates participating jurisdictions’ AML/CFT compliance against FATF standards."
+    },
+    "institution.apg.description": {
+      "it": "APG è il FATF-Style Regional Body per l'Asia-Pacifico e coordina cooperazione e valutazioni reciproche AML/CFT nella regione.",
+      "en": "APG is the FATF-Style Regional Body for Asia-Pacific and coordinates AML/CFT cooperation and mutual evaluations in the region."
+    },
+    "institution.cfatf.description": {
+      "it": "CFATF è il FATF-Style Regional Body dei Caraibi per cooperazione e valutazioni AML/CFT.",
+      "en": "CFATF is the Caribbean FATF-Style Regional Body for AML/CFT cooperation and evaluations."
+    },
+    "institution.gafilat.description": {
+      "it": "GAFILAT è il FATF-Style Regional Body dell'America Latina per coordinamento AML/CFT.",
+      "en": "GAFILAT is the Latin American FATF-Style Regional Body for AML/CFT coordination."
+    },
+    "institution.gabac.description": {
+      "it": "GABAC è il FATF-Style Regional Body dell'Africa centrale in ambito AML/CFT.",
+      "en": "GABAC is the Central African FATF-Style Regional Body for AML/CFT."
+    },
+    "institution.giaba.description": {
+      "it": "GIABA è il FATF-Style Regional Body dell'Africa occidentale per cooperazione AML/CFT.",
+      "en": "GIABA is the West African FATF-Style Regional Body for AML/CFT cooperation."
+    },
+    "institution.menafatf.description": {
+      "it": "MENAFATF è il FATF-Style Regional Body per Medio Oriente e Nord Africa.",
+      "en": "MENAFATF is the FATF-Style Regional Body for the Middle East and North Africa."
+    },
+    "institution.esaamlg.description": {
+      "it": "ESAAMLG è il FATF-Style Regional Body dell'Africa orientale e australe.",
+      "en": "ESAAMLG is the FATF-Style Regional Body for Eastern and Southern Africa."
+    },
+    "institution.eag.description": {
+      "it": "EAG è il FATF-Style Regional Body eurasiatico focalizzato su AML/CFT.",
+      "en": "EAG is the Eurasian FATF-Style Regional Body focused on AML/CFT."
+    },
+    "institution.iosco.description": {
+      "it": "IOSCO è l'organizzazione internazionale delle autorità di vigilanza sui mercati mobiliari e definisce standard globali per integrità di mercato e tutela degli investitori.",
+      "en": "IOSCO is the international organization of securities regulators and sets global standards for market integrity and investor protection."
+    },
+    "institution.iosco_i_scan.description": {
+      "it": "IOSCO i-SCAN aggrega alert e avvisi agli investitori pubblicati da autorità di vigilanza in più giurisdizioni.",
+      "en": "IOSCO i-SCAN aggregates investor alerts and warnings published by supervisory authorities across jurisdictions."
+    },
+    "institution.esma.description": {
+      "it": "ESMA è l'autorità dell'UE per la vigilanza dei mercati degli strumenti finanziari e la tutela degli investitori.",
+      "en": "ESMA is the EU authority for securities-market supervision and investor protection."
+    },
+    "institution.european_commission.description": {
+      "it": "La Commissione europea è l'organo esecutivo dell'UE e coordina iniziative normative e di policy anche in materia finanziaria.",
+      "en": "The European Commission is the EU executive body and coordinates policy and legislative initiatives, including financial matters."
+    },
+    "institution.olaf.description": {
+      "it": "OLAF indaga amministrativamente su frodi e irregolarità che ledono gli interessi finanziari dell'UE e gestisce canali ufficiali di segnalazione.",
+      "en": "OLAF conducts administrative anti-fraud investigations affecting the EU’s financial interests and provides official reporting channels."
+    },
+    "institution.iosco_asia_pacific_hub.description": {
+      "it": "IOSCO Asia Pacific Hub supporta formazione e cooperazione tra regolatori finanziari nell'area Asia-Pacifico.",
+      "en": "The IOSCO Asia Pacific Hub supports training and cooperation among financial regulators in the Asia-Pacific region."
+    },
+    "institution.csrc.description": {
+      "it": "CSRC è l'autorità cinese di vigilanza su titoli e mercati dei capitali.",
+      "en": "CSRC is China’s securities and capital-markets supervisory authority."
+    },
+    "institution.sebi.description": {
+      "it": "SEBI è l'autorità indiana di regolamentazione dei mercati mobiliari e tutela degli investitori.",
+      "en": "SEBI is India’s securities-market regulator and investor-protection authority."
+    },
+    "institution.asic.description": {
+      "it": "ASIC è l'autorità australiana di regolazione dei mercati finanziari e dei servizi societari.",
+      "en": "ASIC is Australia’s regulator for financial markets and corporate/financial services."
+    },
+    "institution.fbi_ic3.description": {
+      "it": "FBI IC3 è il centro statunitense di raccolta denunce su crimini informatici, incluse truffe finanziarie online.",
+      "en": "FBI IC3 is the U.S. reporting center for cybercrime complaints, including online financial fraud."
+    },
+    "institution.sipc.description": {
+      "it": "SIPC è l'ente statunitense di protezione degli investitori presso broker-dealer membri in caso di insolvenza dell'intermediario.",
+      "en": "SIPC is the U.S. investor-protection entity for customers of member broker-dealers in broker insolvency events."
+    },
+    "institution.sec_investor_gov.description": {
+      "it": "SEC Investor.gov è il portale ufficiale di educazione e prevenzione frodi per investitori della SEC statunitense.",
+      "en": "SEC Investor.gov is the U.S. SEC’s official investor education and fraud-prevention portal."
+    },
+    "institution.scamshield.description": {
+      "it": "ScamShield è un servizio nazionale di Singapore per prevenzione truffe e segnalazioni antifrode ai cittadini.",
+      "en": "ScamShield is Singapore’s national service for anti-scam prevention and citizen reporting support."
+    }
+  }
+}
