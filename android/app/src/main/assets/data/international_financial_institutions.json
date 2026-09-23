@@ -1,0 +1,870 @@
+{
+  "schemaVersion": "1.0.0",
+  "generatedFrom": [
+    "referenze.html",
+    "User-requested additions: FATF/GAFI, Egmont Group, UIF Italy, and principal FSRBs"
+  ],
+  "metadata": {
+    "lastVerified": "2026-09-23",
+    "categoriesRef": "data/international_institutions_categories.json",
+    "institutionTypesRef": "data/international_institutions_types.json",
+    "notes": [
+      "Cross-references use stable IDs and are intended for navigation, not automatic claims of subordination.",
+      "FATF/GAFI is represented as a standard-setting and evaluation body without direct investigative, seizure, or legislative powers."
+    ],
+    "unresolvedAuthorityReferences": [
+      {
+        "institutionId": "it_uif",
+        "requestedReference": "Bank of Italy supervisory authority record",
+        "reason": "No standalone Bank of Italy authorityId exists in financial_authorities_database.json as of 2026-09-23",
+        "officialUrl": "https://www.bancaditalia.it/"
+      },
+      {
+        "institutionId": "it_uif",
+        "requestedReference": "Guardia di Finanza authority record",
+        "reason": "No Guardia di Finanza authorityId exists in financial_authorities_database.json as of 2026-09-23",
+        "officialUrl": "https://www.gdf.gov.it/it"
+      },
+      {
+        "institutionId": "it_uif",
+        "requestedReference": "Questure - Polizia di Stato (Italy)",
+        "reason": "No standalone authorityId exists in financial_authorities_database.json as of 2026-09-23",
+        "officialUrl": "https://questure.poliziadistato.it/",
+        "relatedApp": "YouPol"
+      },
+      {
+        "institutionId": "it_uif",
+        "requestedReference": "Arma dei Carabinieri (Italy)",
+        "reason": "No standalone authorityId exists in financial_authorities_database.json as of 2026-09-23",
+        "officialUrl": "https://carabinieri.it",
+        "relatedApp": "iCarabinieri"
+      }
+    ]
+  },
+  "categories": [
+    "financial_supervision",
+    "aml_cft_policy",
+    "fiu_cooperation",
+    "investigation_anti_fraud",
+    "consumer_protection"
+  ],
+  "institutionTypes": [
+    "intergovernmental_standard_setter",
+    "fiu_network",
+    "national_fiu",
+    "regional_fatf_style_body",
+    "international_standard_setter",
+    "alerts_aggregation_portal",
+    "supranational_financial_supervisor",
+    "supranational_executive_body",
+    "anti_fraud_investigation_office",
+    "national_regulator",
+    "national_law_enforcement_reporting_center",
+    "investor_protection_fund",
+    "consumer_protection_service",
+    "investor_education_portal"
+  ],
+  "regions": [
+    {
+      "id": "worldwide",
+      "label": "Worldwide"
+    },
+    {
+      "id": "europe",
+      "label": "Europe"
+    },
+    {
+      "id": "americas",
+      "label": "Americas"
+    },
+    {
+      "id": "africa",
+      "label": "Africa"
+    },
+    {
+      "id": "asia_pacific",
+      "label": "Asia-Pacific"
+    },
+    {
+      "id": "middle_east_north_africa",
+      "label": "Middle East & North Africa"
+    },
+    {
+      "id": "eurasia",
+      "label": "Eurasia"
+    }
+  ],
+  "institutions": [
+    {
+      "id": "fatf_gafi",
+      "name": "Financial Action Task Force",
+      "shortName": "FATF",
+      "abbreviation": "FATF/GAFI",
+      "italianName": "Gruppo d'Azione Finanziaria Internazionale",
+      "category": "aml_cft_policy",
+      "institutionType": "intergovernmental_standard_setter",
+      "level": "global",
+      "region": "worldwide",
+      "country": null,
+      "homepage": "https://www.fatf-gafi.org/",
+      "mandateUrl": "https://www.fatf-gafi.org/en/about/mandate-of-the-fatf.html",
+      "recommendationsUrl": "https://www.fatf-gafi.org/en/publications/Fatfrecommendations/Fatf-recommendations.html",
+      "listsUrl": "https://www.fatf-gafi.org/en/countries/black-and-grey-lists.html",
+      "reportsUrl": "https://www.fatf-gafi.org/en/publications.html",
+      "descriptionKey": "institution.fatf_gafi.description",
+      "relatedInstitutionIds": [
+        "moneyval",
+        "apg",
+        "cfatf",
+        "gafilat",
+        "gabac",
+        "giaba",
+        "menafatf",
+        "esaamlg",
+        "eag",
+        "egmont_group"
+      ],
+      "relatedAuthorityIds": [],
+      "scope": [
+        "AML",
+        "CFT",
+        "CPF",
+        "mutual evaluations",
+        "risk monitoring"
+      ],
+      "powers": {
+        "can": [
+          "issue international AML/CFT/CPF standards",
+          "coordinate peer mutual evaluations",
+          "publish high-risk and increased-monitoring lists"
+        ],
+        "cannot": [
+          "conduct criminal investigations",
+          "seize assets directly",
+          "enact binding national legislation"
+        ]
+      },
+      "source": {
+        "primary": "https://www.fatf-gafi.org/",
+        "secondary": [
+          "https://www.fatf-gafi.org/en/about/mandate-of-the-fatf.html",
+          "https://www.fatf-gafi.org/en/publications/Fatfrecommendations/Fatf-recommendations.html"
+        ],
+        "lastVerified": "2026-09-23"
+      }
+    },
+    {
+      "id": "egmont_group",
+      "name": "Egmont Group of Financial Intelligence Units",
+      "shortName": "Egmont Group",
+      "abbreviation": "Egmont Group",
+      "italianName": "Gruppo Egmont delle Unità di Informazione Finanziaria",
+      "category": "fiu_cooperation",
+      "institutionType": "fiu_network",
+      "level": "global",
+      "region": "worldwide",
+      "country": null,
+      "homepage": "https://egmontgroup.org/",
+      "aboutUrl": "https://egmontgroup.org/about/",
+      "membersUrl": "https://egmontgroup.org/membership/",
+      "descriptionKey": "institution.egmont_group.description",
+      "relatedInstitutionIds": [
+        "fatf_gafi",
+        "it_uif"
+      ],
+      "relatedAuthorityIds": [
+        "italy__consob"
+      ],
+      "scope": [
+        "FIU cooperation",
+        "secure intelligence exchange",
+        "capacity building"
+      ],
+      "powers": {
+        "can": [
+          "facilitate FIU-to-FIU cooperation",
+          "promote FIU standards and training"
+        ],
+        "cannot": [
+          "exercise direct law-enforcement powers in member jurisdictions"
+        ]
+      },
+      "source": {
+        "primary": "https://egmontgroup.org/",
+        "lastVerified": "2026-09-23"
+      }
+    },
+    {
+      "id": "it_uif",
+      "name": "Unità di Informazione Finanziaria per l'Italia",
+      "shortName": "UIF Italy",
+      "abbreviation": "UIF",
+      "italianName": "Unità di Informazione Finanziaria per l'Italia",
+      "category": "fiu_cooperation",
+      "institutionType": "national_fiu",
+      "level": "national",
+      "region": "europe",
+      "country": "Italy",
+      "homepage": "https://uif.bancaditalia.it/",
+      "aboutUrl": "https://uif.bancaditalia.it/chi-siamo/index.html",
+      "reportsUrl": "https://uif.bancaditalia.it/pubblicazioni/index.html",
+      "contactsUrl": "https://uif.bancaditalia.it/contatti/index.html",
+      "descriptionKey": "institution.it_uif.description",
+      "relatedInstitutionIds": [
+        "fatf_gafi",
+        "egmont_group",
+        "moneyval"
+      ],
+      "relatedAuthorityIds": [
+        "italy__consob"
+      ],
+      "scope": [
+        "suspicious transaction reports",
+        "financial intelligence",
+        "AML/CFT analysis"
+      ],
+      "powers": {
+        "can": [
+          "receive and analyze suspicious transaction reports",
+          "share intelligence with competent authorities under law"
+        ],
+        "cannot": [
+          "act as a criminal court",
+          "replace police/judicial seizure powers"
+        ]
+      },
+      "source": {
+        "primary": "https://uif.bancaditalia.it/",
+        "secondary": [
+          "https://uif.bancaditalia.it/chi-siamo/index.html"
+        ],
+        "lastVerified": "2026-09-23"
+      }
+    },
+    {
+      "id": "moneyval",
+      "name": "Committee of Experts on the Evaluation of Anti-Money Laundering Measures and the Financing of Terrorism",
+      "shortName": "MONEYVAL",
+      "abbreviation": "MONEYVAL",
+      "category": "aml_cft_policy",
+      "institutionType": "regional_fatf_style_body",
+      "level": "regional",
+      "region": "europe",
+      "country": null,
+      "homepage": "https://www.coe.int/en/web/moneyval",
+      "membersUrl": "https://www.coe.int/en/web/moneyval/jurisdictions",
+      "reportsUrl": "https://www.coe.int/en/web/moneyval/evaluations",
+      "descriptionKey": "institution.moneyval.description",
+      "relatedInstitutionIds": [
+        "fatf_gafi",
+        "egmont_group",
+        "it_uif"
+      ],
+      "relatedAuthorityIds": [
+        "italy__consob"
+      ],
+      "scope": [
+        "FATF standards implementation",
+        "mutual evaluations in Europe"
+      ],
+      "powers": {
+        "can": [
+          "conduct regional AML/CFT evaluations",
+          "publish technical compliance reports"
+        ],
+        "cannot": [
+          "legislate for sovereign member states"
+        ]
+      },
+      "source": {
+        "primary": "https://www.coe.int/en/web/moneyval",
+        "lastVerified": "2026-09-23"
+      }
+    },
+    {
+      "id": "apg",
+      "name": "Asia/Pacific Group on Money Laundering",
+      "shortName": "APG",
+      "abbreviation": "APG",
+      "category": "aml_cft_policy",
+      "institutionType": "regional_fatf_style_body",
+      "level": "regional",
+      "region": "asia_pacific",
+      "country": null,
+      "homepage": "https://www.apgml.org/",
+      "aboutUrl": "https://www.apgml.org/about-us/page.aspx?p=6f6f6887-c372-4f05-8af4-58be7f5f18f6",
+      "membersUrl": "https://www.apgml.org/members-and-observers/members/page.aspx?p=8c16db88-66f9-4f5f-99ed-77f8e9c29e2c",
+      "descriptionKey": "institution.apg.description",
+      "relatedInstitutionIds": [
+        "fatf_gafi"
+      ],
+      "relatedAuthorityIds": [
+        "australia__asic",
+        "india__sebi"
+      ],
+      "scope": [
+        "regional AML/CFT cooperation",
+        "mutual evaluations"
+      ],
+      "powers": {
+        "can": [
+          "coordinate FATF-style peer reviews in Asia-Pacific"
+        ],
+        "cannot": [
+          "exercise national supervisory powers directly"
+        ]
+      },
+      "source": {
+        "primary": "https://www.apgml.org/",
+        "lastVerified": "2026-09-23"
+      }
+    },
+    {
+      "id": "cfatf",
+      "name": "Caribbean Financial Action Task Force",
+      "shortName": "CFATF",
+      "abbreviation": "CFATF",
+      "category": "aml_cft_policy",
+      "institutionType": "regional_fatf_style_body",
+      "level": "regional",
+      "region": "americas",
+      "country": null,
+      "homepage": "https://www.cfatf-gafic.org/",
+      "descriptionKey": "institution.cfatf.description",
+      "relatedInstitutionIds": [
+        "fatf_gafi"
+      ],
+      "relatedAuthorityIds": [],
+      "scope": [
+        "Caribbean AML/CFT policy coordination"
+      ],
+      "source": {
+        "primary": "https://www.cfatf-gafic.org/",
+        "lastVerified": "2026-09-23"
+      }
+    },
+    {
+      "id": "gafilat",
+      "name": "Financial Action Task Force of Latin America",
+      "shortName": "GAFILAT",
+      "abbreviation": "GAFILAT",
+      "category": "aml_cft_policy",
+      "institutionType": "regional_fatf_style_body",
+      "level": "regional",
+      "region": "americas",
+      "country": null,
+      "homepage": "https://www.gafilat.org/",
+      "descriptionKey": "institution.gafilat.description",
+      "relatedInstitutionIds": [
+        "fatf_gafi"
+      ],
+      "relatedAuthorityIds": [],
+      "scope": [
+        "Latin America AML/CFT cooperation"
+      ],
+      "source": {
+        "primary": "https://www.gafilat.org/",
+        "lastVerified": "2026-09-23"
+      }
+    },
+    {
+      "id": "gabac",
+      "name": "Groupe d’Action contre le Blanchiment d’Argent en Afrique Centrale",
+      "shortName": "GABAC",
+      "abbreviation": "GABAC",
+      "category": "aml_cft_policy",
+      "institutionType": "regional_fatf_style_body",
+      "level": "regional",
+      "region": "africa",
+      "country": null,
+      "homepage": "https://gabac.cemac.int/",
+      "descriptionKey": "institution.gabac.description",
+      "relatedInstitutionIds": [
+        "fatf_gafi"
+      ],
+      "relatedAuthorityIds": [],
+      "scope": [
+        "Central Africa AML/CFT cooperation"
+      ],
+      "source": {
+        "primary": "https://gabac.cemac.int/",
+        "lastVerified": "2026-09-23"
+      }
+    },
+    {
+      "id": "giaba",
+      "name": "Inter-Governmental Action Group against Money Laundering in West Africa",
+      "shortName": "GIABA",
+      "abbreviation": "GIABA",
+      "category": "aml_cft_policy",
+      "institutionType": "regional_fatf_style_body",
+      "level": "regional",
+      "region": "africa",
+      "country": null,
+      "homepage": "https://www.giaba.org/",
+      "descriptionKey": "institution.giaba.description",
+      "relatedInstitutionIds": [
+        "fatf_gafi"
+      ],
+      "relatedAuthorityIds": [],
+      "scope": [
+        "West Africa AML/CFT cooperation"
+      ],
+      "source": {
+        "primary": "https://www.giaba.org/",
+        "lastVerified": "2026-09-23"
+      }
+    },
+    {
+      "id": "menafatf",
+      "name": "Middle East and North Africa Financial Action Task Force",
+      "shortName": "MENAFATF",
+      "abbreviation": "MENAFATF",
+      "category": "aml_cft_policy",
+      "institutionType": "regional_fatf_style_body",
+      "level": "regional",
+      "region": "middle_east_north_africa",
+      "country": null,
+      "homepage": "https://menafatf.org/",
+      "descriptionKey": "institution.menafatf.description",
+      "relatedInstitutionIds": [
+        "fatf_gafi"
+      ],
+      "relatedAuthorityIds": [],
+      "scope": [
+        "MENA AML/CFT cooperation"
+      ],
+      "source": {
+        "primary": "https://menafatf.org/",
+        "lastVerified": "2026-09-23"
+      }
+    },
+    {
+      "id": "esaamlg",
+      "name": "Eastern and Southern Africa Anti-Money Laundering Group",
+      "shortName": "ESAAMLG",
+      "abbreviation": "ESAAMLG",
+      "category": "aml_cft_policy",
+      "institutionType": "regional_fatf_style_body",
+      "level": "regional",
+      "region": "africa",
+      "country": null,
+      "homepage": "https://www.esaamlg.org/",
+      "descriptionKey": "institution.esaamlg.description",
+      "relatedInstitutionIds": [
+        "fatf_gafi"
+      ],
+      "relatedAuthorityIds": [],
+      "scope": [
+        "Eastern and Southern Africa AML/CFT cooperation"
+      ],
+      "source": {
+        "primary": "https://www.esaamlg.org/",
+        "lastVerified": "2026-09-23"
+      }
+    },
+    {
+      "id": "eag",
+      "name": "Eurasian Group on Combating Money Laundering and Financing of Terrorism",
+      "shortName": "EAG",
+      "abbreviation": "EAG",
+      "category": "aml_cft_policy",
+      "institutionType": "regional_fatf_style_body",
+      "level": "regional",
+      "region": "eurasia",
+      "country": null,
+      "homepage": "https://eurasiangroup.org/",
+      "descriptionKey": "institution.eag.description",
+      "relatedInstitutionIds": [
+        "fatf_gafi"
+      ],
+      "relatedAuthorityIds": [],
+      "scope": [
+        "Eurasian AML/CFT cooperation"
+      ],
+      "source": {
+        "primary": "https://eurasiangroup.org/",
+        "lastVerified": "2026-09-23"
+      }
+    },
+    {
+      "id": "iosco",
+      "name": "International Organization of Securities Commissions",
+      "shortName": "IOSCO",
+      "abbreviation": "IOSCO",
+      "category": "financial_supervision",
+      "institutionType": "international_standard_setter",
+      "level": "global",
+      "region": "worldwide",
+      "country": null,
+      "homepage": "https://www.iosco.org/",
+      "membersUrl": "https://www.iosco.org/about/?subsection=membership",
+      "descriptionKey": "institution.iosco.description",
+      "relatedInstitutionIds": [
+        "iosco_i_scan",
+        "esma",
+        "iosco_asia_pacific_hub"
+      ],
+      "relatedAuthorityIds": [
+        "italy__consob",
+        "united_states_of_america__sec",
+        "china__csrc",
+        "india__sebi",
+        "australia__asic"
+      ],
+      "scope": [
+        "securities market standards",
+        "investor protection",
+        "cross-border cooperation"
+      ],
+      "source": {
+        "primary": "https://www.iosco.org/",
+        "lastVerified": "2026-09-23"
+      }
+    },
+    {
+      "id": "iosco_i_scan",
+      "name": "IOSCO International Securities & Commodities Alerts Network",
+      "shortName": "IOSCO i-SCAN",
+      "abbreviation": "i-SCAN",
+      "category": "investigation_anti_fraud",
+      "institutionType": "alerts_aggregation_portal",
+      "level": "global",
+      "region": "worldwide",
+      "country": null,
+      "homepage": "https://www.iosco.org/i-scan/",
+      "alertsUrl": "https://www.iosco.org/i-scan/",
+      "descriptionKey": "institution.iosco_i_scan.description",
+      "relatedInstitutionIds": [
+        "iosco"
+      ],
+      "relatedAuthorityIds": [],
+      "scope": [
+        "public investor alerts aggregation"
+      ],
+      "source": {
+        "primary": "https://www.iosco.org/i-scan/",
+        "lastVerified": "2026-09-23"
+      }
+    },
+    {
+      "id": "esma",
+      "name": "European Securities and Markets Authority",
+      "shortName": "ESMA",
+      "abbreviation": "ESMA",
+      "category": "financial_supervision",
+      "institutionType": "supranational_financial_supervisor",
+      "level": "supranational",
+      "region": "europe",
+      "country": null,
+      "homepage": "https://www.esma.europa.eu/",
+      "aboutUrl": "https://www.esma.europa.eu/about-esma",
+      "alertsUrl": "https://www.esma.europa.eu/investor-corner/warnings",
+      "descriptionKey": "institution.esma.description",
+      "relatedInstitutionIds": [
+        "iosco",
+        "european_commission"
+      ],
+      "relatedAuthorityIds": [
+        "italy__consob"
+      ],
+      "scope": [
+        "EU securities supervision",
+        "investor protection"
+      ],
+      "source": {
+        "primary": "https://www.esma.europa.eu/",
+        "lastVerified": "2026-09-23"
+      }
+    },
+    {
+      "id": "european_commission",
+      "name": "European Commission",
+      "shortName": "European Commission",
+      "abbreviation": "EC",
+      "italianName": "Commissione europea",
+      "category": "financial_supervision",
+      "institutionType": "supranational_executive_body",
+      "level": "supranational",
+      "region": "europe",
+      "country": null,
+      "homepage": "https://commission.europa.eu/",
+      "mandateUrl": "https://commission.europa.eu/about-european-commission_en",
+      "descriptionKey": "institution.european_commission.description",
+      "relatedInstitutionIds": [
+        "esma",
+        "olaf"
+      ],
+      "relatedAuthorityIds": [
+        "italy__consob"
+      ],
+      "scope": [
+        "EU executive and policy coordination"
+      ],
+      "source": {
+        "primary": "https://commission.europa.eu/",
+        "lastVerified": "2026-09-23"
+      }
+    },
+    {
+      "id": "olaf",
+      "name": "European Anti-Fraud Office",
+      "shortName": "OLAF",
+      "abbreviation": "OLAF",
+      "italianName": "Ufficio europeo per la lotta antifrode",
+      "category": "investigation_anti_fraud",
+      "institutionType": "anti_fraud_investigation_office",
+      "level": "supranational",
+      "region": "europe",
+      "country": null,
+      "homepage": "https://anti-fraud.ec.europa.eu/index_en",
+      "aboutUrl": "https://anti-fraud.ec.europa.eu/about-us_en",
+      "alertsUrl": "https://anti-fraud.ec.europa.eu/olaf-and-you/report-fraud_en",
+      "descriptionKey": "institution.olaf.description",
+      "relatedInstitutionIds": [
+        "european_commission"
+      ],
+      "relatedAuthorityIds": [],
+      "scope": [
+        "EU anti-fraud administrative investigations"
+      ],
+      "source": {
+        "primary": "https://anti-fraud.ec.europa.eu/index_en",
+        "lastVerified": "2026-09-23"
+      }
+    },
+    {
+      "id": "iosco_asia_pacific_hub",
+      "name": "IOSCO Asia Pacific Hub",
+      "shortName": "IOSCO Asia Pacific Hub",
+      "abbreviation": "IOSCO AP Hub",
+      "category": "financial_supervision",
+      "institutionType": "international_standard_setter",
+      "level": "regional",
+      "region": "asia_pacific",
+      "country": null,
+      "homepage": "https://www.iosco.org.my/",
+      "aboutUrl": "https://www.iosco.org/",
+      "descriptionKey": "institution.iosco_asia_pacific_hub.description",
+      "relatedInstitutionIds": [
+        "iosco"
+      ],
+      "relatedAuthorityIds": [
+        "australia__asic",
+        "india__sebi"
+      ],
+      "scope": [
+        "regional capacity building",
+        "IOSCO engagement in Asia-Pacific"
+      ],
+      "source": {
+        "primary": "https://www.iosco.org.my/",
+        "secondary": [
+          "https://www.iosco.org/"
+        ],
+        "lastVerified": "2026-09-23"
+      }
+    },
+    {
+      "id": "csrc",
+      "name": "China Securities Regulatory Commission",
+      "shortName": "CSRC",
+      "abbreviation": "CSRC",
+      "category": "financial_supervision",
+      "institutionType": "national_regulator",
+      "level": "national",
+      "region": "asia_pacific",
+      "country": "China",
+      "homepage": "http://www.csrc.gov.cn/",
+      "descriptionKey": "institution.csrc.description",
+      "relatedInstitutionIds": [
+        "iosco",
+        "fatf_gafi"
+      ],
+      "relatedAuthorityIds": [
+        "china__csrc"
+      ],
+      "scope": [
+        "securities and futures supervision in China"
+      ],
+      "source": {
+        "primary": "http://www.csrc.gov.cn/",
+        "secondary": [
+          "https://www.iosco.org/"
+        ],
+        "lastVerified": "2026-09-23"
+      }
+    },
+    {
+      "id": "sebi",
+      "name": "Securities and Exchange Board of India",
+      "shortName": "SEBI",
+      "abbreviation": "SEBI",
+      "category": "financial_supervision",
+      "institutionType": "national_regulator",
+      "level": "national",
+      "region": "asia_pacific",
+      "country": "India",
+      "homepage": "https://www.sebi.gov.in/",
+      "descriptionKey": "institution.sebi.description",
+      "relatedInstitutionIds": [
+        "iosco",
+        "fatf_gafi",
+        "apg"
+      ],
+      "relatedAuthorityIds": [
+        "india__sebi"
+      ],
+      "scope": [
+        "securities market regulation in India"
+      ],
+      "source": {
+        "primary": "https://www.sebi.gov.in/",
+        "secondary": [
+          "https://www.iosco.org/"
+        ],
+        "lastVerified": "2026-09-23"
+      }
+    },
+    {
+      "id": "asic",
+      "name": "Australian Securities and Investments Commission",
+      "shortName": "ASIC",
+      "abbreviation": "ASIC",
+      "category": "financial_supervision",
+      "institutionType": "national_regulator",
+      "level": "national",
+      "region": "asia_pacific",
+      "country": "Australia",
+      "homepage": "https://asic.gov.au/",
+      "descriptionKey": "institution.asic.description",
+      "relatedInstitutionIds": [
+        "iosco",
+        "fatf_gafi",
+        "apg"
+      ],
+      "relatedAuthorityIds": [
+        "australia__asic"
+      ],
+      "scope": [
+        "financial markets and corporate regulation in Australia"
+      ],
+      "source": {
+        "primary": "https://asic.gov.au/",
+        "secondary": [
+          "https://www.iosco.org/"
+        ],
+        "lastVerified": "2026-09-23"
+      }
+    },
+    {
+      "id": "fbi_ic3",
+      "name": "Internet Crime Complaint Center",
+      "shortName": "FBI IC3",
+      "abbreviation": "IC3",
+      "category": "investigation_anti_fraud",
+      "institutionType": "national_law_enforcement_reporting_center",
+      "level": "national",
+      "region": "americas",
+      "country": "United States of America",
+      "homepage": "https://www.ic3.gov/",
+      "reportsUrl": "https://www.ic3.gov/AnnualReport/Reports",
+      "contactsUrl": "https://www.ic3.gov/Home/ComplaintChoice",
+      "descriptionKey": "institution.fbi_ic3.description",
+      "relatedInstitutionIds": [
+        "sec_investor_gov"
+      ],
+      "relatedAuthorityIds": [
+        "united_states_of_america__sec"
+      ],
+      "scope": [
+        "cybercrime reporting",
+        "public advisories"
+      ],
+      "source": {
+        "primary": "https://www.ic3.gov/",
+        "lastVerified": "2026-09-23"
+      }
+    },
+    {
+      "id": "sipc",
+      "name": "Securities Investor Protection Corporation",
+      "shortName": "SIPC",
+      "abbreviation": "SIPC",
+      "category": "consumer_protection",
+      "institutionType": "investor_protection_fund",
+      "level": "national",
+      "region": "americas",
+      "country": "United States of America",
+      "homepage": "https://www.sipc.org/",
+      "membersUrl": "https://www.sipc.org/list-of-members",
+      "descriptionKey": "institution.sipc.description",
+      "relatedInstitutionIds": [
+        "sec_investor_gov"
+      ],
+      "relatedAuthorityIds": [
+        "united_states_of_america__sec"
+      ],
+      "scope": [
+        "broker-dealer customer protection"
+      ],
+      "source": {
+        "primary": "https://www.sipc.org/",
+        "lastVerified": "2026-09-23"
+      }
+    },
+    {
+      "id": "sec_investor_gov",
+      "name": "SEC Investor.gov",
+      "shortName": "Investor.gov",
+      "abbreviation": "SEC Investor.gov",
+      "category": "consumer_protection",
+      "institutionType": "investor_education_portal",
+      "level": "national",
+      "region": "americas",
+      "country": "United States of America",
+      "homepage": "https://www.investor.gov/",
+      "alertsUrl": "https://www.investor.gov/protect-your-investments/fraud/how-avoid-fraud",
+      "aboutUrl": "https://www.investor.gov/",
+      "descriptionKey": "institution.sec_investor_gov.description",
+      "relatedInstitutionIds": [
+        "fbi_ic3",
+        "sipc"
+      ],
+      "relatedAuthorityIds": [
+        "united_states_of_america__sec"
+      ],
+      "scope": [
+        "investor education",
+        "fraud prevention guidance"
+      ],
+      "source": {
+        "primary": "https://www.investor.gov/",
+        "lastVerified": "2026-09-23"
+      }
+    },
+    {
+      "id": "scamshield",
+      "name": "ScamShield",
+      "shortName": "ScamShield",
+      "abbreviation": "ScamShield",
+      "category": "consumer_protection",
+      "institutionType": "consumer_protection_service",
+      "level": "national",
+      "region": "asia_pacific",
+      "country": "Singapore",
+      "homepage": "https://www.scamshield.gov.sg/",
+      "alertsUrl": "https://www.scamshield.gov.sg/",
+      "descriptionKey": "institution.scamshield.description",
+      "relatedInstitutionIds": [],
+      "relatedAuthorityIds": [],
+      "scope": [
+        "anti-scam citizen protection services"
+      ],
+      "source": {
+        "primary": "https://www.scamshield.gov.sg/",
+        "lastVerified": "2026-09-23"
+      }
+    }
+  ]
+}

@@ -1,1 +1,5 @@
 *.backup
+android/.gradle/
+android/**/build/
+android/local.properties
+android/.idea/
