@@ -1331,6 +1331,11 @@
         }
         .flags-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); gap: 15px; max-width: 1200px; margin: 0 auto; }
         .flag-item {
+            appearance: none;
+            -webkit-appearance: none;
+            font: inherit;
+            color: inherit;
+            width: 100%;
             background: white;
             border: 2px solid #e0e0e0;
             border-radius: 10px;
@@ -1345,6 +1350,8 @@
             min-height: 110px;
         }
         .flag-item:hover { transform: translateY(-5px); box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4); border-color: #667eea; }
+        .flag-item-unavailable { cursor: default; opacity: 0.8; }
+        .flag-item-unavailable:hover { transform: none; box-shadow: none; border-color: #e0e0e0; }
         .flag-icon-wrapper { 
             margin-bottom: 8px;
             display: block;
@@ -1356,6 +1363,17 @@
             display: inline-block;
         }
         .flag-code { font-weight: 600; color: #667eea; font-size: 0.9em; margin-top: 5px; }
+        .flag-name { font-size: 0.75em; color: #334155; margin-top: 4px; line-height: 1.2; text-align: center; }
+        .flag-marker-badge {
+            display: inline-block;
+            margin-top: 4px;
+            padding: 2px 8px;
+            border-radius: 999px;
+            background: rgba(30, 41, 59, 0.12);
+            color: #1e293b;
+            font-size: 0.7em;
+            font-weight: 700;
+        }
         .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); z-index: 1000; overflow-y: auto; }
         .modal-content { background: white; max-width: 900px; margin: 50px auto; border-radius: 15px; padding: 40px; padding-bottom: 80px; position: relative; }
         .close-modal { position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%); font-size: 60px; line-height: 1; cursor: pointer; color: #dc2626; font-weight: bold; transition: all 0.3s ease; background: #fee2e2; border: 3px solid #dc2626; border-radius: 50%; width: 70px; height: 70px; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 12px rgba(220, 38, 38, 0.4); z-index: 10; }
@@ -4416,6 +4434,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         let countriesData = [];
         // Gestione intervallo per l'effetto HOLA sulle bandiere del grid
         let flagsWaveInterval = null;
+        let hasCompletedCountryLoad = false;
+        let hasCountryLoadError = false;
         // Rendere il grid bandiere non critico per il primo paint
         let hasRenderedFlagsGrid = false;
         let pendingFlagsGridRender = false;
@@ -4726,18 +4746,22 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 
                 // Assegna continente a ogni paese - SEO Enhancement
                 countriesData = assignContinents(countriesData);
+                hasCompletedCountryLoad = true;
+                hasCountryLoadError = false;
                 
                 renderAll();
             } catch (error) {
                 console.error('Error loading country data:', error);
                 countriesData = [];
+                hasCompletedCountryLoad = true;
+                hasCountryLoadError = true;
                 const countriesGrid = document.getElementById('countriesGrid');
                 if (countriesGrid) {
                     countriesGrid.innerHTML = `<p style="color: red; text-align: center;">Could not load country data. Please check the console for errors.</p>`;
                 }
                 const flagsGrid = document.getElementById('flagsGrid');
                 if (flagsGrid) {
-                    flagsGrid.innerHTML = `<p style="color: #92400e; text-align: center; grid-column: 1 / -1;">Flag grid unavailable: country data could not be loaded.</p>`;
+                    flagsGrid.innerHTML = `<p role="status" aria-live="polite" style="color: #92400e; text-align: center; grid-column: 1 / -1;">Flag grid unavailable: country data could not be loaded.</p>`;
                 }
             }
         }
@@ -6157,7 +6181,14 @@ https://avvstancamarcello.github.io/Financial-Authority-Database/
             grid.innerHTML = '';
 
             if (!Array.isArray(countriesData) || countriesData.length === 0) {
-                grid.innerHTML = '<p style="text-align:center; color:#92400e; grid-column: 1 / -1;">No country data available for flags grid.</p>';
+                if (!hasCompletedCountryLoad) {
+                    return;
+                }
+                if (hasCountryLoadError) {
+                    grid.innerHTML = '<p role="status" aria-live="polite" style="color: #92400e; text-align: center; grid-column: 1 / -1;">Flag grid unavailable: country data could not be loaded.</p>';
+                    return;
+                }
+                grid.innerHTML = '<p role="status" aria-live="polite" style="text-align:center; color:#92400e; grid-column: 1 / -1;">No country data available for flags grid.</p>';
                 return;
             }
             
@@ -6165,34 +6196,84 @@ https://avvstancamarcello.github.io/Financial-Authority-Database/
                 String(a?.country_name || '').localeCompare(String(b?.country_name || ''))
             );
 
-            sortedCountries.forEach(country => {
-                if (!country || !country.country_name) return;
+            sortedCountries.forEach((country, index) => {
+                if (!country) return;
+                const resolvedCountryName = typeof country.country_name === 'string' && country.country_name.trim()
+                    ? country.country_name.trim()
+                    : `Unknown country ${index + 1}`;
+                const hasCountryName = !!(country.country_name && String(country.country_name).trim());
 
-                const flagItem = document.createElement('div');
+                const flagItem = hasCountryName
+                    ? document.createElement('button')
+                    : document.createElement('div');
+                if (hasCountryName) {
+                    flagItem.setAttribute('type', 'button');
+                }
                 flagItem.className = 'flag-item';
-                flagItem.onclick = () => openModal(country.country_name);
+                if (hasCountryName) {
+                    flagItem.onclick = () => openModal(resolvedCountryName);
+                    flagItem.setAttribute('aria-label', `Open details for ${resolvedCountryName}`);
+                } else {
+                    flagItem.classList.add('flag-item-unavailable');
+                    flagItem.title = `Country details unavailable for ${resolvedCountryName}`;
+                }
                 
                 // Estrai informazioni per bandiera (codice per flag-icon e codice testuale)
-                const flagInfo = getFlagInfo(country.country_name);
+                const flagInfo = getFlagInfo(resolvedCountryName);
                 const countryCode = flagInfo.flagCode;
                 const displayCode = flagInfo.textCode;
                 const fallbackFlag = (typeof country.flag === 'string' && country.flag.trim()) ? country.flag.trim() : '🌍';
+                const normalizedCountryCode = String(countryCode || '').toUpperCase();
+                const specialRegionalFlagCode = normalizedCountryCode === 'CEMAC'
+                    ? 'cm'
+                    : (normalizedCountryCode === 'ECSRC' ? 'lc' : null);
                 
                 // Usa flag-icon CSS dove possibile, altrimenti fallback su emoji o globo
-                let flagHTML = '';
-                if (/^[A-Z]{2}$/.test(countryCode || '')) {
+                const flagWrapperNode = document.createElement('span');
+                flagWrapperNode.className = 'flag-icon-wrapper';
+                flagWrapperNode.setAttribute('aria-hidden', 'true');
+                if (specialRegionalFlagCode) {
+                    const iconNode = document.createElement('span');
+                    iconNode.className = `fi fi-${specialRegionalFlagCode}`;
+                    flagWrapperNode.appendChild(iconNode);
+                } else if (/^[A-Z]{2}$/.test(normalizedCountryCode)) {
                     // Bandiere nazionali con flag-icon-css
-                    flagHTML = `<span class="flag-icon-wrapper"><span class="fi fi-${countryCode.toLowerCase()}"></span></span>`;
+                    const iconNode = document.createElement('span');
+                    iconNode.className = `fi fi-${normalizedCountryCode.toLowerCase()}`;
+                    flagWrapperNode.appendChild(iconNode);
                 } else {
                     // Fallback affidabile su emoji dal database (oppure globo)
-                    flagHTML = `<span class="flag-icon-wrapper" style="font-size: 3em;">${fallbackFlag}</span>`;
+                    flagWrapperNode.style.fontSize = '3em';
+                    flagWrapperNode.textContent = fallbackFlag;
                 }
-                
-                flagItem.innerHTML = `
-                    ${flagHTML}
-                    <span class="flag-code">${displayCode}</span>
-                    ${country.country_name === 'Canary Islands (Spain)' ? '<span style="display:inline-block; margin-top:4px; padding:2px 8px; border-radius:999px; background:rgba(30,41,59,0.12); color:#1e293b; font-size:0.7em; font-weight:700;">Canarie</span>' : ''}
-                `;
+
+                const codeNode = document.createElement('span');
+                codeNode.className = 'flag-code';
+                codeNode.textContent = String(displayCode || 'N/A');
+
+                const nameNode = document.createElement('span');
+                nameNode.className = 'flag-name';
+                nameNode.textContent = resolvedCountryName;
+
+                flagItem.appendChild(flagWrapperNode);
+                flagItem.appendChild(codeNode);
+                flagItem.appendChild(nameNode);
+
+                if (!hasCountryName) {
+                    const unavailableNode = document.createElement('span');
+                    unavailableNode.className = 'flag-code';
+                    unavailableNode.style.marginTop = '2px';
+                    unavailableNode.textContent = 'Unavailable';
+                    flagItem.appendChild(unavailableNode);
+                }
+
+                const countryMarker = getCountryGridMarker(resolvedCountryName);
+                if (countryMarker) {
+                    const markerBadgeNode = document.createElement('span');
+                    markerBadgeNode.className = 'flag-marker-badge';
+                    markerBadgeNode.textContent = countryMarker;
+                    flagItem.appendChild(markerBadgeNode);
+                }
                 
                 grid.appendChild(flagItem);
             });
