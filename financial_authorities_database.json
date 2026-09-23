@@ -10,7 +10,9 @@
       "homepage": "https://www.bankofalbania.org/",
       "fraudReportLink": "https://www.bankofalbania.org/rc/doc/formular_ankese_1557820555.pdf",
       "authorityEmail": "public@bankofalbania.org",
-      "social_links": {}
+      "social_links": {},
+      "authorityId": "albania__boa",
+      "relatedInternationalInstitutionIds": []
     },
     "notes": "World Investor Week Coordinator: Anjeza Beja."
   },
@@ -25,7 +27,9 @@
       "homepage": "https://www.cosob.org/",
       "fraudReportLink": "https://www.cosob.org/fr/plaintes",
       "authorityEmail": "contact@cosob.dz",
-      "social_links": {}
+      "social_links": {},
+      "authorityId": "algeria__cosob",
+      "relatedInternationalInstitutionIds": []
     },
     "notes": "World Investor Week Coordinator: Abdelhakim Berrah."
   },
@@ -40,7 +44,9 @@
       "homepage": "https://www.cmc.ao/",
       "fraudReportLink": "https://www.cmc.ao/denuncias-e-reclamacoes",
       "authorityEmail": "cmc@cmc.ao",
-      "social_links": {}
+      "social_links": {},
+      "authorityId": "angola__cmc",
+      "relatedInternationalInstitutionIds": []
     },
     "notes": "World Investor Week Coordinator: José M. Matos."
   },
@@ -59,7 +65,9 @@
         "linkedin": "https://ar.linkedin.com/company/comision-nacional-de-valores",
         "twitter": "https://x.com/CNVArgentina",
         "youtube": "https://www.youtube.com/user/CNVArgentina"
-      }
+      },
+      "authorityId": "argentina__cnv",
+      "relatedInternationalInstitutionIds": []
     },
     "notes": "La BCRA (Banca Centrale) gestisce il registro degli intermediari finanziari."
   },
@@ -74,7 +82,9 @@
       "homepage": "https://www.cba.am/",
       "fraudReportLink": "https://www.cba.am/en/SitePages/fsc/fsc_complaints.aspx",
       "authorityEmail": "info@cba.am",
-      "social_links": {}
+      "social_links": {},
+      "authorityId": "armenia__cba",
+      "relatedInternationalInstitutionIds": []
     },
     "notes": "World Investor Week Coordinator: Armenak Darbinyan."
   },
@@ -93,7 +103,14 @@
         "linkedin": "https://www.linkedin.com/company/asic/",
         "twitter": "https://twitter.com/ASIC_Connect",
         "youtube": "https://www.youtube.com/user/ASICMoneysmart"
-      }
+      },
+      "authorityId": "australia__asic",
+      "relatedInternationalInstitutionIds": [
+        "asic",
+        "iosco",
+        "fatf_gafi",
+        "apg"
+      ]
     },
     "notes": "ASIC gestisce il registro delle aziende e dei servizi finanziari (Moneysmart)."
   },
@@ -108,7 +125,9 @@
       "homepage": "https://www.fma.gv.at/",
       "fraudReportLink": "https://www.fma.gv.at/en/consumers/complaints/",
       "authorityEmail": "fma@fma.gv.at",
-      "social_links": {}
+      "social_links": {},
+      "authorityId": "austria__fma",
+      "relatedInternationalInstitutionIds": []
     },
     "notes": "Standard UE pienamente applicati."
   },
@@ -123,7 +142,9 @@
       "homepage": "https://www.cbar.az/",
       "fraudReportLink": "https://www.cbar.az/page-415/consumer-protection",
       "authorityEmail": "mail@cbar.az",
-      "social_links": {}
+      "social_links": {},
+      "authorityId": "azerbaijan__cba",
+      "relatedInternationalInstitutionIds": []
     },
     "notes": "World Investor Week Coordinator: Vusala Gurbanova."
   },
@@ -143,7 +164,9 @@
         "instagram": "https://www.instagram.com/getsmarteraboutmoney/?hl=en",
         "linkedin": "https://bs.linkedin.com/company/securities-commission-of-the-bahamas",
         "youtube": "https://www.youtube.com/@securitiescommissionoftheb6891"
-      }
+      },
+      "authorityId": "bahamas__scb",
+      "relatedInternationalInstitutionIds": []
     },
     "notes": "Focus su educazione finanziaria."
   },
@@ -158,7 +181,9 @@
       "homepage": "https://www.cbb.gov.bh",
       "fraudReportLink": "https://www.cbb.gov.bh/complaints-page/",
       "authorityEmail": "info@cbb.gov.bh",
-      "social_links": {}
+      "social_links": {},
+      "authorityId": "bahrain__cbb",
+      "relatedInternationalInstitutionIds": []
     },
     "notes": ""
   },
@@ -173,7 +198,9 @@
       "homepage": "https://www.sec.gov.bd/",
       "fraudReportLink": "https://www.sec.gov.bd/complain",
       "authorityEmail": "info@sec.gov.bd",
-      "social_links": {}
+      "social_links": {},
+      "authorityId": "bangladesh__bsec",
+      "relatedInternationalInstitutionIds": []
     },
     "notes": "World Investor Week Coordinator: Md. Mahbubul Alam."
   },
@@ -188,7 +215,9 @@
       "homepage": "https://www.fsc.gov.bb/",
       "fraudReportLink": "https://www.fsc.gov.bb/complaints-queries/",
       "authorityEmail": "info@fsc.gov.bb",
-      "social_links": {}
+      "social_links": {},
+      "authorityId": "barbados__fsc",
+      "relatedInternationalInstitutionIds": []
     },
     "notes": "World Investor Week Coordinator: Legal & Licensing department."
   },
@@ -203,7 +232,9 @@
       "homepage": "https://www.fsma.be",
       "fraudReportLink": "https://www.fsma.be/en/consumer/complaints",
       "authorityEmail": "info@fsma.be",
-      "social_links": {}
+      "social_links": {},
+      "authorityId": "belgium__fsma",
+      "relatedInternationalInstitutionIds": []
     },
     "notes": "Standard UE applicati."
   },
@@ -218,7 +249,9 @@
       "homepage": "https://www.bma.bm/",
       "fraudReportLink": "https://www.bma.bm/report-a-scam",
       "authorityEmail": "enquiries@bma.bm",
-      "social_links": {}
+      "social_links": {},
+      "authorityId": "bermuda__bma",
+      "relatedInternationalInstitutionIds": []
     },
     "notes": "World Investor Week Coordinator: Lasonia Packwood."
   },
@@ -233,7 +266,9 @@
       "homepage": "https://www.asfi.gob.bo/",
       "fraudReportLink": "https://www.asfi.gob.bo/index.php/puntos-de-reclamacion-pr.html",
       "authorityEmail": "asfi@asfi.gob.bo",
-      "social_links": {}
+      "social_links": {},
+      "authorityId": "bolivia__asfi",
+      "relatedInternationalInstitutionIds": []
     },
     "notes": "World Investor Week Coordinator: Ilse Alemán."
   },
@@ -248,7 +283,9 @@
       "homepage": "https://www.nbfira.org.bw/",
       "fraudReportLink": "https://www.nbfira.org.bw/lodge-complaint",
       "authorityEmail": "info@nbfira.org.bw",
-      "social_links": {}
+      "social_links": {},
+      "authorityId": "botswana__nbfira",
+      "relatedInternationalInstitutionIds": []
     },
     "notes": "World Investor Week Coordinator: Boa Ntebele."
   },
@@ -263,7 +300,9 @@
       "homepage": "https://www.gov.br/cvm/",
       "fraudReportLink": "https://www.gov.br/cvm/pt-br/canais_atendimento/spc/login-cidadao",
       "authorityEmail": "imprensa@cvm.gov.br",
-      "social_links": {}
+      "social_links": {},
+      "authorityId": "brazil__cvm",
+      "relatedInternationalInstitutionIds": []
     },
     "notes": "World Investor Week Coordinator: José Alexandre Vasco."
   },
@@ -278,7 +317,9 @@
       "homepage": "https://www.bvifsc.vg/",
       "fraudReportLink": "https://www.bvifsc.vg/complaints-and-assistance",
       "authorityEmail": "commissioner@bvifsc.vg",
-      "social_links": {}
+      "social_links": {},
+      "authorityId": "british_virgin_islands__bvi_fsc",
+      "relatedInternationalInstitutionIds": []
     },
     "notes": "World Investor Week Coordinator: The Registry of Corporate Affairs."
   },
@@ -293,7 +334,9 @@
       "homepage": "https://www.fsc.bg/en/",
       "fraudReportLink": "https://www.fsc.bg/en/for-the-consumers/",
       "authorityEmail": "fsc@fsc.bg",
-      "social_links": {}
+      "social_links": {},
+      "authorityId": "bulgaria__fsc",
+      "relatedInternationalInstitutionIds": []
     },
     "notes": "Entrata nell'Area Euro il 1 Gennaio 2026. Standard UE applicati."
   },
@@ -308,7 +351,9 @@
       "homepage": "https://www.crepmf.org/",
       "fraudReportLink": "https://www.crepmf.org/nous-contacter/",
       "authorityEmail": "crepmf@crepmf.org",
-      "social_links": {}
+      "social_links": {},
+      "authorityId": "burkina_faso__crepmf",
+      "relatedInternationalInstitutionIds": []
     },
     "notes": "Autorità regionale per l'Unione Monetaria dell'Africa Occidentale (WAEMU)."
   },
@@ -323,7 +368,9 @@
       "homepage": "https://www.serc.gov.kh/",
       "fraudReportLink": "https://www.serc.gov.kh/contact-us/",
       "authorityEmail": "info@serc.gov.kh",
-      "social_links": {}
+      "social_links": {},
+      "authorityId": "cambodia__serc",
+      "relatedInternationalInstitutionIds": []
     },
     "notes": "World Investor Week Coordinator: SERC Team."
   },
@@ -338,7 +385,9 @@
       "homepage": "https://www.securities-administrators.ca/",
       "fraudReportLink": "https://www.securities-administrators.ca/investor-tools/report-a-scam/",
       "authorityEmail": "csa-acvm-secretariat@acvm-csa.ca",
-      "social_links": {}
+      "social_links": {},
+      "authorityId": "canada_csa_federal__csa",
+      "relatedInternationalInstitutionIds": []
     },
     "notes": "Organismo federale di coordinamento che raggruppa le 13 autorità provinciali e territoriali del Canada."
   },
@@ -353,7 +402,9 @@
       "homepage": "https://www.albertasecurities.com/",
       "fraudReportLink": "https://www.albertasecurities.com/enforcement/investor-protection",
       "authorityEmail": "inquiries@asc.ca",
-      "social_links": {}
+      "social_links": {},
+      "authorityId": "canada_alberta__asc",
+      "relatedInternationalInstitutionIds": []
     },
     "notes": "Autorità di regolamentazione dei titoli della provincia di Alberta."
   },
@@ -368,7 +419,9 @@
       "homepage": "https://www.bcsc.bc.ca/",
       "fraudReportLink": "https://www.bcsc.bc.ca/enforcement/report-a-concern",
       "authorityEmail": "inquiries@bcsc.bc.ca",
-      "social_links": {}
+      "social_links": {},
+      "authorityId": "canada_british_columbia__bcsc",
+      "relatedInternationalInstitutionIds": []
     },
     "notes": "Autorità di regolamentazione dei titoli della provincia della British Columbia."
   },
@@ -383,7 +436,9 @@
       "homepage": "https://www.msc.gov.mb.ca/",
       "fraudReportLink": "https://www.msc.gov.mb.ca/contact_us.html",
       "authorityEmail": "securities@gov.mb.ca",
-      "social_links": {}
+      "social_links": {},
+      "authorityId": "canada_manitoba__msc",
+      "relatedInternationalInstitutionIds": []
     },
     "notes": "Autorità di regolamentazione dei titoli della provincia del Manitoba."
   },
@@ -398,7 +453,9 @@
       "homepage": "https://www.fcnb.ca/",
       "fraudReportLink": "https://www.fcnb.ca/en/complaints",
       "authorityEmail": "info@fcnb.ca",
-      "social_links": {}
+      "social_links": {},
+      "authorityId": "canada_new_brunswick__fcnb",
+      "relatedInternationalInstitutionIds": []
     },
     "notes": "Autorità di regolamentazione dei servizi finanziari e dei consumatori del New Brunswick."
   },
@@ -413,7 +470,9 @@
       "homepage": "https://www.gov.nl.ca/dgsnl/securities/",
       "fraudReportLink": "https://www.gov.nl.ca/dgsnl/securities/contact/",
       "authorityEmail": "securities@gov.nl.ca",
-      "social_links": {}
+      "social_links": {},
+      "authorityId": "canada_newfoundland_and_labrador__oss_nl",
+      "relatedInternationalInstitutionIds": []
     },
     "notes": "Ufficio del Sovrintendente ai Titoli di Newfoundland and Labrador."
   },
@@ -428,7 +487,9 @@
       "homepage": "https://www.justice.gov.nt.ca/en/securities/",
       "fraudReportLink": "https://www.justice.gov.nt.ca/en/securities/",
       "authorityEmail": "securities@gov.nt.ca",
-      "social_links": {}
+      "social_links": {},
+      "authorityId": "canada_northwest_territories__oss_nt",
+      "relatedInternationalInstitutionIds": []
     },
     "notes": "Ufficio del Sovrintendente ai Titoli dei Territori del Nord-Ovest."
   },
@@ -443,7 +504,9 @@
       "homepage": "https://nssc.novascotia.ca/",
       "fraudReportLink": "https://nssc.novascotia.ca/investor-education/report-a-concern",
       "authorityEmail": "nssc@novascotia.ca",
-      "social_links": {}
+      "social_links": {},
+      "authorityId": "canada_nova_scotia__nssc",
+      "relatedInternationalInstitutionIds": []
     },
     "notes": "Autorità di regolamentazione dei titoli della Nova Scotia."
   },
@@ -458,7 +521,9 @@
       "homepage": "https://www.gov.nu.ca/justice/securities",
       "fraudReportLink": "https://www.gov.nu.ca/justice/securities",
       "authorityEmail": "securities@gov.nu.ca",
-      "social_links": {}
+      "social_links": {},
+      "authorityId": "canada_nunavut__nso",
+      "relatedInternationalInstitutionIds": []
     },
     "notes": "Ufficio dei Titoli del Nunavut."
   },
@@ -473,7 +538,9 @@
       "homepage": "https://www.osc.ca/",
       "fraudReportLink": "https://www.osc.ca/en/investors/report-a-concern",
       "authorityEmail": "inquiries@osc.gov.on.ca",
-      "social_links": {}
+      "social_links": {},
+      "authorityId": "canada_ontario__osc",
+      "relatedInternationalInstitutionIds": []
     },
     "notes": "Principale autorità di regolamentazione dei titoli del Canada, con sede a Toronto."
   },
@@ -488,7 +555,9 @@
       "homepage": "https://www.princeedwardisland.ca/en/topic/securities-office",
       "fraudReportLink": "https://www.princeedwardisland.ca/en/topic/securities-office",
       "authorityEmail": "securities@gov.pe.ca",
-      "social_links": {}
+      "social_links": {},
+      "authorityId": "canada_prince_edward_island__fcsd_pei",
+      "relatedInternationalInstitutionIds": []
     },
     "notes": "Divisione dei servizi finanziari e dei consumatori dell'Isola del Principe Edoardo."
   },
@@ -503,7 +572,9 @@
       "homepage": "https://lautorite.qc.ca/",
       "fraudReportLink": "https://lautorite.qc.ca/en/general-public/assistance-and-complaints/file-a-complaint",
       "authorityEmail": "information@lautorite.qc.ca",
-      "social_links": {}
+      "social_links": {},
+      "authorityId": "canada_quebec__amf",
+      "relatedInternationalInstitutionIds": []
     },
     "notes": "Autorità dei mercati finanziari del Quebec. Regolatore unico per il settore finanziario della provincia."
   },
@@ -518,7 +589,9 @@
       "homepage": "https://fcaa.gov.sk.ca/",
       "fraudReportLink": "https://fcaa.gov.sk.ca/securities/investor-protection",
       "authorityEmail": "securities@gov.sk.ca",
-      "social_links": {}
+      "social_links": {},
+      "authorityId": "canada_saskatchewan__fcaa",
+      "relatedInternationalInstitutionIds": []
     },
     "notes": "Autorità per gli affari finanziari e dei consumatori del Saskatchewan."
   },
@@ -533,7 +606,9 @@
       "homepage": "https://yukon.ca/en/doing-business/securities",
       "fraudReportLink": "https://yukon.ca/en/doing-business/securities",
       "authorityEmail": "securities@yukon.ca",
-      "social_links": {}
+      "social_links": {},
+      "authorityId": "canada_yukon__oyss",
+      "relatedInternationalInstitutionIds": []
     },
     "notes": "Ufficio del Sovrintendente ai Titoli dello Yukon."
   },
@@ -548,7 +623,9 @@
       "homepage": "https://www.cima.ky/",
       "fraudReportLink": "https://www.cima.ky/complaints",
       "authorityEmail": "contact@cima.ky",
-      "social_links": {}
+      "social_links": {},
+      "authorityId": "cayman_islands__cima",
+      "relatedInternationalInstitutionIds": []
     },
     "notes": "World Investor Week Coordinator: CIMA Team."
   },
@@ -563,7 +640,9 @@
       "homepage": "https://cosumaf.org/",
       "fraudReportLink": "https://cosumaf.org/contact/",
       "authorityEmail": "contact@cosumaf.org",
-      "social_links": {}
+      "social_links": {},
+      "authorityId": "cemac_regional__cosumaf",
+      "relatedInternationalInstitutionIds": []
     },
     "notes": "Autorità regionale per Camerun, Repubblica Centrafricana, Ciad, Congo, Guinea Equatoriale e Gabon."
   },
@@ -578,7 +657,9 @@
       "homepage": "https://www.cmfchile.cl/",
       "fraudReportLink": "https://www.cmfchile.cl/portal/principal/605/w3-propertyvalue-9871.html",
       "authorityEmail": "consultas@cmfchile.cl",
-      "social_links": {}
+      "social_links": {},
+      "authorityId": "chile__cmf",
+      "relatedInternationalInstitutionIds": []
     },
     "notes": "World Investor Week Coordinator: CMF Educa."
   },
@@ -593,7 +674,13 @@
       "homepage": "http://www.csrc.gov.cn/",
       "fraudReportLink": "http://www.csrc.gov.cn/csrc/c100028/common_list.shtml",
       "authorityEmail": "info@csrc.gov.cn",
-      "social_links": {}
+      "social_links": {},
+      "authorityId": "china__csrc",
+      "relatedInternationalInstitutionIds": [
+        "csrc",
+        "iosco",
+        "fatf_gafi"
+      ]
     },
     "notes": "Agenzia governativa sotto il Consiglio di Stato della Repubblica Popolare Cinese. Regola l'industria dei titoli, futures e fondi di investimento. Supervisiona la Borsa di Shanghai, Shenzhen e Beijing."
   },
@@ -608,7 +695,9 @@
       "homepage": "https://www.fsc.gov.tw/en/",
       "fraudReportLink": "https://fscmail.fsc.gov.tw/",
       "authorityEmail": "chium@sfb.gov.tw",
-      "social_links": {}
+      "social_links": {},
+      "authorityId": "chinese_taipei__fsc",
+      "relatedInternationalInstitutionIds": []
     },
     "notes": "World Investor Week Coordinator: Tiffany Chiu."
   },
@@ -623,7 +712,9 @@
       "homepage": "https://www.superfinanciera.gov.co/",
       "fraudReportLink": "https://www.superfinanciera.gov.co/jsp/index.jsf?id=10080769",
       "authorityEmail": "super@superfinanciera.gov.co",
-      "social_links": {}
+      "social_links": {},
+      "authorityId": "colombia__sfc",
+      "relatedInternationalInstitutionIds": []
     },
     "notes": "World Investor Week Coordinator: Angela Maria Garcia."
   },
@@ -638,7 +729,9 @@
       "homepage": "https://www.sugeval.fi.cr/",
       "fraudReportLink": "https://www.sugeval.fi.cr/tramites_servicios/Paginas/Denuncias.aspx",
       "authorityEmail": "informacion@sugeval.fi.cr",
-      "social_links": {}
+      "social_links": {},
+      "authorityId": "costa_rica__sugeval",
+      "relatedInternationalInstitutionIds": []
     },
     "notes": "World Investor Week Coordinator: María Lucía Fernández."
   },
@@ -653,7 +746,9 @@
       "homepage": "https://www.crepmf.org/",
       "fraudReportLink": "https://www.crepmf.org/nous-contacter/",
       "authorityEmail": "crepmf@crepmf.org",
-      "social_links": {}
+      "social_links": {},
+      "authorityId": "c_te_d_ivoire__crepmf",
+      "relatedInternationalInstitutionIds": []
     },
     "notes": "Autorità regionale per l'Unione Monetaria dell'Africa Occidentale (WAEMU)."
   },
@@ -668,7 +763,9 @@
       "homepage": "https://www.hanfa.hr/",
       "fraudReportLink": "https://www.hanfa.hr/trziste-kapitala/upiti-i-prigovori/",
       "authorityEmail": "info@hanfa.hr",
-      "social_links": {}
+      "social_links": {},
+      "authorityId": "croatia__hanfa",
+      "relatedInternationalInstitutionIds": []
     },
     "notes": "World Investor Week Coordinator: HANFA Team."
   },
@@ -683,7 +780,9 @@
       "homepage": "https://www.cysec.gov.cy/",
       "fraudReportLink": "https://www.cysec.gov.cy/en-GB/complaints/how-to-complain/",
       "authorityEmail": "info@cysec.gov.cy",
-      "social_links": {}
+      "social_links": {},
+      "authorityId": "cyprus__cysec",
+      "relatedInternationalInstitutionIds": []
     },
     "notes": "World Investor Week Coordinator: CySEC Team."
   },
@@ -698,7 +797,9 @@
       "homepage": "https://www.cnb.cz/",
       "fraudReportLink": "https://www.cnb.cz/en/consumer/protection-and-financial-literacy/how-to-file-a-complaint-or-inquiry/",
       "authorityEmail": "podatelna@cnb.cz",
-      "social_links": {}
+      "social_links": {},
+      "authorityId": "czech_republic__cnb",
+      "relatedInternationalInstitutionIds": []
     },
     "notes": "World Investor Week Coordinator: CNB Team."
   },
@@ -713,7 +814,9 @@
       "homepage": "https://www.finanstilsynet.dk/",
       "fraudReportLink": "https://www.finanstilsynet.dk/Forbrugere/Klag-over-en-finansiel-virksomhed",
       "authorityEmail": "finanstilsynet@ftnet.dk",
-      "social_links": {}
+      "social_links": {},
+      "authorityId": "denmark__finanstilsynet",
+      "relatedInternationalInstitutionIds": []
     },
     "notes": "World Investor Week Coordinator: Ulla Brøns."
   },
@@ -728,7 +831,9 @@
       "homepage": "https://www.finanstilsynet.dk/",
       "fraudReportLink": "https://www.finanstilsynet.dk/Forbrugere/Klag-over-en-finansiel-virksomhed",
       "authorityEmail": "finanstilsynet@ftnet.dk",
-      "social_links": {}
+      "social_links": {},
+      "authorityId": "greenland__finanstilsynet",
+      "relatedInternationalInstitutionIds": []
     },
     "notes": "Territorio d'oltremare del Regno di Danimarca. La vigilanza sui mercati finanziari e sugli intermediari è esercitata dall'Autorità danese Finanstilsynet anche per la Groenlandia."
   },
@@ -743,7 +848,9 @@
       "homepage": "http://www.ecsrc.com",
       "fraudReportLink": "http://www.ecsrc.com/complaints/",
       "authorityEmail": "ecsrc@eccb-centralbank.org",
-      "social_links": {}
+      "social_links": {},
+      "authorityId": "ecsrc_regional__ecsrc",
+      "relatedInternationalInstitutionIds": []
     },
     "notes": "Autorità regionale per Anguilla, Antigua e Barbuda, Dominica, Grenada, Montserrat, Saint Kitts e Nevis, Santa Lucia, Saint Vincent e Grenadine."
   },
@@ -758,7 +865,9 @@
       "homepage": "https://fra.gov.eg/",
       "fraudReportLink": "https://fra.gov.eg/complaints/",
       "authorityEmail": "fra@fra.gov.eg",
-      "social_links": {}
+      "social_links": {},
+      "authorityId": "egypt__fra",
+      "relatedInternationalInstitutionIds": []
     },
     "notes": "World Investor Week Coordinator: FRA Team."
   },
@@ -773,7 +882,9 @@
       "homepage": "https://www.ssf.gob.sv/",
       "fraudReportLink": "https://www.ssf.gob.sv/atencion-al-usuario-financiero/",
       "authorityEmail": "info@ssf.gob.sv",
-      "social_links": {}
+      "social_links": {},
+      "authorityId": "el_salvador__ssf",
+      "relatedInternationalInstitutionIds": []
     },
     "notes": "World Investor Week Coordinator: Ana Lorena Guevara de Palacios."
   },
@@ -788,7 +899,9 @@
       "homepage": "https://www.fi.ee/",
       "fraudReportLink": "https://www.fi.ee/en/consumer/all-articles/how-submit-complaint-against-financial-service-provider",
       "authorityEmail": "info@fi.ee",
-      "social_links": {}
+      "social_links": {},
+      "authorityId": "estonia__fsa",
+      "relatedInternationalInstitutionIds": []
     },
     "notes": "World Investor Week Coordinator: FSA Team."
   },
@@ -803,7 +916,9 @@
       "homepage": "https://www.finanssivalvonta.fi/",
       "fraudReportLink": "https://www.finanssivalvonta.fi/en/about-the-fin-fsa/contact-us/report-suspected-offence/",
       "authorityEmail": "kirjaamo@finanssivalvonta.fi",
-      "social_links": {}
+      "social_links": {},
+      "authorityId": "finland__fin_fsa",
+      "relatedInternationalInstitutionIds": []
     },
     "notes": "World Investor Week Coordinator: Anneli Tuominen."
   },
@@ -818,7 +933,9 @@
       "homepage": "https://www.amf-france.org/",
       "fraudReportLink": "https://www.amf-france.org/fr/le-mediateur-de-lamf/votre-dossier-de-mediation/vous-voulez-deposer-une-demande-de-mediation",
       "authorityEmail": "mediateur@amf-france.org",
-      "social_links": {}
+      "social_links": {},
+      "authorityId": "france__amf",
+      "relatedInternationalInstitutionIds": []
     },
     "notes": "World Investor Week Coordinator: AMF Team."
   },
@@ -833,7 +950,9 @@
       "homepage": "https://nbg.gov.ge/",
       "fraudReportLink": "https://nbg.gov.ge/en/page/hot-line",
       "authorityEmail": "info@nbg.gov.ge",
-      "social_links": {}
+      "social_links": {},
+      "authorityId": "georgia__nbg",
+      "relatedInternationalInstitutionIds": []
     },
     "notes": "World Investor Week Coordinator: Lasha Gzirishvili."
   },
@@ -848,7 +967,9 @@
       "homepage": "https://www.bafin.de/",
       "fraudReportLink": "https://www.bafin.de/EN/DieBaFin/Kontakt/Verbrauchertelefon/verbrauchertelefon_node_en.html",
       "authorityEmail": "poststelle@bafin.de",
-      "social_links": {}
+      "social_links": {},
+      "authorityId": "germany__bafin",
+      "relatedInternationalInstitutionIds": []
     },
     "notes": "World Investor Week Coordinator: BaFin Team."
   },
@@ -863,7 +984,9 @@
       "homepage": "https://www.fsc.gi/",
       "fraudReportLink": "https://www.fsc.gi/consumer-hub/complaints",
       "authorityEmail": "information@fsc.gi",
-      "social_links": {}
+      "social_links": {},
+      "authorityId": "gibraltar__gfsc",
+      "relatedInternationalInstitutionIds": []
     },
     "notes": "World Investor Week Coordinator: GFSC Team."
   },
@@ -878,7 +1001,9 @@
       "homepage": "http://www.hcmc.gr/",
       "fraudReportLink": "http://www.hcmc.gr/en_US/web/portal/epikoinonia",
       "authorityEmail": "info@cmc.gov.gr",
-      "social_links": {}
+      "social_links": {},
+      "authorityId": "greece__hcmc",
+      "relatedInternationalInstitutionIds": []
     },
     "notes": "World Investor Week Coordinator: HCMC Team."
   },
@@ -893,7 +1018,9 @@
       "homepage": "https://www.gfsc.gg/",
       "fraudReportLink": "https://www.gfsc.gg/consumers/making-complaint",
       "authorityEmail": "info@gfsc.gg",
-      "social_links": {}
+      "social_links": {},
+      "authorityId": "guernsey__gfsc",
+      "relatedInternationalInstitutionIds": []
     },
     "notes": "World Investor Week Coordinator: GFSC Team."
   },
@@ -908,7 +1035,9 @@
       "homepage": "https://www.sfc.hk/",
       "fraudReportLink": "https://www.sfc.hk/en/Lodge-a-complaint",
       "authorityEmail": "enquiry@sfc.hk",
-      "social_links": {}
+      "social_links": {},
+      "authorityId": "hong_kong__sfc",
+      "relatedInternationalInstitutionIds": []
     },
     "notes": "World Investor Week Coordinator: Investor and Financial Education Council."
   },
@@ -923,7 +1052,9 @@
       "homepage": "https://www.mnb.hu/",
       "fraudReportLink": "https://www.mnb.hu/fogyasztovedelem/elerhetosegek",
       "authorityEmail": "ugyfelszolgalat@mnb.hu",
-      "social_links": {}
+      "social_links": {},
+      "authorityId": "hungary__mnb",
+      "relatedInternationalInstitutionIds": []
     },
     "notes": "World Investor Week Coordinator: MNB Team. Pagina contatti consumatori: https://www.mnb.hu/fogyasztovedelem/elerhetosegek - Email ufficiale consumatori: ugyfelszolgalat@mnb.hu - Avvisi investitori: https://www.mnb.hu/felugyelet/piacfelugyelet/befektetoi-figyelmeztetesek"
   },
@@ -938,7 +1069,9 @@
       "homepage": "https://www.sedlabanki.is/",
       "fraudReportLink": "https://www.sedlabanki.is/consumer-protection/complaints-and-comments/",
       "authorityEmail": "sedlabanki@sedlabanki.is",
-      "social_links": {}
+      "social_links": {},
+      "authorityId": "iceland__cbi",
+      "relatedInternationalInstitutionIds": []
     },
     "notes": "World Investor Week Coordinator: CBI Team."
   },
@@ -953,7 +1086,14 @@
       "homepage": "https://www.sebi.gov.in/",
       "fraudReportLink": "https://scores.gov.in/",
       "authorityEmail": "sebi@sebi.gov.in",
-      "social_links": {}
+      "social_links": {},
+      "authorityId": "india__sebi",
+      "relatedInternationalInstitutionIds": [
+        "sebi",
+        "iosco",
+        "fatf_gafi",
+        "apg"
+      ]
     },
     "notes": "World Investor Week Coordinator: SEBI Team."
   },
@@ -968,7 +1108,9 @@
       "homepage": "https://www.ojk.go.id/",
       "fraudReportLink": "https://kontak157.ojk.go.id/",
       "authorityEmail": "humas@ojk.go.id",
-      "social_links": {}
+      "social_links": {},
+      "authorityId": "indonesia__ojk",
+      "relatedInternationalInstitutionIds": []
     },
     "notes": "World Investor Week Coordinator: OJK Team."
   },
@@ -985,7 +1127,9 @@
       "authorityEmail": "enquiries@centralbank.ie",
       "social_links": {
         "consumer_education": "https://www.centralbank.ie/consumer-hub/explainers/how-can-i-avoid-a-financial-services-scam"
-      }
+      },
+      "authorityId": "ireland__cbi",
+      "relatedInternationalInstitutionIds": []
     },
     "notes": "Consumer Hub dedicato: guida esemplare 'How can I avoid a financial services scam' (https://www.centralbank.ie/consumer-hub/explainers/how-can-i-avoid-a-financial-services-scam) - educazione finanziaria per riconoscimento truffe. World Investor Week Coordinator: CBI Team."
   },
@@ -1000,7 +1144,9 @@
       "homepage": "https://www.iomfsa.im/",
       "fraudReportLink": "https://www.iomfsa.im/consumer-material/how-to-make-a-complaint/",
       "authorityEmail": "info@iomfsa.im",
-      "social_links": {}
+      "social_links": {},
+      "authorityId": "isle_of_man__iomfsa",
+      "relatedInternationalInstitutionIds": []
     },
     "notes": "World Investor Week Coordinator: IOMFSA Team."
   },
@@ -1015,7 +1161,9 @@
       "homepage": "https://www.isa.gov.il/",
       "fraudReportLink": "https://www.isa.gov.il/sites/ISAEng/188/Pages/190.aspx",
       "authorityEmail": "pniot@isa.gov.il",
-      "social_links": {}
+      "social_links": {},
+      "authorityId": "israel__isa",
+      "relatedInternationalInstitutionIds": []
     },
     "notes": "World Investor Week Coordinator: ISA Team."
   },
@@ -1030,7 +1178,16 @@
       "homepage": "https://www.consob.it/",
       "fraudReportLink": "https://www.consob.it/web/area-pubblica/esposti",
       "authorityEmail": "consob@pec.consob.it",
-      "social_links": {}
+      "social_links": {},
+      "authorityId": "italy__consob",
+      "relatedInternationalInstitutionIds": [
+        "iosco",
+        "esma",
+        "fatf_gafi",
+        "moneyval",
+        "egmont_group",
+        "it_uif"
+      ]
     },
     "notes": "World Investor Week Coordinator: CONSOB Team.",
     "thumbnail": "authority/preview-consob.png",
@@ -1048,7 +1205,9 @@
       "homepage": "https://www.fscjamaica.org/",
       "fraudReportLink": "https://www.fscjamaica.org/complaints/",
       "authorityEmail": "fsc@fscjamaica.org",
-      "social_links": {}
+      "social_links": {},
+      "authorityId": "jamaica__fsc",
+      "relatedInternationalInstitutionIds": []
     },
     "notes": "World Investor Week Coordinator: FSC Team."
   },
@@ -1063,7 +1222,9 @@
       "homepage": "https://www.fsa.go.jp/",
       "fraudReportLink": "https://www.fsa.go.jp/en/contact/index.html",
       "authorityEmail": "equestion@fsa.go.jp",
-      "social_links": {}
+      "social_links": {},
+      "authorityId": "japan__fsa",
+      "relatedInternationalInstitutionIds": []
     },
     "notes": "World Investor Week Coordinator: FSA Team."
   },
@@ -1078,7 +1239,9 @@
       "homepage": "https://www.jerseyfsc.org/",
       "fraudReportLink": "https://www.jerseyfsc.org/industry/making-a-complaint/",
       "authorityEmail": "info@jerseyfsc.org",
-      "social_links": {}
+      "social_links": {},
+      "authorityId": "jersey__jfsc",
+      "relatedInternationalInstitutionIds": []
     },
     "notes": "World Investor Week Coordinator: JFSC Team."
   },
@@ -1093,7 +1256,9 @@
       "homepage": "http://www.jsc.gov.jo/",
       "fraudReportLink": "http://www.jsc.gov.jo/page/en/investor-complaints",
       "authorityEmail": "info@jsc.gov.jo",
-      "social_links": {}
+      "social_links": {},
+      "authorityId": "jordan__jsc",
+      "relatedInternationalInstitutionIds": []
     },
     "notes": "World Investor Week Coordinator: JSC Team."
   },
@@ -1108,7 +1273,9 @@
       "homepage": "https://www.gov.kz/memleket/entities/ardfm",
       "fraudReportLink": "https://www.gov.kz/memleket/entities/ardfm/request/1?lang=en",
       "authorityEmail": "info@finreg.kz",
-      "social_links": {}
+      "social_links": {},
+      "authorityId": "kazakhstan__ardfm",
+      "relatedInternationalInstitutionIds": []
     },
     "notes": "World Investor Week Coordinator: ARDFM Team."
   },
@@ -1123,7 +1290,9 @@
       "homepage": "https://www.cma.or.ke/",
       "fraudReportLink": "https://www.cma.or.ke/index.php/investor-protection/complaints-handling",
       "authorityEmail": "corporate@cma.or.ke",
-      "social_links": {}
+      "social_links": {},
+      "authorityId": "kenya__cma",
+      "relatedInternationalInstitutionIds": []
     },
     "notes": "World Investor Week Coordinator: CMA Team."
   },
@@ -1138,7 +1307,9 @@
       "homepage": "https://www.fss.or.kr/",
       "fraudReportLink": "https://www.fss.or.kr/fss/en/main/contents.do?menuNo=400023",
       "authorityEmail": "fssintl@fss.or.kr",
-      "social_links": {}
+      "social_links": {},
+      "authorityId": "korea_republic_of__fss",
+      "relatedInternationalInstitutionIds": []
     },
     "notes": "World Investor Week Coordinator: FSS Team."
   },
@@ -1153,7 +1324,9 @@
       "homepage": "https://www.cma.gov.kw/",
       "fraudReportLink": "https://www.cma.gov.kw/en/web/cma/complaints",
       "authorityEmail": "info@cma.gov.kw",
-      "social_links": {}
+      "social_links": {},
+      "authorityId": "kuwait__cma",
+      "relatedInternationalInstitutionIds": []
     },
     "notes": "World Investor Week Coordinator: CMA Team."
   },
@@ -1168,7 +1341,9 @@
       "homepage": "http://www.fsa.kg/",
       "fraudReportLink": "http://www.fsa.kg/feedback",
       "authorityEmail": "info@fsa.kg",
-      "social_links": {}
+      "social_links": {},
+      "authorityId": "kyrgyzstan__ssrsfm",
+      "relatedInternationalInstitutionIds": []
     },
     "notes": "World Investor Week Coordinator: SSRSFM Team."
   },
@@ -1183,7 +1358,9 @@
       "homepage": "https://www.bank.lv/",
       "fraudReportLink": "https://www.bank.lv/en/customer-protection/submitting-complaints",
       "authorityEmail": "info@bank.lv",
-      "social_links": {}
+      "social_links": {},
+      "authorityId": "latvia__lb",
+      "relatedInternationalInstitutionIds": []
     },
     "notes": "World Investor Week Coordinator: LB Team."
   },
@@ -1198,7 +1375,9 @@
       "homepage": "https://www.fma-li.li/",
       "fraudReportLink": "https://www.fma-li.li/en/client-protection/complaints-office.html",
       "authorityEmail": "info@fma-li.li",
-      "social_links": {}
+      "social_links": {},
+      "authorityId": "liechtenstein__fma",
+      "relatedInternationalInstitutionIds": []
     },
     "notes": "World Investor Week Coordinator: FMA Team."
   },
@@ -1213,7 +1392,9 @@
       "homepage": "https://www.lb.lt/",
       "fraudReportLink": "https://www.lb.lt/en/consumer-and-financial-market-participant-disputes",
       "authorityEmail": "info@lb.lt",
-      "social_links": {}
+      "social_links": {},
+      "authorityId": "lithuania__lb",
+      "relatedInternationalInstitutionIds": []
     },
     "notes": "World Investor Week Coordinator: LB Team."
   },
@@ -1228,7 +1409,9 @@
       "homepage": "https://www.cssf.lu/",
       "fraudReportLink": "https://www.cssf.lu/en/consumer/complaints/",
       "authorityEmail": "direction@cssf.lu",
-      "social_links": {}
+      "social_links": {},
+      "authorityId": "luxembourg__cssf",
+      "relatedInternationalInstitutionIds": []
     },
     "notes": "World Investor Week Coordinator: CSSF Team."
   },
@@ -1243,7 +1426,9 @@
       "homepage": "https://www.rbm.mw/",
       "fraudReportLink": "https://www.rbm.mw/Supervision/ComplaintsHandling",
       "authorityEmail": "rbm@rbm.mw",
-      "social_links": {}
+      "social_links": {},
+      "authorityId": "malawi__rbm",
+      "relatedInternationalInstitutionIds": []
     },
     "notes": "World Investor Week Coordinator: RBM Team."
   },
@@ -1258,7 +1443,9 @@
       "homepage": "https://www.sc.com.my/",
       "fraudReportLink": "https://www.sc.com.my/regulation/enforcement/make-a-complaint",
       "authorityEmail": "aduan@seccom.com.my",
-      "social_links": {}
+      "social_links": {},
+      "authorityId": "malaysia__sc",
+      "relatedInternationalInstitutionIds": []
     },
     "notes": "World Investor Week Coordinator: SC Team."
   },
@@ -1273,7 +1460,9 @@
       "homepage": "https://www.mfsa.mt/",
       "fraudReportLink": "https://www.mfsa.mt/consumers/complaints-and-redress/",
       "authorityEmail": "communications@mfsa.mt",
-      "social_links": {}
+      "social_links": {},
+      "authorityId": "malta__mfsa",
+      "relatedInternationalInstitutionIds": []
     },
     "notes": "World Investor Week Coordinator: MFSA Team."
   },
@@ -1288,7 +1477,9 @@
       "homepage": "https://www.fscmauritius.org/",
       "fraudReportLink": "https://www.fscmauritius.org/en/consumer-protection/complaints",
       "authorityEmail": "fscmauritius@intnet.mu",
-      "social_links": {}
+      "social_links": {},
+      "authorityId": "mauritius__fsc",
+      "relatedInternationalInstitutionIds": []
     },
     "notes": "World Investor Week Coordinator: FSC Team."
   },
@@ -1303,7 +1494,9 @@
       "homepage": "https://www.gob.mx/cnbv",
       "fraudReportLink": "https://www.gob.mx/cnbv/acciones-y-programas/quejas-y-denuncias-ante-la-cnbv",
       "authorityEmail": "info@cnbv.gob.mx",
-      "social_links": {}
+      "social_links": {},
+      "authorityId": "mexico__cnbv",
+      "relatedInternationalInstitutionIds": []
     },
     "notes": "World Investor Week Coordinator: CNBV Team."
   },
@@ -1318,7 +1511,9 @@
       "homepage": "https://www.frc.mn/",
       "fraudReportLink": "https://www.frc.mn/s/10",
       "authorityEmail": "info@frc.mn",
-      "social_links": {}
+      "social_links": {},
+      "authorityId": "mongolia__frc",
+      "relatedInternationalInstitutionIds": []
     },
     "notes": "World Investor Week Coordinator: FRC Team."
   },
@@ -1333,7 +1528,9 @@
       "homepage": "https://www.scmn.me/",
       "fraudReportLink": "https://www.scmn.me/index.php/zastita-investitora",
       "authorityEmail": "office@scmn.me",
-      "social_links": {}
+      "social_links": {},
+      "authorityId": "montenegro__cma",
+      "relatedInternationalInstitutionIds": []
     },
     "notes": "World Investor Week Coordinator: CMA Team."
   },
@@ -1348,7 +1545,9 @@
       "homepage": "https://www.ammc.ma/",
       "fraudReportLink": "https://www.ammc.ma/fr/webform/reclamation",
       "authorityEmail": "contact@ammc.ma",
-      "social_links": {}
+      "social_links": {},
+      "authorityId": "morocco__ammc",
+      "relatedInternationalInstitutionIds": []
     },
     "notes": "World Investor Week Coordinator: AMMC Team."
   },
@@ -1363,7 +1562,9 @@
       "homepage": "https://www.bvm.co.mz/",
       "fraudReportLink": "https://www.bvm.co.mz/index.php/pt/contactos",
       "authorityEmail": "bvm@bvm.co.mz",
-      "social_links": {}
+      "social_links": {},
+      "authorityId": "mozambique__bvm",
+      "relatedInternationalInstitutionIds": []
     },
     "notes": "World Investor Week Coordinator: BVM Team."
   },
@@ -1382,7 +1583,9 @@
         "linkedin": "https://www.linkedin.com/company/namfisa/",
         "twitter": "https://twitter.com/namfisa",
         "youtube": "https://www.youtube.com/@namfisanamibia7634"
-      }
+      },
+      "authorityId": "namibia__namfisa",
+      "relatedInternationalInstitutionIds": []
     },
     "notes": "Autorità indipendente istituita con Act No. 3 of 2001 per regolamentare e supervisionare le istituzioni finanziarie non bancarie in Namibia."
   },
@@ -1397,7 +1600,9 @@
       "homepage": "https://www.afm.nl/",
       "fraudReportLink": "https://www.afm.nl/nl-nl/consumenten/contact/klacht-over-financiele-dienstverlener",
       "authorityEmail": "info@afm.nl",
-      "social_links": {}
+      "social_links": {},
+      "authorityId": "netherlands__afm",
+      "relatedInternationalInstitutionIds": []
     },
     "notes": "World Investor Week Coordinator: AFM Team."
   },
@@ -1412,7 +1617,9 @@
       "homepage": "https://www.fma.govt.nz/",
       "fraudReportLink": "https://www.fma.govt.nz/contact-us/make-a-complaint/",
       "authorityEmail": "questions@fma.govt.nz",
-      "social_links": {}
+      "social_links": {},
+      "authorityId": "new_zealand__fma",
+      "relatedInternationalInstitutionIds": []
     },
     "notes": "World Investor Week Coordinator: FMA Team."
   },
@@ -1427,7 +1634,9 @@
       "homepage": "https://sec.gov.ng/",
       "fraudReportLink": "https://sec.gov.ng/complaints/",
       "authorityEmail": "sec@sec.gov.ng",
-      "social_links": {}
+      "social_links": {},
+      "authorityId": "nigeria__sec",
+      "relatedInternationalInstitutionIds": []
     },
     "notes": "World Investor Week Coordinator: SEC Team."
   },
@@ -1442,7 +1651,9 @@
       "homepage": "https://www.sec.gov.mk/",
       "fraudReportLink": "https://www.sec.gov.mk/index.php/en/investor-protection-en/complaints-en",
       "authorityEmail": "info@sec.gov.mk",
-      "social_links": {}
+      "social_links": {},
+      "authorityId": "north_macedonia__sec",
+      "relatedInternationalInstitutionIds": []
     },
     "notes": "World Investor Week Coordinator: SEC Team."
   },
@@ -1457,7 +1668,9 @@
       "homepage": "https://cma.gov.om/",
       "fraudReportLink": "https://cma.gov.om/Home/Page/Complaints",
       "authorityEmail": "info@cma.gov.om",
-      "social_links": {}
+      "social_links": {},
+      "authorityId": "oman__cma",
+      "relatedInternationalInstitutionIds": []
     },
     "notes": "World Investor Week Coordinator: CMA Team."
   },
@@ -1472,7 +1685,9 @@
       "homepage": "https://www.secp.gov.pk/",
       "fraudReportLink": "https://sdms.secp.gov.pk/",
       "authorityEmail": "queries@secp.gov.pk",
-      "social_links": {}
+      "social_links": {},
+      "authorityId": "pakistan__secp",
+      "relatedInternationalInstitutionIds": []
     },
     "notes": "World Investor Week Coordinator: SECP Team."
   },
@@ -1490,7 +1705,9 @@
       "social_links": {
         "linkedin": "https://www.linkedin.com/in/pcma-palestine/",
         "youtube": "https://www.youtube.com/channel/UCBbUALZvnr36sor3E8WhRcQ"
-      }
+      },
+      "authorityId": "palestine__pcma",
+      "relatedInternationalInstitutionIds": []
     },
     "notes": "Autorità pubblica istituita con Legge n. 13 del 2004. Regola i settori assicurativi, titoli, leasing finanziario e mutui ipotecari. Sede a Ramallah."
   },
@@ -1505,7 +1722,9 @@
       "homepage": "https://supervalores.gob.pa/",
       "fraudReportLink": "https://supervalores.gob.pa/servicios-al-inversionista/presentacion-de-denuncias/",
       "authorityEmail": "info@supervalores.gob.pa",
-      "social_links": {}
+      "social_links": {},
+      "authorityId": "panama__smv",
+      "relatedInternationalInstitutionIds": []
     },
     "notes": "World Investor Week Coordinator: SMV Team."
   },
@@ -1520,7 +1739,9 @@
       "homepage": "https://www.scpng.gov.pg/",
       "fraudReportLink": "https://www.scpng.gov.pg/contact-us/",
       "authorityEmail": "info@scpng.gov.pg",
-      "social_links": {}
+      "social_links": {},
+      "authorityId": "papua_new_guinea__scpng",
+      "relatedInternationalInstitutionIds": []
     },
     "notes": "World Investor Week Coordinator: SCPNG Team."
   },
@@ -1535,7 +1756,9 @@
       "homepage": "https://www.bcp.gov.py/superintendencia-de-valores-i1025",
       "fraudReportLink": "https://www.bcp.gov.py/superintendencia-de-valores-i1025",
       "authorityEmail": "cnv@cnv.gov.py",
-      "social_links": {}
+      "social_links": {},
+      "authorityId": "paraguay__siv",
+      "relatedInternationalInstitutionIds": []
     },
     "notes": "World Investor Week Coordinator: SIV Team."
   },
@@ -1550,7 +1773,9 @@
       "homepage": "https://www.smv.gob.pe/",
       "fraudReportLink": "https://www.smv.gob.pe/Frm_Denuncias.aspx",
       "authorityEmail": "orientacion@smv.gob.pe",
-      "social_links": {}
+      "social_links": {},
+      "authorityId": "peru__smv",
+      "relatedInternationalInstitutionIds": []
     },
     "notes": "World Investor Week Coordinator: SMV Team."
   },
@@ -1565,7 +1790,9 @@
       "homepage": "https://www.knf.gov.pl/",
       "fraudReportLink": "https://www.knf.gov.pl/en/CONSUMERS/Arrears_and_complaints",
       "authorityEmail": "knf@knf.gov.pl",
-      "social_links": {}
+      "social_links": {},
+      "authorityId": "poland__knf",
+      "relatedInternationalInstitutionIds": []
     },
     "notes": "World Investor Week Coordinator: KNF Team."
   },
@@ -1580,7 +1807,9 @@
       "homepage": "https://www.cmvm.pt/",
       "fraudReportLink": "https://www.cmvm.pt/pt/AreadoInvestidor/ProtecaodoInvestidor/Reclamacoes/Pages/default.aspx",
       "authorityEmail": "cmvm@cmvm.pt",
-      "social_links": {}
+      "social_links": {},
+      "authorityId": "portugal__cmvm",
+      "relatedInternationalInstitutionIds": []
     },
     "notes": "World Investor Week Coordinator: CMVM Team."
   },
@@ -1595,7 +1824,9 @@
       "homepage": "https://www.qfma.org.qa/",
       "fraudReportLink": "https://www.qfma.org.qa/en/Pages/Complaints.aspx",
       "authorityEmail": "info@qfma.org.qa",
-      "social_links": {}
+      "social_links": {},
+      "authorityId": "qatar__qfma",
+      "relatedInternationalInstitutionIds": []
     },
     "notes": "World Investor Week Coordinator: QFMA Team."
   },
@@ -1616,7 +1847,9 @@
         "instagram": "https://www.instagram.com/autoritateadesupraveghere_fin/",
         "tiktok": "https://www.tiktok.com/@asf_romania",
         "twitter": "https://twitter.com/asf_romania"
-      }
+      },
+      "authorityId": "romania__asf",
+      "relatedInternationalInstitutionIds": []
     },
     "notes": "World Investor Week Coordinator: ASF Team. Risorse protezione consumatori: https://asfromania.ro/ro/a/2776/a.s.f.-avertizeaza-consumatorii-cu-privire-la-existenta-unor-actiuni-din-partea-unor-persoane-fizice-neautorizate-care-pretind-ca-presteaza-servicii-si-activitati-de-investitii,-conform-prevederilor-legii-nr.-126/2018 - Rapporto mercati finanziari 2025: https://asfromania.ro/uploads/articole/attachments/69491c5a8dcea135792448.pdf - Supervisione e legislazione: https://asfromania.ro/ro/c/20/supraveghere - Comunicati stampa: https://asfromania.ro/ro/c/34/comunicate-si-informari-de-presa - Registro imprese finanziarie autorizzate: https://www.asfromania.ro/app.php/ro/a/1705/registrul-instrumentelor-%C8%99i-investi%C8%9Biilor-financiare - Form denuncia entità non autorizzate: https://asfromania.ro/ro/forms/entitatineautorizate - Email denunce entità non autorizzate: Entitati.Neautorizate@asfromania.ro"
   },
@@ -1631,7 +1864,9 @@
       "homepage": "https://cma.org.sa/",
       "fraudReportLink": "https://cma.org.sa/en/InvestorProtection/Pages/default.aspx",
       "authorityEmail": "info@cma.org.sa",
-      "social_links": {}
+      "social_links": {},
+      "authorityId": "saudi_arabia__cma",
+      "relatedInternationalInstitutionIds": []
     },
     "notes": "World Investor Week Coordinator: CMA Team."
   },
@@ -1646,7 +1881,9 @@
       "homepage": "https://www.sec.gov.rs/",
       "fraudReportLink": "https://www.sec.gov.rs/index.php/en/investors-protection-en/complaints-en",
       "authorityEmail": "office@sec.gov.rs",
-      "social_links": {}
+      "social_links": {},
+      "authorityId": "serbia__sec",
+      "relatedInternationalInstitutionIds": []
     },
     "notes": "World Investor Week Coordinator: SEC Team."
   },
@@ -1663,7 +1900,9 @@
       "authorityEmail": "enquiries@fsaseychelles.sc",
       "social_links": {
         "youtube": "https://www.youtube.com/channel/UCHRa9-VoK07iIJVeaLUhRUA"
-      }
+      },
+      "authorityId": "seychelles__fsa",
+      "relatedInternationalInstitutionIds": []
     },
     "notes": "Autorità di regolamentazione dei servizi finanziari delle Seychelles. Sede: Bois De Rose Avenue, Victoria, Mahe."
   },
@@ -1683,7 +1922,9 @@
         "linkedin": "https://www.linkedin.com/company/monetary-authority-of-singapore-mas-/",
         "twitter": "https://twitter.com/MAS_sg",
         "youtube": "https://www.youtube.com/channel/UCb_3U5s_2Qp3nJg2IuR22mQ"
-      }
+      },
+      "authorityId": "singapore__mas",
+      "relatedInternationalInstitutionIds": []
     }
   },
   "Slovakia": {
@@ -1697,7 +1938,9 @@
       "homepage": "https://www.nbs.sk/",
       "fraudReportLink": "https://www.nbs.sk/en/consumer-protection/how-to-make-an-enquiry-or-complaint",
       "authorityEmail": "info@nbs.sk",
-      "social_links": {}
+      "social_links": {},
+      "authorityId": "slovakia__nbs",
+      "relatedInternationalInstitutionIds": []
     },
     "notes": "World Investor Week Coordinator: NBS Team."
   },
@@ -1712,7 +1955,9 @@
       "homepage": "https://www.atvp.si/",
       "fraudReportLink": "https://www.atvp.si/en/consumer-protection/questions-and-complaints/",
       "authorityEmail": "info@atvp.si",
-      "social_links": {}
+      "social_links": {},
+      "authorityId": "slovenia__atvp",
+      "relatedInternationalInstitutionIds": []
     },
     "notes": "World Investor Week Coordinator: ATVP Team."
   },
@@ -1727,7 +1972,9 @@
       "homepage": "https://www.fsca.co.za/",
       "fraudReportLink": "https://www.fsca.co.za/Pages/Contact-Us.aspx",
       "authorityEmail": "info@fsca.co.za",
-      "social_links": {}
+      "social_links": {},
+      "authorityId": "south_africa__fsca",
+      "relatedInternationalInstitutionIds": []
     },
     "notes": "World Investor Week Coordinator: FSCA Team."
   },
@@ -1742,7 +1989,9 @@
       "homepage": "https://www.cnmv.es/",
       "fraudReportLink": "https://www.cnmv.es/portal/inversor/reclamaciones.aspx",
       "authorityEmail": "serviciodereclamaciones@cnmv.es",
-      "social_links": {}
+      "social_links": {},
+      "authorityId": "spain__cnmv",
+      "relatedInternationalInstitutionIds": []
     },
     "notes": "World Investor Week Coordinator: CNMV Team."
   },
@@ -1761,7 +2010,9 @@
         "facebook": "https://www.facebook.com/people/SVG-Financial-Services-Authority/61575001776057/",
         "linkedin": "https://www.linkedin.com/company/svg-financial-services-authority-fsa/?viewAsMember=true",
         "instagram": "https://www.instagram.com/svgfsa/"
-      }
+      },
+      "authorityId": "st_vincent_and_the_grenadines__fsa",
+      "relatedInternationalInstitutionIds": []
     },
     "notes": "Parte della Eastern Caribbean Currency Union (ECSRC). Form reclami: https://fsasvg.com/file-complaint/ - Ricerca entità registrate: https://fsasvg.com/entity-name-search/ - Avvisi investitori/Alert frodi: https://fsasvg.com/investor-alerts/ - Tel: (784) 456-2577 / (784) 457-2328 / (784) 485-6031"
   },
@@ -1776,7 +2027,9 @@
       "homepage": "https://www.fi.se/",
       "fraudReportLink": "https://www.fi.se/en/consumer-protection/if-you-are-dissatisfied/",
       "authorityEmail": "finansinspektionen@fi.se",
-      "social_links": {}
+      "social_links": {},
+      "authorityId": "sweden__fi",
+      "relatedInternationalInstitutionIds": []
     },
     "notes": "World Investor Week Coordinator: FI Team."
   },
@@ -1795,7 +2048,9 @@
         "linkedin": "https://www.linkedin.com/company/finma/",
         "twitter": "https://twitter.com/FINMA_media",
         "youtube": "https://www.youtube.com/user/finmamedia"
-      }
+      },
+      "authorityId": "switzerland__finma",
+      "relatedInternationalInstitutionIds": []
     },
     "notes": "World Investor Week Coordinator: Roman Rampa."
   },
@@ -1814,7 +2069,9 @@
         "twitter": "http://twitter.com/ThaiSEC_News",
         "youtube": "https://www.youtube.com/user/insideSEC",
         "facebook": "https://www.facebook.com/sec.or.th"
-      }
+      },
+      "authorityId": "thailand__sec_th",
+      "relatedInternationalInstitutionIds": []
     },
     "notes": "World Investor Week Coordinator: Sarica Apiwatthakakul."
   },
@@ -1835,7 +2092,9 @@
         "youtube": "http://youtube.com/%40ttsecuritiesandexchangecom7332",
         "facebook": "https://www.facebook.com/investucateTT/#",
         "instagram": "http://instagram.com/ttsec_tt"
-      }
+      },
+      "authorityId": "trinidad_and_tobago__ttsec",
+      "relatedInternationalInstitutionIds": []
     },
     "notes": "Coordinator: Rachael Rampersad. Investor Education: https://investucatett.com/. Investing Game: https://www.investorquest-tt.com/. Mobile Apps: Google Play e Apple App Store."
   },
@@ -1850,7 +2109,9 @@
       "homepage": "https://www.cmf.tn/",
       "fraudReportLink": "https://www.cmf.tn/deposer-une-plainte",
       "authorityEmail": "cooperation@cmf.tn",
-      "social_links": {}
+      "social_links": {},
+      "authorityId": "tunisia__cmf",
+      "relatedInternationalInstitutionIds": []
     },
     "notes": "World Investor Week Coordinator: Mehdi Ben Mustapha."
   },
@@ -1865,7 +2126,9 @@
       "homepage": "http://www.spk.gov.tr",
       "fraudReportLink": "https://www.spk.gov.tr/Sayfa/Dosya/1031",
       "authorityEmail": "muge.cetin@spk.gov.tr",
-      "social_links": {}
+      "social_links": {},
+      "authorityId": "t_rkiye__cmb",
+      "relatedInternationalInstitutionIds": []
     },
     "notes": "World Investor Week Coordinator: Müge ÇETİN."
   },
@@ -1880,7 +2143,9 @@
       "homepage": "https://www.sca.gov.ae/",
       "fraudReportLink": "https://www.sca.gov.ae/en/services/complaint-investor.aspx",
       "authorityEmail": "ma.alali@sca.ae",
-      "social_links": {}
+      "social_links": {},
+      "authorityId": "united_arab_emirates__sca",
+      "relatedInternationalInstitutionIds": []
     },
     "notes": "World Investor Week Coordinator: Mohammed Al Noukhatha Al Ali."
   },
@@ -1895,7 +2160,9 @@
       "homepage": "https://www.nssmc.gov.ua/",
       "fraudReportLink": "https://www.nssmc.gov.ua/en/about-us/contacts/",
       "authorityEmail": "office@nssmc.gov.ua",
-      "social_links": {}
+      "social_links": {},
+      "authorityId": "ukraine__nssmc",
+      "relatedInternationalInstitutionIds": []
     },
     "notes": "Commissione nazionale per i titoli e il mercato azionario dell'Ucraina, istituita nel 1995. Supervisiona i partecipanti ai mercati dei capitali ucraini, garantisce stabilità e sviluppo dei mercati e protezione degli investitori. Sede a Kiev."
   },
@@ -1914,10 +2181,12 @@
         "fca_register": "https://register.fca.org.uk/s/",
         "prudential_regulation": "https://www.bankofengland.co.uk/prudential-regulation"
       },
-       "protectionLevel": "High",
-       "thumbnail": "authority/preview-fca.png",
-       "modal": "authority/UK-FCA.html",
-       "has_orbital_view": true
+      "protectionLevel": "High",
+      "thumbnail": "authority/preview-fca.png",
+      "modal": "authority/UK-FCA.html",
+      "has_orbital_view": true,
+      "authorityId": "united_kingdom__fca",
+      "relatedInternationalInstitutionIds": []
     },
     "notes": "FCA Financial Services Register (https://register.fca.org.uk/s/): verifica affidabilità imprese dichiarate iscritte/regolamentate. Prudential Regulation Authority (Bank of England): supervisione prudenziale 1.292 banche, società credito edilizio, cooperative credito, assicurazioni, società investimento (https://www.bankofengland.co.uk/prudential-regulation). Sito investitori: https://www.fca.org.uk/investsmart. World Investor Week Coordinator: Sam Stoakes."
   },
@@ -1932,7 +2201,9 @@
       "homepage": "https://asc.alabama.gov/",
       "fraudReportLink": "https://asc.alabama.gov/Complaints.aspx",
       "authorityEmail": "asc@asc.alabama.gov",
-      "social_links": {}
+      "social_links": {},
+      "authorityId": "usa_alabama__asc",
+      "relatedInternationalInstitutionIds": []
     },
     "notes": "Autorità statale USA per la vigilanza dei mercati finanziari e la tutela degli investitori in Alabama."
   },
@@ -1947,7 +2218,9 @@
       "homepage": "https://www.commerce.alaska.gov/web/dbs/",
       "fraudReportLink": "https://www.commerce.alaska.gov/web/dbs/ConsumerResources.aspx",
       "authorityEmail": "dbs.licensing@alaska.gov",
-      "social_links": {}
+      "social_links": {},
+      "authorityId": "usa_alaska__ak_dbs",
+      "relatedInternationalInstitutionIds": []
     },
     "notes": "Autorità statale USA per la vigilanza dei mercati finanziari e la tutela degli investitori in Alaska."
   },
@@ -1962,7 +2235,9 @@
       "homepage": "https://azcc.gov/securities",
       "fraudReportLink": "https://azcc.gov/securities/consumer-investor-information",
       "authorityEmail": "info@azcc.gov",
-      "social_links": {}
+      "social_links": {},
+      "authorityId": "usa_arizona__acc_securities",
+      "relatedInternationalInstitutionIds": []
     },
     "notes": "Autorità statale USA per la vigilanza dei mercati finanziari e la tutela degli investitori in Arizona."
   },
@@ -1977,7 +2252,9 @@
       "homepage": "https://www.securities.arkansas.gov/",
       "fraudReportLink": "https://www.securities.arkansas.gov/pages/file-a-complaint",
       "authorityEmail": "info@securities.arkansas.gov",
-      "social_links": {}
+      "social_links": {},
+      "authorityId": "usa_arkansas__asd",
+      "relatedInternationalInstitutionIds": []
     },
     "notes": "Autorità statale USA per la vigilanza dei mercati finanziari e la tutela degli investitori in Arkansas."
   },
@@ -1992,7 +2269,9 @@
       "homepage": "https://dfpi.ca.gov/",
       "fraudReportLink": "https://dfpi.ca.gov/file-a-complaint/",
       "authorityEmail": "ask.dfpi@dfpi.ca.gov",
-      "social_links": {}
+      "social_links": {},
+      "authorityId": "usa_california__dfpi",
+      "relatedInternationalInstitutionIds": []
     },
     "notes": "Autorità statale USA per la vigilanza dei mercati finanziari e la tutela degli investitori in California."
   },
@@ -2007,7 +2286,9 @@
       "homepage": "https://securities.colorado.gov/",
       "fraudReportLink": "https://securities.colorado.gov/enforcement/file-a-complaint",
       "authorityEmail": "dora_securitieswebsite@state.co.us",
-      "social_links": {}
+      "social_links": {},
+      "authorityId": "usa_colorado__cdos",
+      "relatedInternationalInstitutionIds": []
     },
     "notes": "Autorità statale USA per la vigilanza dei mercati finanziari e la tutela degli investitori in Colorado."
   },
@@ -2022,7 +2303,9 @@
       "homepage": "https://portal.ct.gov/DOB",
       "fraudReportLink": "https://portal.ct.gov/DOB/Consumer/Consumer-Complaints",
       "authorityEmail": "dob.complaints@ct.gov",
-      "social_links": {}
+      "social_links": {},
+      "authorityId": "usa_connecticut__ct_dob",
+      "relatedInternationalInstitutionIds": []
     },
     "notes": "Autorità statale USA per la vigilanza dei mercati finanziari e la tutela degli investitori in Connecticut."
   },
@@ -2037,7 +2320,9 @@
       "homepage": "https://attorneygeneral.delaware.gov/fraud/cpu/investor-protection-unit/",
       "fraudReportLink": "https://attorneygeneral.delaware.gov/fraud/cpu/investor-protection-unit/",
       "authorityEmail": "investor.protection@delaware.gov",
-      "social_links": {}
+      "social_links": {},
+      "authorityId": "usa_delaware__de_ipu",
+      "relatedInternationalInstitutionIds": []
     },
     "notes": "Autorità statale USA per la vigilanza dei mercati finanziari e la tutela degli investitori in Delaware."
   },
@@ -2052,7 +2337,9 @@
       "homepage": "https://flofr.gov/",
       "fraudReportLink": "https://flofr.gov/sitePages/FileAComplaint.htm",
       "authorityEmail": "consumer.services@flofr.gov",
-      "social_links": {}
+      "social_links": {},
+      "authorityId": "usa_florida__ofr",
+      "relatedInternationalInstitutionIds": []
     },
     "notes": "Autorità statale USA per la vigilanza dei mercati finanziari e la tutela degli investitori in Florida."
   },
@@ -2067,7 +2354,9 @@
       "homepage": "https://sos.ga.gov/securities",
       "fraudReportLink": "https://sos.ga.gov/how-to-guide/how-guide-securities-complaints",
       "authorityEmail": "securities@sos.ga.gov",
-      "social_links": {}
+      "social_links": {},
+      "authorityId": "usa_georgia__ga_securities",
+      "relatedInternationalInstitutionIds": []
     },
     "notes": "Autorità statale USA per la vigilanza dei mercati finanziari e la tutela degli investitori in Georgia."
   },
@@ -2082,7 +2371,9 @@
       "homepage": "https://cca.hawaii.gov/sec/",
       "fraudReportLink": "https://cca.hawaii.gov/sec/consumer/",
       "authorityEmail": "dccascb@dcca.hawaii.gov",
-      "social_links": {}
+      "social_links": {},
+      "authorityId": "usa_hawaii__hi_dcca_scb",
+      "relatedInternationalInstitutionIds": []
     },
     "notes": "Autorità statale USA per la vigilanza dei mercati finanziari e la tutela degli investitori in Hawaii."
   },
@@ -2097,7 +2388,9 @@
       "homepage": "https://www.finance.idaho.gov/",
       "fraudReportLink": "https://www.finance.idaho.gov/consumer-resources/file-a-complaint/",
       "authorityEmail": "finance@finance.idaho.gov",
-      "social_links": {}
+      "social_links": {},
+      "authorityId": "usa_idaho__idof",
+      "relatedInternationalInstitutionIds": []
     },
     "notes": "Autorità statale USA per la vigilanza dei mercati finanziari e la tutela degli investitori in Idaho."
   },
@@ -2112,7 +2405,9 @@
       "homepage": "https://www.ilsos.gov/departments/securities/",
       "fraudReportLink": "https://www.ilsos.gov/departments/securities/investor_education/complaints.html",
       "authorityEmail": "securities@ilsos.gov",
-      "social_links": {}
+      "social_links": {},
+      "authorityId": "usa_illinois__ilsos_securities",
+      "relatedInternationalInstitutionIds": []
     },
     "notes": "Autorità statale USA per la vigilanza dei mercati finanziari e la tutela degli investitori in Illinois."
   },
@@ -2127,7 +2422,9 @@
       "homepage": "https://www.in.gov/sos/securities/",
       "fraudReportLink": "https://www.in.gov/sos/securities/complaint/",
       "authorityEmail": "securities@sos.in.gov",
-      "social_links": {}
+      "social_links": {},
+      "authorityId": "usa_indiana__in_securities",
+      "relatedInternationalInstitutionIds": []
     },
     "notes": "Autorità statale USA per la vigilanza dei mercati finanziari e la tutela degli investitori in Indiana."
   },
@@ -2142,7 +2439,9 @@
       "homepage": "https://iid.iowa.gov/securities",
       "fraudReportLink": "https://iid.iowa.gov/consumer-services/file-complaint",
       "authorityEmail": "securities@iid.iowa.gov",
-      "social_links": {}
+      "social_links": {},
+      "authorityId": "usa_iowa__iid_securities",
+      "relatedInternationalInstitutionIds": []
     },
     "notes": "Autorità statale USA per la vigilanza dei mercati finanziari e la tutela degli investitori in Iowa."
   },
@@ -2157,7 +2456,9 @@
       "homepage": "https://www.osbckansas.org/securities.html",
       "fraudReportLink": "https://www.osbckansas.org/consumer-information/file-a-complaint.html",
       "authorityEmail": "kdoc@ks.gov",
-      "social_links": {}
+      "social_links": {},
+      "authorityId": "usa_kansas__kosc",
+      "relatedInternationalInstitutionIds": []
     },
     "notes": "Autorità statale USA per la vigilanza dei mercati finanziari e la tutela degli investitori in Kansas."
   },
@@ -2172,7 +2473,9 @@
       "homepage": "https://kfi.ky.gov/securities/Pages/default.aspx",
       "fraudReportLink": "https://kfi.ky.gov/securities/Pages/Investor-Complaints.aspx",
       "authorityEmail": "kfi@ky.gov",
-      "social_links": {}
+      "social_links": {},
+      "authorityId": "usa_kentucky__kdfi",
+      "relatedInternationalInstitutionIds": []
     },
     "notes": "Autorità statale USA per la vigilanza dei mercati finanziari e la tutela degli investitori in Kentucky."
   },
@@ -2187,7 +2490,9 @@
       "homepage": "https://ofi.la.gov/securities/",
       "fraudReportLink": "https://ofi.la.gov/consumers/file-a-complaint/",
       "authorityEmail": "officeoffinancialinstitutions@la.gov",
-      "social_links": {}
+      "social_links": {},
+      "authorityId": "usa_louisiana__lofi",
+      "relatedInternationalInstitutionIds": []
     },
     "notes": "Autorità statale USA per la vigilanza dei mercati finanziari e la tutela degli investitori in Louisiana."
   },
@@ -2202,7 +2507,9 @@
       "homepage": "https://www.maine.gov/pfr/securities/",
       "fraudReportLink": "https://www.maine.gov/pfr/securities/complaint.html",
       "authorityEmail": "securities.pfr@maine.gov",
-      "social_links": {}
+      "social_links": {},
+      "authorityId": "usa_maine__mos",
+      "relatedInternationalInstitutionIds": []
     },
     "notes": "Autorità statale USA per la vigilanza dei mercati finanziari e la tutela degli investitori in Maine."
   },
@@ -2217,7 +2524,9 @@
       "homepage": "https://www.marylandattorneygeneral.gov/Pages/Securities/",
       "fraudReportLink": "https://www.marylandattorneygeneral.gov/Pages/Securities/consumers.aspx",
       "authorityEmail": "securities@oag.state.md.us",
-      "social_links": {}
+      "social_links": {},
+      "authorityId": "usa_maryland__md_securities",
+      "relatedInternationalInstitutionIds": []
     },
     "notes": "Autorità statale USA per la vigilanza dei mercati finanziari e la tutela degli investitori in Maryland."
   },
@@ -2232,7 +2541,9 @@
       "homepage": "https://www.sec.state.ma.us/sct/",
       "fraudReportLink": "https://www.sec.state.ma.us/sct/complaint/complaintidx.htm",
       "authorityEmail": "securities@sec.state.ma.us",
-      "social_links": {}
+      "social_links": {},
+      "authorityId": "usa_massachusetts__msd",
+      "relatedInternationalInstitutionIds": []
     },
     "notes": "Autorità statale USA per la vigilanza dei mercati finanziari e la tutela degli investitori in Massachusetts."
   },
@@ -2247,7 +2558,9 @@
       "homepage": "https://www.michigan.gov/lara/bureau-list/cscl/securities",
       "fraudReportLink": "https://www.michigan.gov/lara/bureau-list/cscl/complaints",
       "authorityEmail": "Corporations@michigan.gov",
-      "social_links": {}
+      "social_links": {},
+      "authorityId": "usa_michigan__lara_cscl",
+      "relatedInternationalInstitutionIds": []
     },
     "notes": "Autorità statale USA per la vigilanza dei mercati finanziari e la tutela degli investitori in Michigan."
   },
@@ -2262,7 +2575,9 @@
       "homepage": "https://mn.gov/commerce/industries/securities/",
       "fraudReportLink": "https://mn.gov/commerce/consumers/file-a-complaint/",
       "authorityEmail": "consumer.protection@state.mn.us",
-      "social_links": {}
+      "social_links": {},
+      "authorityId": "usa_minnesota__mn_commerce",
+      "relatedInternationalInstitutionIds": []
     },
     "notes": "Autorità statale USA per la vigilanza dei mercati finanziari e la tutela degli investitori in Minnesota."
   },
@@ -2277,7 +2592,9 @@
       "homepage": "https://www.sos.ms.gov/securities",
       "fraudReportLink": "https://www.sos.ms.gov/content.aspx?page=securities-complaints",
       "authorityEmail": "securities@sos.ms.gov",
-      "social_links": {}
+      "social_links": {},
+      "authorityId": "usa_mississippi__ms_securities",
+      "relatedInternationalInstitutionIds": []
     },
     "notes": "Autorità statale USA per la vigilanza dei mercati finanziari e la tutela degli investitori in Mississippi."
   },
@@ -2292,7 +2609,9 @@
       "homepage": "https://www.sos.mo.gov/securities",
       "fraudReportLink": "https://www.sos.mo.gov/securities/complaints",
       "authorityEmail": "securities@sos.mo.gov",
-      "social_links": {}
+      "social_links": {},
+      "authorityId": "usa_missouri__mosd",
+      "relatedInternationalInstitutionIds": []
     },
     "notes": "Autorità statale USA per la vigilanza dei mercati finanziari e la tutela degli investitori in Missouri."
   },
@@ -2307,7 +2626,9 @@
       "homepage": "https://csimt.gov/securities/",
       "fraudReportLink": "https://csimt.gov/consumer-assistance/",
       "authorityEmail": "csi@mt.gov",
-      "social_links": {}
+      "social_links": {},
+      "authorityId": "usa_montana__csi_montana",
+      "relatedInternationalInstitutionIds": []
     },
     "notes": "Autorità statale USA per la vigilanza dei mercati finanziari e la tutela degli investitori in Montana."
   },
@@ -2322,7 +2643,9 @@
       "homepage": "https://ndbf.nebraska.gov/bureaus/securities-bureau",
       "fraudReportLink": "https://ndbf.nebraska.gov/consumers/file-complaint",
       "authorityEmail": "ndbf.securities@nebraska.gov",
-      "social_links": {}
+      "social_links": {},
+      "authorityId": "usa_nebraska__ndbf_securities",
+      "relatedInternationalInstitutionIds": []
     },
     "notes": "Autorità statale USA per la vigilanza dei mercati finanziari e la tutela degli investitori in Nebraska."
   },
@@ -2337,7 +2660,9 @@
       "homepage": "https://www.nvsos.gov/sos/securities",
       "fraudReportLink": "https://www.nvsos.gov/sos/securities/file-a-complaint",
       "authorityEmail": "securities@sos.nv.gov",
-      "social_links": {}
+      "social_links": {},
+      "authorityId": "usa_nevada__nv_securities",
+      "relatedInternationalInstitutionIds": []
     },
     "notes": "Autorità statale USA per la vigilanza dei mercati finanziari e la tutela degli investitori in Nevada."
   },
@@ -2352,7 +2677,9 @@
       "homepage": "https://sos.nh.gov/corporation-division/securities/",
       "fraudReportLink": "https://sos.nh.gov/corporation-division/securities/consumer-information/",
       "authorityEmail": "securities@sos.nh.gov",
-      "social_links": {}
+      "social_links": {},
+      "authorityId": "usa_new_hampshire__nh_bsr",
+      "relatedInternationalInstitutionIds": []
     },
     "notes": "Autorità statale USA per la vigilanza dei mercati finanziari e la tutela degli investitori in New Hampshire."
   },
@@ -2367,7 +2694,9 @@
       "homepage": "https://www.njconsumeraffairs.gov/bos",
       "fraudReportLink": "https://www.njconsumeraffairs.gov/bos/Pages/complaintinstructions.aspx",
       "authorityEmail": "askconsumeraffairs@dca.njoag.gov",
-      "social_links": {}
+      "social_links": {},
+      "authorityId": "usa_new_jersey__njbos",
+      "relatedInternationalInstitutionIds": []
     },
     "notes": "Autorità statale USA per la vigilanza dei mercati finanziari e la tutela degli investitori in New Jersey."
   },
@@ -2382,7 +2711,9 @@
       "homepage": "https://www.rld.nm.gov/securities-division/",
       "fraudReportLink": "https://www.rld.nm.gov/securities-division/filing-a-complaint/",
       "authorityEmail": "securitiesdivision@rld.nm.gov",
-      "social_links": {}
+      "social_links": {},
+      "authorityId": "usa_new_mexico__nm_securities",
+      "relatedInternationalInstitutionIds": []
     },
     "notes": "Autorità statale USA per la vigilanza dei mercati finanziari e la tutela degli investitori in New Mexico."
   },
@@ -2397,7 +2728,9 @@
       "homepage": "https://ag.ny.gov/investor-protection-bureau",
       "fraudReportLink": "https://ag.ny.gov/investor-protection-bureau/investor-complaint-form",
       "authorityEmail": "investor.protection@ag.ny.gov",
-      "social_links": {}
+      "social_links": {},
+      "authorityId": "usa_new_york__ny_ipb",
+      "relatedInternationalInstitutionIds": []
     },
     "notes": "Autorità statale USA per la vigilanza dei mercati finanziari e la tutela degli investitori in New York."
   },
@@ -2412,7 +2745,9 @@
       "homepage": "https://www.sosnc.gov/divisions/securities",
       "fraudReportLink": "https://www.sosnc.gov/divisions/securities/investor_complaints",
       "authorityEmail": "securities@sosnc.gov",
-      "social_links": {}
+      "social_links": {},
+      "authorityId": "usa_north_carolina__nc_securities",
+      "relatedInternationalInstitutionIds": []
     },
     "notes": "Autorità statale USA per la vigilanza dei mercati finanziari e la tutela degli investitori in North Carolina."
   },
@@ -2427,7 +2762,9 @@
       "homepage": "https://www.securities.nd.gov/",
       "fraudReportLink": "https://www.securities.nd.gov/investors/file-complaint",
       "authorityEmail": "ndsecurities@nd.gov",
-      "social_links": {}
+      "social_links": {},
+      "authorityId": "usa_north_dakota__ndsd",
+      "relatedInternationalInstitutionIds": []
     },
     "notes": "Autorità statale USA per la vigilanza dei mercati finanziari e la tutela degli investitori in North Dakota."
   },
@@ -2442,7 +2779,9 @@
       "homepage": "https://com.ohio.gov/divisions-and-programs/securities",
       "fraudReportLink": "https://com.ohio.gov/divisions-and-programs/securities/file-a-complaint",
       "authorityEmail": "securities@com.ohio.gov",
-      "social_links": {}
+      "social_links": {},
+      "authorityId": "usa_ohio__odc_securities",
+      "relatedInternationalInstitutionIds": []
     },
     "notes": "Autorità statale USA per la vigilanza dei mercati finanziari e la tutela degli investitori in Ohio."
   },
@@ -2457,7 +2796,9 @@
       "homepage": "https://www.securities.ok.gov/",
       "fraudReportLink": "https://www.securities.ok.gov/investors/file-a-complaint",
       "authorityEmail": "info@securities.ok.gov",
-      "social_links": {}
+      "social_links": {},
+      "authorityId": "usa_oklahoma__ods",
+      "relatedInternationalInstitutionIds": []
     },
     "notes": "Autorità statale USA per la vigilanza dei mercati finanziari e la tutela degli investitori in Oklahoma."
   },
@@ -2472,7 +2813,9 @@
       "homepage": "https://dfr.oregon.gov/insure/securities/Pages/index.aspx",
       "fraudReportLink": "https://dfr.oregon.gov/help/complaints-licenses/Pages/index.aspx",
       "authorityEmail": "dfr.financialserviceshelp@dcbs.oregon.gov",
-      "social_links": {}
+      "social_links": {},
+      "authorityId": "usa_oregon__odfr",
+      "relatedInternationalInstitutionIds": []
     },
     "notes": "Autorità statale USA per la vigilanza dei mercati finanziari e la tutela degli investitori in Oregon."
   },
@@ -2487,7 +2830,9 @@
       "homepage": "https://www.pa.gov/agencies/dobs.html",
       "fraudReportLink": "https://www.pa.gov/services/dobs/file-a-complaint-against-a-company-or-business.html",
       "authorityEmail": "RA-BNKSecurities@pa.gov",
-      "social_links": {}
+      "social_links": {},
+      "authorityId": "usa_pennsylvania__pa_dobs",
+      "relatedInternationalInstitutionIds": []
     },
     "notes": "Autorità statale USA per la vigilanza dei mercati finanziari e la tutela degli investitori in Pennsylvania."
   },
@@ -2502,7 +2847,9 @@
       "homepage": "https://dbr.ri.gov/divisions/securities",
       "fraudReportLink": "https://dbr.ri.gov/divisions/securities/investor-education",
       "authorityEmail": "dbr.securities@dbr.ri.gov",
-      "social_links": {}
+      "social_links": {},
+      "authorityId": "usa_rhode_island__ri_dbr",
+      "relatedInternationalInstitutionIds": []
     },
     "notes": "Autorità statale USA per la vigilanza dei mercati finanziari e la tutela degli investitori in Rhode Island."
   },
@@ -2517,7 +2864,9 @@
       "homepage": "https://www.scag.gov/about-the-office/criminal-division/securities-division/",
       "fraudReportLink": "https://www.scag.gov/about-the-office/criminal-division/securities-division/investor-complaints/",
       "authorityEmail": "securities@scag.gov",
-      "social_links": {}
+      "social_links": {},
+      "authorityId": "usa_south_carolina__scag_securities",
+      "relatedInternationalInstitutionIds": []
     },
     "notes": "Autorità statale USA per la vigilanza dei mercati finanziari e la tutela degli investitori in South Carolina."
   },
@@ -2532,7 +2881,9 @@
       "homepage": "https://dlr.sd.gov/insurance/securities/default.aspx",
       "fraudReportLink": "https://dlr.sd.gov/insurance/securities/investor_information.aspx",
       "authorityEmail": "insurance@state.sd.us",
-      "social_links": {}
+      "social_links": {},
+      "authorityId": "usa_south_dakota__sd_doi",
+      "relatedInternationalInstitutionIds": []
     },
     "notes": "Autorità statale USA per la vigilanza dei mercati finanziari e la tutela degli investitori in South Dakota."
   },
@@ -2547,7 +2898,9 @@
       "homepage": "https://www.tn.gov/commerce/securities-division.html",
       "fraudReportLink": "https://www.tn.gov/commerce/securities-division/consumer-resources/file-a-complaint.html",
       "authorityEmail": "securities.1@tn.gov",
-      "social_links": {}
+      "social_links": {},
+      "authorityId": "usa_tennessee__tdci_securities",
+      "relatedInternationalInstitutionIds": []
     },
     "notes": "Autorità statale USA per la vigilanza dei mercati finanziari e la tutela degli investitori in Tennessee."
   },
@@ -2562,7 +2915,9 @@
       "homepage": "https://www.ssb.texas.gov/",
       "fraudReportLink": "https://www.ssb.texas.gov/investors/file-complaint",
       "authorityEmail": "enforcement@ssb.texas.gov",
-      "social_links": {}
+      "social_links": {},
+      "authorityId": "usa_texas__tssb",
+      "relatedInternationalInstitutionIds": []
     },
     "notes": "Autorità statale USA per la vigilanza dei mercati finanziari e la tutela degli investitori in Texas."
   },
@@ -2577,7 +2932,9 @@
       "homepage": "https://securities.utah.gov/",
       "fraudReportLink": "https://securities.utah.gov/investor-resources/file-a-complaint/",
       "authorityEmail": "securities@utah.gov",
-      "social_links": {}
+      "social_links": {},
+      "authorityId": "usa_utah__ut_securities",
+      "relatedInternationalInstitutionIds": []
     },
     "notes": "Autorità statale USA per la vigilanza dei mercati finanziari e la tutela degli investitori in Utah."
   },
@@ -2592,7 +2949,9 @@
       "homepage": "https://dfr.vermont.gov/industry/securities",
       "fraudReportLink": "https://dfr.vermont.gov/consumers/file-complaint",
       "authorityEmail": "dfr.securities@vermont.gov",
-      "social_links": {}
+      "social_links": {},
+      "authorityId": "usa_vermont__vt_dfr",
+      "relatedInternationalInstitutionIds": []
     },
     "notes": "Autorità statale USA per la vigilanza dei mercati finanziari e la tutela degli investitori in Vermont."
   },
@@ -2607,7 +2966,9 @@
       "homepage": "https://www.scc.virginia.gov/pages/Securities-and-Retail-Franchising",
       "fraudReportLink": "https://www.scc.virginia.gov/pages/Enforcement-and-Complaints-Securities",
       "authorityEmail": "sccinfo@scc.virginia.gov",
-      "social_links": {}
+      "social_links": {},
+      "authorityId": "usa_virginia__va_scc_dsrf",
+      "relatedInternationalInstitutionIds": []
     },
     "notes": "Autorità statale USA per la vigilanza dei mercati finanziari e la tutela degli investitori in Virginia."
   },
@@ -2622,7 +2983,9 @@
       "homepage": "https://dfi.wa.gov/securities",
       "fraudReportLink": "https://dfi.wa.gov/consumers/complaint",
       "authorityEmail": "CSEnforceComplaints@dfi.wa.gov",
-      "social_links": {}
+      "social_links": {},
+      "authorityId": "usa_washington__wa_dfi",
+      "relatedInternationalInstitutionIds": []
     },
     "notes": "Autorità statale USA per la vigilanza dei mercati finanziari e la tutela degli investitori in Washington."
   },
@@ -2637,7 +3000,9 @@
       "homepage": "https://www.wvsao.gov/securities/",
       "fraudReportLink": "https://www.wvsao.gov/securities/complaints/",
       "authorityEmail": "securities@wvsao.gov",
-      "social_links": {}
+      "social_links": {},
+      "authorityId": "usa_west_virginia__wvsc",
+      "relatedInternationalInstitutionIds": []
     },
     "notes": "Autorità statale USA per la vigilanza dei mercati finanziari e la tutela degli investitori in West Virginia."
   },
@@ -2652,7 +3017,9 @@
       "homepage": "https://dfi.wi.gov/Pages/Securities/Home.aspx",
       "fraudReportLink": "https://dfi.wi.gov/Pages/Securities/InvestorProtection/Complaints.aspx",
       "authorityEmail": "DFISecurities@dfi.wisconsin.gov",
-      "social_links": {}
+      "social_links": {},
+      "authorityId": "usa_wisconsin__wdfi",
+      "relatedInternationalInstitutionIds": []
     },
     "notes": "Autorità statale USA per la vigilanza dei mercati finanziari e la tutela degli investitori in Wisconsin."
   },
@@ -2667,7 +3034,9 @@
       "homepage": "https://sos.wyo.gov/securities/",
       "fraudReportLink": "https://sos.wyo.gov/Securities/complaints.aspx",
       "authorityEmail": "investor.protection@wyo.gov",
-      "social_links": {}
+      "social_links": {},
+      "authorityId": "usa_wyoming__wy_securities",
+      "relatedInternationalInstitutionIds": []
     },
     "notes": "Autorità statale USA per la vigilanza dei mercati finanziari e la tutela degli investitori in Wyoming."
   },
@@ -2682,7 +3051,15 @@
       "homepage": "https://www.sec.gov/",
       "fraudReportLink": "https://www.sec.gov/tcr",
       "authorityEmail": "DonleyO@sec.gov",
-      "social_links": {}
+      "social_links": {},
+      "authorityId": "united_states_of_america__sec",
+      "relatedInternationalInstitutionIds": [
+        "sec_investor_gov",
+        "iosco",
+        "fatf_gafi",
+        "fbi_ic3",
+        "sipc"
+      ]
     },
     "investor_protection": {
       "name": "Securities Investor Protection Corporation",
@@ -2708,7 +3085,9 @@
       "homepage": "https://www.bcu.gub.uy",
       "fraudReportLink": "https://www.bcu.gub.uy/Paginas/custom/reportes-y-denuncias.aspx",
       "authorityEmail": "vvillete@bcu.gub.uy",
-      "social_links": {}
+      "social_links": {},
+      "authorityId": "uruguay__ssf",
+      "relatedInternationalInstitutionIds": []
     },
     "notes": "World Investor Week Coordinator: Verónica Villete."
   },
@@ -2728,7 +3107,9 @@
         "youtube_educational": "https://youtu.be/L3gVhN4heK8",
         "telegram": "https://t.me/finlituzb",
         "financial_literacy": "https://finlit.uz/uz/news/1949794/"
-      }
+      },
+      "authorityId": "uzbekistan__cbu",
+      "relatedInternationalInstitutionIds": []
     },
     "notes": "App Ufficiale CBU disponibile per download. Video educazione finanziaria antitruffa disponibile su YouTube. Canale Telegram ufficiale 'Finlit.uz - moliyaviy savodxonlik ✔' (13.662+ iscritti) - Dipartimento di Educazione Finanziaria e Divulgazione della Banca Centrale. Per migliorare l'alfabetizzazione finanziaria, è importante promuovere educazione tra donne e giovani, insegnare loro l'\"igiene informatica\" e diffondere i servizi di microfinanza. Sistema di vigilanza bancaria moderna con focus su protezione consumatori."
   },
@@ -2743,7 +3124,9 @@
       "homepage": "https://ssc.gov.vn",
       "fraudReportLink": "https://ssc.gov.vn/wps/portal/home/Trang%20chu/lien-he",
       "authorityEmail": "info@ssc.gov.vn",
-      "social_links": {}
+      "social_links": {},
+      "authorityId": "vietnam__ssc",
+      "relatedInternationalInstitutionIds": []
     },
     "notes": "Autorità di vigilanza sui mercati dei capitali e sui servizi d'investimento in Vietnam."
   },
@@ -2758,7 +3141,9 @@
       "homepage": "https://www.csbf.mg",
       "fraudReportLink": "https://www.csbf.mg/reclamation",
       "authorityEmail": "contact@csbf.mg",
-      "social_links": {}
+      "social_links": {},
+      "authorityId": "madagascar__csbf",
+      "relatedInternationalInstitutionIds": []
     },
     "notes": "Autorità di supervisione bancaria e finanziaria della Repubblica del Madagascar, responsabile anche della vigilanza su intermediari e mercati locali."
   },
@@ -2773,7 +3158,9 @@
       "homepage": "https://cmda.gov.mv",
       "fraudReportLink": "https://cmda.gov.mv/complaints",
       "authorityEmail": "info@cmda.gov.mv",
-      "social_links": {}
+      "social_links": {},
+      "authorityId": "maldives__cmda",
+      "relatedInternationalInstitutionIds": []
     },
     "notes": "Autorità di regolamentazione e sviluppo dei mercati dei capitali e dei servizi di investimento nelle Maldive."
   },
@@ -2788,7 +3175,9 @@
       "homepage": "https://sebon.gov.np",
       "fraudReportLink": "https://sebon.gov.np/investor-complaints",
       "authorityEmail": "info@sebon.gov.np",
-      "social_links": {}
+      "social_links": {},
+      "authorityId": "nepal__sebon",
+      "relatedInternationalInstitutionIds": []
     },
     "notes": "Autorità di vigilanza sui mercati mobiliari e sulle imprese d'investimento in Nepal (Securities Board of Nepal)."
   },
@@ -2803,7 +3192,9 @@
       "homepage": "https://www.cmvm.pt",
       "fraudReportLink": "https://www.cmvm.pt/pt/Comunicados/Queixas_reclamacoes/Pages/default.aspx",
       "authorityEmail": "cmvm@cmvm.pt",
-      "social_links": {}
+      "social_links": {},
+      "authorityId": "azores_portugal__cmvm",
+      "relatedInternationalInstitutionIds": []
     },
     "notes": "Regione autonoma del Portogallo (Azzorre). Per la vigilanza sui mercati finanziari e sugli intermediari si applicano le competenze dell'Autorità portoghese CMVM, in linea con gli standard UE."
   },
@@ -2818,7 +3209,9 @@
       "homepage": "https://www.cnmv.es",
       "fraudReportLink": "https://www.cnmv.es/portal/consultas/Reclamaciones-Quejas.aspx",
       "authorityEmail": "oficinadelinversor@cnmv.es",
-      "social_links": {}
+      "social_links": {},
+      "authorityId": "canary_islands_spain__cnmv",
+      "relatedInternationalInstitutionIds": []
     },
     "notes": "Comunità autonoma spagnola (Isole Canarie). La vigilanza su intermediari e mercati finanziari è esercitata dalla CNMV spagnola, nell'ambito del quadro regolatorio UE."
   },
@@ -2833,7 +3226,9 @@
       "homepage": "https://www.sec.gov.lk/",
       "fraudReportLink": "https://www.sec.gov.lk/investor-complaints/",
       "authorityEmail": "info@sec.gov.lk",
-      "social_links": {}
+      "social_links": {},
+      "authorityId": "sri_lanka__sec_sri_lanka",
+      "relatedInternationalInstitutionIds": []
     },
     "notes": "Autorità di vigilanza sui mercati mobiliari e sui servizi di investimento in Sri Lanka (SEC Sri Lanka)."
   },
@@ -2848,7 +3243,9 @@
       "homepage": "https://www.lsc.gov.la",
       "fraudReportLink": "https://www.lsc.gov.la/investor-protection",
       "authorityEmail": "info@lsc.gov.la",
-      "social_links": {}
+      "social_links": {},
+      "authorityId": "laos__lsco",
+      "relatedInternationalInstitutionIds": []
     },
     "notes": "Autorità di regolamentazione del mercato dei capitali della Repubblica Democratica Popolare del Laos (Lao Securities Commission Office)."
   },
@@ -2863,7 +3260,9 @@
       "homepage": "https://www.nbe.gov.et",
       "fraudReportLink": "https://www.nbe.gov.et/financial-consumer-protection",
       "authorityEmail": "info@nbe.gov.et",
-      "social_links": {}
+      "social_links": {},
+      "authorityId": "ethiopia__nbe",
+      "relatedInternationalInstitutionIds": []
     },
     "notes": "Banca centrale dell'Etiopia con competenze di vigilanza sul sistema bancario e sulle istituzioni finanziarie, inclusa la protezione dei consumatori nei servizi di pagamento e di credito."
   },
@@ -2878,7 +3277,9 @@
       "homepage": "https://cbl.gov.ly",
       "fraudReportLink": "https://cbl.gov.ly/contact/",
       "authorityEmail": "info@cbl.gov.ly",
-      "social_links": {}
+      "social_links": {},
+      "authorityId": "libya__cbl",
+      "relatedInternationalInstitutionIds": []
     },
     "notes": "Banca centrale della Libia con responsabilità di supervisione sul sistema bancario e sugli intermediari finanziari autorizzati."
   },
@@ -2893,7 +3294,9 @@
       "homepage": "https://www.cosumaf.org",
       "fraudReportLink": "https://www.cosumaf.org/reclamation",
       "authorityEmail": "contact@cosumaf.org",
-      "social_links": {}
+      "social_links": {},
+      "authorityId": "gabon__cosumaf",
+      "relatedInternationalInstitutionIds": []
     },
     "notes": "Il Gabon fa parte dell'area CEMAC; la vigilanza sui mercati dei capitali è svolta dall'autorità regionale COSUMAF per gli stati dell'Africa Centrale."
   },
@@ -2908,7 +3311,9 @@
       "homepage": "https://www.seczim.co.zw",
       "fraudReportLink": "https://www.seczim.co.zw/investor-complaints",
       "authorityEmail": "info@seczim.co.zw",
-      "social_links": {}
+      "social_links": {},
+      "authorityId": "zimbabwe_formerly_rhodesia__secz",
+      "relatedInternationalInstitutionIds": []
     },
     "notes": "L'ex denominazione coloniale 'Rhodesia' oggi corrisponde alla Repubblica dello Zimbabwe. La vigilanza sui mercati mobiliari è svolta dalla Securities and Exchange Commission of Zimbabwe (SECZ)."
   },
@@ -2923,7 +3328,9 @@
       "homepage": "https://www.cma.rw",
       "fraudReportLink": "https://www.cma.rw/investor-complaints",
       "authorityEmail": "info@cma.rw",
-      "social_links": {}
+      "social_links": {},
+      "authorityId": "rwanda__cma_rwanda",
+      "relatedInternationalInstitutionIds": []
     },
     "notes": "Autorità di regolamentazione e supervisione dei mercati dei capitali in Rwanda (Capital Market Authority)."
   },
@@ -2938,7 +3345,9 @@
       "homepage": "https://www.amf-france.org",
       "fraudReportLink": "https://www.amf-france.org/fr/espace-epargnants/proteger-son-epargne/signaler-une-arnaque",
       "authorityEmail": "contact@amf-france.org",
-      "social_links": {}
+      "social_links": {},
+      "authorityId": "french_polynesia_france__amf",
+      "relatedInternationalInstitutionIds": []
     },
     "notes": "Collettività d'oltremare della Repubblica Francese. Per i servizi finanziari, la vigilanza sui mercati e sugli intermediari è esercitata dall'Autorité des marchés financiers (AMF), nell'ambito del quadro regolatorio francese ed europeo."
   },
@@ -2953,7 +3362,9 @@
       "homepage": "https://www.seczambia.org.zm",
       "fraudReportLink": "https://www.seczambia.org.zm/complaints/",
       "authorityEmail": "dmakumba@seczambia.org.zm",
-      "social_links": {}
+      "social_links": {},
+      "authorityId": "zambia__sec",
+      "relatedInternationalInstitutionIds": []
     },
     "notes": "World Investor Week Coordinators: Dingase Nunkwe Makumba, Mubanga Kondolo Jr., Sitali Mwala Mugala."
   },
@@ -2969,7 +3380,9 @@
       "homepage": "https://www.afa.ad/",
       "fraudReportLink": "https://www.afa.ad/consumidors/reclamacions",
       "authorityEmail": "",
-      "social_links": {}
+      "social_links": {},
+      "authorityId": "andorra__afa",
+      "relatedInternationalInstitutionIds": []
     },
     "notes": "Principato situato nei Pirenei tra Francia e Spagna. Importante centro finanziario con forte tutela della privacy bancaria."
   },
@@ -2985,7 +3398,9 @@
       "homepage": "https://www.nbrb.by/",
       "fraudReportLink": "",
       "authorityEmail": "",
-      "social_links": {}
+      "social_links": {},
+      "authorityId": "belarus__nbrb",
+      "relatedInternationalInstitutionIds": []
     },
     "notes": "Banca centrale della Bielorussia. Website potrebbe essere inaccessibile da alcune regioni."
   },
@@ -3001,7 +3416,9 @@
       "homepage": "https://www.bceao.int/",
       "fraudReportLink": "https://www.bceao.int/fr/contact",
       "authorityEmail": "",
-      "social_links": {}
+      "social_links": {},
+      "authorityId": "benin__bceao",
+      "relatedInternationalInstitutionIds": []
     },
     "notes": "Membro della zona UEMOA (Unione Economica e Monetaria Ovest Africana). La vigilanza bancaria è coordinata a livello regionale dalla BCEAO."
   },
@@ -3017,7 +3434,9 @@
       "homepage": "https://www.rma.org.bt/",
       "fraudReportLink": "https://www.rma.org.bt/contact_us/",
       "authorityEmail": "",
-      "social_links": {}
+      "social_links": {},
+      "authorityId": "bhutan__rma",
+      "relatedInternationalInstitutionIds": []
     },
     "notes": "Regno himalayano. La RMA regola il sistema finanziario del paese con focus sulla stabilità economica."
   },
@@ -3033,7 +3452,9 @@
       "homepage": "https://www.cbbh.ba/",
       "fraudReportLink": "https://www.cbbh.ba/press/faq",
       "authorityEmail": "",
-      "social_links": {}
+      "social_links": {},
+      "authorityId": "bosnia_and_herzegovina__cbbh",
+      "relatedInternationalInstitutionIds": []
     },
     "notes": "Stato dei Balcani occidentali. Sistema finanziario regolato a livello federale."
   },
@@ -3049,7 +3470,9 @@
       "homepage": "https://www.bcv.cv/",
       "fraudReportLink": "https://www.bcv.cv/Footer/Paginas/Contacts.aspx",
       "authorityEmail": "",
-      "social_links": {}
+      "social_links": {},
+      "authorityId": "cabo_verde__bcv",
+      "relatedInternationalInstitutionIds": []
     },
     "notes": "Arcipelago dell'Oceano Atlantico al largo dell'Africa occidentale. Sistema bancario stabile."
   },
@@ -3065,7 +3488,9 @@
       "homepage": "https://www.beac.int/",
       "fraudReportLink": "https://www.beac.int/contact/",
       "authorityEmail": "",
-      "social_links": {}
+      "social_links": {},
+      "authorityId": "cameroon__beac",
+      "relatedInternationalInstitutionIds": []
     },
     "notes": "Membro della zona CEMAC (Comunità Economica e Monetaria dell'Africa Centrale). Vigilanza bancaria regionale coordinata dalla BEAC e COBAC."
   },
@@ -3081,7 +3506,9 @@
       "homepage": "https://banque-comores.km/",
       "fraudReportLink": "",
       "authorityEmail": "secretariat@banque-comores.km",
-      "social_links": {}
+      "social_links": {},
+      "authorityId": "comoros__bcc",
+      "relatedInternationalInstitutionIds": []
     },
     "notes": "Arcipelago dell'Oceano Indiano. Sistema finanziario in via di sviluppo."
   },
@@ -3098,7 +3525,9 @@
       "homepage": "https://www.bc.gob.cu/",
       "fraudReportLink": "",
       "authorityEmail": "atencionpoblacion@bc.gob.cu",
-      "social_links": {}
+      "social_links": {},
+      "authorityId": "cuba__bcc",
+      "relatedInternationalInstitutionIds": []
     },
     "notes": "⚠️ STOPPED BY ONU - Paese soggetto a sanzioni internazionali. Transazioni finanziarie verso Cuba sono limitate o vietate in molti paesi."
   },
@@ -3114,7 +3543,9 @@
       "homepage": "https://www.sbs.gob.ec/",
       "fraudReportLink": "",
       "authorityEmail": "",
-      "social_links": {}
+      "social_links": {},
+      "authorityId": "ecuador__sb",
+      "relatedInternationalInstitutionIds": []
     },
     "notes": "Paese dell'America Latina. Website dell'autorità potrebbe essere temporaneamente inaccessibile."
   },
@@ -3130,7 +3561,9 @@
       "homepage": "https://www.beac.int/",
       "fraudReportLink": "https://www.beac.int/contact/",
       "authorityEmail": "",
-      "social_links": {}
+      "social_links": {},
+      "authorityId": "equatorial_guinea__beac",
+      "relatedInternationalInstitutionIds": []
     },
     "notes": "Membro della zona CEMAC. Unico paese africano con spagnolo come lingua ufficiale."
   },
@@ -3146,7 +3579,9 @@
       "homepage": "https://www.rbf.gov.fj/",
       "fraudReportLink": "https://www.rbf.gov.fj/give-us-your-feedback/",
       "authorityEmail": "",
-      "social_links": {}
+      "social_links": {},
+      "authorityId": "fiji__rbf",
+      "relatedInternationalInstitutionIds": []
     },
     "notes": "Arcipelago del Pacifico. Centro finanziario regionale per il Pacifico meridionale."
   },
@@ -3162,7 +3597,9 @@
       "homepage": "https://www.sib.gob.gt/",
       "fraudReportLink": "",
       "authorityEmail": "",
-      "social_links": {}
+      "social_links": {},
+      "authorityId": "guatemala__sib",
+      "relatedInternationalInstitutionIds": []
     },
     "notes": "Paese dell'America Centrale. Website dell'autorità potrebbe essere temporaneamente inaccessibile."
   },
@@ -3178,7 +3615,9 @@
       "homepage": "https://www.bcrg-guinee.org/",
       "fraudReportLink": "https://www.bcrg-guinee.org/nous-contacter/",
       "authorityEmail": "webmaster@bcrg-guinee.org",
-      "social_links": {}
+      "social_links": {},
+      "authorityId": "guinea__bcrg",
+      "relatedInternationalInstitutionIds": []
     },
     "notes": "Paese dell'Africa occidentale. Non confondere con Guinea-Bissau o Guinea Equatoriale."
   },
@@ -3194,7 +3633,9 @@
       "homepage": "https://www.bceao.int/",
       "fraudReportLink": "https://www.bceao.int/fr/contact",
       "authorityEmail": "",
-      "social_links": {}
+      "social_links": {},
+      "authorityId": "guinea_bissau__bceao",
+      "relatedInternationalInstitutionIds": []
     },
     "notes": "Membro della zona UEMOA. Piccolo paese lusofono dell'Africa occidentale."
   },
@@ -3210,7 +3651,9 @@
       "homepage": "https://www.bankofguyana.org.gy/",
       "fraudReportLink": "",
       "authorityEmail": "",
-      "social_links": {}
+      "social_links": {},
+      "authorityId": "guyana__bog",
+      "relatedInternationalInstitutionIds": []
     },
     "notes": "Unico paese anglofono del Sud America. Economia in forte crescita grazie alle scoperte petrolifere."
   },
@@ -3226,7 +3669,9 @@
       "homepage": "https://www.brh.ht/",
       "fraudReportLink": "https://www.brh.ht/contactez-nous2/",
       "authorityEmail": "",
-      "social_links": {}
+      "social_links": {},
+      "authorityId": "haiti__brh",
+      "relatedInternationalInstitutionIds": []
     },
     "notes": "Paese caraibico. Sistema finanziario in difficoltà a causa dell'instabilità politica."
   },
@@ -3242,7 +3687,9 @@
       "homepage": "https://www.cnbs.gob.hn/",
       "fraudReportLink": "https://www.cnbs.gob.hn/reclamos",
       "authorityEmail": "webmaster@cnbs.gob.hn",
-      "social_links": {}
+      "social_links": {},
+      "authorityId": "honduras__cnbs",
+      "relatedInternationalInstitutionIds": []
     },
     "notes": "Paese dell'America Centrale. La CNBS supervisiona banche e assicurazioni."
   },
@@ -3259,7 +3706,9 @@
       "homepage": "https://cbi.ir/",
       "fraudReportLink": "",
       "authorityEmail": "",
-      "social_links": {}
+      "social_links": {},
+      "authorityId": "iran__cbi",
+      "relatedInternationalInstitutionIds": []
     },
     "notes": "⚠️ STOPPED BY ONU - Paese soggetto a severe sanzioni internazionali. Transazioni finanziarie verso l'Iran sono vietate o fortemente limitate nella maggior parte dei paesi occidentali."
   },
@@ -3275,7 +3724,9 @@
       "homepage": "https://cbi.iq/",
       "fraudReportLink": "https://cbi.iq/page/158",
       "authorityEmail": "",
-      "social_links": {}
+      "social_links": {},
+      "authorityId": "iraq__cbi",
+      "relatedInternationalInstitutionIds": []
     },
     "notes": "Sistema bancario in fase di ricostruzione. La CBI gestisce la politica monetaria e la supervisione bancaria."
   },
@@ -3291,7 +3742,9 @@
       "homepage": "https://www.bdl.gov.lb/",
       "fraudReportLink": "https://www.bdl.gov.lb/contactus.php",
       "authorityEmail": "",
-      "social_links": {}
+      "social_links": {},
+      "authorityId": "lebanon__bdl",
+      "relatedInternationalInstitutionIds": []
     },
     "notes": "Sistema bancario in profonda crisi dal 2019. Controlli sui capitali in vigore. Accesso ai depositi fortemente limitato."
   },
@@ -3307,7 +3760,9 @@
       "homepage": "https://centralbank.org.ls/",
       "fraudReportLink": "",
       "authorityEmail": "corporatecomms@centralbank.org.ls",
-      "social_links": {}
+      "social_links": {},
+      "authorityId": "lesotho__cbl",
+      "relatedInternationalInstitutionIds": []
     },
     "notes": "Regno enclave completamente circondato dal Sudafrica. Utilizza il Loti agganciato al Rand sudafricano."
   },
@@ -3323,7 +3778,9 @@
       "homepage": "https://www.cbl.org.lr/",
       "fraudReportLink": "",
       "authorityEmail": "",
-      "social_links": {}
+      "social_links": {},
+      "authorityId": "liberia__cbl",
+      "relatedInternationalInstitutionIds": []
     },
     "notes": "Paese dell'Africa occidentale fondato da ex schiavi americani. Sistema finanziario in via di sviluppo."
   },
@@ -3339,7 +3796,9 @@
       "homepage": "https://www.bceao.int/",
       "fraudReportLink": "https://www.bceao.int/fr/contact",
       "authorityEmail": "",
-      "social_links": {}
+      "social_links": {},
+      "authorityId": "mali__bceao",
+      "relatedInternationalInstitutionIds": []
     },
     "notes": "Membro della zona UEMOA. Vasto paese del Sahel."
   },
@@ -3355,7 +3814,9 @@
       "homepage": "https://www.bcm.mr/",
       "fraudReportLink": "https://www.bcm.mr/page/contacts/33",
       "authorityEmail": "",
-      "social_links": {}
+      "social_links": {},
+      "authorityId": "mauritania__bcm",
+      "relatedInternationalInstitutionIds": []
     },
     "notes": "Paese dell'Africa nordoccidentale. Ponte tra Maghreb e Africa subsahariana."
   },
@@ -3371,7 +3832,9 @@
       "homepage": "https://www.bnm.md/en",
       "fraudReportLink": "",
       "authorityEmail": "",
-      "social_links": {}
+      "social_links": {},
+      "authorityId": "moldova__nbm",
+      "relatedInternationalInstitutionIds": []
     },
     "notes": "Paese dell'Europa orientale candidato UE. Sistema bancario riformato dopo scandali del 2014."
   },
@@ -3387,7 +3850,9 @@
       "homepage": "https://www.ccaf.mc/",
       "fraudReportLink": "",
       "authorityEmail": "ccaf@ccaf.mc",
-      "social_links": {}
+      "social_links": {},
+      "authorityId": "monaco__ccaf",
+      "relatedInternationalInstitutionIds": []
     },
     "notes": "Principato sulla Costa Azzurra. Importante piazza finanziaria con rigide normative antiriciclaggio."
   },
@@ -3403,7 +3868,9 @@
       "homepage": "https://www.cbm.gov.mm/",
       "fraudReportLink": "https://www.cbm.gov.mm/content/274",
       "authorityEmail": "",
-      "social_links": {}
+      "social_links": {},
+      "authorityId": "myanmar__cbm",
+      "relatedInternationalInstitutionIds": []
     },
     "notes": "Ex Birmania. Sistema finanziario sotto pressione a causa dell'instabilità politica dal 2021."
   },
@@ -3419,7 +3886,9 @@
       "homepage": "https://www.bceao.int/",
       "fraudReportLink": "https://www.bceao.int/fr/contact",
       "authorityEmail": "",
-      "social_links": {}
+      "social_links": {},
+      "authorityId": "niger__bceao",
+      "relatedInternationalInstitutionIds": []
     },
     "notes": "Membro della zona UEMOA. Vasto paese del Sahel."
   },
@@ -3436,7 +3905,9 @@
       "homepage": "",
       "fraudReportLink": "",
       "authorityEmail": "",
-      "social_links": {}
+      "social_links": {},
+      "authorityId": "north_korea__cbdprk",
+      "relatedInternationalInstitutionIds": []
     },
     "notes": "⚠️ STOPPED BY ONU - Paese sotto le più severe sanzioni internazionali. Qualsiasi transazione finanziaria è vietata."
   },
@@ -3452,7 +3923,9 @@
       "homepage": "https://www.bsp.gov.ph/",
       "fraudReportLink": "",
       "authorityEmail": "bspmail@bsp.gov.ph",
-      "social_links": {}
+      "social_links": {},
+      "authorityId": "philippines__bsp",
+      "relatedInternationalInstitutionIds": []
     },
     "notes": "Arcipelago del Sud-Est asiatico. Sistema bancario moderno con forte protezione dei consumatori."
   },
@@ -3469,7 +3942,9 @@
       "homepage": "https://www.cbr.ru/eng/",
       "fraudReportLink": "",
       "authorityEmail": "",
-      "social_links": {}
+      "social_links": {},
+      "authorityId": "russia__cbr",
+      "relatedInternationalInstitutionIds": []
     },
     "notes": "⚠️ STOPPED BY ONU - Paese soggetto a severe sanzioni internazionali dal 2022. Escluso dal sistema SWIFT. Transazioni finanziarie fortemente limitate."
   },
@@ -3485,7 +3960,9 @@
       "homepage": "https://www.bcsm.sm/",
       "fraudReportLink": "https://www.bcsm.sm/contatti",
       "authorityEmail": "",
-      "social_links": {}
+      "social_links": {},
+      "authorityId": "san_marino__bcsm",
+      "relatedInternationalInstitutionIds": []
     },
     "notes": "Antica repubblica enclave in Italia. Accordo monetario con l'UE, utilizza l'Euro."
   },
@@ -3501,7 +3978,9 @@
       "homepage": "https://www.bceao.int/",
       "fraudReportLink": "https://www.bceao.int/fr/contact",
       "authorityEmail": "",
-      "social_links": {}
+      "social_links": {},
+      "authorityId": "senegal__bceao",
+      "relatedInternationalInstitutionIds": []
     },
     "notes": "Membro della zona UEMOA. Sede principale della BCEAO a Dakar."
   },
@@ -3517,7 +3996,9 @@
       "homepage": "https://www.bsl.gov.sl/",
       "fraudReportLink": "",
       "authorityEmail": "",
-      "social_links": {}
+      "social_links": {},
+      "authorityId": "sierra_leone__bsl",
+      "relatedInternationalInstitutionIds": []
     },
     "notes": "Paese dell'Africa occidentale. Sistema finanziario in via di sviluppo. Website potrebbe essere inaccessibile."
   },
@@ -3533,7 +4014,9 @@
       "homepage": "https://centralbank.gov.so/",
       "fraudReportLink": "https://centralbank.gov.so/contact-us/",
       "authorityEmail": "info@centralbank.gov.so",
-      "social_links": {}
+      "social_links": {},
+      "authorityId": "somalia__cbs",
+      "relatedInternationalInstitutionIds": []
     },
     "notes": "Sistema finanziario in fase di ricostruzione. Economia basata principalmente su rimesse e trasferimenti mobile money."
   },
@@ -3549,7 +4032,9 @@
       "homepage": "https://www.banksouthsudan.org/",
       "fraudReportLink": "",
       "authorityEmail": "",
-      "social_links": {}
+      "social_links": {},
+      "authorityId": "south_sudan__bss",
+      "relatedInternationalInstitutionIds": []
     },
     "notes": "Paese più giovane del mondo (indipendenza 2011). Sistema finanziario in via di sviluppo. Website potrebbe essere inaccessibile."
   },
@@ -3565,7 +4050,9 @@
       "homepage": "https://cbos.gov.sd/",
       "fraudReportLink": "",
       "authorityEmail": "info@cbos.gov.sd",
-      "social_links": {}
+      "social_links": {},
+      "authorityId": "sudan__cbos",
+      "relatedInternationalInstitutionIds": []
     },
     "notes": "Sistema bancario basato sulla finanza islamica. Sanzioni internazionali parzialmente rimosse nel 2020."
   },
@@ -3581,7 +4068,9 @@
       "homepage": "https://www.cbvs.sr/",
       "fraudReportLink": "",
       "authorityEmail": "",
-      "social_links": {}
+      "social_links": {},
+      "authorityId": "suriname__cbvs",
+      "relatedInternationalInstitutionIds": []
     },
     "notes": "Unico paese di lingua olandese in Sud America. Ex colonia dei Paesi Bassi."
   },
@@ -3598,7 +4087,9 @@
       "homepage": "https://cb.gov.sy/",
       "fraudReportLink": "",
       "authorityEmail": "info@cb.gov.sy",
-      "social_links": {}
+      "social_links": {},
+      "authorityId": "syria__cbs",
+      "relatedInternationalInstitutionIds": []
     },
     "notes": "⚠️ STOPPED BY ONU - Paese soggetto a severe sanzioni internazionali. Transazioni finanziarie verso la Siria sono vietate nella maggior parte dei paesi."
   },
@@ -3614,7 +4105,9 @@
       "homepage": "https://nbt.tj/en/",
       "fraudReportLink": "",
       "authorityEmail": "info@nbt.tj",
-      "social_links": {}
+      "social_links": {},
+      "authorityId": "tajikistan__nbt",
+      "relatedInternationalInstitutionIds": []
     },
     "notes": "Paese dell'Asia centrale. Economia dipendente dalle rimesse dei lavoratori emigrati."
   },
@@ -3630,7 +4123,9 @@
       "homepage": "https://www.bot.go.tz/",
       "fraudReportLink": "",
       "authorityEmail": "",
-      "social_links": {}
+      "social_links": {},
+      "authorityId": "tanzania__bot",
+      "relatedInternationalInstitutionIds": []
     },
     "notes": "Paese dell'Africa orientale. Sistema bancario in crescita. Website potrebbe essere bloccato in alcune regioni."
   },
@@ -3646,7 +4141,9 @@
       "homepage": "https://www.bceao.int/",
       "fraudReportLink": "https://www.bceao.int/fr/contact",
       "authorityEmail": "",
-      "social_links": {}
+      "social_links": {},
+      "authorityId": "togo__bceao",
+      "relatedInternationalInstitutionIds": []
     },
     "notes": "Membro della zona UEMOA. Piccolo paese costiero dell'Africa occidentale."
   },
@@ -3662,7 +4159,9 @@
       "homepage": "https://www.cbt.tm/",
       "fraudReportLink": "",
       "authorityEmail": "",
-      "social_links": {}
+      "social_links": {},
+      "authorityId": "turkmenistan__cbt",
+      "relatedInternationalInstitutionIds": []
     },
     "notes": "Paese dell'Asia centrale ricco di gas naturale. Economia centralizzata con limitato accesso ai mercati finanziari internazionali."
   },
@@ -3678,7 +4177,9 @@
       "homepage": "https://www.bou.or.ug/",
       "fraudReportLink": "https://www.bou.or.ug/RelatedPages/location/",
       "authorityEmail": "",
-      "social_links": {}
+      "social_links": {},
+      "authorityId": "uganda__bou",
+      "relatedInternationalInstitutionIds": []
     },
     "notes": "Paese dell'Africa orientale. Sistema bancario in crescita con forte sviluppo del mobile banking."
   },
@@ -3694,7 +4195,9 @@
       "homepage": "https://sudeban.gob.ve/",
       "fraudReportLink": "",
       "authorityEmail": "",
-      "social_links": {}
+      "social_links": {},
+      "authorityId": "venezuela__sudeban",
+      "relatedInternationalInstitutionIds": []
     },
     "notes": "Sistema bancario sotto forte controllo statale. Iperinflazione e controlli sui cambi. Website potrebbe essere inaccessibile."
   },
@@ -3710,7 +4213,9 @@
       "homepage": "https://www.centralbank.gov.ye/",
       "fraudReportLink": "",
       "authorityEmail": "",
-      "social_links": {}
+      "social_links": {},
+      "authorityId": "yemen__cby",
+      "relatedInternationalInstitutionIds": []
     },
     "notes": "Paese in conflitto. Sistema finanziario frammentato con due banche centrali rivali. Website spesso inaccessibile."
   }

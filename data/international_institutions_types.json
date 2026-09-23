@@ -1,0 +1,79 @@
+{
+  "schemaVersion": "1.0.0",
+  "metadata": {
+    "lastVerified": "2026-09-23",
+    "description": "Institution type dictionary for international and supranational institutions"
+  },
+  "institutionTypes": [
+    {
+      "id": "intergovernmental_standard_setter",
+      "category": "aml_cft_policy",
+      "labelKey": "type.intergovernmental_standard_setter.label"
+    },
+    {
+      "id": "fiu_network",
+      "category": "fiu_cooperation",
+      "labelKey": "type.fiu_network.label"
+    },
+    {
+      "id": "national_fiu",
+      "category": "fiu_cooperation",
+      "labelKey": "type.national_fiu.label"
+    },
+    {
+      "id": "regional_fatf_style_body",
+      "category": "aml_cft_policy",
+      "labelKey": "type.regional_fatf_style_body.label"
+    },
+    {
+      "id": "international_standard_setter",
+      "category": "financial_supervision",
+      "labelKey": "type.international_standard_setter.label"
+    },
+    {
+      "id": "alerts_aggregation_portal",
+      "category": "investigation_anti_fraud",
+      "labelKey": "type.alerts_aggregation_portal.label"
+    },
+    {
+      "id": "supranational_financial_supervisor",
+      "category": "financial_supervision",
+      "labelKey": "type.supranational_financial_supervisor.label"
+    },
+    {
+      "id": "supranational_executive_body",
+      "category": "financial_supervision",
+      "labelKey": "type.supranational_executive_body.label"
+    },
+    {
+      "id": "anti_fraud_investigation_office",
+      "category": "investigation_anti_fraud",
+      "labelKey": "type.anti_fraud_investigation_office.label"
+    },
+    {
+      "id": "national_regulator",
+      "category": "financial_supervision",
+      "labelKey": "type.national_regulator.label"
+    },
+    {
+      "id": "national_law_enforcement_reporting_center",
+      "category": "investigation_anti_fraud",
+      "labelKey": "type.national_law_enforcement_reporting_center.label"
+    },
+    {
+      "id": "investor_protection_fund",
+      "category": "consumer_protection",
+      "labelKey": "type.investor_protection_fund.label"
+    },
+    {
+      "id": "consumer_protection_service",
+      "category": "consumer_protection",
+      "labelKey": "type.consumer_protection_service.label"
+    },
+    {
+      "id": "investor_education_portal",
+      "category": "consumer_protection",
+      "labelKey": "type.investor_education_portal.label"
+    }
+  ]
+}
