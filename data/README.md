@@ -80,8 +80,8 @@ Some requested national links could not be resolved to current national dataset 
 
 Current unresolved items:
 
-- Bank of Italy supervisory authority record (not present as standalone authority in `financial_authorities_database.json`)
-- Guardia di Finanza authority record (not present as standalone authority in `financial_authorities_database.json`)
+- Bank of Italy supervisory authority record (not present as standalone authority in `financial_authorities_database.json`) — official site: https://www.bancaditalia.it/
+- Guardia di Finanza authority record (not present as standalone authority in `financial_authorities_database.json`) — official site: https://www.gdf.gov.it/it
 
 ## Synchronization rule (active mirrors)
 
