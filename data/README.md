@@ -82,6 +82,8 @@ Current unresolved items:
 
 - Bank of Italy supervisory authority record (not present as standalone authority in `financial_authorities_database.json`) — official site: https://www.bancaditalia.it/
 - Guardia di Finanza authority record (not present as standalone authority in `financial_authorities_database.json`) — official site: https://www.gdf.gov.it/it
+- Questure - Polizia di Stato authority record (not present as standalone authority in `financial_authorities_database.json`) — official site: https://questure.poliziadistato.it/ (app: YouPol)
+- Arma dei Carabinieri authority record (not present as standalone authority in `financial_authorities_database.json`) — official site: https://carabinieri.it (app: iCarabinieri)
 
 ## Synchronization rule (active mirrors)
 

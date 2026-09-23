@@ -24,6 +24,20 @@
         "requestedReference": "Guardia di Finanza authority record",
         "reason": "No Guardia di Finanza authorityId exists in financial_authorities_database.json as of 2026-09-23",
         "officialUrl": "https://www.gdf.gov.it/it"
+      },
+      {
+        "institutionId": "it_uif",
+        "requestedReference": "Questure - Polizia di Stato (Italy)",
+        "reason": "No standalone authorityId exists in financial_authorities_database.json as of 2026-09-23",
+        "officialUrl": "https://questure.poliziadistato.it/",
+        "relatedApp": "YouPol"
+      },
+      {
+        "institutionId": "it_uif",
+        "requestedReference": "Arma dei Carabinieri (Italy)",
+        "reason": "No standalone authorityId exists in financial_authorities_database.json as of 2026-09-23",
+        "officialUrl": "https://carabinieri.it",
+        "relatedApp": "iCarabinieri"
       }
     ]
   },
