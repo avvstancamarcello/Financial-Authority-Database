@@ -1350,6 +1350,7 @@
             min-height: 110px;
         }
         .flag-item:hover { transform: translateY(-5px); box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4); border-color: #667eea; }
+        .flag-item:focus-visible { outline: 3px solid #1d4ed8; outline-offset: 3px; border-color: #1d4ed8; }
         .flag-item-unavailable { cursor: default; opacity: 0.8; }
         .flag-item-unavailable:hover { transform: none; box-shadow: none; border-color: #e0e0e0; }
         .flag-icon-wrapper { 
@@ -2235,7 +2236,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     Scorri l'Alfabeto e seleziona la Bandiera!&nbsp;&nbsp;&nbsp; <span class="keyword-pulse-red">Database più completo del mondo!</span>
                 </p>
             </div>
-            <div class="flags-grid" id="flagsGrid"></div>
+            <div class="flags-grid" id="flagsGrid" role="grid" aria-label="Country flags grid"></div>
         </div>
 
         <!-- NUOVA BARRA RICERCA SUPERIORE -->
@@ -2427,19 +2428,19 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         </footer>
     </div>
 
-    <div id="countryModal" class="modal">
-        <div class="modal-content">
+    <div id="countryModal" class="modal" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="countryModalTitle">
+        <div class="modal-content" tabindex="-1">
             <!-- Pulsante close rimosso da qui - ora è posizionato in basso, sopra il banner -->
             <div id="modalContent"></div>
         </div>
     </div>
 
     <!-- Report Form Modal -->
-    <div id="reportFormModal" class="modal" style="display: none;">
-        <div class="modal-content" style="max-width: 650px; background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%); color: #ffffff; border: 2px solid #39ff14;">
-            <span class="close-modal" onclick="closeReportForm()" style="color: #39ff14;">×</span>
+    <div id="reportFormModal" class="modal" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="reportFormTitleHeading" style="display: none;">
+        <div class="modal-content" tabindex="-1" style="max-width: 650px; background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%); color: #ffffff; border: 2px solid #39ff14;">
+            <button type="button" class="close-modal" onclick="closeReportForm()" aria-label="Close report form" style="color: #39ff14;">×</button>
             <div style="text-align: center; margin-bottom: 20px;">
-                <h2 style="color: #39ff14; margin: 0;" data-i18n="reportFormTitle">⚠️ Segnala Entità Sospetta</h2>
+                <h2 id="reportFormTitleHeading" style="color: #39ff14; margin: 0;" data-i18n="reportFormTitle">⚠️ Segnala Entità Sospetta</h2>
                 <p style="color: #9ca3af; font-size: 0.9em;" id="reportAuthorityInfo" data-i18n="reportFormSubtitle">Richiesta di verifica all'Autorità Finanziaria</p>
             </div>
             <form id="reportForm" onsubmit="submitReport(event)">
@@ -2492,9 +2493,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </div>
 
     <!-- Full-Screen Instructions Modal (apre dentro la scheda) -->
-    <div id="instructionsFullscreenModal" class="instructions-fullscreen-modal" style="display: none;">
-        <div class="instructions-fullscreen-content">
-            <span class="instructions-fullscreen-close" onclick="closeInstructionsFullscreen()">×</span>
+    <div id="instructionsFullscreenModal" class="instructions-fullscreen-modal" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="instructionsFullscreenTitle" style="display: none;">
+        <div class="instructions-fullscreen-content" tabindex="-1">
+            <button type="button" class="instructions-fullscreen-close" onclick="closeInstructionsFullscreen()" aria-label="Close instructions">×</button>
             <div class="instructions-fullscreen-header">
                 <h2 id="instructionsFullscreenTitle">🛡️ Guida Legale Operativa – Verifica di un'Impresa Finanziaria in 5 Passi</h2>
                 <p id="instructionsFullscreenSubtitle">Autorità: <span id="instructionsAuthorityName"></span></p>
@@ -4442,6 +4443,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         // Cache traduzioni on-demand
         let translationCache = {};
         let isConsobOrbitalDialogSetup = false;
+        let activeDialogState = null;
 
         // Inizializza canonical URL per SEO (Google self-referencing canonical)
         (function initCanonical() {
@@ -4505,9 +4507,15 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 if (!country) return;
                 
                 // Traduci le note
-                const originalNotes = country.notes || '';
+                const notesKey = country.notes_key || getAuthorityNotesKey(country.country_name);
+                const notesTranslations = authorityNotesDictionary[notesKey] || {};
+                const originalNotes = notesTranslations.it || country.notes || '';
                 const translatedNotes = await translateText(originalNotes, currentLanguage);
-                notesContainer.innerHTML = translatedNotes.replace(/(https?:\/\/[^\s]+)/g, '<a href="$1" target="_blank">$1</a>');
+                authorityNotesDictionary[notesKey] = {
+                    ...notesTranslations,
+                    [currentLanguage]: translatedNotes
+                };
+                notesContainer.innerHTML = translatedNotes.replace(/(https?:\/\/[^\s]+)/g, '<a href="$1" target="_blank" rel="noopener noreferrer">$1</a>');
                 
                 // Aggiorna pulsante
                 translateBtn.textContent = currentTranslations.translateDone || '✓ Tradotto';
@@ -4556,9 +4564,18 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             popup.setAttribute('aria-hidden', isVisible ? 'false' : 'true');
         }
 
-        // Traduzioni specifiche per le note dei paesi
-        const countryNotesTranslations = {
-            'Singapore': {
+        function getAuthorityNotesKey(countryName) {
+            return String(countryName || '')
+                .normalize('NFD')
+                .replace(/[\u0300-\u036f]/g, '')
+                .toLowerCase()
+                .replace(/[^a-z0-9]+/g, '_')
+                .replace(/^_+|_+$/g, '');
+        }
+
+        // Dizionario note authority con chiave stabile
+        const authorityNotesDictionary = {
+            singapore: {
                 it: "Regolamentazione di altissima civiltà con supporto psicologico per le vittime (https://www.scamshield.gov.sg/avenues-of-support/), a dimostrazione di grande attenzione per il dramma umano. La Polizia, tramite l'app Scamshield, offre una guida esemplare sulle tattiche psicologiche (https://www.scamshield.gov.sg/why-do-people-fall-prey-to-scams/) e report infografici (https://www.scamshield.gov.sg/scams-and-cybercrime-briefs/). Guida al rischio: https://www.moneysense.gov.sg/investments/investment-risk/. Cyber Security Agency (Facebook): https://www.facebook.com/CSAsingapore. DBS Bank promuove la responsabilità condivisa (https://www.dbs.com.sg/personal/support/general-shared-responsibility-framework.html). World Investor Week Coordinator: Paulyn Sng.",
                 en: "Highly civilized regulation with psychological support for victims (https://www.scamshield.gov.sg/avenues-of-support/), demonstrating great attention to human drama. The Police, through the Scamshield app, offers exemplary guidance on psychological tactics (https://www.scamshield.gov.sg/why-do-people-fall-prey-to-scams/) and infographic reports (https://www.scamshield.gov.sg/scams-and-cybercrime-briefs/). Risk guide: https://www.moneysense.gov.sg/investments/investment-risk/. Cyber Security Agency (Facebook): https://www.facebook.com/CSAsingapore. DBS Bank promotes shared responsibility (https://www.dbs.com.sg/personal/support/general-shared-responsibility-framework.html). World Investor Week Coordinator: Paulyn Sng.",
                 fr: "Réglementation de très haute civilisation avec soutien psychologique pour les victimes (https://www.scamshield.gov.sg/avenues-of-support/), démontrant une grande attention au drame humain. La Police, via l'application Scamshield, offre un guide exemplaire sur les tactiques psychologiques (https://www.scamshield.gov.sg/why-do-people-fall-prey-to-scams/) et des rapports infographiques (https://www.scamshield.gov.sg/scams-and-cybercrime-briefs/). Guide des risques: https://www.moneysense.gov.sg/investments/investment-risk/. Cyber Security Agency (Facebook): https://www.facebook.com/CSAsingapore. DBS Bank promeut la responsabilité partagée (https://www.dbs.com.sg/personal/support/general-shared-responsibility-framework.html). World Investor Week Coordinator: Paulyn Sng.",
@@ -4568,7 +4585,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         };
 
         function getTranslatedNotes(countryName, notes) {
-            const notesTranslations = countryNotesTranslations[countryName];
+            const notesKey = getAuthorityNotesKey(countryName);
+            const notesTranslations = authorityNotesDictionary[notesKey];
             const notesLanguage = notesTranslations && notesTranslations[currentLanguage]
                 ? currentLanguage
                 : localeMetadata[currentLanguage]?.fallback || currentLanguage;
@@ -4677,7 +4695,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 'Sao Tome and Principe': 'Africa', 'Senegal': 'Africa', 'Seychelles': 'Africa', 'Sierra Leone': 'Africa', 'Somalia': 'Africa',
                 'South Africa': 'Africa', 'South Sudan': 'Africa', 'Sudan': 'Africa', 'Tanzania': 'Africa', 'Togo': 'Africa',
                 'Tunisia': 'Africa', 'Uganda': 'Africa', 'Zambia': 'Africa', 'Zimbabwe': 'Africa',
-                'CEMAC Region': 'Africa', 'ECOWAS Region': 'Africa',
+                'CEMAC (Regional)': 'Africa', 'ECOWAS Region': 'Africa',
                 // AMERICHE
                 'Argentina': 'Americas', 'Bahamas': 'Americas', 'Barbados': 'Americas', 'Belize': 'Americas', 'Bolivia': 'Americas',
                 'Brazil': 'Americas', 'Canada': 'Americas', 'Chile': 'Americas', 'Colombia': 'Americas', 'Costa Rica': 'Americas',
@@ -4687,7 +4705,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 'Peru': 'Americas', 'Saint Kitts and Nevis': 'Americas', 'Saint Lucia': 'Americas', 'Saint Vincent and the Grenadines': 'Americas',
                 'Suriname': 'Americas', 'Trinidad and Tobago': 'Americas', 'United States': 'Americas', 'Uruguay': 'Americas', 'Venezuela': 'Americas',
                 'British Virgin Islands': 'Americas', 'Cayman Islands': 'Americas', 'Bermuda': 'Americas', 'Puerto Rico': 'Americas',
-                'ECSRC (Eastern Caribbean)': 'Americas',
+                'ECSRC (Regional)': 'Americas',
                 // OCEANIA
                 'Australia': 'Oceania', 'Fiji': 'Oceania', 'Kiribati': 'Oceania', 'Marshall Islands': 'Oceania', 'Micronesia': 'Oceania',
                 'Nauru': 'Oceania', 'New Zealand': 'Oceania', 'Palau': 'Oceania', 'Papua New Guinea': 'Oceania', 'Samoa': 'Oceania',
@@ -4742,7 +4760,20 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 data = addWatermark(data);
                 
                 // Converti l'oggetto in array
-                countriesData = Object.values(data);
+                countriesData = Object.values(data).map((country) => {
+                    const stableKey = getAuthorityNotesKey(country?.country_name);
+                    if (!authorityNotesDictionary[stableKey]) {
+                        authorityNotesDictionary[stableKey] = { it: country?.notes || '' };
+                    }
+                    if (!authorityNotesDictionary[stableKey].it) {
+                        authorityNotesDictionary[stableKey].it = country?.notes || '';
+                    }
+                    return {
+                        ...country,
+                        authority_id: country?.authority_id || stableKey,
+                        notes_key: country?.notes_key || stableKey
+                    };
+                });
                 
                 // Assegna continente a ogni paese - SEO Enhancement
                 countriesData = assignContinents(countriesData);
@@ -5476,18 +5507,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                             ${country.sanctioned ? `<span class="sanctioned-badge">${sanctionedBadge}</span>` : ''}
                         </div>
 					</div>
-					<div class="modal-uk">
-                      <h2>United Kingdom – FCA</h2>
-					  
-                      <div class="orbital-box">
-                        <img src="authority/preview-fca.png"
-                             alt="FCA Orbital Preview"
-                             class="orbital-thumbnail"
-                             onclick="openOrbitalWebApp('authority/UK-FCA.html')">
-                      </div>
-
-                    </div>
-
                     ${orbitalThumbnailHtml}
                 `;
                 const searchAliases = getCountrySearchAliases(country.country_name);
@@ -5828,6 +5847,75 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             dialog.removeAttribute('open');
         }
 
+        function getFocusableElements(container) {
+            if (!container) return [];
+            return Array.from(container.querySelectorAll('a[href], button:not([disabled]), textarea:not([disabled]), input:not([disabled]), select:not([disabled]), [tabindex]:not([tabindex="-1"])'))
+                .filter((el) => !el.hasAttribute('disabled') && el.getAttribute('aria-hidden') !== 'true');
+        }
+
+        function activateModalDialog(modal, { initialFocusSelector } = {}) {
+            if (!modal) return;
+            const previouslyFocused = document.activeElement instanceof HTMLElement ? document.activeElement : null;
+            modal.style.display = 'block';
+            modal.setAttribute('aria-hidden', 'false');
+            document.body.style.overflow = 'hidden';
+
+            const modalContent = modal.querySelector('.modal-content, .instructions-fullscreen-content');
+            const focusable = getFocusableElements(modal);
+            const initialFocus = (initialFocusSelector && modal.querySelector(initialFocusSelector))
+                || focusable[0]
+                || modalContent
+                || modal;
+            if (initialFocus && typeof initialFocus.focus === 'function') {
+                initialFocus.focus();
+            }
+            activeDialogState = { modal, previouslyFocused };
+        }
+
+        function deactivateModalDialog(modal, { restoreFocus = true } = {}) {
+            if (!modal) return;
+            modal.style.display = 'none';
+            modal.setAttribute('aria-hidden', 'true');
+            document.body.style.overflow = 'auto';
+            if (activeDialogState && activeDialogState.modal === modal) {
+                const focusTarget = activeDialogState.previouslyFocused;
+                activeDialogState = null;
+                if (restoreFocus && focusTarget && typeof focusTarget.focus === 'function') {
+                    focusTarget.focus();
+                }
+            }
+        }
+
+        document.addEventListener('keydown', (event) => {
+            if (!activeDialogState || !activeDialogState.modal) return;
+            const { modal } = activeDialogState;
+            if (modal.style.display === 'none') return;
+
+            if (event.key === 'Escape') {
+                event.preventDefault();
+                if (modal.id === 'countryModal') closeModal();
+                if (modal.id === 'reportFormModal') closeReportForm();
+                if (modal.id === 'instructionsFullscreenModal') closeInstructionsFullscreen();
+                return;
+            }
+
+            if (event.key !== 'Tab') return;
+            const focusable = getFocusableElements(modal);
+            if (focusable.length === 0) {
+                event.preventDefault();
+                return;
+            }
+            const first = focusable[0];
+            const last = focusable[focusable.length - 1];
+            if (event.shiftKey && document.activeElement === first) {
+                event.preventDefault();
+                last.focus();
+            } else if (!event.shiftKey && document.activeElement === last) {
+                event.preventDefault();
+                first.focus();
+            }
+        });
+
         function openModal(countryName) {
             const country = countriesData.find(c => c.country_name === countryName);
             if (!country) return;
@@ -5835,6 +5923,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             const modal = document.getElementById('countryModal');
             const modalContent = document.getElementById('modalContent');
             const currentTranslations = getLanguageBundle(currentLanguage);
+            const notAvailableText = currentTranslations.notAvailable || 'N/A';
 
             // Bandiera nel popup: stessa icona del grid ma dimensione maggiore
             const flagInfo = getFlagInfo(country.country_name);
@@ -5904,12 +5993,24 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             const safeAuthorityEmail = escapeHtmlAttribute(country.financial_authority.authorityEmail);
             const safeCountryLanguage = escapeHtmlAttribute(getCountryLanguage(country.country_name));
             const countryMarker = getCountryGridMarker(country.country_name);
+            const homepage = (country.financial_authority.homepage || '').trim();
+            const fraudReportLink = (country.financial_authority.fraudReportLink || '').trim();
+            const authorityEmail = (country.financial_authority.authorityEmail || '').trim();
+            const homepageHtml = homepage
+                ? `<a href="${escapeHtmlAttribute(homepage)}" target="_blank" rel="noopener noreferrer">${escapeHtmlAttribute(homepage)}</a>`
+                : `<span>${escapeHtmlAttribute(notAvailableText)}</span>`;
+            const fraudReportHtml = fraudReportLink
+                ? `<a href="${escapeHtmlAttribute(fraudReportLink)}" target="_blank" rel="noopener noreferrer">${escapeHtmlAttribute(fraudReportLink)}</a>`
+                : `<span>${escapeHtmlAttribute(notAvailableText)}</span>`;
+            const authorityEmailHtml = authorityEmail
+                ? `<a href="mailto:${escapeHtmlAttribute(authorityEmail)}">${escapeHtmlAttribute(authorityEmail)}</a>`
+                : `<span>${escapeHtmlAttribute(notAvailableText)}</span>`;
 
             modalContent.innerHTML = `
                 ${sanctionAlertHTML}
                 <div class="country-header">
                     <div class="country-flag">${modalFlagHTML}</div>
-                    <div class="country-name">${country.country_name}${countryMarker ? ` <span style="display:inline-block; margin-left:8px; padding:3px 10px; border-radius:999px; background:rgba(30,41,59,0.12); color:#1e293b; font-size:0.55em; font-weight:700; vertical-align:middle;">${countryMarker}</span>` : ''}</div>
+                    <h2 id="countryModalTitle" class="country-name">${country.country_name}${countryMarker ? ` <span style="display:inline-block; margin-left:8px; padding:3px 10px; border-radius:999px; background:rgba(30,41,59,0.12); color:#1e293b; font-size:0.55em; font-weight:700; vertical-align:middle;">${countryMarker}</span>` : ''}</h2>
                 </div>
                 <div class="country-info" style="margin-top: 20px;">
                     <p><strong>${currentTranslations.modalAuthority || 'Authority'}:</strong> ${country.financial_authority.name}</p>
@@ -5917,13 +6018,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     <p><strong>${currentTranslations.protectionLevel || 'Protection'}:</strong> ${getLocalizedProtectionLevel(country.protectionLevel)}${country.sanctioned ? ` <span class="sanctioned-badge">${sanctionedBadge}</span>` : ''}</p>
                     <div class="authority-link" style="margin: 15px 0;">
                         <strong>${currentTranslations.modalHomepage || 'Homepage'}:</strong><br>
-                        <a href="${country.financial_authority.homepage}" target="_blank">${country.financial_authority.homepage || 'N/A'}</a>
+                        ${homepageHtml}
                     </div>
                     <div class="authority-link" style="margin: 15px 0;">
                         <strong>${currentTranslations.modalFraudReport || 'Fraud Report'}:</strong><br>
-                        <a href="${country.financial_authority.fraudReportLink}" target="_blank">${country.financial_authority.fraudReportLink}</a>
+                        ${fraudReportHtml}
                     </div>
-                    <p><strong>${currentTranslations.modalEmail || 'Email'}:</strong> <a href="mailto:${country.financial_authority.authorityEmail}">${country.financial_authority.authorityEmail}</a></p>
+                    <p><strong>${currentTranslations.modalEmail || 'Email'}:</strong> ${authorityEmailHtml}</p>
                     ${socialHTML ? `<p style="margin-top:15px;"><strong>${currentTranslations.modalSocial || 'Social'}:</strong> ${socialHTML}</p>` : ''}
                     ${orbitalPreviewHtml}
                     <div style="margin-top: 20px; display: flex; align-items: center; flex-wrap: wrap; gap: 10px;">
@@ -5932,7 +6033,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                             ${translateBtnText[currentLanguage] || '🌐 Translate'}
                         </button>
                     </div>
-                    <p id="notesContent">${getTranslatedNotes(country.country_name, country.notes).replace(/(https?:\/\/[^\s]+)/g, '<a href="$1" target="_blank">$1</a>')}</p>
+                    <p id="notesContent">${getTranslatedNotes(country.country_name, country.notes).replace(/(https?:\/\/[^\s]+)/g, '<a href="$1" target="_blank" rel="noopener noreferrer">$1</a>')}</p>
                 </div>
                 <div style="margin-top: 25px; padding-top: 20px; border-top: 2px solid #e0e0e0; text-align: center;">
                     <div style="display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-bottom: 15px;">
@@ -5969,11 +6070,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             if (modalCloseHintText) {
                 modalCloseHintText.textContent = modalTranslations.modalCloseHint || 'Clicca per chiudere';
             }
-            modal.style.display = 'block';
+            activateModalDialog(modal, { initialFocusSelector: '#modalCloseButton' });
         }
 
-        function closeModal() {
-            document.getElementById('countryModal').style.display = 'none';
+        function closeModal(restoreFocus = true) {
+            deactivateModalDialog(document.getElementById('countryModal'), { restoreFocus });
         }
 
         // === REPORT FORM FUNCTIONS ===
@@ -5984,12 +6085,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             document.getElementById('reportAuthorityEmail').value = authorityEmail;
             const reportPrefix = currentTranslations.reportAuthorityInfoPrefix || 'Richiesta di verifica a';
             document.getElementById('reportAuthorityInfo').textContent = `${reportPrefix}: ${authorityName} (${countryName})`;
-            document.getElementById('reportFormModal').style.display = 'block';
-            document.getElementById('countryModal').style.display = 'none';
+            closeModal();
+            activateModalDialog(document.getElementById('reportFormModal'), { initialFocusSelector: '#userEmail' });
         }
 
         function closeReportForm() {
-            document.getElementById('reportFormModal').style.display = 'none';
+            deactivateModalDialog(document.getElementById('reportFormModal'));
             document.getElementById('reportForm').reset();
         }
 
@@ -6063,8 +6164,10 @@ https://avvstancamarcello.github.io/Financial-Authority-Database/
             const subjectAdmin = encodeURIComponent(`[WARNING LIST] Segnalazione: ${suspectName} - ${countryName}`);
             const bodyAdmin = encodeURIComponent(`NUOVA SEGNALAZIONE PER WARNING LIST\n\n${letterTemplate}`);
 
-            // Apri email verso Authority
-            window.open(`mailto:${authorityEmail}?subject=${subjectAuthority}&body=${bodyAuthority}`, '_blank');
+            // Apri email verso Authority (se disponibile)
+            if (authorityEmail) {
+                window.open(`mailto:${authorityEmail}?subject=${subjectAuthority}&body=${bodyAuthority}`, '_blank');
+            }
             
             // Dopo 1 secondo, apri email verso admin
             setTimeout(() => {
@@ -6074,7 +6177,8 @@ https://avvstancamarcello.github.io/Financial-Authority-Database/
             // Mostra conferma
             const reportPreparedAlert = (currentTranslations.reportPreparedAlert || "✅ Due email sono state preparate:\n\n1. Per l'Authority Finanziaria ({authorityName})\n2. Per l'Amministratore (Warning List)\n\nInvia entrambe dal tuo client email!")
                 .replace('{authorityName}', authorityName);
-            alert(reportPreparedAlert);
+            const missingAuthorityEmailAlert = currentTranslations.missingAuthorityEmailAlert || "⚠️ Email dell'Authority non disponibile nel database: è stata preparata solo l'email per l'Amministratore.";
+            alert(authorityEmail ? reportPreparedAlert : missingAuthorityEmailAlert);
             
             closeReportForm();
         }
@@ -6138,13 +6242,11 @@ https://avvstancamarcello.github.io/Financial-Authority-Database/
             bodyEl.innerHTML = getInstructionsContent(targetLang);
             titleEl.textContent = getInstructionsTitle(targetLang);
             
-            modal.style.display = 'block';
-            document.body.style.overflow = 'hidden';
+            activateModalDialog(modal, { initialFocusSelector: '.instructions-fullscreen-close' });
         }
 
         function closeInstructionsFullscreen() {
-            document.getElementById('instructionsFullscreenModal').style.display = 'none';
-            document.body.style.overflow = 'auto';
+            deactivateModalDialog(document.getElementById('instructionsFullscreenModal'));
         }
 
         function getInstructionsTitle(lang) {
@@ -6195,6 +6297,7 @@ https://avvstancamarcello.github.io/Financial-Authority-Database/
             const sortedCountries = [...countriesData].sort((a, b) => 
                 String(a?.country_name || '').localeCompare(String(b?.country_name || ''))
             );
+            const openDetailsPrefix = currentLanguage === 'it' ? 'Apri dettagli per' : 'Open details for';
 
             sortedCountries.forEach((country, index) => {
                 if (!country) return;
@@ -6212,7 +6315,7 @@ https://avvstancamarcello.github.io/Financial-Authority-Database/
                 flagItem.className = 'flag-item';
                 if (hasCountryName) {
                     flagItem.onclick = () => openModal(resolvedCountryName);
-                    flagItem.setAttribute('aria-label', `Open details for ${resolvedCountryName}`);
+                    flagItem.setAttribute('aria-label', `${openDetailsPrefix} ${resolvedCountryName}`);
                 } else {
                     flagItem.classList.add('flag-item-unavailable');
                     flagItem.title = `Country details unavailable for ${resolvedCountryName}`;
@@ -6539,17 +6642,6 @@ https://avvstancamarcello.github.io/Financial-Authority-Database/
             // Mostra banner di installazione personalizzato se necessario
         });
     </script>
-    <script>
-    function openOrbitalWebApp(modalPage) {
-      var iframe = document.getElementById("orbital-iframe");
-      iframe.src = modalPage;
-      document.getElementById("orbital-modal").style.display = "block";
-    }
-    </script>
-    <div id="orbital-modal" class="modal-orbital">
-      <span class="close" onclick="document.getElementById('orbital-modal').style.display='none'">&times;</span>
-      <iframe id="orbital-iframe" class="orbital-frame"></iframe>
-   </div>
 
     <footer style="text-align:center; padding: 12px 8px 16px; font-size: 0.85rem; color:#e5e7eb;">
         <span>© 2026 Avv. Marcello Stanca - Tutti i diritti riservati.</span>
