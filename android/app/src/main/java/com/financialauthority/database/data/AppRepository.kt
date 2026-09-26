@@ -32,10 +32,10 @@ class AppRepository(private val context: Context) {
     suspend fun loadLegalDocument(docId: String, locale: String): String = withContext(Dispatchers.IO) {
         val preferred = "legal/${docId}_${locale}.md"
         val en = "legal/${docId}_en.md"
-        val it = "legal/${docId}_it.md"
+        val italian = "legal/${docId}_it.md"
         runCatching { loadAsset(preferred) }
             .recoverCatching { loadAsset(en) }
-            .recoverCatching { loadAsset(it) }
+            .recoverCatching { loadAsset(italian) }
             .getOrElse { "Contenuto non disponibile." }
     }
 
