@@ -34,15 +34,21 @@ function isAppNavigationRequest(request) {
 }
 
 function isSameOriginAppRequest(url) {
-  return url.origin === self.location.origin && url.pathname.startsWith(`${BASE_PATH}/`);
+  return url.origin === self.location.origin
+    && (url.pathname === BASE_PATH || url.pathname.startsWith(`${BASE_PATH}/`));
+}
+
+function isAppShellDocumentPath(pathname) {
+  return pathname === BASE_PATH || pathname === `${BASE_PATH}/` || pathname === `${BASE_PATH}/index.html`;
 }
 
 function isAssetStaleWhileRevalidate(requestUrl) {
-  return requestUrl === FLAG_ICONS_CSS_URL || PWA_ICON_PATHS.some(path => requestUrl.endsWith(path));
+  const url = new URL(requestUrl);
+  return requestUrl === FLAG_ICONS_CSS_URL || PWA_ICON_PATHS.includes(url.pathname);
 }
 
 async function cacheUrl(cache, url) {
-  const response = await fetch(url, { cache: 'no-cache' });
+  const response = await fetch(url);
   if (!isCacheableResponse(response)) {
     throw new Error(`Unexpected response while caching ${url}: ${response?.status}`);
   }
@@ -65,7 +71,7 @@ async function handleNavigationRequest(request) {
     const requestUrl = new URL(request.url);
     if (request.method === 'GET' && isCacheableResponse(networkResponse) && isSameOriginAppRequest(requestUrl)) {
       await cache.put(request, networkResponse.clone());
-      if (requestUrl.pathname === `${BASE_PATH}/` || requestUrl.pathname === `${BASE_PATH}/index.html`) {
+      if (isAppShellDocumentPath(requestUrl.pathname)) {
         await Promise.all([
           cache.put(`${BASE_PATH}/index.html`, networkResponse.clone()),
           cache.put(`${BASE_PATH}/`, networkResponse.clone())

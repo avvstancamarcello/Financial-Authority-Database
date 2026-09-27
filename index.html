@@ -1000,10 +1000,18 @@
             color: #f8fafc;
             font: inherit;
             font-weight: 700;
-            width: 2.35rem;
             height: 2.35rem;
+            min-width: 2.35rem;
+            padding: 0 0.75rem;
             border-radius: 999px;
             cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.35rem;
+        }
+        .ios-install-hint-dismiss-label {
+            font-size: 0.82rem;
+            line-height: 1;
         }
         [data-guide-lang][hidden] {
             display: none !important;
@@ -2602,7 +2610,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                             <span class="sr-only" data-i18n="appDownloadGuideLanguagesSr">Guida disponibile in Italiano e English</span>
                         </span>
                     </button>
-                    <div id="ios-install-hint" class="ios-install-hint" hidden role="note">
+                    <div id="ios-install-hint" class="ios-install-hint" hidden role="note" aria-live="polite" aria-atomic="true">
                         <p data-i18n="appDownloadIosHint">Su iPhone apri questa pagina in Safari, tocca Condividi e scegli Aggiungi a Home per installarla come WebApp/PWA.</p>
                         <div class="ios-install-hint-actions">
                             <button id="ios-install-hint-open" type="button" class="app-download-guide-button ios-install-hint-open" onclick="openIosInstallGuide(this)">
@@ -2611,6 +2619,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                             </button>
                             <button id="ios-install-hint-dismiss" type="button" class="ios-install-hint-dismiss" data-i18n-aria-label="appDownloadIosHintDismissAriaLabel" aria-label="Nascondi il suggerimento installazione iPhone" onclick="dismissIosInstallHint()">
                                 <span aria-hidden="true">×</span>
+                                <span class="ios-install-hint-dismiss-label" data-i18n="appDownloadIosHintDismissText">Chiudi</span>
+                                <span class="sr-only" data-i18n="appDownloadIosHintDismissAriaLabel">Nascondi il suggerimento installazione iPhone</span>
                             </button>
                         </div>
                     </div>
@@ -4871,7 +4881,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 appDownloadGuideTrigger: "Leggi la guida",
                 appDownloadGuideLanguagesSr: "Guida disponibile in Italiano e English",
                 appDownloadIosHint: "Su iPhone apri questa pagina in Safari, tocca Condividi e scegli Aggiungi a Home per installarla come WebApp/PWA.",
-                appDownloadIosHintDismissAriaLabel: "Nascondi il suggerimento installazione iPhone"
+                appDownloadIosHintDismissAriaLabel: "Nascondi il suggerimento installazione iPhone",
+                appDownloadIosHintDismissText: "Chiudi"
             },
             en: {
                 appDownloadImageAlt: "Financial Authority Database Android app shield icon",
@@ -4890,7 +4901,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 appDownloadGuideTrigger: "Read the guide",
                 appDownloadGuideLanguagesSr: "Guide available in Italian and English",
                 appDownloadIosHint: "On iPhone, open this page in Safari, tap Share, and choose Add to Home Screen to install it as a Web App / PWA.",
-                appDownloadIosHintDismissAriaLabel: "Dismiss the iPhone install hint"
+                appDownloadIosHintDismissAriaLabel: "Dismiss the iPhone install hint",
+                appDownloadIosHintDismissText: "Close"
             },
             fr: {
                 appDownloadImageAlt: "Icône bouclier de l'application Android Financial Authority Database",
@@ -4909,7 +4921,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 appDownloadGuideTrigger: "Lire le guide",
                 appDownloadGuideLanguagesSr: "Guide disponible en italien et en anglais",
                 appDownloadIosHint: "Sur iPhone, ouvrez cette page dans Safari, touchez Partager puis Ajouter à l’écran d’accueil pour l’installer comme WebApp/PWA.",
-                appDownloadIosHintDismissAriaLabel: "Masquer le conseil d’installation iPhone"
+                appDownloadIosHintDismissAriaLabel: "Masquer le conseil d’installation iPhone",
+                appDownloadIosHintDismissText: "Fermer"
             },
             de: {
                 appDownloadImageAlt: "Schildsymbol der Financial Authority Database Android-App",
@@ -4928,7 +4941,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 appDownloadGuideTrigger: "Anleitung lesen",
                 appDownloadGuideLanguagesSr: "Anleitung auf Italienisch und Englisch verfügbar",
                 appDownloadIosHint: "Öffnen Sie diese Seite auf dem iPhone in Safari, tippen Sie auf Teilen und dann auf Zum Home-Bildschirm, um sie als WebApp/PWA zu installieren.",
-                appDownloadIosHintDismissAriaLabel: "iPhone-Installationshinweis ausblenden"
+                appDownloadIosHintDismissAriaLabel: "iPhone-Installationshinweis ausblenden",
+                appDownloadIosHintDismissText: "Schließen"
             },
             es: {
                 appDownloadImageAlt: "Icono de escudo de la app Android Financial Authority Database",
@@ -4947,7 +4961,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 appDownloadGuideTrigger: "Leer la guía",
                 appDownloadGuideLanguagesSr: "Guía disponible en italiano e inglés",
                 appDownloadIosHint: "En iPhone, abre esta página en Safari, toca Compartir y elige Añadir a pantalla de inicio para instalarla como WebApp/PWA.",
-                appDownloadIosHintDismissAriaLabel: "Ocultar la sugerencia de instalación para iPhone"
+                appDownloadIosHintDismissAriaLabel: "Ocultar la sugerencia de instalación para iPhone",
+                appDownloadIosHintDismissText: "Cerrar"
             },
             pt: {
                 appDownloadImageAlt: "Ícone de escudo da app Android Financial Authority Database",
@@ -4966,7 +4981,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 appDownloadGuideTrigger: "Ler o guia",
                 appDownloadGuideLanguagesSr: "Guia disponível em italiano e inglês",
                 appDownloadIosHint: "No iPhone, abra esta página no Safari, toque em Partilhar e escolha Adicionar ao ecrã principal para a instalar como WebApp/PWA.",
-                appDownloadIosHintDismissAriaLabel: "Ocultar dica de instalação no iPhone"
+                appDownloadIosHintDismissAriaLabel: "Ocultar dica de instalação no iPhone",
+                appDownloadIosHintDismissText: "Fechar"
             },
             ro: {
                 appDownloadImageAlt: "Pictograma scut al aplicației Android Financial Authority Database",
@@ -4985,7 +5001,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 appDownloadGuideTrigger: "Citește ghidul",
                 appDownloadGuideLanguagesSr: "Ghid disponibil în italiană și engleză",
                 appDownloadIosHint: "Pe iPhone, deschide această pagină în Safari, atinge Partajează și alege Adaugă pe ecranul principal pentru a o instala ca WebApp/PWA.",
-                appDownloadIosHintDismissAriaLabel: "Ascunde sugestia de instalare pe iPhone"
+                appDownloadIosHintDismissAriaLabel: "Ascunde sugestia de instalare pe iPhone",
+                appDownloadIosHintDismissText: "Închide"
             },
             nl: {
                 appDownloadImageAlt: "Schildpictogram van de Financial Authority Database Android-app",
@@ -5004,7 +5021,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 appDownloadGuideTrigger: "Lees de gids",
                 appDownloadGuideLanguagesSr: "Gids beschikbaar in het Italiaans en Engels",
                 appDownloadIosHint: "Open deze pagina op iPhone in Safari, tik op Deel en kies Zet op beginscherm om hem als webapp/PWA te installeren.",
-                appDownloadIosHintDismissAriaLabel: "Tip voor iPhone-installatie verbergen"
+                appDownloadIosHintDismissAriaLabel: "Tip voor iPhone-installatie verbergen",
+                appDownloadIosHintDismissText: "Sluiten"
             },
             el: {
                 appDownloadImageAlt: "Εικονίδιο ασπίδας της εφαρμογής Android Financial Authority Database",
@@ -5023,7 +5041,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 appDownloadGuideTrigger: "Διαβάστε τον οδηγό",
                 appDownloadGuideLanguagesSr: "Οδηγός διαθέσιμος στα ιταλικά και στα αγγλικά",
                 appDownloadIosHint: "Στο iPhone ανοίξτε αυτή τη σελίδα στο Safari, πατήστε Κοινοποίηση και επιλέξτε Προσθήκη στην Αφετηρία για εγκατάσταση ως WebApp/PWA.",
-                appDownloadIosHintDismissAriaLabel: "Απόκρυψη υπόδειξης εγκατάστασης iPhone"
+                appDownloadIosHintDismissAriaLabel: "Απόκρυψη υπόδειξης εγκατάστασης iPhone",
+                appDownloadIosHintDismissText: "Κλείσιμο"
             },
             bs: {
                 appDownloadImageAlt: "Ikona štita Android aplikacije Financial Authority Database",
@@ -5042,7 +5061,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 appDownloadGuideTrigger: "Pročitaj vodič",
                 appDownloadGuideLanguagesSr: "Vodič dostupan na italijanskom i engleskom",
                 appDownloadIosHint: "Na iPhone-u otvorite ovu stranicu u Safariju, dodirnite Dijeli i izaberite Dodaj na početni ekran da biste je instalirali kao WebApp/PWA.",
-                appDownloadIosHintDismissAriaLabel: "Sakrij savjet za instalaciju na iPhone-u"
+                appDownloadIosHintDismissAriaLabel: "Sakrij savjet za instalaciju na iPhone-u",
+                appDownloadIosHintDismissText: "Zatvori"
             },
             sq: {
                 appDownloadImageAlt: "Ikona me mburojë e aplikacionit Android Financial Authority Database",
@@ -5061,7 +5081,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 appDownloadGuideTrigger: "Lexo udhëzuesin",
                 appDownloadGuideLanguagesSr: "Udhëzuesi disponohet në italisht dhe anglisht",
                 appDownloadIosHint: "Në iPhone hapeni këtë faqe në Safari, prekni Shpërndaj dhe zgjidhni Shto në ekranin kryesor për ta instaluar si WebApp/PWA.",
-                appDownloadIosHintDismissAriaLabel: "Fshi sugjerimin e instalimit në iPhone"
+                appDownloadIosHintDismissAriaLabel: "Fshi sugjerimin e instalimit në iPhone",
+                appDownloadIosHintDismissText: "Mbyll"
             },
             ar: {
                 appDownloadImageAlt: "أيقونة الدرع لتطبيق Android Financial Authority Database",
@@ -5080,7 +5101,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 appDownloadGuideTrigger: "اقرأ الدليل",
                 appDownloadGuideLanguagesSr: "الدليل متاح بالإيطالية والإنجليزية",
                 appDownloadIosHint: "على iPhone افتح هذه الصفحة في Safari، واضغط مشاركة ثم اختر إضافة إلى الشاشة الرئيسية لتثبيتها كتطبيق ويب/PWA.",
-                appDownloadIosHintDismissAriaLabel: "إخفاء تلميح التثبيت على iPhone"
+                appDownloadIosHintDismissAriaLabel: "إخفاء تلميح التثبيت على iPhone",
+                appDownloadIosHintDismissText: "إغلاق"
             },
             zh: {
                 appDownloadImageAlt: "Financial Authority Database Android 应用盾牌图标",
@@ -5099,7 +5121,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 appDownloadGuideTrigger: "阅读指南",
                 appDownloadGuideLanguagesSr: "指南提供意大利语和英语版本",
                 appDownloadIosHint: "在 iPhone 上请用 Safari 打开此页面，轻点“共享”，再选择“添加到主屏幕”即可安装为 WebApp/PWA。",
-                appDownloadIosHintDismissAriaLabel: "隐藏 iPhone 安装提示"
+                appDownloadIosHintDismissAriaLabel: "隐藏 iPhone 安装提示",
+                appDownloadIosHintDismissText: "关闭"
             },
             hi: {
                 appDownloadImageAlt: "Financial Authority Database Android ऐप का शील्ड आइकन",
@@ -5118,7 +5141,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 appDownloadGuideTrigger: "मार्गदर्शिका पढ़ें",
                 appDownloadGuideLanguagesSr: "मार्गदर्शिका इतालवी और अंग्रेज़ी में उपलब्ध है",
                 appDownloadIosHint: "iPhone पर इस पेज को Safari में खोलें, Share पर टैप करें और Add to Home Screen चुनें ताकि इसे Web App / PWA के रूप में इंस्टॉल किया जा सके।",
-                appDownloadIosHintDismissAriaLabel: "iPhone इंस्टॉल संकेत छिपाएँ"
+                appDownloadIosHintDismissAriaLabel: "iPhone इंस्टॉल संकेत छिपाएँ",
+                appDownloadIosHintDismissText: "बंद करें"
             },
             vi: {
                 appDownloadImageAlt: "Biểu tượng lá chắn của ứng dụng Android Financial Authority Database",
@@ -5137,7 +5161,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 appDownloadGuideTrigger: "Đọc hướng dẫn",
                 appDownloadGuideLanguagesSr: "Hướng dẫn có sẵn bằng tiếng Ý và tiếng Anh",
                 appDownloadIosHint: "Trên iPhone, hãy mở trang này bằng Safari, chạm Chia sẻ rồi chọn Thêm vào Màn hình chính để cài dưới dạng WebApp/PWA.",
-                appDownloadIosHintDismissAriaLabel: "Ẩn gợi ý cài đặt iPhone"
+                appDownloadIosHintDismissAriaLabel: "Ẩn gợi ý cài đặt iPhone",
+                appDownloadIosHintDismissText: "Đóng"
             }
         };
         Object.entries(appDownloadTranslations).forEach(([locale, values]) => {
@@ -5406,8 +5431,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         }
 
         function openIosInstallGuide(triggerElement) {
+            const persistentTrigger = document.getElementById('android-app-guide-trigger') || triggerElement;
+            openAndroidGuideDialog(persistentTrigger);
             dismissIosInstallHint(true);
-            openAndroidGuideDialog(triggerElement || document.getElementById('android-app-guide-trigger'));
         }
 
         function setupIosInstallHint() {
@@ -7715,9 +7741,6 @@ https://avvstancamarcello.github.io/Financial-Authority-Database/
                 navigator.serviceWorker.register('service-worker.js')
                     .then(registration => {
                         console.log('Service Worker registrato con successo:', registration.scope);
-                        registration.update().catch(error => {
-                            console.log('Controllo aggiornamenti Service Worker fallito:', error);
-                        });
                     })
                     .catch(error => {
                         console.log('Registrazione Service Worker fallita:', error);

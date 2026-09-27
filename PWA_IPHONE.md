@@ -25,7 +25,7 @@
 - Alcune funzioni native iOS restano limitate rispetto a una app Swift/App Store.
 - L’offline copre la shell statica e i contenuti già memorizzati nella cache del service worker.
 
-## Controlli eseguiti in questa pass
+## Controlli eseguiti in questa verifica
 - Verifica metadata/PWA in `index.html`, `manifest.json` e `service-worker.js`.
 - Controllo coerenza path GitHub Pages `/Financial-Authority-Database/`.
 - Validazione JSON del manifest.
