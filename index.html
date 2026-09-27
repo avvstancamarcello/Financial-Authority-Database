@@ -2512,12 +2512,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                         <button type="button" class="app-download-guide-close" onclick="closeAndroidGuideDialog()" aria-label="Chiudi la guida">✕</button>
                     </div>
                     <p id="android-app-guide-context" class="app-download-guide-context">Scegli la lingua e segui i passaggi per installare l'app Android in pochi minuti.</p>
-                    <div class="app-download-guide-langs" role="group" aria-label="Scegli la lingua della guida">
-                        <button type="button" class="app-download-guide-lang" data-guide-lang-btn="it" onclick="setAndroidGuideLanguage('it')" aria-label="Italiano">
+                    <div class="app-download-guide-langs" role="radiogroup" aria-label="Scegli la lingua della guida">
+                        <button type="button" role="radio" aria-checked="false" tabindex="-1" class="app-download-guide-lang" data-guide-lang-btn="it" onclick="setAndroidGuideLanguage('it')" aria-label="Italiano">
                             <span class="fi fi-it" aria-hidden="true"></span>
                             <span>IT</span>
                         </button>
-                        <button type="button" class="app-download-guide-lang" data-guide-lang-btn="en" onclick="setAndroidGuideLanguage('en')" aria-label="English">
+                        <button type="button" role="radio" aria-checked="false" tabindex="-1" class="app-download-guide-lang" data-guide-lang-btn="en" onclick="setAndroidGuideLanguage('en')" aria-label="English">
                             <span class="fi fi-gb" aria-hidden="true"></span>
                             <span>EN</span>
                         </button>
@@ -4938,8 +4938,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             });
             document.querySelectorAll('[data-guide-lang-btn]').forEach((button) => {
                 const buttonLanguage = button.getAttribute('data-guide-lang-btn');
-                button.classList.toggle('is-active', buttonLanguage === selectedLanguage);
-                button.setAttribute('aria-pressed', buttonLanguage === selectedLanguage ? 'true' : 'false');
+                const isActive = buttonLanguage === selectedLanguage;
+                button.classList.toggle('is-active', isActive);
+                button.setAttribute('aria-checked', isActive ? 'true' : 'false');
+                button.setAttribute('tabindex', isActive ? '0' : '-1');
             });
             const guideDialog = document.getElementById('android-app-guide-dialog');
             const guideTitle = document.getElementById('android-app-guide-title');
