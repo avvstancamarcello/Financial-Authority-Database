@@ -2,6 +2,8 @@ package com.financialauthority.database.navigation
 
 import android.content.Intent
 import android.net.Uri
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Favorite
@@ -12,20 +14,25 @@ import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.icons.filled.TravelExplore
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.unit.dp
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -40,6 +47,7 @@ import com.financialauthority.database.domain.SearchResult
 import com.financialauthority.database.ui.about.AboutScreen
 import com.financialauthority.database.ui.about.ContactScreen
 import com.financialauthority.database.ui.about.LegalMarkdownScreen
+import com.financialauthority.database.ui.components.UiText
 import com.financialauthority.database.ui.countries.CountriesScreen
 import com.financialauthority.database.ui.countries.CountryDetailScreen
 import com.financialauthority.database.ui.favorites.FavoritesScreen
@@ -51,6 +59,7 @@ import com.financialauthority.database.ui.search.SearchScreen
 
 private data class BottomItem(val route: String, val label: String, val icon: @Composable () -> Unit)
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MainScaffold(
     vm: MainViewModel,
@@ -64,11 +73,11 @@ fun MainScaffold(
     var langMenuOpen by remember { mutableStateOf(false) }
 
     val bottomItems = listOf(
-        BottomItem(Routes.COUNTRIES, if (language == "it") "Paesi" else "Countries", { Icon(Icons.Default.Public, contentDescription = "Paesi") }),
-        BottomItem(Routes.INTERNATIONAL, if (language == "it") "Internazionali" else "International", { Icon(Icons.Default.Language, contentDescription = "Internazionali") }),
-        BottomItem(Routes.SEARCH, if (language == "it") "Cerca" else "Search", { Icon(Icons.Default.Search, contentDescription = "Cerca") }),
-        BottomItem(Routes.FAVORITES, if (language == "it") "Preferiti" else "Favorites", { Icon(Icons.Default.Favorite, contentDescription = "Preferiti") }),
-        BottomItem(Routes.ABOUT, if (language == "it") "Informazioni" else "About", { Icon(Icons.Default.Info, contentDescription = "Informazioni") })
+        BottomItem(Routes.COUNTRIES, UiText.get(language, "countries"), { Icon(Icons.Default.Public, contentDescription = UiText.get(language, "countries")) }),
+        BottomItem(Routes.INTERNATIONAL, UiText.get(language, "international"), { Icon(Icons.Default.Language, contentDescription = UiText.get(language, "international")) }),
+        BottomItem(Routes.SEARCH, UiText.get(language, "search"), { Icon(Icons.Default.Search, contentDescription = UiText.get(language, "search")) }),
+        BottomItem(Routes.FAVORITES, UiText.get(language, "favorites"), { Icon(Icons.Default.Favorite, contentDescription = UiText.get(language, "favorites")) }),
+        BottomItem(Routes.ABOUT, UiText.get(language, "about"), { Icon(Icons.Default.Info, contentDescription = UiText.get(language, "about")) })
     )
 
     val openUrl: (String) -> Unit = { url ->
@@ -81,18 +90,36 @@ fun MainScaffold(
             TopAppBar(
                 title = { Text("Financial Authority Database") },
                 actions = {
-                    IconButton(onClick = { langMenuOpen = true }) {
-                        Icon(Icons.Default.TravelExplore, contentDescription = "Selettore lingua")
+                    TextButton(onClick = { langMenuOpen = true }) {
+                        Row(
+                            verticalAlignment = Alignment.CenterVertically,
+                            horizontalArrangement = Arrangement.spacedBy(4.dp)
+                        ) {
+                            Text(
+                                text = if (language == "it") "🇮🇹 IT | 🇬🇧 EN" else "🇬🇧 EN | 🇮🇹 IT",
+                                style = MaterialTheme.typography.labelLarge
+                            )
+                            Icon(
+                                imageVector = Icons.Default.TravelExplore,
+                                contentDescription = UiText.get(language, "language_selector")
+                            )
+                        }
                     }
                     DropdownMenu(expanded = langMenuOpen, onDismissRequest = { langMenuOpen = false }) {
-                        DropdownMenuItem(text = { Text("Italiano") }, onClick = {
-                            vm.setLanguage("it")
-                            langMenuOpen = false
-                        })
-                        DropdownMenuItem(text = { Text("English") }, onClick = {
-                            vm.setLanguage("en")
-                            langMenuOpen = false
-                        })
+                        DropdownMenuItem(
+                            text = { Text("🇮🇹 Italiano (IT)") },
+                            onClick = {
+                                vm.setLanguage("it")
+                                langMenuOpen = false
+                            }
+                        )
+                        DropdownMenuItem(
+                            text = { Text("🇬🇧 English (EN)") },
+                            onClick = {
+                                vm.setLanguage("en")
+                                langMenuOpen = false
+                            }
+                        )
                     }
                 }
             )
@@ -164,7 +191,7 @@ fun MainScaffold(
                 }
             }
             composable(Routes.FSRBS) {
-                FSRBScreen(catalog.institutions) { navController.navigate("${Routes.FSRBS}/${it.id}") }
+                FSRBScreen(institutions = catalog.institutions, onOpen = { navController.navigate("${Routes.FSRBS}/${it.id}") })
             }
             composable(
                 route = Routes.FSRB_DETAIL,
@@ -183,7 +210,7 @@ fun MainScaffold(
                 }
             }
             composable(Routes.FIUS) {
-                FIUScreen(catalog.institutions) { navController.navigate("${Routes.FIUS}/${it.id}") }
+                FIUScreen(institutions = catalog.institutions, onOpen = { navController.navigate("${Routes.FIUS}/${it.id}") })
             }
             composable(
                 route = Routes.FIU_DETAIL,

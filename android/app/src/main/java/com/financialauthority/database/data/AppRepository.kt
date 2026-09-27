@@ -22,7 +22,7 @@ class AppRepository(private val context: Context) {
             val result = JsonParsers.parseCatalog(countries, institutions, categories, types, i18n)
             result.fold(
                 onSuccess = { LoadResult(catalog = it) },
-                onFailure = { LoadResult(error = "JSON non valido: ${it.message}") }
+                onFailure = { throwable -> LoadResult(error = "JSON non valido: ${throwable.message}") }
             )
         } catch (e: Exception) {
             LoadResult(error = "Impossibile caricare i dataset locali: ${e.message}")
@@ -32,10 +32,10 @@ class AppRepository(private val context: Context) {
     suspend fun loadLegalDocument(docId: String, locale: String): String = withContext(Dispatchers.IO) {
         val preferred = "legal/${docId}_${locale}.md"
         val en = "legal/${docId}_en.md"
-        val it = "legal/${docId}_it.md"
+        val italian = "legal/${docId}_it.md"
         runCatching { loadAsset(preferred) }
             .recoverCatching { loadAsset(en) }
-            .recoverCatching { loadAsset(it) }
+            .recoverCatching { loadAsset(italian) }
             .getOrElse { "Contenuto non disponibile." }
     }
 
