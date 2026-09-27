@@ -300,7 +300,9 @@
       "homepage": "https://www.gov.br/cvm/",
       "fraudReportLink": "https://www.gov.br/cvm/pt-br/canais_atendimento/spc/login-cidadao",
       "authorityEmail": "imprensa@cvm.gov.br",
-      "social_links": {},
+      "social_links": {
+        "news_system_2026": "https://www.gov.br/cvm/pt-br/assuntos/noticias/2026/cvm-lanca-novo-sistema-de-atendimento-ao-cidadao-sac"
+      },
       "authorityId": "brazil__cvm",
       "relatedInternationalInstitutionIds": []
     },
