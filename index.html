@@ -2365,7 +2365,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <div class="apk-download-panel__content">
                 <div>
                     <h2 id="android-apk-download-title" data-i18n-text="androidAppPanelTitle">📲 Scarica l'app Android ufficiale</h2>
-                    <p data-i18n="androidAppPanelIntro">Puoi installare la versione Android del <strong>Financial Authority Database</strong> e consultare il database anche in modalità offline-first.</p>
+                    <p><span data-i18n-text="androidAppPanelIntroPrefix">Puoi installare la versione Android del</span> <strong>Financial Authority Database</strong> <span data-i18n-text="androidAppPanelIntroSuffix">e consultare il database anche in modalità offline-first.</span></p>
                     <ul class="apk-download-panel__badges">
                         <li class="apk-download-panel__badge" data-i18n-text="androidAppPanelAndroidBadge">🤖 Solo Android</li>
                         <li class="apk-download-panel__badge" data-i18n-text="androidAppPanelIosBadge">🍏 iPhone in arrivo</li>
@@ -2667,7 +2667,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 securityBannerSubtitle: "Tocca per leggere i dettagli",
                 introText: "Questa pagina web offre 239 link diretti per accedere alle webpage delle AUTORITA' FINANZIARIE di 239 Paesi del Mondo.<br>CERCA il nome del Paese che viene dichiarato sede della impresa finanziaria, e potrai conoscere tutti i dettagli identificativi ufficiali.",
                 androidAppPanelTitle: "📲 Scarica l'app Android ufficiale",
-                androidAppPanelIntro: "Puoi installare la versione Android del <strong>Financial Authority Database</strong> e consultare il database anche in modalità offline-first.",
+                androidAppPanelIntroPrefix: "Puoi installare la versione Android del",
+                androidAppPanelIntroSuffix: "e consultare il database anche in modalità offline-first.",
                 androidAppPanelAndroidBadge: "🤖 Solo Android",
                 androidAppPanelIosBadge: "🍏 iPhone in arrivo",
                 androidAppPanelFreeBadge: "💶 Gratuita",
@@ -3288,7 +3289,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 securityBannerSubtitle: "Tap to read details",
                 introText: "This website provides links to the webpages of the Financial Authorities of 239 countries worldwide. Use it to verify the legitimacy and regularity of companies, individuals, and entities offering financial services.",
                 androidAppPanelTitle: "📲 Download the official Android app",
-                androidAppPanelIntro: "You can install the Android version of <strong>Financial Authority Database</strong> and consult the database with an offline-first experience.",
+                androidAppPanelIntroPrefix: "You can install the Android version of",
+                androidAppPanelIntroSuffix: "and consult the database with an offline-first experience.",
                 androidAppPanelAndroidBadge: "🤖 Android only",
                 androidAppPanelIosBadge: "🍏 iPhone coming soon",
                 androidAppPanelFreeBadge: "💶 Free",
@@ -4618,7 +4620,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 const androidAppData = JSON.parse(androidAppJsonLd.textContent || '{}');
                 if (typeof androidAppData.downloadUrl === 'string' && androidAppData.downloadUrl.trim()) {
                     const normalizedDownloadUrl = androidAppData.downloadUrl.trim();
-                    if (androidApkDownloadLink.href !== normalizedDownloadUrl) {
+                    if (androidApkDownloadLink.getAttribute('href') !== normalizedDownloadUrl) {
                         androidApkDownloadLink.href = normalizedDownloadUrl;
                     }
                 }
@@ -5487,7 +5489,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 'subtitle',
                 'securityText',
                 'introText',
-                'androidAppPanelIntro',
                 'footerNote',
                 'credentialsBody',
                 'alphabetBannerTitle',
