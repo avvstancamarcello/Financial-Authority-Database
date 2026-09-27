@@ -717,10 +717,12 @@
             line-height: 1.6;
         }
         .apk-download-panel__badges {
+            list-style: none;
             display: flex;
             flex-wrap: wrap;
             gap: 10px;
             margin: 12px 0 16px;
+            padding: 0;
         }
         .apk-download-panel__badge {
             display: inline-flex;
@@ -2366,11 +2368,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     <div>
                         <h2 id="android-apk-download-title">📲 Scarica l'app Android ufficiale</h2>
                         <p>Puoi installare la versione Android del <strong>Financial Authority Database</strong> e consultare il database anche in modalità offline-first.</p>
-                        <div class="apk-download-panel__badges" aria-label="Informazioni disponibilità app">
-                            <span class="apk-download-panel__badge">🤖 Solo Android</span>
-                            <span class="apk-download-panel__badge">🍏 iPhone in arrivo</span>
-                            <span class="apk-download-panel__badge">💶 Gratuita</span>
-                        </div>
+                        <ul class="apk-download-panel__badges" aria-label="Informazioni disponibilità app">
+                            <li class="apk-download-panel__badge">🤖 Solo Android</li>
+                            <li class="apk-download-panel__badge">🍏 iPhone in arrivo</li>
+                            <li class="apk-download-panel__badge">💶 Gratuita</li>
+                        </ul>
                         <a class="apk-download-panel__button" href="https://github.com/avvstancamarcello/Financial-Authority-Database/releases/download/V.1.0.0/FinancialAuthorityDatabase.apk" target="_blank" rel="noopener noreferrer" aria-describedby="android-apk-download-note">
                             <span aria-hidden="true">⬇️</span>
                             <span>Scarica APK Android</span>
