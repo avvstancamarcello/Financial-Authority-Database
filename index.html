@@ -2371,7 +2371,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                         <li class="apk-download-panel__badge" data-i18n-text="androidAppPanelIosBadge">🍏 iPhone in arrivo</li>
                         <li class="apk-download-panel__badge" data-i18n-text="androidAppPanelFreeBadge">💶 Gratuita</li>
                     </ul>
-                    <a id="android-apk-download-link" class="apk-download-panel__button" target="_blank" rel="noopener noreferrer" aria-describedby="android-apk-download-note">
+                    <a id="android-apk-download-link" class="apk-download-panel__button" href="https://github.com/avvstancamarcello/Financial-Authority-Database/releases/download/V.1.0.0/FinancialAuthorityDatabase.apk" target="_blank" rel="noopener noreferrer" aria-describedby="android-apk-download-note">
                         <span aria-hidden="true">⬇️</span>
                         <span data-i18n-text="androidAppPanelButton">Scarica APK Android</span>
                     </a>
@@ -4617,7 +4617,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             try {
                 const androidAppData = JSON.parse(androidAppJsonLd.textContent || '{}');
                 if (typeof androidAppData.downloadUrl === 'string' && androidAppData.downloadUrl.trim()) {
-                    androidApkDownloadLink.href = androidAppData.downloadUrl.trim();
+                    const normalizedDownloadUrl = androidAppData.downloadUrl.trim();
+                    if (androidApkDownloadLink.href !== normalizedDownloadUrl) {
+                        androidApkDownloadLink.href = normalizedDownloadUrl;
+                    }
                 }
             } catch (error) {
                 console.warn('Unable to synchronize the Android APK download link.', error);
