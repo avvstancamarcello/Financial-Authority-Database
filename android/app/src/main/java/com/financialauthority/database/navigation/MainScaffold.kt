@@ -25,6 +25,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -142,6 +143,7 @@ fun MainScaffold(
                 CountriesScreen(
                     countries = catalog.countries,
                     favorites = favorites,
+                    language = language,
                     onOpen = { navController.navigate("${Routes.COUNTRIES}/${it.countryKey}") }
                 )
             }
@@ -159,6 +161,7 @@ fun MainScaffold(
                         country = country,
                         institutionNames = institutionNames,
                         isFavorite = favorites.contains("country:${country.countryKey}"),
+                        language = language,
                         onToggleFavorite = { vm.toggleFavorite("country:${country.countryKey}") },
                         onOpenInstitution = { id -> navController.navigate("${Routes.INTERNATIONAL}/$id") },
                         onOpenUrl = openUrl
@@ -191,7 +194,10 @@ fun MainScaffold(
                 }
             }
             composable(Routes.FSRBS) {
-                FSRBScreen(institutions = catalog.institutions, onOpen = { navController.navigate("${Routes.FSRBS}/${it.id}") })
+                FSRBScreen(
+                    institutions = catalog.institutions,
+                    onOpen = { navController.navigate("${Routes.FSRBS}/${it.id}") }
+                )
             }
             composable(
                 route = Routes.FSRB_DETAIL,
@@ -210,7 +216,10 @@ fun MainScaffold(
                 }
             }
             composable(Routes.FIUS) {
-                FIUScreen(institutions = catalog.institutions, onOpen = { navController.navigate("${Routes.FIUS}/${it.id}") })
+                FIUScreen(
+                    institutions = catalog.institutions,
+                    onOpen = { navController.navigate("${Routes.FIUS}/${it.id}") }
+                )
             }
             composable(
                 route = Routes.FIU_DETAIL,
@@ -241,14 +250,15 @@ fun MainScaffold(
                 )
             }
             composable(Routes.ABOUT) {
+                val aboutEntries by vm.aboutSections.collectAsState()
                 AboutScreen(
-                    entries = vm.aboutSections.value,
+                    entries = aboutEntries,
                     onOpenEntry = { entry -> navController.navigate("about/$entry") }
                 )
             }
             composable(Routes.ABOUT_PRIVACY) {
                 LegalMarkdownScreen(
-                    title = "Privacy",
+                    title = if (language == "it") "Privacy" else "Privacy",
                     locale = language,
                     loadText = vm::loadLegal,
                     docId = "privacy"
@@ -256,7 +266,7 @@ fun MainScaffold(
             }
             composable(Routes.ABOUT_TERMS) {
                 LegalMarkdownScreen(
-                    title = "Terms of Service",
+                    title = if (language == "it") "Termini di Servizio" else "Terms of Service",
                     locale = language,
                     loadText = vm::loadLegal,
                     docId = "terms"
@@ -272,7 +282,7 @@ fun MainScaffold(
             }
             composable(Routes.ABOUT_SOURCES) {
                 LegalMarkdownScreen(
-                    title = "Sources and Methodology",
+                    title = if (language == "it") "Fonti e Metodologia" else "Sources and Methodology",
                     locale = language,
                     loadText = vm::loadLegal,
                     docId = "sources"
@@ -280,7 +290,7 @@ fun MainScaffold(
             }
             composable(Routes.ABOUT_LICENSES) {
                 LegalMarkdownScreen(
-                    title = "Open Source Licenses",
+                    title = if (language == "it") "Licenze Open Source" else "Open Source Licenses",
                     locale = language,
                     loadText = { _, _ -> "Jetpack Compose, Material 3, Kotlin, AndroidX." },
                     docId = "licenses"
