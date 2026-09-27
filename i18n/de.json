@@ -5,5 +5,20 @@
   "status": "Status: Genehmigt",
   "title": "Petition Nr. 0888/2024 zum Schutz von Bankkunden vor gefälschten Investmentplattformen",
   "summary": "Der Petent berichtet über schwerwiegenden digitalen Betrug durch gefälschte Finanzunternehmen, die durch aggressive Überzeugungstechniken Opfer dazu bringen, Geld auf ausländische Konten zu überweisen. Die Petition fordert stärkere EU-weite Maßnahmen zum Schutz von Bankkunden.",
-  "pdf": "petitions-pdf/Home _ PETI _ Ausschüsse _ Europäisches Parlament-deutsch.pdf"
+  "pdf": "petitions-pdf/Home _ PETI _ Ausschüsse _ Europäisches Parlament-deutsch.pdf",
+  "appDownloadImageAlt": "Schildsymbol der Financial Authority Database Android-App",
+  "appDownloadPlatformLine1": "APP für Android verfügbar.",
+  "appDownloadPlatformLine2": "für die offizielle Plattform von amevfirenze.it und tutelatruffe.it",
+  "appDownloadPlatformLine3": "Apple/iPhone-Version derzeit in Entwicklung",
+  "appDownloadTitleLine1": "OFFIZIELLE ANDROID-APP HERUNTERLADEN",
+  "appDownloadTitleLine2": "\"Financial Authority Database\"",
+  "appDownloadMetaAriaLabel": "Informationen zur Android-App",
+  "appDownloadBadgeAndroid": "Android",
+  "appDownloadBadgeFree": "Kostenlos",
+  "appDownloadBadgeIphone": "iPhone-Version in Arbeit",
+  "appDownloadDescription": "Sie können die Legitimität und Identität derjenigen überprüfen, die Finanzinvestitionen anbieten, und Betrug durch die intelligente Nutzung Ihres Smartphones oder PCs verhindern.",
+  "appDownloadLink": "Android-App herunterladen (APK)",
+  "appDownloadLinkAriaLabel": "Laden Sie die Android-App als APK aus der offiziellen GitHub-Veröffentlichung herunter",
+  "appDownloadGuideTrigger": "Anleitung lesen",
+  "appDownloadGuideLanguagesSr": "Anleitung auf Italienisch und Englisch verfügbar"
 }

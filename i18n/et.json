@@ -5,5 +5,20 @@
   "status": "Olek: Heaks kiidetud",
   "title": "Petitsioon nr 0888/2024 pangaklientide kaitsmise kohta võltsitud investeerimisplatvormide eest",
   "summary": "Petitsiooni esitaja teatab tõsistest digitaalsetest pettustest, mida panevad toime võltsfinantsoperaatorid, kes agressiivsete veenmistehnikatega panevad ohvreid raha välismaistele kontodele üle kandma.",
-  "pdf": "petitions-pdf/Avaleht _ PETI _ Komisjonid _ Euroopa Parlament-eesti-keel.pdf"
+  "pdf": "petitions-pdf/Avaleht _ PETI _ Komisjonid _ Euroopa Parlament-eesti-keel.pdf",
+  "appDownloadImageAlt": "Financial Authority Database Androidi rakenduse kilbiikoon",
+  "appDownloadPlatformLine1": "APP on Androidi jaoks saadaval.",
+  "appDownloadPlatformLine2": "amevfirenze.it ja tutelatruffe.it ametlikule platvormile",
+  "appDownloadPlatformLine3": "Apple/iPhone’i versioon on praegu arenduses",
+  "appDownloadTitleLine1": "LAADI ALLA AMETLIK ANDROIDI APP",
+  "appDownloadTitleLine2": "\"Financial Authority Database\"",
+  "appDownloadMetaAriaLabel": "Androidi rakenduse teave",
+  "appDownloadBadgeAndroid": "Android",
+  "appDownloadBadgeFree": "Tasuta",
+  "appDownloadBadgeIphone": "iPhone’i versioon töös",
+  "appDownloadDescription": "Saate kontrollida finantsinvesteeringuid pakkujate seaduslikkust ja identiteeti ning ennetada pettusi tänu oma nutitelefoni või arvuti targale kasutamisele.",
+  "appDownloadLink": "Laadi alla Androidi rakendus (APK)",
+  "appDownloadLinkAriaLabel": "Laadi Androidi rakenduse APK alla ametlikust GitHubi väljalaskest",
+  "appDownloadGuideTrigger": "Loe juhendit",
+  "appDownloadGuideLanguagesSr": "Juhend on saadaval itaalia ja inglise keeles"
 }

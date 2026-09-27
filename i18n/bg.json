@@ -5,5 +5,20 @@
   "status": "Статус: Одобрена",
   "title": "Петиция № 0888/2024 относно защитата на банкови клиенти от фалшиви инвестиционни платформи",
   "summary": "Вносителят на петицията съобщава за сериозни цифрови измами, извършвани от фалшиви финансови оператори, които чрез агресивни техники за убеждаване карат жертвите да прехвърлят пари по чуждестранни сметки.",
-  "pdf": "petitions-pdf/petition-0888-EU-2024-bg.pdf"
+  "pdf": "petitions-pdf/petition-0888-EU-2024-bg.pdf",
+  "appDownloadImageAlt": "Икона на щит за Android приложението Financial Authority Database",
+  "appDownloadPlatformLine1": "APP е налично за Android.",
+  "appDownloadPlatformLine2": "за официалната платформа на amevfirenze.it и tutelatruffe.it",
+  "appDownloadPlatformLine3": "Версията за Apple/iPhone в момента се разработва",
+  "appDownloadTitleLine1": "ИЗТЕГЛЕТЕ ОФИЦИАЛНОТО ANDROID APP",
+  "appDownloadTitleLine2": "\"Financial Authority Database\"",
+  "appDownloadMetaAriaLabel": "Информация за Android приложението",
+  "appDownloadBadgeAndroid": "Android",
+  "appDownloadBadgeFree": "Безплатна",
+  "appDownloadBadgeIphone": "Версия за iPhone в процес",
+  "appDownloadDescription": "Можете да проверите легитимността и самоличността на тези, които предлагат финансови инвестиции, и да предотвратите измами благодарение на интелигентното използване на вашия смартфон или компютър.",
+  "appDownloadLink": "Изтеглете Android приложението (APK)",
+  "appDownloadLinkAriaLabel": "Изтеглете APK на Android приложението от официалната GitHub версия",
+  "appDownloadGuideTrigger": "Прочетете ръководството",
+  "appDownloadGuideLanguagesSr": "Ръководството е налично на италиански и английски"
 }

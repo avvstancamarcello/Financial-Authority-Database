@@ -5,5 +5,20 @@
   "status": "Status: Odobreno",
   "title": "Peticija št. 0888/2024 o zaščiti bančnih strank pred lažnimi naložbenimi platformami",
   "summary": "Vlagatelj peticije poroča o resnih digitalnih goljufijah, ki jih izvajajo lažni finančni operaterji, ki z agresivnimi tehnikami prepričevanja žrtve prisilijo k prenosu denarja na tuje račune.",
-  "pdf": "petitions-pdf/Domovská-stránka_PETI_Výbory_Európsky-Parlament-slovencina-.pdf"
+  "pdf": "petitions-pdf/Domovská-stránka_PETI_Výbory_Európsky-Parlament-slovencina-.pdf",
+  "appDownloadImageAlt": "Ikona ščita aplikacije Financial Authority Database za Android",
+  "appDownloadPlatformLine1": "APP je na voljo za Android.",
+  "appDownloadPlatformLine2": "za uradno platformo amevfirenze.it in tutelatruffe.it",
+  "appDownloadPlatformLine3": "Različica za Apple/iPhone je trenutno v pripravi",
+  "appDownloadTitleLine1": "PRENESITE URADNO ANDROID APP",
+  "appDownloadTitleLine2": "\"Financial Authority Database\"",
+  "appDownloadMetaAriaLabel": "Informacije o aplikaciji za Android",
+  "appDownloadBadgeAndroid": "Android",
+  "appDownloadBadgeFree": "Brezplačna",
+  "appDownloadBadgeIphone": "Različica za iPhone v pripravi",
+  "appDownloadDescription": "Lahko preverite legitimnost in identiteto tistih, ki ponujajo finančne naložbe, ter preprečite prevare z inteligentno uporabo svojega pametnega telefona ali računalnika.",
+  "appDownloadLink": "Prenesi aplikacijo za Android (APK)",
+  "appDownloadLinkAriaLabel": "Prenesite APK aplikacije za Android iz uradne izdaje GitHub",
+  "appDownloadGuideTrigger": "Preberi vodnik",
+  "appDownloadGuideLanguagesSr": "Vodnik je na voljo v italijanščini in angleščini"
 }

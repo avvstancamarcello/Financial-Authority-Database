@@ -5,5 +5,20 @@
   "status": "Būsena: Patvirtinta",
   "title": "Peticija Nr. 0888/2024 dėl banko klientų apsaugos nuo netikrų investavimo platformų",
   "summary": "Peticijos teikėjas praneša apie rimtus skaitmeninius sukčiavimus, kuriuos vykdo netikri finansų operatoriai, agresyviais įtikinėjimo būdais verčiantys aukas pervesti pinigus į užsienio sąskaitas.",
-  "pdf": "petitions-pdf/Pagrindinis puslapis _ PETI _ Komitetai _ Europos Parlamentas-LV.pdf"
+  "pdf": "petitions-pdf/Pagrindinis puslapis _ PETI _ Komitetai _ Europos Parlamentas-LV.pdf",
+  "appDownloadImageAlt": "Financial Authority Database Android programėlės skydo piktograma",
+  "appDownloadPlatformLine1": "APP galima naudoti su Android.",
+  "appDownloadPlatformLine2": "oficialiai amevfirenze.it ir tutelatruffe.it platformai",
+  "appDownloadPlatformLine3": "Apple/iPhone versija šiuo metu kuriama",
+  "appDownloadTitleLine1": "ATSISIŲSKITE OFICIALIĄ ANDROID PROGRAMĖLĘ",
+  "appDownloadTitleLine2": "\"Financial Authority Database\"",
+  "appDownloadMetaAriaLabel": "Android programėlės informacija",
+  "appDownloadBadgeAndroid": "Android",
+  "appDownloadBadgeFree": "Nemokama",
+  "appDownloadBadgeIphone": "iPhone versija kuriama",
+  "appDownloadDescription": "Galite patikrinti finansines investicijas siūlančių asmenų teisėtumą ir tapatybę bei užkirsti kelią sukčiavimui išmaniai naudodamiesi savo išmaniuoju telefonu ar kompiuteriu.",
+  "appDownloadLink": "Atsisiųsti Android programėlę (APK)",
+  "appDownloadLinkAriaLabel": "Atsisiųskite Android programėlės APK iš oficialaus GitHub leidimo",
+  "appDownloadGuideTrigger": "Skaityti gidą",
+  "appDownloadGuideLanguagesSr": "Gidas pasiekiamas italų ir anglų kalbomis"
 }

@@ -5,5 +5,20 @@
   "status": "Status: Approved",
   "title": "Petition No 0888/2024 on protecting bank customers from fake investment platforms",
   "summary": "The petitioner reports serious digital fraud carried out by fake financial operators who, through aggressive persuasion techniques, induce victims to transfer money to foreign accounts. The petition calls for stronger EU-wide measures to protect bank customers and hold financial institutions accountable.",
-  "pdf": "petitions-pdf/Home _ PETI _ Committees _ European Parliament-base.pdf"
+  "pdf": "petitions-pdf/Home _ PETI _ Committees _ European Parliament-base.pdf",
+  "appDownloadImageAlt": "Financial Authority Database Android app shield icon",
+  "appDownloadPlatformLine1": "APP available for Android.",
+  "appDownloadPlatformLine2": "for the official amevfirenze.it and tutelatruffe.it platform",
+  "appDownloadPlatformLine3": "Apple/iPhone version currently in development",
+  "appDownloadTitleLine1": "DOWNLOAD OFFICIAL ANDROID APP",
+  "appDownloadTitleLine2": "\"Financial Authority Database\"",
+  "appDownloadMetaAriaLabel": "Android app information",
+  "appDownloadBadgeAndroid": "Android",
+  "appDownloadBadgeFree": "Free",
+  "appDownloadBadgeIphone": "iPhone version in progress",
+  "appDownloadDescription": "You can verify the legitimacy and identity of anyone offering financial investments and prevent scams thanks to the smart use of your smartphone or PC.",
+  "appDownloadLink": "Download the Android App (APK)",
+  "appDownloadLinkAriaLabel": "Download the Android app APK from the official GitHub release",
+  "appDownloadGuideTrigger": "Read the guide",
+  "appDownloadGuideLanguagesSr": "Guide available in Italian and English"
 }
