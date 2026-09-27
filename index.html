@@ -2500,7 +2500,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     <button id="android-app-guide-trigger" type="button" class="app-download-guide-button" onclick="openAndroidGuideDialog(this)" aria-haspopup="dialog" aria-controls="android-app-guide-dialog" aria-expanded="false">
                         <span aria-hidden="true">📖</span>
                         <span>Leggi la guida</span>
-                        <span class="app-download-guide-flags" aria-label="Guida disponibile in Italiano e English">
+                        <span class="app-download-guide-flags">
                             <span class="fi fi-it" aria-hidden="true"></span>
                             <span class="fi fi-gb" aria-hidden="true"></span>
                             <span class="sr-only">Italiano e English</span>
@@ -4997,7 +4997,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             if (dialog.classList.contains('is-fallback-open')) {
                 dialog.classList.remove('is-fallback-open');
                 dialog.removeAttribute('open');
-                dialog.removeAttribute('aria-modal');
                 if (fallbackBackdrop) {
                     fallbackBackdrop.hidden = true;
                 }
@@ -5030,7 +5029,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     }
                     return;
                 }
-                dialog.setAttribute('aria-modal', 'true');
                 dialog.showModal();
                 if (closeButton && typeof closeButton.focus === 'function') {
                     closeButton.focus();
@@ -5038,7 +5036,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 return;
             }
 
-            dialog.removeAttribute('aria-modal');
             dialog.setAttribute('open', 'open');
             dialog.classList.add('is-fallback-open');
             if (fallbackBackdrop) {
@@ -5061,7 +5058,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             dialog.addEventListener('close', () => {
                 document.body.classList.remove('apk-guide-open');
                 dialog.classList.remove('is-fallback-open');
-                dialog.removeAttribute('aria-modal');
                 if (fallbackBackdrop) {
                     fallbackBackdrop.hidden = true;
                 }
