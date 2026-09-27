@@ -66,11 +66,11 @@ fun FlagGridCell(
                 border = BorderStroke(0.6.dp, MaterialTheme.colorScheme.outlineVariant),
                 shape = shape
             )
-            .clickable(onClick = onClick)
-            .semantics {
-                contentDescription = country.countryName
+            .semantics(mergeDescendants = true) {
+                contentDescription = "${country.countryName} ${country.countryCode}"
                 role = Role.Button
             }
+            .clickable(onClick = onClick)
             .padding(2.dp),
         contentAlignment = Alignment.Center
     ) {

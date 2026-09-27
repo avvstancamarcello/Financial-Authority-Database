@@ -59,13 +59,14 @@ object JsonParsers {
         val root = json.parseToJsonElement(raw).jsonObject
         return root.entries.map { (key, value) ->
             val item = value.jsonObject
+            val countryName = item.string("country_name") ?: key
             val authority = item["financial_authority"]?.jsonObject ?: error("Missing financial_authority for $key")
             val authorityId = authority.string("authorityId") ?: error("Missing authorityId for $key")
             Country(
                 countryKey = normalizeKey(key),
-                countryName = item.string("country_name") ?: key,
+                countryName = countryName,
                 flag = item.string("flag") ?: "🏳️",
-                countryCode = parseCountryCode(item = item, countryKey = key),
+                countryCode = parseCountryCode(item = item, countryKey = key, countryName = countryName),
                 isEU = item.bool("isEU") ?: false,
                 protectionLevel = item.string("protectionLevel") ?: "Unknown",
                 notes = item.string("notes"),
@@ -183,15 +184,16 @@ object JsonParsers {
         .replace(" ", "_")
         .replace("-", "_")
 
-    private fun parseCountryCode(item: JsonObject, countryKey: String): String {
+    private fun parseCountryCode(item: JsonObject, countryKey: String, countryName: String): String {
         val fromJson = item.string("countryCode")
             ?: item.string("country_code")
             ?: item.string("iso2")
             ?: item.string("iso3")
             ?: item.string("alpha2")
             ?: item.string("alpha3")
-        if (!fromJson.isNullOrBlank()) {
-            return fromJson.uppercase()
+        val normalizedFromJson = fromJson?.let(::normalizeCountryCodeCandidate)
+        if (!normalizedFromJson.isNullOrBlank()) {
+            return normalizedFromJson
         }
 
         val flag = item.string("flag").orEmpty()
@@ -200,7 +202,7 @@ object JsonParsers {
             return fromFlag
         }
 
-        return deriveCountryCodeFallback(countryKey)
+        return deriveCountryCodeFallback(countryName.ifBlank { countryKey })
     }
 
     private fun JsonObject.string(key: String): String? = this[key]?.jsonPrimitive?.contentOrNull
@@ -225,7 +227,7 @@ internal fun deriveCountryCodeFromFlag(flagEmoji: String): String? {
     val regionalIndicators = flagEmoji.codePoints()
         .filter { it in 0x1F1E6..0x1F1FF }
         .toArray()
-    if (regionalIndicators.size < 2) return null
+    if (regionalIndicators.size != 2) return null
 
     val first = 'A' + (regionalIndicators[0] - 0x1F1E6)
     val second = 'A' + (regionalIndicators[1] - 0x1F1E6)
@@ -236,12 +238,24 @@ internal fun deriveCountryCodeFallback(countryKey: String): String {
     val cleaned = countryKey.trim()
     if (cleaned.isEmpty()) return "UNK"
 
-    val words = cleaned.split(Regex("[^\\p{L}\\p{N}]+")).filter { it.isNotBlank() }
+    val words = cleaned
+        .split(Regex("[^\\p{L}\\p{N}]+"))
+        .filter { it.isNotBlank() }
+    val stopWords = setOf("AND", "OF", "THE", "DA", "DE", "DEL", "DI", "DU", "LA", "LE", "EL")
+    val significantWords = words.filterNot { stopWords.contains(it.uppercase()) }
+    val source = if (significantWords.isNotEmpty()) significantWords else words
+
+    val initials = source.joinToString(separator = "") { it.take(1) }
     val code = when {
-        words.size >= 2 -> words.joinToString(separator = "") { it.take(1) }.take(3)
-        words.isNotEmpty() -> words.first().take(3)
+        initials.length >= 2 -> initials.take(3)
+        source.isNotEmpty() -> source.first().take(3)
         else -> cleaned.take(3)
     }
 
     return code.uppercase()
+}
+
+internal fun normalizeCountryCodeCandidate(rawCode: String): String? {
+    val normalized = rawCode.trim().uppercase()
+    return if (Regex("^[A-Z0-9]{2,3}$").matches(normalized)) normalized else null
 }

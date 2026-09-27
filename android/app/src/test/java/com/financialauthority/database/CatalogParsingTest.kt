@@ -4,6 +4,7 @@ import com.financialauthority.database.data.JsonParsers
 import com.financialauthority.database.data.SearchEngine
 import com.financialauthority.database.data.deriveCountryCodeFallback
 import com.financialauthority.database.data.deriveCountryCodeFromFlag
+import com.financialauthority.database.data.normalizeCountryCodeCandidate
 import com.financialauthority.database.data.resolve
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNull
@@ -113,6 +114,53 @@ class CatalogParsingTest {
     fun countryCodeHelpers_deriveFromFlagAndFallback() {
         assertEquals("DE", deriveCountryCodeFromFlag("🇩🇪"))
         assertNull(deriveCountryCodeFromFlag("🏳️"))
-        assertEquals("BAH", deriveCountryCodeFallback("Bosnia and Herzegovina"))
+        assertEquals("BH", deriveCountryCodeFallback("Bosnia and Herzegovina"))
+        assertEquals("UK", deriveCountryCodeFallback("United Kingdom"))
+        assertEquals("ITA", normalizeCountryCodeCandidate(" ita "))
+        assertNull(normalizeCountryCodeCandidate("it-IT"))
+    }
+
+    @Test
+    fun parseCatalog_countryCodePrefersJsonAndFallsBackWhenMissing() {
+        val countriesWithCodesJson = """
+            {
+              "United States": {
+                "country_name": "United States",
+                "flag": "🇺🇸",
+                "iso3": "usa",
+                "isEU": false,
+                "protectionLevel": "High",
+                "financial_authority": {
+                  "name": "SEC",
+                  "authorityId": "us__sec",
+                  "relatedInternationalInstitutionIds": []
+                }
+              },
+              "uk_slug": {
+                "country_name": "United Kingdom",
+                "isEU": false,
+                "protectionLevel": "High",
+                "financial_authority": {
+                  "name": "FCA",
+                  "authorityId": "uk__fca",
+                  "relatedInternationalInstitutionIds": []
+                }
+              }
+            }
+        """.trimIndent()
+
+        val catalog = JsonParsers.parseCatalog(
+            countriesWithCodesJson,
+            institutionsJson,
+            categoriesJson,
+            typesJson,
+            i18nJson
+        ).getOrThrow()
+
+        val unitedStates = catalog.countries.first { it.countryName == "United States" }
+        val unitedKingdom = catalog.countries.first { it.countryName == "United Kingdom" }
+
+        assertEquals("USA", unitedStates.countryCode)
+        assertEquals("UK", unitedKingdom.countryCode)
     }
 }
