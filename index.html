@@ -873,6 +873,11 @@
             gap: 8px;
             margin-bottom: 14px;
         }
+        .app-download-guide-context {
+            margin: 0 0 12px;
+            color: #cbd5e1;
+            font-size: 0.92rem;
+        }
         .app-download-guide-lang {
             display: inline-flex;
             align-items: center;
@@ -2489,7 +2494,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                         <span class="app-download-badge"><span aria-hidden="true">🍏</span>Versione iPhone in arrivo</span>
                     </div>
                     <a class="app-download-link" href="https://github.com/avvstancamarcello/Financial-Authority-Database/releases/download/V.1.0.0/FinancialAuthorityDatabase.apk" target="_blank" rel="noopener noreferrer" aria-label="Scarica l'App per Android in formato APK dalla release ufficiale GitHub"><span aria-hidden="true">📲</span><span>Scarica l'App per Android (APK)</span></a>
-                    <button type="button" class="app-download-guide-button" onclick="openAndroidGuideDialog()" aria-haspopup="dialog" aria-controls="android-app-guide-dialog">
+                    <button id="android-app-guide-trigger" type="button" class="app-download-guide-button" onclick="openAndroidGuideDialog(this)" aria-haspopup="dialog" aria-controls="android-app-guide-dialog" aria-expanded="false">
                         <span aria-hidden="true">📖</span>
                         <span>Leggi la guida</span>
                         <span class="app-download-guide-flags" aria-label="Guida disponibile in Italiano e English">
@@ -2500,12 +2505,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     </button>
                 </div>
             </div>
-            <dialog id="android-app-guide-dialog" class="app-download-guide" aria-labelledby="android-app-guide-title">
+            <dialog id="android-app-guide-dialog" class="app-download-guide" aria-labelledby="android-app-guide-title" aria-describedby="android-app-guide-context">
                 <div class="app-download-guide-card">
                     <div class="app-download-guide-header">
                         <h3 id="android-app-guide-title">Guida installazione APK</h3>
                         <button type="button" class="app-download-guide-close" onclick="closeAndroidGuideDialog()" aria-label="Chiudi la guida">✕</button>
                     </div>
+                    <p id="android-app-guide-context" class="app-download-guide-context">Scegli la lingua e segui i passaggi per installare l'app Android in pochi minuti.</p>
                     <div class="app-download-guide-langs" role="group" aria-label="Scegli la lingua della guida">
                         <button type="button" class="app-download-guide-lang" data-guide-lang-btn="it" onclick="setAndroidGuideLanguage('it')" aria-label="Italiano">
                             <span class="fi fi-it" aria-hidden="true"></span>
@@ -4798,6 +4804,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         let isConsobOrbitalDialogSetup = false;
         let activeDialogState = null;
         let currentAndroidGuideLanguage = null;
+        let androidGuideLastTrigger = null;
 
         // Inizializza canonical URL per SEO (Google self-referencing canonical)
         (function initCanonical() {
@@ -4936,6 +4943,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             });
             const guideDialog = document.getElementById('android-app-guide-dialog');
             const guideTitle = document.getElementById('android-app-guide-title');
+            const guideContext = document.getElementById('android-app-guide-context');
             const closeButton = guideDialog?.querySelector('.app-download-guide-close');
             const languageGroup = guideDialog?.querySelector('.app-download-guide-langs');
             if (guideDialog) {
@@ -4946,6 +4954,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     ? 'APK installation guide'
                     : 'Guida installazione APK';
             }
+            if (guideContext) {
+                guideContext.textContent = selectedLanguage === 'en'
+                    ? 'Choose your language and follow the steps to install the Android app in a few minutes.'
+                    : 'Scegli la lingua e segui i passaggi per installare l\'app Android in pochi minuti.';
+            }
             if (closeButton) {
                 closeButton.setAttribute('aria-label', selectedLanguage === 'en' ? 'Close guide' : 'Chiudi la guida');
             }
@@ -4953,6 +4966,19 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 languageGroup.setAttribute('aria-label', selectedLanguage === 'en'
                     ? 'Choose guide language'
                     : 'Scegli la lingua della guida');
+            }
+        }
+
+        function updateAndroidGuideTriggerExpanded(isExpanded) {
+            const trigger = document.getElementById('android-app-guide-trigger');
+            if (trigger) {
+                trigger.setAttribute('aria-expanded', isExpanded ? 'true' : 'false');
+            }
+        }
+
+        function restoreAndroidGuideFocus() {
+            if (androidGuideLastTrigger && typeof androidGuideLastTrigger.focus === 'function') {
+                androidGuideLastTrigger.focus();
             }
         }
 
@@ -4968,6 +4994,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     fallbackBackdrop.hidden = true;
                 }
                 document.body.classList.remove('apk-guide-open');
+                updateAndroidGuideTriggerExpanded(false);
+                restoreAndroidGuideFocus();
                 return;
             }
 
@@ -4976,19 +5004,28 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             }
         }
 
-        function openAndroidGuideDialog() {
+        function openAndroidGuideDialog(triggerElement) {
             const dialog = document.getElementById('android-app-guide-dialog');
             const fallbackBackdrop = document.getElementById('android-app-guide-backdrop');
+            const closeButton = dialog?.querySelector('.app-download-guide-close');
             if (!dialog) return;
 
+            androidGuideLastTrigger = triggerElement || document.activeElement;
             const preferredLanguage = currentAndroidGuideLanguage || detectAndroidGuideDefaultLanguage();
             setAndroidGuideLanguage(preferredLanguage);
+            updateAndroidGuideTriggerExpanded(true);
 
             if (typeof dialog.showModal === 'function') {
-                if (dialog.open && typeof dialog.close === 'function') {
-                    dialog.close();
+                if (dialog.open) {
+                    if (closeButton && typeof closeButton.focus === 'function') {
+                        closeButton.focus();
+                    }
+                    return;
                 }
                 dialog.showModal();
+                if (closeButton && typeof closeButton.focus === 'function') {
+                    closeButton.focus();
+                }
                 return;
             }
 
@@ -4998,6 +5035,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 fallbackBackdrop.hidden = false;
             }
             document.body.classList.add('apk-guide-open');
+            if (closeButton && typeof closeButton.focus === 'function') {
+                closeButton.focus();
+            }
         }
 
         function setupAndroidGuideDialog() {
@@ -5014,6 +5054,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 if (fallbackBackdrop) {
                     fallbackBackdrop.hidden = true;
                 }
+                updateAndroidGuideTriggerExpanded(false);
+                restoreAndroidGuideFocus();
             });
 
             dialog.addEventListener('click', (event) => {
@@ -5029,6 +5071,21 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             document.addEventListener('keydown', (event) => {
                 if (event.key === 'Escape' && dialog.classList.contains('is-fallback-open')) {
                     closeAndroidGuideDialog();
+                    return;
+                }
+                if (event.key !== 'Tab' || !dialog.classList.contains('is-fallback-open')) {
+                    return;
+                }
+                const focusable = dialog.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
+                if (!focusable.length) return;
+                const firstElement = focusable[0];
+                const lastElement = focusable[focusable.length - 1];
+                if (event.shiftKey && document.activeElement === firstElement) {
+                    event.preventDefault();
+                    lastElement.focus();
+                } else if (!event.shiftKey && document.activeElement === lastElement) {
+                    event.preventDefault();
+                    firstElement.focus();
                 }
             });
 
