@@ -2505,7 +2505,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     </button>
                 </div>
             </div>
-            <dialog id="android-app-guide-dialog" class="app-download-guide" role="dialog" aria-modal="true" aria-hidden="true" lang="it" aria-labelledby="android-app-guide-title" aria-describedby="android-app-guide-context">
+            <dialog id="android-app-guide-dialog" class="app-download-guide" role="dialog" aria-modal="true" lang="it" aria-labelledby="android-app-guide-title" aria-describedby="android-app-guide-context" hidden>
                 <div class="app-download-guide-card">
                     <div class="app-download-guide-header">
                         <h3 id="android-app-guide-title">Guida installazione APK</h3>
@@ -4994,7 +4994,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             if (dialog.classList.contains('is-fallback-open')) {
                 dialog.classList.remove('is-fallback-open');
                 dialog.removeAttribute('open');
-                dialog.setAttribute('aria-hidden', 'true');
+                dialog.hidden = true;
                 if (fallbackBackdrop) {
                     fallbackBackdrop.hidden = true;
                 }
@@ -5019,7 +5019,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             const preferredLanguage = currentAndroidGuideLanguage || detectAndroidGuideDefaultLanguage();
             setAndroidGuideLanguage(preferredLanguage);
             updateAndroidGuideTriggerExpanded(true);
-            dialog.setAttribute('aria-hidden', 'false');
+            dialog.hidden = false;
 
             if (typeof dialog.showModal === 'function') {
                 if (dialog.open) {
@@ -5057,7 +5057,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             dialog.addEventListener('close', () => {
                 document.body.classList.remove('apk-guide-open');
                 dialog.classList.remove('is-fallback-open');
-                dialog.setAttribute('aria-hidden', 'true');
+                dialog.hidden = true;
                 if (fallbackBackdrop) {
                     fallbackBackdrop.hidden = true;
                 }
@@ -5066,7 +5066,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             });
 
             dialog.addEventListener('click', (event) => {
-                if (event.target === dialog && typeof dialog.showModal === 'function') {
+                if (typeof dialog.showModal !== 'function') return;
+                const rect = dialog.getBoundingClientRect();
+                const isInsideDialog =
+                    event.clientX >= rect.left &&
+                    event.clientX <= rect.right &&
+                    event.clientY >= rect.top &&
+                    event.clientY <= rect.bottom;
+                if (!isInsideDialog) {
                     closeAndroidGuideDialog();
                 }
             });
