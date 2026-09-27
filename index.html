@@ -4996,7 +4996,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             }
         };
         Object.entries(appDownloadTranslations).forEach(([locale, values]) => {
-            translations[locale] = Object.assign(translations[locale] || {}, values);
+            translations[locale] = Object.assign({}, values, translations[locale] || {});
         });
         translations["ro-RO"] = translations.ro;
         translations["sq-XK"] = translations.sq;
