@@ -2505,7 +2505,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     </button>
                 </div>
             </div>
-            <dialog id="android-app-guide-dialog" class="app-download-guide" role="dialog" aria-modal="true" aria-labelledby="android-app-guide-title" aria-describedby="android-app-guide-context">
+            <dialog id="android-app-guide-dialog" class="app-download-guide" role="dialog" aria-modal="true" lang="it" aria-labelledby="android-app-guide-title" aria-describedby="android-app-guide-context">
                 <div class="app-download-guide-card">
                     <div class="app-download-guide-header">
                         <h3 id="android-app-guide-title">Guida installazione APK</h3>
@@ -5070,7 +5070,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 fallbackBackdrop.addEventListener('click', closeAndroidGuideDialog);
             }
 
-            document.addEventListener('keydown', (event) => {
+            dialog.addEventListener('keydown', (event) => {
                 if (event.key === 'Escape' && dialog.classList.contains('is-fallback-open')) {
                     closeAndroidGuideDialog();
                     return;
