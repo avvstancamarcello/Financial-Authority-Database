@@ -769,32 +769,165 @@
             outline: 3px solid #ffffff;
             outline-offset: 3px;
         }
-        .app-download-security,
-        .app-download-disclaimer,
-        .app-download-install {
+        .app-download-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        .app-download-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 0.38rem 0.7rem;
+            border-radius: 999px;
             background: rgba(15,23,42,0.45);
-            border: 1px solid rgba(255,255,255,0.14);
-            border-radius: 18px;
-            padding: 16px 18px;
+            border: 1px solid rgba(255,255,255,0.18);
+            color: #f8fafc;
+            font-size: 0.82rem;
+            font-weight: 700;
         }
-        .app-download-disclaimer strong,
-        .app-download-install strong,
-        .app-download-security strong {
-            color: #fde68a;
-        }
-        .app-download-install h3,
-        .app-download-disclaimer h3 {
-            margin: 0 0 8px;
+        .app-download-guide-button {
+            justify-self: start;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 0.72rem 1rem;
+            border-radius: 999px;
+            border: 1px solid rgba(255,255,255,0.45);
+            background: rgba(255,255,255,0.08);
             color: #ffffff;
-            font-size: 1rem;
+            font: inherit;
+            font-weight: 700;
+            cursor: pointer;
+            transition: transform 0.2s ease, background 0.2s ease;
         }
-        .app-download-install ol {
+        .app-download-guide-button:hover,
+        .app-download-guide-button:focus-visible {
+            transform: translateY(-1px);
+            background: rgba(255,255,255,0.18);
+        }
+        .app-download-guide-button:focus-visible {
+            outline: 3px solid #ffffff;
+            outline-offset: 3px;
+        }
+        .app-download-guide-flags {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+        }
+        .app-download-guide-flags .fi {
+            width: 20px;
+            height: 15px;
+            font-size: 20px;
+        }
+        .app-download-guide {
+            width: min(92vw, 640px);
+            max-height: 86vh;
+            padding: 0;
+            border: none;
+            border-radius: 20px;
+            background: #0f172a;
+            color: #f8fafc;
+            box-shadow: 0 20px 55px rgba(15,23,42,0.55);
+            overflow: hidden;
+        }
+        .app-download-guide::backdrop {
+            background: rgba(2, 6, 23, 0.72);
+        }
+        .app-download-guide.is-fallback-open {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
             margin: 0;
-            padding-left: 1.2rem;
+            z-index: 1301;
+        }
+        .app-download-guide-card {
+            padding: 18px 20px 20px;
+            overflow-y: auto;
+            max-height: 86vh;
+        }
+        .app-download-guide-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 14px;
+        }
+        .app-download-guide-header h3 {
+            margin: 0;
+            font-size: 1.2rem;
+            color: #ffffff;
+        }
+        .app-download-guide-close {
+            border: 0;
+            background: transparent;
+            color: #e2e8f0;
+            font-size: 1.15rem;
+            font-weight: 700;
+            cursor: pointer;
+            padding: 0.2rem 0.4rem;
+        }
+        .app-download-guide-langs {
+            display: inline-flex;
+            gap: 8px;
+            margin-bottom: 14px;
+        }
+        .app-download-guide-lang {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            border-radius: 999px;
+            border: 1px solid rgba(255,255,255,0.3);
+            background: rgba(15,23,42,0.45);
+            color: #f8fafc;
+            padding: 0.38rem 0.75rem;
+            font: inherit;
+            font-size: 0.85rem;
+            font-weight: 700;
+            cursor: pointer;
+        }
+        .app-download-guide-lang .fi {
+            width: 20px;
+            height: 15px;
+            font-size: 20px;
+        }
+        .app-download-guide-lang.is-active {
+            background: rgba(59,130,246,0.32);
+            border-color: rgba(191,219,254,0.72);
+        }
+        .app-download-guide-body ol {
+            margin: 0;
+            padding-left: 1.25rem;
             color: #e2e8f0;
         }
-        .app-download-install li + li {
+        .app-download-guide-body li + li {
             margin-top: 0.45rem;
+        }
+        .app-download-guide-note {
+            margin-top: 14px;
+            background: rgba(30,41,59,0.72);
+            border: 1px solid rgba(148,163,184,0.45);
+            border-radius: 12px;
+            padding: 0.75rem 0.85rem;
+            color: #cbd5e1;
+            font-size: 0.9rem;
+            line-height: 1.45;
+        }
+        [data-guide-lang][hidden] {
+            display: none !important;
+        }
+        .app-download-guide-fallback-backdrop {
+            position: fixed;
+            inset: 0;
+            background: rgba(2, 6, 23, 0.72);
+            z-index: 1300;
+        }
+        .app-download-guide-fallback-backdrop[hidden] {
+            display: none;
+        }
+        body.apk-guide-open {
+            overflow: hidden;
         }
         .intro-text { 
             padding: 14px 20px; 
@@ -1822,6 +1955,7 @@
             .stat-number { font-size: 1.3em; }
             .app-download-section { padding: 22px 18px; }
             .app-download-card { grid-template-columns: 1fr; gap: 20px; }
+            .app-download-guide-button,
             .app-download-link { justify-self: stretch; justify-content: center; text-align: center; }
             .controls { flex-direction: column; padding: 18px 15px; } 
             .search-row { gap: 10px; }
@@ -1878,9 +2012,13 @@
             h1 { font-size: 1.35em; line-height: 1.3; }
             header { padding: 15px 10px; }
             .app-download-section { padding: 18px 12px; }
-            .app-download-security,
-            .app-download-disclaimer,
-            .app-download-install { padding: 14px; border-radius: 14px; }
+            .app-download-guide-button,
+            .app-download-link {
+                justify-self: stretch;
+                justify-content: center;
+                text-align: center;
+            }
+            .app-download-guide-card { padding: 16px 14px 18px; }
             .language-selector { gap: 8px; max-width: 100%; }
             .amev-introduction { padding: 14px 12px; margin-top: 12px; }
             .amev-introduction h2 { font-size: 1rem; }
@@ -2345,23 +2483,66 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     <p class="app-download-eyebrow">App Android ufficiale</p>
                     <h2 id="android-app-download-title">Scarica Financial Authority Database per Android</h2>
                     <p>App Android offline-first per consultare le autorità finanziarie, verificare riferimenti istituzionali e prevenire le truffe anche quando vuoi un accesso rapido dal telefono.</p>
+                    <div class="app-download-meta" aria-label="Informazioni app Android">
+                        <span class="app-download-badge"><span aria-hidden="true">🤖</span>Android</span>
+                        <span class="app-download-badge"><span aria-hidden="true">💶</span>Gratuita</span>
+                        <span class="app-download-badge"><span aria-hidden="true">🍏</span>Versione iPhone in arrivo</span>
+                    </div>
                     <a class="app-download-link" href="https://github.com/avvstancamarcello/Financial-Authority-Database/releases/download/V.1.0.0/FinancialAuthorityDatabase.apk" target="_blank" rel="noopener noreferrer" aria-label="Scarica l'App per Android in formato APK dalla release ufficiale GitHub"><span aria-hidden="true">📲</span><span>Scarica l'App per Android (APK)</span></a>
-                    <p class="app-download-security"><strong>Avviso di sicurezza responsabile:</strong> l'app è distribuita tramite release ufficiale GitHub del repository pubblico. Prima di installarla, verifica che la provenienza del download corrisponda alla release ufficiale e consulta storico dei commit e delle release nel repository.</p>
-                    <div class="app-download-disclaimer">
-                        <h3>Informazione dichiarata dall'autore</h3>
-                        <p>La nota seguente è riportata come dichiarazione dell'autore a fini informativi e di riconoscibilità pubblica, non come garanzia di sicurezza:</p>
-                        <p>“Autore verificato – Developer con profilo GitHub pubblico, storico trasparente di commit e release consultabile nel repository ufficiale, con ulteriore riconoscibilità pubblica della pagina e dell’autore evidenziata anche dalla spunta verde “Whot” a questa pagina, presente nelle ricerche Google.”</p>
-                    </div>
-                    <div class="app-download-install">
-                        <h3>Istruzioni prudenti per l'installazione Android</h3>
-                        <ol>
-                            <li>Apri il download solo dalla release ufficiale GitHub collegata da questa pagina.</li>
-                            <li>Controlla nome del file e provenienza della release prima di aprire l'APK.</li>
-                            <li>Segui gli avvisi di sicurezza del dispositivo durante l'installazione e interrompi la procedura se la provenienza non ti convince.</li>
-                        </ol>
-                    </div>
+                    <button type="button" class="app-download-guide-button" onclick="openAndroidGuideDialog()" aria-haspopup="dialog" aria-controls="android-app-guide-dialog">
+                        <span aria-hidden="true">📖</span>
+                        <span>Leggi la guida</span>
+                        <span class="app-download-guide-flags" aria-label="Guida disponibile in Italiano e English">
+                            <span class="fi fi-it" aria-hidden="true"></span>
+                            <span class="fi fi-gb" aria-hidden="true"></span>
+                            <span class="sr-only">Italiano e English</span>
+                        </span>
+                    </button>
                 </div>
             </div>
+            <dialog id="android-app-guide-dialog" class="app-download-guide" aria-labelledby="android-app-guide-title">
+                <div class="app-download-guide-card">
+                    <div class="app-download-guide-header">
+                        <h3 id="android-app-guide-title">Guida installazione APK</h3>
+                        <button type="button" class="app-download-guide-close" onclick="closeAndroidGuideDialog()" aria-label="Chiudi la guida">✕</button>
+                    </div>
+                    <div class="app-download-guide-langs" role="group" aria-label="Scegli la lingua della guida">
+                        <button type="button" class="app-download-guide-lang" data-guide-lang-btn="it" onclick="setAndroidGuideLanguage('it')" aria-label="Italiano">
+                            <span class="fi fi-it" aria-hidden="true"></span>
+                            <span>IT</span>
+                        </button>
+                        <button type="button" class="app-download-guide-lang" data-guide-lang-btn="en" onclick="setAndroidGuideLanguage('en')" aria-label="English">
+                            <span class="fi fi-gb" aria-hidden="true"></span>
+                            <span>EN</span>
+                        </button>
+                    </div>
+                    <div class="app-download-guide-body" data-guide-lang="it">
+                        <ol>
+                            <li>Tocca <strong>Scarica l'App per Android (APK)</strong>.</li>
+                            <li>Apri il file <strong>FinancialAuthorityDatabase.apk</strong> al termine del download.</li>
+                            <li>Segui le istruzioni del telefono e tocca <strong>Installa</strong>.</li>
+                            <li>Quando l'installazione è completata, tocca <strong>Apri</strong>.</li>
+                        </ol>
+                        <p class="app-download-guide-note">
+                            Installando da APK Android può chiedere una conferma aggiuntiva: è una procedura normale fuori da Google Play.
+                            Per maggiore tranquillità, usa sempre il link ufficiale presente in questa pagina.
+                        </p>
+                    </div>
+                    <div class="app-download-guide-body" data-guide-lang="en" hidden>
+                        <ol>
+                            <li>Tap <strong>Download Android App (APK)</strong>.</li>
+                            <li>Open <strong>FinancialAuthorityDatabase.apk</strong> after the download is complete.</li>
+                            <li>Follow your phone prompts and tap <strong>Install</strong>.</li>
+                            <li>When installation finishes, tap <strong>Open</strong>.</li>
+                        </ol>
+                        <p class="app-download-guide-note">
+                            When installing from APK, Android may ask for an extra confirmation. This is a normal step outside Google Play.
+                            For peace of mind, always use the official link shown on this page.
+                        </p>
+                    </div>
+                </div>
+            </dialog>
+            <div id="android-app-guide-backdrop" class="app-download-guide-fallback-backdrop" hidden></div>
         </section>
 
         <!-- TABLE OF CONTENTS - Indice Navigazione Interna SEO -->
@@ -4736,6 +4917,101 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             popup.setAttribute('aria-hidden', isVisible ? 'false' : 'true');
         }
 
+        function detectAndroidGuideDefaultLanguage() {
+            const browserLanguage = String(navigator.language || navigator.userLanguage || 'it').toLowerCase();
+            return browserLanguage.startsWith('en') ? 'en' : 'it';
+        }
+
+        function setAndroidGuideLanguage(lang) {
+            const selectedLanguage = lang === 'en' ? 'en' : 'it';
+            document.querySelectorAll('[data-guide-lang]').forEach((panel) => {
+                panel.hidden = panel.getAttribute('data-guide-lang') !== selectedLanguage;
+            });
+            document.querySelectorAll('[data-guide-lang-btn]').forEach((button) => {
+                const buttonLanguage = button.getAttribute('data-guide-lang-btn');
+                button.classList.toggle('is-active', buttonLanguage === selectedLanguage);
+                button.setAttribute('aria-pressed', buttonLanguage === selectedLanguage ? 'true' : 'false');
+            });
+        }
+
+        function closeAndroidGuideDialog() {
+            const dialog = document.getElementById('android-app-guide-dialog');
+            const fallbackBackdrop = document.getElementById('android-app-guide-backdrop');
+            if (!dialog) return;
+
+            if (dialog.classList.contains('is-fallback-open')) {
+                dialog.classList.remove('is-fallback-open');
+                dialog.removeAttribute('open');
+                if (fallbackBackdrop) {
+                    fallbackBackdrop.hidden = true;
+                }
+                document.body.classList.remove('apk-guide-open');
+                return;
+            }
+
+            if (typeof dialog.close === 'function' && dialog.open) {
+                dialog.close();
+            }
+        }
+
+        function openAndroidGuideDialog() {
+            const dialog = document.getElementById('android-app-guide-dialog');
+            const fallbackBackdrop = document.getElementById('android-app-guide-backdrop');
+            if (!dialog) return;
+
+            setAndroidGuideLanguage(detectAndroidGuideDefaultLanguage());
+
+            if (typeof dialog.showModal === 'function') {
+                if (dialog.open && typeof dialog.close === 'function') {
+                    dialog.close();
+                }
+                dialog.showModal();
+                return;
+            }
+
+            dialog.setAttribute('open', 'open');
+            dialog.classList.add('is-fallback-open');
+            if (fallbackBackdrop) {
+                fallbackBackdrop.hidden = false;
+            }
+            document.body.classList.add('apk-guide-open');
+        }
+
+        function setupAndroidGuideDialog() {
+            const dialog = document.getElementById('android-app-guide-dialog');
+            const fallbackBackdrop = document.getElementById('android-app-guide-backdrop');
+            if (!dialog) return;
+
+            if (dialog.dataset.ready === 'true') return;
+            dialog.dataset.ready = 'true';
+
+            dialog.addEventListener('close', () => {
+                document.body.classList.remove('apk-guide-open');
+                dialog.classList.remove('is-fallback-open');
+                if (fallbackBackdrop) {
+                    fallbackBackdrop.hidden = true;
+                }
+            });
+
+            dialog.addEventListener('click', (event) => {
+                if (event.target === dialog && typeof dialog.showModal === 'function') {
+                    closeAndroidGuideDialog();
+                }
+            });
+
+            if (fallbackBackdrop) {
+                fallbackBackdrop.addEventListener('click', closeAndroidGuideDialog);
+            }
+
+            document.addEventListener('keydown', (event) => {
+                if (event.key === 'Escape' && dialog.classList.contains('is-fallback-open')) {
+                    closeAndroidGuideDialog();
+                }
+            });
+
+            setAndroidGuideLanguage(detectAndroidGuideDefaultLanguage());
+        }
+
         function getAuthorityNotesKey(countryName) {
             return String(countryName || '')
                 .normalize('NFD')
@@ -4908,6 +5184,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             changeLanguage(currentLanguage);
             setupSearch();
             setupMedusaCta();
+            setupAndroidGuideDialog();
             setupItalyOrbitalDialog();
             loadCountryData();
         });
