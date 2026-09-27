@@ -728,6 +728,9 @@
             font-weight: 600;
             line-height: 1.45;
         }
+        .app-download-platform-line {
+            display: block;
+        }
         .app-download-content {
             display: grid;
             align-content: center;
@@ -2499,9 +2502,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                         <img src="icon-192.png" data-i18n-alt="appDownloadImageAlt" alt="Icona scudo dell'app Android Financial Authority Database" width="192" height="192">
                     </div>
                     <p class="app-download-platform">
-                        <span data-i18n="appDownloadPlatformLine1">APP Disponibile per Android.</span><br>
-                        <span data-i18n="appDownloadPlatformLine2">per la piattaforma ufficiale di amevfirenze.it e tutelatruffe.it</span><br>
-                        <span data-i18n="appDownloadPlatformLine3">Versione per Apple/iPhone attualmente in lavorazione</span>
+                        <span class="app-download-platform-line" data-i18n="appDownloadPlatformLine1">APP Disponibile per Android.</span>
+                        <span class="app-download-platform-line" data-i18n="appDownloadPlatformLine2">per la piattaforma ufficiale di amevfirenze.it e tutelatruffe.it</span>
+                        <span class="app-download-platform-line" data-i18n="appDownloadPlatformLine3">Versione per Apple/iPhone attualmente in lavorazione</span>
                     </p>
                 </div>
                 <div class="app-download-content">
@@ -4996,7 +4999,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             }
         };
         Object.entries(appDownloadTranslations).forEach(([locale, values]) => {
-            translations[locale] = Object.assign({}, values, translations[locale] || {});
+            const target = translations[locale] || {};
+            Object.entries(values).forEach(([key, value]) => {
+                if (typeof target[key] !== "string" || target[key].length === 0) {
+                    target[key] = value;
+                }
+            });
+            translations[locale] = target;
         });
         translations["ro-RO"] = translations.ro;
         translations["sq-XK"] = translations.sq;
