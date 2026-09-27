@@ -2,8 +2,12 @@ package com.financialauthority.database
 
 import com.financialauthority.database.data.JsonParsers
 import com.financialauthority.database.data.SearchEngine
+import com.financialauthority.database.data.deriveCountryCodeFallback
+import com.financialauthority.database.data.deriveCountryCodeFromFlag
+import com.financialauthority.database.data.normalizeCountryCodeCandidate
 import com.financialauthority.database.data.resolve
 import org.junit.Assert.assertEquals
+import org.junit.Assert.assertNull
 import org.junit.Assert.assertTrue
 import org.junit.Test
 
@@ -90,6 +94,7 @@ class CatalogParsingTest {
 
         val italy = catalog.countries.first()
         assertTrue(italy.authority.relatedInternationalInstitutionIds.contains("moneyval"))
+        assertEquals("IT", italy.countryCode)
 
         val moneyval = catalog.institutions.first { it.id == "moneyval" }
         assertTrue(moneyval.relatedAuthorityIds.contains("italy__consob"))
@@ -103,5 +108,59 @@ class CatalogParsingTest {
         val strings = JsonParsers.parseI18nStrings(i18nJson)
         assertEquals("FATF desc", strings.resolve("institution.fatf_gafi.description", "fr", "fallback"))
         assertEquals("fallback", strings.resolve("missing.key", "en", "fallback"))
+    }
+
+    @Test
+    fun countryCodeHelpers_deriveFromFlagAndFallback() {
+        assertEquals("DE", deriveCountryCodeFromFlag("🇩🇪"))
+        assertNull(deriveCountryCodeFromFlag("🏳️"))
+        assertEquals("BH", deriveCountryCodeFallback("Bosnia and Herzegovina"))
+        assertEquals("UK", deriveCountryCodeFallback("United Kingdom"))
+        assertEquals("ITA", normalizeCountryCodeCandidate(" ita "))
+        assertNull(normalizeCountryCodeCandidate("it-IT"))
+    }
+
+    @Test
+    fun parseCatalog_countryCodePrefersJsonAndFallsBackWhenMissing() {
+        val countriesWithCodesJson = """
+            {
+              "United States": {
+                "country_name": "United States",
+                "flag": "🇺🇸",
+                "iso3": "usa",
+                "isEU": false,
+                "protectionLevel": "High",
+                "financial_authority": {
+                  "name": "SEC",
+                  "authorityId": "us__sec",
+                  "relatedInternationalInstitutionIds": []
+                }
+              },
+              "uk_slug": {
+                "country_name": "United Kingdom",
+                "isEU": false,
+                "protectionLevel": "High",
+                "financial_authority": {
+                  "name": "FCA",
+                  "authorityId": "uk__fca",
+                  "relatedInternationalInstitutionIds": []
+                }
+              }
+            }
+        """.trimIndent()
+
+        val catalog = JsonParsers.parseCatalog(
+            countriesWithCodesJson,
+            institutionsJson,
+            categoriesJson,
+            typesJson,
+            i18nJson
+        ).getOrThrow()
+
+        val unitedStates = catalog.countries.first { it.countryName == "United States" }
+        val unitedKingdom = catalog.countries.first { it.countryName == "United Kingdom" }
+
+        assertEquals("USA", unitedStates.countryCode)
+        assertEquals("UK", unitedKingdom.countryCode)
     }
 }

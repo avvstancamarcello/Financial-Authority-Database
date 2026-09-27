@@ -4,14 +4,11 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.FlowRow
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.weight
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.grid.GridCells
-import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
-import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.AssistChip
 import androidx.compose.material3.Icon
@@ -27,7 +24,11 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.semantics.LiveRegionMode
+import androidx.compose.ui.semantics.liveRegion
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.unit.dp
 import com.financialauthority.database.domain.Country
 import com.financialauthority.database.ui.components.ItemCard
@@ -46,10 +47,12 @@ fun CountriesScreen(
     var grid by remember { mutableStateOf(false) }
 
     val protections = remember(countries) { listOf("All") + countries.map { it.protectionLevel }.distinct().sorted() }
-    val filtered = countries.filter {
-        (query.isBlank() || it.countryName.contains(query, true) || it.authority.name.contains(query, true)) &&
-            (regionFilter == "All" || (regionFilter == "EU" && it.isEU) || (regionFilter == "Non-EU" && !it.isEU)) &&
-            (protectionFilter == "All" || it.protectionLevel == protectionFilter)
+    val filtered = remember(countries, query, regionFilter, protectionFilter) {
+        countries.filter {
+            (query.isBlank() || it.countryName.contains(query, true) || it.authority.name.contains(query, true)) &&
+                (regionFilter == "All" || (regionFilter == "EU" && it.isEU) || (regionFilter == "Non-EU" && !it.isEU)) &&
+                (protectionFilter == "All" || it.protectionLevel == protectionFilter)
+        }.sortedBy { it.countryName }
     }
 
     Column(modifier = modifier.fillMaxSize().padding(12.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
@@ -73,19 +76,28 @@ fun CountriesScreen(
                 )
             }
         }
-        if (grid) {
-            LazyVerticalGrid(columns = GridCells.Adaptive(220.dp), contentPadding = PaddingValues(4.dp)) {
-                items(filtered) { country ->
-                    ItemCard(
-                        title = "${country.flag} ${country.countryName}",
-                        subtitle = country.authority.name,
-                        favoriteMark = favorites.contains("country:${country.countryKey}"),
-                        onClick = { onOpen(country) }
-                    )
-                }
+        if (filtered.isEmpty()) {
+            Column(
+                modifier = Modifier
+                    .weight(1f)
+                    .fillMaxWidth()
+                    .semantics { liveRegion = LiveRegionMode.Polite },
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.Center
+            ) {
+                Text("Nessun paese trovato", style = MaterialTheme.typography.bodyLarge)
             }
+        } else if (grid) {
+            FlagGrid(
+                countries = filtered,
+                onOpen = onOpen,
+                modifier = Modifier.weight(1f)
+            )
         } else {
-            LazyColumn(verticalArrangement = Arrangement.spacedBy(8.dp)) {
+            LazyColumn(
+                modifier = Modifier.weight(1f),
+                verticalArrangement = Arrangement.spacedBy(8.dp)
+            ) {
                 items(filtered) { country ->
                     ItemCard(
                         title = "${country.flag} ${country.countryName}",
@@ -95,9 +107,6 @@ fun CountriesScreen(
                     )
                 }
             }
-        }
-        if (filtered.isEmpty()) {
-            Text("Nessun paese trovato", style = MaterialTheme.typography.bodyLarge)
         }
     }
 }
