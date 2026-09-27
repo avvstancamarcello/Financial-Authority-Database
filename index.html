@@ -4620,10 +4620,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     androidApkDownloadLink.href = androidAppData.downloadUrl.trim();
                 }
             } catch (error) {
-                console.warn('Impossibile sincronizzare il link APK Android.', error);
+                console.warn('Unable to synchronize the Android APK download link.', error);
             }
         }
-        syncAndroidApkDownloadLink();
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', syncAndroidApkDownloadLink, { once: true });
+        } else {
+            syncAndroidApkDownloadLink();
+        }
 
         // Inizializza canonical URL per SEO (Google self-referencing canonical)
         (function initCanonical() {
