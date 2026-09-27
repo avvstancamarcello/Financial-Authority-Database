@@ -831,6 +831,9 @@
             box-shadow: 0 20px 55px rgba(15,23,42,0.55);
             overflow: hidden;
         }
+        .app-download-guide:not(.is-fallback-open):not([open]) {
+            display: none;
+        }
         .app-download-guide::backdrop {
             background: rgba(2, 6, 23, 0.72);
         }
@@ -2505,7 +2508,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     </button>
                 </div>
             </div>
-            <dialog id="android-app-guide-dialog" class="app-download-guide" role="dialog" aria-modal="true" lang="it" aria-labelledby="android-app-guide-title" aria-describedby="android-app-guide-context" hidden>
+            <dialog id="android-app-guide-dialog" class="app-download-guide" role="dialog" aria-modal="true" lang="it" aria-labelledby="android-app-guide-title" aria-describedby="android-app-guide-context">
                 <div class="app-download-guide-card">
                     <div class="app-download-guide-header">
                         <h3 id="android-app-guide-title">Guida installazione APK</h3>
@@ -4994,7 +4997,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             if (dialog.classList.contains('is-fallback-open')) {
                 dialog.classList.remove('is-fallback-open');
                 dialog.removeAttribute('open');
-                dialog.hidden = true;
                 if (fallbackBackdrop) {
                     fallbackBackdrop.hidden = true;
                 }
@@ -5006,7 +5008,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
             if (typeof dialog.close === 'function' && dialog.open) {
                 dialog.close();
-                dialog.hidden = true;
             }
         }
 
@@ -5020,7 +5021,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             const preferredLanguage = currentAndroidGuideLanguage || detectAndroidGuideDefaultLanguage();
             setAndroidGuideLanguage(preferredLanguage);
             updateAndroidGuideTriggerExpanded(true);
-            dialog.hidden = false;
 
             if (typeof dialog.showModal === 'function') {
                 if (dialog.open) {
@@ -5058,7 +5058,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             dialog.addEventListener('close', () => {
                 document.body.classList.remove('apk-guide-open');
                 dialog.classList.remove('is-fallback-open');
-                dialog.hidden = true;
                 if (fallbackBackdrop) {
                     fallbackBackdrop.hidden = true;
                 }
