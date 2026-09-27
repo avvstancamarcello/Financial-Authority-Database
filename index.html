@@ -2508,7 +2508,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     </button>
                 </div>
             </div>
-            <dialog id="android-app-guide-dialog" class="app-download-guide" role="dialog" lang="it" aria-labelledby="android-app-guide-title" aria-describedby="android-app-guide-context">
+            <dialog id="android-app-guide-dialog" class="app-download-guide" lang="it" aria-labelledby="android-app-guide-title" aria-describedby="android-app-guide-context">
                 <div class="app-download-guide-card">
                     <div class="app-download-guide-header">
                         <h3 id="android-app-guide-title">Guida installazione APK</h3>
@@ -5067,10 +5067,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 }
                 updateAndroidGuideTriggerExpanded(false);
                 restoreAndroidGuideFocus();
-            });
-
-            dialog.addEventListener('cancel', () => {
-                updateAndroidGuideTriggerExpanded(false);
             });
 
             if (fallbackBackdrop) {
