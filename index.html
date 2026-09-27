@@ -4620,7 +4620,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 const androidAppData = JSON.parse(androidAppJsonLd.textContent || '{}');
                 if (typeof androidAppData.downloadUrl === 'string' && androidAppData.downloadUrl.trim()) {
                     const normalizedDownloadUrl = androidAppData.downloadUrl.trim();
-                    if (androidApkDownloadLink.getAttribute('href') !== normalizedDownloadUrl) {
+                    const parsedDownloadUrl = new URL(normalizedDownloadUrl);
+                    const isTrustedGithubRelease =
+                        parsedDownloadUrl.protocol === 'https:' &&
+                        parsedDownloadUrl.hostname === 'github.com' &&
+                        parsedDownloadUrl.pathname.startsWith('/avvstancamarcello/Financial-Authority-Database/releases/download/');
+                    if (isTrustedGithubRelease && androidApkDownloadLink.getAttribute('href') !== normalizedDownloadUrl) {
                         androidApkDownloadLink.href = normalizedDownloadUrl;
                     }
                 }
