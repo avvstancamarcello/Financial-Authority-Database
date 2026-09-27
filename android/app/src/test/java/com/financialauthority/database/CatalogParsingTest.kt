@@ -2,8 +2,11 @@ package com.financialauthority.database
 
 import com.financialauthority.database.data.JsonParsers
 import com.financialauthority.database.data.SearchEngine
+import com.financialauthority.database.data.deriveCountryCodeFallback
+import com.financialauthority.database.data.deriveCountryCodeFromFlag
 import com.financialauthority.database.data.resolve
 import org.junit.Assert.assertEquals
+import org.junit.Assert.assertNull
 import org.junit.Assert.assertTrue
 import org.junit.Test
 
@@ -90,6 +93,7 @@ class CatalogParsingTest {
 
         val italy = catalog.countries.first()
         assertTrue(italy.authority.relatedInternationalInstitutionIds.contains("moneyval"))
+        assertEquals("IT", italy.countryCode)
 
         val moneyval = catalog.institutions.first { it.id == "moneyval" }
         assertTrue(moneyval.relatedAuthorityIds.contains("italy__consob"))
@@ -103,5 +107,12 @@ class CatalogParsingTest {
         val strings = JsonParsers.parseI18nStrings(i18nJson)
         assertEquals("FATF desc", strings.resolve("institution.fatf_gafi.description", "fr", "fallback"))
         assertEquals("fallback", strings.resolve("missing.key", "en", "fallback"))
+    }
+
+    @Test
+    fun countryCodeHelpers_deriveFromFlagAndFallback() {
+        assertEquals("DE", deriveCountryCodeFromFlag("🇩🇪"))
+        assertNull(deriveCountryCodeFromFlag("🏳️"))
+        assertEquals("BAH", deriveCountryCodeFallback("Bosnia and Herzegovina"))
     }
 }

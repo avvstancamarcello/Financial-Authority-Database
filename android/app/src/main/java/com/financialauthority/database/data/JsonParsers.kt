@@ -65,6 +65,7 @@ object JsonParsers {
                 countryKey = normalizeKey(key),
                 countryName = item.string("country_name") ?: key,
                 flag = item.string("flag") ?: "🏳️",
+                countryCode = parseCountryCode(item = item, countryKey = key),
                 isEU = item.bool("isEU") ?: false,
                 protectionLevel = item.string("protectionLevel") ?: "Unknown",
                 notes = item.string("notes"),
@@ -182,6 +183,26 @@ object JsonParsers {
         .replace(" ", "_")
         .replace("-", "_")
 
+    private fun parseCountryCode(item: JsonObject, countryKey: String): String {
+        val fromJson = item.string("countryCode")
+            ?: item.string("country_code")
+            ?: item.string("iso2")
+            ?: item.string("iso3")
+            ?: item.string("alpha2")
+            ?: item.string("alpha3")
+        if (!fromJson.isNullOrBlank()) {
+            return fromJson.uppercase()
+        }
+
+        val flag = item.string("flag").orEmpty()
+        val fromFlag = deriveCountryCodeFromFlag(flag)
+        if (!fromFlag.isNullOrBlank()) {
+            return fromFlag
+        }
+
+        return deriveCountryCodeFallback(countryKey)
+    }
+
     private fun JsonObject.string(key: String): String? = this[key]?.jsonPrimitive?.contentOrNull
 
     private fun JsonObject.bool(key: String): Boolean? = this[key]?.jsonPrimitive?.booleanOrNull
@@ -198,4 +219,29 @@ object JsonParsers {
 fun Map<String, Map<String, String>>.resolve(key: String, locale: String, fallback: String): String {
     val record = this[key] ?: return fallback
     return record[locale] ?: record["en"] ?: record["it"] ?: fallback
+}
+
+internal fun deriveCountryCodeFromFlag(flagEmoji: String): String? {
+    val regionalIndicators = flagEmoji.codePoints()
+        .filter { it in 0x1F1E6..0x1F1FF }
+        .toArray()
+    if (regionalIndicators.size < 2) return null
+
+    val first = 'A' + (regionalIndicators[0] - 0x1F1E6)
+    val second = 'A' + (regionalIndicators[1] - 0x1F1E6)
+    return "$first$second"
+}
+
+internal fun deriveCountryCodeFallback(countryKey: String): String {
+    val cleaned = countryKey.trim()
+    if (cleaned.isEmpty()) return "UNK"
+
+    val words = cleaned.split(Regex("[^\\p{L}\\p{N}]+")).filter { it.isNotBlank() }
+    val code = when {
+        words.size >= 2 -> words.joinToString(separator = "") { it.take(1) }.take(3)
+        words.isNotEmpty() -> words.first().take(3)
+        else -> cleaned.take(3)
+    }
+
+    return code.uppercase()
 }

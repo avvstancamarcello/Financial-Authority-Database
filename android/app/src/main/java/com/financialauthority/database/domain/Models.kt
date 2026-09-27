@@ -14,6 +14,7 @@ data class Country(
     val countryKey: String,
     val countryName: String,
     val flag: String,
+    val countryCode: String,
     val isEU: Boolean,
     val protectionLevel: String,
     val notes: String?,
