@@ -4797,6 +4797,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         let translationCache = {};
         let isConsobOrbitalDialogSetup = false;
         let activeDialogState = null;
+        let currentAndroidGuideLanguage = null;
 
         // Inizializza canonical URL per SEO (Google self-referencing canonical)
         (function initCanonical() {
@@ -4924,6 +4925,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
         function setAndroidGuideLanguage(lang) {
             const selectedLanguage = lang === 'en' ? 'en' : 'it';
+            currentAndroidGuideLanguage = selectedLanguage;
             document.querySelectorAll('[data-guide-lang]').forEach((panel) => {
                 panel.hidden = panel.getAttribute('data-guide-lang') !== selectedLanguage;
             });
@@ -4932,6 +4934,26 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 button.classList.toggle('is-active', buttonLanguage === selectedLanguage);
                 button.setAttribute('aria-pressed', buttonLanguage === selectedLanguage ? 'true' : 'false');
             });
+            const guideDialog = document.getElementById('android-app-guide-dialog');
+            const guideTitle = document.getElementById('android-app-guide-title');
+            const closeButton = guideDialog?.querySelector('.app-download-guide-close');
+            const languageGroup = guideDialog?.querySelector('.app-download-guide-langs');
+            if (guideDialog) {
+                guideDialog.setAttribute('lang', selectedLanguage);
+            }
+            if (guideTitle) {
+                guideTitle.textContent = selectedLanguage === 'en'
+                    ? 'APK installation guide'
+                    : 'Guida installazione APK';
+            }
+            if (closeButton) {
+                closeButton.setAttribute('aria-label', selectedLanguage === 'en' ? 'Close guide' : 'Chiudi la guida');
+            }
+            if (languageGroup) {
+                languageGroup.setAttribute('aria-label', selectedLanguage === 'en'
+                    ? 'Choose guide language'
+                    : 'Scegli la lingua della guida');
+            }
         }
 
         function closeAndroidGuideDialog() {
@@ -4959,7 +4981,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             const fallbackBackdrop = document.getElementById('android-app-guide-backdrop');
             if (!dialog) return;
 
-            setAndroidGuideLanguage(detectAndroidGuideDefaultLanguage());
+            const preferredLanguage = currentAndroidGuideLanguage || detectAndroidGuideDefaultLanguage();
+            setAndroidGuideLanguage(preferredLanguage);
 
             if (typeof dialog.showModal === 'function') {
                 if (dialog.open && typeof dialog.close === 'function') {
