@@ -10,7 +10,8 @@
     })(window,document,'script','dataLayer','GTM-W2Q6GD42');</script>
     <!-- End Google Tag Manager -->
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="format-detection" content="telephone=no, email=no, address=no">
     
     <!-- Google AdSense -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2899281140209246" crossorigin="anonymous"></script>
@@ -139,6 +140,8 @@
     <meta name="DC.creator" content="Avvocato Marcello Stanca">
     
     <meta name="theme-color" content="#667eea">
+    <meta name="application-name" content="Financial Authority Database">
+    <meta name="mobile-web-app-capable" content="yes">
     
     <!-- PWA Manifest (96/192/384/512 icons; 192/512 include maskable purpose in manifest.json) -->
     <link rel="manifest" href="manifest.json">
@@ -147,7 +150,7 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="FinAuthority">
-    <link rel="apple-touch-icon" href="icon-192.png">
+    <link rel="apple-touch-icon" sizes="192x192" href="icon-192.png">
     
     <title id="page-title">Database Autorità Finanziarie Internazionali | Verifica Licenze Broker | 239 Paesi</title>
     
@@ -390,13 +393,33 @@
     
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --safe-area-inset-top: env(safe-area-inset-top, 0px);
+            --safe-area-inset-right: env(safe-area-inset-right, 0px);
+            --safe-area-inset-bottom: env(safe-area-inset-bottom, 0px);
+            --safe-area-inset-left: env(safe-area-inset-left, 0px);
+        }
+        html {
+            -webkit-text-size-adjust: 100%;
+            scroll-padding-top: calc(20px + var(--safe-area-inset-top));
+            scroll-padding-bottom: calc(24px + var(--safe-area-inset-bottom));
+            background: #1e3c72;
+        }
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             line-height: 1.6;
             /* Cursore personalizzato: lente di ingrandimento scura (tema investigazione) */
             cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'><circle cx='10' cy='10' r='6' fill='%23f9fafb' stroke='%23111827' stroke-width='2'/><line x1='14' y1='14' x2='22' y2='22' stroke='%23111827' stroke-width='3' stroke-linecap='round'/></svg>") 10 10, auto;
         }
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%); color: #333; line-height: 1.6; min-height: 100vh; padding: 20px; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: #333;
+            line-height: 1.6;
+            min-height: 100vh;
+            min-height: 100dvh;
+            padding: calc(20px + var(--safe-area-inset-top)) calc(20px + var(--safe-area-inset-right)) calc(20px + var(--safe-area-inset-bottom)) calc(20px + var(--safe-area-inset-left));
+        }
         .container { max-width: 1400px; margin: 0 auto; background: white; border-radius: 15px; box-shadow: 0 10px 40px rgba(0,0,0,0.3); overflow: hidden; position: relative; }
         .security-banner { background: transparent; color: white; border-bottom: none; padding: 8px 16px 0; display: flex; justify-content: center; }
         .security-banner-toggle {
@@ -836,7 +859,7 @@
         }
         .app-download-guide {
             width: min(92vw, 640px);
-            max-height: 86vh;
+            max-height: calc(100dvh - var(--safe-area-inset-top) - var(--safe-area-inset-bottom) - 24px);
             padding: 0;
             border: none;
             border-radius: 20px;
@@ -860,9 +883,9 @@
             z-index: 1301;
         }
         .app-download-guide-card {
-            padding: 18px 20px 20px;
+            padding: 18px 20px calc(20px + var(--safe-area-inset-bottom));
             overflow-y: auto;
-            max-height: 86vh;
+            max-height: calc(100dvh - var(--safe-area-inset-top) - var(--safe-area-inset-bottom) - 24px);
         }
         .app-download-guide-header {
             display: flex;
@@ -935,6 +958,60 @@
             color: #cbd5e1;
             font-size: 0.9rem;
             line-height: 1.45;
+        }
+        .app-download-guide-section-title {
+            margin: 1rem 0 0.5rem;
+            color: #fde68a;
+            font-size: 0.95rem;
+            font-weight: 800;
+            letter-spacing: 0.02em;
+        }
+        .ios-install-hint {
+            justify-self: start;
+            display: grid;
+            gap: 0.75rem;
+            width: min(100%, 760px);
+            padding: 0.85rem 0.95rem;
+            border-radius: 16px;
+            background: rgba(15,23,42,0.38);
+            border: 1px solid rgba(191,219,254,0.26);
+            color: #dbeafe;
+        }
+        .ios-install-hint[hidden] {
+            display: none !important;
+        }
+        .ios-install-hint p {
+            margin: 0;
+            line-height: 1.5;
+        }
+        .ios-install-hint-actions {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 0.65rem;
+        }
+        .ios-install-hint-open {
+            padding: 0.6rem 0.9rem;
+            font-size: 0.9rem;
+        }
+        .ios-install-hint-dismiss {
+            border: 1px solid rgba(255,255,255,0.26);
+            background: rgba(15,23,42,0.4);
+            color: #f8fafc;
+            font: inherit;
+            font-weight: 700;
+            height: 2.35rem;
+            min-width: 2.35rem;
+            padding: 0 0.75rem;
+            border-radius: 999px;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.35rem;
+        }
+        .ios-install-hint-dismiss-label {
+            font-size: 0.82rem;
+            line-height: 1;
         }
         [data-guide-lang][hidden] {
             display: none !important;
@@ -1664,9 +1741,9 @@
             font-size: 0.65em;
             font-weight: 700;
         }
-        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); z-index: 1000; overflow-y: auto; }
-        .modal-content { background: white; max-width: 900px; margin: 50px auto; border-radius: 15px; padding: 40px; padding-bottom: 80px; position: relative; }
-        .close-modal { position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%); font-size: 60px; line-height: 1; cursor: pointer; color: #dc2626; font-weight: bold; transition: all 0.3s ease; background: #fee2e2; border: 3px solid #dc2626; border-radius: 50%; width: 70px; height: 70px; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 12px rgba(220, 38, 38, 0.4); z-index: 10; }
+        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); z-index: 1000; overflow-y: auto; padding: calc(16px + var(--safe-area-inset-top)) calc(12px + var(--safe-area-inset-right)) calc(16px + var(--safe-area-inset-bottom)) calc(12px + var(--safe-area-inset-left)); }
+        .modal-content { background: white; max-width: 900px; margin: 0 auto; max-height: calc(100dvh - var(--safe-area-inset-top) - var(--safe-area-inset-bottom) - 32px); overflow-y: auto; -webkit-overflow-scrolling: touch; border-radius: 15px; padding: 40px; padding-bottom: calc(80px + var(--safe-area-inset-bottom)); position: relative; }
+        .close-modal { position: absolute; bottom: calc(20px + var(--safe-area-inset-bottom)); left: 50%; transform: translateX(-50%); font-size: 60px; line-height: 1; cursor: pointer; color: #dc2626; font-weight: bold; transition: all 0.3s ease; background: #fee2e2; border: 3px solid #dc2626; border-radius: 50%; width: 70px; height: 70px; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 12px rgba(220, 38, 38, 0.4); z-index: 10; }
         .close-modal:hover { color: #fff; background: #dc2626; box-shadow: 0 6px 18px rgba(220, 38, 38, 0.6); }
         
         /* === FULL-SCREEN INSTRUCTIONS MODAL === */
@@ -1687,14 +1764,14 @@
             color: #ecfdf5;
             width: 100%;
             min-height: 100%;
-            padding: 25px;
+            padding: calc(25px + var(--safe-area-inset-top)) calc(25px + var(--safe-area-inset-right)) calc(25px + var(--safe-area-inset-bottom)) calc(25px + var(--safe-area-inset-left));
             box-sizing: border-box;
             position: relative;
         }
         .instructions-fullscreen-close {
             position: fixed;
-            top: 15px;
-            right: 20px;
+            top: calc(15px + var(--safe-area-inset-top));
+            right: calc(20px + var(--safe-area-inset-right));
             font-size: 2.5rem;
             color: #39ff14;
             cursor: pointer;
@@ -1797,20 +1874,20 @@
             box-shadow: 0 6px 18px rgba(59, 130, 246, 0.6);
         }
         @media (max-width: 768px) {
-            .instructions-fullscreen-content { padding: 20px 15px; }
+            .instructions-fullscreen-content { padding: calc(20px + var(--safe-area-inset-top)) calc(15px + var(--safe-area-inset-right)) calc(20px + var(--safe-area-inset-bottom)) calc(15px + var(--safe-area-inset-left)); }
             .instructions-fullscreen-header h2 { font-size: 1.3rem; }
             .instructions-step { padding: 15px; }
             .instructions-step h3 { font-size: 1.05rem; }
-            .instructions-fullscreen-close { top: 10px; right: 15px; width: 45px; height: 45px; font-size: 2rem; }
+            .instructions-fullscreen-close { top: calc(10px + var(--safe-area-inset-top)); right: calc(15px + var(--safe-area-inset-right)); width: 45px; height: 45px; font-size: 2rem; }
         }
         @media (max-width: 480px) {
-            .instructions-fullscreen-content { padding: 15px 12px; }
+            .instructions-fullscreen-content { padding: calc(15px + var(--safe-area-inset-top)) calc(12px + var(--safe-area-inset-right)) calc(15px + var(--safe-area-inset-bottom)) calc(12px + var(--safe-area-inset-left)); }
             .instructions-fullscreen-header { padding: 15px 0 20px; }
             .instructions-fullscreen-header h2 { font-size: 1.15rem; }
             .instructions-step { padding: 12px; margin-bottom: 12px; }
             .instructions-step h3 { font-size: 0.95rem; }
             .instructions-step p, .instructions-step li { font-size: 0.9rem; }
-            .instructions-fullscreen-close { top: 8px; right: 10px; width: 40px; height: 40px; font-size: 1.8rem; }
+            .instructions-fullscreen-close { top: calc(8px + var(--safe-area-inset-top)); right: calc(10px + var(--safe-area-inset-right)); width: 40px; height: 40px; font-size: 1.8rem; }
             .ask-authority-btn { padding: 0.7rem 1.1rem; font-size: 0.85rem; }
         }
         footer { background: #2c3e50; color: white; text-align: center; padding: 20px; }
@@ -1839,8 +1916,8 @@
         }
         .security-popup {
             position: absolute;
-            top: 40px;
-            right: 20px;
+            top: calc(40px + var(--safe-area-inset-top));
+            right: calc(20px + var(--safe-area-inset-right));
             width: 320px;
             max-width: 90%;
             background: linear-gradient(135deg, #10b981 0%, #059669 100%);
@@ -1892,11 +1969,11 @@
         }
         .instructions-popup {
             position: absolute;
-            top: 110px;
-            right: 20px;
+            top: calc(110px + var(--safe-area-inset-top));
+            right: calc(20px + var(--safe-area-inset-right));
             width: 360px;
             max-width: 95%;
-            max-height: calc(100vh - 140px);
+            max-height: calc(100dvh - var(--safe-area-inset-top) - var(--safe-area-inset-bottom) - 140px);
             overflow-y: auto;
             background: linear-gradient(135deg, #047857 0%, #065f46 100%);
             color: #ecfdf5;
@@ -1952,7 +2029,7 @@
         }
         /* === RESPONSIVE TABLET (768px) === */
         @media (max-width: 768px) { 
-            body { padding: 10px; }
+            body { padding: calc(10px + var(--safe-area-inset-top)) calc(10px + var(--safe-area-inset-right)) calc(10px + var(--safe-area-inset-bottom)) calc(10px + var(--safe-area-inset-left)); }
             h1 { font-size: 1.6em; } 
             .language-selector { position: static; margin-top: 14px; gap: 8px; }
             .language-selector-group { width: 100%; padding: 12px; }
@@ -2011,28 +2088,27 @@
             .modal-content { 
                 max-width: 95%; 
                 width: 95%; 
-                margin: 15px auto; 
                 padding: 20px 15px; 
                 font-size: 0.92em;
             }
-            .close-modal { font-size: 50px; width: 60px; height: 60px; bottom: 15px; }
+            .close-modal { font-size: 50px; width: 60px; height: 60px; bottom: calc(15px + var(--safe-area-inset-bottom)); }
             .authority-link a { font-size: 0.85em; word-break: break-all; }
             .instructions-popup {
-                top: 120px;
+                top: calc(120px + var(--safe-area-inset-top));
                 right: 50%;
                 transform: translateX(50%);
                 width: 92%;
-                max-height: calc(100vh - 150px);
+                max-height: calc(100dvh - var(--safe-area-inset-top) - var(--safe-area-inset-bottom) - 150px);
             }
-            .security-popup { width: 90%; right: 5%; top: 50px; }
+            .security-popup { width: 90%; right: 5%; top: calc(50px + var(--safe-area-inset-top)); }
             .referenze-badge { flex-wrap: wrap; gap: 8px; font-size: 0.85em; }
             .intro-text { padding: 12px 15px; font-size: 0.95em; }
-            footer { padding: 15px 10px; font-size: 0.9em; }
+            footer { padding: 15px 10px calc(15px + var(--safe-area-inset-bottom)); font-size: 0.9em; }
         }
         
         /* === RESPONSIVE SMARTPHONE (480px) === */
         @media (max-width: 480px) {
-            body { padding: 5px; }
+            body { padding: calc(5px + var(--safe-area-inset-top)) calc(5px + var(--safe-area-inset-right)) calc(5px + var(--safe-area-inset-bottom)) calc(5px + var(--safe-area-inset-left)); }
             h1 { font-size: 1.35em; line-height: 1.3; }
             header { padding: 15px 10px; }
             .app-download-section { padding: 18px 12px; }
@@ -2043,6 +2119,13 @@
                 text-align: center;
             }
             .app-download-guide-card { padding: 16px 14px 18px; }
+            .ios-install-hint {
+                justify-items: stretch;
+                text-align: left;
+            }
+            .ios-install-hint-actions {
+                justify-content: space-between;
+            }
             .language-selector { gap: 8px; max-width: 100%; }
             .amev-introduction { padding: 14px 12px; margin-top: 12px; }
             .amev-introduction h2 { font-size: 1rem; }
@@ -2121,12 +2204,11 @@
             }
             .content { padding: 15px 10px; }
             .modal-content { 
-                margin: 10px auto; 
                 padding: 15px 12px; 
                 font-size: 0.88em;
                 border-radius: 12px;
             }
-            .close-modal { font-size: 44px; width: 55px; height: 55px; bottom: 12px; }
+            .close-modal { font-size: 44px; width: 55px; height: 55px; bottom: calc(12px + var(--safe-area-inset-bottom)); }
             .security-banner h2 { font-size: 0.85em; }
             .security-banner .icon { font-size: 1.2rem; }
             .security-banner-toggle { padding: 0 0.6rem; gap: 0.4rem; }
@@ -2139,7 +2221,7 @@
             .referenze-badge { font-size: 0.75em; padding: 6px 10px; }
             .intro-text { padding: 10px 12px; font-size: 0.88em; }
             .eu-references { padding: 15px 12px; margin: 12px 0; font-size: 0.9em; }
-            footer { padding: 12px 8px; font-size: 0.85em; }
+            footer { padding: 12px 8px calc(12px + var(--safe-area-inset-bottom)); font-size: 0.85em; }
         }
         
         /* === RESPONSIVE SMALL PHONES (375px) === */
@@ -2504,7 +2586,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     <p class="app-download-platform">
                         <span class="app-download-platform-line" data-i18n="appDownloadPlatformLine1">APP Disponibile per Android.</span>
                         <span class="app-download-platform-line" data-i18n="appDownloadPlatformLine2">per la piattaforma ufficiale di amevfirenze.it e tutelatruffe.it</span>
-                        <span class="app-download-platform-line" data-i18n="appDownloadPlatformLine3">Versione per Apple/iPhone attualmente in lavorazione</span>
+                        <span class="app-download-platform-line" data-i18n="appDownloadPlatformLine3">Su iPhone disponibile come WebApp/PWA tramite Safari e Aggiungi a Home</span>
                     </p>
                 </div>
                 <div class="app-download-content">
@@ -2515,7 +2597,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     <div class="app-download-meta" data-i18n-aria-label="appDownloadMetaAriaLabel" aria-label="Informazioni app Android">
                         <span class="app-download-badge"><span aria-hidden="true">🤖</span><span data-i18n="appDownloadBadgeAndroid">Android</span></span>
                         <span class="app-download-badge"><span aria-hidden="true">💶</span><span data-i18n="appDownloadBadgeFree">Gratuita</span></span>
-                        <span class="app-download-badge"><span aria-hidden="true">🍏</span><span data-i18n="appDownloadBadgeIphone">Versione iPhone in progress</span></span>
+                        <span class="app-download-badge"><span aria-hidden="true">🍏</span><span data-i18n="appDownloadBadgeIphone">iPhone WebApp/PWA</span></span>
                     </div>
                     <p class="app-download-description" data-i18n="appDownloadDescription">Puoi verificare la legittimità e l'identità di chi offre investimenti finanziari e prevenire le truffe grazie all'uso intelligente del tuo smartphone o PC.</p>
                     <a class="app-download-link" href="https://github.com/avvstancamarcello/Financial-Authority-Database/releases/download/V.1.0.0/FinancialAuthorityDatabase.apk" target="_blank" rel="noopener noreferrer" data-i18n-aria-label="appDownloadLinkAriaLabel" aria-label="Scarica l'App Android in formato APK dalla release ufficiale GitHub"><span aria-hidden="true">📲</span><span data-i18n="appDownloadLink">Scarica l'App per Android (APK)</span></a>
@@ -2528,15 +2610,29 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                             <span class="sr-only" data-i18n="appDownloadGuideLanguagesSr">Guida disponibile in Italiano e English</span>
                         </span>
                     </button>
+                    <div id="ios-install-hint" class="ios-install-hint" hidden role="note" aria-live="polite" aria-atomic="true">
+                        <p data-i18n="appDownloadIosHint">Su iPhone apri questa pagina in Safari, tocca Condividi e scegli Aggiungi a Home per installarla come WebApp/PWA.</p>
+                        <div class="ios-install-hint-actions">
+                            <button id="ios-install-hint-open" type="button" class="app-download-guide-button ios-install-hint-open" onclick="openIosInstallGuide(this)">
+                                <span aria-hidden="true">🍏</span>
+                                <span data-i18n="appDownloadGuideTrigger">Leggi la guida</span>
+                            </button>
+                            <button id="ios-install-hint-dismiss" type="button" class="ios-install-hint-dismiss" data-i18n-aria-label="appDownloadIosHintDismissAriaLabel" aria-label="Nascondi il suggerimento installazione iPhone" onclick="dismissIosInstallHint()">
+                                <span aria-hidden="true">×</span>
+                                <span class="ios-install-hint-dismiss-label" data-i18n="appDownloadIosHintDismissText">Chiudi</span>
+                                <span class="sr-only" data-i18n="appDownloadIosHintDismissAriaLabel">Nascondi il suggerimento installazione iPhone</span>
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </div>
             <dialog id="android-app-guide-dialog" class="app-download-guide" lang="it" aria-labelledby="android-app-guide-title" aria-describedby="android-app-guide-context">
                 <div class="app-download-guide-card">
                     <div class="app-download-guide-header">
-                        <h3 id="android-app-guide-title">Guida installazione APK</h3>
+                        <h3 id="android-app-guide-title">Guida installazione Android e iPhone</h3>
                         <button type="button" class="app-download-guide-close" onclick="closeAndroidGuideDialog()" aria-label="Chiudi la guida">✕</button>
                     </div>
-                    <p id="android-app-guide-context" class="app-download-guide-context">Scegli la lingua e segui i passaggi per installare l'app Android in pochi minuti.</p>
+                    <p id="android-app-guide-context" class="app-download-guide-context">Scegli la lingua e segui i passaggi per installare l'app Android oppure la WebApp/PWA su iPhone tramite Safari.</p>
                     <div class="app-download-guide-langs" role="radiogroup" aria-label="Scegli la lingua della guida">
                         <button type="button" role="radio" aria-checked="false" tabindex="-1" class="app-download-guide-lang" data-guide-lang-btn="it" onclick="setAndroidGuideLanguage('it')" aria-label="Italiano">
                             <span class="fi fi-it" aria-hidden="true"></span>
@@ -2548,6 +2644,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                         </button>
                     </div>
                     <div class="app-download-guide-body" data-guide-lang="it" lang="it">
+                        <h4 class="app-download-guide-section-title">Android (APK)</h4>
                         <ol>
                             <li>Tocca <strong>Scarica l'App per Android (APK)</strong>.</li>
                             <li>Apri il file <strong>FinancialAuthorityDatabase.apk</strong> al termine del download.</li>
@@ -2558,8 +2655,21 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                             Installando da APK Android può chiedere una conferma aggiuntiva: è una procedura normale fuori da Google Play.
                             Per maggiore tranquillità, usa sempre il link ufficiale presente in questa pagina.
                         </p>
+                        <h4 class="app-download-guide-section-title">iPhone / Safari WebApp-PWA</h4>
+                        <ol>
+                            <li>Apri questa pagina con <strong>Safari</strong> su iPhone.</li>
+                            <li>Tocca il pulsante <strong>Condividi</strong> di Safari.</li>
+                            <li>Scorri e scegli <strong>Aggiungi a Home</strong>.</li>
+                            <li>Conferma il nome <strong>FinAuthority</strong> e tocca <strong>Aggiungi</strong>.</li>
+                            <li>Apri l'icona dalla Home: dopo la prima visita l'app resta disponibile anche offline con i contenuti già in cache.</li>
+                        </ol>
+                        <p class="app-download-guide-note">
+                            Su iPhone non viene scaricato alcun APK o file App Store: questa esperienza è una WebApp/PWA installabile da Safari.
+                            Dopo un aggiornamento del sito, se non vedi subito le novità chiudi e riapri la WebApp oppure ricarica la pagina da Safari e ripeti Aggiungi a Home solo se necessario.
+                        </p>
                     </div>
                     <div class="app-download-guide-body" data-guide-lang="en" lang="en" hidden>
+                        <h4 class="app-download-guide-section-title">Android (APK)</h4>
                         <ol>
                             <li>Tap <strong>Scarica l'App per Android (APK)</strong>.</li>
                             <li>Open <strong>FinancialAuthorityDatabase.apk</strong> after the download is complete.</li>
@@ -2569,6 +2679,18 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                         <p class="app-download-guide-note">
                             When installing from APK, Android may ask for an extra confirmation. This is a normal step outside Google Play.
                             For peace of mind, always use the official link shown on this page.
+                        </p>
+                        <h4 class="app-download-guide-section-title">iPhone / Safari Web App PWA</h4>
+                        <ol>
+                            <li>Open this page in <strong>Safari</strong> on your iPhone.</li>
+                            <li>Tap Safari’s <strong>Share</strong> button.</li>
+                            <li>Scroll down and choose <strong>Add to Home Screen</strong>.</li>
+                            <li>Confirm the name <strong>FinAuthority</strong> and tap <strong>Add</strong>.</li>
+                            <li>Launch the icon from the Home Screen: after the first visit, the app remains available offline for the content already cached on the device.</li>
+                        </ol>
+                        <p class="app-download-guide-note">
+                            On iPhone there is no APK or App Store package to download here: this is a Safari-installable Web App / PWA.
+                            After a site update, close and reopen the installed app or refresh the page in Safari; only remove and add it again if the icon or cached content does not refresh.
                         </p>
                     </div>
                 </div>
@@ -4746,256 +4868,301 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 appDownloadImageAlt: "Icona scudo dell'app Android Financial Authority Database",
                 appDownloadPlatformLine1: "APP Disponibile per Android.",
                 appDownloadPlatformLine2: "per la piattaforma ufficiale di amevfirenze.it e tutelatruffe.it",
-                appDownloadPlatformLine3: "Versione per Apple/iPhone attualmente in lavorazione",
+                appDownloadPlatformLine3: "Disponibile su iPhone come WebApp/PWA via Safari e Aggiungi a Home",
                 appDownloadTitleLine1: "SCARICA APP ANDROID UFFICIALE",
                 appDownloadTitleLine2: "\"Financial Authority Database\"",
                 appDownloadMetaAriaLabel: "Informazioni app Android",
                 appDownloadBadgeAndroid: "Android",
                 appDownloadBadgeFree: "Gratuita",
-                appDownloadBadgeIphone: "Versione iPhone in progress",
+                appDownloadBadgeIphone: "iPhone WebApp/PWA",
                 appDownloadDescription: "Puoi verificare la legittimità e l'identità di chi offre investimenti finanziari e prevenire le truffe grazie all'uso intelligente del tuo smartphone o PC.",
                 appDownloadLink: "Scarica l'App per Android (APK)",
                 appDownloadLinkAriaLabel: "Scarica l'App Android in formato APK dalla release ufficiale GitHub",
                 appDownloadGuideTrigger: "Leggi la guida",
-                appDownloadGuideLanguagesSr: "Guida disponibile in Italiano e English"
+                appDownloadGuideLanguagesSr: "Guida disponibile in Italiano e English",
+                appDownloadIosHint: "Su iPhone apri questa pagina in Safari, tocca Condividi e scegli Aggiungi a Home per installarla come WebApp/PWA.",
+                appDownloadIosHintDismissAriaLabel: "Nascondi il suggerimento installazione iPhone",
+                appDownloadIosHintDismissText: "Chiudi"
             },
             en: {
                 appDownloadImageAlt: "Financial Authority Database Android app shield icon",
                 appDownloadPlatformLine1: "APP available for Android.",
                 appDownloadPlatformLine2: "for the official amevfirenze.it and tutelatruffe.it platform",
-                appDownloadPlatformLine3: "Apple/iPhone version currently in development",
+                appDownloadPlatformLine3: "Available on iPhone as a Safari Web App / PWA via Add to Home Screen",
                 appDownloadTitleLine1: "DOWNLOAD OFFICIAL ANDROID APP",
                 appDownloadTitleLine2: "\"Financial Authority Database\"",
                 appDownloadMetaAriaLabel: "Android app information",
                 appDownloadBadgeAndroid: "Android",
                 appDownloadBadgeFree: "Free",
-                appDownloadBadgeIphone: "iPhone version in progress",
+                appDownloadBadgeIphone: "iPhone Web App / PWA",
                 appDownloadDescription: "You can verify the legitimacy and identity of anyone offering financial investments and prevent scams thanks to the smart use of your smartphone or PC.",
                 appDownloadLink: "Download the Android App (APK)",
                 appDownloadLinkAriaLabel: "Download the Android app APK from the official GitHub release",
                 appDownloadGuideTrigger: "Read the guide",
-                appDownloadGuideLanguagesSr: "Guide available in Italian and English"
+                appDownloadGuideLanguagesSr: "Guide available in Italian and English",
+                appDownloadIosHint: "On iPhone, open this page in Safari, tap Share, and choose Add to Home Screen to install it as a Web App / PWA.",
+                appDownloadIosHintDismissAriaLabel: "Dismiss the iPhone install hint",
+                appDownloadIosHintDismissText: "Close"
             },
             fr: {
                 appDownloadImageAlt: "Icône bouclier de l'application Android Financial Authority Database",
                 appDownloadPlatformLine1: "APP disponible pour Android.",
                 appDownloadPlatformLine2: "pour la plateforme officielle de amevfirenze.it et tutelatruffe.it",
-                appDownloadPlatformLine3: "Version Apple/iPhone actuellement en cours de développement",
+                appDownloadPlatformLine3: "Disponible sur iPhone comme WebApp/PWA via Safari et Ajouter à l’écran d’accueil",
                 appDownloadTitleLine1: "TÉLÉCHARGEZ L'APPLICATION ANDROID OFFICIELLE",
                 appDownloadTitleLine2: "\"Financial Authority Database\"",
                 appDownloadMetaAriaLabel: "Informations sur l'application Android",
                 appDownloadBadgeAndroid: "Android",
                 appDownloadBadgeFree: "Gratuite",
-                appDownloadBadgeIphone: "Version iPhone en cours",
+                appDownloadBadgeIphone: "iPhone WebApp/PWA",
                 appDownloadDescription: "Vous pouvez vérifier la légitimité et l'identité de toute personne proposant des investissements financiers et prévenir les arnaques grâce à l'utilisation intelligente de votre smartphone ou de votre PC.",
                 appDownloadLink: "Télécharger l'application Android (APK)",
                 appDownloadLinkAriaLabel: "Télécharger l'APK Android depuis la version officielle GitHub",
                 appDownloadGuideTrigger: "Lire le guide",
-                appDownloadGuideLanguagesSr: "Guide disponible en italien et en anglais"
+                appDownloadGuideLanguagesSr: "Guide disponible en italien et en anglais",
+                appDownloadIosHint: "Sur iPhone, ouvrez cette page dans Safari, touchez Partager puis Ajouter à l’écran d’accueil pour l’installer comme WebApp/PWA.",
+                appDownloadIosHintDismissAriaLabel: "Masquer le conseil d’installation iPhone",
+                appDownloadIosHintDismissText: "Fermer"
             },
             de: {
                 appDownloadImageAlt: "Schildsymbol der Financial Authority Database Android-App",
                 appDownloadPlatformLine1: "APP für Android verfügbar.",
                 appDownloadPlatformLine2: "für die offizielle Plattform von amevfirenze.it und tutelatruffe.it",
-                appDownloadPlatformLine3: "Apple/iPhone-Version derzeit in Entwicklung",
+                appDownloadPlatformLine3: "Auf dem iPhone als Safari-WebApp/PWA über Zum Home-Bildschirm verfügbar",
                 appDownloadTitleLine1: "OFFIZIELLE ANDROID-APP HERUNTERLADEN",
                 appDownloadTitleLine2: "\"Financial Authority Database\"",
                 appDownloadMetaAriaLabel: "Informationen zur Android-App",
                 appDownloadBadgeAndroid: "Android",
                 appDownloadBadgeFree: "Kostenlos",
-                appDownloadBadgeIphone: "iPhone-Version in Arbeit",
+                appDownloadBadgeIphone: "iPhone WebApp/PWA",
                 appDownloadDescription: "Sie können die Legitimität und Identität derjenigen überprüfen, die Finanzinvestitionen anbieten, und Betrug durch die intelligente Nutzung Ihres Smartphones oder PCs verhindern.",
                 appDownloadLink: "Android-App herunterladen (APK)",
                 appDownloadLinkAriaLabel: "Laden Sie die Android-App als APK aus der offiziellen GitHub-Veröffentlichung herunter",
                 appDownloadGuideTrigger: "Anleitung lesen",
-                appDownloadGuideLanguagesSr: "Anleitung auf Italienisch und Englisch verfügbar"
+                appDownloadGuideLanguagesSr: "Anleitung auf Italienisch und Englisch verfügbar",
+                appDownloadIosHint: "Öffnen Sie diese Seite auf dem iPhone in Safari, tippen Sie auf Teilen und dann auf Zum Home-Bildschirm, um sie als WebApp/PWA zu installieren.",
+                appDownloadIosHintDismissAriaLabel: "iPhone-Installationshinweis ausblenden",
+                appDownloadIosHintDismissText: "Schließen"
             },
             es: {
                 appDownloadImageAlt: "Icono de escudo de la app Android Financial Authority Database",
                 appDownloadPlatformLine1: "APP disponible para Android.",
                 appDownloadPlatformLine2: "para la plataforma oficial de amevfirenze.it y tutelatruffe.it",
-                appDownloadPlatformLine3: "Versión para Apple/iPhone actualmente en desarrollo",
+                appDownloadPlatformLine3: "Disponible en iPhone como WebApp/PWA desde Safari con Añadir a pantalla de inicio",
                 appDownloadTitleLine1: "DESCARGA LA APP ANDROID OFICIAL",
                 appDownloadTitleLine2: "\"Financial Authority Database\"",
                 appDownloadMetaAriaLabel: "Información de la app Android",
                 appDownloadBadgeAndroid: "Android",
                 appDownloadBadgeFree: "Gratuita",
-                appDownloadBadgeIphone: "Versión iPhone en progreso",
+                appDownloadBadgeIphone: "iPhone WebApp/PWA",
                 appDownloadDescription: "Puedes verificar la legitimidad y la identidad de quien ofrece inversiones financieras y prevenir las estafas gracias al uso inteligente de tu smartphone o PC.",
                 appDownloadLink: "Descargar la app Android (APK)",
                 appDownloadLinkAriaLabel: "Descarga la app Android en formato APK desde la versión oficial de GitHub",
                 appDownloadGuideTrigger: "Leer la guía",
-                appDownloadGuideLanguagesSr: "Guía disponible en italiano e inglés"
+                appDownloadGuideLanguagesSr: "Guía disponible en italiano e inglés",
+                appDownloadIosHint: "En iPhone, abre esta página en Safari, toca Compartir y elige Añadir a pantalla de inicio para instalarla como WebApp/PWA.",
+                appDownloadIosHintDismissAriaLabel: "Ocultar la sugerencia de instalación para iPhone",
+                appDownloadIosHintDismissText: "Cerrar"
             },
             pt: {
                 appDownloadImageAlt: "Ícone de escudo da app Android Financial Authority Database",
                 appDownloadPlatformLine1: "APP disponível para Android.",
                 appDownloadPlatformLine2: "para a plataforma oficial de amevfirenze.it e tutelatruffe.it",
-                appDownloadPlatformLine3: "Versão para Apple/iPhone atualmente em desenvolvimento",
+                appDownloadPlatformLine3: "Disponível no iPhone como WebApp/PWA via Safari e Adicionar ao ecrã principal",
                 appDownloadTitleLine1: "DESCARREGUE A APP ANDROID OFICIAL",
                 appDownloadTitleLine2: "\"Financial Authority Database\"",
                 appDownloadMetaAriaLabel: "Informações da app Android",
                 appDownloadBadgeAndroid: "Android",
                 appDownloadBadgeFree: "Gratuita",
-                appDownloadBadgeIphone: "Versão iPhone em progresso",
+                appDownloadBadgeIphone: "iPhone WebApp/PWA",
                 appDownloadDescription: "Pode verificar a legitimidade e a identidade de quem oferece investimentos financeiros e prevenir fraudes graças à utilização inteligente do seu smartphone ou PC.",
                 appDownloadLink: "Descarregar a app Android (APK)",
                 appDownloadLinkAriaLabel: "Descarregue a app Android em formato APK a partir da release oficial do GitHub",
                 appDownloadGuideTrigger: "Ler o guia",
-                appDownloadGuideLanguagesSr: "Guia disponível em italiano e inglês"
+                appDownloadGuideLanguagesSr: "Guia disponível em italiano e inglês",
+                appDownloadIosHint: "No iPhone, abra esta página no Safari, toque em Partilhar e escolha Adicionar ao ecrã principal para a instalar como WebApp/PWA.",
+                appDownloadIosHintDismissAriaLabel: "Ocultar dica de instalação no iPhone",
+                appDownloadIosHintDismissText: "Fechar"
             },
             ro: {
                 appDownloadImageAlt: "Pictograma scut al aplicației Android Financial Authority Database",
                 appDownloadPlatformLine1: "APP disponibilă pentru Android.",
                 appDownloadPlatformLine2: "pentru platforma oficială amevfirenze.it și tutelatruffe.it",
-                appDownloadPlatformLine3: "Versiunea pentru Apple/iPhone este în prezent în dezvoltare",
+                appDownloadPlatformLine3: "Disponibil pe iPhone ca WebApp/PWA prin Safari și Adaugă pe ecranul principal",
                 appDownloadTitleLine1: "DESCARCĂ APLICAȚIA OFICIALĂ ANDROID",
                 appDownloadTitleLine2: "\"Financial Authority Database\"",
                 appDownloadMetaAriaLabel: "Informații despre aplicația Android",
                 appDownloadBadgeAndroid: "Android",
                 appDownloadBadgeFree: "Gratuită",
-                appDownloadBadgeIphone: "Versiunea iPhone în progres",
+                appDownloadBadgeIphone: "iPhone WebApp/PWA",
                 appDownloadDescription: "Poți verifica legitimitatea și identitatea celor care oferă investiții financiare și poți preveni fraudele datorită utilizării inteligente a smartphone-ului sau a PC-ului tău.",
                 appDownloadLink: "Descarcă aplicația Android (APK)",
                 appDownloadLinkAriaLabel: "Descarcă APK-ul aplicației Android din release-ul oficial GitHub",
                 appDownloadGuideTrigger: "Citește ghidul",
-                appDownloadGuideLanguagesSr: "Ghid disponibil în italiană și engleză"
+                appDownloadGuideLanguagesSr: "Ghid disponibil în italiană și engleză",
+                appDownloadIosHint: "Pe iPhone, deschide această pagină în Safari, atinge Partajează și alege Adaugă pe ecranul principal pentru a o instala ca WebApp/PWA.",
+                appDownloadIosHintDismissAriaLabel: "Ascunde sugestia de instalare pe iPhone",
+                appDownloadIosHintDismissText: "Închide"
             },
             nl: {
                 appDownloadImageAlt: "Schildpictogram van de Financial Authority Database Android-app",
                 appDownloadPlatformLine1: "APP beschikbaar voor Android.",
                 appDownloadPlatformLine2: "voor het officiële platform van amevfirenze.it en tutelatruffe.it",
-                appDownloadPlatformLine3: "Apple/iPhone-versie momenteel in ontwikkeling",
+                appDownloadPlatformLine3: "Beschikbaar op iPhone als Safari-webapp/PWA via Zet op beginscherm",
                 appDownloadTitleLine1: "DOWNLOAD DE OFFICIËLE ANDROID-APP",
                 appDownloadTitleLine2: "\"Financial Authority Database\"",
                 appDownloadMetaAriaLabel: "Informatie over de Android-app",
                 appDownloadBadgeAndroid: "Android",
                 appDownloadBadgeFree: "Gratis",
-                appDownloadBadgeIphone: "iPhone-versie in ontwikkeling",
+                appDownloadBadgeIphone: "iPhone WebApp/PWA",
                 appDownloadDescription: "Je kunt de legitimiteit en identiteit controleren van wie financiële investeringen aanbiedt en fraude voorkomen dankzij het slimme gebruik van je smartphone of pc.",
                 appDownloadLink: "Android-app downloaden (APK)",
                 appDownloadLinkAriaLabel: "Download de Android-app als APK uit de officiële GitHub-release",
                 appDownloadGuideTrigger: "Lees de gids",
-                appDownloadGuideLanguagesSr: "Gids beschikbaar in het Italiaans en Engels"
+                appDownloadGuideLanguagesSr: "Gids beschikbaar in het Italiaans en Engels",
+                appDownloadIosHint: "Open deze pagina op iPhone in Safari, tik op Deel en kies Zet op beginscherm om hem als webapp/PWA te installeren.",
+                appDownloadIosHintDismissAriaLabel: "Tip voor iPhone-installatie verbergen",
+                appDownloadIosHintDismissText: "Sluiten"
             },
             el: {
                 appDownloadImageAlt: "Εικονίδιο ασπίδας της εφαρμογής Android Financial Authority Database",
                 appDownloadPlatformLine1: "APP διαθέσιμη για Android.",
                 appDownloadPlatformLine2: "για την επίσημη πλατφόρμα των amevfirenze.it και tutelatruffe.it",
-                appDownloadPlatformLine3: "Η έκδοση για Apple/iPhone βρίσκεται αυτή τη στιγμή υπό ανάπτυξη",
+                appDownloadPlatformLine3: "Διαθέσιμο στο iPhone ως WebApp/PWA μέσω Safari και Προσθήκη στην Αφετηρία",
                 appDownloadTitleLine1: "ΚΑΤΕΒΑΣΤΕ ΤΗΝ ΕΠΙΣΗΜΗ ΕΦΑΡΜΟΓΗ ANDROID",
                 appDownloadTitleLine2: "\"Financial Authority Database\"",
                 appDownloadMetaAriaLabel: "Πληροφορίες εφαρμογής Android",
                 appDownloadBadgeAndroid: "Android",
                 appDownloadBadgeFree: "Δωρεάν",
-                appDownloadBadgeIphone: "Έκδοση iPhone σε εξέλιξη",
+                appDownloadBadgeIphone: "iPhone WebApp/PWA",
                 appDownloadDescription: "Μπορείτε να επαληθεύσετε τη νομιμότητα και την ταυτότητα όσων προσφέρουν χρηματοοικονομικές επενδύσεις και να αποτρέψετε τις απάτες χάρη στην έξυπνη χρήση του smartphone ή του PC σας.",
                 appDownloadLink: "Λήψη της εφαρμογής Android (APK)",
                 appDownloadLinkAriaLabel: "Κατεβάστε το APK της εφαρμογής Android από την επίσημη έκδοση GitHub",
                 appDownloadGuideTrigger: "Διαβάστε τον οδηγό",
-                appDownloadGuideLanguagesSr: "Οδηγός διαθέσιμος στα ιταλικά και στα αγγλικά"
+                appDownloadGuideLanguagesSr: "Οδηγός διαθέσιμος στα ιταλικά και στα αγγλικά",
+                appDownloadIosHint: "Στο iPhone ανοίξτε αυτή τη σελίδα στο Safari, πατήστε Κοινοποίηση και επιλέξτε Προσθήκη στην Αφετηρία για εγκατάσταση ως WebApp/PWA.",
+                appDownloadIosHintDismissAriaLabel: "Απόκρυψη υπόδειξης εγκατάστασης iPhone",
+                appDownloadIosHintDismissText: "Κλείσιμο"
             },
             bs: {
                 appDownloadImageAlt: "Ikona štita Android aplikacije Financial Authority Database",
                 appDownloadPlatformLine1: "APP dostupna za Android.",
                 appDownloadPlatformLine2: "za zvaničnu platformu amevfirenze.it i tutelatruffe.it",
-                appDownloadPlatformLine3: "Verzija za Apple/iPhone je trenutno u izradi",
+                appDownloadPlatformLine3: "Dostupno na iPhone-u kao Safari WebApp/PWA putem Dodaj na početni ekran",
                 appDownloadTitleLine1: "PREUZMI ZVANIČNU ANDROID APP",
                 appDownloadTitleLine2: "\"Financial Authority Database\"",
                 appDownloadMetaAriaLabel: "Informacije o Android aplikaciji",
                 appDownloadBadgeAndroid: "Android",
                 appDownloadBadgeFree: "Besplatna",
-                appDownloadBadgeIphone: "iPhone verzija u toku",
+                appDownloadBadgeIphone: "iPhone WebApp/PWA",
                 appDownloadDescription: "Možete provjeriti legitimnost i identitet onih koji nude finansijska ulaganja i spriječiti prevare zahvaljujući pametnom korištenju vašeg pametnog telefona ili računara.",
                 appDownloadLink: "Preuzmi Android aplikaciju (APK)",
                 appDownloadLinkAriaLabel: "Preuzmi APK Android aplikacije sa zvaničnog GitHub izdanja",
                 appDownloadGuideTrigger: "Pročitaj vodič",
-                appDownloadGuideLanguagesSr: "Vodič dostupan na italijanskom i engleskom"
+                appDownloadGuideLanguagesSr: "Vodič dostupan na italijanskom i engleskom",
+                appDownloadIosHint: "Na iPhone-u otvorite ovu stranicu u Safariju, dodirnite Dijeli i izaberite Dodaj na početni ekran da biste je instalirali kao WebApp/PWA.",
+                appDownloadIosHintDismissAriaLabel: "Sakrij savjet za instalaciju na iPhone-u",
+                appDownloadIosHintDismissText: "Zatvori"
             },
             sq: {
                 appDownloadImageAlt: "Ikona me mburojë e aplikacionit Android Financial Authority Database",
                 appDownloadPlatformLine1: "APP e disponueshme për Android.",
                 appDownloadPlatformLine2: "për platformën zyrtare të amevfirenze.it dhe tutelatruffe.it",
-                appDownloadPlatformLine3: "Versioni për Apple/iPhone është aktualisht në zhvillim",
+                appDownloadPlatformLine3: "I disponueshëm në iPhone si WebApp/PWA përmes Safari dhe Shto në ekranin kryesor",
                 appDownloadTitleLine1: "SHKARKO APP ZYRTARE ANDROID",
                 appDownloadTitleLine2: "\"Financial Authority Database\"",
                 appDownloadMetaAriaLabel: "Informacione për aplikacionin Android",
                 appDownloadBadgeAndroid: "Android",
                 appDownloadBadgeFree: "Falas",
-                appDownloadBadgeIphone: "Versioni iPhone në progres",
+                appDownloadBadgeIphone: "iPhone WebApp/PWA",
                 appDownloadDescription: "Mund të verifikoni legjitimitetin dhe identitetin e kujtdo që ofron investime financiare dhe të parandaloni mashtrimet falë përdorimit inteligjent të smartphone-it ose PC-së suaj.",
                 appDownloadLink: "Shkarko aplikacionin Android (APK)",
                 appDownloadLinkAriaLabel: "Shkarko APK-në e aplikacionit Android nga release zyrtar në GitHub",
                 appDownloadGuideTrigger: "Lexo udhëzuesin",
-                appDownloadGuideLanguagesSr: "Udhëzuesi disponohet në italisht dhe anglisht"
+                appDownloadGuideLanguagesSr: "Udhëzuesi disponohet në italisht dhe anglisht",
+                appDownloadIosHint: "Në iPhone hapeni këtë faqe në Safari, prekni Shpërndaj dhe zgjidhni Shto në ekranin kryesor për ta instaluar si WebApp/PWA.",
+                appDownloadIosHintDismissAriaLabel: "Fshi sugjerimin e instalimit në iPhone",
+                appDownloadIosHintDismissText: "Mbyll"
             },
             ar: {
                 appDownloadImageAlt: "أيقونة الدرع لتطبيق Android Financial Authority Database",
                 appDownloadPlatformLine1: "التطبيق APP متاح لنظام Android.",
                 appDownloadPlatformLine2: "للمنصة الرسمية amevfirenze.it و tutelatruffe.it",
-                appDownloadPlatformLine3: "إصدار Apple/iPhone قيد التطوير حالياً",
+                appDownloadPlatformLine3: "متاح على iPhone كتطبيق ويب/PWA عبر Safari وخيار الإضافة إلى الشاشة الرئيسية",
                 appDownloadTitleLine1: "حمّل تطبيق ANDROID الرسمي",
                 appDownloadTitleLine2: "\"Financial Authority Database\"",
                 appDownloadMetaAriaLabel: "معلومات تطبيق Android",
                 appDownloadBadgeAndroid: "Android",
                 appDownloadBadgeFree: "مجاني",
-                appDownloadBadgeIphone: "إصدار iPhone قيد التقدم",
+                appDownloadBadgeIphone: "iPhone WebApp/PWA",
                 appDownloadDescription: "يمكنك التحقق من شرعية وهوية من يقدمون استثمارات مالية ومنع عمليات الاحتيال بفضل الاستخدام الذكي لهاتفك الذكي أو جهاز الكمبيوتر.",
                 appDownloadLink: "تنزيل تطبيق Android ‏(APK)",
                 appDownloadLinkAriaLabel: "نزّل ملف APK لتطبيق Android من الإصدار الرسمي على GitHub",
                 appDownloadGuideTrigger: "اقرأ الدليل",
-                appDownloadGuideLanguagesSr: "الدليل متاح بالإيطالية والإنجليزية"
+                appDownloadGuideLanguagesSr: "الدليل متاح بالإيطالية والإنجليزية",
+                appDownloadIosHint: "على iPhone افتح هذه الصفحة في Safari، واضغط مشاركة ثم اختر إضافة إلى الشاشة الرئيسية لتثبيتها كتطبيق ويب/PWA.",
+                appDownloadIosHintDismissAriaLabel: "إخفاء تلميح التثبيت على iPhone",
+                appDownloadIosHintDismissText: "إغلاق"
             },
             zh: {
                 appDownloadImageAlt: "Financial Authority Database Android 应用盾牌图标",
                 appDownloadPlatformLine1: "APP 现已支持 Android。",
                 appDownloadPlatformLine2: "适用于 amevfirenze.it 和 tutelatruffe.it 官方平台",
-                appDownloadPlatformLine3: "Apple/iPhone 版本目前正在开发中",
+                appDownloadPlatformLine3: "可在 iPhone 上通过 Safari 与“添加到主屏幕”安装为 WebApp/PWA",
                 appDownloadTitleLine1: "下载官方 ANDROID 应用",
                 appDownloadTitleLine2: "\"Financial Authority Database\"",
                 appDownloadMetaAriaLabel: "Android 应用信息",
                 appDownloadBadgeAndroid: "Android",
                 appDownloadBadgeFree: "免费",
-                appDownloadBadgeIphone: "iPhone 版本开发中",
+                appDownloadBadgeIphone: "iPhone WebApp/PWA",
                 appDownloadDescription: "借助智能使用您的智能手机或 PC，您可以核实提供金融投资者的合法性和身份，并预防诈骗。",
                 appDownloadLink: "下载 Android 应用 (APK)",
                 appDownloadLinkAriaLabel: "从 GitHub 官方发布版本下载 Android 应用 APK",
                 appDownloadGuideTrigger: "阅读指南",
-                appDownloadGuideLanguagesSr: "指南提供意大利语和英语版本"
+                appDownloadGuideLanguagesSr: "指南提供意大利语和英语版本",
+                appDownloadIosHint: "在 iPhone 上请用 Safari 打开此页面，轻点“共享”，再选择“添加到主屏幕”即可安装为 WebApp/PWA。",
+                appDownloadIosHintDismissAriaLabel: "隐藏 iPhone 安装提示",
+                appDownloadIosHintDismissText: "关闭"
             },
             hi: {
                 appDownloadImageAlt: "Financial Authority Database Android ऐप का शील्ड आइकन",
                 appDownloadPlatformLine1: "APP अब Android के लिए उपलब्ध है।",
                 appDownloadPlatformLine2: "amevfirenze.it और tutelatruffe.it के आधिकारिक प्लेटफ़ॉर्म के लिए",
-                appDownloadPlatformLine3: "Apple/iPhone संस्करण फिलहाल विकासाधीन है",
+                appDownloadPlatformLine3: "iPhone पर Safari और Add to Home Screen के माध्यम से Web App / PWA के रूप में उपलब्ध",
                 appDownloadTitleLine1: "आधिकारिक ANDROID ऐप डाउनलोड करें",
                 appDownloadTitleLine2: "\"Financial Authority Database\"",
                 appDownloadMetaAriaLabel: "Android ऐप की जानकारी",
                 appDownloadBadgeAndroid: "Android",
                 appDownloadBadgeFree: "निःशुल्क",
-                appDownloadBadgeIphone: "iPhone संस्करण प्रगति पर है",
+                appDownloadBadgeIphone: "iPhone Web App / PWA",
                 appDownloadDescription: "आप अपने स्मार्टफ़ोन या PC के बुद्धिमान उपयोग की मदद से वित्तीय निवेश की पेशकश करने वालों की वैधता और पहचान की जाँच कर सकते हैं और धोखाधड़ी को रोक सकते हैं।",
                 appDownloadLink: "Android ऐप डाउनलोड करें (APK)",
                 appDownloadLinkAriaLabel: "GitHub की आधिकारिक रिलीज़ से Android ऐप APK डाउनलोड करें",
                 appDownloadGuideTrigger: "मार्गदर्शिका पढ़ें",
-                appDownloadGuideLanguagesSr: "मार्गदर्शिका इतालवी और अंग्रेज़ी में उपलब्ध है"
+                appDownloadGuideLanguagesSr: "मार्गदर्शिका इतालवी और अंग्रेज़ी में उपलब्ध है",
+                appDownloadIosHint: "iPhone पर इस पेज को Safari में खोलें, Share पर टैप करें और Add to Home Screen चुनें ताकि इसे Web App / PWA के रूप में इंस्टॉल किया जा सके।",
+                appDownloadIosHintDismissAriaLabel: "iPhone इंस्टॉल संकेत छिपाएँ",
+                appDownloadIosHintDismissText: "बंद करें"
             },
             vi: {
                 appDownloadImageAlt: "Biểu tượng lá chắn của ứng dụng Android Financial Authority Database",
                 appDownloadPlatformLine1: "APP hiện có sẵn cho Android.",
                 appDownloadPlatformLine2: "dành cho nền tảng chính thức của amevfirenze.it và tutelatruffe.it",
-                appDownloadPlatformLine3: "Phiên bản Apple/iPhone hiện đang được phát triển",
+                appDownloadPlatformLine3: "Có sẵn trên iPhone dưới dạng WebApp/PWA qua Safari và Thêm vào Màn hình chính",
                 appDownloadTitleLine1: "TẢI ỨNG DỤNG ANDROID CHÍNH THỨC",
                 appDownloadTitleLine2: "\"Financial Authority Database\"",
                 appDownloadMetaAriaLabel: "Thông tin ứng dụng Android",
                 appDownloadBadgeAndroid: "Android",
                 appDownloadBadgeFree: "Miễn phí",
-                appDownloadBadgeIphone: "Phiên bản iPhone đang được phát triển",
+                appDownloadBadgeIphone: "iPhone WebApp/PWA",
                 appDownloadDescription: "Bạn có thể xác minh tính hợp pháp và danh tính của những người chào mời đầu tư tài chính và ngăn chặn các vụ lừa đảo nhờ việc sử dụng thông minh điện thoại thông minh hoặc PC của mình.",
                 appDownloadLink: "Tải ứng dụng Android (APK)",
                 appDownloadLinkAriaLabel: "Tải APK ứng dụng Android từ bản phát hành chính thức trên GitHub",
                 appDownloadGuideTrigger: "Đọc hướng dẫn",
-                appDownloadGuideLanguagesSr: "Hướng dẫn có sẵn bằng tiếng Ý và tiếng Anh"
+                appDownloadGuideLanguagesSr: "Hướng dẫn có sẵn bằng tiếng Ý và tiếng Anh",
+                appDownloadIosHint: "Trên iPhone, hãy mở trang này bằng Safari, chạm Chia sẻ rồi chọn Thêm vào Màn hình chính để cài dưới dạng WebApp/PWA.",
+                appDownloadIosHintDismissAriaLabel: "Ẩn gợi ý cài đặt iPhone",
+                appDownloadIosHintDismissText: "Đóng"
             }
         };
         Object.entries(appDownloadTranslations).forEach(([locale, values]) => {
@@ -5219,8 +5386,72 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         }
 
         function detectAndroidGuideDefaultLanguage() {
+            const activeSiteLanguage = normalizeLanguageCode(currentLanguage);
+            if (activeSiteLanguage === 'it') {
+                return 'it';
+            }
+            if (activeSiteLanguage) {
+                return 'en';
+            }
             const browserLanguage = String(navigator.language || navigator.userLanguage || 'it').toLowerCase();
-            return browserLanguage.startsWith('en') ? 'en' : 'it';
+            return browserLanguage.startsWith('it') ? 'it' : 'en';
+        }
+
+        function getIosInstallHintStorageKey() {
+            return 'financial-authority-ios-install-hint-dismissed-v1';
+        }
+
+        function isStandaloneDisplayMode() {
+            if (window.navigator.standalone === true) {
+                return true;
+            }
+            return typeof window.matchMedia === 'function'
+                && window.matchMedia('(display-mode: standalone)').matches;
+        }
+
+        function isIosSafariInstallContext() {
+            const ua = String(navigator.userAgent || '');
+            const vendor = String(navigator.vendor || '');
+            const isIosDevice = /iPhone|iPad|iPod/i.test(ua) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+            const isSafari = /Safari/i.test(ua) && vendor.includes('Apple') && !/CriOS|FxiOS|EdgiOS|OPiOS/i.test(ua);
+            return isIosDevice && isSafari && !isStandaloneDisplayMode();
+        }
+
+        function dismissIosInstallHint(persist = true) {
+            const hint = document.getElementById('ios-install-hint');
+            if (hint) {
+                hint.hidden = true;
+            }
+            if (!persist) return;
+            try {
+                window.localStorage.setItem(getIosInstallHintStorageKey(), '1');
+            } catch (error) {
+                console.warn('Impossibile salvare la preferenza del suggerimento iPhone', error);
+            }
+        }
+
+        function openIosInstallGuide(triggerElement) {
+            const persistentTrigger = document.getElementById('android-app-guide-trigger') || triggerElement;
+            openAndroidGuideDialog(persistentTrigger);
+            dismissIosInstallHint(true);
+        }
+
+        function setupIosInstallHint() {
+            const hint = document.getElementById('ios-install-hint');
+            if (!hint) return;
+            if (!isIosSafariInstallContext()) {
+                hint.hidden = true;
+                return;
+            }
+            try {
+                if (window.localStorage.getItem(getIosInstallHintStorageKey()) === '1') {
+                    hint.hidden = true;
+                    return;
+                }
+            } catch (error) {
+                console.warn('Impossibile leggere la preferenza del suggerimento iPhone', error);
+            }
+            hint.hidden = false;
         }
 
         function setAndroidGuideLanguage(lang) {
@@ -5246,13 +5477,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             }
             if (guideTitle) {
                 guideTitle.textContent = selectedLanguage === 'en'
-                    ? 'APK installation guide'
-                    : 'Guida installazione APK';
+                    ? 'Android & iPhone installation guide'
+                    : 'Guida installazione Android e iPhone';
             }
             if (guideContext) {
                 guideContext.textContent = selectedLanguage === 'en'
-                    ? 'Choose your language and follow the steps to install the Android app in a few minutes.'
-                    : 'Scegli la lingua e segui i passaggi per installare l\'app Android in pochi minuti.';
+                    ? 'Choose your language and follow the steps to install the Android app or the iPhone Safari Web App / PWA.'
+                    : 'Scegli la lingua e segui i passaggi per installare l\'app Android oppure la WebApp/PWA su iPhone tramite Safari.';
             }
             if (closeButton) {
                 closeButton.setAttribute('aria-label', selectedLanguage === 'en' ? 'Close guide' : 'Chiudi la guida');
@@ -5603,6 +5834,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             setupSearch();
             setupMedusaCta();
             setupAndroidGuideDialog();
+            setupIosInstallHint();
             setupItalyOrbitalDialog();
             loadCountryData();
         });
@@ -7525,7 +7757,7 @@ https://avvstancamarcello.github.io/Financial-Authority-Database/
         });
     </script>
 
-    <footer style="text-align:center; padding: 12px 8px 16px; font-size: 0.85rem; color:#e5e7eb;">
+    <footer style="text-align:center; padding: 12px 8px calc(16px + var(--safe-area-inset-bottom)); font-size: 0.85rem; color:#e5e7eb;">
         <span>© 2026 Avv. Marcello Stanca - Tutti i diritti riservati.</span>
         <span style="margin:0 6px;">·</span>
         <a href="privacy.html" style="color:#bfdbfe; text-decoration:underline;">Privacy</a>

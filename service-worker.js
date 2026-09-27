@@ -1,108 +1,168 @@
-const CACHE_NAME = 'financial-authority-v8';
+const CACHE_NAME = 'financial-authority-v9';
+const BASE_PATH = '/Financial-Authority-Database';
 const FLAG_ICONS_CSS_URL = 'https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.2.3/css/flag-icons.min.css';
 const PWA_ICON_PATHS = [
-  '/Financial-Authority-Database/icon-96.webp',
-  '/Financial-Authority-Database/icon-96.png',
-  '/Financial-Authority-Database/icon-192.png',
-  '/Financial-Authority-Database/icon-384.webp',
-  '/Financial-Authority-Database/icon-384.png',
-  '/Financial-Authority-Database/icon-512.png'
+  `${BASE_PATH}/icon-96.webp`,
+  `${BASE_PATH}/icon-96.png`,
+  `${BASE_PATH}/icon-192.png`,
+  `${BASE_PATH}/icon-384.webp`,
+  `${BASE_PATH}/icon-384.png`,
+  `${BASE_PATH}/icon-512.png`
 ];
-const urlsToCache = [
-  '/Financial-Authority-Database/',
-  '/Financial-Authority-Database/index.html',
-  '/Financial-Authority-Database/odissea.html',
-  '/Financial-Authority-Database/db.enc',
-  '/Financial-Authority-Database/logo_shield_financial_defense.svg',
-  '/Financial-Authority-Database/logo_galaxy_yous.svg',
-  ...PWA_ICON_PATHS,
-  '/Financial-Authority-Database/manifest.json',
-  FLAG_ICONS_CSS_URL
+const CORE_APP_SHELL_URLS = [
+  `${BASE_PATH}/`,
+  `${BASE_PATH}/index.html`,
+  `${BASE_PATH}/odissea.html`,
+  `${BASE_PATH}/db.enc`,
+  `${BASE_PATH}/logo_shield_financial_defense.svg`,
+  `${BASE_PATH}/logo_galaxy_yous.svg`,
+  `${BASE_PATH}/manifest.json`,
+  ...PWA_ICON_PATHS
 ];
+const OPTIONAL_CACHE_URLS = [FLAG_ICONS_CSS_URL];
 
-function isAssetStaleWhileRevalidate(requestUrl) {
-  return requestUrl === FLAG_ICONS_CSS_URL || PWA_ICON_PATHS.some(path => requestUrl.endsWith(path));
+function isCacheableResponse(response) {
+  return Boolean(response) && (response.ok || response.type === 'opaque');
 }
 
-// Installazione Service Worker
+function isAppNavigationRequest(request) {
+  if (request.mode === 'navigate') {
+    return true;
+  }
+  const acceptHeader = request.headers.get('accept') || '';
+  return request.destination === 'document' || acceptHeader.includes('text/html');
+}
+
+function isSameOriginAppRequest(url) {
+  return url.origin === self.location.origin
+    && (url.pathname === BASE_PATH || url.pathname.startsWith(`${BASE_PATH}/`));
+}
+
+function isAppShellDocumentPath(pathname) {
+  return pathname === BASE_PATH || pathname === `${BASE_PATH}/` || pathname === `${BASE_PATH}/index.html`;
+}
+
+function isAssetStaleWhileRevalidate(requestUrl) {
+  const url = new URL(requestUrl);
+  return requestUrl === FLAG_ICONS_CSS_URL || PWA_ICON_PATHS.includes(url.pathname);
+}
+
+async function cacheUrl(cache, url) {
+  const response = await fetch(url);
+  if (!isCacheableResponse(response)) {
+    throw new Error(`Unexpected response while caching ${url}: ${response?.status}`);
+  }
+  await cache.put(url, response.clone());
+  return response;
+}
+
+async function installCoreShell() {
+  const cache = await caches.open(CACHE_NAME);
+  for (const url of CORE_APP_SHELL_URLS) {
+    await cacheUrl(cache, url);
+  }
+  await Promise.allSettled(OPTIONAL_CACHE_URLS.map(url => cacheUrl(cache, url)));
+}
+
+async function handleNavigationRequest(request) {
+  const cache = await caches.open(CACHE_NAME);
+  try {
+    const networkResponse = await fetch(request);
+    const requestUrl = new URL(request.url);
+    if (request.method === 'GET' && isCacheableResponse(networkResponse) && isSameOriginAppRequest(requestUrl)) {
+      await cache.put(request, networkResponse.clone());
+      if (isAppShellDocumentPath(requestUrl.pathname)) {
+        await Promise.all([
+          cache.put(`${BASE_PATH}/index.html`, networkResponse.clone()),
+          cache.put(`${BASE_PATH}/`, networkResponse.clone())
+        ]);
+      }
+    }
+    return networkResponse;
+  } catch (error) {
+    const cachedResponse = await cache.match(request, { ignoreSearch: true });
+    if (cachedResponse) {
+      return cachedResponse;
+    }
+    const cachedIndexResponse = await cache.match(`${BASE_PATH}/index.html`);
+    if (cachedIndexResponse) {
+      return cachedIndexResponse;
+    }
+    return cache.match(`${BASE_PATH}/`);
+  }
+}
+
+async function handleStaleWhileRevalidate(request, event) {
+  const cache = await caches.open(CACHE_NAME);
+  const cachedResponse = await cache.match(request, { ignoreSearch: true });
+  const networkUpdatePromise = fetch(request)
+    .then(async networkResponse => {
+      if (request.method === 'GET' && isCacheableResponse(networkResponse)) {
+        await cache.put(request, networkResponse.clone());
+      }
+      return networkResponse;
+    })
+    .catch(() => cachedResponse);
+
+  if (cachedResponse) {
+    if (event) {
+      event.waitUntil(networkUpdatePromise.then(() => undefined));
+    }
+    return cachedResponse;
+  }
+
+  return networkUpdatePromise;
+}
+
+async function handleCacheFirst(request) {
+  const cachedResponse = await caches.match(request, { ignoreSearch: true });
+  if (cachedResponse) {
+    return cachedResponse;
+  }
+
+  const networkResponse = await fetch(request);
+  if (request.method === 'GET' && isCacheableResponse(networkResponse) && isSameOriginAppRequest(new URL(request.url))) {
+    const cache = await caches.open(CACHE_NAME);
+    await cache.put(request, networkResponse.clone());
+  }
+  return networkResponse;
+}
+
 self.addEventListener('install', event => {
   event.waitUntil(
-    caches.open(CACHE_NAME)
-      .then(cache => {
-        console.log('Cache aperta');
-        return cache.addAll(urlsToCache);
-      })
+    installCoreShell()
+      .then(() => self.skipWaiting())
   );
 });
 
-// Fetch con strategia Cache First
 self.addEventListener('fetch', event => {
+  if (event.request.method !== 'GET') {
+    return;
+  }
+
+  if (isAppNavigationRequest(event.request) && isSameOriginAppRequest(new URL(event.request.url))) {
+    event.respondWith(handleNavigationRequest(event.request));
+    return;
+  }
+
   if (isAssetStaleWhileRevalidate(event.request.url)) {
-    event.respondWith(
-      caches.open(CACHE_NAME).then(cache =>
-        cache.match(event.request).then(cachedResponse => {
-          const networkUpdatePromise = fetch(event.request)
-            .then(networkResponse => {
-              if (networkResponse && (networkResponse.ok || networkResponse.type === 'opaque')) {
-                cache.put(event.request, networkResponse.clone());
-              }
-              return networkResponse;
-            })
-            .catch(() => cachedResponse);
-
-          if (cachedResponse) {
-            event.waitUntil(networkUpdatePromise.then(() => undefined));
-            return cachedResponse;
-          }
-
-          return networkUpdatePromise;
-        })
-      )
-    );
+    event.respondWith(handleStaleWhileRevalidate(event.request, event));
     return;
   }
 
   event.respondWith(
-    caches.match(event.request)
-      .then(response => {
-        // Cache hit - ritorna la risposta dalla cache
-        if (response) {
-          return response;
-        }
-        return fetch(event.request).then(
-          response => {
-            // Controlla se abbiamo ricevuto una risposta valida
-            if (!response || response.status !== 200 || response.type !== 'basic') {
-              return response;
-            }
-
-            // Clona la risposta
-            const responseToCache = response.clone();
-
-            caches.open(CACHE_NAME)
-              .then(cache => {
-                cache.put(event.request, responseToCache);
-              });
-
-            return response;
-          }
-        );
-      })
+    handleCacheFirst(event.request).catch(() => caches.match(event.request, { ignoreSearch: true }))
   );
 });
 
-// Aggiornamento Service Worker
 self.addEventListener('activate', event => {
-  const cacheWhitelist = [CACHE_NAME];
-  event.waitUntil(
-    caches.keys().then(cacheNames => {
-      return Promise.all(
-        cacheNames.map(cacheName => {
-          if (cacheWhitelist.indexOf(cacheName) === -1) {
-            return caches.delete(cacheName);
-          }
-        })
-      );
-    })
-  );
+  event.waitUntil((async () => {
+    const cacheNames = await caches.keys();
+    await Promise.all(
+      cacheNames
+        .filter(cacheName => cacheName !== CACHE_NAME)
+        .map(cacheName => caches.delete(cacheName))
+    );
+    await self.clients.claim();
+  })());
 });
