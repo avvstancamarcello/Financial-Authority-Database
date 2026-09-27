@@ -4995,6 +4995,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             if (!dialog) return;
 
             if (dialog.classList.contains('is-fallback-open')) {
+                if (typeof dialog.close === 'function' && dialog.open) {
+                    dialog.close();
+                }
                 dialog.classList.remove('is-fallback-open');
                 dialog.removeAttribute('open');
                 if (fallbackBackdrop) {
@@ -5091,6 +5094,15 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     const nextLanguage = nextButton.getAttribute('data-guide-lang-btn');
                     setAndroidGuideLanguage(nextLanguage);
                     nextButton.focus();
+                    event.preventDefault();
+                });
+
+                languageGroup.addEventListener('keydown', (event) => {
+                    if (event.key !== ' ' && event.key !== 'Enter') return;
+                    const focusedButton = document.activeElement;
+                    if (!focusedButton || !focusedButton.hasAttribute('data-guide-lang-btn')) return;
+                    const selectedLanguage = focusedButton.getAttribute('data-guide-lang-btn');
+                    setAndroidGuideLanguage(selectedLanguage);
                     event.preventDefault();
                 });
             }
