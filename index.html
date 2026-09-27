@@ -2525,7 +2525,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                             <span>EN</span>
                         </button>
                     </div>
-                    <div class="app-download-guide-body" data-guide-lang="it">
+                    <div class="app-download-guide-body" data-guide-lang="it" lang="it">
                         <ol>
                             <li>Tocca <strong>Scarica l'App per Android (APK)</strong>.</li>
                             <li>Apri il file <strong>FinancialAuthorityDatabase.apk</strong> al termine del download.</li>
@@ -2537,7 +2537,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                             Per maggiore tranquillità, usa sempre il link ufficiale presente in questa pagina.
                         </p>
                     </div>
-                    <div class="app-download-guide-body" data-guide-lang="en" hidden>
+                    <div class="app-download-guide-body" data-guide-lang="en" lang="en" hidden>
                         <ol>
                             <li>Tap <strong>Download Android App (APK)</strong>.</li>
                             <li>Open <strong>FinancialAuthorityDatabase.apk</strong> after the download is complete.</li>
@@ -5065,17 +5065,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 restoreAndroidGuideFocus();
             });
 
-            dialog.addEventListener('click', (event) => {
-                if (typeof dialog.showModal !== 'function') return;
-                const rect = dialog.getBoundingClientRect();
-                const isInsideDialog =
-                    event.clientX >= rect.left &&
-                    event.clientX <= rect.right &&
-                    event.clientY >= rect.top &&
-                    event.clientY <= rect.bottom;
-                if (!isInsideDialog) {
-                    closeAndroidGuideDialog();
-                }
+            dialog.addEventListener('cancel', () => {
+                updateAndroidGuideTriggerExpanded(false);
             });
 
             if (fallbackBackdrop) {
