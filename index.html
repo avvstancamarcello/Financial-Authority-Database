@@ -2508,7 +2508,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     </button>
                 </div>
             </div>
-            <dialog id="android-app-guide-dialog" class="app-download-guide" role="dialog" aria-modal="true" lang="it" aria-labelledby="android-app-guide-title" aria-describedby="android-app-guide-context">
+            <dialog id="android-app-guide-dialog" class="app-download-guide" role="dialog" lang="it" aria-labelledby="android-app-guide-title" aria-describedby="android-app-guide-context">
                 <div class="app-download-guide-card">
                     <div class="app-download-guide-header">
                         <h3 id="android-app-guide-title">Guida installazione APK</h3>
@@ -4997,6 +4997,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             if (dialog.classList.contains('is-fallback-open')) {
                 dialog.classList.remove('is-fallback-open');
                 dialog.removeAttribute('open');
+                dialog.removeAttribute('aria-modal');
                 if (fallbackBackdrop) {
                     fallbackBackdrop.hidden = true;
                 }
@@ -5029,6 +5030,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     }
                     return;
                 }
+                dialog.setAttribute('aria-modal', 'true');
                 dialog.showModal();
                 if (closeButton && typeof closeButton.focus === 'function') {
                     closeButton.focus();
@@ -5036,6 +5038,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 return;
             }
 
+            dialog.removeAttribute('aria-modal');
             dialog.setAttribute('open', 'open');
             dialog.classList.add('is-fallback-open');
             if (fallbackBackdrop) {
@@ -5058,6 +5061,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             dialog.addEventListener('close', () => {
                 document.body.classList.remove('apk-guide-open');
                 dialog.classList.remove('is-fallback-open');
+                dialog.removeAttribute('aria-modal');
                 if (fallbackBackdrop) {
                     fallbackBackdrop.hidden = true;
                 }
