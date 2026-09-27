@@ -64,10 +64,12 @@ async function handleNavigationRequest(request) {
     const networkResponse = await fetch(request);
     const requestUrl = new URL(request.url);
     if (request.method === 'GET' && isCacheableResponse(networkResponse) && isSameOriginAppRequest(requestUrl)) {
-      cache.put(request, networkResponse.clone());
+      await cache.put(request, networkResponse.clone());
       if (requestUrl.pathname === `${BASE_PATH}/` || requestUrl.pathname === `${BASE_PATH}/index.html`) {
-        cache.put(`${BASE_PATH}/index.html`, networkResponse.clone());
-        cache.put(`${BASE_PATH}/`, networkResponse.clone());
+        await Promise.all([
+          cache.put(`${BASE_PATH}/index.html`, networkResponse.clone()),
+          cache.put(`${BASE_PATH}/`, networkResponse.clone())
+        ]);
       }
     }
     return networkResponse;
@@ -76,23 +78,30 @@ async function handleNavigationRequest(request) {
     if (cachedResponse) {
       return cachedResponse;
     }
-    return cache.match(`${BASE_PATH}/index.html`) || cache.match(`${BASE_PATH}/`);
+    const cachedIndexResponse = await cache.match(`${BASE_PATH}/index.html`);
+    if (cachedIndexResponse) {
+      return cachedIndexResponse;
+    }
+    return cache.match(`${BASE_PATH}/`);
   }
 }
 
-async function handleStaleWhileRevalidate(request) {
+async function handleStaleWhileRevalidate(request, event) {
   const cache = await caches.open(CACHE_NAME);
   const cachedResponse = await cache.match(request, { ignoreSearch: true });
   const networkUpdatePromise = fetch(request)
-    .then(networkResponse => {
+    .then(async networkResponse => {
       if (request.method === 'GET' && isCacheableResponse(networkResponse)) {
-        cache.put(request, networkResponse.clone());
+        await cache.put(request, networkResponse.clone());
       }
       return networkResponse;
     })
     .catch(() => cachedResponse);
 
   if (cachedResponse) {
+    if (event) {
+      event.waitUntil(networkUpdatePromise.then(() => undefined));
+    }
     return cachedResponse;
   }
 
@@ -108,7 +117,7 @@ async function handleCacheFirst(request) {
   const networkResponse = await fetch(request);
   if (request.method === 'GET' && isCacheableResponse(networkResponse) && isSameOriginAppRequest(new URL(request.url))) {
     const cache = await caches.open(CACHE_NAME);
-    cache.put(request, networkResponse.clone());
+    await cache.put(request, networkResponse.clone());
   }
   return networkResponse;
 }
@@ -131,7 +140,7 @@ self.addEventListener('fetch', event => {
   }
 
   if (isAssetStaleWhileRevalidate(event.request.url)) {
-    event.respondWith(handleStaleWhileRevalidate(event.request));
+    event.respondWith(handleStaleWhileRevalidate(event.request, event));
     return;
   }
 

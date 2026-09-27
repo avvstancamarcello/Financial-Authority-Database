@@ -5361,6 +5361,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         }
 
         function detectAndroidGuideDefaultLanguage() {
+            const activeSiteLanguage = normalizeLanguageCode(currentLanguage);
+            if (activeSiteLanguage === 'it') {
+                return 'it';
+            }
+            if (activeSiteLanguage) {
+                return 'en';
+            }
             const browserLanguage = String(navigator.language || navigator.userLanguage || 'it').toLowerCase();
             return browserLanguage.startsWith('it') ? 'it' : 'en';
         }
