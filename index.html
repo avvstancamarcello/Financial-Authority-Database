@@ -701,7 +701,8 @@
         }
         .app-download-visual {
             display: grid;
-            gap: 14px;
+            align-content: center;
+            gap: 16px;
             justify-items: center;
             text-align: center;
         }
@@ -720,13 +721,19 @@
             border-radius: 24px;
         }
         .app-download-platform {
+            max-width: 320px;
             margin: 0;
             color: #dbeafe;
             font-size: 0.98rem;
             font-weight: 600;
+            line-height: 1.45;
+        }
+        .app-download-platform-line {
+            display: block;
         }
         .app-download-content {
             display: grid;
+            align-content: center;
             gap: 12px;
         }
         .app-download-eyebrow {
@@ -743,9 +750,16 @@
             line-height: 1.15;
             color: #ffffff;
         }
+        .app-download-title-line {
+            display: block;
+        }
         .app-download-content p {
             margin: 0;
             color: #e2e8f0;
+        }
+        .app-download-description {
+            max-width: 760px;
+            line-height: 1.55;
         }
         .app-download-link {
             justify-self: start;
@@ -1963,6 +1977,8 @@
             .stat-number { font-size: 1.3em; }
             .app-download-section { padding: 22px 18px; }
             .app-download-card { grid-template-columns: 1fr; gap: 20px; }
+            .app-download-content { justify-items: center; text-align: center; }
+            .app-download-meta { justify-content: center; }
             .app-download-guide-button,
             .app-download-link { justify-self: stretch; justify-content: center; text-align: center; }
             .controls { flex-direction: column; padding: 18px 15px; } 
@@ -2483,27 +2499,33 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <div class="app-download-card">
                 <div class="app-download-visual">
                     <div class="app-download-icon-wrap">
-                        <img src="icon-192.png" alt="Icona dell'app Android Financial Authority Database" width="192" height="192">
+                        <img src="icon-192.png" data-i18n-alt="appDownloadImageAlt" alt="Icona scudo dell'app Android Financial Authority Database" width="192" height="192">
                     </div>
-                    <p class="app-download-platform">Disponibile ora per Android. La versione Apple/iPhone è attualmente in lavorazione.</p>
+                    <p class="app-download-platform">
+                        <span class="app-download-platform-line" data-i18n="appDownloadPlatformLine1">APP Disponibile per Android.</span>
+                        <span class="app-download-platform-line" data-i18n="appDownloadPlatformLine2">per la piattaforma ufficiale di amevfirenze.it e tutelatruffe.it</span>
+                        <span class="app-download-platform-line" data-i18n="appDownloadPlatformLine3">Versione per Apple/iPhone attualmente in lavorazione</span>
+                    </p>
                 </div>
                 <div class="app-download-content">
-                    <p class="app-download-eyebrow">App Android ufficiale</p>
-                    <h2 id="android-app-download-title">Scarica Financial Authority Database per Android</h2>
-                    <p>App Android offline-first per consultare le autorità finanziarie, verificare riferimenti istituzionali e prevenire le truffe anche quando vuoi un accesso rapido dal telefono.</p>
-                    <div class="app-download-meta" aria-label="Informazioni app Android">
-                        <span class="app-download-badge"><span aria-hidden="true">🤖</span>Android</span>
-                        <span class="app-download-badge"><span aria-hidden="true">💶</span>Gratuita</span>
-                        <span class="app-download-badge"><span aria-hidden="true">🍏</span>Versione iPhone in arrivo</span>
+                    <h2 id="android-app-download-title">
+                        <span class="app-download-title-line" data-i18n="appDownloadTitleLine1">SCARICA APP ANDROID UFFICIALE</span>
+                        <span class="app-download-title-line" data-i18n="appDownloadTitleLine2">"Financial Authority Database"</span>
+                    </h2>
+                    <div class="app-download-meta" data-i18n-aria-label="appDownloadMetaAriaLabel" aria-label="Informazioni app Android">
+                        <span class="app-download-badge"><span aria-hidden="true">🤖</span><span data-i18n="appDownloadBadgeAndroid">Android</span></span>
+                        <span class="app-download-badge"><span aria-hidden="true">💶</span><span data-i18n="appDownloadBadgeFree">Gratuita</span></span>
+                        <span class="app-download-badge"><span aria-hidden="true">🍏</span><span data-i18n="appDownloadBadgeIphone">Versione iPhone in progress</span></span>
                     </div>
-                    <a class="app-download-link" href="https://github.com/avvstancamarcello/Financial-Authority-Database/releases/download/V.1.0.0/FinancialAuthorityDatabase.apk" target="_blank" rel="noopener noreferrer" aria-label="Scarica l'App per Android in formato APK dalla release ufficiale GitHub"><span aria-hidden="true">📲</span><span>Scarica l'App per Android (APK)</span></a>
+                    <p class="app-download-description" data-i18n="appDownloadDescription">Puoi verificare la legittimità e l'identità di chi offre investimenti finanziari e prevenire le truffe grazie all'uso intelligente del tuo smartphone o PC.</p>
+                    <a class="app-download-link" href="https://github.com/avvstancamarcello/Financial-Authority-Database/releases/download/V.1.0.0/FinancialAuthorityDatabase.apk" target="_blank" rel="noopener noreferrer" data-i18n-aria-label="appDownloadLinkAriaLabel" aria-label="Scarica l'App Android in formato APK dalla release ufficiale GitHub"><span aria-hidden="true">📲</span><span data-i18n="appDownloadLink">Scarica l'App per Android (APK)</span></a>
                     <button id="android-app-guide-trigger" type="button" class="app-download-guide-button" onclick="openAndroidGuideDialog(this)" aria-haspopup="dialog" aria-controls="android-app-guide-dialog" aria-expanded="false">
                         <span aria-hidden="true">📖</span>
-                        <span>Leggi la guida</span>
+                        <span data-i18n="appDownloadGuideTrigger">Leggi la guida</span>
                         <span class="app-download-guide-flags">
                             <span class="fi fi-it" aria-hidden="true"></span>
                             <span class="fi fi-gb" aria-hidden="true"></span>
-                            <span class="sr-only">Italiano e English</span>
+                            <span class="sr-only" data-i18n="appDownloadGuideLanguagesSr">Guida disponibile in Italiano e English</span>
                         </span>
                     </button>
                 </div>
@@ -4719,6 +4741,274 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             medusaCtaNewTab: "Nieuw tabblad",
             medusaCtaNewTabSr: "(opent in een nieuw tabblad)"
         };
+        const appDownloadTranslations = {
+            it: {
+                appDownloadImageAlt: "Icona scudo dell'app Android Financial Authority Database",
+                appDownloadPlatformLine1: "APP Disponibile per Android.",
+                appDownloadPlatformLine2: "per la piattaforma ufficiale di amevfirenze.it e tutelatruffe.it",
+                appDownloadPlatformLine3: "Versione per Apple/iPhone attualmente in lavorazione",
+                appDownloadTitleLine1: "SCARICA APP ANDROID UFFICIALE",
+                appDownloadTitleLine2: "\"Financial Authority Database\"",
+                appDownloadMetaAriaLabel: "Informazioni app Android",
+                appDownloadBadgeAndroid: "Android",
+                appDownloadBadgeFree: "Gratuita",
+                appDownloadBadgeIphone: "Versione iPhone in progress",
+                appDownloadDescription: "Puoi verificare la legittimità e l'identità di chi offre investimenti finanziari e prevenire le truffe grazie all'uso intelligente del tuo smartphone o PC.",
+                appDownloadLink: "Scarica l'App per Android (APK)",
+                appDownloadLinkAriaLabel: "Scarica l'App Android in formato APK dalla release ufficiale GitHub",
+                appDownloadGuideTrigger: "Leggi la guida",
+                appDownloadGuideLanguagesSr: "Guida disponibile in Italiano e English"
+            },
+            en: {
+                appDownloadImageAlt: "Financial Authority Database Android app shield icon",
+                appDownloadPlatformLine1: "APP available for Android.",
+                appDownloadPlatformLine2: "for the official amevfirenze.it and tutelatruffe.it platform",
+                appDownloadPlatformLine3: "Apple/iPhone version currently in development",
+                appDownloadTitleLine1: "DOWNLOAD OFFICIAL ANDROID APP",
+                appDownloadTitleLine2: "\"Financial Authority Database\"",
+                appDownloadMetaAriaLabel: "Android app information",
+                appDownloadBadgeAndroid: "Android",
+                appDownloadBadgeFree: "Free",
+                appDownloadBadgeIphone: "iPhone version in progress",
+                appDownloadDescription: "You can verify the legitimacy and identity of anyone offering financial investments and prevent scams thanks to the smart use of your smartphone or PC.",
+                appDownloadLink: "Download the Android App (APK)",
+                appDownloadLinkAriaLabel: "Download the Android app APK from the official GitHub release",
+                appDownloadGuideTrigger: "Read the guide",
+                appDownloadGuideLanguagesSr: "Guide available in Italian and English"
+            },
+            fr: {
+                appDownloadImageAlt: "Icône bouclier de l'application Android Financial Authority Database",
+                appDownloadPlatformLine1: "APP disponible pour Android.",
+                appDownloadPlatformLine2: "pour la plateforme officielle de amevfirenze.it et tutelatruffe.it",
+                appDownloadPlatformLine3: "Version Apple/iPhone actuellement en cours de développement",
+                appDownloadTitleLine1: "TÉLÉCHARGEZ L'APPLICATION ANDROID OFFICIELLE",
+                appDownloadTitleLine2: "\"Financial Authority Database\"",
+                appDownloadMetaAriaLabel: "Informations sur l'application Android",
+                appDownloadBadgeAndroid: "Android",
+                appDownloadBadgeFree: "Gratuite",
+                appDownloadBadgeIphone: "Version iPhone en cours",
+                appDownloadDescription: "Vous pouvez vérifier la légitimité et l'identité de toute personne proposant des investissements financiers et prévenir les arnaques grâce à l'utilisation intelligente de votre smartphone ou de votre PC.",
+                appDownloadLink: "Télécharger l'application Android (APK)",
+                appDownloadLinkAriaLabel: "Télécharger l'APK Android depuis la version officielle GitHub",
+                appDownloadGuideTrigger: "Lire le guide",
+                appDownloadGuideLanguagesSr: "Guide disponible en italien et en anglais"
+            },
+            de: {
+                appDownloadImageAlt: "Schildsymbol der Financial Authority Database Android-App",
+                appDownloadPlatformLine1: "APP für Android verfügbar.",
+                appDownloadPlatformLine2: "für die offizielle Plattform von amevfirenze.it und tutelatruffe.it",
+                appDownloadPlatformLine3: "Apple/iPhone-Version derzeit in Entwicklung",
+                appDownloadTitleLine1: "OFFIZIELLE ANDROID-APP HERUNTERLADEN",
+                appDownloadTitleLine2: "\"Financial Authority Database\"",
+                appDownloadMetaAriaLabel: "Informationen zur Android-App",
+                appDownloadBadgeAndroid: "Android",
+                appDownloadBadgeFree: "Kostenlos",
+                appDownloadBadgeIphone: "iPhone-Version in Arbeit",
+                appDownloadDescription: "Sie können die Legitimität und Identität derjenigen überprüfen, die Finanzinvestitionen anbieten, und Betrug durch die intelligente Nutzung Ihres Smartphones oder PCs verhindern.",
+                appDownloadLink: "Android-App herunterladen (APK)",
+                appDownloadLinkAriaLabel: "Laden Sie die Android-App als APK aus der offiziellen GitHub-Veröffentlichung herunter",
+                appDownloadGuideTrigger: "Anleitung lesen",
+                appDownloadGuideLanguagesSr: "Anleitung auf Italienisch und Englisch verfügbar"
+            },
+            es: {
+                appDownloadImageAlt: "Icono de escudo de la app Android Financial Authority Database",
+                appDownloadPlatformLine1: "APP disponible para Android.",
+                appDownloadPlatformLine2: "para la plataforma oficial de amevfirenze.it y tutelatruffe.it",
+                appDownloadPlatformLine3: "Versión para Apple/iPhone actualmente en desarrollo",
+                appDownloadTitleLine1: "DESCARGA LA APP ANDROID OFICIAL",
+                appDownloadTitleLine2: "\"Financial Authority Database\"",
+                appDownloadMetaAriaLabel: "Información de la app Android",
+                appDownloadBadgeAndroid: "Android",
+                appDownloadBadgeFree: "Gratuita",
+                appDownloadBadgeIphone: "Versión iPhone en progreso",
+                appDownloadDescription: "Puedes verificar la legitimidad y la identidad de quien ofrece inversiones financieras y prevenir las estafas gracias al uso inteligente de tu smartphone o PC.",
+                appDownloadLink: "Descargar la app Android (APK)",
+                appDownloadLinkAriaLabel: "Descarga la app Android en formato APK desde la versión oficial de GitHub",
+                appDownloadGuideTrigger: "Leer la guía",
+                appDownloadGuideLanguagesSr: "Guía disponible en italiano e inglés"
+            },
+            pt: {
+                appDownloadImageAlt: "Ícone de escudo da app Android Financial Authority Database",
+                appDownloadPlatformLine1: "APP disponível para Android.",
+                appDownloadPlatformLine2: "para a plataforma oficial de amevfirenze.it e tutelatruffe.it",
+                appDownloadPlatformLine3: "Versão para Apple/iPhone atualmente em desenvolvimento",
+                appDownloadTitleLine1: "DESCARREGUE A APP ANDROID OFICIAL",
+                appDownloadTitleLine2: "\"Financial Authority Database\"",
+                appDownloadMetaAriaLabel: "Informações da app Android",
+                appDownloadBadgeAndroid: "Android",
+                appDownloadBadgeFree: "Gratuita",
+                appDownloadBadgeIphone: "Versão iPhone em progresso",
+                appDownloadDescription: "Pode verificar a legitimidade e a identidade de quem oferece investimentos financeiros e prevenir fraudes graças à utilização inteligente do seu smartphone ou PC.",
+                appDownloadLink: "Descarregar a app Android (APK)",
+                appDownloadLinkAriaLabel: "Descarregue a app Android em formato APK a partir da release oficial do GitHub",
+                appDownloadGuideTrigger: "Ler o guia",
+                appDownloadGuideLanguagesSr: "Guia disponível em italiano e inglês"
+            },
+            ro: {
+                appDownloadImageAlt: "Pictograma scut al aplicației Android Financial Authority Database",
+                appDownloadPlatformLine1: "APP disponibilă pentru Android.",
+                appDownloadPlatformLine2: "pentru platforma oficială amevfirenze.it și tutelatruffe.it",
+                appDownloadPlatformLine3: "Versiunea pentru Apple/iPhone este în prezent în dezvoltare",
+                appDownloadTitleLine1: "DESCARCĂ APLICAȚIA OFICIALĂ ANDROID",
+                appDownloadTitleLine2: "\"Financial Authority Database\"",
+                appDownloadMetaAriaLabel: "Informații despre aplicația Android",
+                appDownloadBadgeAndroid: "Android",
+                appDownloadBadgeFree: "Gratuită",
+                appDownloadBadgeIphone: "Versiunea iPhone în progres",
+                appDownloadDescription: "Poți verifica legitimitatea și identitatea celor care oferă investiții financiare și poți preveni fraudele datorită utilizării inteligente a smartphone-ului sau a PC-ului tău.",
+                appDownloadLink: "Descarcă aplicația Android (APK)",
+                appDownloadLinkAriaLabel: "Descarcă APK-ul aplicației Android din release-ul oficial GitHub",
+                appDownloadGuideTrigger: "Citește ghidul",
+                appDownloadGuideLanguagesSr: "Ghid disponibil în italiană și engleză"
+            },
+            nl: {
+                appDownloadImageAlt: "Schildpictogram van de Financial Authority Database Android-app",
+                appDownloadPlatformLine1: "APP beschikbaar voor Android.",
+                appDownloadPlatformLine2: "voor het officiële platform van amevfirenze.it en tutelatruffe.it",
+                appDownloadPlatformLine3: "Apple/iPhone-versie momenteel in ontwikkeling",
+                appDownloadTitleLine1: "DOWNLOAD DE OFFICIËLE ANDROID-APP",
+                appDownloadTitleLine2: "\"Financial Authority Database\"",
+                appDownloadMetaAriaLabel: "Informatie over de Android-app",
+                appDownloadBadgeAndroid: "Android",
+                appDownloadBadgeFree: "Gratis",
+                appDownloadBadgeIphone: "iPhone-versie in ontwikkeling",
+                appDownloadDescription: "Je kunt de legitimiteit en identiteit controleren van wie financiële investeringen aanbiedt en fraude voorkomen dankzij het slimme gebruik van je smartphone of pc.",
+                appDownloadLink: "Android-app downloaden (APK)",
+                appDownloadLinkAriaLabel: "Download de Android-app als APK uit de officiële GitHub-release",
+                appDownloadGuideTrigger: "Lees de gids",
+                appDownloadGuideLanguagesSr: "Gids beschikbaar in het Italiaans en Engels"
+            },
+            el: {
+                appDownloadImageAlt: "Εικονίδιο ασπίδας της εφαρμογής Android Financial Authority Database",
+                appDownloadPlatformLine1: "APP διαθέσιμη για Android.",
+                appDownloadPlatformLine2: "για την επίσημη πλατφόρμα των amevfirenze.it και tutelatruffe.it",
+                appDownloadPlatformLine3: "Η έκδοση για Apple/iPhone βρίσκεται αυτή τη στιγμή υπό ανάπτυξη",
+                appDownloadTitleLine1: "ΚΑΤΕΒΑΣΤΕ ΤΗΝ ΕΠΙΣΗΜΗ ΕΦΑΡΜΟΓΗ ANDROID",
+                appDownloadTitleLine2: "\"Financial Authority Database\"",
+                appDownloadMetaAriaLabel: "Πληροφορίες εφαρμογής Android",
+                appDownloadBadgeAndroid: "Android",
+                appDownloadBadgeFree: "Δωρεάν",
+                appDownloadBadgeIphone: "Έκδοση iPhone σε εξέλιξη",
+                appDownloadDescription: "Μπορείτε να επαληθεύσετε τη νομιμότητα και την ταυτότητα όσων προσφέρουν χρηματοοικονομικές επενδύσεις και να αποτρέψετε τις απάτες χάρη στην έξυπνη χρήση του smartphone ή του PC σας.",
+                appDownloadLink: "Λήψη της εφαρμογής Android (APK)",
+                appDownloadLinkAriaLabel: "Κατεβάστε το APK της εφαρμογής Android από την επίσημη έκδοση GitHub",
+                appDownloadGuideTrigger: "Διαβάστε τον οδηγό",
+                appDownloadGuideLanguagesSr: "Οδηγός διαθέσιμος στα ιταλικά και στα αγγλικά"
+            },
+            bs: {
+                appDownloadImageAlt: "Ikona štita Android aplikacije Financial Authority Database",
+                appDownloadPlatformLine1: "APP dostupna za Android.",
+                appDownloadPlatformLine2: "za zvaničnu platformu amevfirenze.it i tutelatruffe.it",
+                appDownloadPlatformLine3: "Verzija za Apple/iPhone je trenutno u izradi",
+                appDownloadTitleLine1: "PREUZMI ZVANIČNU ANDROID APP",
+                appDownloadTitleLine2: "\"Financial Authority Database\"",
+                appDownloadMetaAriaLabel: "Informacije o Android aplikaciji",
+                appDownloadBadgeAndroid: "Android",
+                appDownloadBadgeFree: "Besplatna",
+                appDownloadBadgeIphone: "iPhone verzija u toku",
+                appDownloadDescription: "Možete provjeriti legitimnost i identitet onih koji nude finansijska ulaganja i spriječiti prevare zahvaljujući pametnom korištenju vašeg pametnog telefona ili računara.",
+                appDownloadLink: "Preuzmi Android aplikaciju (APK)",
+                appDownloadLinkAriaLabel: "Preuzmi APK Android aplikacije sa zvaničnog GitHub izdanja",
+                appDownloadGuideTrigger: "Pročitaj vodič",
+                appDownloadGuideLanguagesSr: "Vodič dostupan na italijanskom i engleskom"
+            },
+            sq: {
+                appDownloadImageAlt: "Ikona me mburojë e aplikacionit Android Financial Authority Database",
+                appDownloadPlatformLine1: "APP e disponueshme për Android.",
+                appDownloadPlatformLine2: "për platformën zyrtare të amevfirenze.it dhe tutelatruffe.it",
+                appDownloadPlatformLine3: "Versioni për Apple/iPhone është aktualisht në zhvillim",
+                appDownloadTitleLine1: "SHKARKO APP ZYRTARE ANDROID",
+                appDownloadTitleLine2: "\"Financial Authority Database\"",
+                appDownloadMetaAriaLabel: "Informacione për aplikacionin Android",
+                appDownloadBadgeAndroid: "Android",
+                appDownloadBadgeFree: "Falas",
+                appDownloadBadgeIphone: "Versioni iPhone në progres",
+                appDownloadDescription: "Mund të verifikoni legjitimitetin dhe identitetin e kujtdo që ofron investime financiare dhe të parandaloni mashtrimet falë përdorimit inteligjent të smartphone-it ose PC-së suaj.",
+                appDownloadLink: "Shkarko aplikacionin Android (APK)",
+                appDownloadLinkAriaLabel: "Shkarko APK-në e aplikacionit Android nga release zyrtar në GitHub",
+                appDownloadGuideTrigger: "Lexo udhëzuesin",
+                appDownloadGuideLanguagesSr: "Udhëzuesi disponohet në italisht dhe anglisht"
+            },
+            ar: {
+                appDownloadImageAlt: "أيقونة الدرع لتطبيق Android Financial Authority Database",
+                appDownloadPlatformLine1: "التطبيق APP متاح لنظام Android.",
+                appDownloadPlatformLine2: "للمنصة الرسمية amevfirenze.it و tutelatruffe.it",
+                appDownloadPlatformLine3: "إصدار Apple/iPhone قيد التطوير حالياً",
+                appDownloadTitleLine1: "حمّل تطبيق ANDROID الرسمي",
+                appDownloadTitleLine2: "\"Financial Authority Database\"",
+                appDownloadMetaAriaLabel: "معلومات تطبيق Android",
+                appDownloadBadgeAndroid: "Android",
+                appDownloadBadgeFree: "مجاني",
+                appDownloadBadgeIphone: "إصدار iPhone قيد التقدم",
+                appDownloadDescription: "يمكنك التحقق من شرعية وهوية من يقدمون استثمارات مالية ومنع عمليات الاحتيال بفضل الاستخدام الذكي لهاتفك الذكي أو جهاز الكمبيوتر.",
+                appDownloadLink: "تنزيل تطبيق Android ‏(APK)",
+                appDownloadLinkAriaLabel: "نزّل ملف APK لتطبيق Android من الإصدار الرسمي على GitHub",
+                appDownloadGuideTrigger: "اقرأ الدليل",
+                appDownloadGuideLanguagesSr: "الدليل متاح بالإيطالية والإنجليزية"
+            },
+            zh: {
+                appDownloadImageAlt: "Financial Authority Database Android 应用盾牌图标",
+                appDownloadPlatformLine1: "APP 现已支持 Android。",
+                appDownloadPlatformLine2: "适用于 amevfirenze.it 和 tutelatruffe.it 官方平台",
+                appDownloadPlatformLine3: "Apple/iPhone 版本目前正在开发中",
+                appDownloadTitleLine1: "下载官方 ANDROID 应用",
+                appDownloadTitleLine2: "\"Financial Authority Database\"",
+                appDownloadMetaAriaLabel: "Android 应用信息",
+                appDownloadBadgeAndroid: "Android",
+                appDownloadBadgeFree: "免费",
+                appDownloadBadgeIphone: "iPhone 版本开发中",
+                appDownloadDescription: "借助智能使用您的智能手机或 PC，您可以核实提供金融投资者的合法性和身份，并预防诈骗。",
+                appDownloadLink: "下载 Android 应用 (APK)",
+                appDownloadLinkAriaLabel: "从 GitHub 官方发布版本下载 Android 应用 APK",
+                appDownloadGuideTrigger: "阅读指南",
+                appDownloadGuideLanguagesSr: "指南提供意大利语和英语版本"
+            },
+            hi: {
+                appDownloadImageAlt: "Financial Authority Database Android ऐप का शील्ड आइकन",
+                appDownloadPlatformLine1: "APP अब Android के लिए उपलब्ध है।",
+                appDownloadPlatformLine2: "amevfirenze.it और tutelatruffe.it के आधिकारिक प्लेटफ़ॉर्म के लिए",
+                appDownloadPlatformLine3: "Apple/iPhone संस्करण फिलहाल विकासाधीन है",
+                appDownloadTitleLine1: "आधिकारिक ANDROID ऐप डाउनलोड करें",
+                appDownloadTitleLine2: "\"Financial Authority Database\"",
+                appDownloadMetaAriaLabel: "Android ऐप की जानकारी",
+                appDownloadBadgeAndroid: "Android",
+                appDownloadBadgeFree: "निःशुल्क",
+                appDownloadBadgeIphone: "iPhone संस्करण प्रगति पर है",
+                appDownloadDescription: "आप अपने स्मार्टफ़ोन या PC के बुद्धिमान उपयोग की मदद से वित्तीय निवेश की पेशकश करने वालों की वैधता और पहचान की जाँच कर सकते हैं और धोखाधड़ी को रोक सकते हैं।",
+                appDownloadLink: "Android ऐप डाउनलोड करें (APK)",
+                appDownloadLinkAriaLabel: "GitHub की आधिकारिक रिलीज़ से Android ऐप APK डाउनलोड करें",
+                appDownloadGuideTrigger: "मार्गदर्शिका पढ़ें",
+                appDownloadGuideLanguagesSr: "मार्गदर्शिका इतालवी और अंग्रेज़ी में उपलब्ध है"
+            },
+            vi: {
+                appDownloadImageAlt: "Biểu tượng lá chắn của ứng dụng Android Financial Authority Database",
+                appDownloadPlatformLine1: "APP hiện có sẵn cho Android.",
+                appDownloadPlatformLine2: "dành cho nền tảng chính thức của amevfirenze.it và tutelatruffe.it",
+                appDownloadPlatformLine3: "Phiên bản Apple/iPhone hiện đang được phát triển",
+                appDownloadTitleLine1: "TẢI ỨNG DỤNG ANDROID CHÍNH THỨC",
+                appDownloadTitleLine2: "\"Financial Authority Database\"",
+                appDownloadMetaAriaLabel: "Thông tin ứng dụng Android",
+                appDownloadBadgeAndroid: "Android",
+                appDownloadBadgeFree: "Miễn phí",
+                appDownloadBadgeIphone: "Phiên bản iPhone đang được phát triển",
+                appDownloadDescription: "Bạn có thể xác minh tính hợp pháp và danh tính của những người chào mời đầu tư tài chính và ngăn chặn các vụ lừa đảo nhờ việc sử dụng thông minh điện thoại thông minh hoặc PC của mình.",
+                appDownloadLink: "Tải ứng dụng Android (APK)",
+                appDownloadLinkAriaLabel: "Tải APK ứng dụng Android từ bản phát hành chính thức trên GitHub",
+                appDownloadGuideTrigger: "Đọc hướng dẫn",
+                appDownloadGuideLanguagesSr: "Hướng dẫn có sẵn bằng tiếng Ý và tiếng Anh"
+            }
+        };
+        Object.entries(appDownloadTranslations).forEach(([locale, values]) => {
+            const target = translations[locale] || {};
+            Object.entries(values).forEach(([key, value]) => {
+                if (typeof target[key] !== "string" || target[key].length === 0) {
+                    target[key] = value;
+                }
+            });
+            translations[locale] = target;
+        });
+        translations["ro-RO"] = translations.ro;
+        translations["sq-XK"] = translations.sq;
         const localeMetadata = {
             it: { api: 'it', urlSupported: true },
             en: { api: 'en', urlSupported: true },

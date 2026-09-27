@@ -5,5 +5,20 @@
   "status": "Status: Godkänd",
   "title": "Framställning nr 0888/2024 om skydd av bankkunder mot falska investeringsplattformar",
   "summary": "Framställaren rapporterar om allvarliga digitala bedrägerier som begås av falska finansiella aktörer som genom aggressiva övertalningstekniker förmår offer att överföra pengar till utländska konton. Framställningen efterlyser starkare åtgärder på EU-nivå.",
-  "pdf": "petitions-pdf/PETI_Utskott_Europaparlamentet-svenska-SV.pdf"
+  "pdf": "petitions-pdf/PETI_Utskott_Europaparlamentet-svenska-SV.pdf",
+  "appDownloadImageAlt": "Sköldikon för Financial Authority Database Android-app",
+  "appDownloadPlatformLine1": "APP finns tillgänglig för Android.",
+  "appDownloadPlatformLine2": "för den officiella plattformen amevfirenze.it och tutelatruffe.it",
+  "appDownloadPlatformLine3": "Apple/iPhone-versionen är för närvarande under utveckling",
+  "appDownloadTitleLine1": "LADDA NER DEN OFFICIELLA ANDROID-APPEN",
+  "appDownloadTitleLine2": "\"Financial Authority Database\"",
+  "appDownloadMetaAriaLabel": "Information om Android-appen",
+  "appDownloadBadgeAndroid": "Android",
+  "appDownloadBadgeFree": "Gratis",
+  "appDownloadBadgeIphone": "iPhone-version under utveckling",
+  "appDownloadDescription": "Du kan kontrollera legitimiteten och identiteten hos dem som erbjuder finansiella investeringar och förebygga bedrägerier tack vare smart användning av din smartphone eller dator.",
+  "appDownloadLink": "Ladda ner Android-appen (APK)",
+  "appDownloadLinkAriaLabel": "Ladda ner Android-appens APK från den officiella GitHub-utgåvan",
+  "appDownloadGuideTrigger": "Läs guiden",
+  "appDownloadGuideLanguagesSr": "Guide tillgänglig på italienska och engelska"
 }

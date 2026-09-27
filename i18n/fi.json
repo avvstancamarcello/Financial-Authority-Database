@@ -5,5 +5,20 @@
   "status": "Tila: Hyväksytty",
   "title": "Vetoomus nro 0888/2024 pankkiasiakkaiden suojaamisesta väärennetyiltä sijoitusalustoilta",
   "summary": "Vetoomuksen tekijä raportoi vakavista digitaalisista petoksista, joita tekevät väärennetyt rahoitusalan toimijat, jotka aggressiivisilla suostuttelutekniikoilla saavat uhrit siirtämään rahaa ulkomaisille tileille.",
-  "pdf": "petitions-pdf/Etusivu-PETI_Valiokunnat_Euroopan-Parlamentti-FI-suomi.pdf"
+  "pdf": "petitions-pdf/Etusivu-PETI_Valiokunnat_Euroopan-Parlamentti-FI-suomi.pdf",
+  "appDownloadImageAlt": "Financial Authority Database Android-sovelluksen kilpikuvake",
+  "appDownloadPlatformLine1": "APP on saatavilla Androidille.",
+  "appDownloadPlatformLine2": "amevfirenze.it- ja tutelatruffe.it-viralliselle alustalle",
+  "appDownloadPlatformLine3": "Apple/iPhone-versio on parhaillaan kehitteillä",
+  "appDownloadTitleLine1": "LATAA VIRALLINEN ANDROID-SOVELLUS",
+  "appDownloadTitleLine2": "\"Financial Authority Database\"",
+  "appDownloadMetaAriaLabel": "Android-sovelluksen tiedot",
+  "appDownloadBadgeAndroid": "Android",
+  "appDownloadBadgeFree": "Maksuton",
+  "appDownloadBadgeIphone": "iPhone-versio työn alla",
+  "appDownloadDescription": "Voit tarkistaa taloudellisia sijoituksia tarjoavien tahojen laillisuuden ja henkilöllisyyden sekä ehkäistä huijauksia älypuhelimesi tai tietokoneesi älykkään käytön avulla.",
+  "appDownloadLink": "Lataa Android-sovellus (APK)",
+  "appDownloadLinkAriaLabel": "Lataa Android-sovelluksen APK virallisesta GitHub-julkaisusta",
+  "appDownloadGuideTrigger": "Lue opas",
+  "appDownloadGuideLanguagesSr": "Opas saatavilla italiaksi ja englanniksi"
 }

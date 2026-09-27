@@ -5,5 +5,20 @@
   "status": "Status: Approvata",
   "title": "Petizzjoni Nru 0888/2024 dwar il-protezzjoni ta' klijenti bankarji minn pjattaformi ta' investiment foloz",
   "summary": "Il-petizzjonant jirrapporta frodi diġitali serji mwettqa minn operaturi finanzjarji foloz li, permezz ta' tekniki ta' persważjoni aggressivi, iħeġġu lill-vittmi biex jittrasferixxu flus lejn kontijiet barranin.",
-  "pdf": "petitions-pdf/Home _ PETI _ Il-Kumitati _ Parlament Ewropew-malti.pdf"
+  "pdf": "petitions-pdf/Home _ PETI _ Il-Kumitati _ Parlament Ewropew-malti.pdf",
+  "appDownloadImageAlt": "Ikona ta’ tarka tal-app Android Financial Authority Database",
+  "appDownloadPlatformLine1": "L-APP hija disponibbli għal Android.",
+  "appDownloadPlatformLine2": "għall-pjattaforma uffiċjali ta’ amevfirenze.it u tutelatruffe.it",
+  "appDownloadPlatformLine3": "Il-verżjoni għal Apple/iPhone bħalissa qed tiġi żviluppata",
+  "appDownloadTitleLine1": "NIŻŻEL L-APP UFFIĊJALI GĦAL ANDROID",
+  "appDownloadTitleLine2": "\"Financial Authority Database\"",
+  "appDownloadMetaAriaLabel": "Informazzjoni dwar l-app Android",
+  "appDownloadBadgeAndroid": "Android",
+  "appDownloadBadgeFree": "B’xejn",
+  "appDownloadBadgeIphone": "Verżjoni iPhone għaddejja",
+  "appDownloadDescription": "Tista’ tivverifika l-leġittimità u l-identità ta’ min joffri investimenti finanzjarji u tipprevjeni l-frodi grazzi għall-użu intelliġenti tal-ismartphone jew il-PC tiegħek.",
+  "appDownloadLink": "Niżżel l-app Android (APK)",
+  "appDownloadLinkAriaLabel": "Niżżel l-APK tal-app Android mir-release uffiċjali ta’ GitHub",
+  "appDownloadGuideTrigger": "Aqra l-gwida",
+  "appDownloadGuideLanguagesSr": "Il-gwida hija disponibbli bit-Taljan u bl-Ingliż"
 }

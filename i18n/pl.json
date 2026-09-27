@@ -5,5 +5,20 @@
   "status": "Status: Zatwierdzona",
   "title": "Petycja nr 0888/2024 w sprawie ochrony klientów banków przed fałszywymi platformami inwestycyjnymi",
   "summary": "Składający petycję zgłasza poważne oszustwa cyfrowe popełniane przez fałszywych operatorów finansowych, którzy za pomocą agresywnych technik perswazji nakłaniają ofiary do przekazywania pieniędzy na zagraniczne konta. Petycja wzywa do silniejszych środków na poziomie UE.",
-  "pdf": "petitions-pdf/Strona główna _ PETI _ Komisje _ Parlament Europejski-PL.pdf"
+  "pdf": "petitions-pdf/Strona główna _ PETI _ Komisje _ Parlament Europejski-PL.pdf",
+  "appDownloadImageAlt": "Ikona tarczy aplikacji Android Financial Authority Database",
+  "appDownloadPlatformLine1": "APP jest dostępna na Androida.",
+  "appDownloadPlatformLine2": "dla oficjalnej platformy amevfirenze.it i tutelatruffe.it",
+  "appDownloadPlatformLine3": "Wersja na Apple/iPhone jest obecnie w przygotowaniu",
+  "appDownloadTitleLine1": "POBIERZ OFICJALNĄ APLIKACJĘ ANDROID",
+  "appDownloadTitleLine2": "\"Financial Authority Database\"",
+  "appDownloadMetaAriaLabel": "Informacje o aplikacji Android",
+  "appDownloadBadgeAndroid": "Android",
+  "appDownloadBadgeFree": "Bezpłatna",
+  "appDownloadBadgeIphone": "Wersja na iPhone’a w przygotowaniu",
+  "appDownloadDescription": "Możesz zweryfikować legalność i tożsamość osób oferujących inwestycje finansowe oraz zapobiegać oszustwom dzięki inteligentnemu korzystaniu ze smartfona lub komputera.",
+  "appDownloadLink": "Pobierz aplikację Android (APK)",
+  "appDownloadLinkAriaLabel": "Pobierz plik APK aplikacji Android z oficjalnego wydania GitHub",
+  "appDownloadGuideTrigger": "Przeczytaj przewodnik",
+  "appDownloadGuideLanguagesSr": "Przewodnik dostępny po włosku i angielsku"
 }

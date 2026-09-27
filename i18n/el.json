@@ -5,5 +5,20 @@
   "status": "Κατάσταση: Εγκρίθηκε",
   "title": "Αναφορά αριθ. 0888/2024 σχετικά με την προστασία των τραπεζικών πελατών από ψευδείς επενδυτικές πλατφόρμες",
   "summary": "Ο αναφέρων καταγγέλλει σοβαρές ψηφιακές απάτες που διαπράττονται από ψευδείς χρηματοοικονομικούς φορείς που, μέσω επιθετικών τεχνικών πειθούς, παρακινούν τα θύματα να μεταφέρουν χρήματα σε λογαριασμούς του εξωτερικού.",
-  "pdf": "petitions-pdf/Αρχική σελίδα _ PETI _ Επιτροπές _ Ευρωπαϊκό Κοινοβούλιο-ellenik.pdf"
+  "pdf": "petitions-pdf/Αρχική σελίδα _ PETI _ Επιτροπές _ Ευρωπαϊκό Κοινοβούλιο-ellenik.pdf",
+  "appDownloadImageAlt": "Εικονίδιο ασπίδας της εφαρμογής Android Financial Authority Database",
+  "appDownloadPlatformLine1": "APP διαθέσιμη για Android.",
+  "appDownloadPlatformLine2": "για την επίσημη πλατφόρμα των amevfirenze.it και tutelatruffe.it",
+  "appDownloadPlatformLine3": "Η έκδοση για Apple/iPhone βρίσκεται αυτή τη στιγμή υπό ανάπτυξη",
+  "appDownloadTitleLine1": "ΚΑΤΕΒΑΣΤΕ ΤΗΝ ΕΠΙΣΗΜΗ ΕΦΑΡΜΟΓΗ ANDROID",
+  "appDownloadTitleLine2": "\"Financial Authority Database\"",
+  "appDownloadMetaAriaLabel": "Πληροφορίες εφαρμογής Android",
+  "appDownloadBadgeAndroid": "Android",
+  "appDownloadBadgeFree": "Δωρεάν",
+  "appDownloadBadgeIphone": "Έκδοση iPhone σε εξέλιξη",
+  "appDownloadDescription": "Μπορείτε να επαληθεύσετε τη νομιμότητα και την ταυτότητα όσων προσφέρουν χρηματοοικονομικές επενδύσεις και να αποτρέψετε τις απάτες χάρη στην έξυπνη χρήση του smartphone ή του PC σας.",
+  "appDownloadLink": "Λήψη της εφαρμογής Android (APK)",
+  "appDownloadLinkAriaLabel": "Κατεβάστε το APK της εφαρμογής Android από την επίσημη έκδοση GitHub",
+  "appDownloadGuideTrigger": "Διαβάστε τον οδηγό",
+  "appDownloadGuideLanguagesSr": "Οδηγός διαθέσιμος στα ιταλικά και στα αγγλικά"
 }

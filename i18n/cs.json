@@ -5,5 +5,20 @@
   "status": "Stav: Schváleno",
   "title": "Petice č. 0888/2024 o ochraně bankovních klientů před podvodnými investičními platformami",
   "summary": "Petent hlásí závažné digitální podvody páchané falešnými finančními operátory, kteří pomocí agresivních přesvědčovacích technik nutí oběti převádět peníze na zahraniční účty. Petice požaduje silnější opatření na úrovni EU.",
-  "pdf": "petitions-pdf/Úvodní stránka _ PETI _ Výbory _ Evropský parlament-CS.pdf"
+  "pdf": "petitions-pdf/Úvodní stránka _ PETI _ Výbory _ Evropský parlament-CS.pdf",
+  "appDownloadImageAlt": "Ikona štítu aplikace Financial Authority Database pro Android",
+  "appDownloadPlatformLine1": "APP je dostupná pro Android.",
+  "appDownloadPlatformLine2": "pro oficiální platformu amevfirenze.it a tutelatruffe.it",
+  "appDownloadPlatformLine3": "Verze pro Apple/iPhone je momentálně ve vývoji",
+  "appDownloadTitleLine1": "STÁHNĚTE SI OFICIÁLNÍ ANDROID APP",
+  "appDownloadTitleLine2": "\"Financial Authority Database\"",
+  "appDownloadMetaAriaLabel": "Informace o aplikaci pro Android",
+  "appDownloadBadgeAndroid": "Android",
+  "appDownloadBadgeFree": "Zdarma",
+  "appDownloadBadgeIphone": "Verze pro iPhone ve vývoji",
+  "appDownloadDescription": "Díky chytrému používání smartphonu nebo počítače můžete ověřit legitimitu a totožnost těch, kdo nabízejí finanční investice, a předcházet podvodům.",
+  "appDownloadLink": "Stáhnout aplikaci pro Android (APK)",
+  "appDownloadLinkAriaLabel": "Stáhněte si APK aplikace pro Android z oficiálního vydání na GitHubu",
+  "appDownloadGuideTrigger": "Přečíst průvodce",
+  "appDownloadGuideLanguagesSr": "Průvodce je dostupný v italštině a angličtině"
 }

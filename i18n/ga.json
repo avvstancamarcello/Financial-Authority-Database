@@ -5,5 +5,20 @@
   "status": "Stádas: Ceadaithe",
   "title": "Achainí Uimh. 0888/2024 maidir le custaiméirí bainc a chosaint ó ardáin infheistíochta bréagacha",
   "summary": "Tuairiscíonn an t-achainíoch calaois dhigiteach thromchúiseach a dhéanann oibreoirí airgeadais bréagacha a chuireann iallach ar íospartaigh airgead a aistriú chuig cuntais eachtracha trí theicnící áitithe ionsaitheacha.",
-  "pdf": "petitions-pdf/Baile _ PETI _ Coistí _ Parlaimint na hEorpa-gaeilg-GA.pdf"
+  "pdf": "petitions-pdf/Baile _ PETI _ Coistí _ Parlaimint na hEorpa-gaeilg-GA.pdf",
+  "appDownloadImageAlt": "Deilbhín sciatha don aip Android Financial Authority Database",
+  "appDownloadPlatformLine1": "Tá an APP ar fáil do Android.",
+  "appDownloadPlatformLine2": "don ardán oifigiúil amevfirenze.it agus tutelatruffe.it",
+  "appDownloadPlatformLine3": "Tá an leagan Apple/iPhone á fhorbairt faoi láthair",
+  "appDownloadTitleLine1": "ÍOSLÓDÁIL AN AIP OIFIGIÚIL ANDROID",
+  "appDownloadTitleLine2": "\"Financial Authority Database\"",
+  "appDownloadMetaAriaLabel": "Eolas faoin aip Android",
+  "appDownloadBadgeAndroid": "Android",
+  "appDownloadBadgeFree": "Saor in aisce",
+  "appDownloadBadgeIphone": "Leagan iPhone ar siúl",
+  "appDownloadDescription": "Is féidir leat dlisteanacht agus céannacht na ndaoine a thairgeann infheistíochtaí airgeadais a fhíorú agus camscéimeanna a chosc trí úsáid chliste a bhaint as do ghuthán cliste nó do ríomhaire.",
+  "appDownloadLink": "Íoslódáil an aip Android (APK)",
+  "appDownloadLinkAriaLabel": "Íoslódáil APK na haipe Android ón eisiúint oifigiúil GitHub",
+  "appDownloadGuideTrigger": "Léigh an treoir",
+  "appDownloadGuideLanguagesSr": "Treoir ar fáil in Iodáilis agus i mBéarla"
 }

@@ -5,5 +5,20 @@
   "status": "Statuss: Apstiprināts",
   "title": "Lūgumraksts Nr. 0888/2024 par banku klientu aizsardzību pret viltotām ieguldījumu platformām",
   "summary": "Lūgumraksta iesniedzējs ziņo par nopietnām digitālām krāpniecībām, ko veic viltoti finanšu operatori, kuri ar agresīvām pārliecināšanas metodēm liek upuriem pārskaitīt naudu uz ārvalstu kontiem.",
-  "pdf": "petitions-pdf/Sākums _ PETI _ Komitejas _ Eiropas Parlaments-LV.pdf"
+  "pdf": "petitions-pdf/Sākums _ PETI _ Komitejas _ Eiropas Parlaments-LV.pdf",
+  "appDownloadImageAlt": "Financial Authority Database Android lietotnes vairoga ikona",
+  "appDownloadPlatformLine1": "APP ir pieejama Android.",
+  "appDownloadPlatformLine2": "oficiālajai amevfirenze.it un tutelatruffe.it platformai",
+  "appDownloadPlatformLine3": "Apple/iPhone versija pašlaik tiek izstrādāta",
+  "appDownloadTitleLine1": "LEJUPIELĀDĒJIET OFICIĀLO ANDROID APP",
+  "appDownloadTitleLine2": "\"Financial Authority Database\"",
+  "appDownloadMetaAriaLabel": "Android lietotnes informācija",
+  "appDownloadBadgeAndroid": "Android",
+  "appDownloadBadgeFree": "Bezmaksas",
+  "appDownloadBadgeIphone": "iPhone versija izstrādē",
+  "appDownloadDescription": "Jūs varat pārbaudīt to personu likumību un identitāti, kuras piedāvā finanšu ieguldījumus, un novērst krāpšanu, gudri izmantojot savu viedtālruni vai datoru.",
+  "appDownloadLink": "Lejupielādēt Android lietotni (APK)",
+  "appDownloadLinkAriaLabel": "Lejupielādējiet Android lietotnes APK no oficiālā GitHub laidiena",
+  "appDownloadGuideTrigger": "Lasīt ceļvedi",
+  "appDownloadGuideLanguagesSr": "Ceļvedis pieejams itāļu un angļu valodā"
 }

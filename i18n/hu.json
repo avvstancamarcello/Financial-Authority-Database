@@ -5,5 +5,20 @@
   "status": "Állapot: Jóváhagyva",
   "title": "0888/2024. sz. petíció a banki ügyfelek védelméről a hamis befektetési platformoktól",
   "summary": "A petíció benyújtója súlyos digitális csalásokról számol be, amelyeket hamis pénzügyi szolgáltatók követnek el, akik agresszív meggyőzési technikákkal ráveszik az áldozatokat, hogy pénzt utaljanak külföldi számlákra. A petíció erősebb uniós szintű intézkedéseket kér.",
-  "pdf": "petitions-pdf/Kezdőlap _ PETI _ Bizottságok _ Európai Parlament-HU-Magyar.pdf"
+  "pdf": "petitions-pdf/Kezdőlap _ PETI _ Bizottságok _ Európai Parlament-HU-Magyar.pdf",
+  "appDownloadImageAlt": "A Financial Authority Database Android alkalmazás pajzsikonja",
+  "appDownloadPlatformLine1": "Az APP elérhető Androidra.",
+  "appDownloadPlatformLine2": "az amevfirenze.it és a tutelatruffe.it hivatalos platformjához",
+  "appDownloadPlatformLine3": "Az Apple/iPhone verzió jelenleg fejlesztés alatt áll",
+  "appDownloadTitleLine1": "TÖLTSE LE A HIVATALOS ANDROID APPOT",
+  "appDownloadTitleLine2": "\"Financial Authority Database\"",
+  "appDownloadMetaAriaLabel": "Android alkalmazásinformációk",
+  "appDownloadBadgeAndroid": "Android",
+  "appDownloadBadgeFree": "Ingyenes",
+  "appDownloadBadgeIphone": "Az iPhone-verzió fejlesztés alatt",
+  "appDownloadDescription": "Ellenőrizheti a pénzügyi befektetéseket kínálók jogszerűségét és személyazonosságát, valamint megelőzheti a csalásokat okostelefonja vagy számítógépe intelligens használatával.",
+  "appDownloadLink": "Android alkalmazás letöltése (APK)",
+  "appDownloadLinkAriaLabel": "Töltse le az Android alkalmazás APK-ját a hivatalos GitHub kiadásból",
+  "appDownloadGuideTrigger": "Útmutató megnyitása",
+  "appDownloadGuideLanguagesSr": "Az útmutató olasz és angol nyelven érhető el"
 }

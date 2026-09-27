@@ -5,5 +5,20 @@
   "status": "Status: Godkendt",
   "title": "Andragende nr. 0888/2024 om beskyttelse af bankkunder mod falske investeringsplatforme",
   "summary": "Andrageren indberetter alvorlig digital svindel begået af falske finansielle operatører, der gennem aggressive overtalelsesteknikker får ofre til at overføre penge til udenlandske konti. Andragendet opfordrer til stærkere EU-dækkende foranstaltninger.",
-  "pdf": "petitions-pdf/Hjem _ PETI _ Udvalg _ Europa-Parlamentet-dansk.pdf"
+  "pdf": "petitions-pdf/Hjem _ PETI _ Udvalg _ Europa-Parlamentet-dansk.pdf",
+  "appDownloadImageAlt": "Skjoldikon til Financial Authority Database Android-appen",
+  "appDownloadPlatformLine1": "APP er tilgængelig til Android.",
+  "appDownloadPlatformLine2": "til den officielle platform amevfirenze.it og tutelatruffe.it",
+  "appDownloadPlatformLine3": "Apple/iPhone-versionen er i øjeblikket under udvikling",
+  "appDownloadTitleLine1": "DOWNLOAD DEN OFFICIELLE ANDROID-APP",
+  "appDownloadTitleLine2": "\"Financial Authority Database\"",
+  "appDownloadMetaAriaLabel": "Information om Android-appen",
+  "appDownloadBadgeAndroid": "Android",
+  "appDownloadBadgeFree": "Gratis",
+  "appDownloadBadgeIphone": "iPhone-version under udvikling",
+  "appDownloadDescription": "Du kan kontrollere legitimiteten og identiteten hos dem, der tilbyder finansielle investeringer, og forebygge svindel takket være intelligent brug af din smartphone eller pc.",
+  "appDownloadLink": "Download Android-appen (APK)",
+  "appDownloadLinkAriaLabel": "Download Android-appens APK fra den officielle GitHub-udgivelse",
+  "appDownloadGuideTrigger": "Læs guiden",
+  "appDownloadGuideLanguagesSr": "Guide tilgængelig på italiensk og engelsk"
 }
