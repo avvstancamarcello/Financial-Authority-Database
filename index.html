@@ -218,6 +218,29 @@
     }
     </script>
     
+    <script id="android-app-jsonld" type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "Financial Authority Database",
+        "operatingSystem": "Android",
+        "applicationCategory": "FinanceApplication",
+        "description": "App Android offline-first per consultare il database delle autorità finanziarie e verificare rapidamente riferimenti ufficiali e dati identificativi.",
+        "inLanguage": ["it", "en"],
+        "softwareVersion": "1.0.0",
+        "downloadUrl": "https://github.com/avvstancamarcello/Financial-Authority-Database/releases/download/V.1.0.0/FinancialAuthorityDatabase.apk",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "EUR"
+        },
+        "author": {
+            "@type": "Person",
+            "name": "Avv. Marcello Stanca"
+        }
+    }
+    </script>
+    
     <script id="website-jsonld" type="application/ld+json">
     {
         "@context": "https://schema.org",
@@ -669,6 +692,93 @@
             font-size: 1.05em; 
             color: #ffd700; 
             border-bottom: none; 
+        }
+        .apk-download-panel {
+            background: linear-gradient(135deg, rgba(15, 23, 42, 0.96) 0%, rgba(30, 64, 175, 0.92) 100%);
+            border: 1px solid rgba(255, 215, 0, 0.45);
+            border-radius: 20px;
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.28);
+            padding: 22px;
+            color: #ffffff;
+        }
+        .apk-download-panel__content {
+            display: grid;
+            grid-template-columns: minmax(0, 1.3fr) minmax(260px, 0.9fr);
+            gap: 20px;
+            align-items: start;
+        }
+        .apk-download-panel h2 {
+            margin: 0 0 10px;
+            color: #ffd700;
+            font-size: 1.4rem;
+        }
+        .apk-download-panel p {
+            margin: 0 0 10px;
+            line-height: 1.6;
+        }
+        .apk-download-panel__badges {
+            list-style: none;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 12px 0 16px;
+            padding: 0;
+        }
+        .apk-download-panel__badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 12px;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.12);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            font-size: 0.92rem;
+            font-weight: 600;
+        }
+        .apk-download-panel__button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 14px 22px;
+            border-radius: 999px;
+            background: #ffd700;
+            color: #0f172a;
+            font-weight: 700;
+            text-decoration: none;
+            box-shadow: 0 8px 20px rgba(255, 215, 0, 0.25);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .apk-download-panel__button:hover,
+        .apk-download-panel__button:focus-visible {
+            transform: translateY(-1px);
+            box-shadow: 0 10px 22px rgba(255, 215, 0, 0.32);
+        }
+        .apk-download-panel__button:focus-visible {
+            outline: 2px solid #ffffff;
+            outline-offset: 3px;
+        }
+        .apk-download-panel__instructions {
+            background: rgba(15, 23, 42, 0.34);
+            border: 1px solid rgba(255, 255, 255, 0.16);
+            border-radius: 16px;
+            padding: 16px 18px;
+        }
+        .apk-download-panel__instructions h3 {
+            margin: 0 0 10px;
+            color: #ffd700;
+            font-size: 1rem;
+        }
+        .apk-download-panel__instructions ol {
+            margin: 0 0 12px 18px;
+            padding: 0;
+        }
+        .apk-download-panel__instructions li + li {
+            margin-top: 8px;
+        }
+        .apk-download-panel__note {
+            font-size: 0.94rem;
+            color: #dbeafe;
         }
         .eu-references { background: #f0f4ff; padding: 20px; margin: 20px 0; border-left: 5px solid #667eea; border-radius: 8px; }
         .eu-references h3 { color: #1e3c72; margin-bottom: 15px; }
@@ -1693,6 +1803,8 @@
             .actions-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
             .actions-grid-filter-group { gap: 10px; }
             .medusa-cta { min-width: 100%; width: 100%; }
+            .apk-download-panel { padding: 18px; }
+            .apk-download-panel__content { grid-template-columns: 1fr; }
             .filter-buttons { justify-content: center; }
             .filter-btn { padding: 8px 14px; font-size: 0.9em; }
             
@@ -1771,6 +1883,10 @@
             .stat-number { font-size: 1.2em; }
             .stat-label { font-size: 0.8em; }
             .controls { padding: 15px 10px; gap: 12px; }
+            .apk-download-panel { padding: 16px; border-radius: 18px; }
+            .apk-download-panel h2 { font-size: 1.18rem; }
+            .apk-download-panel__button { width: 100%; }
+            .apk-download-panel__instructions { padding: 14px 15px; }
             .search-box input { padding: 10px 12px; font-size: 14px; }
             .search-btn { padding: 8px 12px; font-size: 0.85em; }
             .actions-grid { grid-template-columns: 1fr; }
@@ -2245,6 +2361,33 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <button type="button" onclick="performSearch()" data-i18n-text="searchButton">Cerca</button>
         </div>
 
+        <section class="apk-download-panel" aria-labelledby="android-apk-download-title">
+            <div class="apk-download-panel__content">
+                <div>
+                    <h2 id="android-apk-download-title" data-i18n-text="androidAppPanelTitle">📲 Scarica l'app Android ufficiale</h2>
+                    <p><span data-i18n-text="androidAppPanelIntroPrefix">Puoi installare la versione Android del</span> <strong>Financial Authority Database</strong> <span data-i18n-text="androidAppPanelIntroSuffix">e consultare il database anche in modalità offline-first.</span></p>
+                    <ul class="apk-download-panel__badges">
+                        <li class="apk-download-panel__badge" data-i18n-text="androidAppPanelAndroidBadge">🤖 Solo Android</li>
+                        <li class="apk-download-panel__badge" data-i18n-text="androidAppPanelIosBadge">🍏 iPhone in arrivo</li>
+                        <li class="apk-download-panel__badge" data-i18n-text="androidAppPanelFreeBadge">💶 Gratuita</li>
+                    </ul>
+                    <a id="android-apk-download-link" class="apk-download-panel__button" href="https://github.com/avvstancamarcello/Financial-Authority-Database/releases/download/V.1.0.0/FinancialAuthorityDatabase.apk" rel="noopener noreferrer" aria-describedby="android-apk-download-note">
+                        <span aria-hidden="true">⬇️</span>
+                        <span data-i18n-text="androidAppPanelButton">Scarica APK Android</span>
+                    </a>
+                </div>
+                <div class="apk-download-panel__instructions">
+                    <h3 data-i18n-text="androidAppPanelInstructionsTitle">Installazione rapida</h3>
+                    <ol>
+                        <li data-i18n-text="androidAppPanelStep1">Tocca il pulsante di download e salva il file APK sul tuo dispositivo Android.</li>
+                        <li data-i18n-text="androidAppPanelStep2">Apri il file scaricato e verifica che nome app, release e provenienza corrispondano al progetto ufficiale prima di procedere.</li>
+                        <li data-i18n-text="androidAppPanelStep3">Completa l'installazione e apri l'app per usare il database.</li>
+                    </ol>
+                    <p id="android-apk-download-note" class="apk-download-panel__note" data-i18n-text="androidAppPanelSafetyNote">Installa APK solo da fonti che ritieni affidabili, verifica la release GitHub prima di procedere e considera con attenzione eventuali avvisi di Play Protect o di Android.</p>
+                </div>
+            </div>
+        </section>
+
         <section id="database-search-section" class="controls" role="search" data-i18n-aria-label="searchAndFilterAriaLabel" aria-label="Search and filter">
     			<p class="intro-text" data-i18n="introText">Questa pagina web offre 239 LINK diretti per accedere alle webpage delle AUTORITA' FINANZIARIE di 239 PAESI del Mondo.<br>CERCA il nome del Paese che viene dichiarato sede della impresa finanziaria, e potrai conoscere tutti i dettagli identificativi ufficiali.</p>
             <div class="search-row">
@@ -2523,6 +2666,18 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 securityNoticeAriaLabel: "Avviso di sicurezza",
                 securityBannerSubtitle: "Tocca per leggere i dettagli",
                 introText: "Questa pagina web offre 239 link diretti per accedere alle webpage delle AUTORITA' FINANZIARIE di 239 Paesi del Mondo.<br>CERCA il nome del Paese che viene dichiarato sede della impresa finanziaria, e potrai conoscere tutti i dettagli identificativi ufficiali.",
+                androidAppPanelTitle: "📲 Scarica l'app Android ufficiale",
+                androidAppPanelIntroPrefix: "Puoi installare la versione Android del",
+                androidAppPanelIntroSuffix: "e consultare il database anche in modalità offline-first.",
+                androidAppPanelAndroidBadge: "🤖 Solo Android",
+                androidAppPanelIosBadge: "🍏 iPhone in arrivo",
+                androidAppPanelFreeBadge: "💶 Gratuita",
+                androidAppPanelButton: "Scarica APK Android",
+                androidAppPanelInstructionsTitle: "Installazione rapida",
+                androidAppPanelStep1: "Tocca il pulsante di download e salva il file APK sul tuo dispositivo Android.",
+                androidAppPanelStep2: "Apri il file scaricato e verifica che nome app, release e provenienza corrispondano al progetto ufficiale prima di procedere.",
+                androidAppPanelStep3: "Completa l'installazione e apri l'app per usare il database.",
+                androidAppPanelSafetyNote: "Installa APK solo da fonti che ritieni affidabili, verifica la release GitHub prima di procedere e considera con attenzione eventuali avvisi di Play Protect o di Android.",
                 searchPlaceholder: "Cerca per paese o autorità...",
                 searchCountryPlaceholder: "🔍 Cerca paese...",
                 searchCountryAriaLabel: "Cerca un paese",
@@ -3133,6 +3288,18 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 securityNoticeAriaLabel: "Security notice",
                 securityBannerSubtitle: "Tap to read details",
                 introText: "This website provides links to the webpages of the Financial Authorities of 239 countries worldwide. Use it to verify the legitimacy and regularity of companies, individuals, and entities offering financial services.",
+                androidAppPanelTitle: "📲 Download the official Android app",
+                androidAppPanelIntroPrefix: "You can install the Android version of",
+                androidAppPanelIntroSuffix: "and consult the database with an offline-first experience.",
+                androidAppPanelAndroidBadge: "🤖 Android only",
+                androidAppPanelIosBadge: "🍏 iPhone coming soon",
+                androidAppPanelFreeBadge: "💶 Free",
+                androidAppPanelButton: "Download Android APK",
+                androidAppPanelInstructionsTitle: "Quick installation",
+                androidAppPanelStep1: "Tap the download button and save the APK file on your Android device.",
+                androidAppPanelStep2: "Open the downloaded file and verify that the app name, release, and source match the official project before proceeding.",
+                androidAppPanelStep3: "Complete the installation and open the app to use the database.",
+                androidAppPanelSafetyNote: "Install APKs only from sources you consider trustworthy, verify the GitHub release before continuing, and take any Play Protect or Android warnings seriously.",
                 searchPlaceholder: "Search by country or authority...",
                 searchCountryPlaceholder: "🔍 Search country...",
                 searchCountryAriaLabel: "Search for a country",
@@ -4444,6 +4611,33 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         let translationCache = {};
         let isConsobOrbitalDialogSetup = false;
         let activeDialogState = null;
+
+        function syncAndroidApkDownloadLink() {
+            const androidAppJsonLd = document.getElementById('android-app-jsonld');
+            const androidApkDownloadLink = document.getElementById('android-apk-download-link');
+            if (!androidAppJsonLd || !androidApkDownloadLink) return;
+            try {
+                const androidAppData = JSON.parse(androidAppJsonLd.textContent || '{}');
+                if (typeof androidAppData.downloadUrl === 'string' && androidAppData.downloadUrl.trim()) {
+                    const normalizedDownloadUrl = androidAppData.downloadUrl.trim();
+                    const parsedDownloadUrl = new URL(normalizedDownloadUrl);
+                    const isExpectedApkPath = /^\/avvstancamarcello\/Financial-Authority-Database\/releases\/download\/[^/]+\/[^/]+\.apk$/i.test(parsedDownloadUrl.pathname);
+                    const isTrustedGithubRelease =
+                        parsedDownloadUrl.origin === 'https://github.com' &&
+                        isExpectedApkPath;
+                    if (isTrustedGithubRelease && androidApkDownloadLink.getAttribute('href') !== normalizedDownloadUrl) {
+                        androidApkDownloadLink.href = normalizedDownloadUrl;
+                    }
+                }
+            } catch (error) {
+                console.warn('Unable to synchronize the Android APK download link.', error);
+            }
+        }
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', syncAndroidApkDownloadLink, { once: true });
+        } else {
+            syncAndroidApkDownloadLink();
+        }
 
         // Inizializza canonical URL per SEO (Google self-referencing canonical)
         (function initCanonical() {
