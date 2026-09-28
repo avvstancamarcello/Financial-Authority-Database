@@ -1,0 +1,1182 @@
+avvocato@LAPTOP-7E2BDF4K:/mnt/c/dev/Financial-Authority-Database$ grep -RIn "financial_authorities_database" .
+./AI_DISCOVERY.md:14:- 🗂️ Dataset JSON: <https://avvstancamarcello.github.io/Financial-Authority-Database/financial_authorities_database.json>
+./AI_DISCOVERY.md:142:      "contentUrl": "https://avvstancamarcello.github.io/Financial-Authority-Database/financial_authorities_database.json"
+./android/app/build/intermediates/assets/debug/mergeDebugAssets/data/international_financial_institutions.json:19:        "reason": "No standalone Bank of Italy authorityId exists in financial_authorities_database.json as of 2026-09-23",
+./android/app/build/intermediates/assets/debug/mergeDebugAssets/data/international_financial_institutions.json:25:        "reason": "No Guardia di Finanza authorityId exists in financial_authorities_database.json as of 2026-09-23",
+./android/app/build/intermediates/assets/debug/mergeDebugAssets/data/international_financial_institutions.json:31:        "reason": "No standalone authorityId exists in financial_authorities_database.json as of 2026-09-23",
+./android/app/build/intermediates/assets/debug/mergeDebugAssets/data/international_financial_institutions.json:38:        "reason": "No standalone authorityId exists in financial_authorities_database.json as of 2026-09-23",
+./android/app/build/intermediates/assets/debug/mergeDebugAssets/legal/sources_en.md:5:- `financial_authorities_database.json`
+./android/app/build/intermediates/assets/debug/mergeDebugAssets/legal/sources_it.md:5:- `financial_authorities_database.json`
+./android/app/build/intermediates/assets/release/mergeReleaseAssets/data/international_financial_institutions.json:19:        "reason": "No standalone Bank of Italy authorityId exists in financial_authorities_database.json as of 2026-09-23",
+./android/app/build/intermediates/assets/release/mergeReleaseAssets/data/international_financial_institutions.json:25:        "reason": "No Guardia di Finanza authorityId exists in financial_authorities_database.json as of 2026-09-23",
+./android/app/build/intermediates/assets/release/mergeReleaseAssets/data/international_financial_institutions.json:31:        "reason": "No standalone authorityId exists in financial_authorities_database.json as of 2026-09-23",
+./android/app/build/intermediates/assets/release/mergeReleaseAssets/data/international_financial_institutions.json:38:        "reason": "No standalone authorityId exists in financial_authorities_database.json as of 2026-09-23",
+./android/app/build/intermediates/assets/release/mergeReleaseAssets/legal/sources_en.md:5:- `financial_authorities_database.json`
+./android/app/build/intermediates/assets/release/mergeReleaseAssets/legal/sources_it.md:5:- `financial_authorities_database.json`
+^[[B^[[B./android/app/build/intermediates/incremental/mergeDebugAssets/merger.xml:2:<merger version="3"><dataSet config="main" ignore_pattern="!.svn:!.git:!.ds_store:!*.scc:.*:&lt;dir>_*:!CVS:!thumbs.db:!picasa.ini:!*~"><source path="C:\dev\Financial-Authority-Database\android\app\src\main\assets"><file name="data/international_financial_institutions.json" path="C:\dev\Financial-Authority-Database\android\app\src\main\assets\data\international_financial_institutions.json"/><file name="data/international_institutions_categories.json" path="C:\dev\Financial-Authority-Database\android\app\src\main\assets\data\international_institutions_categories.json"/><file name="data/international_institutions_i18n.json" path="C:\dev\Financial-Authority-Database\android\app\src\main\assets\data\international_institutions_i18n.json"/><file name="data/international_institutions_types.json" path="C:\dev\Financial-Authority-Database\android\app\src\main\assets\data\international_institutions_types.json"/><file name="financial_authorities_database.json" path="C:\dev\Financial-Authority-Database\android\app\src\main\assets\financial_authorities_database.json"/><file name="legal/disclaimer_en.md" path="C:\dev\Financial-Authority-Database\android\app\src\main\assets\legal\disclaimer_en.md"/><file name="legal/disclaimer_it.md" path="C:\dev\Financial-Authority-Database\android\app\src\main\assets\legal\disclaimer_it.md"/><file name="legal/privacy_en.md" path="C:\dev\Financial-Authority-Database\android\app\src\main\assets\legal\privacy_en.md"/><file name="legal/privacy_it.md" path="C:\dev\Financial-Authority-Database\android\app\src\main\assets\legal\privacy_it.md"/><file name="legal/sources_en.md" path="C:\dev\Financial-Authority-Database\android\app\src\main\assets\legal\sources_en.md"/><file name="legal/sources_it.md" path="C:\dev\Financial-Authority-Database\android\app\src\main\assets\legal\sources_it.md"/><file name="legal/terms_en.md" path="C:\dev\Financial-Authority-Database\android\app\src\main\assets\legal\terms_en.md"/><file name="legal/terms_it.md" path="C:\dev\Financial-Authority-Database\android\app\src\main\assets\legal\terms_it.md"/></source></dataSet><dataSet config="debug" ignore_pattern="!.svn:!.git:!.ds_store:!*.scc:.*:&lt;dir>_*:!CVS:!thumbs.db:!picasa.ini:!*~"><source path="C:\dev\Financial-Authority-Database\android\app\src\debug\assets"/></dataSet><dataSet config="generated" ignore_pattern="!.svn:!.git:!.ds_store:!*.scc:.*:&lt;dir>_*:!CVS:!thumbs.db:!picasa.ini:!*~"><source path="C:\dev\Financial-Authority-Database\android\app\build\intermediates\shader_assets\debug\compileDebugShaders\out"/></dataSet></merger>
+./android/app/build/intermediates/incremental/mergeReleaseAssets/merger.xml:2:<merger version="3"><dataSet config="main" ignore_pattern="!.svn:!.git:!.ds_store:!*.scc:.*:&lt;dir>_*:!CVS:!thumbs.db:!picasa.ini:!*~"><source path="C:\dev\Financial-Authority-Database\android\app\src\main\assets"><file name="data/international_financial_institutions.json" path="C:\dev\Financial-Authority-Database\android\app\src\main\assets\data\international_financial_institutions.json"/><file name="data/international_institutions_categories.json" path="C:\dev\Financial-Authority-Database\android\app\src\main\assets\data\international_institutions_categories.json"/><file name="data/international_institutions_i18n.json" path="C:\dev\Financial-Authority-Database\android\app\src\main\assets\data\international_institutions_i18n.json"/><file name="data/international_institutions_types.json" path="C:\dev\Financial-Authority-Database\android\app\src\main\assets\data\international_institutions_types.json"/><file name="financial_authorities_database.json" path="C:\dev\Financial-Authority-Database\android\app\src\main\assets\financial_authorities_database.json"/><file name="legal/disclaimer_en.md" path="C:\dev\Financial-Authority-Database\android\app\src\main\assets\legal\disclaimer_en.md"/><file name="legal/disclaimer_it.md" path="C:\dev\Financial-Authority-Database\android\app\src\main\assets\legal\disclaimer_it.md"/><file name="legal/privacy_en.md" path="C:\dev\Financial-Authority-Database\android\app\src\main\assets\legal\privacy_en.md"/><file name="legal/privacy_it.md" path="C:\dev\Financial-Authority-Database\android\app\src\main\assets\legal\privacy_it.md"/><file name="legal/sources_en.md" path="C:\dev\Financial-Authority-Database\android\app\src\main\assets\legal\sources_en.md"/><file name="legal/sources_it.md" path="C:\dev\Financial-Authority-Database\android\app\src\main\assets\legal\sources_it.md"/><file name="legal/terms_en.md" path="C:\dev\Financial-Authority-Database\android\app\src\main\assets\legal\terms_en.md"/><file name="legal/terms_it.md" path="C:\dev\Financial-Authority-Database\android\app\src\main\assets\legal\terms_it.md"/></source></dataSet><dataSet config="release" ignore_pattern="!.svn:!.git:!.ds_store:!*.scc:.*:&lt;dir>_*:!CVS:!thumbs.db:!picasa.ini:!*~"><source path="C:\dev\Financial-Authority-Database\android\app\src\release\assets"/></dataSet><dataSet config="generated" ignore_pattern="!.svn:!.git:!.ds_store:!*.scc:.*:&lt;dir>_*:!CVS:!thumbs.db:!picasa.ini:!*~"><source path="C:\dev\Financial-Authority-Database\android\app\build\intermediates\shader_assets\release\compileReleaseShaders\out"/></dataSet></merger>
+./android/app/src/main/assets/data/international_financial_institutions.json:19:        "reason": "No standalone Bank of Italy authorityId exists in financial_authorities_database.json as of 2026-09-23",
+./android/app/src/main/assets/data/international_financial_institutions.json:25:        "reason": "No Guardia di Finanza authorityId exists in financial_authorities_database.json as of 2026-09-23",
+./android/app/src/main/assets/data/international_financial_institutions.json:31:        "reason": "No standalone authorityId exists in financial_authorities_database.json as of 2026-09-23",
+./android/app/src/main/assets/data/international_financial_institutions.json:38:        "reason": "No standalone authorityId exists in financial_authorities_database.json as of 2026-09-23",
+./android/app/src/main/assets/legal/sources_en.md:5:- `financial_authorities_database.json`
+./android/app/src/main/assets/legal/sources_it.md:5:- `financial_authorities_database.json`
+./android/app/src/main/java/com/financialauthority/database/data/AppRepository.kt:16:            val countries = loadAsset("financial_authorities_database.json")
+./android/README.md:21:- `app/src/main/assets/financial_authorities_database.json`
+./APP/index.backup-2026-09-14.html:207:            "contentUrl": "financial_authorities_database.json"
+./APP/index.backup-2026-09-14.html:284:        "identifier": "https://tutelatruffe.it/financial_authorities_database.json",
+./APP/index.backup-2026-09-14.html:332:            "contentUrl": "https://tutelatruffe.it/financial_authorities_database.json"
+./APP/index.html:310:        "identifier": "https://tutelatruffe.it/financial_authorities_database.json",
+./APP/index.html:358:            "contentUrl": "https://tutelatruffe.it/financial_authorities_database.json"
+./APP/index.html:4754:                const response = await fetch('financial_authorities_database.json');
+./APP/index.html:4858:        const SEO_DATASET_URL = 'https://tutelatruffe.it/financial_authorities_database.json';
+./APP/robots.txt:40:Disallow: /financial_authorities_database.json
+./APP/robots.txt:44:Disallow: /financial_authorities_database.json
+./APP/robots.txt:48:Disallow: /financial_authorities_database.json
+./APP/sitemap.xml:164:        <loc>https://tutelatruffe.it/financial_authorities_database.json</loc>
+./archive/development-prototypes/index1.html:176:            "contentUrl": "https://avvstancamarcello.github.io/Financial-Authority-Database/financial_authorities_database.json"
+./archive/development-prototypes/index1.html:1977:                    const response = await fetch('financial_authorities_database.json');
+./archive/legacy-server-register/index.html:207:            "contentUrl": "financial_authorities_database.json"
+./archive/legacy-server-register/index.html:284:        "identifier": "https://tutelatruffe.it/financial_authorities_database.json",
+./archive/legacy-server-register/index.html:332:            "contentUrl": "https://tutelatruffe.it/financial_authorities_database.json"
+./archive/legacy-server-register/index.html:2868:                const response = await fetch('financial_authorities_database.json');
+./Backup/_index-now.html:1055:                <a href="financial_authorities_database.json" class="planet planet-inner-a planet-saturno" data-planet="saturn" style="position: absolute; top: 50%; left: 50%; width: 60px; height: 60px; background: radial-gradient(circle at 30% 30%, #D4A574, #C4956A, #8B7355); border-radius: 50%; box-shadow: 0 0 25px rgba(212, 165, 116, 0.8), inset -8px -8px 16px rgba(0,0,0,0.3); cursor: pointer; text-decoration: none; animation: innerOrbitClockwise 40s linear infinite; display: flex; align-items: center; justify-content: center;">
+./banner-dinamico.html:1179:                <a href="financial_authorities_database.json" class="planet planet-inner-a planet-police" data-planet="police" style="position: absolute; top: 50%; left: 50%; width: 120px; height: 120px; background: radial-gradient(circle at 30% 30%, #1e40af, #1d4ed8, #3b82f6); border-radius: 50%; box-shadow: 0 0 35px rgba(59, 130, 246, 0.9), inset -12px -12px 24px rgba(0,0,0,0.3); cursor: pointer; text-decoration: none; animation: innerOrbitClockwise 40s linear infinite; display: flex; align-items: center; justify-content: center;">
+./cifra_database.ps1:7:#   1. Modifica financial_authorities_database.json
+./cifra_database.ps1:17:if (-not (Test-Path "financial_authorities_database.json")) {
+./cifra_database.ps1:18:    Write-Host "❌ ERRORE: File financial_authorities_database.json non trovato!" -ForegroundColor Red
+./cifra_database.ps1:23:$data = Get-Content 'financial_authorities_database.json' -Raw
+./cifra_database.ps1:84:Write-Host "   2. git add db.enc financial_authorities_database.json"
+./COMANDI_RAPIDI.md:8:code "c:\Users\Utente\BancheEuropa\financial_authorities_database.json"
+./COMANDI_RAPIDI.md:12:Copy-Item "c:\Users\Utente\BancheEuropa\financial_authorities_database.json" . -Force
+./COMANDI_RAPIDI.md:14:git add financial_authorities_database.json
+./COMANDI_RAPIDI.md:24:code "c:\Users\Utente\BancheEuropa\financial_authorities_database.json"
+./COMANDI_RAPIDI.md:32:git add db.enc financial_authorities_database.json
+./COMANDI_RAPIDI.md:58:$data = Get-Content 'financial_authorities_database.json' -Raw
+./COMANDI_RAPIDI.md:78:    $json = Get-Content 'financial_authorities_database.json' -Raw | ConvertFrom-Json
+./COMANDI_RAPIDI.md:88:$json = Get-Content 'financial_authorities_database.json' -Raw | ConvertFrom-Json
+./COMANDI_RAPIDI.md:94:$json = Get-Content 'financial_authorities_database.json' -Raw | ConvertFrom-Json
+./COMANDI_RAPIDI.md:105:Copy-Item "c:\Users\Utente\BancheEuropa\financial_authorities_database.json" `
+./COMANDI_RAPIDI.md:118:Copy-Item "c:\Users\Utente\BancheEuropa\financial_authorities_database.json" `
+./COMANDI_RAPIDI.md:141:git add financial_authorities_database.json
+./COMANDI_RAPIDI.md:169:$json = Get-Content 'financial_authorities_database.json' -Raw | ConvertFrom-Json
+./COMANDI_RAPIDI.md:175:$json = Get-Content 'financial_authorities_database.json' -Raw | ConvertFrom-Json
+./COMANDI_RAPIDI.md:182:$json = Get-Content 'financial_authorities_database.json' -Raw | ConvertFrom-Json
+./COMANDI_RAPIDI.md:189:$json = Get-Content 'financial_authorities_database.json' -Raw | ConvertFrom-Json
+./COMANDI_RAPIDI.md:201:$json = Get-Content 'financial_authorities_database.json' -Raw | ConvertFrom-Json
+./COMANDI_RAPIDI.md:216:$jsonSize = (Get-Item 'financial_authorities_database.json').Length
+./COMANDI_RAPIDI.md:267:Copy-Item "c:\Users\Utente\BancheEuropa\financial_authorities_database.json" `
+./COMANDI_RAPIDI.md:305:$DEV_JSON = "c:\Users\Utente\BancheEuropa\financial_authorities_database.json"
+./COMANDI_RAPIDI.md:306:$PROD_JSON = "c:\Users\Utente\Financial-Authority-Database\financial_authorities_database.json"
+./COMANDI_RAPIDI.md:321:cd "c:\Users\Utente\BancheEuropa"; .\cifra_database.ps1; cd "c:\Users\Utente\Financial-Authority-Database"; git add db.enc financial_authorities_database.json; git commit -m "Database update"; git push
+./COMANDI_RAPIDI.md:326:$json = Get-Content "c:\Users\Utente\BancheEuropa\financial_authorities_database.json" -Raw | ConvertFrom-Json; $count = ($json.PSObject.Properties | Where-Object {$_.Value.country_name}).Count; Write-Host "✅ $count paesi validati"; cd "c:\Users\Utente\Financial-Authority-Database"; Copy-Item "c:\Users\Utente\BancheEuropa\financial_authorities_database.json" . -Force; git add financial_authorities_database.json; git commit -m "Update: $count paesi"; git push
+./COPYRIGHT_SEO_REPORT.md:19:- **Funzionamento:** Il sito carica preferenzialmente il database cifrato `db.enc`. Se non disponibile, fallback su `financial_authorities_database.json`
+./COPYRIGHT_SEO_REPORT.md:197:Il database `financial_authorities_database.json` è opera dell'ingegno di **Avvocato Marcello Stanca**, protetta dalla legge sul diritto d'autore (L. 633/1941 e successive modifiche).
+./data/international_financial_institutions.json:19:        "reason": "No standalone Bank of Italy authorityId exists in financial_authorities_database.json as of 2026-09-23",
+./data/international_financial_institutions.json:25:        "reason": "No Guardia di Finanza authorityId exists in financial_authorities_database.json as of 2026-09-23",
+./data/international_financial_institutions.json:31:        "reason": "No standalone authorityId exists in financial_authorities_database.json as of 2026-09-23",
+./data/international_financial_institutions.json:38:        "reason": "No standalone authorityId exists in financial_authorities_database.json as of 2026-09-23",
+./data/README.md:46:`financial_authorities_database.json` (root + mirrors) now includes on each `financial_authority` object:
+./data/README.md:83:- Bank of Italy supervisory authority record (not present as standalone authority in `financial_authorities_database.json`) — official site: https://www.bancaditalia.it/
+./data/README.md:84:- Guardia di Finanza authority record (not present as standalone authority in `financial_authorities_database.json`) — official site: https://www.gdf.gov.it/it
+./data/README.md:85:- Questure - Polizia di Stato authority record (not present as standalone authority in `financial_authorities_database.json`) — official site: https://questure.poliziadistato.it/ (app: YouPol)
+./data/README.md:86:- Arma dei Carabinieri authority record (not present as standalone authority in `financial_authorities_database.json`) — official site: https://carabinieri.it (app: iCarabinieri)
+./data/README.md:92:- `/financial_authorities_database.json`
+./data/README.md:93:- `/APP/financial_authorities_database.json`
+./data/README.md:94:- `/DEPLOY_REGISTER/financial_authorities_database.json`
+./decifra_database.ps1:71:if (Test-Path "financial_authorities_database.json") {
+./decifra_database.ps1:73:    $original = Get-Content 'financial_authorities_database.json' -Raw
+./DEPLOY_REGISTER/index.backup-2026-09-14.html:207:            "contentUrl": "financial_authorities_database.json"
+./DEPLOY_REGISTER/index.backup-2026-09-14.html:284:        "identifier": "https://tutelatruffe.it/financial_authorities_database.json",
+./DEPLOY_REGISTER/index.backup-2026-09-14.html:332:            "contentUrl": "https://tutelatruffe.it/financial_authorities_database.json"
+./DEPLOY_REGISTER/robots.txt:40:Disallow: /financial_authorities_database.json
+./DEPLOY_REGISTER/robots.txt:44:Disallow: /financial_authorities_database.json
+./DEPLOY_REGISTER/robots.txt:48:Disallow: /financial_authorities_database.json
+./DEPLOY_REGISTER/sitemap.xml:164:        <loc>https://tutelatruffe.it/financial_authorities_database.json</loc>
+./DOCUMENTATION.md:43:- [`financial_authorities_database.json`](financial_authorities_database.json)
+./DOCUMENTATION.md:155:  - [financial_authorities_database.json](financial_authorities_database.json)
+./Error/index.html:176:            "contentUrl": "https://avvstancamarcello.github.io/Financial-Authority-Database/financial_authorities_database.json"
+./Error/index.html:2853:                    const response = await fetch('financial_authorities_database.json');
+./Error/index.txt:165:            "contentUrl": "https://avvstancamarcello.github.io/Financial-Authority-Database/financial_authorities_database.json"
+./Error/index.txt:1962:                    const response = await fetch('financial_authorities_database.json');
+./ESEMPI_MODIFICA_JSON.md:67:Copy-Item "c:\Users\Utente\BancheEuropa\financial_authorities_database.json" .
+./ESEMPI_MODIFICA_JSON.md:69:git add financial_authorities_database.json
+./ESEMPI_MODIFICA_JSON.md:174:git add db.enc financial_authorities_database.json
+./ESEMPI_MODIFICA_JSON.md:211:code "c:\Users\Utente\BancheEuropa\financial_authorities_database.json"
+./ESEMPI_MODIFICA_JSON.md:220:Copy-Item "c:\Users\Utente\BancheEuropa\financial_authorities_database.json" .
+./ESEMPI_MODIFICA_JSON.md:222:git add financial_authorities_database.json
+./ESEMPI_MODIFICA_JSON.md:316:$json = Get-Content 'financial_authorities_database.json' -Raw
+./ESEMPI_MODIFICA_JSON.md:341:$json = Get-Content 'financial_authorities_database.json' -Raw | ConvertFrom-Json
+./ESEMPI_MODIFICA_JSON.md:346:Copy-Item "c:\Users\Utente\BancheEuropa\financial_authorities_database.json" .
+./ESEMPI_MODIFICA_JSON.md:347:git add financial_authorities_database.json
+./GUIDA_VERIFICA_SEO.md:28:3. Cerca nella lista file "db.enc" o "financial_authorities_database.json"
+./index.backup-2026-09-15.html:208:            "contentUrl": "financial_authorities_database.json"
+./index.backup-2026-09-15.html:285:        "identifier": "https://tutelatruffe.it/financial_authorities_databas.json",
+./index.backup-2026-09-15.html:333:            "contentUrl": "https://tutelatruffe.it/financial_authorities_database.json"
+./index.backup-2026-09-15.html:4258:                const response = await fetch('financial_authorities_databas.json');
+./index.html:310:        "identifier": "https://tutelatruffe.it/financial_authorities_database.json",
+./index.html:358:            "contentUrl": "https://tutelatruffe.it/financial_authorities_database.json"
+./index.html:4754:                const response = await fetch('financial_authorities_database.json');
+./index.html:4858:        const SEO_DATASET_URL = 'https://tutelatruffe.it/financial_authorities_database.json';
+./INDICE_DOCUMENTAZIONE.md:90:- Legge `financial_authorities_database.json`
+./INDICE_DOCUMENTAZIONE.md:196:├── financial_authorities_database.json  ← DATABASE MASTER
+./INDICE_DOCUMENTAZIONE.md:213:├── financial_authorities_database.json  ← DB pubblico
+./IONOS/ANALISI_SICUREZZA_2026-02-09.md:31:| `/financial_authorities_database.json` | 37 | ✅ Valido | Database principale |
+./IONOS/index-dramatic.html:1179:                <a href="financial_authorities_database.json" class="planet planet-inner-a planet-police" data-planet="police" style="position: absolute; top: 50%; left: 50%; width: 120px; height: 120px; background: radial-gradient(circle at 30% 30%, #1e40af, #1d4ed8, #3b82f6); border-radius: 50%; box-shadow: 0 0 35px rgba(59, 130, 246, 0.9), inset -12px -12px 24px rgba(0,0,0,0.3); cursor: pointer; text-decoration: none; animation: innerOrbitClockwise 40s linear infinite; display: flex; align-items: center; justify-content: center;">
+./IONOS/index.html:1187:                <a href="financial_authorities_database.json" class="planet planet-inner-a planet-police" data-planet="police" style="position: absolute; top: 50%; left: 50%; width: 96px; height: 96px; background: radial-gradient(circle at 30% 30%, #1e40af, #1d4ed8, #3b82f6); border-radius: 50%; box-shadow: 0 0 35px rgba(59, 130, 246, 0.9), inset -12px -12px 24px rgba(0,0,0,0.3); cursor: pointer; text-decoration: none; animation: innerOrbitClockwise 40s linear infinite; display: flex; align-items: center; justify-content: center;">
+./IONOS/ScamRadar-main/ScamRadar-main/index.html:1054:                <a href="financial_authorities_database.json" class="planet planet-inner-a planet-saturno" data-planet="saturn" style="position: absolute; top: 50%; left: 50%; width: 60px; height: 60px; background: radial-gradient(circle at 30% 30%, #D4A574, #C4956A, #8B7355); border-radius: 50%; box-shadow: 0 0 25px rgba(212, 165, 116, 0.8), inset -8px -8px 16px rgba(0,0,0,0.3); cursor: pointer; text-decoration: none; animation: innerOrbitClockwise 40s linear infinite; display: flex; align-items: center; justify-content: center;">
+./OUTREACH.md:14:- 🗂️ Dataset JSON: <https://avvstancamarcello.github.io/Financial-Authority-Database/financial_authorities_database.json>
+./OUTREACH.md:37:Dataset JSON: https://avvstancamarcello.github.io/Financial-Authority-Database/financial_authorities_database.json
+./OUTREACH.md:68:Dataset JSON: https://avvstancamarcello.github.io/Financial-Authority-Database/financial_authorities_database.json
+./OUTREACH.md:102:Dataset JSON: https://avvstancamarcello.github.io/Financial-Authority-Database/financial_authorities_database.json
+./OUTREACH.md:133:Dataset JSON: https://avvstancamarcello.github.io/Financial-Authority-Database/financial_authorities_database.json
+./OUTREACH.md:160:Dataset JSON: https://avvstancamarcello.github.io/Financial-Authority-Database/financial_authorities_database.json
+./README_DATABASE.md:9:2. **Senza `db.enc`** → Carica `financial_authorities_database.json` (funziona ugualmente!)
+./README_DATABASE.md:41:code financial_authorities_database.json
+./README_DATABASE.md:48:git add financial_authorities_database.json
+./README_DATABASE.md:62:code financial_authorities_database.json
+./README_DATABASE.md:70:git add db.enc financial_authorities_database.json
+./README_DATABASE.md:109:✅ Cifra `financial_authorities_database.json` → crea `db.enc`
+./README_DATABASE.md:185:Copy-Item "c:\Users\Utente\BancheEuropa\financial_authorities_database.json" .
+./README_DATABASE.md:187:git add financial_authorities_database.json
+./README_DATABASE.md:199:git add db.enc financial_authorities_database.json
+./robots.txt:40:Disallow: /financial_authorities_database.json
+./robots.txt:44:Disallow: /financial_authorities_database.json
+./robots.txt:48:Disallow: /financial_authorities_database.json
+./scripts/validate_international_data.py:12:    ROOT / "financial_authorities_database.json",
+./scripts/validate_international_data.py:13:    ROOT / "APP" / "financial_authorities_database.json",
+./scripts/validate_international_data.py:14:    ROOT / "DEPLOY_REGISTER" / "financial_authorities_database.json",
+./sitemap-multilingua.xml:103:        <loc>https://avvstancamarcello.github.io/Financial-Authority-Database/financial_authorities_database.json</loc>
+./sitemap-multilingua.xml:107:        <xhtml:link rel="alternate" hreflang="it" href="https://avvstancamarcello.github.io/Financial-Authority-Database/financial_authorities_database.json?lang=it"/>
+./sitemap-multilingua.xml:108:        <xhtml:link rel="alternate" hreflang="en" href="https://avvstancamarcello.github.io/Financial-Authority-Database/financial_authorities_database.json?lang=en"/>
+./sitemap-multilingua.xml:109:        <xhtml:link rel="alternate" hreflang="fr" href="https://avvstancamarcello.github.io/Financial-Authority-Database/financial_authorities_database.json?lang=fr"/>
+./sitemap-multilingua.xml:110:        <xhtml:link rel="alternate" hreflang="de" href="https://avvstancamarcello.github.io/Financial-Authority-Database/financial_authorities_database.json?lang=de"/>
+./sitemap-multilingua.xml:111:        <xhtml:link rel="alternate" hreflang="es" href="https://avvstancamarcello.github.io/Financial-Authority-Database/financial_authorities_database.json?lang=es"/>
+./sitemap-multilingua.xml:112:        <xhtml:link rel="alternate" hreflang="ar" href="https://avvstancamarcello.github.io/Financial-Authority-Database/financial_authorities_database.json?lang=ar"/>
+./sitemap-multilingua.xml:113:        <xhtml:link rel="alternate" hreflang="zh" href="https://avvstancamarcello.github.io/Financial-Authority-Database/financial_authorities_database.json?lang=zh"/>
+./sitemap-multilingua.xml:114:        <xhtml:link rel="alternate" hreflang="hi" href="https://avvstancamarcello.github.io/Financial-Authority-Database/financial_authorities_database.json?lang=hi"/>
+./sitemap-multilingua.xml:115:        <xhtml:link rel="alternate" hreflang="vi" href="https://avvstancamarcello.github.io/Financial-Authority-Database/financial_authorities_database.json?lang=vi"/>
+./sitemap-multilingua.xml:116:        <xhtml:link rel="alternate" hreflang="pt" href="https://avvstancamarcello.github.io/Financial-Authority-Database/financial_authorities_database.json?lang=pt"/>
+./sitemap-multilingua.xml:117:        <xhtml:link rel="alternate" hreflang="x-default" href="https://avvstancamarcello.github.io/Financial-Authority-Database/financial_authorities_database.json?lang=en"/>
+./sitemap.xml:108:        <loc>https://avvstancamarcello.github.io/Financial-Authority-Database/financial_authorities_database.json</loc>
+./sitemap.xml:112:        <xhtml:link rel="alternate" hreflang="it" href="https://avvstancamarcello.github.io/Financial-Authority-Database/financial_authorities_database.json?lang=it"/>
+./sitemap.xml:113:        <xhtml:link rel="alternate" hreflang="en" href="https://avvstancamarcello.github.io/Financial-Authority-Database/financial_authorities_database.json?lang=en"/>
+./sitemap.xml:114:        <xhtml:link rel="alternate" hreflang="fr" href="https://avvstancamarcello.github.io/Financial-Authority-Database/financial_authorities_database.json?lang=fr"/>
+./sitemap.xml:115:        <xhtml:link rel="alternate" hreflang="de" href="https://avvstancamarcello.github.io/Financial-Authority-Database/financial_authorities_database.json?lang=de"/>
+./sitemap.xml:116:        <xhtml:link rel="alternate" hreflang="es" href="https://avvstancamarcello.github.io/Financial-Authority-Database/financial_authorities_database.json?lang=es"/>
+./sitemap.xml:117:        <xhtml:link rel="alternate" hreflang="ar" href="https://avvstancamarcello.github.io/Financial-Authority-Database/financial_authorities_database.json?lang=ar"/>
+./sitemap.xml:118:        <xhtml:link rel="alternate" hreflang="zh" href="https://avvstancamarcello.github.io/Financial-Authority-Database/financial_authorities_database.json?lang=zh"/>
+./sitemap.xml:119:        <xhtml:link rel="alternate" hreflang="hi" href="https://avvstancamarcello.github.io/Financial-Authority-Database/financial_authorities_database.json?lang=hi"/>
+./sitemap.xml:120:        <xhtml:link rel="alternate" hreflang="vi" href="https://avvstancamarcello.github.io/Financial-Authority-Database/financial_authorities_database.json?lang=vi"/>
+./sitemap.xml:121:        <xhtml:link rel="alternate" hreflang="pt" href="https://avvstancamarcello.github.io/Financial-Authority-Database/financial_authorities_database.json?lang=pt"/>
+./sitemap.xml:122:        <xhtml:link rel="alternate" hreflang="x-default" href="https://avvstancamarcello.github.io/Financial-Authority-Database/financial_authorities_database.json?lang=en"/>
+./test-bosnian-locale.html:499:                        addResult((datasetSchema?.distribution?.contentUrl || '').includes('financial_authorities_database.json'), `${lang}: Dataset JSON-LD keeps the downloadable database URL`);
+./WORKFLOW_DATABASE.md:47:code financial_authorities_database.json
+./WORKFLOW_DATABASE.md:54:git add financial_authorities_database.json
+./WORKFLOW_DATABASE.md:71:code financial_authorities_database.json
+./WORKFLOW_DATABASE.md:79:git add db.enc financial_authorities_database.json
+./WORKFLOW_DATABASE.md:96:code "c:\Users\Utente\BancheEuropa\financial_authorities_database.json"
+./WORKFLOW_DATABASE.md:192:code "c:\Users\Utente\BancheEuropa\financial_authorities_database.json"
+./WORKFLOW_DATABASE.md:203:Copy-Item "c:\Users\Utente\BancheEuropa\financial_authorities_database.json" .
+./WORKFLOW_DATABASE.md:205:git add financial_authorities_database.json
+./WORKFLOW_DATABASE.md:219:code "c:\Users\Utente\BancheEuropa\financial_authorities_database.json"
+./WORKFLOW_DATABASE.md:238:git add db.enc financial_authorities_database.json
+./WORKFLOW_DATABASE.md:252:code "c:\Users\Utente\BancheEuropa\financial_authorities_database.json"
+./WORKFLOW_DATABASE.md:263:Copy-Item "c:\Users\Utente\BancheEuropa\financial_authorities_database.json" .
+./WORKFLOW_DATABASE.md:265:git add financial_authorities_database.json
+./WORKFLOW_DATABASE.md:304:  '/Financial-Authority-Database/financial_authorities_database.json',
+./WORKFLOW_DATABASE.md:394:**A:** SÌ! Carica automaticamente `financial_authorities_database.json` come fallback.
+avvocato@LAPTOP-7E2BDF4K:/mnt/c/dev/Financial-Authority-Database$ nano check.sh
+avvocato@LAPTOP-7E2BDF4K:/mnt/c/dev/Financial-Authority-Database$ attrib +x check.sh
+Command 'attrib' not found, did you mean:
+  command 'hattrib' from deb hfsutils (3.2.6-15build2)
+  command 'mattrib' from deb mtools (4.0.33-1+really4.0.32-1build1)
+Try: sudo apt install <deb name>
+avvocato@LAPTOP-7E2BDF4K:/mnt/c/dev/Financial-Authority-Database$ ls check.sh
+check.sh
+avvocato@LAPTOP-7E2BDF4K:/mnt/c/dev/Financial-Authority-Database$ ls -l check.sh
+-rwxrwxrwx 1 avvocato avvocato 497 Sep 28 12:57 check.sh
+avvocato@LAPTOP-7E2BDF4K:/mnt/c/dev/Financial-Authority-Database$ bash ./check.sh
+./AI_DISCOVERY.md:14:- 🗂️ Dataset JSON: <https://avvstancamarcello.github.io/Financial-Authority-Database/financial_authorities_database.json>
+./AI_DISCOVERY.md:142:      "contentUrl": "https://avvstancamarcello.github.io/Financial-Authority-Database/financial_authorities_database.json"
+./android/app/src/main/assets/data/international_financial_institutions.json:19:        "reason": "No standalone Bank of Italy authorityId exists in financial_authorities_database.json as of 2026-09-23",
+./android/app/src/main/assets/data/international_financial_institutions.json:25:        "reason": "No Guardia di Finanza authorityId exists in financial_authorities_database.json as of 2026-09-23",
+./android/app/src/main/assets/data/international_financial_institutions.json:31:        "reason": "No standalone authorityId exists in financial_authorities_database.json as of 2026-09-23",
+./android/app/src/main/assets/data/international_financial_institutions.json:38:        "reason": "No standalone authorityId exists in financial_authorities_database.json as of 2026-09-23",
+./android/app/src/main/assets/legal/sources_en.md:5:- `financial_authorities_database.json`
+./android/app/src/main/assets/legal/sources_it.md:5:- `financial_authorities_database.json`
+./android/app/src/main/java/com/financialauthority/database/data/AppRepository.kt:16:            val countries = loadAsset("financial_authorities_database.json")
+./android/README.md:21:- `app/src/main/assets/financial_authorities_database.json`
+./APP/index.backup-2026-09-14.html:207:            "contentUrl": "financial_authorities_database.json"
+./APP/index.backup-2026-09-14.html:284:        "identifier": "https://tutelatruffe.it/financial_authorities_database.json",
+./APP/index.backup-2026-09-14.html:332:            "contentUrl": "https://tutelatruffe.it/financial_authorities_database.json"
+./APP/index.html:310:        "identifier": "https://tutelatruffe.it/financial_authorities_database.json",
+./APP/index.html:358:            "contentUrl": "https://tutelatruffe.it/financial_authorities_database.json"
+./APP/index.html:4754:                const response = await fetch('financial_authorities_database.json');
+./APP/index.html:4858:        const SEO_DATASET_URL = 'https://tutelatruffe.it/financial_authorities_database.json';
+./APP/robots.txt:40:Disallow: /financial_authorities_database.json
+./APP/robots.txt:44:Disallow: /financial_authorities_database.json
+./APP/robots.txt:48:Disallow: /financial_authorities_database.json
+./APP/sitemap.xml:164:        <loc>https://tutelatruffe.it/financial_authorities_database.json</loc>
+./banner-dinamico.html:1179:                <a href="financial_authorities_database.json" class="planet planet-inner-a planet-police" data-planet="police" style="position: absolute; top: 50%; left: 50%; width: 120px; height: 120px; background: radial-gradient(circle at 30% 30%, #1e40af, #1d4ed8, #3b82f6); border-radius: 50%; box-shadow: 0 0 35px rgba(59, 130, 246, 0.9), inset -12px -12px 24px rgba(0,0,0,0.3); cursor: pointer; text-decoration: none; animation: innerOrbitClockwise 40s linear infinite; display: flex; align-items: center; justify-content: center;">
+./check.sh:2:grep -RIn --exclude-dir={build,.git,archive,Backup,Error,IONOS,node_modules} "financial_authorities_database" .
+./check.sh:5:sha256sum financial_authorities_database.json APP/financial_authorities_database.json \
+./check.sh:6:  DEPLOY_REGISTER/financial_authorities_database.json \
+./check.sh:7:  android/app/src/main/assets/financial_authorities_database.json
+./cifra_database.ps1:7:#   1. Modifica financial_authorities_database.json
+./cifra_database.ps1:17:if (-not (Test-Path "financial_authorities_database.json")) {
+./cifra_database.ps1:18:    Write-Host "❌ ERRORE: File financial_authorities_database.json non trovato!" -ForegroundColor Red
+./cifra_database.ps1:23:$data = Get-Content 'financial_authorities_database.json' -Raw
+./cifra_database.ps1:84:Write-Host "   2. git add db.enc financial_authorities_database.json"
+./COMANDI_RAPIDI.md:8:code "c:\Users\Utente\BancheEuropa\financial_authorities_database.json"
+./COMANDI_RAPIDI.md:12:Copy-Item "c:\Users\Utente\BancheEuropa\financial_authorities_database.json" . -Force
+./COMANDI_RAPIDI.md:14:git add financial_authorities_database.json
+./COMANDI_RAPIDI.md:24:code "c:\Users\Utente\BancheEuropa\financial_authorities_database.json"
+./COMANDI_RAPIDI.md:32:git add db.enc financial_authorities_database.json
+./COMANDI_RAPIDI.md:58:$data = Get-Content 'financial_authorities_database.json' -Raw
+./COMANDI_RAPIDI.md:78:    $json = Get-Content 'financial_authorities_database.json' -Raw | ConvertFrom-Json
+./COMANDI_RAPIDI.md:88:$json = Get-Content 'financial_authorities_database.json' -Raw | ConvertFrom-Json
+./COMANDI_RAPIDI.md:94:$json = Get-Content 'financial_authorities_database.json' -Raw | ConvertFrom-Json
+./COMANDI_RAPIDI.md:105:Copy-Item "c:\Users\Utente\BancheEuropa\financial_authorities_database.json" `
+./COMANDI_RAPIDI.md:118:Copy-Item "c:\Users\Utente\BancheEuropa\financial_authorities_database.json" `
+./COMANDI_RAPIDI.md:141:git add financial_authorities_database.json
+./COMANDI_RAPIDI.md:169:$json = Get-Content 'financial_authorities_database.json' -Raw | ConvertFrom-Json
+./COMANDI_RAPIDI.md:175:$json = Get-Content 'financial_authorities_database.json' -Raw | ConvertFrom-Json
+./COMANDI_RAPIDI.md:182:$json = Get-Content 'financial_authorities_database.json' -Raw | ConvertFrom-Json
+./COMANDI_RAPIDI.md:189:$json = Get-Content 'financial_authorities_database.json' -Raw | ConvertFrom-Json
+./COMANDI_RAPIDI.md:201:$json = Get-Content 'financial_authorities_database.json' -Raw | ConvertFrom-Json
+./COMANDI_RAPIDI.md:216:$jsonSize = (Get-Item 'financial_authorities_database.json').Length
+./COMANDI_RAPIDI.md:267:Copy-Item "c:\Users\Utente\BancheEuropa\financial_authorities_database.json" `
+./COMANDI_RAPIDI.md:305:$DEV_JSON = "c:\Users\Utente\BancheEuropa\financial_authorities_database.json"
+./COMANDI_RAPIDI.md:306:$PROD_JSON = "c:\Users\Utente\Financial-Authority-Database\financial_authorities_database.json"
+./COMANDI_RAPIDI.md:321:cd "c:\Users\Utente\BancheEuropa"; .\cifra_database.ps1; cd "c:\Users\Utente\Financial-Authority-Database"; git add db.enc financial_authorities_database.json; git commit -m "Database update"; git push
+./COMANDI_RAPIDI.md:326:$json = Get-Content "c:\Users\Utente\BancheEuropa\financial_authorities_database.json" -Raw | ConvertFrom-Json; $count = ($json.PSObject.Properties | Where-Object {$_.Value.country_name}).Count; Write-Host "✅ $count paesi validati"; cd "c:\Users\Utente\Financial-Authority-Database"; Copy-Item "c:\Users\Utente\BancheEuropa\financial_authorities_database.json" . -Force; git add financial_authorities_database.json; git commit -m "Update: $count paesi"; git push
+./COPYRIGHT_SEO_REPORT.md:19:- **Funzionamento:** Il sito carica preferenzialmente il database cifrato `db.enc`. Se non disponibile, fallback su `financial_authorities_database.json`
+./COPYRIGHT_SEO_REPORT.md:197:Il database `financial_authorities_database.json` è opera dell'ingegno di **Avvocato Marcello Stanca**, protetta dalla legge sul diritto d'autore (L. 633/1941 e successive modifiche).
+./data/international_financial_institutions.json:19:        "reason": "No standalone Bank of Italy authorityId exists in financial_authorities_database.json as of 2026-09-23",
+./data/international_financial_institutions.json:25:        "reason": "No Guardia di Finanza authorityId exists in financial_authorities_database.json as of 2026-09-23",
+./data/international_financial_institutions.json:31:        "reason": "No standalone authorityId exists in financial_authorities_database.json as of 2026-09-23",
+./data/international_financial_institutions.json:38:        "reason": "No standalone authorityId exists in financial_authorities_database.json as of 2026-09-23",
+./data/README.md:46:`financial_authorities_database.json` (root + mirrors) now includes on each `financial_authority` object:
+./data/README.md:83:- Bank of Italy supervisory authority record (not present as standalone authority in `financial_authorities_database.json`) — official site: https://www.bancaditalia.it/
+./data/README.md:84:- Guardia di Finanza authority record (not present as standalone authority in `financial_authorities_database.json`) — official site: https://www.gdf.gov.it/it
+./data/README.md:85:- Questure - Polizia di Stato authority record (not present as standalone authority in `financial_authorities_database.json`) — official site: https://questure.poliziadistato.it/ (app: YouPol)
+./data/README.md:86:- Arma dei Carabinieri authority record (not present as standalone authority in `financial_authorities_database.json`) — official site: https://carabinieri.it (app: iCarabinieri)
+./data/README.md:92:- `/financial_authorities_database.json`
+./data/README.md:93:- `/APP/financial_authorities_database.json`
+./data/README.md:94:- `/DEPLOY_REGISTER/financial_authorities_database.json`
+./decifra_database.ps1:71:if (Test-Path "financial_authorities_database.json") {
+./decifra_database.ps1:73:    $original = Get-Content 'financial_authorities_database.json' -Raw
+./DEPLOY_REGISTER/index.backup-2026-09-14.html:207:            "contentUrl": "financial_authorities_database.json"
+./DEPLOY_REGISTER/index.backup-2026-09-14.html:284:        "identifier": "https://tutelatruffe.it/financial_authorities_database.json",
+./DEPLOY_REGISTER/index.backup-2026-09-14.html:332:            "contentUrl": "https://tutelatruffe.it/financial_authorities_database.json"
+./DEPLOY_REGISTER/robots.txt:40:Disallow: /financial_authorities_database.json
+./DEPLOY_REGISTER/robots.txt:44:Disallow: /financial_authorities_database.json
+./DEPLOY_REGISTER/robots.txt:48:Disallow: /financial_authorities_database.json
+./DEPLOY_REGISTER/sitemap.xml:164:        <loc>https://tutelatruffe.it/financial_authorities_database.json</loc>
+./DOCUMENTATION.md:43:- [`financial_authorities_database.json`](financial_authorities_database.json)
+./DOCUMENTATION.md:155:  - [financial_authorities_database.json](financial_authorities_database.json)
+./ESEMPI_MODIFICA_JSON.md:67:Copy-Item "c:\Users\Utente\BancheEuropa\financial_authorities_database.json" .
+./ESEMPI_MODIFICA_JSON.md:69:git add financial_authorities_database.json
+./ESEMPI_MODIFICA_JSON.md:174:git add db.enc financial_authorities_database.json
+./ESEMPI_MODIFICA_JSON.md:211:code "c:\Users\Utente\BancheEuropa\financial_authorities_database.json"
+./ESEMPI_MODIFICA_JSON.md:220:Copy-Item "c:\Users\Utente\BancheEuropa\financial_authorities_database.json" .
+./ESEMPI_MODIFICA_JSON.md:222:git add financial_authorities_database.json
+./ESEMPI_MODIFICA_JSON.md:316:$json = Get-Content 'financial_authorities_database.json' -Raw
+./ESEMPI_MODIFICA_JSON.md:341:$json = Get-Content 'financial_authorities_database.json' -Raw | ConvertFrom-Json
+./ESEMPI_MODIFICA_JSON.md:346:Copy-Item "c:\Users\Utente\BancheEuropa\financial_authorities_database.json" .
+./ESEMPI_MODIFICA_JSON.md:347:git add financial_authorities_database.json
+./GUIDA_VERIFICA_SEO.md:28:3. Cerca nella lista file "db.enc" o "financial_authorities_database.json"
+./index.backup-2026-09-15.html:208:            "contentUrl": "financial_authorities_database.json"
+./index.backup-2026-09-15.html:285:        "identifier": "https://tutelatruffe.it/financial_authorities_database.json",
+./index.backup-2026-09-15.html:333:            "contentUrl": "https://tutelatruffe.it/financial_authorities_database.json"
+./index.backup-2026-09-15.html:4258:                const response = await fetch('financial_authorities_database.json');
+./index.html:310:        "identifier": "https://tutelatruffe.it/financial_authorities_database.json",
+./index.html:358:            "contentUrl": "https://tutelatruffe.it/financial_authorities_database.json"
+./index.html:4754:                const response = await fetch('financial_authorities_database.json');
+./index.html:4858:        const SEO_DATASET_URL = 'https://tutelatruffe.it/financial_authorities_database.json';
+./INDICE_DOCUMENTAZIONE.md:90:- Legge `financial_authorities_database.json`
+./INDICE_DOCUMENTAZIONE.md:196:├── financial_authorities_database.json  ← DATABASE MASTER
+./INDICE_DOCUMENTAZIONE.md:213:├── financial_authorities_database.json  ← DB pubblico
+./OUTREACH.md:14:- 🗂️ Dataset JSON: <https://avvstancamarcello.github.io/Financial-Authority-Database/financial_authorities_database.json>
+./OUTREACH.md:37:Dataset JSON: https://avvstancamarcello.github.io/Financial-Authority-Database/financial_authorities_database.json
+./OUTREACH.md:68:Dataset JSON: https://avvstancamarcello.github.io/Financial-Authority-Database/financial_authorities_database.json
+./OUTREACH.md:102:Dataset JSON: https://avvstancamarcello.github.io/Financial-Authority-Database/financial_authorities_database.json
+./OUTREACH.md:133:Dataset JSON: https://avvstancamarcello.github.io/Financial-Authority-Database/financial_authorities_database.json
+./OUTREACH.md:160:Dataset JSON: https://avvstancamarcello.github.io/Financial-Authority-Database/financial_authorities_database.json
+./README_DATABASE.md:9:2. **Senza `db.enc`** → Carica `financial_authorities_database.json` (funziona ugualmente!)
+./README_DATABASE.md:41:code financial_authorities_database.json
+./README_DATABASE.md:48:git add financial_authorities_database.json
+./README_DATABASE.md:62:code financial_authorities_database.json
+./README_DATABASE.md:70:git add db.enc financial_authorities_database.json
+./README_DATABASE.md:109:✅ Cifra `financial_authorities_database.json` → crea `db.enc`
+./README_DATABASE.md:185:Copy-Item "c:\Users\Utente\BancheEuropa\financial_authorities_database.json" .
+./README_DATABASE.md:187:git add financial_authorities_database.json
+./README_DATABASE.md:199:git add db.enc financial_authorities_database.json
+./robots.txt:40:Disallow: /financial_authorities_database.json
+./robots.txt:44:Disallow: /financial_authorities_database.json
+./robots.txt:48:Disallow: /financial_authorities_database.json
+./scripts/validate_international_data.py:12:    ROOT / "financial_authorities_database.json",
+./scripts/validate_international_data.py:13:    ROOT / "APP" / "financial_authorities_database.json",
+./scripts/validate_international_data.py:14:    ROOT / "DEPLOY_REGISTER" / "financial_authorities_database.json",
+./sitemap-multilingua.xml:103:        <loc>https://avvstancamarcello.github.io/Financial-Authority-Database/financial_authorities_database.json</loc>
+./sitemap-multilingua.xml:107:        <xhtml:link rel="alternate" hreflang="it" href="https://avvstancamarcello.github.io/Financial-Authority-Database/financial_authorities_database.json?lang=it"/>
+./sitemap-multilingua.xml:108:        <xhtml:link rel="alternate" hreflang="en" href="https://avvstancamarcello.github.io/Financial-Authority-Database/financial_authorities_database.json?lang=en"/>
+./sitemap-multilingua.xml:109:        <xhtml:link rel="alternate" hreflang="fr" href="https://avvstancamarcello.github.io/Financial-Authority-Database/financial_authorities_database.json?lang=fr"/>
+./sitemap-multilingua.xml:110:        <xhtml:link rel="alternate" hreflang="de" href="https://avvstancamarcello.github.io/Financial-Authority-Database/financial_authorities_database.json?lang=de"/>
+./sitemap-multilingua.xml:111:        <xhtml:link rel="alternate" hreflang="es" href="https://avvstancamarcello.github.io/Financial-Authority-Database/financial_authorities_database.json?lang=es"/>
+./sitemap-multilingua.xml:112:        <xhtml:link rel="alternate" hreflang="ar" href="https://avvstancamarcello.github.io/Financial-Authority-Database/financial_authorities_database.json?lang=ar"/>
+./sitemap-multilingua.xml:113:        <xhtml:link rel="alternate" hreflang="zh" href="https://avvstancamarcello.github.io/Financial-Authority-Database/financial_authorities_database.json?lang=zh"/>
+./sitemap-multilingua.xml:114:        <xhtml:link rel="alternate" hreflang="hi" href="https://avvstancamarcello.github.io/Financial-Authority-Database/financial_authorities_database.json?lang=hi"/>
+./sitemap-multilingua.xml:115:        <xhtml:link rel="alternate" hreflang="vi" href="https://avvstancamarcello.github.io/Financial-Authority-Database/financial_authorities_database.json?lang=vi"/>
+./sitemap-multilingua.xml:116:        <xhtml:link rel="alternate" hreflang="pt" href="https://avvstancamarcello.github.io/Financial-Authority-Database/financial_authorities_database.json?lang=pt"/>
+./sitemap-multilingua.xml:117:        <xhtml:link rel="alternate" hreflang="x-default" href="https://avvstancamarcello.github.io/Financial-Authority-Database/financial_authorities_database.json?lang=en"/>
+./sitemap.xml:108:        <loc>https://avvstancamarcello.github.io/Financial-Authority-Database/financial_authorities_database.json</loc>
+./sitemap.xml:112:        <xhtml:link rel="alternate" hreflang="it" href="https://avvstancamarcello.github.io/Financial-Authority-Database/financial_authorities_database.json?lang=it"/>
+./sitemap.xml:113:        <xhtml:link rel="alternate" hreflang="en" href="https://avvstancamarcello.github.io/Financial-Authority-Database/financial_authorities_database.json?lang=en"/>
+./sitemap.xml:114:        <xhtml:link rel="alternate" hreflang="fr" href="https://avvstancamarcello.github.io/Financial-Authority-Database/financial_authorities_database.json?lang=fr"/>
+./sitemap.xml:115:        <xhtml:link rel="alternate" hreflang="de" href="https://avvstancamarcello.github.io/Financial-Authority-Database/financial_authorities_database.json?lang=de"/>
+./sitemap.xml:116:        <xhtml:link rel="alternate" hreflang="es" href="https://avvstancamarcello.github.io/Financial-Authority-Database/financial_authorities_database.json?lang=es"/>
+./sitemap.xml:117:        <xhtml:link rel="alternate" hreflang="ar" href="https://avvstancamarcello.github.io/Financial-Authority-Database/financial_authorities_database.json?lang=ar"/>
+./sitemap.xml:118:        <xhtml:link rel="alternate" hreflang="zh" href="https://avvstancamarcello.github.io/Financial-Authority-Database/financial_authorities_database.json?lang=zh"/>
+./sitemap.xml:119:        <xhtml:link rel="alternate" hreflang="hi" href="https://avvstancamarcello.github.io/Financial-Authority-Database/financial_authorities_database.json?lang=hi"/>
+./sitemap.xml:120:        <xhtml:link rel="alternate" hreflang="vi" href="https://avvstancamarcello.github.io/Financial-Authority-Database/financial_authorities_database.json?lang=vi"/>
+./sitemap.xml:121:        <xhtml:link rel="alternate" hreflang="pt" href="https://avvstancamarcello.github.io/Financial-Authority-Database/financial_authorities_database.json?lang=pt"/>
+./sitemap.xml:122:        <xhtml:link rel="alternate" hreflang="x-default" href="https://avvstancamarcello.github.io/Financial-Authority-Database/financial_authorities_database.json?lang=en"/>
+./test-bosnian-locale.html:499:                        addResult((datasetSchema?.distribution?.contentUrl || '').includes('financial_authorities_database.json'), `${lang}: Dataset JSON-LD keeps the downloadable database URL`);
+./WORKFLOW_DATABASE.md:47:code financial_authorities_database.json
+./WORKFLOW_DATABASE.md:54:git add financial_authorities_database.json
+./WORKFLOW_DATABASE.md:71:code financial_authorities_database.json
+./WORKFLOW_DATABASE.md:79:git add db.enc financial_authorities_database.json
+./WORKFLOW_DATABASE.md:96:code "c:\Users\Utente\BancheEuropa\financial_authorities_database.json"
+./WORKFLOW_DATABASE.md:192:code "c:\Users\Utente\BancheEuropa\financial_authorities_database.json"
+./WORKFLOW_DATABASE.md:203:Copy-Item "c:\Users\Utente\BancheEuropa\financial_authorities_database.json" .
+./WORKFLOW_DATABASE.md:205:git add financial_authorities_database.json
+./WORKFLOW_DATABASE.md:219:code "c:\Users\Utente\BancheEuropa\financial_authorities_database.json"
+./WORKFLOW_DATABASE.md:238:git add db.enc financial_authorities_database.json
+./WORKFLOW_DATABASE.md:252:code "c:\Users\Utente\BancheEuropa\financial_authorities_database.json"
+./WORKFLOW_DATABASE.md:263:Copy-Item "c:\Users\Utente\BancheEuropa\financial_authorities_database.json" .
+./WORKFLOW_DATABASE.md:265:git add financial_authorities_database.json
+./WORKFLOW_DATABASE.md:304:  '/Financial-Authority-Database/financial_authorities_database.json',
+./WORKFLOW_DATABASE.md:394:**A:** SÌ! Carica automaticamente `financial_authorities_database.json` come fallback.
+01271a3b000f17aa89ddd4f81ab43f601a4beabdfb244c65cd781af7cc2e0db6  financial_authorities_database.json
+9732c583db8528188b6ddac47781752987c44fb8fb6539a28fad607644892750  APP/financial_authorities_database.json
+9732c583db8528188b6ddac47781752987c44fb8fb6539a28fad607644892750  DEPLOY_REGISTER/financial_authorities_database.json
+2d7a032a3088050d6dfa7ad7cb1fa5351df925aebc1e4d51f85150a6c07058bb  android/app/src/main/assets/financial_authorities_database.json
+avvocato@LAPTOP-7E2BDF4K:/mnt/c/dev/Financial-Authority-Database$ nano sync-db.sh
+avvocato@LAPTOP-7E2BDF4K:/mnt/c/dev/Financial-Authority-Database$ nano diff-db.sh
+avvocato@LAPTOP-7E2BDF4K:/mnt/c/dev/Financial-Authority-Database$ ./diff-db.sh
+== Tipo di a capo, dimensione e data di modifica ==
+financial_authorities_database.json                               4222 righe CRLF | 166369 byte | 2026-09-27 10:53:01
+APP/financial_authorities_database.json                           4218 righe CRLF | 166196 byte | 2026-09-27 10:56:06
+android/app/src/main/assets/financial_authorities_database.json   4224 righe CRLF | 166513 byte | 2026-09-27 22:25:41
+
+== Hash del contenuto normalizzato (ignora formattazione) ==
+3d298e19bac5 239 chiavi financial_authorities_database.json
+70f555c72164 239 chiavi APP/financial_authorities_database.json
+27e81d380de4 239 chiavi android/app/src/main/assets/financial_authorities_database.json
+
+== Chiavi presenti in radice ma non in android e viceversa ==
+solo radice vs android: []
+solo android: []
+chiavi comuni con valori diversi (android): 1 ['Brazil']
+solo radice vs APP: []
+solo APP: []
+chiavi comuni con valori diversi (APP): 1 ['United Kingdom']
+avvocato@LAPTOP-7E2BDF4K:/mnt/c/dev/Financial-Authority-Database$ nano show-diff.sh
+avvocato@LAPTOP-7E2BDF4K:/mnt/c/dev/Financial-Authority-Database$ nano show-diffs.sh
+avvocato@LAPTOP-7E2BDF4K:/mnt/c/dev/Financial-Authority-Database$ ./ show-diffs.sh
+-bash: ./: Is a directory
+avvocato@LAPTOP-7E2BDF4K:/mnt/c/dev/Financial-Authority-Database$ ./show-diffs.sh
+======================================================================
+BRAZIL: radice vs android
+======================================================================
+--- RADICE ---
+{
+  "country_name": "Brazil",
+  "flag": "🇧🇷",
+  "isEU": false,
+  "protectionLevel": "Alto",
+  "financial_authority": {
+    "name": "Comissão de Valores Mobiliários",
+    "abbreviation": "CVM",
+    "homepage": "https://www.gov.br/cvm/",
+    "fraudReportLink": "https://www.gov.br/cvm/pt-br/canais_atendimento/spc/login-cidadao",
+    "authorityEmail": "imprensa@cvm.gov.br",
+    "social_links": {},
+    "authorityId": "brazil__cvm",
+    "relatedInternationalInstitutionIds": []
+  },
+  "notes": "World Investor Week Coordinator: José Alexandre Vasco."
+}
+--- ANDROID ---
+{
+  "country_name": "Brazil",
+  "flag": "🇧🇷",
+  "isEU": false,
+  "protectionLevel": "Alto",
+  "financial_authority": {
+    "name": "Comissão de Valores Mobiliários",
+    "abbreviation": "CVM",
+    "homepage": "https://www.gov.br/cvm/",
+    "fraudReportLink": "https://www.gov.br/cvm/pt-br/canais_atendimento/spc/login-cidadao",
+    "authorityEmail": "imprensa@cvm.gov.br",
+    "social_links": {
+      "news_system_2026": "https://www.gov.br/cvm/pt-br/assuntos/noticias/2026/cvm-lanca-novo-sistema-de-atendimento-ao-cidadao-sac"
+    },
+    "authorityId": "brazil__cvm",
+    "relatedInternationalInstitutionIds": []
+  },
+  "notes": "World Investor Week Coordinator: José Alexandre Vasco."
+}
+
+======================================================================
+UNITED KINGDOM: radice vs APP
+======================================================================
+--- RADICE ---
+{
+  "country_name": "United Kingdom",
+  "flag": "UK",
+  "isEU": false,
+  "protectionLevel": "Altissimo",
+  "financial_authority": {
+    "name": "Financial Conduct Authority",
+    "abbreviation": "FCA",
+    "homepage": "https://www.fca.org.uk/",
+    "fraudReportLink": "https://www.fca.org.uk/consumers/report-scam-us",
+    "authorityEmail": "consumer.queries@fca.org.uk",
+    "social_links": {
+      "fca_register": "https://register.fca.org.uk/s/",
+      "prudential_regulation": "https://www.bankofengland.co.uk/prudential-regulation"
+    },
+    "protectionLevel": "High",
+    "thumbnail": "authority/preview-fca.png",
+    "modal": "authority/UK-FCA.html",
+    "has_orbital_view": true,
+    "authorityId": "united_kingdom__fca",
+    "relatedInternationalInstitutionIds": []
+  },
+  "notes": "FCA Financial Services Register (https://register.fca.org.uk/s/): verifica affidabilità imprese dichiarate iscritte/regolamentate. Prudential Regulation Authority (Bank of England): supervisione prudenziale 1.292 banche, società credito edilizio, cooperative credito, assicurazioni, società investimento (https://www.bankofengland.co.uk/prudential-regulation). Sito investitori: https://www.fca.org.uk/investsmart. World Investor Week Coordinator: Sam Stoakes."
+}
+--- APP ---
+{
+  "country_name": "United Kingdom",
+  "flag": "🇬🇧",
+  "isEU": false,
+  "protectionLevel": "Altissimo",
+  "financial_authority": {
+    "name": "Financial Conduct Authority",
+    "abbreviation": "FCA",
+    "homepage": "https://www.fca.org.uk/",
+    "fraudReportLink": "https://register.fca.org.uk/s/",
+    "authorityEmail": "sam.stoakes@fca.org.uk",
+    "social_links": {
+      "fca_register": "https://register.fca.org.uk/s/",
+      "prudential_regulation": "https://www.bankofengland.co.uk/prudential-regulation"
+    },
+    "authorityId": "united_kingdom__fca",
+    "relatedInternationalInstitutionIds": []
+  },
+  "notes": "FCA Financial Services Register (https://register.fca.org.uk/s/): verifica affidabilità imprese dichiarate iscritte/regolamentate. Prudential Regulation Authority (Bank of England): supervisione prudenziale 1.292 banche, società credito edilizio, cooperative credito, assicurazioni, società investimento (https://www.bankofengland.co.uk/prudential-regulation). Sito investitori: https://www.fca.org.uk/investsmart. World Investor Week Coordinator: Sam Stoakes."
+}
+avvocato@LAPTOP-7E2BDF4K:/mnt/c/dev/Financial-Authority-Database$ nano check-database-mirrors.sh
+avvocato@LAPTOP-7E2BDF4K:/mnt/c/dev/Financial-Authority-Database$ sh check-database-mirrors.sh
+== Verifica presenza e validità JSON ==
+OK: financial_authorities_database.json
+  formato: oggetto
+  record/chiavi primo livello: 239
+  dimensione: 166369 byte
+  righe LF: 4222; righe CRLF: 4222
+  SHA-256 grezzo:     01271a3b000f17aa89ddd4f81ab43f601a4beabdfb244c65cd781af7cc2e0db6
+  SHA-256 semantico:  c42bcc990ed8c060c3f5cb04932dd0d05e72a3127a86c2052af69376a4baccb2
+OK: APP/financial_authorities_database.json
+  formato: oggetto
+  record/chiavi primo livello: 239
+  dimensione: 166196 byte
+  righe LF: 4218; righe CRLF: 4218
+  SHA-256 grezzo:     9732c583db8528188b6ddac47781752987c44fb8fb6539a28fad607644892750
+  SHA-256 semantico:  be52abce56f0c11313f44036decda9a0eb644b239a7bba14f216668bbd4cb2ac
+OK: DEPLOY_REGISTER/financial_authorities_database.json
+  formato: oggetto
+  record/chiavi primo livello: 239
+  dimensione: 166196 byte
+  righe LF: 4218; righe CRLF: 4218
+  SHA-256 grezzo:     9732c583db8528188b6ddac47781752987c44fb8fb6539a28fad607644892750
+  SHA-256 semantico:  be52abce56f0c11313f44036decda9a0eb644b239a7bba14f216668bbd4cb2ac
+OK: android/app/src/main/assets/financial_authorities_database.json
+  formato: oggetto
+  record/chiavi primo livello: 239
+  dimensione: 166513 byte
+  righe LF: 4224; righe CRLF: 4224
+  SHA-256 grezzo:     2d7a032a3088050d6dfa7ad7cb1fa5351df925aebc1e4d51f85150a6c07058bb
+  SHA-256 semantico:  ed99ae632aae7789413f542be2b3ce016cb80cdaa0b78b13dfe762e389eefed6
+
+== Confronto con il file master della radice ==
+
+--- APP/financial_authorities_database.json ---
+Hash grezzo uguale:    NO
+Contenuto uguale:      NO
+Differenze semantiche: 7
+  - $['United Kingdom'].financial_authority.has_orbital_view: presente solo nel primo file
+  - $['United Kingdom'].financial_authority.modal: presente solo nel primo file
+  - $['United Kingdom'].financial_authority.protectionLevel: presente solo nel primo file
+  - $['United Kingdom'].financial_authority.thumbnail: presente solo nel primo file
+  - $['United Kingdom'].financial_authority.authorityEmail: 'consumer.queries@fca.org.uk' != 'sam.stoakes@fca.org.uk'
+  - $['United Kingdom'].financial_authority.fraudReportLink: 'https://www.fca.org.uk/consumers/report-scam-us' != 'https://register.fca.org.uk/s/'
+  - $['United Kingdom'].flag: 'UK' != '🇬🇧'
+
+--- DEPLOY_REGISTER/financial_authorities_database.json ---
+Hash grezzo uguale:    NO
+Contenuto uguale:      NO
+Differenze semantiche: 7
+  - $['United Kingdom'].financial_authority.has_orbital_view: presente solo nel primo file
+  - $['United Kingdom'].financial_authority.modal: presente solo nel primo file
+  - $['United Kingdom'].financial_authority.protectionLevel: presente solo nel primo file
+  - $['United Kingdom'].financial_authority.thumbnail: presente solo nel primo file
+  - $['United Kingdom'].financial_authority.authorityEmail: 'consumer.queries@fca.org.uk' != 'sam.stoakes@fca.org.uk'
+  - $['United Kingdom'].financial_authority.fraudReportLink: 'https://www.fca.org.uk/consumers/report-scam-us' != 'https://register.fca.org.uk/s/'
+  - $['United Kingdom'].flag: 'UK' != '🇬🇧'
+
+--- android/app/src/main/assets/financial_authorities_database.json ---
+Hash grezzo uguale:    NO
+Contenuto uguale:      NO
+Differenze semantiche: 1
+  - $.Brazil.financial_authority.social_links.news_system_2026: presente solo nel secondo file
+
+== Verdetto finale ==
+ERRORE: almeno una copia contiene differenze reali nei dati.
+Non sincronizzare automaticamente i file prima di esaminare i percorsi indicati.
+avvocato@LAPTOP-7E2BDF4K:/mnt/c/dev/Financial-Authority-Database$ nano check-fca-references.sh
+avvocato@LAPTOP-7E2BDF4K:/mnt/c/dev/Financial-Authority-Database$ ./check-fca-references.sh
+index.html:310:        "identifier": "https://tutelatruffe.it/financial_authorities_database.json",
+index.html:358:            "contentUrl": "https://tutelatruffe.it/financial_authorities_database.json"
+index.html:4754:                const response = await fetch('financial_authorities_database.json');
+index.html:4858:        const SEO_DATASET_URL = 'https://tutelatruffe.it/financial_authorities_database.json';
+index.html:5478:                const hasOrbitalView = Boolean(country.has_orbital_view)
+index.html:5988:                && Boolean(country.has_orbital_view)
+APP/index.html:310:        "identifier": "https://tutelatruffe.it/financial_authorities_database.json",
+APP/index.html:358:            "contentUrl": "https://tutelatruffe.it/financial_authorities_database.json"
+APP/index.html:4754:                const response = await fetch('financial_authorities_database.json');
+APP/index.html:4858:        const SEO_DATASET_URL = 'https://tutelatruffe.it/financial_authorities_database.json';
+APP/index.html:5478:                    && Boolean(country.has_orbital_view)
+APP/index.html:5973:                && Boolean(country.has_orbital_view)
+./authority/UK-FCA.html
+avvocato@LAPTOP-7E2BDF4K:/mnt/c/dev/Financial-Authority-Database$ nano check-orbital-logic.sh
+avvocato@LAPTOP-7E2BDF4K:/mnt/c/dev/Financial-Authority-Database$ ./check-orbital-logic.sh
+===== index.html (5465-5500) =====
+                    flagHTML = `<span class="flag-icon-wrapper" style="font-size: 3em;">${country.flag}</span>`;
+                } else {
+                    // Ultimo fallback neutro
+                    flagHTML = `<span class="flag-icon-wrapper" style="font-size: 3em;">🌍</span>`;
+                }
+
+                // Icona sanzione ONU se applicabile
+                const sanctionIconTitle = currentTranslations.sanctionedIconTitle || '⚠️ Subject to UN sanctions';
+                const sanctionedBadge = currentTranslations.sanctionedBadge || '⚠️ UN SANCTIONS';
+                const sanctionIcon = country.sanctioned ? `<div class="sanctioned-icon" title="${escapeHtmlAttribute(sanctionIconTitle)}">!</div>` : '';
+                const orbitalModalSrc = resolveConsobOrbitalSrc(country.modal);
+                const orbitalThumbnailSrc = resolveConsobOrbitalThumbnailSrc(country.thumbnail);
+                const orbitalAuthorityName = country.financial_authority.abbreviation || country.financial_authority.name || country.country_name;
+                const hasOrbitalView = Boolean(country.has_orbital_view)
+                    && Boolean(orbitalModalSrc)
+                    && Boolean(orbitalThumbnailSrc);
+
+                card.innerHTML = `
+                    ${sanctionIcon}
+                    <div class="country-header">
+                        <div class="country-flag">${flagHTML}</div>
+                        <div class="country-name">${country.country_name}${countryMarker ? ` <span style="display:inline-block; margin-left:8px; padding:3px 10px; border-radius:999px; background:rgba(30,41,59,0.12); color:#1e293b; font-size:0.55em; font-weight:700; vertical-align:middle;">${countryMarker}</span>` : ''}</div>
+                    </div>
+                    <div class="country-info">
+                        <div class="info-row">
+                            <span class="info-label">${currentTranslations.authority || 'Authority'}:</span>
+                            <span class="info-value">${country.financial_authority.name} (${country.financial_authority.abbreviation})</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">${currentTranslations.protectionLevel || 'Protection'}:</span>
+                            <span class="protection-badge ${protectionClass}">${getLocalizedProtectionLevel(country.protectionLevel)}</span>
+                            ${country.sanctioned ? `<span class="sanctioned-badge">${sanctionedBadge}</span>` : ''}
+                        </div>
+                    </div>
+                `;
+
+===== index.html (5975-6000) =====
+                    <p id="sanctionAlertText" style="margin-top: 10px; font-size: 0.85em;">${safeSanctionedAlertText}</p>
+                </div>
+            ` : '';
+
+            // Testo pulsante traduci in base alla lingua
+            const translateBtnText = {
+                'it': '🌐 Traduci', 'en': '🌐 Translate', 'fr': '🌐 Traduire', 'de': '🌐 Übersetzen',
+                'es': '🌐 Traducir', 'pt': '🌐 Traduzir', 'sq': '🌐 Përkthe', 'xk': '🌐 Përkthe', 'zh': '🌐 翻译', 'hi': '🌐 अनुवाद करें',
+                'ar': '🌐 ترجم', 'vi': '🌐 Dịch', 'ja': '🌐 翻訳', 'ko': '🌐 번역'
+            };
+            const orbitalModalSrc = resolveConsobOrbitalSrc(country.modal);
+            const orbitalThumbnailSrc = resolveConsobOrbitalThumbnailSrc(country.thumbnail);
+            const hasItalyOrbitalView = (orbitalModalSrc === '/authority/IT-CONSOB.html')
+                && Boolean(country.has_orbital_view)
+                && Boolean(orbitalThumbnailSrc)
+                && Boolean(orbitalModalSrc);
+            const orbitalPreviewHtml = hasItalyOrbitalView ? `
+                <div style="margin: 20px 0 0;">
+                    <p style="margin: 0 0 10px;"><strong>CONSOB Orbital Preview:</strong></p>
+                    <button
+                        type="button"
+                        class="orbital-thumbnail-trigger"
+                        data-orbital-trigger="consob"
+                        data-orbital-src="${escapeHtmlAttribute(orbitalModalSrc)}"
+                        aria-label="Open CONSOB orbital dialog"
+                        onclick="openItalyOrbitalDialog(this.dataset.orbitalSrc); return false;"
+===== APP/index.html (5465-5500) =====
+                    flagHTML = `<span class="flag-icon-wrapper" style="font-size: 3em;">${country.flag}</span>`;
+                } else {
+                    // Ultimo fallback neutro
+                    flagHTML = `<span class="flag-icon-wrapper" style="font-size: 3em;">🌍</span>`;
+                }
+
+                // Icona sanzione ONU se applicabile
+                const sanctionIconTitle = currentTranslations.sanctionedIconTitle || '⚠️ Subject to UN sanctions';
+                const sanctionedBadge = currentTranslations.sanctionedBadge || '⚠️ UN SANCTIONS';
+                const sanctionIcon = country.sanctioned ? `<div class="sanctioned-icon" title="${escapeHtmlAttribute(sanctionIconTitle)}">!</div>` : '';
+                const orbitalModalSrc = resolveConsobOrbitalSrc(country.modal);
+                const orbitalThumbnailSrc = resolveConsobOrbitalThumbnailSrc(country.thumbnail);
+                const hasItalyOrbitalView = (orbitalModalSrc === '/authority/IT-CONSOB.html')
+                    && Boolean(country.has_orbital_view)
+                    && Boolean(orbitalThumbnailSrc)
+                    && Boolean(orbitalModalSrc);
+                const orbitalThumbnailHtml = hasItalyOrbitalView ? `
+                    <button
+                        type="button"
+                        class="orbital-thumbnail-trigger"
+                        data-orbital-trigger="consob"
+                        data-orbital-src="${escapeHtmlAttribute(orbitalModalSrc)}"
+                        aria-label="Open CONSOB orbital dialog"
+                    >
+                        <img src="${escapeHtmlAttribute(orbitalThumbnailSrc)}" alt="CONSOB orbital preview thumbnail">
+                    </button>
+                ` : '';
+
+                card.innerHTML = `
+                    ${sanctionIcon}
+                    <div class="country-header">
+                        <div class="country-flag">${flagHTML}</div>
+                        <div class="country-name">${country.country_name}${countryMarker ? ` <span style="display:inline-block; margin-left:8px; padding:2px 8px; border-radius:999px; background:rgba(30,41,59,0.12); color:#1e293b; font-size:0.55em; font-weight:700; vertical-align:middle;">${countryMarker}</span>` : ''}</div>
+                    </div>
+                    <div class="country-info">
+                        <div class="info-row">
+===== APP/index.html (5975-6000) =====
+                && Boolean(orbitalModalSrc);
+            const orbitalPreviewHtml = hasItalyOrbitalView ? `
+                <div style="margin: 20px 0 0;">
+                    <p style="margin: 0 0 10px;"><strong>CONSOB Orbital Preview:</strong></p>
+                    <button
+                        type="button"
+                        class="orbital-thumbnail-trigger"
+                        data-orbital-trigger="consob"
+                        data-orbital-src="${escapeHtmlAttribute(orbitalModalSrc)}"
+                        aria-label="Open CONSOB orbital dialog"
+                        onclick="openItalyOrbitalDialog(this.dataset.orbitalSrc); return false;"
+                    >
+                        <img src="${escapeHtmlAttribute(orbitalThumbnailSrc)}" alt="CONSOB orbital preview thumbnail">
+                    </button>
+                </div>
+            ` : '';
+            const safeCountryName = escapeHtmlAttribute(country.country_name);
+            const safeAuthorityName = escapeHtmlAttribute(country.financial_authority.name);
+            const safeAuthorityEmail = escapeHtmlAttribute(country.financial_authority.authorityEmail);
+            const safeCountryLanguage = escapeHtmlAttribute(getCountryLanguage(country.country_name));
+            const countryMarker = getCountryGridMarker(country.country_name);
+            const homepage = (country.financial_authority.homepage || '').trim();
+            const fraudReportLink = (country.financial_authority.fraudReportLink || '').trim();
+            const authorityEmail = (country.financial_authority.authorityEmail || '').trim();
+            const homepageHtml = homepage
+                ? `<a href="${escapeHtmlAttribute(homepage)}" target="_blank" rel="noopener noreferrer">${escapeHtmlAttribute(homepage)}</a>`
+===== Paesi con vista orbital e posizione dei campi =====
+
+financial_authorities_database.json
+  Italy: primo livello=True  dentro financial_authority=None  modal=authority/IT-CONSOB.html
+  United Kingdom: primo livello=None  dentro financial_authority=True  modal=authority/UK-FCA.html
+
+APP/financial_authorities_database.json
+  Italy: primo livello=True  dentro financial_authority=None  modal=authority/IT-CONSOB.html
+
+android/app/src/main/assets/financial_authorities_database.json
+  Italy: primo livello=True  dentro financial_authority=None  modal=authority/IT-CONSOB.html
+  United Kingdom: primo livello=None  dentro financial_authority=True  modal=authority/UK-FCA.html
+avvocato@LAPTOP-7E2BDF4K:/mnt/c/dev/Financial-Authority-Database$ nano check-resolvers.sh
+avvocato@LAPTOP-7E2BDF4K:/mnt/c/dev/Financial-Authority-Database$ ./check-resolvers.sh
+index.html:5770:        function resolveConsobOrbitalSrc(candidateSource, { allowFallback = false } = {}) {
+index.html-5771-            const source = String(candidateSource || '').trim();
+index.html-5772-            if (!source) return allowFallback ? CONSOB_ORBITAL_FALLBACK_SRC : '';
+index.html-5773-            try {
+index.html-5774-                const url = new URL(source, window.location.href);
+index.html-5775-                if (url.origin !== window.location.origin) return '';
+index.html-5776-                if (!CONSOB_ORBITAL_ALLOWED_PATHS.has(url.pathname)) return '';
+index.html-5777-                return url.pathname;
+index.html-5778-            } catch (error) {
+index.html-5779-                return '';
+index.html-5780-            }
+index.html-5781-        }
+index.html-5782-
+index.html:5783:        function resolveConsobOrbitalThumbnailSrc(candidateSource, { allowFallback = false } = {}) {
+index.html-5784-            const source = String(candidateSource || '').trim();
+index.html-5785-            if (!source) return allowFallback ? CONSOB_ORBITAL_THUMBNAIL_FALLBACK_SRC : '';
+index.html-5786-            try {
+index.html-5787-                const url = new URL(source, window.location.href);
+index.html-5788-                if (url.origin !== window.location.origin) return '';
+index.html-5789-                if (!CONSOB_ORBITAL_ALLOWED_THUMBNAIL_PATHS.has(url.pathname)) return '';
+index.html-5790-                return url.pathname;
+index.html-5791-            } catch (error) {
+index.html-5792-                return '';
+index.html-5793-            }
+index.html-5794-        }
+index.html-5795-
+index.html-5796-        function setupItalyOrbitalDialog() {
+index.html-5797-            if (isConsobOrbitalDialogSetup) return;
+index.html-5798-
+--
+index.html:5823:        function openItalyOrbitalDialog(modalSrc) {
+index.html-5824-            const dialog = document.getElementById('consobOrbitalDialog');
+index.html-5825-            const frame = document.getElementById('consobOrbitalFrame');
+index.html-5826-            const src = resolveConsobOrbitalSrc(modalSrc, { allowFallback: true });
+index.html-5827-            if (!src) return;
+index.html-5828-            if (!dialog) {
+index.html-5829-                window.open(src, '_blank', 'noopener');
+index.html-5830-                return;
+index.html-5831-            }
+index.html-5832-            if (!frame) {
+index.html-5833-                window.open(src, '_blank', 'noopener');
+index.html-5834-                return;
+index.html-5835-            }
+index.html-5836-            if (typeof dialog.showModal === 'function') {
+index.html-5837-                try {
+index.html-5838-                    if (dialog.open && typeof dialog.close === 'function') {
+--
+APP/index.html:5755:        function resolveConsobOrbitalSrc(candidateSource, { allowFallback = false } = {}) {
+APP/index.html-5756-            const source = String(candidateSource || '').trim();
+APP/index.html-5757-            if (!source) return allowFallback ? CONSOB_ORBITAL_FALLBACK_SRC : '';
+APP/index.html-5758-            try {
+APP/index.html-5759-                const url = new URL(source, window.location.href);
+APP/index.html-5760-                if (url.origin !== window.location.origin) return '';
+APP/index.html-5761-                if (!CONSOB_ORBITAL_ALLOWED_PATHS.has(url.pathname)) return '';
+APP/index.html-5762-                return url.pathname;
+APP/index.html-5763-            } catch (error) {
+APP/index.html-5764-                return '';
+APP/index.html-5765-            }
+APP/index.html-5766-        }
+APP/index.html-5767-
+APP/index.html:5768:        function resolveConsobOrbitalThumbnailSrc(candidateSource, { allowFallback = false } = {}) {
+APP/index.html-5769-            const source = String(candidateSource || '').trim();
+APP/index.html-5770-            if (!source) return allowFallback ? CONSOB_ORBITAL_THUMBNAIL_FALLBACK_SRC : '';
+APP/index.html-5771-            try {
+APP/index.html-5772-                const url = new URL(source, window.location.href);
+APP/index.html-5773-                if (url.origin !== window.location.origin) return '';
+APP/index.html-5774-                if (!CONSOB_ORBITAL_ALLOWED_THUMBNAIL_PATHS.has(url.pathname)) return '';
+APP/index.html-5775-                return url.pathname;
+APP/index.html-5776-            } catch (error) {
+APP/index.html-5777-                return '';
+APP/index.html-5778-            }
+APP/index.html-5779-        }
+APP/index.html-5780-
+APP/index.html-5781-        function setupItalyOrbitalDialog() {
+APP/index.html-5782-            if (isConsobOrbitalDialogSetup) return;
+APP/index.html-5783-
+--
+APP/index.html:5808:        function openItalyOrbitalDialog(modalSrc) {
+APP/index.html-5809-            const dialog = document.getElementById('consobOrbitalDialog');
+APP/index.html-5810-            const frame = document.getElementById('consobOrbitalFrame');
+APP/index.html-5811-            const src = resolveConsobOrbitalSrc(modalSrc, { allowFallback: true });
+APP/index.html-5812-            if (!src) return;
+APP/index.html-5813-            if (!dialog) {
+APP/index.html-5814-                window.open(src, '_blank', 'noopener');
+APP/index.html-5815-                return;
+APP/index.html-5816-            }
+APP/index.html-5817-            if (!frame) {
+APP/index.html-5818-                window.open(src, '_blank', 'noopener');
+APP/index.html-5819-                return;
+APP/index.html-5820-            }
+APP/index.html-5821-            if (typeof dialog.showModal === 'function') {
+APP/index.html-5822-                try {
+APP/index.html-5823-                    if (dialog.open && typeof dialog.close === 'function') {
+ls: cannot access 'authority/preview-fca.png': No such file or directory
+ls: cannot access 'preview-consob.png': No such file or directory
+ls: cannot access 'css/orbital.css': No such file or directory
+avvocato@LAPTOP-7E2BDF4K:/mnt/c/dev/Financial-Authority-Database$ grep -RIn "fetch("
+^C
+avvocato@LAPTOP-7E2BDF4K:/mnt/c/dev/Financial-Authority-Database$ grep -RIn "fetch(" .
+./APP/curriculum.html:1209:                const response = await fetch('i18n/index.json');
+./APP/curriculum.html:1223:                const response = await fetch('petition_documents.json');
+./APP/curriculum.html:1255:                const response = await fetch(`i18n/${langCode}.json`);
+./APP/index.html:4473:                const response = await fetch(`https://api.mymemory.translated.net/get?q=${encodeURIComponent(text)}&langpair=${sourceLang}|${target}`);
+./APP/index.html:4754:                const response = await fetch('financial_authorities_database.json');
+./archive/development-prototypes/index1.html:1964:                    const encResponse = await fetch('db.enc');
+./archive/development-prototypes/index1.html:1977:                    const response = await fetch('financial_authorities_database.json');
+./archive/legacy-server-register/index.html:2610:                const response = await fetch(`https://api.mymemory.translated.net/get?q=${encodeURIComponent(text)}&langpair=${sourceLang}|${target}`);
+./archive/legacy-server-register/index.html:2868:                const response = await fetch('financial_authorities_database.json');
+./banche_airtable.txt:9:    fetch("https:\u002F\u002Fo1061291.ingest.sentry.io\u002Fapi\u002F6173372\u002Fstore\u002F?sentry_key=e2e585110fec1fe15198199002e82b9a", {
+./banche_airtable.txt:62:fetch("\u002Fv0.3\u002Fapplication\u002FapprmYrIcUst4ixrt\u002Fread?stringifiedObjectParams=%7B%22includeDataForTableIds%22%3A%5B%22tblZUll2DtukjmHnE%22%5D%2C%22includeDataForViewIds%22%3A%5B%22viwC3zKdvLDT9mp1T%22%5D%2C%22shouldIncludeSchemaChecksum%22%3Atrue%2C%22mayExcludeCellDataForLargeViews%22%3Afalse%7D&requestId=reqCb6TWo71AuN7GG&accessPolicy=%7B%22allowedActions%22%3A%5B%7B%22modelClassName%22%3A%22application%22%2C%22modelIdSelector%22%3A%22apprmYrIcUst4ixrt%22%2C%22action%22%3A%22read%22%7D%2C%7B%22modelClassName%22%3A%22application%22%2C%22modelIdSelector%22%3A%22apprmYrIcUst4ixrt%22%2C%22action%22%3A%22readForDetailView%22%7D%2C%7B%22modelClassName%22%3A%22application%22%2C%22modelIdSelector%22%3A%22apprmYrIcUst4ixrt%22%2C%22action%22%3A%22readSignedAttachmentUrls%22%7D%2C%7B%22modelClassName%22%3A%22application%22%2C%22modelIdSelector%22%3A%22apprmYrIcUst4ixrt%22%2C%22action%22%3A%22readBlockInstallationPages%22%7D%2C%7B%22modelClassName%22%3A%22application%22%2C%22modelIdSelector%22%3A%22apprmYrIcUst4ixrt%22%2C%22action%22%3A%22readBlockInstallations%22%7D%2C%7B%22modelClassName%22%3A%22application%22%2C%22modelIdSelector%22%3A%22apprmYrIcUst4ixrt%22%2C%22action%22%3A%22readInitialDataForBlockInstallations%22%7D%2C%7B%22modelClassName%22%3A%22blockInstallationPage%22%2C%22modelIdSelector%22%3A%22apprmYrIcUst4ixrt%20*%22%2C%22action%22%3A%22readLayouts%22%7D%2C%7B%22modelClassName%22%3A%22table%22%2C%22modelIdSelector%22%3A%22apprmYrIcUst4ixrt%20*%22%2C%22action%22%3A%22read%22%7D%2C%7B%22modelClassName%22%3A%22table%22%2C%22modelIdSelector%22%3A%22apprmYrIcUst4ixrt%20*%22%2C%22action%22%3A%22readData%22%7D%2C%7B%22modelClassName%22%3A%22table%22%2C%22modelIdSelector%22%3A%22apprmYrIcUst4ixrt%20*%22%2C%22action%22%3A%22readDataForRowCards%22%7D%2C%7B%22modelClassName%22%3A%22view%22%2C%22modelIdSelector%22%3A%22apprmYrIcUst4ixrt%20*%22%2C%22action%22%3A%22readRowOrder%22%7D%2C%7B%22modelClassName%22%3A%22view%22%2C%22modelIdSelector%22%3A%22apprmYrIcUst4ixrt%20*%22%2C%22action%22%3A%22readData%22%7D%2C%7B%22modelClassName%22%3A%22view%22%2C%22modelIdSelector%22%3A%22apprmYrIcUst4ixrt%20*%22%2C%22action%22%3A%22getMetadataForPrinting%22%7D%2C%7B%22modelClassName%22%3A%22row%22%2C%22modelIdSelector%22%3A%22apprmYrIcUst4ixrt%20*%22%2C%22action%22%3A%22readDataForDetailView%22%7D%2C%7B%22modelClassName%22%3A%22row%22%2C%22modelIdSelector%22%3A%22apprmYrIcUst4ixrt%20*%22%2C%22action%22%3A%22createDocumentPreviewSession%22%7D%2C%7B%22modelClassName%22%3A%22view%22%2C%22modelIdSelector%22%3A%22apprmYrIcUst4ixrt%20*%22%2C%22action%22%3A%22downloadCsv%22%7D%2C%7B%22modelClassName%22%3A%22view%22%2C%22modelIdSelector%22%3A%22apprmYrIcUst4ixrt%20*%22%2C%22action%22%3A%22downloadICal%22%7D%2C%7B%22modelClassName%22%3A%22row%22%2C%22modelIdSelector%22%3A%22apprmYrIcUst4ixrt%20*%22%2C%22action%22%3A%22downloadAttachment%22%7D%5D%2C%22shareId%22%3A%22shrHs0mFxeHthTd7u%22%2C%22applicationId%22%3A%22apprmYrIcUst4ixrt%22%2C%22generationNumber%22%3A0%2C%22expires%22%3A%222026-01-15T00%3A00%3A00.000Z%22%2C%22signature%22%3A%226285eb28915e0778621c3e3eedcce39137dad5f6d8d1cf87b15a1317bf7a16a6%22%7D", {
+./banner-dinamico.html:6398:                    const response = await fetch('european_geographic_flags.json');
+./curriculum.html:1293:                const response = await fetch('i18n/index.json');
+./curriculum.html:1307:                const response = await fetch('petition_documents.json');
+./curriculum.html:1339:                const response = await fetch(`i18n/${langCode}.json`);
+./DEPLOY_REGISTER/curriculum.html:1293:                const response = await fetch('i18n/index.json');
+./DEPLOY_REGISTER/curriculum.html:1307:                const response = await fetch('petition_documents.json');
+./DEPLOY_REGISTER/curriculum.html:1339:                const response = await fetch(`i18n/${langCode}.json`);
+./DEPLOY_REGISTER/curriculum2.html:1208:                const response = await fetch('i18n/index.json');
+./DEPLOY_REGISTER/curriculum2.html:1222:                const response = await fetch('petition_documents.json');
+./DEPLOY_REGISTER/curriculum2.html:1254:                const response = await fetch(`i18n/${langCode}.json`);
+./Error/assistenza-google-download.htm:3490:headers:Object.assign({},a.requestHeaders)},a.body&&{body:a.body},a.withCredentials&&{credentials:"include"},{signal:a.XA&&f?f.signal:null}),oa.yield(fetch(a.url,k),5);case 5:l=oa.oa;if(l.status!==200){(p=c)==null||p(l.status);oa.Qa(3);break}if((r=b)==null){oa.Qa(7);break}return oa.yield(l.text(),8);case 8:r(oa.oa);case 7:case 3:oa.Ba();clearTimeout(h);oa.Da(0);break;case 2:t=oa.ua();switch((v=t)==null?void 0:v.name){case "AbortError":(y=c)==null||y(408);break;default:(E=c)==null||E(400)}oa.Qa(3)}})};
+./Error/index.html:2840:                    const encResponse = await fetch('db.enc');
+./Error/index.html:2853:                    const response = await fetch('financial_authorities_database.json');
+./Error/index.txt:1949:                    const encResponse = await fetch('db.enc');
+./Error/index.txt:1962:                    const response = await fetch('financial_authorities_database.json');
+./index.backup-2026-09-15.html:4000:                const response = await fetch(`https://api.mymemory.translated.net/get?q=${encodeURIComponent(text)}&langpair=${sourceLang}|${target}`);
+./index.backup-2026-09-15.html:4258:                const response = await fetch('financial_authorities_database.json');
+./index.html:4473:                const response = await fetch(`https://api.mymemory.translated.net/get?q=${encodeURIComponent(text)}&langpair=${sourceLang}|${target}`);
+./index.html:4754:                const response = await fetch('financial_authorities_database.json');
+./IONOS/index-dramatic.html:6398:                    const response = await fetch('european_geographic_flags.json');
+./IONOS/index.html:6376:                    const response = await fetch('european_geographic_flags.json');
+./IONOS/nuovo scenario.html:218:    const res = await fetch("eu_first_scene_flags_act2.json");
+./IONOS/Scheletro-Java.txt:27:    const response = await fetch("eu_first_scene_flags.json");
+./odissea.html:1803:                    const response = await fetch(`https://nominatim.openstreetmap.org/search?q=${query}&format=json&limit=1`);
+./service-worker.js:44:          const networkUpdatePromise = fetch(event.request)
+./service-worker.js:72:        return fetch(event.request).then(
+./test-bosnian-locale.html:193:        const appIndexHtmlPromise = fetch('./APP/index.html', { cache: 'no-store' }).then(async (response) => {
+avvocato@LAPTOP-7E2BDF4K:/mnt/c/dev/Financial-Authority-Database$ grep -RIn "fetch(" .
+./APP/curriculum.html:1209:                const response = await fetch('i18n/index.json');
+./APP/curriculum.html:1223:                const response = await fetch('petition_documents.json');
+./APP/curriculum.html:1255:                const response = await fetch(`i18n/${langCode}.json`);
+./APP/index.html:4473:                const response = await fetch(`https://api.mymemory.translated.net/get?q=${encodeURIComponent(text)}&langpair=${sourceLang}|${target}`);
+./APP/index.html:4754:                const response = await fetch('financial_authorities_database.json');
+./archive/development-prototypes/index1.html:1964:                    const encResponse = await fetch('db.enc');
+./archive/development-prototypes/index1.html:1977:                    const response = await fetch('financial_authorities_database.json');
+./archive/legacy-server-register/index.html:2610:                const response = await fetch(`https://api.mymemory.translated.net/get?q=${encodeURIComponent(text)}&langpair=${sourceLang}|${target}`);
+./archive/legacy-server-register/index.html:2868:                const response = await fetch('financial_authorities_database.json');
+./banche_airtable.txt:9:    fetch("https:\u002F\u002Fo1061291.ingest.sentry.io\u002Fapi\u002F6173372\u002Fstore\u002F?sentry_key=e2e585110fec1fe15198199002e82b9a", {
+./banche_airtable.txt:62:fetch("\u002Fv0.3\u002Fapplication\u002FapprmYrIcUst4ixrt\u002Fread?stringifiedObjectParams=%7B%22includeDataForTableIds%22%3A%5B%22tblZUll2DtukjmHnE%22%5D%2C%22includeDataForViewIds%22%3A%5B%22viwC3zKdvLDT9mp1T%22%5D%2C%22shouldIncludeSchemaChecksum%22%3Atrue%2C%22mayExcludeCellDataForLargeViews%22%3Afalse%7D&requestId=reqCb6TWo71AuN7GG&accessPolicy=%7B%22allowedActions%22%3A%5B%7B%22modelClassName%22%3A%22application%22%2C%22modelIdSelector%22%3A%22apprmYrIcUst4ixrt%22%2C%22action%22%3A%22read%22%7D%2C%7B%22modelClassName%22%3A%22application%22%2C%22modelIdSelector%22%3A%22apprmYrIcUst4ixrt%22%2C%22action%22%3A%22readForDetailView%22%7D%2C%7B%22modelClassName%22%3A%22application%22%2C%22modelIdSelector%22%3A%22apprmYrIcUst4ixrt%22%2C%22action%22%3A%22readSignedAttachmentUrls%22%7D%2C%7B%22modelClassName%22%3A%22application%22%2C%22modelIdSelector%22%3A%22apprmYrIcUst4ixrt%22%2C%22action%22%3A%22readBlockInstallationPages%22%7D%2C%7B%22modelClassName%22%3A%22application%22%2C%22modelIdSelector%22%3A%22apprmYrIcUst4ixrt%22%2C%22action%22%3A%22readBlockInstallations%22%7D%2C%7B%22modelClassName%22%3A%22application%22%2C%22modelIdSelector%22%3A%22apprmYrIcUst4ixrt%22%2C%22action%22%3A%22readInitialDataForBlockInstallations%22%7D%2C%7B%22modelClassName%22%3A%22blockInstallationPage%22%2C%22modelIdSelector%22%3A%22apprmYrIcUst4ixrt%20*%22%2C%22action%22%3A%22readLayouts%22%7D%2C%7B%22modelClassName%22%3A%22table%22%2C%22modelIdSelector%22%3A%22apprmYrIcUst4ixrt%20*%22%2C%22action%22%3A%22read%22%7D%2C%7B%22modelClassName%22%3A%22table%22%2C%22modelIdSelector%22%3A%22apprmYrIcUst4ixrt%20*%22%2C%22action%22%3A%22readData%22%7D%2C%7B%22modelClassName%22%3A%22table%22%2C%22modelIdSelector%22%3A%22apprmYrIcUst4ixrt%20*%22%2C%22action%22%3A%22readDataForRowCards%22%7D%2C%7B%22modelClassName%22%3A%22view%22%2C%22modelIdSelector%22%3A%22apprmYrIcUst4ixrt%20*%22%2C%22action%22%3A%22readRowOrder%22%7D%2C%7B%22modelClassName%22%3A%22view%22%2C%22modelIdSelector%22%3A%22apprmYrIcUst4ixrt%20*%22%2C%22action%22%3A%22readData%22%7D%2C%7B%22modelClassName%22%3A%22view%22%2C%22modelIdSelector%22%3A%22apprmYrIcUst4ixrt%20*%22%2C%22action%22%3A%22getMetadataForPrinting%22%7D%2C%7B%22modelClassName%22%3A%22row%22%2C%22modelIdSelector%22%3A%22apprmYrIcUst4ixrt%20*%22%2C%22action%22%3A%22readDataForDetailView%22%7D%2C%7B%22modelClassName%22%3A%22row%22%2C%22modelIdSelector%22%3A%22apprmYrIcUst4ixrt%20*%22%2C%22action%22%3A%22createDocumentPreviewSession%22%7D%2C%7B%22modelClassName%22%3A%22view%22%2C%22modelIdSelector%22%3A%22apprmYrIcUst4ixrt%20*%22%2C%22action%22%3A%22downloadCsv%22%7D%2C%7B%22modelClassName%22%3A%22view%22%2C%22modelIdSelector%22%3A%22apprmYrIcUst4ixrt%20*%22%2C%22action%22%3A%22downloadICal%22%7D%2C%7B%22modelClassName%22%3A%22row%22%2C%22modelIdSelector%22%3A%22apprmYrIcUst4ixrt%20*%22%2C%22action%22%3A%22downloadAttachment%22%7D%5D%2C%22shareId%22%3A%22shrHs0mFxeHthTd7u%22%2C%22applicationId%22%3A%22apprmYrIcUst4ixrt%22%2C%22generationNumber%22%3A0%2C%22expires%22%3A%222026-01-15T00%3A00%3A00.000Z%22%2C%22signature%22%3A%226285eb28915e0778621c3e3eedcce39137dad5f6d8d1cf87b15a1317bf7a16a6%22%7D", {
+./banner-dinamico.html:6398:                    const response = await fetch('european_geographic_flags.json');
+./curriculum.html:1293:                const response = await fetch('i18n/index.json');
+./curriculum.html:1307:                const response = await fetch('petition_documents.json');
+./curriculum.html:1339:                const response = await fetch(`i18n/${langCode}.json`);
+./DEPLOY_REGISTER/curriculum.html:1293:                const response = await fetch('i18n/index.json');
+./DEPLOY_REGISTER/curriculum.html:1307:                const response = await fetch('petition_documents.json');
+./DEPLOY_REGISTER/curriculum.html:1339:                const response = await fetch(`i18n/${langCode}.json`);
+./DEPLOY_REGISTER/curriculum2.html:1208:                const response = await fetch('i18n/index.json');
+./DEPLOY_REGISTER/curriculum2.html:1222:                const response = await fetch('petition_documents.json');
+./DEPLOY_REGISTER/curriculum2.html:1254:                const response = await fetch(`i18n/${langCode}.json`);
+./Error/assistenza-google-download.htm:3490:headers:Object.assign({},a.requestHeaders)},a.body&&{body:a.body},a.withCredentials&&{credentials:"include"},{signal:a.XA&&f?f.signal:null}),oa.yield(fetch(a.url,k),5);case 5:l=oa.oa;if(l.status!==200){(p=c)==null||p(l.status);oa.Qa(3);break}if((r=b)==null){oa.Qa(7);break}return oa.yield(l.text(),8);case 8:r(oa.oa);case 7:case 3:oa.Ba();clearTimeout(h);oa.Da(0);break;case 2:t=oa.ua();switch((v=t)==null?void 0:v.name){case "AbortError":(y=c)==null||y(408);break;default:(E=c)==null||E(400)}oa.Qa(3)}})};
+./Error/index.html:2840:                    const encResponse = await fetch('db.enc');
+./Error/index.html:2853:                    const response = await fetch('financial_authorities_database.json');
+./Error/index.txt:1949:                    const encResponse = await fetch('db.enc');
+./Error/index.txt:1962:                    const response = await fetch('financial_authorities_database.json');
+./index.backup-2026-09-15.html:4000:                const response = await fetch(`https://api.mymemory.translated.net/get?q=${encodeURIComponent(text)}&langpair=${sourceLang}|${target}`);
+./index.backup-2026-09-15.html:4258:                const response = await fetch('financial_authorities_database.json');
+./index.html:4473:                const response = await fetch(`https://api.mymemory.translated.net/get?q=${encodeURIComponent(text)}&langpair=${sourceLang}|${target}`);
+./index.html:4754:                const response = await fetch('financial_authorities_database.json');
+./IONOS/index-dramatic.html:6398:                    const response = await fetch('european_geographic_flags.json');
+./IONOS/index.html:6376:                    const response = await fetch('european_geographic_flags.json');
+./IONOS/nuovo scenario.html:218:    const res = await fetch("eu_first_scene_flags_act2.json");
+./IONOS/Scheletro-Java.txt:27:    const response = await fetch("eu_first_scene_flags.json");
+./odissea.html:1803:                    const response = await fetch(`https://nominatim.openstreetmap.org/search?q=${query}&format=json&limit=1`);
+./service-worker.js:44:          const networkUpdatePromise = fetch(event.request)
+./service-worker.js:72:        return fetch(event.request).then(
+./test-bosnian-locale.html:193:        const appIndexHtmlPromise = fetch('./APP/index.html', { cache: 'no-store' }).then(async (response) => {
+avvocato@LAPTOP-7E2BDF4K:/mnt/c/dev/Financial-Authority-Database$ grep -RIn import.json .
+^C
+avvocato@LAPTOP-7E2BDF4K:/mnt/c/dev/Financial-Authority-Database$ grep -RIn import .*json" .
+> ^C
+avvocato@LAPTOP-7E2BDF4K:/mnt/c/dev/Financial-Authority-Database$ grep -RIn "import .*json" .
+./android/app/src/main/java/com/financialauthority/database/data/JsonParsers.kt:7:import kotlinx.serialization.json.Json
+./android/app/src/main/java/com/financialauthority/database/data/JsonParsers.kt:8:import kotlinx.serialization.json.JsonArray
+./android/app/src/main/java/com/financialauthority/database/data/JsonParsers.kt:9:import kotlinx.serialization.json.JsonElement
+./android/app/src/main/java/com/financialauthority/database/data/JsonParsers.kt:10:import kotlinx.serialization.json.JsonObject
+./android/app/src/main/java/com/financialauthority/database/data/JsonParsers.kt:11:import kotlinx.serialization.json.JsonPrimitive
+./android/app/src/main/java/com/financialauthority/database/data/JsonParsers.kt:12:import kotlinx.serialization.json.booleanOrNull
+./android/app/src/main/java/com/financialauthority/database/data/JsonParsers.kt:13:import kotlinx.serialization.json.contentOrNull
+./android/app/src/main/java/com/financialauthority/database/data/JsonParsers.kt:14:import kotlinx.serialization.json.decodeFromJsonElement
+./android/app/src/main/java/com/financialauthority/database/data/JsonParsers.kt:15:import kotlinx.serialization.json.jsonArray
+./android/app/src/main/java/com/financialauthority/database/data/JsonParsers.kt:16:import kotlinx.serialization.json.jsonObject
+./android/app/src/main/java/com/financialauthority/database/data/JsonParsers.kt:17:import kotlinx.serialization.json.jsonPrimitive
+./check-database-mirrors.sh:6:import json
+./check-orbital-logic.sh:9:import json
+./diff-db.sh:14:  python3 -c "import json,sys,hashlib;d=json.load(open(sys.argv[1],encoding='utf-8-sig'));print(hashlib.sha256(json.dumps(d,sort_keys=True).encode()).hexdigest()[:12], len(d), 'chiavi', sys.argv[1])" "$f"
+./diff-db.sh:19:import json
+./Error/assistenza-google-download.htm:5657:a.nextSibling)G(a,d);d=d.join("")}d=d.replace(/(?:\r\n?|\n)$/,"");a=r.className.match(/\blinenums\b(?::(\d+))?/);u={sourceCodeHtml:d,langExtension:c,sourceNode:r,numberLines:a?a[1]&&a[1].length?+a[1]:!0:!1};Q(u);if(r=u.prettyPrintedHtml)if(c=u.sourceNode,"XMP"===c.tagName){d=document.createElement("PRE");for(a=0;a<c.attributes.length;++a)if(q=c.attributes[a],q.specified){var e=q.name.toLowerCase();e==="class"?d.className=q.value:d.setAttribute(q.name,q.value)}d.innerHTML=r;c.parentNode.replaceChild(d,c)}else c.innerHTML=r}}}l<m.length?setTimeout(f,250):b&&b()}for(var h=[document.getElementsByTagName("pre"),document.getElementsByTagName("code"),document.getElementsByTagName("xmp")],m=[],p=0;p<h.length;++p)for(var x=0,t=h[p].length;x<t;++x)m.push(h[p][x]);h=null;var k=Date;k.now||(k={now:function(){return(new Date).getTime()}});var l=0,u;f()}var U=function(){for(var b="! != !== # % %= & && &&= &= ( * *= += , -= -> / /= : :: ; < << <<= <= = == === > >= >> >>= >>> >>>= ? @ [ ^ ^= ^^ ^^= { | |= || ||= ~ break case continue delete do else finally instanceof return throw try typeof".split(" "),f="(?:^^|[+-]",h=0;h<b.length;++h)f+="|"+b[h].replace(/([^=<>:&a-z])/g,"\\$1");return f+=")\\s*"}(),J=/&/g,K=/</g,L=/>/g,S=/"/g,aa=/&lt;/g,ba=/&gt;/g,ca=/&apos;/g,da=/&quot;/g,fa=/&amp;/g,ea=/&nbsp;/g,ja=/[\r\n]/g,I=null,W=RegExp("[^<]+|\x3c!--[\\s\\S]*?--\x3e|<!\\[CDATA\\[[\\s\\S]*?\\]\\]>|</?[a-zA-Z](?:[^>\"']|'[^']*'|\"[^\"]*\")*>|<","g"),X=/^\x3c!--/,Y=/^<!\[CDATA\[/,Z=/^<br\b/i,R=/^<(\/?)([a-zA-Z][a-zA-Z0-9]*)/,ka=B({keywords:"break continue do else for if return while auto case char const default double enum extern float goto int long register short signed sizeof static struct switch typedef union unsigned void volatile catch class delete false import new operator private protected public this throw true try typeof alignof align_union asm axiom bool concept concept_map const_cast constexpr decltype dynamic_cast explicit export friend inline late_check mutable namespace nullptr reinterpret_cast static_assert static_cast template typeid typename using virtual wchar_t where break continue do else for if return while auto case char const default double enum extern float goto int long register short signed sizeof static struct switch typedef union unsigned void volatile catch class delete false import new operator private protected public this throw true try typeof abstract boolean byte extends final finally implements import instanceof null native package strictfp super synchronized throws transient as base by checked decimal delegate descending dynamic event fixed foreach from group implicit in interface internal into is lock object out override orderby params partial readonly ref sbyte sealed stackalloc string select uint ulong unchecked unsafe ushort var break continue do else for if return while auto case char const default double enum extern float goto int long register short signed sizeof static struct switch typedef union unsigned void volatile catch class delete false import new operator private protected public this throw true try typeof debugger eval export function get null set undefined var with Infinity NaN caller delete die do dump elsif eval exit foreach for goto if import last local my next no our print package redo require sub undef unless until use wantarray while BEGIN END break continue do else for if return while and as assert class def del elif except exec finally from global import in is lambda nonlocal not or pass print raise try with yield False True None break continue do else for if return while alias and begin case class def defined elsif end ensure false in module next nil not or redo rescue retry self super then true undef unless until when yield BEGIN END break continue do else for if return while case done elif esac eval fi function in local set then until ",hashComments:!0,cStyleComments:!0,multiLineStrings:!0,regexLiterals:!0}),F={};y(ka,["default-code"]);y(D([],[["pln",/^[^<?]+/],["dec",/^<!\w[^>]*(?:>|$)/],["com",/^\x3c!--[\s\S]*?(?:-\->|$)/],["lang-",/^<\?([\s\S]+?)(?:\?>|$)/],["lang-",/^<%([\s\S]+?)(?:%>|$)/],["pun",/^(?:<[%?]|[%?]>)/],["lang-",/^<xmp\b[^>]*>([\s\S]+?)<\/xmp\b[^>]*>/i],["lang-js",/^<script\b[^>]*>([\s\S]*?)(<\/script\b[^>]*>)/i],["lang-css",/^<style\b[^>]*>([\s\S]*?)(<\/style\b[^>]*>)/i],["lang-in.tag",/^(<\/?[a-z][^<>]*>)/i]]),"default-markup htm html mxml xhtml xml xsl".split(" "));y(D([["pln",/^[\s]+/,null," \t\r\n"],["atv",/^(?:"[^"]*"?|'[^']*'?)/,null,"\"'"]],[["tag",/^^<\/?[a-z](?:[\w.:-]*\w)?|\/?>$/i],["atn",/^(?!style[\s=]|on)[a-z](?:[\w:-]*\w)?/i],["lang-uq.val",/^=\s*([^>'"\s]*(?:[^>'"\s\/]|\/(?=\s)))/],["pun",/^[=<>\/]+/],["lang-js",/^on\w+\s*=\s*"([^"]+)"/i],["lang-js",/^on\w+\s*=\s*'([^']+)'/i],["lang-js",/^on\w+\s*=\s*([^"'>\s]+)/i],["lang-css",/^style\s*=\s*"([^"]+)"/i],["lang-css",/^style\s*=\s*'([^']+)'/i],["lang-css",/^style\s*=\s*([^"'>\s]+)/i]]),["in.tag"]);y(D([],[["atv",/^[\s\S]+/]]),["uq.val"]);y(B({keywords:"break continue do else for if return while auto case char const default double enum extern float goto int long register short signed sizeof static struct switch typedef union unsigned void volatile catch class delete false import new operator private protected public this throw true try typeof alignof align_union asm axiom bool concept concept_map const_cast constexpr decltype dynamic_cast explicit export friend inline late_check mutable namespace nullptr reinterpret_cast static_assert static_cast template typeid typename using virtual wchar_t where ",hashComments:!0,cStyleComments:!0}),"c cc cpp cxx cyc m".split(" "));y(B({keywords:"null true false"}),["json"]);y(B({keywords:"break continue do else for if return while auto case char const default double enum extern float goto int long register short signed sizeof static struct switch typedef union unsigned void volatile catch class delete false import new operator private protected public this throw true try typeof abstract boolean byte extends final finally implements import instanceof null native package strictfp super synchronized throws transient as base by checked decimal delegate descending dynamic event fixed foreach from group implicit in interface internal into is lock object out override orderby params partial readonly ref sbyte sealed stackalloc string select uint ulong unchecked unsafe ushort var ",hashComments:!0,cStyleComments:!0,verbatimStrings:!0}),["cs"]);y(B({keywords:"break continue do else for if return while auto case char const default double enum extern float goto int long register short signed sizeof static struct switch typedef union unsigned void volatile catch class delete false import new operator private protected public this throw true try typeof abstract boolean byte extends final finally implements import instanceof null native package strictfp super synchronized throws transient ",cStyleComments:!0}),["java"]);y(B({keywords:"break continue do else for if return while case done elif esac eval fi function in local set then until ",hashComments:!0,multiLineStrings:!0}),["bsh","csh","sh"]);y(B({keywords:"break continue do else for if return while and as assert class def del elif except exec finally from global import in is lambda nonlocal not or pass print raise try with yield False True None ",hashComments:!0,multiLineStrings:!0,tripleQuotedStrings:!0}),["cv","py"]);y(B({keywords:"caller delete die do dump elsif eval exit foreach for goto if import last local my next no our print package redo require sub undef unless until use wantarray while BEGIN END ",hashComments:!0,multiLineStrings:!0,regexLiterals:!0}),["perl","pl","pm"]);y(B({keywords:"break continue do else for if return while alias and begin case class def defined elsif end ensure false in module next nil not or redo rescue retry self super then true undef unless until when yield BEGIN END ",hashComments:!0,multiLineStrings:!0,regexLiterals:!0}),["rb"]);y(B({keywords:"break continue do else for if return while auto case char const default double enum extern float goto int long register short signed sizeof static struct switch typedef union unsigned void volatile catch class delete false import new operator private protected public this throw true try typeof debugger eval export function get null set undefined var with Infinity NaN ",cStyleComments:!0,regexLiterals:!0}),["js"]);y(B({keywords:"all and by catch class else extends false finally for if in is isnt loop new no not null of off on or return super then true try unless until when while yes ",hashComments:3,cStyleComments:!0,multilineStrings:!0,tripleQuotedStrings:!0,regexLiterals:!0}),["coffee"]);y(D([],[["str",/^[\s\S]+/]]),["regex"]);window.PR_normalizedHtml=G;window.prettyPrintOne=ha;window.prettyPrint=ia;window.PR={combinePrefixPatterns:M,createSimpleLexer:D,registerLangHandler:y,sourceDecorator:B,PR_ATTRIB_NAME:"atn",PR_ATTRIB_VALUE:"atv",PR_COMMENT:"com",PR_DECLARATION:"dec",PR_KEYWORD:"kwd",PR_LITERAL:"lit",PR_NOCODE:"nocode",PR_PLAIN:"pln",PR_PUNCTUATION:"pun",PR_SOURCE:"src",PR_STRING:"str",PR_TAG:"tag",PR_TYPE:"typ"}})();
+./scripts/validate_international_data.py:2:import json
+./show-diffs.sh:3:import json
+avvocato@LAPTOP-7E2BDF4K:/mnt/c/dev/Financial-Authority-Database$ grep -RIn "require(.*json" .
+avvocato@LAPTOP-7E2BDF4K:/mnt/c/dev/Financial-Authority-Database$ grep -RIn "openOrbitalWebApp" .
+avvocato@LAPTOP-7E2BDF4K:/mnt/c/dev/Financial-Authority-Database$ grep -RIn "createModal" .
+avvocato@LAPTOP-7E2BDF4K:/mnt/c/dev/Financial-Authority-Database$ grep -RIn "renderModal" .
+avvocato@LAPTOP-7E2BDF4K:/mnt/c/dev/Financial-Authority-Database$ grep -RIN "onclick=\"openOrbitalWebApp" .
+grep: invalid option -- 'N'
+Usage: grep [OPTION]... PATTERNS [FILE]...
+Try 'grep --help' for more information.
+avvocato@LAPTOP-7E2BDF4K:/mnt/c/dev/Financial-Authority-Database$ grep -RIn "onclick=\"openOrbitalWebApp" .
+avvocato@LAPTOP-7E2BDF4K:/mnt/c/dev/Financial-Authority-Database$ grep -RIn "financial_authorities_database" .
+./AI_DISCOVERY.md:14:- 🗂️ Dataset JSON: <https://avvstancamarcello.github.io/Financial-Authority-Database/financial_authorities_database.json>
+./AI_DISCOVERY.md:142:      "contentUrl": "https://avvstancamarcello.github.io/Financial-Authority-Database/financial_authorities_database.json"
+./android/app/build/intermediates/assets/debug/mergeDebugAssets/data/international_financial_institutions.json:19:        "reason": "No standalone Bank of Italy authorityId exists in financial_authorities_database.json as of 2026-09-23",
+./android/app/build/intermediates/assets/debug/mergeDebugAssets/data/international_financial_institutions.json:25:        "reason": "No Guardia di Finanza authorityId exists in financial_authorities_database.json as of 2026-09-23",
+./android/app/build/intermediates/assets/debug/mergeDebugAssets/data/international_financial_institutions.json:31:        "reason": "No standalone authorityId exists in financial_authorities_database.json as of 2026-09-23",
+./android/app/build/intermediates/assets/debug/mergeDebugAssets/data/international_financial_institutions.json:38:        "reason": "No standalone authorityId exists in financial_authorities_database.json as of 2026-09-23",
+./android/app/build/intermediates/assets/debug/mergeDebugAssets/legal/sources_en.md:5:- `financial_authorities_database.json`
+./android/app/build/intermediates/assets/debug/mergeDebugAssets/legal/sources_it.md:5:- `financial_authorities_database.json`
+./android/app/build/intermediates/assets/release/mergeReleaseAssets/data/international_financial_institutions.json:19:        "reason": "No standalone Bank of Italy authorityId exists in financial_authorities_database.json as of 2026-09-23",
+./android/app/build/intermediates/assets/release/mergeReleaseAssets/data/international_financial_institutions.json:25:        "reason": "No Guardia di Finanza authorityId exists in financial_authorities_database.json as of 2026-09-23",
+./android/app/build/intermediates/assets/release/mergeReleaseAssets/data/international_financial_institutions.json:31:        "reason": "No standalone authorityId exists in financial_authorities_database.json as of 2026-09-23",
+./android/app/build/intermediates/assets/release/mergeReleaseAssets/data/international_financial_institutions.json:38:        "reason": "No standalone authorityId exists in financial_authorities_database.json as of 2026-09-23",
+./android/app/build/intermediates/assets/release/mergeReleaseAssets/legal/sources_en.md:5:- `financial_authorities_database.json`
+./android/app/build/intermediates/assets/release/mergeReleaseAssets/legal/sources_it.md:5:- `financial_authorities_database.json`
+./android/app/build/intermediates/incremental/mergeDebugAssets/merger.xml:2:<merger version="3"><dataSet config="main" ignore_pattern="!.svn:!.git:!.ds_store:!*.scc:.*:&lt;dir>_*:!CVS:!thumbs.db:!picasa.ini:!*~"><source path="C:\dev\Financial-Authority-Database\android\app\src\main\assets"><file name="data/international_financial_institutions.json" path="C:\dev\Financial-Authority-Database\android\app\src\main\assets\data\international_financial_institutions.json"/><file name="data/international_institutions_categories.json" path="C:\dev\Financial-Authority-Database\android\app\src\main\assets\data\international_institutions_categories.json"/><file name="data/international_institutions_i18n.json" path="C:\dev\Financial-Authority-Database\android\app\src\main\assets\data\international_institutions_i18n.json"/><file name="data/international_institutions_types.json" path="C:\dev\Financial-Authority-Database\android\app\src\main\assets\data\international_institutions_types.json"/><file name="financial_authorities_database.json" path="C:\dev\Financial-Authority-Database\android\app\src\main\assets\financial_authorities_database.json"/><file name="legal/disclaimer_en.md" path="C:\dev\Financial-Authority-Database\android\app\src\main\assets\legal\disclaimer_en.md"/><file name="legal/disclaimer_it.md" path="C:\dev\Financial-Authority-Database\android\app\src\main\assets\legal\disclaimer_it.md"/><file name="legal/privacy_en.md" path="C:\dev\Financial-Authority-Database\android\app\src\main\assets\legal\privacy_en.md"/><file name="legal/privacy_it.md" path="C:\dev\Financial-Authority-Database\android\app\src\main\assets\legal\privacy_it.md"/><file name="legal/sources_en.md" path="C:\dev\Financial-Authority-Database\android\app\src\main\assets\legal\sources_en.md"/><file name="legal/sources_it.md" path="C:\dev\Financial-Authority-Database\android\app\src\main\assets\legal\sources_it.md"/><file name="legal/terms_en.md" path="C:\dev\Financial-Authority-Database\android\app\src\main\assets\legal\terms_en.md"/><file name="legal/terms_it.md" path="C:\dev\Financial-Authority-Database\android\app\src\main\assets\legal\terms_it.md"/></source></dataSet><dataSet config="debug" ignore_pattern="!.svn:!.git:!.ds_store:!*.scc:.*:&lt;dir>_*:!CVS:!thumbs.db:!picasa.ini:!*~"><source path="C:\dev\Financial-Authority-Database\android\app\src\debug\assets"/></dataSet><dataSet config="generated" ignore_pattern="!.svn:!.git:!.ds_store:!*.scc:.*:&lt;dir>_*:!CVS:!thumbs.db:!picasa.ini:!*~"><source path="C:\dev\Financial-Authority-Database\android\app\build\intermediates\shader_assets\debug\compileDebugShaders\out"/></dataSet></merger>
+./android/app/build/intermediates/incremental/mergeReleaseAssets/merger.xml:2:<merger version="3"><dataSet config="main" ignore_pattern="!.svn:!.git:!.ds_store:!*.scc:.*:&lt;dir>_*:!CVS:!thumbs.db:!picasa.ini:!*~"><source path="C:\dev\Financial-Authority-Database\android\app\src\main\assets"><file name="data/international_financial_institutions.json" path="C:\dev\Financial-Authority-Database\android\app\src\main\assets\data\international_financial_institutions.json"/><file name="data/international_institutions_categories.json" path="C:\dev\Financial-Authority-Database\android\app\src\main\assets\data\international_institutions_categories.json"/><file name="data/international_institutions_i18n.json" path="C:\dev\Financial-Authority-Database\android\app\src\main\assets\data\international_institutions_i18n.json"/><file name="data/international_institutions_types.json" path="C:\dev\Financial-Authority-Database\android\app\src\main\assets\data\international_institutions_types.json"/><file name="financial_authorities_database.json" path="C:\dev\Financial-Authority-Database\android\app\src\main\assets\financial_authorities_database.json"/><file name="legal/disclaimer_en.md" path="C:\dev\Financial-Authority-Database\android\app\src\main\assets\legal\disclaimer_en.md"/><file name="legal/disclaimer_it.md" path="C:\dev\Financial-Authority-Database\android\app\src\main\assets\legal\disclaimer_it.md"/><file name="legal/privacy_en.md" path="C:\dev\Financial-Authority-Database\android\app\src\main\assets\legal\privacy_en.md"/><file name="legal/privacy_it.md" path="C:\dev\Financial-Authority-Database\android\app\src\main\assets\legal\privacy_it.md"/><file name="legal/sources_en.md" path="C:\dev\Financial-Authority-Database\android\app\src\main\assets\legal\sources_en.md"/><file name="legal/sources_it.md" path="C:\dev\Financial-Authority-Database\android\app\src\main\assets\legal\sources_it.md"/><file name="legal/terms_en.md" path="C:\dev\Financial-Authority-Database\android\app\src\main\assets\legal\terms_en.md"/><file name="legal/terms_it.md" path="C:\dev\Financial-Authority-Database\android\app\src\main\assets\legal\terms_it.md"/></source></dataSet><dataSet config="release" ignore_pattern="!.svn:!.git:!.ds_store:!*.scc:.*:&lt;dir>_*:!CVS:!thumbs.db:!picasa.ini:!*~"><source path="C:\dev\Financial-Authority-Database\android\app\src\release\assets"/></dataSet><dataSet config="generated" ignore_pattern="!.svn:!.git:!.ds_store:!*.scc:.*:&lt;dir>_*:!CVS:!thumbs.db:!picasa.ini:!*~"><source path="C:\dev\Financial-Authority-Database\android\app\build\intermediates\shader_assets\release\compileReleaseShaders\out"/></dataSet></merger>
+./android/app/src/main/assets/data/international_financial_institutions.json:19:        "reason": "No standalone Bank of Italy authorityId exists in financial_authorities_database.json as of 2026-09-23",
+./android/app/src/main/assets/data/international_financial_institutions.json:25:        "reason": "No Guardia di Finanza authorityId exists in financial_authorities_database.json as of 2026-09-23",
+./android/app/src/main/assets/data/international_financial_institutions.json:31:        "reason": "No standalone authorityId exists in financial_authorities_database.json as of 2026-09-23",
+./android/app/src/main/assets/data/international_financial_institutions.json:38:        "reason": "No standalone authorityId exists in financial_authorities_database.json as of 2026-09-23",
+./android/app/src/main/assets/legal/sources_en.md:5:- `financial_authorities_database.json`
+./android/app/src/main/assets/legal/sources_it.md:5:- `financial_authorities_database.json`
+./android/app/src/main/java/com/financialauthority/database/data/AppRepository.kt:16:            val countries = loadAsset("financial_authorities_database.json")
+./android/README.md:21:- `app/src/main/assets/financial_authorities_database.json`
+./APP/index.backup-2026-09-14.html:207:            "contentUrl": "financial_authorities_database.json"
+./APP/index.backup-2026-09-14.html:284:        "identifier": "https://tutelatruffe.it/financial_authorities_database.json",
+./APP/index.backup-2026-09-14.html:332:            "contentUrl": "https://tutelatruffe.it/financial_authorities_database.json"
+./APP/index.html:310:        "identifier": "https://tutelatruffe.it/financial_authorities_database.json",
+./APP/index.html:358:            "contentUrl": "https://tutelatruffe.it/financial_authorities_database.json"
+./APP/index.html:4754:                const response = await fetch('financial_authorities_database.json');
+./APP/index.html:4858:        const SEO_DATASET_URL = 'https://tutelatruffe.it/financial_authorities_database.json';
+./APP/robots.txt:40:Disallow: /financial_authorities_database.json
+./APP/robots.txt:44:Disallow: /financial_authorities_database.json
+./APP/robots.txt:48:Disallow: /financial_authorities_database.json
+./APP/sitemap.xml:164:        <loc>https://tutelatruffe.it/financial_authorities_database.json</loc>
+./archive/development-prototypes/index1.html:176:            "contentUrl": "https://avvstancamarcello.github.io/Financial-Authority-Database/financial_authorities_database.json"
+./archive/development-prototypes/index1.html:1977:                    const response = await fetch('financial_authorities_database.json');
+./archive/legacy-server-register/index.html:207:            "contentUrl": "financial_authorities_database.json"
+./archive/legacy-server-register/index.html:284:        "identifier": "https://tutelatruffe.it/financial_authorities_database.json",
+./archive/legacy-server-register/index.html:332:            "contentUrl": "https://tutelatruffe.it/financial_authorities_database.json"
+./archive/legacy-server-register/index.html:2868:                const response = await fetch('financial_authorities_database.json');
+./Backup/_index-now.html:1055:                <a href="financial_authorities_database.json" class="planet planet-inner-a planet-saturno" data-planet="saturn" style="position: absolute; top: 50%; left: 50%; width: 60px; height: 60px; background: radial-gradient(circle at 30% 30%, #D4A574, #C4956A, #8B7355); border-radius: 50%; box-shadow: 0 0 25px rgba(212, 165, 116, 0.8), inset -8px -8px 16px rgba(0,0,0,0.3); cursor: pointer; text-decoration: none; animation: innerOrbitClockwise 40s linear infinite; display: flex; align-items: center; justify-content: center;">
+./banner-dinamico.html:1179:                <a href="financial_authorities_database.json" class="planet planet-inner-a planet-police" data-planet="police" style="position: absolute; top: 50%; left: 50%; width: 120px; height: 120px; background: radial-gradient(circle at 30% 30%, #1e40af, #1d4ed8, #3b82f6); border-radius: 50%; box-shadow: 0 0 35px rgba(59, 130, 246, 0.9), inset -12px -12px 24px rgba(0,0,0,0.3); cursor: pointer; text-decoration: none; animation: innerOrbitClockwise 40s linear infinite; display: flex; align-items: center; justify-content: center;">
+./check-database-mirrors.sh:11:    Path("financial_authorities_database.json"),
+./check-database-mirrors.sh:12:    Path("APP/financial_authorities_database.json"),
+./check-database-mirrors.sh:13:    Path("DEPLOY_REGISTER/financial_authorities_database.json"),
+./check-database-mirrors.sh:14:    Path("android/app/src/main/assets/financial_authorities_database.json"),
+./check-fca-references.sh:1:grep -nE 'UK-FCA|has_orbital_view|preview-fca|financial_authorities_database\.json' \
+./check-orbital-logic.sh:10:for p in ["financial_authorities_database.json",
+./check-orbital-logic.sh:11:          "APP/financial_authorities_database.json",
+./check-orbital-logic.sh:12:          "android/app/src/main/assets/financial_authorities_database.json"]:
+./check.sh:2:grep -RIn --exclude-dir={build,.git,archive,Backup,Error,IONOS,node_modules} "financial_authorities_database" .
+./check.sh:5:sha256sum financial_authorities_database.json APP/financial_authorities_database.json \
+./check.sh:6:  DEPLOY_REGISTER/financial_authorities_database.json \
+./check.sh:7:  android/app/src/main/assets/financial_authorities_database.json
+./cifra_database.ps1:7:#   1. Modifica financial_authorities_database.json
+./cifra_database.ps1:17:if (-not (Test-Path "financial_authorities_database.json")) {
+./cifra_database.ps1:18:    Write-Host "❌ ERRORE: File financial_authorities_database.json non trovato!" -ForegroundColor Red
+./cifra_database.ps1:23:$data = Get-Content 'financial_authorities_database.json' -Raw
+./cifra_database.ps1:84:Write-Host "   2. git add db.enc financial_authorities_database.json"
+./COMANDI_RAPIDI.md:8:code "c:\Users\Utente\BancheEuropa\financial_authorities_database.json"
+./COMANDI_RAPIDI.md:12:Copy-Item "c:\Users\Utente\BancheEuropa\financial_authorities_database.json" . -Force
+./COMANDI_RAPIDI.md:14:git add financial_authorities_database.json
+./COMANDI_RAPIDI.md:24:code "c:\Users\Utente\BancheEuropa\financial_authorities_database.json"
+./COMANDI_RAPIDI.md:32:git add db.enc financial_authorities_database.json
+./COMANDI_RAPIDI.md:58:$data = Get-Content 'financial_authorities_database.json' -Raw
+./COMANDI_RAPIDI.md:78:    $json = Get-Content 'financial_authorities_database.json' -Raw | ConvertFrom-Json
+./COMANDI_RAPIDI.md:88:$json = Get-Content 'financial_authorities_database.json' -Raw | ConvertFrom-Json
+./COMANDI_RAPIDI.md:94:$json = Get-Content 'financial_authorities_database.json' -Raw | ConvertFrom-Json
+./COMANDI_RAPIDI.md:105:Copy-Item "c:\Users\Utente\BancheEuropa\financial_authorities_database.json" `
+./COMANDI_RAPIDI.md:118:Copy-Item "c:\Users\Utente\BancheEuropa\financial_authorities_database.json" `
+./COMANDI_RAPIDI.md:141:git add financial_authorities_database.json
+./COMANDI_RAPIDI.md:169:$json = Get-Content 'financial_authorities_database.json' -Raw | ConvertFrom-Json
+./COMANDI_RAPIDI.md:175:$json = Get-Content 'financial_authorities_database.json' -Raw | ConvertFrom-Json
+./COMANDI_RAPIDI.md:182:$json = Get-Content 'financial_authorities_database.json' -Raw | ConvertFrom-Json
+./COMANDI_RAPIDI.md:189:$json = Get-Content 'financial_authorities_database.json' -Raw | ConvertFrom-Json
+./COMANDI_RAPIDI.md:201:$json = Get-Content 'financial_authorities_database.json' -Raw | ConvertFrom-Json
+./COMANDI_RAPIDI.md:216:$jsonSize = (Get-Item 'financial_authorities_database.json').Length
+./COMANDI_RAPIDI.md:267:Copy-Item "c:\Users\Utente\BancheEuropa\financial_authorities_database.json" `
+./COMANDI_RAPIDI.md:305:$DEV_JSON = "c:\Users\Utente\BancheEuropa\financial_authorities_database.json"
+./COMANDI_RAPIDI.md:306:$PROD_JSON = "c:\Users\Utente\Financial-Authority-Database\financial_authorities_database.json"
+./COMANDI_RAPIDI.md:321:cd "c:\Users\Utente\BancheEuropa"; .\cifra_database.ps1; cd "c:\Users\Utente\Financial-Authority-Database"; git add db.enc financial_authorities_database.json; git commit -m "Database update"; git push
+./COMANDI_RAPIDI.md:326:$json = Get-Content "c:\Users\Utente\BancheEuropa\financial_authorities_database.json" -Raw | ConvertFrom-Json; $count = ($json.PSObject.Properties | Where-Object {$_.Value.country_name}).Count; Write-Host "✅ $count paesi validati"; cd "c:\Users\Utente\Financial-Authority-Database"; Copy-Item "c:\Users\Utente\BancheEuropa\financial_authorities_database.json" . -Force; git add financial_authorities_database.json; git commit -m "Update: $count paesi"; git push
+./COPYRIGHT_SEO_REPORT.md:19:- **Funzionamento:** Il sito carica preferenzialmente il database cifrato `db.enc`. Se non disponibile, fallback su `financial_authorities_database.json`
+./COPYRIGHT_SEO_REPORT.md:197:Il database `financial_authorities_database.json` è opera dell'ingegno di **Avvocato Marcello Stanca**, protetta dalla legge sul diritto d'autore (L. 633/1941 e successive modifiche).
+./data/international_financial_institutions.json:19:        "reason": "No standalone Bank of Italy authorityId exists in financial_authorities_database.json as of 2026-09-23",
+./data/international_financial_institutions.json:25:        "reason": "No Guardia di Finanza authorityId exists in financial_authorities_database.json as of 2026-09-23",
+./data/international_financial_institutions.json:31:        "reason": "No standalone authorityId exists in financial_authorities_database.json as of 2026-09-23",
+./data/international_financial_institutions.json:38:        "reason": "No standalone authorityId exists in financial_authorities_database.json as of 2026-09-23",
+./data/README.md:46:`financial_authorities_database.json` (root + mirrors) now includes on each `financial_authority` object:
+./data/README.md:83:- Bank of Italy supervisory authority record (not present as standalone authority in `financial_authorities_database.json`) — official site: https://www.bancaditalia.it/
+./data/README.md:84:- Guardia di Finanza authority record (not present as standalone authority in `financial_authorities_database.json`) — official site: https://www.gdf.gov.it/it
+./data/README.md:85:- Questure - Polizia di Stato authority record (not present as standalone authority in `financial_authorities_database.json`) — official site: https://questure.poliziadistato.it/ (app: YouPol)
+./data/README.md:86:- Arma dei Carabinieri authority record (not present as standalone authority in `financial_authorities_database.json`) — official site: https://carabinieri.it (app: iCarabinieri)
+./data/README.md:92:- `/financial_authorities_database.json`
+./data/README.md:93:- `/APP/financial_authorities_database.json`
+./data/README.md:94:- `/DEPLOY_REGISTER/financial_authorities_database.json`
+./decifra_database.ps1:71:if (Test-Path "financial_authorities_database.json") {
+./decifra_database.ps1:73:    $original = Get-Content 'financial_authorities_database.json' -Raw
+./DEPLOY_REGISTER/index.backup-2026-09-14.html:207:            "contentUrl": "financial_authorities_database.json"
+./DEPLOY_REGISTER/index.backup-2026-09-14.html:284:        "identifier": "https://tutelatruffe.it/financial_authorities_database.json",
+./DEPLOY_REGISTER/index.backup-2026-09-14.html:332:            "contentUrl": "https://tutelatruffe.it/financial_authorities_database.json"
+./DEPLOY_REGISTER/robots.txt:40:Disallow: /financial_authorities_database.json
+./DEPLOY_REGISTER/robots.txt:44:Disallow: /financial_authorities_database.json
+./DEPLOY_REGISTER/robots.txt:48:Disallow: /financial_authorities_database.json
+./DEPLOY_REGISTER/sitemap.xml:164:        <loc>https://tutelatruffe.it/financial_authorities_database.json</loc>
+./diff-db.sh:2:FILES=(financial_authorities_database.json
+./diff-db.sh:3:       APP/financial_authorities_database.json
+./diff-db.sh:4:       android/app/src/main/assets/financial_authorities_database.json)
+./diff-db.sh:20:a=json.load(open('financial_authorities_database.json',encoding='utf-8-sig'))
+./diff-db.sh:21:b=json.load(open('android/app/src/main/assets/financial_authorities_database.json',encoding='utf-8-sig'))
+./diff-db.sh:22:c=json.load(open('APP/financial_authorities_database.json',encoding='utf-8-sig'))
+./DOCUMENTATION.md:43:- [`financial_authorities_database.json`](financial_authorities_database.json)
+./DOCUMENTATION.md:155:  - [financial_authorities_database.json](financial_authorities_database.json)
+./Error/index.html:176:            "contentUrl": "https://avvstancamarcello.github.io/Financial-Authority-Database/financial_authorities_database.json"
+./Error/index.html:2853:                    const response = await fetch('financial_authorities_database.json');
+./Error/index.txt:165:            "contentUrl": "https://avvstancamarcello.github.io/Financial-Authority-Database/financial_authorities_database.json"
+./Error/index.txt:1962:                    const response = await fetch('financial_authorities_database.json');
+./ESEMPI_MODIFICA_JSON.md:67:Copy-Item "c:\Users\Utente\BancheEuropa\financial_authorities_database.json" .
+./ESEMPI_MODIFICA_JSON.md:69:git add financial_authorities_database.json
+./ESEMPI_MODIFICA_JSON.md:174:git add db.enc financial_authorities_database.json
+./ESEMPI_MODIFICA_JSON.md:211:code "c:\Users\Utente\BancheEuropa\financial_authorities_database.json"
+./ESEMPI_MODIFICA_JSON.md:220:Copy-Item "c:\Users\Utente\BancheEuropa\financial_authorities_database.json" .
+./ESEMPI_MODIFICA_JSON.md:222:git add financial_authorities_database.json
+./ESEMPI_MODIFICA_JSON.md:316:$json = Get-Content 'financial_authorities_database.json' -Raw
+./ESEMPI_MODIFICA_JSON.md:341:$json = Get-Content 'financial_authorities_database.json' -Raw | ConvertFrom-Json
+./ESEMPI_MODIFICA_JSON.md:346:Copy-Item "c:\Users\Utente\BancheEuropa\financial_authorities_database.json" .
+./ESEMPI_MODIFICA_JSON.md:347:git add financial_authorities_database.json
+./GUIDA_VERIFICA_SEO.md:28:3. Cerca nella lista file "db.enc" o "financial_authorities_database.json"
+./index.backup-2026-09-15.html:208:            "contentUrl": "financial_authorities_database.json"
+./index.backup-2026-09-15.html:285:        "identifier": "https://tutelatruffe.it/financial_authorities_databas.json",
+./index.backup-2026-09-15.html:333:            "contentUrl": "https://tutelatruffe.it/financial_authorities_database.json"
+./index.backup-2026-09-15.html:4258:                const response = await fetch('financial_authorities_databas.json');
+./index.html:310:        "identifier": "https://tutelatruffe.it/financial_authorities_database.json",
+./index.html:358:            "contentUrl": "https://tutelatruffe.it/financial_authorities_database.json"
+./index.html:4754:                const response = await fetch('financial_authorities_database.json');
+./index.html:4858:        const SEO_DATASET_URL = 'https://tutelatruffe.it/financial_authorities_database.json';
+./INDICE_DOCUMENTAZIONE.md:90:- Legge `financial_authorities_database.json`
+./INDICE_DOCUMENTAZIONE.md:196:├── financial_authorities_database.json  ← DATABASE MASTER
+./INDICE_DOCUMENTAZIONE.md:213:├── financial_authorities_database.json  ← DB pubblico
+./IONOS/ANALISI_SICUREZZA_2026-02-09.md:31:| `/financial_authorities_database.json` | 37 | ✅ Valido | Database principale |
+./IONOS/index-dramatic.html:1179:                <a href="financial_authorities_database.json" class="planet planet-inner-a planet-police" data-planet="police" style="position: absolute; top: 50%; left: 50%; width: 120px; height: 120px; background: radial-gradient(circle at 30% 30%, #1e40af, #1d4ed8, #3b82f6); border-radius: 50%; box-shadow: 0 0 35px rgba(59, 130, 246, 0.9), inset -12px -12px 24px rgba(0,0,0,0.3); cursor: pointer; text-decoration: none; animation: innerOrbitClockwise 40s linear infinite; display: flex; align-items: center; justify-content: center;">
+./IONOS/index.html:1187:                <a href="financial_authorities_database.json" class="planet planet-inner-a planet-police" data-planet="police" style="position: absolute; top: 50%; left: 50%; width: 96px; height: 96px; background: radial-gradient(circle at 30% 30%, #1e40af, #1d4ed8, #3b82f6); border-radius: 50%; box-shadow: 0 0 35px rgba(59, 130, 246, 0.9), inset -12px -12px 24px rgba(0,0,0,0.3); cursor: pointer; text-decoration: none; animation: innerOrbitClockwise 40s linear infinite; display: flex; align-items: center; justify-content: center;">
+./IONOS/ScamRadar-main/ScamRadar-main/index.html:1054:                <a href="financial_authorities_database.json" class="planet planet-inner-a planet-saturno" data-planet="saturn" style="position: absolute; top: 50%; left: 50%; width: 60px; height: 60px; background: radial-gradient(circle at 30% 30%, #D4A574, #C4956A, #8B7355); border-radius: 50%; box-shadow: 0 0 25px rgba(212, 165, 116, 0.8), inset -8px -8px 16px rgba(0,0,0,0.3); cursor: pointer; text-decoration: none; animation: innerOrbitClockwise 40s linear infinite; display: flex; align-items: center; justify-content: center;">
+./OUTREACH.md:14:- 🗂️ Dataset JSON: <https://avvstancamarcello.github.io/Financial-Authority-Database/financial_authorities_database.json>
+./OUTREACH.md:37:Dataset JSON: https://avvstancamarcello.github.io/Financial-Authority-Database/financial_authorities_database.json
+./OUTREACH.md:68:Dataset JSON: https://avvstancamarcello.github.io/Financial-Authority-Database/financial_authorities_database.json
+./OUTREACH.md:102:Dataset JSON: https://avvstancamarcello.github.io/Financial-Authority-Database/financial_authorities_database.json
+./OUTREACH.md:133:Dataset JSON: https://avvstancamarcello.github.io/Financial-Authority-Database/financial_authorities_database.json
+./OUTREACH.md:160:Dataset JSON: https://avvstancamarcello.github.io/Financial-Authority-Database/financial_authorities_database.json
+./README_DATABASE.md:9:2. **Senza `db.enc`** → Carica `financial_authorities_database.json` (funziona ugualmente!)
+./README_DATABASE.md:41:code financial_authorities_database.json
+./README_DATABASE.md:48:git add financial_authorities_database.json
+./README_DATABASE.md:62:code financial_authorities_database.json
+./README_DATABASE.md:70:git add db.enc financial_authorities_database.json
+./README_DATABASE.md:109:✅ Cifra `financial_authorities_database.json` → crea `db.enc`
+./README_DATABASE.md:185:Copy-Item "c:\Users\Utente\BancheEuropa\financial_authorities_database.json" .
+./README_DATABASE.md:187:git add financial_authorities_database.json
+./README_DATABASE.md:199:git add db.enc financial_authorities_database.json
+./robots.txt:40:Disallow: /financial_authorities_database.json
+./robots.txt:44:Disallow: /financial_authorities_database.json
+./robots.txt:48:Disallow: /financial_authorities_database.json
+./scripts/validate_international_data.py:12:    ROOT / "financial_authorities_database.json",
+./scripts/validate_international_data.py:13:    ROOT / "APP" / "financial_authorities_database.json",
+./scripts/validate_international_data.py:14:    ROOT / "DEPLOY_REGISTER" / "financial_authorities_database.json",
+./show-diffs.sh:8:root = load('financial_authorities_database.json')
+./show-diffs.sh:9:android = load('android/app/src/main/assets/financial_authorities_database.json')
+./show-diffs.sh:10:app = load('APP/financial_authorities_database.json')
+./sitemap-multilingua.xml:103:        <loc>https://avvstancamarcello.github.io/Financial-Authority-Database/financial_authorities_database.json</loc>
+./sitemap-multilingua.xml:107:        <xhtml:link rel="alternate" hreflang="it" href="https://avvstancamarcello.github.io/Financial-Authority-Database/financial_authorities_database.json?lang=it"/>
+./sitemap-multilingua.xml:108:        <xhtml:link rel="alternate" hreflang="en" href="https://avvstancamarcello.github.io/Financial-Authority-Database/financial_authorities_database.json?lang=en"/>
+./sitemap-multilingua.xml:109:        <xhtml:link rel="alternate" hreflang="fr" href="https://avvstancamarcello.github.io/Financial-Authority-Database/financial_authorities_database.json?lang=fr"/>
+./sitemap-multilingua.xml:110:        <xhtml:link rel="alternate" hreflang="de" href="https://avvstancamarcello.github.io/Financial-Authority-Database/financial_authorities_database.json?lang=de"/>
+./sitemap-multilingua.xml:111:        <xhtml:link rel="alternate" hreflang="es" href="https://avvstancamarcello.github.io/Financial-Authority-Database/financial_authorities_database.json?lang=es"/>
+./sitemap-multilingua.xml:112:        <xhtml:link rel="alternate" hreflang="ar" href="https://avvstancamarcello.github.io/Financial-Authority-Database/financial_authorities_database.json?lang=ar"/>
+./sitemap-multilingua.xml:113:        <xhtml:link rel="alternate" hreflang="zh" href="https://avvstancamarcello.github.io/Financial-Authority-Database/financial_authorities_database.json?lang=zh"/>
+./sitemap-multilingua.xml:114:        <xhtml:link rel="alternate" hreflang="hi" href="https://avvstancamarcello.github.io/Financial-Authority-Database/financial_authorities_database.json?lang=hi"/>
+./sitemap-multilingua.xml:115:        <xhtml:link rel="alternate" hreflang="vi" href="https://avvstancamarcello.github.io/Financial-Authority-Database/financial_authorities_database.json?lang=vi"/>
+./sitemap-multilingua.xml:116:        <xhtml:link rel="alternate" hreflang="pt" href="https://avvstancamarcello.github.io/Financial-Authority-Database/financial_authorities_database.json?lang=pt"/>
+./sitemap-multilingua.xml:117:        <xhtml:link rel="alternate" hreflang="x-default" href="https://avvstancamarcello.github.io/Financial-Authority-Database/financial_authorities_database.json?lang=en"/>
+./sitemap.xml:108:        <loc>https://avvstancamarcello.github.io/Financial-Authority-Database/financial_authorities_database.json</loc>
+./sitemap.xml:112:        <xhtml:link rel="alternate" hreflang="it" href="https://avvstancamarcello.github.io/Financial-Authority-Database/financial_authorities_database.json?lang=it"/>
+./sitemap.xml:113:        <xhtml:link rel="alternate" hreflang="en" href="https://avvstancamarcello.github.io/Financial-Authority-Database/financial_authorities_database.json?lang=en"/>
+./sitemap.xml:114:        <xhtml:link rel="alternate" hreflang="fr" href="https://avvstancamarcello.github.io/Financial-Authority-Database/financial_authorities_database.json?lang=fr"/>
+./sitemap.xml:115:        <xhtml:link rel="alternate" hreflang="de" href="https://avvstancamarcello.github.io/Financial-Authority-Database/financial_authorities_database.json?lang=de"/>
+./sitemap.xml:116:        <xhtml:link rel="alternate" hreflang="es" href="https://avvstancamarcello.github.io/Financial-Authority-Database/financial_authorities_database.json?lang=es"/>
+./sitemap.xml:117:        <xhtml:link rel="alternate" hreflang="ar" href="https://avvstancamarcello.github.io/Financial-Authority-Database/financial_authorities_database.json?lang=ar"/>
+./sitemap.xml:118:        <xhtml:link rel="alternate" hreflang="zh" href="https://avvstancamarcello.github.io/Financial-Authority-Database/financial_authorities_database.json?lang=zh"/>
+./sitemap.xml:119:        <xhtml:link rel="alternate" hreflang="hi" href="https://avvstancamarcello.github.io/Financial-Authority-Database/financial_authorities_database.json?lang=hi"/>
+./sitemap.xml:120:        <xhtml:link rel="alternate" hreflang="vi" href="https://avvstancamarcello.github.io/Financial-Authority-Database/financial_authorities_database.json?lang=vi"/>
+./sitemap.xml:121:        <xhtml:link rel="alternate" hreflang="pt" href="https://avvstancamarcello.github.io/Financial-Authority-Database/financial_authorities_database.json?lang=pt"/>
+./sitemap.xml:122:        <xhtml:link rel="alternate" hreflang="x-default" href="https://avvstancamarcello.github.io/Financial-Authority-Database/financial_authorities_database.json?lang=en"/>
+./sync-db.sh:1:cp financial_authorities_database.json APP/
+./sync-db.sh:2:cp financial_authorities_database.json DEPLOY_REGISTER/
+./sync-db.sh:3:cp financial_authorities_database.json android/app/src/main/assets/
+./sync-db.sh:4:sha256sum financial_authorities_database.json */financial_authorities_database.json android/app/src/main/assets/financial_authorities_database.json
+./test-bosnian-locale.html:499:                        addResult((datasetSchema?.distribution?.contentUrl || '').includes('financial_authorities_database.json'), `${lang}: Dataset JSON-LD keeps the downloadable database URL`);
+./WORKFLOW_DATABASE.md:47:code financial_authorities_database.json
+./WORKFLOW_DATABASE.md:54:git add financial_authorities_database.json
+./WORKFLOW_DATABASE.md:71:code financial_authorities_database.json
+./WORKFLOW_DATABASE.md:79:git add db.enc financial_authorities_database.json
+./WORKFLOW_DATABASE.md:96:code "c:\Users\Utente\BancheEuropa\financial_authorities_database.json"
+./WORKFLOW_DATABASE.md:192:code "c:\Users\Utente\BancheEuropa\financial_authorities_database.json"
+./WORKFLOW_DATABASE.md:203:Copy-Item "c:\Users\Utente\BancheEuropa\financial_authorities_database.json" .
+./WORKFLOW_DATABASE.md:205:git add financial_authorities_database.json
+./WORKFLOW_DATABASE.md:219:code "c:\Users\Utente\BancheEuropa\financial_authorities_database.json"
+./WORKFLOW_DATABASE.md:238:git add db.enc financial_authorities_database.json
+./WORKFLOW_DATABASE.md:252:code "c:\Users\Utente\BancheEuropa\financial_authorities_database.json"
+./WORKFLOW_DATABASE.md:263:Copy-Item "c:\Users\Utente\BancheEuropa\financial_authorities_database.json" .
+./WORKFLOW_DATABASE.md:265:git add financial_authorities_database.json
+./WORKFLOW_DATABASE.md:304:  '/Financial-Authority-Database/financial_authorities_database.json',
+./WORKFLOW_DATABASE.md:394:**A:** SÌ! Carica automaticamente `financial_authorities_database.json` come fallback.
+avvocato@LAPTOP-7E2BDF4K:/mnt/c/dev/Financial-Authority-Database$ grep -RIn "financial_authorities_database_json" .
+avvocato@LAPTOP-7E2BDF4K:/mnt/c/dev/Financial-Authority-Database$ grep -RIn "authorities.json" .
+avvocato@LAPTOP-7E2BDF4K:/mnt/c/dev/Financial-Authority-Database$ grep -RIn "orbital-box" .
+avvocato@LAPTOP-7E2BDF4K:/mnt/c/dev/Financial-Authority-Database$ grep -RIn "modal-italy" .
+avvocato@LAPTOP-7E2BDF4K:/mnt/c/dev/Financial-Authority-Database$ grep -RIn "modal-uk" .
+avvocato@LAPTOP-7E2BDF4K:/mnt/c/dev/Financial-Authority-Database$ grep -RIn "manifest.json" .
+./APP/index.backup-2026-09-14.html:134:    <link rel="manifest" href="manifest.json">
+./APP/index.html:143:    <!-- PWA Manifest (96/192/384/512 icons; 192/512 include maskable purpose in manifest.json) -->
+./APP/index.html:144:    <link rel="manifest" href="manifest.json">
+./APP/robots.txt:12:Allow: /manifest.json
+./archive/development-prototypes/index1.html:103:    <link rel="manifest" href="manifest.json">
+./archive/legacy-server-register/index.html:134:    <link rel="manifest" href="manifest.json">
+./Backup/_index-now.html:157:    <link rel="manifest" href="manifest.json">
+./banche_airtable.txt:36:<link rel="manifest" href="/images/favicon/baymax/manifest.json" /><link id="favIconCanvas" rel="icon" type="image/x-icon" /><title>Airtable - Bank Liability Explorer</title><script nonce="pCU9topBwHX6">
+./banner-dinamico.html:157:    <link rel="manifest" href="manifest.json">
+./DEPLOY_REGISTER/index.backup-2026-09-14.html:134:    <link rel="manifest" href="manifest.json">
+./DEPLOY_REGISTER/robots.txt:12:Allow: /manifest.json
+./Error/index.html:103:    <link rel="manifest" href="manifest.json">
+./Error/index.txt:92:    <link rel="manifest" href="manifest.json">
+./index.backup-2026-09-15.html:135:    <link rel="manifest" href="manifest.json">
+./index.html:143:    <!-- PWA Manifest (96/192/384/512 icons; 192/512 include maskable purpose in manifest.json) -->
+./index.html:144:    <link rel="manifest" href="manifest.json">
+./INDICE_DOCUMENTAZIONE.md:215:├── manifest.json                        ← PWA config
+./IONOS/index-dramatic.html:157:    <link rel="manifest" href="manifest.json">
+./IONOS/index.html:157:    <link rel="manifest" href="manifest.json">
+./IONOS/Scam-Radar-index_backup.txt:158:    <link rel="manifest" href="manifest.json">
+./IONOS/ScamRadar-main/ScamRadar-main/index.html:156:    <link rel="manifest" href="manifest.json">
+./odissea.html:75:    <link rel="manifest" href="manifest.json">
+./PAGES/index1.html:18:    <link rel="manifest" href="manifest.json">
+./PAGES/index2.html:18:    <link rel="manifest" href="manifest.json">
+./robots.txt:12:Allow: /manifest.json
+./service-worker.js:19:  '/Financial-Authority-Database/manifest.json',
+./TECHNICAL_ANALYSIS_SUMMARY.md:49:4. manifest.json
+avvocato@LAPTOP-7E2BDF4K:/mnt/c/dev/Financial-Authority-Database$ grep -RIn "service-worker" .
+./APP/index.html:6627:                navigator.serviceWorker.register('service-worker.js')
+./archive/development-prototypes/index1.html:2419:                navigator.serviceWorker.register('service-worker.js')
+./archive/legacy-server-register/index.html:3830:                navigator.serviceWorker.register('service-worker.js')
+./Error/index.html:3295:                navigator.serviceWorker.register('service-worker.js')
+./Error/index.txt:2404:                navigator.serviceWorker.register('service-worker.js')
+./index.backup-2026-09-15.html:5318:                navigator.serviceWorker.register('service-worker.js')
+./index.html:6642:                navigator.serviceWorker.register('service-worker.js')
+./INDICE_DOCUMENTAZIONE.md:216:├── service-worker.js                    ← PWA cache
+./odissea.html:2006:            navigator.serviceWorker.register('service-worker.js')
+./README_DATABASE.md:161:**File:** `service-worker.js`
+./README_DATABASE.md:169:git add service-worker.js
+./WORKFLOW_DATABASE.md:292:# 1. Aggiorna versione cache in service-worker.js
+./WORKFLOW_DATABASE.md:293:code "c:\Users\Utente\BancheEuropa\service-worker.js"
+./WORKFLOW_DATABASE.md:312:Copy-Item "c:\Users\Utente\BancheEuropa\service-worker.js" .
+./WORKFLOW_DATABASE.md:313:git add service-worker.js
+avvocato@LAPTOP-7E2BDF4K:/mnt/c/dev/Financial-Authority-Database$ grep -RIn "href=.*\\.html" | sed -n '1,200p' .
+sed: read error on .: Is a directory
+la consollavvocato@LAPTOP-7E2BDF4K:/mnt/c/dev/Financial-Authority-Database$
+avvocato@LAPTOP-7E2BDF4K:/mnt/c/dev/Financial-Authority-Database$ ^C
+avvocato@LAPTOP-7E2BDF4K:/mnt/c/dev/Financial-Authority-Database$
