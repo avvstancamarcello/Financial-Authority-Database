@@ -253,4 +253,18 @@
         <xhtml:link rel="alternate" hreflang="x-default" href="https://avvstancamarcello.github.io/Financial-Authority-Database/petitions-pdf/Accordo%20EuroParlamento-Consiglio%2027-nov-2025%20su%20responsabilita%20Banche.pdf?lang=en"/>
     </url>
 
+    <url>
+        <loc>https://www.amevfirenze.it/authority/IT-CONSOB.html</loc>
+        <lastmod>2026-09-28</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <url>
+        <loc>https://www.amevfirenze.it/authority/UK-FCA.html</loc>
+        <lastmod>2026-09-28</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
 </urlset>

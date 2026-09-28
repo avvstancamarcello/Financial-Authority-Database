@@ -12,6 +12,7 @@ NATIONAL_FILES = [
     ROOT / "financial_authorities_database.json",
     ROOT / "APP" / "financial_authorities_database.json",
     ROOT / "DEPLOY_REGISTER" / "financial_authorities_database.json",
+    ROOT / "android" / "app" / "src" / "main" / "assets" / "financial_authorities_database.json",
 ]
 
 
@@ -45,7 +46,8 @@ def main():
     cats = load_json(CATS)
     types = load_json(TYPES)
     i18n = load_json(I18N)
-    national = [load_json(p) for p in NATIONAL_FILES]
+    national_raw = [p.read_text(encoding="utf-8") for p in NATIONAL_FILES]
+    national = [json.loads(raw) for raw in national_raw]
 
     assert intl.get("metadata", {}).get("lastVerified") == "2026-09-23", "metadata.lastVerified must be 2026-09-23"
 
@@ -95,6 +97,11 @@ def main():
         for locale in ("it", "en"):
             if locale not in strings[k] or not strings[k][locale]:
                 raise AssertionError(f"Missing {locale} translation for '{k}'")
+
+    base_raw = national_raw[0]
+    for idx, raw in enumerate(national_raw[1:], start=1):
+        if raw != base_raw:
+            raise AssertionError(f"National dataset mirror mismatch in {NATIONAL_FILES[idx]}")
 
     roots = [collect_authorities(d) for d in national]
 

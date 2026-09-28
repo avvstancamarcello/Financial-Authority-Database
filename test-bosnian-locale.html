@@ -196,6 +196,24 @@
             }
             return response.text();
         });
+        const databaseMirrorUrls = [
+            './financial_authorities_database.json',
+            './APP/financial_authorities_database.json',
+            './DEPLOY_REGISTER/financial_authorities_database.json',
+            './android/app/src/main/assets/financial_authorities_database.json'
+        ];
+        const databaseMirrorPromise = Promise.all(databaseMirrorUrls.map(async (url) => {
+            const response = await fetch(url, { cache: 'no-store' });
+            if (!response.ok) {
+                throw new Error(`${url} failed to load (${response.status})`);
+            }
+            const text = await response.text();
+            return {
+                url,
+                text,
+                data: JSON.parse(text)
+            };
+        }));
 
         const results = document.getElementById('results');
 
@@ -542,6 +560,10 @@
                             addResult(missingLocalizedUiLocales.length === 0, 'it: all translation bundles define the localized security subtitle and search UI keys');
                             addResult(missingMedusaLocales.length === 0, 'it: all translation bundles define Codice Caravaggio CTA keys');
                             addResult(appIndexHtml.includes('aria-describedby="caravaggio-medusa-note"') && appIndexHtml.includes('data-i18n-text="medusaCtaNewTab"') && appIndexHtml.includes('data-i18n-text="medusaCtaNewTabSr"'), 'it: APP reference CTA markup remains intact');
+                            const databaseMirrors = await databaseMirrorPromise;
+                            const [rootMirror, ...otherMirrors] = databaseMirrors;
+                            addResult(otherMirrors.every((mirror) => mirror.text === rootMirror.text), 'it: all four financial authorities database mirrors remain byte-identical');
+                            addResult(otherMirrors.every((mirror) => JSON.stringify(mirror.data) === JSON.stringify(rootMirror.data)), 'it: all four financial authorities database mirrors remain semantically identical');
                             await waitForCondition(() => typeof win.openModal === 'function' && Array.isArray(win.countriesData) && win.countriesData.some((country) => country.country_name === 'Italy'), {
                                 errorMessage: 'Italy country data did not finish loading'
                             });
@@ -562,6 +584,27 @@
                             });
                             addResult(doc.getElementById('consobOrbitalDialog')?.open === true, 'it: Italy modal CONSOB preview opens the native fullscreen orbital dialog');
                             addResult((doc.getElementById('consobOrbitalFrame')?.getAttribute('src') || '').endsWith('/authority/IT-CONSOB.html'), 'it: Italy modal CONSOB preview loads the allowlisted orbital iframe source');
+                            win.closeItalyOrbitalDialog();
+                            win.closeModal();
+                            win.openModal('United Kingdom');
+                            const ukModalTrigger = doc.querySelector('#modalContent [data-orbital-trigger="consob"]');
+                            const ukModalTriggerImage = ukModalTrigger?.querySelector('img');
+                            const ukOrbitalPreviewLabel = doc.querySelector('#modalContent .orbital-thumbnail-trigger')?.closest('div')?.querySelector('p strong')?.textContent || '';
+                            addResult(Boolean(ukModalTrigger), 'it: United Kingdom country modal renders the FCA orbital preview trigger');
+                            addResult(ukModalTrigger?.getAttribute('aria-label') === 'Open FCA orbital dialog', 'it: United Kingdom orbital trigger aria-label uses FCA instead of CONSOB');
+                            addResult(ukModalTriggerImage?.getAttribute('src') === '/authority/preview-fca.png', 'it: United Kingdom country modal uses the FCA orbital thumbnail asset');
+                            addResult(ukModalTriggerImage?.getAttribute('alt') === 'FCA orbital preview thumbnail', 'it: United Kingdom orbital preview image alt uses FCA instead of CONSOB');
+                            addResult(ukOrbitalPreviewLabel === 'FCA Orbital Preview:', 'it: United Kingdom modal preview heading is localized to FCA');
+                            ukModalTrigger?.click();
+                            await waitForCondition(() => {
+                                const orbitalDialog = doc.getElementById('consobOrbitalDialog');
+                                const orbitalFrame = doc.getElementById('consobOrbitalFrame');
+                                return Boolean(orbitalDialog?.open) && (orbitalFrame?.getAttribute('src') || '').endsWith('/authority/UK-FCA.html');
+                            }, {
+                                errorMessage: 'FCA orbital dialog did not open from United Kingdom modal preview'
+                            });
+                            addResult(doc.getElementById('consobOrbitalDialog')?.open === true, 'it: United Kingdom modal FCA preview opens the native fullscreen orbital dialog');
+                            addResult((doc.getElementById('consobOrbitalFrame')?.getAttribute('src') || '').endsWith('/authority/UK-FCA.html'), 'it: United Kingdom modal FCA preview loads the allowlisted orbital iframe source');
                             win.closeItalyOrbitalDialog();
                             win.closeModal();
                             win.changeLanguage('de');

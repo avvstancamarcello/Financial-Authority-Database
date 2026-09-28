@@ -1,106 +1,368 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>FCA – Orbital WebApp UK</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" href="../css/orbital.css">
+  <meta charset="UTF-8">
+  <title>FCA – Orbital WebApp United Kingdom</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description"
+        content="Orbital page for the United Kingdom Financial Conduct Authority (FCA), with official supervision, warning-list, register, enforcement, scam-reporting and AML resources.">
+  <link rel="canonical" href="https://www.amevfirenze.it/authority/UK-FCA.html">
+  <style>
+    :root {
+      --fca-blue: #00247d;
+      --fca-light: #f5f8ff;
+      --fca-border: #d0d8ea;
+      --fca-danger: #b00020;
+      --fca-safe: #007e33;
+    }
 
-<style>
-  body {
-    margin: 0;
-    font-family: system-ui, sans-serif;
-    background: #f5f7fa;
-  }
+    * { box-sizing: border-box; }
 
-  header {
-    background: #00247d;
-    color: white;
-    padding: 20px;
-    text-align: center;
-  }
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: radial-gradient(circle at top, #eef2ff 0, #dde7fb 40%, #c9d5f0 100%);
+      color: #111827;
+    }
 
-  .orbital-container {
-    max-width: 900px;
-    margin: auto;
-    padding: 20px;
-  }
+    header {
+      padding: 16px 20px;
+      background: rgba(0, 36, 125, 0.92);
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+    }
 
-  .thumbnail {
-    width: 260px;
-    display: block;
-    margin: 20px auto;
-    border-radius: 12px;
-    border: 1px solid #d0d8ea;
-  }
+    header .title-block {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
 
-  h2 {
-    color: #00247d;
-    margin-top: 40px;
-  }
+    header .flag { font-size: 28px; }
 
-  a {
-    color: #0040ff;
-    font-weight: 600;
-  }
+    header h1 {
+      margin: 0;
+      font-size: 1.4rem;
+    }
 
-  .section {
-    margin-bottom: 40px;
-  }
-</style>
+    header p {
+      margin: 2px 0 0;
+      font-size: 0.85rem;
+      opacity: 0.9;
+    }
+
+    main {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 20px 16px 32px;
+    }
+
+    .card {
+      background: #ffffff;
+      border-radius: 18px;
+      box-shadow: 0 12px 30px rgba(15, 23, 42, 0.18);
+      border: 1px solid var(--fca-border);
+      padding: 20px 18px 22px;
+    }
+
+    .card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 12px;
+      flex-wrap: wrap;
+    }
+
+    .card-header h2 {
+      margin: 0;
+      font-size: 1.2rem;
+      color: var(--fca-blue);
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      font-size: 0.8rem;
+      background: #e0f2fe;
+      color: #0f172a;
+      border: 1px solid #bae6fd;
+    }
+
+    .badge span.dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #22c55e;
+    }
+
+    .thumbnail {
+      width: 100%;
+      border-radius: 14px;
+      margin: 14px 0 18px;
+      border: 1px solid var(--fca-border);
+    }
+
+    dl {
+      margin: 0;
+      display: grid;
+      grid-template-columns: minmax(0, 180px) minmax(0, 1fr);
+      row-gap: 8px;
+      column-gap: 12px;
+      font-size: 0.92rem;
+    }
+
+    dt {
+      font-weight: 600;
+      color: #374151;
+    }
+
+    dd {
+      margin: 0;
+      color: #111827;
+      word-break: break-word;
+    }
+
+    a {
+      color: var(--fca-blue);
+      text-decoration: none;
+    }
+
+    a:hover,
+    a:focus-visible {
+      text-decoration: underline;
+    }
+
+    .note-block {
+      margin-top: 14px;
+      padding: 10px 12px;
+      border-radius: 12px;
+      background: var(--fca-light);
+      border: 1px solid var(--fca-border);
+      font-size: 0.9rem;
+    }
+
+    .note-block strong {
+      display: block;
+      margin-bottom: 4px;
+      color: #1f2937;
+    }
+
+    .actions {
+      margin-top: 18px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .btn {
+      border: none;
+      border-radius: 999px;
+      padding: 8px 14px;
+      font-size: 0.85rem;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    .btn-primary {
+      background: var(--fca-blue);
+      color: #ffffff;
+    }
+
+    .btn-outline {
+      background: #ffffff;
+      color: var(--fca-blue);
+      border: 1px solid var(--fca-blue);
+    }
+
+    .btn-danger {
+      background: var(--fca-danger);
+      color: #ffffff;
+    }
+
+    .btn-safe {
+      background: var(--fca-safe);
+      color: #ffffff;
+    }
+
+    .section {
+      margin-top: 24px;
+      padding-top: 12px;
+      border-top: 1px dashed #cbd5e1;
+    }
+
+    .section h3 {
+      margin: 0 0 8px;
+      font-size: 1rem;
+      color: #0f172a;
+    }
+
+    .section p {
+      margin: 4px 0;
+      font-size: 0.9rem;
+      color: #374151;
+    }
+
+    footer {
+      margin-top: 26px;
+      font-size: 0.75rem;
+      color: #6b7280;
+      text-align: center;
+    }
+
+    @media (max-width: 640px) {
+      dl {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      .card-header {
+        align-items: flex-start;
+      }
+    }
+  </style>
 </head>
-
 <body>
+  <header>
+    <div class="title-block">
+      <span class="flag" aria-hidden="true">🇬🇧</span>
+      <div>
+        <h1>United Kingdom – FCA Orbital WebApp</h1>
+        <p>Financial Conduct Authority · UK conduct, consumer-protection and market-supervision authority</p>
+      </div>
+    </div>
+  </header>
 
-<header>
-  <h1>FCA – Orbital WebApp UK</h1>
-  <p>Financial Conduct Authority – United Kingdom</p>
-</header>
+  <main>
+    <article class="card" aria-labelledby="fca-title">
+      <img src="preview-fca.png" alt="FCA orbital preview thumbnail" class="thumbnail">
 
-<div class="orbital-container">
+      <div class="card-header">
+        <h2 id="fca-title">Orbital page United Kingdom · FCA</h2>
+        <div class="badge" aria-label="Orbital protection level very high">
+          <span class="dot"></span>
+          <span>Protection level: <strong>Altissimo</strong></span>
+        </div>
+      </div>
 
-  <img src="preview-fca.png" alt="FCA Orbital Preview" class="thumbnail">
+      <dl>
+        <dt>Financial authority</dt>
+        <dd>Financial Conduct Authority (FCA)</dd>
 
-  <div class="section">
-    <h2>Institutional Overview</h2>
-    <p>
-      The Financial Conduct Authority (FCA) is the United Kingdom’s independent regulatory body 
-      responsible for supervising financial markets, investment firms, brokers, banks, and 
-      consumer protection frameworks. It operates under the Financial Services and Markets Act 
-      and ensures integrity, transparency, and stability across UK financial operations.
-    </p>
-  </div>
+        <dt>Abbreviation</dt>
+        <dd>FCA</dd>
 
-  <div class="section">
-    <h2>Official Resources</h2>
-    <p>
-      Homepage: <a href="https://www.fca.org.uk" target="_blank">https://www.fca.org.uk</a><br>
-      Register: <a href="https://register.fca.org.uk" target="_blank">https://register.fca.org.uk</a><br>
-      Consumer Protection: <a href="https://www.fca.org.uk/consumers" target="_blank">https://www.fca.org.uk/consumers</a>
-    </p>
-  </div>
+        <dt>Official homepage</dt>
+        <dd>
+          <a href="https://www.fca.org.uk/" target="_blank" rel="noopener noreferrer">
+            https://www.fca.org.uk/
+          </a>
+        </dd>
 
-  <div class="section">
-    <h2>Market Supervision</h2>
-    <p>
-      The FCA supervises investment firms, forex brokers, crypto asset providers, 
-      insurance intermediaries, and banking entities. It enforces strict licensing 
-      requirements and conducts ongoing monitoring to prevent fraud, market abuse, 
-      and unauthorized financial activities.
-    </p>
-  </div>
+        <dt>Scam reporting</dt>
+        <dd>
+          <a href="https://www.fca.org.uk/consumers/report-scam" target="_blank" rel="noopener noreferrer">
+            https://www.fca.org.uk/consumers/report-scam
+          </a>
+        </dd>
 
-  <div class="section">
-    <h2>Reporting Fraud</h2>
-    <p>
-      Suspicious activity can be reported through the FCA’s official channels:<br>
-      <a href="https://www.fca.org.uk/consumers/report-scam-us" target="_blank">
-        Report a Scam – FCA
-      </a>
-    </p>
-  </div>
+        <dt>Institutional email</dt>
+        <dd>
+          <a href="mailto:consumer.queries@fca.org.uk">consumer.queries@fca.org.uk</a>
+        </dd>
+      </dl>
 
-</div>
+      <div class="note-block">
+        <strong>Orbital note</strong>
+        <p>
+          This orbital page collects official UK supervision, warning-list, register and enforcement
+          resources so that users can verify firms, report scams and cross-check prudential oversight
+          from primary institutional sources.
+        </p>
+      </div>
 
+      <div class="actions" aria-label="Quick FCA actions">
+        <a class="btn btn-primary"
+           href="https://www.fca.org.uk/consumers/report-scam"
+           target="_blank" rel="noopener noreferrer">
+          📨 Report a scam to the FCA
+        </a>
+
+        <a class="btn btn-outline"
+           href="https://register.fca.org.uk/s/"
+           target="_blank" rel="noopener noreferrer">
+          🔎 Search the Financial Services Register
+        </a>
+
+        <a class="btn btn-danger"
+           href="https://www.fca.org.uk/scamsmart/warning-list"
+           target="_blank" rel="noopener noreferrer">
+          ⚠️ Check the FCA Warning List
+        </a>
+
+        <a class="btn btn-safe"
+           href="https://www.fca.org.uk/scamsmart"
+           target="_blank" rel="noopener noreferrer">
+          ✅ Open ScamSmart guidance
+        </a>
+      </div>
+
+      <section class="section">
+        <h3>A. Consumer Alerts &amp; Investor Warnings</h3>
+        <p><a href="https://www.fca.org.uk/scamsmart" target="_blank" rel="noopener noreferrer">ScamSmart consumer guidance</a></p>
+        <p><a href="https://www.fca.org.uk/scamsmart/warning-list" target="_blank" rel="noopener noreferrer">FCA Warning List</a></p>
+      </section>
+
+      <section class="section">
+        <h3>B. Enforcement Actions &amp; Notices</h3>
+        <p><a href="https://www.fca.org.uk/firms/enforcement" target="_blank" rel="noopener noreferrer">FCA enforcement overview</a></p>
+        <p><a href="https://www.fca.org.uk/news/search-results?category=warning-notice" target="_blank" rel="noopener noreferrer">Warning notices and related publications</a></p>
+      </section>
+
+      <section class="section">
+        <h3>C. Registers, Authorisations &amp; Licences</h3>
+        <p><a href="https://register.fca.org.uk/s/" target="_blank" rel="noopener noreferrer">Financial Services Register</a></p>
+        <p><a href="https://www.bankofengland.co.uk/prudential-regulation" target="_blank" rel="noopener noreferrer">Prudential Regulation Authority (Bank of England)</a></p>
+      </section>
+
+      <section class="section">
+        <h3>D. Unauthorised Brokers &amp; Clone Firms</h3>
+        <p><a href="https://www.fca.org.uk/scamsmart/warning-list" target="_blank" rel="noopener noreferrer">Warning List for unauthorised firms</a></p>
+        <p><a href="https://www.fca.org.uk/scamsmart" target="_blank" rel="noopener noreferrer">ScamSmart checks for clone-firm risks</a></p>
+      </section>
+
+      <section class="section">
+        <h3>E–F–I–L. Reports, Statistics &amp; Market Publications</h3>
+        <p><a href="https://www.fca.org.uk/publications/annual-reports" target="_blank" rel="noopener noreferrer">Annual reports</a></p>
+        <p><a href="https://www.fca.org.uk/publications/business-plans" target="_blank" rel="noopener noreferrer">Business plans and priorities</a></p>
+      </section>
+
+      <section class="section">
+        <h3>G. Cyber Fraud, Impersonation &amp; Phishing</h3>
+        <p><a href="https://www.fca.org.uk/scamsmart/spot-investment-scam" target="_blank" rel="noopener noreferrer">How to spot an investment scam</a></p>
+        <p><a href="https://www.fca.org.uk/consumers/report-scam" target="_blank" rel="noopener noreferrer">Report impersonation and scam attempts</a></p>
+      </section>
+
+      <section class="section">
+        <h3>H. Anti-Money Laundering &amp; Financial Crime</h3>
+        <p><a href="https://www.fca.org.uk/firms/financial-crime/money-laundering-regulations" target="_blank" rel="noopener noreferrer">Money Laundering Regulations guidance</a></p>
+        <p><a href="https://www.fca.org.uk/firms/financial-crime" target="_blank" rel="noopener noreferrer">Financial crime supervision resources</a></p>
+      </section>
+    </article>
+
+    <footer>
+      Orbital WebApp United Kingdom · FCA · Database Autorità Finanziarie Internazionali ·
+      Copyright © Avv. Marcello Stanca – All rights reserved.
+    </footer>
+  </main>
 </body>
 </html>

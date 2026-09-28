@@ -300,7 +300,9 @@
       "homepage": "https://www.gov.br/cvm/",
       "fraudReportLink": "https://www.gov.br/cvm/pt-br/canais_atendimento/spc/login-cidadao",
       "authorityEmail": "imprensa@cvm.gov.br",
-      "social_links": {},
+      "social_links": {
+        "news_system_2026": "https://www.gov.br/cvm/pt-br/assuntos/noticias/2026/cvm-lanca-novo-sistema-de-atendimento-ao-cidadao-sac"
+      },
       "authorityId": "brazil__cvm",
       "relatedInternationalInstitutionIds": []
     },
@@ -2171,12 +2173,15 @@
     "flag": "🇬🇧",
     "isEU": false,
     "protectionLevel": "Altissimo",
+    "thumbnail": "authority/preview-fca.png",
+    "modal": "authority/UK-FCA.html",
+    "has_orbital_view": true,
     "financial_authority": {
       "name": "Financial Conduct Authority",
       "abbreviation": "FCA",
       "homepage": "https://www.fca.org.uk/",
-      "fraudReportLink": "https://register.fca.org.uk/s/",
-      "authorityEmail": "sam.stoakes@fca.org.uk",
+      "fraudReportLink": "https://www.fca.org.uk/consumers/report-scam",
+      "authorityEmail": "consumer.queries@fca.org.uk",
       "social_links": {
         "fca_register": "https://register.fca.org.uk/s/",
         "prudential_regulation": "https://www.bankofengland.co.uk/prudential-regulation"
