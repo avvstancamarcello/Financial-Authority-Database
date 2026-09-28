@@ -190,6 +190,12 @@
             'amevCredibilityText',
             'amevTimelineText'
         ];
+        const rootIndexHtmlPromise = fetch('./index.html', { cache: 'no-store' }).then(async (response) => {
+            if (!response.ok) {
+                throw new Error(`index.html failed to load (${response.status})`);
+            }
+            return response.text();
+        });
         const appIndexHtmlPromise = fetch('./APP/index.html', { cache: 'no-store' }).then(async (response) => {
             if (!response.ok) {
                 throw new Error(`APP/index.html failed to load (${response.status})`);
@@ -290,6 +296,41 @@
                     window.requestAnimationFrame(() => poll(remaining - 1));
                 };
                 poll(attempts);
+            });
+        }
+
+        function validateJsonLdScriptsFromHtml(html, label) {
+            const parsed = new DOMParser().parseFromString(html, 'text/html');
+            const jsonLdScripts = Array.from(parsed.querySelectorAll('script[type="application/ld+json"]'));
+            addResult(jsonLdScripts.length > 0, `${label}: contains JSON-LD script blocks`);
+            jsonLdScripts.forEach((scriptEl, index) => {
+                const content = scriptEl.textContent || '';
+                addResult(!/function\s+getOrbitalAuthorityLabel\b/.test(content), `${label}: JSON-LD block ${index + 1} does not contain executable orbital helper code`);
+                try {
+                    JSON.parse(content);
+                    addResult(true, `${label}: JSON-LD block ${index + 1} remains valid JSON`);
+                } catch (error) {
+                    addResult(false, `${label}: JSON-LD block ${index + 1} parse error (${error.message})`);
+                }
+            });
+        }
+
+        function loadHiddenIframe(src) {
+            return new Promise((resolve, reject) => {
+                const iframe = document.createElement('iframe');
+                iframe.style.position = 'absolute';
+                iframe.style.left = '-9999px';
+                iframe.style.top = '0';
+                iframe.style.width = '1440px';
+                iframe.style.height = '2400px';
+                iframe.style.visibility = 'hidden';
+                iframe.onload = () => resolve(iframe);
+                iframe.onerror = () => {
+                    iframe.remove();
+                    reject(new Error(`failed to load iframe ${src}`));
+                };
+                iframe.src = src;
+                document.body.appendChild(iframe);
             });
         }
 
@@ -397,7 +438,26 @@
                         const header = doc.querySelector('header[role="banner"]');
                         let appIndexHtml = '';
                         if (lang === 'it') {
+                            const rootIndexHtml = await rootIndexHtmlPromise;
                             appIndexHtml = await appIndexHtmlPromise;
+                            validateJsonLdScriptsFromHtml(rootIndexHtml, 'it: index.html');
+                            validateJsonLdScriptsFromHtml(appIndexHtml, 'it: APP/index.html');
+                            addResult(typeof win.getOrbitalAuthorityLabel === 'function', 'it: index.html exposes getOrbitalAuthorityLabel at runtime');
+                            addResult(win.getOrbitalAuthorityLabel?.({ financial_authority: { abbreviation: 'CONSOB' }, country_name: 'Italy' }) === 'CONSOB', 'it: index.html getOrbitalAuthorityLabel returns the authority abbreviation when available');
+                            addResult(win.getOrbitalAuthorityLabel?.({ country_name: 'United Kingdom' }) === 'United Kingdom', 'it: index.html getOrbitalAuthorityLabel falls back to country name');
+                            addResult(win.getOrbitalAuthorityLabel?.({}) === 'Authority', 'it: index.html getOrbitalAuthorityLabel falls back to Authority');
+                            const appIframe = await loadHiddenIframe('./APP/index.html');
+                            try {
+                                await waitForCondition(() => typeof appIframe.contentWindow?.getOrbitalAuthorityLabel === 'function', {
+                                    errorMessage: 'APP/index.html did not expose getOrbitalAuthorityLabel after load'
+                                });
+                                addResult(typeof appIframe.contentWindow?.getOrbitalAuthorityLabel === 'function', 'it: APP/index.html exposes getOrbitalAuthorityLabel at runtime');
+                                addResult(appIframe.contentWindow.getOrbitalAuthorityLabel({ financial_authority: { abbreviation: 'FCA' }, country_name: 'United Kingdom' }) === 'FCA', 'it: APP/index.html getOrbitalAuthorityLabel returns the authority abbreviation when available');
+                                addResult(appIframe.contentWindow.getOrbitalAuthorityLabel({ country_name: 'Italy' }) === 'Italy', 'it: APP/index.html getOrbitalAuthorityLabel falls back to country name');
+                                addResult(appIframe.contentWindow.getOrbitalAuthorityLabel({}) === 'Authority', 'it: APP/index.html getOrbitalAuthorityLabel falls back to Authority');
+                            } finally {
+                                appIframe.remove();
+                            }
                             addResult(true, 'it: APP/index.html reference file loads successfully');
                         }
                         const headerOrder = Array.from(header?.children || []).map((element) => {

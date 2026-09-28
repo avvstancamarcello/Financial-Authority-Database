@@ -216,10 +216,6 @@
             "ratingCount": "239"
         }
     }
-
-    function getOrbitalAuthorityLabel(country) {
-        return country?.financial_authority?.abbreviation || country?.country_name || 'Authority';
-    }
     </script>
     
     <script id="website-jsonld" type="application/ld+json">
@@ -5248,6 +5244,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 .replace(/'/g, '&#39;')
                 .replace(/</g, '&lt;')
                 .replace(/>/g, '&gt;');
+        }
+
+        function getOrbitalAuthorityLabel(country) {
+            return country?.financial_authority?.abbreviation || country?.country_name || 'Authority';
         }
 
         function sanitizeLocalizedHtml(html) {
