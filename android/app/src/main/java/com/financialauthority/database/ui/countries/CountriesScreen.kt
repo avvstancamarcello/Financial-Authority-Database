@@ -54,6 +54,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.financialauthority.database.domain.Country
 import com.financialauthority.database.domain.FinancialAuthority
+import com.financialauthority.database.ui.about.AmevMatrixCard
 import com.financialauthority.database.ui.components.ItemCard
 import com.financialauthority.database.ui.components.UiText
 
@@ -184,14 +185,36 @@ fun CountriesScreen(
         showAuthorityDropdown = false
     }
 
+    var showAmevMatrix by remember { mutableStateOf(false) }
+
     Column(modifier = modifier.fillMaxSize().padding(12.dp), verticalArrangement = Arrangement.spacedBy(6.dp)) {
-        // CTA Subtitle
-        Text(
-            text = if (language == "it") "Trova e contatta qualsiasi Financial Authority!" else "Find and contact any Financial Authority!",
-            style = MaterialTheme.typography.titleMedium,
-            fontWeight = FontWeight.Bold,
-            color = MaterialTheme.colorScheme.primary
-        )
+        // CTA Subtitle & AMEV Matrix Toggle
+        Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
+            Text(
+                text = if (language == "it") "Trova e contatta qualsiasi Financial Authority!" else "Find and contact any Financial Authority!",
+                style = MaterialTheme.typography.titleMedium,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.colorScheme.primary
+            )
+            AssistChip(
+                onClick = { showAmevMatrix = !showAmevMatrix },
+                label = {
+                    val amevText = buildAnnotatedString {
+                        withStyle(SpanStyle(color = Color(0xFF00FF66), fontWeight = FontWeight.ExtraBold)) {
+                            append("AMEV")
+                        }
+                        append(if (language == "it") " Matrice Acronimo (9 Lingue UE)" else " Acronym Matrix (9 EU Languages)")
+                    }
+                    Text(amevText)
+                }
+            )
+            if (showAmevMatrix) {
+                AmevMatrixCard(
+                    language = language,
+                    onClose = { showAmevMatrix = false }
+                )
+            }
+        }
 
         Row(
             modifier = Modifier.fillMaxWidth(),
