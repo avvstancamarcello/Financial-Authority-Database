@@ -22,7 +22,7 @@
                 expectedCanonical: 'https://tutelatruffe.it/',
                 expectedDir: 'ltr',
                 expectedOgLocale: 'it_IT',
-                expectedTitle: "Database Autorità Finanziarie Internazionali | Verifica Licenze Broker | 239 Paesi",
+                expectedTitle: "Database Autorità Finanziarie Internazionali | Verifica Licenze Broker | 239 Autorità Finanziarie",
                 expectedOgTitle: "Tutela Truffe | Database Autorità Finanziarie UE - Odissea Digitale",
                 expectedOgDescription: "🌍 Database di 239 autorità finanziarie internazionali. Verifica licenze broker, identità delle imprese e percorsi lingua AMEV / AMEA / AWEV per prevenire frodi Forex/Crypto.",
                 expectedOgImageAlt: "Tutela Truffe - Database Autorità Finanziarie e Mappa Europea Truffe",
@@ -47,7 +47,7 @@
                 expectedCanonical: 'https://tutelatruffe.it/?lang=bs',
                 expectedDir: 'ltr',
                 expectedOgLocale: 'bs_BA',
-                expectedTitle: "International Financial Authorities Database | Verify Broker Licenses | 239 Countries",
+                expectedTitle: "International Financial Authorities Database | Verify Broker Licenses | 239 Financial Authorities",
                 expectedOgTitle: "Scam Protection | EU Financial Authorities Database - Digital Odyssey",
                 expectedOgDescription: "🌍 Database of 239 international financial authorities. Verify broker licenses, company identities, and AMEV / AMEA / AWEV language paths for Forex/Crypto fraud prevention.",
                 expectedOgImageAlt: "Scam Protection - Financial Authorities Database and European Scam Map",
@@ -72,7 +72,7 @@
                 expectedCanonical: 'https://tutelatruffe.it/?lang=el',
                 expectedDir: 'ltr',
                 expectedOgLocale: 'el_GR',
-                expectedTitle: "International Financial Authorities Database | Verify Broker Licenses | 239 Countries",
+                expectedTitle: "International Financial Authorities Database | Verify Broker Licenses | 239 Financial Authorities",
                 expectedOgTitle: "Scam Protection | EU Financial Authorities Database - Digital Odyssey",
                 expectedOgDescription: "🌍 Database of 239 international financial authorities. Verify broker licenses, company identities, and AMEV / AMEA / AWEV language paths for Forex/Crypto fraud prevention.",
                 expectedOgImageAlt: "Scam Protection - Financial Authorities Database and European Scam Map",
@@ -88,7 +88,7 @@
                 expectedMedusaNewTab: "Νέα καρτέλα",
                 expectedMedusaNewTabSr: "(ανοίγει σε νέα καρτέλα)",
                 expectedMetaDescriptionIncludes: "AMEV / AMEA / AWEV language paths",
-                expectedHeroTitle: "Βάση Δεδομένων Διεθνών Χρηματοοικονομικών Αρχών – 239 χώρες",
+                expectedHeroTitle: "Βάση Δεδομένων Διεθνών Χρηματοοικονομικών Αρχών – 239 χρηματοοικονομικές αρχές",
                 expectedHeroSubtitle: "Επαληθεύστε άδειες μεσιτών, αναφέρετε απάτες Forex/Crypto και ελέγξτε τη χρηματοοικονομική ταυτότητα των δικαιούχων πληρωμών.",
                 expectedLanguageSelectorTitle: "AMEV / AMEA / AWEV – landing page",
                 expectedLanguageSelectorNote: "AMEV για τον υποστηριζόμενο ευρωπαϊκό πυρήνα, AMEA για τα ελληνικά και AWEV για τη διεθνή αγγλική διαδρομή που χρησιμοποιείται και για την ολλανδική περιοχή.",
@@ -106,7 +106,7 @@
                 expectedCanonical: 'https://tutelatruffe.it/?lang=ar',
                 expectedDir: 'rtl',
                 expectedOgLocale: 'ar_EG',
-                expectedTitle: "International Financial Authorities Database | Verify Broker Licenses | 239 Countries",
+                expectedTitle: "International Financial Authorities Database | Verify Broker Licenses | 239 Financial Authorities",
                 expectedOgTitle: "Scam Protection | EU Financial Authorities Database - Digital Odyssey",
                 expectedOgDescription: "🌍 Database of 239 international financial authorities. Verify broker licenses, company identities, and AMEV / AMEA / AWEV language paths for Forex/Crypto fraud prevention.",
                 expectedOgImageAlt: "Scam Protection - Financial Authorities Database and European Scam Map",
@@ -131,7 +131,7 @@
                 expectedCanonical: 'https://tutelatruffe.it/?lang=xk',
                 expectedDir: 'ltr',
                 expectedOgLocale: 'sq_XK',
-                expectedTitle: "International Financial Authorities Database | Verify Broker Licenses | 239 Countries",
+                expectedTitle: "International Financial Authorities Database | Verify Broker Licenses | 239 Financial Authorities",
                 expectedOgTitle: "Scam Protection | EU Financial Authorities Database - Digital Odyssey",
                 expectedOgDescription: "🌍 Database of 239 international financial authorities. Verify broker licenses, company identities, and AMEV / AMEA / AWEV language paths for Forex/Crypto fraud prevention.",
                 expectedOgImageAlt: "Scam Protection - Financial Authorities Database and European Scam Map",
@@ -154,7 +154,7 @@
         const expectedEnState = {
             htmlLang: 'en',
             canonical: 'https://tutelatruffe.it/?lang=en',
-            title: "International Financial Authorities Database | Verify Broker Licenses | 239 Countries",
+            title: "International Financial Authorities Database | Verify Broker Licenses | 239 Financial Authorities",
             ogTitle: "Scam Protection | EU Financial Authorities Database - Digital Odyssey",
             ogDescription: "🌍 Database of 239 international financial authorities. Verify broker licenses, company identities, and AMEV / AMEA / AWEV language paths for Forex/Crypto fraud prevention.",
             metaDescriptionIncludes: "AMEV / AMEA / AWEV language paths",
@@ -176,6 +176,7 @@
         };
         const obsoleteNavReferences = "📜 Referenze Istituzionali";
         const obsoleteLandingClaimPattern = /\b11\b[\s\S]{0,120}\b(?:AMEV|languages?|lingue|langues|Sprachen|idiomas|línguas|limbi|jezika|gjuhë|γλώσσες)\b/i;
+        const obsolete239CountryClaimPattern = /\b239\s*(?:countries?|paesi?|pays|pa[ií]s(?:es)?|l[äa]nd(?:er|ern)|stati|states?|țări|țară|χώρες|shtete|vendeve?|zemalja|zemlje|دولة|دول|quốc gia|देशों|देश|个国家|国家)(?=[\s.,;:!?<>]|的|列表|$)|(?:الدول|بلدان)\s+(?:الـ\s*)?239\b/i;
         const obsoleteLandingClaimLocales = ['it', 'en', 'fr', 'de', 'es', 'pt', 'bs', 'sq', 'ro', 'el'];
         const obsoleteLandingClaimKeys = [
             'landingHeroTitle',
@@ -706,11 +707,17 @@
                         const staleLandingClaims = obsoleteLandingClaimLocales.flatMap((locale) => obsoleteLandingClaimKeys
                             .map((key) => `${locale}.${key}: ${translationMap?.[locale]?.[key] || ''}`)
                             .filter((entry) => obsoleteLandingClaimPattern.test(entry)));
+                        const stale239CountryClaims = Object.entries(translationMap || {}).flatMap(([locale, bundle]) =>
+                            Object.entries(bundle || {})
+                                .filter(([, value]) => typeof value === 'string' && obsolete239CountryClaimPattern.test(value.replace(/<[^>]*>/g, ' ')))
+                                .map(([key, value]) => `${locale}.${key}: ${value}`)
+                        );
                         const navReferencesLocales = ['it', 'en', 'fr', 'de', 'es', 'pt', 'bs', 'sq', 'ro', 'el', 'ar', 'zh', 'hi', 'vi'];
                         const staleNavReferencesLocales = navReferencesLocales.filter((locale) =>
                             (translationMap?.[locale]?.navReferences || '').trim() === obsoleteNavReferences
                         );
                         addResult((doc.querySelector('#amev-introduction-title')?.textContent || '').includes('AME') && staleLandingClaims.length === 0, `${lang}: updated AMEV/AMEA/AWEV landing copy replaces obsolete 11-language claims across localized landing strings`);
+                        addResult(stale239CountryClaims.length === 0, `${lang}: localized translation bundles describe 239 financial authorities, not countries`);
                         addResult(staleNavReferencesLocales.length === 0, `${lang}: localized/fallback navReferences bundles do not contain obsolete "Referenze Istituzionali" label`);
                         if (lang === 'bs') {
                             addResult(buttonText.includes('BS') && buttonText.includes('Bosanski'), 'bs: EU selector shows BS and Bosanski');
