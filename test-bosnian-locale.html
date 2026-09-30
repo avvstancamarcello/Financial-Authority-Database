@@ -90,7 +90,7 @@
                 expectedMetaDescriptionIncludes: "AMEV / AMEA / AWEV language paths",
                 expectedHeroTitle: "Βάση Δεδομένων Διεθνών Χρηματοοικονομικών Αρχών – 239 χώρες",
                 expectedHeroSubtitle: "Επαληθεύστε άδειες μεσιτών, αναφέρετε απάτες Forex/Crypto και ελέγξτε τη χρηματοοικονομική ταυτότητα των δικαιούχων πληρωμών.",
-                expectedLanguageSelectorTitle: "AMEV / AMEA / AWEV – επιλογή γλώσσας",
+                expectedLanguageSelectorTitle: "AMEV / AMEA / AWEV – landing page",
                 expectedLanguageSelectorNote: "AMEV για τον υποστηριζόμενο ευρωπαϊκό πυρήνα, AMEA για τα ελληνικά και AWEV για τη διεθνή αγγλική διαδρομή που χρησιμοποιείται και για την ολλανδική περιοχή.",
                 expectedFutureLanguagesTitle: "⏳ Μελλοντικά κουμπιά γλώσσας – Work in Progress",
                 expectedFutureLanguagesNote: "Συμπαγής δεσμευμένη περιοχή για τα επόμενα κουμπιά γλώσσας που έχουν ήδη προβλεφθεί για μελλοντική επέκταση.",
@@ -172,7 +172,7 @@
             medusaNewTabSr: "(opens in a new tab)",
             languageAreaEu: "EU area",
             languageAreaAsia: "ASIA area",
-            languagePrompt: "Select your language - AMEV - AMEA - AWEV landing page access"
+            languagePrompt: "Select your language"
         };
         const obsoleteNavReferences = "📜 Referenze Istituzionali";
         const obsoleteLandingClaimPattern = /\b11\b[\s\S]{0,120}\b(?:AMEV|languages?|lingue|langues|Sprachen|idiomas|línguas|limbi|jezika|gjuhë|γλώσσες)\b/i;
@@ -690,7 +690,8 @@
                         addResult(!asiaAreaLabel?.querySelector('.language-selector-area-icon'), `${lang}: ASIA area label has no aggregated icon`);
                         addResult(JSON.stringify(asiaFlagClasses) === JSON.stringify(expectedAsiaFlagClasses), `${lang}: ASIA buttons keep only the existing per-language flags (QA, CN, IN, VN)`);
                         addResult(/\.language-selector-grid-area-label\s*\{[\s\S]*font-size:\s*clamp\(1rem,\s*2\.3vw,\s*1\.7rem\)/.test(styleText), `${lang}: area-row labels use the doubled-sized responsive font rule`);
-                        addResult(/\.language-selector-grid-area-label\s+\.language-selector-area-icon\s*\{[\s\S]*font-size:\s*2em/.test(styleText), `${lang}: EU icon uses the doubled-size style rule`);
+                        addResult(/\.language-selector-eu\s+\.language-selector-grid-area-label-eu\s*\{[^}]*font-size:\s*clamp\(0\.6rem,\s*2vw,\s*1\.35rem\)[^}]*white-space:\s*nowrap/.test(styleText), `${lang}: EU area label uses a responsive single-line font rule`);
+                        addResult(/\.language-selector-eu\s+\.language-selector-area-icon\s*\{\s*font-size:\s*1\.1em/.test(styleText), `${lang}: EU icon uses the reduced banner-scoped size`);
                         addResult(asiaAreaLabel?.querySelector('.language-selector-grid-area-label')?.classList.contains('language-selector-grid-area-label-asia'), `${lang}: ASIA row uses the area-row doubled-size label class`);
                         addResult(amevDisclosureToggle?.tagName === 'BUTTON' && amevDisclosureToggle?.type === 'button', `${lang}: AMEV info uses a semantic disclosure button`);
                         addResult(amevDisclosureToggle?.getAttribute('aria-controls') === 'amev-introduction-content', `${lang}: AMEV disclosure button references stable aria-controls content id`);
