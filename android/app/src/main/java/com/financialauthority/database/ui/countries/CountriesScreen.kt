@@ -92,7 +92,8 @@ fun CountriesScreen(
     favorites: Set<String>,
     modifier: Modifier = Modifier,
     language: String = "it",
-    onOpen: (Country) -> Unit
+    onOpen: (Country) -> Unit,
+    onOpenUrl: (String) -> Unit
 ) {
     var countryQuery by remember { mutableStateOf("") }
     var authorityQuery by remember { mutableStateOf("") }
@@ -418,12 +419,21 @@ fun CountriesScreen(
                 }
             }
 
-            // Icona cambio layout (allineata a destra)
-            IconButton(onClick = { grid = !grid }) {
-                Icon(
-                    imageVector = if (grid) Icons.AutoMirrored.Filled.ViewList else Icons.Default.GridView,
-                    contentDescription = UiText.get(language, if (grid) "list_view" else "grid_view")
+            // Destra: News by Authorities + Icona cambio layout
+            Row(
+                horizontalArrangement = Arrangement.spacedBy(4.dp),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                AssistChip(
+                    onClick = { onOpenUrl("https://www.amevfirenze.it/news") },
+                    label = { Text("📰 News by Authorities") }
                 )
+                IconButton(onClick = { grid = !grid }) {
+                    Icon(
+                        imageVector = if (grid) Icons.AutoMirrored.Filled.ViewList else Icons.Default.GridView,
+                        contentDescription = UiText.get(language, if (grid) "list_view" else "grid_view")
+                    )
+                }
             }
         }
 

@@ -144,7 +144,8 @@ fun MainScaffold(
                     countries = catalog.countries,
                     favorites = favorites,
                     language = language,
-                    onOpen = { navController.navigate("${Routes.COUNTRIES}/${it.countryKey}") }
+                    onOpen = { navController.navigate("${Routes.COUNTRIES}/${it.countryKey}") },
+                    onOpenUrl = openUrl
                 )
             }
             composable(

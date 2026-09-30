@@ -3,9 +3,9 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@android:drawable/ic_dialog_info"
+        android:icon="@drawable/app_shield_icon"
         android:label="Financial Authority Database"
-        android:roundIcon="@android:drawable/ic_dialog_info"
+        android:roundIcon="@drawable/app_shield_icon"
         android:supportsRtl="true"
         android:theme="@style/Theme.FinancialAuthorityDatabase">
         <activity
