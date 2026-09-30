@@ -23,18 +23,22 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ViewList
 import androidx.compose.material.icons.filled.Clear
 import androidx.compose.material.icons.filled.GridView
+import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.AssistChip
+import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.FilterChip
+import androidx.compose.material3.FilterChipDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -90,6 +94,8 @@ private fun getSubstantiveWords(text: String): List<String> {
 fun CountriesScreen(
     countries: List<Country>,
     favorites: Set<String>,
+    starVotes: Map<Int, Int>,
+    onVoteStar: (Int) -> Unit,
     modifier: Modifier = Modifier,
     language: String = "it",
     onOpen: (Country) -> Unit,
@@ -102,11 +108,50 @@ fun CountriesScreen(
     var showAuthorityDropdown by remember { mutableStateOf(false) }
 
     var regionFilter by remember { mutableStateOf("All") }
-    var protectionFilter by remember { mutableStateOf("All") }
-    var protectionMenuOpen by remember { mutableStateOf(false) }
+    var showRatingDialog by remember { mutableStateOf(false) }
+    var showAmevMatrix by remember { mutableStateOf(false) }
     var grid by remember { mutableStateOf(true) }
 
-    val protections = remember(countries) { listOf("All") + countries.map { it.protectionLevel }.distinct().sorted() }
+    // Rating Dialog with counters
+    if (showRatingDialog) {
+        AlertDialog(
+            onDismissRequest = { showRatingDialog = false },
+            title = { Text(if (language == "it") "⭐ Vota con Like" else "⭐ Rate with Like") },
+            text = {
+                Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                    Text(if (language == "it") "Valuta l'utilità di questa App (da 1 a 5 stelle):" else "Rate the usefulness of this App (1 to 5 stars):")
+                    Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
+                        (1..5).forEach { star ->
+                            val count = starVotes[star] ?: 0
+                            Button(
+                                onClick = { onVoteStar(star) },
+                                modifier = Modifier.fillMaxWidth()
+                            ) {
+                                Row(
+                                    modifier = Modifier.fillMaxWidth(),
+                                    horizontalArrangement = Arrangement.SpaceBetween
+                                ) {
+                                    Text("⭐".repeat(star))
+                                    Text("($count)")
+                                }
+                            }
+                        }
+                    }
+                    val totalVotes = starVotes.values.sum()
+                    Text(
+                        text = if (language == "it") "Totale voti registrati: $totalVotes" else "Total votes registered: $totalVotes",
+                        style = MaterialTheme.typography.bodySmall,
+                        modifier = Modifier.padding(top = 4.dp)
+                    )
+                }
+            },
+            confirmButton = {
+                TextButton(onClick = { showRatingDialog = false }) {
+                    Text(if (language == "it") "Chiudi" else "Close")
+                }
+            }
+        )
+    }
 
     val matchingCountries = remember(countryQuery, countries) {
         val q = countryQuery.trim().lowercase()
@@ -127,33 +172,35 @@ fun CountriesScreen(
 
     val matchingAuthorities = remember(authorityQuery, countries) {
         val q = authorityQuery.trim().lowercase()
-        if (q.length < 2 || q in stopWords) emptyList()
+        if (q.length < 3 || q in stopWords) emptyList()
         else countries.filter { country ->
             val authName = country.authority.name.lowercase()
             val abbr = country.authority.abbreviation.orEmpty().lowercase()
             val cName = country.countryName.lowercase()
-            abbr == q || abbr.startsWith(q) || authName.startsWith(q) || cName.startsWith(q) ||
+            abbr == q || abbr.startsWith(q) || abbr.contains(q) ||
+                authName.startsWith(q) || authName.contains(q) ||
+                cName.startsWith(q) || cName.contains(q) ||
                 getSubstantiveWords(country.authority.name).any { word ->
-                    word !in genericWords && word.startsWith(q)
+                    word !in genericWords && word.contains(q)
                 }
         }.sortedWith(
             compareByDescending<Country> { country ->
                 val abbr = country.authority.abbreviation.orEmpty().lowercase()
                 val authName = country.authority.name.lowercase()
-                if (abbr == q) 1000
-                else if (abbr.startsWith(q)) 800
-                else if (authName.startsWith(q)) 600
+                if (abbr == q || abbr.startsWith(q)) 1000
+                else if (authName.startsWith(q)) 800
+                else if (authName.contains(q)) 600
                 else 300
             }.thenBy { it.countryName }
         )
     }
 
-    val filtered = remember(selectedCountry, countryQuery, authorityQuery, regionFilter, protectionFilter, countries) {
+    val filtered = remember(selectedCountry, countryQuery, authorityQuery, regionFilter, countries) {
         val baseList = when {
             selectedCountry != null -> listOf(selectedCountry!!)
             countryQuery.trim().length >= 2 && authorityQuery.isBlank() -> matchingCountries
-            authorityQuery.trim().length >= 2 && countryQuery.isBlank() -> matchingAuthorities
-            countryQuery.trim().length >= 2 && authorityQuery.trim().length >= 2 -> {
+            authorityQuery.trim().length >= 3 && countryQuery.isBlank() -> matchingAuthorities
+            countryQuery.trim().length >= 2 && authorityQuery.trim().length >= 3 -> {
                 countries.filter { country ->
                     val cName = country.countryName.lowercase()
                     val aName = country.authority.name.lowercase()
@@ -165,16 +212,11 @@ fun CountriesScreen(
         }
 
         baseList.filter { country ->
-            val matchesRegion = when (regionFilter) {
+            when (regionFilter) {
                 "EU" -> country.isEU
                 "Non-EU" -> !country.isEU
                 else -> true
             }
-            val matchesProtection = when (protectionFilter) {
-                "All" -> true
-                else -> country.protectionLevel.equals(protectionFilter, ignoreCase = true)
-            }
-            matchesRegion && matchesProtection
         }
     }
 
@@ -186,14 +228,12 @@ fun CountriesScreen(
         showAuthorityDropdown = false
     }
 
-    var showAmevMatrix by remember { mutableStateOf(false) }
-
-    Column(modifier = modifier.fillMaxSize().padding(12.dp), verticalArrangement = Arrangement.spacedBy(6.dp)) {
+    Column(modifier = modifier.fillMaxSize().padding(horizontal = 12.dp, vertical = 4.dp), verticalArrangement = Arrangement.spacedBy(3.dp)) {
         // CTA Subtitle & AMEV Matrix Toggle
-        Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
+        Column(verticalArrangement = Arrangement.spacedBy(2.dp)) {
             Text(
                 text = if (language == "it") "Trova e contatta qualsiasi Financial Authority!" else "Find and contact any Financial Authority!",
-                style = MaterialTheme.typography.titleMedium,
+                style = MaterialTheme.typography.titleSmall,
                 fontWeight = FontWeight.Bold,
                 color = MaterialTheme.colorScheme.primary
             )
@@ -217,12 +257,13 @@ fun CountriesScreen(
             }
         }
 
+        // Search Boxes Row
         Row(
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.spacedBy(8.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
-            // Casella 1: Ricerca Paese (Country / Paese label based on language)
+            // Casella 1: Ricerca Paese
             Column(modifier = Modifier.weight(1f)) {
                 OutlinedTextField(
                     value = countryQuery,
@@ -231,7 +272,7 @@ fun CountriesScreen(
                         selectedCountry = null
                         showCountryDropdown = newValue.trim().length >= 2 && newValue.trim().lowercase() !in stopWords
                     },
-                    label = { Text(if (language == "it") "1. Paese" else "1. Country") },
+                    label = { Text(if (language == "it") "Paese" else "Country") },
                     trailingIcon = {
                         if (countryQuery.isNotBlank()) {
                             IconButton(onClick = {
@@ -278,16 +319,16 @@ fun CountriesScreen(
                 }
             }
 
-            // Casella 2: Ricerca Authority (Menu Compatto: Flag + Sigla)
+            // Casella 2: Ricerca Authority
             Column(modifier = Modifier.weight(1f)) {
                 OutlinedTextField(
                     value = authorityQuery,
                     onValueChange = { newValue ->
                         authorityQuery = newValue
                         selectedCountry = null
-                        showAuthorityDropdown = newValue.trim().length >= 2 && newValue.trim().lowercase() !in stopWords
+                        showAuthorityDropdown = newValue.trim().length >= 3 && newValue.trim().lowercase() !in stopWords
                     },
-                    label = { Text(if (language == "it") "2. Authority" else "2. Authority") },
+                    label = { Text("Authority") },
                     trailingIcon = {
                         if (authorityQuery.isNotBlank()) {
                             IconButton(onClick = {
@@ -303,7 +344,7 @@ fun CountriesScreen(
                     modifier = Modifier.fillMaxWidth()
                 )
 
-                if (showAuthorityDropdown && matchingAuthorities.isNotEmpty() && authorityQuery.trim().length >= 2) {
+                if (showAuthorityDropdown && matchingAuthorities.isNotEmpty() && authorityQuery.trim().length >= 3) {
                     DropdownMenu(
                         expanded = showAuthorityDropdown,
                         onDismissRequest = { showAuthorityDropdown = false },
@@ -360,80 +401,107 @@ fun CountriesScreen(
             }
         }
 
-        // Filtri e cambio layout
+        // Scrolling Prompt & Indicator (Right below Authority box)
         Row(
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically
         ) {
-            FlowRow(
-                horizontalArrangement = Arrangement.spacedBy(6.dp),
-                verticalArrangement = Arrangement.spacedBy(4.dp),
-                modifier = Modifier.weight(1f)
-            ) {
-                // Filtro Regione
-                listOf("All", "EU", "Non-EU").forEach { region ->
-                    val label = when (region) {
-                        "All" -> if (language == "it") "Tutti i Paesi" else "All Countries"
-                        else -> region
-                    }
-                    FilterChip(
-                        selected = regionFilter == region,
-                        onClick = { regionFilter = region },
-                        label = { Text(label) }
-                    )
-                }
+            Text(
+                text = if (language == "it") "Elenco Bandiere in ordine alfabetico" else "Alphabetical Flag List",
+                style = MaterialTheme.typography.bodySmall,
+                color = MaterialTheme.colorScheme.onSurfaceVariant
+            )
+            Text(
+                text = "⬇️ Scroll",
+                style = MaterialTheme.typography.bodySmall,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.colorScheme.primary
+            )
+        }
 
-                // PopUp Banner: Level Consumer Protection
-                Box {
-                    FilterChip(
-                        selected = protectionFilter != "All",
-                        onClick = { protectionMenuOpen = true },
-                        label = {
-                            val labelText = if (protectionFilter == "All") "Level Consumer Protection" else "Level: $protectionFilter"
-                            Text(labelText)
-                        },
-                        trailingIcon = { Text("▼", fontSize = 10.sp) }
-                    )
-                    DropdownMenu(
-                        expanded = protectionMenuOpen,
-                        onDismissRequest = { protectionMenuOpen = false }
-                    ) {
-                        DropdownMenuItem(
-                            text = { Text(if (language == "it") "Tutti i Livelli" else "All Levels") },
-                            onClick = {
-                                protectionFilter = "All"
-                                protectionMenuOpen = false
-                            }
-                        )
-                        protections.filter { it != "All" }.forEach { level ->
-                            DropdownMenuItem(
-                                text = { Text(level) },
-                                onClick = {
-                                    protectionFilter = level
-                                    protectionMenuOpen = false
-                                }
-                            )
-                        }
-                    }
-                }
-            }
+        // RIGA 1: Filtri Regione
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.spacedBy(4.dp),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            FilterChip(
+                selected = regionFilter == "All",
+                onClick = { regionFilter = "All" },
+                label = { Text(if (language == "it") "Tutti" else "All") },
+                colors = FilterChipDefaults.filterChipColors(selectedContainerColor = Color(0xFF3B82F6).copy(alpha = 0.3f))
+            )
+            FilterChip(
+                selected = regionFilter == "EU",
+                onClick = { regionFilter = "EU" },
+                label = { Text("EU") },
+                colors = FilterChipDefaults.filterChipColors(selectedContainerColor = Color(0xFF10B981).copy(alpha = 0.3f))
+            )
+            FilterChip(
+                selected = regionFilter == "Non-EU",
+                onClick = { regionFilter = "Non-EU" },
+                label = { Text("Non-EU") },
+                colors = FilterChipDefaults.filterChipColors(selectedContainerColor = Color(0xFFF59E0B).copy(alpha = 0.3f))
+            )
+        }
 
-            // Destra: News by Authorities + Icona cambio layout
+        // RIGA 2: Vota con Like & NEWS by Authorities
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.spacedBy(4.dp),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            AssistChip(
+                onClick = { showRatingDialog = true },
+                label = { Text("⭐ Vota con Like") }
+            )
+            AssistChip(
+                onClick = { onOpenUrl("https://www.amevfirenze.it/news.html") },
+                label = { Text("✨ NEWS by Authorities") }
+            )
+        }
+
+        // RIGA 3: Change View & Scroll
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Text(
+                text = "",
+                style = MaterialTheme.typography.bodySmall
+            )
+
             Row(
-                horizontalArrangement = Arrangement.spacedBy(4.dp),
+                horizontalArrangement = Arrangement.spacedBy(6.dp),
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                AssistChip(
-                    onClick = { onOpenUrl("https://www.amevfirenze.it/news") },
-                    label = { Text("📰 News by Authorities") }
-                )
-                IconButton(onClick = { grid = !grid }) {
-                    Icon(
-                        imageVector = if (grid) Icons.AutoMirrored.Filled.ViewList else Icons.Default.GridView,
-                        contentDescription = UiText.get(language, if (grid) "list_view" else "grid_view")
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.spacedBy(2.dp),
+                    modifier = Modifier.clickable { grid = !grid }
+                ) {
+                    Text(
+                        text = "change view",
+                        style = MaterialTheme.typography.labelMedium,
+                        fontWeight = FontWeight.Bold,
+                        color = MaterialTheme.colorScheme.primary
                     )
+                    IconButton(onClick = { grid = !grid }) {
+                        Icon(
+                            imageVector = if (grid) Icons.AutoMirrored.Filled.ViewList else Icons.Default.GridView,
+                            contentDescription = UiText.get(language, if (grid) "list_view" else "grid_view"),
+                            tint = MaterialTheme.colorScheme.primary
+                        )
+                    }
                 }
+                Text(
+                    text = "⬇️ Scroll",
+                    style = MaterialTheme.typography.bodyMedium,
+                    fontWeight = FontWeight.ExtraBold,
+                    color = MaterialTheme.colorScheme.primary
+                )
             }
         }
 
@@ -561,7 +629,7 @@ fun CountryDetailScreen(
             item { AssistChip(onClick = { onOpenUrl(webAppUrl) }, label = { Text("🌐 " + UiText.get(language, "open_orbital_webapp")) }) }
         }
         country.authority.mapsUrl?.takeIf { it.isNotBlank() }?.let { mapsUrl ->
-            item { AssistChip(onClick = { onOpenUrl(mapsUrl) }, label = { Text("📍 " + UiText.get(language, "google_maps_location")) }) }
+            item { AssistChip(onClick = { onOpenUrl(mapsUrl) }, label = { Text("📍 " + mapsUrl) }) }
         }
         country.authority.authorityEmail?.takeIf { it.isNotBlank() }?.let { email ->
             item { Text("${UiText.get(language, "email")}: $email") }
@@ -665,14 +733,16 @@ private fun AuthorityTitleHeader(authority: FinancialAuthority) {
                 Text(
                     text = abbr,
                     style = MaterialTheme.typography.titleLarge,
-                    fontWeight = FontWeight.Bold
+                    fontWeight = FontWeight.Bold,
+                    color = MaterialTheme.colorScheme.onSurface
                 )
             }
         }
         Text(
             text = authority.name,
             style = MaterialTheme.typography.titleLarge,
-            fontWeight = FontWeight.SemiBold
+            fontWeight = FontWeight.SemiBold,
+            color = MaterialTheme.colorScheme.onSurface
         )
     }
 }

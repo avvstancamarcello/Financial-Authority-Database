@@ -140,9 +140,12 @@ fun MainScaffold(
     ) { padding ->
         NavHost(navController = navController, startDestination = Routes.COUNTRIES, modifier = Modifier.padding(padding)) {
             composable(Routes.COUNTRIES) {
+                val starVotes by vm.starVotes.collectAsState()
                 CountriesScreen(
                     countries = catalog.countries,
                     favorites = favorites,
+                    starVotes = starVotes,
+                    onVoteStar = vm::voteStar,
                     language = language,
                     onOpen = { navController.navigate("${Routes.COUNTRIES}/${it.countryKey}") },
                     onOpenUrl = openUrl

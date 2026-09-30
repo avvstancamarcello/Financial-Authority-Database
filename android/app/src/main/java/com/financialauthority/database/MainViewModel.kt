@@ -33,6 +33,9 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
 
     val favorites = prefs.favorites.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), emptySet())
     val language = prefs.language.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), "it")
+    val totalConnections = prefs.totalConnections.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), 0)
+    val starVotes = prefs.starVotes.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), emptyMap())
+    val visitedCards = prefs.visitedCards.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), emptySet())
 
     val aboutSections: StateFlow<List<Pair<String, String>>> = language.combine(_catalogState) { locale, _ ->
         listOf(
@@ -47,6 +50,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
 
     init {
         loadData()
+        viewModelScope.launch { prefs.incrementConnection() }
     }
 
     fun loadData() {
@@ -64,6 +68,14 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
 
     fun setLanguage(locale: String) {
         viewModelScope.launch { prefs.setLanguage(locale) }
+    }
+
+    fun voteStar(star: Int) {
+        viewModelScope.launch { prefs.voteStar(star) }
+    }
+
+    fun recordVisit(cardId: String) {
+        viewModelScope.launch { prefs.recordVisit(cardId) }
     }
 
     suspend fun loadLegal(doc: String, locale: String): String = repository.loadLegalDocument(doc, locale)
