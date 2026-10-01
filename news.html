@@ -105,6 +105,55 @@
       font-size: 1.02rem;
     }
 
+    .hero-meta {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 10px;
+      margin-bottom: 18px;
+      padding: 10px 12px;
+      border-radius: 14px;
+      background: rgba(15, 23, 42, 0.55);
+      border: 1px solid var(--line);
+    }
+
+    .post-date {
+      font-size: 0.78rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #f8fafc;
+      font-weight: 700;
+    }
+
+    .authority-strip {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: flex-start;
+      gap: 8px;
+    }
+
+    .authority-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 7px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(251, 191, 36, 0.35);
+      background: rgba(251, 191, 36, 0.08);
+      color: var(--text);
+      font-size: 0.8rem;
+      font-weight: 700;
+    }
+
+    .authority-chip .flag {
+      width: 22px;
+      height: 22px;
+      min-width: 22px;
+      font-size: 1rem;
+      line-height: 1;
+    }
+
     .status-row {
       display: flex;
       flex-wrap: wrap;
@@ -396,7 +445,15 @@
 
     <header class="hero">
       <div class="eyebrow" id="hero-tag">Finanza sicura</div>
-      <h1 id="hero-title">3 pillole di sicurezza finanziaria</h1>
+      <div class="hero-meta" aria-label="Dettagli del post pillole">
+        <div class="authority-strip" aria-label="Authority autrici delle tre pillole">
+          <span class="authority-chip"><span class="flag" aria-hidden="true">🇮🇹</span>CONSOB</span>
+          <span class="authority-chip"><span class="flag" aria-hidden="true">🇬🇧</span>FCA</span>
+          <span class="authority-chip"><span class="flag" aria-hidden="true">🇫🇷</span>AMF</span>
+        </div>
+        <div class="post-date">Post pillole • 01/10/2026</div>
+      </div>
+      <h1 id="hero-title">3 pillole di educazione finanziaria, ogni week end</h1>
       <p class="lead" id="hero-lead">
         Tre aggiornamenti alla settimana, pubblicati nello stesso ritmo delle Authority finanziarie di tutto il mondo.
         Ogni nuovo contenuto viene aggiunto in fondo alla pagina, così il feed cresce in modo ordinato e leggibile.
@@ -426,7 +483,7 @@
     const translations = {
       it: {
         heroTag: 'Finanza sicura',
-        heroTitle: '3 pillole di sicurezza finanziaria',
+        heroTitle: '3 pillole di educazione finanziaria, ogni week end',
         heroLead: 'Tre aggiornamenti alla settimana, pubblicati nello stesso ritmo delle Authority finanziarie di tutto il mondo. Ogni nuovo contenuto viene aggiunto in fondo alla pagina, così il feed cresce in modo ordinato e leggibile.',
         status1: '3 contenuti per aggiornamento',
         status2: 'Nuovi in fondo alla pagina',
