@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>España CNMV orbital WebApp</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Ficha orbital independiente de la CNMV en España: recursos oficiales, advertencias, registros, reclamaciones e información para inversores.">
+  <link rel="canonical" href="https://www.amevfirenze.it/authority/ES-CNMV.html">
+  <style>
+    :root {
+      --cnmv-blue: #004080;
+      --cnmv-light: #f5f8ff;
+      --cnmv-border: #d0d8ea;
+      --cnmv-danger: #b00020;
+      --cnmv-safe: #007e33;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+                   Roboto, sans-serif;
+      background: radial-gradient(circle at top, #f0f6ff 0, #e3ebf7 40%, #d7e0f0 100%);
+      color: #111827;
+    }
+
+    header {
+      padding: 16px 20px;
+      background: rgba(0, 64, 128, 0.9);
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+    }
+
+    header .title-block { display: flex; align-items: center; gap: 12px; }
+    header .flag { font-size: 28px; }
+    header h1 { margin: 0; font-size: 1.4rem; }
+    header p { margin: 2px 0 0; font-size: 0.85rem; opacity: 0.9; }
+    main { max-width: 960px; margin: 0 auto; padding: 20px 16px 32px; }
+
+    .card {
+      background: #ffffff;
+      border-radius: 18px;
+      box-shadow: 0 12px 30px rgba(15, 23, 42, 0.18);
+      border: 1px solid var(--cnmv-border);
+      padding: 20px 18px 22px;
+    }
+
+    .card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 12px;
+      flex-wrap: wrap;
+    }
+
+    .card-header h2 { margin: 0; font-size: 1.2rem; color: var(--cnmv-blue); }
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      font-size: 0.8rem;
+      background: #e0f2fe;
+      color: #0f172a;
+      border: 1px solid #bae6fd;
+    }
+    .badge span.dot { width: 8px; height: 8px; border-radius: 50%; background: #22c55e; }
+    .thumbnail {
+      width: 100%;
+      height: auto;
+      object-fit: contain;
+      border-radius: 14px;
+      margin: 14px 0 18px;
+      border: 1px solid var(--cnmv-border);
+    }
+
+    dl {
+      margin: 0;
+      display: grid;
+      grid-template-columns: minmax(0, 180px) minmax(0, 1fr);
+      row-gap: 8px;
+      column-gap: 12px;
+      font-size: 0.92rem;
+    }
+    dt { font-weight: 600; color: #374151; }
+    dd { margin: 0; color: #111827; word-break: break-word; }
+    a { color: var(--cnmv-blue); text-decoration: none; }
+    a:hover, a:focus-visible { text-decoration: underline; }
+
+    .note-block {
+      margin-top: 14px;
+      padding: 10px 12px;
+      border-radius: 12px;
+      background: var(--cnmv-light);
+      border: 1px solid var(--cnmv-border);
+      font-size: 0.9rem;
+    }
+    .note-block strong { display: block; margin-bottom: 4px; color: #1f2937; }
+    .actions { margin-top: 18px; display: flex; flex-wrap: wrap; gap: 10px; }
+    .btn {
+      border: none;
+      border-radius: 999px;
+      padding: 8px 14px;
+      font-size: 0.85rem;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+    .btn-primary { background: var(--cnmv-blue); color: #ffffff; }
+    .btn-outline { background: #ffffff; color: var(--cnmv-blue); border: 1px solid var(--cnmv-blue); }
+    .btn-danger { background: var(--cnmv-danger); color: #ffffff; }
+    .btn-safe { background: var(--cnmv-safe); color: #ffffff; }
+    .section { margin-top: 24px; padding-top: 12px; border-top: 1px dashed #cbd5e1; }
+    .section h3 { margin: 0 0 8px; font-size: 1rem; color: #0f172a; }
+    .section p { margin: 4px 0; font-size: 0.9rem; color: #374151; }
+    footer { margin-top: 26px; font-size: 0.75rem; color: #6b7280; text-align: center; }
+
+    @media (max-width: 640px) {
+      dl { grid-template-columns: minmax(0, 1fr); }
+      .card-header { align-items: flex-start; }
+      .btn { white-space: normal; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="title-block">
+      <span class="flag" aria-hidden="true">🇪🇸</span>
+      <div>
+        <h1>España CNMV orbital WebApp</h1>
+        <p>Comisión Nacional del Mercado de Valores · Supervisión de los mercados de valores y protección del inversor</p>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <article class="card" aria-labelledby="cnmv-title">
+      <img src="preview-ES-CNMV.png" alt="Vista orbital España · CNMV" class="thumbnail" width="1280" height="1280">
+      <div class="card-header">
+        <h2 id="cnmv-title">Ficha orbital España · CNMV</h2>
+        <div class="badge" aria-label="Enlaces a recursos oficiales de la CNMV">
+          <span class="dot" aria-hidden="true"></span>
+          <span>Recursos oficiales: <strong>CNMV</strong></span>
+        </div>
+      </div>
+
+      <dl>
+        <dt>Autoridad supervisora</dt>
+        <dd>Comisión Nacional del Mercado de Valores</dd>
+        <dt>Abreviatura</dt>
+        <dd>CNMV</dd>
+        <dt>Sitio web oficial</dt>
+        <dd><a href="https://www.cnmv.es/" target="_blank" rel="noopener noreferrer">www.cnmv.es</a></dd>
+        <dt>Reclamaciones</dt>
+        <dd><a href="https://www.cnmv.es/Portal/inversor/Reclamaciones?lang=es" target="_blank" rel="noopener noreferrer">Servicio de Reclamaciones de la CNMV</a></dd>
+        <dt>Información al inversor</dt>
+        <dd><a href="https://www.cnmv.es/Portal/inversor/indice?lang=es" target="_blank" rel="noopener noreferrer">Portal del inversor</a></dd>
+      </dl>
+
+      <div class="note-block">
+        <strong>Nota orbital</strong>
+        <p>Esta ficha independiente enlaza recursos oficiales de la CNMV para comprobar entidades e informarse sobre riesgos. No está publicada, certificada ni avalada por la CNMV y no constituye asesoramiento de inversión.</p>
+      </div>
+
+      <div class="actions" aria-label="Accesos rápidos CNMV">
+        <a class="btn btn-primary" href="https://www.cnmv.es/Portal/inversor/Reclamaciones?lang=es" target="_blank" rel="noopener noreferrer">📨 Consultas y reclamaciones</a>
+        <a class="btn btn-outline" href="https://www.cnmv.es/Portal/consultas/busquedaporentidad?lang=es" target="_blank" rel="noopener noreferrer">🔎 Comprobar entidades</a>
+        <a class="btn btn-danger" href="https://www.cnmv.es/Portal/Advertencias?lang=es" target="_blank" rel="noopener noreferrer">⚠️ Consultar advertencias</a>
+        <a class="btn btn-safe" href="https://www.cnmv.es/" target="_blank" rel="noopener noreferrer">✅ Sitio oficial CNMV</a>
+      </div>
+
+      <section class="section">
+        <h3>A. Advertencias al inversor</h3>
+        <p><a href="https://www.cnmv.es/Portal/Advertencias?lang=es" target="_blank" rel="noopener noreferrer">Advertencias de la CNMV y de otros supervisores</a></p>
+      </section>
+      <section class="section">
+        <h3>B. Supervisión y actuaciones</h3>
+        <p><a href="https://www.cnmv.es/" target="_blank" rel="noopener noreferrer">Información oficial sobre la actividad supervisora de la CNMV</a></p>
+      </section>
+      <section class="section">
+        <h3>C. Entidades autorizadas y registros oficiales</h3>
+        <p><a href="https://www.cnmv.es/Portal/consultas/busquedaporentidad?lang=es" target="_blank" rel="noopener noreferrer">Consultas a los registros oficiales</a></p>
+        <p>Compare el nombre, el sitio web y los datos de contacto: la identidad de una entidad autorizada puede ser suplantada.</p>
+      </section>
+      <section class="section">
+        <h3>D. Entidades no autorizadas</h3>
+        <p><a href="https://www.cnmv.es/Portal/Advertencias?lang=es" target="_blank" rel="noopener noreferrer">Advertencias sobre entidades y sitios web</a></p>
+        <p>La ausencia de una advertencia no demuestra que una entidad esté autorizada ni que una inversión sea segura.</p>
+      </section>
+      <section class="section">
+        <h3>E. Informes y publicaciones</h3>
+        <p><a href="https://www.cnmv.es/Portal/Menu/Publicaciones-Estadisticas-Investigacion?lang=es" target="_blank" rel="noopener noreferrer">Publicaciones de la CNMV</a></p>
+      </section>
+      <section class="section">
+        <h3>F. Estadísticas de los mercados</h3>
+        <p><a href="https://www.cnmv.es/Portal/Menu/Publicaciones-Estadisticas-Investigacion?lang=es" target="_blank" rel="noopener noreferrer">Estadísticas de la CNMV</a></p>
+      </section>
+      <section class="section">
+        <h3>G. Fraude, suplantación de identidad y phishing</h3>
+        <p><a href="https://www.cnmv.es/Portal/inversor/indice?lang=es" target="_blank" rel="noopener noreferrer">Información y protección del inversor</a></p>
+        <p>Utilice los datos de contacto oficiales, no los incluidos en mensajes sospechosos. No comparta contraseñas ni códigos de acceso.</p>
+      </section>
+      <section class="section">
+        <h3>H. Consultas y reclamaciones</h3>
+        <p><a href="https://www.cnmv.es/Portal/inversor/Reclamaciones?lang=es" target="_blank" rel="noopener noreferrer">Cómo presentar una consulta o reclamación ante la CNMV</a></p>
+      </section>
+    </article>
+
+    <footer>
+      Orbital WebApp España · CNMV · Database Autorità Finanziarie Internazionali ·
+      Copyright © Avv. Marcello Stanca – Todos los derechos reservados.
+    </footer>
+  </main>
+</body>
+</html>
