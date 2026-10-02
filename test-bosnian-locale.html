@@ -625,7 +625,7 @@
                             const [rootMirror, ...otherMirrors] = databaseMirrors;
                             addResult(otherMirrors.every((mirror) => mirror.text === rootMirror.text), 'it: all four financial authorities database mirrors remain byte-identical');
                             addResult(otherMirrors.every((mirror) => JSON.stringify(mirror.data) === JSON.stringify(rootMirror.data)), 'it: all four financial authorities database mirrors remain semantically identical');
-                            await waitForCondition(() => typeof win.openModal === 'function' && Array.isArray(win.countriesData) && win.countriesData.some((country) => country.country_name === 'Italy'), {
+                            await waitForCondition(() => typeof win.openModal === 'function' && win.eval('countriesData.some((country) => country.country_name === "Italy")'), {
                                 errorMessage: 'Italy country data did not finish loading'
                             });
                             win.openModal('Italy');
@@ -667,6 +667,57 @@
                             addResult(doc.getElementById('consobOrbitalDialog')?.open === true, 'it: United Kingdom modal FCA preview opens the native fullscreen orbital dialog');
                             addResult((doc.getElementById('consobOrbitalFrame')?.getAttribute('src') || '').endsWith('/authority/UK-FCA.html'), 'it: United Kingdom modal FCA preview loads the allowlisted orbital iframe source');
                             win.closeItalyOrbitalDialog();
+                            win.closeModal();
+                            await waitForCondition(() => doc.querySelector('#flagsGrid button[aria-label$=" France"]'), {
+                                errorMessage: 'France flag did not finish rendering'
+                            });
+                            const rootTitle = doc.title;
+                            const rootCanonical = doc.getElementById('canonical-url')?.getAttribute('href');
+                            doc.querySelector('#flagsGrid button[aria-label$=" France"]').click();
+                            const franceTrigger = doc.querySelector('#modalContent [data-orbital-trigger="consob"]');
+                            addResult(doc.getElementById('countryModal')?.style.display === 'block', 'it: France flag opens the existing country modal');
+                            addResult(franceTrigger?.getAttribute('aria-label') === 'Open AMF orbital dialog', 'it: France preview uses the AMF accessible label');
+                            addResult(franceTrigger?.querySelector('img')?.getAttribute('src') === '/authority/preview-FR-AMF.png', 'it: France preview uses the unchanged AMF asset');
+                            const francePreview = franceTrigger?.querySelector('img');
+                            await waitForCondition(() => francePreview?.naturalWidth > 0, {
+                                errorMessage: 'France navigation preview did not load'
+                            });
+                            const francePreviewStyle = win.getComputedStyle(francePreview);
+                            addResult(francePreviewStyle.objectFit === 'contain' && francePreviewStyle.aspectRatio === 'auto'
+                                && Math.abs(francePreview.clientWidth / francePreview.clientHeight - francePreview.naturalWidth / francePreview.naturalHeight) < 0.02, 'it: France navigation preview is horizontal without cropping or distortion');
+                            addResult(doc.querySelectorAll('#consobOrbitalDialog').length === 1, 'it: France reuses the single existing orbital dialog');
+                            const amfFrame = doc.getElementById('consobOrbitalFrame');
+                            amfFrame.loading = 'eager';
+                            franceTrigger?.click();
+                            await waitForCondition(() => doc.getElementById('consobOrbitalDialog')?.open
+                                && amfFrame?.contentDocument?.getElementById('amf-title')
+                                && amfFrame.contentDocument.querySelector('.thumbnail')?.naturalWidth > 0, {
+                                errorMessage: 'AMF orbital page or preview did not load'
+                            });
+                            addResult(amfFrame.getAttribute('src') === '/authority/FR-AMF.html', 'it: France preview loads the allowlisted AMF page');
+                            const amfDoc = amfFrame.contentDocument;
+                            addResult(amfDoc.documentElement.lang === 'fr' && amfDoc.title === 'AMF France – Orbital WebApp', 'it: standalone AMF page has French language and dedicated title');
+                            addResult(amfDoc.querySelector('link[rel="canonical"]')?.getAttribute('href') === 'https://www.amevfirenze.it/authority/FR-AMF.html', 'it: AMF canonical follows the authority template');
+                            addResult(amfDoc.querySelectorAll('article.card .section').length === 7, 'it: AMF preserves the template sections A–H with the combined report section');
+                            addResult(Array.from(amfDoc.querySelectorAll('a')).every((link) => new URL(link.href).hostname === 'www.amf-france.org'
+                                && link.rel.includes('noopener') && link.rel.includes('noreferrer')), 'it: AMF resources use official URLs and safe new-tab links');
+                            const amfImage = amfDoc.querySelector('.thumbnail');
+                            for (const width of [360, 960]) {
+                                amfFrame.style.width = `${width}px`;
+                                await new Promise((resolve) => win.requestAnimationFrame(resolve));
+                                const style = amfFrame.contentWindow.getComputedStyle(amfImage);
+                                const imageWidth = amfImage.clientWidth - parseFloat(style.paddingLeft) - parseFloat(style.paddingRight);
+                                const imageHeight = amfImage.clientHeight - parseFloat(style.paddingTop) - parseFloat(style.paddingBottom);
+                                addResult(Math.abs(imageWidth / imageHeight - amfImage.naturalWidth / amfImage.naturalHeight) < 0.02
+                                    && style.objectFit === 'contain', `it: AMF preview preserves its horizontal aspect ratio at ${width}px`);
+                                addResult(amfDoc.documentElement.scrollWidth <= amfDoc.documentElement.clientWidth, `it: AMF page has no horizontal overflow at ${width}px`);
+                            }
+                            amfFrame.style.removeProperty('width');
+                            addResult(doc.title === rootTitle && doc.getElementById('canonical-url')?.getAttribute('href') === rootCanonical, 'it: AMF opening does not alter root SEO metadata');
+                            addResult(win.resolveConsobOrbitalSrc('https://example.com/authority/FR-AMF.html') === ''
+                                && win.resolveConsobOrbitalSrc('authority/unknown.html') === '', 'it: orbital sources remain restricted to same-origin allowlisted pages');
+                            win.closeItalyOrbitalDialog();
+                            addResult(amfFrame.getAttribute('src') === 'about:blank' && !doc.getElementById('consobOrbitalDialog').open, 'it: existing close behavior clears the AMF iframe');
                             win.closeModal();
                             win.changeLanguage('de');
                             await waitForLocaleState(iframe, 'de', 'https://tutelatruffe.de/', 'de');
