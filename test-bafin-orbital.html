@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>BaFin orbital regression checks</title>
+</head>
+<body>
+    <h1>BaFin orbital regression checks</h1>
+    <pre id="results">Running…</pre>
+    <iframe id="app" title="Homepage under test" src="./index.html" width="1000" height="700"></iframe>
+    <iframe id="authority" title="BaFin page under test" src="./authority/DE-BAFIN.html" width="1000" height="700"></iframe>
+    <script>
+        const results = document.getElementById('results');
+        const checks = [];
+
+        function check(condition, message) {
+            checks.push(`${condition ? 'PASS' : 'FAIL'}: ${message}`);
+            results.textContent = checks.join('\n');
+            if (!condition) throw new Error(message);
+        }
+
+        async function waitFor(predicate) {
+            const deadline = Date.now() + 20000;
+            while (Date.now() < deadline) {
+                if (predicate()) return;
+                await new Promise(resolve => setTimeout(resolve, 50));
+            }
+            throw new Error('Timed out waiting for page readiness');
+        }
+
+        async function run() {
+            const appFrame = document.getElementById('app');
+            const authorityFrame = document.getElementById('authority');
+            await waitFor(() => appFrame.contentDocument.querySelector('#countriesGrid .country-card')
+                && authorityFrame.contentDocument.querySelector('.thumbnail')?.naturalWidth);
+            const app = appFrame.contentWindow;
+            const doc = authorityFrame.contentDocument;
+            check(doc.title === 'Deutschland BAFIN orbital WebApp'
+                && doc.querySelector('h1').textContent === doc.title, 'Exact requested page title');
+            check(doc.documentElement.lang === 'de', 'German page language');
+            check(doc.querySelector('header .flag').textContent === '🇩🇪'
+                && doc.querySelector('dl') && doc.querySelector('.note-block')
+                && doc.querySelectorAll('.actions .btn').length === 4 && doc.querySelector('footer'),
+                'CONSOB header, metadata, note, actions and footer structure');
+            check([...doc.querySelectorAll('.section h3')].map(node => node.textContent[0]).join('') === 'ABCDEFGH',
+                'Official resource sections A–H');
+            check([...doc.querySelectorAll('a[href]')].every(link => {
+                const url = new URL(link.href);
+                return url.protocol === 'https:' && (url.hostname === 'www.bafin.de' || url.hostname.endsWith('.bafin.de'))
+                    && link.target === '_blank' && link.rel.includes('noopener') && link.rel.includes('noreferrer');
+            }), 'Only official BaFin resources and safe external links');
+            check(doc.querySelector('.note-block').textContent.includes('nicht von der BaFin'),
+                'Independent page disclaimer');
+
+            const image = doc.querySelector('.thumbnail');
+            check(image.getAttribute('src') === 'preview-DE-BAFIN.png'
+                && image.naturalWidth === 820 && image.naturalHeight === 196, 'Existing PNG loads directly');
+            for (const width of [1000, 375]) {
+                authorityFrame.width = width;
+                await new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve)));
+                const style = authorityFrame.contentWindow.getComputedStyle(image);
+                const contentWidth = parseFloat(style.width) - parseFloat(style.borderLeftWidth) - parseFloat(style.borderRightWidth);
+                const contentHeight = parseFloat(style.height) - parseFloat(style.borderTopWidth) - parseFloat(style.borderBottomWidth);
+                check(Math.abs(contentWidth / contentHeight - 820 / 196) < 0.02
+                    && style.objectFit === 'contain'
+                    && doc.documentElement.scrollWidth <= authorityFrame.contentWindow.innerWidth,
+                    `Uncropped responsive thumbnail and layout at ${width}px`);
+            }
+
+            for (const [page, thumbnail] of [
+                ['IT-CONSOB.html', 'preview-consob.png'],
+                ['UK-FCA.html', 'preview-fca.png'],
+                ['FR-AMF.html', 'preview-FR-AMF.png'],
+                ['DE-BAFIN.html', 'preview-DE-BAFIN.png']
+            ]) {
+                check(app.resolveConsobOrbitalSrc(`authority/${page}`).endsWith(`/authority/${page}`),
+                    `Allowlisted page: ${page}`);
+                check(app.resolveConsobOrbitalThumbnailSrc(`authority/${thumbnail}`).endsWith(`/authority/${thumbnail}`),
+                    `Allowlisted thumbnail: ${thumbnail}`);
+                check(app.resolveConsobOrbitalSrc(`https://example.org/authority/${page}`) === ''
+                    && app.resolveConsobOrbitalThumbnailSrc(`https://example.org/authority/${thumbnail}`) === '',
+                    `Reject cross-origin resources: ${page}`);
+            }
+            check(app.resolveConsobOrbitalSrc('authority/unknown.html') === ''
+                && app.resolveConsobOrbitalThumbnailSrc('authority/unknown.png') === ''
+                && app.resolveConsobOrbitalSrc('javascript:alert(1)') === '', 'Reject unallowlisted and unsafe resources');
+
+            const germanyCard = appFrame.contentDocument.querySelector('.country-card[data-country-name="Germany"]');
+            check(germanyCard?.querySelector('.orbital-thumbnail-trigger img')?.src.endsWith('/authority/preview-DE-BAFIN.png'),
+                'Germany card preview hook');
+            app.openModal('Germany');
+            const trigger = appFrame.contentDocument.querySelector('#countryModal .orbital-thumbnail-trigger');
+            check(trigger?.dataset.orbitalSrc.endsWith('/authority/DE-BAFIN.html'), 'Germany modal preview hook');
+            await waitFor(() => trigger.querySelector('img').naturalWidth);
+            const previewStyle = app.getComputedStyle(trigger.querySelector('img'));
+            check(previewStyle.objectFit === 'contain'
+                && Math.abs(parseFloat(previewStyle.width) / parseFloat(previewStyle.height) - 820 / 196) < 0.02,
+                'Germany modal preview preserves aspect ratio');
+            trigger.click();
+            const orbitalFrame = appFrame.contentDocument.getElementById('consobOrbitalFrame');
+            await waitFor(() => orbitalFrame.contentDocument.querySelector('h1')?.textContent === 'Deutschland BAFIN orbital WebApp');
+            check(appFrame.contentDocument.getElementById('consobOrbitalDialog').open,
+                'Germany hook opens BaFin in existing orbital dialog');
+            app.closeItalyOrbitalDialog();
+            app.closeModal();
+
+            for (const [country, page] of [['Italy', 'IT-CONSOB.html'], ['United Kingdom', 'UK-FCA.html'], ['France', 'FR-AMF.html']]) {
+                app.openModal(country);
+                check(appFrame.contentDocument.querySelector('#countryModal .orbital-thumbnail-trigger')?.dataset.orbitalSrc.endsWith(`/authority/${page}`),
+                    `Existing ${country} modal hook preserved`);
+                app.closeModal();
+            }
+            results.dataset.status = 'passed';
+            results.textContent += '\nAll checks passed.';
+        }
+
+        run().catch(error => {
+            results.dataset.status = 'failed';
+            results.textContent += `\nERROR: ${error.message}`;
+        });
+    </script>
+</body>
+</html>
