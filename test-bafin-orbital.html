@@ -36,6 +36,20 @@
                 && authorityFrame.contentDocument.querySelector('.thumbnail')?.naturalWidth);
             const app = appFrame.contentWindow;
             const doc = authorityFrame.contentDocument;
+            const canonicalUrl = 'https://www.amevfirenze.it/authority/DE-BAFIN.html';
+            const canonicalPath = new URL(canonicalUrl).pathname;
+            check(doc.querySelectorAll('link[rel="canonical"]').length === 1
+                && doc.querySelector('link[rel="canonical"]').href === canonicalUrl,
+                'BaFin canonical uses the existing HTML page');
+            check(new URL(authorityFrame.contentWindow.location.href).pathname.endsWith(canonicalPath),
+                'Canonical HTML path resolves to the BaFin page');
+            const legacyResponse = await fetch(`.${canonicalPath.slice(0, -1)}`);
+            check(legacyResponse.ok, 'Legacy extension has a compatibility page instead of a 404');
+            const legacyDoc = new DOMParser().parseFromString(await legacyResponse.text(), 'text/html');
+            check(legacyDoc.querySelector('link[rel="canonical"]')?.getAttribute('href') === canonicalUrl
+                && legacyDoc.querySelector('meta[http-equiv="refresh"]')?.getAttribute('content') === '0; url=DE-BAFIN.html'
+                && new URL(legacyDoc.querySelector('a')?.getAttribute('href'), legacyResponse.url).pathname.endsWith(canonicalPath),
+                'Compatibility page redirects immediately and links only to the canonical HTML page');
             check(doc.title === 'Deutschland BAFIN orbital WebApp'
                 && doc.querySelector('h1').textContent === doc.title, 'Exact requested page title');
             check(doc.documentElement.lang === 'de', 'German page language');
