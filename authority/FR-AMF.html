@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>AMF France – Orbital WebApp</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description"
+        content="Fiche orbitale indépendante de l’Autorité des marchés financiers (AMF France) : vérification des autorisations, listes noires, information des épargnants, sanctions et ressources officielles.">
+  <link rel="canonical" href="https://www.amevfirenze.it/authority/FR-AMF.html">
+  <style>
+    :root {
+      --amf-blue: #00247d;
+      --amf-light: #f5f8ff;
+      --amf-border: #d0d8ea;
+      --amf-danger: #b00020;
+      --amf-safe: #007e33;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: radial-gradient(circle at top, #eef2ff 0, #dde7fb 40%, #c9d5f0 100%);
+      color: #111827;
+    }
+
+    header {
+      padding: 16px 20px;
+      background: rgba(0, 36, 125, 0.92);
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+    }
+
+    header .title-block {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    header .flag { font-size: 28px; }
+
+    header h1 {
+      margin: 0;
+      font-size: 1.4rem;
+    }
+
+    header p {
+      margin: 2px 0 0;
+      font-size: 0.85rem;
+      opacity: 0.9;
+    }
+
+    main {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 20px 16px 32px;
+    }
+
+    .card {
+      background: #ffffff;
+      border-radius: 18px;
+      box-shadow: 0 12px 30px rgba(15, 23, 42, 0.18);
+      border: 1px solid var(--amf-border);
+      padding: 20px 18px 22px;
+    }
+
+    .card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 12px;
+      flex-wrap: wrap;
+    }
+
+    .card-header h2 {
+      margin: 0;
+      font-size: 1.2rem;
+      color: var(--amf-blue);
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      font-size: 0.8rem;
+      background: #e0f2fe;
+      color: #0f172a;
+      border: 1px solid #bae6fd;
+    }
+
+    .badge span.dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #22c55e;
+    }
+
+    .thumbnail {
+      width: 100%;
+      height: auto;
+      object-fit: contain;
+      border-radius: 14px;
+      margin: 14px 0 18px;
+      border: 1px solid var(--amf-border);
+    }
+
+    dl {
+      margin: 0;
+      display: grid;
+      grid-template-columns: minmax(0, 180px) minmax(0, 1fr);
+      row-gap: 8px;
+      column-gap: 12px;
+      font-size: 0.92rem;
+    }
+
+    dt {
+      font-weight: 600;
+      color: #374151;
+    }
+
+    dd {
+      margin: 0;
+      color: #111827;
+      word-break: break-word;
+    }
+
+    a {
+      color: var(--amf-blue);
+      text-decoration: none;
+    }
+
+    a:hover,
+    a:focus-visible {
+      text-decoration: underline;
+    }
+
+    .note-block {
+      margin-top: 14px;
+      padding: 10px 12px;
+      border-radius: 12px;
+      background: var(--amf-light);
+      border: 1px solid var(--amf-border);
+      font-size: 0.9rem;
+    }
+
+    .note-block strong {
+      display: block;
+      margin-bottom: 4px;
+      color: #1f2937;
+    }
+
+    .actions {
+      margin-top: 18px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .btn {
+      border: none;
+      border-radius: 999px;
+      padding: 8px 14px;
+      font-size: 0.85rem;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    .btn-primary {
+      background: var(--amf-blue);
+      color: #ffffff;
+    }
+
+    .btn-outline {
+      background: #ffffff;
+      color: var(--amf-blue);
+      border: 1px solid var(--amf-blue);
+    }
+
+    .btn-danger {
+      background: var(--amf-danger);
+      color: #ffffff;
+    }
+
+    .btn-safe {
+      background: var(--amf-safe);
+      color: #ffffff;
+    }
+
+    .section {
+      margin-top: 24px;
+      padding-top: 12px;
+      border-top: 1px dashed #cbd5e1;
+    }
+
+    .section h3 {
+      margin: 0 0 8px;
+      font-size: 1rem;
+      color: #0f172a;
+    }
+
+    .section p {
+      margin: 4px 0;
+      font-size: 0.9rem;
+      color: #374151;
+    }
+
+    footer {
+      margin-top: 26px;
+      font-size: 0.75rem;
+      color: #6b7280;
+      text-align: center;
+    }
+
+    @media (max-width: 640px) {
+      dl {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      .card-header {
+        align-items: flex-start;
+      }
+
+      .btn {
+        white-space: normal;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="title-block">
+      <span class="flag" aria-hidden="true">🇫🇷</span>
+      <div>
+        <h1>France – AMF Orbital WebApp</h1>
+        <p>Autorité des marchés financiers · Protection de l’épargne et surveillance des marchés financiers</p>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <article class="card" aria-labelledby="amf-title">
+      <img src="preview-FR-AMF.png" alt="Aperçu orbital AMF France – Autorité des marchés financiers" class="thumbnail" width="1280" height="564">
+
+      <div class="card-header">
+        <h2 id="amf-title">Fiche orbitale France · AMF</h2>
+        <div class="badge" aria-label="Liens vers les ressources officielles AMF">
+          <span class="dot" aria-hidden="true"></span>
+          <span>Ressources officielles : <strong>AMF France</strong></span>
+        </div>
+      </div>
+
+      <dl>
+        <dt>Autorité financière</dt>
+        <dd>Autorité des marchés financiers (AMF)</dd>
+
+        <dt>Abréviation</dt>
+        <dd>AMF</dd>
+
+        <dt>Site officiel</dt>
+        <dd>
+          <a href="https://www.amf-france.org/" target="_blank" rel="noopener noreferrer">
+            https://www.amf-france.org/
+          </a>
+        </dd>
+
+        <dt>Information des épargnants</dt>
+        <dd>
+          <a href="https://www.amf-france.org/fr/espace-epargnants/lamf-et-vous/epargne-info-service" target="_blank" rel="noopener noreferrer">
+            AMF Epargne Info Service
+          </a>
+        </dd>
+
+        <dt>Contact officiel</dt>
+        <dd>
+          <a href="https://www.amf-france.org/fr/nous-contacter" target="_blank" rel="noopener noreferrer">
+            Nous contacter – AMF
+          </a>
+        </dd>
+      </dl>
+
+      <div class="note-block">
+        <strong>Note orbitale</strong>
+        <p>
+          Cette fiche indépendante rassemble les ressources officielles de l’AMF pour vérifier
+          les intermédiaires et s’informer sur les risques. Elle n’est ni publiée, ni certifiée,
+          ni approuvée par l’AMF et ne constitue pas un conseil en investissement.
+        </p>
+      </div>
+
+      <div class="actions" aria-label="Actions rapides AMF">
+        <a class="btn btn-primary"
+           href="https://www.amf-france.org/fr/espace-epargnants/lamf-et-vous/epargne-info-service"
+           target="_blank" rel="noopener noreferrer">
+          📨 Consulter Epargne Info Service
+        </a>
+
+        <a class="btn btn-outline"
+           href="https://www.amf-france.org/fr/espace-epargnants/proteger-son-epargne/faire-les-verifications"
+           target="_blank" rel="noopener noreferrer">
+          🔎 Vérifier une autorisation
+        </a>
+
+        <a class="btn btn-danger"
+           href="https://www.amf-france.org/fr/espace-epargnants/proteger-son-epargne/listes-noires-et-mises-en-garde"
+           target="_blank" rel="noopener noreferrer">
+          ⚠️ Consulter les listes noires
+        </a>
+
+        <a class="btn btn-safe"
+           href="https://www.amf-france.org/"
+           target="_blank" rel="noopener noreferrer">
+          ✅ Accéder au site officiel AMF
+        </a>
+      </div>
+
+      <section class="section">
+        <h3>A. Alertes &amp; mises en garde aux épargnants</h3>
+        <p><a href="https://www.amf-france.org/fr/espace-epargnants/proteger-son-epargne/listes-noires-et-mises-en-garde" target="_blank" rel="noopener noreferrer">Listes noires et mises en garde AMF</a></p>
+        <p>Méfiez-vous des rendements garantis, de la pression pour investir rapidement et des demandes de versements supplémentaires pour débloquer des fonds.</p>
+      </section>
+
+      <section class="section">
+        <h3>B. Sanctions &amp; transactions</h3>
+        <p><a href="https://www.amf-france.org/fr/sanctions-transactions/sanctions-et-transactions-accueil" target="_blank" rel="noopener noreferrer">Décisions de la Commission des sanctions et transactions</a></p>
+      </section>
+
+      <section class="section">
+        <h3>C. Autorisations &amp; registres officiels</h3>
+        <p><a href="https://www.amf-france.org/fr/espace-epargnants/proteger-son-epargne/faire-les-verifications" target="_blank" rel="noopener noreferrer">Vérifier une autorisation : registres et listes officiels indiqués par l’AMF</a></p>
+        <p>Vérifiez l’identité, le site et les coordonnées de l’intermédiaire : un nom autorisé peut être usurpé.</p>
+      </section>
+
+      <section class="section">
+        <h3>D. Intermédiaires non autorisés</h3>
+        <p><a href="https://www.amf-france.org/fr/espace-epargnants/proteger-son-epargne/listes-noires-et-mises-en-garde" target="_blank" rel="noopener noreferrer">Sociétés et sites signalés par l’AMF</a></p>
+        <p>L’absence d’un site sur une liste noire ne garantit pas son autorisation ni sa fiabilité.</p>
+      </section>
+
+      <section class="section">
+        <h3>E–F–I–L. Rapports, statistiques &amp; publications</h3>
+        <p><a href="https://www.amf-france.org/fr/actualites-publications/publications/rapports-annuels-et-documents-institutionnels" target="_blank" rel="noopener noreferrer">Rapports annuels et documents institutionnels AMF</a></p>
+      </section>
+
+      <section class="section">
+        <h3>G. Cyberfraude, usurpation &amp; phishing</h3>
+        <p><a href="https://www.amf-france.org/fr/espace-epargnants/lamf-et-vous/epargne-info-service" target="_blank" rel="noopener noreferrer">Epargne Info Service : s’informer en cas de doute ou d’escroquerie</a></p>
+        <p>Si vous avez envoyé des fonds, contactez immédiatement votre banque, conservez les preuves et cessez tout nouveau versement. Utilisez les coordonnées officielles, pas celles fournies par un interlocuteur suspect.</p>
+      </section>
+
+      <section class="section">
+        <h3>H. Lutte contre le blanchiment &amp; le financement du terrorisme</h3>
+        <p><a href="https://www.amf-france.org/fr/actualites-publications/dossiers-thematiques/lutte-anti-blanchiment" target="_blank" rel="noopener noreferrer">Dossier thématique AMF : lutte anti-blanchiment</a></p>
+      </section>
+    </article>
+
+    <footer>
+      Orbital WebApp France · AMF · Database Autorità Finanziarie Internazionali ·
+      Copyright © Avv. Marcello Stanca – Tous droits réservés.
+    </footer>
+  </main>
+</body>
+</html>

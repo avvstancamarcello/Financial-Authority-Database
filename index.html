@@ -1679,6 +1679,11 @@
             object-fit: cover;
             border-radius: 12px;
         }
+        .orbital-thumbnail-trigger img[src$="preview-FR-AMF.png"] {
+            aspect-ratio: auto;
+            height: auto;
+            object-fit: contain;
+        }
         .orbital-thumbnail-trigger:hover {
             transform: translateY(-2px);
             box-shadow: 0 12px 24px rgba(15, 23, 42, 0.28);
@@ -6067,6 +6072,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 const response = await fetch('financial_authorities_database.json');
                 if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
                 let data = await response.json();
+
+                if (data.France) {
+                    data.France.thumbnail = 'authority/preview-FR-AMF.png';
+                    data.France.modal = 'authority/FR-AMF.html';
+                    data.France.has_orbital_view = true;
+                }
                 
                 // Aggiungi suddivisioni regionali e watermark copyright
                 data = addCanadaSubregions(data);
@@ -7135,13 +7146,17 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             new URL('/authority/IT-CONSOB.html', window.location.origin).pathname,
             new URL(CONSOB_ORBITAL_FALLBACK_SRC, window.location.href).pathname,
             new URL('/authority/UK-FCA.html', window.location.origin).pathname,
-            new URL('authority/UK-FCA.html', window.location.href).pathname
+            new URL('authority/UK-FCA.html', window.location.href).pathname,
+            new URL('/authority/FR-AMF.html', window.location.origin).pathname,
+            new URL('authority/FR-AMF.html', window.location.href).pathname
         ]);
         const CONSOB_ORBITAL_ALLOWED_THUMBNAIL_PATHS = new Set([
             new URL('/authority/preview-consob.png', window.location.origin).pathname,
             new URL(CONSOB_ORBITAL_THUMBNAIL_FALLBACK_SRC, window.location.href).pathname,
             new URL('/authority/preview-fca.png', window.location.origin).pathname,
-            new URL('authority/preview-fca.png', window.location.href).pathname
+            new URL('authority/preview-fca.png', window.location.href).pathname,
+            new URL('/authority/preview-FR-AMF.png', window.location.origin).pathname,
+            new URL('authority/preview-FR-AMF.png', window.location.href).pathname
         ]);
 
         function resolveConsobOrbitalSrc(candidateSource, { allowFallback = false } = {}) {
