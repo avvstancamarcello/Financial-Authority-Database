@@ -10,6 +10,7 @@
     <pre id="results">Running…</pre>
     <iframe id="app" title="Homepage under test" src="./index.html" width="1000" height="700"></iframe>
     <iframe id="authority" title="BaFin page under test" src="./authority/DE-BAFIN.html" width="1000" height="700"></iframe>
+    <iframe id="cnmv" title="CNMV page under test" src="./authority/ES-CNMV.html" width="1000" height="700"></iframe>
     <script>
         const results = document.getElementById('results');
         const checks = [];
@@ -86,7 +87,8 @@
                 ['IT-CONSOB.html', 'preview-consob.png'],
                 ['UK-FCA.html', 'preview-fca.png'],
                 ['FR-AMF.html', 'preview-FR-AMF.png'],
-                ['DE-BAFIN.html', 'preview-DE-BAFIN.png']
+                ['DE-BAFIN.html', 'preview-DE-BAFIN.png'],
+                ['ES-CNMV.html', 'preview-ES-CNMV.png']
             ]) {
                 check(app.resolveConsobOrbitalSrc(`authority/${page}`).endsWith(`/authority/${page}`),
                     `Allowlisted page: ${page}`);
@@ -116,6 +118,64 @@
             await waitFor(() => orbitalFrame.contentDocument.querySelector('h1')?.textContent === 'Deutschland BAFIN orbital WebApp');
             check(appFrame.contentDocument.getElementById('consobOrbitalDialog').open,
                 'Germany hook opens BaFin in existing orbital dialog');
+            app.closeItalyOrbitalDialog();
+            app.closeModal();
+
+            const cnmvFrame = document.getElementById('cnmv');
+            await waitFor(() => cnmvFrame.contentDocument.querySelector('.thumbnail')?.naturalWidth);
+            const cnmvDoc = cnmvFrame.contentDocument;
+            check(cnmvDoc.querySelector('link[rel="canonical"]')?.href === 'https://www.amevfirenze.it/authority/ES-CNMV.html'
+                && cnmvDoc.documentElement.lang === 'es'
+                && cnmvDoc.title === 'España CNMV orbital WebApp'
+                && cnmvDoc.querySelector('h1').textContent === cnmvDoc.title,
+                'CNMV Spanish page and canonical HTML route');
+            check(cnmvDoc.querySelector('header .flag').textContent === '🇪🇸'
+                && cnmvDoc.querySelector('dl') && cnmvDoc.querySelector('.badge')
+                && cnmvDoc.querySelector('.note-block').textContent.includes('No está publicada, certificada ni avalada por la CNMV')
+                && cnmvDoc.querySelectorAll('.actions .btn').length === 4
+                && cnmvDoc.querySelector('footer')
+                && [...cnmvDoc.querySelectorAll('.section h3')].map(node => node.textContent[0]).join('') === 'ABCDEFGH',
+                'CNMV orbital structure and independent disclaimer');
+            check([...cnmvDoc.querySelectorAll('a[href]')].every(link => {
+                const url = new URL(link.href);
+                return url.protocol === 'https:' && url.hostname === 'www.cnmv.es'
+                    && link.target === '_blank' && link.rel.includes('noopener') && link.rel.includes('noreferrer');
+            }), 'Only official CNMV resources and safe external links');
+            const cnmvImage = cnmvDoc.querySelector('.thumbnail');
+            check(cnmvImage.getAttribute('src') === 'preview-ES-CNMV.png'
+                && cnmvImage.naturalWidth === 1280 && cnmvImage.naturalHeight === 1280,
+                'Supplied CNMV preview loads at the requested path');
+            for (const width of [1000, 375]) {
+                cnmvFrame.width = width;
+                await new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve)));
+                const style = cnmvFrame.contentWindow.getComputedStyle(cnmvImage);
+                check(Math.abs(parseFloat(style.width) / parseFloat(style.height) - 1) < 0.02
+                    && style.objectFit === 'contain'
+                    && cnmvDoc.documentElement.scrollWidth <= cnmvFrame.contentWindow.innerWidth,
+                    `Uncropped CNMV thumbnail and layout at ${width}px`);
+            }
+            const spainCard = appFrame.contentDocument.querySelector('.country-card[data-country-name="Spain"]');
+            const spainCardTrigger = spainCard?.querySelector('.orbital-thumbnail-trigger');
+            check(spainCardTrigger?.querySelector('img')?.src.endsWith('/authority/preview-ES-CNMV.png'),
+                'Spain card preview hook');
+            spainCardTrigger.click();
+            await waitFor(() => orbitalFrame.contentDocument.querySelector('h1')?.textContent === 'España CNMV orbital WebApp');
+            check(appFrame.contentDocument.getElementById('consobOrbitalDialog').open,
+                'Spain card hook opens CNMV orbital dialog');
+            app.closeItalyOrbitalDialog();
+            app.openModal('Spain');
+            const spainTrigger = appFrame.contentDocument.querySelector('#countryModal .orbital-thumbnail-trigger');
+            check(spainTrigger?.dataset.orbitalSrc.endsWith('/authority/ES-CNMV.html'),
+                'Spain country modal preview hook');
+            await waitFor(() => spainTrigger.querySelector('img').naturalWidth);
+            const spainPreviewStyle = app.getComputedStyle(spainTrigger.querySelector('img'));
+            check(spainPreviewStyle.objectFit === 'contain'
+                && Math.abs(parseFloat(spainPreviewStyle.width) / parseFloat(spainPreviewStyle.height) - 1) < 0.02,
+                'Spain modal preview preserves supplied logo proportions');
+            spainTrigger.click();
+            await waitFor(() => orbitalFrame.contentDocument.querySelector('h1')?.textContent === 'España CNMV orbital WebApp');
+            check(appFrame.contentDocument.getElementById('consobOrbitalDialog').open,
+                'Spain country modal hook opens CNMV orbital dialog');
             app.closeItalyOrbitalDialog();
             app.closeModal();
 

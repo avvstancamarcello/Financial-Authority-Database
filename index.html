@@ -1680,7 +1680,8 @@
             border-radius: 12px;
         }
         .orbital-thumbnail-trigger img[src$="preview-FR-AMF.png"],
-        .orbital-thumbnail-trigger img[src$="preview-DE-BAFIN.png"] {
+        .orbital-thumbnail-trigger img[src$="preview-DE-BAFIN.png"],
+        .orbital-thumbnail-trigger img[src$="preview-ES-CNMV.png"] {
             aspect-ratio: auto;
             height: auto;
             object-fit: contain;
@@ -6084,6 +6085,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     data.Germany.modal = 'authority/DE-BAFIN.html';
                     data.Germany.has_orbital_view = true;
                 }
+                if (data.Spain) {
+                    data.Spain.thumbnail = 'authority/preview-ES-CNMV.png';
+                    data.Spain.modal = 'authority/ES-CNMV.html';
+                    data.Spain.has_orbital_view = true;
+                }
                 
                 // Aggiungi suddivisioni regionali e watermark copyright
                 data = addCanadaSubregions(data);
@@ -7156,7 +7162,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             new URL('/authority/FR-AMF.html', window.location.origin).pathname,
             new URL('authority/FR-AMF.html', window.location.href).pathname,
             new URL('/authority/DE-BAFIN.html', window.location.origin).pathname,
-            new URL('authority/DE-BAFIN.html', window.location.href).pathname
+            new URL('authority/DE-BAFIN.html', window.location.href).pathname,
+            new URL('/authority/ES-CNMV.html', window.location.origin).pathname,
+            new URL('authority/ES-CNMV.html', window.location.href).pathname
         ]);
         const CONSOB_ORBITAL_ALLOWED_THUMBNAIL_PATHS = new Set([
             new URL('/authority/preview-consob.png', window.location.origin).pathname,
@@ -7166,7 +7174,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             new URL('/authority/preview-FR-AMF.png', window.location.origin).pathname,
             new URL('authority/preview-FR-AMF.png', window.location.href).pathname,
             new URL('/authority/preview-DE-BAFIN.png', window.location.origin).pathname,
-            new URL('authority/preview-DE-BAFIN.png', window.location.href).pathname
+            new URL('authority/preview-DE-BAFIN.png', window.location.href).pathname,
+            new URL('/authority/preview-ES-CNMV.png', window.location.origin).pathname,
+            new URL('authority/preview-ES-CNMV.png', window.location.href).pathname
         ]);
 
         function resolveConsobOrbitalSrc(candidateSource, { allowFallback = false } = {}) {
