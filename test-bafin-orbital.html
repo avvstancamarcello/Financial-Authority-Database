@@ -3,14 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>BaFin orbital regression checks</title>
+    <title>Authority orbital regression checks: BaFin, CNMV and SEC</title>
 </head>
 <body>
-    <h1>BaFin orbital regression checks</h1>
+    <h1>Authority orbital regression checks: BaFin, CNMV and SEC</h1>
     <pre id="results">Running…</pre>
     <iframe id="app" title="Homepage under test" src="./index.html" width="1000" height="700"></iframe>
     <iframe id="authority" title="BaFin page under test" src="./authority/DE-BAFIN.html" width="1000" height="700"></iframe>
     <iframe id="cnmv" title="CNMV page under test" src="./authority/ES-CNMV.html" width="1000" height="700"></iframe>
+    <iframe id="sec" title="SEC page under test" src="./authority/US-SEC.html" width="1000" height="700"></iframe>
     <script>
         const results = document.getElementById('results');
         const checks = [];
@@ -88,12 +89,21 @@
                 ['UK-FCA.html', 'preview-fca.png'],
                 ['FR-AMF.html', 'preview-FR-AMF.png'],
                 ['DE-BAFIN.html', 'preview-DE-BAFIN.png'],
-                ['ES-CNMV.html', 'preview-ES-CNMV.png']
+                ['ES-CNMV.html', 'preview-ES-CNMV.png'],
+                ['US-SEC.html', 'preview-US-SEC.svg']
             ]) {
                 check(app.resolveConsobOrbitalSrc(`authority/${page}`).endsWith(`/authority/${page}`),
                     `Allowlisted page: ${page}`);
                 check(app.resolveConsobOrbitalThumbnailSrc(`authority/${thumbnail}`).endsWith(`/authority/${thumbnail}`),
                     `Allowlisted thumbnail: ${thumbnail}`);
+                check(app.resolveConsobOrbitalSrc(`/authority/${page}`) === `/authority/${page}`
+                    && app.resolveConsobOrbitalThumbnailSrc(`/authority/${thumbnail}`) === `/authority/${thumbnail}`,
+                    `Allowlisted root-absolute resources: ${page}`);
+                const deployedPagePath = new URL(`authority/${page}`, appFrame.src).pathname;
+                const deployedThumbnailPath = new URL(`authority/${thumbnail}`, appFrame.src).pathname;
+                check(app.resolveConsobOrbitalSrc(deployedPagePath) === deployedPagePath
+                    && app.resolveConsobOrbitalThumbnailSrc(deployedThumbnailPath) === deployedThumbnailPath,
+                    `Allowlisted deployment-relative resources: ${page}`);
                 check(app.resolveConsobOrbitalSrc(`https://example.org/authority/${page}`) === ''
                     && app.resolveConsobOrbitalThumbnailSrc(`https://example.org/authority/${thumbnail}`) === '',
                     `Reject cross-origin resources: ${page}`);
@@ -142,7 +152,7 @@
                 'Sitemap contains the CNMV canonical URL exactly once');
             await waitFor(() => appFrame.contentDocument.querySelector('#flagsGrid a[href$="/authority/ES-CNMV.html"]'));
             const spainFlag = appFrame.contentDocument.querySelector('#flagsGrid a[href$="/authority/ES-CNMV.html"]');
-            check(new URL(spainFlag.href).pathname === new URL(cnmvFrame.src).pathname,
+            check(new URL(spainFlag.href).pathname === new URL('authority/ES-CNMV.html', app.location.href).pathname,
                 'Rendered Spain flag links directly to the existing CNMV HTML route');
             const modifiedClick = new app.MouseEvent('click', { bubbles: true, cancelable: true, ctrlKey: true });
             let modifiedClickPreserved = false;
@@ -207,6 +217,166 @@
             check(appFrame.contentDocument.getElementById('consobOrbitalDialog').open,
                 'Spain country modal hook opens CNMV orbital dialog');
             app.closeItalyOrbitalDialog();
+            app.closeModal();
+
+            const secFrame = document.getElementById('sec');
+            await waitFor(() => secFrame.contentDocument.querySelector('.thumbnail')?.naturalWidth);
+            const secDoc = secFrame.contentDocument;
+            const secCanonical = 'https://www.amevfirenze.it/authority/US-SEC.html';
+            check(secDoc.documentElement.lang === 'en'
+                && secDoc.title === 'USA SEC: registration checks, EDGAR and investor complaints | AMEV'
+                && secDoc.querySelector('h1').textContent === 'USA SEC orbital WebApp'
+                && secDoc.querySelectorAll('link[rel="canonical"]').length === 1
+                && secDoc.querySelector('link[rel="canonical"]').href === secCanonical
+                && secDoc.querySelector('meta[name="description"]')?.content.includes('Independent guide'),
+                'SEC English page, title, description and canonical metadata');
+            check(secDoc.querySelector('header .flag').textContent === '🇺🇸'
+                && secDoc.querySelector('dl') && secDoc.querySelector('.badge')
+                && secDoc.querySelector('.note-block').textContent.includes('not published, certified or endorsed by the SEC')
+                && secDoc.querySelector('.note-block').textContent.includes('not investment advice')
+                && secDoc.querySelector('dl').textContent.includes('not the sole U.S. financial regulator')
+                && secDoc.querySelector('dl').textContent.includes('state securities regulators')
+                && secDoc.querySelectorAll('.actions .btn').length === 4 && secDoc.querySelector('footer')
+                && [...secDoc.querySelectorAll('.section h3')].map(node => node.textContent[0]).join('') === 'ABCDEFGH',
+                'SEC structure, federal scope and independent/no-advice disclaimer');
+            check([...secDoc.querySelectorAll('a[href]')].every(link => {
+                const url = new URL(link.href);
+                return url.protocol === 'https:'
+                    && ['www.sec.gov', 'adviserinfo.sec.gov', 'www.investor.gov'].includes(url.hostname)
+                    && link.target === '_blank' && link.rel.includes('noopener') && link.rel.includes('noreferrer');
+            }), 'SEC links use official HTTPS resources with safe external navigation');
+            check(['https://www.sec.gov/', 'https://www.investor.gov/', 'https://adviserinfo.sec.gov/',
+                'https://www.sec.gov/edgar/search/', 'https://www.sec.gov/tcr', 'https://www.sec.gov/oiea/Complaint.html']
+                .every(url => [...secDoc.querySelectorAll('a[href]')].some(link => link.href === url))
+                && secDoc.querySelectorAll('.section')[6].textContent.includes('distinct from an investor assistance complaint')
+                && secDoc.querySelectorAll('.section')[7].textContent.includes('cannot guarantee compensation'),
+                'SEC resources distinguish registration, filings, enforcement tips and investor assistance');
+            const secImage = secDoc.querySelector('.thumbnail');
+            check(secImage.getAttribute('src') === 'preview-US-SEC.svg'
+                && secImage.naturalWidth === 640 && secImage.naturalHeight === 360
+                && secImage.alt.includes('not an official seal'),
+                'Original local SEC SVG thumbnail loads without implying an official seal');
+            for (const width of [1000, 375]) {
+                secFrame.width = width;
+                await new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve)));
+                const style = secFrame.contentWindow.getComputedStyle(secImage);
+                const contentWidth = parseFloat(style.width) - parseFloat(style.borderLeftWidth) - parseFloat(style.borderRightWidth);
+                const contentHeight = parseFloat(style.height) - parseFloat(style.borderTopWidth) - parseFloat(style.borderBottomWidth);
+                check(Math.abs(contentWidth / contentHeight - 640 / 360) < 0.02
+                    && style.objectFit === 'contain'
+                    && secDoc.documentElement.scrollWidth <= secFrame.contentWindow.innerWidth,
+                    `Uncropped SEC thumbnail and layout at ${width}px`);
+            }
+            const mirrorTexts = await Promise.all([
+                './financial_authorities_database.json',
+                './APP/financial_authorities_database.json',
+                './DEPLOY_REGISTER/financial_authorities_database.json',
+                './android/app/src/main/assets/financial_authorities_database.json'
+            ].map(async path => {
+                const response = await fetch(path);
+                if (!response.ok) throw new Error(`Cannot load mirror ${path}: ${response.status}`);
+                return response.text();
+            }));
+            check(mirrorTexts.every(text => text === mirrorTexts[0]), 'All four national JSON mirrors remain identical');
+            const nationalData = JSON.parse(mirrorTexts[0]);
+            const federalRecord = nationalData['United States of America'];
+            check(federalRecord.thumbnail === 'authority/preview-US-SEC.svg'
+                && federalRecord.modal === 'authority/US-SEC.html' && federalRecord.has_orbital_view === true
+                && Object.values(nationalData).filter(country => country.modal === 'authority/US-SEC.html').length === 1,
+                'SEC orbital fields activate only the federal United States of America record');
+            const stateNames = Object.keys(nationalData).filter(name => name.startsWith('USA - '));
+            check(stateNames.length === 50 && stateNames.every(name => {
+                const card = appFrame.contentDocument.querySelector(`.country-card[data-country-name="${name}"]`);
+                return !nationalData[name].has_orbital_view && card && !card.querySelector('.orbital-thumbnail-trigger');
+            }), 'All 50 US state records and cards remain without SEC orbital hooks');
+            app.openModal('USA - California');
+            check(!appFrame.contentDocument.querySelector('#countryModal .orbital-thumbnail-trigger'),
+                'State authority modal remains separate from the federal SEC page');
+            app.closeModal();
+            check(homepageSource.querySelector('#flagsGrid a[href="authority/US-SEC.html"]')
+                && [...sitemap.getElementsByTagName('loc')].filter(node => node.textContent === secCanonical).length === 1,
+                'SEC has a crawlable initial HTML link and one canonical sitemap entry');
+            const usFlag = appFrame.contentDocument.querySelector('#flagsGrid a[href$="/authority/US-SEC.html"]');
+            check(usFlag && new URL(usFlag.href).pathname === new URL('authority/US-SEC.html', app.location.href).pathname,
+                'Rendered federal flag retains the crawlable SEC route');
+            let secModifiedClickPreserved = false;
+            usFlag.addEventListener('click', event => {
+                secModifiedClickPreserved = !event.defaultPrevented;
+                event.preventDefault();
+            }, { once: true });
+            usFlag.dispatchEvent(new app.MouseEvent('click', { bubbles: true, cancelable: true, ctrlKey: true }));
+            check(secModifiedClickPreserved, 'Modified SEC flag click preserves native link navigation');
+            usFlag.focus();
+            usFlag.click();
+            const countryModal = appFrame.contentDocument.getElementById('countryModal');
+            const secTrigger = countryModal.querySelector('.orbital-thumbnail-trigger');
+            check(countryModal.style.display === 'block'
+                && secTrigger?.dataset.orbitalSrc.endsWith('/authority/US-SEC.html'),
+                'Federal flag opens the existing parent country modal with SEC preview');
+            await waitFor(() => secTrigger.querySelector('img').naturalWidth);
+            check(app.getComputedStyle(secTrigger.querySelector('img')).objectFit === 'contain',
+                'Federal modal preview uses the original SVG without cropping');
+            secTrigger.focus();
+            secTrigger.click();
+            const orbitalDialog = appFrame.contentDocument.getElementById('consobOrbitalDialog');
+            const orbitalClose = appFrame.contentDocument.getElementById('consobOrbitalCloseButton');
+            await waitFor(() => orbitalFrame.contentDocument.querySelector('h1')?.textContent === 'USA SEC orbital WebApp');
+            check(orbitalDialog.open && countryModal.style.display === 'block'
+                && orbitalDialog.contains(appFrame.contentDocument.activeElement),
+                'SEC opens in the shared nested dialog, keeping its parent open and focusing the child');
+            orbitalClose.click();
+            check(!orbitalDialog.open && orbitalFrame.getAttribute('src') === 'about:blank'
+                && countryModal.style.display === 'block' && appFrame.contentDocument.activeElement === secTrigger,
+                'Nested close button clears the SEC iframe and restores parent trigger focus');
+            secTrigger.click();
+            const escape = new app.KeyboardEvent('keydown', { key: 'Escape', bubbles: true, cancelable: true });
+            orbitalClose.dispatchEvent(escape);
+            check(!escape.defaultPrevented && countryModal.style.display === 'block',
+                'Parent Escape handler defers to the nested native dialog');
+            orbitalDialog.dispatchEvent(new app.Event('cancel', { cancelable: true }));
+            check(!orbitalDialog.open && orbitalFrame.getAttribute('src') === 'about:blank'
+                && countryModal.style.display === 'block' && appFrame.contentDocument.activeElement === secTrigger,
+                'Native Escape cancellation closes only the child, clears its frame and restores focus');
+            secTrigger.click();
+            await waitFor(() => orbitalFrame.contentDocument.readyState === 'complete'
+                && orbitalFrame.contentDocument.querySelector('h1')?.textContent === 'USA SEC orbital WebApp');
+            orbitalFrame.contentDocument.querySelector('.actions a').focus();
+            orbitalFrame.contentDocument.dispatchEvent(new app.KeyboardEvent('keydown',
+                { key: 'Escape', bubbles: true, cancelable: true }));
+            check(!orbitalDialog.open && orbitalFrame.getAttribute('src') === 'about:blank'
+                && countryModal.style.display === 'block' && appFrame.contentDocument.activeElement === secTrigger,
+                'Escape from inside SEC iframe closes only the child and restores the parent trigger focus');
+            secTrigger.dispatchEvent(new app.KeyboardEvent('keydown', { key: 'Escape', bubbles: true, cancelable: true }));
+            check(countryModal.style.display === 'none' && appFrame.contentDocument.activeElement === usFlag,
+                'Subsequent Escape closes the parent and restores federal flag focus');
+            for (const badSource of ['https://example.org/authority/US-SEC.html',
+                '//example.org/authority/US-SEC.html', 'javascript:alert(1)', 'authority/unknown.html']) {
+                app.openItalyOrbitalDialog(badSource);
+                check(!orbitalDialog.open && orbitalFrame.getAttribute('src') === 'about:blank',
+                    `Unauthorized resource cannot open the SEC dialog: ${badSource}`);
+            }
+            const usCard = appFrame.contentDocument.querySelector('.country-card[data-country-name="United States of America"]');
+            const usCardTrigger = usCard?.querySelector('.orbital-thumbnail-trigger');
+            check(usCardTrigger?.querySelector('img')?.src.endsWith('/authority/preview-US-SEC.svg'),
+                'Existing federal country card has the SEC thumbnail hook');
+            usCardTrigger.focus();
+            usCardTrigger.click();
+            await waitFor(() => orbitalFrame.contentDocument.querySelector('h1')?.textContent === 'USA SEC orbital WebApp');
+            check(orbitalDialog.open && countryModal.style.display === 'none',
+                'Federal card thumbnail opens the shared SEC dialog without accidentally opening the parent');
+            app.closeItalyOrbitalDialog();
+            check(appFrame.contentDocument.activeElement === usCardTrigger, 'Card thumbnail regains focus on close');
+            usCard.click();
+            const cardModalTrigger = countryModal.querySelector('.orbital-thumbnail-trigger');
+            check(countryModal.style.display === 'block'
+                && cardModalTrigger?.dataset.orbitalSrc.endsWith('/authority/US-SEC.html'),
+                'Federal country card itself still opens its parent country details with SEC preview');
+            cardModalTrigger.focus();
+            cardModalTrigger.click();
+            orbitalDialog.click();
+            check(!orbitalDialog.open && countryModal.style.display === 'block'
+                && appFrame.contentDocument.activeElement === cardModalTrigger,
+                'Nested backdrop close preserves federal country details and restores preview focus');
             app.closeModal();
 
             for (const [country, page] of [['Italy', 'IT-CONSOB.html'], ['United Kingdom', 'UK-FCA.html'], ['France', 'FR-AMF.html']]) {

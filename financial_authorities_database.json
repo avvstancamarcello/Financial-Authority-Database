@@ -3043,6 +3043,9 @@
   },
   "United States of America": {
     "country_name": "United States of America",
+    "thumbnail": "authority/preview-US-SEC.svg",
+    "modal": "authority/US-SEC.html",
+    "has_orbital_view": true,
     "flag": "🇺🇸",
     "isEU": false,
     "protectionLevel": "Altissimo",

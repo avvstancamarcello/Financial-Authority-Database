@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="360" viewBox="0 0 640 360" role="img" aria-labelledby="title desc">
+  <title id="title">United States · SEC independent resource guide</title>
+  <desc id="desc">Original AMEV illustration of an orbital path and document, not an official SEC seal.</desc>
+  <rect width="640" height="360" rx="28" fill="#eef4fc"/>
+  <ellipse cx="320" cy="180" rx="270" ry="130" fill="none" stroke="#9db5d3" stroke-width="3"/>
+  <circle cx="555" cy="115" r="12" fill="#b54b50"/>
+  <path d="M76 127h82l24 24v102H76z" fill="#fff" stroke="#004080" stroke-width="5" stroke-linejoin="round"/>
+  <path d="M101 170h53m-53 25h53m-53 25h39" fill="none" stroke="#9db5d3" stroke-width="5" stroke-linecap="round"/>
+  <text x="225" y="146" font-family="system-ui, sans-serif" font-size="26" fill="#004080">UNITED STATES</text>
+  <text x="225" y="217" font-family="system-ui, sans-serif" font-size="70" font-weight="700" fill="#004080">SEC</text>
+  <text x="225" y="253" font-family="system-ui, sans-serif" font-size="21" fill="#374151">Independent resource guide</text>
+  <text x="320" y="321" text-anchor="middle" font-family="system-ui, sans-serif" font-size="17" fill="#374151">AMEV · Not an official SEC publication</text>
+</svg>
