@@ -126,9 +126,38 @@
             const cnmvDoc = cnmvFrame.contentDocument;
             check(cnmvDoc.querySelector('link[rel="canonical"]')?.href === 'https://www.amevfirenze.it/authority/ES-CNMV.html'
                 && cnmvDoc.documentElement.lang === 'es'
-                && cnmvDoc.title === 'España CNMV orbital WebApp'
-                && cnmvDoc.querySelector('h1').textContent === cnmvDoc.title,
+                && cnmvDoc.title === 'CNMV España: registros, advertencias y reclamaciones | AMEV'
+                && cnmvDoc.querySelector('h1').textContent === 'España CNMV orbital WebApp',
                 'CNMV Spanish page and canonical HTML route');
+            check(cnmvDoc.querySelector('meta[name="description"]')?.content
+                === 'Ficha independiente de la CNMV en España: enlaces a registros oficiales, advertencias para inversores y canales de consultas y reclamaciones.',
+                'CNMV description explains the independent official-resource guide');
+            const homepageSource = new DOMParser().parseFromString(await (await fetch('./index.html')).text(), 'text/html');
+            check(homepageSource.querySelector('#flagsGrid a[href="authority/ES-CNMV.html"]'),
+                'CNMV flag link exists in initial HTML without JavaScript');
+            const sitemap = new DOMParser().parseFromString(await (await fetch('./sitemap.xml')).text(), 'application/xml');
+            check(!sitemap.querySelector('parsererror')
+                && [...sitemap.getElementsByTagName('loc')].filter(node => node.textContent
+                    === cnmvDoc.querySelector('link[rel="canonical"]').href).length === 1,
+                'Sitemap contains the CNMV canonical URL exactly once');
+            await waitFor(() => appFrame.contentDocument.querySelector('#flagsGrid a[href$="/authority/ES-CNMV.html"]'));
+            const spainFlag = appFrame.contentDocument.querySelector('#flagsGrid a[href$="/authority/ES-CNMV.html"]');
+            check(new URL(spainFlag.href).pathname === new URL(cnmvFrame.src).pathname,
+                'Rendered Spain flag links directly to the existing CNMV HTML route');
+            const modifiedClick = new app.MouseEvent('click', { bubbles: true, cancelable: true, ctrlKey: true });
+            let modifiedClickPreserved = false;
+            spainFlag.addEventListener('click', event => {
+                modifiedClickPreserved = !event.defaultPrevented;
+                event.preventDefault();
+            }, { once: true });
+            spainFlag.dispatchEvent(modifiedClick);
+            check(modifiedClickPreserved, 'Modified flag click preserves native link navigation');
+            spainFlag.click();
+            check(appFrame.contentDocument.getElementById('countryModal').style.display === 'block'
+                && appFrame.contentDocument.querySelector('#countryModal .orbital-thumbnail-trigger')
+                    ?.dataset.orbitalSrc.endsWith('/authority/ES-CNMV.html'),
+                'Normal Spain flag click preserves the country modal and CNMV hook');
+            app.closeModal();
             check(cnmvDoc.querySelector('header .flag').textContent === '🇪🇸'
                 && cnmvDoc.querySelector('dl') && cnmvDoc.querySelector('.badge')
                 && cnmvDoc.querySelector('.note-block').textContent.includes('No está publicada, certificada ni avalada por la CNMV')
@@ -150,6 +179,7 @@
                 await new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve)));
                 const style = cnmvFrame.contentWindow.getComputedStyle(cnmvImage);
                 check(Math.abs(parseFloat(style.width) / parseFloat(style.height) - 1) < 0.02
+                    && parseFloat(style.width) <= 160 && parseFloat(style.height) <= 160
                     && style.objectFit === 'contain'
                     && cnmvDoc.documentElement.scrollWidth <= cnmvFrame.contentWindow.innerWidth,
                     `Uncropped CNMV thumbnail and layout at ${width}px`);

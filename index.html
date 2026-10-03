@@ -1826,6 +1826,7 @@
             border-radius: 10px;
             padding: 15px;
             text-align: center;
+            text-decoration: none;
             cursor: pointer;
             transition: all 0.3s ease;
             display: flex;
@@ -2904,7 +2905,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     Scorri l'Alfabeto e seleziona la Bandiera!&nbsp;&nbsp;&nbsp; <span class="keyword-pulse-red">Database di autorità finanziarie<br>con copertura globale</span>
                 </p>
             </div>
-            <div id="flagsGrid" class="flags-grid" role="grid" aria-label="Country flags grid"></div>
+            <div id="flagsGrid" class="flags-grid" role="grid" aria-label="Country flags grid">
+                <a class="flag-item" href="authority/ES-CNMV.html" aria-label="CNMV España">
+                    <span class="flag-icon-wrapper" aria-hidden="true">🇪🇸</span>
+                    <span class="flag-code">ES</span>
+                    <span class="flag-name">España · CNMV</span>
+                </a>
+            </div>
         </div>
 
         <!-- NUOVA BARRA RICERCA SUPERIORE -->
@@ -7733,16 +7740,25 @@ https://avvstancamarcello.github.io/Financial-Authority-Database/
                     ? country.country_name.trim()
                     : `Unknown country ${index + 1}`;
                 const hasCountryName = !!(country.country_name && String(country.country_name).trim());
+                const cnmvHref = resolvedCountryName === 'Spain' && country.has_orbital_view
+                    ? resolveConsobOrbitalSrc(country.modal)
+                    : '';
 
                 const flagItem = hasCountryName
-                    ? document.createElement('button')
+                    ? document.createElement(cnmvHref ? 'a' : 'button')
                     : document.createElement('div');
-                if (hasCountryName) {
+                if (cnmvHref) {
+                    flagItem.href = cnmvHref;
+                } else if (hasCountryName) {
                     flagItem.setAttribute('type', 'button');
                 }
                 flagItem.className = 'flag-item';
                 if (hasCountryName) {
-                    flagItem.onclick = () => openModal(resolvedCountryName);
+                    flagItem.onclick = (event) => {
+                        if (cnmvHref && (event.ctrlKey || event.metaKey || event.shiftKey || event.altKey)) return;
+                        event.preventDefault();
+                        openModal(resolvedCountryName);
+                    };
                     flagItem.setAttribute('aria-label', `${openDetailsPrefix} ${resolvedCountryName}`);
                 } else {
                     flagItem.classList.add('flag-item-unavailable');
