@@ -1681,7 +1681,8 @@
         }
         .orbital-thumbnail-trigger img[src$="preview-FR-AMF.png"],
         .orbital-thumbnail-trigger img[src$="preview-DE-BAFIN.png"],
-        .orbital-thumbnail-trigger img[src$="preview-ES-CNMV.png"] {
+        .orbital-thumbnail-trigger img[src$="preview-ES-CNMV.png"],
+        .orbital-thumbnail-trigger img[src$="preview-US-SEC.svg"] {
             aspect-ratio: auto;
             height: auto;
             object-fit: contain;
@@ -2910,6 +2911,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     <span class="flag-icon-wrapper" aria-hidden="true">🇪🇸</span>
                     <span class="flag-code">ES</span>
                     <span class="flag-name">España · CNMV</span>
+                </a>
+                <a class="flag-item" href="authority/US-SEC.html" aria-label="United States of America · SEC">
+                    <span class="flag-icon-wrapper" aria-hidden="true">🇺🇸</span>
+                    <span class="flag-code">US</span>
+                    <span class="flag-name">United States of America · SEC</span>
                 </a>
             </div>
         </div>
@@ -7171,7 +7177,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             new URL('/authority/DE-BAFIN.html', window.location.origin).pathname,
             new URL('authority/DE-BAFIN.html', window.location.href).pathname,
             new URL('/authority/ES-CNMV.html', window.location.origin).pathname,
-            new URL('authority/ES-CNMV.html', window.location.href).pathname
+            new URL('authority/ES-CNMV.html', window.location.href).pathname,
+            new URL('/authority/US-SEC.html', window.location.origin).pathname,
+            new URL('authority/US-SEC.html', window.location.href).pathname
         ]);
         const CONSOB_ORBITAL_ALLOWED_THUMBNAIL_PATHS = new Set([
             new URL('/authority/preview-consob.png', window.location.origin).pathname,
@@ -7183,7 +7191,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             new URL('/authority/preview-DE-BAFIN.png', window.location.origin).pathname,
             new URL('authority/preview-DE-BAFIN.png', window.location.href).pathname,
             new URL('/authority/preview-ES-CNMV.png', window.location.origin).pathname,
-            new URL('authority/preview-ES-CNMV.png', window.location.href).pathname
+            new URL('authority/preview-ES-CNMV.png', window.location.href).pathname,
+            new URL('/authority/preview-US-SEC.svg', window.location.origin).pathname,
+            new URL('authority/preview-US-SEC.svg', window.location.href).pathname
         ]);
 
         function resolveConsobOrbitalSrc(candidateSource, { allowFallback = false } = {}) {
@@ -7218,6 +7228,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             const grid = document.getElementById('countriesGrid');
             const dialog = document.getElementById('consobOrbitalDialog');
             const closeButton = document.getElementById('consobOrbitalCloseButton');
+            const frame = document.getElementById('consobOrbitalFrame');
             if (!grid || !dialog) return;
             isConsobOrbitalDialogSetup = true;
 
@@ -7232,6 +7243,18 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             if (closeButton) {
                 closeButton.addEventListener('click', closeItalyOrbitalDialog);
             }
+            dialog.addEventListener('cancel', (event) => {
+                event.preventDefault();
+                closeItalyOrbitalDialog();
+            });
+            // Keyboard events inside the same-origin iframe do not bubble to its parent.
+            frame?.addEventListener('load', () => {
+                frame.contentDocument?.addEventListener('keydown', (event) => {
+                    if (event.key !== 'Escape' || !dialog.open) return;
+                    event.preventDefault();
+                    closeItalyOrbitalDialog();
+                });
+            });
             dialog.addEventListener('click', (event) => {
                 if (event.target === dialog) {
                     closeItalyOrbitalDialog();
@@ -7321,6 +7344,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         }
 
         document.addEventListener('keydown', (event) => {
+            // The nested native dialog owns Escape and focus while it is open.
+            if (document.getElementById('consobOrbitalDialog')?.open) return;
             if (!activeDialogState || !activeDialogState.modal) return;
             const { modal } = activeDialogState;
             if (modal.style.display === 'none') return;
@@ -7740,22 +7765,22 @@ https://avvstancamarcello.github.io/Financial-Authority-Database/
                     ? country.country_name.trim()
                     : `Unknown country ${index + 1}`;
                 const hasCountryName = !!(country.country_name && String(country.country_name).trim());
-                const cnmvHref = resolvedCountryName === 'Spain' && country.has_orbital_view
+                const orbitalHref = ['Spain', 'United States of America'].includes(resolvedCountryName) && country.has_orbital_view
                     ? resolveConsobOrbitalSrc(country.modal)
                     : '';
 
                 const flagItem = hasCountryName
-                    ? document.createElement(cnmvHref ? 'a' : 'button')
+                    ? document.createElement(orbitalHref ? 'a' : 'button')
                     : document.createElement('div');
-                if (cnmvHref) {
-                    flagItem.href = cnmvHref;
+                if (orbitalHref) {
+                    flagItem.href = orbitalHref;
                 } else if (hasCountryName) {
                     flagItem.setAttribute('type', 'button');
                 }
                 flagItem.className = 'flag-item';
                 if (hasCountryName) {
                     flagItem.onclick = (event) => {
-                        if (cnmvHref && (event.ctrlKey || event.metaKey || event.shiftKey || event.altKey)) return;
+                        if (orbitalHref && (event.ctrlKey || event.metaKey || event.shiftKey || event.altKey)) return;
                         event.preventDefault();
                         openModal(resolvedCountryName);
                     };
