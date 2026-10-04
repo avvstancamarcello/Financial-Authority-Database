@@ -1,17 +1,25 @@
 # iPhone Safari WebApp / PWA
 
 ## URL di test
-- GitHub Pages: `https://avvstancamarcello.github.io/Financial-Authority-Database/`
+- Produzione: `https://tutelatruffe.it/`
+- Manifest, service worker e icone usano percorsi dalla root `/` del dominio di produzione, non il sottopercorso GitHub Pages.
 - Pagina canonica del progetto: repository-root `index.html`
 
 ## Test rapido su iPhone Safari
-1. Apri la URL GitHub Pages in **Safari** su iPhone.
+1. Apri la URL di produzione in **Safari** su iPhone.
 2. Verifica che header, dialog, footer e pulsanti non finiscano sotto notch o home indicator.
 3. Apri la guida integrata nella sezione app e controlla il blocco **iPhone / Safari WebApp-PWA**.
 4. Tocca **Condividi** → **Aggiungi a Home**.
-5. Conferma il nome **FinAuthority** e completa l’aggiunta.
-6. Apri l’icona dalla Home Screen e verifica che il launch avvenga sotto `/Financial-Authority-Database/`.
+5. Conferma il nome **Tutela Truffe** e completa l’aggiunta.
+6. Apri l’icona dalla Home Screen e verifica che il launch avvenga alla root `/` del dominio.
 7. Dopo il primo caricamento, riapri l’app con rete disattivata per verificare l’offline dei contenuti già messi in cache.
+
+## Android e regressione locale
+- Su Android Chrome, verifica **Menu → Installa app** e il nome **Tutela Truffe**. Il browser decide quando mostrare il prompt automatico; Safari iPhone non supporta quel prompt.
+- Verifica anche il nome nella scheda di condivisione di Safari. Le anteprime già memorizzate dal dispositivo possono richiedere un aggiornamento.
+- Per il test locale: esegui `python3 -m http.server 8000` dalla root del repository e apri `http://localhost:8000/test-pwa.html`.
+- Il test controlla manifest, metadata delle tre pagine, icone, mancata soppressione del prompt Android, scope `/` e precache della shell.
+- In DevTools verifica il service worker attivo, abilita **Network → Offline** e ricarica `/` per controllare il fallback alla homepage memorizzata.
 
 ## Aggiornare o sbloccare una WebApp installata
 - Per forzare il controllo aggiornamenti: apri la pagina in Safari con rete attiva e attendi il refresh.
@@ -27,7 +35,7 @@
 
 ## Controlli eseguiti in questa verifica
 - Verifica metadata/PWA in `index.html`, `manifest.json` e `service-worker.js`.
-- Controllo coerenza path GitHub Pages `/Financial-Authority-Database/`.
+- Controllo coerenza dei percorsi di produzione `/`.
 - Validazione JSON del manifest.
 - Verifica statica locale delle principali risorse referenziate.
 

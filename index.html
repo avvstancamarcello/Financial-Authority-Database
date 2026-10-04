@@ -140,17 +140,17 @@
     <meta name="DC.creator" content="Avvocato Marcello Stanca">
     
     <meta name="theme-color" content="#667eea">
-    <meta name="application-name" content="Financial Authority Database">
+    <meta name="application-name" content="Tutela Truffe">
     <meta name="mobile-web-app-capable" content="yes">
     
     <!-- PWA Manifest (96/192/384/512 icons; 192/512 include maskable purpose in manifest.json) -->
-    <link rel="manifest" href="manifest.json">
+    <link rel="manifest" href="/manifest.json">
     
     <!-- iOS Meta Tags -->
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="apple-mobile-web-app-title" content="FinAuthority">
-    <link rel="apple-touch-icon" sizes="192x192" href="icon-192.png">
+    <meta name="apple-mobile-web-app-title" content="Tutela Truffe">
+    <link rel="apple-touch-icon" sizes="192x192" href="/icon-192.png">
     
     <title id="page-title">Database Autorità Finanziarie Nazionali ed Internazionali | Verifica Licenze Broker | 239 Bandiere in 161 Paesi</title>
     
@@ -2946,7 +2946,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                             <li>Apri questa pagina con <strong>Safari</strong> su iPhone.</li>
                             <li>Tocca il pulsante <strong>Condividi</strong> di Safari.</li>
                             <li>Scorri e scegli <strong>Aggiungi a Home</strong>.</li>
-                            <li>Conferma il nome <strong>FinAuthority</strong> e tocca <strong>Aggiungi</strong>.</li>
+                            <li>Conferma il nome <strong>Tutela Truffe</strong> e tocca <strong>Aggiungi</strong>.</li>
                             <li>Apri l'icona dalla Home: dopo la prima visita l'app resta disponibile anche offline con i contenuti già in cache.</li>
                         </ol>
                         <p class="app-download-guide-note">
@@ -2971,7 +2971,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                             <li>Open this page in <strong>Safari</strong> on your iPhone.</li>
                             <li>Tap Safari’s <strong>Share</strong> button.</li>
                             <li>Scroll down and choose <strong>Add to Home Screen</strong>.</li>
-                            <li>Confirm the name <strong>FinAuthority</strong> and tap <strong>Add</strong>.</li>
+                            <li>Confirm the name <strong>Tutela Truffe</strong> and tap <strong>Add</strong>.</li>
                             <li>Launch the icon from the Home Screen: after the first visit, the app remains available offline for the content already cached on the device.</li>
                         </ol>
                         <p class="app-download-guide-note">
@@ -8325,7 +8325,7 @@ https://avvstancamarcello.github.io/Financial-Authority-Database/
         // Registrazione Service Worker per PWA (solo su HTTP/HTTPS o localhost, non su file://)
         if ('serviceWorker' in navigator && (window.location.protocol === 'https:' || window.location.protocol === 'http:')) {
             window.addEventListener('load', () => {
-                navigator.serviceWorker.register('service-worker.js')
+                navigator.serviceWorker.register('/service-worker.js')
                     .then(registration => {
                         console.log('Service Worker registrato con successo:', registration.scope);
                     })
@@ -8335,13 +8335,6 @@ https://avvstancamarcello.github.io/Financial-Authority-Database/
             });
         }
 
-        // Prompt per installazione PWA
-        let deferredPrompt;
-        window.addEventListener('beforeinstallprompt', (e) => {
-            e.preventDefault();
-            deferredPrompt = e;
-            // Mostra banner di installazione personalizzato se necessario
-        });
     </script>
 
     <footer style="text-align:center; padding: 12px 8px calc(16px + var(--safe-area-inset-bottom)); font-size: 0.85rem; color:#e5e7eb;">
