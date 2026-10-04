@@ -1,11 +1,21 @@
 {
+  "id": "/Financial-Authority-Database/",
   "name": "Financial Authority Database",
   "short_name": "FinAuthority",
   "description": "Database of 239 International Financial Authorities - Database 239 Autorità Finanziarie Internazionali",
+  "lang": "it",
+  "dir": "ltr",
   "start_url": "/Financial-Authority-Database/",
+  "scope": "/Financial-Authority-Database/",
   "display": "standalone",
   "background_color": "#667eea",
   "theme_color": "#667eea",
+  "categories": [
+    "finance",
+    "reference",
+    "utilities"
+  ],
+  "prefer_related_applications": false,
   "icons": [
     {
       "src": "/Financial-Authority-Database/icon-96.webp",
