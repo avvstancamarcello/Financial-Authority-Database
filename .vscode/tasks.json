@@ -1,0 +1,29 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "Git commit and push",
+			"type": "shell",
+			"command": "git status --short && git add index.html && git commit -m \"Simplify homepage copy and language labels\" && git push",
+			"isBackground": false,
+			"problemMatcher": [],
+			"group": "none"
+		},
+		{
+			"label": "Git commit and push",
+			"type": "shell",
+			"command": "git status --short; git config user.name \"GitHub Copilot\"; git config user.email \"copilot@github.local\"; git add index.html; git commit -m \"Simplify homepage copy and language labels\"; git push",
+			"isBackground": false,
+			"problemMatcher": [],
+			"group": "none"
+		},
+		{
+			"label": "Git commit and push",
+			"type": "shell",
+			"command": "powershell -NoProfile -Command \"git status --short; git config user.name 'GitHub Copilot'; git config user.email 'copilot@github.local'; git add index.html; git commit -m 'Simplify homepage copy and language labels'; git push\"",
+			"isBackground": false,
+			"problemMatcher": [],
+			"group": "none"
+		}
+	]
+}

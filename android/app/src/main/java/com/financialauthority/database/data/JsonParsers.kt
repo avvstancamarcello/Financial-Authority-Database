@@ -12,6 +12,9 @@ import kotlinx.serialization.json.JsonPrimitive
 import kotlinx.serialization.json.booleanOrNull
 import kotlinx.serialization.json.contentOrNull
 import kotlinx.serialization.json.decodeFromJsonElement
+import kotlinx.serialization.json.jsonArray
+import kotlinx.serialization.json.jsonObject
+import kotlinx.serialization.json.jsonPrimitive
 
 object JsonParsers {
     private val json = Json { ignoreUnknownKeys = true }
@@ -61,12 +64,23 @@ object JsonParsers {
             val item = value.jsonObject
             val authority = item["financial_authority"]?.jsonObject ?: error("Missing financial_authority for $key")
             val authorityId = authority.string("authorityId") ?: error("Missing authorityId for $key")
+            val modal = item.string("modal")
+            val webAppUrl = authority.string("webAppUrl") ?: modal?.let { "https://www.amevfirenze.it/$it" }
+            val socialObj = authority["social_links"]?.jsonObject
+            val socialLinks = mutableMapOf<String, String>()
+            socialObj?.forEach { (k, v) ->
+                val content = runCatching { v.jsonPrimitive.contentOrNull }.getOrNull()
+                if (content != null) socialLinks[k] = content
+            }
+            val isEU = item.bool("isEU") ?: false
+            val rawProtection = item.string("protectionLevel") ?: "Unknown"
+            val protectionLevel = if (isEU && (rawProtection == "Altissimo" || rawProtection == "High")) "Livello EU" else rawProtection
             Country(
                 countryKey = normalizeKey(key),
                 countryName = item.string("country_name") ?: key,
                 flag = item.string("flag") ?: "🏳️",
-                isEU = item.bool("isEU") ?: false,
-                protectionLevel = item.string("protectionLevel") ?: "Unknown",
+                isEU = isEU,
+                protectionLevel = protectionLevel,
                 notes = item.string("notes"),
                 authority = FinancialAuthority(
                     authorityId = authorityId,
@@ -75,6 +89,10 @@ object JsonParsers {
                     homepage = authority.string("homepage"),
                     fraudReportLink = authority.string("fraudReportLink"),
                     authorityEmail = authority.string("authorityEmail"),
+                    playStoreUrl = authority.string("playStoreUrl"),
+                    webAppUrl = webAppUrl,
+                    mapsUrl = authority.string("mapsUrl") ?: authority.string("googleMapsUrl"),
+                    socialLinks = socialLinks,
                     relatedInternationalInstitutionIds = authority.stringArray("relatedInternationalInstitutionIds").toSet()
                 )
             )

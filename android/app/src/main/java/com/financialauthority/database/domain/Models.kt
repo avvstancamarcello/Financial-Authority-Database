@@ -7,6 +7,10 @@ data class FinancialAuthority(
     val homepage: String?,
     val fraudReportLink: String?,
     val authorityEmail: String?,
+    val playStoreUrl: String? = null,
+    val webAppUrl: String? = null,
+    val mapsUrl: String? = null,
+    val socialLinks: Map<String, String> = emptyMap(),
     val relatedInternationalInstitutionIds: Set<String>
 )
 
