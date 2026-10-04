@@ -245,6 +245,18 @@
         "url": "https://tutelatruffe.it/",
         "description": "Financial Authority Database con authority records internazionali e link ufficiali per verificare licenze broker, identità degli operatori finanziari e canali di segnalazione frodi.",
         "inLanguage": "it",
+        "hasPart": [
+            {
+                "@type": "WebPage",
+                "name": "CONSOB Orbital Web App",
+                "url": "https://tutelatruffe.it/authority/IT-CONSOB.html"
+            },
+            {
+                "@type": "WebPage",
+                "name": "FCA Orbital Web App",
+                "url": "https://tutelatruffe.it/authority/UK-FCA.html"
+            }
+        ],
         "publisher": {
             "@type": "Organization",
             "name": "tutelatruffe.it",
@@ -375,6 +387,18 @@
             "encodingFormat": "application/json",
             "contentUrl": "https://tutelatruffe.it/financial_authorities_database.json"
         },
+        "subjectOf": [
+            {
+                "@type": "WebPage",
+                "name": "CONSOB Orbital Web App",
+                "url": "https://tutelatruffe.it/authority/IT-CONSOB.html"
+            },
+            {
+                "@type": "WebPage",
+                "name": "FCA Orbital Web App",
+                "url": "https://tutelatruffe.it/authority/UK-FCA.html"
+            }
+        ],
         "includedInDataCatalog": {
             "@type": "DataCatalog",
             "name": "European Parliament Referenced Resources",
@@ -5913,6 +5937,26 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             return entries;
         }
 
+        function getOrbitalSeoPageEntries() {
+            if (!Array.isArray(countriesData) || countriesData.length === 0) {
+                return [];
+            }
+            const uniqueByUrl = new Map();
+            countriesData.forEach((country) => {
+                if (!country?.has_orbital_view) return;
+                const orbitalPath = resolveConsobOrbitalSrc(country.modal);
+                if (!orbitalPath) return;
+                const absoluteUrl = new URL(orbitalPath, SEO_SITE_ROOT).toString();
+                if (uniqueByUrl.has(absoluteUrl)) return;
+                uniqueByUrl.set(absoluteUrl, {
+                    '@type': 'WebPage',
+                    name: `${getOrbitalAuthorityLabel(country)} Orbital Web App`,
+                    url: absoluteUrl
+                });
+            });
+            return Array.from(uniqueByUrl.values());
+        }
+
         function getSeoMetadata(lang = currentLanguage) {
             const normalizedLang = normalizeLanguageCode(lang);
             const langData = getLanguageBundle(normalizedLang);
@@ -5983,6 +6027,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         }
 
         function buildWebsiteStructuredData(metadata) {
+            const orbitalPages = getOrbitalSeoPageEntries();
             return {
                 '@context': 'https://schema.org',
                 '@type': 'WebSite',
@@ -5993,6 +6038,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 description: metadata.description,
                 inLanguage: metadata.inLanguage,
                 isAccessibleForFree: true,
+                ...(orbitalPages.length ? { hasPart: orbitalPages } : {}),
                 publisher: buildSeoPublisherEntity(),
                 author: buildSeoAuthorEntity(),
                 about: [
@@ -6004,6 +6050,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         }
 
         function buildDatasetStructuredData(metadata) {
+            const orbitalPages = getOrbitalSeoPageEntries();
             return {
                 '@context': 'https://schema.org',
                 '@type': 'Dataset',
@@ -6029,6 +6076,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     encodingFormat: 'application/json',
                     contentUrl: SEO_DATASET_URL
                 },
+                ...(orbitalPages.length ? { subjectOf: orbitalPages } : {}),
                 variableMeasured: [
                     {
                         '@type': 'PropertyValue',
