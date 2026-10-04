@@ -15,8 +15,13 @@
     <ul id="results"></ul>
     <script>
         const results = document.getElementById('results');
-        const appName = 'Tutela Truffe';
+        const appName = 'Financial Authority Database';
         const pagePaths = ['/index.html', '/APP/index.html', '/Error/index.html'];
+        const expectedOgSiteNames = {
+            '/index.html': 'Financial Authority Database',
+            '/APP/index.html': 'Tutela Truffe',
+            '/Error/index.html': 'Tutela Truffe'
+        };
 
         function addResult(ok, message) {
             const li = document.createElement('li');
@@ -54,7 +59,7 @@
             document.body.dataset.testStatus = 'running';
             try {
                 const manifest = JSON.parse(await loadText('/manifest.json'));
-                addResult(manifest.name === appName && manifest.short_name === appName, 'Manifest uses Tutela Truffe for both names');
+                addResult(manifest.name === appName && manifest.short_name === appName, 'Manifest uses Financial Authority Database for both names');
                 for (const key of ['id', 'start_url', 'scope']) {
                     addResult(manifest[key] === '/', `Manifest ${key} targets the production root`);
                 }
@@ -71,15 +76,27 @@
                 for (const path of pagePaths) {
                     const html = await loadText(path);
                     const doc = new DOMParser().parseFromString(html, 'text/html');
-                    for (const selector of ['meta[property="og:site_name"]', 'meta[name="application-name"]', 'meta[name="apple-mobile-web-app-title"]']) {
-                        addResult(doc.querySelector(selector)?.content === appName, `${path}: ${selector} uses Tutela Truffe`);
+                    for (const selector of ['meta[name="application-name"]', 'meta[name="apple-mobile-web-app-title"]']) {
+                        addResult(doc.querySelector(selector)?.content === appName, `${path}: ${selector} uses ${appName}`);
                     }
+                    addResult(doc.querySelector('meta[property="og:site_name"]')?.content === expectedOgSiteNames[path], `${path}: og:site_name retains its page branding`);
                     const pageUrl = new URL(path, location.origin);
                     addResult(new URL(doc.querySelector('link[rel="manifest"]').getAttribute('href'), pageUrl).pathname === '/manifest.json', `${path}: shared root manifest`);
                     addResult(new URL(doc.querySelector('link[rel="apple-touch-icon"]').getAttribute('href'), pageUrl).pathname === '/icon-192.png', `${path}: shared iPhone icon`);
                     addResult(/serviceWorker\.register\(['"]\/service-worker\.js['"]\)/.test(html), `${path}: registers the root service worker`);
                     await checkInstallPrompt(path);
                 }
+
+                const homepage = new DOMParser().parseFromString(await loadText('/index.html'), 'text/html');
+                const iosPwaTrigger = homepage.querySelector('#android-app-download #ios-pwa-install-trigger');
+                addResult(
+                    iosPwaTrigger?.getAttribute('type') === 'button'
+                        && iosPwaTrigger.getAttribute('aria-haspopup') === 'dialog'
+                        && iosPwaTrigger.getAttribute('aria-controls') === 'android-app-guide-dialog'
+                        && iosPwaTrigger.getAttribute('onclick') === 'openIosInstallGuide(this)'
+                        && homepage.querySelectorAll('[data-guide-platform="ios"]').length === 2,
+                    'Download section opens directly to iPhone WebApp/PWA installation steps'
+                );
 
                 const worker = await loadText('/service-worker.js');
                 addResult(/const BASE_PATH = '';/.test(worker), 'Service worker caches production root paths');

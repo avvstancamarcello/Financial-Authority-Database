@@ -10,12 +10,12 @@
 2. Verifica che header, dialog, footer e pulsanti non finiscano sotto notch o home indicator.
 3. Apri la guida integrata nella sezione app e controlla il blocco **iPhone / Safari WebApp-PWA**.
 4. Tocca **Condividi** → **Aggiungi a Home**.
-5. Conferma il nome **Tutela Truffe** e completa l’aggiunta.
+5. Conferma il nome **Financial Authority Database** e completa l’aggiunta.
 6. Apri l’icona dalla Home Screen e verifica che il launch avvenga alla root `/` del dominio.
 7. Dopo il primo caricamento, riapri l’app con rete disattivata per verificare l’offline dei contenuti già messi in cache.
 
 ## Android e regressione locale
-- Su Android Chrome, verifica **Menu → Installa app** e il nome **Tutela Truffe**. Il browser decide quando mostrare il prompt automatico; Safari iPhone non supporta quel prompt.
+- Su Android Chrome, verifica **Menu → Installa app** e il nome **Financial Authority Database**. Il browser decide quando mostrare il prompt automatico; Safari iPhone non supporta quel prompt.
 - Verifica anche il nome nella scheda di condivisione di Safari. Le anteprime già memorizzate dal dispositivo possono richiedere un aggiornamento.
 - Per il test locale: esegui `python3 -m http.server 8000` dalla root del repository e apri `http://localhost:8000/test-pwa.html`.
 - Il test controlla manifest, metadata delle tre pagine, icone, mancata soppressione del prompt Android, scope `/` e precache della shell.
