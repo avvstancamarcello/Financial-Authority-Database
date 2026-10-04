@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <title>Deutschland BAFIN orbital WebApp</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description"
+        content="Unabhängige orbitale Übersicht zur BaFin in Deutschland: offizielle Informationen, Warnungen, Unternehmensdatenbank, Beschwerden und Aufsichtsressourcen.">
+  <link rel="canonical" href="https://www.amevfirenze.it/authority/DE-BAFIN.html">
+  <style>
+    :root {
+      --bafin-blue: #004080;
+      --bafin-light: #f5f8ff;
+      --bafin-border: #d0d8ea;
+      --bafin-danger: #b00020;
+      --bafin-safe: #007e33;
+      --orbit-bg: #eef3ff;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+                   Roboto, sans-serif;
+      background: radial-gradient(circle at top, #f0f6ff 0, #e3ebf7 40%, #d7e0f0 100%);
+      color: #111827;
+    }
+
+    header {
+      padding: 16px 20px;
+      background: rgba(0, 64, 128, 0.9);
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+    }
+
+    header .title-block {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    header .flag { font-size: 28px; }
+
+    header h1 {
+      margin: 0;
+      font-size: 1.4rem;
+    }
+
+    header p {
+      margin: 2px 0 0;
+      font-size: 0.85rem;
+      opacity: 0.9;
+    }
+
+    main {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 20px 16px 32px;
+    }
+
+    .card {
+      background: #ffffff;
+      border-radius: 18px;
+      box-shadow: 0 12px 30px rgba(15, 23, 42, 0.18);
+      border: 1px solid var(--bafin-border);
+      padding: 20px 18px 22px;
+    }
+
+    .card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 12px;
+      flex-wrap: wrap;
+    }
+
+    .card-header h2 {
+      margin: 0;
+      font-size: 1.2rem;
+      color: var(--bafin-blue);
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      font-size: 0.8rem;
+      background: #e0f2fe;
+      color: #0f172a;
+      border: 1px solid #bae6fd;
+    }
+
+    .badge span.dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #22c55e;
+    }
+
+    .thumbnail {
+      width: 100%;
+      height: auto;
+      object-fit: contain;
+      border-radius: 14px;
+      margin: 14px 0 18px;
+      border: 1px solid var(--bafin-border);
+    }
+
+    dl {
+      margin: 0;
+      display: grid;
+      grid-template-columns: minmax(0, 180px) minmax(0, 1fr);
+      row-gap: 8px;
+      column-gap: 12px;
+      font-size: 0.92rem;
+    }
+
+    dt {
+      font-weight: 600;
+      color: #374151;
+    }
+
+    dd {
+      margin: 0;
+      color: #111827;
+      word-break: break-word;
+    }
+
+    a {
+      color: var(--bafin-blue);
+      text-decoration: none;
+    }
+
+    a:hover,
+    a:focus-visible {
+      text-decoration: underline;
+    }
+
+    .note-block {
+      margin-top: 14px;
+      padding: 10px 12px;
+      border-radius: 12px;
+      background: var(--bafin-light);
+      border: 1px solid var(--bafin-border);
+      font-size: 0.9rem;
+    }
+
+    .note-block strong {
+      display: block;
+      margin-bottom: 4px;
+      color: #1f2937;
+    }
+
+    .actions {
+      margin-top: 18px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .btn {
+      border: none;
+      border-radius: 999px;
+      padding: 8px 14px;
+      font-size: 0.85rem;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    .btn-primary {
+      background: var(--bafin-blue);
+      color: #ffffff;
+    }
+
+    .btn-outline {
+      background: #ffffff;
+      color: var(--bafin-blue);
+      border: 1px solid var(--bafin-blue);
+    }
+
+    .btn-danger {
+      background: var(--bafin-danger);
+      color: #ffffff;
+    }
+
+    .btn-safe {
+      background: var(--bafin-safe);
+      color: #ffffff;
+    }
+
+    .section {
+      margin-top: 24px;
+      padding-top: 12px;
+      border-top: 1px dashed #cbd5e1;
+    }
+
+    .section h3 {
+      margin: 0 0 8px;
+      font-size: 1rem;
+      color: #0f172a;
+    }
+
+    .section p {
+      margin: 4px 0;
+      font-size: 0.9rem;
+      color: #374151;
+    }
+
+    footer {
+      margin-top: 26px;
+      font-size: 0.75rem;
+      color: #6b7280;
+      text-align: center;
+    }
+
+    @media (max-width: 640px) {
+      dl {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      .card-header {
+        align-items: flex-start;
+      }
+
+      .btn {
+        white-space: normal;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="title-block">
+      <span class="flag" aria-hidden="true">🇩🇪</span>
+      <div>
+        <h1>Deutschland BAFIN orbital WebApp</h1>
+        <p>Bundesanstalt für Finanzdienstleistungsaufsicht · Aufsicht über Banken, Versicherungen und Wertpapiermärkte</p>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <article class="card" aria-labelledby="bafin-title">
+      <img src="preview-DE-BAFIN.png" alt="Orbitale Vorschau Deutschland · BaFin" class="thumbnail" width="820" height="196">
+
+      <div class="card-header">
+        <h2 id="bafin-title">Orbitale Übersicht Deutschland · BaFin</h2>
+        <div class="badge" aria-label="Links zu offiziellen BaFin-Ressourcen">
+          <span class="dot" aria-hidden="true"></span>
+          <span>Offizielle Ressourcen: <strong>BaFin</strong></span>
+        </div>
+      </div>
+
+      <dl>
+        <dt>Aufsichtsbehörde</dt>
+        <dd>Bundesanstalt für Finanzdienstleistungsaufsicht</dd>
+
+        <dt>Abkürzung</dt>
+        <dd>BaFin</dd>
+
+        <dt>Offizielle Website</dt>
+        <dd><a href="https://www.bafin.de/" target="_blank" rel="noopener noreferrer">www.bafin.de</a></dd>
+
+        <dt>Beschwerden</dt>
+        <dd><a href="https://www.bafin.de/DE/verbraucherinnen-verbraucher/hilfe-kontakt/beschwerden-streitschlichtung/bei-bafin-beschweren/bei-bafin-beschweren_node.html" target="_blank" rel="noopener noreferrer">Bei der BaFin beschweren</a></dd>
+
+        <dt>Offizieller Kontakt</dt>
+        <dd><a href="https://www.bafin.de/DE/service/kontakt/kontakt_node.html" target="_blank" rel="noopener noreferrer">Kontakt zur BaFin</a></dd>
+      </dl>
+
+      <div class="note-block">
+        <strong>Orbitaler Hinweis</strong>
+        <p>
+          Diese unabhängige Übersicht verlinkt offizielle BaFin-Ressourcen zur Prüfung von
+          Finanzdienstleistern und zur Information über Risiken. Sie wird nicht von der BaFin
+          veröffentlicht, zertifiziert oder gebilligt und stellt keine Anlageberatung dar.
+        </p>
+      </div>
+
+      <div class="actions" aria-label="BaFin-Schnellzugriff">
+        <a class="btn btn-primary" href="https://www.bafin.de/DE/verbraucherinnen-verbraucher/hilfe-kontakt/beschwerden-streitschlichtung/bei-bafin-beschweren/bei-bafin-beschweren_node.html" target="_blank" rel="noopener noreferrer">📨 Beschwerden und Eingaben</a>
+        <a class="btn btn-outline" href="https://www.bafin.de/DE/die-bafin/publikationen-daten/datenbanken-uebersichten/unternehmenssuche/unternehmenssuche_node.html" target="_blank" rel="noopener noreferrer">🔎 Unternehmen prüfen</a>
+        <a class="btn btn-danger" href="https://www.bafin.de/DE/verbraucherinnen-verbraucher/news-warnungen/warnmeldungen/warnmeldungen_node.html" target="_blank" rel="noopener noreferrer">⚠️ Warnmeldungen lesen</a>
+        <a class="btn btn-safe" href="https://www.bafin.de/" target="_blank" rel="noopener noreferrer">✅ Offizielle BaFin-Website</a>
+      </div>
+
+      <section class="section">
+        <h3>A. Verbraucherwarnungen</h3>
+        <p><a href="https://www.bafin.de/DE/verbraucherinnen-verbraucher/news-warnungen/warnmeldungen/warnmeldungen_node.html" target="_blank" rel="noopener noreferrer">Warnmeldungen der BaFin</a></p>
+      </section>
+
+      <section class="section">
+        <h3>B. Aufsichtsmaßnahmen und Sanktionen</h3>
+        <p><a href="https://www.bafin.de/DE/die-bafin/aktuelles-presse/massnahmen-sanktionen/massnahmen-alle/massnahmen-alle.html" target="_blank" rel="noopener noreferrer">Maßnahmen und Sanktionen der BaFin</a></p>
+      </section>
+
+      <section class="section">
+        <h3>C. Zulassungen und offizielle Register</h3>
+        <p><a href="https://www.bafin.de/DE/die-bafin/publikationen-daten/datenbanken-uebersichten/unternehmenssuche/unternehmenssuche_node.html" target="_blank" rel="noopener noreferrer">BaFin-Unternehmensdatenbank</a></p>
+        <p>Vergleichen Sie Namen, Website und Kontaktdaten: Die Identität eines zugelassenen Unternehmens kann missbraucht werden.</p>
+      </section>
+
+      <section class="section">
+        <h3>D. Unerlaubte Finanzdienstleistungen</h3>
+        <p><a href="https://www.bafin.de/DE/verbraucherinnen-verbraucher/news-warnungen/warnmeldungen/warnmeldungen_node.html" target="_blank" rel="noopener noreferrer">Warnungen zu Unternehmen und Websites</a></p>
+        <p>Das Fehlen einer Warnmeldung ist kein Nachweis einer Zulassung oder der Seriosität eines Anbieters.</p>
+      </section>
+
+      <section class="section">
+        <h3>E. Jahresberichte und Veröffentlichungen</h3>
+        <p><a href="https://www.bafin.de/DE/die-bafin/publikationen-daten/jahresbericht/jahresbericht_node.html" target="_blank" rel="noopener noreferrer">Jahresberichte der BaFin</a></p>
+      </section>
+
+      <section class="section">
+        <h3>F. Statistiken</h3>
+        <p><a href="https://www.bafin.de/DE/die-bafin/publikationen-daten/statistiken/statistiken_node.html" target="_blank" rel="noopener noreferrer">Statistiken der BaFin</a></p>
+      </section>
+
+      <section class="section">
+        <h3>G. Cyberbetrug, Identitätsmissbrauch und Phishing</h3>
+        <p><a href="https://www.bafin.de/DE/verbraucherinnen-verbraucher/themen-finanzprodukte/finanzbetrug-erkennen/datendiebstahl/datendiebstahl.html" target="_blank" rel="noopener noreferrer">Datendiebstahl durch Phishing: Hinweise der BaFin</a></p>
+        <p>Nutzen Sie offizielle Kontaktdaten statt der Angaben verdächtiger Nachrichten. Geben Sie keine Zugangsdaten weiter.</p>
+      </section>
+
+      <section class="section">
+        <h3>H. Geldwäscheprävention und Terrorismusfinanzierung</h3>
+        <p><a href="https://www.bafin.de/DE/die-bafin/ueber-die-bafin/aufgaben/praevention-geldwaesche-terrorismusfinanzierung/praevention-geldwaesche-terrorismusfinanzierung_node.html" target="_blank" rel="noopener noreferrer">Geldwäscheprävention bei der BaFin</a></p>
+      </section>
+    </article>
+
+    <footer>
+      Orbital WebApp Deutschland · BaFin · Database Autorità Finanziarie Internazionali ·
+      Copyright © Avv. Marcello Stanca – Alle Rechte vorbehalten.
+    </footer>
+  </main>
+</body>
+</html>

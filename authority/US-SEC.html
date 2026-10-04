@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>USA SEC: registration checks, EDGAR and investor complaints | AMEV</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Independent guide to the U.S. SEC: official registration checks, EDGAR filings, investor alerts, enforcement tips and investor complaints.">
+  <link rel="canonical" href="https://www.amevfirenze.it/authority/US-SEC.html">
+  <style>
+    :root {
+      --sec-blue: #004080;
+      --sec-light: #f5f8ff;
+      --sec-border: #d0d8ea;
+      --sec-danger: #b00020;
+      --sec-safe: #007e33;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: radial-gradient(circle at top, #f0f6ff 0, #e3ebf7 40%, #d7e0f0 100%);
+      color: #111827;
+    }
+    header {
+      padding: 16px 20px;
+      background: rgba(0, 64, 128, 0.9);
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+    }
+    header .title-block { display: flex; align-items: center; gap: 12px; }
+    header .flag { font-size: 28px; }
+    header h1 { margin: 0; font-size: 1.4rem; }
+    header p { margin: 2px 0 0; font-size: 0.85rem; opacity: 0.9; }
+    main { max-width: 960px; margin: 0 auto; padding: 20px 16px 32px; }
+    .card {
+      background: #ffffff;
+      border-radius: 18px;
+      box-shadow: 0 12px 30px rgba(15, 23, 42, 0.18);
+      border: 1px solid var(--sec-border);
+      padding: 20px 18px 22px;
+    }
+    .card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 12px;
+      flex-wrap: wrap;
+    }
+    .card-header h2 { margin: 0; font-size: 1.2rem; color: var(--sec-blue); }
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      font-size: 0.8rem;
+      background: #e0f2fe;
+      color: #0f172a;
+      border: 1px solid #bae6fd;
+    }
+    .badge span.dot { width: 8px; height: 8px; border-radius: 50%; background: #22c55e; }
+    .thumbnail {
+      display: block;
+      width: min(100%, 160px);
+      height: auto;
+      object-fit: contain;
+      border-radius: 14px;
+      margin: 0 auto 12px;
+      border: 1px solid var(--sec-border);
+    }
+    dl {
+      margin: 0;
+      display: grid;
+      grid-template-columns: minmax(0, 180px) minmax(0, 1fr);
+      row-gap: 8px;
+      column-gap: 12px;
+      font-size: 0.92rem;
+    }
+    dt { font-weight: 600; color: #374151; }
+    dd { margin: 0; color: #111827; word-break: break-word; }
+    a { color: var(--sec-blue); text-decoration: none; }
+    a:hover, a:focus-visible { text-decoration: underline; }
+    .note-block {
+      margin-top: 14px;
+      padding: 10px 12px;
+      border-radius: 12px;
+      background: var(--sec-light);
+      border: 1px solid var(--sec-border);
+      font-size: 0.9rem;
+    }
+    .note-block strong { display: block; margin-bottom: 4px; color: #1f2937; }
+    .actions { margin-top: 18px; display: flex; flex-wrap: wrap; gap: 10px; }
+    .btn {
+      border: none;
+      border-radius: 999px;
+      padding: 8px 14px;
+      font-size: 0.85rem;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+    .btn-primary { background: var(--sec-blue); color: #ffffff; }
+    .btn-outline { background: #ffffff; color: var(--sec-blue); border: 1px solid var(--sec-blue); }
+    .btn-danger { background: var(--sec-danger); color: #ffffff; }
+    .btn-safe { background: var(--sec-safe); color: #ffffff; }
+    .section { margin-top: 24px; padding-top: 12px; border-top: 1px dashed #cbd5e1; }
+    .section h3 { margin: 0 0 8px; font-size: 1rem; color: #0f172a; }
+    .section p { margin: 4px 0; font-size: 0.9rem; color: #374151; }
+    footer { margin-top: 26px; font-size: 0.75rem; color: #6b7280; text-align: center; }
+    @media (max-width: 640px) {
+      dl { grid-template-columns: minmax(0, 1fr); }
+      .card-header { align-items: flex-start; }
+      .btn { white-space: normal; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="title-block">
+      <span class="flag" aria-hidden="true">🇺🇸</span>
+      <div>
+        <h1>USA SEC orbital WebApp</h1>
+        <p>U.S. Securities and Exchange Commission · Federal securities oversight and investor protection</p>
+      </div>
+    </div>
+  </header>
+  <main>
+    <article class="card" aria-labelledby="sec-title">
+      <img src="preview-US-SEC.svg" alt="United States · SEC independent resource guide, not an official seal" class="thumbnail" width="640" height="360">
+      <div class="card-header">
+        <h2 id="sec-title">United States of America · SEC orbital guide</h2>
+        <div class="badge" aria-label="Links to official SEC resources">
+          <span class="dot" aria-hidden="true"></span>
+          <span>Official resources: <strong>SEC</strong></span>
+        </div>
+      </div>
+      <dl>
+        <dt>Federal authority</dt>
+        <dd>U.S. Securities and Exchange Commission (SEC)</dd>
+        <dt>Official website</dt>
+        <dd><a href="https://www.sec.gov/" target="_blank" rel="noopener noreferrer">www.sec.gov</a></dd>
+        <dt>Investor education</dt>
+        <dd><a href="https://www.investor.gov/" target="_blank" rel="noopener noreferrer">Investor.gov</a></dd>
+        <dt>Scope</dt>
+        <dd>The SEC oversees U.S. securities markets, securities disclosures and regulated securities firms. It is not the sole U.S. financial regulator: state securities regulators, the CFTC, banking regulators and FINRA have distinct roles.</dd>
+      </dl>
+      <div class="note-block">
+        <strong>Independent orbital guide</strong>
+        <p>This independent AMEV page is not published, certified or endorsed by the SEC. It is not investment advice. The original thumbnail is not an official SEC seal. Official links are provided for information, not as a guarantee of safety or recovery.</p>
+      </div>
+      <div class="actions" aria-label="SEC quick links">
+        <a class="btn btn-primary" href="https://www.sec.gov/oiea/Complaint.html" target="_blank" rel="noopener noreferrer">📨 Investor complaints</a>
+        <a class="btn btn-outline" href="https://adviserinfo.sec.gov/" target="_blank" rel="noopener noreferrer">🔎 Check an adviser (IAPD)</a>
+        <a class="btn btn-danger" href="https://www.sec.gov/tcr" target="_blank" rel="noopener noreferrer">⚠️ Submit an enforcement tip</a>
+        <a class="btn btn-safe" href="https://www.sec.gov/" target="_blank" rel="noopener noreferrer">✅ Official SEC website</a>
+      </div>
+      <section class="section">
+        <h3>A. Investor alerts and bulletins</h3>
+        <p><a href="https://www.investor.gov/introduction-investing/general-resources/news-alerts/alerts-bulletins" target="_blank" rel="noopener noreferrer">SEC investor alerts and bulletins</a></p>
+        <p>Read about common fraud tactics, investment risks and ways to protect yourself before sending money.</p>
+      </section>
+      <section class="section">
+        <h3>B. Securities oversight and enforcement</h3>
+        <p><a href="https://www.sec.gov/enforcement-litigation" target="_blank" rel="noopener noreferrer">SEC enforcement and litigation resources</a></p>
+        <p>Review official proceedings and orders. An allegation is not a final finding; consult the underlying document and case status.</p>
+      </section>
+      <section class="section">
+        <h3>C. Registration checks and company filings</h3>
+        <p><a href="https://adviserinfo.sec.gov/" target="_blank" rel="noopener noreferrer">Investment Adviser Public Disclosure (IAPD)</a> provides information on SEC- and state-registered investment advisers, certain exempt reporting advisers and investment adviser representatives.</p>
+        <p><a href="https://www.investor.gov/introduction-investing/investing-basics/working-investment-professional" target="_blank" rel="noopener noreferrer">Investor.gov: checking investment professionals</a> explains registration and background checks, including broker checks through FINRA BrokerCheck.</p>
+        <p><a href="https://www.sec.gov/edgar/search/" target="_blank" rel="noopener noreferrer">Search EDGAR company filings</a>. A filing or registration does not mean the SEC approves an investment or guarantees its safety. Compare identities and contact details to guard against impersonation.</p>
+      </section>
+      <section class="section">
+        <h3>D. Unregistered entities and impersonators</h3>
+        <p><a href="https://www.sec.gov/enforcement-litigation/public-alerts-unregistered-soliciting-entities" target="_blank" rel="noopener noreferrer">Public Alert: Unregistered Soliciting Entities (PAUSE)</a></p>
+        <p>Check SEC alerts about soliciting entities and impersonators. This is not a complete list: absence from an alert is not proof of registration or legitimacy.</p>
+      </section>
+      <section class="section">
+        <h3>E. Reports and publications</h3>
+        <p><a href="https://www.sec.gov/reports" target="_blank" rel="noopener noreferrer">SEC reports and publications</a></p>
+        <p>Consult official reports for the SEC's activities and policy context; check publication dates and coverage.</p>
+      </section>
+      <section class="section">
+        <h3>F. Market data and research</h3>
+        <p><a href="https://www.sec.gov/data-research" target="_blank" rel="noopener noreferrer">SEC data and research</a></p>
+        <p>Use official datasets and EDGAR disclosures, noting their definitions, reporting periods and limitations.</p>
+      </section>
+      <section class="section">
+        <h3>G. Fraud, phishing and enforcement tips</h3>
+        <p><a href="https://www.sec.gov/tcr" target="_blank" rel="noopener noreferrer">Submit a tip, complaint or referral (TCR) about a possible securities-law violation</a></p>
+        <p>Use the SEC's official reporting instructions. TCR is an enforcement channel, distinct from an investor assistance complaint. Whistleblower award eligibility has separate requirements; consult the SEC's instructions before submitting.</p>
+        <p>Navigate directly to official sites, verify identities independently and never share passwords or access codes with unsolicited callers. Beware of anyone demanding an upfront payment to recover lost funds.</p>
+      </section>
+      <section class="section">
+        <h3>H. Investor assistance and complaints</h3>
+        <p><a href="https://www.sec.gov/oiea/Complaint.html" target="_blank" rel="noopener noreferrer">SEC investor complaint and assistance channel</a> for problems involving investment accounts, financial professionals or securities transactions.</p>
+        <p>Keep records of communications and transactions. SEC investor assistance is not a court or arbitration service and cannot guarantee compensation. For suspected securities-law violations, use the separate TCR channel above; other regulators may handle matters outside SEC jurisdiction.</p>
+      </section>
+    </article>
+    <footer>
+      Orbital WebApp USA · SEC · Database Autorità Finanziarie Internazionali ·
+      Independent AMEV resource guide, not an official SEC publication
+    </footer>
+  </main>
+</body>
+</html>

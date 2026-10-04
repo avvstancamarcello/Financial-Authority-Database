@@ -98,15 +98,16 @@
     <meta name="DC.creator" content="Avvocato Marcello Stanca">
     
     <meta name="theme-color" content="#667eea">
+    <meta name="application-name" content="Tutela Truffe">
     
     <!-- PWA Manifest -->
-    <link rel="manifest" href="manifest.json">
+    <link rel="manifest" href="/manifest.json">
     
     <!-- iOS Meta Tags -->
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="apple-mobile-web-app-title" content="FinAuthority">
-    <link rel="apple-touch-icon" href="icon-192.png">
+    <meta name="apple-mobile-web-app-title" content="Tutela Truffe">
+    <link rel="apple-touch-icon" href="/icon-192.png">
     
     <title>Database Autorità Finanziarie Internazionali - Protezione Consumatori</title>
     
@@ -3292,7 +3293,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         // Registrazione Service Worker per PWA (solo su HTTP/HTTPS o localhost, non su file://)
         if ('serviceWorker' in navigator && (window.location.protocol === 'https:' || window.location.protocol === 'http:')) {
             window.addEventListener('load', () => {
-                navigator.serviceWorker.register('service-worker.js')
+                navigator.serviceWorker.register('/service-worker.js')
                     .then(registration => {
                         console.log('Service Worker registrato con successo:', registration.scope);
                     })
@@ -3301,14 +3302,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     });
             });
         }
-
-        // Prompt per installazione PWA
-        let deferredPrompt;
-        window.addEventListener('beforeinstallprompt', (e) => {
-            e.preventDefault();
-            deferredPrompt = e;
-            // Mostra banner di installazione personalizzato se necessario
-        });
 
         // Agent 007 Banner - Show after 50% scroll of flags grid
         (function() {
