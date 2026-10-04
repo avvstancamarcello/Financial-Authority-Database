@@ -2906,6 +2906,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                         <button type="button" class="app-download-verify-button" data-i18n="appDownloadVerifyChecksum" onclick="copyAppChecksum(event)" aria-label="Verifica checksum dell'APK">Verifica checksum</button>
                     </div>
                     <a class="app-download-link" href="https://github.com/avvstancamarcello/Financial-Authority-Database/releases/download/v1.1.4/FinancialAuthoritiesDatabase.apk" target="_blank" rel="noopener noreferrer" data-i18n-aria-label="appDownloadLinkAriaLabel" aria-label="Scarica l'App Android in formato APK dalla release ufficiale GitHub"><span aria-hidden="true">📲</span><span data-i18n="appDownloadLink">Scarica l'App per Android (APK)</span></a>
+                    <button id="ios-pwa-install-trigger" type="button" class="app-download-guide-button" onclick="openIosInstallGuide(this)" aria-haspopup="dialog" aria-controls="android-app-guide-dialog" data-i18n="appDownloadPwaLink">🍏 Installa su iPhone (WebApp/PWA)</button>
                     <button id="android-app-guide-trigger" type="button" class="app-download-guide-button" onclick="openAndroidGuideDialog(this)" aria-haspopup="dialog" aria-controls="android-app-guide-dialog" aria-expanded="false">
                         <span aria-hidden="true">📖</span>
                         <span data-i18n="appDownloadGuideTrigger">Leggi la guida</span>
@@ -2960,7 +2961,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                             Installando da APK Android può chiedere una conferma aggiuntiva: è una procedura normale fuori da Google Play.
                             Per maggiore tranquillità, usa sempre il link ufficiale presente in questa pagina.
                         </p>
-                        <h4 class="app-download-guide-section-title">iPhone / Safari WebApp-PWA</h4>
+                        <h4 class="app-download-guide-section-title" data-guide-platform="ios">iPhone / Safari WebApp-PWA</h4>
                         <ol>
                             <li>Apri questa pagina con <strong>Safari</strong> su iPhone.</li>
                             <li>Tocca il pulsante <strong>Condividi</strong> di Safari.</li>
@@ -2985,7 +2986,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                             When installing from APK, Android may ask for an extra confirmation. This is a normal step outside Google Play.
                             For peace of mind, always use the official link shown on this page.
                         </p>
-                        <h4 class="app-download-guide-section-title">iPhone / Safari Web App PWA</h4>
+                        <h4 class="app-download-guide-section-title" data-guide-platform="ios">iPhone / Safari Web App PWA</h4>
                         <ol>
                             <li>Open this page in <strong>Safari</strong> on your iPhone.</li>
                             <li>Tap Safari’s <strong>Share</strong> button.</li>
@@ -5249,6 +5250,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 appDownloadDescription: "Puoi verificare la legittimità e l'identità di chi offre investimenti finanziari e prevenire le truffe grazie all'uso intelligente del tuo smartphone o PC. Chiedi info a qualsiasi Autorità Finanziaria. Scegli con la bandiera!",
                 appDownloadLink: "Scarica l'App per Android (APK)",
                 appDownloadLinkAriaLabel: "Scarica l'App Android in formato APK dalla release ufficiale GitHub",
+                appDownloadPwaLink: "🍏 Installa su iPhone (WebApp/PWA)",
                 appDownloadGuideTrigger: "Leggi la guida",
                 appDownloadGuideLanguagesSr: "Guida disponibile in Italiano e English",
                 appDownloadIosHint: "Su iPhone apri questa pagina in Safari, tocca Condividi e scegli Aggiungi a Home per installarla come WebApp/PWA.",
@@ -5269,6 +5271,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 appDownloadDescription: "You can verify the legitimacy and identity of anyone offering financial investments and prevent scams thanks to the smart use of your smartphone or PC. Ask for information from any Financial Authority. Choose using the flag!",
                 appDownloadLink: "Download the Android App (APK)",
                 appDownloadLinkAriaLabel: "Download the Android app APK from the official GitHub release",
+                appDownloadPwaLink: "🍏 Install on iPhone (Web App/PWA)",
                 appDownloadGuideTrigger: "Read the guide",
                 appDownloadGuideLanguagesSr: "Guide available in Italian and English",
                 appDownloadIosHint: "On iPhone, open this page in Safari, tap Share, and choose Add to Home Screen to install it as a Web App / PWA.",
@@ -5289,6 +5292,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 appDownloadDescription: "Vous pouvez vérifier la légitimité et l'identité de toute personne proposant des investissements financiers et prévenir les arnaques grâce à l'utilisation intelligente de votre smartphone ou de votre PC. Demandez des informations à n'importe quelle autorité financière. Choisissez avec le drapeau !",
                 appDownloadLink: "Télécharger l'application Android (APK)",
                 appDownloadLinkAriaLabel: "Télécharger l'APK Android depuis la version officielle GitHub",
+                appDownloadPwaLink: "🍏 Installer sur iPhone (WebApp/PWA)",
                 appDownloadGuideTrigger: "Lire le guide",
                 appDownloadGuideLanguagesSr: "Guide disponible en italien et en anglais",
                 appDownloadIosHint: "Sur iPhone, ouvrez cette page dans Safari, touchez Partager puis Ajouter à l’écran d’accueil pour l’installer comme WebApp/PWA.",
@@ -5309,6 +5313,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 appDownloadDescription: "Sie können die Legitimität und Identität derjenigen überprüfen, die Finanzinvestitionen anbieten, und Betrug durch die intelligente Nutzung Ihres Smartphones oder PCs verhindern. Fragen Sie jede Finanzbehörde nach Informationen. Wählen Sie mit der Flagge!",
                 appDownloadLink: "Android-App herunterladen (APK)",
                 appDownloadLinkAriaLabel: "Laden Sie die Android-App als APK aus der offiziellen GitHub-Veröffentlichung herunter",
+                appDownloadPwaLink: "🍏 Auf dem iPhone installieren (WebApp/PWA)",
                 appDownloadGuideTrigger: "Anleitung lesen",
                 appDownloadGuideLanguagesSr: "Anleitung auf Italienisch und Englisch verfügbar",
                 appDownloadIosHint: "Öffnen Sie diese Seite auf dem iPhone in Safari, tippen Sie auf Teilen und dann auf Zum Home-Bildschirm, um sie als WebApp/PWA zu installieren.",
@@ -5329,6 +5334,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 appDownloadDescription: "Puedes verificar la legitimidad y la identidad de quien ofrece inversiones financieras y prevenir las estafas gracias al uso inteligente de tu smartphone o PC. Pide información a cualquier autoridad financiera. ¡Elige con la bandera!",
                 appDownloadLink: "Descargar la app Android (APK)",
                 appDownloadLinkAriaLabel: "Descarga la app Android en formato APK desde la versión oficial de GitHub",
+                appDownloadPwaLink: "🍏 Instalar en iPhone (WebApp/PWA)",
                 appDownloadGuideTrigger: "Leer la guía",
                 appDownloadGuideLanguagesSr: "Guía disponible en italiano e inglés",
                 appDownloadIosHint: "En iPhone, abre esta página en Safari, toca Compartir y elige Añadir a pantalla de inicio para instalarla como WebApp/PWA.",
@@ -5349,6 +5355,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 appDownloadDescription: "Pode verificar a legitimidade e a identidade de quem oferece investimentos financeiros e prevenir fraudes graças à utilização inteligente do seu smartphone ou PC. Peça informações a qualquer Autoridade Financeira. Escolha com a bandeira!",
                 appDownloadLink: "Descarregar a app Android (APK)",
                 appDownloadLinkAriaLabel: "Descarregue a app Android em formato APK a partir da release oficial do GitHub",
+                appDownloadPwaLink: "🍏 Instalar no iPhone (WebApp/PWA)",
                 appDownloadGuideTrigger: "Ler o guia",
                 appDownloadGuideLanguagesSr: "Guia disponível em italiano e inglês",
                 appDownloadIosHint: "No iPhone, abra esta página no Safari, toque em Partilhar e escolha Adicionar ao ecrã principal para a instalar como WebApp/PWA.",
@@ -5369,6 +5376,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 appDownloadDescription: "Poți verifica legitimitatea și identitatea celor care oferă investiții financiare și poți preveni fraudele datorită utilizării inteligente a smartphone-ului sau a PC-ului tău. Solicită informații de la orice autoritate financiară. Alege cu steagul!",
                 appDownloadLink: "Descarcă aplicația Android (APK)",
                 appDownloadLinkAriaLabel: "Descarcă APK-ul aplicației Android din release-ul oficial GitHub",
+                appDownloadPwaLink: "🍏 Instalează pe iPhone (WebApp/PWA)",
                 appDownloadGuideTrigger: "Citește ghidul",
                 appDownloadGuideLanguagesSr: "Ghid disponibil în italiană și engleză",
                 appDownloadIosHint: "Pe iPhone, deschide această pagină în Safari, atinge Partajează și alege Adaugă pe ecranul principal pentru a o instala ca WebApp/PWA.",
@@ -5389,6 +5397,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 appDownloadDescription: "Je kunt de legitimiteit en identiteit controleren van wie financiële investeringen aanbiedt en fraude voorkomen dankzij het slimme gebruik van je smartphone of pc. Vraag informatie aan bij elke financiële autoriteit. Kies met de vlag!",
                 appDownloadLink: "Android-app downloaden (APK)",
                 appDownloadLinkAriaLabel: "Download de Android-app als APK uit de officiële GitHub-release",
+                appDownloadPwaLink: "🍏 Installeer op iPhone (WebApp/PWA)",
                 appDownloadGuideTrigger: "Lees de gids",
                 appDownloadGuideLanguagesSr: "Gids beschikbaar in het Italiaans en Engels",
                 appDownloadIosHint: "Open deze pagina op iPhone in Safari, tik op Deel en kies Zet op beginscherm om hem als webapp/PWA te installeren.",
@@ -5409,6 +5418,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 appDownloadDescription: "Μπορείτε να επαληθεύσετε τη νομιμότητα και την ταυτότητα όσων προσφέρουν χρηματοοικονομικές επενδύσεις και να αποτρέψετε τις απάτες χάρη στην έξυπνη χρήση του smartphone ή του PC σας. Ζητήστε πληροφορίες από οποιαδήποτε οικονομική αρχή. Επιλέξτε με τη σημαία!",
                 appDownloadLink: "Λήψη της εφαρμογής Android (APK)",
                 appDownloadLinkAriaLabel: "Κατεβάστε το APK της εφαρμογής Android από την επίσημη έκδοση GitHub",
+                appDownloadPwaLink: "🍏 Εγκατάσταση σε iPhone (WebApp/PWA)",
                 appDownloadGuideTrigger: "Διαβάστε τον οδηγό",
                 appDownloadGuideLanguagesSr: "Οδηγός διαθέσιμος στα ιταλικά και στα αγγλικά",
                 appDownloadIosHint: "Στο iPhone ανοίξτε αυτή τη σελίδα στο Safari, πατήστε Κοινοποίηση και επιλέξτε Προσθήκη στην Αφετηρία για εγκατάσταση ως WebApp/PWA.",
@@ -5429,6 +5439,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 appDownloadDescription: "Možete provjeriti legitimnost i identitet onih koji nude finansijska ulaganja i spriječiti prevare zahvaljujući pametnom korištenju vašeg pametnog telefona ili računara. Tražite informacije od bilo kojeg finansijskog nadležnog tijela. Odaberite zastavicom!",
                 appDownloadLink: "Preuzmi Android aplikaciju (APK)",
                 appDownloadLinkAriaLabel: "Preuzmi APK Android aplikacije sa zvaničnog GitHub izdanja",
+                appDownloadPwaLink: "🍏 Instaliraj na iPhone (WebApp/PWA)",
                 appDownloadGuideTrigger: "Pročitaj vodič",
                 appDownloadGuideLanguagesSr: "Vodič dostupan na italijanskom i engleskom",
                 appDownloadIosHint: "Na iPhone-u otvorite ovu stranicu u Safariju, dodirnite Dijeli i izaberite Dodaj na početni ekran da biste je instalirali kao WebApp/PWA.",
@@ -5449,6 +5460,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 appDownloadDescription: "Mund të verifikoni legjitimitetin dhe identitetin e kujtdo që ofron investime financiare dhe të parandaloni mashtrimet falë përdorimit inteligjent të smartphone-it ose PC-së suaj. Kërkoni informacion nga çdo Autoritet Financiar. Zgjidhni me flamurin!",
                 appDownloadLink: "Shkarko aplikacionin Android (APK)",
                 appDownloadLinkAriaLabel: "Shkarko APK-në e aplikacionit Android nga release zyrtar në GitHub",
+                appDownloadPwaLink: "🍏 Instalo në iPhone (WebApp/PWA)",
                 appDownloadGuideTrigger: "Lexo udhëzuesin",
                 appDownloadGuideLanguagesSr: "Udhëzuesi disponohet në italisht dhe anglisht",
                 appDownloadIosHint: "Në iPhone hapeni këtë faqe në Safari, prekni Shpërndaj dhe zgjidhni Shto në ekranin kryesor për ta instaluar si WebApp/PWA.",
@@ -5469,6 +5481,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 appDownloadDescription: "يمكنك التحقق من شرعية وهوية من يقدمون استثمارات مالية ومنع عمليات الاحتيال بفضل الاستخدام الذكي لهاتفك الذكي أو جهاز الكمبيوتر. اطلب المعلومات من أي سلطة مالية. اختر بالعلم!",
                 appDownloadLink: "تنزيل تطبيق Android ‏(APK)",
                 appDownloadLinkAriaLabel: "نزّل ملف APK لتطبيق Android من الإصدار الرسمي على GitHub",
+                appDownloadPwaLink: "🍏 التثبيت على iPhone (WebApp/PWA)",
                 appDownloadGuideTrigger: "اقرأ الدليل",
                 appDownloadGuideLanguagesSr: "الدليل متاح بالإيطالية والإنجليزية",
                 appDownloadIosHint: "على iPhone افتح هذه الصفحة في Safari، واضغط مشاركة ثم اختر إضافة إلى الشاشة الرئيسية لتثبيتها كتطبيق ويب/PWA.",
@@ -5489,6 +5502,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 appDownloadDescription: "借助智能使用您的智能手机或 PC，您可以核实提供金融投资者的合法性和身份，并预防诈骗。请向任何金融监管机构咨询信息。用国旗选择！",
                 appDownloadLink: "下载 Android 应用 (APK)",
                 appDownloadLinkAriaLabel: "从 GitHub 官方发布版本下载 Android 应用 APK",
+                appDownloadPwaLink: "🍏 在 iPhone 上安装 (WebApp/PWA)",
                 appDownloadGuideTrigger: "阅读指南",
                 appDownloadGuideLanguagesSr: "指南提供意大利语和英语版本",
                 appDownloadIosHint: "在 iPhone 上请用 Safari 打开此页面，轻点“共享”，再选择“添加到主屏幕”即可安装为 WebApp/PWA。",
@@ -5509,6 +5523,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 appDownloadDescription: "आप अपने स्मार्टफ़ोन या PC के बुद्धिमान उपयोग की मदद से वित्तीय निवेश की पेशकश करने वालों की वैधता और पहचान की जाँच कर सकते हैं और धोखाधड़ी को रोक सकते हैं। किसी भी वित्तीय प्राधिकरण से जानकारी लें। ध्वज से चुनें!",
                 appDownloadLink: "Android ऐप डाउनलोड करें (APK)",
                 appDownloadLinkAriaLabel: "GitHub की आधिकारिक रिलीज़ से Android ऐप APK डाउनलोड करें",
+                appDownloadPwaLink: "🍏 iPhone पर इंस्टॉल करें (Web App/PWA)",
                 appDownloadGuideTrigger: "मार्गदर्शिका पढ़ें",
                 appDownloadGuideLanguagesSr: "मार्गदर्शिका इतालवी और अंग्रेज़ी में उपलब्ध है",
                 appDownloadIosHint: "iPhone पर इस पेज को Safari में खोलें, Share पर टैप करें और Add to Home Screen चुनें ताकि इसे Web App / PWA के रूप में इंस्टॉल किया जा सके।",
@@ -5529,6 +5544,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 appDownloadDescription: "Bạn có thể xác minh tính hợp pháp và danh tính của những người chào mời đầu tư tài chính và ngăn chặn các vụ lừa đảo nhờ việc sử dụng thông minh điện thoại thông minh hoặc PC của mình. Hỏi thông tin ở bất kỳ cơ quan tài chính nào. Chọn bằng cờ!",
                 appDownloadLink: "Tải ứng dụng Android (APK)",
                 appDownloadLinkAriaLabel: "Tải APK ứng dụng Android từ bản phát hành chính thức trên GitHub",
+                appDownloadPwaLink: "🍏 Cài đặt trên iPhone (WebApp/PWA)",
                 appDownloadGuideTrigger: "Đọc hướng dẫn",
                 appDownloadGuideLanguagesSr: "Hướng dẫn có sẵn bằng tiếng Ý và tiếng Anh",
                 appDownloadIosHint: "Trên iPhone, hãy mở trang này bằng Safari, chạm Chia sẻ rồi chọn Thêm vào Màn hình chính để cài dưới dạng WebApp/PWA.",
@@ -5916,9 +5932,20 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         }
 
         function openIosInstallGuide(triggerElement) {
-            const persistentTrigger = document.getElementById('android-app-guide-trigger') || triggerElement;
-            openAndroidGuideDialog(persistentTrigger);
-            dismissIosInstallHint(true);
+            const isDismissableHintTrigger = triggerElement?.id === 'ios-install-hint-open';
+            const focusTrigger = isDismissableHintTrigger
+                ? document.getElementById('android-app-guide-trigger')
+                : triggerElement;
+            openAndroidGuideDialog(focusTrigger);
+            if (isDismissableHintTrigger) {
+                dismissIosInstallHint(true);
+            }
+            const iosGuideHeading = document.querySelector(
+                `[data-guide-lang="${currentAndroidGuideLanguage}"] [data-guide-platform="ios"]`
+            );
+            if (typeof iosGuideHeading?.scrollIntoView === 'function') {
+                iosGuideHeading.scrollIntoView({ block: 'start' });
+            }
         }
 
         function setupIosInstallHint() {

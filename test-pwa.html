@@ -87,6 +87,17 @@
                     await checkInstallPrompt(path);
                 }
 
+                const homepage = new DOMParser().parseFromString(await loadText('/index.html'), 'text/html');
+                const iosPwaTrigger = homepage.querySelector('#android-app-download #ios-pwa-install-trigger');
+                addResult(
+                    iosPwaTrigger?.getAttribute('type') === 'button'
+                        && iosPwaTrigger.getAttribute('aria-haspopup') === 'dialog'
+                        && iosPwaTrigger.getAttribute('aria-controls') === 'android-app-guide-dialog'
+                        && iosPwaTrigger.getAttribute('onclick') === 'openIosInstallGuide(this)'
+                        && homepage.querySelectorAll('[data-guide-platform="ios"]').length === 2,
+                    'Download section opens directly to iPhone WebApp/PWA installation steps'
+                );
+
                 const worker = await loadText('/service-worker.js');
                 addResult(/const BASE_PATH = '';/.test(worker), 'Service worker caches production root paths');
                 if (document.body.dataset.testStatus !== 'fail') {
