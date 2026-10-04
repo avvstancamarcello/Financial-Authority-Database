@@ -197,6 +197,112 @@ Esempio operativo rapido:
 
 ---
 
+## 9) Pubblicazione AMEV — Verifica prima di pagare
+
+La pagina è preparata per l'hosting statico GitHub Pages esistente: root del
+repository, `.nojekyll` e `CNAME` (`www.amevfirenze.it`) invariati. Nessuna modifica
+alla homepage, alle impostazioni Pages o al service worker; nessun merge.
+
+- Wrapper: [`verifica-prima di pagare/index.html`](verifica-prima%20di%20pagare/index.html).
+- Frontend: [`verifica-prima di pagare/amevcheck/index.html`](verifica-prima%20di%20pagare/amevcheck/index.html).
+- Rapporto: [`verifica-prima di pagare/amevcheck/rapporto.html`](verifica-prima%20di%20pagare/amevcheck/rapporto.html).
+- Risorse: `verifica-prima di pagare/amevcheck/assets/` (intero output compilato,
+  compresi i chunk dinamici del renderer del rapporto).
+
+### Origine e aggiornamento riproducibile
+
+La fonte è lo ZIP originale `amev-verifica-prima.zip`, conservato senza modifiche.
+Nel checkout corrisponde al blob `9b7ff3fdb0ba69e181b8e64b266377db20e68be8` del
+commit `e911e01f07b17f37c7b3a4eacd527e196b5b3c42`, senza differenze.
+SHA-256: `cb7091af169921e27d836b9b1a987b3ccd6b4a7a2414cae540b7da01f550eb0b`.
+
+Prerequisiti: Python >= 3.9, Node >= 22.12, Corepack e accesso al registry npm.
+Eseguire da qualunque directory, sostituendo il percorso assoluto del checkout:
+
+```sh
+python "/home/runner/work/Financial-Authority-Database/Financial-Authority-Database/scripts/build_amev_pages.py"
+```
+
+Lo script verifica l'hash, valida **tutte** le entry prima di estrarle in una nuova
+directory temporanea (rifiuta traversal, nomi duplicati e link; non sovrascrive
+file durante l'estrazione), applica gli adattamenti statici e usa:
+
+```sh
+corepack pnpm@10.34.5 install --frozen-lockfile --ignore-scripts --config.manage-package-manager-versions=false
+corepack pnpm@10.34.5 run check
+corepack pnpm@10.34.5 exec vite build
+```
+
+Il progetto dichiara pnpm 10.4.1: la sola versione dell'installer è sostituita
+con 10.34.5 per gli advisory di sicurezza su pnpm. `package.json`, lockfile,
+versioni dell'app e patch wouter restano invariati. Gli script del manifest
+sono stati ispezionati; non ci sono lifecycle di progetto. Gli script delle
+dipendenze non vengono eseguiti. Non usare `pnpm build`: compila anche Express.
+Non avviare `dev`/`preview` per la pubblicazione; Vite 7.1.9 dello ZIP ha advisory
+relativi al server di sviluppo, non al sito statico prodotto.
+
+La configurazione mirata `scripts/amev-pages.vite.config.ts` sostituisce quella
+Manus **solo nella directory temporanea**: plugin React/Tailwind, base `./`,
+due entry HTML, output reale `dist/public`. Lo script sostituisce **solo**
+`verifica-prima di pagare/amevcheck/`, dopo build e type-check riusciti, copiando
+tutto `dist/public`; non modificare manualmente quel contenuto generato.
+Sorgenti, `node_modules`, `.env`, server e log rimangono fuori dal sito/commit.
+Con un nuovo ZIP, ispezionare prima manifest, lockfile, script e adattamenti;
+solo dopo aggiornare l'hash nello script. Un hash diverso interrompe la build.
+
+### Adattamenti e limiti
+
+- Wrapper minimo basato sul contenitore iframe fullscreen orbital del sito:
+  sfondo scuro, iframe con titolo accessibile, altezza dinamica mobile e scroll
+  interno, barra con ritorno al database e apertura diretta. Nessuna aggiunta
+  alle allowlist orbital della homepage, dedicate alle autorità.
+- Link interni relativi e routing sotto la directory corrente; `rapporto.html`
+  è una vera entry statica, riapribile/ricaricabile senza fallback Express.
+  Le ancore del dossier e della checklist restano utilizzabili.
+- Le due immagini `amev-globe-hero_c132435c.png` e
+  `amev-verification-still_c41cf1a7.png` **non sono nello ZIP**. I percorsi
+  `/manus-storage/…` richiedono un proxy di sviluppo con credenziali Forge,
+  assente su Pages. L'immagine decorativa hero è omessa; le altre due occorrenze
+  mostrano una nota di indisponibilità negli spazi originali, senza immagini
+  inventate. Per ripristinarle servono i file originali autorizzati.
+- Nessun collector/debug Manus, plugin runtime Manus o proxy nel build pubblico.
+  I componenti template OAuth/Map non sono importati dall'app e non sono inclusi
+  nel bundle; nessuna credenziale o variabile ambiente necessaria alla guida.
+- Guida, checklist e dossier sono informativi: nessuna verifica live di imprese,
+  IBAN o carte, nessuna certificazione del pagamento. I contenuti e le fonti
+  datati 28 settembre 2026 sono preservati, non rivalidati editorialmente.
+  I siti dei registri si aprono all'esterno e dipendono dalla loro disponibilità.
+  Google Fonts resta un servizio esterno con fallback CSS locale.
+
+### Verifica locale
+
+```sh
+python -m http.server 8000 --bind 127.0.0.1 --directory "/home/runner/work/Financial-Authority-Database/Financial-Authority-Database"
+```
+
+Aprire `http://127.0.0.1:8000/test-amev-pages.html` per i controlli browser
+automatici e `http://127.0.0.1:8000/verifica-prima%20di%20pagare/index.html`
+per il wrapper. Il test copre entry compilate, link/risorse, assenza debug/proxy,
+rapporto, disclaimer, checklist/reset, menu mobile e overflow a 1000/375 px.
+Verificare anche console/rete, navigazione guida–rapporto–ancore, ricaricamento
+diretto, desktop/mobile e un mount locale `/Financial-Authority-Database/`.
+La base relativa supporta dominio personalizzato e sottopercorso di progetto.
+L'integrazione non implica che la pagina sia già pubblicata: serve la revisione
+e il successivo deploy Pages.
+
+Risultati dell'integrazione: due build e type-check riusciti, 47 controlli browser
+passati alla root e 47 sotto `/Financial-Authority-Database/`; flussi manuali
+guida/rapporto/refresh/ancore/apertura diretta riusciti a 1440 e 390 px, senza
+errori JavaScript né HTTP locali. Passati anche 9 controlli di estrazione ostile,
+`git diff --check`, il validatore dati esistente e la scansione segreti su tutti
+i file aggiunti/modificati. Nessuna richiesta backend/debug osservata.
+Il servizio browser integrato non era disponibile: verifiche eseguite con
+Chromium locale e Playwright temporaneo fuori dal repository. Google Fonts non
+era raggiungibile per DNS nell'ambiente di prova: verificati i font di fallback,
+non il rendering con i font remoti. I registri esterni non sono stati rivalidati.
+Vite segnala alcuni chunk oltre 500 kB; nessun errore di build. Gli altri test
+HTML del sito non riguardano questa nuova pagina e non sono stati eseguiti.
+
 ## 📎 Nota finale
 
 Questa documentazione è pensata per uso operativo immediato, consultazione istituzionale e migliore indicizzazione semantica da parte dei motori di ricerca e dei sistemi AI.
