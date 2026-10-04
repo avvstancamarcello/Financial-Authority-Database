@@ -1,5 +1,5 @@
-const CACHE_NAME = 'financial-authority-v15';
-const BASE_PATH = '/Financial-Authority-Database';
+const CACHE_NAME = 'financial-authority-v16';
+const BASE_PATH = '';
 const FLAG_ICONS_CSS_URL = 'https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.2.3/css/flag-icons.min.css';
 const PWA_ICON_PATHS = [
   `${BASE_PATH}/icon-96.webp`,

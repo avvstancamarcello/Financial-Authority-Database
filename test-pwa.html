@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PWA configuration regression test</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 2rem; background: #0f172a; color: #e2e8f0; }
+        .pass { color: #22c55e; }
+        .fail { color: #ef4444; }
+    </style>
+</head>
+<body>
+    <h1>PWA configuration regression test</h1>
+    <ul id="results"></ul>
+    <script>
+        const results = document.getElementById('results');
+        const appName = 'Tutela Truffe';
+        const pagePaths = ['/index.html', '/APP/index.html', '/Error/index.html'];
+
+        function addResult(ok, message) {
+            const li = document.createElement('li');
+            li.className = ok ? 'pass' : 'fail';
+            li.textContent = `${ok ? 'PASS' : 'FAIL'} - ${message}`;
+            results.appendChild(li);
+            if (!ok) document.body.dataset.testStatus = 'fail';
+        }
+
+        async function loadText(path) {
+            const response = await fetch(path, { cache: 'no-store' });
+            if (!response.ok) throw new Error(`${path}: HTTP ${response.status}`);
+            return response.text();
+        }
+
+        async function checkInstallPrompt(path) {
+            const iframe = document.createElement('iframe');
+            iframe.hidden = true;
+            try {
+                await new Promise((resolve, reject) => {
+                    const timeout = setTimeout(() => reject(new Error(`${path}: load timeout`)), 30000);
+                    iframe.onload = () => { clearTimeout(timeout); resolve(); };
+                    iframe.src = path;
+                    document.body.appendChild(iframe);
+                });
+                const event = new iframe.contentWindow.Event('beforeinstallprompt', { cancelable: true });
+                iframe.contentWindow.dispatchEvent(event);
+                addResult(!event.defaultPrevented, `${path}: browser install prompt is not suppressed`);
+            } finally {
+                iframe.remove();
+            }
+        }
+
+        (async () => {
+            document.body.dataset.testStatus = 'running';
+            try {
+                const manifest = JSON.parse(await loadText('/manifest.json'));
+                addResult(manifest.name === appName && manifest.short_name === appName, 'Manifest uses Tutela Truffe for both names');
+                for (const key of ['id', 'start_url', 'scope']) {
+                    addResult(manifest[key] === '/', `Manifest ${key} targets the production root`);
+                }
+                addResult(manifest.display === 'standalone', 'Manifest uses standalone display');
+                for (const size of ['192x192', '512x512']) {
+                    addResult(manifest.icons.some(icon => icon.sizes === size && icon.type === 'image/png'), `Manifest includes ${size} PNG install icon`);
+                }
+                for (const icon of manifest.icons) {
+                    addResult(icon.src.startsWith('/icon-'), `Icon ${icon.sizes} uses a root path`);
+                    const response = await fetch(icon.src);
+                    addResult(response.ok && response.headers.get('content-type')?.startsWith('image/'), `${icon.src} loads as an image`);
+                }
+
+                for (const path of pagePaths) {
+                    const html = await loadText(path);
+                    const doc = new DOMParser().parseFromString(html, 'text/html');
+                    for (const selector of ['meta[property="og:site_name"]', 'meta[name="application-name"]', 'meta[name="apple-mobile-web-app-title"]']) {
+                        addResult(doc.querySelector(selector)?.content === appName, `${path}: ${selector} uses Tutela Truffe`);
+                    }
+                    const pageUrl = new URL(path, location.origin);
+                    addResult(new URL(doc.querySelector('link[rel="manifest"]').getAttribute('href'), pageUrl).pathname === '/manifest.json', `${path}: shared root manifest`);
+                    addResult(new URL(doc.querySelector('link[rel="apple-touch-icon"]').getAttribute('href'), pageUrl).pathname === '/icon-192.png', `${path}: shared iPhone icon`);
+                    addResult(/serviceWorker\.register\(['"]\/service-worker\.js['"]\)/.test(html), `${path}: registers the root service worker`);
+                    await checkInstallPrompt(path);
+                }
+
+                const worker = await loadText('/service-worker.js');
+                addResult(/const BASE_PATH = '';/.test(worker), 'Service worker caches production root paths');
+                if (document.body.dataset.testStatus !== 'fail') {
+                    const registration = await navigator.serviceWorker.register('/service-worker.js');
+                    await Promise.race([
+                        navigator.serviceWorker.ready,
+                        new Promise((resolve, reject) => setTimeout(() => reject(new Error('Service worker activation timeout')), 30000))
+                    ]);
+                    addResult(registration.scope === `${location.origin}/`, 'Service worker registers with root scope');
+                    const cacheName = worker.match(/const CACHE_NAME = '([^']+)'/)[1];
+                    const cache = await caches.open(cacheName);
+                    const shellPaths = ['/', '/index.html', '/odissea.html', '/db.enc', '/manifest.json', '/logo_shield_financial_defense.svg', '/logo_galaxy_yous.svg', ...manifest.icons.map(icon => icon.src)];
+                    for (const path of shellPaths) {
+                        const response = await cache.match(path);
+                        addResult(response?.ok === true, `${path} is precached for offline use`);
+                    }
+                    const cachedPage = new DOMParser().parseFromString(await (await cache.match('/index.html')).text(), 'text/html');
+                    addResult(cachedPage.querySelector('meta[name="application-name"]')?.content === appName, 'Offline homepage has the corrected app name');
+                }
+            } catch (error) {
+                addResult(false, error.message);
+            } finally {
+                if (document.body.dataset.testStatus !== 'fail') document.body.dataset.testStatus = 'pass';
+                document.body.dataset.testComplete = 'true';
+            }
+        })();
+    </script>
+</body>
+</html>
