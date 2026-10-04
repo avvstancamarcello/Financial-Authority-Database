@@ -293,15 +293,24 @@ e il successivo deploy Pages.
 Risultati dell'integrazione: due build e type-check riusciti, 47 controlli browser
 passati alla root e 47 sotto `/Financial-Authority-Database/`; flussi manuali
 guida/rapporto/refresh/ancore/apertura diretta riusciti a 1440 e 390 px, senza
-errori JavaScript né HTTP locali. Passati anche 9 controlli di estrazione ostile,
-`git diff --check`, il validatore dati esistente e la scansione segreti su tutti
-i file aggiunti/modificati. Nessuna richiesta backend/debug osservata.
+errori JavaScript né HTTP locali. Tutti i 398 asset rispondono HTTP 200 anche
+sotto il percorso di progetto; wrapper e rapporto funzionano con il service
+worker esistente attivo. Passati anche 9 controlli di estrazione ostile,
+`git diff --check` sui file non generati, il validatore dati esistente e la
+scansione segreti su tutti i file aggiunti/modificati. Nessuna richiesta
+backend/debug osservata.
 Il servizio browser integrato non era disponibile: verifiche eseguite con
 Chromium locale e Playwright temporaneo fuori dal repository. Google Fonts non
 era raggiungibile per DNS nell'ambiente di prova: verificati i font di fallback,
 non il rendering con i font remoti. I registri esterni non sono stati rivalidati.
 Vite segnala alcuni chunk oltre 500 kB; nessun errore di build. Gli altri test
 HTML del sito non riguardano questa nuova pagina e non sono stati eseguiti.
+Il diff completo segnala 36 whitespace negli asset delle dipendenze compilate,
+conservati senza riscritture manuali. La revisione mirata dei sorgenti non ha
+rilevato problemi significativi. La validazione parallela automatica è fallita
+due volte leggendo il grande diff (`git diff`: timeout/SIGPIPE), prima di
+restituire un risultato CodeQL; la CLI CodeQL non è disponibile localmente.
+La scansione CodeQL rimane quindi da eseguire in un ambiente funzionante.
 
 ## 📎 Nota finale
 
