@@ -357,6 +357,12 @@ fallback francese, clic dalla homepage, nota visibile e iframe a 1440×900 e
 (25 istituzioni, 239 autorità). Non è necessaria una nuova build del frontend:
 gli asset compilati non cambiano.
 
+Validazione automatica di questo aggiornamento: la revisione integrata non è
+disponibile per un errore del modello; CodeQL salta l'analisi JavaScript perché
+il database è troppo grande. Non sono quindi esiti positivi di analisi.
+Una revisione mirata alternativa non ha rilevato problemi significativi;
+la scansione dei cinque file modificati non ha rilevato segreti.
+
 Questa documentazione è pensata per uso operativo immediato, consultazione istituzionale e migliore indicizzazione semantica da parte dei motori di ricerca e dei sistemi AI.
 
 **© Financial-Authority-Database — Avv. Marcello Stanca**
