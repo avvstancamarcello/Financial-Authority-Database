@@ -200,8 +200,10 @@ Esempio operativo rapido:
 ## 9) Pubblicazione AMEV — Verifica prima di pagare
 
 La pagina è preparata per l'hosting statico GitHub Pages esistente: root del
-repository, `.nojekyll` e `CNAME` (`www.amevfirenze.it`) invariati. Nessuna modifica
-alla homepage, alle impostazioni Pages o al service worker; nessun merge.
+repository, `.nojekyll` e `CNAME` (`www.amevfirenze.it`) invariati. La pubblicazione
+iniziale non modificava homepage o service worker; l'aggiornamento autorizzato
+aggiunge il collegamento descritto sotto e aggiorna la cache PWA. Nessuna modifica
+alle impostazioni Pages; nessun merge.
 
 - Wrapper: [`verifica-prima di pagare/index.html`](verifica-prima%20di%20pagare/index.html).
 - Frontend: [`verifica-prima di pagare/amevcheck/index.html`](verifica-prima%20di%20pagare/amevcheck/index.html).
@@ -335,6 +337,25 @@ parallela di questo aggiornamento si è interrotto sul diff compilato
 (`timeout/SIGPIPE`), senza produrre un risultato CodeQL.
 
 ## 📎 Nota finale
+
+Accesso alla guida: nell'«Indice Rapido – Naviga il Database» della homepage,
+subito dopo «Cerca Autorità», il pulsante «Verifica prima di pagare» apre
+`./verifica-prima%20di%20pagare/index.html` nella stessa scheda. L'etichetta
+inglese è «Check before paying»; le altre lingue usano il fallback inglese
+esistente. Guida e rapporto restano in italiano, senza una traduzione inglese
+editoriale. La barra del wrapper presenta una nota sulla funzione Traduci del
+browser (se disponibile), sul menu desktop/mobile e sulle possibili imprecisioni
+della traduzione automatica. Non si caricano servizi di traduzione esterni.
+La cache PWA passa a `financial-authority-v18` per aggiornare la homepage.
+
+Verifiche dell'aggiornamento: `test-amev-pages.html` supera 70 controlli alla
+radice e 70 sotto `/Financial-Authority-Database/`, senza errori JavaScript o
+risposte HTTP locali di errore. Provati inoltre etichette italiana/inglese e
+fallback francese, clic dalla homepage, nota visibile e iframe a 1440×900 e
+390×844, senza overflow orizzontale. Passano `git diff --check`,
+`node --check service-worker.js` e `python scripts/validate_international_data.py`
+(25 istituzioni, 239 autorità). Non è necessaria una nuova build del frontend:
+gli asset compilati non cambiano.
 
 Questa documentazione è pensata per uso operativo immediato, consultazione istituzionale e migliore indicizzazione semantica da parte dei motori di ricerca e dei sistemi AI.
 

@@ -32,6 +32,15 @@
       const wrapper = document.getElementById('wrapper');
       const direct = document.getElementById('direct');
       const report = document.getElementById('report');
+      const homepageResponse = await fetch('./index.html');
+      check(homepageResponse.ok, 'Homepage resolves');
+      const homepage = new DOMParser().parseFromString(await homepageResponse.text(), 'text/html');
+      const guideLink = homepage.querySelector('#table-of-contents a[href="./verifica-prima%20di%20pagare/index.html"]');
+      check(guideLink?.textContent.includes('Verifica prima di pagare')
+        && guideLink.previousElementSibling.getAttribute('href') === '#database-search-section'
+        && guideLink.querySelector('[data-i18n-text="quickIndexVerifyLink"]'),
+        'Localized guide button follows Search Authorities in the Quick Index');
+      check((await fetch(guideLink.getAttribute('href'))).ok, 'Homepage guide button target resolves');
       await waitFor(() => wrapper.contentDocument.querySelector('.orbital-frame')
         && direct.contentDocument.querySelector('.step-tab')
         && report.contentDocument.querySelector('.report-sources li'));
@@ -39,6 +48,11 @@
       await waitFor(() => embedded.contentDocument.querySelector('.step-tab'));
       check(embedded.getAttribute('src') === './amevcheck/index.html'
         && embedded.title.length > 0, 'Wrapper embeds a relative, accessibly titled frontend');
+      const translationNote = wrapper.contentDocument.querySelector('.translation-note');
+      check(translationNote?.textContent.includes('se disponibile')
+        && translationNote.textContent.includes('smartphone')
+        && translationNote.textContent.includes('imprecisioni'),
+        'Visible translation note covers browser availability, mobile and limitations');
       const open = wrapper.contentDocument.querySelector('a[target="_blank"]');
       check(open.href === direct.src && open.rel.includes('noopener')
         && open.rel.includes('noreferrer'), 'Direct link opens the same frontend safely');
