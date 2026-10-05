@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <link rel="icon" href="data:,">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Test AMEV — pubblicazione statica</title>
+</head>
+<body>
+  <h1>Test AMEV — pubblicazione statica</h1>
+  <pre id="results">Running…</pre>
+  <iframe id="wrapper" title="Wrapper AMEV sotto test" src="./verifica-prima%20di%20pagare/index.html" width="1000" height="700"></iframe>
+  <iframe id="direct" title="Guida AMEV sotto test" src="./verifica-prima%20di%20pagare/amevcheck/index.html" width="1000" height="700"></iframe>
+  <iframe id="report" title="Rapporto AMEV sotto test" src="./verifica-prima%20di%20pagare/amevcheck/rapporto.html" width="1000" height="700"></iframe>
+  <script>
+    const results = document.getElementById('results');
+    const checks = [];
+    function check(condition, message) {
+      checks.push(`${condition ? 'PASS' : 'FAIL'}: ${message}`);
+      results.textContent = checks.join('\n');
+      if (!condition) throw new Error(message);
+    }
+    async function waitFor(predicate) {
+      const deadline = Date.now() + 20000;
+      while (Date.now() < deadline) {
+        if (predicate()) return;
+        await new Promise(resolve => setTimeout(resolve, 50));
+      }
+      throw new Error('Timed out waiting for page readiness');
+    }
+    async function run() {
+      const wrapper = document.getElementById('wrapper');
+      const direct = document.getElementById('direct');
+      const report = document.getElementById('report');
+      const homepageResponse = await fetch('./index.html');
+      check(homepageResponse.ok, 'Homepage resolves');
+      const homepage = new DOMParser().parseFromString(await homepageResponse.text(), 'text/html');
+      const guideLink = homepage.querySelector('#table-of-contents a[href="./verifica-prima%20di%20pagare/index.html"]');
+      check(guideLink?.textContent.includes('Verifica prima di pagare')
+        && guideLink.previousElementSibling.getAttribute('href') === '#database-search-section'
+        && guideLink.querySelector('[data-i18n-text="quickIndexVerifyLink"]'),
+        'Localized guide button follows Search Authorities in the Quick Index');
+      check((await fetch(guideLink.getAttribute('href'))).ok, 'Homepage guide button target resolves');
+      await waitFor(() => wrapper.contentDocument.querySelector('.orbital-frame')
+        && direct.contentDocument.querySelector('.step-tab')
+        && report.contentDocument.querySelector('.report-sources li'));
+      const embedded = wrapper.contentDocument.querySelector('.orbital-frame');
+      await waitFor(() => embedded.contentDocument.querySelector('.step-tab'));
+      check(embedded.getAttribute('src') === './amevcheck/index.html'
+        && embedded.title.length > 0, 'Wrapper embeds a relative, accessibly titled frontend');
+      const translationNote = wrapper.contentDocument.querySelector('.translation-note');
+      check(translationNote?.textContent.includes('se disponibile')
+        && translationNote.textContent.includes('smartphone')
+        && translationNote.textContent.includes('imprecisioni'),
+        'Visible translation note covers browser availability, mobile and limitations');
+      const open = wrapper.contentDocument.querySelector('a[target="_blank"]');
+      check(open.href === direct.src && open.rel.includes('noopener')
+        && open.rel.includes('noreferrer'), 'Direct link opens the same frontend safely');
+      for (const frame of [direct, report, embedded]) {
+        const doc = frame.contentDocument;
+        check(doc.documentElement.lang === 'it'
+          && doc.querySelector('meta[name="viewport"]'), 'Italian page and mobile viewport');
+        const script = doc.querySelector('script[type="module"]');
+        const css = doc.querySelector('link[rel="stylesheet"][href^="./assets/"]');
+        check(script?.getAttribute('src').startsWith('./assets/') && css,
+          'Compiled JS and CSS use relative asset paths');
+        check(!doc.querySelector('[src*="__manus__"], [src*="/manus-storage/"]'),
+          'No debug collector or unavailable storage images');
+        const images = [...doc.querySelectorAll('img')];
+        await waitFor(() => images.every(image => image.complete && image.naturalWidth > 0));
+        check(images.length === (frame === report ? 1 : 2)
+          && images.every(image => image.getAttribute('src').startsWith('./images/')),
+          'Provided PNG illustrations load from relative local paths');
+        check(images.every(image => image.getAttribute('alt') !== null),
+          'Illustrations retain descriptive or decorative alt attributes');
+        check(!doc.querySelector('.art-unavailable'),
+          'Missing-image notices have been removed');
+        const localLinks = [...doc.querySelectorAll('a[href]')].filter(link =>
+          link.origin === location.origin);
+        const base = new URL('./verifica-prima%20di%20pagare/amevcheck/', location.href).pathname;
+        check(localLinks.every(link => link.pathname.startsWith(base)),
+          'Frontend navigation remains in the AMEV subfolder');
+        for (const resource of [script.src, css.href, ...images.map(image => image.src),
+          ...new Set(localLinks.map(link => link.href.split('#')[0]))]) {
+          check((await fetch(resource)).ok, `Static resource resolves: ${new URL(resource).pathname}`);
+        }
+      }
+      check(report.contentDocument.querySelectorAll('.report-section').length > 5,
+        'Full report and its references render without a backend');
+      const reportDoc = report.contentDocument;
+      check(reportDoc.querySelectorAll('.report-sources li').length === 31,
+        'All original source references are preserved');
+      check(reportDoc.querySelector('.report-article').textContent.includes('elementi di affidabilità')
+        && reportDoc.querySelector('.report-meta').textContent.includes('5 ottobre 2026'),
+        'Report explains current reliability criteria and dates the editorial revision');
+      check(reportDoc.querySelector('.report-article').textContent.includes('Non viene dichiarata alcuna approvazione')
+        && reportDoc.querySelector('.report-article').textContent.includes('non certifica il pagamento'),
+        'Report excludes AI endorsements and financial certification');
+      check(!reportDoc.querySelector('.report-article').textContent.includes('criticità da correggere prima')
+        && !direct.contentDocument.querySelector('.editorial-copy').textContent.includes('cose da correggere'),
+        'Guide and report no longer present historical findings as outstanding defects');
+      const paymentAnchor = direct.contentDocument.querySelector('.payment-card a[href*="#"]').hash;
+      check(reportDoc.querySelector(paymentAnchor), 'Existing payment deep link still targets a report section');
+      const guide = direct.contentDocument;
+      for (let step = 1; step <= 4; step++) {
+        check(guide.querySelector('.step-kicker').textContent.includes(`0${step}`),
+          `Checklist step ${step} is active`);
+        guide.querySelector('.step-actions button').click();
+        await new Promise(resolve => setTimeout(resolve, 50));
+      }
+      check(guide.querySelector('.checklist-finish').textContent.includes('Non è una certificazione'),
+        'Checklist completes with the original non-certification disclaimer');
+      guide.querySelector('.checklist-finish button').click();
+      await waitFor(() => !guide.querySelector('.checklist-finish'));
+      check(guide.querySelector('.step-kicker').textContent.includes('01'), 'Checklist resets');
+      for (const width of [1000, 375]) {
+        for (const frame of [wrapper, direct, report]) frame.width = width;
+        await new Promise(resolve => setTimeout(resolve, 100));
+        for (const frame of [wrapper, direct, report, embedded]) {
+          check(frame.contentDocument.documentElement.scrollWidth <= frame.contentWindow.innerWidth,
+            `No horizontal overflow at ${width}px`);
+        }
+        check(embedded.getBoundingClientRect().height > 400
+          && wrapper.contentDocument.documentElement.scrollHeight <= 700,
+          `Wrapper fits its viewport with internal scrolling at ${width}px`);
+      }
+      const toggle = guide.querySelector('.mobile-menu-toggle');
+      toggle.click();
+      await waitFor(() => guide.querySelector('#mobile-menu'));
+      check(toggle.getAttribute('aria-expanded') === 'true', 'Accessible mobile menu opens');
+      guide.querySelector('#mobile-menu a').click();
+      await waitFor(() => !guide.querySelector('#mobile-menu'));
+      check(toggle.getAttribute('aria-expanded') === 'false', 'Mobile navigation closes the menu');
+      results.textContent += '\nDONE';
+    }
+    run().catch(error => {
+      results.textContent += `\nFAIL: ${error.message}`;
+      console.error(error);
+    });
+  </script>
+</body>
+</html>
