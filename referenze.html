@@ -232,6 +232,71 @@
             transform: translateY(-2px);
             box-shadow: 0 6px 20px rgba(30, 144, 255, 0.5);
         }
+        .esma-preview-trigger {
+            display: inline-flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 8px;
+            max-width: 320px;
+            margin-top: 12px;
+            padding: 0;
+            border: 0;
+            background: transparent;
+            color: #1a365d;
+            font: inherit;
+            font-weight: 600;
+            text-align: left;
+            cursor: pointer;
+        }
+        .esma-preview-trigger img {
+            display: block;
+            width: 100%;
+            height: auto;
+            border: 2px solid #d5a900;
+            border-radius: 10px;
+            box-shadow: 0 5px 14px rgba(15, 23, 42, 0.2);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .esma-preview-trigger:hover img {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(15, 23, 42, 0.28);
+        }
+        .esma-preview-trigger:focus-visible {
+            outline: 3px solid #1d4ed8;
+            outline-offset: 4px;
+        }
+        #esmaDialog {
+            width: 100vw;
+            height: 100vh;
+            max-width: none;
+            max-height: none;
+            margin: 0;
+            padding: 0;
+            border: 0;
+            background: #000;
+            overflow: hidden;
+        }
+        #esmaDialog::backdrop { background: rgba(3, 7, 18, 0.88); }
+        .esma-dialog-shell { position: relative; width: 100%; height: 100%; }
+        .esma-dialog-frame { width: 100%; height: 100%; border: 0; background: #fff; }
+        .esma-dialog-close {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            z-index: 1;
+            padding: 10px 14px;
+            border: 0;
+            border-radius: 8px;
+            background: #fff;
+            color: #1a365d;
+            font: inherit;
+            font-weight: 700;
+            cursor: pointer;
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .esma-preview-trigger img { transition: none; }
+            .esma-preview-trigger:hover img { transform: none; }
+        }
         .shield-ms-icon {
             width: 84px;
             height: 84px;
@@ -554,6 +619,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 <p class="abbreviation">European Securities and Markets Authority</p>
                 <p data-i18n="descESMA">Autorità europea degli strumenti finanziari e dei mercati. Supervisione dei mercati finanziari dell'UE e protezione degli investitori.</p>
                 <a href="https://www.esma.europa.eu" target="_blank" rel="noopener noreferrer" class="resource-link"><img src="logo_shield_financial_defense.svg" alt="" class="shield-icon">🔗 esma.europa.eu</a>
+                <button type="button" id="openEsmaDialog" class="esma-preview-trigger" aria-haspopup="dialog" aria-controls="esmaDialog">
+                    <img src="authority/preview-international-ESMA.png" alt="" width="960" height="540">
+                    <span>📄 Apri la scheda indipendente ESMA</span>
+                </button>
                 <img src="logo_shield_MS.svg" alt="MS" class="shield-ms-icon" title="Financial Defense - Marcello Stanca">
             </div>
         </div>
@@ -732,6 +801,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <a href="privacy.html" data-i18n="privacyLink">Privacy Policy</a>
         </p>
     </footer>
+
+    <dialog id="esmaDialog" aria-label="Scheda indipendente ESMA">
+        <div class="esma-dialog-shell">
+            <button type="button" id="closeEsmaDialog" class="esma-dialog-close" aria-label="Chiudi la scheda ESMA">Chiudi ✕</button>
+            <iframe id="esmaFrame" class="esma-dialog-frame" src="about:blank" title="Scheda indipendente ESMA" loading="lazy"></iframe>
+        </div>
+    </dialog>
     
     <script>
         const translations = {
@@ -1244,6 +1320,20 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 }
             });
         }
+
+        const esmaDialog = document.getElementById('esmaDialog');
+        const esmaFrame = document.getElementById('esmaFrame');
+        document.getElementById('openEsmaDialog').addEventListener('click', () => {
+            esmaFrame.src = 'authority/EU-ESMA.html';
+            esmaDialog.showModal();
+        });
+        document.getElementById('closeEsmaDialog').addEventListener('click', () => esmaDialog.close());
+        esmaDialog.addEventListener('close', () => {
+            esmaFrame.src = 'about:blank';
+        });
+        esmaDialog.addEventListener('click', (event) => {
+            if (event.target === esmaDialog) esmaDialog.close();
+        });
     </script>
 </body>
 </html>
