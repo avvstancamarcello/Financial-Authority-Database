@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "title": "Registro verifiche di coerenza home page Authorithy",
+  "title": "Registro verifiche di coerenza home page Authority",
   "authoritySource": "financial_authorities_database.json",
   "timezone": "Europe/Rome",
   "cycleLengthDays": 20,

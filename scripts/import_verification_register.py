@@ -32,7 +32,7 @@ DEFAULT_HTML = GUIDE_DIR / "index.html"
 DEFAULT_DATASET = ROOT / "financial_authorities_database.json"
 
 SCHEMA_VERSION = 1
-TITLE = "Registro verifiche di coerenza home page Authorithy"
+TITLE = "Registro verifiche di coerenza home page Authority"
 TIMEZONE_NAME = "Europe/Rome"
 TZ = ZoneInfo(TIMEZONE_NAME)
 CYCLE_LENGTH = 20

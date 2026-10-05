@@ -1,4 +1,4 @@
-/* Registro verifiche di coerenza home page Authorithy — logica client.
+/* Registro verifiche di coerenza home page Authority — logica client.
  * Dati: ./registro-verifiche.json (generato da scripts/import_verification_register.py)
  * e ../financial_authorities_database.json (fonte autorevole di ID, nomi e homepage).
  * Tutto il testo importato è trattato come non attendibile: solo textContent e link http(s).

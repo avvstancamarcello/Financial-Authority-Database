@@ -42,7 +42,7 @@
         'Served HTML shows the empty state without invented checks');
       const heading = doc.getElementById('registro-title');
       check(heading?.tagName === 'H2'
-        && heading.textContent === 'Registro verifiche di coerenza home page Authorithy',
+        && heading.textContent === 'Registro verifiche di coerenza home page Authority',
         'Register section keeps the requested heading');
       const navLink = doc.querySelector('header nav a[href="#registro-verifiche"]');
       check(navLink && doc.getElementById('registro-verifiche').contains(heading),

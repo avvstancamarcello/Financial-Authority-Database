@@ -1,4 +1,4 @@
-# Registro verifiche di coerenza home page Authorithy
+# Registro verifiche di coerenza home page Authority
 
 Sezione pubblica del wrapper [`index.html`](index.html#registro-verifiche) di
 «AMEV — Verifica prima di pagare». Documenta i **controlli manuali** con cui un

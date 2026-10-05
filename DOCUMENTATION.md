@@ -340,7 +340,7 @@ parallela di questo aggiornamento si è interrotto sul diff compilato
 
 Il wrapper contiene, sotto la guida e raggiungibile dal collegamento «Registro
 verifiche» dell'intestazione, la sezione «Registro verifiche di coerenza home page
-Authorithy»: griglia del ciclo di 20 giorni (1/20 … 20/20), tabella delle verifiche
+Authority»: griglia del ciclo di 20 giorni (1/20 … 20/20), tabella delle verifiche
 pubblicate, metodo e limiti. Il registro parte vuoto; i dati si aggiungono solo con
 l'importer offline `scripts/import_verification_register.py` da un export CSV
 Airtable, seguito da revisione e commit. Schema, regole di stato (spunta verde
