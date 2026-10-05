@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>IOSCO orbital regression checks</title>
+</head>
+<body>
+    <h1>IOSCO orbital regression checks</h1>
+    <pre id="results">Running…</pre>
+    <iframe id="authority" title="IOSCO page under test" src="./authority/IOSCO.html" width="1000" height="700"></iframe>
+    <script>
+        const results = document.getElementById('results');
+        const checks = [];
+
+        function check(condition, message) {
+            checks.push(`${condition ? 'PASS' : 'FAIL'}: ${message}`);
+            results.textContent = checks.join('\n');
+            if (!condition) throw new Error(message);
+        }
+
+        async function loadDocument(path, type = 'text/html') {
+            const response = await fetch(path);
+            check(response.ok, `${path} is served successfully`);
+            return new DOMParser().parseFromString(await response.text(), type);
+        }
+
+        async function run() {
+            const frame = document.getElementById('authority');
+            const deadline = Date.now() + 20000;
+            while (!frame.contentDocument?.querySelector('#iosco-title')) {
+                if (Date.now() > deadline) throw new Error('Timed out waiting for IOSCO page');
+                await new Promise(resolve => setTimeout(resolve, 50));
+            }
+            const doc = frame.contentDocument;
+            const canonicalUrl = 'https://amevfirenze.it/authority/IOSCO.html';
+            check(doc.querySelectorAll('link[rel="canonical"]').length === 1
+                && doc.querySelector('link[rel="canonical"]').href === canonicalUrl,
+                'Single IOSCO canonical URL on amevfirenze.it');
+            check(frame.contentWindow.location.pathname === new URL(canonicalUrl).pathname,
+                'Wrapper is served at its canonical path');
+            check(doc.documentElement.lang === 'it' && doc.title.includes('IOSCO')
+                && doc.querySelector('meta[name="description"]')?.content.includes('i-SCAN')
+                && doc.querySelectorAll('h1').length === 1,
+                'Self-contained Italian page with dedicated title, description and heading');
+            check(doc.querySelector('.note-block').textContent.includes('non è pubblicata, certificata o approvata da IOSCO')
+                && doc.querySelector('#i-scan').textContent.includes("L'assenza di un avviso non prova"),
+                'Independent guide explains the limits of investor warnings');
+            const externalLinks = [...doc.querySelectorAll('a[href^="https:"]')];
+            check(externalLinks.length === 3 && externalLinks.every(link =>
+                new URL(link.href).hostname === 'www.iosco.org'
+                && link.target === '_blank' && link.rel.includes('noopener') && link.rel.includes('noreferrer')),
+                'Official IOSCO resources use safe external links');
+            const internalLinks = [...doc.querySelectorAll('a[href^="../"]')];
+            check(internalLinks.some(link => link.getAttribute('href') === '../referenze.html')
+                && internalLinks.some(link => link.getAttribute('href') === '../index.html#international-authorities'),
+                'Wrapper links back to the references hub and database');
+            for (const link of internalLinks) {
+                const target = await loadDocument(link.href);
+                check(!link.hash || target.getElementById(link.hash.slice(1)),
+                    `Internal destination exists: ${link.getAttribute('href')}`);
+            }
+            const hub = await loadDocument('./referenze.html');
+            check(hub.querySelector('link[rel="canonical"]').href === 'https://amevfirenze.it/referenze.html'
+                && hub.querySelector('a.resource-link[href="authority/IOSCO.html"]')
+                && hub.querySelector('a.resource-link[href="authority/IOSCO.html#i-scan"]'),
+                'References hub links to the wrapper and i-SCAN section');
+            const hubSchema = [...hub.querySelectorAll('script[type="application/ld+json"]')]
+                .map(node => JSON.parse(node.textContent));
+            check(JSON.stringify(hubSchema).includes(canonicalUrl),
+                'References structured data points to the wrapper');
+            check(hub.querySelector('a[href="https://www.esma.europa.eu"]')
+                && hub.querySelector('a[href="https://www.ic3.gov/AnnualReport/Reports"]'),
+                'Other Authority destinations remain unchanged');
+            const homepage = await loadDocument('./index.html');
+            const section = homepage.querySelector('#international-authorities');
+            check(section.querySelectorAll('a').length === 5
+                && section.querySelector('a[href="authority/IOSCO.html#i-scan"]')
+                && section.querySelector('a[href="https://www.esma.europa.eu"]'),
+                'Small international links section is preserved with only IOSCO routed to the wrapper');
+            const sitemap = await loadDocument('./sitemap.xml', 'application/xml');
+            check(!sitemap.querySelector('parsererror')
+                && [...sitemap.getElementsByTagName('loc')].filter(node => node.textContent === canonicalUrl).length === 1,
+                'Sitemap contains the canonical wrapper URL exactly once');
+            for (const width of [1000, 375, 320]) {
+                frame.width = width;
+                await new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve)));
+                check(doc.documentElement.scrollWidth <= frame.contentWindow.innerWidth,
+                    `IOSCO layout has no horizontal overflow at ${width}px`);
+            }
+            check(!doc.querySelector('script, iframe'), 'Wrapper has no JavaScript or embedded third-party pages');
+            results.textContent += '\nAll checks passed.';
+        }
+
+        run().catch(error => {
+            results.textContent += `\nERROR: ${error.message}`;
+            console.error(error);
+        });
+    </script>
+</body>
+</html>
