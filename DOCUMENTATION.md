@@ -329,6 +329,10 @@ JavaScript o HTTP locale. Le PNG pubblicate sono byte-identiche agli originali;
 i 398 asset compilati rispondono HTTP 200 al percorso di progetto. Passati
 validatore dati e diff-check dei sorgenti. Google Fonts resta irraggiungibile
 nel sandbox; verificati i fallback, non i font remoti.
+Scansione segreti riuscita su tutti i 58 file nuovi/modificati della revisione;
+revisione mirata senza problemi significativi. Anche il tentativo di validazione
+parallela di questo aggiornamento si è interrotto sul diff compilato
+(`timeout/SIGPIPE`), senza produrre un risultato CodeQL.
 
 ## 📎 Nota finale
 
