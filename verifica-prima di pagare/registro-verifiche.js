@@ -1,4 +1,4 @@
-/* Registro verifiche di coerenza home page Authority — logica client.
+/* Registro verifiche di coerenza home page Authorithy — logica client.
  * Dati: ./registro-verifiche.json (generato da scripts/import_verification_register.py)
  * e ../financial_authorities_database.json (fonte autorevole di ID, nomi e homepage).
  * Tutto il testo importato è trattato come non attendibile: solo textContent e link http(s).
@@ -57,6 +57,7 @@
 
   function parseInstant(value) {
     if (typeof value !== 'string' || !DATETIME_RE.test(value)) return null;
+    if (dateToUtc(value.slice(0, 10)) === null) return null;
     const ms = Date.parse(value);
     return Number.isFinite(ms) ? ms : null;
   }
@@ -115,7 +116,11 @@
         && STATUSES.includes(raw.status) && Number.isInteger(raw.cycleDay)
         && raw.cycleDay >= 1 && raw.cycleDay <= CYCLE_LENGTH
         && raw.cycleDay === Math.round((dateToUtc(romeDate(instant)) - dateToUtc(cycle.startDate)) / DAY_MS) + 1
-        && normalizeUrl(raw.checkedUrl) !== null;
+        && normalizeUrl(raw.checkedUrl) !== null
+        && typeof raw.reviewedBy === 'string' && raw.reviewedBy.trim()
+        && (raw.status !== 'verified' || normalizeUrl(raw.finalUrl) !== null)
+        && (!raw.finalUrl || normalizeUrl(raw.finalUrl) !== null)
+        && (raw.status === 'verified' || (typeof raw.notes === 'string' && raw.notes.trim()));
       if (!valid) { rejected += 1; return; }
       const text = key => (typeof raw[key] === 'string' ? raw[key] : '');
       reviews.push({
@@ -369,8 +374,9 @@
             + slot.positive + ' positivi · ' + slot.problems + ' criticità']),
           today
         ]);
-        if (!cycle) button.disabled = true;
+        if (!cycle) button.setAttribute('aria-disabled', 'true');
         button.addEventListener('click', () => {
+          if (!cycle) return;
           selection.day = selection.day === slot.day ? null : slot.day;
           slotButtons.forEach(item => item.button.setAttribute('aria-pressed',
             String(item.slot.day === selection.day)));

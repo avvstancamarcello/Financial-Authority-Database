@@ -32,7 +32,7 @@ DEFAULT_HTML = GUIDE_DIR / "index.html"
 DEFAULT_DATASET = ROOT / "financial_authorities_database.json"
 
 SCHEMA_VERSION = 1
-TITLE = "Registro verifiche di coerenza home page Authority"
+TITLE = "Registro verifiche di coerenza home page Authorithy"
 TIMEZONE_NAME = "Europe/Rome"
 TZ = ZoneInfo(TIMEZONE_NAME)
 CYCLE_LENGTH = 20
@@ -323,7 +323,7 @@ def merge(register, csv_rows, authorities, now):
             errors.append(f"{where}: ciclo non dichiarato")
             continue
         raw = dict(raw, cycleStartDate=cycles[raw["cycleId"]].isoformat())
-        record, _ = validate_review(raw, authorities, errors, where, check_source=False)
+        record, _ = validate_review(raw, authorities, errors, where, now=now, check_source=False)
         if record:
             key = review_key(record)
             if key in existing:
@@ -467,7 +467,7 @@ def render_static(register, authorities, indent="      "):
         when = (f'<span class="slot-date">{esc(format_date_it(parse_date(slot["date"])))}</span>'
                 if slot["date"] else '<span class="slot-date">Data non assegnata</span>')
         lines.append(
-            f'    <li class="cycle-slot slot-{slot["state"]}"><span class="slot-label">'
+            f'    <li class="cycle-slot slot-{slot["state"]}" tabindex="0"><span class="slot-label">'
             f'<span class="visually-hidden">Giorno </span>{slot["day"]}/{CYCLE_LENGTH}</span>{when}<span class="slot-state">'
             f'{esc(SLOT_LABELS[slot["state"]])}</span><span class="slot-count">{slot["reviewed"]}/{DAILY_TARGET} '
             f'controlli · {slot["positive"]} positivi · {slot["problems"]} criticità</span></li>')
