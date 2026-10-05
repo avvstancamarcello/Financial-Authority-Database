@@ -65,7 +65,7 @@ DATE_RE = re.compile(r"\d{4}-\d{2}-\d{2}")
 DATETIME_RE = re.compile(r"\d{4}-\d{2}-\d{2}T\d{2}:\d{2}(:\d{2})?(Z|[+-]\d{2}:\d{2})")
 DAY_RE = re.compile(r"\d{1,2}")
 SCHEME_RE = re.compile(r"[A-Za-z][A-Za-z0-9+.-]*:")
-CONTROL_RE = re.compile("[\x00-\x09\x0b-\x1f\x7f\u202a-\u202e\u2066-\u2069]")
+CONTROL_RE = re.compile(r"[\x00-\x09\x0b-\x1f\x7f\u202a-\u202e\u2066-\u2069]")
 EMAIL_RE = re.compile(r"[^\s@]+@[^\s@]+\.[^\s@]+")
 LIMITS = {"reviewedBy": 80, "notes": 1000, "evidenceRef": 300, "url": 2048}
 

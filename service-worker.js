@@ -59,8 +59,9 @@ async function handleNetworkFirst(request) {
     const networkResponse = await fetch(request);
     if (networkResponse.ok) {
       await cache.put(request, networkResponse.clone());
+      return networkResponse;
     }
-    return networkResponse;
+    return (await cache.match(request, { ignoreSearch: true })) || networkResponse;
   } catch (error) {
     const cachedResponse = await cache.match(request, { ignoreSearch: true });
     if (cachedResponse) {

@@ -10,6 +10,8 @@
   const DAILY_TARGET = 12;
   const VALIDITY_DAYS = 20;
   const DAY_MS = 86400000;
+  const TABLE_COLUMNS = ['Authority', 'Homepage nel dataset', 'URL controllato', 'URL finale', 'Data e ora',
+    'Ciclo / giorno', 'Esito', 'Revisore', 'Note', 'Evidenza pubblica', 'Stato attuale Authority'];
   const TIMEZONE = 'Europe/Rome';
   const STATUSES = ['verified', 'needs_review', 'unreachable', 'blocked'];
   const OUTCOME_LABELS = {
@@ -300,7 +302,7 @@
         clearButton.hidden = true;
       }
       if (!rows.length) {
-        tbody.replaceChildren(el('tr', {}, [el('td', { colspan: '11', class: 'empty-state' }, [
+        tbody.replaceChildren(el('tr', {}, [el('td', { colspan: String(TABLE_COLUMNS.length), class: 'empty-state' }, [
           selection.day ? 'Nessuna verifica documentata per questo giorno del ciclo'
             : 'Nessuna verifica documentata'])]));
         return;
@@ -410,9 +412,7 @@
       el('h3', { id: 'registro-table-title' }, ['Verifiche pubblicate']), filterNote, clearButton,
       el('div', { class: 'table-scroll', role: 'region', 'aria-labelledby': 'registro-table-title', tabindex: '0' }, [
         el('table', { class: 'register-table', id: 'registro-table' }, [
-          el('thead', {}, [el('tr', {}, ['Authority', 'Homepage nel dataset', 'URL controllato', 'URL finale',
-            'Data e ora', 'Ciclo / giorno', 'Esito', 'Revisore', 'Note', 'Evidenza pubblica',
-            'Stato attuale Authority'].map(label => el('th', { scope: 'col' }, [label])))]),
+          el('thead', {}, [el('tr', {}, TABLE_COLUMNS.map(label => el('th', { scope: 'col' }, [label])))]),
           tbody
         ])
       ]));
@@ -434,6 +434,12 @@
     });
   }
 
+  const liveRefresh = { timer: null, controller: null };
+  document.addEventListener('visibilitychange', () => {
+    if (document.visibilityState === 'visible' && liveRefresh.controller) liveRefresh.controller.refresh();
+  });
+  window.addEventListener('pagehide', () => clearInterval(liveRefresh.timer));
+
   function load() {
     const section = document.getElementById('registro-verifiche');
     const container = document.getElementById('registro-data');
@@ -446,11 +452,9 @@
     ]).then(([register, dataset]) => {
       const controller = render(container, register, dataset);
       status.textContent = '';
-      const timer = setInterval(controller.refresh, 60000);
-      document.addEventListener('visibilitychange', () => {
-        if (document.visibilityState === 'visible') controller.refresh();
-      });
-      window.addEventListener('pagehide', () => clearInterval(timer), { once: true });
+      clearInterval(liveRefresh.timer);
+      liveRefresh.controller = controller;
+      liveRefresh.timer = setInterval(controller.refresh, 60000);
       return controller;
     }).catch(error => {
       status.textContent = 'Impossibile caricare i dati aggiornati del registro (connessione assente o errore '
