@@ -1,4 +1,4 @@
-const CACHE_NAME = 'financial-authority-v18';
+const CACHE_NAME = 'financial-authority-v19';
 const BASE_PATH = '';
 const FLAG_ICONS_CSS_URL = 'https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.2.3/css/flag-icons.min.css';
 const PWA_ICON_PATHS = [
@@ -45,6 +45,29 @@ function isAppShellDocumentPath(pathname) {
 function isAssetStaleWhileRevalidate(requestUrl) {
   const url = new URL(requestUrl);
   return requestUrl === FLAG_ICONS_CSS_URL || PWA_ICON_PATHS.includes(url.pathname);
+}
+
+function isNetworkFirstDataRequest(url) {
+  return url.origin === self.location.origin
+    && (url.pathname.endsWith('/financial_authorities_database.json')
+      || /\/verifica-prima%20di%20pagare\/registro-verifiche\.(json|js)$/.test(url.pathname));
+}
+
+async function handleNetworkFirst(request) {
+  const cache = await caches.open(CACHE_NAME);
+  try {
+    const networkResponse = await fetch(request);
+    if (networkResponse.ok) {
+      await cache.put(request, networkResponse.clone());
+    }
+    return networkResponse;
+  } catch (error) {
+    const cachedResponse = await cache.match(request, { ignoreSearch: true });
+    if (cachedResponse) {
+      return cachedResponse;
+    }
+    throw error;
+  }
 }
 
 async function cacheUrl(cache, url) {
@@ -142,6 +165,11 @@ self.addEventListener('fetch', event => {
 
   if (isAppNavigationRequest(event.request) && isSameOriginAppRequest(new URL(event.request.url))) {
     event.respondWith(handleNavigationRequest(event.request));
+    return;
+  }
+
+  if (isNetworkFirstDataRequest(new URL(event.request.url))) {
+    event.respondWith(handleNetworkFirst(event.request));
     return;
   }
 
