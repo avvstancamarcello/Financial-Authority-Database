@@ -9,15 +9,19 @@
   <title>AMEV — Verifica prima di pagare · Orbital</title>
   <style>
     * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
     body {
       margin: 0;
+      background: #000;
+      color: #fff;
+      font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+    }
+    .guide-viewport {
       height: 100vh;
       height: 100dvh;
       display: flex;
       flex-direction: column;
-      background: #000;
-      color: #fff;
-      font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
     }
     header {
       display: flex;
@@ -31,7 +35,7 @@
     h1 { margin: 0; font-size: 1rem; }
     nav { display: flex; flex-wrap: wrap; gap: 8px; }
     .translation-note { flex-basis: 100%; margin: 0; font-size: 0.8rem; line-height: 1.4; color: #d1d5db; }
-    a {
+    header a, .register-jump a {
       border: 1px solid rgba(255, 255, 255, 0.55);
       border-radius: 999px;
       padding: 6px 12px;
@@ -39,23 +43,176 @@
       font-size: 0.9rem;
       text-decoration: none;
     }
-    a:hover { background: rgba(255, 255, 255, 0.12); }
-    a:focus-visible, iframe:focus-visible { outline: 3px solid #d8ed71; outline-offset: -3px; }
+    header a:hover, .register-jump a:hover { background: rgba(255, 255, 255, 0.12); }
+    a:focus-visible, iframe:focus-visible, button:focus-visible, select:focus-visible,
+    .table-scroll:focus-visible { outline: 3px solid #d8ed71; outline-offset: -3px; }
     .orbital-shell { flex: 1; min-height: 0; }
     .orbital-frame { display: block; width: 100%; height: 100%; border: none; background: #091d2d; }
+    .register-jump { margin: 0; padding: 6px 16px; background: rgba(15, 23, 42, 0.95); text-align: center; }
+    .register-jump a { display: inline-block; padding: 3px 12px; font-size: 0.85rem; }
+    .visually-hidden {
+      position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden;
+      clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+    }
+    .register { background: #0b1622; color: #f3f4f6; padding: 24px 16px 40px; line-height: 1.5; }
+    .register-inner { max-width: 1200px; margin: 0 auto; }
+    .register h2 { margin: 0 0 8px; font-size: 1.4rem; }
+    .register h3 { margin: 24px 0 8px; font-size: 1.1rem; }
+    .register a { color: #93c5fd; overflow-wrap: anywhere; }
+    .register code { display: block; font-size: 0.8rem; color: #cbd5e1; overflow-wrap: anywhere; }
+    .register-note, .register-summary { margin: 8px 0; color: #e5e7eb; }
+    .register-error { color: #fecaca; font-weight: 600; }
+    .register-method { border: 1px solid #334155; border-radius: 8px; padding: 4px 16px; background: #0f2233; }
+    .register-method li { margin: 4px 0; }
+    .register-button, .register select {
+      font: inherit; color: #0b1622; background: #e5e7eb; border: 1px solid #94a3b8; border-radius: 6px;
+      padding: 6px 12px;
+    }
+    .register-button { cursor: pointer; }
+    .register-button[hidden] { display: none; }
+    .legend, .authority-overview { list-style: none; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; }
+    .legend li, .authority-overview li { border-radius: 6px; padding: 4px 10px; border: 1px solid #475569; }
+    .cycle-grid {
+      list-style: none; padding: 0; margin: 8px 0;
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 8px;
+    }
+    .cycle-grid > li { display: flex; }
+    .cycle-slot {
+      display: flex; flex-direction: column; gap: 2px; width: 100%; text-align: left; font: inherit;
+      color: #f9fafb; border: 2px solid #475569; border-left-width: 8px; border-radius: 8px; padding: 8px;
+      background: #111c2b;
+    }
+    button.cycle-slot { cursor: pointer; }
+    button.cycle-slot:disabled { cursor: default; }
+    .cycle-slot[aria-pressed="true"] { outline: 3px solid #f9fafb; outline-offset: 1px; }
+    .cycle-slot[aria-current="date"] { box-shadow: 0 0 0 3px #d8ed71 inset; }
+    .slot-label { font-size: 1.15rem; font-weight: 700; }
+    .slot-date, .slot-count { font-size: 0.8rem; color: #cbd5e1; }
+    .slot-state { font-weight: 600; }
+    .slot-today:empty { display: none; }
+    .slot-today { font-size: 0.75rem; font-weight: 700; color: #d8ed71; }
+    .slot-unreviewed { border-color: #475569; }
+    .slot-partial { border-color: #f59e0b; }
+    .slot-completed { border-color: #3b82f6; }
+    .slot-problematic { border-color: #ef4444; }
+    .state-verified { border-color: #22c55e !important; background: rgba(34, 197, 94, 0.18); }
+    .state-renewal { border-color: #f59e0b !important; }
+    .state-warning { border-color: #ef4444 !important; }
+    .state-undocumented { border-color: #64748b !important; }
+    td.state-verified strong { color: #86efac; }
+    td.state-renewal strong { color: #fcd34d; }
+    td.state-warning strong { color: #fca5a5; }
+    .table-scroll { overflow-x: auto; border: 1px solid #334155; border-radius: 8px; }
+    .register-table { border-collapse: collapse; width: 100%; min-width: 1100px; font-size: 0.85rem; }
+    .register-table th, .register-table td {
+      border-bottom: 1px solid #334155; padding: 8px; text-align: left; vertical-align: top;
+    }
+    .register-table thead th { background: #13263a; }
+    .register-table .notes { white-space: pre-line; max-width: 280px; }
+    .empty-state { text-align: center !important; font-weight: 600; padding: 16px !important; }
+    .outcome-verified { color: #86efac; }
+    .outcome-needs_review, .outcome-blocked { color: #fcd34d; }
+    .outcome-unreachable { color: #fca5a5; }
+    @media (max-width: 480px) {
+      header { padding: 8px 12px; gap: 6px 12px; }
+      nav { gap: 6px; }
+      header a { padding: 4px 10px; font-size: 0.8rem; }
+      .register-jump { padding: 4px 12px; }
+      .cycle-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .register { padding: 20px 12px 32px; }
+    }
   </style>
 </head>
 <body>
-  <header>
-    <h1>AMEV — Verifica prima di pagare</h1>
-    <nav aria-label="Navigazione del wrapper">
-      <a href="../index.html">Torna al database</a>
-      <a href="./amevcheck/index.html" target="_blank" rel="noopener noreferrer">Apri la guida direttamente ↗</a>
-    </nav>
-    <p class="translation-note">Per leggere in un’altra lingua, usa la funzione Traduci del browser, se disponibile. Su computer può trovarsi nel menu del tasto destro; su smartphone nel menu del browser. La traduzione automatica può contenere imprecisioni.</p>
-  </header>
-  <main class="orbital-shell">
-    <iframe class="orbital-frame" src="./amevcheck/index.html" title="AMEV — Guida e checklist: verifica prima di pagare" allowfullscreen></iframe>
-  </main>
+  <div class="guide-viewport">
+    <header>
+      <h1>AMEV — Verifica prima di pagare</h1>
+      <nav aria-label="Navigazione del wrapper">
+        <a href="../index.html">Torna al database</a>
+        <a href="./amevcheck/index.html" target="_blank" rel="noopener noreferrer">Apri la guida direttamente ↗</a>
+        <a href="#registro-verifiche">Registro verifiche</a>
+      </nav>
+      <p class="translation-note">Per leggere in un’altra lingua, usa la funzione Traduci del browser, se disponibile. Su computer può trovarsi nel menu del tasto destro; su smartphone nel menu del browser. La traduzione automatica può contenere imprecisioni.</p>
+    </header>
+    <main class="orbital-shell">
+      <iframe class="orbital-frame" src="./amevcheck/index.html" title="AMEV — Guida e checklist: verifica prima di pagare" allowfullscreen></iframe>
+    </main>
+    <p class="register-jump"><a href="#registro-verifiche">↓ Registro verifiche delle home page</a></p>
+  </div>
+  <section id="registro-verifiche" class="register" aria-labelledby="registro-title" tabindex="-1"
+    data-register-src="./registro-verifiche.json" data-dataset-src="../financial_authorities_database.json">
+    <div class="register-inner">
+      <h2 id="registro-title">Registro verifiche di coerenza home page Authority</h2>
+      <p>Questo registro pubblica i controlli manuali con cui AMEV confronta il collegamento alla home page ufficiale di ciascuna Authority del <a href="../index.html">Financial Authority Database</a> con il sito effettivamente raggiunto. I controlli sono organizzati in cicli di 20 giorni, con un obiettivo di 12 Authority al giorno; il numero effettivo di Authority deriva dal dataset e quelle non ancora controllate restano visibili come arretrato.</p>
+
+      <div class="register-method">
+        <h3 id="registro-metodo">Metodo e limiti</h3>
+        <ul>
+          <li><strong>Verifica positiva</strong> significa che un revisore ha aperto manualmente la home page registrata nel dataset e ha riscontrato che risponde e appartiene in modo coerente all’Authority indicata (nome, dominio ed eventuale reindirizzamento, riportato come URL finale).</li>
+          <li><strong>Non significa</strong> che tutti i contenuti del sito esterno siano aggiornati, che un operatore finanziario sia autorizzato, che Google o altri motori di ricerca abbiano convalidato il dato, né che URL o indirizzo IP siano permanenti.</li>
+          <li><strong>Spunta verde «✓ Verificata»</strong> solo se l’ultimo controllo della Authority ha esito positivo, risale a meno di 20 giorni e l’URL controllato coincide con la homepage attuale del dataset. Altrimenti lo stato è «Da rinnovare» (verifica scaduta), «⚠ Attenzione» (ultimo controllo problematico o URL cambiato) oppure «Nessuna verifica documentata». Gli esiti positivi precedenti restano nello storico.</li>
+          <li>Lo stato è ricalcolato in questo browser a ogni apertura della pagina e ogni minuto: una verifica scade senza bisogno di nuove pubblicazioni.</li>
+          <li>I giorni del ciclo e le date sono calcolati nel fuso orario <strong>Europe/Rome</strong>.</li>
+          <li>I dati sono importati dai manutentori da un export Airtable, validati e pubblicati con un commit revisionato nel repository. L’export prova che la verifica è stata registrata da un revisore: non è una certificazione indipendente. Questa pagina non consente modifiche né caricamenti.</li>
+          <li>Il registro non contiene dati personali: il revisore è indicato con un nome pubblico; le evidenze sono riferimenti pubblici senza informazioni personali.</li>
+        </ul>
+      </div>
+
+      <h3 id="registro-legenda">Legenda</h3>
+      <p class="register-note">Le caselle da 1/20 a 20/20 sono i <strong>giorni del ciclo</strong>, non i giorni del mese. Le date di calendario compaiono solo quando è pubblicato un ciclo con data di inizio esplicita. Seleziona una casella per filtrare la tabella delle verifiche.</p>
+      <ul class="legend" aria-labelledby="registro-legenda">
+        <li class="slot-unreviewed">Giorno: Nessuna verifica documentata</li>
+        <li class="slot-partial">Giorno: Parziale (meno di 12 controlli)</li>
+        <li class="slot-completed">Giorno: Completato (almeno 12 controlli, nessuna criticità)</li>
+        <li class="slot-problematic">Giorno: Con criticità (almeno un esito non positivo)</li>
+        <li class="state-verified">Authority: ✓ Verificata</li>
+        <li class="state-renewal">Authority: Da rinnovare</li>
+        <li class="state-warning">Authority: ⚠ Attenzione</li>
+        <li class="state-undocumented">Authority: Nessuna verifica documentata</li>
+      </ul>
+
+      <p id="registro-load-status" class="register-note" role="status" aria-live="polite"></p>
+      <!-- REGISTRO-VERIFICHE:STATIC:BEGIN (generato da scripts/import_verification_register.py) -->
+      <div id="registro-data" class="register-data">
+        <p class="register-summary">Nessuna verifica documentata. Authority nel dataset: 239; nessun ciclo avviato.</p>
+        <h3 id="registro-cycle-title">Ciclo non ancora avviato: giorni numerati senza date di calendario</h3>
+        <ol class="cycle-grid" aria-labelledby="registro-cycle-title">
+          <li class="cycle-slot slot-unreviewed"><span class="slot-label"><span class="visually-hidden">Giorno </span>1/20</span><span class="slot-date">Data non assegnata</span><span class="slot-state">Nessuna verifica documentata</span><span class="slot-count">0/12 controlli · 0 positivi · 0 criticità</span></li>
+          <li class="cycle-slot slot-unreviewed"><span class="slot-label"><span class="visually-hidden">Giorno </span>2/20</span><span class="slot-date">Data non assegnata</span><span class="slot-state">Nessuna verifica documentata</span><span class="slot-count">0/12 controlli · 0 positivi · 0 criticità</span></li>
+          <li class="cycle-slot slot-unreviewed"><span class="slot-label"><span class="visually-hidden">Giorno </span>3/20</span><span class="slot-date">Data non assegnata</span><span class="slot-state">Nessuna verifica documentata</span><span class="slot-count">0/12 controlli · 0 positivi · 0 criticità</span></li>
+          <li class="cycle-slot slot-unreviewed"><span class="slot-label"><span class="visually-hidden">Giorno </span>4/20</span><span class="slot-date">Data non assegnata</span><span class="slot-state">Nessuna verifica documentata</span><span class="slot-count">0/12 controlli · 0 positivi · 0 criticità</span></li>
+          <li class="cycle-slot slot-unreviewed"><span class="slot-label"><span class="visually-hidden">Giorno </span>5/20</span><span class="slot-date">Data non assegnata</span><span class="slot-state">Nessuna verifica documentata</span><span class="slot-count">0/12 controlli · 0 positivi · 0 criticità</span></li>
+          <li class="cycle-slot slot-unreviewed"><span class="slot-label"><span class="visually-hidden">Giorno </span>6/20</span><span class="slot-date">Data non assegnata</span><span class="slot-state">Nessuna verifica documentata</span><span class="slot-count">0/12 controlli · 0 positivi · 0 criticità</span></li>
+          <li class="cycle-slot slot-unreviewed"><span class="slot-label"><span class="visually-hidden">Giorno </span>7/20</span><span class="slot-date">Data non assegnata</span><span class="slot-state">Nessuna verifica documentata</span><span class="slot-count">0/12 controlli · 0 positivi · 0 criticità</span></li>
+          <li class="cycle-slot slot-unreviewed"><span class="slot-label"><span class="visually-hidden">Giorno </span>8/20</span><span class="slot-date">Data non assegnata</span><span class="slot-state">Nessuna verifica documentata</span><span class="slot-count">0/12 controlli · 0 positivi · 0 criticità</span></li>
+          <li class="cycle-slot slot-unreviewed"><span class="slot-label"><span class="visually-hidden">Giorno </span>9/20</span><span class="slot-date">Data non assegnata</span><span class="slot-state">Nessuna verifica documentata</span><span class="slot-count">0/12 controlli · 0 positivi · 0 criticità</span></li>
+          <li class="cycle-slot slot-unreviewed"><span class="slot-label"><span class="visually-hidden">Giorno </span>10/20</span><span class="slot-date">Data non assegnata</span><span class="slot-state">Nessuna verifica documentata</span><span class="slot-count">0/12 controlli · 0 positivi · 0 criticità</span></li>
+          <li class="cycle-slot slot-unreviewed"><span class="slot-label"><span class="visually-hidden">Giorno </span>11/20</span><span class="slot-date">Data non assegnata</span><span class="slot-state">Nessuna verifica documentata</span><span class="slot-count">0/12 controlli · 0 positivi · 0 criticità</span></li>
+          <li class="cycle-slot slot-unreviewed"><span class="slot-label"><span class="visually-hidden">Giorno </span>12/20</span><span class="slot-date">Data non assegnata</span><span class="slot-state">Nessuna verifica documentata</span><span class="slot-count">0/12 controlli · 0 positivi · 0 criticità</span></li>
+          <li class="cycle-slot slot-unreviewed"><span class="slot-label"><span class="visually-hidden">Giorno </span>13/20</span><span class="slot-date">Data non assegnata</span><span class="slot-state">Nessuna verifica documentata</span><span class="slot-count">0/12 controlli · 0 positivi · 0 criticità</span></li>
+          <li class="cycle-slot slot-unreviewed"><span class="slot-label"><span class="visually-hidden">Giorno </span>14/20</span><span class="slot-date">Data non assegnata</span><span class="slot-state">Nessuna verifica documentata</span><span class="slot-count">0/12 controlli · 0 positivi · 0 criticità</span></li>
+          <li class="cycle-slot slot-unreviewed"><span class="slot-label"><span class="visually-hidden">Giorno </span>15/20</span><span class="slot-date">Data non assegnata</span><span class="slot-state">Nessuna verifica documentata</span><span class="slot-count">0/12 controlli · 0 positivi · 0 criticità</span></li>
+          <li class="cycle-slot slot-unreviewed"><span class="slot-label"><span class="visually-hidden">Giorno </span>16/20</span><span class="slot-date">Data non assegnata</span><span class="slot-state">Nessuna verifica documentata</span><span class="slot-count">0/12 controlli · 0 positivi · 0 criticità</span></li>
+          <li class="cycle-slot slot-unreviewed"><span class="slot-label"><span class="visually-hidden">Giorno </span>17/20</span><span class="slot-date">Data non assegnata</span><span class="slot-state">Nessuna verifica documentata</span><span class="slot-count">0/12 controlli · 0 positivi · 0 criticità</span></li>
+          <li class="cycle-slot slot-unreviewed"><span class="slot-label"><span class="visually-hidden">Giorno </span>18/20</span><span class="slot-date">Data non assegnata</span><span class="slot-state">Nessuna verifica documentata</span><span class="slot-count">0/12 controlli · 0 positivi · 0 criticità</span></li>
+          <li class="cycle-slot slot-unreviewed"><span class="slot-label"><span class="visually-hidden">Giorno </span>19/20</span><span class="slot-date">Data non assegnata</span><span class="slot-state">Nessuna verifica documentata</span><span class="slot-count">0/12 controlli · 0 positivi · 0 criticità</span></li>
+          <li class="cycle-slot slot-unreviewed"><span class="slot-label"><span class="visually-hidden">Giorno </span>20/20</span><span class="slot-date">Data non assegnata</span><span class="slot-state">Nessuna verifica documentata</span><span class="slot-count">0/12 controlli · 0 positivi · 0 criticità</span></li>
+        </ol>
+        <h3 id="registro-table-title">Verifiche pubblicate</h3>
+        <div class="table-scroll" role="region" aria-labelledby="registro-table-title" tabindex="0">
+          <table class="register-table">
+            <thead><tr><th scope="col">Authority</th><th scope="col">Homepage nel dataset</th><th scope="col">URL controllato</th><th scope="col">URL finale</th><th scope="col">Data e ora</th><th scope="col">Ciclo / giorno</th><th scope="col">Esito</th><th scope="col">Revisore</th><th scope="col">Note</th><th scope="col">Evidenza pubblica</th></tr></thead>
+            <tbody>
+              <tr><td colspan="10" class="empty-state">Nessuna verifica documentata</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <!-- REGISTRO-VERIFICHE:STATIC:END -->
+
+      <p class="register-note">Manutentori: <a href="./registro-verifiche-template.csv" download>modello CSV vuoto</a> · <a href="./REGISTRO_VERIFICHE.md">schema e procedura di importazione</a> · <a href="./registro-verifiche.json">dati del registro (JSON)</a>.</p>
+    </div>
+  </section>
+  <script src="./registro-verifiche.js" defer></script>
 </body>
 </html>

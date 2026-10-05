@@ -28,6 +28,143 @@
       }
       throw new Error('Timed out waiting for page readiness');
     }
+    async function runRegisterTests(wrapper) {
+      const doc = wrapper.contentDocument;
+      const win = wrapper.contentWindow;
+      const base = new URL('./verifica-prima%20di%20pagare/', location.href);
+      const served = new DOMParser().parseFromString(
+        await (await fetch(new URL('index.html', base))).text(), 'text/html');
+      const staticSlots = [...served.querySelectorAll('#registro-data .cycle-grid > li .slot-label')];
+      check(staticSlots.length === 20 && staticSlots.every((slot, i) => slot.textContent.endsWith(`${i + 1}/20`)),
+        'Initially served HTML contains the 20 cycle slots 1/20…20/20');
+      check(served.querySelector('#registro-data .empty-state')?.textContent === 'Nessuna verifica documentata'
+        && !served.querySelector('#registro-data').textContent.includes('✓'),
+        'Served HTML shows the empty state without invented checks');
+      const heading = doc.getElementById('registro-title');
+      check(heading?.tagName === 'H2'
+        && heading.textContent === 'Registro verifiche di coerenza home page Authority',
+        'Register section keeps the requested heading');
+      const navLink = doc.querySelector('header nav a[href="#registro-verifiche"]');
+      check(navLink && doc.getElementById('registro-verifiche').contains(heading),
+        'Header navigation anchors the register section');
+      const section = doc.getElementById('registro-verifiche');
+      for (const attribute of ['data-register-src', 'data-dataset-src']) {
+        const target = new URL(section.getAttribute(attribute), doc.baseURI);
+        check(target.pathname.startsWith(new URL('./', location.href).pathname) && (await fetch(target)).ok,
+          `${attribute} resolves relative to the published path`);
+      }
+      const template = await (await fetch(new URL('registro-verifiche-template.csv', base))).text();
+      check(template.trim() === 'authorityId,cycleId,cycleStartDate,cycleDay,reviewedAt,status,checkedUrl,finalUrl,reviewedBy,notes,evidenceRef',
+        'Downloadable CSV template is empty apart from the documented header');
+      const methodText = doc.querySelector('.register-method').textContent;
+      check(methodText.includes('Non significa') && methodText.includes('Europe/Rome')
+        && methodText.includes('meno di 20 giorni') && methodText.includes('non è una certificazione indipendente'),
+        'Methodology, limits, timezone and 20-day validity are documented on the page');
+
+      await waitFor(() => win.AmevRegister);
+      await win.AmevRegister.ready;
+      const dataset = await (await fetch(new URL('../financial_authorities_database.json', base))).json();
+      const total = Object.keys(dataset).length;
+      const live = doc.getElementById('registro-data');
+      const liveSlots = [...live.querySelectorAll('.cycle-grid button.cycle-slot')];
+      check(liveSlots.length === 20
+        && liveSlots.every((slot, i) => slot.querySelector('.slot-label').textContent === `Giorno ${i + 1}/20`
+          && slot.textContent.includes('Data non assegnata') && slot.disabled),
+        'Interactive grid has 20 labelled cycle-day buttons without invented dates');
+      check(live.querySelector('.empty-state')?.textContent === 'Nessuna verifica documentata'
+        && live.querySelector('.authority-overview .state-undocumented').textContent.endsWith(String(total))
+        && live.querySelector('.authority-overview .state-verified').textContent.endsWith(': 0')
+        && live.textContent.includes(`Da verificare o rinnovare: ${total} su ${total}`),
+        `Empty register exposes the real dataset backlog (${total} Authority)`);
+
+      const R = win.AmevRegister;
+      const ids = Object.values(dataset).map(r => r.financial_authority)
+        .filter(fa => R.normalizeUrl(fa.homepage)).slice(0, 14);
+      const at = (day, minute) => `2026-10-0${day}T10:${String(minute).padStart(2, '0')}:00+02:00`;
+      const review = (fa, day, minute, extra) => Object.assign({
+        authorityId: fa.authorityId, cycleId: '2026-C01', cycleDay: day, reviewedAt: at(day, minute),
+        status: 'verified', checkedUrl: fa.homepage, finalUrl: fa.homepage, reviewedBy: 'Revisore AMEV',
+        notes: '', evidenceRef: ''
+      }, extra || {});
+      const reviews = ids.slice(0, 12).map((fa, i) => review(fa, 1, i));
+      reviews.push(review(ids[0], 1, 30));
+      reviews.push(review(ids[12], 2, 0, { checkedUrl: 'https://mismatch.example.org/' }));
+      reviews.push(review(ids[1], 3, 0, { status: 'blocked', finalUrl: '',
+        notes: '<img src=x onerror="window.__xss=1">', evidenceRef: 'javascript:window.__xss=1' }));
+      reviews.push(review(ids[2], 3, 5, { evidenceRef: 'https://web.archive.org/web/2026/x', reviewedBy: '<b>X</b>' }));
+      reviews.push(review(ids[13], 5, 0, { reviewedAt: at(4, 0) }));
+      const fixture = { cycles: [{ cycleId: '2026-C01', startDate: '2026-10-01' }], reviews,
+        lastRecordedReviewAt: at(3, 5) };
+      const box = doc.createElement('div');
+      doc.body.appendChild(box);
+      let now = Date.parse('2026-10-05T12:00:00+02:00');
+      const ctl = R.render(box, fixture, dataset, { now: () => now });
+      const slots = [...box.querySelectorAll('button.cycle-slot')];
+      check(slots.length === 20 && slots[0].textContent.includes('1 ott 2026')
+        && slots[19].textContent.includes('20 ott 2026'),
+        'Explicit cycle start date maps 1/20…20/20 to real calendar dates');
+      check(slots[0].classList.contains('slot-completed') && slots[0].textContent.includes('12/12 controlli')
+        && slots[0].textContent.includes('Completato'),
+        'Day with 12 distinct Authority (one re-check not double counted) is completed');
+      check(slots[1].textContent.includes('Parziale') && slots[1].textContent.includes('1/12'),
+        'Day with fewer than 12 checks is partial');
+      check(slots[2].classList.contains('slot-problematic') && slots[2].textContent.includes('Con criticità'),
+        'Day with a failed attempt is problematic, with a text state');
+      check(slots[3].textContent.includes('Nessuna verifica documentata')
+        && box.querySelector('.register-error').textContent.startsWith('1 record'),
+        'Record with cycle day inconsistent with its timestamp is rejected and reported');
+      check(!box.querySelector('img') && !win.__xss
+        && [...box.querySelectorAll('a')].every(a => /^https?:$/.test(a.protocol)
+          && a.rel.includes('noopener') && a.rel.includes('noreferrer'))
+        && box.textContent.includes('javascript:window.__xss=1') && box.textContent.includes('<b>X</b>'),
+        'Imported text is inert and only http(s) links are created, with safe rel');
+      const stateOf = id => [...box.querySelectorAll('tbody tr')]
+        .find(tr => tr.querySelector('code').textContent === id).lastElementChild;
+      check(stateOf(ids[3].authorityId).className.includes('state-verified')
+        && stateOf(ids[3].authorityId).textContent.includes('✓ Verificata'),
+        'Recent positive check with matching URL shows the green tick');
+      check(stateOf(ids[1].authorityId).className.includes('state-warning')
+        && stateOf(ids[1].authorityId).textContent.includes('Ultima verifica positiva storica'),
+        'Later blocked attempt replaces green with a warning and keeps history');
+      check(stateOf(ids[12].authorityId).textContent.includes('non coincide'),
+        'Checked URL different from the dataset homepage is never green');
+      check(box.querySelectorAll('.authority-overview .state-verified').length === 1
+        && box.textContent.includes(`Da verificare o rinnovare: ${total - 11} su ${total}`),
+        'Coverage counts distinct Authority only');
+      now = Date.parse(at(1, 3)) + 20 * 86400000 - 1000;
+      ctl.refresh();
+      check(stateOf(ids[3].authorityId).className.includes('state-verified'), 'Still valid one second before 20 days');
+      now += 1000;
+      ctl.refresh();
+      check(stateOf(ids[3].authorityId).className.includes('state-renewal')
+        && stateOf(ids[3].authorityId).textContent.includes('Da rinnovare'),
+        'Green expires at exactly 20 days without a new commit');
+      slots[0].focus();
+      check(doc.activeElement === slots[0] && slots[0].type === 'button', 'Cycle slots are keyboard-focusable buttons');
+      slots[0].click();
+      check(slots[0].getAttribute('aria-pressed') === 'true' && box.querySelectorAll('tbody tr').length === 13
+        && box.textContent.includes('Filtro attivo: giorno 1/20'), 'Selecting a slot filters its records');
+      slots[3].click();
+      check(box.querySelector('.empty-state').textContent.includes('per questo giorno del ciclo'),
+        'Empty day shows a useful empty state');
+      const clear = [...box.querySelectorAll('button')].find(b => b.textContent === 'Mostra tutte le verifiche');
+      clear.click();
+      check(clear.hidden && box.querySelectorAll('tbody tr').length === 16
+        && slots.every(slot => slot.getAttribute('aria-pressed') === 'false'), 'Filter can be cleared');
+      box.remove();
+
+      const original = section.getAttribute('data-register-src');
+      section.setAttribute('data-register-src', './file-inesistente.json');
+      const originalError = win.console.error;
+      win.console.error = () => {};
+      await R.load();
+      win.console.error = originalError;
+      check(doc.getElementById('registro-load-status').textContent.includes('Impossibile caricare')
+        && doc.querySelector('#registro-data .cycle-grid'), 'Loading errors are explained and published data stays');
+      section.setAttribute('data-register-src', original);
+      doc.getElementById('registro-load-status').classList.remove('register-error');
+      await R.load();
+    }
     async function run() {
       const wrapper = document.getElementById('wrapper');
       const direct = document.getElementById('direct');
@@ -56,6 +193,7 @@
       const open = wrapper.contentDocument.querySelector('a[target="_blank"]');
       check(open.href === direct.src && open.rel.includes('noopener')
         && open.rel.includes('noreferrer'), 'Direct link opens the same frontend safely');
+      await runRegisterTests(wrapper);
       for (const frame of [direct, report, embedded]) {
         const doc = frame.contentDocument;
         check(doc.documentElement.lang === 'it'
@@ -120,9 +258,12 @@
           check(frame.contentDocument.documentElement.scrollWidth <= frame.contentWindow.innerWidth,
             `No horizontal overflow at ${width}px`);
         }
+        const firstScreen = wrapper.contentDocument.querySelector('.guide-viewport');
+        const registerSection = wrapper.contentDocument.getElementById('registro-verifiche');
         check(embedded.getBoundingClientRect().height > 400
-          && wrapper.contentDocument.documentElement.scrollHeight <= 700,
-          `Wrapper fits its viewport with internal scrolling at ${width}px`);
+          && firstScreen.getBoundingClientRect().height <= wrapper.contentWindow.innerHeight
+          && registerSection.getBoundingClientRect().top >= firstScreen.getBoundingClientRect().bottom,
+          `Guide keeps the first screen and the register follows by scrolling at ${width}px`);
       }
       const toggle = guide.querySelector('.mobile-menu-toggle');
       toggle.click();

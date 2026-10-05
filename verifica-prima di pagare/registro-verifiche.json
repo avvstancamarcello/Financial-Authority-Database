@@ -1,0 +1,18 @@
+{
+  "schemaVersion": 1,
+  "title": "Registro verifiche di coerenza home page Authority",
+  "authoritySource": "financial_authorities_database.json",
+  "timezone": "Europe/Rome",
+  "cycleLengthDays": 20,
+  "dailyTarget": 12,
+  "validityDays": 20,
+  "statuses": [
+    "verified",
+    "needs_review",
+    "unreachable",
+    "blocked"
+  ],
+  "lastRecordedReviewAt": null,
+  "cycles": [],
+  "reviews": []
+}

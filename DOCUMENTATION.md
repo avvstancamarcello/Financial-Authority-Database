@@ -336,6 +336,21 @@ revisione mirata senza problemi significativi. Anche il tentativo di validazione
 parallela di questo aggiornamento si è interrotto sul diff compilato
 (`timeout/SIGPIPE`), senza produrre un risultato CodeQL.
 
+### Registro verifiche di coerenza delle home page
+
+Il wrapper contiene, sotto la guida e raggiungibile dal collegamento «Registro
+verifiche» dell'intestazione, la sezione «Registro verifiche di coerenza home page
+Authority»: griglia del ciclo di 20 giorni (1/20 … 20/20), tabella delle verifiche
+pubblicate, metodo e limiti. Il registro parte vuoto; i dati si aggiungono solo con
+l'importer offline `scripts/import_verification_register.py` da un export CSV
+Airtable, seguito da revisione e commit. Schema, regole di stato (spunta verde
+valida 20 giorni), sicurezza e procedura quotidiana:
+[`verifica-prima di pagare/REGISTRO_VERIFICHE.md`](verifica-prima%20di%20pagare/REGISTRO_VERIFICHE.md).
+La cache PWA passa a `financial-authority-v19`: il service worker usa ora una
+strategia network-first (con copia in cache per l'uso offline) per
+`financial_authorities_database.json` e per `registro-verifiche.json/.js`, così
+gli stati non restano bloccati su una copia vecchia.
+
 ## 📎 Nota finale
 
 Accesso alla guida: nell'«Indice Rapido – Naviga il Database» della homepage,
