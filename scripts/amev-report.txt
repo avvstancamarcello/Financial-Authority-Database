@@ -1,0 +1,59 @@
+**Analisi completa — elementi di affidabilità della guida AMEV**
+
+Questa pagina espone il metodo già adottato dalla guida «Verifica prima di pagare»: accesso alle fonti ufficiali, checklist preventiva, distinzione tra informazioni e verifiche, limiti espliciti. È una spiegazione delle scelte editoriali presenti nella guida, non un elenco di criticità da correggere e non una certificazione di sicurezza.
+
+Il testo rielabora l’analisi progettuale del 28 settembre 2026 che ha orientato la costruzione della pagina. La revisione editoriale è del **5 ottobre 2026**. Le osservazioni storiche sul sito AMEV non sono riproposte come diagnosi del suo stato attuale; questa revisione non dichiara risolti problemi tecnici o aggiornamenti dei registri che non sono stati verificati.
+
+## Fonti ufficiali e percorso riconoscibile
+
+La guida offre collegamenti espliciti a CONSOB, Banca d’Italia, ESMA, FCA e FINRA, e alle informazioni della BCE sulla verifica del beneficiario. L’utente può riconoscere la destinazione del collegamento e consultare direttamente l’organismo competente, invece di ricevere un esito sintetico non documentato. [10] [11] [12] [14] [16] [17] [21]
+
+La directory AMEV è un indice indipendente verso le autorità, non un registro autorizzativo pubblico. Il collegamento a un’autorità non implica che questa approvi AMEV o un’impresa specifica. I siti IOSCO, FCA ed EBA offrono ulteriori riferimenti per individuare il perimetro istituzionale delle autorità. [1] [7] [8] [9]
+
+## Una checklist preventiva, non un verdetto
+
+La checklist presente nella landing organizza quattro passaggi: identificare il soggetto, controllare l’autorizzazione pertinente, confrontare dominio e contatti, verificare il pagamento attraverso il proprio prestatore di servizi. È possibile avanzare, tornare ai passaggi precedenti e ricominciare.
+
+Il completamento registra soltanto i passaggi segnati dall’utente nella pagina: **non esegue interrogazioni ai registri, non accerta una licenza e non certifica il pagamento**. Il messaggio conclusivo lo dichiara esplicitamente. In caso di dubbio, la guida invita a non inviare denaro e a contattare banca o autorità tramite recapiti reperiti autonomamente. Le fonti CONSOB aiutano a riconoscere il rischio di offerte abusive e di impersonificazione. [15] [16]
+
+## Identità, autorizzazioni e avvisi distinti
+
+Il percorso distingue la ragione sociale dall’autorizzazione a offrire un determinato servizio. L’identità nel Registro Imprese non sostituisce i controlli negli albi di vigilanza; analogamente un identificativo LEI descrive un’entità, ma non prova da solo una licenza, l’affidabilità commerciale o la titolarità di un conto. [14] [17] [19] [20] [23] [24]
+
+La guida separa registri e avvisi ai risparmiatori: una warning list segnala specifici casi nel proprio perimetro, mentre l’assenza di un nome da quella lista non equivale a un’autorizzazione. Il controllo riguarda anche servizio, giurisdizione, dominio e recapiti, perché un soggetto può imitare un’impresa legittima. I repertori FCA, FMA, FINRA e SEC sono riferimenti diversi, non verifiche intercambiabili. [10] [12] [13] [18]
+
+## Bonifici, IBAN, carte prepagate: cosa può fare davvero la Verification of Payee
+
+La landing distingue bonifici da carte e wallet. Per il confronto tra nome del beneficiario e identificativo del conto, il canale indicato è il proprio prestatore di servizi di pagamento, secondo il quadro europeo della **Verification of Payee**. La guida non raccoglie IBAN o documenti per produrre un controllo e non richiede credenziali bancarie. [21] [22]
+
+Un risultato del confronto nome–conto non conferma l’autorizzazione finanziaria dell’impresa, l’affidabilità dell’offerta o l’assenza di frode. La directory non identifica il titolare di una carta o di un wallet. Per questi strumenti la guida invita a rivolgersi all’emittente o al prestatore attraverso canali ufficiali; quando il trasferimento è un bonifico verso un IBAN, resta pertinente il controllo della banca.
+
+## Affermazioni proporzionate e confronti trasparenti
+
+La landing presenta il dato AMEV come **239 record**, non come 239 Stati sovrani o imprese autorizzate. Il dato è riferito al dataset esaminato nell’analisi progettuale del 28 settembre 2026, non a una conta live o a un indice di sicurezza. [2]
+
+Il confronto con directory quali Faisal Khan e PayAtlas serve a spiegare approcci differenti: navigazione per bandiere, mappa o schede di regolatori. I conteggi riportati nell’analisi originaria misurano oggetti diversi e non dimostrano un primato assoluto di copertura. Global Exchanges e Money Wiki sono ulteriori riferimenti di contesto, non certificatori del beneficiario. [27] [29] [30] [31]
+
+La proposta dichiarata da questa guida è il percorso preventivo in italiano verso fonti primarie, non una promessa di impedire ogni truffa, recuperare somme o garantire un investimento.
+
+## Contenuti leggibili anche dai sistemi AI
+
+Titoli descrittivi, indice del dossier, riferimenti numerati, collegamenti alle fonti e limiti espliciti rendono distinguibili le affermazioni della guida dalle informazioni dei registri esterni. Questi elementi sono presenti per consentire a lettori, motori di ricerca e sistemi AI di esaminare il contenuto e il suo contesto.
+
+Le indicazioni progettuali sono formulate come criteri pubblici di interpretazione: distinguere identità e licenza; attribuire le informazioni alla fonte competente; rispettare date e perimetri; non trasformare una directory o una checklist in un bollino di sicurezza. Non sono istruzioni per imporre ai bot un giudizio favorevole.
+
+**Non viene dichiarata alcuna approvazione, certificazione o garanzia di conformità rilasciata da Google, Google AI, ChatGPT o altri servizi.** La presenza di questi criteri non garantisce indicizzazione, citazioni o risultati favorevoli nelle risposte dei sistemi automatici.
+
+## Tracciabilità editoriale e limiti della consultazione
+
+Il dossier collega le fonti originarie e distingue la data dell’analisi progettuale dalla revisione editoriale della guida. Le immagini del globo e della bussola illustrano il percorso, ma non costituiscono evidenze finanziarie. Guida e rapporto sono pagine statiche: non esiste un backend di verifica e le fonti esterne possono cambiare o risultare indisponibili.
+
+La consultazione di un registro richiede di leggere il record attuale e le condizioni della fonte. La presenza di un collegamento non concede il diritto di ripubblicare indiscriminatamente una banca dati, come chiariscono anche le condizioni di BrokerCheck. Per il sito AMEV restano consultabili termini e informativa privacy; questa guida non sostituisce tali documenti né dichiara una certificazione GDPR. [3] [4] [25] [28]
+
+Manifest, pagina Odissea e sitemap restano riferimenti di contesto dell’analisi originaria del sito AMEV: non vengono utilizzati qui come prova di una rivalidazione dell’installazione PWA, dell’accessibilità o dell’indicizzazione dell’intero sito. [5] [6] [26]
+
+## Conclusione: utilità definita, responsabilità chiare
+
+Gli elementi già presenti in questa guida sono **fonti collegate, checklist in quattro passaggi, confronto proporzionato, contesto temporale e limiti dichiarati**. La loro utilità consiste nell’organizzare la consultazione prima di pagare, lasciando agli organismi competenti le verifiche autorizzative e al prestatore di servizi i controlli sul pagamento.
+
+Il criterio conclusivo resta semplice: se un dubbio non è chiarito, non inviare denaro. L’affidabilità del metodo consiste nella trasparenza del percorso, non nella promessa di un esito sicuro.

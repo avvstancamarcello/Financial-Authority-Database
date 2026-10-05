@@ -246,7 +246,11 @@ Manus **solo nella directory temporanea**: plugin React/Tailwind, base `./`,
 due entry HTML, output reale `dist/public`. Lo script sostituisce **solo**
 `verifica-prima di pagare/amevcheck/`, dopo build e type-check riusciti, copiando
 tutto `dist/public`; non modificare manualmente quel contenuto generato.
-Sorgenti, `node_modules`, `.env`, server e log rimangono fuori dal sito/commit.
+I sorgenti React estratti, `node_modules`, `.env`, server e log rimangono fuori
+dal commit. Il testo editoriale mantenuto in `scripts/amev-report.txt` sostituisce
+il corpo del dossier nella directory temporanea; i 31 riferimenti dello ZIP
+sono conservati. Per aggiornare “Analisi completa”, modificare quel testo e
+ricostruire, non i bundle generati.
 Con un nuovo ZIP, ispezionare prima manifest, lockfile, script e adattamenti;
 solo dopo aggiornare l'hash nello script. Un hash diverso interrompe la build.
 
@@ -259,18 +263,22 @@ solo dopo aggiornare l'hash nello script. Un hash diverso interrompe la build.
 - Link interni relativi e routing sotto la directory corrente; `rapporto.html`
   è una vera entry statica, riapribile/ricaricabile senza fallback Express.
   Le ancore del dossier e della checklist restano utilizzabili.
-- Le due immagini `amev-globe-hero_c132435c.png` e
-  `amev-verification-still_c41cf1a7.png` **non sono nello ZIP**. I percorsi
-  `/manus-storage/…` richiedono un proxy di sviluppo con credenziali Forge,
-  assente su Pages. L'immagine decorativa hero è omessa; le altre due occorrenze
-  mostrano una nota di indisponibilità negli spazi originali, senza immagini
-  inventate. Per ripristinarle servono i file originali autorizzati.
+- Le immagini richieste dal sorgente ZIP sono sostituite con i file forniti
+  dall'utente e committati nella root al commit `b7a32f3`:
+  `globo-terrestre.png` (732×681) per la hero e `bussola-e-cristallo.png`
+  (611×788) per la sezione editoriale e il rapporto. Lo script conserva gli
+  originali e li copia in `amevcheck/images/`, collegandoli con percorsi relativi.
+  Non servono `/manus-storage/`, credenziali Forge o servizi esterni per le immagini.
 - Nessun collector/debug Manus, plugin runtime Manus o proxy nel build pubblico.
   I componenti template OAuth/Map non sono importati dall'app e non sono inclusi
   nel bundle; nessuna credenziale o variabile ambiente necessaria alla guida.
 - Guida, checklist e dossier sono informativi: nessuna verifica live di imprese,
-  IBAN o carte, nessuna certificazione del pagamento. I contenuti e le fonti
-  datati 28 settembre 2026 sono preservati, non rivalidati editorialmente.
+  IBAN o carte, nessuna certificazione del pagamento. Il dossier è rielaborato
+  il 5 ottobre 2026 come elenco degli elementi di affidabilità verificabili
+  della guida attuale, non di criticità storiche da correggere. È allineato
+  anche il breve richiamo editoriale della landing. Fonti e contesto dell'analisi
+  originaria del 28 settembre 2026 restano distinti dalla revisione editoriale;
+  non si dichiarano risolti difetti tecnici non rivalidati né approvazioni Google/AI.
   I siti dei registri si aprono all'esterno e dipendono dalla loro disponibilità.
   Google Fonts resta un servizio esterno con fallback CSS locale.
 
@@ -290,7 +298,7 @@ La base relativa supporta dominio personalizzato e sottopercorso di progetto.
 L'integrazione non implica che la pagina sia già pubblicata: serve la revisione
 e il successivo deploy Pages.
 
-Risultati dell'integrazione: due build e type-check riusciti, 47 controlli browser
+Risultati della prima integrazione (prima del ripristino immagini): due build e type-check riusciti, 47 controlli browser
 passati alla root e 47 sotto `/Financial-Authority-Database/`; flussi manuali
 guida/rapporto/refresh/ancore/apertura diretta riusciti a 1440 e 390 px, senza
 errori JavaScript né HTTP locali. Tutti i 398 asset rispondono HTTP 200 anche
@@ -311,6 +319,16 @@ rilevato problemi significativi. La validazione parallela automatica è fallita
 due volte leggendo il grande diff (`git diff`: timeout/SIGPIPE), prima di
 restituire un risultato CodeQL; la CLI CodeQL non è disponibile localmente.
 La scansione CodeQL rimane quindi da eseguire in un ambiente funzionante.
+
+Aggiornamento del 5 ottobre 2026: build e TypeScript riusciti con le PNG
+locali e il dossier rielaborato; 66 controlli browser passati alla root e 66
+sotto `/Financial-Authority-Database/`, compresi caricamento immagini, 31 fonti,
+assenza di endorsement AI, disclaimer e deep link ai pagamenti. Verificati
+hero e rapporto a 1440/390 px, ricaricamento e ritorno alla guida; nessun errore
+JavaScript o HTTP locale. Le PNG pubblicate sono byte-identiche agli originali;
+i 398 asset compilati rispondono HTTP 200 al percorso di progetto. Passati
+validatore dati e diff-check dei sorgenti. Google Fonts resta irraggiungibile
+nel sandbox; verificati i fallback, non i font remoti.
 
 ## 📎 Nota finale
 

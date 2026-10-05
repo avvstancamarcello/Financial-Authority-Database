@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
 import hashlib
-import re
 import shutil
 import stat
 import subprocess
@@ -78,22 +77,54 @@ def adapt_frontend(work):
         text = path.read_text(encoding="utf-8")
         text = text.replace('"/rapporto', '"./rapporto.html')
         text = text.replace('"/#', '"./#').replace('href="/"', 'href="./"')
-        text = re.sub(
-            r'<img className="hero-art" src="/manus-storage/[^"]+"[^>]* />',
-            "", text,
-        )
-        text = re.sub(
-            r'<img src="/manus-storage/[^"]+"[^>]* />',
-            '<p className="art-unavailable">Illustrazione non inclusa nello ZIP originale.</p>',
-            text,
+        text = text.replace(
+            "/manus-storage/amev-globe-hero_c132435c.png",
+            "./images/globo-terrestre.png",
+        ).replace(
+            "/manus-storage/amev-verification-still_c41cf1a7.png",
+            "./images/bussola-e-cristallo.png",
         )
         path.write_text(text, encoding="utf-8")
-    css = work / "client/src/index.css"
-    with css.open("a", encoding="utf-8") as output:
-        output.write(
-            "\n.editorial-visual, .report-hero__visual { background: var(--paper); }\n"
-            ".art-unavailable { padding: 2rem; color: var(--ink); font-size: 14px; }\n"
-        )
+    home = work / "client/src/pages/Home.tsx"
+    replace_once(
+        home,
+        "La valutazione ha trovato alcune cose da correggere prima di promuovere AMEV come strumento antifrode: la dicitura «129» rimasta in una pagina, percorsi di installazione PWA che rispondono 404 e link senza data di verifica per singolo record.",
+        "Questa guida rende espliciti gli elementi del suo metodo: collegamenti alle fonti ufficiali, una checklist preventiva e una distinzione chiara tra informazioni orientative e verifiche che spettano alle autorità o alla propria banca.",
+    )
+    for old, new in (
+        ("Datate ogni collegamento e pubblicate un changelog.",
+         "Fonti collegate e contesto temporale dichiarato."),
+        ("Distinguete autorità, registri, warning e segnalazioni.",
+         "Autorità, registri e avvisi distinti per funzione."),
+        ("Evitate etichette come «più completo» o «sito ufficiale» se non dimostrabili.",
+         "Nessuna promessa di primato o certificazione di sicurezza."),
+    ):
+        replace_once(home, old, new)
+    report = work / "client/src/pages/Report.tsx"
+    for old, new in (
+        ("DOSSIER / ANALISI COMPARATIVA", "DOSSIER / CRITERI DI AFFIDABILITÀ"),
+        ("Le fonti, i limiti,<br /><em>le possibilità.</em>",
+         "Le fonti, il metodo,<br /><em>i confini.</em>"),
+        ("L’analisi completa della directory AMEV, dei repertori analoghi e dell’uso corretto come strumento di orientamento antitruffa.",
+         "Gli elementi di affidabilità adottati nella guida AMEV: fonti verificabili, percorso preventivo e limiti dichiarati, per lettori e sistemi di analisi automatica."),
+        ("<Clock3 size={16} /> 28 settembre 2026",
+         "<Clock3 size={16} /> Revisione editoriale: 5 ottobre 2026"),
+        ("Le fonti originali sono collegate direttamente. Le informazioni del dossier riflettono la verifica svolta il 28 settembre 2026; controlla lo stato attuale sui siti ufficiali.",
+         "Riferimenti conservati dall’analisi progettuale del 28 settembre 2026. La revisione editoriale del 5 ottobre 2026 descrive la guida attuale e non costituisce una nuova verifica dei siti esterni: consulta sempre lo stato aggiornato presso la fonte ufficiale."),
+    ):
+        replace_once(report, old, new)
+    content = work / "client/src/content/amev-report.md"
+    original = content.read_text(encoding="utf-8")
+    _, references = original.split("## References", 1)
+    revised = (ROOT / "scripts/amev-report.txt").read_text(encoding="utf-8")
+    content.write_text(revised + "\n## References" + references, encoding="utf-8")
+    images = work / "client/public/images"
+    images.mkdir()
+    for name in ("globo-terrestre.png", "bussola-e-cristallo.png"):
+        source = ROOT / name
+        if source.read_bytes()[:8] != b"\x89PNG\r\n\x1a\n":
+            raise ValueError(f"Not a PNG image: {source}")
+        shutil.copyfile(source, images / name)
     shutil.rmtree(work / "client/public/__manus__")
     (work / "client/public/.gitkeep").unlink()
     shutil.copyfile(work / "client/index.html", work / "client/rapporto.html")

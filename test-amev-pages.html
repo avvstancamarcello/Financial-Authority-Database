@@ -52,17 +52,41 @@
           'Compiled JS and CSS use relative asset paths');
         check(!doc.querySelector('[src*="__manus__"], [src*="/manus-storage/"]'),
           'No debug collector or unavailable storage images');
+        const images = [...doc.querySelectorAll('img')];
+        await waitFor(() => images.every(image => image.complete && image.naturalWidth > 0));
+        check(images.length === (frame === report ? 1 : 2)
+          && images.every(image => image.getAttribute('src').startsWith('./images/')),
+          'Provided PNG illustrations load from relative local paths');
+        check(images.every(image => image.getAttribute('alt') !== null),
+          'Illustrations retain descriptive or decorative alt attributes');
+        check(!doc.querySelector('.art-unavailable'),
+          'Missing-image notices have been removed');
         const localLinks = [...doc.querySelectorAll('a[href]')].filter(link =>
           link.origin === location.origin);
         const base = new URL('./verifica-prima%20di%20pagare/amevcheck/', location.href).pathname;
         check(localLinks.every(link => link.pathname.startsWith(base)),
           'Frontend navigation remains in the AMEV subfolder');
-        for (const resource of [script.src, css.href, ...new Set(localLinks.map(link => link.href.split('#')[0]))]) {
+        for (const resource of [script.src, css.href, ...images.map(image => image.src),
+          ...new Set(localLinks.map(link => link.href.split('#')[0]))]) {
           check((await fetch(resource)).ok, `Static resource resolves: ${new URL(resource).pathname}`);
         }
       }
       check(report.contentDocument.querySelectorAll('.report-section').length > 5,
         'Full report and its references render without a backend');
+      const reportDoc = report.contentDocument;
+      check(reportDoc.querySelectorAll('.report-sources li').length === 31,
+        'All original source references are preserved');
+      check(reportDoc.querySelector('.report-article').textContent.includes('elementi di affidabilità')
+        && reportDoc.querySelector('.report-meta').textContent.includes('5 ottobre 2026'),
+        'Report explains current reliability criteria and dates the editorial revision');
+      check(reportDoc.querySelector('.report-article').textContent.includes('Non viene dichiarata alcuna approvazione')
+        && reportDoc.querySelector('.report-article').textContent.includes('non certifica il pagamento'),
+        'Report excludes AI endorsements and financial certification');
+      check(!reportDoc.querySelector('.report-article').textContent.includes('criticità da correggere prima')
+        && !direct.contentDocument.querySelector('.editorial-copy').textContent.includes('cose da correggere'),
+        'Guide and report no longer present historical findings as outstanding defects');
+      const paymentAnchor = direct.contentDocument.querySelector('.payment-card a[href*="#"]').hash;
+      check(reportDoc.querySelector(paymentAnchor), 'Existing payment deep link still targets a report section');
       const guide = direct.contentDocument;
       for (let step = 1; step <= 4; step++) {
         check(guide.querySelector('.step-kicker').textContent.includes(`0${step}`),
