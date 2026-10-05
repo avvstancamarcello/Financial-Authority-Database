@@ -37,12 +37,14 @@
       const staticSlots = [...served.querySelectorAll('#registro-data .cycle-grid > li .slot-label')];
       check(staticSlots.length === 20 && staticSlots.every((slot, i) => slot.textContent.endsWith(`${i + 1}/20`)),
         'Initially served HTML contains the 20 cycle slots 1/20…20/20');
+      check([...served.querySelectorAll('#registro-data .cycle-slot')].every(slot => slot.tabIndex === 0),
+        'Static fallback cycle slots remain keyboard-focusable without JavaScript');
       check(served.querySelector('#registro-data .empty-state')?.textContent === 'Nessuna verifica documentata'
         && !served.querySelector('#registro-data').textContent.includes('✓'),
         'Served HTML shows the empty state without invented checks');
       const heading = doc.getElementById('registro-title');
       check(heading?.tagName === 'H2'
-        && heading.textContent === 'Registro verifiche di coerenza home page Authority',
+        && heading.textContent === 'Registro verifiche di coerenza home page Authorithy',
         'Register section keeps the requested heading');
       const navLink = doc.querySelector('header nav a[href="#registro-verifiche"]');
       check(navLink && doc.getElementById('registro-verifiche').contains(heading),
@@ -69,8 +71,13 @@
       const liveSlots = [...live.querySelectorAll('.cycle-grid button.cycle-slot')];
       check(liveSlots.length === 20
         && liveSlots.every((slot, i) => slot.querySelector('.slot-label').textContent === `Giorno ${i + 1}/20`
-          && slot.textContent.includes('Data non assegnata') && slot.disabled),
+          && slot.textContent.includes('Data non assegnata') && slot.getAttribute('aria-disabled') === 'true'
+          && !slot.disabled),
         'Interactive grid has 20 labelled cycle-day buttons without invented dates');
+      liveSlots[0].focus();
+      liveSlots[0].click();
+      check(doc.activeElement === liveSlots[0] && liveSlots[0].getAttribute('aria-pressed') === 'false',
+        'Empty-cycle slots can receive focus but cannot activate an invented cycle');
       check(live.querySelector('.empty-state')?.textContent === 'Nessuna verifica documentata'
         && live.querySelector('.authority-overview .state-undocumented').textContent.endsWith(String(total))
         && live.querySelector('.authority-overview .state-verified').textContent.endsWith(': 0')
@@ -78,6 +85,17 @@
         `Empty register exposes the real dataset backlog (${total} Authority)`);
 
       const R = win.AmevRegister;
+      const invalidDates = R.prepare({
+        cycles: [{ cycleId: 'bad-date', startDate: '2026-02-20' }],
+        reviews: [{
+          authorityId: Object.values(dataset)[0].financial_authority.authorityId,
+          cycleId: 'bad-date', cycleDay: 10, reviewedAt: '2026-02-29T10:00:00+01:00',
+          status: 'verified', checkedUrl: 'https://example.org/', finalUrl: 'https://example.org/',
+          reviewedBy: 'AMEV'
+        }]
+      }, dataset);
+      check(invalidDates.rejected === 1 && invalidDates.reviews.length === 0,
+        'Impossible review dates are rejected instead of normalized into invented dates');
       const ids = Object.values(dataset).map(r => r.financial_authority)
         .filter(fa => R.normalizeUrl(fa.homepage)).slice(0, 14);
       const at = (day, minute) => `2026-10-0${day}T10:${String(minute).padStart(2, '0')}:00+02:00`;
@@ -95,6 +113,17 @@
       reviews.push(review(ids[13], 5, 0, { reviewedAt: at(4, 0) }));
       const fixture = { cycles: [{ cycleId: '2026-C01', startDate: '2026-10-01' }], reviews,
         lastRecordedReviewAt: at(3, 5) };
+      const incomplete = R.prepare({
+        cycles: fixture.cycles,
+        reviews: [
+          review(ids[0], 1, 0, { finalUrl: '' }),
+          review(ids[0], 1, 1, { finalUrl: 'javascript:alert(1)' }),
+          review(ids[0], 1, 2, { reviewedBy: '' }),
+          review(ids[0], 1, 3, { status: 'blocked', notes: '' })
+        ]
+      }, dataset);
+      check(incomplete.rejected === 4 && incomplete.reviews.length === 0,
+        'Incomplete imported attempts cannot produce positive verification states');
       const box = doc.createElement('div');
       doc.body.appendChild(box);
       let now = Date.parse('2026-10-05T12:00:00+02:00');
@@ -260,6 +289,11 @@
         }
         const firstScreen = wrapper.contentDocument.querySelector('.guide-viewport');
         const registerSection = wrapper.contentDocument.getElementById('registro-verifiche');
+        const cycleSlots = [...registerSection.querySelectorAll('.cycle-slot')];
+        check(cycleSlots.length === 20 && cycleSlots.every(slot => {
+          const bounds = slot.getBoundingClientRect();
+          return bounds.width > 0 && bounds.height > 0 && bounds.left >= 0 && bounds.right <= width;
+        }), `All 20 cycle slots are visible within the layout at ${width}px`);
         check(embedded.getBoundingClientRect().height > 400
           && firstScreen.getBoundingClientRect().height <= wrapper.contentWindow.innerHeight
           && registerSection.getBoundingClientRect().top >= firstScreen.getBoundingClientRect().bottom,

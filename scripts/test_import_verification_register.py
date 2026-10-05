@@ -100,6 +100,7 @@ class EmptyAndGrid(RegisterTestCase):
         for day in range(1, 21):
             self.assertIn(f"</span>{day}/20</span>", page)
         self.assertEqual(page.count('class="cycle-slot slot-unreviewed"'), 20)
+        self.assertEqual(page.count('class="cycle-slot slot-unreviewed" tabindex="0"'), 20)
         self.assertIn("Nessuna verifica documentata", page)
         self.assertIn("Data non assegnata", page)
         self.assertNotIn("✓", page)
@@ -133,6 +134,17 @@ class EmptyAndGrid(RegisterTestCase):
 
 
 class Validation(RegisterTestCase):
+    def test_existing_future_review_is_rejected_without_writing(self):
+        future = reg.merge(reg.empty_register(), [(2, row(1, day=6))],
+                           reg.load_authorities(self.dataset),
+                           reg.parse_datetime("2026-10-07T12:00:00+00:00"))[0]
+        self.register.write_text(reg.serialize(future), encoding="utf-8")
+        before = self.snapshot()
+        code, _, err = self.run_cli("--render")
+        self.assertEqual(code, 2, err)
+        self.assertIn("reviewedAt nel futuro", err)
+        self.assertEqual(before, self.snapshot())
+
     def test_unknown_id_and_url_mismatch(self):
         self.assert_rejected([row(1, authorityId="country_99__auth")], "inesistente nel dataset")
         self.assert_rejected([row(1, checkedUrl="https://other.example.org/")], "non coincide")
@@ -300,6 +312,13 @@ class DerivedStatus(unittest.TestCase):
 
 
 class RepositoryRegister(unittest.TestCase):
+    def test_requested_register_title_matches_public_data_and_page(self):
+        title = "Registro verifiche di coerenza home page Authorithy"
+        self.assertEqual(reg.TITLE, title)
+        self.assertEqual(json.loads(reg.DEFAULT_REGISTER.read_text(encoding="utf-8"))["title"], title)
+        self.assertIn(f'<h2 id="registro-title">{title}</h2>',
+                      reg.DEFAULT_HTML.read_text(encoding="utf-8"))
+
     def test_published_register_and_static_html_are_consistent(self):
         out, err = io.StringIO(), io.StringIO()
         self.assertEqual(reg.run(["--check"], out=out, err=err), 0, out.getvalue() + err.getvalue())

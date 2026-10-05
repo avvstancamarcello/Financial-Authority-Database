@@ -1,4 +1,4 @@
-# Registro verifiche di coerenza home page Authority
+# Registro verifiche di coerenza home page Authorithy
 
 Sezione pubblica del wrapper [`index.html`](index.html#registro-verifiche) di
 «AMEV — Verifica prima di pagare». Documenta i **controlli manuali** con cui un
@@ -8,6 +8,8 @@ homepage) con il sito effettivamente raggiunto.
 
 Il registro è vuoto finché non vengono importate verifiche reali: nessun dato di
 esempio, nessuna data o spunta inventata.
+Le 20 caselle restano raggiungibili con la tastiera anche senza dati o JavaScript;
+il filtro è disponibile solo dopo l'importazione di un ciclo reale.
 
 ## File
 
@@ -94,6 +96,9 @@ virgole, virgolette raddoppiate e a capo gestiti dal modulo `csv` di Python. Le
 righe completamente vuote sono ignorate. Per prevenire formule nei fogli di
 calcolo, i testi che iniziano con `=`, `+`, `@` o `-` (salvo «- » da elenco) sono
 rifiutati; i caratteri di controllo sono rifiutati.
+Anche i record già pubblicati vengono ricontrollati per escludere date future;
+nel browser date inesistenti, revisori mancanti, URL finali assenti per esiti
+positivi e note mancanti per esiti problematici vengono scartati e segnalati.
 
 Duplicati: una verifica è identificata da `authorityId` + istante `reviewedAt`.
 Una riga identica a una già registrata è ignorata (reimportare lo stesso export
