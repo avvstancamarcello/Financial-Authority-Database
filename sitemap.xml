@@ -1,140 +1,100 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-    <!-- Sito pubblico preferito: https://www.amevfirenze.it/ -->
-    <!-- Inventario del sito, non gerarchia dei modal. Date esistenti conservate;
-         lastmod omesso per nuove voci prive di una data verificata. -->
-    <!-- Hreflang resta nelle pagine HTML: nessuna variante PDF/JSON via ?lang
-         e nessun cluster non verificato viene dichiarato in questa sitemap. -->
-    <url>
-        <loc>https://www.amevfirenze.it/</loc>
-        <lastmod>2026-05-15</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>1.0</priority>
-    </url>
-    <url>
-        <loc>https://www.amevfirenze.it/referenze.html</loc>
-        <lastmod>2026-05-15</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.9</priority>
-    </url>
-    <!-- Eccezione di compatibilità richiesta: solo www è il canonical preferito.
-         Due host in sitemap NON sono l'approccio SEO consigliato (solo canonical).
-         Questa voce non configura né verifica redirect HTTP. -->
-    <url>
-        <loc>https://amevfirenze.it/referenze.html</loc>
-        <changefreq>weekly</changefreq>
-        <priority>0.9</priority>
-    </url>
-    <url>
-        <loc>https://www.amevfirenze.it/curriculum.html</loc>
-        <lastmod>2026-05-15</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.8</priority>
-    </url>
-    <url>
-        <loc>https://www.amevfirenze.it/privacy.html</loc>
-        <lastmod>2026-05-15</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.7</priority>
-    </url>
-    <url>
-        <loc>https://www.amevfirenze.it/terms.html</loc>
-        <lastmod>2026-05-15</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.7</priority>
-    </url>
-    <url>
-        <loc>https://www.amevfirenze.it/financial_authorities_database.json</loc>
-        <lastmod>2026-05-15</lastmod>
-        <changefreq>daily</changefreq>
-        <priority>0.9</priority>
-    </url>
-    <url>
-        <loc>https://www.amevfirenze.it/censored-countries.html</loc>
-        <lastmod>2026-05-15</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.5</priority>
-    </url>
-    <url>
-        <loc>https://www.amevfirenze.it/petition_documents.json</loc>
-        <lastmod>2026-05-15</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.7</priority>
-    </url>
-    <url>
-        <loc>https://www.amevfirenze.it/petitions-pdf/Home%20_%20PETI%20_%20Committees%20_%20European%20Parliament-base.pdf</loc>
-        <lastmod>2026-05-15</lastmod>
-        <changefreq>yearly</changefreq>
-        <priority>0.8</priority>
-    </url>
-    <url>
-        <loc>https://www.amevfirenze.it/petitions-pdf/European_Parliament_PETITION_0888-2024_Approved-Committees.pdf</loc>
-        <lastmod>2026-05-15</lastmod>
-        <changefreq>yearly</changefreq>
-        <priority>0.8</priority>
-    </url>
-    <url>
-        <loc>https://www.amevfirenze.it/petitions-pdf/Home%20_%20PETI%20_%20Aussch%C3%BCsse%20_%20Europ%C3%A4isches%20Parlament-deutsch.pdf</loc>
-        <lastmod>2026-05-15</lastmod>
-        <changefreq>yearly</changefreq>
-        <priority>0.8</priority>
-    </url>
-    <url>
-        <loc>https://www.amevfirenze.it/petitions-pdf/European_Parliament_PETI_Committees_2Petition_approved.pdf</loc>
-        <lastmod>2026-05-15</lastmod>
-        <changefreq>yearly</changefreq>
-        <priority>0.8</priority>
-    </url>
-    <url>
-        <loc>https://www.amevfirenze.it/petitions-pdf/Accordo%20EuroParlamento-Consiglio%2027-nov-2025%20su%20responsabilita%20Banche.pdf</loc>
-        <lastmod>2025-11-27</lastmod>
-        <changefreq>yearly</changefreq>
-        <priority>0.9</priority>
-    </url>
-    <url>
-        <loc>https://www.amevfirenze.it/authority/IT-CONSOB.html</loc>
-        <lastmod>2026-09-28</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.8</priority>
-    </url>
-    <url>
-        <loc>https://www.amevfirenze.it/authority/UK-FCA.html</loc>
-        <lastmod>2026-09-28</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.8</priority>
-    </url>
-    <url>
-        <loc>https://www.amevfirenze.it/authority/ES-CNMV.html</loc>
-        <lastmod>2026-10-03</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.8</priority>
-    </url>
-    <url>
-        <loc>https://www.amevfirenze.it/authority/FR-AMF.html</loc>
-        <changefreq>monthly</changefreq>
-        <priority>0.8</priority>
-    </url>
-    <url>
-        <loc>https://www.amevfirenze.it/authority/DE-BAFIN.html</loc>
-        <changefreq>monthly</changefreq>
-        <priority>0.8</priority>
-    </url>
-    <url>
-        <loc>https://www.amevfirenze.it/authority/US-SEC.html</loc>
-        <lastmod>2026-10-03</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.8</priority>
-    </url>
-    <url>
-        <loc>https://www.amevfirenze.it/authority/EU-ESMA.html</loc>
-        <lastmod>2026-10-05</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.8</priority>
-    </url>
-    <url>
-        <loc>https://www.amevfirenze.it/authority/IOSCO.html</loc>
-        <lastmod>2026-10-05</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.8</priority>
-    </url>
+  <url>
+    <loc>https://www.amevfirenze.it/</loc>
+    <lastmod>2026-05-15</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+
+  <url>
+    <loc>https://www.amevfirenze.it/referenze.html</loc>
+    <lastmod>2026-05-15</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://www.amevfirenze.it/curriculum.html</loc>
+    <lastmod>2026-05-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://www.amevfirenze.it/privacy.html</loc>
+    <lastmod>2026-05-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://www.amevfirenze.it/terms.html</loc>
+    <lastmod>2026-05-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://www.amevfirenze.it/censored-countries.html</loc>
+    <lastmod>2026-05-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+
+  <url>
+    <loc>https://www.amevfirenze.it/authority/IT-CONSOB.html</loc>
+    <lastmod>2026-09-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://www.amevfirenze.it/authority/UK-FCA.html</loc>
+    <lastmod>2026-09-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://www.amevfirenze.it/authority/ES-CNMV.html</loc>
+    <lastmod>2026-10-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://www.amevfirenze.it/authority/FR-AMF.html</loc>
+    <lastmod>2026-10-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://www.amevfirenze.it/authority/DE-BAFIN.html</loc>
+    <lastmod>2026-10-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://www.amevfirenze.it/authority/US-SEC.html</loc>
+    <lastmod>2026-10-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://www.amevfirenze.it/authority/EU-ESMA.html</loc>
+    <lastmod>2026-10-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://www.amevfirenze.it/authority/IOSCO.html</loc>
+    <lastmod>2026-10-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
 </urlset>
