@@ -1,51 +1,45 @@
 # robots.txt per Tutela Truffe - Financial Authority Database
 # © 2026 Avvocato Marcello Stanca - Firenze, Italy
-# Repository GitHub Pages: https://avvstancamarcello.github.io/Financial-Authority-Database/
+# Sito pubblico preferito: https://www.amevfirenze.it/
 
 User-agent: *
-Allow: /
-Allow: /index.html
-Allow: /referenze.html
-Allow: /curriculum.html
-Allow: /privacy.html
-Allow: /terms.html
-Allow: /manifest.json
-Allow: /icon-192.png
-Allow: /icon-512.png
+# Pagine pubbliche, authority, referenze, JS e CSS consentiti salvo esclusioni.
 
-# Proteggi il database da scraping aggressivo
+# Ritardo richiesto ai crawler che lo supportano; Google ignora Crawl-delay.
 Crawl-delay: 2
 
-# Non consentire accesso diretto al file cifrato
+# Esclusione dalla scansione, non autenticazione o protezione di accesso.
 Disallow: /db.enc
 
-# Sitemap - puntiamo alla sitemap usata da GitHub Pages
-Sitemap: https://avvstancamarcello.github.io/Financial-Authority-Database/sitemap.xml
+# Sitemap del sito pubblico preferito
+Sitemap: https://www.amevfirenze.it/sitemap.xml
 
 # Direttive specifiche per bot principali
 User-agent: Googlebot
-Allow: /
-Crawl-delay: 1
+Disallow: /db.enc
 
 User-agent: Bingbot
-Allow: /
+Disallow: /db.enc
 Crawl-delay: 1
 
 User-agent: Slurp
-Allow: /
+Disallow: /db.enc
 Crawl-delay: 2
 
 # Blocca scraper noti dal database JSON
 User-agent: AhrefsBot
 Disallow: /financial_authorities_database.json
+Disallow: /db.enc
 Crawl-delay: 10
 
 User-agent: SemrushBot
 Disallow: /financial_authorities_database.json
+Disallow: /db.enc
 Crawl-delay: 10
 
 User-agent: DotBot
 Disallow: /financial_authorities_database.json
+Disallow: /db.enc
 
 User-agent: MJ12bot
 Disallow: /

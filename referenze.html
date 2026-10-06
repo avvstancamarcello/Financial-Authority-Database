@@ -20,18 +20,23 @@
     <meta name="author" content="Avvocato Marcello Stanca">
     
     <!-- Canonical & Hreflang -->
-    <link rel="canonical" href="https://amevfirenze.it/referenze.html">
-    <link rel="alternate" hreflang="en" href="https://amevfirenze.it/referenze.html">
-    <link rel="alternate" hreflang="it" href="https://amevfirenze.it/referenze.html?lang=it">
-    <link rel="alternate" hreflang="x-default" href="https://amevfirenze.it/referenze.html">
+    <link rel="canonical" href="https://www.amevfirenze.it/referenze.html">
+    <link rel="alternate" hreflang="en" href="https://www.amevfirenze.it/referenze.html?lang=en">
+    <link rel="alternate" hreflang="it" href="https://www.amevfirenze.it/referenze.html">
+    <link rel="alternate" hreflang="x-default" href="https://www.amevfirenze.it/referenze.html">
+    <meta property="og:url" content="https://www.amevfirenze.it/referenze.html">
+    <meta property="og:image" content="https://www.amevfirenze.it/icon-512.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://www.amevfirenze.it/referenze.html">
+    <meta name="twitter:image" content="https://www.amevfirenze.it/icon-512.png">
     
     <!-- Schema.org Structured Data -->
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
         "@type": "WebPage",
-        "@id": "https://amevfirenze.it/referenze.html#webpage",
-        "url": "https://amevfirenze.it/referenze.html",
+        "@id": "https://www.amevfirenze.it/referenze.html#webpage",
+        "url": "https://www.amevfirenze.it/referenze.html",
         "name": "Institutional Financial Supervision Resources",
         "description": "Official resources for international financial supervision: SEC, ESMA, European Commission, FBI IC3, SIPC, IOSCO. Direct links to regulatory authorities worldwide.",
         "inLanguage": ["en", "it"],
@@ -39,24 +44,24 @@
         "dateModified": "2026-01-21",
         "isPartOf": {
             "@type": "WebSite",
-            "@id": "https://amevfirenze.it/#website",
-            "url": "https://amevfirenze.it",
+            "@id": "https://www.amevfirenze.it/#website",
+            "url": "https://www.amevfirenze.it/",
             "name": "Tutela Truffe - Financial Authority Database",
             "description": "Free database of financial supervisory authorities worldwide to help fraud victims",
             "publisher": {
                 "@type": "Person",
-                "@id": "https://amevfirenze.it/#author",
+                "@id": "https://www.amevfirenze.it/#author",
                 "name": "Avv. Marcello Stanca",
                 "email": "lawyer@marcellostanca.it",
                 "jobTitle": "Lawyer",
-                "url": "https://amevfirenze.it"
+                "url": "https://www.amevfirenze.it/"
             }
         },
         "about": {
             "@type": "Service",
             "serviceType": "Financial Supervision Resources",
             "provider": {
-                "@id": "https://amevfirenze.it/#author"
+                "@id": "https://www.amevfirenze.it/#author"
             }
         },
         "mainEntity": {
@@ -68,9 +73,13 @@
                 {"@type": "ListItem", "position": 2, "name": "ESMA", "url": "https://www.esma.europa.eu"},
                 {"@type": "ListItem", "position": 3, "name": "European Commission", "url": "https://ec.europa.eu"},
                 {"@type": "ListItem", "position": 4, "name": "FBI IC3", "url": "https://www.ic3.gov"},
-                {"@type": "ListItem", "position": 5, "name": "IOSCO", "url": "https://amevfirenze.it/authority/IOSCO.html"}
+                {"@type": "ListItem", "position": 5, "name": "IOSCO", "url": "https://www.amevfirenze.it/authority/IOSCO.html"}
             ]
         },
+        "hasPart": [
+            {"@type": "WebPage", "name": "ESMA", "url": "https://www.amevfirenze.it/authority/EU-ESMA.html"},
+            {"@type": "WebPage", "name": "IOSCO", "url": "https://www.amevfirenze.it/authority/IOSCO.html"}
+        ],
         "breadcrumb": {
             "@type": "BreadcrumbList",
             "itemListElement": [
@@ -78,13 +87,13 @@
                     "@type": "ListItem",
                     "position": 1,
                     "name": "Home",
-                    "item": "https://amevfirenze.it/"
+                    "item": "https://www.amevfirenze.it/"
                 },
                 {
                     "@type": "ListItem",
                     "position": 2,
                     "name": "Institutional Resources",
-                    "item": "https://amevfirenze.it/referenze.html"
+                    "item": "https://www.amevfirenze.it/referenze.html"
                 }
             ]
         }
@@ -275,6 +284,9 @@
             border: 0;
             background: #000;
             overflow: hidden;
+        }
+        @supports (height: 100dvh) {
+            #esmaDialog { height: 100dvh; }
         }
         #esmaDialog::backdrop { background: rgba(3, 7, 18, 0.88); }
         .esma-dialog-shell { position: relative; width: 100%; height: 100%; }
@@ -590,7 +602,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 <h3>IOSCO</h3>
                 <p class="abbreviation">International Organization of Securities Commissions</p>
                 <p data-i18n="descIOSCO">Organizzazione internazionale delle commissioni di vigilanza sui valori mobiliari. Standard globali per la regolamentazione dei mercati finanziari.</p>
-                <a href="authority/IOSCO.html" class="resource-link"><img src="logo_shield_financial_defense.svg" alt="" class="shield-icon">🔗 IOSCO · Guida AMEV</a>
+                <a id="openIoscoDialog" href="authority/IOSCO.html" class="resource-link" aria-haspopup="dialog" aria-controls="esmaDialog" data-international-authority="IOSCO"><img src="logo_shield_financial_defense.svg" alt="" class="shield-icon">🔗 IOSCO · Guida AMEV</a>
                 <img src="logo_shield_MS.svg" alt="MS" class="shield-ms-icon" title="Financial Defense - Marcello Stanca">
             </div>
         </div>
@@ -619,10 +631,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 <p class="abbreviation">European Securities and Markets Authority</p>
                 <p data-i18n="descESMA">Autorità europea degli strumenti finanziari e dei mercati. Supervisione dei mercati finanziari dell'UE e protezione degli investitori.</p>
                 <a href="https://www.esma.europa.eu" target="_blank" rel="noopener noreferrer" class="resource-link"><img src="logo_shield_financial_defense.svg" alt="" class="shield-icon">🔗 esma.europa.eu</a>
-                <button type="button" id="openEsmaDialog" class="esma-preview-trigger" aria-haspopup="dialog" aria-controls="esmaDialog">
+                <a href="authority/EU-ESMA.html" id="openEsmaDialog" class="esma-preview-trigger" aria-haspopup="dialog" aria-controls="esmaDialog" data-international-authority="ESMA">
                     <img src="authority/preview-international-ESMA.png" alt="" width="960" height="540">
                     <span data-i18n="esmaPreview">📄 Apri la scheda indipendente ESMA</span>
-                </button>
+                </a>
                 <img src="logo_shield_MS.svg" alt="MS" class="shield-ms-icon" title="Financial Defense - Marcello Stanca">
             </div>
         </div>
@@ -1403,7 +1415,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         let currentLanguage = 'it';
 
         function changeLanguage(lang) {
+            if (!Object.prototype.hasOwnProperty.call(translations, lang)) return;
             currentLanguage = lang;
+            document.documentElement.lang = lang;
             document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
             const activeBtn = Array.from(document.querySelectorAll('.lang-btn')).find(btn => btn.textContent.includes(lang.toUpperCase()));
             if (activeBtn) activeBtn.classList.add('active');
@@ -1415,25 +1429,56 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 }
             });
             if (translations[lang]) {
-                document.getElementById('esmaDialog').setAttribute('aria-label', translations[lang].esmaDialogLabel);
-                document.getElementById('closeEsmaDialog').setAttribute('aria-label', translations[lang].esmaCloseLabel);
-                document.getElementById('esmaFrame').title = translations[lang].esmaFrameTitle;
+                updateAuthorityDialogLabels();
             }
         }
 
         const esmaDialog = document.getElementById('esmaDialog');
         const esmaFrame = document.getElementById('esmaFrame');
-        document.getElementById('openEsmaDialog').addEventListener('click', () => {
-            esmaFrame.src = 'authority/EU-ESMA.html';
-            esmaDialog.showModal();
+        let activeAuthority = 'ESMA';
+        let authorityTrigger = null;
+        function updateAuthorityDialogLabels() {
+            const labels = translations[currentLanguage] || translations.en;
+            esmaDialog.setAttribute('aria-label', labels.esmaDialogLabel.replace(/ESMA/g, activeAuthority));
+            document.getElementById('closeEsmaDialog').setAttribute('aria-label', labels.esmaCloseLabel.replace(/ESMA/g, activeAuthority));
+            esmaFrame.title = labels.esmaFrameTitle.replace(/ESMA/g, activeAuthority);
+        }
+        const internationalRoutes = {
+            ESMA: 'authority/EU-ESMA.html',
+            IOSCO: 'authority/IOSCO.html'
+        };
+        document.querySelectorAll('[data-international-authority]').forEach(trigger => {
+            trigger.addEventListener('click', event => {
+                if (event.ctrlKey || event.metaKey || event.shiftKey || event.altKey || event.button !== 0) return;
+                const authority = trigger.dataset.internationalAuthority;
+                const route = Object.prototype.hasOwnProperty.call(internationalRoutes, authority) ? internationalRoutes[authority] : '';
+                if (!route || typeof esmaDialog.showModal !== 'function') return;
+                event.preventDefault();
+                activeAuthority = authority;
+                authorityTrigger = trigger;
+                updateAuthorityDialogLabels();
+                esmaFrame.src = route;
+                esmaDialog.showModal();
+            });
         });
         document.getElementById('closeEsmaDialog').addEventListener('click', () => esmaDialog.close());
         esmaDialog.addEventListener('close', () => {
             esmaFrame.src = 'about:blank';
+            authorityTrigger?.focus();
+        });
+        // Keyboard events inside the same-origin iframe do not bubble to its parent.
+        esmaFrame.addEventListener('load', () => {
+            esmaFrame.contentDocument?.addEventListener('keydown', event => {
+                if (event.key !== 'Escape' || !esmaDialog.open) return;
+                event.preventDefault();
+                esmaDialog.close();
+            });
         });
         esmaDialog.addEventListener('click', (event) => {
             if (event.target === esmaDialog) esmaDialog.close();
         });
+        const requestedLanguage = new URLSearchParams(window.location.search).get('lang') || 'it';
+        changeLanguage(Object.prototype.hasOwnProperty.call(translations, requestedLanguage) ? requestedLanguage : 'it');
     </script>
 </body>
 </html>

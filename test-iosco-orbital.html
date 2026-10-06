@@ -33,10 +33,10 @@
                 await new Promise(resolve => setTimeout(resolve, 50));
             }
             const doc = frame.contentDocument;
-            const canonicalUrl = 'https://amevfirenze.it/authority/IOSCO.html';
+            const canonicalUrl = 'https://www.amevfirenze.it/authority/IOSCO.html';
             check(doc.querySelectorAll('link[rel="canonical"]').length === 1
                 && doc.querySelector('link[rel="canonical"]').href === canonicalUrl,
-                'Single IOSCO canonical URL on amevfirenze.it');
+                'Single IOSCO canonical URL on www.amevfirenze.it');
             check(frame.contentWindow.location.pathname === new URL(canonicalUrl).pathname,
                 'Wrapper is served at its canonical path');
             check(doc.documentElement.lang === 'it' && doc.title.includes('IOSCO')
@@ -61,7 +61,7 @@
                     `Internal destination exists: ${link.getAttribute('href')}`);
             }
             const hub = await loadDocument('./referenze.html');
-            check(hub.querySelector('link[rel="canonical"]').href === 'https://amevfirenze.it/referenze.html'
+            check(hub.querySelector('link[rel="canonical"]').href === 'https://www.amevfirenze.it/referenze.html'
                 && hub.querySelector('a.resource-link[href="authority/IOSCO.html"]')
                 && hub.querySelector('a.resource-link[href="authority/IOSCO.html#i-scan"]'),
                 'References hub links to the wrapper and i-SCAN section');
