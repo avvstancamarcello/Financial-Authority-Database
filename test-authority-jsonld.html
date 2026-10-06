@@ -21,8 +21,8 @@
       const response = await fetch('./index.html');
       check(response.ok, 'Homepage resolves');
       const page = new DOMParser().parseFromString(await response.text(), 'text/html');
-      const root = 'https://amevfirenze.it/';
-      check(page.querySelector('link[rel="canonical"]').href === root, 'Canonical retains the non-www domain');
+      const root = 'https://www.amevfirenze.it/';
+      check(page.querySelector('link[rel="canonical"]').href === root, 'Canonical uses the preferred www domain');
       const authorities = [
         ['CONSOB', 'IT-CONSOB'],
         ['FCA', 'UK-FCA'],

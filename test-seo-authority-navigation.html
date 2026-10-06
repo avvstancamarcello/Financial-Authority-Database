@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="icon" href="data:,">
+  <title>SEO and authority navigation regression</title>
+</head>
+<body>
+  <h1>SEO and authority navigation regression</h1>
+  <pre id="results">Running…</pre>
+  <iframe id="references" title="International authority modal tests"></iframe>
+  <script>
+    const results = document.getElementById('results');
+    const checks = [];
+    function check(condition, message) {
+      checks.push(`${condition ? 'PASS' : 'FAIL'}: ${message}`);
+      results.textContent = checks.join('\n');
+      if (!condition) throw new Error(message);
+    }
+    async function waitFor(predicate) {
+      const deadline = Date.now() + 20000;
+      while (!predicate()) {
+        if (Date.now() > deadline) throw new Error('Timed out');
+        await new Promise(resolve => setTimeout(resolve, 50));
+      }
+    }
+    async function text(path) {
+      const response = await fetch(path);
+      check(response.ok, `${path} exists with exact casing`);
+      return response.text();
+    }
+    async function run() {
+      const root = 'https://www.amevfirenze.it/';
+      const national = ['IT-CONSOB', 'UK-FCA', 'ES-CNMV', 'FR-AMF', 'DE-BAFIN', 'US-SEC'];
+      const international = ['EU-ESMA', 'IOSCO'];
+      const parser = new DOMParser();
+      const indexSource = await text('index.html');
+      const index = parser.parseFromString(indexSource, 'text/html');
+      const referenceSource = await text('referenze.html');
+      const references = parser.parseFromString(referenceSource, 'text/html');
+      const sitemap = parser.parseFromString(await text('sitemap.xml'), 'application/xml');
+      check(!sitemap.querySelector('parsererror'), 'Sitemap XML parses');
+      const locs = Array.from(sitemap.getElementsByTagNameNS('*', 'loc'), node => node.textContent);
+      check(new Set(locs).size === locs.length, 'Sitemap locs are unique');
+      check(locs.includes(root + 'referenze.html') && locs.includes('https://amevfirenze.it/referenze.html'),
+        'Both requested reference host forms are listed');
+      for (const loc of locs) {
+        const url = new URL(loc);
+        check(url.protocol === 'https:' && !url.hash &&
+          (url.host === 'www.amevfirenze.it' || loc === 'https://amevfirenze.it/referenze.html'),
+          `Preferred host, no fragment: ${url.pathname}`);
+        await text(decodeURIComponent(url.pathname).replace(/^\//, '') || 'index.html');
+      }
+      check(!sitemap.getElementsByTagNameNS('http://www.w3.org/1999/xhtml', 'link').length,
+        'No unverified hreflang clusters or fabricated PDF/JSON translations');
+      for (const [page, source, path] of [[index, indexSource, ''], [references, referenceSource, 'referenze.html']]) {
+        check(page.querySelector('link[rel="canonical"]').getAttribute('href') === root + path,
+          `Preferred canonical: ${path || 'homepage'}`);
+        check(!source.includes('https://amevfirenze.it/'), 'No non-www local URLs in root page');
+        for (const selector of ['meta[property="og:url"]', 'meta[name="twitter:url"]']) {
+          check(page.querySelector(selector).content === root + path, `${selector} matches canonical`);
+        }
+        for (const selector of ['meta[property="og:image"]', 'meta[name="twitter:image"]']) {
+          check(page.querySelector(selector).content.startsWith(root), `${selector} uses public host`);
+        }
+        page.querySelectorAll('script[type="application/ld+json"]').forEach(script => {
+          check(Boolean(JSON.parse(script.textContent)), 'JSON-LD parses');
+        });
+      }
+      const indexLd = Array.from(index.querySelectorAll('script[type="application/ld+json"]'), script => JSON.parse(script.textContent));
+      const site = indexLd.find(node => node['@type'] === 'WebSite');
+      const dataset = indexLd.find(node => node['@type'] === 'Dataset');
+      const referenceLd = JSON.parse(references.querySelector('script[type="application/ld+json"]').textContent);
+      const allowlist = indexSource.match(/const CONSOB_ORBITAL_ALLOWED_PATHS = new Set\(\[([\s\S]*?)\]\);/)[1];
+      for (const id of [...national, ...international]) {
+        const path = `authority/${id}.html`;
+        const authority = parser.parseFromString(await text(path), 'text/html');
+        check(locs.includes(root + path), `${id} standalone page in sitemap`);
+        check(authority.querySelector('link[rel="canonical"]').getAttribute('href') === root + path,
+          `${id} standalone canonical agrees`);
+        check(!/noindex/i.test(authority.querySelector('meta[name="robots"]')?.content || ''),
+          `${id} standalone page remains indexable`);
+        if (national.includes(id)) {
+          check(Boolean(index.querySelector(`a[href="${path}"]`)), `${id} crawlable homepage fallback`);
+          check(allowlist.includes(path), `${id} allowed national modal`);
+          check(site.hasPart.some(node => node.url === root + path) &&
+            dataset.subjectOf.some(node => node.url === root + path), `${id} in both national JSON-LD mappings`);
+        } else {
+          check(!allowlist.includes(path), `${id} not a homepage modal`);
+          check(!site.hasPart.some(node => node.url === root + path) &&
+            !dataset.subjectOf.some(node => node.url === root + path), `${id} not a homepage JSON-LD part`);
+          check(Boolean(references.querySelector(`a[href="${path}"][data-international-authority]`)),
+            `${id} crawlable reference modal trigger`);
+          check(referenceLd.hasPart.some(node => node.url === root + path), `${id} is part of references`);
+        }
+      }
+      const robots = await text('robots.txt');
+      check(robots.includes('Sitemap: ' + root + 'sitemap.xml'), 'Robots public sitemap');
+      const groups = new Map();
+      let agents = [];
+      let rules = [];
+      function saveGroup() {
+        agents.forEach(agent => groups.set(agent, rules));
+      }
+      for (const line of robots.split('\n').concat('User-agent: end')) {
+        const match = line.replace(/#.*/, '').trim().match(/^(User-agent|Allow|Disallow):\s*(.*)$/i);
+        if (!match) continue;
+        if (match[1].toLowerCase() === 'user-agent') {
+          if (rules.length) { saveGroup(); agents = []; rules = []; }
+          agents.push(match[2].toLowerCase());
+        } else rules.push([match[1].toLowerCase(), match[2]]);
+      }
+      function allowed(agent, path) {
+        const rules = groups.get(agent.toLowerCase()) || groups.get('*');
+        const matches = rules.filter(([, prefix]) => prefix && path.startsWith(prefix))
+          .sort((a, b) => b[1].length - a[1].length || (a[0] === 'allow' ? -1 : 1));
+        return !matches.length || matches[0][0] === 'allow';
+      }
+      for (const agent of ['unknown', 'Googlebot', 'Bingbot', 'Slurp', 'AhrefsBot', 'SemrushBot', 'DotBot']) {
+        check(!allowed(agent, '/db.enc'), `${agent}: db.enc excluded`);
+        for (const path of ['/referenze.html', '/authority/EU-ESMA.html', '/authority/IOSCO.html', '/service-worker.js', '/manifest.json']) {
+          check(allowed(agent, path), `${agent}: crawl allowed for ${path}`);
+        }
+      }
+      for (const agent of ['AhrefsBot', 'SemrushBot', 'DotBot']) {
+        check(!allowed(agent, '/financial_authorities_database.json'), `${agent}: scraper policy retained`);
+      }
+      for (const agent of ['MJ12bot', 'BLEXBot']) check(!allowed(agent, '/'), `${agent}: full block retained`);
+      const frame = document.getElementById('references');
+      frame.src = 'referenze.html?lang=en';
+      await waitFor(() => frame.contentDocument?.querySelector('#openIoscoDialog') &&
+        frame.contentDocument.documentElement.lang === 'en');
+      const doc = frame.contentDocument;
+      const unsafeTrigger = doc.getElementById('openIoscoDialog');
+      const originalAuthority = unsafeTrigger.dataset.internationalAuthority;
+      for (const unsafe of ['__proto__', 'constructor', 'https://example.invalid/']) {
+        unsafeTrigger.dataset.internationalAuthority = unsafe;
+        const event = new frame.contentWindow.MouseEvent('click', { bubbles: true, cancelable: true });
+        unsafeTrigger.addEventListener('click', event => {
+          check(!event.defaultPrevented && !doc.getElementById('esmaDialog').open,
+            `Reject unknown international modal mapping: ${unsafe}`);
+          event.preventDefault();
+        }, { once: true });
+        unsafeTrigger.dispatchEvent(event);
+      }
+      unsafeTrigger.dataset.internationalAuthority = originalAuthority;
+      for (const [triggerId, id] of [['openEsmaDialog', 'EU-ESMA'], ['openIoscoDialog', 'IOSCO']]) {
+        const trigger = doc.getElementById(triggerId);
+        const dialog = doc.getElementById('esmaDialog');
+        const orbital = doc.getElementById('esmaFrame');
+        trigger.focus();
+        trigger.click();
+        check(dialog.open && orbital.getAttribute('src') === `authority/${id}.html`, `${id} modal opens`);
+        await waitFor(() => orbital.contentDocument?.readyState === 'complete' &&
+          orbital.contentWindow.location.pathname.endsWith(`/authority/${id}.html`));
+        orbital.contentDocument.dispatchEvent(new orbital.contentWindow.KeyboardEvent('keydown', { key: 'Escape', bubbles: true }));
+        await waitFor(() => !dialog.open && doc.activeElement === trigger &&
+          orbital.getAttribute('src') === 'about:blank');
+        check(orbital.getAttribute('src') === 'about:blank', `${id} Escape cleanup and focus return`);
+        trigger.click();
+        doc.getElementById('closeEsmaDialog').click();
+        await waitFor(() => !dialog.open && doc.activeElement === trigger &&
+          orbital.getAttribute('src') === 'about:blank');
+        check(true, `${id} close button and focus return`);
+      }
+      frame.contentWindow.changeLanguage('it');
+      check(doc.documentElement.lang === 'it', 'Reference language switching preserved');
+      frame.contentWindow.changeLanguage('__proto__');
+      check(doc.documentElement.lang === 'it', 'Unknown language/prototype keys are ignored safely');
+      results.textContent += '\nDONE';
+    }
+    run().catch(error => {
+      results.textContent += `\nFAIL: ${error.message}`;
+      console.error(error);
+    });
+  </script>
+</body>
+</html>
