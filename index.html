@@ -6433,6 +6433,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     data.Spain.modal = 'authority/ES-CNMV.html';
                     data.Spain.has_orbital_view = true;
                 }
+                if (data.Benin) {
+                    data.Benin.thumbnail = 'authority/perview-BCEAO.png';
+                    data.Benin.modal = 'authority/BJ-BCEAO.html';
+                    data.Benin.has_orbital_view = true;
+                }
                 if (data.Ethiopia) {
                     data.Ethiopia.ecma_orbital = {
                         name: 'Ethiopian Capital Market Authority (ECMA)',
@@ -7553,7 +7558,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             new URL('/authority/ES-CNMV.html', window.location.origin).pathname,
             new URL('authority/ES-CNMV.html', window.location.href).pathname,
             new URL('/authority/US-SEC.html', window.location.origin).pathname,
-            new URL('authority/US-SEC.html', window.location.href).pathname
+            new URL('authority/US-SEC.html', window.location.href).pathname,
+            new URL('/authority/BJ-BCEAO.html', window.location.origin).pathname,
+            new URL('authority/BJ-BCEAO.html', window.location.href).pathname
         ]);
         const CONSOB_ORBITAL_ALLOWED_THUMBNAIL_PATHS = new Set([
             new URL('/authority/preview-consob.png', window.location.origin).pathname,
@@ -7569,7 +7576,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             new URL('/authority/preview-ES-CNMV.png', window.location.origin).pathname,
             new URL('authority/preview-ES-CNMV.png', window.location.href).pathname,
             new URL('/authority/preview-US-SEC.svg', window.location.origin).pathname,
-            new URL('authority/preview-US-SEC.svg', window.location.href).pathname
+            new URL('authority/preview-US-SEC.svg', window.location.href).pathname,
+            new URL('/authority/perview-BCEAO.png', window.location.origin).pathname,
+            new URL('authority/perview-BCEAO.png', window.location.href).pathname
         ]);
 
         function resolveConsobOrbitalSrc(candidateSource, { allowFallback = false } = {}) {
