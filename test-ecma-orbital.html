@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>ECMA supplemental Orbital regression checks</title>
+    <style>
+        #results { max-height: 240px; overflow: auto; }
+    </style>
+</head>
+<body>
+    <h1>ECMA supplemental Orbital regression checks</h1>
+    <pre id="results">Running…</pre>
+    <iframe id="app" title="Homepage under test" src="./index.html" width="1000" height="700"></iframe>
+    <script>
+        const results = document.getElementById('results');
+        const checks = [];
+
+        function check(condition, message) {
+            checks.push(`${condition ? 'PASS' : 'FAIL'}: ${message}`);
+            results.textContent = checks.join('\n');
+            if (!condition) throw new Error(message);
+        }
+
+        async function waitFor(predicate) {
+            const deadline = Date.now() + 20000;
+            while (Date.now() < deadline) {
+                if (predicate()) return;
+                await new Promise(resolve => setTimeout(resolve, 50));
+            }
+            throw new Error('Timed out waiting for page readiness');
+        }
+
+        async function run() {
+            const frame = document.getElementById('app');
+            await waitFor(() => frame.contentDocument.querySelector('#flagsGrid [aria-label$="Ethiopia"]'));
+            const app = frame.contentWindow;
+            const doc = frame.contentDocument;
+            const source = await (await fetch('./financial_authorities_database.json')).json();
+            check(source.Ethiopia.financial_authority.authorityId === 'ethiopia__nbe'
+                && source.Ethiopia.financial_authority.abbreviation === 'NBE', 'Database retains NBE identity');
+            const flag = doc.querySelector('#flagsGrid [aria-label$="Ethiopia"]');
+            check(flag.tagName === 'BUTTON'
+                && !doc.querySelector('.country-card[data-country-name="Ethiopia"] .orbital-thumbnail-trigger'),
+                'Ethiopia flag and grid card remain detail-card entry points');
+            flag.click();
+            check(doc.getElementById('countryModal').style.display === 'block'
+                && !doc.getElementById('consobOrbitalDialog').open
+                && doc.getElementById('modalContent').textContent.includes('National Bank of Ethiopia'),
+                'Flag opens Ethiopia detail card first, retaining NBE');
+            const trigger = doc.querySelector('#countryModal [data-orbital-src$="/authority/ET-ECMA.html"]');
+            check(trigger?.getAttribute('aria-label') === 'Open ECMA orbital dialog'
+                && doc.getElementById('modalContent').textContent.includes('NBE remains the banking authority'),
+                'Accessible supplemental ECMA launcher distinguishes mandates');
+            await waitFor(() => trigger.querySelector('img').naturalWidth);
+            check(trigger.getBoundingClientRect().width >= 44 && trigger.getBoundingClientRect().height >= 44,
+                'ECMA launcher has a touch-sized target and a working local image');
+            trigger.focus();
+            trigger.click();
+            const orbitalFrame = doc.getElementById('consobOrbitalFrame');
+            await waitFor(() => orbitalFrame.contentDocument?.querySelector('h1')?.textContent.includes('Ethiopian Capital Market Authority'));
+            const ecmaDoc = orbitalFrame.contentDocument;
+            check(doc.getElementById('consobOrbitalDialog').open, 'ECMA opens in the unchanged shared Orbital dialog');
+            check(ecmaDoc.querySelector('link[rel="canonical"]').href === 'https://www.amevfirenze.it/authority/ET-ECMA.html',
+                'ECMA canonical route');
+            check(ecmaDoc.querySelectorAll('[data-app]').length === 2
+                && ecmaDoc.querySelector('[data-app="ecma"]').textContent.includes('disponibilità non verificata')
+                && ecmaDoc.querySelector('[data-app="neway"]').textContent.includes('Ethiopian Securities Exchange'),
+                'Distinct ECMA and ESX app cards; no invented ECMA Apple listing');
+            check(!ecmaDoc.querySelector('form, input, iframe, script:not([type="application/ld+json"])')
+                && [...ecmaDoc.querySelectorAll('a[target="_blank"]')].every(link =>
+                    link.rel.includes('noopener') && link.rel.includes('noreferrer')),
+                'No credentials, trading proxy or unsafe external targets');
+            check(!ecmaDoc.querySelector('a[href*="play.google.com"], a[href*="apps.apple.com"]')
+                && ecmaDoc.getElementById('sources').parentElement.textContent.includes('Verifica live non completata'),
+                'Unverified institutional-to-store link chains are withheld with a visible explanation');
+            check(ecmaDoc.querySelector('.notice').textContent.includes('non è consulenza')
+                && ecmaDoc.querySelector('.notice').textContent.includes('non garantiscono rendimenti'),
+                'Visible endorsement, advice and loss disclaimers');
+            for (const node of ecmaDoc.querySelectorAll('script[type="application/ld+json"]')) {
+                check(JSON.parse(node.textContent)['@type'] === 'WebPage', 'Wrapper JSON-LD parses');
+            }
+            for (const width of [1000, 375]) {
+                frame.width = width;
+                await new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve)));
+                check(ecmaDoc.documentElement.scrollWidth <= orbitalFrame.contentWindow.innerWidth,
+                    `Responsive ECMA wrapper at ${width}px outer viewport`);
+            }
+            frame.width = 1000;
+            app.closeItalyOrbitalDialog();
+            check(doc.activeElement === trigger && doc.getElementById('countryModal').style.display === 'block',
+                'Closing Orbital restores launcher focus and keeps Ethiopia details open');
+            await waitFor(() => orbitalFrame.contentWindow.location.href === 'about:blank');
+            app.closeModal();
+
+            for (const [country, page] of [['United Kingdom', 'UK-FCA.html'], ['France', 'FR-AMF.html'], ['Germany', 'DE-BAFIN.html']]) {
+                app.openModal(country);
+                const existingTrigger = doc.querySelector('#countryModal .orbital-thumbnail-trigger');
+                check(existingTrigger?.dataset.orbitalSrc.endsWith(`/authority/${page}`),
+                    `${country} existing detail launcher unchanged`);
+                existingTrigger.click();
+                await waitFor(() => orbitalFrame.contentDocument?.querySelector('h1')
+                    && orbitalFrame.contentWindow.location.pathname.endsWith(`/authority/${page}`));
+                check(doc.getElementById('consobOrbitalDialog').open, `${country} existing Orbital flow works`);
+                app.closeItalyOrbitalDialog();
+                await waitFor(() => orbitalFrame.contentWindow.location.href === 'about:blank');
+                app.closeModal();
+            }
+            check(app.resolveConsobOrbitalSrc('https://example.org/authority/ET-ECMA.html') === ''
+                && app.resolveConsobOrbitalThumbnailSrc('https://example.org/authority/preview-ET-ECMA.svg') === '',
+                'ECMA allowlists reject cross-origin pages and illustrations');
+            for (const id of ['website-jsonld', 'dataset-jsonld']) {
+                const data = JSON.parse(doc.getElementById(id).textContent);
+                const entries = data.hasPart || data.subjectOf;
+                check(entries.filter(entry => entry.url === 'https://www.amevfirenze.it/authority/ET-ECMA.html').length === 1,
+                    `${id} discovers ECMA once with its own identity`);
+            }
+            const sitemap = new DOMParser().parseFromString(await (await fetch('./sitemap.xml')).text(), 'application/xml');
+            const entry = [...sitemap.getElementsByTagName('url')].filter(node =>
+                node.getElementsByTagName('loc')[0].textContent === 'https://www.amevfirenze.it/authority/ET-ECMA.html');
+            check(!sitemap.querySelector('parsererror') && entry.length === 1
+                && entry[0].getElementsByTagName('lastmod')[0].textContent === '2026-10-07',
+                'Valid sitemap has one ECMA entry with actual modification date');
+            results.textContent += '\nAll ECMA checks passed.';
+        }
+
+        run().catch(error => {
+            results.textContent += `\nFAIL: ${error.message}`;
+        });
+    </script>
+</body>
+</html>
