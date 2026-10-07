@@ -7760,6 +7760,25 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             }
         });
 
+        const BCEAO_MEMBER_COUNTRIES = new Set([
+            'Benin', 'Burkina Faso', "Côte d'Ivoire", 'Guinea-Bissau',
+            'Mali', 'Niger', 'Senegal', 'Togo'
+        ]);
+
+        function getBceaoMemberLinksHtml(country) {
+            if (!BCEAO_MEMBER_COUNTRIES.has(country?.country_name)) return '';
+            return `
+                <section aria-label="BCEAO applications and Orbital WebApp" style="margin: 18px 0;">
+                    <strong>BCEAO resources:</strong>
+                    <ul>
+                        <li><a href="authority/BJ-BCEAO.html" target="_blank" rel="noopener noreferrer">BCEAO Orbital WebApp</a></li>
+                        <li><a href="https://play.google.com/store/apps/details?id=www.bceao" target="_blank" rel="noopener noreferrer">Download APP Google Play</a></li>
+                        <li><a href="https://itunes.apple.com/fr/app/bceao/id1130940569?l=en&amp;mt=8" target="_blank" rel="noopener noreferrer">Download Apple Store</a></li>
+                    </ul>
+                </section>
+            `;
+        }
+
         function openModal(countryName) {
             const country = countriesData.find(c => c.country_name === countryName);
             if (!country) return;
@@ -7860,6 +7879,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             const homepage = (country.financial_authority.homepage || '').trim();
             const fraudReportLink = (country.financial_authority.fraudReportLink || '').trim();
             const authorityEmail = (country.financial_authority.authorityEmail || '').trim();
+            const bceaoMemberLinksHtml = getBceaoMemberLinksHtml(country);
             const physicalAddress = String(country.financial_authority.physicalAddress || '').trim();
             const phoneNumbers = Array.isArray(country.financial_authority.phoneNumbers)
                 ? country.financial_authority.phoneNumbers
@@ -7928,6 +7948,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     </div>
                     <p><strong>${currentTranslations.modalEmail || 'Email'}:</strong> ${authorityEmailHtml}</p>
                     ${authorityContactDetailsHtml}
+                    ${bceaoMemberLinksHtml}
                     ${socialHTML ? `<p style="margin-top:15px;"><strong>${currentTranslations.modalSocial || 'Social'}:</strong> ${socialHTML}</p>` : ''}
                     ${orbitalPreviewHtml}
                     ${ecmaPreviewHtml}
