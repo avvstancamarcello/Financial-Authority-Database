@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>BCEAO – Orbital WebApp</title>
+  <meta name="description" content="Fiche orbitale indépendante de la BCEAO : ressources officielles, éducation financière et États membres de l'UMOA.">
+  <link rel="canonical" href="https://www.amevfirenze.it/authority/BJ-BCEAO.html">
+  <style>
+    :root {
+      color-scheme: light;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: #172033;
+      background: #f1f5f3;
+      font-synthesis: none;
+    }
+
+    * { box-sizing: border-box; }
+    body { margin: 0; }
+    header { padding: 22px max(20px, calc((100% - 960px) / 2)); background: #064e3b; color: #fff; }
+    header p { margin: 6px 0 0; opacity: .9; }
+    main { max-width: 960px; margin: 24px auto; padding: 0 16px; }
+    article { padding: 24px; background: #fff; border: 1px solid #cbd5d1; border-radius: 18px; box-shadow: 0 12px 30px #1720331c; }
+    .preview { display: block; width: min(100%, 820px); height: auto; margin: 0 auto 22px; border: 1px solid #d1d9d5; border-radius: 14px; }
+    h1 { margin: 0; font-size: clamp(1.35rem, 4vw, 1.8rem); }
+    h2 { margin: 0 0 14px; color: #064e3b; font-size: 1.2rem; }
+    p { line-height: 1.55; }
+    dl { display: grid; grid-template-columns: minmax(150px, 210px) minmax(0, 1fr); gap: 10px 16px; margin: 22px 0; }
+    dt { font-weight: 700; }
+    dd { margin: 0; overflow-wrap: anywhere; }
+    a { color: #075e48; }
+    a:focus-visible, button:focus-visible { outline: 3px solid #e5a900; outline-offset: 3px; }
+    .members { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 8px; padding: 0; list-style: none; }
+    .members li { padding: 9px 12px; border: 1px solid #d5ded9; border-radius: 9px; background: #f7faf8; }
+    .cta { display: inline-flex; align-items: center; min-height: 46px; padding: 10px 16px; border-radius: 999px; background: #075e48; color: #fff; font-weight: 700; text-decoration: none; }
+    .cta:hover { background: #064e3b; text-decoration: underline; }
+    #release-status { margin: 8px 0 0; color: #475569; font-size: .9rem; }
+    .note { padding: 12px 14px; border-left: 4px solid #d8a51b; background: #fffbeb; }
+    footer { margin: 20px 0 30px; color: #64748b; font-size: .8rem; text-align: center; }
+    @media (max-width: 600px) {
+      article { padding: 18px 14px; }
+      dl { grid-template-columns: 1fr; gap: 4px; }
+      dd { margin-bottom: 9px; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Banque Centrale des États de l’Afrique de l’Ouest · BCEAO</h1>
+    <p>Fiche orbitale indépendante · Union Monétaire Ouest Africaine</p>
+  </header>
+  <main>
+    <article aria-labelledby="bceao-heading">
+      <img class="preview" src="perview-BCEAO.png" alt="Logo BCEAO et aperçu de la fiche orbitale" width="820" height="462">
+      <h2 id="bceao-heading">Ressources officielles de la BCEAO</h2>
+      <dl>
+        <dt>Institution</dt>
+        <dd>Banque Centrale des États de l’Afrique de l’Ouest (BCEAO)</dd>
+        <dt>Site officiel</dt>
+        <dd><a href="https://www.bceao.int/" target="_blank" rel="noopener noreferrer">https://www.bceao.int/</a></dd>
+        <dt>Contact officiel</dt>
+        <dd><a href="https://www.bceao.int/fr/contact" target="_blank" rel="noopener noreferrer">Formulaire de contact BCEAO</a></dd>
+        <dt>Éducation financière</dt>
+        <dd><a href="https://www.bceao.int/publications/education-financiere" target="_blank" rel="noopener noreferrer">Publications d’éducation financière</a></dd>
+        <dt>Compétence régionale</dt>
+        <dd>États membres de l’Union Monétaire Ouest Africaine (UMOA)</dd>
+      </dl>
+
+      <section aria-labelledby="members-heading">
+        <h2 id="members-heading">États membres</h2>
+        <ul class="members">
+          <li>Bénin</li>
+          <li>Burkina Faso</li>
+          <li>Côte d’Ivoire</li>
+          <li>Guinée-Bissau</li>
+          <li>Mali</li>
+          <li>Niger</li>
+          <li>Sénégal</li>
+          <li>Togo</li>
+        </ul>
+      </section>
+
+      <section aria-labelledby="release-heading">
+        <h2 id="release-heading">Communiqué sur la monnaie électronique</h2>
+        <a class="cta" id="release-link" href="https://www.bceao.int/fr/communique-presse/transactions-de-monnaie-electronique-entre-personnes-physiques-par-lintermediaire" target="_blank" rel="noopener noreferrer">
+          Lire le communiqué officiel
+        </a>
+        <p id="release-status" role="status" aria-live="polite">Le lien officiel est prêt ; vérification de disponibilité en cours.</p>
+      </section>
+
+      <p class="note">Cette fiche indépendante rassemble des liens institutionnels. Elle n’est ni publiée, ni certifiée, ni approuvée par la BCEAO et ne constitue pas un conseil financier.</p>
+    </article>
+    <footer><a href="../index.html">Retour à la base de données</a> · BCEAO Orbital WebApp</footer>
+  </main>
+  <script>
+    (() => {
+      const releaseLink = document.getElementById('release-link');
+      const releaseStatus = document.getElementById('release-status');
+      const fallbackUrl = releaseLink.href;
+      const pressReleasePath = '/fr/communique-presse/';
+      let lastChecked = 0;
+
+      async function checkRelease() {
+        const controller = new AbortController();
+        const timeout = window.setTimeout(() => controller.abort(), 8000);
+        lastChecked = Date.now();
+        try {
+          const response = await fetch(fallbackUrl, {
+            method: 'HEAD',
+            mode: 'cors',
+            cache: 'no-store',
+            redirect: 'follow',
+            signal: controller.signal
+          });
+          const resolvedUrl = new URL(response.url);
+          const officialHost = ['www.bceao.int', 'bceao.int'].includes(resolvedUrl.hostname);
+          if (!response.ok || resolvedUrl.protocol !== 'https:' || !officialHost
+              || !resolvedUrl.pathname.startsWith(pressReleasePath)) {
+            throw new Error('Official press release unavailable');
+          }
+          releaseLink.href = resolvedUrl.href;
+          releaseStatus.textContent = 'Lien officiel BCEAO vérifié à l’instant.';
+        } catch {
+          releaseLink.href = fallbackUrl;
+          releaseStatus.textContent = 'Vérification automatique indisponible ; le lien officiel fourni reste accessible.';
+        } finally {
+          window.clearTimeout(timeout);
+        }
+      }
+
+      checkRelease();
+      window.setInterval(checkRelease, 6 * 60 * 60 * 1000);
+      document.addEventListener('visibilitychange', () => {
+        if (document.visibilityState === 'visible' && Date.now() - lastChecked > 5 * 60 * 1000) {
+          checkRelease();
+        }
+      });
+    })();
+  </script>
+</body>
+</html>

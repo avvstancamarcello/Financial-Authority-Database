@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>BCEAO and AMF-UMOA regression checks</title>
+</head>
+<body>
+    <h1>BCEAO and AMF-UMOA regression checks</h1>
+    <pre id="results">Running…</pre>
+    <script>
+        const results = document.getElementById('results');
+        const checks = [];
+
+        function check(condition, message) {
+            checks.push(`${condition ? 'PASS' : 'FAIL'}: ${message}`);
+            results.textContent = checks.join('\n');
+            if (!condition) throw new Error(message);
+        }
+
+        async function load(path, type = 'text/html') {
+            const response = await fetch(path);
+            check(response.ok, `${path} is served successfully`);
+            const content = type === 'application/json' ? await response.json() : await response.text();
+            return type === 'application/json'
+                ? content
+                : new DOMParser().parseFromString(content, type);
+        }
+
+        async function run() {
+            const homepageResponse = await fetch('./index.html');
+            check(homepageResponse.ok, 'Homepage is served successfully');
+            const homepageSource = await homepageResponse.text();
+            const homepage = new DOMParser().parseFromString(homepageSource, 'text/html');
+            const homepageScripts = [...homepage.querySelectorAll('script:not([type="application/ld+json"])')]
+                .map(script => script.textContent).join('\n');
+            check(homepageScripts.includes("data.Benin.thumbnail = 'authority/perview-BCEAO.png'")
+                && homepageScripts.includes("data.Benin.modal = 'authority/BJ-BCEAO.html'")
+                && homepageScripts.includes("data.Benin.has_orbital_view = true"),
+                'Benin is wired to the BCEAO Orbital image and page');
+            check(homepageScripts.includes("new URL('/authority/BJ-BCEAO.html', window.location.origin).pathname")
+                && homepageScripts.includes("new URL('/authority/perview-BCEAO.png', window.location.origin).pathname")
+                && homepageScripts.includes('CONSOB_ORBITAL_ALLOWED_PATHS.has(orbitalModalSrc)'),
+                'The existing same-origin page and image allowlists authorize the launcher');
+            check(homepageScripts.includes('orbitalImage.alt = `${orbitalAuthorityName} orbital preview thumbnail`;')
+                && homepageScripts.includes('setAttribute(\'aria-label\', `Open ${orbitalAuthorityName} orbital dialog`)')
+                && homepageScripts.includes('class="orbital-thumbnail-trigger"'),
+                'BCEAO uses the existing accessible grid button pattern');
+            const bceaoMembers = [
+                'Benin', 'Burkina Faso', "Côte d'Ivoire", 'Guinea-Bissau',
+                'Mali', 'Niger', 'Senegal', 'Togo'
+            ];
+            const bceaoMemberSet = homepageScripts.match(/const BCEAO_MEMBER_COUNTRIES = new Set\(\[([\s\S]*?)\]\);/);
+            check(bceaoMemberSet
+                && bceaoMembers.every(country => bceaoMemberSet[1].includes(`'${country}'`) || bceaoMemberSet[1].includes(`"${country}"`)),
+                'All eight member-state modals are explicitly enabled for BCEAO links');
+            check(homepageScripts.includes('if (!BCEAO_MEMBER_COUNTRIES.has(country?.country_name)) return \'\';')
+                && homepageScripts.includes('const bceaoMemberLinksHtml = getBceaoMemberLinksHtml(country);')
+                && homepageScripts.includes('${bceaoMemberLinksHtml}'),
+                'BCEAO links render only inside qualifying authority modals');
+            for (const [url, label] of [
+                ['authority/BJ-BCEAO.html', 'BCEAO Orbital WebApp'],
+                ['https://play.google.com/store/apps/details?id=www.bceao', 'Download APP Google Play'],
+                ['https://itunes.apple.com/fr/app/bceao/id1130940569?l=en&amp;mt=8', 'Download Apple Store']
+            ]) {
+                check(homepageScripts.includes(`href="${url}"`)
+                    && homepageScripts.includes(`>${label}</a>`),
+                    `Modal contains the ${label} link`);
+            }
+
+            const page = await load('./authority/BJ-BCEAO.html');
+            const canonicalUrl = 'https://www.amevfirenze.it/authority/BJ-BCEAO.html';
+            check(page.querySelector('link[rel="canonical"]')?.href === canonicalUrl
+                && page.title.includes('BCEAO')
+                && page.querySelector('meta[name="description"]')?.content.includes('BCEAO')
+                && page.documentElement.lang === 'fr',
+                'BCEAO page has canonical metadata, description and French language');
+            const preview = page.querySelector('.preview');
+            check(preview.getAttribute('src') === 'perview-BCEAO.png'
+                && preview.alt.includes('BCEAO')
+                && preview.getAttribute('width') === '820'
+                && preview.getAttribute('height') === '462',
+                'The required local BCEAO image has accessible alt text and dimensions');
+            check(JSON.stringify([...page.querySelectorAll('.members li')].map(item => item.textContent.trim())) === JSON.stringify([
+                'Bénin', 'Burkina Faso', 'Côte d’Ivoire', 'Guinée-Bissau',
+                'Mali', 'Niger', 'Sénégal', 'Togo'
+            ]), 'All eight UMOA member states are listed');
+            check(page.querySelector('a[href="https://www.bceao.int/"]')
+                && page.querySelector('a[href="https://www.bceao.int/fr/contact"]')
+                && page.querySelector('a[href="https://www.bceao.int/publications/education-financiere"]'),
+                'Official website, contact and financial education resources are linked');
+
+            const releaseUrl = 'https://www.bceao.int/fr/communique-presse/transactions-de-monnaie-electronique-entre-personnes-physiques-par-lintermediaire';
+            const releaseLink = page.getElementById('release-link');
+            const pageSource = await (await fetch('./authority/BJ-BCEAO.html')).text();
+            check(releaseLink.href === releaseUrl
+                && releaseLink.target === '_blank'
+                && releaseLink.rel.includes('noopener')
+                && releaseLink.rel.includes('noreferrer')
+                && page.getElementById('release-status').getAttribute('aria-live') === 'polite',
+                'Press-release CTA has the supplied URL and accessible safe-link behavior');
+            check(pageSource.includes("method: 'HEAD'")
+                && pageSource.includes("mode: 'cors'")
+                && pageSource.includes("cache: 'no-store'")
+                && pageSource.includes('setInterval(checkRelease, 6 * 60 * 60 * 1000)')
+                && pageSource.includes('releaseLink.href = fallbackUrl')
+                && pageSource.includes("url.hostname"),
+                'Press-release URL is revalidated periodically with a checked same-site fallback');
+            check([...page.querySelectorAll('a[target="_blank"]')].every(link =>
+                link.rel.includes('noopener') && link.rel.includes('noreferrer')),
+                'External links use safe target attributes');
+
+            const records = await load('./financial_authorities_database.json', 'application/json');
+            for (const country of ['Burkina Faso', "Côte d'Ivoire"]) {
+                const authority = records[country].financial_authority;
+                check(authority.abbreviation === 'AMF-UMOA'
+                    && authority.homepage === 'https://www.amf-umoa.org/'
+                    && authority.fraudReportLink === 'https://www.amf-umoa.org/pratique/procedure/requete'
+                    && authority.authorityEmail === 'sg@amf-umoa.org'
+                    && authority.additionalEmails.includes('communication@amf-umoa.org')
+                    && authority.physicalAddress.includes('Avenue Joseph ANOMA')
+                    && authority.phoneNumbers.length === 3
+                    && authority.agreementVerificationLink.endsWith('/verification/agrement')
+                    && authority.professionalCardVerificationLink.endsWith('/verification/cartepro'),
+                    `${country} AMF-UMOA record includes supplied contact and verification data`);
+            }
+            check(homepageScripts.includes('const physicalAddress')
+                && homepageScripts.includes('const phoneNumbers')
+                && homepageScripts.includes('const additionalEmails')
+                && homepageScripts.includes('${authorityContactDetailsHtml}'),
+                'AMF-UMOA address, phones, secondary email and verification URLs render in the authority card');
+            for (const path of [
+                './APP/financial_authorities_database.json',
+                './DEPLOY_REGISTER/financial_authorities_database.json',
+                './android/app/src/main/assets/financial_authorities_database.json'
+            ]) {
+                const mirror = await load(path, 'application/json');
+                check(JSON.stringify(mirror['Côte d\'Ivoire'].financial_authority)
+                    === JSON.stringify(records['Côte d\'Ivoire'].financial_authority),
+                    `${path} remains synchronized`);
+            }
+            const sitemap = await load('./sitemap.xml', 'application/xml');
+            check(!sitemap.querySelector('parsererror')
+                && [...sitemap.getElementsByTagName('loc')].filter(node => node.textContent === canonicalUrl).length === 1,
+                'Sitemap contains the BCEAO canonical page exactly once');
+            results.textContent += '\nAll BCEAO and AMF-UMOA checks passed.';
+        }
+
+        run().catch(error => {
+            results.textContent += `\nFAIL: ${error.message}`;
+            console.error(error);
+        });
+    </script>
+</body>
+</html>
