@@ -46,6 +46,27 @@
                 && homepageScripts.includes('setAttribute(\'aria-label\', `Open ${orbitalAuthorityName} orbital dialog`)')
                 && homepageScripts.includes('class="orbital-thumbnail-trigger"'),
                 'BCEAO uses the existing accessible grid button pattern');
+            const bceaoMembers = [
+                'Benin', 'Burkina Faso', "Côte d'Ivoire", 'Guinea-Bissau',
+                'Mali', 'Niger', 'Senegal', 'Togo'
+            ];
+            const bceaoMemberSet = homepageScripts.match(/const BCEAO_MEMBER_COUNTRIES = new Set\(\[([\s\S]*?)\]\);/);
+            check(bceaoMemberSet
+                && bceaoMembers.every(country => bceaoMemberSet[1].includes(`'${country}'`) || bceaoMemberSet[1].includes(`"${country}"`)),
+                'All eight member-state modals are explicitly enabled for BCEAO links');
+            check(homepageScripts.includes('if (!BCEAO_MEMBER_COUNTRIES.has(country?.country_name)) return \'\';')
+                && homepageScripts.includes('const bceaoMemberLinksHtml = getBceaoMemberLinksHtml(country);')
+                && homepageScripts.includes('${bceaoMemberLinksHtml}'),
+                'BCEAO links render only inside qualifying authority modals');
+            for (const [url, label] of [
+                ['authority/BJ-BCEAO.html', 'BCEAO Orbital WebApp'],
+                ['https://play.google.com/store/apps/details?id=www.bceao', 'Download APP Google Play'],
+                ['https://itunes.apple.com/fr/app/bceao/id1130940569?l=en&amp;mt=8', 'Download Apple Store']
+            ]) {
+                check(homepageScripts.includes(`href="${url}"`)
+                    && homepageScripts.includes(`>${label}</a>`),
+                    `Modal contains the ${label} link`);
+            }
 
             const page = await load('./authority/BJ-BCEAO.html');
             const canonicalUrl = 'https://www.amevfirenze.it/authority/BJ-BCEAO.html';
