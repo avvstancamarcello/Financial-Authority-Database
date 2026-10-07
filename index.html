@@ -6433,6 +6433,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     data.Spain.modal = 'authority/ES-CNMV.html';
                     data.Spain.has_orbital_view = true;
                 }
+                if (data.Ethiopia) {
+                    data.Ethiopia.ecma_orbital = {
+                        name: 'Ethiopian Capital Market Authority (ECMA)',
+                        modal: 'authority/ET-ECMA.html',
+                        thumbnail: 'authority/preview-ET-ECMA.svg'
+                    };
+                }
                 
                 // Aggiungi suddivisioni regionali e watermark copyright
                 data = addCanadaSubregions(data);
@@ -6736,6 +6743,17 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             }
             const uniqueByUrl = new Map();
             countriesData.forEach((country) => {
+                if (country.country_name === 'Ethiopia' && country.ecma_orbital) {
+                    const ecmaPath = resolveConsobOrbitalSrc(country.ecma_orbital.modal);
+                    if (ecmaPath) {
+                        const ecmaUrl = new URL(ecmaPath, SEO_SITE_ROOT).toString();
+                        uniqueByUrl.set(ecmaUrl, {
+                            '@type': 'WebPage',
+                            name: 'ECMA Orbital Web App',
+                            url: ecmaUrl
+                        });
+                    }
+                }
                 if (!country?.has_orbital_view) return;
                 const orbitalPath = resolveConsobOrbitalSrc(country.modal);
                 if (!orbitalPath) return;
@@ -7530,6 +7548,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             new URL('authority/FR-AMF.html', window.location.href).pathname,
             new URL('/authority/DE-BAFIN.html', window.location.origin).pathname,
             new URL('authority/DE-BAFIN.html', window.location.href).pathname,
+            new URL('/authority/ET-ECMA.html', window.location.origin).pathname,
+            new URL('authority/ET-ECMA.html', window.location.href).pathname,
             new URL('/authority/ES-CNMV.html', window.location.origin).pathname,
             new URL('authority/ES-CNMV.html', window.location.href).pathname,
             new URL('/authority/US-SEC.html', window.location.origin).pathname,
@@ -7544,6 +7564,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             new URL('authority/preview-FR-AMF.png', window.location.href).pathname,
             new URL('/authority/preview-DE-BAFIN.png', window.location.origin).pathname,
             new URL('authority/preview-DE-BAFIN.png', window.location.href).pathname,
+            new URL('/authority/preview-ET-ECMA.svg', window.location.origin).pathname,
+            new URL('authority/preview-ET-ECMA.svg', window.location.href).pathname,
             new URL('/authority/preview-ES-CNMV.png', window.location.origin).pathname,
             new URL('authority/preview-ES-CNMV.png', window.location.href).pathname,
             new URL('/authority/preview-US-SEC.svg', window.location.origin).pathname,
@@ -7802,6 +7824,25 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     </button>
                 </div>
             ` : '';
+            const ecmaOrbital = country.country_name === 'Ethiopia' ? country.ecma_orbital : null;
+            const ecmaModalSrc = resolveConsobOrbitalSrc(ecmaOrbital?.modal);
+            const ecmaThumbnailSrc = resolveConsobOrbitalThumbnailSrc(ecmaOrbital?.thumbnail);
+            const ecmaPreviewHtml = ecmaModalSrc && ecmaThumbnailSrc ? `
+                <section style="margin: 20px 0 0;" aria-label="ECMA capital market resources">
+                    <p style="margin: 0 0 10px;"><strong>${escapeHtmlAttribute(ecmaOrbital.name)} Orbital Preview:</strong></p>
+                    <p>Capital markets: ECMA · Securities exchange: ESX. NBE remains the banking authority.</p>
+                    <button
+                        type="button"
+                        class="orbital-thumbnail-trigger"
+                        data-orbital-trigger="consob"
+                        data-orbital-src="${escapeHtmlAttribute(ecmaModalSrc)}"
+                        aria-label="Open ECMA orbital dialog"
+                        onclick="openItalyOrbitalDialog(this.dataset.orbitalSrc); return false;"
+                    >
+                        <img src="${escapeHtmlAttribute(ecmaThumbnailSrc)}" alt="Independent ECMA resource guide illustration" style="width: 160px; max-width: 100%; aspect-ratio: auto; object-fit: contain;" width="256" height="256">
+                    </button>
+                </section>
+            ` : '';
             const safeCountryName = escapeHtmlAttribute(country.country_name);
             const safeAuthorityName = escapeHtmlAttribute(country.financial_authority.name);
             const safeAuthorityEmail = escapeHtmlAttribute(country.financial_authority.authorityEmail);
@@ -7841,6 +7882,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     <p><strong>${currentTranslations.modalEmail || 'Email'}:</strong> ${authorityEmailHtml}</p>
                     ${socialHTML ? `<p style="margin-top:15px;"><strong>${currentTranslations.modalSocial || 'Social'}:</strong> ${socialHTML}</p>` : ''}
                     ${orbitalPreviewHtml}
+                    ${ecmaPreviewHtml}
                     <div style="margin-top: 20px; display: flex; align-items: center; flex-wrap: wrap; gap: 10px;">
                         <h3 style="margin: 0;">${currentTranslations.modalNotes || 'Notes'}:</h3>
                         <button id="translateNotesBtn" class="translate-btn" onclick="translateNotes(this.dataset.country)" data-country="${safeCountryName}">

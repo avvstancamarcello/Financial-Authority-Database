@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256" role="img" aria-labelledby="title desc">
+  <title id="title">ECMA independent resource guide</title>
+  <desc id="desc">Original orbital illustration with a book and ECMA lettering, not an official authority emblem.</desc>
+  <rect width="256" height="256" rx="44" fill="#103c32"/>
+  <ellipse cx="128" cy="114" rx="98" ry="58" fill="none" stroke="#f6d36b" stroke-width="4" transform="rotate(-25 128 114)"/>
+  <circle cx="208" cy="71" r="9" fill="#ef7770"/>
+  <path d="M78 82q25-12 50 0q25-12 50 0v67q-25-12-50 0q-25-12-50 0z" fill="#fff9e8"/>
+  <path d="M128 82v67M88 102h27m-27 15h27m26-15h27m-27 15h27" fill="none" stroke="#103c32" stroke-width="4"/>
+  <text x="128" y="205" fill="#fff9e8" font-family="system-ui, sans-serif" font-size="35" font-weight="700" text-anchor="middle">ECMA</text>
+  <text x="128" y="231" fill="#f6d36b" font-family="system-ui, sans-serif" font-size="11" text-anchor="middle">INDEPENDENT RESOURCE GUIDE</text>
+</svg>
