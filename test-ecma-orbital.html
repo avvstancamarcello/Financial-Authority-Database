@@ -11,7 +11,7 @@
 <body>
     <h1>ECMA supplemental Orbital regression checks</h1>
     <pre id="results">Running…</pre>
-    <iframe id="app" title="Homepage under test" src="./index.html" width="1000" height="700"></iframe>
+    <iframe id="app" title="WIP homepage under test" src="./index-wip.html?diag=1" width="1000" height="700"></iframe>
     <script>
         const results = document.getElementById('results');
         const checks = [];
@@ -36,6 +36,20 @@
             await waitFor(() => frame.contentDocument.querySelector('#flagsGrid [aria-label$="Ethiopia"]'));
             const app = frame.contentWindow;
             const doc = frame.contentDocument;
+            const diagnostics = app.gridPipelineDiag;
+            await waitFor(() => diagnostics?.lastSnapshot?.state === 'ready');
+            check(JSON.stringify(diagnostics.orbitalReport.inventory.map(item => item.authority).sort())
+                === JSON.stringify(['AMF France', 'BaFin', 'CNMV', 'CONSOB', 'ECMA Ethiopia', 'FCA', 'SEC'].sort()),
+                'Opt-in WIP inventory lists each configured Orbital integration once');
+            check(diagnostics.orbitalReport.inventory.every(item => item.authorized
+                && item.sourcePath.startsWith('/authority/')
+                && item.thumbnailPath.startsWith('/authority/')
+                && item.wrapperId === 'consobOrbitalDialog'
+                && item.iframeId === 'consobOrbitalFrame'),
+                'Every inventory entry uses an authorized local page, preview, and shared wrapper');
+            check(diagnostics.orbitalReport.inventory.find(item => item.authority === 'ECMA Ethiopia')
+                ?.configuredBy === 'WIP bootstrap',
+                'Ethiopia ECMA runtime injection is distinguished from persisted JSON fields');
             const source = await (await fetch('./financial_authorities_database.json')).json();
             check(source.Ethiopia.financial_authority.authorityId === 'ethiopia__nbe'
                 && source.Ethiopia.financial_authority.abbreviation === 'NBE', 'Database retains NBE identity');
@@ -60,7 +74,22 @@
             const orbitalFrame = doc.getElementById('consobOrbitalFrame');
             await waitFor(() => orbitalFrame.contentDocument?.querySelector('h1')?.textContent.includes('Ethiopian Capital Market Authority'));
             const ecmaDoc = orbitalFrame.contentDocument;
-            check(doc.getElementById('consobOrbitalDialog').open, 'ECMA opens in the unchanged shared Orbital dialog');
+            const ecmaOpen = diagnostics.events.filter(entry => entry.event === 'orbital:open:done').at(-1);
+            const ecmaLoad = diagnostics.events.filter(entry => entry.event === 'orbital:iframe:load').at(-1);
+            const ecmaAttempt = diagnostics.events.filter(entry => entry.event === 'orbital:open:start').at(-1);
+            await waitFor(() => diagnostics.events.some(entry =>
+                entry.event === 'orbital:resource:check' && entry.attemptId === ecmaAttempt.attemptId));
+            const ecmaResource = diagnostics.events.find(entry =>
+                entry.event === 'orbital:resource:check' && entry.attemptId === ecmaAttempt.attemptId);
+            check(doc.getElementById('consobOrbitalDialog').open
+                && doc.getElementById('consobOrbitalDialog').matches(':modal')
+                && ecmaOpen?.wrapperVisible && ecmaOpen.focusInside,
+                'ECMA opens visibly with focus in the unchanged shared Orbital dialog');
+            check(ecmaLoad?.contentStatus === 'same-origin-document-ready'
+                && ecmaLoad.hasBody && ecmaLoad.hasHeading,
+                'ECMA iframe has a same-origin ready document, not merely a load event');
+            check(ecmaResource.ok && ecmaResource.status === 200,
+                'Read-only same-origin ECMA metadata request confirms the local wrapper exists');
             check(ecmaDoc.querySelector('link[rel="canonical"]').href === 'https://www.amevfirenze.it/authority/ET-ECMA.html',
                 'ECMA canonical route');
             check(ecmaDoc.querySelectorAll('[data-app]').length === 2
@@ -93,17 +122,40 @@
             await waitFor(() => orbitalFrame.contentWindow.location.href === 'about:blank');
             app.closeModal();
 
-            for (const [country, page] of [['United Kingdom', 'UK-FCA.html'], ['France', 'FR-AMF.html'], ['Germany', 'DE-BAFIN.html']]) {
+            for (const [country, page] of [
+                ['Italy', 'IT-CONSOB.html'],
+                ['United Kingdom', 'UK-FCA.html'],
+                ['France', 'FR-AMF.html'],
+                ['Germany', 'DE-BAFIN.html'],
+                ['Spain', 'ES-CNMV.html'],
+                ['United States of America', 'US-SEC.html']
+            ]) {
                 app.openModal(country);
                 const existingTrigger = doc.querySelector('#countryModal .orbital-thumbnail-trigger');
                 check(existingTrigger?.dataset.orbitalSrc.endsWith(`/authority/${page}`),
                     `${country} existing detail launcher unchanged`);
+                existingTrigger.focus();
                 existingTrigger.click();
                 await waitFor(() => orbitalFrame.contentDocument?.querySelector('h1')
                     && orbitalFrame.contentWindow.location.pathname.endsWith(`/authority/${page}`));
-                check(doc.getElementById('consobOrbitalDialog').open, `${country} existing Orbital flow works`);
+                const open = diagnostics.events.filter(entry => entry.event === 'orbital:open:done').at(-1);
+                const load = diagnostics.events.filter(entry => entry.event === 'orbital:iframe:load').at(-1);
+                const attempt = diagnostics.events.filter(entry => entry.event === 'orbital:open:start').at(-1);
+                await waitFor(() => diagnostics.events.some(entry =>
+                    entry.event === 'orbital:resource:check' && entry.attemptId === attempt.attemptId));
+                const resource = diagnostics.events.find(entry =>
+                    entry.event === 'orbital:resource:check' && entry.attemptId === attempt.attemptId);
+                check(doc.getElementById('consobOrbitalDialog').open && open?.wrapperVisible && open.focusInside,
+                    `${country} wrapper is actually visible and receives focus`);
+                check(load?.contentStatus === 'same-origin-document-ready'
+                    && load.sourcePath.endsWith(`/authority/${page}`),
+                    `${country} iframe content is same-origin and document-ready`);
+                check(resource.ok && resource.status === 200,
+                    `${country} local wrapper exists according to read-only HTTP metadata`);
                 app.closeItalyOrbitalDialog();
                 await waitFor(() => orbitalFrame.contentWindow.location.href === 'about:blank');
+                check(doc.activeElement === existingTrigger,
+                    `${country} close returns focus to its launcher`);
                 app.closeModal();
             }
             check(app.resolveConsobOrbitalSrc('https://example.org/authority/ET-ECMA.html') === ''

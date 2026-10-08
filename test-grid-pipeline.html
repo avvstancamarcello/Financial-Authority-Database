@@ -6,9 +6,10 @@
 </head>
 <body>
     <h1>Diagnostica grid WIP</h1>
-    <p>Aprire <code>index-wip?diag=1</code> e la console: il gruppo
+    <p>Aprire <code>index-wip.html?diag=1</code> e la console: il gruppo
         <code>[DIAG] Grid pipeline</code> raccoglie eventi e snapshot.
-        Il tracer è disponibile in <code>window.gridPipelineDiag</code>; senza
+        Il tracer è disponibile in <code>window.gridPipelineDiag</code>, con
+        inventario Orbital e snapshot in <code>window.gridPipelineDiag.lastOrbitalSnapshot</code>; senza
         <code>diag=1</code> non viene creato.</p>
     <p>Esempio: <code>{event: "db:fetch:response", relativeMs: 42, iso: "2026-10-08T08:00:00.000Z", status: 200, ok: true, redirected: false}</code>.
         Lo snapshot finale espone stato, ultimo evento e conteggio DOM.</p>
@@ -16,12 +17,11 @@
         Un blocco permanente lascia la timeline parziale, senza snapshot di completamento.
         Gli errori e fallback preesistenti restano invariati. I record senza nome sono
         contati come invalidi, non scartati: la diagnostica non filtra i dati.
-        I campi Orbital Ethiopia assenti producono un warning, preservando i default WIP.
+        I campi Orbital Ethiopia assenti dal JSON producono un warning; ECMA è aggiunto dal bootstrap WIP.
         I log successivi al primo snapshot restano marcati [DIAG] fuori dal gruppo iniziale.
         Gli errori di parsing non riportano il messaggio originale, che può contenere JSON.
-        Nessun payload JSON viene registrato dal tracer. Il file senza estensione
-        <code>index-wip</code> deve essere servito come <code>text/html</code>;
-        una risposta <code>text/plain</code> o un download impedisce l’avvio degli script.</p>
+        Nessun payload JSON/HTML o URL con query è registrato dal tracer. Il caricamento di un iframe
+        distingue il wrapper visibile dal documento same-origin pronto; un contenuto cross-origin è non verificabile.</p>
     <p>Test: servire la root con <code>python3 -m http.server 8000</code>,
         poi aprire <code>http://localhost:8000/test-grid-pipeline.html</code>.
         I test isolano gli script WIP in iframe, senza caricare script esterni o service worker.
@@ -40,16 +40,22 @@
             }
 
             async function run() {
-                const response = await fetch('./index-wip');
+                const response = await fetch('./index-wip.html');
                 check(response.ok, 'WIP source served');
+                check(response.headers.get('content-type')?.toLowerCase().includes('text/html'),
+                    'Renamed WIP page is served as text/html');
                 const source = new DOMParser().parseFromString(await response.text(), 'text/html');
                 const bootstrap = source.querySelector('#grid-pipeline-diagnostics').textContent;
                 const application = [...source.querySelectorAll('script')]
                     .find(script => script.textContent.includes('async function loadCountryData()')).textContent;
-                source.querySelectorAll('script, iframe').forEach(node => node.remove());
+                source.querySelectorAll('script, iframe').forEach(node => {
+                    if (node.id !== 'consobOrbitalFrame') node.remove();
+                });
                 const databaseResponse = await fetch('./financial_authorities_database.json');
                 check(databaseResponse.ok, 'Database fixture served');
                 const database = await databaseResponse.json();
+                check(!Object.hasOwn(database.Ethiopia, 'ecma_orbital'),
+                    'ECMA Orbital metadata is not mistaken for persisted JSON fields');
 
                 async function fixture(mode, enabled = true) {
                     const frame = document.createElement('iframe');
@@ -61,17 +67,31 @@
                     const win = frame.contentWindow;
                     win.document.body.innerHTML = source.body.innerHTML;
                     const logs = [];
+                    const fetchCalls = [];
                     for (const method of ['log', 'warn', 'error', 'groupCollapsed', 'groupEnd']) {
                         win.console[method] = (...args) => logs.push({ method, args });
                     }
+                    const orbitalTimeouts = [];
+                    const nativeSetTimeout = win.setTimeout.bind(win);
+                    win.setTimeout = (callback, delay, ...args) => {
+                        if (delay === 12000) {
+                            orbitalTimeouts.push(callback);
+                            return nativeSetTimeout(() => {}, 60000);
+                        }
+                        return nativeSetTimeout(callback, delay, ...args);
+                    };
                     const onerror = () => false;
                     const onrejection = () => {};
                     win.onerror = onerror;
                     win.onunhandledrejection = onrejection;
                     win.eval(bootstrap);
                     win.eval(application);
-                    win.fetch = async () => {
+                    win.fetch = async (url, options = {}) => {
+                        fetchCalls.push({ url: String(url), method: options.method || 'GET' });
                         if (mode === 'network') throw new win.TypeError('Simulated network failure');
+                        if (mode === 'orbital-http' && options.method === 'HEAD') {
+                            return { status: 404, ok: false, redirected: false };
+                        }
                         return {
                             status: mode === 'http' ? 503 : 200,
                             ok: mode !== 'http',
@@ -92,7 +112,7 @@
                             await new Promise(resolve => setTimeout(resolve, 20));
                         }
                     }
-                    return { frame, win, logs, onerror, onrejection };
+                    return { frame, win, logs, fetchCalls, orbitalTimeouts, onerror, onrejection };
                 }
 
                 const success = await fixture('success');
@@ -122,11 +142,11 @@
                     'Fetch event records the requested URL');
                     const normalized = tracer.events.find(entry => entry.event === 'data:normalize:done');
                     const domCount = win.document.querySelectorAll('#flagsGrid .flag-item').length;
-                    check(domCount > 0 && tracer.lastSnapshot.state === 'ready' &&
+                    check(domCount === Object.keys(database).length && tracer.lastSnapshot.state === 'ready' &&
                         tracer.lastSnapshot.renderedElements === domCount &&
                         normalized.validRecords + normalized.invalidRecords === normalized.records &&
                         normalized.discardedRecords === 0,
-                    'Snapshot and normalization counts match actual DOM without filtering');
+                    'Snapshot and normalization counts match the 239-record baseline DOM without filtering');
                     check(names.includes('data:ethiopia:warning') &&
                         [...win.document.querySelectorAll('#flagsGrid .flag-name')]
                             .some(node => node.textContent === 'Ethiopia'),
@@ -136,6 +156,13 @@
                     'One collapsed pipeline group is created');
                     check(!JSON.stringify(tracer.events).includes(database.Ethiopia.notes),
                     'Tracer does not log country payloads');
+                    check(JSON.stringify(tracer.orbitalReport.inventory.map(item => item.authority).sort())
+                        === JSON.stringify(['AMF France', 'BaFin', 'CNMV', 'CONSOB', 'ECMA Ethiopia', 'FCA', 'SEC'].sort()),
+                    'Orbital inventory matches the seven configured authority launchers');
+                    check(tracer.orbitalReport.inventory.find(item => item.authority === 'ECMA Ethiopia')
+                        ?.configuredBy === 'WIP bootstrap'
+                        && tracer.events.some(entry => entry.event === 'data:ethiopia:warning'),
+                    'Ethiopia ECMA is inventoried as a bootstrap-injected integration');
                     check(win.onerror === onerror && win.onunhandledrejection === onrejection,
                     'Existing global handlers are preserved');
                     check(!/BJ-BCEAO|perview-BCEAO|physicalAddress|phoneNumbers|additionalEmails|verificationLinks/
@@ -163,6 +190,88 @@
                     check(win.document.querySelector('#modalContent [data-orbital-src$="authority/ET-ECMA.html"]') &&
                         win.document.querySelector('#modalContent img[src$="authority/preview-ET-ECMA.svg"]'),
                     'Ethiopia: ECMA Orbital preview preserved');
+
+                    win.openItalyOrbitalDialog('https://example.org/authority/ET-ECMA.html');
+                    const rejectedAttempt = tracer.events.filter(entry =>
+                        entry.event === 'orbital:trigger').at(-1);
+                    check(rejectedAttempt.reason === 'cross-origin'
+                        && tracer.events.some(entry => entry.event === 'orbital:open:error'
+                            && entry.attemptId === rejectedAttempt.attemptId && entry.reason === 'cross-origin'),
+                    'Rejected cross-origin Orbital URL is diagnosed without changing its allowlist');
+
+                    win.setupItalyOrbitalDialog();
+                    const getElementById = win.document.getElementById.bind(win.document);
+                    win.document.getElementById = id => id === 'consobOrbitalDialog'
+                        ? null : getElementById(id);
+                    win.open = () => null;
+                    win.openItalyOrbitalDialog('authority/IT-CONSOB.html');
+                    check(tracer.events.some(entry => entry.event === 'orbital:wrapper:missing'
+                        && entry.reason === 'dialog-not-found')
+                        && tracer.events.some(entry => entry.event === 'orbital:open:error'
+                            && entry.reason === 'dialog-not-found'),
+                    'Missing Orbital wrapper is reported while retaining the existing fallback');
+                    win.document.getElementById = getElementById;
+
+                    win.openItalyOrbitalDialog('authority/IT-CONSOB.html');
+                    const firstAttempt = tracer.events.filter(entry =>
+                        entry.event === 'orbital:open:start').at(-1);
+                    win.openItalyOrbitalDialog('authority/IT-CONSOB.html');
+                    const secondAttempt = tracer.events.filter(entry =>
+                        entry.event === 'orbital:open:start').at(-1);
+                    check(firstAttempt.attemptId !== secondAttempt.attemptId
+                        && tracer.events.some(entry => entry.event === 'orbital:close'
+                            && entry.attemptId === firstAttempt.attemptId
+                            && entry.reason === 'superseded-by-reopen'),
+                    'Rapid reopen correlates attempts and closes the superseded timer');
+                    const orbitalTimeout = success.orbitalTimeouts.at(-1);
+                    check(typeof orbitalTimeout === 'function',
+                    'Active Orbital attempt installs its diagnostic timeout');
+                    win.closeItalyOrbitalDialog();
+                    orbitalTimeout();
+                    check(!tracer.events.some(entry => entry.event === 'orbital:iframe:timeout'
+                        && entry.attemptId === secondAttempt.attemptId),
+                    'Closing an Orbital attempt cancels its diagnostic timeout');
+                    const orbitalFrame = win.document.getElementById('consobOrbitalFrame');
+                    let interceptedSource = orbitalFrame.getAttribute('src') || 'about:blank';
+                    Object.defineProperty(orbitalFrame, 'src', {
+                        configurable: true,
+                        get: () => interceptedSource,
+                        set: value => { interceptedSource = String(value); }
+                    });
+                    win.openItalyOrbitalDialog('authority/IT-CONSOB.html');
+                    const thirdAttempt = tracer.events.filter(entry =>
+                        entry.event === 'orbital:open:start').at(-1);
+                    const activeTimeout = success.orbitalTimeouts.at(-1);
+                    activeTimeout();
+                    check(tracer.events.some(entry => entry.event === 'orbital:iframe:timeout'
+                        && entry.attemptId === thirdAttempt.attemptId),
+                    'Diagnostic iframe timeout is emitted only for the current attempt');
+                    win.document.getElementById('consobOrbitalFrame')
+                        .dispatchEvent(new win.Event('error'));
+                    check(tracer.events.filter(entry => entry.event === 'orbital:iframe:error'
+                        && entry.attemptId === thirdAttempt.attemptId).length === 1,
+                    'One iframe error listener is correlated to the active open attempt');
+                    win.closeItalyOrbitalDialog();
+                    delete orbitalFrame.src;
+
+                    const httpFailure = await fixture('orbital-http');
+                    try {
+                        httpFailure.win.setupItalyOrbitalDialog();
+                        httpFailure.win.openItalyOrbitalDialog('authority/IT-CONSOB.html');
+                        const deadline = performance.now() + 3000;
+                        while (performance.now() < deadline && !httpFailure.win.gridPipelineDiag.events
+                            .some(entry => entry.event === 'orbital:resource:check')) {
+                            await new Promise(resolve => setTimeout(resolve, 20));
+                        }
+                        const resourceCheck = httpFailure.win.gridPipelineDiag.events
+                            .find(entry => entry.event === 'orbital:resource:check');
+                        check(resourceCheck?.status === 404 && !resourceCheck.ok
+                            && resourceCheck.reason === 'http-response-not-ok',
+                        'Same-origin HTTP failure is reported as metadata, not iframe success');
+                        httpFailure.win.closeItalyOrbitalDialog();
+                    } finally {
+                        httpFailure.frame.remove();
+                    }
                     const error = new win.ErrorEvent('error', {
                         message: 'Simulated runtime error', error: new win.Error('Simulated runtime error'),
                         cancelable: true
@@ -211,10 +320,16 @@
 
                 const disabled = await fixture('success', false);
                 try {
+                    disabled.win.setupItalyOrbitalDialog();
+                    disabled.win.openItalyOrbitalDialog('authority/IT-CONSOB.html');
+                    disabled.win.closeItalyOrbitalDialog();
                     check(!disabled.win.gridPipelineDiag &&
                         !disabled.logs.some(log => String(log.args[0]).includes('[DIAG]')) &&
+                        !disabled.fetchCalls.some(call => call.method === 'HEAD') &&
+                        !disabled.win.document.getElementById('consobOrbitalFrame')
+                            .hasAttribute('data-orbital-diagnostics') &&
                         disabled.win.document.querySelectorAll('#flagsGrid .flag-item').length > 0,
-                    'Default OFF: no tracer or diagnostic logs; flags still render');
+                    'Default OFF: no tracer, diagnostic logs, listeners or metadata probes; flags still render');
                 } finally {
                     disabled.frame.remove();
                 }
