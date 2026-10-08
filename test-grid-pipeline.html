@@ -24,7 +24,9 @@
         una risposta <code>text/plain</code> o un download impedisce l’avvio degli script.</p>
     <p>Test: servire la root con <code>python3 -m http.server 8000</code>,
         poi aprire <code>http://localhost:8000/test-grid-pipeline.html</code>.
-        I test isolano gli script WIP in iframe, senza caricare script esterni o service worker.</p>
+        I test isolano gli script WIP in iframe, senza caricare script esterni o service worker.
+        Verificano anche il rollback BCEAO (nessun hook Orbital Benin, allowlist o contatti extra),
+        i due soli link AMF-UMOA e BCEAO negli otto modal UMOA e la conservazione delle Orbital AMF France ed ECMA Ethiopia.</p>
     <pre id="results">Running…</pre>
     <script>
         if (!new URLSearchParams(location.search).has('fixture')) {
@@ -136,6 +138,31 @@
                     'Tracer does not log country payloads');
                     check(win.onerror === onerror && win.onunhandledrejection === onrejection,
                     'Existing global handlers are preserved');
+                    check(!/BJ-BCEAO|perview-BCEAO|physicalAddress|phoneNumbers|additionalEmails|verificationLinks/
+                        .test(application),
+                    'BCEAO Orbital hooks/allowlist entries and extra contact blocks are rolled back');
+                    const umoaUrls = ['https://www.amf-umoa.org/', 'https://www.bceao.int/'];
+                    const modalLinks = name => {
+                        win.openModal(name);
+                        return [...win.document.querySelectorAll('#modalContent .umoa-institution-links a')]
+                            .map(link => link.href);
+                    };
+                    for (const name of ['Benin', 'Burkina Faso', "Côte d'Ivoire", 'Guinea-Bissau',
+                        'Mali', 'Niger', 'Senegal', 'Togo']) {
+                        check(JSON.stringify(modalLinks(name)) === JSON.stringify(umoaUrls) &&
+                            !win.document.querySelector('#modalContent [data-orbital-trigger]'),
+                        `${name}: modal has exactly the AMF-UMOA and BCEAO links, no Orbital preview`);
+                    }
+                    for (const name of ['France', 'Guinea', 'Ethiopia']) {
+                        check(modalLinks(name).length === 0, `${name}: no UMOA institution links`);
+                    }
+                    win.openModal('France');
+                    check(win.document.querySelector('#modalContent [data-orbital-src$="authority/FR-AMF.html"]'),
+                    'France: AMF France Orbital preserved');
+                    win.openModal('Ethiopia');
+                    check(win.document.querySelector('#modalContent [data-orbital-src$="authority/ET-ECMA.html"]') &&
+                        win.document.querySelector('#modalContent img[src$="authority/preview-ET-ECMA.svg"]'),
+                    'Ethiopia: ECMA Orbital preview preserved');
                     const error = new win.ErrorEvent('error', {
                         message: 'Simulated runtime error', error: new win.Error('Simulated runtime error'),
                         cancelable: true

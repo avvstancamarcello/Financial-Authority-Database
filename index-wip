@@ -6524,11 +6524,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     data.Spain.modal = 'authority/ES-CNMV.html';
                     data.Spain.has_orbital_view = true;
                 }
-                if (data.Benin) {
-                    data.Benin.thumbnail = 'authority/perview-BCEAO.png';
-                    data.Benin.modal = 'authority/BJ-BCEAO.html';
-                    data.Benin.has_orbital_view = true;
-                }
                 if (data.Ethiopia) {
                     data.Ethiopia.ecma_orbital = {
                         name: 'Ethiopian Capital Market Authority (ECMA)',
@@ -7667,9 +7662,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             new URL('/authority/ES-CNMV.html', window.location.origin).pathname,
             new URL('authority/ES-CNMV.html', window.location.href).pathname,
             new URL('/authority/US-SEC.html', window.location.origin).pathname,
-            new URL('authority/US-SEC.html', window.location.href).pathname,
-            new URL('/authority/BJ-BCEAO.html', window.location.origin).pathname,
-            new URL('authority/BJ-BCEAO.html', window.location.href).pathname
+            new URL('authority/US-SEC.html', window.location.href).pathname
         ]);
         const CONSOB_ORBITAL_ALLOWED_THUMBNAIL_PATHS = new Set([
             new URL('/authority/preview-consob.png', window.location.origin).pathname,
@@ -7685,9 +7678,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             new URL('/authority/preview-ES-CNMV.png', window.location.origin).pathname,
             new URL('authority/preview-ES-CNMV.png', window.location.href).pathname,
             new URL('/authority/preview-US-SEC.svg', window.location.origin).pathname,
-            new URL('authority/preview-US-SEC.svg', window.location.href).pathname,
-            new URL('/authority/perview-BCEAO.png', window.location.origin).pathname,
-            new URL('authority/perview-BCEAO.png', window.location.href).pathname
+            new URL('authority/preview-US-SEC.svg', window.location.href).pathname
         ]);
 
         function resolveConsobOrbitalSrc(candidateSource, { allowFallback = false } = {}) {
@@ -7869,20 +7860,20 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             }
         });
 
-        const BCEAO_MEMBER_COUNTRIES = new Set([
+        // UMOA member states: keys match country_name values in financial_authorities_database.json.
+        const UMOA_MEMBER_COUNTRIES = new Set([
             'Benin', 'Burkina Faso', "Côte d'Ivoire", 'Guinea-Bissau',
             'Mali', 'Niger', 'Senegal', 'Togo'
         ]);
 
-        function getBceaoMemberLinksHtml(country) {
-            if (!BCEAO_MEMBER_COUNTRIES.has(country?.country_name)) return '';
+        function getUmoaInstitutionLinksHtml(country) {
+            if (!UMOA_MEMBER_COUNTRIES.has(country?.country_name)) return '';
             return `
-                <section aria-label="BCEAO applications and Orbital WebApp" style="margin: 18px 0;">
-                    <strong>BCEAO resources:</strong>
+                <section class="authority-link umoa-institution-links" aria-label="UMOA regional institutions" style="margin: 15px 0;">
+                    <strong>UMOA regional institutions:</strong>
                     <ul>
-                        <li><a href="authority/BJ-BCEAO.html" target="_blank" rel="noopener noreferrer">BCEAO Orbital WebApp</a></li>
-                        <li><a href="https://play.google.com/store/apps/details?id=www.bceao" target="_blank" rel="noopener noreferrer">Download APP Google Play</a></li>
-                        <li><a href="https://itunes.apple.com/fr/app/bceao/id1130940569?l=en&amp;mt=8" target="_blank" rel="noopener noreferrer">Download Apple Store</a></li>
+                        <li><a href="https://www.amf-umoa.org/" target="_blank" rel="noopener noreferrer">AMF-UMOA – Autorité des Marchés Financiers de l'Union Monétaire Ouest Africaine</a></li>
+                        <li><a href="https://www.bceao.int/" target="_blank" rel="noopener noreferrer">Banque Centrale des États de l'Afrique de l'Ouest (BCEAO)</a></li>
                     </ul>
                 </section>
             `;
@@ -7988,45 +7979,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             const homepage = (country.financial_authority.homepage || '').trim();
             const fraudReportLink = (country.financial_authority.fraudReportLink || '').trim();
             const authorityEmail = (country.financial_authority.authorityEmail || '').trim();
-            const bceaoMemberLinksHtml = getBceaoMemberLinksHtml(country);
-            const physicalAddress = String(country.financial_authority.physicalAddress || '').trim();
-            const phoneNumbers = Array.isArray(country.financial_authority.phoneNumbers)
-                ? country.financial_authority.phoneNumbers
-                : [];
-            const additionalEmails = Array.isArray(country.financial_authority.additionalEmails)
-                ? country.financial_authority.additionalEmails
-                : [];
-            const verificationLinks = [
-                ['Agreement / Agrément verification', country.financial_authority.agreementVerificationLink],
-                ['Professional card verification', country.financial_authority.professionalCardVerificationLink]
-            ].map(([label, source]) => {
-                try {
-                    const url = new URL(source);
-                    if (url.protocol !== 'https:' || url.hostname !== 'www.amf-umoa.org') return '';
-                    return `<p><strong>${label}:</strong> <a href="${escapeHtmlAttribute(url.href)}" target="_blank" rel="noopener noreferrer">${escapeHtmlAttribute(url.href)}</a></p>`;
-                } catch (error) {
-                    return '';
-                }
-            }).join('');
-            const authorityContactDetailsHtml = physicalAddress || phoneNumbers.length || additionalEmails.length || verificationLinks
-                ? `<div class="authority-link" style="margin: 15px 0;">
-                    ${physicalAddress ? `<p><strong>Address:</strong> ${escapeHtmlAttribute(physicalAddress)}</p>` : ''}
-                    ${phoneNumbers.map((phone) => {
-                        const number = String(phone).trim();
-                        const telNumber = number.replace(/[^\d+]/g, '');
-                        return /^\+?\d+$/.test(telNumber)
-                            ? `<p><strong>Telephone:</strong> <a href="tel:${telNumber}">${escapeHtmlAttribute(number)}</a></p>`
-                            : '';
-                    }).join('')}
-                    ${additionalEmails.map((email) => {
-                        const address = String(email).trim();
-                        return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(address)
-                            ? `<p><strong>Additional email:</strong> <a href="mailto:${escapeHtmlAttribute(address)}">${escapeHtmlAttribute(address)}</a></p>`
-                            : '';
-                    }).join('')}
-                    ${verificationLinks}
-                </div>`
-                : '';
+            const umoaInstitutionLinksHtml = getUmoaInstitutionLinksHtml(country);
             const homepageHtml = homepage
                 ? `<a href="${escapeHtmlAttribute(homepage)}" target="_blank" rel="noopener noreferrer">${escapeHtmlAttribute(homepage)}</a>`
                 : `<span>${escapeHtmlAttribute(notAvailableText)}</span>`;
@@ -8056,8 +8009,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                         ${fraudReportHtml}
                     </div>
                     <p><strong>${currentTranslations.modalEmail || 'Email'}:</strong> ${authorityEmailHtml}</p>
-                    ${authorityContactDetailsHtml}
-                    ${bceaoMemberLinksHtml}
+                    ${umoaInstitutionLinksHtml}
                     ${socialHTML ? `<p style="margin-top:15px;"><strong>${currentTranslations.modalSocial || 'Social'}:</strong> ${socialHTML}</p>` : ''}
                     ${orbitalPreviewHtml}
                     ${ecmaPreviewHtml}
