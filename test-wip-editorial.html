@@ -52,9 +52,31 @@
                     'Static title, description, Open Graph and Twitter match the requested SEO copy');
                 check(source.querySelector('h1 [data-i18n="landingHeroTitle"]').textContent === seoTitle.split(' | ')[0]
                     && source.querySelector('h1 [data-i18n="landingHeroCoverage"]').textContent === seoTitle.split(' | ')[1]
-                    && /investigazioni finanziarie nazionali e internazionali/.test(
+                    && /investigazioni finanziarie/.test(
                         source.querySelector('[data-i18n="landingHeroSubtitle"]').textContent),
                     'Existing hero markup describes cooperation requests and preliminary verification');
+                const compactLead = {
+                    it: {
+                       landingHeroSubtitle: 'Fonti ufficiali e checklist preliminari per richieste di collaborazione nelle investigazioni finanziarie. La consultazione non garantisce la sicurezza degli investimenti.',
+                       appDownloadDescription: "Consulta le autorità finanziarie da smartphone o PC. Verifica autorizzazioni e identità presso le fonti competenti: l'app non certifica gli investimenti."
+                    },
+                    en: {
+                       landingHeroSubtitle: 'Official sources and preliminary checklists for cooperation requests in financial investigations. Consultation does not guarantee investment safety.',
+                       appDownloadDescription: 'Consult financial authorities on smartphone or PC. Check authorizations and identity with the competent sources: the app does not certify investments.'
+                    }
+                };
+                check(Object.entries(compactLead.it).every(([key, text]) =>
+                    source.querySelector(`[data-i18n="${key}"]`).textContent === text),
+                    'Static lead copy is compact and retains cooperation purpose and safety limitations');
+                const amev = source.getElementById('amev-introduction-content');
+                check(source.getElementById('amev-introduction-toggle-label').textContent
+                    === 'AMEV / AMEA / AWEV · Versioni linguistiche'
+                    && amev.querySelector('h3').textContent.trim() === '📊 AMEV: confronto linguistico'
+                    && amev.querySelector('p').textContent.trim()
+                       === "Espansioni dell'acronimo AMEV (Authority Market Effective Verification):"
+                    && amev.querySelectorAll('tbody tr').length === 9
+                    && amev.hidden,
+                    'AMEV lead names language variants once and preserves the collapsed comparison table');
                 check(['webapp-jsonld', 'website-jsonld'].every(id =>
                     JSON.parse(source.getElementById(id).textContent).description === seoDescription)
                     && /requests for cooperation/.test(JSON.parse(source.getElementById('dataset-jsonld').textContent).description),
@@ -159,6 +181,17 @@
                         'el', 'el-GR', 'sq', 'xk', 'sq-XK', 'bs', 'ar', 'zh', 'hi', 'vi']) {
                         win.changeLanguage(locale);
                         const copy = win.getLanguageBundle(locale);
+                        check(Object.entries(compactLead[locale === 'it' ? 'it' : 'en']).every(([key, text]) =>
+                            copy[key] === text && doc.querySelector(`[data-i18n="${key}"]`).textContent === text),
+                            `${locale}: compact lead copy survives rendering and language switching`);
+                        check(!/AMEV|AMEA|AWEV|landing page/i.test(
+                            doc.getElementById('language-selector-eu-title').textContent),
+                            `${locale}: language heading does not repeat the AMEV description`);
+                        if (locale === 'it' || locale === 'en') {
+                            check(doc.getElementById('amev-introduction-toggle-label').textContent
+                                === `AMEV / AMEA / AWEV · ${locale === 'it' ? 'Versioni linguistiche' : 'Language versions'}`,
+                                `${locale}: AMEV language-version label uses the correct acronym`);
+                        }
                         check(!unsupported.test(JSON.stringify(copy))
                             && /requests for cooperation|richieste di collaborazione/.test(copy.metaDescription)
                             && /not an authorization register|non un registro autorizzativo/.test(copy.footerNote)
