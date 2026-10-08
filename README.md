@@ -301,3 +301,44 @@ Questa codifica fornisce una base formale per:
 - documentare il metodo usato nello sviluppo della web page,
 - costruire strumenti automatici di verifica (linting semantico),
 - guidare altre AI/agent nella replica dello stesso stile di lavoro.
+
+## 4. MVP micropagine Orbital WebApp e piano di estensione
+
+Il MVP aggiunge esattamente tre pagine informative indipendenti:
+
+1. [ETHIOPIA · ECMA](authority/ethiopia-ecma-orbital-webapp.html)
+2. [FRANCE · AMF](authority/france-amf-orbital-webapp.html)
+3. [GERMANY · BaFin](authority/germany-bafin-orbital-webapp.html)
+
+Ethiopia risponde alla richiesta esplicita; France e Germany riusano fonti
+robuste delle schede Orbital già presenti, con verifiche, avvisi e orientamento
+ai consumatori. I percorsi e i canonical sono distinti dalle schede esistenti.
+Titoli country-first e navigazione statica alfabetica rendono percepibile
+l'ordine del catalogo, ma non garantiscono indicizzazione, ranking o ordine
+dei risultati sui motori di ricerca. I link di scoperta sono solo nella WIP,
+fuori grid, e nelle micropagine; la sitemap live non viene modificata.
+
+La PR #152, verificata aperta e draft l'8 ottobre 2026, resta contesto separato:
+questo MVP non ne importa né sovrascrive il riallineamento SEO/editoriale.
+Per ECMA la scheda Google Play reperita nella ricerca identifica
+`gov.ecma.mobile`; la verifica live della catena istituzione–store non è stata
+completata. La micropagina esplicita il limite, distingue ECMA da Neway ESX
+e non attribuisce certificazioni o approvazioni Google. La data visibile
+indica solo la revisione editoriale, non una verifica live delle fonti.
+
+### Estensione successiva, previa revisione e approvazione
+
+- Valutare altre authority già dotate di risorse Orbital (es. CONSOB, CNMV,
+  FCA), senza creare ora altre pagine o modificare le integrazioni esistenti.
+- Per ogni candidata verificare mandato, fonti istituzionali, utilità distinta
+  del contenuto e, se pertinente, catena istituzione–store e sviluppatore.
+- Conservare titoli naturali `[COUNTRY] – [Authority/Topic] Orbital WebApp | AMEV`,
+  ordine alfabetico, limiti espliciti e data effettiva della revisione.
+- Riesaminare separatamente eventuali link dalla homepage e inserimenti in
+  sitemap: non fanno parte di questo MVP. Nessun merge/deploy automatico.
+
+### Verifica mirata
+
+Servire la root con `python -m http.server 8000` e aprire
+`http://localhost:8000/test-seo-authority-navigation.html?micropages=1`.
+Senza il parametro restano attivi anche i controlli SEO/navigazione precedenti.
