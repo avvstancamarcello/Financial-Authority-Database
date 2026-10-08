@@ -1652,6 +1652,12 @@
             font-size: 48px;
             display: inline-block;
         }
+        .flag-icon-wrapper .flag-image {
+            width: 48px;
+            height: 36px;
+            object-fit: contain;
+            display: inline-block;
+        }
         .flag-code { font-weight: 600; color: #667eea; font-size: 0.9em; margin-top: 5px; }
         .flag-name { font-size: 0.75em; color: #334155; margin-top: 4px; line-height: 1.2; text-align: center; }
         .flag-marker-badge {
@@ -2067,7 +2073,7 @@
             .orbit-side-icon img { height: 80px; border-radius: 20px; }
             .countries-grid { grid-template-columns: repeat(2, 1fr); gap: 8px; padding: 10px; }
             .flag-item { padding: 10px 8px; min-height: 90px; }
-            .flag-icon-wrapper .fi { width: 36px !important; height: 27px !important; font-size: 36px; }
+            .flag-icon-wrapper .fi, .flag-icon-wrapper .flag-image { width: 36px !important; height: 27px !important; font-size: 36px; }
             .flag-code { font-size: 0.8em; }
             .stats { grid-template-columns: 1fr; gap: 8px; padding: 12px 10px; }
             .stat-card { padding: 8px; }
@@ -2150,7 +2156,7 @@
             .orbit-side-icon img { height: 65px; border-radius: 15px; }
             .countries-grid { grid-template-columns: repeat(2, 1fr); gap: 6px; }
             .flag-item { padding: 8px 5px; min-height: 80px; }
-            .flag-icon-wrapper .fi { width: 30px !important; height: 22px !important; font-size: 30px; }
+            .flag-icon-wrapper .fi, .flag-icon-wrapper .flag-image { width: 30px !important; height: 22px !important; font-size: 30px; }
             .search-box input { font-size: 13px; }
             .filter-btn { padding: 6px 8px; font-size: 0.75em; }
             .modal-content { padding: 12px 10px; font-size: 0.85em; }
@@ -7228,7 +7234,14 @@ https://avvstancamarcello.github.io/Financial-Authority-Database/
                 const flagWrapperNode = document.createElement('span');
                 flagWrapperNode.className = 'flag-icon-wrapper';
                 flagWrapperNode.setAttribute('aria-hidden', 'true');
-                if (specialRegionalFlagCode) {
+                if (flagInfo.flagImage) {
+                    const imageNode = document.createElement('img');
+                    imageNode.className = 'flag-image';
+                    imageNode.src = flagInfo.flagImage;
+                    imageNode.alt = '';
+                    imageNode.decoding = 'async';
+                    flagWrapperNode.appendChild(imageNode);
+                } else if (specialRegionalFlagCode) {
                     const iconNode = document.createElement('span');
                     iconNode.className = `fi fi-${specialRegionalFlagCode}`;
                     flagWrapperNode.appendChild(iconNode);
@@ -7372,6 +7385,7 @@ https://avvstancamarcello.github.io/Financial-Authority-Database/
         function getFlagInfo(countryName) {
             const canadaSubdivisionCodes = {
                 'Canada': 'CAN',
+                'Canada - CSA (Federal)': 'CAN-CSA',
                 'Canada - Alberta': 'CAN-AB',
                 'Canada - British Columbia': 'CAN-BC',
                 'Canada - Manitoba': 'CAN-MB',
@@ -7382,7 +7396,7 @@ https://avvstancamarcello.github.io/Financial-Authority-Database/
                 'Canada - Nunavut': 'CAN-NU',
                 'Canada - Ontario': 'CAN-ON',
                 'Canada - Prince Edward Island': 'CAN-PE',
-                'Canada - Québec': 'CAN-QC',
+                'Canada - Quebec': 'CAN-QC',
                 'Canada - Saskatchewan': 'CAN-SK',
                 'Canada - Yukon': 'CAN-YT'
             };
@@ -7440,10 +7454,16 @@ https://avvstancamarcello.github.io/Financial-Authority-Database/
                 'USA - Wyoming': 'USA-WY'
             };
 
+            const canadaGridFlagImages = {
+                'Canada - CSA (Federal)': 'flags/canada.svg',
+                'Canada - Quebec': 'flags/quebec.svg'
+            };
+
             if (canadaSubdivisionCodes[countryName]) {
                 return {
                     flagCode: 'CA',
-                    textCode: canadaSubdivisionCodes[countryName]
+                    textCode: canadaSubdivisionCodes[countryName],
+                    flagImage: canadaGridFlagImages[countryName] || null
                 };
             }
 
