@@ -6,7 +6,7 @@
 </head>
 <body>
     <h1>Diagnostica grid WIP</h1>
-    <p>Aprire <code>index-wip.html?diag=1</code> e la console: il gruppo
+    <p>Aprire <code>index.html?diag=1</code> e la console: il gruppo
         <code>[DIAG] Grid pipeline</code> raccoglie eventi e snapshot.
         Il tracer è disponibile in <code>window.gridPipelineDiag</code>, con
         inventario Orbital e snapshot in <code>window.gridPipelineDiag.lastOrbitalSnapshot</code>; senza
@@ -40,7 +40,7 @@
             }
 
             async function run() {
-                const response = await fetch('./index-wip.html');
+                const response = await fetch('./index.html');
                 check(response.ok, 'WIP source served');
                 check(response.headers.get('content-type')?.toLowerCase().includes('text/html'),
                     'Renamed WIP page is served as text/html');
