@@ -31,16 +31,21 @@
             }
 
             async function run() {
-                const stableResponse = await fetch('./index.html');
-                check(stableResponse.ok, 'Stable homepage served');
+                const stableResponse = await fetch('./obsolete-index.html');
+                check(stableResponse.ok, 'Backup homepage served');
                 const hash = Array.from(new Uint8Array(await crypto.subtle.digest(
                     'SHA-256', await stableResponse.arrayBuffer())))
                     .map(byte => byte.toString(16).padStart(2, '0')).join('');
                 check(hash === 'e080f08edf8e08dac87012fd6c1c7e2d9f2bfdcd34586a6b84d24e3bc6fcba2e',
-                    'Stable index.html is byte-identical to the audited main baseline');
+                    'Backup obsolete-index.html is byte-identical to the audited main baseline');
 
-                const response = await fetch('./index-wip.html');
-                check(response.ok, 'WIP source served');
+                const response = await fetch('./index.html');
+                check(response.ok, 'Published homepage served');
+                const publishedHash = Array.from(new Uint8Array(await crypto.subtle.digest(
+                    'SHA-256', await response.clone().arrayBuffer())))
+                    .map(byte => byte.toString(16).padStart(2, '0')).join('');
+                check(publishedHash === '220bf5864814fc5af1bf897cda6f2e5eae6579f3d3b73ebc5dca81bf2779bf08',
+                    'Published index.html is byte-identical to the approved WIP homepage');
                 const source = new DOMParser().parseFromString(await response.text(), 'text/html');
                 const seoTitle = 'Strumento per richiesta di collaborazione alle Autorità Finanziarie | Verifica preliminare nazionale e internazionale';
                 const seoDescription = 'Strumento informativo per supportare richieste di collaborazione alle Autorità Finanziarie in ambito nazionale e internazionale, con accesso a fonti ufficiali e checklist di verifica preliminare.';

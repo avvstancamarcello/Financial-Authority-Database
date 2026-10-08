@@ -40,13 +40,13 @@
           'pas un registre', 'ne garantit aucun résultat', 'pas une vérification en temps réel']
       ];
       const parser = new DOMParser();
-      const wip = parser.parseFromString(await text('index-wip.html'), 'text/html');
+      const wip = parser.parseFromString(await text('index.html'), 'text/html');
       const discovery = wip.getElementById('orbital-micropages');
       check(Boolean(discovery) && !discovery.closest('#flags-section, #countries-section, .flags-grid, .countries-grid'),
         'MVP discovery navigation stays outside country and flag grids');
       check(JSON.stringify([...discovery.querySelectorAll('a')].map(link => link.getAttribute('href')))
         === JSON.stringify(pages.map(([path]) => 'authority/' + path)), 'WIP exposes exactly three alphabetical static links');
-      const stable = await text('index.html');
+      const stable = await text('obsolete-index.html');
       const sitemap = await text('sitemap.xml');
       const database = await text('financial_authorities_database.json');
       const frame = document.getElementById('references');
@@ -77,8 +77,9 @@
           && main.firstElementChild.tagName === 'SECTION'
           && main.firstElementChild.querySelector('h2').id === (country === 'POLYNÉSIE FRANÇAISE' ? 'territory' : 'authority'),
           `${country} territorial content immediately follows title and subtitle`);
-        check(Boolean(page.querySelector('a[href="../index-wip.html"]')),
-          `${country} WIP remains reachable`);
+        check(Boolean(page.querySelector('a[href="../index.html"]'))
+          && Boolean(page.querySelector('a[href="../obsolete-index.html"]')),
+          `${country} published homepage and backup remain reachable`);
         check(!page.querySelector('link[hreflang]'), `${country} no hreflang between non-equivalent territories`);
         const links = [...page.querySelectorAll('a[href^="https:"]')];
         check(links.some(link => new URL(link.href).host === host)
@@ -92,7 +93,7 @@
         check(page.querySelector('time').dateTime === '2026-10-08'
           && page.body.textContent.includes(dateLimit), `${country} honest editorial date`);
         check(!stable.includes(path) && !sitemap.includes(path) && !database.includes(path),
-          `${country} no additions to stable homepage, live sitemap or database`);
+          `${country} no additions to backup homepage, live sitemap or database`);
         if (country === 'ETHIOPIA') {
           const play = page.getElementById('google-play').parentElement;
           check(play.textContent.includes('Collegamento Google Play non verificato')

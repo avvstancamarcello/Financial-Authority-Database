@@ -8,7 +8,7 @@
 <body>
     <h1>Polynesia WIP Orbital regression checks</h1>
     <pre id="results">Running…</pre>
-    <iframe id="app" title="WIP homepage under test" src="./index-wip.html" width="1000" height="700"></iframe>
+    <iframe id="app" title="WIP homepage under test" src="./index.html" width="1000" height="700"></iframe>
     <script>
         const results = document.getElementById('results');
         const checks = [];
@@ -38,7 +38,7 @@
         }
 
         async function run() {
-            const source = await (await fetch('./index-wip.html')).text();
+            const source = await (await fetch('./index.html')).text();
             for (const [pattern, expected] of [
                 [/        <nav aria-label="CONSOB · FCA · CNMV · AMF · BaFin · SEC">[\s\S]*?<\/nav>/,
                     '2e40e64972b8624c906578dc05bedb731134a6035c410f8eddfa9fac6f7e9549'],
