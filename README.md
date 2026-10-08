@@ -319,8 +319,11 @@ restano integralmente invariate, inclusi contenuti, URL e canonical.
 Ogni micropagina ha un canonical autoreferenziale; non ci sono hreflang
 tra territori non equivalenti. L'i18n dinamico serve agli utenti ma non
 garantisce l'indicizzazione delle singole versioni linguistiche.
-Le fonti FMA e IEOM e la pagina ACPR sulle convenzioni con la Polinesia sono
-state reperite nella ricerca ufficiale; il loro accesso diretto è fallito.
+Le fonti FMA e IEOM sono state reperite nella ricerca ufficiale; il loro
+accesso diretto è fallito. I tre ulteriori link IEOM su agenzie, reazione alle
+truffe/usurpazione d'identità e prevenzione delle frodi nei pagamenti sono
+forniti dall'utente e inseriti con etichette francesi, senza dichiararne
+verificato il contenuto né garantire protezione o recupero dei fondi.
 La pagina territoriale dichiara quindi che la verifica giuridica dettagliata
 delle competenze e delle convenzioni non è completata. Non estende in blocco
 il diritto metropolitano, non attribuisce all'ACPR tutti gli assicuratori
@@ -351,6 +354,11 @@ indica solo la revisione editoriale, non una verifica live delle fonti.
   URL già indicizzati e non dedurre le traduzioni indicizzate dal selettore i18n.
 - Riesaminare separatamente eventuali link dalla homepage e inserimenti in
   sitemap: non fanno parte di questo MVP. Nessun merge/deploy automatico.
+- **TODO — PR separata ACPR:** predisporre una scheda dedicata all'authority,
+  verificando fonti ufficiali, competenze per servizio e disposizioni
+  territoriali/convenzioni, incluse le questioni assicurative. In questa PR
+  la Polinesia conserva soltanto una menzione contestuale minima di ACPR,
+  senza link o trattazione dettagliata; non viene creata una quarta micropagina.
 
 ### Verifica mirata
 

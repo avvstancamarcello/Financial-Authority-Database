@@ -98,11 +98,25 @@
         } else {
           const territory = page.getElementById('territory').parentElement.textContent;
           check(['IEOM', 'ACPR', 'AMF', 'Polynésie française'].every(name => territory.includes(name))
-            && territory.includes('adaptations') && territory.includes('assurance'),
-            'Polynesia distinguishes institutional resources and territorial insurance caveat');
-          check(links.some(link => new URL(link.href).host === 'acpr.banque-france.fr')
+            && territory.includes('adaptations') && territory.includes('autorité distincte')
+            && territory.includes('PR séparée'),
+            'Polynesia keeps ACPR distinct and contextual, with territorial caveats');
+          check(!links.some(link => new URL(link.href).host === 'acpr.banque-france.fr')
             && links.some(link => new URL(link.href).host === 'www.amf-france.org'),
-            'Polynesia links to both national financial authorities');
+            'Polynesia leaves detailed ACPR resources to a separate PR');
+          const sources = page.getElementById('sources').parentElement;
+          for (const [url, label] of [
+            ['https://www.ieom.fr/Nos-territoires-d-intervention-et-nos-agences?lang=fr', "territoires d'intervention et agences"],
+            ['https://www.ieom.fr/Comment-reagir-en-cas-d-arnaque-ou-d-usurpation-d-identite?lang=fr', "arnaque ou d'usurpation d'identité"],
+            ['https://www.ieom.fr/IMG/pdf/infograpie_ieom_attention_arnaques_protection_contre_la_fraude_moyens_de_paiement.pdf', 'fraude aux moyens de paiement (PDF)']
+          ]) {
+            check([...sources.querySelectorAll('a')].some(link =>
+              link.getAttribute('href') === url && link.textContent.includes(label)),
+              `Exact IEOM official/anti-fraud link and French label: ${label}`);
+          }
+          check(sources.textContent.includes('sans garantie')
+            && sources.textContent.includes("pas une conclusion juridique"),
+            'IEOM resources retain informative, non-conclusive wording');
         }
         frame.src = 'authority/' + path;
         await waitFor(() => frame.contentDocument?.readyState === 'complete'
