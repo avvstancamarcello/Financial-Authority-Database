@@ -42,6 +42,32 @@
                 const response = await fetch('./index-wip.html');
                 check(response.ok, 'WIP source served');
                 const source = new DOMParser().parseFromString(await response.text(), 'text/html');
+                const seoTitle = 'Strumento per richiesta di collaborazione alle Autorità Finanziarie | Verifica preliminare nazionale e internazionale';
+                const seoDescription = 'Strumento informativo per supportare richieste di collaborazione alle Autorità Finanziarie in ambito nazionale e internazionale, con accesso a fonti ufficiali e checklist di verifica preliminare.';
+                check(source.title === seoTitle
+                    && ['meta-og-title', 'meta-twitter-title'].every(id =>
+                        source.getElementById(id).content === seoTitle)
+                    && ['meta-description', 'meta-og-description', 'meta-twitter-description'].every(id =>
+                        source.getElementById(id).content === seoDescription),
+                    'Static title, description, Open Graph and Twitter match the requested SEO copy');
+                check(source.querySelector('h1 [data-i18n="landingHeroTitle"]').textContent === seoTitle.split(' | ')[0]
+                    && source.querySelector('h1 [data-i18n="landingHeroCoverage"]').textContent === seoTitle.split(' | ')[1]
+                    && /investigazioni finanziarie nazionali e internazionali/.test(
+                        source.querySelector('[data-i18n="landingHeroSubtitle"]').textContent),
+                    'Existing hero markup describes cooperation requests and preliminary verification');
+                check(['webapp-jsonld', 'website-jsonld'].every(id =>
+                    JSON.parse(source.getElementById(id).textContent).description === seoDescription)
+                    && /requests for cooperation/.test(JSON.parse(source.getElementById('dataset-jsonld').textContent).description),
+                    'Main static JSON-LD descriptions reflect the informational cooperation purpose');
+                function hasEthiopiaSeoEntry(data, key) {
+                    return data[key]?.some(entry => entry['@type'] === 'WebPage'
+                        && entry.name === 'Ethiopia / ECMA Orbital Web App'
+                        && entry.url === 'https://www.amevfirenze.it/authority/ET-ECMA.html');
+                }
+                check(/Etiopia, Ethiopia, ECMA/.test(source.querySelector('meta[name="keywords"]').content)
+                    && hasEthiopiaSeoEntry(JSON.parse(source.getElementById('website-jsonld').textContent), 'hasPart')
+                    && hasEthiopiaSeoEntry(JSON.parse(source.getElementById('dataset-jsonld').textContent), 'subjectOf'),
+                    'Static SEO names Ethiopia/ECMA and links only to its existing Orbital page');
                 const section = source.getElementById('storia-giovanni-falcone');
                 check(section?.tagName === 'SECTION'
                     && source.querySelectorAll('#storia-giovanni-falcone').length === 1
@@ -79,6 +105,10 @@
                 check(/non esercitano poteri investigativi/.test(section.textContent)
                     && /non implica.*approvazione/.test(section.textContent),
                     'Consumer directory is explicitly distinct from judicial powers and Foundation endorsement');
+                check(/metodo Falcone/.test(section.querySelector('p').textContent)
+                    && /tracciabilità dei flussi finanziari, cooperazione internazionale e lavoro di squadra/.test(section.querySelector('p').textContent)
+                    && /non una certificazione o garanzia dello strumento/.test(section.querySelector('p').textContent),
+                    'Falcone introduction is a historical-methodological reference, not a tool certification');
 
                 const unsupported = /più completo del mondo|most complete|sito ufficiale legittimo|official legitimate|no limits|best seller|161 Paesi|161 countries|239 autorità|239 authorities|239 link|239 financial|scudo attivo|quasi certamente una truffa/i;
                 check(!unsupported.test(source.body.textContent.split('const translations =')[0]),
@@ -130,11 +160,16 @@
                         win.changeLanguage(locale);
                         const copy = win.getLanguageBundle(locale);
                         check(!unsupported.test(JSON.stringify(copy))
-                            && /not an authorization register|non un registro autorizzativo/.test(copy.metaDescription),
+                            && /requests for cooperation|richieste di collaborazione/.test(copy.metaDescription)
+                            && /not an authorization register|non un registro autorizzativo/.test(copy.footerNote)
+                            && (locale !== 'it' || (copy.documentTitle === seoTitle && copy.metaDescription === seoDescription)),
                             `${locale}: effective template/fallback and SEO copy are neutral`);
                         const hero = doc.querySelector('[data-i18n="landingHeroTitle"]');
                         check(hero.lang === (locale === 'it' ? 'it' : 'en')
                             && doc.title === copy.documentTitle
+                            && doc.querySelector('#meta-description').content === copy.metaDescription
+                            && doc.querySelector('#meta-og-title').content === copy.documentTitle
+                            && doc.querySelector('#meta-twitter-title').content === copy.documentTitle
                             && doc.querySelector('#meta-og-description').content === copy.metaDescription
                             && doc.querySelector('#meta-twitter-description').content === copy.metaDescription,
                             `${locale}: editorial fallback language, title, OG and Twitter are coherent`);
@@ -142,6 +177,11 @@
                             check(!unsupported.test(JSON.stringify(JSON.parse(script.textContent))),
                                 `${locale}: dynamic ${script.id} parses with neutral copy`);
                         }
+                        check(['webapp-jsonld', 'website-jsonld', 'dataset-jsonld'].every(id =>
+                            JSON.parse(doc.getElementById(id).textContent).description === copy.metaDescription)
+                            && hasEthiopiaSeoEntry(JSON.parse(doc.getElementById('website-jsonld').textContent), 'hasPart')
+                            && hasEthiopiaSeoEntry(JSON.parse(doc.getElementById('dataset-jsonld').textContent), 'subjectOf'),
+                            `${locale}: dynamic JSON-LD preserves cooperation copy and Ethiopia/ECMA references`);
                     }
                     win.changeLanguage('it');
                     win.setupSearch();
