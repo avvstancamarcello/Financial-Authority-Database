@@ -330,8 +330,11 @@ il diritto metropolitano, non attribuisce all'ACPR tutti gli assicuratori
 locali e invita a confermare il regime del servizio prima di dedurre licenze.
 Titoli country-first e navigazione statica alfabetica rendono percepibile
 l'ordine del catalogo, ma non garantiscono indicizzazione, ranking o ordine
-dei risultati sui motori di ricerca. I link di scoperta sono solo nella WIP,
-fuori grid, e nelle micropagine; la sitemap live non viene modificata.
+dei risultati sui motori di ricerca. L'elenco alfabetico di scoperta compare
+soltanto nella WIP, fuori grid. Le micropagine presentano il proprio contenuto
+territoriale subito dopo titolo e sottotitolo, senza elenco MVP o navigazione
+verso le altre micropagine; eventuali indici interni rimandano solo a sezioni
+della stessa pagina. La sitemap live non viene modificata.
 
 La PR #152, verificata aperta e draft l'8 ottobre 2026, resta contesto separato:
 questo MVP non ne importa né sovrascrive il riallineamento SEO/editoriale.

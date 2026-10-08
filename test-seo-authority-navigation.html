@@ -63,10 +63,20 @@
           && page.querySelector('meta[property="og:title"]').content === title, `${country} distinct canonical and social metadata`);
         check(!/noindex/i.test(page.querySelector('meta[name="robots"]')?.content || ''),
           `${country} no indexing restriction`);
-        check(JSON.stringify([...page.querySelectorAll('nav ol a')].map(link => link.getAttribute('href')))
-          === JSON.stringify(pages.map(([name]) => name)), `${country} alphabetical peer navigation`);
-        check(page.querySelectorAll('[aria-current="page"]').length === 1
-          && page.querySelector('[aria-current="page"]').getAttribute('href') === path, `${country} current page identified`);
+        check(![...page.querySelectorAll('a[href]')].some(link =>
+          pages.some(([name]) => link.getAttribute('href') === name)),
+          `${country} no MVP micropage discovery list or peer links`);
+        check([...page.querySelectorAll('nav a')].every(link => {
+          const href = link.getAttribute('href');
+          return href?.startsWith('#') && href.length > 1 && Boolean(page.getElementById(href.slice(1)));
+        }), `${country} any internal navigation targets only existing same-page sections`);
+        const header = page.querySelector('header');
+        const main = page.querySelector('main');
+        check(header.children.length === 2 && header.children[0].tagName === 'H1'
+          && header.children[1].tagName === 'P' && header.nextElementSibling === main
+          && main.firstElementChild.tagName === 'SECTION'
+          && main.firstElementChild.querySelector('h2').id === (country === 'POLYNÉSIE FRANÇAISE' ? 'territory' : 'authority'),
+          `${country} territorial content immediately follows title and subtitle`);
         check(Boolean(page.querySelector('a[href="../index-wip.html"]')),
           `${country} WIP remains reachable`);
         check(!page.querySelector('link[hreflang]'), `${country} no hreflang between non-equivalent territories`);
