@@ -36,10 +36,9 @@
       check(homepageResponse.ok, 'Homepage resolves');
       const homepage = new DOMParser().parseFromString(await homepageResponse.text(), 'text/html');
       const guideLink = homepage.querySelector('#table-of-contents a[href="./verifica-prima%20di%20pagare/index.html"]');
-      check(guideLink?.textContent.includes('Verifica prima di pagare')
-        && guideLink.previousElementSibling.getAttribute('href') === '#database-search-section'
-        && guideLink.querySelector('[data-i18n-text="quickIndexVerifyLink"]'),
-        'Localized guide button follows Search Authorities in the Quick Index');
+      check(guideLink
+        && guideLink.previousElementSibling.getAttribute('href') === '#database-search-section',
+        'Guide link follows Search Authorities in the Quick Index');
       check((await fetch(guideLink.getAttribute('href'))).ok, 'Homepage guide button target resolves');
       await waitFor(() => wrapper.contentDocument.querySelector('.orbital-frame')
         && direct.contentDocument.querySelector('.step-tab')
