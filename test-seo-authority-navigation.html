@@ -29,7 +29,133 @@
       check(response.ok, `${path} exists with exact casing`);
       return response.text();
     }
+    async function testMicropages() {
+      const root = 'https://www.amevfirenze.it/';
+      const pages = [
+        ['ethiopia-ecma-orbital-webapp.html', 'ETHIOPIA', 'ECMA', 'it', 'ecma.gov.et',
+          'non è un registro autorizzativo', 'garanzia di risultati', 'non un controllo in tempo reale'],
+        ['oesterreich-fma-orbital-webapp.html', 'ÖSTERREICH', 'FMA', 'de', 'www.fma.gv.at',
+          'kein Zulassungsregister', 'keine Ergebnisse', 'keine Echtzeitprüfung'],
+        ['polynesie-francaise-orbital-webapp.html', 'POLYNÉSIE FRANÇAISE', 'Autorités financières', 'fr', 'www.ieom.fr',
+          'pas un registre', 'ne garantit aucun résultat', 'pas une vérification en temps réel']
+      ];
+      const parser = new DOMParser();
+      const wip = parser.parseFromString(await text('index-wip.html'), 'text/html');
+      const discovery = wip.getElementById('orbital-micropages');
+      check(Boolean(discovery) && !discovery.closest('#flags-section, #countries-section, .flags-grid, .countries-grid'),
+        'MVP discovery navigation stays outside country and flag grids');
+      check(JSON.stringify([...discovery.querySelectorAll('a')].map(link => link.getAttribute('href')))
+        === JSON.stringify(pages.map(([path]) => 'authority/' + path)), 'WIP exposes exactly three alphabetical static links');
+      const stable = await text('index.html');
+      const sitemap = await text('sitemap.xml');
+      const database = await text('financial_authorities_database.json');
+      const frame = document.getElementById('references');
+      for (const [path, country, authority, language, host, registerLimit, resultLimit, dateLimit] of pages) {
+        const source = await text('authority/' + path);
+        const page = parser.parseFromString(source, 'text/html');
+        const title = `${country} – ${authority} Orbital WebApp | AMEV`;
+        check(page.title === title && page.querySelectorAll('h1').length === 1
+          && page.querySelector('h1').textContent === title, `${country} exact country-first title and H1`);
+        check(page.documentElement.lang === language && page.querySelector('meta[name="viewport"]')
+          && page.querySelector('meta[name="description"]').content.length > 40, `${country} language, viewport and useful description`);
+        check(page.querySelector('link[rel="canonical"]').getAttribute('href') === root + 'authority/' + path
+          && page.querySelector('meta[property="og:url"]').content === root + 'authority/' + path
+          && page.querySelector('meta[property="og:title"]').content === title, `${country} distinct canonical and social metadata`);
+        check(!/noindex/i.test(page.querySelector('meta[name="robots"]')?.content || ''),
+          `${country} no indexing restriction`);
+        check(![...page.querySelectorAll('a[href]')].some(link =>
+          pages.some(([name]) => link.getAttribute('href') === name)),
+          `${country} no MVP micropage discovery list or peer links`);
+        check([...page.querySelectorAll('nav a')].every(link => {
+          const href = link.getAttribute('href');
+          return href?.startsWith('#') && href.length > 1 && Boolean(page.getElementById(href.slice(1)));
+        }), `${country} any internal navigation targets only existing same-page sections`);
+        const header = page.querySelector('header');
+        const main = page.querySelector('main');
+        check(header.children.length === 2 && header.children[0].tagName === 'H1'
+          && header.children[1].tagName === 'P' && header.nextElementSibling === main
+          && main.firstElementChild.tagName === 'SECTION'
+          && main.firstElementChild.querySelector('h2').id === (country === 'POLYNÉSIE FRANÇAISE' ? 'territory' : 'authority'),
+          `${country} territorial content immediately follows title and subtitle`);
+        check(Boolean(page.querySelector('a[href="../index-wip.html"]')),
+          `${country} WIP remains reachable`);
+        check(!page.querySelector('link[hreflang]'), `${country} no hreflang between non-equivalent territories`);
+        const links = [...page.querySelectorAll('a[href^="https:"]')];
+        check(links.some(link => new URL(link.href).host === host)
+          && links.every(link => !link.rel.includes('nofollow')
+            && (link.target !== '_blank' || (link.rel.includes('noopener') && link.rel.includes('noreferrer')))),
+          `${country} institutional follow links and safe targets`);
+        check(!page.querySelector('script, iframe, form, input'), `${country} informational page without executable or credential collection code`);
+        check(page.getElementById('limits').parentElement.textContent.includes(registerLimit)
+          && page.getElementById('limits').parentElement.textContent.includes(resultLimit),
+          `${country} visible directory and results limitations`);
+        check(page.querySelector('time').dateTime === '2026-10-08'
+          && page.body.textContent.includes(dateLimit), `${country} honest editorial date`);
+        check(!stable.includes(path) && !sitemap.includes(path) && !database.includes(path),
+          `${country} no additions to stable homepage, live sitemap or database`);
+        if (country === 'ETHIOPIA') {
+          const play = page.getElementById('google-play').parentElement;
+          check(play.textContent.includes('Collegamento Google Play non verificato')
+            && !page.querySelector('a[href*="play.google.com"], a[href*="apps.apple.com"]')
+            && !/Disponibile su Google Play|gov\.ecma\.mobile/.test(source),
+            'Ethiopia withholds unverified store link and availability claim');
+          check(page.body.textContent.includes('NBE') && page.body.textContent.includes('Neway')
+            && !/certificat[ao] da Google/i.test(source), 'Ethiopia mandates distinguished without Google certification claim');
+          check(Boolean(page.querySelector('a[href="ET-ECMA.html"]')), 'Existing Ethiopia Orbital remains reachable');
+        } else if (country === 'ÖSTERREICH') {
+          check(page.getElementById('authority').parentElement.textContent.includes('Finanzmarktaufsicht')
+            && !page.querySelector('a[href="DE-BAFIN.html"]'), 'Austria uses FMA, not a renamed BaFin guide');
+        } else {
+          const territory = page.getElementById('territory').parentElement.textContent;
+          check(['IEOM', 'ACPR', 'AMF', 'Polynésie française'].every(name => territory.includes(name))
+            && territory.includes('adaptations') && territory.includes('autorité distincte')
+            && territory.includes('PR séparée'),
+            'Polynesia keeps ACPR distinct and contextual, with territorial caveats');
+          check(!links.some(link => new URL(link.href).host === 'acpr.banque-france.fr')
+            && links.some(link => new URL(link.href).host === 'www.amf-france.org'),
+            'Polynesia leaves detailed ACPR resources to a separate PR');
+          const sources = page.getElementById('sources').parentElement;
+          for (const [url, label] of [
+            ['https://www.ieom.fr/Nos-territoires-d-intervention-et-nos-agences?lang=fr', "territoires d'intervention et agences"],
+            ['https://www.ieom.fr/Comment-reagir-en-cas-d-arnaque-ou-d-usurpation-d-identite?lang=fr', "arnaque ou d'usurpation d'identité"],
+            ['https://www.ieom.fr/IMG/pdf/infograpie_ieom_attention_arnaques_protection_contre_la_fraude_moyens_de_paiement.pdf', 'fraude aux moyens de paiement (PDF)']
+          ]) {
+            check([...sources.querySelectorAll('a')].some(link =>
+              link.getAttribute('href') === url && link.textContent.includes(label)),
+              `Exact IEOM official/anti-fraud link and French label: ${label}`);
+          }
+          check(sources.textContent.includes('sans garantie')
+            && sources.textContent.includes("pas une conclusion juridique"),
+            'IEOM resources retain informative, non-conclusive wording');
+        }
+        frame.src = 'authority/' + path;
+        await waitFor(() => frame.contentDocument?.readyState === 'complete'
+          && frame.contentWindow.location.pathname.endsWith('/authority/' + path));
+        for (const width of [375, 1000]) {
+          frame.width = width;
+          await new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve)));
+          check(frame.contentDocument.documentElement.scrollWidth <= frame.contentWindow.innerWidth,
+            `${country} no horizontal overflow at ${width}px`);
+        }
+        for (const link of page.querySelectorAll('a:not([href^="https:"])')) {
+          await text(new URL(link.getAttribute('href'), new URL('authority/' + path, location.href)).pathname);
+        }
+      }
+      for (const [path, language] of [['FR-AMF.html', 'fr'], ['DE-BAFIN.html', 'de']]) {
+        const page = parser.parseFromString(await text('authority/' + path), 'text/html');
+        check(page.documentElement.lang === language
+          && page.querySelector('link[rel="canonical"]').getAttribute('href') === root + 'authority/' + path,
+          `${path} original language and canonical preserved`);
+      }
+      check(!/france-amf-orbital-webapp|germany-bafin-orbital-webapp/.test(discovery.innerHTML),
+        'WIP no longer discovers discarded FR/DE MVP duplicates');
+    }
     async function run() {
+      await testMicropages();
+      if (new URLSearchParams(location.search).get('micropages') === '1') {
+        results.textContent += '\nDONE';
+        return;
+      }
       const root = 'https://www.amevfirenze.it/';
       const national = ['IT-CONSOB', 'UK-FCA', 'ES-CNMV', 'FR-AMF', 'DE-BAFIN', 'US-SEC'];
       const international = ['EU-ESMA', 'IOSCO'];
