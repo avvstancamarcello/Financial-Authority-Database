@@ -307,12 +307,24 @@ Questa codifica fornisce una base formale per:
 Il MVP aggiunge esattamente tre pagine informative indipendenti:
 
 1. [ETHIOPIA · ECMA](authority/ethiopia-ecma-orbital-webapp.html)
-2. [FRANCE · AMF](authority/france-amf-orbital-webapp.html)
-3. [GERMANY · BaFin](authority/germany-bafin-orbital-webapp.html)
+2. [ÖSTERREICH · FMA](authority/oesterreich-fma-orbital-webapp.html), in tedesco
+3. [POLYNÉSIE FRANÇAISE · Autorités financières](authority/polynesie-francaise-orbital-webapp.html), in francese
 
-Ethiopia risponde alla richiesta esplicita; France e Germany riusano fonti
-robuste delle schede Orbital già presenti, con verifiche, avvisi e orientamento
-ai consumatori. I percorsi e i canonical sono distinti dalle schede esistenti.
+Ethiopia resta nel MVP; le due micropagine FR/DE della prima bozza sono
+sostituite da schede territoriali utili, non da cloni linguistici. Austria
+usa la FMA, non BaFin. La Polinesia francese distingue IEOM, ACPR e AMF
+rispetto al servizio e alle disposizioni territoriali applicabili.
+Le Orbital originali `authority/FR-AMF.html` e `authority/DE-BAFIN.html`
+restano integralmente invariate, inclusi contenuti, URL e canonical.
+Ogni micropagina ha un canonical autoreferenziale; non ci sono hreflang
+tra territori non equivalenti. L'i18n dinamico serve agli utenti ma non
+garantisce l'indicizzazione delle singole versioni linguistiche.
+Le fonti FMA e IEOM e la pagina ACPR sulle convenzioni con la Polinesia sono
+state reperite nella ricerca ufficiale; il loro accesso diretto è fallito.
+La pagina territoriale dichiara quindi che la verifica giuridica dettagliata
+delle competenze e delle convenzioni non è completata. Non estende in blocco
+il diritto metropolitano, non attribuisce all'ACPR tutti gli assicuratori
+locali e invita a confermare il regime del servizio prima di dedurre licenze.
 Titoli country-first e navigazione statica alfabetica rendono percepibile
 l'ordine del catalogo, ma non garantiscono indicizzazione, ranking o ordine
 dei risultati sui motori di ricerca. I link di scoperta sono solo nella WIP,
@@ -320,20 +332,23 @@ fuori grid, e nelle micropagine; la sitemap live non viene modificata.
 
 La PR #152, verificata aperta e draft l'8 ottobre 2026, resta contesto separato:
 questo MVP non ne importa né sovrascrive il riallineamento SEO/editoriale.
-Per ECMA la scheda Google Play reperita nella ricerca identifica
-`gov.ecma.mobile`; la verifica live della catena istituzione–store non è stata
-completata. La micropagina esplicita il limite, distingue ECMA da Neway ESX
-e non attribuisce certificazioni o approvazioni Google. La data visibile
+Per ECMA la verifica diretta del collegamento Google Play e della catena
+istituzione–store non è riuscita. La micropagina rimuove quindi il link allo
+store e il claim di disponibilità; mantiene solo il rinvio alla fonte
+istituzionale, distingue ECMA da Neway ESX e non attribuisce certificazioni
+o approvazioni Google. La data visibile
 indica solo la revisione editoriale, non una verifica live delle fonti.
 
 ### Estensione successiva, previa revisione e approvazione
 
-- Valutare altre authority già dotate di risorse Orbital (es. CONSOB, CNMV,
-  FCA), senza creare ora altre pagine o modificare le integrazioni esistenti.
+- Valutare contenuti territoriali distinti o traduzioni equivalenti realmente
+  utili, senza rinominare l'autorità di un altro Paese per la lingua comune.
 - Per ogni candidata verificare mandato, fonti istituzionali, utilità distinta
   del contenuto e, se pertinente, catena istituzione–store e sviluppatore.
 - Conservare titoli naturali `[COUNTRY] – [Authority/Topic] Orbital WebApp | AMEV`,
   ordine alfabetico, limiti espliciti e data effettiva della revisione.
+- Usare hreflang solo tra versioni equivalenti reali; preservare sempre gli
+  URL già indicizzati e non dedurre le traduzioni indicizzate dal selettore i18n.
 - Riesaminare separatamente eventuali link dalla homepage e inserimenti in
   sitemap: non fanno parte di questo MVP. Nessun merge/deploy automatico.
 
