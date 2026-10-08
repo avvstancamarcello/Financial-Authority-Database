@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>WIP editorial and Falcone regression checks</title>
+</head>
+<body>
+    <h1>Audit editoriale WIP e sezione Falcone</h1>
+    <p>I test isolano gli script WIP senza script esterni o service worker.
+        Verificano DOM, copy, metadati e collegamenti, non il caricamento delle bandiere dal CDN.
+        Le verifiche live delle fonti storiche sono documentate nella PR, non simulate da questo test.</p>
+    <pre id="results">Running…</pre>
+    <script>
+        if (!new URLSearchParams(location.search).has('fixture')) {
+            const results = document.getElementById('results');
+            const checks = [];
+
+            function check(condition, message) {
+                checks.push(`${condition ? 'PASS' : 'FAIL'}: ${message}`);
+                results.textContent = checks.join('\n');
+                if (!condition) throw new Error(message);
+            }
+
+            async function waitFor(predicate) {
+                const deadline = Date.now() + 10000;
+                while (Date.now() < deadline) {
+                    if (predicate()) return;
+                    await new Promise(resolve => setTimeout(resolve, 20));
+                }
+                throw new Error('Timed out waiting for WIP rendering');
+            }
+
+            async function run() {
+                const stableResponse = await fetch('./index.html');
+                check(stableResponse.ok, 'Stable homepage served');
+                const hash = Array.from(new Uint8Array(await crypto.subtle.digest(
+                    'SHA-256', await stableResponse.arrayBuffer())))
+                    .map(byte => byte.toString(16).padStart(2, '0')).join('');
+                check(hash === 'e080f08edf8e08dac87012fd6c1c7e2d9f2bfdcd34586a6b84d24e3bc6fcba2e',
+                    'Stable index.html is byte-identical to the audited main baseline');
+
+                const response = await fetch('./index-wip.html');
+                check(response.ok, 'WIP source served');
+                const source = new DOMParser().parseFromString(await response.text(), 'text/html');
+                const section = source.getElementById('storia-giovanni-falcone');
+                check(section?.tagName === 'SECTION'
+                    && source.querySelectorAll('#storia-giovanni-falcone').length === 1
+                    && section.querySelector('h2')?.textContent === 'Storia e strumenti della Lotta Criminalità Finanziaria'
+                    && section.getAttribute('aria-labelledby') === section.querySelector('h2').id,
+                    'Unique stable history anchor and semantic heading have the exact requested title');
+                check(!section.closest('#flags-section, #countries-section, #countriesGrid, .controls, .modal, dialog')
+                    && section.lang === 'it',
+                    'Standalone Italian history section is outside grids, controls and modals');
+                const historyLink = source.querySelector('a[href="#storia-giovanni-falcone"]');
+                check(historyLink?.textContent === 'Storia di Giovanni Falcone'
+                    && !historyLink.closest('#flags-section, .controls, .modal, dialog'),
+                    'Exact requested text links internally to the new section');
+                const expectedSources = [
+                    'https://www.fondazionefalcone.org/giovanni-falcone/',
+                    'https://www.fondazionefalcone.org/fatti/approvata-allunanimita-a-vienna-la-risoluzione-falcone/',
+                    'https://www.unodc.org/documents/treaties/UNTOC/COP/SESSION_10/Resolutions/Resolution_10_4_-_English.pdf'
+                ];
+                check(expectedSources.every(url => section.querySelector(`a[href="${url}"]`)),
+                    'History links directly to the Foundation biography, resolution account and official UNODC document');
+                check([...section.querySelectorAll('a')].every(link =>
+                    !new URL(link.href).hash && (link.target !== '_blank'
+                        || (link.rel.includes('noopener') && link.rel.includes('noreferrer')
+                            && /nuova scheda/.test(link.textContent)))),
+                    'No invented external fragment; new-tab sources have safe rel and visible notice');
+                check(/Paolo Borsellino/.test(section.textContent)
+                    && /pool antimafia/.test(section.textContent)
+                    && /patrimoniali e bancarie/.test(section.textContent)
+                    && /flussi di denaro/.test(section.textContent)
+                    && /prova/.test(section.textContent)
+                    && /cooperazione giudiziaria internazionale/.test(section.textContent)
+                    && /2020/.test(section.textContent) && /2000/.test(section.textContent)
+                    && !/475|2665|190 Paesi|primo magistrato/i.test(section.textContent),
+                    'History covers documented methods, teamwork and distinct dates without unsupported figures or primacy');
+                check(/non esercitano poteri investigativi/.test(section.textContent)
+                    && /non implica.*approvazione/.test(section.textContent),
+                    'Consumer directory is explicitly distinct from judicial powers and Foundation endorsement');
+
+                const unsupported = /più completo del mondo|most complete|sito ufficiale legittimo|official legitimate|no limits|best seller|161 Paesi|161 countries|239 autorità|239 authorities|239 link|239 financial|scudo attivo|quasi certamente una truffa/i;
+                check(!unsupported.test(source.body.textContent.split('const translations =')[0]),
+                    'Static WIP fallbacks do not repeat unsupported coverage or self-certification claims');
+                for (const script of source.querySelectorAll('script')) {
+                    if (script.type === 'application/ld+json') {
+                        check(!!JSON.parse(script.textContent)['@type']
+                            && !unsupported.test(script.textContent), `Static ${script.id} parses with neutral copy`);
+                    } else if (!script.src && script.textContent.trim()) {
+                        new Function(script.textContent);
+                    }
+                }
+                check(true, 'All inline JavaScript parses');
+                const bootstrap = source.querySelector('#grid-pipeline-diagnostics').textContent;
+                const application = [...source.querySelectorAll('script')]
+                    .find(script => script.textContent.includes('async function loadCountryData()')).textContent;
+                source.querySelectorAll('script, iframe').forEach(node => {
+                    if (node.id !== 'consobOrbitalFrame') node.remove();
+                });
+                const database = await (await fetch('./financial_authorities_database.json')).json();
+                check(Object.keys(database).length === 239
+                    && Object.hasOwn(database, 'Canada - Alberta')
+                    && Object.hasOwn(database, 'CEMAC (Regional)'),
+                    'Audited dataset has 239 records, including subnational and regional entries, not 239 sovereign states');
+                const frame = document.createElement('iframe');
+                frame.hidden = true;
+                frame.src = './test-wip-editorial.html?fixture=1';
+                const loaded = new Promise(resolve => frame.onload = resolve);
+                document.body.appendChild(frame);
+                await loaded;
+                try {
+                    const win = frame.contentWindow;
+                    const doc = win.document;
+                    doc.head.innerHTML = '';
+                    source.head.querySelectorAll('meta, title, link[rel="alternate"], link[rel="canonical"]')
+                        .forEach(node => doc.head.appendChild(node.cloneNode(true)));
+                    doc.body.innerHTML = source.body.innerHTML;
+                    win.eval(bootstrap);
+                    win.eval(application);
+                    win.fetch = async () => ({ ok: true, status: 200, json: async () => structuredClone(database) });
+                    await win.loadCountryData();
+                    await waitFor(() => doc.querySelectorAll('#flagsGrid .flag-item').length === 239);
+                    check(doc.querySelectorAll('#countriesGrid .country-card').length === 239
+                        && doc.getElementById('totalCountries').textContent === '239'
+                        && doc.querySelector('[data-i18n-text="statCountries"]').textContent === 'Record totali nel dataset',
+                        'Unfiltered grid and record statistics retain the 239-record baseline');
+                    for (const locale of ['it', 'en', 'fr', 'de', 'es', 'pt', 'nl', 'ro', 'ro-RO',
+                        'el', 'el-GR', 'sq', 'xk', 'sq-XK', 'bs', 'ar', 'zh', 'hi', 'vi']) {
+                        win.changeLanguage(locale);
+                        const copy = win.getLanguageBundle(locale);
+                        check(!unsupported.test(JSON.stringify(copy))
+                            && /not an authorization register|non un registro autorizzativo/.test(copy.metaDescription),
+                            `${locale}: effective template/fallback and SEO copy are neutral`);
+                        const hero = doc.querySelector('[data-i18n="landingHeroTitle"]');
+                        check(hero.lang === (locale === 'it' ? 'it' : 'en')
+                            && doc.title === copy.documentTitle
+                            && doc.querySelector('#meta-og-description').content === copy.metaDescription
+                            && doc.querySelector('#meta-twitter-description').content === copy.metaDescription,
+                            `${locale}: editorial fallback language, title, OG and Twitter are coherent`);
+                        for (const script of doc.querySelectorAll('script[type="application/ld+json"]')) {
+                            check(!unsupported.test(JSON.stringify(JSON.parse(script.textContent))),
+                                `${locale}: dynamic ${script.id} parses with neutral copy`);
+                        }
+                    }
+                    win.changeLanguage('it');
+                    win.setupSearch();
+                    doc.getElementById('searchInput').value = 'Ethiopia';
+                    doc.getElementById('searchInput').dispatchEvent(new win.Event('input', { bubbles: true }));
+                    const visible = [...doc.querySelectorAll('#countriesGrid .country-card')]
+                        .filter(card => card.style.display !== 'none');
+                    check(visible.length === 1 && visible[0].dataset.countryName === 'Ethiopia',
+                        'Search input retains Ethiopia matching');
+                    win.filterBySearchTerm('');
+                    win.filterCountries('ue');
+                    check(doc.querySelectorAll('#countriesGrid .country-card').length ===
+                        Object.values(database).filter(country => country.isEU).length
+                        && doc.getElementById('totalCountries').textContent === '239',
+                        'EU filter preserves its dataset-defined scope');
+                    win.filterCountries('all');
+                    win.filterCountries('altissimo');
+                    check(doc.querySelectorAll('#countriesGrid .country-card').length ===
+                        Object.values(database).filter(country => country.protectionLevel === 'Altissimo').length
+                        && [...doc.querySelectorAll('#countriesGrid .country-card')].every(card =>
+                            card.querySelector('.protection-altissimo')),
+                        'High indication filter preserves its functional classification');
+                    win.filterCountries('all');
+                    check(doc.querySelectorAll('#countriesGrid .country-card').length === 239
+                        && doc.querySelector('a[href="#storia-giovanni-falcone"]').textContent === 'Storia di Giovanni Falcone',
+                        'Reset restores all cards and language switching preserves the exact historical link');
+                    check(!win.gridPipelineDiag, 'Diagnostic monitor remains opt-in');
+                } finally {
+                    frame.remove();
+                }
+                results.dataset.status = 'passed';
+            }
+
+            run().catch(error => {
+                results.dataset.status = 'failed';
+                results.textContent += `\nERROR: ${error.stack || error.message}`;
+                console.error(error);
+            });
+        }
+    </script>
+</body>
+</html>
