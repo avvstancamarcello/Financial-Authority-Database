@@ -77,10 +77,28 @@
                 check(!section.closest('#flags-section, #countries-section, #countriesGrid, .controls, .modal, dialog')
                     && section.lang === 'it',
                     'Standalone Italian history section is outside grids, controls and modals');
-                const historyLink = source.querySelector('a[href="#storia-giovanni-falcone"]');
+                const historyLink = source.querySelector('a[href="#storia-giovanni-falcone"]:not(.falcone-hero-cta)');
                 check(historyLink?.textContent === 'Storia di Giovanni Falcone'
                     && !historyLink.closest('#flags-section, .controls, .modal, dialog'),
                     'Exact requested text links internally to the new section');
+                const heroCta = source.querySelectorAll('header[role="banner"] nav.falcone-hero-nav a.falcone-hero-cta');
+                check(heroCta.length === 1
+                    && heroCta[0].getAttribute('href') === '#storia-giovanni-falcone'
+                    && heroCta[0].querySelector('.falcone-hero-cta-label')?.textContent === 'Metodo Falcone'
+                    && !heroCta[0].hasAttribute('tabindex')
+                    && !heroCta[0].closest('#flags-section, .controls, .modal, dialog, .language-selector'),
+                    'Hero nav CTA "Metodo Falcone" links natively to the history anchor');
+                check(/Regolamento Internazionale/.test(heroCta[0].querySelector('.falcone-hero-cta-date')?.textContent)
+                    && /ottobre 2020/.test(heroCta[0].querySelector('.falcone-hero-cta-date').textContent),
+                    'Hero CTA date caption mentions Regolamento Internazionale and its date');
+                check(heroCta[0].compareDocumentPosition(source.querySelector('header nav.language-selector'))
+                    & Node.DOCUMENT_POSITION_FOLLOWING
+                    && source.querySelectorAll('header nav.language-selector').length === 1,
+                    'Hero CTA precedes and preserves the language navigation block');
+                check(!section.hidden && !/display:\s*none|visibility:\s*hidden/.test(section.getAttribute('style'))
+                    && !section.closest('header, nav, [class*="grid"]')
+                    && section.querySelectorAll('a[href^="https://www.fondazionefalcone.org/"]').length === 2,
+                    'History section stays visible, standalone and keeps both Foundation links');
                 const expectedSources = [
                     'https://www.fondazionefalcone.org/giovanni-falcone/',
                     'https://www.fondazionefalcone.org/fatti/approvata-allunanimita-a-vienna-la-risoluzione-falcone/',
@@ -206,8 +224,10 @@
                         'High indication filter preserves its functional classification');
                     win.filterCountries('all');
                     check(doc.querySelectorAll('#countriesGrid .country-card').length === 239
-                        && doc.querySelector('a[href="#storia-giovanni-falcone"]').textContent === 'Storia di Giovanni Falcone',
-                        'Reset restores all cards and language switching preserves the exact historical link');
+                        && doc.querySelector('a[href="#storia-giovanni-falcone"]:not(.falcone-hero-cta)').textContent === 'Storia di Giovanni Falcone'
+                        && doc.querySelector('header a.falcone-hero-cta .falcone-hero-cta-label').textContent === 'Metodo Falcone'
+                        && /Regolamento Internazionale/.test(doc.querySelector('header a.falcone-hero-cta').textContent),
+                        'Reset restores all cards and language switching preserves the exact historical link and hero CTA');
                     check(!win.gridPipelineDiag, 'Diagnostic monitor remains opt-in');
                 } finally {
                     frame.remove();
