@@ -92,6 +92,7 @@
                     }
                 }
                 check(true, 'All inline JavaScript parses');
+                const bootstrap = source.querySelector('#grid-pipeline-diagnostics').textContent;
                 const application = [...source.querySelectorAll('script')]
                     .find(script => script.textContent.includes('async function loadCountryData()')).textContent;
                 source.querySelectorAll('script, iframe').forEach(node => {
@@ -115,12 +116,14 @@
                     source.head.querySelectorAll('meta, title, link[rel="alternate"], link[rel="canonical"]')
                         .forEach(node => doc.head.appendChild(node.cloneNode(true)));
                     doc.body.innerHTML = source.body.innerHTML;
+                    win.eval(bootstrap);
                     win.eval(application);
                     win.fetch = async () => ({ ok: true, status: 200, json: async () => structuredClone(database) });
                     await win.loadCountryData();
                     await waitFor(() => doc.querySelectorAll('#flagsGrid .flag-item').length === 239);
                     check(doc.querySelectorAll('#countriesGrid .country-card').length === 239
-                        && doc.getElementById('totalCountries').textContent === '239',
+                        && doc.getElementById('totalCountries').textContent === '239'
+                        && doc.querySelector('[data-i18n-text="statCountries"]').textContent === 'Record totali nel dataset',
                         'Unfiltered grid and record statistics retain the 239-record baseline');
                     for (const locale of ['it', 'en', 'fr', 'de', 'es', 'pt', 'nl', 'ro', 'ro-RO',
                         'el', 'el-GR', 'sq', 'xk', 'sq-XK', 'bs', 'ar', 'zh', 'hi', 'vi']) {
@@ -151,7 +154,8 @@
                     win.filterBySearchTerm('');
                     win.filterCountries('ue');
                     check(doc.querySelectorAll('#countriesGrid .country-card').length ===
-                        Object.values(database).filter(country => country.isEU).length,
+                        Object.values(database).filter(country => country.isEU).length
+                        && doc.getElementById('totalCountries').textContent === '239',
                         'EU filter preserves its dataset-defined scope');
                     win.filterCountries('all');
                     win.filterCountries('altissimo');
