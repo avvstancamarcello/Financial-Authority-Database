@@ -1,6 +1,70 @@
 <!DOCTYPE html>
 <html lang="it" prefix="og: https://ogp.me/ns#">
 <head>
+    <script id="grid-pipeline-diagnostics">
+        (() => {
+            if (!new URLSearchParams(window.location.search).getAll('diag').includes('1')) return;
+
+            const started = performance.now();
+            const events = [];
+            let groupOpen = true;
+            console.groupCollapsed('[DIAG] Grid pipeline');
+
+            const tracer = window.gridPipelineDiag = {
+                events,
+                event(event, metadata = {}) {
+                    const entry = {
+                        event,
+                        relativeMs: Number((performance.now() - started).toFixed(2)),
+                        iso: new Date().toISOString(),
+                        ...metadata
+                    };
+                    events.push(entry);
+                    console[metadata.level === 'warning' ? 'warn' : 'log']('[DIAG]', entry);
+                },
+                error(error, includeMessage = true) {
+                    return {
+                        name: error?.name || 'Error',
+                        message: includeMessage
+                            ? String(error?.message || (typeof error === 'string' ? error : 'Unknown error'))
+                            : 'Database JSON parsing failed',
+                        stack: includeMessage && typeof error?.stack === 'string'
+                            ? error.stack.split('\n').slice(1).join('\n') : undefined
+                    };
+                },
+                snapshot(state, metadata = {}) {
+                    const snapshot = {
+                        state,
+                        lastEvent: events[events.length - 1]?.event,
+                        eventCount: events.length,
+                        ...metadata
+                    };
+                    tracer.lastSnapshot = snapshot;
+                    console.log('[DIAG] Snapshot', snapshot);
+                    if (groupOpen) {
+                        console.groupEnd();
+                        groupOpen = false;
+                    }
+                }
+            };
+            tracer.event('boot:start');
+            // Observe window.onerror/onunhandledrejection events without replacing handlers.
+            window.addEventListener('error', (event) => {
+                tracer.event('app:error', {
+                    ...tracer.error(event.error),
+                    message: event.message || 'Unknown error',
+                    filename: event.filename,
+                    line: event.lineno,
+                    column: event.colno
+                });
+                tracer.snapshot('error');
+            });
+            window.addEventListener('unhandledrejection', (event) => {
+                tracer.event('app:unhandledrejection', tracer.error(event.reason));
+                tracer.snapshot('error');
+            });
+        })();
+    </script>
    
     <!-- Google Tag Manager -->
     <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -3386,6 +3450,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </dialog>
 
     <script>
+        const gridPipelineDiag = window.gridPipelineDiag || {
+            event() {},
+            error() { return {}; },
+            snapshot() {}
+        };
         const translations = {
             it: {
                 title: "Database Internazionale per controlli bancari sulla identità finanziaria sui destinatari di transazioni bancarie.",
@@ -6412,11 +6481,33 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         }
 
         async function loadCountryData() {
+            let diagnosticPhase = 'fetch';
             try {
                 // Carica direttamente il database JSON
+                gridPipelineDiag.event('db:fetch:start', {
+                    url: new URL('financial_authorities_database.json', document.baseURI).href
+                });
                 const response = await fetch('financial_authorities_database.json');
+                gridPipelineDiag.event('db:fetch:response', {
+                    status: response.status, ok: response.ok, redirected: response.redirected
+                });
                 if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+                diagnosticPhase = 'parse';
                 let data = await response.json();
+                gridPipelineDiag.event('db:parse:ok');
+                diagnosticPhase = 'normalize';
+                gridPipelineDiag.event('data:normalize:start', { records: Object.keys(data).length });
+
+                if (window.gridPipelineDiag) {
+                    const missingFields = ['country_name', 'ecma_orbital.modal', 'ecma_orbital.thumbnail', 'ecma_orbital.name']
+                        .filter((path) => !path.split('.').reduce((value, key) => value?.[key], data.Ethiopia));
+                    if (missingFields.length) {
+                        gridPipelineDiag.event('data:ethiopia:warning', {
+                            level: 'warning', missingFields,
+                            message: 'Ethiopia Orbital fields missing in JSON; existing WIP defaults preserved'
+                        });
+                    }
+                }
 
                 if (data.France) {
                     data.France.thumbnail = 'authority/preview-FR-AMF.png';
@@ -6468,11 +6559,29 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 
                 // Assegna continente a ogni paese - SEO Enhancement
                 countriesData = assignContinents(countriesData);
+                if (window.gridPipelineDiag) {
+                    const validRecords = countriesData.filter((country) =>
+                        typeof country?.country_name === 'string' && country.country_name.trim()).length;
+                    gridPipelineDiag.event('data:normalize:done', {
+                        records: countriesData.length,
+                        validRecords,
+                        invalidRecords: countriesData.length - validRecords,
+                        discardedRecords: 0
+                    });
+                }
                 hasCompletedCountryLoad = true;
                 hasCountryLoadError = false;
                 
+                diagnosticPhase = 'render';
                 renderAll();
             } catch (error) {
+                gridPipelineDiag.event(
+                    diagnosticPhase === 'fetch' ? 'db:fetch:error'
+                        : diagnosticPhase === 'parse' ? 'db:parse:error'
+                        : diagnosticPhase === 'render' ? 'grid:render:error' : 'data:normalize:error',
+                    gridPipelineDiag.error(error, diagnosticPhase !== 'parse')
+                );
+                gridPipelineDiag.snapshot('error', { phase: diagnosticPhase });
                 console.error('Error loading country data:', error);
                 countriesData = [];
                 hasCompletedCountryLoad = true;
@@ -8200,22 +8309,31 @@ https://avvstancamarcello.github.io/Financial-Authority-Database/
 
         function renderFlagsGrid() {
             const grid = document.getElementById('flagsGrid');
+            gridPipelineDiag.event(grid ? 'grid:container:found' : 'grid:container:missing');
             if (!grid) {
+                gridPipelineDiag.snapshot('blocked', { reason: 'Missing #flagsGrid' });
                 console.warn('renderFlagsGrid skipped: #flagsGrid element not found.');
                 return;
             }
 
+            gridPipelineDiag.event('grid:render:start', { records: countriesData.length });
             grid.innerHTML = '';
 
             if (!Array.isArray(countriesData) || countriesData.length === 0) {
                 if (!hasCompletedCountryLoad) {
+                    gridPipelineDiag.snapshot('waiting', { renderedElements: 0 });
                     return;
                 }
                 if (hasCountryLoadError) {
                     grid.innerHTML = '<p role="status" aria-live="polite" style="color: #92400e; text-align: center; grid-column: 1 / -1;">Flag grid unavailable: country data could not be loaded.</p>';
+                    gridPipelineDiag.event('grid:render:done', { renderedElements: 0 });
+                    gridPipelineDiag.snapshot('error', { renderedElements: 0 });
                     return;
                 }
                 grid.innerHTML = '<p role="status" aria-live="polite" style="text-align:center; color:#92400e; grid-column: 1 / -1;">No country data available for flags grid.</p>';
+                gridPipelineDiag.event('grid:render:done', { renderedElements: 0 });
+                gridPipelineDiag.event('app:ready');
+                gridPipelineDiag.snapshot('empty', { renderedElements: 0 });
                 return;
             }
 
@@ -8364,6 +8482,12 @@ https://avvstancamarcello.github.io/Financial-Authority-Database/
             if (flagWrappers.length > 0) {
                 applyWaveGroup();
                 flagsWaveInterval = setInterval(applyWaveGroup, 2340);
+            }
+            if (window.gridPipelineDiag) {
+                const renderedElements = grid.querySelectorAll('.flag-item').length;
+                gridPipelineDiag.event('grid:render:done', { renderedElements });
+                gridPipelineDiag.event('app:ready');
+                gridPipelineDiag.snapshot('ready', { renderedElements });
             }
         }
 

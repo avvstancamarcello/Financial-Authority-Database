@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>WIP grid pipeline diagnostics tests</title>
+</head>
+<body>
+    <h1>Diagnostica grid WIP</h1>
+    <p>Aprire <code>index-wip?diag=1</code> e la console: il gruppo
+        <code>[DIAG] Grid pipeline</code> raccoglie eventi e snapshot.
+        Il tracer è disponibile in <code>window.gridPipelineDiag</code>; senza
+        <code>diag=1</code> non viene creato.</p>
+    <p>Esempio: <code>{event: "db:fetch:response", relativeMs: 42, iso: "2026-10-08T08:00:00.000Z", status: 200, ok: true, redirected: false}</code>.
+        Lo snapshot finale espone stato, ultimo evento e conteggio DOM.</p>
+    <p>Limiti: il conteggio DOM non certifica visibilità CSS o caricamento immagini.
+        Un blocco permanente lascia la timeline parziale, senza snapshot di completamento.
+        Gli errori e fallback preesistenti restano invariati. I record senza nome sono
+        contati come invalidi, non scartati: la diagnostica non filtra i dati.
+        I campi Orbital Ethiopia assenti producono un warning, preservando i default WIP.
+        I log successivi al primo snapshot restano marcati [DIAG] fuori dal gruppo iniziale.
+        Gli errori di parsing non riportano il messaggio originale, che può contenere JSON.
+        Nessun payload JSON viene registrato dal tracer. Il file senza estensione
+        <code>index-wip</code> deve essere servito come <code>text/html</code>;
+        una risposta <code>text/plain</code> o un download impedisce l’avvio degli script.</p>
+    <p>Test: servire la root con <code>python3 -m http.server 8000</code>,
+        poi aprire <code>http://localhost:8000/test-grid-pipeline.html</code>.
+        I test isolano gli script WIP in iframe, senza caricare script esterni o service worker.</p>
+    <pre id="results">Running…</pre>
+    <script>
+        if (!new URLSearchParams(location.search).has('fixture')) {
+            const results = document.getElementById('results');
+            const checks = [];
+
+            function check(condition, message) {
+                checks.push(`${condition ? 'PASS' : 'FAIL'}: ${message}`);
+                results.textContent = checks.join('\n');
+                if (!condition) throw new Error(message);
+            }
+
+            async function run() {
+                const response = await fetch('./index-wip');
+                check(response.ok, 'WIP source served');
+                const source = new DOMParser().parseFromString(await response.text(), 'text/html');
+                const bootstrap = source.querySelector('#grid-pipeline-diagnostics').textContent;
+                const application = [...source.querySelectorAll('script')]
+                    .find(script => script.textContent.includes('async function loadCountryData()')).textContent;
+                source.querySelectorAll('script, iframe').forEach(node => node.remove());
+                const databaseResponse = await fetch('./financial_authorities_database.json');
+                check(databaseResponse.ok, 'Database fixture served');
+                const database = await databaseResponse.json();
+
+                async function fixture(mode, enabled = true) {
+                    const frame = document.createElement('iframe');
+                    frame.hidden = true;
+                    frame.src = `./test-grid-pipeline.html?fixture=1${enabled ? '&diag=1' : ''}`;
+                    const loaded = new Promise(resolve => frame.onload = resolve);
+                    document.body.appendChild(frame);
+                    await loaded;
+                    const win = frame.contentWindow;
+                    win.document.body.innerHTML = source.body.innerHTML;
+                    const logs = [];
+                    for (const method of ['log', 'warn', 'error', 'groupCollapsed', 'groupEnd']) {
+                        win.console[method] = (...args) => logs.push({ method, args });
+                    }
+                    const onerror = () => false;
+                    const onrejection = () => {};
+                    win.onerror = onerror;
+                    win.onunhandledrejection = onrejection;
+                    win.eval(bootstrap);
+                    win.eval(application);
+                    win.fetch = async () => {
+                        if (mode === 'network') throw new win.TypeError('Simulated network failure');
+                        return {
+                            status: mode === 'http' ? 503 : 200,
+                            ok: mode !== 'http',
+                            redirected: false,
+                            json: async () => {
+                                if (mode === 'parse') throw new win.SyntaxError('Private JSON fragment');
+                                return mode === 'normalize' ? null : structuredClone(database);
+                            }
+                        };
+                    };
+                    if (mode === 'missing') win.document.getElementById('flagsGrid').remove();
+                    await win.loadCountryData();
+                    if (['success', 'missing'].includes(mode)) {
+                        const deadline = performance.now() + 5000;
+                        while (performance.now() < deadline &&
+                            (enabled ? !win.gridPipelineDiag.lastSnapshot
+                                : !win.document.querySelector('#flagsGrid .flag-item'))) {
+                            await new Promise(resolve => setTimeout(resolve, 20));
+                        }
+                    }
+                    return { frame, win, logs, onerror, onrejection };
+                }
+
+                const success = await fixture('success');
+                try {
+                    const { win, logs, onerror, onrejection } = success;
+                    const tracer = win.gridPipelineDiag;
+                    check(!!tracer, 'diag=1 creates global tracer');
+                    const names = tracer.events.map(entry => entry.event);
+                    const expected = [
+                        'boot:start', 'db:fetch:start', 'db:fetch:response', 'db:parse:ok',
+                        'data:normalize:start', 'data:normalize:done', 'grid:container:found',
+                        'grid:render:start', 'grid:render:done', 'app:ready'
+                    ];
+                    let last = -1;
+                    check(expected.every(name => {
+                        const index = names.indexOf(name);
+                        const ordered = index > last;
+                        last = index;
+                        return ordered;
+                    }), 'Successful pipeline emits all base events in order');
+                    check(tracer.events.every((entry, index) =>
+                        Number.isFinite(entry.relativeMs) && !Number.isNaN(Date.parse(entry.iso)) &&
+                        (!index || entry.relativeMs >= tracer.events[index - 1].relativeMs)),
+                    'All events have ISO and monotonic relative timestamps');
+                    check(tracer.events.find(entry => entry.event === 'db:fetch:start').url
+                        === new URL('./financial_authorities_database.json', location.href).href,
+                    'Fetch event records the requested URL');
+                    const normalized = tracer.events.find(entry => entry.event === 'data:normalize:done');
+                    const domCount = win.document.querySelectorAll('#flagsGrid .flag-item').length;
+                    check(domCount > 0 && tracer.lastSnapshot.state === 'ready' &&
+                        tracer.lastSnapshot.renderedElements === domCount &&
+                        normalized.validRecords + normalized.invalidRecords === normalized.records &&
+                        normalized.discardedRecords === 0,
+                    'Snapshot and normalization counts match actual DOM without filtering');
+                    check(names.includes('data:ethiopia:warning') &&
+                        [...win.document.querySelectorAll('#flagsGrid .flag-name')]
+                            .some(node => node.textContent === 'Ethiopia'),
+                    'Missing Ethiopia Orbital JSON fields warn without blocking the flag');
+                    check(logs.filter(log => log.method === 'groupCollapsed').length === 1 &&
+                        logs.find(log => log.method === 'groupCollapsed').args[0] === '[DIAG] Grid pipeline',
+                    'One collapsed pipeline group is created');
+                    check(!JSON.stringify(tracer.events).includes(database.Ethiopia.notes),
+                    'Tracer does not log country payloads');
+                    check(win.onerror === onerror && win.onunhandledrejection === onrejection,
+                    'Existing global handlers are preserved');
+                    const error = new win.ErrorEvent('error', {
+                        message: 'Simulated runtime error', error: new win.Error('Simulated runtime error'),
+                        cancelable: true
+                    });
+                    win.dispatchEvent(error);
+                    const rejection = new win.PromiseRejectionEvent('unhandledrejection', {
+                        promise: win.Promise.resolve(), reason: new win.Error('Simulated rejection'),
+                        cancelable: true
+                    });
+                    win.dispatchEvent(rejection);
+                    check(!error.defaultPrevented && !rejection.defaultPrevented &&
+                        tracer.events.some(entry => entry.event === 'app:error' && entry.stack) &&
+                        tracer.events.some(entry => entry.event === 'app:unhandledrejection' && entry.stack),
+                    'Global errors have stacks and are not suppressed');
+                } finally {
+                    success.frame.remove();
+                }
+
+                for (const [mode, event] of [
+                    ['network', 'db:fetch:error'], ['http', 'db:fetch:error'],
+                    ['parse', 'db:parse:error'], ['normalize', 'data:normalize:error'],
+                    ['missing', 'grid:container:missing']
+                ]) {
+                    const test = await fixture(mode);
+                    try {
+                        const tracer = test.win.gridPipelineDiag;
+                        const names = tracer.events.map(entry => entry.event);
+                        check(names[0] === 'boot:start' && names[1] === 'db:fetch:start' &&
+                            names.includes(event) && !names.includes('app:ready'),
+                        `${mode}: correct failure event without false readiness`);
+                        check(tracer.lastSnapshot.state === (mode === 'missing' ? 'blocked' : 'error'),
+                        `${mode}: final failure snapshot`);
+                        if (mode === 'network') {
+                            check(tracer.events.find(entry => entry.event === event).message === 'Simulated network failure' &&
+                                test.win.document.querySelector('#flagsGrid [role="status"]'),
+                            'Fetch failure retains message and existing error UI');
+                        }
+                        if (mode === 'parse') {
+                            check(!JSON.stringify(tracer.events).includes('Private JSON fragment'),
+                            'Parse diagnostics omit potentially private JSON excerpts');
+                        }
+                    } finally {
+                        test.frame.remove();
+                    }
+                }
+
+                const disabled = await fixture('success', false);
+                try {
+                    check(!disabled.win.gridPipelineDiag &&
+                        !disabled.logs.some(log => String(log.args[0]).includes('[DIAG]')) &&
+                        disabled.win.document.querySelectorAll('#flagsGrid .flag-item').length > 0,
+                    'Default OFF: no tracer or diagnostic logs; flags still render');
+                } finally {
+                    disabled.frame.remove();
+                }
+                results.dataset.status = 'passed';
+            }
+
+            run().catch(error => {
+                results.dataset.status = 'failed';
+                results.textContent += `\nERROR: ${error.stack || error.message}`;
+                console.error(error);
+            });
+        }
+    </script>
+</body>
+</html>
