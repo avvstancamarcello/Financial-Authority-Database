@@ -1941,6 +1941,30 @@
             outline: 3px solid #1d4ed8;
             outline-offset: 3px;
         }
+        .polynesia-orbital-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            min-width: 44px;
+            min-height: 44px;
+            max-width: 100%;
+            box-sizing: border-box;
+            margin-top: 20px;
+            padding: 12px 16px;
+            border-radius: 8px;
+            background: #1e3a8a;
+            color: #fff;
+            font-weight: 600;
+            text-decoration: underline;
+            overflow-wrap: anywhere;
+        }
+        .polynesia-orbital-cta:hover {
+            background: #172554;
+        }
+        .polynesia-orbital-cta:focus-visible {
+            outline: 3px solid #1d4ed8;
+            outline-offset: 3px;
+        }
         @media (prefers-reduced-motion: reduce) {
             .orbital-thumbnail-trigger {
                 transition: none;
@@ -3234,6 +3258,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 <li><a href="authority/polynesie-francaise-orbital-webapp.html" lang="fr">POLYNÉSIE FRANÇAISE · Autorités financières</a></li>
             </ol>
         </nav>
+
+        <p data-i18n-text="orbitalCatalogDescription" lang="it">Esplora le Orbital WebApp disponibili: guide informative per Paese, territorio o autorità, con collegamenti alle fonti istituzionali e indicazioni per una verifica preliminare. Il catalogo comprende le pagine attualmente disponibili e potrà essere ampliato.</p>
 
         <!-- NUOVA BARRA RICERCA SUPERIORE -->
         <div class="search-bar-top">
@@ -5912,6 +5938,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         // WIP-only editorial copy; other locales retain their UI and use explicit English copy here.
         const WIP_EDITORIAL_COPY = {
             it: {
+                orbitalCatalogDescription: "Esplora le Orbital WebApp disponibili: guide informative per Paese, territorio o autorità, con collegamenti alle fonti istituzionali e indicazioni per una verifica preliminare. Il catalogo comprende le pagine attualmente disponibili e potrà essere ampliato.",
+                polynesiaOrbitalOpen: "Apri Orbital WebApp · Polynésie française",
                 title: "Directory internazionale delle autorità finanziarie",
                 subtitle: "Collegamenti alle fonti ufficiali",
                 securityTitle: "Directory indipendente verso le fonti ufficiali",
@@ -5949,6 +5977,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 metaDescription: "Strumento informativo per supportare richieste di collaborazione alle Autorità Finanziarie in ambito nazionale e internazionale, con accesso a fonti ufficiali e checklist di verifica preliminare."
             },
             en: {
+                orbitalCatalogDescription: "Explore the available Orbital WebApps: informational guides by country, territory or authority, with links to institutional sources and guidance for a preliminary check. The catalog includes the pages currently available and may be expanded.",
+                polynesiaOrbitalOpen: "Open Orbital WebApp · Polynésie française",
                 title: "International directory of financial authorities",
                 subtitle: "Links to official sources",
                 securityTitle: "Independent directory linking to official sources",
@@ -6043,6 +6073,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         // Cache traduzioni on-demand
         let translationCache = {};
         let isConsobOrbitalDialogSetup = false;
+        let consobOrbitalLastTrigger = null;
         const orbitalDiagnosticState = { attemptNumber: 0, currentAttempt: null };
         let activeDialogState = null;
         let currentAndroidGuideLanguage = null;
@@ -7828,6 +7859,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             new URL('authority/DE-BAFIN.html', window.location.href).pathname,
             new URL('/authority/ET-ECMA.html', window.location.origin).pathname,
             new URL('authority/ET-ECMA.html', window.location.href).pathname,
+            new URL('/authority/polynesie-francaise-orbital-webapp.html', window.location.origin).pathname,
+            new URL('authority/polynesie-francaise-orbital-webapp.html', window.location.href).pathname,
             new URL('/authority/ES-CNMV.html', window.location.origin).pathname,
             new URL('authority/ES-CNMV.html', window.location.href).pathname,
             new URL('/authority/US-SEC.html', window.location.origin).pathname,
@@ -8129,7 +8162,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             });
         }
 
-        function openItalyOrbitalDialog(modalSrc) {
+        function openItalyOrbitalDialog(modalSrc, trigger = document.activeElement) {
             const dialog = document.getElementById('consobOrbitalDialog');
             const frame = document.getElementById('consobOrbitalFrame');
             const src = resolveConsobOrbitalSrc(modalSrc, { allowFallback: true });
@@ -8144,7 +8177,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 id: attemptId,
                 authority,
                 sourcePath: src || null,
-                trigger: document.activeElement instanceof HTMLElement ? document.activeElement : null,
+                trigger: trigger instanceof HTMLElement ? trigger : null,
                 timeoutId: null
             } : null;
             if (diagnosticsEnabled) {
@@ -8215,6 +8248,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     if (dialog.open && typeof dialog.close === 'function') {
                         dialog.close();
                     }
+                    consobOrbitalLastTrigger = trigger instanceof HTMLElement ? trigger : null;
                     dialog.showModal();
                     frame.src = src;
                     if (diagnosticsEnabled) {
@@ -8287,6 +8321,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             } else if (dialog) {
                 dialog.removeAttribute('open');
             }
+            if (consobOrbitalLastTrigger?.isConnected) {
+                consobOrbitalLastTrigger.focus();
+            }
+            consobOrbitalLastTrigger = null;
             if (attempt) {
                 emitOrbitalDiagnostic('orbital:close', {
                     attemptId: attempt.id, authority: attempt.authority,
@@ -8486,6 +8524,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     </button>
                 </section>
             ` : '';
+            const polynesiaPreviewHtml = country.country_name === 'French Polynesia (France)' ? `
+                <a class="polynesia-orbital-cta"
+                    href="authority/polynesie-francaise-orbital-webapp.html"
+                    onclick="if (event.button === 0 && !event.ctrlKey && !event.metaKey && !event.shiftKey && !event.altKey) { event.preventDefault(); openItalyOrbitalDialog(this.getAttribute('href'), this); }">
+                    <span aria-hidden="true">◎</span>
+                    <span data-i18n-text="polynesiaOrbitalOpen" lang="${currentLanguage === 'it' ? 'it' : 'en'}">${escapeHtmlAttribute(currentTranslations.polynesiaOrbitalOpen)}</span>
+                </a>
+            ` : '';
             const safeCountryName = escapeHtmlAttribute(country.country_name);
             const safeAuthorityName = escapeHtmlAttribute(country.financial_authority.name);
             const safeAuthorityEmail = escapeHtmlAttribute(country.financial_authority.authorityEmail);
@@ -8528,6 +8574,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     ${socialHTML ? `<p style="margin-top:15px;"><strong>${currentTranslations.modalSocial || 'Social'}:</strong> ${socialHTML}</p>` : ''}
                     ${orbitalPreviewHtml}
                     ${ecmaPreviewHtml}
+                    ${polynesiaPreviewHtml}
                     <div style="margin-top: 20px; display: flex; align-items: center; flex-wrap: wrap; gap: 10px;">
                         <h3 style="margin: 0;">${currentTranslations.modalNotes || 'Notes'}:</h3>
                         <button id="translateNotesBtn" class="translate-btn" onclick="translateNotes(this.dataset.country)" data-country="${safeCountryName}">
