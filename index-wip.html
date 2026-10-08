@@ -8,10 +8,12 @@
             const started = performance.now();
             const events = [];
             let groupOpen = true;
+            const orbitalReport = { inventory: [], lastAttempt: null, problems: [] };
             console.groupCollapsed('[DIAG] Grid pipeline');
 
             const tracer = window.gridPipelineDiag = {
                 events,
+                orbitalReport,
                 event(event, metadata = {}) {
                     const entry = {
                         event,
@@ -21,6 +23,40 @@
                     };
                     events.push(entry);
                     console[metadata.level === 'warning' ? 'warn' : 'log']('[DIAG]', entry);
+                },
+                orbitalInventory(launchers) {
+                    orbitalReport.inventory = launchers;
+                    tracer.event('orbital:inventory', { launchers });
+                    tracer.orbitalSnapshot();
+                },
+                orbitalEvent(event, metadata = {}) {
+                    tracer.event(event, metadata);
+                    if (metadata.attemptId) {
+                        orbitalReport.lastAttempt = {
+                            attemptId: metadata.attemptId,
+                            authority: metadata.authority,
+                            event,
+                            status: metadata.status || metadata.contentStatus || null
+                        };
+                    }
+                    if (metadata.level === 'warning' || /:(missing|error|timeout)$/.test(event)) {
+                        orbitalReport.problems.push({
+                            event,
+                            authority: metadata.authority || null,
+                            reason: metadata.reason || metadata.contentStatus || null
+                        });
+                        orbitalReport.problems = orbitalReport.problems.slice(-20);
+                    }
+                    tracer.orbitalSnapshot();
+                },
+                orbitalSnapshot() {
+                    const snapshot = {
+                        inventory: orbitalReport.inventory,
+                        lastAttempt: orbitalReport.lastAttempt,
+                        problems: orbitalReport.problems
+                    };
+                    tracer.lastOrbitalSnapshot = snapshot;
+                    console.log('[DIAG] Orbital snapshot', snapshot);
                 },
                 error(error, includeMessage = true) {
                     return {
@@ -3453,7 +3489,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         const gridPipelineDiag = window.gridPipelineDiag || {
             event() {},
             error() { return {}; },
-            snapshot() {}
+            snapshot() {},
+            orbitalInventory() {},
+            orbitalEvent() {}
         };
         const translations = {
             it: {
@@ -5884,6 +5922,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         // Cache traduzioni on-demand
         let translationCache = {};
         let isConsobOrbitalDialogSetup = false;
+        const orbitalDiagnosticState = { attemptNumber: 0, currentAttempt: null };
         let activeDialogState = null;
         let currentAndroidGuideLanguage = null;
         let androidGuideLastTrigger = null;
@@ -6554,6 +6593,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 
                 // Assegna continente a ogni paese - SEO Enhancement
                 countriesData = assignContinents(countriesData);
+                recordOrbitalInventory();
                 if (window.gridPipelineDiag) {
                     const validRecords = countriesData.filter((country) =>
                         typeof country?.country_name === 'string' && country.country_name.trim()).length;
@@ -7707,6 +7747,203 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             }
         }
 
+        function getOrbitalAuthority(country) {
+            if (country.country_name === 'Italy') return 'CONSOB';
+            if (country.country_name === 'United Kingdom') return 'FCA';
+            if (country.country_name === 'France') return 'AMF France';
+            if (country.country_name === 'Germany') return 'BaFin';
+            if (country.country_name === 'Spain') return 'CNMV';
+            if (country.country_name === 'United States of America') return 'SEC';
+            if (country.country_name === 'Ethiopia') return 'ECMA Ethiopia';
+            return country.country_name || 'Unknown authority';
+        }
+
+        function getOrbitalRejectionReason(candidateSource) {
+            const source = String(candidateSource || '').trim();
+            if (!source) return 'missing-source';
+            try {
+                const url = new URL(source, window.location.href);
+                if (url.origin !== window.location.origin) return 'cross-origin';
+                if (!CONSOB_ORBITAL_ALLOWED_PATHS.has(url.pathname)) return 'allowlist';
+            } catch (error) {
+                return 'invalid-url';
+            }
+            return null;
+        }
+
+        function emitOrbitalDiagnostic(event, metadata = {}) {
+            if (window.gridPipelineDiag) gridPipelineDiag.orbitalEvent(event, metadata);
+        }
+
+        function recordOrbitalInventory() {
+            if (!window.gridPipelineDiag) return;
+            const dialog = document.getElementById('consobOrbitalDialog');
+            const frame = document.getElementById('consobOrbitalFrame');
+            if (dialog && frame) {
+                emitOrbitalDiagnostic('orbital:wrapper:found', {
+                    wrapperId: dialog.id, iframeId: frame.id, phase: 'inventory'
+                });
+            } else {
+                emitOrbitalDiagnostic('orbital:wrapper:missing', {
+                    wrapperId: 'consobOrbitalDialog', iframeId: 'consobOrbitalFrame',
+                    phase: 'inventory', reason: !dialog ? 'dialog-not-found' : 'iframe-not-found',
+                    level: 'warning'
+                });
+            }
+
+            const launchers = [];
+            countriesData.forEach((country) => {
+                const configurations = [];
+                if (country?.has_orbital_view) {
+                    configurations.push({
+                        modal: country.modal,
+                        thumbnail: country.thumbnail,
+                        configuredBy: ['France', 'Germany', 'Spain'].includes(country.country_name)
+                            ? 'WIP bootstrap' : 'database'
+                    });
+                }
+                if (country?.country_name === 'Ethiopia' && country.ecma_orbital) {
+                    configurations.push({ ...country.ecma_orbital, configuredBy: 'WIP bootstrap' });
+                }
+
+                configurations.forEach((configuration, index) => {
+                    const authority = getOrbitalAuthority(country);
+                    const rejectionReason = getOrbitalRejectionReason(configuration.modal);
+                    const sourcePath = resolveConsobOrbitalSrc(configuration.modal);
+                    const thumbnailPath = resolveConsobOrbitalThumbnailSrc(configuration.thumbnail);
+                    const launcher = {
+                        authority,
+                        country: country.country_name,
+                        launcherId: `${authority.toLowerCase().replace(/[^a-z0-9]+/g, '-')}-${index + 1}`,
+                        wrapperId: 'consobOrbitalDialog',
+                        iframeId: 'consobOrbitalFrame',
+                        sourcePath: sourcePath || null,
+                        thumbnailPath: thumbnailPath || null,
+                        authorized: Boolean(sourcePath && thumbnailPath),
+                        configuredBy: configuration.configuredBy
+                    };
+                    launchers.push(launcher);
+                    if (rejectionReason || !thumbnailPath) {
+                        emitOrbitalDiagnostic('orbital:trigger', {
+                            authority, launcherId: launcher.launcherId,
+                            reason: rejectionReason || 'thumbnail-allowlist', level: 'warning'
+                        });
+                    }
+                });
+            });
+            gridPipelineDiag.orbitalInventory(launchers);
+        }
+
+        function clearOrbitalAttemptTimer(attempt) {
+            if (attempt?.timeoutId) {
+                clearTimeout(attempt.timeoutId);
+                attempt.timeoutId = null;
+            }
+        }
+
+        function getOrbitalWrapperVisibility(dialog) {
+            if (!dialog) return false;
+            const style = window.getComputedStyle(dialog);
+            return dialog.open && style.display !== 'none'
+                && style.visibility !== 'hidden' && dialog.getClientRects().length > 0;
+        }
+
+        function inspectOrbitalFrame(frame, attempt) {
+            let contentDocument;
+            try {
+                contentDocument = frame.contentDocument;
+            } catch (error) {
+                return {
+                    contentStatus: 'unverifiable',
+                    reason: 'cross-origin',
+                    readyState: null,
+                    hasBody: false,
+                    hasHeading: false
+                };
+            }
+            if (!contentDocument) {
+                return {
+                    contentStatus: 'unverifiable',
+                    reason: 'document-unavailable',
+                    readyState: null,
+                    hasBody: false,
+                    hasHeading: false
+                };
+            }
+            const body = contentDocument.body;
+            const hasBody = Boolean(body && body.childElementCount);
+            const hasHeading = Boolean(contentDocument.querySelector('h1'));
+            const bodyText = body?.textContent?.slice(0, 2000).toLowerCase() || '';
+            const titleText = contentDocument.title.toLowerCase();
+            const hasErrorIndicator = /\b(error response|error code:\s*(403|404|500)|404 not found|file not found|403 forbidden|500 internal server error)\b/
+                .test(`${titleText} ${bodyText}`);
+            const ready = contentDocument.readyState === 'complete' && hasBody;
+            return {
+                contentStatus: hasErrorIndicator ? 'error-indicator'
+                    : ready && hasHeading ? 'same-origin-document-ready'
+                        : ready ? 'same-origin-document-incomplete' : 'incomplete',
+                reason: hasErrorIndicator ? 'http-error-indicator' : undefined,
+                readyState: contentDocument.readyState,
+                hasBody,
+                hasHeading
+            };
+        }
+
+        function verifyOrbitalResource(src, attempt) {
+            fetch(src, { method: 'HEAD', credentials: 'same-origin', cache: 'no-store' })
+                .then((response) => {
+                    emitOrbitalDiagnostic('orbital:resource:check', {
+                        attemptId: attempt.id, authority: attempt.authority,
+                        status: response.status, ok: response.ok,
+                        ...(!response.ok ? { reason: 'http-response-not-ok', level: 'warning' } : {})
+                    });
+                })
+                .catch(() => {
+                    emitOrbitalDiagnostic('orbital:resource:check', {
+                        attemptId: attempt.id, authority: attempt.authority,
+                        status: 'unavailable', reason: 'same-origin-head-failed', level: 'warning'
+                    });
+                });
+        }
+
+        function setupOrbitalFrameDiagnostics(frame) {
+            if (!window.gridPipelineDiag || !frame || frame.dataset.orbitalDiagnostics === 'attached') return;
+            frame.dataset.orbitalDiagnostics = 'attached';
+            frame.addEventListener('load', () => {
+                const attempt = orbitalDiagnosticState.currentAttempt;
+                if (attempt) recordOrbitalFrameLoad(frame, attempt);
+            });
+            frame.addEventListener('error', () => {
+                const attempt = orbitalDiagnosticState.currentAttempt;
+                if (!attempt) return;
+                clearOrbitalAttemptTimer(attempt);
+                emitOrbitalDiagnostic('orbital:iframe:error', {
+                    attemptId: attempt.id, authority: attempt.authority,
+                    sourcePath: attempt.sourcePath, reason: 'iframe-error-event', level: 'warning'
+                });
+            });
+        }
+
+        function recordOrbitalFrameLoad(frame, attempt) {
+            if (attempt.loaded || frame.getAttribute('src') === 'about:blank') return;
+            try {
+                const loadedPath = new URL(frame.contentDocument?.location.href).pathname;
+                if (loadedPath !== new URL(attempt.sourcePath, document.baseURI).pathname) return;
+            } catch (error) {
+                return;
+            }
+            attempt.loaded = true;
+            clearOrbitalAttemptTimer(attempt);
+            const result = inspectOrbitalFrame(frame, attempt);
+            emitOrbitalDiagnostic('orbital:iframe:load', {
+                attemptId: attempt.id,
+                authority: attempt.authority,
+                sourcePath: attempt.sourcePath,
+                ...result,
+                level: result.contentStatus === 'same-origin-document-ready' ? undefined : 'warning'
+            });
+        }
+
         function setupItalyOrbitalDialog() {
             if (isConsobOrbitalDialogSetup) return;
 
@@ -7716,6 +7953,15 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             const frame = document.getElementById('consobOrbitalFrame');
             if (!grid || !dialog) return;
             isConsobOrbitalDialogSetup = true;
+            if (window.gridPipelineDiag) setupOrbitalFrameDiagnostics(frame);
+            if (window.gridPipelineDiag) {
+                emitOrbitalDiagnostic(frame ? 'orbital:wrapper:found' : 'orbital:wrapper:missing', {
+                    wrapperId: dialog.id,
+                    iframeId: frame?.id || 'consobOrbitalFrame',
+                    phase: 'setup',
+                    ...(!frame ? { reason: 'iframe-not-found', level: 'warning' } : {})
+                });
+            }
 
             grid.addEventListener('click', (event) => {
                 const trigger = event.target.closest('[data-orbital-trigger="consob"]');
@@ -7751,14 +7997,79 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             const dialog = document.getElementById('consobOrbitalDialog');
             const frame = document.getElementById('consobOrbitalFrame');
             const src = resolveConsobOrbitalSrc(modalSrc, { allowFallback: true });
-            if (!src) return;
+            const diagnosticsEnabled = Boolean(window.gridPipelineDiag);
+            const attemptId = diagnosticsEnabled ? `orbital-${++orbitalDiagnosticState.attemptNumber}` : null;
+            const authority = diagnosticsEnabled && src ? getOrbitalAuthority({
+                country_name: countriesData.find((country) =>
+                    resolveConsobOrbitalSrc(country?.modal) === src)?.country_name
+                    || (src.endsWith('/authority/ET-ECMA.html') ? 'Ethiopia' : 'Unknown authority')
+            }) : 'Unknown authority';
+            const attempt = diagnosticsEnabled ? {
+                id: attemptId,
+                authority,
+                sourcePath: src || null,
+                trigger: document.activeElement instanceof HTMLElement ? document.activeElement : null,
+                timeoutId: null
+            } : null;
+            if (diagnosticsEnabled) {
+                emitOrbitalDiagnostic('orbital:trigger', {
+                    attemptId, authority, sourcePath: src || null,
+                    ...(!src ? { reason: getOrbitalRejectionReason(modalSrc), level: 'warning' } : {})
+                });
+            }
+            if (!src) {
+                if (diagnosticsEnabled) {
+                    emitOrbitalDiagnostic('orbital:open:error', {
+                        attemptId, authority, reason: getOrbitalRejectionReason(modalSrc) || 'allowlist',
+                        level: 'warning'
+                    });
+                }
+                return;
+            }
+            if (diagnosticsEnabled && orbitalDiagnosticState.currentAttempt) {
+                clearOrbitalAttemptTimer(orbitalDiagnosticState.currentAttempt);
+                emitOrbitalDiagnostic('orbital:close', {
+                    attemptId: orbitalDiagnosticState.currentAttempt.id,
+                    authority: orbitalDiagnosticState.currentAttempt.authority,
+                    reason: 'superseded-by-reopen'
+                });
+            }
+            if (diagnosticsEnabled) {
+                orbitalDiagnosticState.currentAttempt = attempt;
+                emitOrbitalDiagnostic('orbital:open:start', {
+                    attemptId, authority, wrapperId: 'consobOrbitalDialog',
+                    iframeId: 'consobOrbitalFrame', sourcePath: src
+                });
+            }
             if (!dialog) {
+                if (diagnosticsEnabled) {
+                    emitOrbitalDiagnostic('orbital:wrapper:missing', {
+                        attemptId, authority, wrapperId: 'consobOrbitalDialog',
+                        reason: 'dialog-not-found', level: 'warning'
+                    });
+                    emitOrbitalDiagnostic('orbital:open:error', {
+                        attemptId, authority, reason: 'dialog-not-found', level: 'warning'
+                    });
+                }
                 window.open(src, '_blank', 'noopener');
                 return;
             }
             if (!frame) {
+                if (diagnosticsEnabled) {
+                    emitOrbitalDiagnostic('orbital:wrapper:missing', {
+                        attemptId, authority, wrapperId: dialog.id,
+                        iframeId: 'consobOrbitalFrame', reason: 'iframe-not-found', level: 'warning'
+                    });
+                    emitOrbitalDiagnostic('orbital:open:error', {
+                        attemptId, authority, reason: 'iframe-not-found', level: 'warning'
+                    });
+                }
                 window.open(src, '_blank', 'noopener');
                 return;
+            }
+            if (diagnosticsEnabled) {
+                setupOrbitalFrameDiagnostics(frame);
+                verifyOrbitalResource(src, attempt);
             }
             if (typeof dialog.showModal === 'function') {
                 try {
@@ -7767,10 +8078,47 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     }
                     dialog.showModal();
                     frame.src = src;
+                    if (diagnosticsEnabled) {
+                        attempt.timeoutId = setTimeout(() => {
+                            if (orbitalDiagnosticState.currentAttempt !== attempt) return;
+                            emitOrbitalDiagnostic('orbital:iframe:timeout', {
+                                attemptId, authority, sourcePath: src,
+                                timeoutMs: 12000, reason: 'load-event-not-observed', level: 'warning'
+                            });
+                        }, 12000);
+                        const wrapperVisible = getOrbitalWrapperVisibility(dialog);
+                        const focusInside = dialog.contains(document.activeElement);
+                        emitOrbitalDiagnostic('orbital:open:done', {
+                            attemptId, authority, wrapperVisible, focusInside
+                        });
+                        if (!wrapperVisible) {
+                            emitOrbitalDiagnostic('orbital:open:error', {
+                                attemptId, authority, reason: 'wrapper-not-visible', level: 'warning'
+                            });
+                        }
+                        if (!focusInside) {
+                            emitOrbitalDiagnostic('orbital:open:error', {
+                                attemptId, authority, reason: 'focus-not-inside-wrapper', level: 'warning'
+                            });
+                        }
+                        recordOrbitalFrameLoad(frame, attempt);
+                    }
                 } catch (error) {
+                    if (diagnosticsEnabled) {
+                        clearOrbitalAttemptTimer(attempt);
+                        emitOrbitalDiagnostic('orbital:open:error', {
+                            attemptId, authority, errorName: error?.name || 'Error',
+                            reason: 'dialog-open-failed', level: 'warning'
+                        });
+                    }
                     window.open(src, '_blank', 'noopener');
                 }
             } else {
+                if (diagnosticsEnabled) {
+                    emitOrbitalDiagnostic('orbital:open:error', {
+                        attemptId, authority, reason: 'dialog-api-unavailable', level: 'warning'
+                    });
+                }
                 window.open(src, '_blank', 'noopener');
             }
         }
@@ -7778,15 +8126,31 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         function closeItalyOrbitalDialog() {
             const dialog = document.getElementById('consobOrbitalDialog');
             const frame = document.getElementById('consobOrbitalFrame');
+            const attempt = window.gridPipelineDiag ? orbitalDiagnosticState.currentAttempt : null;
+            if (attempt) clearOrbitalAttemptTimer(attempt);
             if (frame) {
                 frame.src = 'about:blank';
             }
-            if (!dialog) return;
-            if (typeof dialog.close === 'function' && dialog.open) {
+            if (dialog && typeof dialog.close === 'function' && dialog.open) {
                 dialog.close();
-                return;
+            } else if (dialog) {
+                dialog.removeAttribute('open');
             }
-            dialog.removeAttribute('open');
+            if (attempt) {
+                emitOrbitalDiagnostic('orbital:close', {
+                    attemptId: attempt.id, authority: attempt.authority,
+                    wrapperVisible: getOrbitalWrapperVisibility(dialog)
+                });
+                orbitalDiagnosticState.currentAttempt = null;
+                requestAnimationFrame(() => {
+                    if (document.activeElement !== attempt.trigger) {
+                        emitOrbitalDiagnostic('orbital:focus:warning', {
+                            attemptId: attempt.id, authority: attempt.authority,
+                            reason: 'trigger-focus-not-restored', level: 'warning'
+                        });
+                    }
+                });
+            }
         }
 
         function getFocusableElements(container) {
