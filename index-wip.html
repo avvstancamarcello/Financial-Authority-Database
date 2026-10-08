@@ -965,6 +965,33 @@
         }
         h1 { font-size: 2.5em; margin-bottom: 10px; text-shadow: 2px 2px 4px rgba(0,0,0,0.2); }
         .subtitle { font-size: 1.4em; opacity: 0.95; font-weight: 400; }
+
+        .amev-hero-nav { margin: 1rem 0; }
+        .amev-hero-nav .amev-hero-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.8rem;
+            box-sizing: border-box;
+            width: 100%;
+            max-width: 30rem;
+            min-height: 44px;
+            padding: 0.8rem 1rem;
+            border: 1px solid #ffd700;
+            border-radius: 12px;
+            background: #1e293b;
+            color: #ffffff;
+            text-align: left;
+            text-decoration: none;
+        }
+        .amev-hero-nav .amev-hero-button:hover { background: #334155; }
+        .amev-hero-nav .amev-hero-button:focus-visible {
+            outline: 3px solid #ffffff;
+            outline-offset: 3px;
+        }
+        .amev-hero-nav .amev-hero-button-icon { flex-shrink: 0; font-size: 1.5rem; }
+        .amev-hero-nav .amev-hero-button-text { min-width: 0; overflow-wrap: anywhere; }
+        .amev-hero-nav .amev-hero-button-title { display: block; font-weight: 700; line-height: 1.4; }
+        .amev-hero-nav .amev-hero-button-note { display: block; color: #dbeafe; font-size: 0.85rem; line-height: 1.5; }
         
         /* Effetto pulsante cuore per parole chiave */
         .keyword-pulse {
@@ -2807,6 +2834,15 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             </div>
             <h1 itemprop="name"><span data-i18n="landingHeroTitle">Strumento per richiesta di collaborazione alle Autorità Finanziarie</span><br><span data-i18n="landingHeroCoverage">Verifica preliminare nazionale e internazionale</span></h1>
             <p class="subtitle" data-i18n="landingHeroSubtitle" itemprop="description">Fonti ufficiali e checklist preliminari per richieste di collaborazione nelle investigazioni finanziarie. La consultazione non garantisce la sicurezza degli investimenti.</p>
+            <nav class="amev-hero-nav" data-i18n-aria-label="amevHeroNavLabel" aria-label="Guida AMEV">
+                <a class="amev-hero-button" href="./verifica-prima%20di%20pagare/index.html">
+                    <span class="amev-hero-button-icon" aria-hidden="true">🛡️</span>
+                    <span class="amev-hero-button-text">
+                        <span class="amev-hero-button-title" data-i18n-text="quickIndexVerifyLink">Verifica prima di pagare</span>
+                        <span class="amev-hero-button-note" data-i18n-text="amevHeroNote">Guida interna AMEV per controllare fonti, licenze e domini</span>
+                    </span>
+                </a>
+            </nav>
             <nav class="language-selector" data-layout="compact" role="navigation" data-i18n-aria-label="languageSelectionAriaLabel" aria-label="Language selection">
                 <section class="language-selector-group language-selector-eu" aria-labelledby="language-selector-eu-title">
                     <h2 class="language-selector-title" id="language-selector-eu-title" data-i18n-text="languageSelectorEuTitle"><span class="fi fi-eu language-selector-area-icon" aria-hidden="true" style="margin-right:0.5rem;"></span>Area UE - Seleziona la tua lingua</h2>
@@ -5948,6 +5984,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 landingHeroTitle: "Strumento per richiesta di collaborazione alle Autorità Finanziarie",
                 landingHeroCoverage: "Verifica preliminare nazionale e internazionale",
                 landingHeroSubtitle: "Fonti ufficiali e checklist preliminari per richieste di collaborazione nelle investigazioni finanziarie. La consultazione non garantisce la sicurezza degli investimenti.",
+                amevHeroNavLabel: "Guida AMEV",
+                amevHeroNote: "Guida interna AMEV per controllare fonti, licenze e domini",
                 quickIndexCountriesLink: "Consulta le schede delle autorità",
                 quickIndexAuthorLink: "Autore e riferimenti",
                 navDatabase: "🏠 Directory delle autorità finanziarie",
@@ -5987,6 +6025,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 landingHeroTitle: "Tool for requesting cooperation with Financial Authorities",
                 landingHeroCoverage: "National and international preliminary verification",
                 landingHeroSubtitle: "Official sources and preliminary checklists for cooperation requests in financial investigations. Consultation does not guarantee investment safety.",
+                amevHeroNavLabel: "AMEV guide",
+                amevHeroNote: "Internal AMEV guide to check sources, licenses and domains",
                 quickIndexCountriesLink: "Browse authority records",
                 quickIndexAuthorLink: "Author and references",
                 navDatabase: "🏠 Financial authorities directory",

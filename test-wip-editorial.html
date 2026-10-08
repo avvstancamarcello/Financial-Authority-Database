@@ -42,6 +42,47 @@
                 const response = await fetch('./index-wip.html');
                 check(response.ok, 'WIP source served');
                 const source = new DOMParser().parseFromString(await response.text(), 'text/html');
+                const guideHref = './verifica-prima%20di%20pagare/index.html';
+                const guideCopy = {
+                    it: {
+                        title: 'Verifica prima di pagare',
+                        note: 'Guida interna AMEV per controllare fonti, licenze e domini',
+                        nav: 'Guida AMEV'
+                    },
+                    en: {
+                        title: 'Check before paying',
+                        note: 'Internal AMEV guide to check sources, licenses and domains',
+                        nav: 'AMEV guide'
+                    }
+                };
+                const heroContainer = source.querySelector('header[role="banner"]');
+                const heroNav = heroContainer?.querySelector('.amev-hero-nav');
+                const heroButton = heroNav?.querySelector('.amev-hero-button');
+                const heroSubtitle = heroContainer?.querySelector('[data-i18n="landingHeroSubtitle"]');
+                const languageSelector = heroContainer?.querySelector('.language-selector');
+                check(source.querySelectorAll('.amev-hero-nav').length === 1
+                    && source.querySelectorAll('.amev-hero-button').length === 1
+                    && heroContainer.contains(heroButton)
+                    && heroNav.getAttribute('aria-label') === guideCopy.it.nav
+                    && heroButton.getAttribute('href') === guideHref
+                    && !heroButton.hasAttribute('target')
+                    && heroButton.querySelector('.amev-hero-button-title')?.textContent === guideCopy.it.title
+                    && heroButton.querySelector('.amev-hero-button-note')?.textContent === guideCopy.it.note
+                    && heroButton.querySelector('.amev-hero-button-icon[aria-hidden="true"]')?.textContent === '🛡️',
+                    'Unique named hero navigation contains the Italian guide link and decorative icon');
+                check(heroSubtitle && languageSelector
+                    && (heroSubtitle.compareDocumentPosition(heroNav) & Node.DOCUMENT_POSITION_FOLLOWING)
+                    && (heroNav.compareDocumentPosition(languageSelector) & Node.DOCUMENT_POSITION_FOLLOWING),
+                    'Hero guide navigation follows the subtitle and precedes language selection without requiring adjacent siblings');
+                check(source.querySelector(`#table-of-contents a[href="${guideHref}"]`),
+                    'Existing Quick Index guide link is preserved');
+                const guideResponse = await fetch(guideHref);
+                check(guideResponse.ok, 'Hero guide page target resolves through an explicit fetch');
+                const guide = new DOMParser().parseFromString(await guideResponse.text(), 'text/html');
+                check(guide.querySelector('h1')?.textContent === 'AMEV — Verifica prima di pagare'
+                    && guide.querySelector('.orbital-shell .orbital-frame')?.getAttribute('src') === './amevcheck/index.html'
+                    && guide.querySelector('a[href="./amevcheck/index.html"]'),
+                    'Target is the existing AMEV wrapper with relative guide paths');
                 const seoTitle = 'Strumento per richiesta di collaborazione alle Autorità Finanziarie | Verifica preliminare nazionale e internazionale';
                 const seoDescription = 'Strumento informativo per supportare richieste di collaborazione alle Autorità Finanziarie in ambito nazionale e internazionale, con accesso a fonti ufficiali e checklist di verifica preliminare.';
                 check(source.title === seoTitle
@@ -181,6 +222,19 @@
                         'el', 'el-GR', 'sq', 'xk', 'sq-XK', 'bs', 'ar', 'zh', 'hi', 'vi']) {
                         win.changeLanguage(locale);
                         const copy = win.getLanguageBundle(locale);
+                        const expectedGuide = guideCopy[locale === 'it' ? 'it' : 'en'];
+                        const renderedNav = doc.querySelector('header[role="banner"] .amev-hero-nav');
+                        const renderedButton = renderedNav.querySelector('.amev-hero-button');
+                        const renderedTitle = renderedButton.querySelector('.amev-hero-button-title');
+                        const renderedNote = renderedButton.querySelector('.amev-hero-button-note');
+                        check(renderedTitle.textContent === expectedGuide.title
+                            && renderedNote.textContent === expectedGuide.note
+                            && renderedNote.lang === (locale === 'it' ? 'it' : 'en')
+                            && renderedNav.getAttribute('aria-label') === expectedGuide.nav
+                            && renderedButton.getAttribute('href') === guideHref
+                            && !renderedButton.hasAttribute('target')
+                            && renderedButton.querySelector('.amev-hero-button-icon[aria-hidden="true"]')?.textContent === '🛡️',
+                            `${locale}: hero guide title, note and navigation label use Italian/English fallback while preserving icon and href`);
                         check(Object.entries(compactLead[locale === 'it' ? 'it' : 'en']).every(([key, text]) =>
                             copy[key] === text && doc.querySelector(`[data-i18n="${key}"]`).textContent === text),
                             `${locale}: compact lead copy survives rendering and language switching`);
