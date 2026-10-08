@@ -41,6 +41,12 @@
             check(JSON.stringify(diagnostics.orbitalReport.inventory.map(item => item.authority).sort())
                 === JSON.stringify(['AMF France', 'BaFin', 'CNMV', 'CONSOB', 'ECMA Ethiopia', 'FCA', 'SEC'].sort()),
                 'Opt-in WIP inventory lists each configured Orbital integration once');
+            check(diagnostics.orbitalReport.inventory.every(item => item.authorized
+                && item.sourcePath.startsWith('/authority/')
+                && item.thumbnailPath.startsWith('/authority/')
+                && item.wrapperId === 'consobOrbitalDialog'
+                && item.iframeId === 'consobOrbitalFrame'),
+                'Every inventory entry uses an authorized local page, preview, and shared wrapper');
             check(diagnostics.orbitalReport.inventory.find(item => item.authority === 'ECMA Ethiopia')
                 ?.configuredBy === 'WIP bootstrap',
                 'Ethiopia ECMA runtime injection is distinguished from persisted JSON fields');
@@ -70,6 +76,11 @@
             const ecmaDoc = orbitalFrame.contentDocument;
             const ecmaOpen = diagnostics.events.filter(entry => entry.event === 'orbital:open:done').at(-1);
             const ecmaLoad = diagnostics.events.filter(entry => entry.event === 'orbital:iframe:load').at(-1);
+            const ecmaAttempt = diagnostics.events.filter(entry => entry.event === 'orbital:open:start').at(-1);
+            await waitFor(() => diagnostics.events.some(entry =>
+                entry.event === 'orbital:resource:check' && entry.attemptId === ecmaAttempt.attemptId));
+            const ecmaResource = diagnostics.events.find(entry =>
+                entry.event === 'orbital:resource:check' && entry.attemptId === ecmaAttempt.attemptId);
             check(doc.getElementById('consobOrbitalDialog').open
                 && doc.getElementById('consobOrbitalDialog').matches(':modal')
                 && ecmaOpen?.wrapperVisible && ecmaOpen.focusInside,
@@ -77,6 +88,8 @@
             check(ecmaLoad?.contentStatus === 'same-origin-document-ready'
                 && ecmaLoad.hasBody && ecmaLoad.hasHeading,
                 'ECMA iframe has a same-origin ready document, not merely a load event');
+            check(ecmaResource.ok && ecmaResource.status === 200,
+                'Read-only same-origin ECMA metadata request confirms the local wrapper exists');
             check(ecmaDoc.querySelector('link[rel="canonical"]').href === 'https://www.amevfirenze.it/authority/ET-ECMA.html',
                 'ECMA canonical route');
             check(ecmaDoc.querySelectorAll('[data-app]').length === 2
@@ -127,11 +140,18 @@
                     && orbitalFrame.contentWindow.location.pathname.endsWith(`/authority/${page}`));
                 const open = diagnostics.events.filter(entry => entry.event === 'orbital:open:done').at(-1);
                 const load = diagnostics.events.filter(entry => entry.event === 'orbital:iframe:load').at(-1);
+                const attempt = diagnostics.events.filter(entry => entry.event === 'orbital:open:start').at(-1);
+                await waitFor(() => diagnostics.events.some(entry =>
+                    entry.event === 'orbital:resource:check' && entry.attemptId === attempt.attemptId));
+                const resource = diagnostics.events.find(entry =>
+                    entry.event === 'orbital:resource:check' && entry.attemptId === attempt.attemptId);
                 check(doc.getElementById('consobOrbitalDialog').open && open?.wrapperVisible && open.focusInside,
                     `${country} wrapper is actually visible and receives focus`);
                 check(load?.contentStatus === 'same-origin-document-ready'
                     && load.sourcePath.endsWith(`/authority/${page}`),
                     `${country} iframe content is same-origin and document-ready`);
+                check(resource.ok && resource.status === 200,
+                    `${country} local wrapper exists according to read-only HTTP metadata`);
                 app.closeItalyOrbitalDialog();
                 await waitFor(() => orbitalFrame.contentWindow.location.href === 'about:blank');
                 check(doc.activeElement === existingTrigger,

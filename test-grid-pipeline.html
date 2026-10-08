@@ -48,7 +48,9 @@
                 const bootstrap = source.querySelector('#grid-pipeline-diagnostics').textContent;
                 const application = [...source.querySelectorAll('script')]
                     .find(script => script.textContent.includes('async function loadCountryData()')).textContent;
-                source.querySelectorAll('script, iframe').forEach(node => node.remove());
+                source.querySelectorAll('script, iframe').forEach(node => {
+                    if (node.id !== 'consobOrbitalFrame') node.remove();
+                });
                 const databaseResponse = await fetch('./financial_authorities_database.json');
                 check(databaseResponse.ok, 'Database fixture served');
                 const database = await databaseResponse.json();
@@ -69,6 +71,15 @@
                     for (const method of ['log', 'warn', 'error', 'groupCollapsed', 'groupEnd']) {
                         win.console[method] = (...args) => logs.push({ method, args });
                     }
+                    const orbitalTimeouts = [];
+                    const nativeSetTimeout = win.setTimeout.bind(win);
+                    win.setTimeout = (callback, delay, ...args) => {
+                        if (delay === 12000) {
+                            orbitalTimeouts.push(callback);
+                            return nativeSetTimeout(() => {}, 60000);
+                        }
+                        return nativeSetTimeout(callback, delay, ...args);
+                    };
                     const onerror = () => false;
                     const onrejection = () => {};
                     win.onerror = onerror;
@@ -101,7 +112,7 @@
                             await new Promise(resolve => setTimeout(resolve, 20));
                         }
                     }
-                    return { frame, win, logs, fetchCalls, onerror, onrejection };
+                    return { frame, win, logs, fetchCalls, orbitalTimeouts, onerror, onrejection };
                 }
 
                 const success = await fixture('success');
@@ -131,11 +142,11 @@
                     'Fetch event records the requested URL');
                     const normalized = tracer.events.find(entry => entry.event === 'data:normalize:done');
                     const domCount = win.document.querySelectorAll('#flagsGrid .flag-item').length;
-                    check(domCount > 0 && tracer.lastSnapshot.state === 'ready' &&
+                    check(domCount === Object.keys(database).length && tracer.lastSnapshot.state === 'ready' &&
                         tracer.lastSnapshot.renderedElements === domCount &&
                         normalized.validRecords + normalized.invalidRecords === normalized.records &&
                         normalized.discardedRecords === 0,
-                    'Snapshot and normalization counts match actual DOM without filtering');
+                    'Snapshot and normalization counts match the 239-record baseline DOM without filtering');
                     check(names.includes('data:ethiopia:warning') &&
                         [...win.document.querySelectorAll('#flagsGrid .flag-name')]
                             .some(node => node.textContent === 'Ethiopia'),
@@ -189,10 +200,9 @@
                     'Rejected cross-origin Orbital URL is diagnosed without changing its allowlist');
 
                     win.setupItalyOrbitalDialog();
-                    const dialog = win.document.getElementById('consobOrbitalDialog');
-                    const parent = dialog.parentNode;
-                    const next = dialog.nextSibling;
-                    dialog.remove();
+                    const getElementById = win.document.getElementById.bind(win.document);
+                    win.document.getElementById = id => id === 'consobOrbitalDialog'
+                        ? null : getElementById(id);
                     win.open = () => null;
                     win.openItalyOrbitalDialog('authority/IT-CONSOB.html');
                     check(tracer.events.some(entry => entry.event === 'orbital:wrapper:missing'
@@ -200,17 +210,8 @@
                         && tracer.events.some(entry => entry.event === 'orbital:open:error'
                             && entry.reason === 'dialog-not-found'),
                     'Missing Orbital wrapper is reported while retaining the existing fallback');
-                    parent.insertBefore(dialog, next);
+                    win.document.getElementById = getElementById;
 
-                    const originalSetTimeout = win.setTimeout;
-                    let orbitalTimeout;
-                    win.setTimeout = (callback, delay, ...args) => {
-                        if (delay === 12000) {
-                            orbitalTimeout = callback;
-                            return originalSetTimeout(() => {}, 60000);
-                        }
-                        return originalSetTimeout(callback, delay, ...args);
-                    };
                     win.openItalyOrbitalDialog('authority/IT-CONSOB.html');
                     const firstAttempt = tracer.events.filter(entry =>
                         entry.event === 'orbital:open:start').at(-1);
@@ -222,17 +223,36 @@
                             && entry.attemptId === firstAttempt.attemptId
                             && entry.reason === 'superseded-by-reopen'),
                     'Rapid reopen correlates attempts and closes the superseded timer');
-                    orbitalTimeout?.();
-                    check(tracer.events.some(entry => entry.event === 'orbital:iframe:timeout'
+                    const orbitalTimeout = success.orbitalTimeouts.at(-1);
+                    check(typeof orbitalTimeout === 'function',
+                    'Active Orbital attempt installs its diagnostic timeout');
+                    win.closeItalyOrbitalDialog();
+                    orbitalTimeout();
+                    check(!tracer.events.some(entry => entry.event === 'orbital:iframe:timeout'
                         && entry.attemptId === secondAttempt.attemptId),
-                    'Diagnostic iframe timeout is emitted for the current attempt');
+                    'Closing an Orbital attempt cancels its diagnostic timeout');
+                    const orbitalFrame = win.document.getElementById('consobOrbitalFrame');
+                    let interceptedSource = orbitalFrame.getAttribute('src') || 'about:blank';
+                    Object.defineProperty(orbitalFrame, 'src', {
+                        configurable: true,
+                        get: () => interceptedSource,
+                        set: value => { interceptedSource = String(value); }
+                    });
+                    win.openItalyOrbitalDialog('authority/IT-CONSOB.html');
+                    const thirdAttempt = tracer.events.filter(entry =>
+                        entry.event === 'orbital:open:start').at(-1);
+                    const activeTimeout = success.orbitalTimeouts.at(-1);
+                    activeTimeout();
+                    check(tracer.events.some(entry => entry.event === 'orbital:iframe:timeout'
+                        && entry.attemptId === thirdAttempt.attemptId),
+                    'Diagnostic iframe timeout is emitted only for the current attempt');
                     win.document.getElementById('consobOrbitalFrame')
                         .dispatchEvent(new win.Event('error'));
-                    check(tracer.events.some(entry => entry.event === 'orbital:iframe:error'
-                        && entry.attemptId === secondAttempt.attemptId),
-                    'Iframe error event is correlated to the active open attempt');
+                    check(tracer.events.filter(entry => entry.event === 'orbital:iframe:error'
+                        && entry.attemptId === thirdAttempt.attemptId).length === 1,
+                    'One iframe error listener is correlated to the active open attempt');
                     win.closeItalyOrbitalDialog();
-                    win.setTimeout = originalSetTimeout;
+                    delete orbitalFrame.src;
 
                     const httpFailure = await fixture('orbital-http');
                     try {

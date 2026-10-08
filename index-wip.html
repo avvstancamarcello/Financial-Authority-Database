@@ -7836,7 +7836,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
         function clearOrbitalAttemptTimer(attempt) {
             if (attempt?.timeoutId) {
-                clearTimeout(attempt.timeoutId);
+                window.clearTimeout(attempt.timeoutId);
                 attempt.timeoutId = null;
             }
         }
@@ -7890,8 +7890,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         }
 
         function verifyOrbitalResource(src, attempt) {
-            fetch(src, { method: 'HEAD', credentials: 'same-origin', cache: 'no-store' })
+            attempt.resourceController = new AbortController();
+            fetch(src, {
+                method: 'HEAD', credentials: 'same-origin', cache: 'no-store',
+                signal: attempt.resourceController.signal
+            })
                 .then((response) => {
+                    if (orbitalDiagnosticState.currentAttempt !== attempt) return;
                     emitOrbitalDiagnostic('orbital:resource:check', {
                         attemptId: attempt.id, authority: attempt.authority,
                         status: response.status, ok: response.ok,
@@ -7899,6 +7904,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     });
                 })
                 .catch(() => {
+                    if (attempt.resourceController.signal.aborted
+                        || orbitalDiagnosticState.currentAttempt !== attempt) return;
                     emitOrbitalDiagnostic('orbital:resource:check', {
                         attemptId: attempt.id, authority: attempt.authority,
                         status: 'unavailable', reason: 'same-origin-head-failed', level: 'warning'
@@ -8028,6 +8035,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             }
             if (diagnosticsEnabled && orbitalDiagnosticState.currentAttempt) {
                 clearOrbitalAttemptTimer(orbitalDiagnosticState.currentAttempt);
+                orbitalDiagnosticState.currentAttempt.resourceController?.abort();
                 emitOrbitalDiagnostic('orbital:close', {
                     attemptId: orbitalDiagnosticState.currentAttempt.id,
                     authority: orbitalDiagnosticState.currentAttempt.authority,
@@ -8050,6 +8058,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     emitOrbitalDiagnostic('orbital:open:error', {
                         attemptId, authority, reason: 'dialog-not-found', level: 'warning'
                     });
+                    orbitalDiagnosticState.currentAttempt = null;
                 }
                 window.open(src, '_blank', 'noopener');
                 return;
@@ -8063,6 +8072,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     emitOrbitalDiagnostic('orbital:open:error', {
                         attemptId, authority, reason: 'iframe-not-found', level: 'warning'
                     });
+                    orbitalDiagnosticState.currentAttempt = null;
                 }
                 window.open(src, '_blank', 'noopener');
                 return;
@@ -8079,8 +8089,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     dialog.showModal();
                     frame.src = src;
                     if (diagnosticsEnabled) {
-                        attempt.timeoutId = setTimeout(() => {
-                            if (orbitalDiagnosticState.currentAttempt !== attempt) return;
+                        attempt.timeoutId = window.setTimeout(() => {
+                            if (orbitalDiagnosticState.currentAttempt !== attempt || attempt.loaded) return;
+                            attempt.timeoutId = null;
                             emitOrbitalDiagnostic('orbital:iframe:timeout', {
                                 attemptId, authority, sourcePath: src,
                                 timeoutMs: 12000, reason: 'load-event-not-observed', level: 'warning'
@@ -8106,10 +8117,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 } catch (error) {
                     if (diagnosticsEnabled) {
                         clearOrbitalAttemptTimer(attempt);
+                        attempt.resourceController?.abort();
                         emitOrbitalDiagnostic('orbital:open:error', {
                             attemptId, authority, errorName: error?.name || 'Error',
                             reason: 'dialog-open-failed', level: 'warning'
                         });
+                        if (orbitalDiagnosticState.currentAttempt === attempt) {
+                            orbitalDiagnosticState.currentAttempt = null;
+                        }
                     }
                     window.open(src, '_blank', 'noopener');
                 }
@@ -8118,6 +8133,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     emitOrbitalDiagnostic('orbital:open:error', {
                         attemptId, authority, reason: 'dialog-api-unavailable', level: 'warning'
                     });
+                    attempt.resourceController?.abort();
+                    if (orbitalDiagnosticState.currentAttempt === attempt) {
+                        orbitalDiagnosticState.currentAttempt = null;
+                    }
                 }
                 window.open(src, '_blank', 'noopener');
             }
@@ -8127,7 +8146,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             const dialog = document.getElementById('consobOrbitalDialog');
             const frame = document.getElementById('consobOrbitalFrame');
             const attempt = window.gridPipelineDiag ? orbitalDiagnosticState.currentAttempt : null;
-            if (attempt) clearOrbitalAttemptTimer(attempt);
+            if (attempt) {
+                clearOrbitalAttemptTimer(attempt);
+                attempt.resourceController?.abort();
+            }
             if (frame) {
                 frame.src = 'about:blank';
             }
