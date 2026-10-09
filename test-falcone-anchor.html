@@ -39,8 +39,10 @@
             check(!cta.closest('body > nav'), 'il pulsante non è nella navigazione globale');
             check(source.querySelector('header[role="banner"] .subtitle')
                 .compareDocumentPosition(cta) & Node.DOCUMENT_POSITION_FOLLOWING, 'il pulsante segue il sottotitolo della hero');
+            const ctaStart = html.indexOf("it: 'Metodo Falcone'");
+            const ctaMap = html.slice(ctaStart, html.indexOf('})', ctaStart));
             ['it', 'en', 'fr', 'de', 'es', 'pt', 'ar', 'zh', 'hi', 'vi', 'sq', 'bs', 'ro', 'nl', 'el'].forEach(locale => {
-                check(new RegExp(`\\b${locale}: '[^']+'`).test(html.slice(html.indexOf("it: 'Metodo Falcone'"))), `etichetta per la lingua ${locale}`);
+                check(new RegExp(`\\b${locale}: '[^']+'`).test(ctaMap), `etichetta per la lingua ${locale}`);
             });
 
             source.querySelectorAll('script, link, iframe').forEach(node => node.remove());
