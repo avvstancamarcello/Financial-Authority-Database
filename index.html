@@ -2735,6 +2735,20 @@
         @media (prefers-reduced-motion: reduce) {
             #flagsGrid .flag-item, #flagsGrid .flag-icon-wrapper { animation: none !important; transition: none !important; transform: none !important; }
         }
+        .hero-cta-row { margin: 14px 0 4px; display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; }
+        .hero-cta-link {
+            display: inline-flex; align-items: center; justify-content: center;
+            min-height: 44px; min-width: 44px; max-width: 100%; padding: 10px 20px;
+            color: #ffffff; background: #1e293b; border: 1px solid #FFCC00; border-radius: 8px;
+            font-weight: 700; text-decoration: none; text-align: center; overflow-wrap: anywhere;
+            touch-action: manipulation; transition: background-color 0.2s ease;
+        }
+        .hero-cta-link:hover { background: #334155; }
+        .hero-cta-link:focus-visible { outline: 3px solid #FFCC00; outline-offset: 3px; box-shadow: 0 0 0 6px #1e293b; }
+        @media (prefers-reduced-motion: reduce) { .hero-cta-link { transition: none; } }
+        #storia-giovanni-falcone { scroll-margin-top: calc(var(--sticky-nav-height, 160px) + 12px); }
+        @media (max-width: 767px) { #storia-giovanni-falcone { scroll-margin-top: calc(var(--sticky-nav-height, 300px) + 12px); } }
+        @media (max-width: 480px) { #storia-giovanni-falcone { scroll-margin-top: calc(var(--sticky-nav-height, 360px) + 12px); } }
     </style>
 </head>
 <body itemscope itemtype="https://schema.org/WebApplication">
@@ -2907,6 +2921,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             </div>
             <h1 itemprop="name"><span data-i18n="landingHeroTitle">Strumento per richiesta di collaborazione alle Autorità Finanziarie</span><br><span data-i18n="landingHeroCoverage">Verifica preliminare nazionale e internazionale</span></h1>
             <p class="subtitle" data-i18n="landingHeroSubtitle" itemprop="description">Fonti ufficiali e checklist preliminari per richieste di collaborazione nelle investigazioni finanziarie. La consultazione non garantisce la sicurezza degli investimenti.</p>
+            <p class="hero-cta-row"><a href="#storia-giovanni-falcone" class="hero-cta-link" data-i18n-text="heroFalconeMethodCta">Metodo Falcone</a></p>
             <nav class="language-selector" data-layout="compact" role="navigation" data-i18n-aria-label="languageSelectionAriaLabel" aria-label="Language selection">
                 <section class="language-selector-group language-selector-eu" aria-labelledby="language-selector-eu-title">
                     <h2 class="language-selector-title" id="language-selector-eu-title" data-i18n-text="languageSelectorEuTitle"><span class="fi fi-eu language-selector-area-icon" aria-hidden="true" style="margin-right:0.5rem;"></span>Area UE - Seleziona la tua lingua</h2>
@@ -6218,6 +6233,23 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 flagViewOpenDetails: 'Άνοιγμα λεπτομερειών για'
             }
         }).forEach(([locale, copy]) => Object.assign(translations[locale] ||= {}, copy));
+        Object.entries({
+            it: 'Metodo Falcone', en: 'Falcone Method', fr: 'Méthode Falcone', de: 'Falcone-Methode',
+            es: 'Método Falcone', pt: 'Método Falcone', ar: 'منهج فالكوني', zh: '法尔科内方法',
+            hi: 'फाल्कोने पद्धति', vi: 'Phương pháp Falcone', sq: 'Metoda Falcone', bs: 'Falconeova metoda',
+            ro: 'Metoda Falcone', nl: 'Falcone-methode', el: 'Μέθοδος Φαλκόνε'
+        }).forEach(([locale, label]) => { (translations[locale] ||= {}).heroFalconeMethodCta = label; });
+        (() => {
+            const stickyNav = document.querySelector('body > nav');
+            if (!stickyNav || typeof ResizeObserver !== 'function') return;
+            const clipsSticky = node => /auto|scroll|hidden/.test(`${getComputedStyle(node).overflowX} ${getComputedStyle(node).overflowY}`);
+            new ResizeObserver(() => {
+                const sticks = getComputedStyle(stickyNav).position === 'sticky'
+                    && !(clipsSticky(document.body) && clipsSticky(document.documentElement));
+                const height = sticks ? Math.ceil(stickyNav.getBoundingClientRect().height) : 0;
+                document.documentElement.style.setProperty('--sticky-nav-height', `${height}px`);
+            }).observe(stickyNav, { box: 'border-box' });
+        })();
         const localeMetadata = {
             it: { api: 'it', urlSupported: true },
             en: { api: 'en', urlSupported: true },

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Metodo Falcone anchor regression tests</title>
+</head>
+<body>
+    <h1>Metodo Falcone — regressioni ancora e hero</h1>
+    <p>Servire la root via HTTP. La fixture non carica analytics, pubblicità o service worker.</p>
+    <pre id="results">Running…</pre>
+    <div id="fixtures"></div>
+    <script>
+        const results = document.getElementById('results');
+        const checks = [];
+        function check(condition, message) {
+            checks.push(`${condition ? 'PASS' : 'FAIL'}: ${message}`);
+            results.textContent = checks.join('\n');
+            if (!condition) throw new Error(message);
+        }
+        async function run() {
+            const html = await (await fetch('./index.html')).text();
+            const source = new DOMParser().parseFromString(html, 'text/html');
+            const targetId = 'storia-giovanni-falcone';
+            const ids = [...source.querySelectorAll('[id]')].map(node => node.id);
+            const duplicates = [...new Set(ids.filter((id, index) => ids.indexOf(id) !== index))];
+            check(duplicates.length === 0, `nessun ID duplicato (${duplicates.join(', ') || 'nessuno'})`);
+            const target = source.getElementById(targetId);
+            check(target && target.tagName === 'SECTION', 'la sezione destinazione esiste ed è una <section>');
+            check(!target.closest('[hidden], details:not([open])'), 'la sezione non è collassata né nascosta');
+            check(target.querySelector('h2')?.textContent.includes('Lotta Criminalità Finanziaria'), 'contenuto della sezione invariato');
+
+            const heroLinks = [...source.querySelectorAll('header[role="banner"] a.hero-cta-link')];
+            check(heroLinks.length === 1, 'un solo pulsante hero-cta-link nella hero');
+            const cta = heroLinks[0];
+            check(cta.getAttribute('href') === `#${targetId}`, 'il pulsante punta al frammento della sezione');
+            check(cta.textContent.trim() === 'Metodo Falcone', 'etichetta italiana esatta "Metodo Falcone"');
+            check(cta.getAttribute('data-i18n-text') === 'heroFalconeMethodCta', 'chiave i18n heroFalconeMethodCta');
+            check(!cta.closest('body > nav'), 'il pulsante non è nella navigazione globale');
+            check(source.querySelector('header[role="banner"] .subtitle')
+                .compareDocumentPosition(cta) & Node.DOCUMENT_POSITION_FOLLOWING, 'il pulsante segue il sottotitolo della hero');
+            const ctaStart = html.indexOf("it: 'Metodo Falcone'");
+            const ctaMap = html.slice(ctaStart, html.indexOf('})', ctaStart));
+            ['it', 'en', 'fr', 'de', 'es', 'pt', 'ar', 'zh', 'hi', 'vi', 'sq', 'bs', 'ro', 'nl', 'el'].forEach(locale => {
+                check(new RegExp(`\\b${locale}: '[^']+'`).test(ctaMap), `etichetta per la lingua ${locale}`);
+            });
+
+            source.querySelectorAll('script, link, iframe').forEach(node => node.remove());
+            const styles = [...new DOMParser().parseFromString(html, 'text/html').querySelectorAll('head style')]
+                .map(style => style.outerHTML).join('');
+            for (const width of [320, 412, 1280]) {
+                const frame = document.createElement('iframe');
+                frame.style.cssText = `width:${width}px;height:700px;border:0;display:block;`;
+                const loaded = new Promise(resolve => frame.onload = resolve);
+                frame.src = 'about:blank';
+                document.getElementById('fixtures').appendChild(frame);
+                await loaded;
+                const doc = frame.contentDocument;
+                doc.open();
+                doc.write(`<!DOCTYPE html><html><head>${styles}</head><body>${source.body.innerHTML}</body></html>`);
+                doc.close();
+                const link = doc.querySelector('header a.hero-cta-link');
+                const box = link.getBoundingClientRect();
+                check(box.height >= 44 && box.width >= 44, `${width}px: area touch ≥ 44px (${Math.round(box.width)}×${Math.round(box.height)})`);
+                check(box.right <= doc.documentElement.clientWidth + 1, `${width}px: il pulsante non deborda orizzontalmente`);
+                link.focus();
+                check(doc.activeElement === link, `${width}px: il pulsante è raggiungibile da tastiera`);
+                const navHeight = doc.querySelector('body > nav').getBoundingClientRect().height;
+                const margin = parseFloat(frame.contentWindow.getComputedStyle(doc.getElementById(targetId)).scrollMarginTop);
+                check(margin >= navHeight, `${width}px: scroll-margin-top (${margin}px) ≥ nav sticky (${Math.round(navHeight)}px) anche senza JS`);
+                frame.contentWindow.location.hash = targetId;
+                await new Promise(resolve => setTimeout(resolve, 50));
+                const top = doc.getElementById(targetId).getBoundingClientRect().top;
+                check(top >= navHeight - 1, `${width}px: dopo il salto la sezione non è coperta dalla nav (top ${Math.round(top)}px)`);
+            }
+            checks.push('ALL CHECKS PASSED');
+            results.textContent = checks.join('\n');
+        }
+        run().catch(error => {
+            checks.push(`ERROR: ${error.message}`);
+            results.textContent = checks.join('\n');
+        });
+    </script>
+</body>
+</html>
