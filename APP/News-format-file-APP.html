@@ -33,15 +33,8 @@
   </header>
         <!-- Barra di ricerca rapida -->
   <input type="text" id="searchInput" class="search-box" placeholder="🔍 Cerca per data o autorità (es. CVM, FCA)..." onkeyup="filterNews()">
-  <div id="newsContainer"><!-- News Card 1: Brasile CVM -->
-    <div class="news-card" data-date="2026-09-14" data-text="brasile cvm nuovo sistema servizi al cittadino sac">
-      <div class="news-date">📅 14.09.2026</div>
-      <div class="news-auth">🇧🇷 CVM - Brasile</div>
-      <a href="https://www.gov.br/cvm/pt-br/assuntos/noticias/2026/cvm-lanca-novo-sistema-de-atendimento-ao-cidadao-sac" target="_blank" class="news-title" data-it="CVM lancia il nuovo sistema di assistenza e servizi al cittadino (SAC)" data-en="CVM launches new citizen service and support system (SAC)">CVM lancia il nuovo sistema di assistenza e servizi al cittadino (SAC)</a>
-      <div class="news-desc" data-it="Nuovo portale digitale per la tutela degli investitori e la gestione rapida delle istanze in Brasile." data-en="New digital portal for investor protection and rapid request management in Brazil.">Nuovo portale digitale per la tutela degli investitori e la gestione rapida delle istanze in Brasile.</div>
-      <a href="https://www.gov.br/cvm/pt-br/assuntos/noticias/2026/cvm-lanca-novo-sistema-de-atendimento-ao-cidadao-sac" target="_blank" class="news-link" data-it="Leggi comunicato ufficiale ➔" data-en="Read official press release ➔">Leggi comunicato ufficiale ➔</a>
-    </div>
-  </div>
+  <div id="newsContainer"></div>
+
   <div style="text-align: center;">
     <a href="https://www.amevfirenze.it" class="back-btn" id="backBtn">⬅️ Ritorna a Financial Authority Database</a>
   </div>
@@ -49,43 +42,113 @@
     <p id="footerText">Financial Authority Database · Webmaster &amp; Autore: Avvocato Marcello Stanca (Verificato)</p>
   </footer>
 </div>
-<script>function setLanguage(lang) {
-            document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
-            if(lang === 'it') {
-                document.querySelector('button[onclick="setLanguage(\'it\')"]').classList.add('active');
-                document.getElementById('mainTitle').innerText = "📰 News by Authorities";
-                document.getElementById('mainSubtitle').innerText = "Aggiornamenti ufficiali e alert dalle Autorità di Vigilanza Finanziaria nel Mondo";
-                document.getElementById('searchInput').placeholder = "🔍 Cerca per data o autorità (es. CVM, FCA)...";
-                document.getElementById('backBtn').innerText = "⬅️ Ritorna a Financial Authority Database";
-                document.getElementById('footerText').innerText = "Financial Authority Database · Webmaster & Autore: Avvocato Marcello Stanca (Verificato)";
-            } else {
-                document.querySelector('button[onclick="setLanguage(\'en\')"]').classList.add('active');
-                document.getElementById('mainTitle').innerText = "📰 News by Authorities";
-                document.getElementById('mainSubtitle').innerText = "Official updates and alerts from Financial Supervisory Authorities worldwide";
-                document.getElementById('searchInput').placeholder = "🔍 Search by date or authority (e.g. CVM, FCA)...";
-                document.getElementById('backBtn').innerText = "⬅️ Return to Financial Authority Database";
-                document.getElementById('footerText').innerText = "Financial Authority Database · Webmaster & Author: Marcello Stanca, Esq. (Verified)";
-            }
-            // Traduce dinamicamente tutte le card delle notizie
-            document.querySelectorAll('.news-card').forEach(card => {
-                let title = card.querySelector('.news-title');
-                let desc = card.querySelector('.news-desc');
-                let link = card.querySelector('.news-link');
-                title.innerText = title.getAttribute('data-' + lang);
-                desc.innerText = desc.getAttribute('data-' + lang);
-                link.innerText = link.getAttribute('data-' + lang);
-            });
-        }
-        function filterNews() {
-            let input = document.getElementById('searchInput').value.toLowerCase();
-            let cards = document.getElementsByClassName('news-card');
-            for (let i = 0; i < cards.length; i++) {
-                let text = cards[i].getAttribute('data-text').toLowerCase();
-                let date = cards[i].getAttribute('data-date').toLowerCase();
-                if (text.includes(input) || date.includes(input)) {
-                    cards[i].style.display = "";
-                } else {
-                    cards[i].style.display = "none";
-                }
-            }
-        }</script>
+<script>
+let currentLang = 'it';
+let allNews = [];
+
+function formatDate(isoDate, lang) {
+  if (!isoDate) return '';
+  const d = new Date(isoDate);
+  if (isNaN(d)) return isoDate;
+  return d.toLocaleDateString(lang === 'it' ? 'it-IT' : 'en-GB');
+}
+
+function escapeHtml(str) {
+  return (str || '').replace(/[&<>"']/g, m => ({
+    '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+  }[m]));
+}
+
+function getLocalized(item, fieldBase, lang) {
+  // supporta sia campi flat (_it/_en/_me) sia nested
+  if (item[fieldBase + '_' + lang]) return item[fieldBase + '_' + lang];
+  if (item[fieldBase] && typeof item[fieldBase] === 'object') {
+    return item[fieldBase][lang] || item[fieldBase].it || item[fieldBase].en || '';
+  }
+  return item[fieldBase] || '';
+}
+
+function buildCard(item) {
+  const title = getLocalized(item, 'title', currentLang);
+  const summary = getLocalized(item, 'summary', currentLang) || getLocalized(item, 'body_text', currentLang);
+  const cta = currentLang === 'it' ? 'Leggi comunicato ufficiale ➔' : 'Read official press release ➔';
+  const dateIso = item.date || item.published_at || '';
+  const dateLabel = formatDate(dateIso, currentLang);
+  const authority = item.authority || item.source_authority || '';
+  const country = item.country || '';
+  const sourceUrl = item.source_url || item.url || '#';
+
+  const searchable = `${title} ${summary} ${authority} ${country} ${dateLabel} ${dateIso}`.toLowerCase();
+
+  return `
+    <div class="news-card" data-text="${escapeHtml(searchable)}" data-date="${escapeHtml((dateIso || '').toLowerCase())}">
+      <div class="news-date">📅 ${escapeHtml(dateLabel || dateIso)}</div>
+      <div class="news-auth">${escapeHtml([country, authority].filter(Boolean).join(' · '))}</div>
+      <a href="${escapeHtml(sourceUrl)}" target="_blank" class="news-title">${escapeHtml(title)}</a>
+      <div class="news-desc">${escapeHtml(summary)}</div>
+      <a href="${escapeHtml(sourceUrl)}" target="_blank" class="news-link">${cta}</a>
+    </div>
+  `;
+}
+
+function renderNews() {
+  const container = document.getElementById('newsContainer');
+  container.innerHTML = allNews.map(buildCard).join('');
+  filterNews();
+}
+
+function setLanguage(lang) {
+  currentLang = lang;
+  document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
+
+  if (lang === 'it') {
+    document.querySelector('button[onclick="setLanguage(\'it\')"]').classList.add('active');
+    document.getElementById('mainTitle').innerText = "📰 News by Authorities";
+    document.getElementById('mainSubtitle').innerText = "Aggiornamenti ufficiali e alert dalle Autorità di Vigilanza Finanziaria nel Mondo";
+    document.getElementById('searchInput').placeholder = "🔍 Cerca per data o autorità (es. CVM, FCA)...";
+    document.getElementById('backBtn').innerText = "⬅️ Ritorna a Financial Authority Database";
+    document.getElementById('footerText').innerText = "Financial Authority Database · Webmaster & Autore: Avvocato Marcello Stanca (Verificato)";
+  } else {
+    document.querySelector('button[onclick="setLanguage(\'en\')"]').classList.add('active');
+    document.getElementById('mainTitle').innerText = "📰 News by Authorities";
+    document.getElementById('mainSubtitle').innerText = "Official updates and alerts from Financial Supervisory Authorities worldwide";
+    document.getElementById('searchInput').placeholder = "🔍 Search by date or authority (e.g. CVM, FCA)...";
+    document.getElementById('backBtn').innerText = "⬅️ Return to Financial Authority Database";
+    document.getElementById('footerText').innerText = "Financial Authority Database · Webmaster & Author: Marcello Stanca, Esq. (Verified)";
+  }
+
+  renderNews();
+}
+
+function filterNews() {
+  const input = document.getElementById('searchInput').value.toLowerCase();
+  const cards = document.getElementsByClassName('news-card');
+  for (let i = 0; i < cards.length; i++) {
+    const text = (cards[i].getAttribute('data-text') || '').toLowerCase();
+    const date = (cards[i].getAttribute('data-date') || '').toLowerCase();
+    cards[i].style.display = (text.includes(input) || date.includes(input)) ? "" : "none";
+  }
+}
+
+async function loadNews() {
+  try {
+    const res = await fetch('../NEWS/news-feed.json', { cache: 'no-store' });
+    if (!res.ok) throw new Error('Feed HTTP ' + res.status);
+    const data = await res.json();
+
+    // accetta sia array diretto sia {items:[...]}
+    allNews = Array.isArray(data) ? data : (data.items || []);
+
+    // ordina per data desc
+    allNews.sort((a, b) => (b.date || b.published_at || '').localeCompare(a.date || a.published_at || ''));
+
+    renderNews();
+  } catch (err) {
+    const container = document.getElementById('newsContainer');
+    container.innerHTML = '<div class="news-card"><div class="news-desc">Unable to load news feed.</div></div>';
+    console.error(err);
+  }
+}
+
+loadNews();
+</script>
