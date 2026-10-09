@@ -30,10 +30,11 @@
 
         async function run() {
             const frame = document.getElementById('app');
-            await waitFor(() => frame.contentDocument.querySelector('#flagsGrid .flag-item'));
-            const doc = frame.contentDocument;
             const database = await (await fetch('./financial_authorities_database.json')).json();
+            await waitFor(() => frame.contentDocument.querySelectorAll('#flagsGrid .flag-item').length === Object.keys(database).length);
+            const doc = frame.contentDocument;
             const grid = doc.getElementById('flagsGrid');
+            if (doc.getElementById('flagViewDialog')?.open) frame.contentWindow.document.getElementById('flagViewClose').click();
             check(grid.querySelectorAll('.flag-item').length === Object.keys(database).length,
                 'Grid renders all 239 database records');
 
@@ -41,6 +42,7 @@
                 ['Canada - Quebec', 'flags/quebec.svg'],
                 ['Canada - CSA (Federal)', 'flags/canada.svg']
             ]) {
+                check(database[country].flagImage === expectedSrc, `${country}: SVG path comes from JSON`);
                 const item = [...grid.querySelectorAll('.flag-item')]
                     .find(node => node.querySelector('.flag-name')?.textContent === country);
                 const image = item?.querySelector('.flag-image');
@@ -49,6 +51,25 @@
                     && image.naturalWidth === 60 && image.naturalHeight === 40
                     && frame.contentWindow.getComputedStyle(image).display === 'inline-block',
                     `${country}: local SVG flag loads and is visible in the grid`);
+                check(image.alt === '' && item.getAttribute('aria-label').includes(country),
+                    `${country}: decorative image retains accessible country name`);
+                for (const mode of ['compact', 'detailed']) {
+                    frame.contentWindow.flagViewPreference.choose(mode, false);
+                    check(item.getBoundingClientRect().width >= 44 && item.getBoundingClientRect().height >= 44
+                        && image.getBoundingClientRect().width <= item.getBoundingClientRect().width,
+                        `${country}: ${mode} keeps SVG within usable touch target`);
+                }
+                item.click();
+                check(doc.getElementById('countryModal').style.display === 'block'
+                    && doc.getElementById('modalContent').textContent.includes(database[country].financial_authority.name),
+                    `${country}: flag opens the correct authority details`);
+                frame.contentWindow.closeModal();
+            }
+            for (const path of ['./APP/financial_authorities_database.json',
+                './DEPLOY_REGISTER/financial_authorities_database.json',
+                './android/app/src/main/assets/financial_authorities_database.json']) {
+                const mirror = await (await fetch(path)).json();
+                check(JSON.stringify(mirror) === JSON.stringify(database), `${path}: database mirror synchronized`);
             }
 
             for (const country of ['Canada - Alberta', 'Canada - Ontario']) {
@@ -57,6 +78,22 @@
                 check(item?.querySelector('.flag-icon-wrapper .fi.fi-ca'),
                     `${country}: existing Canadian grid flag remains unchanged`);
             }
+            const app = frame.contentWindow;
+            for (const invalidPath of ['https://example.invalid/flag.svg', 'flags/../quebec.svg', 'flags/flag.svg?query=1']) {
+                app.eval(`countriesData.find(country => country.country_name === 'Canada - Quebec').flagImage = ${JSON.stringify(invalidPath)}; renderFlagsGrid();`);
+                const item = [...grid.querySelectorAll('.flag-item')]
+                    .find(node => node.querySelector('.flag-name')?.textContent === 'Canada - Quebec');
+                check(!item.querySelector('.flag-image') && item.querySelector('.flag-icon-wrapper').childNodes.length > 0,
+                    `${invalidPath}: invalid SVG path rejected with existing fallback`);
+            }
+            app.eval("countriesData.find(country => country.country_name === 'Canada - Quebec').flagImage = 'flags/missing-regression-test.svg'; renderFlagsGrid();");
+            const missingItem = [...grid.querySelectorAll('.flag-item')]
+                .find(node => node.querySelector('.flag-name')?.textContent === 'Canada - Quebec');
+            await waitFor(() => !missingItem.querySelector('.flag-image'));
+            check(missingItem.querySelector('.flag-icon-wrapper').childNodes.length > 0
+                && missingItem.getAttribute('aria-label').includes('Canada - Quebec'),
+                'Missing SVG restores visible fallback and retains accessible name');
+            app.eval("countriesData.find(country => country.country_name === 'Canada - Quebec').flagImage = 'flags/quebec.svg'; renderFlagsGrid();");
             results.dataset.status = 'passed';
         }
 

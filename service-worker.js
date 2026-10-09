@@ -1,4 +1,4 @@
-const CACHE_NAME = 'financial-authority-v24';
+const CACHE_NAME = 'financial-authority-v26';
 const BASE_PATH = '';
 const FLAG_ICONS_CSS_URL = 'https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.2.3/css/flag-icons.min.css';
 const PWA_ICON_PATHS = [

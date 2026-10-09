@@ -111,6 +111,60 @@
     <!-- End Google Tag Manager -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <script id="flag-view-bootstrap">
+        (() => {
+            // Set this fixed UTC timestamp to the actual publication time at release.
+            const campaignStart = Date.parse('2026-10-09T09:09:24Z');
+            const campaignEnd = campaignStart + 30 * 24 * 60 * 60 * 1000;
+            const storageKey = 'financial-authority-flag-view';
+            const preferenceVersion = 1;
+            const viewport = window.matchMedia('(max-width: 768px)');
+            const validMode = mode => mode === 'compact' || mode === 'detailed';
+            let saved = null;
+            try {
+                const value = JSON.parse(localStorage.getItem(storageKey));
+                if (value && value.version === preferenceVersion && value.remember === true && validMode(value.mode)) {
+                    saved = value;
+                }
+            } catch (_) { /* Storage may be unavailable in privacy contexts. */ }
+            const state = {
+                mode: saved ? saved.mode : (viewport.matches ? 'compact' : 'detailed'),
+                explicit: Boolean(saved),
+                remembered: Boolean(saved),
+                campaignActive: (now = Date.now()) => now >= campaignStart && now < campaignEnd,
+                choose(mode, remember) {
+                    if (!validMode(mode)) return;
+                    state.mode = mode;
+                    state.explicit = true;
+                    state.remembered = false;
+                    try {
+                        if (remember) {
+                            localStorage.setItem(storageKey, JSON.stringify({
+                                version: preferenceVersion, mode, remember: true
+                            }));
+                            state.remembered = true;
+                        } else {
+                            localStorage.removeItem(storageKey);
+                        }
+                    } catch (_) { /* The current-page choice still works without storage. */ }
+                    apply();
+                }
+            };
+            function apply() {
+                document.documentElement.dataset.flagView = state.mode;
+                document.dispatchEvent(new Event('flagviewchange'));
+            }
+            function adapt() {
+                if (state.explicit) return;
+                state.mode = viewport.matches ? 'compact' : 'detailed';
+                apply();
+            }
+            if (viewport.addEventListener) viewport.addEventListener('change', adapt);
+            else viewport.addListener(adapt);
+            window.flagViewPreference = state;
+            apply();
+        })();
+    </script>
     <meta name="format-detection" content="telephone=no, email=no, address=no">
     
     <!-- Google AdSense -->
@@ -2120,6 +2174,7 @@
             font-size: 48px;
             display: inline-block;
         }
+        #flagsGrid .flag-image { width: 48px; height: 32px; object-fit: contain; display: inline-block; }
         .flag-code { font-weight: 600; color: #667eea; font-size: 0.9em; margin-top: 5px; }
         .flag-name { font-size: 0.75em; color: #334155; margin-top: 4px; line-height: 1.2; text-align: center; }
         .flag-marker-badge {
@@ -2637,6 +2692,49 @@
         .container { overflow-x: hidden; }
 
         #table-of-contents a.amev-quick-index-button { border-color: #16a34a !important; }
+        .flag-view-selector, .flag-view-dialog {
+            color: #172033;
+            background: #fff;
+            border: 2px solid #667eea;
+            border-radius: 12px;
+            padding: 16px;
+        }
+        .flag-view-selector { max-width: 1200px; margin: 0 auto 16px; }
+        .flag-view-selector fieldset, .flag-view-dialog fieldset { border: 0; padding: 0; margin: 0 0 12px; min-width: 0; }
+        .flag-view-selector legend, .flag-view-dialog legend { font-weight: 700; margin-bottom: 10px; }
+        .flag-view-actions { display: flex; flex-wrap: wrap; gap: 8px; margin-block: 12px; }
+        .flag-view-selector button, .flag-view-dialog button {
+            min-height: 44px; padding: 10px 14px; border: 2px solid #334155;
+            border-radius: 8px; background: #fff; color: #172033; font: inherit; cursor: pointer;
+        }
+        .flag-view-selector button[aria-pressed="true"] { background: #172033; color: #fff; }
+        .flag-view-selector label, .flag-view-dialog label {
+            display: flex; align-items: center; gap: 10px; min-height: 44px; cursor: pointer;
+        }
+        .flag-view-selector input, .flag-view-dialog input { flex: 0 0 auto; width: 20px; height: 20px; }
+        .flag-view-selector :focus-visible, .flag-view-dialog :focus-visible { outline: 3px solid #1d4ed8; outline-offset: 3px; }
+        .flag-view-dialog { width: min(540px, calc(100% - 24px)); max-height: calc(100dvh - 32px); overflow: auto; margin: auto; }
+        .flag-view-dialog:not([open]), .flag-view-dialog [hidden] { display: none !important; }
+        .flag-view-dialog::backdrop { background: rgba(0, 0, 0, 0.7); }
+        .flag-view-dialog h2 { font-size: 1.35rem; margin-block: 0 12px; }
+        .flag-view-dialog p { margin-block: 12px; }
+        html[data-flag-view] #flagsGrid .flag-item { min-width: 0; overflow-wrap: anywhere; }
+        html[data-flag-view="compact"] #flagsGrid {
+            grid-template-columns: repeat(auto-fill, minmax(56px, 1fr)); gap: 6px;
+        }
+        html[data-flag-view="compact"] #flagsGrid .flag-item { min-height: 52px; padding: 6px 2px; }
+        html[data-flag-view="compact"] #flagsGrid .flag-icon-wrapper { margin-bottom: 0; font-size: 24px !important; }
+        html[data-flag-view="compact"] #flagsGrid .flag-icon-wrapper .fi { width: 32px !important; height: 24px !important; font-size: 32px; }
+        html[data-flag-view="compact"] #flagsGrid .flag-image { width: 32px; height: 24px; }
+        html[data-flag-view="compact"] #flagsGrid .flag-code { font-size: 0.75rem; margin-top: 3px; }
+        html[data-flag-view="compact"] #flagsGrid .flag-name,
+        html[data-flag-view="compact"] #flagsGrid .flag-marker-badge { display: none; }
+        html[data-flag-view="detailed"] #flagsGrid { grid-template-columns: repeat(auto-fill, minmax(min(140px, 100%), 1fr)); gap: 12px; }
+        html[data-flag-view="detailed"] #flagsGrid .flag-item { min-height: 110px; padding: 12px 8px; }
+        html[data-flag-view="detailed"] #flagsGrid .flag-name { font-size: 0.875rem; }
+        @media (prefers-reduced-motion: reduce) {
+            #flagsGrid .flag-item, #flagsGrid .flag-icon-wrapper { animation: none !important; transition: none !important; transform: none !important; }
+        }
     </style>
 </head>
 <body itemscope itemtype="https://schema.org/WebApplication">
@@ -3216,6 +3314,17 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
         <div id="flags-section" class="flags-grid-container">
             <h2 data-i18n="flagsGridTitle" style="text-align: center; margin-bottom: 20px;">🌍 Seleziona una giurisdizione o un'autorità</h2>
+            <div class="flag-view-selector" id="flagViewSelector">
+                <fieldset>
+                    <legend data-i18n-text="panoramicFlagsLabel">Visione panoramica bandiere</legend>
+                    <div class="flag-view-actions">
+                        <button type="button" data-flag-view-mode="compact" aria-pressed="false" aria-controls="flagsGrid" data-i18n-text="flagViewCompact">Compatta</button>
+                        <button type="button" data-flag-view-mode="detailed" aria-pressed="false" aria-controls="flagsGrid" data-i18n-text="flagViewDetailed">Dettagliata</button>
+                    </div>
+                </fieldset>
+                <label><input type="checkbox" id="flagViewRemember"><span data-i18n-text="flagViewRemember">Ricorda questa scelta su questo dispositivo</span></label>
+                <button type="button" id="flagViewRevise" aria-haspopup="dialog" aria-controls="flagViewDialog" data-i18n-text="flagViewRevise">Cambia visualizzazione</button>
+            </div>
             <!-- Banner Alfabeto A-Z - Sfondo Nero, Testo Verde Fosforo -->
             <div style="background: #000000; padding: 18px 20px; margin-bottom: 15px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.3); border: 2px solid #39ff14;">
                 <div style="display: flex; align-items: center; justify-content: center; gap: 12px; flex-wrap: wrap;">
@@ -3229,7 +3338,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     Scorri l'Alfabeto e seleziona la Bandiera!&nbsp;&nbsp;&nbsp; <span class="keyword-pulse-red">Database di autorità finanziarie<br>con copertura globale</span>
                 </p>
             </div>
-            <div id="flagsGrid" class="flags-grid" role="grid" aria-label="Country flags grid">
+            <div id="flagsGrid" class="flags-grid" role="group" data-i18n-aria-label="flagViewGridLabel" aria-label="Bandiere di Paesi e autorità">
                 <a class="flag-item" href="authority/ES-CNMV.html" aria-label="CNMV España">
                     <span class="flag-icon-wrapper" aria-hidden="true">🇪🇸</span>
                     <span class="flag-code">ES</span>
@@ -3242,6 +3351,22 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 </a>
             </div>
         </div>
+
+        <dialog id="flagViewDialog" class="flag-view-dialog" aria-labelledby="flagViewTitle" aria-describedby="flagViewBody">
+            <h2 id="flagViewTitle" data-i18n-text="panoramicFlagsLabel">Visione panoramica bandiere</h2>
+            <p id="flagViewBody" data-i18n-text="flagViewBody">Come preferisci visualizzare le bandiere? Scegli una griglia compatta oppure una visualizzazione dettagliata. Puoi cambiare scelta in qualsiasi momento.</p>
+            <fieldset>
+                <legend data-i18n-text="panoramicFlagsLabel">Visione panoramica bandiere</legend>
+                <label><input type="radio" name="flag-view-choice" value="compact" autofocus><span data-i18n-text="flagViewCompact">Compatta</span></label>
+                <label><input type="radio" name="flag-view-choice" value="detailed"><span data-i18n-text="flagViewDetailed">Dettagliata</span></label>
+            </fieldset>
+            <label><input type="checkbox" id="flagViewDialogRemember"><span data-i18n-text="flagViewRemember">Ricorda questa scelta su questo dispositivo</span></label>
+            <p id="flagViewCampaignNote" data-i18n-text="flagViewCampaign" hidden>Per 30 giorni ti riproponiamo questa scelta, anche se hai già salvato una preferenza.</p>
+            <div class="flag-view-actions">
+                <button type="button" id="flagViewContinue" data-i18n-text="flagViewContinue">Applica e continua</button>
+                <button type="button" id="flagViewClose" data-i18n-text="flagViewClose">Chiudi senza cambiare</button>
+            </div>
+        </dialog>
 
         <nav aria-label="CONSOB · FCA · CNMV · AMF · BaFin · SEC">
             <a href="authority/IT-CONSOB.html">CONSOB · Italia</a> ·
@@ -5896,6 +6021,203 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         });
         translations["ro-RO"] = translations.ro;
         translations["sq-XK"] = translations.sq;
+        Object.entries({
+            it: {
+                panoramicFlagsLabel: 'Visione panoramica bandiere',
+                flagViewBody: 'Come preferisci visualizzare le bandiere? Scegli una griglia compatta oppure una visualizzazione dettagliata. Puoi cambiare scelta in qualsiasi momento.',
+                flagViewCompact: 'Compatta',
+                flagViewDetailed: 'Dettagliata',
+                flagViewRemember: 'Ricorda questa scelta su questo dispositivo',
+                flagViewCampaign: 'Per 30 giorni ti riproponiamo questa scelta, anche se hai già salvato una preferenza.',
+                flagViewContinue: 'Applica e continua',
+                flagViewClose: 'Chiudi senza cambiare',
+                flagViewRevise: 'Cambia visualizzazione',
+                flagViewGridLabel: 'Bandiere di Paesi e autorità',
+                flagViewOpenDetails: 'Apri dettagli per'
+            },
+            en: {
+                panoramicFlagsLabel: 'Flags overview',
+                flagViewBody: 'How would you like to view the flags? Choose a compact grid or a detailed view. You can change your choice at any time.',
+                flagViewCompact: 'Compact',
+                flagViewDetailed: 'Detailed',
+                flagViewRemember: 'Remember this choice on this device',
+                flagViewCampaign: 'For 30 days, we will ask you to choose again, even if you have already saved a preference.',
+                flagViewContinue: 'Apply and continue',
+                flagViewClose: 'Close without changing',
+                flagViewRevise: 'Change view',
+                flagViewGridLabel: 'Country and authority flags',
+                flagViewOpenDetails: 'Open details for'
+            },
+            fr: {
+                panoramicFlagsLabel: 'Vue d’ensemble des drapeaux',
+                flagViewBody: 'Comment souhaitez-vous afficher les drapeaux ? Choisissez une grille compacte ou une vue détaillée. Vous pouvez changer votre choix à tout moment.',
+                flagViewCompact: 'Compacte',
+                flagViewDetailed: 'Détaillée',
+                flagViewRemember: 'Mémoriser ce choix sur cet appareil',
+                flagViewCampaign: 'Pendant 30 jours, nous vous proposerons à nouveau ce choix, même si vous avez déjà enregistré une préférence.',
+                flagViewContinue: 'Appliquer et continuer',
+                flagViewClose: 'Fermer sans modifier',
+                flagViewRevise: 'Changer l’affichage',
+                flagViewGridLabel: 'Drapeaux des pays et des autorités',
+                flagViewOpenDetails: 'Ouvrir les détails pour'
+            },
+            de: {
+                panoramicFlagsLabel: 'Flaggenübersicht',
+                flagViewBody: 'Wie möchten Sie die Flaggen anzeigen? Wählen Sie ein kompaktes Raster oder eine detaillierte Ansicht. Sie können Ihre Auswahl jederzeit ändern.',
+                flagViewCompact: 'Kompakt',
+                flagViewDetailed: 'Detailliert',
+                flagViewRemember: 'Diese Auswahl auf diesem Gerät speichern',
+                flagViewCampaign: '30 Tage lang bieten wir Ihnen diese Auswahl erneut an, auch wenn Sie bereits eine Einstellung gespeichert haben.',
+                flagViewContinue: 'Übernehmen und fortfahren',
+                flagViewClose: 'Ohne Änderungen schließen',
+                flagViewRevise: 'Ansicht ändern',
+                flagViewGridLabel: 'Flaggen von Ländern und Behörden',
+                flagViewOpenDetails: 'Details öffnen für'
+            },
+            es: {
+                panoramicFlagsLabel: 'Vista general de las banderas',
+                flagViewBody: '¿Cómo prefieres ver las banderas? Elige una cuadrícula compacta o una vista detallada. Puedes cambiar tu elección en cualquier momento.',
+                flagViewCompact: 'Compacta',
+                flagViewDetailed: 'Detallada',
+                flagViewRemember: 'Recordar esta elección en este dispositivo',
+                flagViewCampaign: 'Durante 30 días volveremos a ofrecerte esta elección, aunque ya hayas guardado una preferencia.',
+                flagViewContinue: 'Aplicar y continuar',
+                flagViewClose: 'Cerrar sin cambiar',
+                flagViewRevise: 'Cambiar vista',
+                flagViewGridLabel: 'Banderas de países y autoridades',
+                flagViewOpenDetails: 'Abrir detalles de'
+            },
+            pt: {
+                panoramicFlagsLabel: 'Vista geral das bandeiras',
+                flagViewBody: 'Como prefere visualizar as bandeiras? Escolha uma grelha compacta ou uma vista detalhada. Pode mudar a sua escolha a qualquer momento.',
+                flagViewCompact: 'Compacta',
+                flagViewDetailed: 'Detalhada',
+                flagViewRemember: 'Guardar esta escolha neste dispositivo',
+                flagViewCampaign: 'Durante 30 dias voltaremos a apresentar esta escolha, mesmo que já tenha guardado uma preferência.',
+                flagViewContinue: 'Aplicar e continuar',
+                flagViewClose: 'Fechar sem alterar',
+                flagViewRevise: 'Alterar visualização',
+                flagViewGridLabel: 'Bandeiras de países e autoridades',
+                flagViewOpenDetails: 'Abrir detalhes de'
+            },
+            ar: {
+                panoramicFlagsLabel: 'نظرة عامة على الأعلام',
+                flagViewBody: 'كيف تفضل عرض الأعلام؟ اختر شبكة مدمجة أو عرضًا تفصيليًا. يمكنك تغيير اختيارك في أي وقت.',
+                flagViewCompact: 'مدمج',
+                flagViewDetailed: 'تفصيلي',
+                flagViewRemember: 'تذكر هذا الاختيار على هذا الجهاز',
+                flagViewCampaign: 'لمدة 30 يومًا، سنعرض عليك هذا الاختيار مجددًا، حتى لو سبق لك حفظ تفضيل.',
+                flagViewContinue: 'تطبيق ومتابعة',
+                flagViewClose: 'إغلاق دون تغيير',
+                flagViewRevise: 'تغيير طريقة العرض',
+                flagViewGridLabel: 'أعلام الدول والهيئات',
+                flagViewOpenDetails: 'فتح تفاصيل'
+            },
+            zh: {
+                panoramicFlagsLabel: '旗帜总览',
+                flagViewBody: '您希望如何查看旗帜？请选择紧凑网格或详细视图。您可以随时更改选择。',
+                flagViewCompact: '紧凑',
+                flagViewDetailed: '详细',
+                flagViewRemember: '在此设备上记住此选择',
+                flagViewCampaign: '在30天内，即使您已保存偏好，我们仍会再次请您选择。',
+                flagViewContinue: '应用并继续',
+                flagViewClose: '关闭且不更改',
+                flagViewRevise: '更改视图',
+                flagViewGridLabel: '国家和机构旗帜',
+                flagViewOpenDetails: '查看详情：'
+            },
+            hi: {
+                panoramicFlagsLabel: 'झंडों का समग्र दृश्य',
+                flagViewBody: 'आप झंडों को कैसे देखना पसंद करेंगे? एक संक्षिप्त ग्रिड या विस्तृत दृश्य चुनें। आप अपनी पसंद किसी भी समय बदल सकते हैं।',
+                flagViewCompact: 'संक्षिप्त',
+                flagViewDetailed: 'विस्तृत',
+                flagViewRemember: 'इस डिवाइस पर यह पसंद याद रखें',
+                flagViewCampaign: '30 दिनों तक हम आपको यह विकल्प फिर से दिखाएँगे, भले ही आपने पहले ही अपनी पसंद सहेज ली हो।',
+                flagViewContinue: 'लागू करें और आगे बढ़ें',
+                flagViewClose: 'बिना बदलाव किए बंद करें',
+                flagViewRevise: 'दृश्य बदलें',
+                flagViewGridLabel: 'देशों और प्राधिकरणों के झंडे',
+                flagViewOpenDetails: 'इनके विवरण खोलें:'
+            },
+            vi: {
+                panoramicFlagsLabel: 'Tổng quan các lá cờ',
+                flagViewBody: 'Bạn muốn xem các lá cờ như thế nào? Chọn dạng lưới thu gọn hoặc chế độ xem chi tiết. Bạn có thể thay đổi lựa chọn bất cứ lúc nào.',
+                flagViewCompact: 'Thu gọn',
+                flagViewDetailed: 'Chi tiết',
+                flagViewRemember: 'Ghi nhớ lựa chọn này trên thiết bị này',
+                flagViewCampaign: 'Trong 30 ngày, chúng tôi sẽ mời bạn chọn lại, ngay cả khi bạn đã lưu tùy chọn.',
+                flagViewContinue: 'Áp dụng và tiếp tục',
+                flagViewClose: 'Đóng mà không thay đổi',
+                flagViewRevise: 'Thay đổi chế độ xem',
+                flagViewGridLabel: 'Cờ của các quốc gia và cơ quan',
+                flagViewOpenDetails: 'Mở thông tin chi tiết về'
+            },
+            sq: {
+                panoramicFlagsLabel: 'Pamje e përgjithshme e flamujve',
+                flagViewBody: 'Si preferoni t’i shihni flamujt? Zgjidhni një rrjet kompakt ose një pamje të detajuar. Mund ta ndryshoni zgjedhjen në çdo kohë.',
+                flagViewCompact: 'Kompakte',
+                flagViewDetailed: 'E detajuar',
+                flagViewRemember: 'Mbaje mend këtë zgjedhje në këtë pajisje',
+                flagViewCampaign: 'Për 30 ditë do t’jua ofrojmë sërish këtë zgjedhje, edhe nëse keni ruajtur tashmë një preferencë.',
+                flagViewContinue: 'Zbato dhe vazhdo',
+                flagViewClose: 'Mbyll pa ndryshuar',
+                flagViewRevise: 'Ndrysho pamjen',
+                flagViewGridLabel: 'Flamujt e vendeve dhe autoriteteve',
+                flagViewOpenDetails: 'Hap detajet për'
+            },
+            bs: {
+                panoramicFlagsLabel: 'Pregled zastava',
+                flagViewBody: 'Kako želite prikazati zastave? Odaberite kompaktnu mrežu ili detaljan prikaz. Svoj izbor možete promijeniti u bilo kojem trenutku.',
+                flagViewCompact: 'Kompaktni',
+                flagViewDetailed: 'Detaljni',
+                flagViewRemember: 'Zapamti ovaj izbor na ovom uređaju',
+                flagViewCampaign: 'Tokom 30 dana ponovo ćemo vam ponuditi ovaj izbor, čak i ako ste već sačuvali postavku.',
+                flagViewContinue: 'Primijeni i nastavi',
+                flagViewClose: 'Zatvori bez promjena',
+                flagViewRevise: 'Promijeni prikaz',
+                flagViewGridLabel: 'Zastave zemalja i nadležnih tijela',
+                flagViewOpenDetails: 'Otvori detalje za'
+            },
+            ro: {
+                panoramicFlagsLabel: 'Vedere de ansamblu a steagurilor',
+                flagViewBody: 'Cum preferi să vizualizezi steagurile? Alege o grilă compactă sau o vizualizare detaliată. Poți schimba alegerea în orice moment.',
+                flagViewCompact: 'Compactă',
+                flagViewDetailed: 'Detaliată',
+                flagViewRemember: 'Reține această alegere pe acest dispozitiv',
+                flagViewCampaign: 'Timp de 30 de zile îți vom oferi din nou această alegere, chiar dacă ai salvat deja o preferință.',
+                flagViewContinue: 'Aplică și continuă',
+                flagViewClose: 'Închide fără modificări',
+                flagViewRevise: 'Schimbă vizualizarea',
+                flagViewGridLabel: 'Steagurile țărilor și autorităților',
+                flagViewOpenDetails: 'Deschide detaliile pentru'
+            },
+            nl: {
+                panoramicFlagsLabel: 'Vlaggenoverzicht',
+                flagViewBody: 'Hoe wil je de vlaggen bekijken? Kies een compact raster of een gedetailleerde weergave. Je kunt je keuze op elk moment wijzigen.',
+                flagViewCompact: 'Compact',
+                flagViewDetailed: 'Gedetailleerd',
+                flagViewRemember: 'Deze keuze op dit apparaat onthouden',
+                flagViewCampaign: 'Gedurende 30 dagen bieden we je deze keuze opnieuw aan, ook als je al een voorkeur hebt opgeslagen.',
+                flagViewContinue: 'Toepassen en doorgaan',
+                flagViewClose: 'Sluiten zonder wijzigingen',
+                flagViewRevise: 'Weergave wijzigen',
+                flagViewGridLabel: 'Vlaggen van landen en autoriteiten',
+                flagViewOpenDetails: 'Details openen voor'
+            },
+            el: {
+                panoramicFlagsLabel: 'Πανοραμική προβολή σημαιών',
+                flagViewBody: 'Πώς προτιμάτε να βλέπετε τις σημαίες; Επιλέξτε ένα συμπαγές πλέγμα ή μια λεπτομερή προβολή. Μπορείτε να αλλάξετε την επιλογή σας ανά πάσα στιγμή.',
+                flagViewCompact: 'Συμπαγής',
+                flagViewDetailed: 'Λεπτομερής',
+                flagViewRemember: 'Απομνημόνευση αυτής της επιλογής σε αυτή τη συσκευή',
+                flagViewCampaign: 'Για 30 ημέρες θα σας προσφέρουμε ξανά αυτή την επιλογή, ακόμα κι αν έχετε ήδη αποθηκεύσει μια προτίμηση.',
+                flagViewContinue: 'Εφαρμογή και συνέχεια',
+                flagViewClose: 'Κλείσιμο χωρίς αλλαγές',
+                flagViewRevise: 'Αλλαγή προβολής',
+                flagViewGridLabel: 'Σημαίες χωρών και αρχών',
+                flagViewOpenDetails: 'Άνοιγμα λεπτομερειών για'
+            }
+        }).forEach(([locale, copy]) => Object.assign(translations[locale] ||= {}, copy));
         const localeMetadata = {
             it: { api: 'it', urlSupported: true },
             en: { api: 'en', urlSupported: true },
@@ -6662,10 +6984,69 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             setupAndroidGuideDialog();
             setupIosInstallHint();
             setupItalyOrbitalDialog();
+            setupFlagViewSelector();
             loadCountryData();
         });
         
         // Funzione per aggiornare il canonical URL in base alla lingua corrente
+        function setupFlagViewSelector() {
+            const state = window.flagViewPreference;
+            const dialog = document.getElementById('flagViewDialog');
+            const selector = document.getElementById('flagViewSelector');
+            const remember = document.getElementById('flagViewRemember');
+            const dialogRemember = document.getElementById('flagViewDialogRemember');
+            const radios = Array.from(dialog.querySelectorAll('input[type="radio"]'));
+            let returnFocus = null;
+            function sync() {
+                selector.querySelectorAll('[data-flag-view-mode]').forEach(button => {
+                    button.setAttribute('aria-pressed', String(button.dataset.flagViewMode === state.mode));
+                });
+                remember.checked = state.remembered;
+                radios.forEach(radio => { radio.checked = radio.value === state.mode; });
+            }
+            function open() {
+                if (dialog.open) return;
+                returnFocus = document.activeElement;
+                sync();
+                dialogRemember.checked = state.remembered;
+                document.getElementById('flagViewCampaignNote').hidden = !state.campaignActive();
+                dialog.showModal();
+                radios.find(radio => radio.checked).focus();
+            }
+            selector.querySelectorAll('[data-flag-view-mode]').forEach(button => {
+                button.addEventListener('click', () => state.choose(button.dataset.flagViewMode, remember.checked));
+            });
+            remember.addEventListener('change', () => state.choose(state.mode, remember.checked));
+            document.getElementById('flagViewRevise').addEventListener('click', open);
+            document.getElementById('flagViewContinue').addEventListener('click', () => {
+                const selected = radios.find(radio => radio.checked);
+                if (selected) state.choose(selected.value, dialogRemember.checked);
+                dialog.close();
+            });
+            document.getElementById('flagViewClose').addEventListener('click', () => dialog.close());
+            dialog.addEventListener('close', () => {
+                sync();
+                const target = returnFocus && returnFocus.isConnected && returnFocus !== document.body
+                    ? returnFocus : document.getElementById('flagViewRevise');
+                target.focus({ preventScroll: true });
+            });
+            dialog.addEventListener('keydown', event => {
+                if (event.key !== 'Tab') return;
+                const first = radios.find(radio => radio.checked);
+                const last = document.getElementById('flagViewClose');
+                if (event.shiftKey && document.activeElement === first) {
+                    event.preventDefault();
+                    last.focus();
+                } else if (!event.shiftKey && document.activeElement === last) {
+                    event.preventDefault();
+                    first.focus();
+                }
+            });
+            document.addEventListener('flagviewchange', sync);
+            sync();
+            if (state.campaignActive() || !state.remembered) open();
+        }
+
         function updateCanonicalUrl(lang = currentLanguage) {
             const canonicalTag = document.getElementById('canonical-url');
             if (canonicalTag) {
@@ -8385,7 +8766,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
         document.addEventListener('keydown', (event) => {
             // The nested native dialog owns Escape and focus while it is open.
-            if (document.getElementById('consobOrbitalDialog')?.open) return;
+            if (document.getElementById('consobOrbitalDialog')?.open || document.getElementById('flagViewDialog')?.open) return;
             if (!activeDialogState || !activeDialogState.modal) return;
             const { modal } = activeDialogState;
             if (modal.style.display === 'none') return;
@@ -8856,7 +9237,7 @@ https://avvstancamarcello.github.io/Financial-Authority-Database/
             const sortedCountries = [...countriesData].sort((a, b) => 
                 String(a?.country_name || '').localeCompare(String(b?.country_name || ''))
             );
-            const openDetailsPrefix = currentLanguage === 'it' ? 'Apri dettagli per' : 'Open details for';
+            const openDetailsPrefix = getLanguageBundle().flagViewOpenDetails;
 
             sortedCountries.forEach((country, index) => {
                 if (!country) return;
@@ -8916,6 +9297,22 @@ https://avvstancamarcello.github.io/Financial-Authority-Database/
                     // Fallback affidabile su emoji dal database (oppure globo)
                     flagWrapperNode.style.fontSize = '3em';
                     flagWrapperNode.textContent = fallbackFlag;
+                }
+                if (typeof country.flagImage === 'string' && /^flags\/[a-z0-9_-]+\.svg$/.test(country.flagImage)) {
+                    const image = document.createElement('img');
+                    image.className = 'flag-image';
+                    image.alt = '';
+                    image.width = 60;
+                    image.height = 40;
+                    const fallbackNodes = Array.from(flagWrapperNode.childNodes);
+                    const fallbackFontSize = flagWrapperNode.style.fontSize;
+                    image.addEventListener('error', () => {
+                        flagWrapperNode.replaceChildren(...fallbackNodes);
+                        flagWrapperNode.style.fontSize = fallbackFontSize;
+                    }, { once: true });
+                    flagWrapperNode.style.fontSize = '';
+                    flagWrapperNode.replaceChildren(image);
+                    image.src = country.flagImage;
                 }
 
                 const codeNode = document.createElement('span');

@@ -156,6 +156,51 @@ Remove-Item db_decrypted.json  # Pulisci dopo verifica
 
 ## 🔧 **AGGIORNAMENTO SERVICE WORKER**
 
+### Visione panoramica bandiere — pubblicazione
+
+I record possono specificare `flagImage`, un percorso locale `flags/nome.svg`
+(solo lettere minuscole, cifre, trattini e underscore nel nome).
+La griglia principale usa questo SVG decorativo mantenendo il nome accessibile
+del pulsante e il fallback preesistente se l'immagine non viene caricata.
+Québec usa `flags/quebec.svg`, CSA federale `flags/canada.svg`; l'emoji `flag`
+resta disponibile per gli altri renderer. Mantenere sincronizzati i quattro
+JSON: root, `APP/`, `DEPLOY_REGISTER/` e asset Android.
+
+Il selettore permanente sopra `#flagsGrid` offre **Compatta / Dettagliata**.
+Senza una scelta valida salvata, il default è compatto fino a 768px e dettagliato
+oltre 768px; si adatta alla larghezza solo finché l'utente non sceglie.
+Il dialogo si ripresenta a ogni caricamento completo durante la campagna,
+anche a chi ha già salvato una preferenza. Dopo la scadenza viene chiesto solo
+a chi non ha una preferenza valida. Lingua, hash e rendering non lo riaprono.
+
+**Al momento della pubblicazione**, aggiornare `campaignStart` nello script
+`#flag-view-bootstrap` di `index.html` con l'istante UTC effettivo di disponibilità
+(formato ISO, ad esempio `2026-10-09T12:00:00Z`), mai anteriore al 9 ottobre 2026.
+`campaignEnd` è calcolato automaticamente come inizio + 30 giorni: l'inizio è
+inclusivo e la fine esclusiva. Una pubblicazione successiva estende quindi la
+campagna oltre l'8 novembre 2026. Non usare la prima visita del singolo utente
+né una data ricalcolata a ogni caricamento. Se la pubblicazione viene rinviata,
+aggiornare di nuovo l'inizio **prima** di pubblicare, per garantire 30 giorni reali.
+La data nel codice è una configurazione di rilascio, non una prova di deployment.
+
+Solo il checkbox **Ricorda questa scelta su questo dispositivo** abilita il
+salvataggio: chiave `financial-authority-flag-view`, versione 1, modalità validata
+e `remember: true`. Deselezionarlo rimuove solo questa preferenza; i dati
+legacy/non validi non costituiscono consenso. Con storage bloccato la scelta
+resta attiva nella pagina corrente. Chiudere/Escape non inventa né salva una scelta.
+
+`/` e `/index.html` condividono lo storage sullo **stesso origin** e il service
+worker aggiorna entrambe le copie HTML con strategia network-first.
+`www` e non-`www`, protocolli o domini differenti hanno storage separati:
+il sito non trasferisce preferenze tra origin e non controlla “Sito desktop”
+del browser. `CNAME` indica `www.amevfirenze.it`; non si deduce da questi file
+quale redirect o copia sia effettivamente servita in produzione.
+
+Regressioni locali: servire la root con `python3 -m http.server 8000` e aprire
+`http://localhost:8000/test-flag-view.html`. Le fixture isolano script esterni,
+storage e orologio; controllano layout, consenso, campagne e lifecycle.
+Non certificano il rendering su un dispositivo fisico né un deployment.
+
 Quando modifichi il sito, aggiorna versione cache:
 
 **File:** `service-worker.js`
