@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flag view regression tests</title>
+</head>
+<body>
+    <h1>Visione panoramica — regressioni</h1>
+    <p>Servire la root via HTTP. Le fixture non caricano analytics, pubblicità o service worker.</p>
+    <pre id="results">Running…</pre>
+    <div id="fixtures"></div>
+    <script>
+        const results = document.getElementById('results');
+        const checks = [];
+        function check(condition, message) {
+            checks.push(`${condition ? 'PASS' : 'FAIL'}: ${message}`);
+            results.textContent = checks.join('\n');
+            if (!condition) throw new Error(message);
+        }
+        async function run() {
+            const response = await fetch('./index.html');
+            const source = new DOMParser().parseFromString(await response.text(), 'text/html');
+            const bootstrap = source.querySelector('#flag-view-bootstrap').textContent;
+            const diagnostics = source.querySelector('#grid-pipeline-diagnostics').textContent;
+            const application = [...source.querySelectorAll('script')]
+                .find(script => script.textContent.includes('async function loadCountryData()')).textContent;
+            const start = Date.parse(bootstrap.match(/Date.parse\('([^']+)'\)/)[1]);
+            const end = start + 30 * 86400000;
+            const key = 'financial-authority-flag-view';
+            const saved = mode => JSON.stringify({ version: 1, mode, remember: true });
+            source.querySelectorAll('script, link, iframe').forEach(node => {
+                if (node.id !== 'consobOrbitalFrame') node.remove();
+            });
+            source.querySelector('#consobOrbitalFrame')?.removeAttribute('src');
+
+            async function fixture({ width = 375, value = null, now = start, failure = '', path = '/index.html' } = {}) {
+                const frame = document.createElement('iframe');
+                frame.style.cssText = `width:${width}px;height:800px;border:0;display:block;`;
+                const loaded = new Promise(resolve => frame.onload = resolve);
+                frame.src = './test-flag-view.html?fixture=1';
+                document.getElementById('fixtures').appendChild(frame);
+                await loaded;
+                const win = frame.contentWindow;
+                win.document.head.innerHTML = source.head.innerHTML;
+                win.document.body.innerHTML = source.body.innerHTML;
+                const storage = new Map([['unrelated', 'keep']]);
+                if (value !== null) storage.set(key, value);
+                Object.defineProperty(win, 'localStorage', {
+                    value: {
+                        getItem(name) { if (failure === 'read') throw new Error('blocked'); return storage.get(name) || null; },
+                        setItem(name, data) { if (failure === 'write') throw new Error('full'); storage.set(name, data); },
+                        removeItem(name) { if (failure === 'remove') throw new Error('blocked'); storage.delete(name); }
+                    }
+                });
+                const base = win.document.createElement('base');
+                base.href = new URL(path, location.href).href;
+                win.document.head.prepend(base);
+                win.Date.now = () => now;
+                win.eval(diagnostics);
+                win.eval(bootstrap);
+                win.eval(application);
+                win.changeLanguage('it');
+                win.setupSearch();
+                win.setupFlagViewSelector();
+                await win.loadCountryData();
+                const deadline = performance.now() + 5000;
+                while (!win.document.querySelector('#flagsGrid .flag-item') && performance.now() < deadline) {
+                    await new Promise(resolve => setTimeout(resolve, 20));
+                }
+                const doc = win.document;
+                return {
+                    frame, win, doc, storage, dialog: doc.getElementById('flagViewDialog'),
+                    state: win.flagViewPreference,
+                    close() { doc.getElementById('flagViewClose').click(); },
+                    choose(mode, remember = false) {
+                        doc.querySelector(`input[name="flag-view-choice"][value="${mode}"]`).checked = true;
+                        doc.getElementById('flagViewDialogRemember').checked = remember;
+                        doc.getElementById('flagViewContinue').click();
+                    },
+                    dispose() { frame.remove(); }
+                };
+            }
+
+            for (const width of [320, 375, 390, 480, 768, 769, 1024]) {
+                const f = await fixture({ width });
+                check(f.state.mode === (width <= 768 ? 'compact' : 'detailed'), `${width}px automatic default`);
+                check(f.dialog.open && f.dialog.matches(':modal') && getComputedStyle(f.dialog).display !== 'none',
+                    `${width}px dialog stays visible and modal through data rendering`);
+                check(f.doc.activeElement.matches('input[name="flag-view-choice"]:checked'), `${width}px initial focus`);
+                check(!f.doc.getElementById('flagViewDialogRemember').checked, `${width}px consent initially off`);
+                f.choose('compact');
+                check(!f.dialog.open && getComputedStyle(f.dialog).display === 'none', `${width}px dialog truly hidden after action`);
+                const grid = f.doc.getElementById('flagsGrid');
+                const columns = f.win.getComputedStyle(grid).gridTemplateColumns.split(' ').length;
+                check(columns >= 3 && grid.scrollWidth <= grid.clientWidth, `${width}px compact multi-column, no grid overflow`);
+                check(f.win.getComputedStyle(f.doc.querySelector('.flag-name')).display === 'none', `${width}px compact names visually collapsed`);
+                check([...grid.querySelectorAll('.flag-item')].every(item => {
+                    const rect = item.getBoundingClientRect();
+                    return rect.width >= 44 && rect.height >= 44 && item.getAttribute('aria-label');
+                }), `${width}px all flag touch targets >=44px with accessible names`);
+                f.doc.querySelector('[data-flag-view-mode="detailed"]').click();
+                check(f.state.mode === 'detailed' && f.win.getComputedStyle(f.doc.querySelector('.flag-name')).display !== 'none'
+                    && grid.scrollWidth <= grid.clientWidth, `${width}px detailed names legible, no grid overflow`);
+                f.dispose();
+            }
+
+            for (const mode of ['compact', 'detailed']) {
+                const f = await fixture({ value: saved(mode) });
+                check(f.state.mode === mode && f.dialog.open && f.doc.getElementById('flagViewDialogRemember').checked,
+                    `Returning ${mode}: saved layout/preselection never suppress campaign`);
+                f.close();
+                check(f.state.mode === mode && f.storage.get(key) === saved(mode), 'Dismiss retains saved preference');
+                f.win.changeLanguage('ar');
+                check(!f.dialog.open && f.doc.documentElement.dir === 'rtl' && f.state.mode === mode,
+                    'RTL switch/rerender does not reopen dialog or change layout');
+                f.dispose();
+                const reload = await fixture({ value: saved(mode) });
+                check(reload.dialog.open, 'New page entry re-prompts saved user during campaign');
+                reload.dispose();
+            }
+
+            for (const value of ['compact', JSON.stringify({ mode: 'detailed' }), 'invalid',
+                JSON.stringify({ version: 1, mode: 'bad', remember: true }),
+                JSON.stringify({ version: 2, mode: 'detailed', remember: true }),
+                JSON.stringify({ version: 1, mode: 'detailed', remember: false })]) {
+                const f = await fixture({ value });
+                check(f.state.mode === 'compact' && !f.state.remembered && f.dialog.open, 'Legacy/invalid data ignored without inferred consent');
+                f.close();
+                check(!f.state.explicit && f.storage.get(key) === value, 'Dismissal does not invent a selection');
+                f.dispose();
+            }
+
+            for (const now of [start - 1, start, end - 1, end, end + 1]) {
+                const active = now >= start && now < end;
+                const f = await fixture({ value: saved('detailed'), now });
+                check(f.state.campaignActive() === active && f.dialog.open === active, `Exact campaign boundary ${now - start}ms`);
+                check(f.state.mode === 'detailed', 'Saved preference restored outside campaign too');
+                f.dispose();
+                const unsaved = await fixture({ now });
+                check(unsaved.dialog.open, 'Users without persisted choice are asked before/during/after campaign');
+                check(unsaved.doc.getElementById('flagViewCampaignNote').hidden === !active, 'Campaign note only during campaign');
+                unsaved.dispose();
+            }
+            const laterStart = start + 40 * 86400000;
+            const laterBootstrap = bootstrap.replace(new Date(start).toISOString().replace('.000', ''), new Date(laterStart).toISOString().replace('.000', ''));
+            const later = await fixture();
+            later.win.eval(laterBootstrap);
+            check(!later.win.flagViewPreference.campaignActive(laterStart - 1)
+                && later.win.flagViewPreference.campaignActive(laterStart + 30 * 86400000 - 1)
+                && !later.win.flagViewPreference.campaignActive(laterStart + 30 * 86400000),
+                'Updating release start extends availability for exactly 30 days');
+            later.dispose();
+
+            const optIn = await fixture();
+            optIn.doc.querySelector('input[name="flag-view-choice"][value="detailed"]').checked = true;
+            optIn.win.changeLanguage('ar');
+            check(optIn.dialog.open && optIn.dialog.matches(':modal')
+                && optIn.doc.querySelector('input[name="flag-view-choice"]:checked').value === 'detailed'
+                && optIn.doc.documentElement.dir === 'rtl', 'Language change preserves open dialog and unconfirmed radio choice');
+            optIn.win.changeLanguage('it');
+            optIn.choose('detailed', true);
+            check(optIn.storage.get(key) === saved('detailed') && optIn.state.remembered, 'Checked opt-in saves versioned validated mode');
+            optIn.doc.getElementById('flagViewRemember').checked = false;
+            optIn.doc.getElementById('flagViewRemember').dispatchEvent(new optIn.win.Event('change'));
+            check(!optIn.storage.has(key) && optIn.storage.get('unrelated') === 'keep', 'Opt-out removes only site view preference');
+            optIn.dispose();
+            const optOut = await fixture({ value: saved('detailed') });
+            optOut.choose('compact', false);
+            check(!optOut.storage.has(key) && optOut.state.explicit && optOut.state.mode === 'compact', 'Unchecked dialog applies page choice and removes previous preference');
+            optOut.dispose();
+            for (const failure of ['read', 'write', 'remove']) {
+                const f = await fixture({ failure, value: saved('detailed') });
+                f.choose('compact', failure === 'write');
+                check(f.state.mode === 'compact' && f.state.explicit && !f.dialog.open && !f.state.remembered,
+                    `Storage ${failure} exception does not block choice or closure`);
+                f.dispose();
+            }
+
+            const adaptive = await fixture({ width: 375 });
+            adaptive.close();
+            adaptive.frame.style.width = '1024px';
+            await new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve)));
+            await new Promise(resolve => setTimeout(resolve, 100));
+            check(adaptive.state.mode === 'detailed' && !adaptive.dialog.open, 'Unchosen layout adapts across breakpoint without reopening');
+            adaptive.doc.querySelector('[data-flag-view-mode="compact"]').click();
+            adaptive.frame.style.width = '390px';
+            await new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve)));
+            await new Promise(resolve => setTimeout(resolve, 100));
+            adaptive.frame.style.width = '1024px';
+            await new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve)));
+            await new Promise(resolve => setTimeout(resolve, 100));
+            check(adaptive.state.mode === 'compact', 'Explicit page-only choice survives orientation/resize');
+            const count = adaptive.doc.querySelectorAll('#flagsGrid .flag-item').length;
+            adaptive.win.renderAll();
+            adaptive.win.filterCountries('eu');
+            adaptive.doc.getElementById('searchInput').value = 'Italy';
+            adaptive.doc.getElementById('searchInput').dispatchEvent(new adaptive.win.Event('input'));
+            check(adaptive.state.mode === 'compact' && !adaptive.dialog.open
+                && adaptive.doc.querySelectorAll('#flagsGrid .flag-item').length === count, 'Rendering/search/filter preserve flag view and lifecycle');
+            adaptive.win.location.hash = '#flags-section';
+            check(!adaptive.dialog.open && adaptive.state.mode === 'compact', 'Hash navigation does not reopen choice dialog');
+            const flag = [...adaptive.doc.querySelectorAll('#flagsGrid .flag-item')].find(item => item.getAttribute('aria-label').endsWith('Italy'));
+            flag.click();
+            check(adaptive.doc.getElementById('countryModal').style.display !== 'none', 'Flag still launches authority modal');
+            adaptive.win.closeModal();
+            adaptive.doc.getElementById('flagViewRevise').focus();
+            adaptive.doc.getElementById('flagViewRevise').click();
+            adaptive.doc.getElementById('flagViewClose').focus();
+            adaptive.dialog.dispatchEvent(new adaptive.win.KeyboardEvent('keydown', { key: 'Tab', bubbles: true, cancelable: true }));
+            check(adaptive.doc.activeElement.matches('input[name="flag-view-choice"]:checked'), 'Forward Tab wraps within dialog');
+            adaptive.dialog.dispatchEvent(new adaptive.win.KeyboardEvent('keydown', { key: 'Tab', shiftKey: true, bubbles: true, cancelable: true }));
+            check(adaptive.doc.activeElement.id === 'flagViewClose', 'Backward Tab wraps within dialog');
+            adaptive.close();
+            await new Promise(resolve => setTimeout(resolve, 30));
+            check(adaptive.doc.activeElement.id === 'flagViewRevise', 'Focus returns to persistent opener');
+            adaptive.dispose();
+            for (const path of ['/', '/index.html']) {
+                const f = await fixture({ path, value: saved('compact'), now: end });
+                check(f.state.mode === 'compact' && !f.dialog.open, `${path} uses identical preference and expiry logic`);
+                f.dispose();
+            }
+            results.textContent += `\nDONE: ${checks.length} checks passed.`;
+        }
+        if (!new URLSearchParams(location.search).has('fixture')) {
+            run().catch(error => { results.textContent += `\nERROR: ${error.message}`; });
+        }
+    </script>
+</body>
+</html>
