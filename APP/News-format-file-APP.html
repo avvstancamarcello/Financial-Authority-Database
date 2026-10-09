@@ -1,0 +1,91 @@
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title id="pageTitle">News by Authorities - Financial Authority Database</title>
+<meta name="description" content="Aggiornamenti in tempo reale, avvisi e comunicati ufficiali pubblicati dalle Autorità di Vigilanza Finanziaria nel Mondo.">
+<style>body { font-family: system-ui, -apple-system, sans-serif; background-color: #0f172a; color: #f8fafc; margin: 0; padding: 20px; }
+        .container { max-width: 800px; margin: 0 auto; }
+        header { text-align: center; margin-bottom: 25px; }
+        .lang-switch { margin-bottom: 15px; }
+        .lang-btn { background: #334155; color: #fff; border: none; padding: 6px 12px; border-radius: 4px; cursor: pointer; font-weight: bold; margin: 0 4px; }
+        .lang-btn.active { background: #008C45; }
+        h1 { color: #008C45; font-size: 26px; margin-bottom: 5px; }
+        p.subtitle { color: #94a3b8; font-size: 14px; }
+        .search-box { width: 100%; padding: 12px; border-radius: 8px; border: 1px solid #334155; background: #1e293b; color: #fff; font-size: 16px; margin-bottom: 20px; box-sizing: border-box; }
+        .news-card { background: #1e293b; border-left: 4px solid #008C45; border-radius: 8px; padding: 16px; margin-bottom: 15px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+        .news-date { font-size: 12px; color: #38bdf8; font-weight: bold; margin-bottom: 4px; }
+        .news-auth { display: inline-block; background: #334155; color: #e2e8f0; font-size: 11px; padding: 2px 8px; border-radius: 4px; margin-bottom: 8px; }
+        .news-title { font-size: 18px; font-weight: bold; color: #f8fafc; text-decoration: none; display: block; margin-bottom: 8px; }
+        .news-title:hover { color: #38bdf8; }
+        .news-desc { font-size: 14px; color: #cbd5e1; margin-bottom: 12px; }
+        .news-link { color: #38bdf8; text-decoration: none; font-size: 13px; font-weight: bold; }
+        .news-link:hover { text-decoration: underline; }
+        .back-btn { display: inline-block; margin-top: 30px; background: #008C45; color: #fff; padding: 12px 24px; border-radius: 8px; text-decoration: none; font-weight: bold; font-size: 14px; }
+        .back-btn:hover { background: #007038; }
+        footer { text-align: center; margin-top: 40px; font-size: 12px; color: #64748b; border-top: 1px solid #334155; padding-top: 15px; }</style>
+<div class="container">
+  <header><!-- Selettore Lingua Istantaneo IT / EN -->
+    <div class="lang-switch">
+      <button class="lang-btn active" onclick="setLanguage('it')">🇮🇹 IT</button>
+      <button class="lang-btn" onclick="setLanguage('en')">🇬🇧 EN</button>
+    </div>
+    <h1 id="mainTitle">📰 News by Authorities</h1>
+    <p class="subtitle" id="mainSubtitle">Aggiornamenti ufficiali e alert dalle Autorità di Vigilanza Finanziaria nel Mondo</p>
+  </header>
+        <!-- Barra di ricerca rapida -->
+  <input type="text" id="searchInput" class="search-box" placeholder="🔍 Cerca per data o autorità (es. CVM, FCA)..." onkeyup="filterNews()">
+  <div id="newsContainer"><!-- News Card 1: Brasile CVM -->
+    <div class="news-card" data-date="2026-09-14" data-text="brasile cvm nuovo sistema servizi al cittadino sac">
+      <div class="news-date">📅 14.09.2026</div>
+      <div class="news-auth">🇧🇷 CVM - Brasile</div>
+      <a href="https://www.gov.br/cvm/pt-br/assuntos/noticias/2026/cvm-lanca-novo-sistema-de-atendimento-ao-cidadao-sac" target="_blank" class="news-title" data-it="CVM lancia il nuovo sistema di assistenza e servizi al cittadino (SAC)" data-en="CVM launches new citizen service and support system (SAC)">CVM lancia il nuovo sistema di assistenza e servizi al cittadino (SAC)</a>
+      <div class="news-desc" data-it="Nuovo portale digitale per la tutela degli investitori e la gestione rapida delle istanze in Brasile." data-en="New digital portal for investor protection and rapid request management in Brazil.">Nuovo portale digitale per la tutela degli investitori e la gestione rapida delle istanze in Brasile.</div>
+      <a href="https://www.gov.br/cvm/pt-br/assuntos/noticias/2026/cvm-lanca-novo-sistema-de-atendimento-ao-cidadao-sac" target="_blank" class="news-link" data-it="Leggi comunicato ufficiale ➔" data-en="Read official press release ➔">Leggi comunicato ufficiale ➔</a>
+    </div>
+  </div>
+  <div style="text-align: center;">
+    <a href="https://www.amevfirenze.it" class="back-btn" id="backBtn">⬅️ Ritorna a Financial Authority Database</a>
+  </div>
+  <footer>
+    <p id="footerText">Financial Authority Database · Webmaster &amp; Autore: Avvocato Marcello Stanca (Verificato)</p>
+  </footer>
+</div>
+<script>function setLanguage(lang) {
+            document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
+            if(lang === 'it') {
+                document.querySelector('button[onclick="setLanguage(\'it\')"]').classList.add('active');
+                document.getElementById('mainTitle').innerText = "📰 News by Authorities";
+                document.getElementById('mainSubtitle').innerText = "Aggiornamenti ufficiali e alert dalle Autorità di Vigilanza Finanziaria nel Mondo";
+                document.getElementById('searchInput').placeholder = "🔍 Cerca per data o autorità (es. CVM, FCA)...";
+                document.getElementById('backBtn').innerText = "⬅️ Ritorna a Financial Authority Database";
+                document.getElementById('footerText').innerText = "Financial Authority Database · Webmaster & Autore: Avvocato Marcello Stanca (Verificato)";
+            } else {
+                document.querySelector('button[onclick="setLanguage(\'en\')"]').classList.add('active');
+                document.getElementById('mainTitle').innerText = "📰 News by Authorities";
+                document.getElementById('mainSubtitle').innerText = "Official updates and alerts from Financial Supervisory Authorities worldwide";
+                document.getElementById('searchInput').placeholder = "🔍 Search by date or authority (e.g. CVM, FCA)...";
+                document.getElementById('backBtn').innerText = "⬅️ Return to Financial Authority Database";
+                document.getElementById('footerText').innerText = "Financial Authority Database · Webmaster & Author: Marcello Stanca, Esq. (Verified)";
+            }
+            // Traduce dinamicamente tutte le card delle notizie
+            document.querySelectorAll('.news-card').forEach(card => {
+                let title = card.querySelector('.news-title');
+                let desc = card.querySelector('.news-desc');
+                let link = card.querySelector('.news-link');
+                title.innerText = title.getAttribute('data-' + lang);
+                desc.innerText = desc.getAttribute('data-' + lang);
+                link.innerText = link.getAttribute('data-' + lang);
+            });
+        }
+        function filterNews() {
+            let input = document.getElementById('searchInput').value.toLowerCase();
+            let cards = document.getElementsByClassName('news-card');
+            for (let i = 0; i < cards.length; i++) {
+                let text = cards[i].getAttribute('data-text').toLowerCase();
+                let date = cards[i].getAttribute('data-date').toLowerCase();
+                if (text.includes(input) || date.includes(input)) {
+                    cards[i].style.display = "";
+                } else {
+                    cards[i].style.display = "none";
+                }
+            }
+        }</script>
