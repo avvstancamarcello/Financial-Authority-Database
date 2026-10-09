@@ -2174,6 +2174,7 @@
             font-size: 48px;
             display: inline-block;
         }
+        #flagsGrid .flag-image { width: 48px; height: 32px; object-fit: contain; display: inline-block; }
         .flag-code { font-weight: 600; color: #667eea; font-size: 0.9em; margin-top: 5px; }
         .flag-name { font-size: 0.75em; color: #334155; margin-top: 4px; line-height: 1.2; text-align: center; }
         .flag-marker-badge {
@@ -2724,6 +2725,7 @@
         html[data-flag-view="compact"] #flagsGrid .flag-item { min-height: 52px; padding: 6px 2px; }
         html[data-flag-view="compact"] #flagsGrid .flag-icon-wrapper { margin-bottom: 0; font-size: 24px !important; }
         html[data-flag-view="compact"] #flagsGrid .flag-icon-wrapper .fi { width: 32px !important; height: 24px !important; font-size: 32px; }
+        html[data-flag-view="compact"] #flagsGrid .flag-image { width: 32px; height: 24px; }
         html[data-flag-view="compact"] #flagsGrid .flag-code { font-size: 0.75rem; margin-top: 3px; }
         html[data-flag-view="compact"] #flagsGrid .flag-name,
         html[data-flag-view="compact"] #flagsGrid .flag-marker-badge { display: none; }
@@ -9295,6 +9297,22 @@ https://avvstancamarcello.github.io/Financial-Authority-Database/
                     // Fallback affidabile su emoji dal database (oppure globo)
                     flagWrapperNode.style.fontSize = '3em';
                     flagWrapperNode.textContent = fallbackFlag;
+                }
+                if (typeof country.flagImage === 'string' && /^flags\/[a-z0-9_-]+\.svg$/.test(country.flagImage)) {
+                    const image = document.createElement('img');
+                    image.className = 'flag-image';
+                    image.alt = '';
+                    image.width = 60;
+                    image.height = 40;
+                    const fallbackNodes = Array.from(flagWrapperNode.childNodes);
+                    const fallbackFontSize = flagWrapperNode.style.fontSize;
+                    image.addEventListener('error', () => {
+                        flagWrapperNode.replaceChildren(...fallbackNodes);
+                        flagWrapperNode.style.fontSize = fallbackFontSize;
+                    }, { once: true });
+                    flagWrapperNode.style.fontSize = '';
+                    flagWrapperNode.replaceChildren(image);
+                    image.src = country.flagImage;
                 }
 
                 const codeNode = document.createElement('span');

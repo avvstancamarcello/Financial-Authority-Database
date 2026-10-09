@@ -158,6 +158,14 @@ Remove-Item db_decrypted.json  # Pulisci dopo verifica
 
 ### Visione panoramica bandiere — pubblicazione
 
+I record possono specificare `flagImage`, un percorso locale `flags/nome.svg`
+(solo lettere minuscole, cifre, trattini e underscore nel nome).
+La griglia principale usa questo SVG decorativo mantenendo il nome accessibile
+del pulsante e il fallback preesistente se l'immagine non viene caricata.
+Québec usa `flags/quebec.svg`, CSA federale `flags/canada.svg`; l'emoji `flag`
+resta disponibile per gli altri renderer. Mantenere sincronizzati i quattro
+JSON: root, `APP/`, `DEPLOY_REGISTER/` e asset Android.
+
 Il selettore permanente sopra `#flagsGrid` offre **Compatta / Dettagliata**.
 Senza una scelta valida salvata, il default è compatto fino a 768px e dettagliato
 oltre 768px; si adatta alla larghezza solo finché l'utente non sceglie.

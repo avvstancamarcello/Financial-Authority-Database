@@ -384,6 +384,7 @@
   "Canada - CSA (Federal)": {
     "country_name": "Canada - CSA (Federal)",
     "flag": "🇨🇦",
+    "flagImage": "flags/canada.svg",
     "isEU": false,
     "protectionLevel": "Altissimo",
     "financial_authority": {
@@ -571,6 +572,7 @@
   "Canada - Quebec": {
     "country_name": "Canada - Quebec",
     "flag": "🇨🇦",
+    "flagImage": "flags/quebec.svg",
     "isEU": false,
     "protectionLevel": "Altissimo",
     "financial_authority": {
