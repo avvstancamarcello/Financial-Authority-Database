@@ -2,6 +2,7 @@ package com.financialauthority.database.navigation
 
 import android.content.Intent
 import android.net.Uri
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
@@ -57,6 +58,7 @@ import com.financialauthority.database.ui.international.FSRBScreen
 import com.financialauthority.database.ui.international.InstitutionDetailScreen
 import com.financialauthority.database.ui.international.InternationalInstitutionsScreen
 import com.financialauthority.database.ui.search.SearchScreen
+import com.financialauthority.database.ui.theme.landingBackgroundColor
 
 private data class BottomItem(val route: String, val label: String, val icon: @Composable () -> Unit)
 
@@ -87,6 +89,11 @@ fun MainScaffold(
     }
 
     Scaffold(
+        containerColor = if (currentRoute == null || currentRoute == Routes.COUNTRIES) {
+            landingBackgroundColor(isSystemInDarkTheme(), MaterialTheme.colorScheme.background)
+        } else {
+            MaterialTheme.colorScheme.background
+        },
         topBar = {
             TopAppBar(
                 title = { Text("Financial Authority Database") },

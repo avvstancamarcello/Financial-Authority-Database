@@ -22,6 +22,9 @@ private val LightScheme: ColorScheme = lightColorScheme(
     surface = Color(0xFFFFFFFF)
 )
 
+internal fun landingBackgroundColor(isDark: Boolean, background: Color): Color =
+    if (isDark) background else Color(0xFFF1EDF6)
+
 @Composable
 fun FinancialAuthorityTheme(content: @Composable () -> Unit) {
     MaterialTheme(

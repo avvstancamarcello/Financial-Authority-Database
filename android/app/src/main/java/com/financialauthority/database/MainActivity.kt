@@ -7,6 +7,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -33,6 +34,7 @@ import androidx.compose.ui.unit.dp
 import com.financialauthority.database.navigation.MainScaffold
 import com.financialauthority.database.ui.components.UiText
 import com.financialauthority.database.ui.theme.FinancialAuthorityTheme
+import com.financialauthority.database.ui.theme.landingBackgroundColor
 import kotlinx.coroutines.delay
 
 class MainActivity : ComponentActivity() {
@@ -83,7 +85,7 @@ fun BrandSplashScreen(language: String) {
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .background(MaterialTheme.colorScheme.background),
+            .background(landingBackgroundColor(isSystemInDarkTheme(), MaterialTheme.colorScheme.background)),
         contentAlignment = Alignment.Center
     ) {
         Column(

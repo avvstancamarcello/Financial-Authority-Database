@@ -156,6 +156,68 @@ Remove-Item db_decrypted.json  # Pulisci dopo verifica
 
 ## 🔧 **AGGIORNAMENTO SERVICE WORKER**
 
+### Sfondo landing Android e PWA
+
+Il riferimento desktop canonico è `/index.html`; `/APP/index.html` è la
+variante attiva di confronto. Gli stili effettivi sono inline (il CSS esterno
+`flag-icons` riguarda le bandiere). Prima di questa modifica, entrambi usavano
+un fondo blu `linear-gradient(135deg, #1e3c72 0%, #2a5298 100%)` e un
+contenitore bianco: non uno sfondo viola chiaro. Il gradiente di brand
+`linear-gradient(135deg, #667eea 0%, #764ba2 100%)` appartiene all'header e
+alla sezione bandiere, non all'intera landing.
+
+Si adotta quindi `#F1EDF6` (RGB 241, 237, 246), ottenuto mescolando il 10%
+del viola desktop `#764BA2` con il 90% di bianco, arrotondando i canali.
+`html`, `body` e `.container` nei due entry point condividono questo fondo
+a tutte le larghezze, senza cambiare layout, dataset, etichette o ricerca.
+Header, bandiere, menu, pulsanti e tile conservano i propri colori.
+Il testo base `#333333` sul nuovo fondo ha contrasto circa 10,9:1.
+La PWA resta in tema chiaro anche con preferenza di sistema scura, come prima.
+
+Android usa lo stesso colore sullo splash `BrandSplashScreen` in
+`MainActivity.kt` e sul contenitore `MainScaffold.kt` solo per la route Paesi
+(incluso il primo frame senza route). La funzione `landingBackgroundColor`
+in `ui/theme/Theme.kt` mantiene in modalità scura il background del tema
+esistente `#101A2A`; le altre schermate e le barre Material restano invariate.
+Il tema non usa colori dinamici Android: il colore chiaro è esplicito e non
+dipende dal background del sistema. Il test unitario `LandingBackgroundColorTest`
+verifica la tinta chiara indipendente dal tema e la conservazione del tema scuro.
+
+Il manifest cambia solo `background_color` a `#f1edf6` per il lancio;
+`theme_color` e i meta theme-color restano `#667eea`, coerenti con l'header.
+La cache passa da `financial-authority-v30` a `financial-authority-v31`
+tramite il meccanismo esistente, senza modificare DataStore, localStorage o
+IndexedDB. Non viene aggiunta alcuna cancellazione di dati utente.
+
+Verifiche locali eseguite con Chromium headless: `/test-pwa.html` (70
+verifiche dopo l'aggiornamento v30 → v31), `/test-flag-view.html` (121),
+`/test-grid-pipeline.html` e `/test-canada-grid-flags.html` superati.
+Entrambi gli entry point controllati a 320, 360 e 1440 CSS px, con font
+simulati al 100% e 130%: colore calcolato corretto e 239 tile presenti.
+Screenshot prima/dopo raccolti in `/tmp/landing-qa/`, non inclusi nel repository;
+le comparazioni senza dialogo ricostruiscono il solo CSS precedente.
+Il test `/test-bosnian-locale.html` non supera l'attesa del canonical:
+attende `tutelatruffe.it`, mentre il codice preesistente usa `www.amevfirenze.it`.
+Il sito pubblico non è raggiungibile dall'ambiente: riferimento verificato
+nel codice attivo, non certificato sul deployment.
+
+Limiti: installazione/avvio PWA standalone non eseguiti (comandi non disponibili
+nel Chromium headless); verifica browser non equivale a prova su device mobile.
+Test Android e lint tentati ma bloccati prima della compilazione dalla mancata
+risoluzione del plugin `com.android.application:8.7.3`; il Gradle installato è
+9.8.0, il wrapper dichiara 8.9 ma manca il JAR. Nessun dispositivo/emulatore
+collegato: screenshot Android, 320/360 dp, font ingranditi e modalità scura
+su device restano da verificare prima della distribuzione.
+Scansione segreti senza rilevamenti; revisione read-only supplementare senza
+problemi significativi. La validazione automatica richiesta è stata tentata:
+il revisore non è partito per modello non disponibile e CodeQL ha saltato
+JavaScript per dimensione del database. Non sono esiti di analisi completate.
+
+**Distribuzione separata:** Android richiede nuova build e distribuzione;
+la PWA richiede aggiornamento degli asset/deploy e attivazione della nuova cache.
+Questa modifica prepara solo la PR: nessuna release, APK/AAB o pubblicazione
+di produzione viene effettuata.
+
 ### News pubbliche della homepage
 
 La homepage canonica `/index.html` conserva il contenitore CONSOB/FCA/AMF e
