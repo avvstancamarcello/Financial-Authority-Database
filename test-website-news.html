@@ -85,6 +85,35 @@
             && !Number.isFinite(page.PublicNews.timestamp('2026-10-01T24:00:00Z'))
             && !Number.isFinite(page.PublicNews.timestamp('2026-10-01T12:30:00')),
             'Invalid calendar dates, times and timezone-less timestamps are rejected');
+        const mapping = {
+            it: ['Italiano', '🇮🇹'], en: ['English', '🇬🇧'], me: ['Crnogorski', '🇲🇪'],
+            ar: ['العربية', '🌍'], hi: ['हिन्दी', '🇮🇳'], sq: ['Shqip', '🇦🇱'],
+            ro: ['Română', '🇷🇴'], et: ['Eesti', '🇪🇪'], lt: ['Lietuvių', '🇱🇹'],
+            bs: ['Bosanski', '🇧🇦'], nl: ['Nederlands', '🇳🇱'], sv: ['Svenska', '🇸🇪'],
+            el: ['Ελληνικά', '🇬🇷'], fr: ['Français', '🇫🇷']
+        };
+        check(Object.keys(page.PublicNews.languages).join(',') === Object.keys(mapping).join(','),
+            'News mapping contains exactly the definitive 14 codes');
+        async function resize(width) {
+            frame.style.width = `${width}px`;
+            await new Promise(resolve => setTimeout(resolve, 50));
+        }
+        const homeStyles = [...parsed.querySelectorAll('style')].map(style => style.outerHTML).join('');
+        page = await open('<html lang="it"><head><meta name="viewport" content="width=device-width, initial-scale=1">' +
+            homeStyles + '</head><body>' + container + '<script src="scripts/news-feed.js"></' + 'script></body></html>');
+        page.resolveFeed({ ok: true, json: async () => records });
+        await waitFor(() => date().includes('2026'));
+        for (const width of [320, 375, 390, 768, 1280, 640]) {
+            await resize(width);
+            const link = page.document.querySelector('.language-hint-link');
+            const box = link.getBoundingClientRect();
+            check(box.width >= 44 && box.height >= 44 && parseFloat(page.getComputedStyle(link).fontSize) >= 16,
+                `${width}px homepage news CTA is visible, readable and touch-sized`);
+            check(page.document.documentElement.scrollWidth <= width &&
+                link.scrollWidth <= link.clientWidth, `${width}px homepage news has no overflow or clipped CTA`);
+            link.focus();
+            check(page.getComputedStyle(link).outlineStyle !== 'none', `${width}px news CTA has visible keyboard focus`);
+        }
         const newsSource = await (await fetch('./news.html')).text();
         page = await open(newsSource);
         const doc = page.document;
@@ -117,6 +146,43 @@
         page.setLanguage('unsupported');
         check(doc.documentElement.lang === 'it', 'Unknown persisted language falls back safely');
         page.setLanguage('it');
+        const languageRecords = Object.keys(mapping).map(lang => ({
+            ...record, news_id: `language-${lang}`, lang,
+            title: lang === 'ar' ? 'تحذير مالي مهم' : 'LongHeadline'.repeat(30),
+            summary: 'LongBody'.repeat(50), theme: 'LongAuthority'.repeat(20)
+        }));
+        await load(languageRecords.concat(
+            ['EN', ' en', 'en-US', 'xx', 'constructor'].map(lang => ({ ...record, news_id: `unknown-${lang}`, lang })),
+            [{ ...record, news_id: '', published_at: '2099-01-01' },
+             { ...record, news_id: 'missing-language', lang: null },
+             { ...record, news_id: 'missing-title', title: ' ' },
+             { ...record, news_id: 'bad-body', body_text: {} }]
+        ));
+        check(cards().length === 19 && !update().includes('2099'), 'Invalid records are skipped without losing valid news or falsifying publication date');
+        for (const [lang, [label, flag]] of Object.entries(mapping)) {
+            page.setLanguage(lang);
+            const card = cards().find(card => card.dataset.lang === lang);
+            check(card.querySelector('.flag').textContent === flag &&
+                card.querySelector('.badge').textContent === `${label} (${lang})`,
+                `${lang} uses exact feed language for its flag and readable label`);
+            check(doc.getElementById('language-selector').value === lang, `${lang} is selectable even without a translated UI bundle`);
+        }
+        check(cards().filter(card => !Object.hasOwn(mapping, card.dataset.lang)).every(card =>
+            card.querySelector('.flag').textContent === '🌍' && card.querySelector('.badge').textContent.startsWith('Unknown language')),
+            'Unsupported, padded, uppercase and regional codes stay unchanged with neutral labels');
+        const arabic = cards().find(card => card.dataset.lang === 'ar');
+        check(arabic.querySelector('h2').dir === 'rtl' && arabic.querySelector('p').dir === 'rtl',
+            'Arabic record content uses RTL without reversing controls');
+        page.setLanguage('it');
+        for (const width of [320, 375, 390, 768, 1280, 640]) {
+            await resize(width);
+            check(doc.documentElement.scrollWidth <= width && cards().every(card => card.scrollWidth <= card.clientWidth),
+                `${width}px news cards wrap long titles, body, metadata and labels without overflow`);
+            check([...doc.querySelectorAll('.news-link, .share-button, .back-btn')].every(link => {
+                const box = link.getBoundingClientRect();
+                return box.width >= 44 && box.height >= 44;
+            }), `${width}px news controls have sufficient tap targets`);
+        }
         await load([...records, { ...record, news_id: 'next', published_at: '2026-11-01', title: 'Next' }]);
         check(update().includes('01/11/2026') && cards()[0].querySelector('h2').textContent === 'Next', 'New published record advances update date and appears first');
         for (const payload of [[], [{ ...record, status: 'draft' }], [{ ...record, published_at: 'invalid' }]]) {

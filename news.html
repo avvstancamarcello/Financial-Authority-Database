@@ -60,6 +60,7 @@
       text-decoration: none;
       font-size: 0.92rem;
       transition: 0.2s ease;
+      min-height: 44px;
     }
 
     .back-btn:hover,
@@ -220,6 +221,8 @@
       border-radius: 18px;
       box-shadow: var(--shadow);
       transition: transform 0.22s ease, border-color 0.22s ease;
+      min-width: 0;
+      overflow-wrap: anywhere;
     }
 
     .news-card:hover {
@@ -244,6 +247,7 @@
       font-size: 0.8rem;
       letter-spacing: 0.04em;
       text-transform: uppercase;
+      min-width: 0;
     }
 
     .flag {
@@ -268,7 +272,7 @@
       color: #fef3c7;
       font-size: 0.76rem;
       letter-spacing: 0.05em;
-      text-transform: uppercase;
+      max-width: 100%;
     }
 
     .news-card h2 {
@@ -296,11 +300,15 @@
       text-decoration: none;
       font-weight: 700;
       box-shadow: 0 12px 28px rgba(251, 191, 36, 0.15);
+      min-height: 44px;
+      max-width: 100%;
+      text-align: center;
     }
 
     .news-link:hover,
     .news-link:focus-visible {
-      outline: none;
+      outline: 3px solid var(--text);
+      outline-offset: 3px;
       filter: brightness(1.04);
     }
 
@@ -315,8 +323,8 @@
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      min-width: 42px;
-      height: 38px;
+      min-width: 44px;
+      height: 44px;
       padding: 0 11px;
       border-radius: 999px;
       border: 1px solid rgba(96, 165, 250, 0.28);
@@ -406,6 +414,17 @@
     }
 
     @media (max-width: 640px) {
+      .hero, .back-btn, .status-pill {
+        overflow-wrap: anywhere;
+        min-width: 0;
+        max-width: 100%;
+      }
+
+      .back-btn, .lang-switcher select {
+        font-size: 1rem;
+        min-height: 44px;
+      }
+
       .topbar {
         flex-direction: column;
         align-items: flex-start;
@@ -583,6 +602,15 @@
     const newsList = document.getElementById('news-list');
     const emptyState = document.getElementById('empty-state');
     const languageSelector = document.getElementById('language-selector');
+    for (const [lang, metadata] of Object.entries(PublicNews.languages)) {
+      let option = [...languageSelector.options].find(option => option.value === lang);
+      if (!option) {
+        option = document.createElement('option');
+        option.value = lang;
+        languageSelector.append(option);
+      }
+      option.textContent = `${lang} — ${metadata.label}`;
+    }
     const starRating = document.getElementById('star-rating');
     const voteResult = document.getElementById('vote-result');
 
@@ -613,7 +641,8 @@
     function createNewsCard(item) {
       const article = document.createElement('article');
       article.className = 'news-card';
-      const t = translations[currentLanguage];
+      const t = translations[currentLanguage] || translations.en;
+      const language = PublicNews.language(item.lang);
       const shareButtons = [
         { platform: 'Facebook', label: 'f' },
         { platform: 'Threads', label: '🧵' },
@@ -629,7 +658,7 @@
       const flag = document.createElement('span');
       flag.className = 'flag';
       flag.setAttribute('aria-hidden', 'true');
-      flag.textContent = '🌍';
+      flag.textContent = language.flag;
       meta.append(flag);
       for (const text of [item.authority, '•', formatDate(item.date)]) {
         const span = document.createElement('span');
@@ -638,21 +667,23 @@
       }
       const badge = document.createElement('span');
       badge.className = 'badge';
-      badge.textContent = item.lang.toUpperCase();
+      badge.textContent = `${language.label} (${item.lang})`;
       top.append(meta, badge);
       article.append(top);
-      article.lang = item.lang;
+      article.dataset.lang = item.lang;
+      if (Object.hasOwn(PublicNews.languages, item.lang)) article.lang = item.lang;
       for (const [tag, text] of [['h2', item.title], ['p', item.summary], ['p', item.body_text]]) {
         if (!text) continue;
         const element = document.createElement(tag);
         element.textContent = text;
+        element.dir = item.lang === 'ar' ? 'rtl' : 'auto';
         article.append(element);
       }
       if (item.lang !== currentLanguage) {
         const notice = document.createElement('p');
         notice.className = 'translation-fallback';
         notice.lang = currentLanguage;
-        notice.textContent = `${PublicNews.messages(currentLanguage)[4]} ${item.lang.toUpperCase()}`;
+        notice.textContent = `${PublicNews.messages(currentLanguage)[4] || PublicNews.messages('en')[4]} ${language.label} (${item.lang})`;
         article.append(notice);
       }
       if (item.url) {
@@ -716,11 +747,6 @@
       renderNews();
       try {
         const records = await PublicNews.load();
-        if (records.some(record =>
-          ['news_id', 'lang', 'title'].some(key => typeof record[key] !== 'string' || !record[key].trim())
-          || !/^[a-z]{2}(?:-[A-Za-z0-9]+)*$/.test(record.lang)
-          || ['summary', 'body_text', 'theme', 'source_url'].some(key => record[key] != null && typeof record[key] !== 'string')
-        )) throw new Error('Invalid published news');
         publishedRecords = records;
         feedState = 'loaded';
       } catch {
@@ -730,12 +756,12 @@
     }
 
     function setLanguage(lang) {
-      lang = Object.hasOwn(translations, lang) ? lang : 'it';
+      lang = Object.hasOwn(translations, lang) || Object.hasOwn(PublicNews.languages, lang) ? lang : 'it';
       currentLanguage = lang;
       languageSelector.value = lang;
       localStorage.setItem('pillole-language', lang);
       document.documentElement.lang = lang;
-      const t = translations[lang];
+      const t = translations[lang] || translations.en;
 
       document.getElementById('hero-tag').textContent = t.heroTag;
       document.getElementById('hero-title').textContent = t.heroTitle;
@@ -753,7 +779,7 @@
     }
 
     function renderStars(value) {
-      const t = translations[currentLanguage];
+      const t = translations[currentLanguage] || translations.en;
       starRating.innerHTML = '';
 
       for (let star = 1; star <= 5; star += 1) {
