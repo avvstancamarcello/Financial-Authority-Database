@@ -1,6 +1,25 @@
 /* Public GitHub export only; publication dates are displayed consistently in UTC. */
 window.PublicNews = (() => {
     const url = 'https://raw.githubusercontent.com/avvstancamarcello/Airtable-news/main/news.json';
+    const languages = Object.freeze({
+        it: { label: 'Italiano', flag: '🇮🇹' },
+        en: { label: 'English', flag: '🇬🇧' },
+        me: { label: 'Crnogorski', flag: '🇲🇪' },
+        ar: { label: 'العربية', flag: '🌍' },
+        hi: { label: 'हिन्दी', flag: '🇮🇳' },
+        sq: { label: 'Shqip', flag: '🇦🇱' },
+        ro: { label: 'Română', flag: '🇷🇴' },
+        et: { label: 'Eesti', flag: '🇪🇪' },
+        lt: { label: 'Lietuvių', flag: '🇱🇹' },
+        bs: { label: 'Bosanski', flag: '🇧🇦' },
+        nl: { label: 'Nederlands', flag: '🇳🇱' },
+        sv: { label: 'Svenska', flag: '🇸🇪' },
+        el: { label: 'Ελληνικά', flag: '🇬🇷' },
+        fr: { label: 'Français', flag: '🇫🇷' }
+    });
+    function language(value) {
+        return Object.hasOwn(languages, value) ? languages[value] : { label: 'Unknown language', flag: '🌍' };
+    }
     const copy = {
         it: ['NEWS PUBBLICATE', 'Caricamento notizie…', 'Nessuna notizia pubblicata', 'Notizie non disponibili', 'Traduzione non disponibile; lingua:'],
         en: ['NEWS PUBLISHED', 'Loading news…', 'No published news', 'News unavailable', 'Translation unavailable; language:'],
@@ -58,9 +77,11 @@ window.PublicNews = (() => {
         if (!Array.isArray(records) || records.some(record => !record || typeof record !== 'object' || Array.isArray(record))) {
             throw new Error('Invalid news feed');
         }
-        return records.filter(record => record.status === 'published' && Number.isFinite(timestamp(record.published_at)));
+        return records.filter(record => record.status === 'published' && Number.isFinite(timestamp(record.published_at))
+            && ['news_id', 'lang', 'title'].every(key => typeof record[key] === 'string' && record[key].trim())
+            && ['summary', 'body_text', 'theme', 'source_url'].every(key => record[key] == null || typeof record[key] === 'string'));
     }
-    return { load, timestamp, formatDate, latest, label, safeUrl, messages };
+    return { load, timestamp, formatDate, latest, label, safeUrl, messages, languages, language };
 })();
 
 const homepageNewsDate = document.getElementById('homepage-news-date');
