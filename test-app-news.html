@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>App news feed regression checks</title>
+</head>
+<body>
+    <h1>App news feed regression checks</h1>
+    <pre id="results">Running…</pre>
+    <iframe id="app" title="App news page under test" width="850" height="700"></iframe>
+    <script>
+        const results = document.getElementById('results');
+        const checks = [];
+        const frame = document.getElementById('app');
+        function check(condition, message) {
+            checks.push(`${condition ? 'PASS' : 'FAIL'}: ${message}`);
+            results.textContent = checks.join('\n');
+            if (!condition) throw new Error(message);
+        }
+        async function waitFor(predicate) {
+            const deadline = Date.now() + 5000;
+            while (!predicate()) {
+                if (Date.now() > deadline) throw new Error('Timed out waiting for feed state');
+                await new Promise(resolve => setTimeout(resolve, 20));
+            }
+        }
+        async function run() {
+            const response = await fetch('./APP/News-format-file-APP.html');
+            check(response.ok, 'App news page served');
+            const source = await response.text();
+            const mock = document.createElement('script');
+            mock.textContent = `
+                window.fetch = (url, options) => {
+                    window.feedRequest = { url: String(url), options };
+                    return new Promise((resolve, reject) => {
+                        window.resolveFeed = resolve;
+                        window.rejectFeed = reject;
+                    });
+                };
+            `;
+            frame.srcdoc = source.replace('<script>', mock.outerHTML + '<script>');
+            await waitFor(() => frame.contentWindow.resolveFeed);
+            const app = frame.contentWindow;
+            const doc = frame.contentDocument;
+            const status = () => doc.getElementById('feedStatus').textContent;
+            const fallback = doc.getElementById('staticFallback');
+            const search = doc.getElementById('searchInput');
+            const visible = () => [...doc.querySelectorAll('.news-card')].filter(card => !card.hidden);
+            function filter(value) {
+                search.value = value;
+                search.dispatchEvent(new app.Event('input', { bubbles: true }));
+            }
+            async function load(payload, failure) {
+                const pending = app.loadNewsFeed();
+                if (failure === 'offline') app.rejectFeed(new TypeError('Offline'));
+                else app.resolveFeed({
+                    ok: failure !== 'http',
+                    json: async () => {
+                        if (failure === 'json') throw new SyntaxError('Invalid JSON');
+                        return payload;
+                    }
+                });
+                await pending;
+            }
+            check(new URL(app.feedRequest.url).origin + new URL(app.feedRequest.url).pathname
+                === 'https://raw.githubusercontent.com/avvstancamarcello/Airtable-news/main/news.json',
+                'Public feed URL is preserved');
+            check(doc.getElementById('newsContainer').getAttribute('aria-busy') === 'true'
+                && /Caricamento/.test(status()) && !fallback.hidden, 'Loading state shows labeled sample');
+            check(fallback.getAttribute('aria-describedby') === 'fallbackNotice'
+                && /non un aggiornamento del feed/.test(doc.getElementById('fallbackNotice').textContent),
+                'Fallback is explicitly identified as saved sample content');
+            check(search.getAttribute('aria-describedby') === 'feedStatus'
+                && doc.getElementById('feedStatus').getAttribute('aria-live') === 'polite'
+                && doc.getElementById('feedStatus').getAttribute('aria-atomic') === 'true',
+                'Search feedback is associated and announced accessibly');
+            filter('missing-query');
+            check(!visible().length && /Nessuna notizia corrisponde/.test(status())
+                && /Caricamento/.test(status()), 'Loading search misses retain state and give guidance');
+            app.setLanguage('en');
+            check(/Loading published/.test(status()) && /No news matches/.test(status())
+                && search.value === 'missing-query', 'Language change preserves search and translates loading feedback');
+            filter('  INVESTOR  ');
+            check(visible().length === 1 && /Search results: 1 of 1/.test(status()),
+                'Fallback search matches translated text, ignoring case and surrounding whitespace');
+            app.rejectFeed(new TypeError('Offline'));
+            await waitFor(() => doc.getElementById('newsContainer').getAttribute('aria-busy') === 'false');
+            check(/Unable to load/.test(status()) && !fallback.hidden, 'Offline error keeps matching sample visible');
+            filter('missing-query');
+            check(/Unable to load/.test(status()) && /No news matches/.test(status()),
+                'Offline search miss is not confused with an empty published feed');
+            filter('');
+            check(!fallback.hidden && !/No news matches/.test(status()), 'Clearing search restores fallback');
+            for (const failure of ['http', 'json']) {
+                await load(null, failure);
+                check(/Unable to load/.test(status()) && !fallback.hidden, `${failure} failure shows sample`);
+            }
+            for (const payload of [{ bad: [] }, [null], [{ status: 'published', title: 'Invalid' }]]) {
+                await load(payload);
+                check(/Unable to load/.test(status()) && !fallback.hidden, 'Invalid feed shows sample');
+            }
+            for (const payload of [[], [{ status: 'draft' }]]) {
+                await load(payload);
+                check(/contains no published news/.test(status()) && !visible().length
+                    && fallback.hidden, 'Empty published feed hides sample and explains absence');
+            }
+            filter('missing-query');
+            app.setLanguage('it');
+            check(/non contiene notizie pubblicate/.test(status()) && !/corrisponde/.test(status()),
+                'Empty-feed message remains accurate with search and language changes');
+            const record = {
+                news_id: 'one', lang: 'it', title: 'Titolo italiano', summary: 'Tutela investitori',
+                theme: 'FCA', published_at: '2026-09-14T00:00:00Z', status: 'published',
+                source_url: 'https://example.org/news'
+            };
+            await load({ records: [record, { ...record, lang: 'en', title: 'English title', summary: 'Investor protection' },
+                { ...record, news_id: 'two', title: '<img src=x onerror=alert(1)>', source_url: 'javascript:alert(1)' }] });
+            check(/Feed caricato/.test(status()) && /0 di 2/.test(status())
+                && /Nessuna notizia corrisponde/.test(status()), 'Search entered before load applies to grouped feed items');
+            filter('  FCA  ');
+            check(visible().length === 2 && /2 di 2/.test(status()), 'Loaded authority filtering reports distinct news counts');
+            filter('2026-09-14');
+            check(visible().length === 2, 'Loaded items are searchable by ISO date');
+            filter('English title');
+            search.focus();
+            doc.querySelector('[data-lang="en"]').click();
+            check(visible().length === 1 && /Search results: 1 of 2/.test(status())
+                && doc.documentElement.lang === 'en' && search.getAttribute('aria-label') === 'Search news',
+                'Language toggle reapplies existing query to translated news');
+            check(doc.activeElement === search
+                && doc.querySelector('[data-lang="en"]').getAttribute('aria-pressed') === 'true',
+                'Updates do not move keyboard focus and preserve pressed state');
+            filter('');
+            check(visible().length === 2 && fallback.hidden && /News items shown: 2 of 2/.test(status()),
+                'Clearing search restores all published news, not the sample');
+            check(!doc.querySelector('article img') && !doc.querySelector('a[href^="javascript:"]')
+                && [...doc.querySelectorAll('a[target="_blank"]')].every(link =>
+                    link.rel.includes('noopener') && link.rel.includes('noreferrer')),
+                'Untrusted text and unsafe URLs remain inert; external links remain protected');
+            results.textContent += '\nDONE';
+        }
+        run().catch(error => {
+            results.textContent += `\nFAIL: ${error.message}`;
+            console.error(error);
+        });
+    </script>
+</body>
+</html>

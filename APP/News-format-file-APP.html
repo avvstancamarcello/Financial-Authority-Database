@@ -37,12 +37,13 @@
     <p class="subtitle" id="mainSubtitle">Aggiornamenti ufficiali e alert dalle Autorità di Vigilanza Finanziaria nel Mondo</p>
   </header>
         <!-- Barra di ricerca rapida -->
-  <input type="text" id="searchInput" class="search-box" aria-label="Cerca notizie" placeholder="🔍 Cerca per data o autorità (es. CVM, FCA)..." oninput="filterNews()">
-  <p id="feedStatus" role="status" aria-live="polite">Caricamento news...</p>
+  <input type="text" id="searchInput" class="search-box" aria-label="Cerca notizie" aria-describedby="feedStatus" aria-controls="newsContainer" placeholder="🔍 Cerca per data o autorità (es. CVM, FCA)..." oninput="filterNews()">
+  <p id="feedStatus" role="status" aria-live="polite" aria-atomic="true">Caricamento delle notizie pubblicate. Nel frattempo puoi consultare la notizia di esempio.</p>
   <div id="newsContainer" aria-busy="true"><!-- News Card 1: Brasile CVM -->
-    <div id="staticFallback" class="news-card" data-date="2026-09-14" data-text="brasile cvm nuovo sistema servizi al cittadino sac">
+    <div id="staticFallback" class="news-card" aria-describedby="fallbackNotice" data-date="2026-09-14" data-text="brasile brazil cvm nuovo sistema servizi al cittadino sac">
+      <p id="fallbackNotice" class="news-desc" data-it="Notizia di esempio salvata nella pagina, non un aggiornamento del feed. Il link alla fonte richiede una connessione Internet." data-en="Sample news saved in this page, not a feed update. The source link requires an Internet connection.">Notizia di esempio salvata nella pagina, non un aggiornamento del feed. Il link alla fonte richiede una connessione Internet.</p>
       <div class="news-date">📅 14.09.2026</div>
-      <div class="news-auth">🇧🇷 CVM - Brasile</div>
+      <div class="news-auth" data-it="🇧🇷 CVM - Brasile" data-en="🇧🇷 CVM - Brazil">🇧🇷 CVM - Brasile</div>
       <a href="https://www.gov.br/cvm/pt-br/assuntos/noticias/2026/cvm-lanca-novo-sistema-de-atendimento-ao-cidadao-sac" target="_blank" rel="noopener noreferrer" class="news-title" data-it="CVM lancia il nuovo sistema di assistenza e servizi al cittadino (SAC)" data-en="CVM launches new citizen service and support system (SAC)">CVM lancia il nuovo sistema di assistenza e servizi al cittadino (SAC)</a>
       <div class="news-desc" data-it="Nuovo portale digitale per la tutela degli investitori e la gestione rapida delle istanze in Brasile." data-en="New digital portal for investor protection and rapid request management in Brazil.">Nuovo portale digitale per la tutela degli investitori e la gestione rapida delle istanze in Brasile.</div>
       <a href="https://www.gov.br/cvm/pt-br/assuntos/noticias/2026/cvm-lanca-novo-sistema-de-atendimento-ao-cidadao-sac" target="_blank" rel="noopener noreferrer" class="news-link" data-it="Leggi comunicato ufficiale ➔" data-en="Read official press release ➔">Leggi comunicato ufficiale ➔</a>
@@ -81,18 +82,26 @@
             return element;
         }
 
-        function updateStatus() {
+        function updateStatus(visibleCount, totalCount, hasQuery) {
             const messages = activeLanguage === 'it' ? {
-                loading: 'Caricamento news...',
-                empty: 'Nessuna news pubblicata.',
-                error: 'Feed non disponibile. È mostrata la notizia di esempio.'
+                loading: 'Caricamento delle notizie pubblicate. Nel frattempo puoi consultare la notizia di esempio.',
+                empty: 'Il feed è stato caricato, ma non contiene notizie pubblicate. Riprova più tardi.',
+                error: 'Impossibile caricare il feed: potrebbe essere non disponibile o contenere dati non validi. È disponibile una notizia di esempio salvata nella pagina.',
+                loaded: `Feed caricato. Notizie visualizzate: ${visibleCount} di ${totalCount}.`,
+                results: `Risultati della ricerca: ${visibleCount} di ${totalCount}.`,
+                noResults: 'Nessuna notizia corrisponde alla ricerca. Modifica o cancella il testo di ricerca per vedere le notizie disponibili.'
             } : {
-                loading: 'Loading news...',
-                empty: 'No published news.',
-                error: 'Feed unavailable. Showing the sample news item.'
+                loading: 'Loading published news. In the meantime, you can consult the sample news item.',
+                empty: 'The feed loaded, but contains no published news. Please check again later.',
+                error: 'Unable to load the feed: it may be unavailable or contain invalid data. A sample news item saved in this page is available.',
+                loaded: `Feed loaded. News items shown: ${visibleCount} of ${totalCount}.`,
+                results: `Search results: ${visibleCount} of ${totalCount}.`,
+                noResults: 'No news matches your search. Change or clear the search text to see the available news.'
             };
-            feedStatus.textContent = feedState === 'loaded'
-                ? (publishedRecords.length ? '' : messages.empty) : messages[feedState];
+            const status = feedState === 'loaded'
+                ? (totalCount ? messages.loaded : messages.empty) : messages[feedState];
+            feedStatus.textContent = status + (hasQuery && totalCount
+                ? ` ${visibleCount ? messages.results : messages.noResults}` : '');
         }
 
         function renderNews() {
@@ -137,7 +146,6 @@
                 ].join(' ').toLowerCase();
                 newsContainer.append(card);
             });
-            updateStatus();
             filterNews();
         }
 
@@ -165,26 +173,29 @@
                 document.getElementById('footerText').textContent = "Financial Authority Database · Webmaster & Author: Marcello Stanca, Esq. (Verified)";
             }
             // Traduce dinamicamente tutte le card delle notizie
-            [staticFallback].forEach(card => {
-                let title = card.querySelector('.news-title');
-                let desc = card.querySelector('.news-desc');
-                let link = card.querySelector('.news-link');
-                title.textContent = title.getAttribute('data-' + lang);
-                desc.textContent = desc.getAttribute('data-' + lang);
-                link.textContent = link.getAttribute('data-' + lang);
+            staticFallback.querySelectorAll('[data-it][data-en]').forEach(element => {
+                element.textContent = element.getAttribute('data-' + lang);
             });
             renderNews();
         }
         function filterNews() {
             let input = document.getElementById('searchInput').value.trim().toLowerCase();
-            let cards = document.getElementsByClassName('news-card');
-            for (let i = 0; i < cards.length; i++) {
-                const card = cards[i];
+            const cards = newsContainer.querySelectorAll('.news-card');
+            let visibleCount = 0;
+            let totalCount = 0;
+            cards.forEach(card => {
+                const available = card !== staticFallback || feedState !== 'loaded';
                 const text = card === staticFallback
-                    ? [card.dataset.text, card.dataset.date, card.textContent].join(' ').toLowerCase()
+                    ? [card.dataset.text, card.dataset.date, ...Array.from(
+                        card.querySelectorAll('.news-date, .news-auth, .news-title, .news-desc:not(#fallbackNotice), .news-link'),
+                        element => element.textContent
+                    )].join(' ').toLowerCase()
                     : card.dataset.searchText;
-                card.hidden = (card === staticFallback && feedState === 'loaded') || !text.includes(input);
-            }
+                card.hidden = !available || !text.includes(input);
+                if (available) totalCount++;
+                if (!card.hidden) visibleCount++;
+            });
+            updateStatus(visibleCount, totalCount, Boolean(input));
         }
 
         async function loadNewsFeed() {
