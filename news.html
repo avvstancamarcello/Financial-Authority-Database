@@ -604,7 +604,7 @@
 
     function isValidNewsFlag(value) {
       return typeof value === 'string'
-        && /^(?:\p{Regional_Indicator}{2}|\p{Extended_Pictographic}(?:\uFE0F)?(?:\u200D\p{Extended_Pictographic}(?:\uFE0F)?)*)$/u.test(value);
+        && /^(?:\p{Regional_Indicator}{2}|🏳️)$/u.test(value);
     }
 
     function getShareUrl(platform, item) {

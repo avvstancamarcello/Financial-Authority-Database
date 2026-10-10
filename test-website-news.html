@@ -124,7 +124,8 @@
         'All 14 Airtable-declared flags render verbatim from their records');
         await load([
             { ...record, news_id: 'missing-flag', title: 'Missing flag', flag: undefined },
-            { ...record, news_id: 'invalid-flag', title: 'Invalid flag', flag: '<script>alert(1)</script>' }
+            { ...record, news_id: 'invalid-flag', title: 'Invalid flag', flag: '<script>alert(1)<\/script>' },
+            { ...record, news_id: 'non-flag-emoji', title: 'Non-flag emoji', flag: '🦄' }
         ]);
         check(cards().every(card => card.querySelector('.flag').textContent === '🏳️')
             && !doc.querySelector('.news-card script'), 'Missing and invalid flags use a safe neutral fallback');
