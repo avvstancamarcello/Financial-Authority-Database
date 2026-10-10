@@ -247,7 +247,9 @@
         });
         if (!response.ok) throw new Error(`Feed request failed: ${response.status}`);
         const payload = await response.json();
-        const records = Array.isArray(payload) ? payload : payload && (payload.records || payload.news);
+        const records = Array.isArray(payload)
+          ? payload
+          : payload && (Array.isArray(payload.records) ? payload.records : payload.news);
         if (!Array.isArray(records)) throw new Error('Feed must contain a records or news array');
         publishedRecords = records.filter(record =>
           record && record.status === 'published' && typeof record.news_id === 'string' && record.news_id.trim()
