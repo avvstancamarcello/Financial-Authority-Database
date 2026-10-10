@@ -65,6 +65,13 @@
         page.document.documentElement.lang = 'en';
         await waitFor(() => date().startsWith('NEWS PUBLISHED'));
         check(date().includes('04/10/2026'), 'Homepage language switch preserves fetched date');
+        page.document.documentElement.lang = 'bs-BA';
+        await waitFor(() => date().startsWith('OBJAVLJENE VIJESTI'));
+        check(page.document.querySelector('.language-hint-link').getAttribute('aria-label') === 'OBJAVLJENE VIJESTI',
+            'Actual Bosnian regional locale localizes date and accessible link label');
+        page.document.documentElement.lang = 'sq-XK';
+        await waitFor(() => date().startsWith('LAJME TË PUBLIKUARA'));
+        check(date().includes('2026'), 'Kosovo regional alias preserves Albanian news labels');
         const nextRecords = records.concat({ ...record, news_id: 'next', published_at: '2026-11-01' });
         page = await open('<html lang="it"><body>' + container + '<script src="scripts/news-feed.js"></' + 'script></body></html>');
         page.resolveFeed({ ok: true, json: async () => nextRecords });

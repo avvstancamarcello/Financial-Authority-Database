@@ -8,6 +8,8 @@ window.PublicNews = (() => {
         de: ['NEWS VERÖFFENTLICHT', 'Nachrichten werden geladen…', 'Keine veröffentlichten Nachrichten', 'Nachrichten nicht verfügbar', 'Übersetzung nicht verfügbar; Sprache:'],
         es: ['NOTICIAS PUBLICADAS', 'Cargando noticias…', 'No hay noticias publicadas', 'Noticias no disponibles', 'Traducción no disponible; idioma:'],
         pt: ['NOTÍCIAS PUBLICADAS', 'A carregar notícias…', 'Nenhuma notícia publicada', 'Notícias indisponíveis', 'Tradução indisponível; idioma:'],
+        nl: ['GEPUBLICEERD NIEUWS', 'Nieuws laden…', 'Geen gepubliceerd nieuws', 'Nieuws niet beschikbaar'],
+        ro: ['ȘTIRI PUBLICATE', 'Se încarcă știrile…', 'Nu există știri publicate', 'Știri indisponibile'],
         bs: ['OBJAVLJENE VIJESTI', 'Učitavanje vijesti…', 'Nema objavljenih vijesti', 'Vijesti nisu dostupne'],
         sq: ['LAJME TË PUBLIKUARA', 'Duke ngarkuar lajmet…', 'Nuk ka lajme të publikuara', 'Lajmet nuk janë të disponueshme'],
         el: ['ΔΗΜΟΣΙΕΥΜΕΝΕΣ ΕΙΔΗΣΕΙΣ', 'Φόρτωση ειδήσεων…', 'Δεν υπάρχουν δημοσιευμένες ειδήσεις', 'Οι ειδήσεις δεν είναι διαθέσιμες'],
@@ -17,7 +19,7 @@ window.PublicNews = (() => {
         vi: ['TIN TỨC ĐÃ ĐĂNG', 'Đang tải tin tức…', 'Chưa có tin tức được đăng', 'Tin tức không khả dụng']
     };
     function messages(lang) {
-        return copy[lang === 'xk' || lang === 'sq-XK' ? 'sq' : lang] || copy.en;
+        return copy[lang === 'xk' ? 'sq' : lang.split('-')[0].toLowerCase()] || copy.en;
     }
     function timestamp(value) {
         if (typeof value !== 'string' || !/^\d{4}-\d{2}-\d{2}(?:T\d{2}:\d{2}(?::\d{2}(?:\.\d+)?)?(?:Z|[+-]\d{2}:\d{2}))?$/.test(value)) return NaN;
