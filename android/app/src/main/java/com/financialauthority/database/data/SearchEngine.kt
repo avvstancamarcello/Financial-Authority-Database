@@ -10,7 +10,7 @@ object SearchEngine {
         if (q.isBlank()) return emptyList()
 
         val countryResults = catalog.countries.filter { country ->
-            listOf(
+            matchesUsCountryAlias(country, q) || listOf(
                 country.countryName,
                 country.authority.name,
                 country.authority.abbreviation.orEmpty(),
@@ -28,7 +28,7 @@ object SearchEngine {
         }
 
         val authorityResults = catalog.countries.filter { country ->
-            listOf(
+            matchesUsCountryAlias(country, q) || listOf(
                 country.authority.name,
                 country.authority.abbreviation.orEmpty(),
                 country.countryName
