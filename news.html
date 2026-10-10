@@ -451,16 +451,16 @@
           <span class="authority-chip"><span class="flag" aria-hidden="true">🇬🇧</span>FCA</span>
           <span class="authority-chip"><span class="flag" aria-hidden="true">🇫🇷</span>AMF</span>
         </div>
-        <div class="post-date">Post pillole • 01/10/2026</div>
+        <div class="post-date" id="news-update" aria-live="polite">Caricamento notizie…</div>
       </div>
       <h1 id="hero-title">3 pillole di educazione finanziaria, ogni week end</h1>
       <p class="lead" id="hero-lead">
         Tre aggiornamenti alla settimana, pubblicati nello stesso ritmo delle Authority finanziarie di tutto il mondo.
-        Ogni nuovo contenuto viene aggiunto in fondo alla pagina, così il feed cresce in modo ordinato e leggibile.
+        Le notizie più recenti sono in cima; quelle precedenti restano disponibili sotto.
       </p>
       <div class="status-row" aria-label="Dettagli feed">
         <span class="status-pill"><span class="dot" aria-hidden="true"></span><span id="status-1">3 contenuti per aggiornamento</span></span>
-        <span class="status-pill"><span class="dot" aria-hidden="true"></span><span id="status-2">Nuovi in fondo alla pagina</span></span>
+        <span class="status-pill"><span class="dot" aria-hidden="true"></span><span id="status-2">Notizie più recenti in cima</span></span>
         <span class="status-pill"><span class="dot" aria-hidden="true"></span><span id="status-3">3x3: 9 authority a settimana</span></span>
       </div>
     </header>
@@ -479,14 +479,15 @@
     </main>
   </div>
 
+  <script src="scripts/news-feed.js"></script>
   <script>
     const translations = {
       it: {
         heroTag: 'Finanza sicura',
         heroTitle: '3 pillole di educazione finanziaria, ogni week end',
-        heroLead: 'Tre aggiornamenti alla settimana, pubblicati nello stesso ritmo delle Authority finanziarie di tutto il mondo. Ogni nuovo contenuto viene aggiunto in fondo alla pagina, così il feed cresce in modo ordinato e leggibile.',
+        heroLead: 'Aggiornamenti dalle Authority finanziarie di tutto il mondo. Le notizie più recenti sono in cima; quelle precedenti restano disponibili sotto.',
         status1: '3 contenuti per aggiornamento',
-        status2: 'Nuovi in fondo alla pagina',
+        status2: 'Notizie più recenti in cima',
         status3: '3x3: 9 authority a settimana',
         emptyState: 'Nessuna news pubblicata ancora. Inizia aggiungendo il primo aggiornamento al feed.',
         voteTitle: 'Valuta questa sequenza',
@@ -500,9 +501,9 @@
       en: {
         heroTag: 'Safe finance',
         heroTitle: '3 financial safety pills',
-        heroLead: 'Three updates per week, published at the same rhythm as financial authorities around the world. Each new item is added at the end of the page so the feed grows in a clean and readable way.',
+        heroLead: 'Updates from financial authorities around the world. The newest stories appear first; older stories remain available below.',
         status1: '3 content pieces per update',
-        status2: 'New items added at the bottom',
+        status2: 'Newest stories first',
         status3: '3x3: 9 authorities per week',
         emptyState: 'No news published yet. Start by adding the first update to the feed.',
         voteTitle: 'Rate this sequence',
@@ -516,9 +517,9 @@
       fr: {
         heroTag: 'Finance sûre',
         heroTitle: '3 pilules de sécurité financière',
-        heroLead: 'Trois mises à jour par semaine, publiées au même rythme que les autorités financières du monde entier. Chaque nouveau contenu est ajouté à la fin de la page pour faire grandir le fil d’actualité de manière claire et lisible.',
+        heroLead: 'Actualités des autorités financières du monde entier. Les plus récentes apparaissent en premier ; les précédentes restent disponibles en dessous.',
         status1: '3 contenus par mise à jour',
-        status2: 'Nouveaux contenus en bas de page',
+        status2: 'Actualités les plus récentes en premier',
         status3: '3x3 : 9 autorités par semaine',
         emptyState: 'Aucune actualité publiée pour l’instant. Commencez par ajouter la première mise à jour au fil.',
         voteTitle: 'Évaluez cette séquence',
@@ -532,9 +533,9 @@
       es: {
         heroTag: 'Finanzas seguras',
         heroTitle: '3 píldoras de seguridad financiera',
-        heroLead: 'Tres actualizaciones por semana, publicadas al mismo ritmo que las autoridades financieras de todo el mundo. Cada nuevo contenido se añade al final de la página para que el feed crezca de forma ordenada y legible.',
+        heroLead: 'Actualizaciones de las autoridades financieras de todo el mundo. Las noticias más recientes aparecen primero; las anteriores siguen disponibles debajo.',
         status1: '3 contenidos por actualización',
-        status2: 'Novedades al final de la página',
+        status2: 'Noticias más recientes primero',
         status3: '3x3: 9 autoridades por semana',
         emptyState: 'Todavía no hay noticias publicadas. Empieza añadiendo la primera actualización al feed.',
         voteTitle: 'Valora esta secuencia',
@@ -548,9 +549,9 @@
       pt: {
         heroTag: 'Finança segura',
         heroTitle: '3 comprimidos de segurança financeira',
-        heroLead: 'Três atualizações por semana, publicadas no mesmo ritmo das autoridades financeiras de todo o mundo. Cada novo conteúdo é adicionado ao fim da página para que o feed cresça de forma organizada e legível.',
+        heroLead: 'Atualizações das autoridades financeiras de todo o mundo. As notícias mais recentes aparecem primeiro; as anteriores continuam disponíveis abaixo.',
         status1: '3 conteúdos por atualização',
-        status2: 'Novidades no fim da página',
+        status2: 'Notícias mais recentes primeiro',
         status3: '3x3: 9 autoridades por semana',
         emptyState: 'Ainda não há notícias publicadas. Comece adicionando a primeira atualização ao feed.',
         voteTitle: 'Avalie esta sequência',
@@ -564,9 +565,9 @@
       de: {
         heroTag: 'Sichere Finanzen',
         heroTitle: '3 Pillen für finanzielle Sicherheit',
-        heroLead: 'Drei Updates pro Woche, veröffentlicht im gleichen Rhythmus wie die Finanzbehörden auf der ganzen Welt. Jeder neue Inhalt wird unten auf der Seite ergänzt, damit der Feed sauber und lesbar wächst.',
+        heroLead: 'Nachrichten von Finanzbehörden weltweit. Die neuesten Nachrichten stehen oben; ältere bleiben darunter verfügbar.',
         status1: '3 Inhalte pro Update',
-        status2: 'Neuigkeiten am Seitenende',
+        status2: 'Neueste Nachrichten zuerst',
         status3: '3x3: 9 Behörden pro Woche',
         emptyState: 'Es wurden noch keine Nachrichten veröffentlicht. Fügen Sie zuerst das erste Update dem Feed hinzu.',
         voteTitle: 'Bewerten Sie diese Sequenz',
@@ -579,39 +580,6 @@
       }
     };
 
-    const sequenceByLanguage = {
-      it: [
-        { authority: 'CONSOB', flag: '🇮🇹', badge: 'Pillola 1', title: 'CONSOB: attenzione ai rischi e alla trasparenza nei prodotti finanziari', summary: 'L’autorità italiana continua a rafforzare la comunicazione chiara sui prodotti finanziari, con focus su rischi, costi e tutela degli investitori retail.', url: 'https://www.consob.it', date: '2026-10-01' },
-        { authority: 'Financial Conduct Authority', flag: '🇬🇧', badge: 'Pillola 2', title: 'FCA: aggiornamento su comunicazione agli investitori e tutela del cliente', summary: 'La FCA ha ribadito l’importanza di informazioni chiare, disclosure efficaci e pratiche trasparenti per ridurre il rischio di errore o truffa.', url: 'https://www.fca.org.uk', date: '2026-10-01' },
-        { authority: 'Autorité des Marchés Financiers', flag: '🇫🇷', badge: 'Pillola 3', title: 'AMF: nuove indicazioni su trasparenza e vigilanza dei mercati finanziari', summary: 'L’Autorité des Marchés Financiers richiama il ruolo centrale della trasparenza nelle comunicazioni e della vigilanza preventiva sui mercati.', url: 'https://www.amf-france.org', date: '2026-10-01' }
-      ],
-      en: [
-        { authority: 'CONSOB', flag: '🇮🇹', badge: 'Pill 1', title: 'CONSOB: attention to risk and transparency in financial products', summary: 'The Italian authority continues to strengthen clear communication on financial products, with emphasis on risk, costs and protection for retail investors.', url: 'https://www.consob.it', date: '2026-10-01' },
-        { authority: 'Financial Conduct Authority', flag: '🇬🇧', badge: 'Pill 2', title: 'FCA: update on investor communication and customer protection', summary: 'The FCA has reaffirmed the importance of clear information, effective disclosure and transparent practices to reduce the risk of mistakes or scams.', url: 'https://www.fca.org.uk', date: '2026-10-01' },
-        { authority: 'Autorité des Marchés Financiers', flag: '🇫🇷', badge: 'Pill 3', title: 'AMF: new guidance on transparency and financial market supervision', summary: 'The Autorité des Marchés Financiers highlights the central role of transparency in communications and preventive supervision of markets.', url: 'https://www.amf-france.org', date: '2026-10-01' }
-      ],
-      fr: [
-        { authority: 'CONSOB', flag: '🇮🇹', badge: 'Pilule 1', title: 'CONSOB : vigilance sur les risques et la transparence des produits financiers', summary: 'L’autorité italienne continue de renforcer la communication claire sur les produits financiers, en mettant l’accent sur les risques, les coûts et la protection des investisseurs de détail.', url: 'https://www.consob.it', date: '2026-10-01' },
-        { authority: 'Financial Conduct Authority', flag: '🇬🇧', badge: 'Pilule 2', title: 'FCA : mise à jour sur la communication aux investisseurs et la protection du client', summary: 'La FCA a réaffirmé l’importance d’informations claires, d’une divulgation efficace et de pratiques transparentes pour réduire les risques d’erreur ou d’arnaque.', url: 'https://www.fca.org.uk', date: '2026-10-01' },
-        { authority: 'Autorité des Marchés Financiers', flag: '🇫🇷', badge: 'Pilule 3', title: 'AMF : nouvelles recommandations sur la transparence et la supervision des marchés financiers', summary: 'L’AMF rappelle le rôle central de la transparence dans les communications et de la supervision préventive des marchés.', url: 'https://www.amf-france.org', date: '2026-10-01' }
-      ],
-      es: [
-        { authority: 'CONSOB', flag: '🇮🇹', badge: 'Píldora 1', title: 'CONSOB: atención a los riesgos y la transparencia en los productos financieros', summary: 'La autoridad italiana sigue reforzando la comunicación clara sobre los productos financieros, con especial atención a los riesgos, costes y protección de los inversores minoristas.', url: 'https://www.consob.it', date: '2026-10-01' },
-        { authority: 'Financial Conduct Authority', flag: '🇬🇧', badge: 'Píldora 2', title: 'FCA: actualización sobre la comunicación a inversores y protección del cliente', summary: 'La FCA ha destacado la importancia de una información clara, divulgación efectiva y prácticas transparentes para reducir el riesgo de error o fraude.', url: 'https://www.fca.org.uk', date: '2026-10-01' },
-        { authority: 'Autorité des Marchés Financiers', flag: '🇫🇷', badge: 'Píldora 3', title: 'AMF: nuevas indicaciones sobre transparencia y supervisión de los mercados financieros', summary: 'La Autorité des Marchés Financiers subraya la importancia de la transparencia en las comunicaciones y de la supervisión preventiva de los mercados.', url: 'https://www.amf-france.org', date: '2026-10-01' }
-      ],
-      pt: [
-        { authority: 'CONSOB', flag: '🇮🇹', badge: 'Comprimido 1', title: 'CONSOB: atenção aos riscos e à transparência nos produtos financeiros', summary: 'A autoridade italiana continua a reforçar a comunicação clara sobre produtos financeiros, com foco nos riscos, custos e na proteção dos investidores de retalho.', url: 'https://www.consob.it', date: '2026-10-01' },
-        { authority: 'Financial Conduct Authority', flag: '🇬🇧', badge: 'Comprimido 2', title: 'FCA: atualização sobre comunicação ao investidor e proteção do cliente', summary: 'A FCA reiterou a importância de informações claras, divulgação eficaz e práticas transparentes para reduzir o risco de erro ou fraude.', url: 'https://www.fca.org.uk', date: '2026-10-01' },
-        { authority: 'Autorité des Marchés Financiers', flag: '🇫🇷', badge: 'Comprimido 3', title: 'AMF: novas orientações sobre transparência e supervisão dos mercados financeiros', summary: 'A Autorité des Marchés Financiers recorda o papel central da transparência nas comunicações e da supervisão preventiva dos mercados.', url: 'https://www.amf-france.org', date: '2026-10-01' }
-      ],
-      de: [
-        { authority: 'CONSOB', flag: '🇮🇹', badge: 'Pille 1', title: 'CONSOB: Fokus auf Risiken und Transparenz bei Finanzprodukten', summary: 'Die italienische Behörde stärkt die klare Kommunikation zu Finanzprodukten weiter und setzt dabei den Schwerpunkt auf Risiken, Kosten und den Schutz von Kleinanlegern.', url: 'https://www.consob.it', date: '2026-10-01' },
-        { authority: 'Financial Conduct Authority', flag: '🇬🇧', badge: 'Pille 2', title: 'FCA: Update zur Anlegerkommunikation und zum Kundenschutz', summary: 'Die FCA hat die Bedeutung klarer Informationen, wirksamer Offenlegung und transparenter Praktiken zur Reduktion von Fehlern oder Betrug betont.', url: 'https://www.fca.org.uk', date: '2026-10-01' },
-        { authority: 'Autorité des Marchés Financiers', flag: '🇫🇷', badge: 'Pille 3', title: 'AMF: neue Leitlinien zu Transparenz und Aufsicht über Finanzmärkte', summary: 'Die Autorité des Marchés Financiers erinnert an die zentrale Rolle der Transparenz in Mitteilungen und der präventiven Marktaufsicht.', url: 'https://www.amf-france.org', date: '2026-10-01' }
-      ]
-    };
-
     const newsList = document.getElementById('news-list');
     const emptyState = document.getElementById('empty-state');
     const languageSelector = document.getElementById('language-selector');
@@ -619,21 +587,15 @@
     const voteResult = document.getElementById('vote-result');
 
     let currentLanguage = localStorage.getItem('pillole-language') || 'it';
+    let publishedRecords = [];
+    let feedState = 'loading';
 
     function formatDate(dateValue) {
-      const date = new Date(dateValue);
-      if (Number.isNaN(date.getTime())) {
-        return dateValue;
-      }
-      return new Intl.DateTimeFormat(currentLanguage === 'en' ? 'en-GB' : currentLanguage === 'fr' ? 'fr-FR' : currentLanguage === 'es' ? 'es-ES' : currentLanguage === 'pt' ? 'pt-PT' : currentLanguage === 'de' ? 'de-DE' : 'it-IT', {
-        day: '2-digit',
-        month: '2-digit',
-        year: 'numeric'
-      }).format(date);
+      return PublicNews.formatDate(dateValue, currentLanguage);
     }
 
     function getShareUrl(platform, item) {
-      const baseUrl = item.url || 'https://financial-authority-database.github.io/';
+      const baseUrl = item.url || 'https://www.amevfirenze.it/news.html';
       const shareText = `${item.authority}: ${item.title}`.trim();
       const shareMessage = `${shareText} — ${item.summary || ''}`.trim();
 
@@ -660,57 +622,117 @@
         { platform: 'Instagram', label: '◎' }
       ];
 
-      const shareMarkup = shareButtons.map(({ platform, label }) => `
-        <a class="share-button" href="${getShareUrl(platform, item)}" target="_blank" rel="noopener noreferrer" aria-label="${t.shareLabel} su ${platform}">${label}</a>
-      `).join('');
-
-      article.innerHTML = `
-        <div class="news-top">
-          <div class="meta">
-            <span class="flag" aria-hidden="true">${item.flag || '🌍'}</span>
-            <span>${item.authority}</span>
-            <span>•</span>
-            <span>${formatDate(item.date)}</span>
-          </div>
-          <span class="badge">${item.badge || 'News'}</span>
-        </div>
-        <h2>${item.title}</h2>
-        <p>${item.summary || ''}</p>
-        <a class="news-link" href="${item.url || '#'}" target="_blank" rel="noopener noreferrer">${t.readMore}</a>
-        <div class="share-row" aria-label="${t.shareLabel} il contenuto">
-          ${shareMarkup}
-        </div>
-      `;
+      const top = document.createElement('div');
+      top.className = 'news-top';
+      const meta = document.createElement('div');
+      meta.className = 'meta';
+      const flag = document.createElement('span');
+      flag.className = 'flag';
+      flag.setAttribute('aria-hidden', 'true');
+      flag.textContent = '🌍';
+      meta.append(flag);
+      for (const text of [item.authority, '•', formatDate(item.date)]) {
+        const span = document.createElement('span');
+        span.textContent = text;
+        meta.append(span);
+      }
+      const badge = document.createElement('span');
+      badge.className = 'badge';
+      badge.textContent = item.lang.toUpperCase();
+      top.append(meta, badge);
+      article.append(top);
+      article.lang = item.lang;
+      for (const [tag, text] of [['h2', item.title], ['p', item.summary], ['p', item.body_text]]) {
+        if (!text) continue;
+        const element = document.createElement(tag);
+        element.textContent = text;
+        article.append(element);
+      }
+      if (item.lang !== currentLanguage) {
+        const notice = document.createElement('p');
+        notice.className = 'translation-fallback';
+        notice.lang = currentLanguage;
+        notice.textContent = `${PublicNews.messages(currentLanguage)[4]} ${item.lang.toUpperCase()}`;
+        article.append(notice);
+      }
+      if (item.url) {
+        const link = document.createElement('a');
+        link.className = 'news-link';
+        link.href = item.url;
+        link.target = '_blank';
+        link.rel = 'noopener noreferrer';
+        link.textContent = t.readMore;
+        article.append(link);
+      }
+      const shareRow = document.createElement('div');
+      shareRow.className = 'share-row';
+      shareRow.setAttribute('aria-label', t.shareLabel);
+      for (const { platform, label } of shareButtons) {
+        const link = document.createElement('a');
+        link.className = 'share-button';
+        link.href = getShareUrl(platform, item);
+        link.target = '_blank';
+        link.rel = 'noopener noreferrer';
+        link.setAttribute('aria-label', `${t.shareLabel}: ${platform}`);
+        link.textContent = label;
+        shareRow.append(link);
+      }
+      article.append(shareRow);
       return article;
     }
 
-    function appendNewsItem(item) {
-      if (!item || !item.title) return;
-      const card = createNewsCard(item);
-      newsList.appendChild(card);
-      emptyState.classList.remove('is-visible');
-      window.scrollTo({
-        top: document.body.scrollHeight,
-        behavior: 'smooth'
-      });
-    }
-
-    function appendNewsBatch(items) {
-      if (!Array.isArray(items) || !items.length) return;
-      items.forEach((item) => appendNewsItem(item));
-    }
-
-    function renderInitialNews(items) {
-      if (!Array.isArray(items) || !items.length) {
-        emptyState.classList.add('is-visible');
-        return;
+    function renderNews() {
+      newsList.replaceChildren();
+      const groups = new Map();
+      for (const record of publishedRecords) {
+        if (!groups.has(record.news_id)) groups.set(record.news_id, []);
+        groups.get(record.news_id).push(record);
       }
-      items.forEach((item) => newsList.appendChild(createNewsCard(item)));
-      emptyState.classList.remove('is-visible');
+      const stories = [...groups.values()].map(variants => {
+        variants.sort((a, b) => PublicNews.timestamp(b.published_at) - PublicNews.timestamp(a.published_at));
+        return {
+          record: variants.find(record => record.lang === currentLanguage)
+            || variants.find(record => record.lang === 'en')
+            || variants.find(record => record.lang === 'it') || variants[0],
+          date: PublicNews.latest(variants)
+        };
+      }).sort((a, b) => b.date - a.date);
+      for (const { record } of stories) {
+        newsList.append(createNewsCard({
+          ...record, authority: record.theme || '', date: record.published_at,
+          url: PublicNews.safeUrl(record.source_url)
+        }));
+      }
+      const messages = PublicNews.messages(currentLanguage);
+      emptyState.textContent = messages[feedState === 'loading' ? 1 : feedState === 'error' ? 3 : 2];
+      emptyState.classList.toggle('is-visible', !stories.length);
+      newsList.setAttribute('aria-busy', String(feedState === 'loading'));
+      document.getElementById('news-update').textContent = PublicNews.label(publishedRecords, feedState, currentLanguage);
+    }
+
+    async function loadNewsFeed() {
+      feedState = 'loading';
+      publishedRecords = [];
+      renderNews();
+      try {
+        const records = await PublicNews.load();
+        if (records.some(record =>
+          ['news_id', 'lang', 'title'].some(key => typeof record[key] !== 'string' || !record[key].trim())
+          || !/^[a-z]{2}(?:-[A-Za-z0-9]+)*$/.test(record.lang)
+          || ['summary', 'body_text', 'theme', 'source_url'].some(key => record[key] != null && typeof record[key] !== 'string')
+        )) throw new Error('Invalid published news');
+        publishedRecords = records;
+        feedState = 'loaded';
+      } catch {
+        feedState = 'error';
+      }
+      renderNews();
     }
 
     function setLanguage(lang) {
+      lang = Object.hasOwn(translations, lang) ? lang : 'it';
       currentLanguage = lang;
+      languageSelector.value = lang;
       localStorage.setItem('pillole-language', lang);
       document.documentElement.lang = lang;
       const t = translations[lang];
@@ -726,8 +748,7 @@
       document.querySelector('.back-btn').setAttribute('aria-label', t.homeLabel);
       document.querySelector('.back-btn').textContent = '⬅️ ' + t.homeLabel;
 
-      newsList.innerHTML = '';
-      renderInitialNews(sequenceByLanguage[lang]);
+      renderNews();
       renderStars(Number(localStorage.getItem(`pillole-vote-${lang}`) || 0));
     }
 
@@ -764,16 +785,9 @@
       setLanguage(event.target.value);
     });
 
-    window.publishAuthorityNews = function (item) {
-      appendNewsItem(item);
-    };
-
-    window.publishAuthorityNewsBatch = function (items) {
-      appendNewsBatch(items);
-    };
-
     languageSelector.value = currentLanguage;
     setLanguage(currentLanguage);
+    loadNewsFeed();
   </script>
 </body>
 </html>

@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"><title>Website news regression checks</title></head>
+<body>
+<h1>Website news regression checks</h1>
+<pre id="results">Running…</pre>
+<iframe id="page" title="Website news under test" width="850" height="700"></iframe>
+<script>
+    const results = document.getElementById('results');
+    const frame = document.getElementById('page');
+    const checks = [];
+    function check(condition, message) {
+        checks.push(`${condition ? 'PASS' : 'FAIL'}: ${message}`);
+        results.textContent = checks.join('\n');
+        if (!condition) throw new Error(message);
+    }
+    async function waitFor(predicate) {
+        const deadline = Date.now() + 5000;
+        while (!predicate()) {
+            if (Date.now() > deadline) throw new Error('Timed out');
+            await new Promise(resolve => setTimeout(resolve, 20));
+        }
+    }
+    const record = {
+        news_id: 'old', lang: 'it', title: 'Vecchia', theme: 'FCA',
+        published_at: '2026-09-01T00:00:00Z', status: 'published', source_url: 'https://example.org/news'
+    };
+    const records = [
+        record,
+        { ...record, news_id: 'new', title: 'Nuova', published_at: '2026-10-02T23:30:00-02:00' },
+        { ...record, news_id: 'new', lang: 'en', title: 'Newest English', published_at: '2026-10-04T00:00:00Z' },
+        { ...record, news_id: 'draft', status: 'draft', published_at: '2099-01-01' },
+        { ...record, news_id: 'invalid', published_at: '2026-02-30' },
+        { ...record, news_id: 'unsafe', title: '<img src=x onerror=alert(1)>', body_text: '<script>alert(1)<\/script>', source_url: 'javascript:alert(1)' }
+    ];
+    async function run() {
+        const helper = await (await fetch('./scripts/news-feed.js')).text();
+        const mock = `<script>
+            window.fetch = (url, options) => {
+                window.feedRequest = { url: String(url), options };
+                return new Promise((resolve, reject) => { window.resolveFeed = resolve; window.rejectFeed = reject; });
+            };
+        <\/script>`;
+        async function open(source) {
+            const loaded = new Promise(resolve => { frame.onload = resolve; });
+            frame.srcdoc = source.replace('<script src="scripts/news-feed.js"></' + 'script>',
+                mock + '<script>' + helper + '</' + 'script>');
+            await loaded;
+            await waitFor(() => frame.contentWindow.resolveFeed);
+            return frame.contentWindow;
+        }
+        const homeSource = await (await fetch('./index.html')).text();
+        check(/href="news.html" class="language-hint-link"/.test(homeSource), 'Canonical homepage target remains public HTML');
+        check(!/newsPillsDate|01\/10\/2026/.test(homeSource), 'Fixed publication dates removed from homepage translations');
+        // Exercise the exact homepage container and its production date controller without unrelated database scripts.
+        const parsed = new DOMParser().parseFromString(homeSource, 'text/html');
+        const container = parsed.querySelector('.language-hint').outerHTML;
+        let page = await open('<html lang="it"><body>' + container + '<script src="scripts/news-feed.js"></' + 'script></body></html>');
+        const date = () => page.document.getElementById('homepage-news-date').textContent;
+        check(/Caricamento/.test(date()) && !/\d{2}\/\d{2}\/\d{4}/.test(date()), 'Homepage loading has no fabricated date');
+        check(page.feedRequest.options.cache === 'no-cache' && !page.feedRequest.url.includes('?'), 'Feed is revalidated without cache-busting URLs');
+        page.resolveFeed({ ok: true, json: async () => records });
+        await waitFor(() => date().includes('04/10/2026'));
+        check(date() === 'NEWS PUBBLICATE · 04/10/2026', 'Homepage date uses maximum valid published translation date');
+        page.document.documentElement.lang = 'en';
+        await waitFor(() => date().startsWith('NEWS PUBLISHED'));
+        check(date().includes('04/10/2026'), 'Homepage language switch preserves fetched date');
+        const nextRecords = records.concat({ ...record, news_id: 'next', published_at: '2026-11-01' });
+        page = await open('<html lang="it"><body>' + container + '<script src="scripts/news-feed.js"></' + 'script></body></html>');
+        page.resolveFeed({ ok: true, json: async () => nextRecords });
+        await waitFor(() => date().includes('01/11/2026'));
+        check(date().includes('01/11/2026'), 'New homepage load advances date with newly published news');
+        page.document.querySelector('.language-hint-link').focus();
+        page.document.documentElement.lang = 'en';
+        await waitFor(() => date().startsWith('NEWS PUBLISHED'));
+        check(page.document.activeElement.classList.contains('language-hint-link'), 'Date and language updates preserve link focus');
+        check(!Number.isFinite(page.PublicNews.timestamp('2026-02-30'))
+            && !Number.isFinite(page.PublicNews.timestamp('2026-10-01T24:00:00Z'))
+            && !Number.isFinite(page.PublicNews.timestamp('2026-10-01T12:30:00')),
+            'Invalid calendar dates, times and timezone-less timestamps are rejected');
+        const newsSource = await (await fetch('./news.html')).text();
+        page = await open(newsSource);
+        const doc = page.document;
+        const cards = () => [...doc.querySelectorAll('.news-card')];
+        const update = () => doc.getElementById('news-update').textContent;
+        async function load(payload, failure) {
+            const pending = page.loadNewsFeed();
+            if (failure === 'offline') page.rejectFeed(new TypeError('Offline'));
+            else page.resolveFeed({ ok: failure !== 'http', json: async () => {
+                if (failure === 'json') throw new SyntaxError('Malformed JSON');
+                return payload;
+            } });
+            await pending;
+        }
+        page.resolveFeed({ ok: true, json: async () => ({ records }) });
+        await waitFor(() => doc.getElementById('news-list').getAttribute('aria-busy') === 'false');
+        page.setLanguage('it');
+        check(cards().length === 3 && cards()[0].querySelector('h2').textContent === 'Nuova', 'Published stories grouped without duplicates, newest first');
+        check(cards().some(card => card.querySelector('h2').textContent === 'Vecchia'), 'Older stories remain below');
+        check(update().includes('04/10/2026'), 'Page update date includes all translations, not only selected language');
+        check(!doc.querySelector('.news-card img, .news-card script, a[href^="javascript:"]'), 'Remote markup and unsafe URLs remain inert');
+        check([...doc.querySelectorAll('a[target="_blank"]')].every(link => link.rel.includes('noopener') && link.rel.includes('noreferrer')), 'External source and share links are protected');
+        page.setLanguage('en');
+        check(cards()[0].querySelector('h2').textContent === 'Newest English' && doc.querySelector('.translation-fallback'), 'Available translation selected, missing translations explicitly labeled');
+        check(update().includes('04/10/2026') && doc.documentElement.lang === 'en', 'News date and ordering survive language switch');
+        for (const lang of ['it', 'en', 'fr', 'es', 'pt', 'de']) {
+            page.setLanguage(lang);
+            check(cards().length === 3 && update().includes('2026'), `${lang} preserves stories and publication date`);
+        }
+        page.setLanguage('unsupported');
+        check(doc.documentElement.lang === 'it', 'Unknown persisted language falls back safely');
+        page.setLanguage('it');
+        await load([...records, { ...record, news_id: 'next', published_at: '2026-11-01', title: 'Next' }]);
+        check(update().includes('01/11/2026') && cards()[0].querySelector('h2').textContent === 'Next', 'New published record advances update date and appears first');
+        for (const payload of [[], [{ ...record, status: 'draft' }], [{ ...record, published_at: 'invalid' }]]) {
+            await load(payload);
+            check(!cards().length && /Nessuna notizia pubblicata/.test(update()), 'Empty/draft/invalid-date feed shows no news, not samples');
+        }
+        for (const failure of ['offline', 'http', 'json']) {
+            await load(null, failure);
+            check(!cards().length && /non disponibili/.test(update()), `${failure} failure has no fabricated date`);
+        }
+        await load({ invalid: [] });
+        check(/non disponibili/.test(update()), 'Invalid schema produces clear error');
+        page.setLanguage('en');
+        check(update() === 'News unavailable', 'Error state is localized on language switch');
+        for (const failure of [false, true]) {
+            page = await open('<html lang="it"><body>' + container + '<script src="scripts/news-feed.js"></' + 'script></body></html>');
+            if (failure) page.rejectFeed(new TypeError('Offline'));
+            else page.resolveFeed({ ok: true, json: async () => [] });
+            await waitFor(() => !date().includes('Caricamento'));
+            check(date() === (failure ? 'Notizie non disponibili' : 'Nessuna notizia pubblicata')
+                && page.document.querySelector('.language-hint-link').getAttribute('href') === 'news.html',
+                'Homepage empty/error states retain functioning link without date');
+        }
+        const worker = await (await fetch('./service-worker.js')).text();
+        check(worker.includes('/scripts/news-feed.js') && worker.includes("'/avvstancamarcello/Airtable-news/main/news.json'"), 'PWA precaches controller and bypasses feed cache');
+        const appNews = await fetch('./APP/News-format-file-APP.html');
+        check(appNews.ok, 'Existing integrated app News page remains available');
+        results.textContent += '\nDONE';
+    }
+    run().catch(error => { results.textContent += `\nFAIL: ${error.message}`; console.error(error); });
+</script>
+</body>
+</html>
