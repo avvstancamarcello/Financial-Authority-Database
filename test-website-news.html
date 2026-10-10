@@ -22,13 +22,13 @@
         }
     }
     const record = {
-        news_id: 'old', lang: 'it', title: 'Vecchia', theme: 'FCA',
+        news_id: 'old', lang: 'it', flag: '🇮🇹', title: 'Vecchia', theme: 'FCA',
         published_at: '2026-09-01T00:00:00Z', status: 'published', source_url: 'https://example.org/news'
     };
     const records = [
         record,
         { ...record, news_id: 'new', title: 'Nuova', published_at: '2026-10-02T23:30:00-02:00' },
-        { ...record, news_id: 'new', lang: 'en', title: 'Newest English', published_at: '2026-10-04T00:00:00Z' },
+        { ...record, news_id: 'new', lang: 'en', flag: '🇬🇧', title: 'Newest English', published_at: '2026-10-04T00:00:00Z' },
         { ...record, news_id: 'draft', status: 'draft', published_at: '2099-01-01' },
         { ...record, news_id: 'invalid', published_at: '2026-02-30' },
         { ...record, news_id: 'unsafe', title: '<img src=x onerror=alert(1)>', body_text: '<script>alert(1)<\/script>', source_url: 'javascript:alert(1)' }
@@ -103,12 +103,40 @@
         await waitFor(() => doc.getElementById('news-list').getAttribute('aria-busy') === 'false');
         page.setLanguage('it');
         check(cards().length === 3 && cards()[0].querySelector('h2').textContent === 'Nuova', 'Published stories grouped without duplicates, newest first');
+        check(cards()[0].querySelector('.flag').textContent === '🇮🇹'
+            && cards()[0].lang === 'it', 'Selected Italian record binds its own language and feed flag');
         check(cards().some(card => card.querySelector('h2').textContent === 'Vecchia'), 'Older stories remain below');
         check(update().includes('04/10/2026'), 'Page update date includes all translations, not only selected language');
         check(!doc.querySelector('.news-card img, .news-card script, a[href^="javascript:"]'), 'Remote markup and unsafe URLs remain inert');
         check([...doc.querySelectorAll('a[target="_blank"]')].every(link => link.rel.includes('noopener') && link.rel.includes('noreferrer')), 'External source and share links are protected');
+        const declaredFlags = [
+            ['it', '🇮🇹'], ['en', '🇬🇧'], ['me', '🇲🇪'], ['ar', '🇸🇦'],
+            ['hi', '🇮🇳'], ['sq', '🇦🇱'], ['ro', '🇷🇴'], ['et', '🇪🇪'],
+            ['lt', '🇱🇹'], ['bs', '🇧🇦'], ['nl', '🇳🇱'], ['sv', '🇸🇪'],
+            ['el', '🇬🇷'], ['fr', '🇫🇷']
+        ];
+        await load(declaredFlags.map(([lang, flag]) => ({
+            ...record, news_id: `flag-${lang}`, lang, flag, title: lang
+        })));
+        check(cards().length === declaredFlags.length
+            && declaredFlags.every(([lang, flag]) =>
+                cards().find(card => card.querySelector('h2').textContent === lang)?.querySelector('.flag').textContent === flag),
+        'All 14 Airtable-declared flags render verbatim from their records');
+        await load([
+            { ...record, news_id: 'missing-flag', title: 'Missing flag', flag: undefined },
+            { ...record, news_id: 'invalid-flag', title: 'Invalid flag', flag: '<script>alert(1)</script>' }
+        ]);
+        check(cards().every(card => card.querySelector('.flag').textContent === '🏳️')
+            && !doc.querySelector('.news-card script'), 'Missing and invalid flags use a safe neutral fallback');
+        await load([{ ...record, news_id: 'malformed-lang', lang: 'not a language', flag: '🇸🇦' }]);
+        check(cards().length === 1 && cards()[0].querySelector('.flag').textContent === '🇸🇦'
+            && cards()[0].getAttribute('lang') === null && !/non disponibili/.test(update()),
+        'Malformed record language does not fail the feed or override its flag');
+        await load({ records });
         page.setLanguage('en');
         check(cards()[0].querySelector('h2').textContent === 'Newest English' && doc.querySelector('.translation-fallback'), 'Available translation selected, missing translations explicitly labeled');
+        check(cards()[0].querySelector('.flag').textContent === '🇬🇧'
+            && cards()[0].lang === 'en', 'Fallback selection renders the selected English record flag');
         check(update().includes('04/10/2026') && doc.documentElement.lang === 'en', 'News date and ordering survive language switch');
         for (const lang of ['it', 'en', 'fr', 'es', 'pt', 'de']) {
             page.setLanguage(lang);
@@ -141,7 +169,16 @@
                 'Homepage empty/error states retain functioning link without date');
         }
         const worker = await (await fetch('./service-worker.js')).text();
-        check(worker.includes('/scripts/news-feed.js') && worker.includes("'/avvstancamarcello/Airtable-news/main/news.json'"), 'PWA precaches controller and bypasses feed cache');
+        check(worker.includes("`${BASE_PATH}/news.html`") && worker.includes('/scripts/news-feed.js')
+            && worker.includes("'/avvstancamarcello/Airtable-news/main/news.json'"),
+        'PWA precaches the news page and controller while bypassing feed cache');
+        const newsStyles = newsSource.match(/<style>([\s\S]*?)<\/style>/)?.[1] || '';
+        check(/@media \(max-width: 640px\)[\s\S]*?\.news-link[\s\S]*?min-height:\s*44px[\s\S]*?font-size:\s*1\.05rem/.test(newsStyles),
+            'Mobile article buttons use readable text and touch-friendly height');
+        const homepageStyles = homeSource.match(/<style>([\s\S]*?)<\/style>/)?.[1] || '';
+        check(!/@media \(max-width: 480px\)[\s\S]*?\.language-hint\s*\{\s*display:\s*none/.test(homepageStyles)
+            && /@media \(max-width: 480px\)[\s\S]*?\.authority-link-pill\s*\{\s*font-size:\s*0\.82rem/.test(homepageStyles),
+        'Homepage news chips remain visible and enlarge their actual text on phones');
         const appNews = await fetch('./APP/News-format-file-APP.html');
         check(appNews.ok, 'Existing integrated app News page remains available');
         results.textContent += '\nDONE';

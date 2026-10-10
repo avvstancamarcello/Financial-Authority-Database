@@ -298,6 +298,14 @@
       box-shadow: 0 12px 28px rgba(251, 191, 36, 0.15);
     }
 
+    @media (max-width: 640px) {
+      .news-link {
+        width: 100%;
+        min-height: 44px;
+        font-size: 1.05rem;
+      }
+    }
+
     .news-link:hover,
     .news-link:focus-visible {
       outline: none;
@@ -594,6 +602,11 @@
       return PublicNews.formatDate(dateValue, currentLanguage);
     }
 
+    function isValidNewsFlag(value) {
+      return typeof value === 'string'
+        && /^(?:\p{Regional_Indicator}{2}|\p{Extended_Pictographic}(?:\uFE0F)?(?:\u200D\p{Extended_Pictographic}(?:\uFE0F)?)*)$/u.test(value);
+    }
+
     function getShareUrl(platform, item) {
       const baseUrl = item.url || 'https://www.amevfirenze.it/news.html';
       const shareText = `${item.authority}: ${item.title}`.trim();
@@ -629,7 +642,7 @@
       const flag = document.createElement('span');
       flag.className = 'flag';
       flag.setAttribute('aria-hidden', 'true');
-      flag.textContent = '🌍';
+      flag.textContent = isValidNewsFlag(item.flag) ? item.flag : '🏳️';
       meta.append(flag);
       for (const text of [item.authority, '•', formatDate(item.date)]) {
         const span = document.createElement('span');
@@ -641,7 +654,7 @@
       badge.textContent = item.lang.toUpperCase();
       top.append(meta, badge);
       article.append(top);
-      article.lang = item.lang;
+      if (/^[a-z]{2}(?:-[A-Za-z0-9]+)*$/.test(item.lang)) article.lang = item.lang;
       for (const [tag, text] of [['h2', item.title], ['p', item.summary], ['p', item.body_text]]) {
         if (!text) continue;
         const element = document.createElement(tag);
@@ -718,7 +731,6 @@
         const records = await PublicNews.load();
         if (records.some(record =>
           ['news_id', 'lang', 'title'].some(key => typeof record[key] !== 'string' || !record[key].trim())
-          || !/^[a-z]{2}(?:-[A-Za-z0-9]+)*$/.test(record.lang)
           || ['summary', 'body_text', 'theme', 'source_url'].some(key => record[key] != null && typeof record[key] !== 'string')
         )) throw new Error('Invalid published news');
         publishedRecords = records;
