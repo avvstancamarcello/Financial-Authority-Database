@@ -3,6 +3,7 @@ package com.financialauthority.database
 import androidx.activity.ComponentActivity
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.requiredWidth
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
@@ -81,7 +82,7 @@ class BrandFlagTileTest {
                 MaterialTheme {
                     LazyVerticalGrid(
                         columns = GridCells.Fixed(6),
-                        modifier = Modifier.requiredWidth(width.dp),
+                        modifier = Modifier.requiredWidth(width.dp).padding(horizontal = 12.dp),
                         contentPadding = PaddingValues(2.dp),
                         horizontalArrangement = Arrangement.spacedBy(4.dp),
                         verticalArrangement = Arrangement.spacedBy(4.dp)
