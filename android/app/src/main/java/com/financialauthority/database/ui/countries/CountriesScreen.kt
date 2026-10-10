@@ -56,6 +56,8 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.financialauthority.database.data.isUsCountryQuery
+import com.financialauthority.database.data.matchesUsCountryAlias
 import com.financialauthority.database.domain.Country
 import com.financialauthority.database.domain.FinancialAuthority
 import com.financialauthority.database.ui.about.AmevMatrixCard
@@ -87,6 +89,21 @@ private fun getSubstantiveWords(text: String): List<String> {
         .split(" ", "-", "_", "/", "(", ")", ",", ".")
         .map { it.trim() }
         .filter { it.isNotBlank() && it !in stopWords }
+}
+
+internal fun matchesCountrySearchQuery(country: Country, query: String): Boolean {
+    val q = query.trim().lowercase()
+    if (q.length < 2 || q in stopWords) return false
+    val name = country.countryName.lowercase()
+    val key = country.countryKey.lowercase()
+    return when {
+        q == "uk" || q == "gb" -> key.contains("united_kingdom") || name.contains("united kingdom")
+        q == "ua" || q == "uc" -> key.contains("ukraine") || name.contains("ucraina")
+        isUsCountryQuery(q) -> matchesUsCountryAlias(country, q)
+        q == "ca" || q == "can" || q == "canada" -> key.startsWith("canada") || name.startsWith("canada")
+        else -> name.startsWith(q) || key.startsWith(q) ||
+            getSubstantiveWords(country.countryName).any { it.startsWith(q) }
+    }
 }
 
 @OptIn(ExperimentalLayoutApi::class)
@@ -154,20 +171,7 @@ fun CountriesScreen(
     }
 
     val matchingCountries = remember(countryQuery, countries) {
-        val q = countryQuery.trim().lowercase()
-        if (q.length < 2 || q in stopWords) emptyList()
-        else countries.filter { country ->
-            val name = country.countryName.lowercase()
-            val key = country.countryKey.lowercase()
-            if (q == "uk" || q == "gb") key.contains("united_kingdom") || name.contains("united kingdom")
-            else if (q == "ua" || q == "uc") key.contains("ukraine") || name.contains("ucraina")
-            else if (q == "us" || q == "usa") key.startsWith("usa") || name.startsWith("usa")
-            else if (q == "ca" || q == "can" || q == "canada") key.startsWith("canada") || name.startsWith("canada")
-            else {
-                name.startsWith(q) || key.startsWith(q) ||
-                    getSubstantiveWords(country.countryName).any { it.startsWith(q) }
-            }
-        }.sortedBy { it.countryName }
+        countries.filter { matchesCountrySearchQuery(it, countryQuery) }.sortedBy { it.countryName }
     }
 
     val matchingAuthorities = remember(authorityQuery, countries) {
