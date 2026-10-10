@@ -545,12 +545,7 @@ fun BrandFlagTile(
     country: Country,
     onClick: () -> Unit
 ) {
-    val countryCode = when {
-        country.countryKey.contains("united_kingdom") -> "UK"
-        country.countryKey.contains("united_states") || country.countryKey.startsWith("usa") -> "USA"
-        country.countryKey.contains("canada") -> "CAN"
-        else -> country.countryKey.take(3).uppercase().replace("_", "")
-    }
+    val countryCode = deriveTileCountryCode(country)
 
     val siglaText = country.authority.abbreviation?.takeIf { it.isNotBlank() }
         ?: country.countryName.take(3).uppercase()
