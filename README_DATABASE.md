@@ -171,7 +171,12 @@ Feed vuoti o non disponibili non mostrano date né contenuti di esempio.
 
 Il feed viene rivalidato a ogni caricamento (`cache: "no-cache"`), non aggiornato
 in tempo reale. Il service worker non intercetta questo JSON; conserva invece
-il controller locale nella shell. Incrementare la versione cache quando cambia.
+il controller locale e la pagina News nella shell. Il feed resta non disponibile
+offline. Il flag di ogni card proviene dal campo `flag` del record selezionato,
+senza mapping frontend o dipendenze dal JSON delle Autorità; valori mancanti o
+non emoji usano 🏳️. L'esportazione pubblica deve includere il campo formula
+`NEWS_SIMPLE.flag` affinché siano mostrate le bandiere editoriali.
+Incrementare la versione cache quando cambia.
 Le regressioni browser sono `/test-website-news.html`, `/test-app-news.html`
 (copertura PR #170) e `/test-pwa.html`, servite con `python3 -m http.server 8000`.
 

@@ -109,7 +109,7 @@
                     addResult(registration.scope === `${location.origin}/`, 'Service worker registers with root scope');
                     const cacheName = worker.match(/const CACHE_NAME = '([^']+)'/)[1];
                     const cache = await caches.open(cacheName);
-                    const shellPaths = ['/', '/index.html', '/odissea.html', '/db.enc', '/manifest.json', '/logo_shield_financial_defense.svg', '/logo_galaxy_yous.svg', ...manifest.icons.map(icon => icon.src)];
+                    const shellPaths = ['/', '/index.html', '/news.html', '/scripts/news-feed.js', '/odissea.html', '/db.enc', '/manifest.json', '/logo_shield_financial_defense.svg', '/logo_galaxy_yous.svg', ...manifest.icons.map(icon => icon.src)];
                     for (const path of shellPaths) {
                         const response = await cache.match(path);
                         addResult(response?.ok === true, `${path} is precached for offline use`);
