@@ -156,6 +156,34 @@ Remove-Item db_decrypted.json  # Pulisci dopo verifica
 
 ## 🔧 **AGGIORNAMENTO SERVICE WORKER**
 
+### News pubbliche della homepage
+
+La homepage canonica `/index.html` conserva il contenitore CONSOB/FCA/AMF e
+collega `/news.html`. Entrambe le pagine leggono l'esportazione pubblica
+`https://raw.githubusercontent.com/avvstancamarcello/Airtable-news/main/news.json`
+tramite `scripts/news-feed.js`, senza credenziali né richieste dirette ad Airtable.
+La data è il massimo `published_at` valido dei record con `status: "published"`,
+considerando tutte le traduzioni, visualizzato nella lingua corrente in UTC.
+Non è la data di caricamento. Le notizie sono raggruppate per `news_id`, ordinate
+dalla più recente e selezionate nella lingua richiesta; se manca, viene usato
+inglese, poi italiano, poi una traduzione disponibile, con avviso esplicito.
+Feed vuoti o non disponibili non mostrano date né contenuti di esempio.
+
+Il feed viene rivalidato a ogni caricamento (`cache: "no-cache"`), non aggiornato
+in tempo reale. Il service worker non intercetta questo JSON; conserva invece
+il controller locale nella shell. Incrementare la versione cache quando cambia.
+Le regressioni browser sono `/test-website-news.html`, `/test-app-news.html`
+(copertura PR #170) e `/test-pwa.html`, servite con `python3 -m http.server 8000`.
+
+`/APP/index.html` è una variante attiva di riferimento e attualmente non contiene
+una voce News; la pagina app già integrata è `/APP/News-format-file-APP.html`,
+che rimane invariata. Nel progetto Android, `CountriesScreen.kt` apre
+`https://www.amevfirenze.it/news.html` tramite `Intent.ACTION_VIEW` in
+`MainScaffold.kt`: queste modifiche web non richiedono una ricompilazione APK.
+Non cambiano asset Android, URL nativi, firma o versioni e non pubblicano release.
+Verificare separatamente il deployment pubblico dopo il merge; i test locali
+non certificano la pubblicazione né il funzionamento su dispositivi fisici.
+
 ### Visione panoramica bandiere — pubblicazione
 
 I record possono specificare `flagImage`, un percorso locale `flags/nome.svg`

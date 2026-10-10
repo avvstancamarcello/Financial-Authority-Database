@@ -896,6 +896,10 @@
             transform: translateY(-1px);
             background: rgba(34, 197, 94, 0.2);
         }
+        .language-hint-link:focus-visible {
+            outline: 3px solid #bbf7d0;
+            outline-offset: 3px;
+        }
         .authority-link-stack {
             display: flex;
             flex-wrap: wrap;
@@ -3053,7 +3057,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     </ul>
                 </section>
                 <span class="language-hint" aria-label="Authority autrici delle tre pillole">
-                    <a href="news.html" class="language-hint-link" aria-label="Authority autrici delle tre pillole">
+                    <a href="news.html" class="language-hint-link" aria-label="NEWS PUBBLICATE" aria-describedby="homepage-news-date">
                         <span class="authority-link-stack" aria-hidden="true">
                             <span class="authority-link-pill"><span class="fi fi-it" aria-hidden="true"></span>CONSOB</span>
                             <span class="authority-link-pill"><span class="fi fi-gb" aria-hidden="true"></span>FCA</span>
@@ -3061,7 +3065,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                         </span>
                     </a>
                     <span class="language-hint-meta" aria-label="Data e titolo delle pillole">
-                        <span class="language-hint-date" data-i18n-text="newsPillsDate">NEWS PUBBLICATE . 01/10/2026</span>
+                        <span class="language-hint-date" id="homepage-news-date" aria-live="polite">Caricamento notizie…</span>
                         <span class="language-hint-title" data-i18n-text="newsPillsTitle">3 pillole di educazione finanziaria ogni week end</span>
                     </span>
                 </span>
@@ -5392,69 +5396,57 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         translations.it.landingHeroTitle = "Database Autorità Finanziarie Nazionali ed Internazionali";
         translations.it.landingHeroCoverage = "Accedi in 161 Paesi con 239 bandiere!";
         translations.it.landingHeroSubtitle = "Verifica licenze broker, segnala truffe Forex e Crypto, chiedi controllo della identità tra destinatari dei bonifici ed impresa finanziaria autorizzata.";
-        translations.it.newsPillsDate = "NEWS PUBBLICATE . 01/10/2026";
         translations.it.newsPillsTitle = "3 pillole di educazione finanziaria ogni week end";
         translations.it.navReferences = "📜 Istituzioni Internazionali";
         translations.en.landingHeroTitle = "National and International Financial Authorities Database";
         translations.en.landingHeroCoverage = "Access 161 countries with 239 flags!";
         translations.en.landingHeroSubtitle = "Verify broker licenses, report Forex/Crypto scams, and ask for control of the financial identity between payment beneficiaries and the company.";
-        translations.en.newsPillsDate = "NEWS PUBLISHED . 01/10/2026";
         translations.en.newsPillsTitle = "3 financial education pills every weekend";
         translations.en.navReferences = "📜 International Institutions";
         translations.fr.landingHeroTitle = "Base de Données des Autorités Financières Nationales et Internationales";
         translations.fr.landingHeroCoverage = "Accédez à 161 pays avec 239 drapeaux !";
         translations.fr.landingHeroSubtitle = "Vérifiez les licences de courtage, signalez les fraudes Forex/Crypto et demandez un contrôle de l'identité financière entre le bénéficiaire d'un virement et l'entreprise.";
-        translations.fr.newsPillsDate = "ACTUALITÉS PUBLIÉES . 01/10/2026";
         translations.fr.newsPillsTitle = "3 pilules d'éducation financière chaque week-end";
         translations.fr.navReferences = "📜 Institutions internationales";
         translations.de.landingHeroTitle = "Datenbank nationaler und internationaler Finanzbehörden";
         translations.de.landingHeroCoverage = "Zugriff auf 161 Länder mit 239 Flaggen!";
         translations.de.landingHeroSubtitle = "Prüfen Sie Brokerlizenzen, melden Sie Forex-/Krypto-Betrug und bitten Sie um Kontrolle der finanziellen Identität zwischen Zahlungsempfängern und Unternehmen.";
-        translations.de.newsPillsDate = "NEWS VERÖFFENTLICHT . 01/10/2026";
         translations.de.newsPillsTitle = "3 Pillen zur Finanzbildung jedes Wochenende";
         translations.de.navReferences = "📜 Internationale Institutionen";
         translations.es.landingHeroTitle = "Base de Datos de Autoridades Financieras Nacionales e Internacionales";
         translations.es.landingHeroCoverage = "Accede a 161 países con 239 banderas!";
         translations.es.landingHeroSubtitle = "Verifique licencias de bróker, denuncie fraudes Forex/Crypto y solicite el control de la identidad financiera entre beneficiarios de pagos y la empresa.";
-        translations.es.newsPillsDate = "NOTICIAS PUBLICADAS . 01/10/2026";
         translations.es.newsPillsTitle = "3 píldoras de educación financiera cada fin de semana";
         translations.es.navReferences = "📜 Instituciones Internacionales";
         translations.pt.landingHeroTitle = "Base de Dados de Autoridades Financeiras Nacionais e Internacionais";
         translations.pt.landingHeroCoverage = "Aceda a 161 países com 239 bandeiras!";
         translations.pt.landingHeroSubtitle = "Verifique licenças de corretoras, denuncie fraudes Forex/Crypto e solicite controlo da identidade financeira entre beneficiários de pagamentos e a empresa.";
-        translations.pt.newsPillsDate = "NOTÍCIAS PUBLICADAS . 01/10/2026";
         translations.pt.newsPillsTitle = "3 comprimidos de educação financeira a cada fim de semana";
         translations.pt.navReferences = "📜 Instituições Internacionais";
         translations.bs.landingHeroTitle = "Baza finansijskih autoriteta - nacionalna i međunarodna";
         translations.bs.landingHeroCoverage = "Pristupite 161 zemlji sa 239 zastava!";
         translations.bs.landingHeroSubtitle = "Provjerite licence brokera, prijavite Forex/Crypto prevare i zatražite provjeru financijskog identiteta između primalaca uplata i tvrtke.";
-        translations.bs.newsPillsDate = "OBJAVLJENE VIJESTI . 01/10/2026";
         translations.bs.newsPillsTitle = "3 pilule finansijskog obrazovanja svaki vikend";
         translations.bs.navReferences = "📜 Međunarodne institucije";
         translations.sq.landingHeroTitle = "Baza e Autoriteteve Financiare Kombëtare dhe Ndërkombëtare";
         translations.sq.landingHeroCoverage = "Hyr në 161 vende me 239 flamuj!";
         translations.sq.landingHeroSubtitle = "Verifikoni licencat e brokerëve, raportoni mashtrimet Forex/Crypto dhe kërkoni kontrollin e identitetit financiar midis përfituesve të pagesave dhe firmës.";
-        translations.sq.newsPillsDate = "LAJME TË PUBLIKUARA . 01/10/2026";
         translations.sq.newsPillsTitle = "3 pilula edukimi financiar çdo fundjavë";
         translations.sq.navReferences = "📜 Institucionet Ndërkombëtare";
         translations.ar.landingHeroTitle = "قاعدة بيانات السلطات المالية الوطنية والدولية";
         translations.ar.landingHeroCoverage = "تصفح 161 دولة عبر 239 علمًا!";
-        translations.ar.newsPillsDate = "الأخبار المنشورة . 01/10/2026";
         translations.ar.newsPillsTitle = "3 حبوب للتثقيف المالي كل نهاية أسبوع";
         translations.ar.navReferences = "📜 مؤسسات دولية";
         translations.zh.landingHeroTitle = "国家与国际金融监管机构数据库";
         translations.zh.landingHeroCoverage = "访问161个国家，覆盖239面国旗！";
-        translations.zh.newsPillsDate = "已发布新闻 . 01/10/2026";
         translations.zh.newsPillsTitle = "每周末发布3条金融教育小贴士";
         translations.zh.navReferences = "📜 国际机构";
         translations.hi.landingHeroTitle = "राष्ट्रीय और अंतर्राष्ट्रीय वित्तीय प्राधिकरण डेटाबेस";
         translations.hi.landingHeroCoverage = "161 देशों तक पहुँचें, 239 ध्वज के साथ!";
-        translations.hi.newsPillsDate = "समाचार प्रकाशित . 01/10/2026";
         translations.hi.newsPillsTitle = "हर सप्ताहांत 3 वित्तीय शिक्षा गोलियाँ";
         translations.hi.navReferences = "📜 अंतरराष्ट्रीय संस्थान";
         translations.vi.landingHeroTitle = "Cơ sở dữ liệu cơ quan tài chính quốc gia và quốc tế";
         translations.vi.landingHeroCoverage = "Truy cập 161 quốc gia với 239 lá cờ!";
-        translations.vi.newsPillsDate = "TIN TỨC ĐÃ ĐĂNG . 01/10/2026";
         translations.vi.newsPillsTitle = "3 viên thông tin giáo dục tài chính mỗi cuối tuần";
         translations.vi.navReferences = "📜 Cơ quan quốc tế";
         translations.fr.navReferences = "📜 Institutions internationales";
@@ -9650,5 +9642,6 @@ https://avvstancamarcello.github.io/Financial-Authority-Database/
         <span style="margin:0 6px;">·</span>
         <a href="terms.html" style="color:#bfdbfe; text-decoration:underline;">Termini di Servizio</a>
     </footer>
+    <script src="scripts/news-feed.js"></script>
 </body>
 </html>
