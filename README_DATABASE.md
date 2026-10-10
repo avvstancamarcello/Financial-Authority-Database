@@ -208,6 +208,10 @@ risoluzione del plugin `com.android.application:8.7.3`; il Gradle installato è
 9.8.0, il wrapper dichiara 8.9 ma manca il JAR. Nessun dispositivo/emulatore
 collegato: screenshot Android, 320/360 dp, font ingranditi e modalità scura
 su device restano da verificare prima della distribuzione.
+Scansione segreti senza rilevamenti; revisione read-only supplementare senza
+problemi significativi. La validazione automatica richiesta è stata tentata:
+il revisore non è partito per modello non disponibile e CodeQL ha saltato
+JavaScript per dimensione del database. Non sono esiti di analisi completate.
 
 **Distribuzione separata:** Android richiede nuova build e distribuzione;
 la PWA richiede aggiornamento degli asset/deploy e attivazione della nuova cache.
