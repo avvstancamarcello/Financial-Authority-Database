@@ -44,7 +44,7 @@
                 const publishedHash = Array.from(new Uint8Array(await crypto.subtle.digest(
                     'SHA-256', await response.clone().arrayBuffer())))
                     .map(byte => byte.toString(16).padStart(2, '0')).join('');
-                check(publishedHash === '220bf5864814fc5af1bf897cda6f2e5eae6579f3d3b73ebc5dca81bf2779bf08',
+                check(publishedHash === '56da9bb105e25e11419924892037f58d5fbcbcf405159539f94f198539e39a17',
                     'Published index.html is byte-identical to the approved WIP homepage');
                 const source = new DOMParser().parseFromString(await response.text(), 'text/html');
                 const seoTitle = 'Strumento per richiesta di collaborazione alle Autorità Finanziarie | Verifica preliminare nazionale e internazionale';
@@ -55,24 +55,30 @@
                     && ['meta-description', 'meta-og-description', 'meta-twitter-description'].every(id =>
                         source.getElementById(id).content === seoDescription),
                     'Static title, description, Open Graph and Twitter match the requested SEO copy');
-                check(source.querySelector('h1 [data-i18n="landingHeroTitle"]').textContent === seoTitle.split(' | ')[0]
-                    && source.querySelector('h1 [data-i18n="landingHeroCoverage"]').textContent === seoTitle.split(' | ')[1]
+                check(source.querySelector('h1 [data-i18n="landingHeroTitle"]').textContent
+                        === 'Strumento per richiesta di collaborazione a 239 Autorità Finanziarie'
+                    && source.querySelector('h1 [data-i18n="landingHeroCoverage"]').textContent
+                        === 'Verifica preliminare nazionale e internazionale'
                     && /investigazioni finanziarie/.test(
                         source.querySelector('[data-i18n="landingHeroSubtitle"]').textContent),
-                    'Existing hero markup describes cooperation requests and preliminary verification');
+                    'Hero markup describes cooperation requests and preliminary verification');
                 const compactLead = {
                     it: {
-                       landingHeroSubtitle: 'Fonti ufficiali e checklist preliminari per richieste di collaborazione nelle investigazioni finanziarie. La consultazione non garantisce la sicurezza degli investimenti.',
+                       landingHeroSubtitle: 'Fonti ufficiali e checklist preliminari per richieste di collaborazione nelle investigazioni finanziarie.',
+                       landingHeroSafetyNotice: "L'esistenza sul web (sito web, email o app) non garantisce la sicurezza degli investimenti.",
+                       landingHeroCta: 'Apri il form di richiesta con ogni bandiera!',
                        appDownloadDescription: "Consulta le autorità finanziarie da smartphone o PC. Verifica autorizzazioni e identità presso le fonti competenti: l'app non certifica gli investimenti."
                     },
                     en: {
-                       landingHeroSubtitle: 'Official sources and preliminary checklists for cooperation requests in financial investigations. Consultation does not guarantee investment safety.',
+                       landingHeroSubtitle: 'Official sources and preliminary checklists for cooperation requests in financial investigations.',
+                       landingHeroSafetyNotice: 'An online presence (website, email, or app) does not guarantee investment safety.',
+                       landingHeroCta: 'Open the request form from any flag!',
                        appDownloadDescription: 'Consult financial authorities on smartphone or PC. Check authorizations and identity with the competent sources: the app does not certify investments.'
                     }
                 };
                 check(Object.entries(compactLead.it).every(([key, text]) =>
-                    source.querySelector(`[data-i18n="${key}"]`).textContent === text),
-                    'Static lead copy is compact and retains cooperation purpose and safety limitations');
+                    source.querySelector(`[data-i18n="${key}"], [data-i18n-text="${key}"]`).textContent === text),
+                    'Static lead copy includes cooperation purpose, safety notice, and flag CTA');
                 const amev = source.getElementById('amev-introduction-content');
                 check(source.getElementById('amev-introduction-toggle-label').textContent
                     === 'AMEV / AMEA / AWEV · Versioni linguistiche'
@@ -137,7 +143,7 @@
                     && /non una certificazione o garanzia dello strumento/.test(section.querySelector('p').textContent),
                     'Falcone introduction is a historical-methodological reference, not a tool certification');
 
-                const unsupported = /più completo del mondo|most complete|sito ufficiale legittimo|official legitimate|no limits|best seller|161 Paesi|161 countries|239 autorità|239 authorities|239 link|239 financial|scudo attivo|quasi certamente una truffa/i;
+                const unsupported = /più completo del mondo|most complete|sito ufficiale legittimo|official legitimate|no limits|best seller|161 Paesi|161 countries|239 link|scudo attivo|quasi certamente una truffa/i;
                 check(!unsupported.test(source.body.textContent.split('const translations =')[0]),
                     'Static WIP fallbacks do not repeat unsupported coverage or self-certification claims');
                 for (const script of source.querySelectorAll('script')) {
@@ -187,8 +193,15 @@
                         win.changeLanguage(locale);
                         const copy = win.getLanguageBundle(locale);
                         check(Object.entries(compactLead[locale === 'it' ? 'it' : 'en']).every(([key, text]) =>
-                            copy[key] === text && doc.querySelector(`[data-i18n="${key}"]`).textContent === text),
+                            copy[key] === text
+                                && doc.querySelector(`[data-i18n="${key}"], [data-i18n-text="${key}"]`).textContent === text),
                             `${locale}: compact lead copy survives rendering and language switching`);
+                        check(['landingHeroTitle', 'landingHeroCoverage', 'landingHeroSubtitle',
+                            'landingHeroSafetyNotice', 'landingHeroCta'].every(key => {
+                            const element = doc.querySelector(`[data-i18n="${key}"], [data-i18n-text="${key}"]`);
+                            return typeof copy[key] === 'string' && copy[key].length > 0
+                                && element?.textContent === copy[key];
+                        }), `${locale}: localized hero copy and flag CTA render`);
                         check(!/AMEV|AMEA|AWEV|landing page/i.test(
                             doc.getElementById('language-selector-eu-title').textContent),
                             `${locale}: language heading does not repeat the AMEV description`);
