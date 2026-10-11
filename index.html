@@ -2931,8 +2931,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 </div>
             </div>
             <h1 itemprop="name"><span data-i18n="landingHeroTitle">Strumento per richiesta di collaborazione alle Autorità Finanziarie</span><br><span data-i18n="landingHeroCoverage">Verifica preliminare nazionale e internazionale</span></h1>
-            <p class="subtitle" data-i18n="landingHeroSubtitle" itemprop="description">Fonti ufficiali e checklist preliminari per richieste di collaborazione nelle investigazioni finanziarie. La consultazione non garantisce la sicurezza degli investimenti.</p>
-            <p class="hero-cta-row"><a href="#storia-giovanni-falcone" class="hero-cta-link" data-i18n-text="heroFalconeMethodCta">Metodo Falcone</a></p>
+            <p class="subtitle" data-i18n="landingHeroSubtitle" itemprop="description">Fonti ufficiali e checklist preliminari per richieste di collaborazione nelle investigazioni finanziarie.</p>
+            <p class="subtitle" data-i18n-text="landingHeroSafetyNotice">La presenza sul web (sito, email o app) non garantisce la sicurezza degli investimenti.</p>
+            <p class="hero-cta-row">
+                <a href="#flags-section" class="hero-cta-link" data-i18n-text="landingHeroCta">Apri il form di richiesta selezionando una bandiera!</a>
+                <a href="#storia-giovanni-falcone" class="hero-cta-link" data-i18n-text="heroFalconeMethodCta">Metodo Falcone</a>
+            </p>
             <nav class="language-selector" data-layout="compact" role="navigation" data-i18n-aria-label="languageSelectionAriaLabel" aria-label="Language selection">
                 <section class="language-selector-group language-selector-eu" aria-labelledby="language-selector-eu-title">
                     <h2 class="language-selector-title" id="language-selector-eu-title" data-i18n-text="languageSelectorEuTitle"><span class="fi fi-eu language-selector-area-icon" aria-hidden="true" style="margin-right:0.5rem;"></span>Area UE - Seleziona la tua lingua</h2>
@@ -6238,6 +6242,113 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             hi: 'फाल्कोने पद्धति', vi: 'Phương pháp Falcone', sq: 'Metoda Falcone', bs: 'Falconeova metoda',
             ro: 'Metoda Falcone', nl: 'Falcone-methode', el: 'Μέθοδος Φαλκόνε'
         }).forEach(([locale, label]) => { (translations[locale] ||= {}).heroFalconeMethodCta = label; });
+        Object.entries({
+            it: {
+                landingHeroTitle: "Strumento per richiesta di collaborazione a 239 Autorità Finanziarie",
+                landingHeroCoverage: "Verifica preliminare nazionale e internazionale",
+                landingHeroSubtitle: "Fonti ufficiali e checklist preliminari per richieste di collaborazione nelle investigazioni finanziarie.",
+                landingHeroSafetyNotice: "La presenza sul web (sito, email o app) non garantisce la sicurezza degli investimenti.",
+                landingHeroCta: "Apri il form di richiesta selezionando una bandiera!"
+            },
+            en: {
+                landingHeroTitle: "A tool for requesting cooperation from 239 Financial Authorities",
+                landingHeroCoverage: "National and international preliminary checks",
+                landingHeroSubtitle: "Official sources and preliminary checklists for cooperation requests in financial investigations.",
+                landingHeroSafetyNotice: "An online presence (website, email, or app) does not guarantee investment safety.",
+                landingHeroCta: "Open the request form by selecting a flag!"
+            },
+            fr: {
+                landingHeroTitle: "Outil de demande de coopération auprès de 239 autorités financières",
+                landingHeroCoverage: "Vérification préliminaire nationale et internationale",
+                landingHeroSubtitle: "Sources officielles et listes de contrôle préliminaires pour les demandes de coopération dans les enquêtes financières.",
+                landingHeroSafetyNotice: "Une présence en ligne (site web, e-mail ou application) ne garantit pas la sécurité des investissements.",
+                landingHeroCta: "Ouvrez le formulaire de demande en sélectionnant un drapeau !"
+            },
+            de: {
+                landingHeroTitle: "Instrument zur Beantragung der Zusammenarbeit mit 239 Finanzbehörden",
+                landingHeroCoverage: "Nationale und internationale Vorabprüfung",
+                landingHeroSubtitle: "Offizielle Quellen und vorläufige Checklisten für Ersuchen um Zusammenarbeit bei Finanzermittlungen.",
+                landingHeroSafetyNotice: "Eine Präsenz im Internet (Website, E-Mail oder App) garantiert keine Anlagesicherheit.",
+                landingHeroCta: "Öffnen Sie das Antragsformular, indem Sie eine Flagge auswählen!"
+            },
+            es: {
+                landingHeroTitle: "Herramienta para solicitar la cooperación de 239 autoridades financieras",
+                landingHeroCoverage: "Verificación preliminar nacional e internacional",
+                landingHeroSubtitle: "Fuentes oficiales y listas de verificación preliminares para solicitudes de cooperación en investigaciones financieras.",
+                landingHeroSafetyNotice: "La presencia en Internet (sitio web, correo electrónico o aplicación) no garantiza la seguridad de las inversiones.",
+                landingHeroCta: "¡Abre el formulario de solicitud seleccionando una bandera!"
+            },
+            pt: {
+                landingHeroTitle: "Ferramenta para solicitar a cooperação de 239 autoridades financeiras",
+                landingHeroCoverage: "Verificação preliminar nacional e internacional",
+                landingHeroSubtitle: "Fontes oficiais e listas de verificação preliminares para pedidos de cooperação em investigações financeiras.",
+                landingHeroSafetyNotice: "A presença na Internet (site, e-mail ou aplicação) não garante a segurança dos investimentos.",
+                landingHeroCta: "Abra o formulário de pedido selecionando uma bandeira!"
+            },
+            sq: {
+                landingHeroTitle: "Mjet për kërkesa bashkëpunimi me 239 autoritete financiare",
+                landingHeroCoverage: "Verifikim paraprak kombëtar dhe ndërkombëtar",
+                landingHeroSubtitle: "Burime zyrtare dhe lista paraprake kontrolli për kërkesa bashkëpunimi në hetimet financiare.",
+                landingHeroSafetyNotice: "Prania në internet (faqe interneti, email ose aplikacion) nuk garanton sigurinë e investimeve.",
+                landingHeroCta: "Hap formularin e kërkesës duke zgjedhur një flamur!"
+            },
+            bs: {
+                landingHeroTitle: "Alat za zahtjev za saradnju s 239 finansijskih regulatora",
+                landingHeroCoverage: "Preliminarna nacionalna i međunarodna provjera",
+                landingHeroSubtitle: "Zvanični izvori i preliminarne kontrolne liste za zahtjeve za saradnju u finansijskim istragama.",
+                landingHeroSafetyNotice: "Prisustvo na internetu (web-stranica, e-pošta ili aplikacija) ne garantuje sigurnost ulaganja.",
+                landingHeroCta: "Otvorite obrazac za zahtjev odabirom zastave!"
+            },
+            ro: {
+                landingHeroTitle: "Instrument pentru solicitarea cooperării cu 239 de autorități financiare",
+                landingHeroCoverage: "Verificare preliminară națională și internațională",
+                landingHeroSubtitle: "Surse oficiale și liste preliminare de verificare pentru solicitări de cooperare în investigații financiare.",
+                landingHeroSafetyNotice: "Prezența online (site, e-mail sau aplicație) nu garantează siguranța investițiilor.",
+                landingHeroCta: "Deschide formularul de solicitare selectând un steag!"
+            },
+            nl: {
+                landingHeroTitle: "Hulpmiddel voor samenwerkingsverzoeken aan 239 financiële autoriteiten",
+                landingHeroCoverage: "Nationale en internationale voorafgaande controle",
+                landingHeroSubtitle: "Officiële bronnen en voorlopige checklists voor samenwerkingsverzoeken bij financiële onderzoeken.",
+                landingHeroSafetyNotice: "Een online aanwezigheid (website, e-mail of app) garandeert de veiligheid van beleggingen niet.",
+                landingHeroCta: "Open het aanvraagformulier door een vlag te selecteren!"
+            },
+            el: {
+                landingHeroTitle: "Εργαλείο υποβολής αιτημάτων συνεργασίας προς 239 χρηματοοικονομικές αρχές",
+                landingHeroCoverage: "Εθνικός και διεθνής προκαταρκτικός έλεγχος",
+                landingHeroSubtitle: "Επίσημες πηγές και προκαταρκτικές λίστες ελέγχου για αιτήματα συνεργασίας σε χρηματοοικονομικές έρευνες.",
+                landingHeroSafetyNotice: "Η παρουσία στο διαδίκτυο (ιστότοπος, email ή εφαρμογή) δεν εγγυάται την ασφάλεια των επενδύσεων.",
+                landingHeroCta: "Ανοίξτε τη φόρμα αιτήματος επιλέγοντας μια σημαία!"
+            },
+            ar: {
+                landingHeroTitle: "أداة لطلب التعاون مع 239 سلطة مالية",
+                landingHeroCoverage: "تحقق أولي وطني ودولي",
+                landingHeroSubtitle: "مصادر رسمية وقوائم تحقق أولية لطلبات التعاون في التحقيقات المالية.",
+                landingHeroSafetyNotice: "الوجود على الإنترنت (موقع إلكتروني أو بريد إلكتروني أو تطبيق) لا يضمن سلامة الاستثمارات.",
+                landingHeroCta: "افتح نموذج الطلب باختيار أحد الأعلام!"
+            },
+            zh: {
+                landingHeroTitle: "与239家金融监管机构申请协作的工具",
+                landingHeroCoverage: "国内与国际初步核查",
+                landingHeroSubtitle: "为金融调查协作请求提供官方来源和初步核查清单。",
+                landingHeroSafetyNotice: "在线存在（网站、电子邮件或应用程序）并不保证投资安全。",
+                landingHeroCta: "选择一面旗帜以打开请求表单！"
+            },
+            hi: {
+                landingHeroTitle: "239 वित्तीय प्राधिकरणों से सहयोग का अनुरोध करने का साधन",
+                landingHeroCoverage: "राष्ट्रीय और अंतरराष्ट्रीय प्रारंभिक जाँच",
+                landingHeroSubtitle: "वित्तीय जाँच में सहयोग के अनुरोधों के लिए आधिकारिक स्रोत और प्रारंभिक जाँच-सूचियाँ।",
+                landingHeroSafetyNotice: "ऑनलाइन मौजूदगी (वेबसाइट, ईमेल या ऐप) निवेश की सुरक्षा की गारंटी नहीं देती।",
+                landingHeroCta: "कोई ध्वज चुनकर अनुरोध फ़ॉर्म खोलें!"
+            },
+            vi: {
+                landingHeroTitle: "Công cụ yêu cầu hợp tác với 239 cơ quan tài chính",
+                landingHeroCoverage: "Kiểm tra sơ bộ trong nước và quốc tế",
+                landingHeroSubtitle: "Nguồn chính thức và danh sách kiểm tra sơ bộ cho các yêu cầu hợp tác trong điều tra tài chính.",
+                landingHeroSafetyNotice: "Sự hiện diện trên mạng (trang web, email hoặc ứng dụng) không đảm bảo an toàn cho khoản đầu tư.",
+                landingHeroCta: "Mở biểu mẫu yêu cầu bằng cách chọn một lá cờ!"
+            }
+        }).forEach(([locale, copy]) => Object.assign(translations[locale] ||= {}, copy));
         (() => {
             const stickyNav = document.querySelector('body > nav');
             if (!stickyNav || typeof ResizeObserver !== 'function') return;
@@ -6300,9 +6411,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 securityTitle: "Directory indipendente verso le fonti ufficiali",
                 securityText: "Consulta i registri aggiornati delle autorità competenti. La directory non accerta licenze, identità dei beneficiari o sicurezza degli investimenti; un link non implica approvazione dell'autorità.",
                 introText: "Directory indipendente di collegamenti alle autorità finanziarie, con record nazionali, regionali e subnazionali. Consulta i registri aggiornati presso le fonti ufficiali: questa pagina non accerta licenze né identifica il titolare di un conto.",
-                landingHeroTitle: "Strumento per richiesta di collaborazione alle Autorità Finanziarie",
-                landingHeroCoverage: "Verifica preliminare nazionale e internazionale",
-                landingHeroSubtitle: "Fonti ufficiali e checklist preliminari per richieste di collaborazione nelle investigazioni finanziarie. La consultazione non garantisce la sicurezza degli investimenti.",
                 quickIndexCountriesLink: "Consulta le schede delle autorità",
                 quickIndexAuthorLink: "Autore e riferimenti",
                 navDatabase: "🏠 Directory delle autorità finanziarie",
@@ -6339,9 +6447,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 securityTitle: "Independent directory linking to official sources",
                 securityText: "Consult current registers held by the competent authorities. This directory does not verify licenses, payment beneficiaries or investment safety; a link does not imply endorsement by an authority.",
                 introText: "Independent directory linking to financial authorities, including national, regional and subnational records. Consult current official registers: this page does not verify licenses or identify account holders.",
-                landingHeroTitle: "Tool for requesting cooperation with Financial Authorities",
-                landingHeroCoverage: "National and international preliminary verification",
-                landingHeroSubtitle: "Official sources and preliminary checklists for cooperation requests in financial investigations. Consultation does not guarantee investment safety.",
                 quickIndexCountriesLink: "Browse authority records",
                 quickIndexAuthorLink: "Author and references",
                 navDatabase: "🏠 Financial authorities directory",
