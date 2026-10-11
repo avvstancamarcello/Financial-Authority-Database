@@ -44,7 +44,7 @@
                 const publishedHash = Array.from(new Uint8Array(await crypto.subtle.digest(
                     'SHA-256', await response.clone().arrayBuffer())))
                     .map(byte => byte.toString(16).padStart(2, '0')).join('');
-                check(publishedHash === '56da9bb105e25e11419924892037f58d5fbcbcf405159539f94f198539e39a17',
+                check(publishedHash === 'f27993e87831111e872f56b1ee5fc021d07b90534340dc83da8e496c8d8e3e3e',
                     'Published index.html is byte-identical to the approved WIP homepage');
                 const source = new DOMParser().parseFromString(await response.text(), 'text/html');
                 const seoTitle = 'Strumento per richiesta di collaborazione alle Autorità Finanziarie | Verifica preliminare nazionale e internazionale';
@@ -192,10 +192,18 @@
                         'el', 'el-GR', 'sq', 'xk', 'sq-XK', 'bs', 'ar', 'zh', 'hi', 'vi']) {
                         win.changeLanguage(locale);
                         const copy = win.getLanguageBundle(locale);
-                        check(Object.entries(compactLead[locale === 'it' ? 'it' : 'en']).every(([key, text]) =>
-                            copy[key] === text
-                                && doc.querySelector(`[data-i18n="${key}"], [data-i18n-text="${key}"]`).textContent === text),
+                        const expectedAppDescription = locale === 'it'
+                            ? compactLead.it.appDownloadDescription
+                            : compactLead.en.appDownloadDescription;
+                        check(copy.appDownloadDescription === expectedAppDescription
+                            && doc.querySelector('[data-i18n="appDownloadDescription"]').textContent === expectedAppDescription,
                             `${locale}: compact lead copy survives rendering and language switching`);
+                        if (locale === 'it' || locale === 'en') {
+                            check(Object.entries(compactLead[locale]).filter(([key]) => key !== 'appDownloadDescription')
+                                .every(([key, text]) => copy[key] === text
+                                    && doc.querySelector(`[data-i18n="${key}"], [data-i18n-text="${key}"]`).textContent === text),
+                                `${locale}: localized lead copy matches the approved copy`);
+                        }
                         check(['landingHeroTitle', 'landingHeroCoverage', 'landingHeroSubtitle',
                             'landingHeroSafetyNotice', 'landingHeroCta'].every(key => {
                             const element = doc.querySelector(`[data-i18n="${key}"], [data-i18n-text="${key}"]`);
@@ -216,14 +224,14 @@
                             && (locale !== 'it' || (copy.documentTitle === seoTitle && copy.metaDescription === seoDescription)),
                             `${locale}: effective template/fallback and SEO copy are neutral`);
                         const hero = doc.querySelector('[data-i18n="landingHeroTitle"]');
-                        check(hero.lang === (locale === 'it' ? 'it' : 'en')
+                        check(hero.lang === doc.documentElement.lang
                             && doc.title === copy.documentTitle
                             && doc.querySelector('#meta-description').content === copy.metaDescription
                             && doc.querySelector('#meta-og-title').content === copy.documentTitle
                             && doc.querySelector('#meta-twitter-title').content === copy.documentTitle
                             && doc.querySelector('#meta-og-description').content === copy.metaDescription
                             && doc.querySelector('#meta-twitter-description').content === copy.metaDescription,
-                            `${locale}: editorial fallback language, title, OG and Twitter are coherent`);
+                            `${locale}: hero language, title, OG and Twitter are coherent`);
                         for (const script of doc.querySelectorAll('script[type="application/ld+json"]')) {
                             check(!unsupported.test(JSON.stringify(JSON.parse(script.textContent))),
                                 `${locale}: dynamic ${script.id} parses with neutral copy`);

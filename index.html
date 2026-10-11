@@ -6491,8 +6491,18 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
         function getWipEditorialCopy(lang) {
             const copy = WIP_EDITORIAL_COPY[lang === 'it' ? 'it' : 'en'];
+            const localizedBundle = translations[localeMetadata[lang]?.api || lang] || {};
+            const localizedHeroCopy = {};
+            if (lang !== 'it' && lang !== 'en') {
+                ['landingHeroTitle', 'landingHeroCoverage', 'landingHeroSubtitle'].forEach(key => {
+                    if (typeof localizedBundle[key] === 'string' && localizedBundle[key]) {
+                        localizedHeroCopy[key] = localizedBundle[key];
+                    }
+                });
+            }
             return {
                 ...copy,
+                ...localizedHeroCopy,
                 ogTitle: copy.documentTitle,
                 twitterTitle: copy.documentTitle,
                 ogDescription: copy.metaDescription,
@@ -7909,10 +7919,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             const langData = getLanguageBundle(lang);
             const fallbackData = translations.en || {};
             const editorialCopy = getWipEditorialCopy(lang);
+            const localizedHeroKeys = new Set(['landingHeroTitle', 'landingHeroCoverage', 'landingHeroSubtitle']);
             document.querySelectorAll('[data-i18n], [data-i18n-text]').forEach(element => {
                 const key = element.getAttribute('data-i18n') || element.getAttribute('data-i18n-text');
                 if (Object.hasOwn(editorialCopy, key)) {
-                    element.lang = lang === 'it' ? 'it' : 'en';
+                    element.lang = localizedHeroKeys.has(key)
+                        ? getHtmlLangForLocale(lang)
+                        : lang === 'it' ? 'it' : 'en';
                 }
             });
             const htmlKeys = new Set([
