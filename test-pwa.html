@@ -50,6 +50,21 @@
                 const event = new iframe.contentWindow.Event('beforeinstallprompt', { cancelable: true });
                 iframe.contentWindow.dispatchEvent(event);
                 addResult(!event.defaultPrevented, `${path}: browser install prompt is not suppressed`);
+                if (path !== '/Error/index.html') {
+                    const win = iframe.contentWindow;
+                    const doc = iframe.contentDocument;
+                    for (const selector of ['html', 'body', '.container']) {
+                        const style = win.getComputedStyle(doc.querySelector(selector));
+                        addResult(
+                            style.backgroundColor === 'rgb(241, 237, 246)' && style.backgroundImage === 'none',
+                            `${path}: ${selector} uses the light purple landing background`
+                        );
+                    }
+                    addResult(
+                        win.getComputedStyle(doc.querySelector('header')).backgroundImage.includes('rgb(118, 75, 162)'),
+                        `${path}: desktop brand header gradient is preserved`
+                    );
+                }
             } finally {
                 iframe.remove();
             }
@@ -64,6 +79,8 @@
                     addResult(manifest[key] === '/', `Manifest ${key} targets the production root`);
                 }
                 addResult(manifest.display === 'standalone', 'Manifest uses standalone display');
+                addResult(manifest.background_color === '#f1edf6', 'Launch background matches the light purple landing');
+                addResult(manifest.theme_color === '#667eea', 'Browser chrome retains the brand header color');
                 for (const size of ['192x192', '512x512']) {
                     addResult(manifest.icons.some(icon => icon.sizes === size && icon.type === 'image/png'), `Manifest includes ${size} PNG install icon`);
                 }
@@ -109,13 +126,14 @@
                     addResult(registration.scope === `${location.origin}/`, 'Service worker registers with root scope');
                     const cacheName = worker.match(/const CACHE_NAME = '([^']+)'/)[1];
                     const cache = await caches.open(cacheName);
-                    const shellPaths = ['/', '/index.html', '/odissea.html', '/db.enc', '/manifest.json', '/logo_shield_financial_defense.svg', '/logo_galaxy_yous.svg', ...manifest.icons.map(icon => icon.src)];
+                    const shellPaths = ['/', '/index.html', '/news.html', '/scripts/news-feed.js', '/odissea.html', '/db.enc', '/manifest.json', '/logo_shield_financial_defense.svg', '/logo_galaxy_yous.svg', ...manifest.icons.map(icon => icon.src)];
                     for (const path of shellPaths) {
                         const response = await cache.match(path);
                         addResult(response?.ok === true, `${path} is precached for offline use`);
                     }
                     const cachedPage = new DOMParser().parseFromString(await (await cache.match('/index.html')).text(), 'text/html');
                     addResult(cachedPage.querySelector('meta[name="application-name"]')?.content === appName, 'Offline homepage has the corrected app name');
+                    addResult(cachedPage.querySelector('style')?.textContent.includes('background: #f1edf6'), 'Offline homepage includes the light purple landing background');
                 }
             } catch (error) {
                 addResult(false, error.message);

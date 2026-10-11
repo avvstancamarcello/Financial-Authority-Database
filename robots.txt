@@ -13,6 +13,8 @@ Disallow: /db.enc
 
 # Sitemap del sito pubblico preferito
 Sitemap: https://www.amevfirenze.it/sitemap.xml
+Sitemap: https://www.amevfirenze.it/sitemap-multilingua.xml
+Sitemap: https://www.amevfirenze.it/curriculum-sitemap.xml
 
 # Direttive specifiche per bot principali
 User-agent: Googlebot

@@ -305,6 +305,14 @@
       text-align: center;
     }
 
+    @media (max-width: 640px) {
+      .news-link {
+        width: 100%;
+        min-height: 44px;
+        font-size: 1.05rem;
+      }
+    }
+
     .news-link:hover,
     .news-link:focus-visible {
       outline: 3px solid var(--text);
@@ -622,6 +630,11 @@
       return PublicNews.formatDate(dateValue, currentLanguage);
     }
 
+    function isValidNewsFlag(value) {
+      return typeof value === 'string'
+        && /^(?:\p{Regional_Indicator}{2}|🏳️)$/u.test(value);
+    }
+
     function getShareUrl(platform, item) {
       const baseUrl = item.url || 'https://www.amevfirenze.it/news.html';
       const shareText = `${item.authority}: ${item.title}`.trim();
@@ -658,7 +671,8 @@
       const flag = document.createElement('span');
       flag.className = 'flag';
       flag.setAttribute('aria-hidden', 'true');
-      flag.textContent = language.flag;
+      flag.textContent = Object.hasOwn(PublicNews.languages, item.lang)
+        ? (isValidNewsFlag(item.flag) ? item.flag : '🏳️') : '🌍';
       meta.append(flag);
       for (const text of [item.authority, '•', formatDate(item.date)]) {
         const span = document.createElement('span');
