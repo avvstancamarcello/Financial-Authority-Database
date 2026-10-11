@@ -1,0 +1,233 @@
+AMEV9lingue.txt
+
+<!-- =====================================================
+ AMEV — AUTHORITY MARKET EFFECTIVE VERIFICATION
+ Financial Authority Database
+ Multilingual Matrix — SEO Semantic HTML
+===================================================== -->
+
+<style>
+
+#amev-matrix {
+    width: 100%;
+    max-width: 1200px;
+    margin: 20px auto;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #e4e0e8;
+}
+
+/* TITOLO */
+
+#amev-matrix .amev-title {
+    background: #111827;
+    border: 2px solid #92909e;
+    border-radius: 16px;
+    padding: 16px;
+    text-align: center;
+    font-size: clamp(19px, 3vw, 28px);
+    font-weight: 700;
+    margin-bottom: 18px;
+}
+
+#amev-matrix .amev-title strong {
+    color: #26e66c;
+}
+
+/* CONTENITORE */
+
+#amev-matrix .amev-container {
+    background: #46424b;
+    border-radius: 24px;
+    padding: 22px;
+    box-shadow: 0 8px 22px rgba(0,0,0,.25);
+}
+
+/* DESCRIZIONE */
+
+#amev-matrix .amev-description {
+    font-size: 16px;
+    line-height: 1.6;
+    margin-bottom: 18px;
+}
+
+/* SCROLL ORIZZONTALE */
+
+#amev-matrix .amev-scroll {
+    width: 100%;
+    overflow-x: scroll;
+    overflow-y: hidden;
+
+    scrollbar-width: auto;
+    scrollbar-color: #83a9ff #302d36;
+
+    -webkit-overflow-scrolling: touch;
+    touch-action: pan-x pan-y;
+
+    padding-bottom: 12px;
+}
+
+/* BARRA CHROME / EDGE / SAFARI */
+
+#amev-matrix .amev-scroll::-webkit-scrollbar {
+    height: 12px;
+}
+
+#amev-matrix .amev-scroll::-webkit-scrollbar-track {
+    background: #302d36;
+    border-radius: 10px;
+}
+
+#amev-matrix .amev-scroll::-webkit-scrollbar-thumb {
+    background: #83a9ff;
+    border-radius: 10px;
+    border: 2px solid #302d36;
+}
+
+#amev-matrix .amev-scroll::-webkit-scrollbar-thumb:hover {
+    background: #a5c2ff;
+}
+
+/* TABELLA */
+
+#amev-matrix table {
+    width: 100%;
+    min-width: 780px;
+    border-collapse: collapse;
+    table-layout: auto;
+}
+
+#amev-matrix caption {
+    text-align: left;
+    color: #83a9ff;
+    font-size: 19px;
+    font-weight: 700;
+    padding-bottom: 16px;
+}
+
+#amev-matrix th,
+#amev-matrix td {
+    padding: 16px 14px;
+    text-align: left;
+    vertical-align: middle;
+    white-space: nowrap;
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+#amev-matrix thead th {
+    font-size: 20px;
+    color: #ffffff;
+    border-bottom: 1px solid #77727c;
+}
+
+#amev-matrix tbody tr {
+    border-bottom: 1px solid rgba(255,255,255,.08);
+}
+
+#amev-matrix tbody tr:last-child {
+    border-bottom: none;
+}
+
+/* COLORI ORIGINALI */
+
+#amev-matrix .green {
+    color: #49a76b;
+}
+
+#amev-matrix .yellow {
+    color: #f2c34f;
+}
+
+#amev-matrix .red {
+    color: #d65757;
+}
+
+#amev-matrix .cyan {
+    color: #54bdd0;
+}
+
+/* LETTERE A / V */
+
+#amev-matrix .letter-a {
+    color: #26e66c;
+}
+
+#amev-matrix .letter-v {
+    color: #ed5555;
+}
+
+/* COLLEGAMENTI */
+
+#amev-matrix .amev-country-link {
+    color: inherit;
+    text-decoration: none;
+    font-weight: 700;
+    display: inline-block;
+    padding: 5px 2px;
+    border-radius: 5px;
+}
+
+#amev-matrix .amev-country-link:hover {
+    text-decoration: underline;
+    background: rgba(255,255,255,.08);
+}
+
+#amev-matrix .amev-country-link:focus-visible {
+    outline: 2px solid #83a9ff;
+    outline-offset: 3px;
+}
+
+/* INDICATORE SCORRIMENTO */
+
+#amev-matrix .amev-scroll-hint {
+    font-size: 13px;
+    color: #d7d3df;
+    margin: 8px 0 12px;
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 768px) {
+
+    #amev-matrix .amev-container {
+        padding: 16px 10px;
+        border-radius: 20px;
+    }
+
+    #amev-matrix .amev-title {
+        font-size: 19px;
+        padding: 14px 8px;
+    }
+
+    #amev-matrix .amev-description {
+        font-size: 15px;
+    }
+
+    #amev-matrix th,
+    #amev-matrix td {
+        font-size: 15px;
+        padding: 14px 12px;
+    }
+
+}
+
+</style>
+
+
+<section id="amev-matrix"
+         aria-labelledby="amev-matrix-heading">
+
+    <h2 class="amev-title"
+        id="amev-matrix-heading">
+
+        <strong>AMEV</strong>
+        Acronym Matrix (9 EU Languages)
+
+    </h2>
+
+    <div class="amev-container">
+
+        <p class="amev-description">
+
+            <strong>AMEV</strong> stands for
+            <strong>
