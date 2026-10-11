@@ -19,7 +19,7 @@
             {
                 lang: 'it',
                 expectedHtmlLang: 'it',
-                expectedCanonical: 'https://tutelatruffe.it/',
+                expectedCanonical: 'https://www.amevfirenze.it/?lang=it',
                 expectedDir: 'ltr',
                 expectedOgLocale: 'it_IT',
                 expectedTitle: "Database Autorità Finanziarie Internazionali | Verifica Licenze Broker | 239 Autorità Finanziarie",
@@ -44,7 +44,7 @@
             {
                 lang: 'bs',
                 expectedHtmlLang: 'bs-BA',
-                expectedCanonical: 'https://tutelatruffe.it/?lang=bs',
+                expectedCanonical: 'https://www.amevfirenze.it/?lang=bs',
                 expectedDir: 'ltr',
                 expectedOgLocale: 'bs_BA',
                 expectedTitle: "International Financial Authorities Database | Verify Broker Licenses | 239 Financial Authorities",
@@ -69,7 +69,7 @@
             {
                 lang: 'el',
                 expectedHtmlLang: 'el',
-                expectedCanonical: 'https://tutelatruffe.it/?lang=el',
+                expectedCanonical: 'https://www.amevfirenze.it/?lang=el',
                 expectedDir: 'ltr',
                 expectedOgLocale: 'el_GR',
                 expectedTitle: "International Financial Authorities Database | Verify Broker Licenses | 239 Financial Authorities",
@@ -103,7 +103,7 @@
             {
                 lang: 'ar',
                 expectedHtmlLang: 'ar',
-                expectedCanonical: 'https://tutelatruffe.it/?lang=ar',
+                expectedCanonical: 'https://www.amevfirenze.it/?lang=ar',
                 expectedDir: 'rtl',
                 expectedOgLocale: 'ar_EG',
                 expectedTitle: "International Financial Authorities Database | Verify Broker Licenses | 239 Financial Authorities",
@@ -128,7 +128,7 @@
             {
                 lang: 'xk',
                 expectedHtmlLang: 'sq-XK',
-                expectedCanonical: 'https://tutelatruffe.it/?lang=xk',
+                expectedCanonical: 'https://www.amevfirenze.it/?lang=xk',
                 expectedDir: 'ltr',
                 expectedOgLocale: 'sq_XK',
                 expectedTitle: "International Financial Authorities Database | Verify Broker Licenses | 239 Financial Authorities",
@@ -153,7 +153,7 @@
         ];
         const expectedEnState = {
             htmlLang: 'en',
-            canonical: 'https://tutelatruffe.it/?lang=en',
+            canonical: 'https://www.amevfirenze.it/?lang=en',
             title: "International Financial Authorities Database | Verify Broker Licenses | 239 Financial Authorities",
             ogTitle: "Scam Protection | EU Financial Authorities Database - Digital Odyssey",
             ogDescription: "🌍 Database of 239 international financial authorities. Verify broker licenses, company identities, and AMEV / AMEA / AWEV language paths for Forex/Crypto fraud prevention.",
@@ -720,13 +720,13 @@
                             addResult(amfFrame.getAttribute('src') === 'about:blank' && !doc.getElementById('consobOrbitalDialog').open, 'it: existing close behavior clears the AMF iframe');
                             win.closeModal();
                             win.changeLanguage('de');
-                            await waitForLocaleState(iframe, 'de', 'https://tutelatruffe.de/', 'de');
-                            addResult(iframe.contentDocument?.getElementById('canonical-url')?.getAttribute('href') === 'https://tutelatruffe.de/', 'it→de: canonical prefers the dedicated German domain');
-                            addResult(iframe.contentDocument?.getElementById('meta-og-url')?.getAttribute('content') === 'https://tutelatruffe.de/', 'it→de: og:url follows the dedicated German canonical');
-                            addResult(iframe.contentDocument?.getElementById('meta-twitter-url')?.getAttribute('content') === 'https://tutelatruffe.de/', 'it→de: twitter:url follows the dedicated German canonical');
+                            await waitForLocaleState(iframe, 'de', 'https://www.amevfirenze.it/?lang=de', 'de');
+                            addResult(iframe.contentDocument?.getElementById('canonical-url')?.getAttribute('href') === 'https://www.amevfirenze.it/?lang=de', 'it→de: canonical uses the AMEV German URL');
+                            addResult(iframe.contentDocument?.getElementById('meta-og-url')?.getAttribute('content') === 'https://www.amevfirenze.it/?lang=de', 'it→de: og:url follows the AMEV German canonical');
+                            addResult(iframe.contentDocument?.getElementById('meta-twitter-url')?.getAttribute('content') === 'https://www.amevfirenze.it/?lang=de', 'it→de: twitter:url follows the AMEV German canonical');
                             addResult(iframe.contentDocument?.getElementById('meta-og-locale')?.getAttribute('content') === 'de_DE', 'it→de: og:locale switches to de_DE');
                             win.changeLanguage('it');
-                            await waitForLocaleState(iframe, 'it', 'https://tutelatruffe.it/', 'it');
+                            await waitForLocaleState(iframe, 'it', 'https://www.amevfirenze.it/?lang=it', 'it');
                         }
                         addResult(Boolean(euAreaLabel), `${lang}: EU area label is present`);
                         addResult(Boolean(asiaAreaLabel), `${lang}: ASIA area label is present`);
@@ -772,8 +772,8 @@
                         addResult(staleNavReferencesLocales.length === 0, `${lang}: localized/fallback navReferences bundles do not contain obsolete "Referenze Istituzionali" label`);
                         if (lang === 'bs') {
                             addResult(buttonText.includes('BS') && buttonText.includes('Bosanski'), 'bs: EU selector shows BS and Bosanski');
-                            addResult(doc.querySelector('link[hreflang="bs"]')?.href === 'https://tutelatruffe.it/?lang=bs', 'bs: hreflang bs points to Bosnian URL');
-                            addResult(doc.querySelector('link[hreflang="bs-BA"]')?.href === 'https://tutelatruffe.it/?lang=bs', 'bs: hreflang bs-BA points to Bosnian URL');
+                            addResult(doc.querySelector('link[hreflang="bs"]')?.href === 'https://www.amevfirenze.it/?lang=bs', 'bs: hreflang bs points to Bosnian URL');
+                            addResult(doc.querySelector('link[hreflang="bs-BA"]')?.href === 'https://www.amevfirenze.it/?lang=bs', 'bs: hreflang bs-BA points to Bosnian URL');
                         }
                         if (lang === 'el') {
                             addResult((doc.querySelector('#amev-introduction-title')?.textContent || '').includes('AMEV, AMEA και AWEV'), 'el: Greek AMEV intro title is localized');
@@ -897,9 +897,33 @@
 
         (async () => {
             document.body.dataset.testStatus = 'pass';
+            for (const [query, lang] of [
+                ['', 'en'], ['?lang=unknown', 'en'], ['?lang=', 'en'],
+                ['?lang=it', 'it'], ['?lang=fr', 'fr'], ['?lang=de', 'de'],
+                ['?lang=bs', 'bs'], ['?lang=sq', 'sq'], ['?lang=ar', 'ar'],
+                ['?lang=ro-RO', 'ro'], ['?lang=el-GR', 'el'], ['?lang=sq-XK', 'xk']
+            ]) {
+                let iframe;
+                try {
+                    iframe = await loadHiddenIframe(`./index.html${query}`);
+                    const expectedHtmlLang = { bs: 'bs-BA', ro: 'ro-RO', el: query === '?lang=el-GR' ? 'el-GR' : 'el', sq: 'sq', xk: 'sq-XK' }[lang] || lang;
+                    const canonical = `https://www.amevfirenze.it/?lang=${lang}`;
+                    await waitForLocaleState(iframe, expectedHtmlLang, canonical, lang);
+                    addResult(iframe.contentWindow.location.search === `?lang=${lang}`, `${query || 'no parameter'}: URL normalizes to ${lang}`);
+                    addResult(iframe.contentDocument.querySelector('link[hreflang="x-default"]')?.href === expectedEnState.canonical, `${lang}: x-default is English`);
+                    iframe.contentWindow.changeLanguage('it');
+                    await waitForLocaleState(iframe, 'it', 'https://www.amevfirenze.it/?lang=it', 'it');
+                    addResult(iframe.contentWindow.location.search === '?lang=it', `${lang}→it: preserves explicit Italian parameter`);
+                } catch (error) {
+                    addResult(false, `homepage URL ${query}: ${error.message}`);
+                } finally {
+                    iframe?.remove();
+                }
+            }
             for (const scenario of scenarios) {
                 await loadScenario(scenario);
             }
+            document.body.dataset.testComplete = 'true';
         })();
     </script>
 </body>
