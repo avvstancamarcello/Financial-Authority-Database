@@ -94,6 +94,9 @@
         };
         check(Object.keys(page.PublicNews.languages).join(',') === Object.keys(mapping).join(','),
             'News mapping contains exactly the definitive 14 codes');
+        check(Object.entries(mapping).every(([lang, [label, flag]]) =>
+            page.PublicNews.language(lang).label === label && page.PublicNews.language(lang).flag === flag),
+            'Reference language labels and flag conventions remain centralized');
         async function resize(width) {
             frame.style.width = `${width}px`;
             await new Promise(resolve => setTimeout(resolve, 50));
@@ -176,7 +179,7 @@
         check(doc.documentElement.lang === 'it', 'Unknown persisted language falls back safely');
         page.setLanguage('it');
         const languageRecords = Object.keys(mapping).map(lang => ({
-            ...record, news_id: `language-${lang}`, lang, flag: mapping[lang][1],
+            ...record, news_id: `language-${lang}`, lang, flag: declaredFlags.find(([code]) => code === lang)[1],
             title: lang === 'ar' ? 'تحذير مالي مهم' : 'LongHeadline'.repeat(30),
             summary: 'LongBody'.repeat(50), theme: 'LongAuthority'.repeat(20)
         }));
@@ -191,9 +194,9 @@
         for (const [lang, [label, flag]] of Object.entries(mapping)) {
             page.setLanguage(lang);
             const card = cards().find(card => card.dataset.lang === lang);
-            check(card.querySelector('.flag').textContent === flag &&
+            check(card.querySelector('.flag').textContent === declaredFlags.find(([code]) => code === lang)[1] &&
                 card.querySelector('.badge').textContent === `${label} (${lang})`,
-                `${lang} uses exact feed language for its flag and readable label`);
+                `${lang} uses its feed flag and exact language for its readable label`);
             check(doc.getElementById('language-selector').value === lang, `${lang} is selectable even without a translated UI bundle`);
         }
         check(cards().filter(card => !Object.hasOwn(mapping, card.dataset.lang)).every(card =>
