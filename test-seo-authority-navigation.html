@@ -92,8 +92,8 @@
           `${country} visible directory and results limitations`);
         check(page.querySelector('time').dateTime === '2026-10-08'
           && page.body.textContent.includes(dateLimit), `${country} honest editorial date`);
-        check(!stable.includes(path) && !sitemap.includes(path) && !database.includes(path),
-          `${country} no additions to backup homepage, live sitemap or database`);
+        check(!stable.includes(path) && sitemap.includes(path) && !database.includes(path),
+          `${country} existing sitemap discovery retained without additions to backup homepage or database`);
         if (country === 'ETHIOPIA') {
           const play = page.getElementById('google-play').parentElement;
           check(play.textContent.includes('Collegamento Google Play non verificato')

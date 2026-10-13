@@ -37,6 +37,8 @@
             await waitFor(() => appFrame.contentDocument.querySelector('#countriesGrid .country-card')
                 && authorityFrame.contentDocument.querySelector('.thumbnail')?.naturalWidth);
             const app = appFrame.contentWindow;
+            appFrame.contentDocument.getElementById('flagViewClose').click();
+            await new Promise(resolve => requestAnimationFrame(resolve));
             const doc = authorityFrame.contentDocument;
             const canonicalUrl = 'https://www.amevfirenze.it/authority/DE-BAFIN.html';
             const canonicalPath = new URL(canonicalUrl).pathname;
