@@ -40,7 +40,7 @@
             const diagnostics = app.gridPipelineDiag;
             await waitFor(() => diagnostics?.lastSnapshot?.state === 'ready');
             check(JSON.stringify(diagnostics.orbitalReport.inventory.map(item => item.authority).sort())
-                === JSON.stringify(['AMF France', 'BaFin', 'CNMV', 'CONSOB', 'ECMA Ethiopia', 'FCA', 'SEC', 'FMA Austria', 'Polynésie française'].sort()),
+                === JSON.stringify(['AMF France', 'BaFin', 'CNMV', 'CONSOB', 'ECMA Ethiopia', 'FCA', 'SEC', 'FMA Austria', 'Polynésie française · sources territoriales'].sort()),
                 'Opt-in WIP inventory lists each configured Orbital integration once');
             check(diagnostics.orbitalReport.inventory.every(item => item.authorized
                 && item.sourcePath.startsWith('/authority/')

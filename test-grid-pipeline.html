@@ -157,8 +157,8 @@
                     check(!JSON.stringify(tracer.events).includes(database.Ethiopia.notes),
                     'Tracer does not log country payloads');
                     check(JSON.stringify(tracer.orbitalReport.inventory.map(item => item.authority).sort())
-                        === JSON.stringify(['AMF France', 'BaFin', 'CNMV', 'CONSOB', 'ECMA Ethiopia', 'FCA', 'SEC', 'FMA Austria', 'Polynésie française'].sort()),
-                    'Orbital inventory matches the nine configured image integrations');
+                        === JSON.stringify(['AMF France', 'BaFin', 'CNMV', 'CONSOB', 'ECMA Ethiopia', 'FCA', 'SEC', 'FMA Austria', 'Polynésie française · sources territoriales'].sort()),
+                    'Orbital inventory matches the nine configured authority/territorial launchers');
                     check(tracer.orbitalReport.inventory.find(item => item.authority === 'ECMA Ethiopia')
                         ?.configuredBy === 'WIP bootstrap'
                         && tracer.events.some(entry => entry.event === 'data:ethiopia:warning'),

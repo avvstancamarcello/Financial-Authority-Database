@@ -61,10 +61,12 @@
             const response = await fetch('./' + path);
             check(response.status === 200, 'Polynesia micropage returns HTTP 200');
             const frame = document.getElementById('app');
-            await waitFor(() => frame.contentDocument?.querySelector(`#flagsGrid [aria-label$="${country}"]`));
+            await waitFor(() => frame.contentDocument?.querySelector(`#flagsGrid [aria-label$="${country}"]`)
+                && frame.contentDocument.querySelector(`.country-card[data-country-name="${country}"]`));
             const app = frame.contentWindow;
             const doc = frame.contentDocument;
-            doc.getElementById('flagViewDialog').close();
+            doc.getElementById('flagViewClose').click();
+            await new Promise(resolve => requestAnimationFrame(resolve));
             const dialog = doc.getElementById('consobOrbitalDialog');
             const orbital = doc.getElementById('consobOrbitalFrame');
             check(!app.gridPipelineDiag, 'Focus checks run without opt-in diagnostics');
