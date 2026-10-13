@@ -7195,6 +7195,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             }
         }
 
+        // NOTA PER AGENTI AI: bandiere e dati delle autorità della griglia #flagsGrid (incluso AT/Austria) sono generati dinamicamente da financial_authorities_database.json tramite loadCountryData() → countriesData → renderFlagsGrid(); non cercare tile statiche dei Paesi in questo HTML, consulta il JSON e questo flusso di caricamento/rendering.
         async function loadCountryData() {
             let diagnosticPhase = 'fetch';
             try {
@@ -7238,6 +7239,16 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     data.Spain.thumbnail = 'authority/preview-ES-CNMV.png';
                     data.Spain.modal = 'authority/ES-CNMV.html';
                     data.Spain.has_orbital_view = true;
+                }
+                if (data.Austria) {
+                    data.Austria.thumbnail = 'authority/preview-AT-FMA.svg';
+                    data.Austria.modal = 'authority/oesterreich-fma-orbital-webapp.html';
+                    data.Austria.has_orbital_view = true;
+                }
+                if (data['French Polynesia (France)']) {
+                    data['French Polynesia (France)'].thumbnail = 'authority/preview-PF.svg';
+                    data['French Polynesia (France)'].modal = 'authority/polynesie-francaise-orbital-webapp.html';
+                    data['French Polynesia (France)'].has_orbital_view = true;
                 }
                 if (data.Ethiopia) {
                     data.Ethiopia.ecma_orbital = {
@@ -7793,6 +7804,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         }
 
         function getOrbitalAuthorityLabel(country) {
+            if (country?.country_name === 'French Polynesia (France)') return 'Polynésie française · sources territoriales';
             return country?.financial_authority?.abbreviation || country?.country_name || 'Authority';
         }
 
@@ -8120,15 +8132,18 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     const orbitalContainer = document.createElement('div');
                     orbitalContainer.style.marginTop = '15px';
 
-                    const orbitalButton = document.createElement('button');
-                    orbitalButton.type = 'button';
+                    const isPreviewLink = ['Austria', 'French Polynesia (France)'].includes(country.country_name);
+                    const orbitalButton = document.createElement(isPreviewLink ? 'a' : 'button');
+                    if (isPreviewLink) orbitalButton.href = orbitalModalSrc;
+                    else orbitalButton.type = 'button';
                     orbitalButton.className = 'orbital-thumbnail-trigger';
                     orbitalButton.dataset.orbitalSrc = orbitalModalSrc;
                     orbitalButton.setAttribute('aria-label', `Open ${orbitalAuthorityName} orbital dialog`);
                     orbitalButton.addEventListener('click', (event) => {
-                        event.preventDefault();
                         event.stopPropagation();
-                        openItalyOrbitalDialog(orbitalModalSrc);
+                        if (isPreviewLink && (event.button !== 0 || event.ctrlKey || event.metaKey || event.shiftKey || event.altKey)) return;
+                        event.preventDefault();
+                        openItalyOrbitalDialog(orbitalModalSrc, orbitalButton);
                     });
 
                     const orbitalImage = document.createElement('img');
@@ -8387,6 +8402,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             new URL('authority/DE-BAFIN.html', window.location.href).pathname,
             new URL('/authority/ET-ECMA.html', window.location.origin).pathname,
             new URL('authority/ET-ECMA.html', window.location.href).pathname,
+            new URL('/authority/oesterreich-fma-orbital-webapp.html', window.location.origin).pathname,
+            new URL('authority/oesterreich-fma-orbital-webapp.html', window.location.href).pathname,
             new URL('/authority/polynesie-francaise-orbital-webapp.html', window.location.origin).pathname,
             new URL('authority/polynesie-francaise-orbital-webapp.html', window.location.href).pathname,
             new URL('/authority/ES-CNMV.html', window.location.origin).pathname,
@@ -8405,6 +8422,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             new URL('authority/preview-DE-BAFIN.png', window.location.href).pathname,
             new URL('/authority/preview-ET-ECMA.svg', window.location.origin).pathname,
             new URL('authority/preview-ET-ECMA.svg', window.location.href).pathname,
+            new URL('/authority/preview-AT-FMA.svg', window.location.origin).pathname,
+            new URL('authority/preview-AT-FMA.svg', window.location.href).pathname,
+            new URL('/authority/preview-PF.svg', window.location.origin).pathname,
+            new URL('authority/preview-PF.svg', window.location.href).pathname,
             new URL('/authority/preview-ES-CNMV.png', window.location.origin).pathname,
             new URL('authority/preview-ES-CNMV.png', window.location.href).pathname,
             new URL('/authority/preview-US-SEC.svg', window.location.origin).pathname,
@@ -8445,6 +8466,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             if (country.country_name === 'Spain') return 'CNMV';
             if (country.country_name === 'United States of America') return 'SEC';
             if (country.country_name === 'Ethiopia') return 'ECMA Ethiopia';
+            if (country.country_name === 'Austria') return 'FMA Austria';
+            if (country.country_name === 'French Polynesia (France)') return 'Polynésie française · sources territoriales';
             return country.country_name || 'Unknown authority';
         }
 
@@ -9018,19 +9041,20 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 && Boolean(country.has_orbital_view)
                 && Boolean(orbitalThumbnailSrc)
                 && Boolean(orbitalModalSrc);
+            const isPreviewLink = ['Austria', 'French Polynesia (France)'].includes(country.country_name);
             const orbitalPreviewHtml = hasItalyOrbitalView ? `
                 <div style="margin: 20px 0 0;">
                     <p style="margin: 0 0 10px;"><strong>${escapeHtmlAttribute(orbitalAuthorityName)} Orbital Preview:</strong></p>
-                    <button
-                        type="button"
+                    <${isPreviewLink ? 'a' : 'button'}
+                        ${isPreviewLink ? `href="${escapeHtmlAttribute(orbitalModalSrc)}"` : 'type="button"'}
                         class="orbital-thumbnail-trigger"
                         data-orbital-trigger="consob"
                         data-orbital-src="${escapeHtmlAttribute(orbitalModalSrc)}"
                         aria-label="Open ${escapeHtmlAttribute(orbitalAuthorityName)} orbital dialog"
-                        onclick="openItalyOrbitalDialog(this.dataset.orbitalSrc); return false;"
+                        onclick="event.stopPropagation(); if (${isPreviewLink} && (event.button !== 0 || event.ctrlKey || event.metaKey || event.shiftKey || event.altKey)) return; event.preventDefault(); openItalyOrbitalDialog(this.dataset.orbitalSrc, this);"
                     >
                         <img src="${escapeHtmlAttribute(orbitalThumbnailSrc)}" alt="${escapeHtmlAttribute(orbitalAuthorityName)} orbital preview thumbnail">
-                    </button>
+                    </${isPreviewLink ? 'a' : 'button'}>
                 </div>
             ` : '';
             const ecmaOrbital = country.country_name === 'Ethiopia' ? country.ecma_orbital : null;

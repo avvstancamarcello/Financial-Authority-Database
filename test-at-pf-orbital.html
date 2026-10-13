@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Austria and French Polynesia dynamic Orbital preview checks</title>
+</head>
+<body>
+    <h1>Austria and French Polynesia dynamic Orbital preview checks</h1>
+    <pre id="results">Running…</pre>
+    <iframe id="app" title="Homepage under test" src="./index.html" width="1000" height="700"></iframe>
+    <script>
+        const results = document.getElementById('results');
+        const targets = [
+            ['Austria', 'AT', 'oesterreich-fma-orbital-webapp.html', 'preview-AT-FMA.svg', 'FMA'],
+            ['French Polynesia (France)', 'PF', 'polynesie-francaise-orbital-webapp.html', 'preview-PF.svg', 'sources territoriales']
+        ];
+        function check(condition, message) {
+            results.textContent += `\n${condition ? 'PASS' : 'FAIL'}: ${message}`;
+            if (!condition) throw new Error(message);
+        }
+        async function waitFor(predicate) {
+            const deadline = Date.now() + 20000;
+            while (!predicate()) {
+                if (Date.now() > deadline) throw new Error('Timed out waiting for page readiness');
+                await new Promise(resolve => setTimeout(resolve, 50));
+            }
+        }
+        async function run() {
+            const database = await (await fetch('./financial_authorities_database.json')).json();
+            const frame = document.getElementById('app');
+            await waitFor(() => frame.contentDocument?.querySelector('.country-card[data-country-name="Austria"] a.orbital-thumbnail-trigger')
+                && frame.contentDocument.querySelector('#flagsGrid [aria-label$="French Polynesia (France)"]'));
+            const app = frame.contentWindow;
+            const doc = frame.contentDocument;
+            doc.getElementById('flagViewClose').click();
+            await new Promise(resolve => requestAnimationFrame(resolve));
+            const dialog = doc.getElementById('consobOrbitalDialog');
+            const orbital = doc.getElementById('consobOrbitalFrame');
+            const catalog = doc.getElementById('orbital-micropages').innerHTML;
+            for (const [country, code, page, image, label] of targets) {
+                check(database[country]?.country_name === country && app.getFlagInfo(country).textCode === code,
+                    `${code}: exact database identifier and flag code`);
+                check((await fetch(`./authority/${page}`)).ok && (await fetch(`./authority/${image}`)).ok,
+                    `${code}: destination and editorial preview asset exist`);
+                check(app.resolveConsobOrbitalSrc(`authority/${page}`).endsWith(`/authority/${page}`)
+                    && app.resolveConsobOrbitalThumbnailSrc(`authority/${image}`).endsWith(`/authority/${image}`)
+                    && !app.resolveConsobOrbitalSrc(`https://example.org/authority/${page}`),
+                    `${code}: same-origin allowlists include exact resources`);
+                for (const locale of ['it', 'en', 'fr', 'de']) {
+                    app.changeLanguage(locale);
+                    for (const mode of ['compact', 'detailed']) {
+                        app.flagViewPreference.choose(mode, false);
+                        app.filterCountries(code === 'AT' ? 'ue' : 'non-ue');
+                        app.renderAll();
+                        app.filterBySearchTerm(country);
+                        const card = doc.querySelector(`.country-card[data-country-name="${country}"]`);
+                        const cardLink = card?.querySelector('a.orbital-thumbnail-trigger');
+                        check(cardLink?.getAttribute('href').endsWith(`/authority/${page}`)
+                            && cardLink.querySelector('img').getAttribute('src').endsWith(`/authority/${image}`)
+                            && cardLink.getAttribute('aria-label').includes(label)
+                            && cardLink.querySelector('img').alt.includes(label)
+                            && cardLink.tabIndex === 0 && card.style.display !== 'none',
+                            `${code}/${locale}/${mode}: accessible card preview persists through render/filter/view changes`);
+                        await waitFor(() => cardLink.querySelector('img').naturalWidth > 0);
+                        check(cardLink.querySelector('img').naturalHeight > 0, `${code}: preview image decodes`);
+                        let parentClicks = 0;
+                        card.addEventListener('click', () => parentClicks++);
+                        const modified = new app.MouseEvent('click', { bubbles: true, cancelable: true, ctrlKey: true });
+                        cardLink.dispatchEvent(modified);
+                        check(!modified.defaultPrevented && parentClicks === 0 && !dialog.open,
+                            `${code}: modified link click preserves navigation without triggering parent card`);
+                        cardLink.focus();
+                        cardLink.click();
+                        check(dialog.open && doc.getElementById('countryModal').style.display !== 'block'
+                            && parentClicks === 0 && orbital.getAttribute('src').endsWith(`/authority/${page}`),
+                            `${code}: preview opens only the existing Orbital dialog`);
+                        app.closeItalyOrbitalDialog();
+                        check(doc.activeElement === cardLink, `${code}: preview focus restored`);
+                        const flag = doc.querySelector(`#flagsGrid [aria-label$="${country}"]`);
+                        flag.focus();
+                        flag.click();
+                        const link = doc.querySelector('#countryModal a.orbital-thumbnail-trigger');
+                        check(link?.getAttribute('href').endsWith(`/authority/${page}`) && link.tabIndex === 0,
+                            `${code}: flag selection exposes same keyboard-focusable preview in country modal`);
+                        const authority = doc.querySelector('#countryModal').textContent;
+                        check(authority.includes(database[country].financial_authority.abbreviation),
+                            `${code}: existing authority data preserved`);
+                        link.focus();
+                        link.click();
+                        check(dialog.open && orbital.getAttribute('src').endsWith(`/authority/${page}`),
+                            `${code}: country modal preview uses exact Orbital destination`);
+                        app.closeItalyOrbitalDialog();
+                        check(doc.activeElement === link, `${code}: modal preview focus restored`);
+                        app.closeModal();
+                    }
+                }
+                app.filterCountries('all');
+                const link = doc.querySelector(`.country-card[data-country-name="${country}"] a.orbital-thumbnail-trigger`);
+                const originalOpen = app.open;
+                let fallback;
+                try {
+                    app.open = (...args) => fallback = args;
+                    dialog.remove();
+                    link.click();
+                    check(fallback?.[0].endsWith(`/authority/${page}`)
+                        && fallback[1] === '_blank' && fallback[2] === 'noopener',
+                        `${code}: existing safe fallback navigation works when dialog is missing`);
+                } finally {
+                    doc.body.appendChild(dialog);
+                    app.open = originalOpen;
+                }
+            }
+            app.filterCountries('all');
+            for (const [country, page, image] of [
+                ['Italy', 'IT-CONSOB.html', 'preview-consob.png'],
+                ['United Kingdom', 'UK-FCA.html', 'preview-fca.png'],
+                ['Spain', 'ES-CNMV.html', 'preview-ES-CNMV.png'],
+                ['France', 'FR-AMF.html', 'preview-FR-AMF.png'],
+                ['Germany', 'DE-BAFIN.html', 'preview-DE-BAFIN.png'],
+                ['United States of America', 'US-SEC.html', 'preview-US-SEC.svg']
+            ]) {
+                const preview = doc.querySelector(`.country-card[data-country-name="${country}"] .orbital-thumbnail-trigger`);
+                check(preview?.dataset.orbitalSrc.endsWith(`/authority/${page}`)
+                    && preview.querySelector('img').getAttribute('src').endsWith(`/authority/${image}`),
+                    `${country}: existing preview hook preserved`);
+            }
+            app.openModal('France');
+            check(!doc.querySelector('#countryModal [href$="polynesie-francaise-orbital-webapp.html"]'),
+                'Metropolitan France retains AMF preview, not the territorial launcher');
+            app.closeModal();
+            check(doc.getElementById('orbital-micropages').innerHTML === catalog,
+                'Separate MVP catalog unchanged');
+            results.textContent += '\nDONE';
+        }
+        run().catch(error => results.textContent += `\nFAIL: ${error.message}`);
+    </script>
+</body>
+</html>
