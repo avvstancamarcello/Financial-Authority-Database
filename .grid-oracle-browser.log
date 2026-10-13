@@ -1,0 +1,26 @@
+[12067:12082:1013/184115.085012:ERROR:dbus/bus.cc:405] Failed to connect to the bus: Failed to connect to socket /run/user/0/bus: Permission denied
+[12067:12082:1013/184115.086258:ERROR:dbus/bus.cc:405] Failed to connect to the bus: Failed to connect to socket /run/user/0/bus: Permission denied
+[12067:12082:1013/184115.091987:ERROR:dbus/bus.cc:405] Failed to connect to the bus: Failed to connect to socket /run/user/0/bus: Permission denied
+[12067:12082:1013/184115.124791:ERROR:dbus/bus.cc:405] Failed to connect to the bus: Failed to connect to socket /run/user/0/bus: Permission denied
+
+DevTools listening on ws://127.0.0.1:9227/devtools/browser/21e57761-d0ca-4707-90b4-5ac18d39c2f5
+[12067:12067:1013/184115.147874:ERROR:dbus/object_proxy.cc:572] Failed to call method: org.freedesktop.DBus.NameHasOwner: object_path= /org/freedesktop/DBus: unknown error type: 
+[12067:12082:1013/184115.147997:ERROR:dbus/bus.cc:405] Failed to connect to the bus: Failed to connect to socket /run/user/0/bus: Permission denied
+[12067:12067:1013/184115.148023:ERROR:dbus/object_proxy.cc:572] Failed to call method: org.freedesktop.DBus.NameHasOwner: object_path= /org/freedesktop/DBus: unknown error type: 
+[12067:12082:1013/184115.148069:ERROR:dbus/bus.cc:405] Failed to connect to the bus: Failed to connect to socket /run/user/0/bus: Permission denied
+[12067:12067:1013/184115.148365:ERROR:dbus/object_proxy.cc:572] Failed to call method: org.freedesktop.DBus.NameHasOwner: object_path= /org/freedesktop/DBus: unknown error type: 
+[12067:12067:1013/184115.155418:ERROR:dbus/object_proxy.cc:572] Failed to call method: org.freedesktop.DBus.NameHasOwner: object_path= /org/freedesktop/DBus: unknown error type: 
+[12067:12082:1013/184115.155530:ERROR:dbus/bus.cc:405] Failed to connect to the bus: Failed to connect to socket /run/user/0/bus: Permission denied
+[12067:12067:1013/184115.158279:ERROR:dbus/object_proxy.cc:572] Failed to call method: org.freedesktop.DBus.NameHasOwner: object_path= /org/freedesktop/DBus: unknown error type: 
+[12067:12067:1013/184115.158475:ERROR:dbus/object_proxy.cc:572] Failed to call method: org.freedesktop.DBus.NameHasOwner: object_path= /org/freedesktop/DBus: unknown error type: 
+[12067:12082:1013/184115.158792:ERROR:dbus/bus.cc:405] Failed to connect to the bus: Failed to connect to socket /run/user/0/bus: Permission denied
+[12067:12067:1013/184115.302721:ERROR:dbus/object_proxy.cc:572] Failed to call method: org.freedesktop.DBus.NameHasOwner: object_path= /org/freedesktop/DBus: unknown error type: 
+[12067:12067:1013/184115.305533:ERROR:dbus/object_proxy.cc:572] Failed to call method: org.freedesktop.DBus.NameHasOwner: object_path= /org/freedesktop/DBus: unknown error type: 
+[12067:12067:1013/184115.305796:ERROR:dbus/object_proxy.cc:572] Failed to call method: org.freedesktop.DBus.Properties.GetAll: object_path= /org/freedesktop/UPower/devices/DisplayDevice: org.freedesktop.DBus.Error.ServiceUnknown: The name org.freedesktop.UPower was not provided by any .service files
+[12067:12082:1013/184115.307462:ERROR:dbus/bus.cc:405] Failed to connect to the bus: Failed to connect to socket /run/user/0/bus: Permission denied
+[12067:12067:1013/184115.343192:ERROR:dbus/object_proxy.cc:572] Failed to call method: org.freedesktop.DBus.NameHasOwner: object_path= /org/freedesktop/DBus: unknown error type: 
+[12067:12082:1013/184115.343326:ERROR:dbus/bus.cc:405] Failed to connect to the bus: Failed to connect to socket /run/user/0/bus: Permission denied
+[12067:12067:1013/184115.369634:ERROR:dbus/object_proxy.cc:572] Failed to call method: org.freedesktop.DBus.NameHasOwner: object_path= /org/freedesktop/DBus: unknown error type: 
+[12067:12067:1013/184115.392954:ERROR:dbus/object_proxy.cc:572] Failed to call method: org.freedesktop.NetworkManager.GetDevices: object_path= /org/freedesktop/NetworkManager: org.freedesktop.DBus.Error.ServiceUnknown: The name org.freedesktop.NetworkManager was not provided by any .service files
+[12067:12067:1013/184115.464843:ERROR:chrome/browser/component_updater/soda_component_installer.cc:100] On demand update of the SODA component failed with error: 5
+[12067:12067:1013/184115.483832:ERROR:chrome/browser/component_updater/soda_language_pack_component_installer.cc:86] On demand update of the SODA language component failed with error: 5
