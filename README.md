@@ -8,6 +8,98 @@ Le regole sono espresse sia in linguaggio naturale sia in forma di
 **asserzioni Prolog**, così da poterle utilizzare come base per motori di
 regole, validatori automatici o strumenti di analisi statica.
 
+## Filosofia del progetto
+
+AMEV / Financial Authority Database nasce per facilitare l'accesso alle
+fonti istituzionali e aiutare gli utenti a orientarsi nella verifica delle
+imprese che offrono servizi finanziari in contesto internazionale.
+La sua finalità protettiva è favorire la consapevolezza degli utenti e
+la trasparenza dei mercati: distinguere ciò che un'impresa dichiara da ciò
+che risulta presso le autorità competenti, prima di assumere impegni o
+effettuare pagamenti.
+
+Il progetto offre **orientamento informativo**, non consulenza legale o
+finanziaria personalizzata, raccomandazioni di investimento o valutazioni
+di adeguatezza rispetto alla situazione del singolo utente.
+Il principio guida è **verificare sempre la fonte ufficiale primaria**:
+autorità competente, registri e avvisi istituzionali. La presenza di un
+soggetto nel database non costituisce certificazione, approvazione o
+garanzia della sua affidabilità.
+
+## Metodo di protezione dei mercati e degli utenti
+
+Il **«grattacielo logico»** è una metafora operativa per leggere una
+struttura informativa complessa:
+
+- **Fondamenta — le fonti:** documenti, registri e comunicazioni ufficiali
+  su cui basare le verifiche, distinguendoli dalle dichiarazioni commerciali.
+- **Piani — giurisdizioni e autorità:** contesti territoriali e competenze
+  da individuare in relazione al servizio offerto.
+- **Collegamenti — navigazione e approfondimenti:** percorsi che aiutano
+  a passare dalla scheda informativa alle fonti e ai dettagli pertinenti.
+- **Terrazza — la decisione informata dell'utente:** una visione d'insieme
+  delle evidenze raccolte e dei dubbi ancora da chiarire.
+
+Organizzare la complessità serve a ridurre gli errori di interpretazione,
+non a eliminarne ogni possibilità. Un'autorità non ha necessariamente
+competenza su tutti i servizi di un'impresa; una registrazione in un Paese
+non implica automaticamente il diritto di operare in un altro.
+La protezione perseguita è preventiva e informativa, non una promessa
+di assenza di rischi.
+
+## Uso dello strumento di verifica internazionale
+
+Lo strumento aiuta a cercare riscontri sull'identità di un'impresa e sulle
+autorizzazioni dichiarate; non produce un giudizio automatico di autenticità
+o affidabilità. Un percorso pratico di verifica comprende:
+
+1. **Identificare il soggetto:** raccogliere denominazione legale, Paese,
+   numero di registrazione, licenza dichiarata, sito e recapiti utilizzati.
+   Distinguere il nome commerciale dalla persona giuridica.
+2. **Mappare la giurisdizione:** considerare sede, Paese in cui il servizio
+   è proposto e tipo di attività, senza presumere equivalenza tra regimi.
+3. **Consultare l'autorità competente e i registri ufficiali:** raggiungere
+   la fonte istituzionale, confrontare identificativi e recapiti e verificare
+   stato, ambito e limiti dell'autorizzazione per il servizio considerato.
+   L'iscrizione a un registro delle imprese non equivale a una licenza finanziaria.
+4. **Cercare avvisi e pubblicazioni ufficiali:** consultare warning, blacklist
+   e comunicazioni su operatori non autorizzati o su imitazioni di imprese
+   legittime. L'assenza di avvisi non dimostra che un operatore sia sicuro.
+5. **Documentare esito e incongruenze:** annotare fonti, URL, data della
+   consultazione e riscontri mancanti o discordanti. Se restano dubbi,
+   chiedere chiarimenti all'autorità tramite i suoi recapiti ufficiali,
+   senza trattare una verifica incompleta come un esito positivo.
+
+Segnali che richiedono approfondimento possono essere recapiti o domini
+diversi da quelli del registro, licenze non riscontrabili o riferite a
+un'altra impresa, promesse di rendimenti garantiti, pressioni a pagare
+immediatamente o richieste di versamento a soggetti estranei.
+Sono elementi da valutare nel contesto, non prove automatiche di illecito:
+anche il nome o il numero di licenza di un'impresa autorizzata può essere
+copiato da chi ne imita l'identità.
+
+## Limiti e trasparenza
+
+Uno strumento informativo non sostituisce verifiche legali o tecniche
+dedicate, né accertamenti dell'autorità competente. Il riscontro di
+un'autorizzazione non garantisce solvibilità, qualità del servizio,
+assenza di frodi o recupero dei fondi.
+
+Informazioni, licenze, competenze territoriali e avvisi possono evolvere.
+Occorre verificare puntualmente le fonti ufficiali **al momento dell'uso**,
+tenendo distinta la data di aggiornamento di una scheda dalla data della
+propria consultazione. Dati mancanti o non verificabili devono restare
+espliciti, senza trasformarsi in attestazioni di regolarità.
+
+## Relazione con le regole Prolog
+
+Le regole e le asserzioni Prolog riportate di seguito non sono un fine a
+sé stesse: rappresentano il metodo di lavoro per prevenire regressioni
+metodologiche e mantenere coerenza e tracciabilità tra gli aggiornamenti.
+Sostengono l'organizzazione delle informazioni, ma non certificano
+imprese, licenze o conformità giuridica. La verifica istituzionale rimane
+fondata sulle fonti ufficiali e sul contesto concreto del servizio.
+
 ---
 
 ## 1. Elenco sintetico delle 21 Regole
