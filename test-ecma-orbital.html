@@ -36,10 +36,11 @@
             await waitFor(() => frame.contentDocument.querySelector('#flagsGrid [aria-label$="Ethiopia"]'));
             const app = frame.contentWindow;
             const doc = frame.contentDocument;
+            doc.getElementById('flagViewDialog').close();
             const diagnostics = app.gridPipelineDiag;
             await waitFor(() => diagnostics?.lastSnapshot?.state === 'ready');
             check(JSON.stringify(diagnostics.orbitalReport.inventory.map(item => item.authority).sort())
-                === JSON.stringify(['AMF France', 'BaFin', 'CNMV', 'CONSOB', 'ECMA Ethiopia', 'FCA', 'SEC'].sort()),
+                === JSON.stringify(['AMF France', 'BaFin', 'CNMV', 'CONSOB', 'ECMA Ethiopia', 'FCA', 'SEC', 'FMA Austria', 'Polynésie française · sources territoriales'].sort()),
                 'Opt-in WIP inventory lists each configured Orbital integration once');
             check(diagnostics.orbitalReport.inventory.every(item => item.authorized
                 && item.sourcePath.startsWith('/authority/')
@@ -73,6 +74,8 @@
             trigger.click();
             const orbitalFrame = doc.getElementById('consobOrbitalFrame');
             await waitFor(() => orbitalFrame.contentDocument?.querySelector('h1')?.textContent.includes('Ethiopian Capital Market Authority'));
+            await waitFor(() => diagnostics.events.some(entry =>
+                entry.event === 'orbital:iframe:load' && entry.authority === 'ECMA Ethiopia'));
             const ecmaDoc = orbitalFrame.contentDocument;
             const ecmaOpen = diagnostics.events.filter(entry => entry.event === 'orbital:open:done').at(-1);
             const ecmaLoad = diagnostics.events.filter(entry => entry.event === 'orbital:iframe:load').at(-1);
@@ -138,6 +141,8 @@
                 existingTrigger.click();
                 await waitFor(() => orbitalFrame.contentDocument?.querySelector('h1')
                     && orbitalFrame.contentWindow.location.pathname.endsWith(`/authority/${page}`));
+                await waitFor(() => diagnostics.events.some(entry =>
+                    entry.event === 'orbital:iframe:load' && entry.sourcePath.endsWith(`/authority/${page}`)));
                 const open = diagnostics.events.filter(entry => entry.event === 'orbital:open:done').at(-1);
                 const load = diagnostics.events.filter(entry => entry.event === 'orbital:iframe:load').at(-1);
                 const attempt = diagnostics.events.filter(entry => entry.event === 'orbital:open:start').at(-1);

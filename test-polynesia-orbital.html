@@ -78,6 +78,14 @@
                     `${locale}: new catalog text uses existing i18n with explicit English fallback`);
                 doc.querySelector(`#flagsGrid [aria-label$="${country}"]`).click();
                 const trigger = doc.querySelector('#countryModal .polynesia-orbital-cta');
+                const thumbnail = doc.querySelector('#countryModal .orbital-thumbnail-trigger');
+                const gridThumbnail = doc.querySelector(`.country-card[data-country-name="${country}"] .orbital-thumbnail-trigger`);
+                check(thumbnail?.dataset.orbitalSrc === '/' + path
+                    && thumbnail.querySelector('img').getAttribute('src') === '/authority/preview-PF.svg'
+                    && gridThumbnail?.dataset.orbitalSrc === '/' + path
+                    && thumbnail.getAttribute('aria-label').includes('Polynésie française')
+                    && !thumbnail.querySelector('img').src.includes('FR-AMF'),
+                    `${locale}: neutral territorial preview appears in cards and flag-opened details without conflating France`);
                 check(trigger?.getAttribute('href') === path
                     && trigger.textContent.trim().endsWith(
                         `${locale === 'it' ? 'Apri' : 'Open'} Orbital WebApp · Polynésie française`)
