@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="320" height="200" viewBox="0 0 320 200" role="img" aria-labelledby="title desc">
+  <title id="title">Austria FMA resource guide preview</title>
+  <desc id="desc">Original illustration of an orbital resource guide, not an official authority logo.</desc>
+  <rect width="320" height="200" rx="16" fill="#172033"/>
+  <ellipse cx="160" cy="98" rx="118" ry="64" fill="none" stroke="#93c5fd" stroke-width="2"/>
+  <path d="M42 98h236M160 34v128" stroke="#475569"/>
+  <circle cx="160" cy="98" r="42" fill="#1e3a8a"/>
+  <circle cx="42" cy="98" r="9" fill="#ef4444"/>
+  <circle cx="278" cy="98" r="9" fill="#fff"/>
+  <text x="160" y="105" text-anchor="middle" font-family="sans-serif" font-size="24" fill="#fff">FMA</text>
+  <text x="160" y="184" text-anchor="middle" font-family="sans-serif" font-size="16" fill="#fff">AUSTRIA · RESOURCE GUIDE</text>
+</svg>
