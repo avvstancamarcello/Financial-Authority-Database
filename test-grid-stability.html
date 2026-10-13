@@ -306,6 +306,32 @@
                         check(!localFlag.isConnected && localWrapper.textContent.trim() === database[name].flag,
                             `${name}: failed local SVG restores its exact visible emoji fallback`);
                     }
+                    const france = win.gridStabilityRecords().find(country => country.country_name === 'France');
+                    const originalFlagImage = france.flagImage;
+                    try {
+                        france.flagImage = 'flags/missing-grid-regression.svg';
+                        win.renderFlagsGrid();
+                        const tile = doc.querySelector('#flagsGrid [data-country-name="France"]');
+                        const wrapper = tile.querySelector('.flag-icon-wrapper');
+                        const image = wrapper.querySelector('.flag-image');
+                        check(!!image && !wrapper.querySelector('.fi'),
+                            'Local SVG initially replaces the detached France CSS flag fallback');
+                        await waitFor(() => !image.isConnected);
+                        const fallback = wrapper.querySelector('.fi');
+                        check(tile.contains(fallback) && fallback?.isConnected
+                            && fallback.classList.contains('flag-emoji-fallback')
+                            && wrapper.textContent.trim() === database.France.flag,
+                            'Actual missing SVG plus blocked CDN restores visible emoji in the same France tile');
+                        tile.focus();
+                        tile.click();
+                        check(doc.getElementById('modalContent').dataset.authorityId === database.France.financial_authority.authorityId,
+                            'France tile retains its correct authority handler after the actual SVG failure');
+                        win.closeModal();
+                    } finally {
+                        if (originalFlagImage === undefined) delete france.flagImage;
+                        else france.flagImage = originalFlagImage;
+                        win.renderFlagsGrid();
+                    }
                     for (const width of [320, 375, 768, 769, 1024]) {
                         app.frame.style.width = `${width}px`;
                         for (const mode of ['compact', 'detailed']) {
