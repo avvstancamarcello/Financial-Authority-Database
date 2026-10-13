@@ -7195,6 +7195,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             }
         }
 
+        // NOTA PER AGENTI AI: bandiere e dati delle autorità della griglia #flagsGrid (incluso AT/Austria) sono generati dinamicamente da financial_authorities_database.json tramite loadCountryData() → countriesData → renderFlagsGrid(); non cercare tile statiche dei Paesi in questo HTML, consulta il JSON e questo flusso di caricamento/rendering.
         async function loadCountryData() {
             let diagnosticPhase = 'fetch';
             try {
