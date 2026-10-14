@@ -131,7 +131,7 @@
                     check(dialog.open && dialog.matches(':modal') && dialog.contains(doc.activeElement)
                         && orbital.contentWindow.location.origin === location.origin
                         && orbital.contentDocument.querySelector('h1')?.textContent
-                            === 'POLYNÉSIE FRANÇAISE – Autorités financières Orbital WebApp | AMEV'
+                            === 'POLYNÉSIE FRANÇAISE – IEOM Orbital WebApp | AMEV'
                         && orbital.contentDocument.body.textContent.includes('IEOM'),
                         `${width}px: shared dialog is modal, focused and actually loads the correct same-origin page`);
                     check(orbital.contentDocument.documentElement.scrollWidth <= orbital.contentWindow.innerWidth,
