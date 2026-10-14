@@ -15,7 +15,7 @@
 
 ### Passaggi:
 1. **Accedi** con account Microsoft (Outlook, Hotmail, ecc.)
-2. **Aggiungi sito**: `https://tutelatruffe.it`
+2. **Aggiungi sito**: `https://www.amevfirenze.it/`
 3. **Metodo verifica**: Scegli "XML File"
 4. **Codice**: Bing ti darà un codice alfanumerico
 5. **Modifica** `BingSiteAuth.xml`:
@@ -23,7 +23,20 @@
    - Sostituisci `YOUR_BING_VERIFICATION_CODE` con il codice ricevuto
 6. **Carica** il file nella root del sito (GitHub Pages)
 7. **Verifica** cliccando il pulsante su Bing
-8. **Invia Sitemap**: `https://tutelatruffe.it/sitemap.xml`
+8. **Invia Sitemap** in **Sitemaps → Submit Sitemap**:
+   - Principale: `https://www.amevfirenze.it/sitemap.xml`
+   - Financial Authority Database: `https://www.amevfirenze.it/sitemap-financial-authorities.xml`
+9. **Dopo la pubblicazione**, controlla che la sitemap dedicata risponda con HTTP 200 e XML valido; verifica in Bing Webmaster Tools gli errori di scansione e lo stato dei singoli URL.
+
+### Sitemap dedicata alle autorità finanziarie
+
+- Usa gli URL canonici realmente presenti: indice `/?lang=en` e pagine sotto `/authority/`. Gli slug proposti come `/consob-orbital-webapp-italia` e `/financial-authority-database` non corrispondono a pagine di questo repository e non vanno inviati.
+- Include CONSOB, CNMV, FCA, AMF, BaFin, FMA, SEC, IOSCO, ECMA, ESMA, BCEAO e le micropagine esistenti di Etiopia e Polinesia francese.
+- È dichiarata in `robots.txt` ed è utilizzabile anche da altri motori; non sostituisce la sitemap principale né quella multilingua.
+- Mantieni gli URL sincronizzati con i canonical delle pagine e con `sitemap.xml` quando aggiungi, rinomini o rimuovi pagine authority.
+- `priority` e `changefreq` sono indicazioni facoltative, non comandi: non forzano la scansione, l'indicizzazione o il posizionamento. `daily` e `weekly` rappresentano frequenze suggerite, non aggiornamenti verificati. Non è indicato `lastmod` senza una data attendibile di modifica del contenuto.
+- Non sono garantiti tempi di 24–72 ore né l'indicizzazione di tutte le pagine. La presenza su Google e l'assenza su Bing vanno verificate nei rispettivi strumenti webmaster; una sitemap da sola non dimostra la causa di eventuali esclusioni.
+- IndexNow è un meccanismo separato di notifica degli URL aggiornati: questa modifica non genera chiavi né invia notifiche IndexNow.
 
 ### Vantaggi:
 - ✅ Una registrazione = 4 motori (Bing, Yahoo, DuckDuckGo, Ecosia)

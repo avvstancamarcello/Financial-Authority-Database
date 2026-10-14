@@ -29,6 +29,43 @@
       check(response.ok, `${path} exists with exact casing`);
       return response.text();
     }
+    async function testFinancialAuthoritySitemap() {
+      const root = 'https://www.amevfirenze.it/';
+      const ns = 'http://www.sitemaps.org/schemas/sitemap/0.9';
+      const parser = new DOMParser();
+      const sitemap = parser.parseFromString(await text('sitemap-financial-authorities.xml'), 'application/xml');
+      check(!sitemap.querySelector('parsererror') && sitemap.documentElement.localName === 'urlset'
+        && sitemap.documentElement.namespaceURI === ns, 'Dedicated sitemap has a valid sitemap XML root');
+      const entries = [...sitemap.getElementsByTagNameNS(ns, 'url')];
+      const locs = entries.map(entry => entry.getElementsByTagNameNS(ns, 'loc')[0]?.textContent);
+      const main = parser.parseFromString(await text('sitemap.xml'), 'application/xml');
+      const expected = [...main.getElementsByTagNameNS(ns, 'loc')].map(node => node.textContent)
+        .filter(url => url === root + '?lang=en' || url.startsWith(root + 'authority/'));
+      check(locs.length > 0 && new Set(locs).size === locs.length
+        && locs.length === expected.length && expected.every(url => locs.includes(url)),
+        'Dedicated sitemap covers the global index and every main-sitemap authority exactly once');
+      for (const entry of entries) {
+        const loc = entry.getElementsByTagNameNS(ns, 'loc')[0].textContent;
+        const url = new URL(loc);
+        check(url.origin === root.slice(0, -1) && !url.hash
+          && (url.pathname === '/' ? url.search === '?lang=en'
+            : url.pathname.startsWith('/authority/') && !url.search),
+          `Dedicated sitemap uses existing public routes: ${loc}`);
+        const page = parser.parseFromString(await text(url.pathname.slice(1) || 'index.html'), 'text/html');
+        check(page.querySelector('link[rel="canonical"]')?.getAttribute('href') === loc
+          && !/noindex/i.test(page.querySelector('meta[name="robots"]')?.content || ''),
+          `Dedicated sitemap URL is canonical and indexable: ${loc}`);
+        const frequency = entry.getElementsByTagNameNS(ns, 'changefreq')[0]?.textContent;
+        const priority = entry.getElementsByTagNameNS(ns, 'priority')[0]?.textContent;
+        check(['daily', 'weekly', 'monthly'].includes(frequency)
+          && Boolean(priority?.trim()) && Number.isFinite(Number(priority))
+          && Number(priority) >= 0 && Number(priority) <= 1,
+          `Dedicated sitemap hints are valid: ${loc}`);
+      }
+      const robots = await text('robots.txt');
+      check(robots.split(/\r?\n/).includes('Sitemap: ' + root + 'sitemap-financial-authorities.xml'),
+        'Robots advertises the dedicated sitemap');
+    }
     async function testMicropages() {
       const root = 'https://www.amevfirenze.it/';
       const pages = [
@@ -157,6 +194,12 @@
         'WIP no longer discovers discarded FR/DE MVP duplicates');
     }
     async function run() {
+      await testFinancialAuthoritySitemap();
+      if (new URLSearchParams(location.search).get('sitemap') === '1') {
+        results.dataset.status = 'passed';
+        results.textContent += '\nDONE';
+        return;
+      }
       await testMicropages();
       if (new URLSearchParams(location.search).get('micropages') === '1') {
         results.dataset.status = 'passed';
