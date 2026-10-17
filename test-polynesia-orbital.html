@@ -43,10 +43,10 @@
                 [/        <nav aria-label="CONSOB · FCA · CNMV · AMF · BaFin · SEC">[\s\S]*?<\/nav>/,
                     '2e40e64972b8624c906578dc05bedb731134a6035c410f8eddfa9fac6f7e9549'],
                 [/        <nav id="orbital-micropages"[\s\S]*?<\/nav>/,
-                    'c6d6f3478006dfe730b8981a4be0c8cdc445edc926d57eeee6c12e4ffd095337']
+                    '9a2f24f87810afae011187ac47464a5c230215c27a8786224354f7dc169a93cd']
             ]) {
                 check(await hash(source.match(pattern)?.[0] || '') === expected,
-                    'Original Orbital summary block is byte-identical, including links, order and attributes');
+                    'Orbital summary block matches the expected links, order and attributes');
             }
             const staticDoc = new DOMParser().parseFromString(source, 'text/html');
             const description = staticDoc.querySelector('[data-i18n-text="orbitalCatalogDescription"]');

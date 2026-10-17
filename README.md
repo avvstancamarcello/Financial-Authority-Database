@@ -396,7 +396,7 @@ Questa codifica fornisce una base formale per:
 
 ## 4. MVP micropagine Orbital WebApp e piano di estensione
 
-Il MVP aggiunge esattamente tre pagine informative indipendenti:
+Il MVP originario aggiunge esattamente tre pagine informative indipendenti:
 
 1. [ETHIOPIA · ECMA](authority/ethiopia-ecma-orbital-webapp.html)
 2. [ÖSTERREICH · FMA](authority/oesterreich-fma-orbital-webapp.html), in tedesco
@@ -436,6 +436,18 @@ store e il claim di disponibilità; mantiene solo il rinvio alla fonte
 istituzionale, distingue ECMA da Neway ESX e non attribuisce certificazioni
 o approvazioni Google. La data visibile
 indica solo la revisione editoriale, non una verifica live delle fonti.
+
+### Estensione Nunavut
+
+La guida informativa [NUNAVUT · Territorio canadese / WSCC](authority/nunavut-orbital-webapp.html)
+si aggiunge al catalogo alfabetico sotto la griglia, senza modificare il database
+né le authority card. Distingue il territorio dalla WSCC e dai servizi di
+vigilanza finanziaria, con canali WSCC per le frodi di sua competenza.
+È inclusa una sola volta in ciascuna delle sitemap principale e finanziaria
+e nel precache locale del service worker. I profili social non verificati e
+i collegamenti agli app store sono omessi.
+Verifica dedicata: `/test-nunavut-orbital.html`; verifica offline:
+`/test-grid-offline.html`, seguendo le istruzioni della pagina.
 
 ### Estensione successiva, previa revisione e approvazione
 
