@@ -1,4 +1,4 @@
-const CACHE_NAME = 'financial-authority-v35';
+const CACHE_NAME = 'financial-authority-v36';
 const BASE_PATH = '';
 const FLAG_ICONS_CSS_URL = 'https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.2.3/css/flag-icons.min.css';
 const PWA_ICON_PATHS = [
@@ -34,6 +34,7 @@ const LOCAL_GRID_URLS = [
   '/authority/ET-ECMA.html',
   '/authority/oesterreich-fma-orbital-webapp.html',
   '/authority/polynesie-francaise-orbital-webapp.html',
+  '/authority/nunavut-orbital-webapp.html',
   '/authority/preview-consob.png',
   '/authority/preview-fca.png',
   '/authority/preview-FR-AMF.png',

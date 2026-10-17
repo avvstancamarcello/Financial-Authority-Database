@@ -82,7 +82,12 @@
       check(Boolean(discovery) && !discovery.closest('#flags-section, #countries-section, .flags-grid, .countries-grid'),
         'MVP discovery navigation stays outside country and flag grids');
       check(JSON.stringify([...discovery.querySelectorAll('a')].map(link => link.getAttribute('href')))
-        === JSON.stringify(pages.map(([path]) => 'authority/' + path)), 'WIP exposes exactly three alphabetical static links');
+        === JSON.stringify([
+          'authority/ethiopia-ecma-orbital-webapp.html',
+          'authority/nunavut-orbital-webapp.html',
+          'authority/oesterreich-fma-orbital-webapp.html',
+          'authority/polynesie-francaise-orbital-webapp.html'
+        ]), 'WIP exposes four alphabetical static links, including informational Nunavut');
       const stable = await text('obsolete-index.html');
       const sitemap = await text('sitemap.xml');
       const sitemapDocument = parser.parseFromString(sitemap, 'application/xml');
