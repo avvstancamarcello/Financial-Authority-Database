@@ -86,8 +86,9 @@
           'authority/ethiopia-ecma-orbital-webapp.html',
           'authority/nunavut-orbital-webapp.html',
           'authority/oesterreich-fma-orbital-webapp.html',
-          'authority/polynesie-francaise-orbital-webapp.html'
-        ]), 'WIP exposes four alphabetical static links, including informational Nunavut');
+          'authority/polynesie-francaise-orbital-webapp.html',
+          'authority/CH-FINMA.html'
+        ]), 'WIP exposes five alphabetical static links, including informational Nunavut and FINMA CH');
       const stable = await text('obsolete-index.html');
       const sitemap = await text('sitemap.xml');
       const sitemapDocument = parser.parseFromString(sitemap, 'application/xml');

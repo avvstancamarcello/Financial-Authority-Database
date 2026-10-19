@@ -40,7 +40,7 @@
                     `${sitemap}: exact canonical occurs once`);
             }
             const worker = await (await fetch('./service-worker.js')).text();
-            check(worker.includes("const CACHE_NAME = 'financial-authority-v36'")
+            check(worker.includes("const CACHE_NAME = 'financial-authority-v37'")
                 && worker.includes("'" + '/' + path + "'"), 'Versioned worker includes Nunavut in local precache');
             const response = await fetch('./' + path);
             check(response.ok, 'Direct Nunavut URL returns HTTP 200');
