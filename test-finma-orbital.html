@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>FINMA CH additive Orbital regression checks</title>
+</head>
+<body>
+    <h1>FINMA CH additive Orbital regression checks</h1>
+    <p>Serve over HTTP. Fixtures compare the current application with the pre-FINMA backup, without external scripts or service workers.</p>
+    <pre id="results">Running…</pre>
+    <div id="fixtures"></div>
+    <script>
+        if (!new URLSearchParams(location.search).has('fixture')) {
+        const results = document.getElementById('results');
+        const backup = './Backup/pre-finma-2026-10-19-a061852/';
+        const path = 'authority/CH-FINMA.html';
+        const canonical = 'https://www.amevfirenze.it/' + path;
+        function check(condition, message) {
+            results.textContent += `\n${condition ? 'PASS' : 'FAIL'}: ${message}`;
+            if (!condition) throw new Error(message);
+        }
+        async function waitFor(predicate) {
+            const deadline = Date.now() + 20000;
+            while (!predicate()) {
+                if (Date.now() > deadline) throw new Error('Timed out');
+                await new Promise(resolve => setTimeout(resolve, 50));
+            }
+        }
+        const parse = text => new DOMParser().parseFromString(text, 'text/html');
+        async function fixture(text) {
+            const source = parse(text);
+            const diagnostics = source.querySelector('#grid-pipeline-diagnostics').textContent;
+            const bootstrap = source.querySelector('#flag-view-bootstrap').textContent;
+            const application = [...source.scripts].find(script =>
+                script.textContent.includes('async function loadCountryData()')).textContent;
+            source.querySelectorAll('script, link, iframe').forEach(node => {
+                if (node.id !== 'consobOrbitalFrame') node.remove();
+            });
+            source.querySelector('#consobOrbitalFrame').removeAttribute('src');
+            const frame = document.createElement('iframe');
+            frame.title = 'Isolated homepage fixture';
+            frame.style.cssText = 'display:block;border:0;width:1024px;height:800px';
+            frame.src = './test-finma-orbital.html?fixture=1';
+            const loaded = new Promise(resolve => frame.onload = resolve);
+            document.getElementById('fixtures').appendChild(frame);
+            await loaded;
+            const win = frame.contentWindow, doc = frame.contentDocument;
+            doc.head.innerHTML = source.head.innerHTML;
+            doc.body.innerHTML = source.body.innerHTML;
+            const motion = doc.createElement('style');
+            motion.textContent = '*, *::before, *::after { animation: none !important; transition: none !important; }';
+            doc.head.appendChild(motion);
+            win.eval(diagnostics);
+            win.eval(bootstrap);
+            win.eval(application);
+            win.setupSearch();
+            win.setupItalyOrbitalDialog();
+            win.setupFlagViewSelector();
+            doc.getElementById('flagViewDialog').close();
+            await win.loadCountryData();
+            win.renderAll();
+            await waitFor(() => doc.querySelectorAll('#flagsGrid .flag-item').length === 239);
+            return { frame, win, doc };
+        }
+        async function run() {
+            const bytes = await (await fetch('./financial_authorities_database.json')).arrayBuffer();
+            const saved = await (await fetch(backup + 'financial_authorities_database.json')).arrayBuffer();
+            const digest = Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256', bytes)))
+                .map(byte => byte.toString(16).padStart(2, '0')).join('');
+            check(digest === '3b9fd8fb5a0c5738287974ab5607f02d707543a0871034ce2a99a0a4b08d1b1c'
+                && bytes.byteLength === saved.byteLength
+                && new Uint8Array(bytes).every((byte, index) => byte === new Uint8Array(saved)[index]),
+                'Database bytes, every record and every field equal the committed pre-FINMA backup');
+            const [beforeText, afterText] = await Promise.all([
+                fetch(backup + 'index.html').then(r => r.text()), fetch('./index.html').then(r => r.text())
+            ]);
+            check([...parse(beforeText).querySelectorAll('style')].map(node => node.textContent).join('')
+                === [...parse(afterText).querySelectorAll('style')].map(node => node.textContent).join(''),
+                'Every existing homepage stylesheet remains unchanged');
+            const before = await fixture(beforeText), after = await fixture(afterText);
+            check(before.win.renderFlagsGrid.toString() === after.win.renderFlagsGrid.toString(),
+                'Flag grid renderer is unchanged');
+            for (const width of [1024, 375, 320]) {
+                for (const app of [before, after]) app.frame.style.width = width + 'px';
+                for (const mode of ['compact', 'detailed']) {
+                    for (const app of [before, after]) {
+                        app.win.flagViewPreference.choose(mode, false);
+                        app.win.renderAll();
+                    }
+                    await new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve)));
+                    await waitFor(() => [before, after].every(app =>
+                        app.doc.querySelectorAll('#flagsGrid .flag-item').length === 239));
+                    const snapshot = app => {
+                        const grid = app.doc.getElementById('flagsGrid');
+                        return [...grid.querySelectorAll('.flag-item')].map(flag => {
+                            return [flag.outerHTML, flag.offsetLeft, flag.offsetTop, flag.offsetWidth, flag.offsetHeight];
+                        });
+                    };
+                    const baseline = snapshot(before), current = snapshot(after);
+                    const mismatch = baseline.findIndex((item, index) => JSON.stringify(item) !== JSON.stringify(current[index]));
+                    if (mismatch >= 0) results.textContent += '\nFirst mismatch: ' + JSON.stringify([baseline[mismatch], current[mismatch]]);
+                    check(current.length === 239 && mismatch === -1,
+                        `${width}px/${mode}: all 239 flag DOM nodes, ordering and geometry are identical`);
+                    const fields = app => [...app.doc.querySelectorAll('#countriesGrid .country-card')].map(card =>
+                        [card.dataset.countryName, card.dataset.authorityId,
+                            [...card.querySelectorAll('.info-row')].map(row => row.innerHTML)]);
+                    check(fields(after).length === 239 && JSON.stringify(fields(before)) === JSON.stringify(fields(after))
+                        && after.doc.getElementById('totalCountries').textContent === '239',
+                        `${width}px/${mode}: all rendered data fields, authority identities and counters unchanged`);
+                }
+            }
+            const { doc, win } = after;
+            const dialog = doc.getElementById('consobOrbitalDialog');
+            const orbital = doc.getElementById('consobOrbitalFrame');
+            check(!win.resolveConsobOrbitalSrc('https://example.org/' + path)
+                && !win.resolveConsobOrbitalThumbnailSrc('https://example.org/authority/preview-CH-FINMA.svg'),
+                'Existing same-origin allowlists reject external Orbital sources');
+            for (const locale of ['it', 'en', 'fr', 'de']) {
+                for (const app of [before, after]) {
+                    app.win.changeLanguage(locale);
+                    app.doc.querySelector('#flagsGrid [data-country-name="Switzerland"]').click();
+                }
+                const hooks = doc.querySelectorAll('#countryModal [data-orbital-src="/authority/CH-FINMA.html"]');
+                check(hooks.length === 1 && doc.getElementById('countryModal').style.display === 'block',
+                    `${locale}: original CH flag action opens its details with exactly one FINMA hook`);
+                const withoutPreview = doc.getElementById('modalContent').cloneNode(true);
+                withoutPreview.querySelector('.orbital-thumbnail-trigger').parentElement.remove();
+                const normalize = html => html.replace(/\s+/g, ' ').trim();
+                check(normalize(withoutPreview.innerHTML) === normalize(before.doc.getElementById('modalContent').innerHTML),
+                    `${locale}: every pre-existing CH detail, official link and action is unchanged`);
+                const hook = hooks[0];
+                hook.focus();
+                hook.click();
+                check(dialog.open && orbital.getAttribute('src') === '/authority/CH-FINMA.html',
+                    `${locale}: hook opens the existing shared Orbital dialog`);
+                await waitFor(() => orbital.contentDocument?.querySelector('h1')?.textContent.includes('FINMA'));
+                win.closeItalyOrbitalDialog();
+                check(!dialog.open && doc.activeElement === hook, `${locale}: close restores focus to the CH hook`);
+                win.closeModal();
+                before.win.closeModal();
+            }
+            check(doc.querySelectorAll('.country-card[data-country-name="Switzerland"] .orbital-thumbnail-trigger').length === 1,
+                'Separate CH country card also has exactly one shared preview hook');
+            const catalogLink = doc.querySelector(`#orbital-micropages a[href="${path}"]`);
+            check(catalogLink && (doc.getElementById('flags-section').compareDocumentPosition(catalogLink) & 4)
+                && !catalogLink.closest('#flags-section, #countries-section'),
+                'Direct FINMA link is in the existing catalog after the flags grid');
+            const pageResponse = await fetch('./' + path);
+            check(pageResponse.ok, 'Standalone FINMA page returns HTTP 200');
+            const page = parse(await pageResponse.text());
+            const urls = [
+                'https://www.finma.ch/en/finma/finma-an-overview/bl_kundenschutz/',
+                'https://www.finma.ch/en/finma-public/',
+                'https://www.finma.ch/en/news/2025/06/20252626-meldung-finma-warnt-vor-phishing-e-mails/',
+                'https://www.fedpol.admin.ch/fedpol/en/home.html',
+                'https://www.finma.ch/en/documentation/finma-videos/schutz-vor-anlagebetrug/',
+                'https://www.finma.ch/en/documentation/finma-videos/'
+            ];
+            check(page.querySelectorAll('a[href^="https:"]').length === 6 && urls.every(url =>
+                page.querySelectorAll(`a[href="${url}"][target="_blank"][rel="noopener noreferrer"]`).length === 1),
+                'Exactly the six requested primary resources are static, safe external links');
+            check(!page.querySelector('iframe, script:not([type="application/ld+json"])')
+                && page.querySelector('#resources') && page.querySelector('#fedpol').parentElement.textContent.includes('distinto da FINMA')
+                && page.querySelector('.notice').textContent.includes('non è un sito FINMA'),
+                'Page works without JavaScript, embeds no external sites and distinguishes independence and fedpol');
+            const schema = JSON.parse(page.querySelector('script[type="application/ld+json"]').textContent);
+            check(page.title.includes('FINMA') && page.querySelector('meta[name="description"]').content.length > 40
+                && page.querySelector('meta[name="robots"]').content === 'index, follow'
+                && page.querySelector('link[rel="canonical"]').href === canonical
+                && page.querySelector('meta[property="og:url"]').content === canonical
+                && schema.url === canonical && schema.publisher.name === 'amevfirenze.it',
+                'Self-canonical, robots, social metadata and independent JSON-LD publisher are consistent');
+            for (const sitemap of ['sitemap.xml', 'sitemap-financial-authorities.xml']) {
+                const xml = new DOMParser().parseFromString(await (await fetch('./' + sitemap)).text(), 'application/xml');
+                check(!xml.querySelector('parsererror') && [...xml.getElementsByTagNameNS('*', 'loc')]
+                    .filter(node => node.textContent === canonical).length === 1, `${sitemap}: one FINMA canonical`);
+            }
+            for (const app of [before, after]) app.frame.remove();
+            results.dataset.status = 'passed';
+        }
+        run().catch(error => {
+            results.dataset.status = 'failed';
+            results.textContent += `\nERROR: ${error.stack || error.message}`;
+        });
+        }
+    </script>
+</body>
+</html>

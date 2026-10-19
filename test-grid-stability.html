@@ -47,6 +47,7 @@
                 'United States of America': { page: '/authority/US-SEC.html', thumbnail: '/authority/preview-US-SEC.svg', heading: 'USA SEC orbital WebApp' },
                 Ethiopia: { page: '/authority/ET-ECMA.html', thumbnail: '/authority/preview-ET-ECMA.svg', heading: '🇪🇹 Ethiopian Capital Market Authority (ECMA)' },
                 Austria: { page: '/authority/oesterreich-fma-orbital-webapp.html', thumbnail: '/authority/preview-AT-FMA.svg', heading: 'ÖSTERREICH – FMA Orbital WebApp | AMEV' },
+                Switzerland: { page: '/authority/CH-FINMA.html', thumbnail: '/authority/preview-CH-FINMA.svg', heading: '🇨🇭 Svizzera / Switzerland CH – FINMA Orbital WebApp' },
                 'French Polynesia (France)': { page: '/authority/polynesie-francaise-orbital-webapp.html', thumbnail: '/authority/preview-PF.svg', heading: 'POLYNÉSIE FRANÇAISE – Autorités financières Orbital WebApp | AMEV' }
             };
             function matchesOrbitalFixtures(entries) {
@@ -225,9 +226,9 @@
                         }
                     }
                     const inventory = win.gridPipelineDiag.orbitalReport.inventory;
-                    check(inventory.length === 9 && new Set(inventory.map(item => item.sourcePath)).size === 9
-                        && inventory.every(item => item.authorized), 'Nine distinct authorized local image integrations');
-                    check(matchesOrbitalFixtures(inventory), 'All nine countries match independently specified page and thumbnail identities');
+                    check(inventory.length === 10 && new Set(inventory.map(item => item.sourcePath)).size === 10
+                        && inventory.every(item => item.authorized), 'Ten distinct authorized local image integrations');
+                    check(matchesOrbitalFixtures(inventory), 'All ten countries match independently specified page and thumbnail identities');
                     const swappedInventory = inventory.map(entry => ({
                         ...entry,
                         ...(['Austria', 'Germany'].includes(entry.country) ? {

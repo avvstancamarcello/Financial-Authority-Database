@@ -420,6 +420,11 @@
                 "@type": "WebPage",
                 "name": "Ethiopia / ECMA Orbital Web App",
                 "url": "https://www.amevfirenze.it/authority/ET-ECMA.html"
+            },
+            {
+                "@type": "WebPage",
+                "name": "Switzerland / FINMA Orbital Web App",
+                "url": "https://www.amevfirenze.it/authority/CH-FINMA.html"
             }
         ],
         "publisher": {
@@ -3398,6 +3403,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 <li><a href="authority/nunavut-orbital-webapp.html" lang="it">NUNAVUT · Territorio canadese / WSCC</a></li>
                 <li><a href="authority/oesterreich-fma-orbital-webapp.html" lang="de">ÖSTERREICH · FMA</a></li>
                 <li><a href="authority/polynesie-francaise-orbital-webapp.html" lang="fr">POLYNÉSIE FRANÇAISE · Autorités financières</a></li>
+                <li><a href="authority/CH-FINMA.html" lang="it">SVIZZERA / SWITZERLAND · FINMA CH</a></li>
             </ol>
         </nav>
 
@@ -7279,6 +7285,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     data.Austria.modal = 'authority/oesterreich-fma-orbital-webapp.html';
                     data.Austria.has_orbital_view = true;
                 }
+                if (data.Switzerland) {
+                    data.Switzerland.thumbnail = 'authority/preview-CH-FINMA.svg';
+                    data.Switzerland.modal = 'authority/CH-FINMA.html';
+                    data.Switzerland.has_orbital_view = true;
+                }
                 if (data['French Polynesia (France)']) {
                     data['French Polynesia (France)'].thumbnail = 'authority/preview-PF.svg';
                     data['French Polynesia (France)'].modal = 'authority/polynesie-francaise-orbital-webapp.html';
@@ -8487,7 +8498,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             new URL('/authority/ES-CNMV.html', window.location.origin).pathname,
             new URL('authority/ES-CNMV.html', window.location.href).pathname,
             new URL('/authority/US-SEC.html', window.location.origin).pathname,
-            new URL('authority/US-SEC.html', window.location.href).pathname
+            new URL('authority/US-SEC.html', window.location.href).pathname,
+            new URL('/authority/CH-FINMA.html', window.location.origin).pathname,
+            new URL('authority/CH-FINMA.html', window.location.href).pathname
         ]);
         const CONSOB_ORBITAL_ALLOWED_THUMBNAIL_PATHS = new Set([
             new URL('/authority/preview-consob.png', window.location.origin).pathname,
@@ -8507,7 +8520,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             new URL('/authority/preview-ES-CNMV.png', window.location.origin).pathname,
             new URL('authority/preview-ES-CNMV.png', window.location.href).pathname,
             new URL('/authority/preview-US-SEC.svg', window.location.origin).pathname,
-            new URL('authority/preview-US-SEC.svg', window.location.href).pathname
+            new URL('authority/preview-US-SEC.svg', window.location.href).pathname,
+            new URL('/authority/preview-CH-FINMA.svg', window.location.origin).pathname,
+            new URL('authority/preview-CH-FINMA.svg', window.location.href).pathname
         ]);
 
         function resolveConsobOrbitalSrc(candidateSource, { allowFallback = false } = {}) {
@@ -8545,6 +8560,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             if (country.country_name === 'United States of America') return 'SEC';
             if (country.country_name === 'Ethiopia') return 'ECMA Ethiopia';
             if (country.country_name === 'Austria') return 'FMA Austria';
+            if (country.country_name === 'Switzerland') return 'FINMA Switzerland · CH';
             if (country.country_name === 'French Polynesia (France)') return 'Polynésie française · sources territoriales';
             return country.country_name || 'Unknown authority';
         }

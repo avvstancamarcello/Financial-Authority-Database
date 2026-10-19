@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256" role="img" aria-labelledby="title desc">
+  <title id="title">FINMA CH · Guida indipendente AMEV</title>
+  <desc id="desc">Anteprima editoriale delle risorse svizzere per consumatori e investitori. Non è un logo FINMA.</desc>
+  <rect width="256" height="256" rx="24" fill="#f5f8ff"/>
+  <rect x="16" y="16" width="224" height="64" rx="12" fill="#b91c1c"/>
+  <g fill="#fff" font-family="system-ui, sans-serif" text-anchor="middle">
+    <text x="128" y="59" font-size="28" font-weight="700">CH · FINMA</text>
+  </g>
+  <g fill="#111827" font-family="system-ui, sans-serif" text-anchor="middle">
+    <text x="128" y="119" font-size="20">Consumatori</text>
+    <text x="128" y="149" font-size="20">e investitori</text>
+    <text x="128" y="192" font-size="15">Risorse ufficiali</text>
+    <text x="128" y="224" font-size="13">Guida indipendente AMEV</text>
+  </g>
+</svg>
