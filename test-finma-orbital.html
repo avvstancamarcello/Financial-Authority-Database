@@ -111,6 +111,48 @@
                 }
             }
             const { doc, win } = after;
+            const visibleCountries = app => [...app.doc.querySelectorAll('.country-card')]
+                .filter(card => card.style.display !== 'none').map(card => card.dataset.countryName);
+            const aliases = ['CH', 'Svizzera', 'Suisse', 'Switzerland', 'FINMA', '  sUiSsE  '];
+            const reference = parse(await (await fetch('./APP/index.html')).text());
+            const referenceScript = [...reference.scripts].find(script =>
+                script.textContent.includes('function getCountrySearchAliases(')).textContent;
+            const referenceAliases = new Function(referenceScript.match(
+                /function getCountrySearchAliases\(countryName\) \{[\s\S]*?\n        \}/)[0]
+                + '\nreturn getCountrySearchAliases;')();
+            check(referenceAliases('Switzerland') === win.getCountrySearchAliases('Switzerland'),
+                'Active reference homepage exposes the same Swiss aliases');
+            for (const locale of ['it', 'en', 'fr', 'de']) {
+                win.changeLanguage(locale);
+                for (const id of ['searchInput', 'search-input-top']) {
+                    for (const query of aliases) {
+                        const input = doc.getElementById(id);
+                        input.value = query;
+                        input.dispatchEvent(new win.Event('input', { bubbles: true }));
+                        check(visibleCountries(after).includes('Switzerland')
+                            && ['searchInput', 'search-input-top'].every(key => doc.getElementById(key).value === query),
+                            `${locale}/${id}/${query}: Swiss alias matches and inputs stay synchronized`);
+                        before.win.filterBySearchTerm(query);
+                        check(visibleCountries(before).every(name => visibleCountries(after).includes(name)),
+                            `${locale}/${query}: existing substring results remain available`);
+                    }
+                }
+            }
+            win.filterBySearchTerm('Svizzera');
+            win.changeLanguage('en');
+            for (const filter of ['non-ue', 'europe', 'altissimo', 'all', 'ue']) {
+                win.filterCountries(filter);
+                check(JSON.stringify(visibleCountries(after)) === JSON.stringify(filter === 'ue' ? [] : ['Switzerland'])
+                    && doc.getElementById('searchInput').value === 'Svizzera'
+                    && doc.querySelectorAll('#flagsGrid .flag-item').length === 239,
+                    `${filter}: Swiss alias survives rerenders without bypassing category filters or changing flags`);
+            }
+            win.filterCountries('all');
+            for (const query of ['canarie', 'spagna', 'USA - California', 'unmatched-country-query', '']) {
+                for (const app of [before, after]) app.win.filterBySearchTerm(query);
+                check(JSON.stringify(visibleCountries(before)) === JSON.stringify(visibleCountries(after)),
+                    `${query || 'empty query'}: existing search behavior is unchanged`);
+            }
             const dialog = doc.getElementById('consobOrbitalDialog');
             const orbital = doc.getElementById('consobOrbitalFrame');
             check(!win.resolveConsobOrbitalSrc('https://example.org/' + path)
