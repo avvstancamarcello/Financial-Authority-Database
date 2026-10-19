@@ -190,7 +190,14 @@
                 'Direct FINMA link is in the existing catalog after the flags grid');
             const pageResponse = await fetch('./' + path);
             check(pageResponse.ok, 'Standalone FINMA page returns HTTP 200');
-            const page = parse(await pageResponse.text());
+            const italianSource = await pageResponse.text();
+            const page = parse(italianSource);
+            const originalItalian = italianSource.replace(/^.*(?:rel="alternate"|data-language-switch).*\n/gm, '');
+            const italianDigest = Array.from(new Uint8Array(await crypto.subtle.digest(
+                'SHA-256', new TextEncoder().encode(originalItalian))))
+                .map(byte => byte.toString(16).padStart(2, '0')).join('');
+            check(italianDigest === 'c802e079fd4e7f1dbcd6d50ff3960af716e0b462468afb528d793fe16a8c3413',
+                'Italian page is byte-identical to its baseline apart from reciprocal language links');
             const urls = [
                 'https://www.finma.ch/en/finma/finma-an-overview/bl_kundenschutz/',
                 'https://www.finma.ch/en/finma-public/',
@@ -213,10 +220,68 @@
                 && page.querySelector('meta[property="og:url"]').content === canonical
                 && schema.url === canonical && schema.publisher.name === 'amevfirenze.it',
                 'Self-canonical, robots, social metadata and independent JSON-LD publisher are consistent');
+            const englishResponse = await fetch('./authority/CH-FINMA-en.html');
+            check(englishResponse.ok, 'Standalone English FINMA page returns HTTP 200');
+            const englishSource = await englishResponse.text();
+            const english = parse(englishSource);
+            const englishCanonical = 'https://www.amevfirenze.it/authority/CH-FINMA-en.html';
+            for (const [language, guide, source, url] of [
+                ['it', page, italianSource, canonical], ['en', english, englishSource, englishCanonical]
+            ]) {
+                const data = JSON.parse(guide.querySelector('script[type="application/ld+json"]').textContent);
+                check(guide.documentElement.lang === language && data.inLanguage === language
+                    && guide.querySelectorAll('link[rel="canonical"]').length === 1
+                    && guide.querySelector('link[rel="canonical"]').href === url
+                    && guide.querySelector('meta[property="og:url"]').content === url && data.url === url
+                    && guide.querySelector('meta[name="robots"]').content === 'index, follow'
+                    && data.publisher.name === 'amevfirenze.it',
+                    `${language}: indexable, self-canonical and language-aligned metadata`);
+                check(guide.querySelectorAll('link[rel="alternate"][hreflang]').length === 2
+                    && guide.querySelector('link[hreflang="it"]').href === canonical
+                    && guide.querySelector('link[hreflang="en"]').href === englishCanonical
+                    && guide.querySelector('[data-language-switch] a').getAttribute('href')
+                        === (language === 'it' ? 'CH-FINMA-en.html' : 'CH-FINMA.html'),
+                    `${language}: reciprocal hreflang and usable static language switch`);
+                check(urls.every(resource =>
+                    guide.querySelectorAll(`a[href="${resource}"][target="_blank"][rel="noopener noreferrer"]`).length === 1)
+                    && !guide.querySelector('iframe, script:not([type="application/ld+json"])'),
+                    `${language}: all six official links work without JavaScript or external embeds`);
+                const stack = [];
+                const voidTags = new Set(['meta', 'link', 'br', 'hr', 'img', 'input', 'source', 'wbr']);
+                const markup = source.replace(/<(script|style)\b[^>]*>[\s\S]*?<\/\1>/gi, '');
+                let balanced = true;
+                for (const token of markup.matchAll(/<(\/?)([a-z][a-z0-9]*)\b[^>]*>/gi)) {
+                    const tag = token[2].toLowerCase();
+                    if (voidTags.has(tag)) continue;
+                    if (token[1]) {
+                        if (stack.pop() !== tag) balanced = false;
+                    } else {
+                        if (tag === 'p' && stack.includes('p')) balanced = false;
+                        stack.push(tag);
+                    }
+                }
+                check(balanced && !stack.length && (source.match(/<!DOCTYPE html>/gi) || []).length === 1
+                    && (source.match(/<html\b/gi) || []).length === 1
+                    && guide.querySelectorAll('main').length === 1
+                    && !guide.querySelector('p section, p nav, p ul, p ol, a a')
+                    && [...guide.querySelectorAll('[aria-labelledby]')].every(node =>
+                        guide.getElementById(node.getAttribute('aria-labelledby'))),
+                    `${language}: one standalone document, balanced source tags and valid section headings`);
+            }
+            check(english.body.textContent.trim().split(/\s+/).length >= 1000
+                && english.querySelector('#recap') && english.querySelector('#phishing')
+                && english.querySelector('#fedpol').parentElement.textContent.includes('distinct from FINMA')
+                && english.querySelector('.notice').textContent.includes('not published or endorsed by FINMA or fedpol')
+                && english.querySelector('meta[property="og:locale"]').content === 'en_GB'
+                && english.title === english.querySelector('meta[property="og:title"]').content,
+                'English guide has 1,000+ visible words, practical guidance and explicit institutional independence');
             for (const sitemap of ['sitemap.xml', 'sitemap-financial-authorities.xml']) {
                 const xml = new DOMParser().parseFromString(await (await fetch('./' + sitemap)).text(), 'application/xml');
                 check(!xml.querySelector('parsererror') && [...xml.getElementsByTagNameNS('*', 'loc')]
                     .filter(node => node.textContent === canonical).length === 1, `${sitemap}: one FINMA canonical`);
+                check([...xml.getElementsByTagNameNS('*', 'loc')]
+                    .filter(node => node.textContent === englishCanonical).length === 1,
+                    `${sitemap}: one English FINMA canonical`);
             }
             for (const app of [before, after]) app.frame.remove();
             results.dataset.status = 'passed';
