@@ -103,11 +103,7 @@
     </script>
    
     <!-- Google Tag Manager -->
-    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-    })(window,document,'script','dataLayer','GTM-W2Q6GD42');</script>
+    <script>window.dataLayer = window.dataLayer || [];</script>
     <!-- End Google Tag Manager -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
@@ -167,15 +163,28 @@
     </script>
     <meta name="format-detection" content="telephone=no, email=no, address=no">
     
-    <!-- Google AdSense -->
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2899281140209246" crossorigin="anonymous"></script>
+    <!-- Google site verification -->
     <meta name="google-site-verification" content="cyy_B7liLeU0oPM5epVAlJvP6XI9AwbCMIbuDzrtPFc" />
     
-    <!-- Firebase SDK - TutelaTruffe-Rating -->
-    <script type="module">
-        try {
-            import("https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js").then(({ initializeApp }) => {
-                import("https://www.gstatic.com/firebasejs/10.7.1/firebase-analytics.js").then(({ getAnalytics }) => {
+    <!-- Non-critical third parties: preserve queues and consent settings, never grant consent here. -->
+    <script id="deferred-third-parties">
+        (() => {
+            function privacyOptOut() {
+                return navigator.globalPrivacyControl === true
+                    || navigator.doNotTrack === '1' || window.doNotTrack === '1';
+            }
+            function loadScript(src, crossOrigin) {
+                const script = document.createElement('script');
+                script.async = true;
+                script.src = src;
+                if (crossOrigin) script.crossOrigin = crossOrigin;
+                document.head.appendChild(script);
+            }
+            async function loadAnalytics() {
+                try {
+                    const { isSupported, getAnalytics } = await import("https://www.gstatic.com/firebasejs/10.7.1/firebase-analytics.js");
+                    if (!await isSupported() || privacyOptOut()) return;
+                    const { initializeApp } = await import("https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js");
                     const firebaseConfig = {
                         apiKey: "AIzaSyBUxnsm7TXXEFyN-jPtTXvy8HMMnr25JIo",
                         authDomain: "tutelatruffe-rating.firebaseapp.com",
@@ -186,11 +195,30 @@
                         measurementId: "G-WWXL8GWYWM"
                     };
                     const app = initializeApp(firebaseConfig);
-                    const analytics = getAnalytics(app);
+                    getAnalytics(app);
                     console.log('Firebase Analytics initialized');
-                }).catch(() => { /* Analytics blocked by browser */ });
-            }).catch(() => { /* Firebase blocked by browser privacy settings */ });
-        } catch (e) { /* Firebase unavailable - site continues to work */ }
+                } catch (_) { /* Analytics or storage blocked by browser privacy settings. */ }
+            }
+            function loadThirdParties() {
+                if (privacyOptOut()) return;
+                window.dataLayer.push({ 'gtm.start': Date.now(), event: 'gtm.js' });
+                loadScript('https://www.googletagmanager.com/gtm.js?id=GTM-W2Q6GD42');
+                loadScript('https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2899281140209246', 'anonymous');
+                void loadAnalytics();
+            }
+            function schedule() {
+                // Leave the initial render and input handling free of non-essential SDK work.
+                setTimeout(() => {
+                    if ('requestIdleCallback' in window) {
+                        window.requestIdleCallback(loadThirdParties, { timeout: 2000 });
+                    } else {
+                        loadThirdParties();
+                    }
+                }, 3500);
+            }
+            if (document.readyState === 'complete') schedule();
+            else window.addEventListener('load', schedule, { once: true });
+        })();
     </script>
     
     <!-- Preload Critical Resources - Core Web Vitals Optimization -->
@@ -709,10 +737,10 @@
             border-radius: 40px;
         }
         .orbit-side-icon-left img {
-            animation: side-pulse 1.8s ease-in-out infinite;
+            animation: side-pulse 3s ease-in-out 2;
         }
         .orbit-side-icon-right img {
-            animation: side-pulse 1.8s ease-in-out infinite;
+            animation: side-pulse 3s ease-in-out 2;
             animation-delay: 0.9s;
         }
         .flag-orbit-ring {
@@ -1020,7 +1048,7 @@
         /* Effetto pulsante cuore per parole chiave */
         .keyword-pulse {
             display: inline-block;
-            animation: keyword-pulse-anim 1.6s ease-in-out infinite;
+            animation: keyword-pulse-anim 3s ease-in-out 2;
             color: #ffd700;
             font-weight: 700;
             text-shadow: 0 0 10px rgba(255, 215, 0, 0.6);
@@ -1031,7 +1059,7 @@
         }
         .keyword-pulse-red {
             display: inline-block;
-            animation: keyword-pulse-anim 1.6s ease-in-out infinite;
+            animation: keyword-pulse-anim 3s ease-in-out 2;
             color: #ff4444;
             font-weight: 700;
             text-shadow: 0 0 12px rgba(255, 68, 68, 0.7);
@@ -1640,7 +1668,7 @@
         .medusa-serpent {
             transform-box: fill-box;
             transform-origin: center;
-            animation: medusaSerpentFloat 4.2s ease-in-out infinite;
+            animation: medusaSerpentFloat 4.2s ease-in-out 2;
         }
         .medusa-serpent.snake-1 { animation-delay: -0.2s; }
         .medusa-serpent.snake-2 { animation-delay: -1.2s; }
@@ -1714,7 +1742,7 @@
             height: 8px;
             border-top: 2px solid rgba(255,215,0,0.65);
             border-radius: 999px;
-            animation: medusaTrailWave 2.8s ease-in-out infinite;
+            animation: medusaTrailWave 2.8s ease-in-out 2;
             transform: translateX(var(--snake-shift));
         }
         .medusa-cta-snake-trail span:nth-child(2) { animation-delay: -0.9s; width: 30px; }
@@ -1744,6 +1772,11 @@
             }
             .medusa-serpent,
             .medusa-cta-snake-trail span {
+                animation: none;
+            }
+            .orbit-side-icon img,
+            .keyword-pulse,
+            .keyword-pulse-red {
                 animation: none;
             }
         }
@@ -2351,8 +2384,8 @@
             50% { transform: translate(-50%, -50%) scale(1.08); }
         }
         @keyframes side-pulse {
-            0%, 100% { transform: scale(1); filter: drop-shadow(0 0 0 rgba(34,197,94,0.7)); }
-            50% { transform: scale(1.06); filter: drop-shadow(0 0 16px rgba(34,197,94,0.9)); }
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.03); }
         }
         @keyframes flag-wave {
             0%, 100% { transform: scale(1); filter: brightness(1); }
