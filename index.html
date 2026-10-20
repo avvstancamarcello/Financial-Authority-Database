@@ -425,6 +425,11 @@
                 "@type": "WebPage",
                 "name": "Switzerland / FINMA Orbital Web App",
                 "url": "https://www.amevfirenze.it/authority/CH-FINMA.html"
+            },
+            {
+                "@type": "WebPage",
+                "name": "AMEV · Significato del brand ed equivalenza multilingue",
+                "url": "https://www.amevfirenze.it/authority/amev-equivalenza-lang-9-EU.html"
             }
         ],
         "publisher": {
@@ -2742,6 +2747,20 @@
         .hero-cta-link:hover { background: #334155; }
         .hero-cta-link:focus-visible { outline: 3px solid #FFCC00; outline-offset: 3px; box-shadow: 0 0 0 6px #1e293b; }
         @media (prefers-reduced-motion: reduce) { .hero-cta-link { transition: none; } }
+        .hero-brand-row { margin: 6px 0 4px; display: flex; justify-content: center; }
+        .hero-brand-link {
+            display: inline-flex; align-items: center; gap: 10px; min-height: 44px; max-width: 100%;
+            padding: 6px 16px 6px 8px; color: #ffffff; background: rgba(15, 23, 42, 0.85);
+            border: 1px solid #FFCC00; border-radius: 999px; text-decoration: none; text-align: left;
+            touch-action: manipulation; transition: background-color 0.2s ease;
+        }
+        .hero-brand-link img { width: 36px; height: 36px; flex: 0 0 36px; }
+        .hero-brand-text { display: flex; flex-direction: column; min-width: 0; line-height: 1.2; }
+        .hero-brand-title { font-weight: 700; font-size: 0.95rem; overflow-wrap: anywhere; }
+        .hero-brand-sub { font-size: 0.78rem; color: #FFCC00; overflow-wrap: anywhere; }
+        .hero-brand-link:hover { background: #334155; }
+        .hero-brand-link:focus-visible { outline: 3px solid #FFCC00; outline-offset: 3px; box-shadow: 0 0 0 6px #1e293b; }
+        @media (prefers-reduced-motion: reduce) { .hero-brand-link { transition: none; } }
         #storia-giovanni-falcone { scroll-margin-top: calc(var(--sticky-nav-height, 160px) + 12px); }
         @media (max-width: 767px) { #storia-giovanni-falcone { scroll-margin-top: calc(var(--sticky-nav-height, 300px) + 12px); } }
         @media (max-width: 480px) { #storia-giovanni-falcone { scroll-margin-top: calc(var(--sticky-nav-height, 360px) + 12px); } }
@@ -2925,6 +2944,15 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <p class="hero-cta-row">
                 <a href="#flags-section" class="hero-cta-link" data-i18n-text="landingHeroCta">Apri il form di richiesta con ogni bandiera!</a>
                 <a href="#storia-giovanni-falcone" class="hero-cta-link" data-i18n-text="heroFalconeMethodCta">Metodo Falcone</a>
+            </p>
+            <p class="hero-brand-row">
+                <a href="authority/amev-equivalenza-lang-9-EU.html" class="hero-brand-link" hreflang="it">
+                    <img src="logo_shield_financial_defense.svg" alt="" width="36" height="36">
+                    <span class="hero-brand-text">
+                        <span class="hero-brand-title" data-i18n-text="heroAmevBrandCta">AMEV · Significato del brand</span>
+                        <span class="hero-brand-sub" data-i18n-text="heroAmevBrandSub">Equivalenza multilingue</span>
+                    </span>
+                </a>
             </p>
             <nav class="language-selector" data-layout="compact" role="navigation" data-i18n-aria-label="languageSelectionAriaLabel" aria-label="Language selection">
                 <section class="language-selector-group language-selector-eu" aria-labelledby="language-selector-eu-title">
@@ -6239,6 +6267,25 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             hi: 'फाल्कोने पद्धति', vi: 'Phương pháp Falcone', sq: 'Metoda Falcone', bs: 'Falconeova metoda',
             ro: 'Metoda Falcone', nl: 'Falcone-methode', el: 'Μέθοδος Φαλκόνε'
         }).forEach(([locale, label]) => { (translations[locale] ||= {}).heroFalconeMethodCta = label; });
+        Object.entries({
+            it: ['AMEV · Significato del brand', 'Equivalenza multilingue'],
+            en: ['AMEV · Brand meaning', 'Multilingual equivalence'],
+            fr: ['AMEV · Signification de la marque', 'Équivalence multilingue'],
+            de: ['AMEV · Bedeutung der Marke', 'Mehrsprachige Entsprechung'],
+            es: ['AMEV · Significado de la marca', 'Equivalencia multilingüe'],
+            pt: ['AMEV · Significado da marca', 'Equivalência multilíngue'],
+            ar: ['AMEV · معنى العلامة التجارية', 'التكافؤ متعدد اللغات'],
+            zh: ['AMEV · 品牌含义', '多语言对照'],
+            hi: ['AMEV · ब्रांड का अर्थ', 'बहुभाषी समतुल्यता'],
+            vi: ['AMEV · Ý nghĩa thương hiệu', 'Tương đương đa ngôn ngữ'],
+            sq: ['AMEV · Kuptimi i markës', 'Ekuivalenca shumëgjuhëshe'],
+            bs: ['AMEV · Značenje brenda', 'Višejezična ekvivalencija'],
+            ro: ['AMEV · Semnificația mărcii', 'Echivalență multilingvă'],
+            nl: ['AMEV · Betekenis van het merk', 'Meertalige gelijkwaardigheid'],
+            el: ['AMEV · Σημασία της επωνυμίας', 'Πολυγλωσσική αντιστοιχία']
+        }).forEach(([locale, [cta, sub]]) => {
+            Object.assign(translations[locale] ||= {}, { heroAmevBrandCta: cta, heroAmevBrandSub: sub });
+        });
         Object.entries({
             it: {
                 landingHeroTitle: "Strumento per richiesta di collaborazione a 239 Autorità Finanziarie",

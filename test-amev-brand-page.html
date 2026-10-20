@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="data:,">
+  <title>AMEV brand Orbital WebApp regression tests</title>
+</head>
+<body>
+  <h1>AMEV · pagina brand, redirect, hero e sitemap</h1>
+  <p>Servire la root via HTTP (es. <code>python3 -m http.server</code>) e aprire questa pagina.</p>
+  <pre id="results">Running…</pre>
+  <div id="fixtures"></div>
+  <script>
+    const results = document.getElementById('results');
+    const checks = [];
+    const root = 'https://www.amevfirenze.it/';
+    const brandPath = 'authority/amev-equivalenza-lang-9-EU.html';
+    const canonical = root + brandPath;
+    const logo = 'logo_shield_financial_defense.svg';
+    const expectedRows = [
+      ['EN', 'Authority', 'Market', 'Effective', 'Verification'],
+      ['AT', 'Autorität', 'Markt', 'Effektive', 'Verifizierung'],
+      ['DE', 'Autorität', 'Markt', 'Effektive', 'Verifizierung'],
+      ['ES', 'Autoridad', 'Mercado', 'Efectiva', 'Verificación'],
+      ['FR', 'Autorité', 'Marché', 'Effective', 'Vérification'],
+      ['IT', 'Authority (Autorità)', 'Market (Mercato)', 'Effettiva', 'Verifica'],
+      ['NL', 'Autoriteit', 'Markt', 'Effectieve', 'Verificatie'],
+      ['PT', 'Autoridade', 'Mercado', 'Efetiva', 'Verificação'],
+      ['RO', 'Autoritate', 'Market / Mercat', 'Efectivă', 'Verificare']
+    ];
+    function check(condition, message) {
+      checks.push(`${condition ? 'PASS' : 'FAIL'}: ${message}`);
+      results.textContent = checks.join('\n');
+      if (!condition) throw new Error(message);
+    }
+    async function text(path) {
+      const response = await fetch(path);
+      check(response.ok, `${path} esiste`);
+      return response.text();
+    }
+    async function waitFor(predicate) {
+      const deadline = Date.now() + 15000;
+      while (!predicate()) {
+        if (Date.now() > deadline) throw new Error('Timed out');
+        await new Promise(resolve => setTimeout(resolve, 50));
+      }
+    }
+    async function loadFrame(src, width) {
+      const frame = document.createElement('iframe');
+      frame.style.cssText = `width:${width}px;height:700px;border:0;display:block;`;
+      document.getElementById('fixtures').appendChild(frame);
+      const loaded = new Promise(resolve => frame.onload = resolve);
+      frame.src = src;
+      await loaded;
+      return frame;
+    }
+    const nextFrame = () => new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve)));
+
+    async function testStaticBrandPage(parser) {
+      const source = await text(brandPath);
+      check(!source.includes('```'), 'pagina brand senza fence Markdown');
+      check(source.trimStart().startsWith('<!DOCTYPE html>'), 'pagina brand inizia con il doctype');
+      const page = parser.parseFromString(source, 'text/html');
+      check(page.documentElement.lang === 'it', 'lingua italiana');
+      check(page.querySelectorAll('h1').length === 1 && page.querySelector('main article'), 'H1 unico e main/article semantici');
+      check(!/cdn\.tailwindcss\.com/.test(source), 'stili locali, nessuna dipendenza dal runtime Tailwind CDN');
+      const ids = [...page.querySelectorAll('[id]')].map(node => node.id);
+      check(new Set(ids).size === ids.length, 'nessun ID duplicato nella pagina brand');
+      const rows = [...page.querySelectorAll('#amevTable tbody tr')];
+      check(rows.length === 9, 'le 9 voci della tabella sono presenti senza JavaScript');
+      rows.forEach((row, index) => {
+        const [code, ...terms] = expectedRows[index];
+        const cells = [...row.querySelectorAll('td.term')].map(cell => cell.textContent.replace(/\s+/g, ' ').trim());
+        check(row.querySelector('.code').textContent === code && JSON.stringify(cells) === JSON.stringify(terms),
+          `riga ${code} con traduzioni originali`);
+      });
+      check(page.getElementById('amevToolbar').hasAttribute('hidden'), 'controlli JS nascosti senza JavaScript');
+      for (const id of ['acronimo', 'confronto', 'principi', 'nota-metodologica']) {
+        check(Boolean(page.querySelector(`nav a[href="#${id}"]`)) && Boolean(page.getElementById(id)),
+          `navigazione rapida verso #${id}`);
+      }
+      check(page.querySelectorAll('a[href="../index.html"]').length >= 1, 'link di ritorno alla Home');
+      const logos = [...page.querySelectorAll(`img[src="../${logo}"]`)];
+      check(logos.length >= 2 && logos.every(img => img.getAttribute('width') && img.getAttribute('height')),
+        'logo del brand riutilizzato con dimensioni intrinseche');
+      for (const link of page.querySelectorAll('img[src], a[href]:not([href^="https:"]):not([href^="#"])')) {
+        const attr = link.getAttribute('src') || link.getAttribute('href');
+        await text(new URL(attr, new URL(brandPath, location.href)).pathname);
+      }
+      check(page.querySelector('link[rel="canonical"]').getAttribute('href') === canonical, 'canonical self-referenziale');
+      for (const selector of ['meta[property="og:url"]', 'meta[name="twitter:url"]']) {
+        check(page.querySelector(selector).content === canonical, `${selector} coincide con il canonical`);
+      }
+      for (const selector of ['meta[property="og:image"]', 'meta[name="twitter:image"]']) {
+        check(page.querySelector(selector).content === root + logo, `${selector} usa il logo reale`);
+      }
+      check(page.querySelector('meta[property="og:title"]').content === page.title, 'og:title coincide con il title');
+      check(!/noindex/i.test(page.querySelector('meta[name="robots"]')?.content || ''), 'pagina indicizzabile');
+      const ld = JSON.parse(page.querySelector('script[type="application/ld+json"]').textContent);
+      const webPage = ld['@graph'].find(node => [].concat(node['@type']).includes('WebPage'));
+      check([].concat(webPage['@type']).includes('AboutPage') && webPage.url === canonical, 'JSON-LD WebPage/AboutPage con URL canonico');
+      check(ld['@graph'].some(node => node['@type'] === 'BreadcrumbList'), 'JSON-LD breadcrumb');
+      check(!/GovernmentOrganization|accreditat|certificat|hasCredential/i.test(JSON.stringify(ld)),
+        'JSON-LD non presenta il brand come autorità o standard certificato');
+      check(page.body.textContent.includes("non è un'Autorità finanziaria")
+        && page.getElementById('nota-metodologica').parentElement.textContent.includes('non è un\'Autorità di vigilanza'),
+        'chiarimento visibile: pagina esplicativa, non Autorità');
+      check(!/Standard Internazionale AMEV/.test(source), 'nessun badge "Standard Internazionale"');
+    }
+
+    async function testRedirect(parser) {
+      const source = await text('amev-equivalenza-lang-9-EU.html');
+      const page = parser.parseFromString(source, 'text/html');
+      check(!source.includes('```') && !page.getElementById('amevTable'), 'vecchio URL senza contenuto duplicato');
+      const refresh = page.querySelector('meta[http-equiv="refresh"]').content;
+      check(refresh === `0; url=${brandPath}`, 'meta refresh immediato verso la nuova pagina');
+      check(page.querySelector('link[rel="canonical"]').getAttribute('href') === canonical, 'canonical del vecchio URL punta al nuovo');
+      check(page.querySelector(`a[href="${brandPath}"]`), 'link visibile funzionante senza JavaScript');
+      const frame = await loadFrame('amev-equivalenza-lang-9-EU.html', 800);
+      await waitFor(() => frame.contentWindow.location.pathname.endsWith('/' + brandPath));
+      check(true, 'il vecchio URL reindirizza alla destinazione canonica');
+      frame.remove();
+    }
+
+    async function testHomepage(parser) {
+      const source = await text('index.html');
+      const index = parser.parseFromString(source, 'text/html');
+      const links = [...index.querySelectorAll('header[role="banner"] a.hero-brand-link')];
+      check(links.length === 1, 'un solo pulsante brand nella hero');
+      const link = links[0];
+      check(link.getAttribute('href') === brandPath, 'il pulsante punta alla pagina canonica (link statico)');
+      check(!link.closest('[aria-hidden="true"]'), 'il pulsante non è dentro decorazioni aria-hidden');
+      check(!link.querySelector('a, button, input, select, textarea'), 'nessun elemento interattivo annidato');
+      const img = link.querySelector('img');
+      check(img.getAttribute('src') === logo && img.getAttribute('alt') === ''
+        && img.getAttribute('width') === '36' && img.getAttribute('height') === '36',
+        'logo decorativo con dimensioni intrinseche');
+      check(link.textContent.includes('AMEV · Significato del brand') && link.textContent.includes('Equivalenza multilingue'),
+        'testo visibile descrittivo');
+      check(link.querySelector('[data-i18n-text="heroAmevBrandCta"]') && link.querySelector('[data-i18n-text="heroAmevBrandSub"]'),
+        'chiavi i18n sugli span di testo (il logo non viene sovrascritto)');
+      const map = source.slice(source.indexOf("it: ['AMEV · Significato del brand'"));
+      ['it', 'en', 'fr', 'de', 'es', 'pt', 'ar', 'zh', 'hi', 'vi', 'sq', 'bs', 'ro', 'nl', 'el'].forEach(locale => {
+        check(new RegExp(`\\b${locale}: \\['[^']+', '[^']+'\\]`).test(map.slice(0, map.indexOf('})'))), `etichette per ${locale}`);
+      });
+      const website = JSON.parse(index.getElementById('website-jsonld').textContent);
+      check(website.hasPart.filter(node => node.url === canonical).length === 1, 'WebSite.hasPart include la pagina brand una volta');
+      const dataset = JSON.parse(index.getElementById('dataset-jsonld').textContent);
+      check(!JSON.stringify(dataset).includes(brandPath), 'la pagina brand non entra nel Dataset delle autorità');
+      check(!(await text('financial_authorities_database.json')).includes(brandPath), 'database autorità invariato');
+
+      const styles = [...index.querySelectorAll('head style')].map(style => style.outerHTML).join('');
+      index.querySelectorAll('script, link, iframe').forEach(node => node.remove());
+      for (const width of [320, 412, 1280]) {
+        const frame = await loadFrame('about:blank', width);
+        const doc = frame.contentDocument;
+        doc.open();
+        doc.write(`<!DOCTYPE html><html><head>${styles}</head><body>${index.body.innerHTML}</body></html>`);
+        doc.close();
+        await nextFrame();
+        const hero = doc.querySelector('header a.hero-brand-link');
+        const box = hero.getBoundingClientRect();
+        check(box.height >= 44 && box.width >= 44, `${width}px: area touch ≥ 44px`);
+        check(box.right <= doc.documentElement.clientWidth + 1 && box.left >= -1, `${width}px: il pulsante non deborda`);
+        hero.focus();
+        check(doc.activeElement === hero, `${width}px: raggiungibile da tastiera`);
+        frame.remove();
+      }
+    }
+
+    async function testSitemap(parser) {
+      const ns = 'http://www.sitemaps.org/schemas/sitemap/0.9';
+      const sitemap = parser.parseFromString(await text('sitemap.xml'), 'application/xml');
+      check(!sitemap.querySelector('parsererror'), 'sitemap.xml è XML valido');
+      const urls = [...sitemap.getElementsByTagNameNS(ns, 'url')];
+      const locs = urls.map(url => url.getElementsByTagNameNS(ns, 'loc')[0].textContent);
+      check(new Set(locs).size === locs.length, 'loc univoci');
+      const entries = urls.filter(url => url.getElementsByTagNameNS(ns, 'loc')[0].textContent === canonical);
+      check(entries.length === 1, 'una sola voce per la pagina brand');
+      check(entries[0].getElementsByTagNameNS(ns, 'lastmod')[0].textContent === '2026-10-20'
+        && entries[0].getElementsByTagNameNS(ns, 'changefreq')[0].textContent === 'monthly'
+        && entries[0].getElementsByTagNameNS(ns, 'priority')[0].textContent === '0.8', 'lastmod reale e convenzioni authority');
+      check(!locs.includes(root + 'amev-equivalenza-lang-9-EU.html'), 'il vecchio URL non è nella sitemap');
+      check(!(await text('sitemap-financial-authorities.xml')).includes(brandPath), 'sitemap delle autorità invariata');
+      const sw = await text('service-worker.js');
+      check(sw.includes(`'/${brandPath}'`), 'pagina brand disponibile offline tramite service worker');
+    }
+
+    async function testInteractions() {
+      for (const width of [320, 375, 1280]) {
+        const frame = await loadFrame(brandPath, width);
+        await nextFrame();
+        const win = frame.contentWindow;
+        check(win.document.documentElement.scrollWidth <= win.innerWidth, `${width}px: nessun overflow orizzontale`);
+        frame.remove();
+      }
+      const frame = await loadFrame(brandPath, 1000);
+      const win = frame.contentWindow;
+      const doc = frame.contentDocument;
+      check(!doc.getElementById('amevToolbar').hidden, 'controlli visibili con JavaScript');
+      const search = doc.getElementById('searchInput');
+      check(doc.querySelector(`label[for="searchInput"]`), 'campo di ricerca con etichetta accessibile');
+      const visible = () => [...doc.querySelectorAll('#amevTable tbody tr')].filter(row => !row.hidden).length;
+      const type = value => { search.value = value; search.dispatchEvent(new win.Event('input')); };
+      type('italiano');
+      check(visible() === 1 && doc.getElementById('noResults').hidden, 'ricerca "italiano" mostra una riga');
+      check(doc.getElementById('amevStatus').textContent === '1 di 9 voci linguistiche visibili.', 'stato live della ricerca');
+      type('DE');
+      check(visible() >= 2, 'ricerca per codice lingua');
+      type('zzzz');
+      check(visible() === 0 && !doc.getElementById('noResults').hidden, 'stato "nessun risultato"');
+      type('');
+      check(visible() === 9, 'ricerca vuota ripristina le 9 righe');
+
+      const btn = doc.getElementById('highlightBtn');
+      const itCell = doc.querySelector('tr[data-lang^="italiano"] .term-a');
+      const original = itCell.innerHTML;
+      const allOriginal = [...doc.querySelectorAll('.term')].map(cell => cell.innerHTML);
+      btn.focus();
+      check(doc.activeElement === btn && btn.type === 'button', 'pulsante evidenziazione raggiungibile da tastiera');
+      for (let round = 1; round <= 3; round++) {
+        btn.click();
+        check(btn.getAttribute('aria-pressed') === 'true' && doc.querySelectorAll('.amev-initial').length === 36,
+          `giro ${round}: iniziali evidenziate (aria-pressed=true)`);
+        check(itCell.querySelector('.amev-initial').textContent === 'A' && itCell.querySelector('.note')?.textContent === '(Autorità)'
+          && itCell.textContent.replace(/\s+/g, ' ').trim() === 'Authority (Autorità)', `giro ${round}: nota italiana conservata`);
+        btn.click();
+        check(btn.getAttribute('aria-pressed') === 'false' && itCell.innerHTML === original
+          && JSON.stringify([...doc.querySelectorAll('.term')].map(cell => cell.innerHTML)) === JSON.stringify(allOriginal),
+          `giro ${round}: markup originale ripristinato`);
+      }
+
+      const toast = doc.getElementById('toast');
+      check(toast.getAttribute('role') === 'status', 'toast annunciato come stato live');
+      let copied = '';
+      Object.defineProperty(win.navigator, 'clipboard', { configurable: true,
+        value: { writeText: value => { copied = value; return Promise.resolve(); } } });
+      check(await win.amevBrandPage.copyTableData() === true && copied.includes('IT: Authority | Market | Effettiva | Verifica')
+        && copied.split('\n').filter(line => /^[A-Z]{2}: /.test(line)).length === 9
+        && !toast.classList.contains('is-error') && toast.textContent.includes('copiato'), 'copia riuscita segnalata');
+      Object.defineProperty(win.navigator, 'clipboard', { configurable: true,
+        value: { writeText: () => Promise.reject(new Error('denied')) } });
+      doc.execCommand = () => false;
+      check(await win.amevBrandPage.copyTableData() === false && toast.classList.contains('is-error')
+        && toast.textContent.includes('Impossibile'), 'fallimento della copia segnalato onestamente');
+      doc.execCommand = () => true;
+      check(await win.amevBrandPage.copyTableData() === true && !toast.classList.contains('is-error'), 'fallback execCommand verificato');
+      frame.remove();
+    }
+
+    async function run() {
+      const parser = new DOMParser();
+      await testStaticBrandPage(parser);
+      await testRedirect(parser);
+      await testHomepage(parser);
+      await testSitemap(parser);
+      await testInteractions();
+      checks.push('ALL CHECKS PASSED');
+      results.dataset.status = 'passed';
+      results.textContent = checks.join('\n') + '\nDONE';
+    }
+    run().catch(error => {
+      checks.push(`ERROR: ${error.message}`);
+      results.dataset.status = 'failed';
+      results.textContent = checks.join('\n') + '\nFAIL';
+      console.error(error);
+    });
+  </script>
+</body>
+</html>
