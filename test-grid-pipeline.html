@@ -15,8 +15,8 @@
         Lo snapshot finale espone stato, ultimo evento e conteggio DOM.</p>
     <p>Limiti: il conteggio DOM non certifica visibilità CSS o caricamento immagini.
         Un blocco permanente lascia la timeline parziale, senza snapshot di completamento.
-        Gli errori e fallback preesistenti restano invariati. I record senza nome sono
-        contati come invalidi, non scartati: la diagnostica non filtra i dati.
+        Gli errori e fallback restano visibili. I record incompleti o duplicati
+        invalidano il caricamento: la diagnostica non filtra silenziosamente i dati.
         I campi Orbital Ethiopia assenti dal JSON producono un warning; ECMA è aggiunto dal bootstrap WIP.
         I log successivi al primo snapshot restano marcati [DIAG] fuori dal gruppo iniziale.
         Gli errori di parsing non riportano il messaggio originale, che può contenere JSON.
@@ -157,8 +157,8 @@
                     check(!JSON.stringify(tracer.events).includes(database.Ethiopia.notes),
                     'Tracer does not log country payloads');
                     check(JSON.stringify(tracer.orbitalReport.inventory.map(item => item.authority).sort())
-                        === JSON.stringify(['AMF France', 'BaFin', 'CNMV', 'CONSOB', 'ECMA Ethiopia', 'FCA', 'SEC'].sort()),
-                    'Orbital inventory matches the seven configured authority launchers');
+                        === JSON.stringify(['AMF France', 'BaFin', 'CNMV', 'CONSOB', 'ECMA Ethiopia', 'FCA', 'SEC', 'FMA Austria', 'FINMA Switzerland · CH', 'Polynésie française · sources territoriales'].sort()),
+                    'Orbital inventory matches the ten configured authority/territorial launchers');
                     check(tracer.orbitalReport.inventory.find(item => item.authority === 'ECMA Ethiopia')
                         ?.configuredBy === 'WIP bootstrap'
                         && tracer.events.some(entry => entry.event === 'data:ethiopia:warning'),

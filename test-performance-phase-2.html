@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Performance Phase 2 regression checks</title>
+</head>
+<body>
+    <h1>Non-core performance regression checks</h1>
+    <p>Serve the repository over HTTP. SDKs are mocked; no analytics or ads are sent.</p>
+    <pre id="results">Running…</pre>
+    <script>
+        const results = document.getElementById('results'), checks = [];
+        function check(condition, message) {
+            checks.push(`${condition ? 'PASS' : 'FAIL'}: ${message}`);
+            results.textContent = checks.join('\n');
+            if (!condition) throw new Error(message);
+        }
+        async function run() {
+            const parser = new DOMParser();
+            const source = parser.parseFromString(await (await fetch('./index.html')).text(), 'text/html');
+            const loader = source.getElementById('deferred-third-parties').textContent;
+            check(!source.querySelector('script[src*="googletagmanager"], script[src*="adsbygoogle"], script[src*="firebase"]'),
+                'No eager non-critical SDK script tags');
+            const bootstrap = [...source.scripts].find(script => script.textContent.trim() === 'window.dataLayer = window.dataLayer || [];');
+            check(Boolean(bootstrap), 'Early dataLayer queue remains available');
+
+            async function scenario(options = {}) {
+                const scripts = [], imports = [], timers = [], idle = [], events = [];
+                const queue = [{ event: 'queued-before-load' }, ['consent', 'default', { analytics_storage: 'denied' }]];
+                const win = { dataLayer: queue, addEventListener: (...args) => events.push(args) };
+                const nav = { ...options.privacy };
+                if (!options.noIdle) win.requestIdleCallback = (...args) => idle.push(args);
+                const doc = {
+                    readyState: options.complete ? 'complete' : 'loading',
+                    createElement: () => ({}),
+                    head: { appendChild: script => scripts.push(script) }
+                };
+                let initialized = 0, analytics = 0;
+                const importSDK = async url => {
+                    imports.push(url);
+                    if (options.blocked) throw new Error('SDK blocked');
+                    return {
+                        isSupported: async () => !options.unsupported,
+                        initializeApp: () => {
+                            initialized++;
+                            if (options.storageBlocked) throw new Error('Storage blocked');
+                            return {};
+                        },
+                        getAnalytics: () => analytics++
+                    };
+                };
+                new Function('window', 'document', 'navigator', 'setTimeout', 'importSDK',
+                    loader.replace(/\bimport\(/g, 'importSDK('))(win, doc, nav, (...args) => timers.push(args), importSDK);
+                check(!scripts.length && !imports.length && (options.complete || !timers.length),
+                    'No third-party work before window load');
+                if (!options.complete) {
+                    check(events[0][0] === 'load' && events[0][2].once, 'One-shot window load listener');
+                    events[0][1]();
+                }
+                check(timers.length === 1 && timers[0][1] === 3500, 'Post-load delay retained');
+                timers[0][0]();
+                if (!options.noIdle) {
+                    check(!scripts.length && idle[0][1].timeout === 2000, 'Idle scheduling has bounded timeout');
+                    if (options.lateOptOut) nav.globalPrivacyControl = true;
+                    idle[0][0]();
+                }
+                // Drain the mocked dynamic-import/SDK promise chain, including rejection paths.
+                for (let step = 0; step < 12; step++) await Promise.resolve();
+                check(win.dataLayer === queue && queue[0].event === 'queued-before-load'
+                    && queue[1][2].analytics_storage === 'denied', 'Existing events and consent queue preserved');
+                const optedOut = options.privacy?.globalPrivacyControl || options.privacy?.doNotTrack === '1' || options.lateOptOut;
+                if (optedOut) {
+                    check(!scripts.length && !imports.length && queue.length === 2, 'Privacy opt-out blocks all SDKs');
+                } else {
+                    check(scripts.length === 2 && scripts.every(script => script.async)
+                        && scripts[0].src === 'https://www.googletagmanager.com/gtm.js?id=GTM-W2Q6GD42'
+                        && scripts[1].src === 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2899281140209246'
+                        && scripts[1].crossOrigin === 'anonymous'
+                        && queue.filter(event => event.event === 'gtm.js').length === 1,
+                        'GTM and AdSense load asynchronously once with original identifiers');
+                    check(analytics === (options.blocked || options.unsupported || options.storageBlocked ? 0 : 1),
+                        'Firebase initializes when supported; SDK/storage failures stay contained');
+                    if (options.unsupported) check(initialized === 0, 'Unsupported analytics never initializes Firebase app');
+                }
+            }
+            await scenario();
+            await scenario({ noIdle: true, complete: true });
+            await scenario({ privacy: { globalPrivacyControl: true } });
+            await scenario({ privacy: { doNotTrack: '1' } });
+            await scenario({ lateOptOut: true });
+            await scenario({ blocked: true });
+            await scenario({ unsupported: true });
+            await scenario({ storageBlocked: true });
+
+            const style = source.querySelector('style').textContent;
+            for (const name of ['side-pulse', 'keyword-pulse-anim', 'medusaSerpentFloat', 'medusaTrailWave']) {
+                check(!new RegExp(`animation:\\s*${name}[^;]*infinite`).test(style), `${name}: decorative animation is finite`);
+            }
+            const sidePulse = style.match(/@keyframes side-pulse\s*\{([\s\S]*?)\n        \}/)[1];
+            check(!/filter:/.test(sidePulse) && /transform:/.test(sidePulse), 'Side pulse animates transform, not filter');
+            check(/@media \(prefers-reduced-motion: reduce\)[\s\S]*?\.orbit-side-icon img,[\s\S]*?\.keyword-pulse-red\s*\{\s*animation: none;/.test(style),
+                'Reduced motion disables decorative logo and keyword pulses');
+
+            for (const [page, image, width, height] of [
+                ['IT-CONSOB', 'preview-consob.png', 1536, 1024],
+                ['UK-FCA', 'preview-fca.png', 1024, 1024]
+            ]) {
+                const html = parser.parseFromString(await (await fetch(`./authority/${page}.html`)).text(), 'text/html');
+                const preview = html.querySelector(`img[src="${image}"]`);
+                const decoded = new Image();
+                decoded.src = `./authority/${image}`;
+                await decoded.decode();
+                check(preview.width === width && preview.height === height
+                    && decoded.naturalWidth === width && decoded.naturalHeight === height,
+                    `${page}: explicit dimensions match unchanged preview asset`);
+                check(/\.thumbnail\s*\{[^}]*height:\s*auto;/.test(html.querySelector('style').textContent),
+                    `${page}: responsive image height preserved`);
+            }
+            results.textContent += '\nAll Performance Phase 2 checks passed.';
+        }
+        run().catch(error => { results.textContent += `\nERROR: ${error.stack}`; });
+    </script>
+</body>
+</html>

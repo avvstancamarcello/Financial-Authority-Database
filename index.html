@@ -103,11 +103,7 @@
     </script>
    
     <!-- Google Tag Manager -->
-    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-    })(window,document,'script','dataLayer','GTM-W2Q6GD42');</script>
+    <script>window.dataLayer = window.dataLayer || [];</script>
     <!-- End Google Tag Manager -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
@@ -167,15 +163,28 @@
     </script>
     <meta name="format-detection" content="telephone=no, email=no, address=no">
     
-    <!-- Google AdSense -->
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2899281140209246" crossorigin="anonymous"></script>
+    <!-- Google site verification -->
     <meta name="google-site-verification" content="cyy_B7liLeU0oPM5epVAlJvP6XI9AwbCMIbuDzrtPFc" />
     
-    <!-- Firebase SDK - TutelaTruffe-Rating -->
-    <script type="module">
-        try {
-            import("https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js").then(({ initializeApp }) => {
-                import("https://www.gstatic.com/firebasejs/10.7.1/firebase-analytics.js").then(({ getAnalytics }) => {
+    <!-- Non-critical third parties: preserve queues and consent settings, never grant consent here. -->
+    <script id="deferred-third-parties">
+        (() => {
+            function privacyOptOut() {
+                return navigator.globalPrivacyControl === true
+                    || navigator.doNotTrack === '1' || window.doNotTrack === '1';
+            }
+            function loadScript(src, crossOrigin) {
+                const script = document.createElement('script');
+                script.async = true;
+                script.src = src;
+                if (crossOrigin) script.crossOrigin = crossOrigin;
+                document.head.appendChild(script);
+            }
+            async function loadAnalytics() {
+                try {
+                    const { isSupported, getAnalytics } = await import("https://www.gstatic.com/firebasejs/10.7.1/firebase-analytics.js");
+                    if (!await isSupported() || privacyOptOut()) return;
+                    const { initializeApp } = await import("https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js");
                     const firebaseConfig = {
                         apiKey: "AIzaSyBUxnsm7TXXEFyN-jPtTXvy8HMMnr25JIo",
                         authDomain: "tutelatruffe-rating.firebaseapp.com",
@@ -186,11 +195,30 @@
                         measurementId: "G-WWXL8GWYWM"
                     };
                     const app = initializeApp(firebaseConfig);
-                    const analytics = getAnalytics(app);
+                    getAnalytics(app);
                     console.log('Firebase Analytics initialized');
-                }).catch(() => { /* Analytics blocked by browser */ });
-            }).catch(() => { /* Firebase blocked by browser privacy settings */ });
-        } catch (e) { /* Firebase unavailable - site continues to work */ }
+                } catch (_) { /* Analytics or storage blocked by browser privacy settings. */ }
+            }
+            function loadThirdParties() {
+                if (privacyOptOut()) return;
+                window.dataLayer.push({ 'gtm.start': Date.now(), event: 'gtm.js' });
+                loadScript('https://www.googletagmanager.com/gtm.js?id=GTM-W2Q6GD42');
+                loadScript('https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2899281140209246', 'anonymous');
+                void loadAnalytics();
+            }
+            function schedule() {
+                // Leave the initial render and input handling free of non-essential SDK work.
+                setTimeout(() => {
+                    if ('requestIdleCallback' in window) {
+                        window.requestIdleCallback(loadThirdParties, { timeout: 2000 });
+                    } else {
+                        loadThirdParties();
+                    }
+                }, 3500);
+            }
+            if (document.readyState === 'complete') schedule();
+            else window.addEventListener('load', schedule, { once: true });
+        })();
     </script>
     
     <!-- Preload Critical Resources - Core Web Vitals Optimization -->
@@ -420,6 +448,16 @@
                 "@type": "WebPage",
                 "name": "Ethiopia / ECMA Orbital Web App",
                 "url": "https://www.amevfirenze.it/authority/ET-ECMA.html"
+            },
+            {
+                "@type": "WebPage",
+                "name": "Switzerland / FINMA Orbital Web App",
+                "url": "https://www.amevfirenze.it/authority/CH-FINMA.html"
+            },
+            {
+                "@type": "WebPage",
+                "name": "AMEV · Significato del brand ed equivalenza multilingue",
+                "url": "https://www.amevfirenze.it/authority/amev-equivalenza-lang-9-EU.html"
             }
         ],
         "publisher": {
@@ -699,10 +737,10 @@
             border-radius: 40px;
         }
         .orbit-side-icon-left img {
-            animation: side-pulse 1.8s ease-in-out infinite;
+            animation: side-pulse 3s ease-in-out 2;
         }
         .orbit-side-icon-right img {
-            animation: side-pulse 1.8s ease-in-out infinite;
+            animation: side-pulse 3s ease-in-out 2;
             animation-delay: 0.9s;
         }
         .flag-orbit-ring {
@@ -1016,7 +1054,7 @@
         /* Effetto pulsante cuore per parole chiave */
         .keyword-pulse {
             display: inline-block;
-            animation: keyword-pulse-anim 1.6s ease-in-out infinite;
+            animation: keyword-pulse-anim 3s ease-in-out 2;
             color: #ffd700;
             font-weight: 700;
             text-shadow: 0 0 10px rgba(255, 215, 0, 0.6);
@@ -1027,7 +1065,7 @@
         }
         .keyword-pulse-red {
             display: inline-block;
-            animation: keyword-pulse-anim 1.6s ease-in-out infinite;
+            animation: keyword-pulse-anim 3s ease-in-out 2;
             color: #ff4444;
             font-weight: 700;
             text-shadow: 0 0 12px rgba(255, 68, 68, 0.7);
@@ -1636,7 +1674,7 @@
         .medusa-serpent {
             transform-box: fill-box;
             transform-origin: center;
-            animation: medusaSerpentFloat 4.2s ease-in-out infinite;
+            animation: medusaSerpentFloat 4.2s ease-in-out 2;
         }
         .medusa-serpent.snake-1 { animation-delay: -0.2s; }
         .medusa-serpent.snake-2 { animation-delay: -1.2s; }
@@ -1710,7 +1748,7 @@
             height: 8px;
             border-top: 2px solid rgba(255,215,0,0.65);
             border-radius: 999px;
-            animation: medusaTrailWave 2.8s ease-in-out infinite;
+            animation: medusaTrailWave 2.8s ease-in-out 2;
             transform: translateX(var(--snake-shift));
         }
         .medusa-cta-snake-trail span:nth-child(2) { animation-delay: -0.9s; width: 30px; }
@@ -1740,6 +1778,11 @@
             }
             .medusa-serpent,
             .medusa-cta-snake-trail span {
+                animation: none;
+            }
+            .orbit-side-icon img,
+            .keyword-pulse,
+            .keyword-pulse-red {
                 animation: none;
             }
         }
@@ -2168,6 +2211,7 @@
             display: inline-block;
         }
         #flagsGrid .flag-image { width: 48px; height: 32px; object-fit: contain; display: inline-block; }
+        .fi.flag-emoji-fallback { background-image: none !important; font-size: 28px; line-height: 1; }
         .flag-code { font-weight: 600; color: #667eea; font-size: 0.9em; margin-top: 5px; }
         .flag-name { font-size: 0.75em; color: #334155; margin-top: 4px; line-height: 1.2; text-align: center; }
         .flag-marker-badge {
@@ -2346,8 +2390,8 @@
             50% { transform: translate(-50%, -50%) scale(1.08); }
         }
         @keyframes side-pulse {
-            0%, 100% { transform: scale(1); filter: drop-shadow(0 0 0 rgba(34,197,94,0.7)); }
-            50% { transform: scale(1.06); filter: drop-shadow(0 0 16px rgba(34,197,94,0.9)); }
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.03); }
         }
         @keyframes flag-wave {
             0%, 100% { transform: scale(1); filter: brightness(1); }
@@ -2741,6 +2785,20 @@
         .hero-cta-link:hover { background: #334155; }
         .hero-cta-link:focus-visible { outline: 3px solid #FFCC00; outline-offset: 3px; box-shadow: 0 0 0 6px #1e293b; }
         @media (prefers-reduced-motion: reduce) { .hero-cta-link { transition: none; } }
+        .hero-brand-row { margin: 6px 0 4px; display: flex; justify-content: center; }
+        .hero-brand-link {
+            display: inline-flex; align-items: center; gap: 10px; min-height: 44px; max-width: 100%;
+            padding: 6px 16px 6px 8px; color: #ffffff; background: rgba(15, 23, 42, 0.85);
+            border: 1px solid #FFCC00; border-radius: 999px; text-decoration: none; text-align: left;
+            touch-action: manipulation; transition: background-color 0.2s ease;
+        }
+        .hero-brand-link img { width: 36px; height: 36px; flex: 0 0 36px; }
+        .hero-brand-text { display: flex; flex-direction: column; min-width: 0; line-height: 1.2; }
+        .hero-brand-title { font-weight: 700; font-size: 0.95rem; overflow-wrap: anywhere; }
+        .hero-brand-sub { font-size: 0.78rem; color: #FFCC00; overflow-wrap: anywhere; }
+        .hero-brand-link:hover { background: #334155; }
+        .hero-brand-link:focus-visible { outline: 3px solid #FFCC00; outline-offset: 3px; box-shadow: 0 0 0 6px #1e293b; }
+        @media (prefers-reduced-motion: reduce) { .hero-brand-link { transition: none; } }
         #storia-giovanni-falcone { scroll-margin-top: calc(var(--sticky-nav-height, 160px) + 12px); }
         @media (max-width: 767px) { #storia-giovanni-falcone { scroll-margin-top: calc(var(--sticky-nav-height, 300px) + 12px); } }
         @media (max-width: 480px) { #storia-giovanni-falcone { scroll-margin-top: calc(var(--sticky-nav-height, 360px) + 12px); } }
@@ -2781,7 +2839,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <a href="odissea.html" style="color: white; text-decoration: none; font-weight: 500; font-size: 1.05rem; padding: 0.5rem 1.5rem; background: rgba(255,255,255,0.05); border-radius: 8px; transition: all 0.3s ease;" onmouseover="this.style.background='rgba(255,255,255,0.15)';" onmouseout="this.style.background='rgba(255,255,255,0.05)';">
                 <span data-i18n-text="navOdyssey">🌊 Odissea Digitale</span>
             </a>
-            <a href="referenze.html" style="color: white; text-decoration: none; font-weight: 500; font-size: 1.05rem; padding: 0.5rem 1.5rem; background: rgba(255,255,255,0.05); border-radius: 8px; transition: all 0.3s ease;" onmouseover="this.style.background='rgba(255,255,255,0.15)';" onmouseout="this.style.background='rgba(255,255,255,0.05)';">
+            <a href="#international-authorities" style="color: white; text-decoration: none; font-weight: 500; font-size: 1.05rem; padding: 0.5rem 1.5rem; background: rgba(255,255,255,0.05); border-radius: 8px; transition: all 0.3s ease;" onmouseover="this.style.background='rgba(255,255,255,0.15)';" onmouseout="this.style.background='rgba(255,255,255,0.05)';">
                 <span data-i18n-text="navReferences">📜 Istituzioni Internazionali</span>
             </a>
             <a href="curriculum.html" style="color: #ffd700; text-decoration: none; font-weight: 600; font-size: 1.05rem; padding: 0.5rem 1.5rem; background: rgba(255,215,0,0.1); border-radius: 8px; transition: all 0.3s ease; border: 1px solid rgba(255,215,0,0.7);" onmouseover="this.style.background='rgba(255,215,0,0.25)';" onmouseout="this.style.background='rgba(255,215,0,0.1)';">
@@ -2924,6 +2982,15 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <p class="hero-cta-row">
                 <a href="#flags-section" class="hero-cta-link" data-i18n-text="landingHeroCta">Apri il form di richiesta con ogni bandiera!</a>
                 <a href="#storia-giovanni-falcone" class="hero-cta-link" data-i18n-text="heroFalconeMethodCta">Metodo Falcone</a>
+            </p>
+            <p class="hero-brand-row">
+                <a href="authority/amev-equivalenza-lang-9-EU.html" class="hero-brand-link" hreflang="it">
+                    <img src="logo_shield_financial_defense.svg" alt="" width="36" height="36">
+                    <span class="hero-brand-text">
+                        <span class="hero-brand-title" data-i18n-text="heroAmevBrandCta">AMEV · Significato del brand</span>
+                        <span class="hero-brand-sub" data-i18n-text="heroAmevBrandSub">Equivalenza multilingue</span>
+                    </span>
+                </a>
             </p>
             <nav class="language-selector" data-layout="compact" role="navigation" data-i18n-aria-label="languageSelectionAriaLabel" aria-label="Language selection">
                 <section class="language-selector-group language-selector-eu" aria-labelledby="language-selector-eu-title">
@@ -3399,8 +3466,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <p>Micropagine Orbital WebApp · MVP informativo · ordine alfabetico per Paese o territorio</p>
             <ol>
                 <li><a href="authority/ethiopia-ecma-orbital-webapp.html">ETHIOPIA · ECMA</a></li>
+                <li><a href="authority/nunavut-orbital-webapp.html" lang="it">NUNAVUT · Territorio canadese / WSCC</a></li>
                 <li><a href="authority/oesterreich-fma-orbital-webapp.html" lang="de">ÖSTERREICH · FMA</a></li>
                 <li><a href="authority/polynesie-francaise-orbital-webapp.html" lang="fr">POLYNÉSIE FRANÇAISE · Autorités financières</a></li>
+                <li><a href="authority/CH-FINMA.html" lang="it">SVIZZERA / SWITZERLAND · FINMA CH</a></li>
             </ol>
         </nav>
 
@@ -3492,7 +3561,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
         <section id="international-authorities" class="content">
             <div class="eu-references">
-                <h3 data-i18n="euReferences">Organi Internazionali di Supervisione Finanziaria ed Autorità di Polizia Federale</h3>
+                <h2 data-i18n="euReferences">Organi Internazionali di Supervisione Finanziaria ed Autorità di Polizia Federale</h2>
+                <p data-i18n="internationalInstitutionsSummary">Questa sezione riunisce riferimenti a istituzioni e servizi ufficiali che operano nella supervisione dei mercati finanziari, nella cooperazione regolatoria e nella segnalazione delle frodi. Comprende organismi europei e internazionali, risorse statunitensi e servizi regionali. I loro mandati sono diversi: per verificare una licenza, consulta sempre il registro ufficiale dell’autorità competente nella giurisdizione pertinente.</p>
+                <p><a href="referenze.html" data-i18n-text="internationalInstitutionsFullGuide">Consulta la guida completa alle istituzioni finanziarie internazionali e alle risorse continentali.</a></p>
                 <p><strong>ESMA</strong> - European Securities and Markets Authority: <a href="https://www.esma.europa.eu" target="_blank">esma.europa.eu</a></p>
                 <p><strong data-i18n="euCommission">Commissione Europea</strong>: <a href="https://commission.europa.eu" target="_blank">commission.europa.eu</a></p>
                 <p><strong>FBI IC3</strong> - Internet Crime Complaint Center: <a href="https://www.ic3.gov/AnnualReport/Reports" target="_blank">ic3.gov/AnnualReport/Reports</a></p>
@@ -3793,6 +3864,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 protectionLevel: "Livello Protezione",
                 notes: "Note",
                 euReferences: "Risorse Istituzionali di Supervisione - Unione Europea USA FBI - ScamShield",
+                internationalInstitutionsSummary: "Questa sezione riunisce riferimenti a istituzioni e servizi ufficiali che operano nella supervisione dei mercati finanziari, nella cooperazione regolatoria e nella segnalazione delle frodi. Comprende organismi europei e internazionali, risorse statunitensi e servizi regionali. I loro mandati sono diversi: per verificare una licenza, consulta sempre il registro ufficiale dell’autorità competente nella giurisdizione pertinente.",
+                internationalInstitutionsFullGuide: "Consulta la guida completa alle istituzioni finanziarie internazionali e alle risorse continentali.",
                 euCommission: "Commissione Europea",
                 flagsTitle: "Accesso Rapido per Paese",
                 flagsGridTitle: "🌍 Seleziona il tuo Paese - 239 Bandiere in 161 Paesi",
@@ -4405,6 +4478,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 protectionLevel: "Protection Level",
                 notes: "Notes",
                 euReferences: "Institutional Supervision Resources - European Union USA FBI - ScamShield",
+                internationalInstitutionsSummary: "This section brings together official institutions and services involved in financial-market supervision, regulatory cooperation, and fraud reporting. It covers European and international bodies, U.S. resources, and regional services. Their mandates differ: to verify a licence, always consult the official register of the competent authority in the relevant jurisdiction.",
+                internationalInstitutionsFullGuide: "Read the complete guide to international financial institutions and continental resources.",
                 euCommission: "European Commission",
                 flagsTitle: "Quick Access by Country",
                 flagsGridTitle: "🌍 Select your Country - 239 Financial Authorities Database",
@@ -6231,6 +6306,25 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             ro: 'Metoda Falcone', nl: 'Falcone-methode', el: 'Μέθοδος Φαλκόνε'
         }).forEach(([locale, label]) => { (translations[locale] ||= {}).heroFalconeMethodCta = label; });
         Object.entries({
+            it: ['AMEV · Significato del brand', 'Equivalenza multilingue'],
+            en: ['AMEV · Brand meaning', 'Multilingual equivalence'],
+            fr: ['AMEV · Signification de la marque', 'Équivalence multilingue'],
+            de: ['AMEV · Bedeutung der Marke', 'Mehrsprachige Entsprechung'],
+            es: ['AMEV · Significado de la marca', 'Equivalencia multilingüe'],
+            pt: ['AMEV · Significado da marca', 'Equivalência multilíngue'],
+            ar: ['AMEV · معنى العلامة التجارية', 'التكافؤ متعدد اللغات'],
+            zh: ['AMEV · 品牌含义', '多语言对照'],
+            hi: ['AMEV · ब्रांड का अर्थ', 'बहुभाषी समतुल्यता'],
+            vi: ['AMEV · Ý nghĩa thương hiệu', 'Tương đương đa ngôn ngữ'],
+            sq: ['AMEV · Kuptimi i markës', 'Ekuivalenca shumëgjuhëshe'],
+            bs: ['AMEV · Značenje brenda', 'Višejezična ekvivalencija'],
+            ro: ['AMEV · Semnificația mărcii', 'Echivalență multilingvă'],
+            nl: ['AMEV · Betekenis van het merk', 'Meertalige gelijkwaardigheid'],
+            el: ['AMEV · Σημασία της επωνυμίας', 'Πολυγλωσσική αντιστοιχία']
+        }).forEach(([locale, [cta, sub]]) => {
+            Object.assign(translations[locale] ||= {}, { heroAmevBrandCta: cta, heroAmevBrandSub: sub });
+        });
+        Object.entries({
             it: {
                 landingHeroTitle: "Strumento per richiesta di collaborazione a 239 Autorità Finanziarie",
                 landingHeroCoverage: "Verifica preliminare nazionale e internazionale",
@@ -6531,8 +6625,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
         let currentLanguage = getInitialLanguageFromUrl();
         let currentFilter = 'all';
+        let currentSearchTerm = '';
+        let countryLoadSequence = 0;
         // Array di paesi; inizializzato a [] per evitare errori quando i dati non sono caricati
         let countriesData = [];
+        const flagIconProbes = new WeakMap();
+        const COUNTRY_GRID_LOAD_ERROR_HTML = '<p role="status" aria-live="polite" style="color: #92400e; text-align: center;">Could not load country data. Please try again when connected.</p>';
         // Gestione intervallo per l'effetto HOLA sulle bandiere del grid
         let flagsWaveInterval = null;
         let hasCompletedCountryLoad = false;
@@ -7200,7 +7298,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             }
         }
 
+        // NOTA PER AGENTI AI: bandiere e dati delle autorità della griglia #flagsGrid (incluso AT/Austria) sono generati dinamicamente da financial_authorities_database.json tramite loadCountryData() → countriesData → renderFlagsGrid(); non cercare tile statiche dei Paesi in questo HTML, consulta il JSON e questo flusso di caricamento/rendering.
         async function loadCountryData() {
+            const loadSequence = ++countryLoadSequence;
             let diagnosticPhase = 'fetch';
             try {
                 // Carica direttamente il database JSON
@@ -7214,8 +7314,29 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
                 diagnosticPhase = 'parse';
                 let data = await response.json();
+                if (loadSequence !== countryLoadSequence) return;
                 gridPipelineDiag.event('db:parse:ok');
                 diagnosticPhase = 'normalize';
+                // Reject truncated exports without excluding larger future databases.
+                if (!data || Array.isArray(data) || typeof data !== 'object' || Object.keys(data).length < 239) {
+                    throw new Error('Country database is missing required records');
+                }
+                const authorityIds = new Set();
+                const persistedAuthorityIds = new Set();
+                for (const [key, country] of Object.entries(data)) {
+                    const authority = country?.financial_authority;
+                    const id = country?.authority_id || getAuthorityNotesKey(country?.country_name);
+                    if (!country || typeof country.country_name !== 'string' || country.country_name !== key
+                        || !authority || typeof authority.name !== 'string' || !authority.name.trim()
+                        || typeof authority.abbreviation !== 'string'
+                        || typeof authority.authorityId !== 'string' || !authority.authorityId
+                        || persistedAuthorityIds.has(authority.authorityId)
+                        || !id || authorityIds.has(id)) {
+                        throw new Error('Invalid or duplicate country authority record');
+                    }
+                    authorityIds.add(id);
+                    persistedAuthorityIds.add(authority.authorityId);
+                }
                 gridPipelineDiag.event('data:normalize:start', { records: Object.keys(data).length });
 
                 if (window.gridPipelineDiag) {
@@ -7243,6 +7364,21 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     data.Spain.thumbnail = 'authority/preview-ES-CNMV.png';
                     data.Spain.modal = 'authority/ES-CNMV.html';
                     data.Spain.has_orbital_view = true;
+                }
+                if (data.Austria) {
+                    data.Austria.thumbnail = 'authority/preview-AT-FMA.svg';
+                    data.Austria.modal = 'authority/oesterreich-fma-orbital-webapp.html';
+                    data.Austria.has_orbital_view = true;
+                }
+                if (data.Switzerland) {
+                    data.Switzerland.thumbnail = 'authority/preview-CH-FINMA.svg';
+                    data.Switzerland.modal = 'authority/CH-FINMA.html';
+                    data.Switzerland.has_orbital_view = true;
+                }
+                if (data['French Polynesia (France)']) {
+                    data['French Polynesia (France)'].thumbnail = 'authority/preview-PF.svg';
+                    data['French Polynesia (France)'].modal = 'authority/polynesie-francaise-orbital-webapp.html';
+                    data['French Polynesia (France)'].has_orbital_view = true;
                 }
                 if (data.Ethiopia) {
                     data.Ethiopia.ecma_orbital = {
@@ -7291,6 +7427,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 diagnosticPhase = 'render';
                 renderAll();
             } catch (error) {
+                if (loadSequence !== countryLoadSequence) return;
                 gridPipelineDiag.event(
                     diagnosticPhase === 'fetch' ? 'db:fetch:error'
                         : diagnosticPhase === 'parse' ? 'db:parse:error'
@@ -7302,9 +7439,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 countriesData = [];
                 hasCompletedCountryLoad = true;
                 hasCountryLoadError = true;
+                updateStats();
+                if (flagsWaveInterval) {
+                    clearInterval(flagsWaveInterval);
+                    flagsWaveInterval = null;
+                }
                 const countriesGrid = document.getElementById('countriesGrid');
                 if (countriesGrid) {
-                    countriesGrid.innerHTML = `<p style="color: red; text-align: center;">Could not load country data. Please check the console for errors.</p>`;
+                    countriesGrid.innerHTML = COUNTRY_GRID_LOAD_ERROR_HTML;
                 }
                 const flagsGrid = document.getElementById('flagsGrid');
                 if (flagsGrid) {
@@ -7316,11 +7458,37 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         function ensureFlagIconsFallbackStylesheet() {
             const flagIconsLink = document.getElementById('flag-icons-css');
             if (!flagIconsLink) return;
+            flagIconsLink.addEventListener('load', () => ensureVisibleCountryFlags(document));
+            flagIconsLink.addEventListener('error', () => ensureVisibleCountryFlags(document));
             window.setTimeout(() => {
                 if (flagIconsLink.rel !== 'stylesheet') {
                     flagIconsLink.rel = 'stylesheet';
                 }
             }, 3000);
+        }
+
+        function ensureVisibleCountryFlags(root) {
+            root.querySelectorAll('.country-flag .fi, .modal-flag-icon-wrapper .fi, #flagsGrid .fi').forEach(icon => {
+                const probeToken = {};
+                flagIconProbes.set(icon, probeToken);
+                const countryName = icon.closest('[data-country-name]')?.dataset.countryName
+                    || icon.closest('.flag-item')?.querySelector('.flag-name')?.textContent
+                    || document.getElementById('countryModalTitle')?.textContent;
+                const country = countriesData.find(record => record.country_name === countryName);
+                icon.classList.remove('flag-emoji-fallback');
+                const background = getComputedStyle(icon).backgroundImage;
+                icon.textContent = country?.flag || '🌍';
+                icon.classList.add('flag-emoji-fallback');
+                const url = background.match(/^url\(["']?(.*?)["']?\)$/)?.[1];
+                if (!url) return;
+                const probe = new Image();
+                probe.onload = () => {
+                    if (!icon.isConnected || flagIconProbes.get(icon) !== probeToken) return;
+                    icon.textContent = '';
+                    icon.classList.remove('flag-emoji-fallback');
+                };
+                probe.src = url;
+            });
         }
 
         function renderAll() {
@@ -7341,6 +7509,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             }
             if (countryName === 'Spain') {
                 return 'spagna espana españa reino de espana';
+            }
+            if (countryName === 'Switzerland') {
+                return 'ch svizzera suisse switzerland finma';
             }
             return '';
         }
@@ -7798,6 +7969,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         }
 
         function getOrbitalAuthorityLabel(country) {
+            if (country?.country_name === 'French Polynesia (France)') return 'Polynésie française · sources territoriales';
             return country?.financial_authority?.abbreviation || country?.country_name || 'Authority';
         }
 
@@ -8024,6 +8196,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         function renderCountries() {
             const grid = document.getElementById('countriesGrid');
             grid.innerHTML = '';
+            if (hasCountryLoadError) {
+                grid.innerHTML = COUNTRY_GRID_LOAD_ERROR_HTML;
+                return;
+            }
             
             const sortedCountries = countriesData.sort((a, b) => 
                 a.country_name.localeCompare(b.country_name)
@@ -8070,6 +8246,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 const card = document.createElement('div');
                 card.className = 'country-card';
                 card.dataset.countryName = country.country_name;
+                card.dataset.authorityId = country.financial_authority.authorityId;
                 card.onclick = () => openModal(country.country_name);
                 const currentTranslations = getLanguageBundle(currentLanguage);
                 const countryMarker = getCountryGridMarker(country.country_name);
@@ -8125,15 +8302,18 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     const orbitalContainer = document.createElement('div');
                     orbitalContainer.style.marginTop = '15px';
 
-                    const orbitalButton = document.createElement('button');
-                    orbitalButton.type = 'button';
+                    const isPreviewLink = ['Austria', 'French Polynesia (France)'].includes(country.country_name);
+                    const orbitalButton = document.createElement(isPreviewLink ? 'a' : 'button');
+                    if (isPreviewLink) orbitalButton.href = orbitalModalSrc;
+                    else orbitalButton.type = 'button';
                     orbitalButton.className = 'orbital-thumbnail-trigger';
                     orbitalButton.dataset.orbitalSrc = orbitalModalSrc;
                     orbitalButton.setAttribute('aria-label', `Open ${orbitalAuthorityName} orbital dialog`);
                     orbitalButton.addEventListener('click', (event) => {
-                        event.preventDefault();
                         event.stopPropagation();
-                        openItalyOrbitalDialog(orbitalModalSrc);
+                        if (isPreviewLink && (event.button !== 0 || event.ctrlKey || event.metaKey || event.shiftKey || event.altKey)) return;
+                        event.preventDefault();
+                        openItalyOrbitalDialog(orbitalModalSrc, orbitalButton);
                     });
 
                     const orbitalImage = document.createElement('img');
@@ -8189,6 +8369,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             afterCanadaProvinces.forEach(country => {
                 grid.appendChild(renderCountryCard(country));
             });
+            filterBySearchTerm(currentSearchTerm);
+            ensureVisibleCountryFlags(grid);
         }
 
         function filterCountries(filter) {
@@ -8216,7 +8398,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         
         // Shared search filtering function
         function filterBySearchTerm(searchTerm) {
-            const term = searchTerm.toLowerCase().trim();
+            currentSearchTerm = String(searchTerm || '');
+            for (const id of ['searchInput', 'search-input-top']) {
+                const input = document.getElementById(id);
+                if (input) input.value = currentSearchTerm;
+            }
+            const term = currentSearchTerm.toLowerCase().trim();
             const normalizedTerm = term.replace(/^usa\s*-\s*/i, '').trim();
             const cards = document.querySelectorAll('.country-card');
             cards.forEach(card => {
@@ -8392,12 +8579,16 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             new URL('authority/DE-BAFIN.html', window.location.href).pathname,
             new URL('/authority/ET-ECMA.html', window.location.origin).pathname,
             new URL('authority/ET-ECMA.html', window.location.href).pathname,
+            new URL('/authority/oesterreich-fma-orbital-webapp.html', window.location.origin).pathname,
+            new URL('authority/oesterreich-fma-orbital-webapp.html', window.location.href).pathname,
             new URL('/authority/polynesie-francaise-orbital-webapp.html', window.location.origin).pathname,
             new URL('authority/polynesie-francaise-orbital-webapp.html', window.location.href).pathname,
             new URL('/authority/ES-CNMV.html', window.location.origin).pathname,
             new URL('authority/ES-CNMV.html', window.location.href).pathname,
             new URL('/authority/US-SEC.html', window.location.origin).pathname,
-            new URL('authority/US-SEC.html', window.location.href).pathname
+            new URL('authority/US-SEC.html', window.location.href).pathname,
+            new URL('/authority/CH-FINMA.html', window.location.origin).pathname,
+            new URL('authority/CH-FINMA.html', window.location.href).pathname
         ]);
         const CONSOB_ORBITAL_ALLOWED_THUMBNAIL_PATHS = new Set([
             new URL('/authority/preview-consob.png', window.location.origin).pathname,
@@ -8410,10 +8601,16 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             new URL('authority/preview-DE-BAFIN.png', window.location.href).pathname,
             new URL('/authority/preview-ET-ECMA.svg', window.location.origin).pathname,
             new URL('authority/preview-ET-ECMA.svg', window.location.href).pathname,
+            new URL('/authority/preview-AT-FMA.svg', window.location.origin).pathname,
+            new URL('authority/preview-AT-FMA.svg', window.location.href).pathname,
+            new URL('/authority/preview-PF.svg', window.location.origin).pathname,
+            new URL('authority/preview-PF.svg', window.location.href).pathname,
             new URL('/authority/preview-ES-CNMV.png', window.location.origin).pathname,
             new URL('authority/preview-ES-CNMV.png', window.location.href).pathname,
             new URL('/authority/preview-US-SEC.svg', window.location.origin).pathname,
-            new URL('authority/preview-US-SEC.svg', window.location.href).pathname
+            new URL('authority/preview-US-SEC.svg', window.location.href).pathname,
+            new URL('/authority/preview-CH-FINMA.svg', window.location.origin).pathname,
+            new URL('authority/preview-CH-FINMA.svg', window.location.href).pathname
         ]);
 
         function resolveConsobOrbitalSrc(candidateSource, { allowFallback = false } = {}) {
@@ -8450,6 +8647,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             if (country.country_name === 'Spain') return 'CNMV';
             if (country.country_name === 'United States of America') return 'SEC';
             if (country.country_name === 'Ethiopia') return 'ECMA Ethiopia';
+            if (country.country_name === 'Austria') return 'FMA Austria';
+            if (country.country_name === 'Switzerland') return 'FINMA Switzerland · CH';
+            if (country.country_name === 'French Polynesia (France)') return 'Polynésie française · sources territoriales';
             return country.country_name || 'Unknown authority';
         }
 
@@ -8493,7 +8693,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     configurations.push({
                         modal: country.modal,
                         thumbnail: country.thumbnail,
-                        configuredBy: ['France', 'Germany', 'Spain'].includes(country.country_name)
+                        configuredBy: ['France', 'Germany', 'Spain', 'Austria', 'French Polynesia (France)'].includes(country.country_name)
                             ? 'WIP bootstrap' : 'database'
                     });
                 }
@@ -8670,7 +8870,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 if (!trigger) return;
                 event.preventDefault();
                 event.stopPropagation();
-                openItalyOrbitalDialog(trigger.getAttribute('data-orbital-src') || CONSOB_ORBITAL_FALLBACK_SRC);
+                openItalyOrbitalDialog(trigger.getAttribute('data-orbital-src') || CONSOB_ORBITAL_FALLBACK_SRC, trigger);
             });
 
             if (closeButton) {
@@ -8971,6 +9171,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             
             const modal = document.getElementById('countryModal');
             const modalContent = document.getElementById('modalContent');
+            modalContent.dataset.authorityId = country.financial_authority.authorityId;
+            modalContent.dataset.countryName = country.country_name;
             const currentTranslations = getLanguageBundle(currentLanguage);
             const notAvailableText = currentTranslations.notAvailable || 'N/A';
 
@@ -9023,19 +9225,20 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 && Boolean(country.has_orbital_view)
                 && Boolean(orbitalThumbnailSrc)
                 && Boolean(orbitalModalSrc);
+            const isPreviewLink = ['Austria', 'French Polynesia (France)'].includes(country.country_name);
             const orbitalPreviewHtml = hasItalyOrbitalView ? `
                 <div style="margin: 20px 0 0;">
                     <p style="margin: 0 0 10px;"><strong>${escapeHtmlAttribute(orbitalAuthorityName)} Orbital Preview:</strong></p>
-                    <button
-                        type="button"
+                    <${isPreviewLink ? 'a' : 'button'}
+                        ${isPreviewLink ? `href="${escapeHtmlAttribute(orbitalModalSrc)}"` : 'type="button"'}
                         class="orbital-thumbnail-trigger"
                         data-orbital-trigger="consob"
                         data-orbital-src="${escapeHtmlAttribute(orbitalModalSrc)}"
                         aria-label="Open ${escapeHtmlAttribute(orbitalAuthorityName)} orbital dialog"
-                        onclick="openItalyOrbitalDialog(this.dataset.orbitalSrc); return false;"
+                        onclick="event.stopPropagation(); if (${isPreviewLink} && (event.button !== 0 || event.ctrlKey || event.metaKey || event.shiftKey || event.altKey)) return; event.preventDefault(); openItalyOrbitalDialog(this.dataset.orbitalSrc, this);"
                     >
                         <img src="${escapeHtmlAttribute(orbitalThumbnailSrc)}" alt="${escapeHtmlAttribute(orbitalAuthorityName)} orbital preview thumbnail">
-                    </button>
+                    </${isPreviewLink ? 'a' : 'button'}>
                 </div>
             ` : '';
             const ecmaOrbital = country.country_name === 'Ethiopia' ? country.ecma_orbital : null;
@@ -9051,7 +9254,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                         data-orbital-trigger="consob"
                         data-orbital-src="${escapeHtmlAttribute(ecmaModalSrc)}"
                         aria-label="Open ECMA orbital dialog"
-                        onclick="openItalyOrbitalDialog(this.dataset.orbitalSrc); return false;"
+                        onclick="openItalyOrbitalDialog(this.dataset.orbitalSrc, this); return false;"
                     >
                         <img src="${escapeHtmlAttribute(ecmaThumbnailSrc)}" alt="Independent ECMA resource guide illustration" style="width: 160px; max-width: 100%; aspect-ratio: auto; object-fit: contain;" width="256" height="256">
                     </button>
@@ -9152,6 +9355,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 modalCloseHintText.textContent = modalTranslations.modalCloseHint || 'Clicca per chiudere';
             }
             activateModalDialog(modal, { initialFocusSelector: '#modalCloseButton' });
+            ensureVisibleCountryFlags(modal);
         }
 
         function closeModal(restoreFocus = true) {
@@ -9355,6 +9559,10 @@ https://avvstancamarcello.github.io/Financial-Authority-Database/
         }
 
         function renderFlagsGrid() {
+            if (flagsWaveInterval) {
+                clearInterval(flagsWaveInterval);
+                flagsWaveInterval = null;
+            }
             const grid = document.getElementById('flagsGrid');
             gridPipelineDiag.event(grid ? 'grid:container:found' : 'grid:container:missing');
             if (!grid) {
@@ -9408,6 +9616,8 @@ https://avvstancamarcello.github.io/Financial-Authority-Database/
                     flagItem.setAttribute('type', 'button');
                 }
                 flagItem.className = 'flag-item';
+                flagItem.dataset.countryName = resolvedCountryName;
+                flagItem.dataset.authorityId = country.financial_authority.authorityId;
                 if (hasCountryName) {
                     flagItem.onclick = (event) => {
                         if (orbitalHref && (event.ctrlKey || event.metaKey || event.shiftKey || event.altKey)) return;
@@ -9459,6 +9669,7 @@ https://avvstancamarcello.github.io/Financial-Authority-Database/
                     image.addEventListener('error', () => {
                         flagWrapperNode.replaceChildren(...fallbackNodes);
                         flagWrapperNode.style.fontSize = fallbackFontSize;
+                        ensureVisibleCountryFlags(flagItem);
                     }, { once: true });
                     flagWrapperNode.style.fontSize = '';
                     flagWrapperNode.replaceChildren(image);
@@ -9542,7 +9753,8 @@ https://avvstancamarcello.github.io/Financial-Authority-Database/
                 wavePhase = (wavePhase + 1) % 4;
             };
 
-            if (flagWrappers.length > 0) {
+            ensureVisibleCountryFlags(grid);
+            if (flagWrappers.length > 0 && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
                 applyWaveGroup();
                 flagsWaveInterval = setInterval(applyWaveGroup, 2340);
             }

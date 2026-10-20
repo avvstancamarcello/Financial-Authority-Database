@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Nunavut informational Orbital regression checks</title>
+</head>
+<body>
+    <h1>Nunavut informational Orbital regression checks</h1>
+    <pre id="results">Running…</pre>
+    <iframe id="app" title="Homepage and Nunavut guide under test" src="./index.html" width="1000" height="700"></iframe>
+    <script>
+        const results = document.getElementById('results');
+        function check(condition, message) {
+            results.textContent += `\n${condition ? 'PASS' : 'FAIL'}: ${message}`;
+            if (!condition) throw new Error(message);
+        }
+        async function waitFor(predicate) {
+            const deadline = Date.now() + 20000;
+            while (!predicate()) {
+                if (Date.now() > deadline) throw new Error('Timed out');
+                await new Promise(resolve => setTimeout(resolve, 50));
+            }
+        }
+        async function run() {
+            const path = 'authority/nunavut-orbital-webapp.html';
+            const canonical = 'https://www.amevfirenze.it/' + path;
+            const databaseText = await (await fetch('./financial_authorities_database.json')).text();
+            const digest = Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256',
+                new TextEncoder().encode(databaseText)))).map(byte => byte.toString(16).padStart(2, '0')).join('');
+            check(digest === '3b9fd8fb5a0c5738287974ab5607f02d707543a0871034ce2a99a0a4b08d1b1c',
+                'Entire pre-existing database remains byte-identical');
+            const database = JSON.parse(databaseText);
+            check(database['Canada - Nunavut'].financial_authority.authorityId === 'canada_nunavut__nso',
+                'Existing Nunavut Securities Office record remains distinct from WSCC');
+            for (const sitemap of ['sitemap.xml', 'sitemap-financial-authorities.xml']) {
+                const xml = new DOMParser().parseFromString(await (await fetch('./' + sitemap)).text(), 'application/xml');
+                check(!xml.querySelector('parsererror')
+                    && [...xml.getElementsByTagNameNS('*', 'loc')].filter(node => node.textContent === canonical).length === 1,
+                    `${sitemap}: exact canonical occurs once`);
+            }
+            const worker = await (await fetch('./service-worker.js')).text();
+            check(worker.includes("const CACHE_NAME = 'financial-authority-v37'")
+                && worker.includes("'" + '/' + path + "'"), 'Versioned worker includes Nunavut in local precache');
+            const response = await fetch('./' + path);
+            check(response.ok, 'Direct Nunavut URL returns HTTP 200');
+            const frame = document.getElementById('app');
+            await waitFor(() => frame.contentDocument?.querySelectorAll('#flagsGrid .flag-item').length === Object.keys(database).length);
+            const home = frame.contentDocument;
+            if (home.getElementById('flagViewDialog').open) home.getElementById('flagViewClose').click();
+            check(home.querySelectorAll('#flagsGrid .flag-item').length === 239
+                && home.querySelectorAll('#countriesGrid .country-card').length === 239
+                && home.querySelectorAll('#flagsGrid [data-country-name="Canada - Nunavut"]').length === 1,
+                'Homepage retains 239 flags and cards, with Nunavut only once');
+            const link = home.querySelector(`#orbital-micropages a[href="${path}"]`);
+            check(link && !link.closest('#flags-section, #countries-section')
+                && frame.contentWindow.getComputedStyle(link).visibility === 'visible'
+                && link.getClientRects().length > 0, 'Visible Nunavut link belongs only to the separate Orbital catalog');
+            link.focus();
+            check(home.activeElement === link, 'Catalog link is keyboard-focusable');
+            link.click();
+            await waitFor(() => frame.contentWindow.location.pathname === '/' + path
+                && frame.contentDocument.readyState === 'complete');
+            const doc = frame.contentDocument;
+            check(doc.documentElement.lang === 'it' && doc.querySelectorAll('h1').length === 1
+                && doc.querySelector('link[rel="canonical"]').href === canonical
+                && doc.querySelector('meta[property="og:url"]').content === canonical
+                && doc.querySelector('meta[name="description"]').content.length > 40,
+                'Catalog navigation loads Italian guide with self-canonical and social metadata');
+            for (const href of ['https://www.gov.nu.ca/', 'https://www.wscc.nt.ca/',
+                'https://www.wscc.nt.ca/reporting-fraud', 'mailto:info@wscc.nt.ca',
+                'tel:+18662863338', 'tel:+18676694401', 'https://www.facebook.com/WSCCNTNU']) {
+                check(!!doc.querySelector(`a[href="${href}"]`), `Official reference present: ${href}`);
+            }
+            check(!doc.querySelector('script, iframe, form, input, a[href*="instagram.com"], a[href*="twitter.com"], a[href*="x.com"], a[href*="play.google.com"], a[href*="apps.apple.com"]'),
+                'No data collection, unverified social profiles or app-store claims');
+            check(doc.getElementById('territory').parentElement.textContent.includes("non un'autorità finanziaria autonoma")
+                && doc.getElementById('wscc').parentElement.textContent.includes('non la fraud tip line')
+                && doc.querySelector('svg[role="img"] title').textContent.includes('inuksuk'),
+                'Territory, WSCC contacts and flag symbolism are explicitly distinguished');
+            for (const width of [1000, 375, 320]) {
+                frame.width = width;
+                await new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve)));
+                check(doc.documentElement.scrollWidth <= frame.contentWindow.innerWidth,
+                    `${width}px: guide has no horizontal overflow`);
+            }
+            const skip = doc.querySelector('.skip-link');
+            frame.contentWindow.focus();
+            skip.focus();
+            check(doc.activeElement === skip && skip.getBoundingClientRect().top >= 0
+                && frame.contentWindow.getComputedStyle(skip).outlineWidth === '3px',
+                'Skip link becomes visible with a keyboard focus outline');
+            check(doc.querySelector('footer a').getAttribute('href') === '../index.html#orbital-micropages',
+                'Return link targets the homepage catalog');
+            results.dataset.status = 'passed';
+        }
+        run().catch(error => {
+            results.dataset.status = 'failed';
+            results.textContent += `\nERROR: ${error.stack || error.message}`;
+        });
+    </script>
+</body>
+</html>

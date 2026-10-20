@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Grid stability regression checks</title>
+</head>
+<body>
+    <h1>Grid stability regression checks</h1>
+    <p>Serve the repository over HTTP. Fixtures use the actual homepage styles and application,
+        with no analytics, advertising, external flag CSS or service worker.</p>
+    <pre id="results">Running…</pre>
+    <div id="fixtures"></div>
+    <script>
+        if (!new URLSearchParams(location.search).has('fixture')) {
+            const results = document.getElementById('results');
+            const checks = [];
+            function check(condition, message) {
+                checks.push(`${condition ? 'PASS' : 'FAIL'}: ${message}`);
+                results.textContent = checks.join('\n');
+                if (!condition) throw new Error(message);
+            }
+            const pause = () => new Promise(resolve => setTimeout(resolve, 20));
+            async function waitFor(predicate) {
+                const deadline = Date.now() + 20000;
+                while (!predicate()) {
+                    if (Date.now() > deadline) throw new Error('Timed out waiting for grid or preview');
+                    await pause();
+                }
+            }
+            function deferred() {
+                let resolve, reject;
+                const promise = new Promise((yes, no) => { resolve = yes; reject = no; });
+                return { promise, resolve, reject };
+            }
+            const paths = [
+                './financial_authorities_database.json', './APP/financial_authorities_database.json',
+                './DEPLOY_REGISTER/financial_authorities_database.json',
+                './android/app/src/main/assets/financial_authorities_database.json'
+            ];
+            const orbitalFixtures = {
+                Italy: { page: '/authority/IT-CONSOB.html', thumbnail: '/authority/preview-consob.png', heading: 'Italia – CONSOB Orbital WebApp' },
+                'United Kingdom': { page: '/authority/UK-FCA.html', thumbnail: '/authority/preview-fca.png', heading: 'United Kingdom – FCA Orbital WebApp' },
+                France: { page: '/authority/FR-AMF.html', thumbnail: '/authority/preview-FR-AMF.png', heading: 'France – AMF Orbital WebApp' },
+                Germany: { page: '/authority/DE-BAFIN.html', thumbnail: '/authority/preview-DE-BAFIN.png', heading: 'Deutschland BAFIN orbital WebApp' },
+                Spain: { page: '/authority/ES-CNMV.html', thumbnail: '/authority/preview-ES-CNMV.png', heading: 'España CNMV orbital WebApp' },
+                'United States of America': { page: '/authority/US-SEC.html', thumbnail: '/authority/preview-US-SEC.svg', heading: 'USA SEC orbital WebApp' },
+                Ethiopia: { page: '/authority/ET-ECMA.html', thumbnail: '/authority/preview-ET-ECMA.svg', heading: '🇪🇹 Ethiopian Capital Market Authority (ECMA)' },
+                Austria: { page: '/authority/oesterreich-fma-orbital-webapp.html', thumbnail: '/authority/preview-AT-FMA.svg', heading: 'ÖSTERREICH – FMA Orbital WebApp | AMEV' },
+                Switzerland: { page: '/authority/CH-FINMA.html', thumbnail: '/authority/preview-CH-FINMA.svg', heading: '🇨🇭 Svizzera / Switzerland CH – FINMA Orbital WebApp' },
+                'French Polynesia (France)': { page: '/authority/polynesie-francaise-orbital-webapp.html', thumbnail: '/authority/preview-PF.svg', heading: 'POLYNÉSIE FRANÇAISE – Autorités financières Orbital WebApp | AMEV' }
+            };
+            function matchesOrbitalFixtures(entries) {
+                return entries.length === Object.keys(orbitalFixtures).length
+                    && new Set(entries.map(entry => entry.country)).size === entries.length
+                    && entries.every(entry => orbitalFixtures[entry.country]?.page === entry.sourcePath
+                        && orbitalFixtures[entry.country]?.thumbnail === entry.thumbnailPath);
+            }
+            async function run() {
+                const source = new DOMParser().parseFromString(await (await fetch('./index.html')).text(), 'text/html');
+                const diagnostics = source.querySelector('#grid-pipeline-diagnostics').textContent;
+                const bootstrap = source.querySelector('#flag-view-bootstrap').textContent;
+                const application = [...source.scripts].find(script =>
+                    script.textContent.includes('async function loadCountryData()')).textContent;
+                const database = await (await fetch(paths[0])).json();
+                const names = Object.keys(database).sort();
+                check(names.length === 239, 'Exact 239-record baseline');
+                check(names.every(name => database[name].country_name === name),
+                    'Every database key equals its country_name');
+                check(new Set(Object.values(database).map(country =>
+                    country.financial_authority.authorityId)).size === 239, '239 unique persisted authority IDs');
+                for (const path of paths) {
+                    check(JSON.stringify(await (await fetch(path)).json()) === JSON.stringify(database),
+                        `${path}: complete four-mirror equality`);
+                }
+                source.querySelectorAll('script, link, iframe').forEach(node => {
+                    if (node.id !== 'consobOrbitalFrame') node.remove();
+                });
+                source.querySelector('#consobOrbitalFrame').removeAttribute('src');
+                const response = data => ({ ok: true, status: 200, json: async () => structuredClone(data) });
+                async function fixture({ idle = true, reduced = false } = {}) {
+                    const frame = document.createElement('iframe');
+                    frame.style.cssText = 'display:block;border:0;width:1024px;height:800px';
+                    frame.src = './test-grid-stability.html?fixture=1&diag=1';
+                    const loaded = new Promise(resolve => frame.onload = resolve);
+                    document.getElementById('fixtures').appendChild(frame);
+                    await loaded;
+                    const win = frame.contentWindow, doc = frame.contentDocument;
+                    doc.head.innerHTML = source.head.innerHTML;
+                    doc.body.innerHTML = source.body.innerHTML;
+                    const activeWaves = new Set(), idleCallbacks = [];
+                    const nativeInterval = win.setInterval.bind(win), nativeClear = win.clearInterval.bind(win);
+                    win.setInterval = (callback, delay, ...args) => {
+                        const id = nativeInterval(callback, delay, ...args);
+                        if (delay === 2340) activeWaves.add(id);
+                        return id;
+                    };
+                    win.clearInterval = id => { activeWaves.delete(id); nativeClear(id); };
+                    if (idle) win.requestIdleCallback = callback => { idleCallbacks.push(callback); return idleCallbacks.length; };
+                    else delete win.requestIdleCallback;
+                    const nativeMatch = win.matchMedia.bind(win);
+                    win.matchMedia = query => query === '(prefers-reduced-motion: reduce)'
+                        ? { matches: reduced, addEventListener() {}, removeEventListener() {} } : nativeMatch(query);
+                    win.eval(diagnostics);
+                    win.eval(bootstrap);
+                    win.eval(application + '\nwindow.gridStabilityRecords = () => countriesData;');
+                    win.setupSearch();
+                    win.setupItalyOrbitalDialog();
+                    win.setupFlagViewSelector();
+                    doc.getElementById('flagViewDialog').close();
+                    win.fetch = async () => response(database);
+                    return { frame, win, doc, activeWaves, idleCallbacks,
+                        flush() { idleCallbacks.splice(0).forEach(callback => callback()); } };
+                }
+                const fullIdentity = fixture => {
+                    const { doc, win } = fixture;
+                    const flags = [...doc.querySelectorAll('#flagsGrid .flag-item')];
+                    const cards = [...doc.querySelectorAll('#countriesGrid .country-card')];
+                    const normalized = win.gridStabilityRecords();
+                    check(normalized.length === 239 && new Set(normalized.map(c => c.authority_id)).size === 239
+                        && doc.getElementById('totalCountries').textContent === '239',
+                        'Runtime retains 239 unique normalized identities');
+                    check(JSON.stringify(flags.map(node => node.dataset.countryName).sort()) === JSON.stringify(names)
+                        && JSON.stringify(cards.map(node => node.dataset.countryName).sort()) === JSON.stringify(names),
+                        'Entire dataset maps bijectively to 239 flags and 239 cards');
+                    check([...flags, ...cards].every(node => node.dataset.authorityId ===
+                        database[node.dataset.countryName].financial_authority.authorityId),
+                        'Every rendered flag and card retains its exact persisted authority ID');
+                };
+                const app = await fixture();
+                try {
+                    const { win, doc } = app;
+                    const pending = deferred();
+                    win.fetch = () => pending.promise;
+                    const loading = win.loadCountryData();
+                    win.changeLanguage('ar');
+                    win.flagViewPreference.choose('compact', false);
+                    check(doc.documentElement.dir === 'rtl'
+                        && doc.documentElement.dataset.flagView === 'compact'
+                        && doc.querySelectorAll('#flagsGrid .flag-item').length === 2
+                        && !doc.querySelector('#flagsGrid [data-authority-id]'),
+                        'Slow fetch retains the two static SEO links, RTL and compact view without inventing runtime records');
+                    check(app.idleCallbacks.length === 1, 'Slow startup schedules only one idle render');
+                    app.flush();
+                    check(win.gridPipelineDiag.lastSnapshot.state === 'waiting', 'Unresolved initial fetch is waiting, not empty/error');
+                    pending.resolve(response(database));
+                    await loading;
+                    fullIdentity(app);
+                    check(app.activeWaves.size === 1, 'Exactly one wave timer after slow-fetch completion');
+                    check(doc.querySelectorAll('#flagsGrid .fi.flag-emoji-fallback').length > 200
+                        && [...doc.querySelectorAll('#flagsGrid .fi.flag-emoji-fallback')].every(node => node.textContent.trim()),
+                        'Blocked CDN produces visible emoji/globe flags instead of blank CSS boxes');
+                    for (const flag of doc.querySelectorAll('#flagsGrid .flag-item')) {
+                        flag.focus();
+                        flag.click();
+                        const modalIcon = doc.querySelector('#modalContent .modal-flag-icon-wrapper .fi');
+                        if (modalIcon) check(modalIcon.classList.contains('flag-emoji-fallback')
+                            && modalIcon.textContent.trim() === (database[flag.dataset.countryName].flag || '🌍'),
+                            `${flag.dataset.countryName}: modal CSS flag has its exact visible fallback`);
+                        check(doc.getElementById('countryModalTitle').textContent.startsWith(flag.dataset.countryName)
+                            && doc.getElementById('modalContent').dataset.authorityId === flag.dataset.authorityId
+                            && doc.getElementById('modalContent').textContent.includes(
+                                database[flag.dataset.countryName].financial_authority.name),
+                            `${flag.dataset.countryName}: flag opens the correct authority`);
+                        win.closeModal();
+                    }
+                    const NativeImage = win.Image;
+                    const probes = [];
+                    const wrapper = doc.createElement('span');
+                    wrapper.className = 'modal-flag-icon-wrapper';
+                    const icon = doc.createElement('span');
+                    icon.className = 'fi';
+                    icon.dataset.countryName = 'France';
+                    icon.style.backgroundImage = 'url("flags/canada.svg")';
+                    wrapper.appendChild(icon);
+                    doc.getElementById('modalContent').appendChild(wrapper);
+                    try {
+                        win.Image = class { constructor() { probes.push(this); } };
+                        win.ensureVisibleCountryFlags(wrapper);
+                        check(icon.textContent === database.France.flag && probes.length === 1,
+                            'Standalone modal wrapper gets visible fallback while its image probe is pending');
+                        win.ensureVisibleCountryFlags(wrapper);
+                        probes[0].onload();
+                        check(icon.classList.contains('flag-emoji-fallback'),
+                            'An older successful probe cannot clear the current fallback');
+                        icon.remove();
+                        probes[1].onload();
+                        check(icon.classList.contains('flag-emoji-fallback'),
+                            'Disconnected icon probe cannot mutate its fallback');
+                        wrapper.appendChild(icon);
+                        win.ensureVisibleCountryFlags(wrapper);
+                        probes[1].onload();
+                        check(icon.classList.contains('flag-emoji-fallback'),
+                            'Reattached icon still ignores the superseded probe');
+                        probes[2].onload();
+                        check(!icon.classList.contains('flag-emoji-fallback') && icon.textContent === '',
+                            'Only the latest connected successful probe restores the CSS flag');
+                    } finally {
+                        win.Image = NativeImage;
+                        wrapper.remove();
+                    }
+                    for (let cycle = 0; cycle < 3; cycle++) {
+                        for (const locale of ['it', 'en', 'ar', 'fr', 'de', 'es']) {
+                            win.filterBySearchTerm('Austria');
+                            win.changeLanguage(locale);
+                            for (const filter of ['ue', 'non-ue', 'europe', 'asia', 'africa', 'americas', 'oceania', 'altissimo', 'all']) {
+                                win.filterCountries(filter);
+                                check([...doc.querySelectorAll('.country-card')].every(card =>
+                                    card.style.display === (card.dataset.countryName === 'Austria' ? 'block' : 'none'))
+                                    && doc.querySelectorAll('#flagsGrid .flag-item').length === 239
+                                    && ['searchInput', 'search-input-top'].every(id => doc.getElementById(id).value === 'Austria'),
+                                    `${cycle}/${locale}/${filter}: search survives filter and language rerenders`);
+                            }
+                            for (const mode of ['compact', 'detailed']) {
+                                win.flagViewPreference.choose(mode, false);
+                                win.renderAll();
+                                check(app.activeWaves.size === 1, `${locale}/${mode}: rerender never duplicates wave timers`);
+                            }
+                            win.filterBySearchTerm('');
+                            win.filterCountries('all');
+                            fullIdentity(app);
+                            doc.querySelector('#flagsGrid [data-country-name="Austria"]').click();
+                            check(doc.getElementById('modalContent').dataset.authorityId === database.Austria.financial_authority.authorityId,
+                                `${cycle}/${locale}: handlers survive repeated reset/rerenders`);
+                            win.closeModal();
+                        }
+                    }
+                    const inventory = win.gridPipelineDiag.orbitalReport.inventory;
+                    check(inventory.length === 10 && new Set(inventory.map(item => item.sourcePath)).size === 10
+                        && inventory.every(item => item.authorized), 'Ten distinct authorized local image integrations');
+                    check(matchesOrbitalFixtures(inventory), 'All ten countries match independently specified page and thumbnail identities');
+                    const swappedInventory = inventory.map(entry => ({
+                        ...entry,
+                        ...(['Austria', 'Germany'].includes(entry.country) ? {
+                            sourcePath: orbitalFixtures[entry.country === 'Austria' ? 'Germany' : 'Austria'].page,
+                            thumbnailPath: orbitalFixtures[entry.country === 'Austria' ? 'Germany' : 'Austria'].thumbnail
+                        } : {})
+                    }));
+                    check(!matchesOrbitalFixtures(swappedInventory), 'Independent country oracle rejects swapped Austria/Germany integrations');
+                    for (const entry of inventory) {
+                        const expected = orbitalFixtures[entry.country];
+                        const image = new Image();
+                        image.src = expected.thumbnail;
+                        await image.decode();
+                        check(image.naturalWidth > 0, `${entry.authority}: local preview decodes`);
+                        for (const locale of ['en', 'ar']) {
+                            win.filterCountries(database[entry.country].isEU ? 'ue' : 'non-ue');
+                            win.filterBySearchTerm(entry.country);
+                            win.changeLanguage(locale);
+                            win.flagViewPreference.choose(locale === 'en' ? 'detailed' : 'compact', false);
+                            win.renderCountries();
+                            const orbital = doc.getElementById('consobOrbitalFrame');
+                            const dialog = doc.getElementById('consobOrbitalDialog');
+                            const card = doc.querySelector(`.country-card[data-country-name="${entry.country}"]`);
+                            if (entry.country !== 'Ethiopia') {
+                                const cardTrigger = card.querySelector('.orbital-thumbnail-trigger');
+                                check(card.style.display !== 'none' && cardTrigger?.dataset.orbitalSrc === expected.page
+                                    && cardTrigger.querySelector('img').getAttribute('src') === expected.thumbnail
+                                    && doc.getElementById('searchInput').value === entry.country,
+                                    `${locale}/${entry.authority}: filtered/searched rerender retains the exact card image hook`);
+                                cardTrigger.click();
+                                await waitFor(() => orbital.contentWindow?.location.pathname === expected.page
+                                    && orbital.contentDocument?.readyState === 'complete');
+                                check(dialog.open && orbital.contentDocument.querySelector('h1')?.textContent.trim() === expected.heading
+                                    && doc.getElementById('countryModal').style.display !== 'block',
+                                    `${locale}/${entry.authority}: card image loads the exact authority heading without opening parent details`);
+                                win.closeItalyOrbitalDialog();
+                                await waitFor(() => orbital.contentWindow?.location.href === 'about:blank'
+                                    && orbital.contentDocument?.readyState === 'complete');
+                                check(!dialog.open && orbital.getAttribute('src') === 'about:blank' && doc.activeElement === cardTrigger,
+                                    `${locale}/${entry.authority}: card close clears iframe and restores its launcher focus`);
+                            } else {
+                                check(!card.querySelector('.orbital-thumbnail-trigger'),
+                                    `${locale}: Ethiopia rerender preserves the primary NBE card, with ECMA supplemental only`);
+                            }
+                            const flag = doc.querySelector(`#flagsGrid [data-country-name="${entry.country}"]`);
+                            flag.focus();
+                            flag.click();
+                            const trigger = doc.querySelector(`#countryModal [data-orbital-src="${expected.page}"]`);
+                            check(trigger?.querySelector('img').getAttribute('src') === expected.thumbnail,
+                                `${locale}/${entry.authority}: independent page and image identities persist in flag-opened details`);
+                            trigger.click();
+                            await waitFor(() => orbital.contentWindow?.location.pathname === expected.page
+                                && orbital.contentDocument?.readyState === 'complete');
+                            check(dialog.open && orbital.contentDocument.querySelector('h1')?.textContent.trim() === expected.heading,
+                                `${locale}/${entry.authority}: modal preview loads the exact authority heading`);
+                            win.closeItalyOrbitalDialog();
+                            await waitFor(() => orbital.contentWindow?.location.href === 'about:blank'
+                                && orbital.contentDocument?.readyState === 'complete');
+                            check(!dialog.open && orbital.getAttribute('src') === 'about:blank' && doc.activeElement === trigger,
+                                `${locale}/${entry.authority}: modal close clears iframe and restores its launcher focus`);
+                            win.closeModal();
+                            check(doc.activeElement === flag, `${locale}/${entry.authority}: parent close restores the selected flag focus`);
+                            win.filterBySearchTerm('');
+                            win.filterCountries('all');
+                        }
+                    }
+                    fullIdentity(app);
+                    for (const path of ['flags/canada.svg', 'flags/quebec.svg']) {
+                        const image = new Image(); image.src = path; await image.decode();
+                        check(image.naturalWidth > 0, `${path}: local territorial flag exists and decodes`);
+                    }
+                    for (const localFlag of [...doc.querySelectorAll('#flagsGrid .flag-image')]) {
+                        const localWrapper = localFlag.parentElement;
+                        const name = localWrapper.closest('.flag-item').dataset.countryName;
+                        localFlag.dispatchEvent(new win.Event('error'));
+                        check(!localFlag.isConnected && localWrapper.textContent.trim() === database[name].flag,
+                            `${name}: failed local SVG restores its exact visible emoji fallback`);
+                    }
+                    const france = win.gridStabilityRecords().find(country => country.country_name === 'France');
+                    const originalFlagImage = france.flagImage;
+                    try {
+                        france.flagImage = 'flags/missing-grid-regression.svg';
+                        win.renderFlagsGrid();
+                        const tile = doc.querySelector('#flagsGrid [data-country-name="France"]');
+                        const wrapper = tile.querySelector('.flag-icon-wrapper');
+                        const image = wrapper.querySelector('.flag-image');
+                        check(!!image && !wrapper.querySelector('.fi'),
+                            'Local SVG initially replaces the detached France CSS flag fallback');
+                        await waitFor(() => !image.isConnected);
+                        const fallback = wrapper.querySelector('.fi');
+                        check(tile.contains(fallback) && fallback?.isConnected
+                            && fallback.classList.contains('flag-emoji-fallback')
+                            && wrapper.textContent.trim() === database.France.flag,
+                            'Actual missing SVG plus blocked CDN restores visible emoji in the same France tile');
+                        tile.focus();
+                        tile.click();
+                        check(doc.getElementById('modalContent').dataset.authorityId === database.France.financial_authority.authorityId,
+                            'France tile retains its correct authority handler after the actual SVG failure');
+                        win.closeModal();
+                    } finally {
+                        if (originalFlagImage === undefined) delete france.flagImage;
+                        else france.flagImage = originalFlagImage;
+                        win.renderFlagsGrid();
+                    }
+                    for (const width of [320, 375, 768, 769, 1024]) {
+                        app.frame.style.width = `${width}px`;
+                        for (const mode of ['compact', 'detailed']) {
+                            win.flagViewPreference.choose(mode, false);
+                            for (const size of ['100%', '150%']) {
+                                doc.documentElement.style.fontSize = size;
+                                await new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve)));
+                                const grid = doc.getElementById('flagsGrid');
+                                check(grid.scrollWidth <= grid.clientWidth + 1
+                                    && [...grid.querySelectorAll('.flag-item')].every(flag => flag.getBoundingClientRect().width >= 44),
+                                    `${width}px/${mode}/${size}: grid fits with accessible flag targets`);
+                            }
+                        }
+                    }
+                    win.fetch = async () => response(database);
+                    const truncated = structuredClone(database);
+                    delete truncated.Austria;
+                    for (const invalid of [null, [], {}, { ...database, Austria: {} },
+                        { ...database, Austria: { country_name: 'Austria' } },
+                        truncated, { ...database, Austria: { ...database.Austria, country_name: 'Wrong name' } },
+                        { ...database, Germany: { ...database.Germany,
+                            financial_authority: database.Austria.financial_authority } }]) {
+                        win.fetch = async () => response(invalid);
+                        await win.loadCountryData();
+                        const immediateMarkup = doc.getElementById('countriesGrid').innerHTML;
+                        check(doc.querySelector('#countriesGrid [role="status"][aria-live="polite"]')
+                            && doc.querySelector('#flagsGrid [role="status"][aria-live="polite"]'),
+                            'Loader failure immediately announces accessible status in both grids');
+                        win.changeLanguage('en');
+                        check(!doc.querySelector('#flagsGrid .flag-item')
+                            && doc.querySelector('#flagsGrid [role="status"]')?.textContent.includes('unavailable')
+                            && doc.querySelector('#countriesGrid [role="status"]')
+                            && app.activeWaves.size === 0
+                            && doc.getElementById('countriesGrid').innerHTML === immediateMarkup,
+                            'Malformed/empty/incomplete/duplicate data preserves identical accessible markup across rerenders');
+                        win.fetch = async () => response(database);
+                        await win.loadCountryData();
+                        fullIdentity(app);
+                    }
+                    for (const failure of [
+                        () => Promise.reject(new win.TypeError('Offline')),
+                        async () => ({ ok: false, status: 503 }),
+                        async () => ({ ok: true, status: 200, json: async () => { throw new win.SyntaxError('Malformed JSON'); } })
+                    ]) {
+                        win.fetch = failure;
+                        await win.loadCountryData();
+                        check(doc.querySelector('#flagsGrid [role="status"]') && app.activeWaves.size === 0,
+                            'Network/HTTP/parse errors expose status and stop detached wave timers');
+                        win.fetch = async () => response(database);
+                        await win.loadCountryData();
+                        fullIdentity(app);
+                    }
+                    for (const staleFails of [false, true]) {
+                        const older = deferred(), newer = deferred();
+                        const staleDatabase = structuredClone(database);
+                        staleDatabase.Austria.financial_authority.name = 'Stale authority response';
+                        let calls = 0;
+                        win.fetch = () => (++calls === 1 ? older : newer).promise;
+                        const oldLoad = win.loadCountryData(), newLoad = win.loadCountryData();
+                        newer.resolve(response(database)); await newLoad;
+                        if (staleFails) older.reject(new win.TypeError('Stale failure'));
+                        else older.resolve(response(staleDatabase));
+                        await oldLoad;
+                        fullIdentity(app);
+                        check(app.activeWaves.size === 1 && win.gridStabilityRecords().find(country =>
+                            country.country_name === 'Austria').financial_authority.name === database.Austria.financial_authority.name,
+                            'Latest response wins against valid stale success or failure');
+                    }
+                } finally { app.frame.remove(); }
+                for (const reduced of [false, true]) {
+                    const fallback = await fixture({ idle: false, reduced });
+                    try {
+                        await fallback.win.loadCountryData();
+                        await waitFor(() => fallback.doc.querySelectorAll('#flagsGrid [data-authority-id]').length === 239);
+                        fullIdentity(fallback);
+                        check(fallback.activeWaves.size === (reduced ? 0 : 1),
+                            `setTimeout fallback renders full grid; reduced motion=${reduced} respects wave preference`);
+                    } finally { fallback.frame.remove(); }
+                }
+                document.body.dataset.testStatus = 'pass';
+                results.textContent += '\nAll grid stability checks passed.';
+            }
+            run().catch(error => {
+                document.body.dataset.testStatus = 'fail';
+                results.textContent += `\nFAIL: ${error.stack || error}`;
+            });
+        }
+    </script>
+</body>
+</html>

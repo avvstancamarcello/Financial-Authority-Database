@@ -43,10 +43,10 @@
                 [/        <nav aria-label="CONSOB · FCA · CNMV · AMF · BaFin · SEC">[\s\S]*?<\/nav>/,
                     '2e40e64972b8624c906578dc05bedb731134a6035c410f8eddfa9fac6f7e9549'],
                 [/        <nav id="orbital-micropages"[\s\S]*?<\/nav>/,
-                    'c6d6f3478006dfe730b8981a4be0c8cdc445edc926d57eeee6c12e4ffd095337']
+                    '9a2f24f87810afae011187ac47464a5c230215c27a8786224354f7dc169a93cd']
             ]) {
                 check(await hash(source.match(pattern)?.[0] || '') === expected,
-                    'Original Orbital summary block is byte-identical, including links, order and attributes');
+                    'Orbital summary block matches the expected links, order and attributes');
             }
             const staticDoc = new DOMParser().parseFromString(source, 'text/html');
             const description = staticDoc.querySelector('[data-i18n-text="orbitalCatalogDescription"]');
@@ -61,9 +61,12 @@
             const response = await fetch('./' + path);
             check(response.status === 200, 'Polynesia micropage returns HTTP 200');
             const frame = document.getElementById('app');
-            await waitFor(() => frame.contentDocument?.querySelector(`#flagsGrid [aria-label$="${country}"]`));
+            await waitFor(() => frame.contentDocument?.querySelector(`#flagsGrid [aria-label$="${country}"]`)
+                && frame.contentDocument.querySelector(`.country-card[data-country-name="${country}"]`));
             const app = frame.contentWindow;
             const doc = frame.contentDocument;
+            doc.getElementById('flagViewClose').click();
+            await new Promise(resolve => requestAnimationFrame(resolve));
             const dialog = doc.getElementById('consobOrbitalDialog');
             const orbital = doc.getElementById('consobOrbitalFrame');
             check(!app.gridPipelineDiag, 'Focus checks run without opt-in diagnostics');
@@ -75,6 +78,14 @@
                     `${locale}: new catalog text uses existing i18n with explicit English fallback`);
                 doc.querySelector(`#flagsGrid [aria-label$="${country}"]`).click();
                 const trigger = doc.querySelector('#countryModal .polynesia-orbital-cta');
+                const thumbnail = doc.querySelector('#countryModal .orbital-thumbnail-trigger');
+                const gridThumbnail = doc.querySelector(`.country-card[data-country-name="${country}"] .orbital-thumbnail-trigger`);
+                check(thumbnail?.dataset.orbitalSrc === '/' + path
+                    && thumbnail.querySelector('img').getAttribute('src') === '/authority/preview-PF.svg'
+                    && gridThumbnail?.dataset.orbitalSrc === '/' + path
+                    && thumbnail.getAttribute('aria-label').includes('Polynésie française')
+                    && !thumbnail.querySelector('img').src.includes('FR-AMF'),
+                    `${locale}: neutral territorial preview appears in cards and flag-opened details without conflating France`);
                 check(trigger?.getAttribute('href') === path
                     && trigger.textContent.trim().endsWith(
                         `${locale === 'it' ? 'Apri' : 'Open'} Orbital WebApp · Polynésie française`)
@@ -120,7 +131,7 @@
                     check(dialog.open && dialog.matches(':modal') && dialog.contains(doc.activeElement)
                         && orbital.contentWindow.location.origin === location.origin
                         && orbital.contentDocument.querySelector('h1')?.textContent
-                            === 'POLYNÉSIE FRANÇAISE – Autorités financières Orbital WebApp | AMEV'
+                            === 'POLYNÉSIE FRANÇAISE – IEOM Orbital WebApp | AMEV'
                         && orbital.contentDocument.body.textContent.includes('IEOM'),
                         `${width}px: shared dialog is modal, focused and actually loads the correct same-origin page`);
                     check(orbital.contentDocument.documentElement.scrollWidth <= orbital.contentWindow.innerWidth,

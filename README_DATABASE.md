@@ -318,6 +318,42 @@ Regressioni locali: servire la root con `python3 -m http.server 8000` e aprire
 storage e orologio; controllano layout, consenso, campagne e lifecycle.
 Non certificano il rendering su un dispositivo fisico né un deployment.
 
+### Regressioni della griglia dinamica
+
+La homepage canonica legge `financial_authorities_database.json`: il riferimento
+di 239 riguarda record di autorità, territori e suddivisioni, non Stati sovrani.
+`#flagsGrid` conserva tutti i record; ricerca e filtri interessano soltanto
+`#countriesGrid`. La ricerca resta applicata quando le schede sono ricostruite
+da un filtro o da un cambio lingua.
+
+Servire la **root del repository** con `python3 -m http.server 8000` e aprire:
+
+- `/test-grid-stability.html`: identità e conteggi, mirror, bootstrap,
+  ricostruzioni, navigazione dalle bandiere, preview e visualizzazione.
+- `/test-grid-offline.html`: risorse della griglia nella cache del service worker
+  e regressioni offline; usare un origin locale dedicato, separato dai test
+  ordinari, per evitare interferenze della cache.
+- `/test-grid-pipeline.html`, `/test-flag-view.html`,
+  `/test-canada-grid-flags.html`, `/test-ecma-orbital.html`,
+  `/test-polynesia-orbital.html` e `/test-bafin-orbital.html`: regressioni
+  complementari della pipeline, dei layout e dei dialoghi.
+- `/test-bceao-orbital.html`: conserva il rollback del launcher Benin e verifica
+  i due link istituzionali UMOA; la pagina BCEAO autonoma resta disponibile.
+- `/test-seo-authority-navigation.html`: canonical inglese `?lang=en`,
+  micropagine pubblicate nel sitemap e percorsi di navigazione.
+
+Austria e Polinesia usano preview locali nella scheda autorità e nel dettaglio
+aperto dalla bandiera, attraverso il dialogo Orbital condiviso. I metadati sono
+aggiunti dal loader della homepage, senza alterare i quattro mirror JSON.
+La CTA testuale preesistente della Polinesia resta disponibile.
+Le risorse locali della griglia sono precache opzionali: un errore di download
+non blocca l'installazione del service worker, ma quella risorsa non è garantita
+offline. Le bandiere CSS non disponibili usano un fallback visibile.
+
+Gli esiti locali non certificano DNS, redirect, indicizzazione, deploy pubblico
+o comportamento su dispositivi fisici. Le fixture isolate non sostituiscono
+la prova separata della PWA con service worker attivo.
+
 Quando modifichi il sito, aggiorna versione cache:
 
 **File:** `service-worker.js`

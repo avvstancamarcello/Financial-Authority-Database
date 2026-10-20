@@ -29,6 +29,44 @@
       check(response.ok, `${path} exists with exact casing`);
       return response.text();
     }
+    async function testFinancialAuthoritySitemap() {
+      const root = 'https://www.amevfirenze.it/';
+      const ns = 'http://www.sitemaps.org/schemas/sitemap/0.9';
+      const parser = new DOMParser();
+      const sitemap = parser.parseFromString(await text('sitemap-financial-authorities.xml'), 'application/xml');
+      check(!sitemap.querySelector('parsererror') && sitemap.documentElement.localName === 'urlset'
+        && sitemap.documentElement.namespaceURI === ns, 'Dedicated sitemap has a valid sitemap XML root');
+      const entries = [...sitemap.getElementsByTagNameNS(ns, 'url')];
+      const locs = entries.map(entry => entry.getElementsByTagNameNS(ns, 'loc')[0]?.textContent);
+      const main = parser.parseFromString(await text('sitemap.xml'), 'application/xml');
+      const expected = [...main.getElementsByTagNameNS(ns, 'loc')].map(node => node.textContent)
+        .filter(url => url === root + '?lang=en' || (url.startsWith(root + 'authority/')
+          && url !== root + 'authority/amev-equivalenza-lang-9-EU.html'));
+      check(locs.length > 0 && new Set(locs).size === locs.length
+        && locs.length === expected.length && expected.every(url => locs.includes(url)),
+        'Dedicated sitemap covers the global index and every main-sitemap authority exactly once');
+      for (const entry of entries) {
+        const loc = entry.getElementsByTagNameNS(ns, 'loc')[0].textContent;
+        const url = new URL(loc);
+        check(url.origin === root.slice(0, -1) && !url.hash
+          && (url.pathname === '/' ? url.search === '?lang=en'
+            : url.pathname.startsWith('/authority/') && !url.search),
+          `Dedicated sitemap uses existing public routes: ${loc}`);
+        const page = parser.parseFromString(await text(url.pathname.slice(1) || 'index.html'), 'text/html');
+        check(page.querySelector('link[rel="canonical"]')?.getAttribute('href') === loc
+          && !/noindex/i.test(page.querySelector('meta[name="robots"]')?.content || ''),
+          `Dedicated sitemap URL is canonical and indexable: ${loc}`);
+        const frequency = entry.getElementsByTagNameNS(ns, 'changefreq')[0]?.textContent;
+        const priority = entry.getElementsByTagNameNS(ns, 'priority')[0]?.textContent;
+        check(['daily', 'weekly', 'monthly'].includes(frequency)
+          && Boolean(priority?.trim()) && Number.isFinite(Number(priority))
+          && Number(priority) >= 0 && Number(priority) <= 1,
+          `Dedicated sitemap hints are valid: ${loc}`);
+      }
+      const robots = await text('robots.txt');
+      check(robots.split(/\r?\n/).includes('Sitemap: ' + root + 'sitemap-financial-authorities.xml'),
+        'Robots advertises the dedicated sitemap');
+    }
     async function testMicropages() {
       const root = 'https://www.amevfirenze.it/';
       const pages = [
@@ -45,9 +83,19 @@
       check(Boolean(discovery) && !discovery.closest('#flags-section, #countries-section, .flags-grid, .countries-grid'),
         'MVP discovery navigation stays outside country and flag grids');
       check(JSON.stringify([...discovery.querySelectorAll('a')].map(link => link.getAttribute('href')))
-        === JSON.stringify(pages.map(([path]) => 'authority/' + path)), 'WIP exposes exactly three alphabetical static links');
+        === JSON.stringify([
+          'authority/ethiopia-ecma-orbital-webapp.html',
+          'authority/nunavut-orbital-webapp.html',
+          'authority/oesterreich-fma-orbital-webapp.html',
+          'authority/polynesie-francaise-orbital-webapp.html',
+          'authority/CH-FINMA.html'
+        ]), 'WIP exposes five alphabetical static links, including informational Nunavut and FINMA CH');
       const stable = await text('obsolete-index.html');
       const sitemap = await text('sitemap.xml');
+      const sitemapDocument = parser.parseFromString(sitemap, 'application/xml');
+      check(!sitemapDocument.querySelector('parsererror'), 'Micropage sitemap parses');
+      const sitemapLocations = [...sitemapDocument.getElementsByTagNameNS('*', 'loc')]
+        .map(node => node.textContent);
       const database = await text('financial_authorities_database.json');
       const frame = document.getElementById('references');
       for (const [path, country, authority, language, host, registerLimit, resultLimit, dateLimit] of pages) {
@@ -92,8 +140,9 @@
           `${country} visible directory and results limitations`);
         check(page.querySelector('time').dateTime === '2026-10-08'
           && page.body.textContent.includes(dateLimit), `${country} honest editorial date`);
-        check(!stable.includes(path) && !sitemap.includes(path) && !database.includes(path),
-          `${country} no additions to backup homepage, live sitemap or database`);
+        check(!stable.includes(path) && !database.includes(path)
+          && sitemapLocations.filter(url => url === root + 'authority/' + path).length === 1,
+          `${country} published sitemap discovers the canonical once; backup and database stay unchanged`);
         if (country === 'ETHIOPIA') {
           const play = page.getElementById('google-play').parentElement;
           check(play.textContent.includes('Collegamento Google Play non verificato')
@@ -152,8 +201,15 @@
         'WIP no longer discovers discarded FR/DE MVP duplicates');
     }
     async function run() {
+      await testFinancialAuthoritySitemap();
+      if (new URLSearchParams(location.search).get('sitemap') === '1') {
+        results.dataset.status = 'passed';
+        results.textContent += '\nDONE';
+        return;
+      }
       await testMicropages();
       if (new URLSearchParams(location.search).get('micropages') === '1') {
+        results.dataset.status = 'passed';
         results.textContent += '\nDONE';
         return;
       }
@@ -169,18 +225,18 @@
       check(!sitemap.querySelector('parsererror'), 'Sitemap XML parses');
       const locs = Array.from(sitemap.getElementsByTagNameNS('*', 'loc'), node => node.textContent);
       check(new Set(locs).size === locs.length, 'Sitemap locs are unique');
-      check(locs.includes(root + 'referenze.html') && locs.includes('https://amevfirenze.it/referenze.html'),
-        'Both requested reference host forms are listed');
+      check(locs.includes(root + 'referenze.html') && !locs.includes('https://amevfirenze.it/referenze.html'),
+        'References use only the preferred canonical host');
       for (const loc of locs) {
         const url = new URL(loc);
         check(url.protocol === 'https:' && !url.hash &&
-          (url.host === 'www.amevfirenze.it' || loc === 'https://amevfirenze.it/referenze.html'),
+          url.host === 'www.amevfirenze.it',
           `Preferred host, no fragment: ${url.pathname}`);
         await text(decodeURIComponent(url.pathname).replace(/^\//, '') || 'index.html');
       }
       check(!sitemap.getElementsByTagNameNS('http://www.w3.org/1999/xhtml', 'link').length,
         'No unverified hreflang clusters or fabricated PDF/JSON translations');
-      for (const [page, source, path] of [[index, indexSource, ''], [references, referenceSource, 'referenze.html']]) {
+      for (const [page, source, path] of [[index, indexSource, '?lang=en'], [references, referenceSource, 'referenze.html']]) {
         check(page.querySelector('link[rel="canonical"]').getAttribute('href') === root + path,
           `Preferred canonical: ${path || 'homepage'}`);
         check(!source.includes('https://amevfirenze.it/'), 'No non-www local URLs in root page');
@@ -294,9 +350,11 @@
       check(doc.documentElement.lang === 'it', 'Reference language switching preserved');
       frame.contentWindow.changeLanguage('__proto__');
       check(doc.documentElement.lang === 'it', 'Unknown language/prototype keys are ignored safely');
+      results.dataset.status = 'passed';
       results.textContent += '\nDONE';
     }
     run().catch(error => {
+      results.dataset.status = 'failed';
       results.textContent += `\nFAIL: ${error.message}`;
       console.error(error);
     });

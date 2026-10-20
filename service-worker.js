@@ -1,4 +1,4 @@
-const CACHE_NAME = 'financial-authority-v34';
+const CACHE_NAME = 'financial-authority-v42';
 const BASE_PATH = '';
 const FLAG_ICONS_CSS_URL = 'https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.2.3/css/flag-icons.min.css';
 const PWA_ICON_PATHS = [
@@ -21,7 +21,34 @@ const CORE_APP_SHELL_URLS = [
   `${BASE_PATH}/manifest.json`,
   ...PWA_ICON_PATHS
 ];
-const OPTIONAL_CACHE_URLS = [FLAG_ICONS_CSS_URL];
+const LOCAL_GRID_URLS = [
+  '/financial_authorities_database.json',
+  '/flags/canada.svg',
+  '/flags/quebec.svg',
+  '/authority/IT-CONSOB.html',
+  '/authority/UK-FCA.html',
+  '/authority/FR-AMF.html',
+  '/authority/DE-BAFIN.html',
+  '/authority/ES-CNMV.html',
+  '/authority/US-SEC.html',
+  '/authority/CH-FINMA.html',
+  '/authority/ET-ECMA.html',
+  '/authority/oesterreich-fma-orbital-webapp.html',
+  '/authority/polynesie-francaise-orbital-webapp.html',
+  '/authority/nunavut-orbital-webapp.html',
+  '/authority/amev-equivalenza-lang-9-EU.html',
+  '/authority/preview-consob.png',
+  '/authority/preview-fca.png',
+  '/authority/preview-FR-AMF.png',
+  '/authority/preview-DE-BAFIN.png',
+  '/authority/preview-ES-CNMV.png',
+  '/authority/preview-US-SEC.svg',
+  '/authority/preview-CH-FINMA.svg',
+  '/authority/preview-ET-ECMA.svg',
+  '/authority/preview-AT-FMA.svg',
+  '/authority/preview-PF.svg'
+];
+const OPTIONAL_CACHE_URLS = [FLAG_ICONS_CSS_URL, ...LOCAL_GRID_URLS.map(path => `${BASE_PATH}${path}`)];
 
 function isCacheableResponse(response) {
   return Boolean(response) && (response.ok || response.type === 'opaque');

@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Real service worker grid offline regression</title>
+</head>
+<body>
+    <h1>Real service worker grid offline regression</h1>
+    <p>Use a fresh browser profile on localhost. Wait for “Warm cache ready”, then disable
+        network for both page and service worker in browser automation (or disconnect the
+        network), disable the browser HTTP cache (not CacheStorage), and press “Run offline checks”.
+        No fetch or cache mocks are used.
+        A first-ever offline navigation, without an installed worker, must fail normally.</p>
+    <button id="offline" disabled>Run offline checks</button>
+    <pre id="results">Running…</pre>
+    <iframe id="app" title="Actual offline homepage" width="1024" height="800"></iframe>
+    <script>
+        const results = document.getElementById('results'), checks = [];
+        const cacheName = 'financial-authority-v42';
+        const orbitalFixtures = {
+            Italy: { page: '/authority/IT-CONSOB.html', thumbnail: '/authority/preview-consob.png', heading: 'Italia – CONSOB Orbital WebApp' },
+            'United Kingdom': { page: '/authority/UK-FCA.html', thumbnail: '/authority/preview-fca.png', heading: 'United Kingdom – FCA Orbital WebApp' },
+            France: { page: '/authority/FR-AMF.html', thumbnail: '/authority/preview-FR-AMF.png', heading: 'France – AMF Orbital WebApp' },
+            Germany: { page: '/authority/DE-BAFIN.html', thumbnail: '/authority/preview-DE-BAFIN.png', heading: 'Deutschland BAFIN orbital WebApp' },
+            Spain: { page: '/authority/ES-CNMV.html', thumbnail: '/authority/preview-ES-CNMV.png', heading: 'España CNMV orbital WebApp' },
+            'United States of America': { page: '/authority/US-SEC.html', thumbnail: '/authority/preview-US-SEC.svg', heading: 'USA SEC orbital WebApp' },
+            Ethiopia: { page: '/authority/ET-ECMA.html', thumbnail: '/authority/preview-ET-ECMA.svg', heading: '🇪🇹 Ethiopian Capital Market Authority (ECMA)' },
+            Austria: { page: '/authority/oesterreich-fma-orbital-webapp.html', thumbnail: '/authority/preview-AT-FMA.svg', heading: 'ÖSTERREICH – FMA Orbital WebApp | AMEV' },
+            Switzerland: { page: '/authority/CH-FINMA.html', thumbnail: '/authority/preview-CH-FINMA.svg', heading: '🇨🇭 Svizzera / Switzerland CH – FINMA Orbital WebApp' },
+            'French Polynesia (France)': { page: '/authority/polynesie-francaise-orbital-webapp.html', thumbnail: '/authority/preview-PF.svg', heading: 'POLYNÉSIE FRANÇAISE – Autorités financières Orbital WebApp | AMEV' }
+        };
+        function matchesOrbitalFixtures(entries) {
+            return entries.length === Object.keys(orbitalFixtures).length
+                && new Set(entries.map(entry => entry.country)).size === entries.length
+                && entries.every(entry => orbitalFixtures[entry.country]?.page === entry.sourcePath
+                    && orbitalFixtures[entry.country]?.thumbnail === entry.thumbnailPath);
+        }
+        let baseline, inventory, cachedDatabase;
+        function check(condition, message) {
+            checks.push(`${condition ? 'PASS' : 'FAIL'}: ${message}`);
+            results.textContent = checks.join('\n');
+            if (!condition) throw new Error(message);
+        }
+        const sleep = () => new Promise(resolve => setTimeout(resolve, 50));
+        async function waitFor(predicate) {
+            const deadline = Date.now() + 30000;
+            while (!predicate()) {
+                if (Date.now() > deadline) throw new Error('Timed out');
+                await sleep();
+            }
+        }
+        const frame = document.getElementById('app');
+        async function navigate() {
+            const previousDiagnostics = frame.contentWindow?.gridPipelineDiag;
+            frame.src = './index.html?diag=1&offline-regression=' + Date.now();
+            await waitFor(() => frame.contentWindow?.gridPipelineDiag !== previousDiagnostics
+                && frame.contentWindow?.gridPipelineDiag?.lastSnapshot?.state === 'ready'
+                && frame.contentDocument.querySelectorAll('#flagsGrid .flag-item').length === 239);
+        }
+        function identity() {
+            const doc = frame.contentDocument;
+            const flags = [...doc.querySelectorAll('#flagsGrid .flag-item')];
+            const cards = [...doc.querySelectorAll('#countriesGrid .country-card')];
+            check(flags.length === 239 && cards.length === 239
+                && [...flags, ...cards].every(node => baseline[node.dataset.countryName]?.financial_authority.authorityId
+                    === node.dataset.authorityId), 'Offline full dataset-to-flags-and-cards identity: 239 exact authorities');
+        }
+        async function warm() {
+            document.body.dataset.testStatus = 'running';
+            if (new URLSearchParams(location.search).has('fresh')) {
+                check((await navigator.serviceWorker.getRegistrations()).length === 0
+                    && (await caches.keys()).length === 0 && !navigator.serviceWorker.controller,
+                    'Fresh profile starts without a service worker or fictitious offline cache');
+            }
+            baseline = await (await fetch('./financial_authorities_database.json')).json();
+            await navigator.serviceWorker.register('./service-worker.js');
+            await navigator.serviceWorker.ready;
+            await waitFor(() => navigator.serviceWorker.controller);
+            await navigate();
+            identity();
+            inventory = frame.contentWindow.gridPipelineDiag.orbitalReport.inventory;
+            check(inventory.length === 10, 'Warm cache configures all ten image integrations');
+            check(matchesOrbitalFixtures(inventory), 'Warm integrations match the independent country/page/thumbnail oracle');
+            const swappedInventory = inventory.map(entry => ({
+                ...entry,
+                ...(['Austria', 'Germany'].includes(entry.country) ? {
+                    sourcePath: orbitalFixtures[entry.country === 'Austria' ? 'Germany' : 'Austria'].page,
+                    thumbnailPath: orbitalFixtures[entry.country === 'Austria' ? 'Germany' : 'Austria'].thumbnail
+                } : {})
+            }));
+            check(!matchesOrbitalFixtures(swappedInventory), 'Offline oracle rejects swapped Austria/Germany integrations');
+            const cache = await caches.open(cacheName);
+            cachedDatabase = await cache.match('/financial_authorities_database.json');
+            check(!!cachedDatabase && (await cachedDatabase.clone().json()).Austria.country_name === 'Austria',
+                'Fresh v41 install caches the actual grid database');
+            for (const path of ['/index.html', '/flags/canada.svg', '/flags/quebec.svg', '/authority/nunavut-orbital-webapp.html',
+                ...Object.values(orbitalFixtures).flatMap(expected => [expected.page, expected.thumbnail])]) {
+                check((await cache.match(path))?.ok, `${path}: relevant local asset cached without mandatory CDN`);
+            }
+            check(!(await caches.keys()).some(name => name.startsWith('financial-authority-') && name !== cacheName),
+                'Old app caches are removed on v41 activation');
+            document.body.dataset.testPhase = 'warm';
+            document.getElementById('offline').disabled = false;
+            results.textContent += '\nWarm cache ready — disable network, then run offline checks.';
+        }
+        async function offline() {
+            document.body.dataset.testPhase = 'offline';
+            let networkFailed = false;
+            try {
+                await fetch('/offline-network-probe-' + Date.now(), { cache: 'no-store' });
+            } catch (error) { networkFailed = true; }
+            check(networkFailed, 'Network is genuinely unavailable, not a mocked successful fetch');
+            await navigate();
+            identity();
+            const win = frame.contentWindow, doc = frame.contentDocument;
+            doc.getElementById('flagViewDialog').close();
+            for (const locale of ['en', 'ar', 'it']) {
+                win.changeLanguage(locale);
+                win.flagViewPreference.choose(locale === 'ar' ? 'compact' : 'detailed', false);
+                win.filterBySearchTerm('Austria');
+                win.filterCountries('ue');
+                check([...doc.querySelectorAll('.country-card')].filter(card => card.style.display !== 'none')
+                    .every(card => card.dataset.countryName === 'Austria'), `${locale}: search retained offline`);
+                win.filterBySearchTerm('');
+                win.filterCountries('all');
+                for (const query of ['CH', 'Svizzera', 'Suisse', 'Switzerland', 'FINMA']) {
+                    win.filterBySearchTerm(query);
+                    check([...doc.querySelectorAll('.country-card')].some(card =>
+                        card.dataset.countryName === 'Switzerland' && card.style.display !== 'none'),
+                        `${locale}/${query}: Swiss alias finds Switzerland offline`);
+                }
+                win.filterBySearchTerm('');
+                identity();
+            }
+            for (const entry of inventory) {
+                const expected = orbitalFixtures[entry.country];
+                const image = new Image(); image.src = expected.thumbnail; await image.decode();
+                check(image.naturalWidth > 0, `${entry.authority}: preview image decodes with network disabled`);
+                doc.querySelector(`#flagsGrid [data-country-name="${entry.country}"]`).click();
+                const trigger = doc.querySelector(`#countryModal [data-orbital-src="${expected.page}"]`);
+                check(trigger?.querySelector('img').getAttribute('src') === expected.thumbnail,
+                    `${entry.authority}: offline flag opens independently specified page and thumbnail`);
+                trigger.click();
+                const orbital = doc.getElementById('consobOrbitalFrame');
+                await waitFor(() => orbital.contentWindow?.location.pathname === expected.page
+                    && orbital.contentDocument?.readyState === 'complete');
+                check(doc.getElementById('consobOrbitalDialog').open
+                    && orbital.contentDocument.querySelector('h1')?.textContent.trim() === expected.heading,
+                    `${entry.authority}: cached Orbital document has the exact authority heading offline`);
+                win.closeItalyOrbitalDialog();
+                await waitFor(() => orbital.contentWindow?.location.href === 'about:blank'
+                    && orbital.contentDocument?.readyState === 'complete');
+                check(!doc.getElementById('consobOrbitalDialog').open && orbital.getAttribute('src') === 'about:blank'
+                    && doc.activeElement === trigger, `${entry.authority}: cached preview close clears iframe and restores exact launcher focus`);
+                win.closeModal();
+            }
+            for (const path of ['/flags/canada.svg', '/flags/quebec.svg']) {
+                const image = new Image(); image.src = path; await image.decode();
+                check(image.naturalWidth > 0, `${path}: local flag decodes offline`);
+            }
+            const cache = await caches.open(cacheName);
+            await cache.delete('/financial_authorities_database.json');
+            try {
+                await win.loadCountryData();
+                check(!doc.querySelector('#flagsGrid .flag-item') && doc.querySelector('#flagsGrid [role="status"]')
+                    && doc.querySelector('#countriesGrid [role="status"][aria-live="polite"]'),
+                    'Installed shell without cached data honestly reports unavailable, never a fake 239-item grid');
+            } finally {
+                await cache.put('/financial_authorities_database.json', cachedDatabase.clone());
+            }
+            await win.loadCountryData();
+            identity();
+            doc.querySelector('#orbital-micropages a[href="authority/nunavut-orbital-webapp.html"]').click();
+            await waitFor(() => frame.contentWindow.location.pathname === '/authority/nunavut-orbital-webapp.html'
+                && frame.contentDocument.readyState === 'complete');
+            check(frame.contentDocument.querySelector('h1')?.textContent.includes('NUNAVUT')
+                && frame.contentDocument.querySelector('a[href="https://www.wscc.nt.ca/reporting-fraud"]'),
+                'Homepage catalog opens the actual Nunavut guide offline, not the fallback homepage');
+            document.body.dataset.testStatus = 'pass';
+            results.textContent += '\nAll real service worker offline checks passed.';
+        }
+        function failed(error) {
+            document.body.dataset.testStatus = 'fail';
+            results.textContent += '\nFAIL: ' + (error.stack || error);
+        }
+        window.runOfflineChecks = () => offline().catch(failed);
+        document.getElementById('offline').onclick = window.runOfflineChecks;
+        warm().catch(failed);
+    </script>
+</body>
+</html>
