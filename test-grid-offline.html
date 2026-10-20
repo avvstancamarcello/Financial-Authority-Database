@@ -93,13 +93,13 @@
             const cache = await caches.open(cacheName);
             cachedDatabase = await cache.match('/financial_authorities_database.json');
             check(!!cachedDatabase && (await cachedDatabase.clone().json()).Austria.country_name === 'Austria',
-                'Fresh v41 install caches the actual grid database');
+                'Fresh v42 install caches the actual grid database');
             for (const path of ['/index.html', '/flags/canada.svg', '/flags/quebec.svg', '/authority/nunavut-orbital-webapp.html',
                 ...Object.values(orbitalFixtures).flatMap(expected => [expected.page, expected.thumbnail])]) {
                 check((await cache.match(path))?.ok, `${path}: relevant local asset cached without mandatory CDN`);
             }
             check(!(await caches.keys()).some(name => name.startsWith('financial-authority-') && name !== cacheName),
-                'Old app caches are removed on v41 activation');
+                'Old app caches are removed on v42 activation');
             document.body.dataset.testPhase = 'warm';
             document.getElementById('offline').disabled = false;
             results.textContent += '\nWarm cache ready — disable network, then run offline checks.';
