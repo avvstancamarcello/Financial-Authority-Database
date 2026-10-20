@@ -231,12 +231,34 @@ dalla più recente e selezionate nella lingua richiesta; se manca, viene usato
 inglese, poi italiano, poi una traduzione disponibile, con avviso esplicito.
 Feed vuoti o non disponibili non mostrano date né contenuti di esempio.
 
+La mappatura centralizzata `PublicNews.languages` usa il `lang` esatto del record
+per le etichette. Le convenzioni linguistiche di riferimento sono,
+senza alias o normalizzazioni: it → Italiano 🇮🇹, en → English 🇬🇧,
+me → Crnogorski 🇲🇪, ar → العربية 🌍, hi → हिन्दी 🇮🇳, sq → Shqip 🇦🇱,
+ro → Română 🇷🇴, et → Eesti 🇪🇪, lt → Lietuvių 🇱🇹, bs → Bosanski 🇧🇦,
+nl → Nederlands 🇳🇱, sv → Svenska 🇸🇪, el → Ελληνικά 🇬🇷, fr → Français 🇫🇷.
+Le bandiere sono convenzioni linguistiche, non il paese dell'Authority:
+inglese conserva la convenzione britannica già presente, `me` identifica il
+montenegrino nel contratto del feed (non viene convertito in serbo); per arabo
+il riferimento neutro è un globo perché non identifica un singolo paese.
+Per lingue supportate, le icone effettive seguono il campo editoriale `flag`
+validato del record, come previsto dalla versione aggiornata del feed.
+Codici sconosciuti
+restano visibili come `Unknown language (codice)` con globo, mai una bandiera
+dedotta dal testo. Il selettore include tutte le 14 lingue del feed; per le
+lingue senza bundle UI i controlli usano l'inglese, non i contenuti delle news.
+Record senza ID, titolo o lingua, con data/status invalidi o campi testuali
+malformati non sono pubblicati nella UI. I link non HTTP(S) restano inattivi.
+Il pulsante news della homepage rimane visibile anche a 320px, con testo
+di almeno 1rem e area di tocco alta almeno 44px; i testi lunghi vanno a capo.
+
 Il feed viene rivalidato a ogni caricamento (`cache: "no-cache"`), non aggiornato
 in tempo reale. Il service worker non intercetta questo JSON; conserva invece
 il controller locale e la pagina News nella shell. Il feed resta non disponibile
-offline. Il flag di ogni card proviene dal campo `flag` del record selezionato,
-senza mapping frontend o dipendenze dal JSON delle Autorità; valori mancanti o
-non emoji usano 🏳️. L'esportazione pubblica deve includere il campo formula
+offline. Il flag di ogni card con lingua supportata proviene dal campo `flag`
+del record selezionato, senza dipendenze dal JSON delle Autorità; valori
+mancanti o non validi usano 🏳️, lingue sconosciute usano 🌍.
+L'esportazione pubblica deve includere il campo formula
 `NEWS_SIMPLE.flag` affinché siano mostrate le bandiere editoriali.
 Incrementare la versione cache quando cambia.
 Le regressioni browser sono `/test-website-news.html`, `/test-app-news.html`

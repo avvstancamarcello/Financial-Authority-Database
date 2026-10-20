@@ -848,6 +848,8 @@
             justify-content: center;
             gap: 3px;
             text-align: center;
+            min-width: 0;
+            overflow-wrap: anywhere;
         }
         .language-hint-date {
             font-size: 0.68rem;
@@ -909,8 +911,12 @@
             color: #bbf7d0;
             text-decoration: none;
             font-weight: 800;
-            font-size: 0.8rem;
-            white-space: nowrap;
+            font-size: 1rem;
+            min-height: 44px;
+            max-width: 100%;
+            flex-wrap: wrap;
+            white-space: normal;
+            text-align: center;
             transition: transform 0.2s ease, background 0.2s ease;
         }
         .language-hint-link:hover {
@@ -2521,8 +2527,7 @@
             .lang-btn { padding: 10px 14px; font-size: 0.95em; min-width: 65px; }
             .lang-flag { width: 24px !important; height: 18px !important; }
             .language-hint { padding: 0.5rem 0.7rem; border-radius: 18px; }
-            .language-hint-label,
-            .language-hint-link { font-size: 0.72rem; }
+            .language-hint-label { font-size: 0.72rem; }
             .language-hint-link { width: 100%; min-height: 44px; white-space: normal; }
             .authority-link-pill { font-size: 0.8rem; }
             .flag-orbit-banner { flex-direction: column; gap: 12px; }
