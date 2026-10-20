@@ -17,7 +17,7 @@
     <iframe id="app" title="Actual offline homepage" width="1024" height="800"></iframe>
     <script>
         const results = document.getElementById('results'), checks = [];
-        const cacheName = 'financial-authority-v39';
+        const cacheName = 'financial-authority-v40';
         const orbitalFixtures = {
             Italy: { page: '/authority/IT-CONSOB.html', thumbnail: '/authority/preview-consob.png', heading: 'Italia – CONSOB Orbital WebApp' },
             'United Kingdom': { page: '/authority/UK-FCA.html', thumbnail: '/authority/preview-fca.png', heading: 'United Kingdom – FCA Orbital WebApp' },
@@ -93,13 +93,13 @@
             const cache = await caches.open(cacheName);
             cachedDatabase = await cache.match('/financial_authorities_database.json');
             check(!!cachedDatabase && (await cachedDatabase.clone().json()).Austria.country_name === 'Austria',
-                'Fresh v39 install caches the actual grid database');
+                'Fresh v40 install caches the actual grid database');
             for (const path of ['/index.html', '/flags/canada.svg', '/flags/quebec.svg', '/authority/nunavut-orbital-webapp.html',
                 ...Object.values(orbitalFixtures).flatMap(expected => [expected.page, expected.thumbnail])]) {
                 check((await cache.match(path))?.ok, `${path}: relevant local asset cached without mandatory CDN`);
             }
             check(!(await caches.keys()).some(name => name.startsWith('financial-authority-') && name !== cacheName),
-                'Old app caches are removed on v39 activation');
+                'Old app caches are removed on v40 activation');
             document.body.dataset.testPhase = 'warm';
             document.getElementById('offline').disabled = false;
             results.textContent += '\nWarm cache ready — disable network, then run offline checks.';
