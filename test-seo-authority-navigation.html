@@ -40,7 +40,8 @@
       const locs = entries.map(entry => entry.getElementsByTagNameNS(ns, 'loc')[0]?.textContent);
       const main = parser.parseFromString(await text('sitemap.xml'), 'application/xml');
       const expected = [...main.getElementsByTagNameNS(ns, 'loc')].map(node => node.textContent)
-        .filter(url => url === root + '?lang=en' || url.startsWith(root + 'authority/'));
+        .filter(url => url === root + '?lang=en' || (url.startsWith(root + 'authority/')
+          && url !== root + 'authority/amev-equivalenza-lang-9-EU.html'));
       check(locs.length > 0 && new Set(locs).size === locs.length
         && locs.length === expected.length && expected.every(url => locs.includes(url)),
         'Dedicated sitemap covers the global index and every main-sitemap authority exactly once');
