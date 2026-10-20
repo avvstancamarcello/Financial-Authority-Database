@@ -118,6 +118,7 @@
     }
     .amev-home-link:hover { background: #1e293b; }
 
+    .amev-main:focus { outline: none; }
     .amev-main { max-width: 1040px; margin: 0 auto; padding: 20px 16px 32px; }
     .amev-card {
       background: var(--amev-card);
@@ -164,7 +165,13 @@
     .amev-card-header h2 { margin: 0; font-size: 1.35rem; color: #fff; }
     .amev-gradient {
       background: linear-gradient(90deg, var(--amev-a), var(--amev-e), #a5b4fc);
-      -webkit-background-clip: text; background-clip: text; color: transparent;
+      color: var(--amev-e);
+    }
+    @supports ((-webkit-background-clip: text) or (background-clip: text)) {
+      .amev-gradient { -webkit-background-clip: text; background-clip: text; color: transparent; }
+    }
+    @media (forced-colors: active) {
+      .amev-gradient { background: none; color: CanvasText; }
     }
     .amev-badge {
       display: inline-flex; align-items: center; gap: 6px; padding: 6px 10px; border-radius: 999px;
@@ -311,7 +318,7 @@
   </style>
 </head>
 <body class="amev-orbital">
-  <a class="amev-skip" href="#amev-brand-title">Vai al contenuto</a>
+  <a class="amev-skip" href="#amev-main">Vai al contenuto</a>
   <header class="amev-header">
     <div class="amev-title-block">
       <img src="../logo_shield_financial_defense.svg" alt="" width="48" height="48">
@@ -323,7 +330,7 @@
     <a class="amev-home-link" href="../index.html">← Torna alla Home</a>
   </header>
 
-  <main class="amev-main">
+  <main class="amev-main" id="amev-main" tabindex="-1">
     <article class="amev-card" aria-labelledby="amev-brand-title">
 
       <figure class="amev-thumbnail">
