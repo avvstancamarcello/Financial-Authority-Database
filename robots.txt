@@ -12,7 +12,7 @@ Crawl-delay: 2
 Disallow: /db.enc
 
 # Sitemap del sito pubblico preferito
-Sitemap: https://www.amevfirenze.it/sitemap.xml
+Sitemap: https://www.amevfirenze.it/sitemap-pagine.xml
 Sitemap: https://www.amevfirenze.it/sitemap-financial-authorities.xml
 Sitemap: https://www.amevfirenze.it/sitemap-multilingua.xml
 Sitemap: https://www.amevfirenze.it/curriculum-sitemap.xml
