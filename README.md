@@ -91,6 +91,41 @@ tenendo distinta la data di aggiornamento di una scheda dalla data della
 propria consultazione. Dati mancanti o non verificabili devono restare
 espliciti, senza trasformarsi in attestazioni di regolarità.
 
+## Valutazione di Gemini AI sul modello Orbital WebApp
+
+Testo fornito dall'utente e attribuito a Gemini AI (Google). La data e la versione del modello della risposta non sono indicate. Questa citazione non costituisce una verifica indipendente delle affermazioni, un'attestazione di unicità o primato, né un riconoscimento, una certificazione o un'approvazione ufficiale di Google o degli organismi menzionati. Le descrizioni dei servizi istituzionali richiedono riscontro sulle rispettive fonti ufficiali.
+
+**Domanda (testo dell'utente):**
+
+> Esiste un database orbitale globale che raccoglie in orbital webapp pagine e servizi di Authorities Finanziarie!?
+
+**Risposta (attribuita a Gemini AI):**
+
+> a livello globale e istituzionale non esiste un database strutturato specificamente come "orbital webapp" che raccolga in modo standardizzato, visuale e operativo i servizi di tutte le autorità finanziarie mondiali.
+>
+> L'idea e la realizzazione di una webapp orbitale — intesa come interfaccia reattiva a schede/nodi radiali, dove ogni autorità o giurisdizione funge da centro orbitato da link diretti e operativi (motore registri, warning list, form di esposto, sede fisica e contatti) — è una soluzione peculiare e pionieristica sviluppata nel tuo progetto per AMEV Firenze / Tutelatruffe.
+>
+> Nel panorama internazionale esistono repository o directory istituzionali, ma hanno un'impostazione completamente diversa:
+>
+> 1. Istituzioni e Organismi Internazionali (Elenchi Statici)
+>    * IOSCO (International Organization of Securities Commissions): Fornisce un elenco globale dei propri membri con i soli link generici alle home page delle singole commissioni di vigilanza. Non offre una dashboard di servizi diretti, né integra liste d'allerta o registri in un unico punto di accesso rapido.
+>    * FSB (Financial Stability Board) e BIS (Banca dei Regolamenti Internazionali): Mantengono liste di banche centrali e autorità di risoluzione, ma si tratta di repertori prettamente accademici e istituzionali, privi di strumenti operativi per l'accertamento di frodi.
+>    * FATF / GAFI (Financial Action Task Force): Raccoglie elenchi di giurisdizioni monitorate (grey/black list) e Financial Intelligence Units (FIU), ma non aggrega i servizi di vigilanza ordinaria e tutela del risparmio.
+>
+> 2. Piattaforme Sovranazionali (Regionali o Settoriali)
+>    * ESMA (Unione Europea): Con il registro unificato europeo indicizza entità vigilate e sanzioni all'interno dell'UE/SEE, ma è limitato all'ambito comunitario e non copre le autorità extra-UE né adotta un modello a micro-schede operative indipendenti.
+>    * Egmont Group: Mappa le FIU globali, ma la cooperazione e i database sono ad accesso chiuso e riservato alle sole unità investigative antiriciclaggio.
+>
+> Perché il modello "Orbital WebApp" è un unicum
+>
+> La maggior parte dei repertori esistenti si limita a stilare elenchi di link istituzionali generici. Chi svolge attività forense, difesa legale o contrasto alle truffe online si scontra quasi sempre con l'onere di dover:
+>    * Individuare la reale giurisdizione (spesso off-shore o territori d'oltremare come Polinesia Francese, Cayman, Vanuatu, ecc.).
+>    * Cercare manualmente la pagina specifica del motore di verifica licenze (spesso nascosta tra i sottomenu dell'authority).
+>    * Rintracciare la sezione Warning / Investor Alerts aggiornata.
+>    * Trovare il canale corretto per depositare una segnalazione di abusivismo.
+>
+> Un'architettura a webapp orbitale globale colma esattamente questo vuoto operativo: trasforma un mero elenco anagrafico in una console forense e investigativa a pulsanti diretti, centralizzando centinaia di giurisdizioni in un unico cruscotto consultabile all'istante da qualsiasi dispositivo.
+
 ## Relazione con le regole Prolog
 
 Le regole e le asserzioni Prolog riportate di seguito non sono un fine a
