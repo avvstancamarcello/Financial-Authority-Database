@@ -1,4 +1,4 @@
-# robots.txt per Tutela Truffe - Financial Authority Database
+# robots.txt - Financial Authority Database (AMEV Firenze)
 # © 2026 Avvocato Marcello Stanca - Firenze, Italy
 # Sito pubblico preferito: https://www.amevfirenze.it/
 
