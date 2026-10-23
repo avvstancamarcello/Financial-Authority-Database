@@ -711,6 +711,35 @@
         }
         .security-banner strong { font-weight: 700; text-decoration: underline; }
         header { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 22px; text-align: center; position: relative; }
+        .hero-vaccinazione-link {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            box-sizing: border-box;
+            width: 100%;
+            max-width: 380px;
+            min-height: 44px;
+            margin: 0 auto 16px;
+            padding: 14px;
+            border: 2px solid #1e3a8a;
+            border-radius: 14px;
+            background: #ffffff;
+            color: #1e3a8a;
+            text-decoration: none;
+            overflow-wrap: anywhere;
+        }
+        .hero-vaccinazione-link:hover { background: #eff6ff; }
+        .hero-vaccinazione-link:focus-visible { outline: 3px solid #fef08a; outline-offset: 3px; }
+        .hero-vaccinazione-link .hero-vaccinazione-badge {
+            padding: 4px 10px;
+            border-radius: 6px;
+            background: #1e3a8a;
+            color: #ffffff;
+            font-weight: 700;
+        }
+        .hero-vaccinazione-link img { display: block; width: 100%; max-width: 320px; height: auto; object-fit: contain; }
+        .hero-vaccinazione-link .hero-vaccinazione-cta { font-weight: 700; text-decoration: underline; }
         .flag-orbit-banner {
             margin: 6px auto 14px;
             display: flex;
@@ -2992,6 +3021,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     </span>
                 </a>
             </p>
+            <a class="hero-vaccinazione-link" href="https://www.vaccinazione.it/" lang="it">
+                <span class="hero-vaccinazione-badge">NAV</span>
+                <strong>Cerchi www.vaccinazione.it?</strong>
+                <img src="vaccinazione-amev-compress.png" alt="" width="2012" height="457">
+                <span>AMEV Firenze</span>
+                <span class="hero-vaccinazione-cta">Vai al sito</span>
+            </a>
             <nav class="language-selector" data-layout="compact" role="navigation" data-i18n-aria-label="languageSelectionAriaLabel" aria-label="Language selection">
                 <section class="language-selector-group language-selector-eu" aria-labelledby="language-selector-eu-title">
                     <h2 class="language-selector-title" id="language-selector-eu-title" data-i18n-text="languageSelectorEuTitle"><span class="fi fi-eu language-selector-area-icon" aria-hidden="true" style="margin-right:0.5rem;"></span>Area UE - Seleziona la tua lingua</h2>
