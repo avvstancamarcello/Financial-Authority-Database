@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Bulgarian FSC consumer guide checks</title>
+</head>
+<body>
+  <h1>Bulgarian FSC consumer guide checks</h1>
+  <pre id="results">Running…</pre>
+  <iframe id="app" title="Bulgarian and English guide under test" src="./authority/bulgaria-fsc-orbital-webapp.html" sandbox="allow-same-origin" width="1000" height="700"></iframe>
+  <script>
+    const results = document.getElementById('results');
+    function check(condition, message) {
+      results.textContent += `\n${condition ? 'PASS' : 'FAIL'}: ${message}`;
+      if (!condition) throw new Error(message);
+    }
+    async function waitFor(predicate) {
+      const deadline = Date.now() + 20000;
+      while (!predicate()) {
+        if (Date.now() > deadline) throw new Error('Timed out waiting for guide');
+        await new Promise(resolve => setTimeout(resolve, 50));
+      }
+    }
+    function luminance(color) {
+      const rgb = color.match(/[\d.]+/g).slice(0, 3).map(Number).map(value => {
+        const channel = value / 255;
+        return channel <= .04045 ? channel / 12.92 : ((channel + .055) / 1.055) ** 2.4;
+      });
+      return rgb[0] * .2126 + rgb[1] * .7152 + rgb[2] * .0722;
+    }
+    function background(element, win) {
+      const color = win.getComputedStyle(element).backgroundColor;
+      return color === 'rgba(0, 0, 0, 0)' ? background(element.parentElement, win) : color;
+    }
+    async function run() {
+      const frame = document.getElementById('app');
+      await waitFor(() => frame.contentDocument?.querySelector('#en-limits'));
+      const doc = frame.contentDocument;
+      const win = frame.contentWindow;
+      check(!frame.sandbox.contains('allow-scripts'), 'Guide runs with JavaScript disabled by iframe sandbox');
+      const path = 'authority/bulgaria-fsc-orbital-webapp.html';
+      const raw = await (await fetch('./' + path)).text();
+      check(doc.documentElement.lang === 'bg' && doc.querySelectorAll('h1').length === 1
+        && doc.querySelector('link[rel="canonical"]').href === 'https://www.amevfirenze.it/' + path,
+        'Bulgarian document, one main heading and self-canonical');
+      check(!doc.querySelector('script, iframe, form, input, img, link[rel="stylesheet"], [translate="no"], .notranslate')
+        && !/url\s*\(|@import/i.test(doc.querySelector('style').textContent),
+        'Self-contained page without JS, official logo, embedded services, tracking or translation blockers');
+      check(raw.includes('https://www.fsc.bg/?page_id=39599&amp;lang=en'),
+        'Exact user intermediary URL is retained with escaped ampersand');
+      const targets = [
+        'https://www.fsc.bg/', 'https://www.fsc.bg/en/',
+        'https://www.fsc.bg/wp-content/uploads/2025/01/programa-2025-2028-11.2024-last-en.pdf',
+        'https://www.fsc.bg/?page_id=39599&lang=en',
+        'https://www.fsc.bg/en/for-the-consumers/complaints/',
+        'https://www.fsc.bg/za-potrebitelya/zhalbi/',
+        'https://www.fsc.bg/wp-content/uploads/2021/files/28646_file.doc',
+        'https://eis.fsc.bg/',
+        'mailto:delovodstvo@fsc.bg', 'mailto:corruption@fsc.bg', 'mailto:ict_contact_point@fsc.bg',
+        'tel:080040444', 'tel:+35929404789', 'tel:+35929404545', 'tel:+359882889492'
+      ];
+      const languageTargets = [];
+      for (const language of ['bg', 'en']) {
+        const section = doc.getElementById(language);
+        check(section.lang === language && section.tabIndex === -1
+          && section.querySelectorAll('h3').length === 5, `${language}: complete semantic language section`);
+        for (const target of targets) {
+          check([...section.querySelectorAll('a')].some(link => link.getAttribute('href') === target),
+            `${language}: usable action ${target}`);
+        }
+        languageTargets.push([...new Set([...section.querySelectorAll('a')]
+          .map(link => link.getAttribute('href')).filter(href => !href.startsWith('#')))].sort());
+        check(section.querySelector('a[href$=".doc"]').textContent.includes('DOC')
+          && !section.querySelector('a[href$=".doc"]').hasAttribute('download')
+          && section.querySelector('a[href$=".pdf"]').textContent.includes('PDF'),
+          `${language}: document formats and ordinary cross-origin file navigation`);
+        check(section.querySelector('address').textContent.includes('16')
+          && section.querySelector('address').textContent.includes('1000')
+          && section.querySelector('a[href="tel:+359882889492"]').textContent === '0882 88 94 92'
+          && section.querySelector('time').dateTime === '2026-10-27',
+          `${language}: postal address, preserved local ICT number and editorial date`);
+        check(section.querySelectorAll('ol')[0].children.length === 5
+          && section.querySelectorAll('ol')[1].children.length === 3,
+          `${language}: intermediary and complaint steps have structural parity`);
+      }
+      check(JSON.stringify(languageTargets[0]) === JSON.stringify(languageTargets[1]),
+        'Both languages offer identical official resources and contact actions');
+      const ids = [...doc.querySelectorAll('[id]')].map(element => element.id);
+      check(new Set(ids).size === ids.length, 'All HTML IDs are unique');
+      for (const link of doc.querySelectorAll('a[href^="#"]')) {
+        check(!!doc.getElementById(link.hash.slice(1)), `Fragment destination exists: ${link.hash}`);
+      }
+      for (const label of doc.querySelectorAll('[aria-labelledby]')) {
+        check(label.getAttribute('aria-labelledby').split(/\s+/).every(id => doc.getElementById(id)),
+          'Section accessible heading references resolve');
+      }
+      for (const language of ['en', 'bg']) {
+        const link = doc.querySelector(`.language-nav a[href="#${language}"]`);
+        link.click();
+        await new Promise(resolve => requestAnimationFrame(resolve));
+        check(win.location.hash === '#' + language && doc.activeElement === doc.getElementById(language),
+          `${language}: native language anchor moves focus without page JavaScript`);
+      }
+      for (const width of [1000, 375, 320]) {
+        frame.width = width;
+        await new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve)));
+        check(doc.documentElement.scrollWidth <= win.innerWidth, `${width}px: no horizontal overflow`);
+      }
+      doc.documentElement.style.fontSize = '200%';
+      await new Promise(resolve => requestAnimationFrame(resolve));
+      check(doc.documentElement.scrollWidth <= win.innerWidth, '320px at 200% text size: no horizontal overflow');
+      doc.documentElement.style.fontSize = '';
+      let minimumContrast = Infinity;
+      for (const element of doc.querySelectorAll('body *')) {
+        if (![...element.childNodes].some(node => node.nodeType === 3 && node.textContent.trim())) continue;
+        const foreground = luminance(win.getComputedStyle(element).color);
+        const back = luminance(background(element, win));
+        minimumContrast = Math.min(minimumContrast, (Math.max(foreground, back) + .05) / (Math.min(foreground, back) + .05));
+      }
+      check(minimumContrast >= 4.5, `All rendered text meets 4.5:1 contrast (minimum ${minimumContrast.toFixed(2)}:1)`);
+      check([...doc.querySelectorAll('a')].every(link =>
+        win.getComputedStyle(link).textDecorationLine.includes('underline')
+        && link.getBoundingClientRect().height >= 24), 'All links underlined with at least 24px target height');
+      const skip = doc.querySelector('.skip-link');
+      skip.focus();
+      check(doc.activeElement === skip && skip.getBoundingClientRect().top >= 0
+        && win.getComputedStyle(skip).outlineWidth === '3px', 'Skip link visible with focus outline');
+      for (const link of doc.querySelectorAll('a')) {
+        link.focus();
+        check(doc.activeElement === link && win.getComputedStyle(link).outlineWidth === '3px',
+          'Every action is focusable with a visible outline');
+      }
+      results.dataset.status = 'passed';
+      results.textContent += '\nDONE';
+    }
+    run().catch(error => {
+      results.dataset.status = 'failed';
+      results.textContent += `\nERROR: ${error.stack || error.message}`;
+    });
+  </script>
+</body>
+</html>
