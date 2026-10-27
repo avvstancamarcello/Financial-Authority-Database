@@ -7,5 +7,6 @@
   <sitemap>
     <loc>https://www.amevfirenze.it/sitemap-amev-equivalenza.xml</loc>
   </sitemap>
-</sitemapindex>
 
+  <sitemap><loc>https://www.amevfirenze.it/authority/sitemap.xml</loc></sitemap>
+</sitemapindex>
