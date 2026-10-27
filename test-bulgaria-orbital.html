@@ -60,7 +60,7 @@
         'Exactly one Bulgaria catalog link uses the real destination, visible label and Bulgarian flag');
       check(JSON.stringify(links.map(link => link.textContent.trim())) === JSON.stringify([
         'BULGARIA · BG', 'ETHIOPIA · ECMA', 'NUNAVUT · Territorio canadese / WSCC',
-        'ÖSTERREICH · FMA', 'POLYNÉSIE FRANÇAISE · Autorités financières', 'SVIZZERA / SWITZERLAND · FINMA CH'
+        'ÖSTERREICH · FMA', 'POLYNÉSIE FRANÇAISE · Autorités financières', 'ROMANIA · ASF', 'SVIZZERA / SWITZERLAND · FINMA CH'
       ]), 'Bulgaria precedes Ethiopia and all existing catalog entries retain their order and text');
       bulgaria.focus();
       check(!homepage.sandbox.contains('allow-scripts') && home.activeElement === bulgaria
