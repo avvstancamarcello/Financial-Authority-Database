@@ -9,6 +9,7 @@
   <h1>Bulgarian FSC consumer guide checks</h1>
   <pre id="results">Running…</pre>
   <iframe id="app" title="Bulgarian and English guide under test" src="./authority/bulgaria-fsc-orbital-webapp.html" sandbox="allow-same-origin" width="1000" height="700"></iframe>
+  <iframe id="homepage" title="Homepage catalog without JavaScript" src="./index.html" sandbox="allow-same-origin" width="1000" height="700"></iframe>
   <script>
     const results = document.getElementById('results');
     function check(condition, message) {
@@ -41,6 +42,31 @@
       check(!frame.sandbox.contains('allow-scripts'), 'Guide runs with JavaScript disabled by iframe sandbox');
       const path = 'authority/bulgaria-fsc-orbital-webapp.html';
       const raw = await (await fetch('./' + path)).text();
+      const homepage = document.getElementById('homepage');
+      await waitFor(() => homepage.contentDocument?.querySelector('#orbital-micropages'));
+      const home = homepage.contentDocument;
+      const catalog = home.getElementById('orbital-micropages');
+      const destination = '/' + path;
+      const links = [...catalog.querySelectorAll('ol > li > a')];
+      const bulgaria = links[0];
+      check(home.getElementById('flags-section').compareDocumentPosition(catalog) & Node.DOCUMENT_POSITION_FOLLOWING
+        && catalog.previousElementSibling.querySelector('a[href="authority/IT-CONSOB.html"]')
+        && catalog.querySelector('p').textContent === 'Micropagine Orbital WebApp · MVP informativo · ordine alfabetico per Paese o territorio',
+        'Catalog is in the existing post-grid section after the CONSOB/FCA links');
+      check(home.querySelectorAll(`a[href="${destination}"]`).length === 1
+        && bulgaria.getAttribute('href') === destination
+        && bulgaria.textContent.trim() === 'BULGARIA · BG'
+        && bulgaria.querySelector('.fi.fi-bg[aria-hidden="true"]'),
+        'Exactly one Bulgaria catalog link uses the real destination, visible label and Bulgarian flag');
+      check(JSON.stringify(links.map(link => link.textContent.trim())) === JSON.stringify([
+        'BULGARIA · BG', 'ETHIOPIA · ECMA', 'NUNAVUT · Territorio canadese / WSCC',
+        'ÖSTERREICH · FMA', 'POLYNÉSIE FRANÇAISE · Autorités financières', 'SVIZZERA / SWITZERLAND · FINMA CH'
+      ]), 'Bulgaria precedes Ethiopia and all existing catalog entries retain their order and text');
+      bulgaria.focus();
+      check(!homepage.sandbox.contains('allow-scripts') && home.activeElement === bulgaria
+        && bulgaria.tabIndex === 0 && bulgaria.getBoundingClientRect().height > 0
+        && !bulgaria.hasAttribute('onclick') && (await fetch(destination)).ok,
+        'Catalog link is visible, keyboard-focusable and uses an available native destination without JavaScript');
       check(doc.documentElement.lang === 'bg' && doc.querySelectorAll('h1').length === 1
         && doc.querySelector('link[rel="canonical"]').href === 'https://www.amevfirenze.it/' + path,
         'Bulgarian document, one main heading and self-canonical');
@@ -65,6 +91,11 @@
         const section = doc.getElementById(language);
         check(section.lang === language && section.tabIndex === -1
           && section.querySelectorAll('h3').length === 5, `${language}: complete semantic language section`);
+        check(JSON.stringify([...section.querySelectorAll('nav a')].map(link => link.getAttribute('href')))
+          === JSON.stringify(['actions', 'checks', 'complaints', 'contacts', 'limits'].map(id => `#${language}-${id}`))
+          && [...section.querySelectorAll('nav a')].every(link => section.querySelector(link.hash))
+          && section.querySelector('a[href="../index.html"]'),
+          `${language}: internal mini sitemap has five working section anchors and a directory return link`);
         for (const target of targets) {
           check([...section.querySelectorAll('a')].some(link => link.getAttribute('href') === target),
             `${language}: usable action ${target}`);
