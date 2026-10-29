@@ -177,25 +177,37 @@ html[dir="rtl"] .card-top .arrow { transform: scaleX(-1); }
 }
 @media (max-width: 620px) {
   .site-header, main { width: min(100% - 32px, 1200px); }
-  .site-header { min-height: 72px; }
+  .site-header { min-height: 72px; flex-wrap: wrap; gap: 10px 16px; padding: 12px 0; }
+  .brand { min-width: 0; }
   .brand img { width: 38px; height: 38px; }
-  .header-nav { gap: 8px 13px; justify-content: end; }
-  .header-nav a { font-size: .78rem; }
+  .brand > span { min-width: 0; overflow-wrap: anywhere; }
+  .header-nav { width: 100%; min-width: 0; gap: 8px 16px; justify-content: flex-start; }
+  .header-nav a { min-width: 0; max-width: 100%; font-size: .78rem; white-space: normal; }
   .hero { min-height: 0; padding: 48px 0 40px; }
-  .hero-copy { width: 100%; }
-  h1 { font-size: clamp(1.85rem, 8vw, 2.55rem); }
+  .hero-copy { width: 100%; min-width: 0; }
+  h1 { font-size: clamp(1.85rem, 8vw, 2.55rem); overflow-wrap: normal; word-break: normal; }
   .orbit-art { width: 260px; height: 260px; top: 8px; inset-inline-end: -180px; opacity: .35; }
   .orbit-core { inset: 95px; }
   .orbit-core img { width: 50px; height: 50px; }
   .section-heading { align-items: start; flex-direction: column; }
-  .language-control { width: 100%; }
-  .language-control select { width: 100%; }
+  .section-heading > div, .language-control { width: 100%; min-width: 0; }
+  .language-control select { width: 100%; min-width: 0; }
   .tools { align-items: stretch; flex-wrap: wrap; }
-  .search-control { flex-basis: 100%; max-width: none; }
-  .results-status { flex: 1; align-self: center; }
+  .search-control { min-width: 0; flex-basis: 100%; max-width: none; }
+  .results-status { min-width: 0; flex: 1; align-self: center; overflow-wrap: anywhere; }
   .authority-grid { grid-template-columns: minmax(0, 1fr); gap: 10px; }
+  .authority-card, .card-link, .card-top { min-width: 0; }
   .card-link { min-height: 174px; }
+  .card-footer { flex-wrap: wrap; }
+  .notice > div { min-width: 0; overflow-wrap: anywhere; }
+  .page-footer, .page-footer > * { min-width: 0; overflow-wrap: anywhere; }
   .page-footer { flex-direction: column; }
+}
+@media (max-width: 360px) {
+  .site-header, main { width: calc(100% - 24px); }
+  .site-header { gap: 8px 12px; }
+  .header-nav { gap: 8px 12px; }
+  .notice { gap: 10px; padding: 14px; }
 }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
