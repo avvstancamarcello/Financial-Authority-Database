@@ -6611,7 +6611,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
         function getWipEditorialCopy(lang) {
             const copy = WIP_EDITORIAL_COPY[lang === 'it' ? 'it' : 'en'];
-            const localizedBundle = translations[localeMetadata[lang]?.api || lang] || {};
+            const api = localeMetadata[lang]?.api || lang;
+            const localizedBundle = translations[api] || translations[lang] || {};
             const localizedHeroCopy = {};
             if (lang !== 'it' && lang !== 'en') {
                 ['landingHeroTitle', 'landingHeroCoverage', 'landingHeroSubtitle'].forEach(key => {
@@ -6620,16 +6621,27 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     }
                 });
             }
+            const localizedSeoValue = key => {
+                const value = localizedBundle[key];
+                return lang !== 'it' && lang !== 'en'
+                    && typeof value === 'string' && value.trim()
+                    && value !== translations.en?.[key] ? value : undefined;
+            };
+            const documentTitle = localizedSeoValue('documentTitle')
+                || localizedSeoValue('landingHeroTitle') || copy.documentTitle;
+            const metaDescription = localizedSeoValue('metaDescription')
+                || localizedSeoValue('landingHeroSubtitle') || copy.metaDescription;
             return {
                 ...copy,
                 ...localizedHeroCopy,
-                ogTitle: copy.documentTitle,
-                twitterTitle: copy.documentTitle,
-                ogDescription: copy.metaDescription,
-                twitterDescription: copy.metaDescription
+                documentTitle,
+                metaDescription,
+                ogTitle: documentTitle,
+                twitterTitle: documentTitle,
+                ogDescription: metaDescription,
+                twitterDescription: metaDescription
             };
         }
-
         function getLanguageBundle(lang = currentLanguage) {
             const visited = new Set();
             const chain = [];
