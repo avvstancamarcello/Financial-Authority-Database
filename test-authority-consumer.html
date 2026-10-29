@@ -1,0 +1,276 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Authority consumer directory regression checks</title>
+  <style>
+    body { margin: 1.5rem; color: #172033; font: 16px/1.5 system-ui, sans-serif; }
+    pre { padding: 1rem; border: 1px solid #ccd4df; border-radius: .5rem; white-space: pre-wrap; }
+    iframe { box-sizing: content-box; display: block; width: 100%; height: 760px; border: 1px solid #ccd4df; }
+    iframe[hidden] { position: absolute; width: 1px; height: 1px; border: 0; clip-path: inset(50%); }
+  </style>
+</head>
+<body>
+  <h1>Authority consumer directory regression checks</h1>
+  <pre id="results" role="status" aria-live="polite" data-status="running">Running…</pre>
+  <iframe id="directory" title="Authority consumer directory under test" src="./authority-consumer/index.html"></iframe>
+  <iframe id="homepage" title="Homepage directory banner test" hidden></iframe>
+  <script>
+    const results = document.getElementById('results');
+    const checks = [];
+    function check(condition, message) {
+      checks.push(`${condition ? 'PASS' : 'FAIL'}: ${message}`);
+      results.textContent = checks.join('\n');
+      if (!condition) throw new Error(message);
+    }
+    async function fetchText(path) {
+      const response = await fetch(path);
+      check(response.ok, `${path} is available`);
+      return response.text();
+    }
+    async function waitFor(test, message) {
+      const deadline = Date.now() + 20000;
+      while (!test()) {
+        if (Date.now() > deadline) throw new Error(message);
+        await new Promise(resolve => setTimeout(resolve, 50));
+      }
+    }
+    async function sha256(value) {
+      const digest = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(value));
+      return [...new Uint8Array(digest)].map(byte => byte.toString(16).padStart(2, '0')).join('');
+    }
+    async function testStaticDirectory() {
+      const source = await fetchText('./authority-consumer/index.html');
+      const doc = new DOMParser().parseFromString(source, 'text/html');
+      const expected = [
+        '../authority/oesterreich-fma-orbital-webapp.html',
+        '../authority/BJ-BCEAO.html',
+        '../authority/bulgaria-fsc-orbital-webapp.html',
+        '../authority/ET-ECMA.html',
+        '../authority/ethiopia-ecma-orbital-webapp.html',
+        '../authority/FR-AMF.html',
+        '../authority/DE-BAFIN.html',
+        '../authority/IOSCO.html',
+        '../authority/IT-CONSOB.html',
+        '../authority/nunavut-orbital-webapp.html',
+        '../authority/polynesie-francaise-orbital-webapp.html',
+        '../authority/UK-FCA.html',
+        '../authority/romania-asf-orbital-webapp.html',
+        '../authority/ES-CNMV.html',
+        '../authority/US-SEC.html',
+        '../authority/CH-FINMA-en.html',
+        '../authority/CH-FINMA.html',
+        '../authority/EU-ESMA.html'
+      ];
+      const links = [...doc.querySelectorAll('a[data-authority-link]')].map(link => link.getAttribute('href'));
+      check(links.length === 18 && new Set(links).size === 18
+        && expected.every(path => links.includes(path)), 'Exactly the required 18 unique static authority destinations are linked');
+      check(!links.some(path => path.includes('amev-equivalenza-lang-9-EU') || path.endsWith('DE-BAFIN.htm')),
+        'Brand explainer and DE-BAFIN.htm redirect are excluded');
+      check(doc.querySelector('h1')?.textContent ===
+        'Autorità finanziarie — Sezioni e settori per la tutela del consumatore e la prevenzione delle frodi',
+        'Exact Italian directory H1 is present in static HTML');
+      check(doc.querySelectorAll('.authority-card .authority-name').length === 18
+        && doc.querySelector('[data-i18n="noticeBody"]')?.textContent.includes('L’assenza di avvisi')
+        && doc.querySelector('meta[name="description"]')?.content.length > 40,
+        'Authority names, editorial disclaimer and description are present without JavaScript');
+      check(doc.querySelector('#authority-search').disabled
+        && doc.querySelector('#language').disabled
+        && doc.querySelector('#reset-search').disabled,
+        'Search and language controls are disabled when JavaScript has not run');
+      const names = [...doc.querySelectorAll('[data-country-label]')].map(node => node.textContent);
+      const italianCollator = new Intl.Collator('it', { sensitivity: 'base' });
+      check(names.every((name, index) => !index || italianCollator.compare(names[index - 1], name) <= 0),
+        'Static Italian country labels are alphabetically sorted');
+      check(doc.querySelectorAll('.flag-icon').length === 16
+        && doc.querySelectorAll('.flag-emoji').length === 16
+        && doc.querySelector('[data-id="nunavut"] svg.nunavut-flag')
+        && doc.querySelector('[data-id="iosco"] .globe-icon')
+        && !doc.querySelector('[data-id="iosco"] .fi'),
+        'Flags include emoji fallback; Nunavut has its inline SVG and IOSCO has a globe');
+      check(doc.querySelector('link[href*="flag-icons@7.2.3"]')
+        && doc.querySelector('link[rel="icon"]')?.getAttribute('href') === '../logo_shield_financial_defense.svg',
+        'Flag-icons v7.2.3 and the requested shield logo are referenced');
+      check(!doc.querySelector('link[rel="canonical"], link[hreflang]'),
+        'Directory introduces no canonical or hreflang metadata');
+
+      const targetResults = await Promise.all(links.map(async path => {
+        const url = new URL(path, new URL('./authority-consumer/index.html', location.href));
+        const response = await fetch(url);
+        return { path, ok: response.ok, status: response.status };
+      }));
+      check(targetResults.every(result => result.ok),
+        `All 18 links resolve to pages (${targetResults.filter(result => !result.ok).map(result => `${result.path}: ${result.status}`).join(', ') || 'HTTP success'})`);
+      return links;
+    }
+    async function testRuntimeDirectory(expectedLinks) {
+      const frame = document.getElementById('directory');
+      await waitFor(() => frame.contentWindow?.authorityConsumer
+        && frame.contentDocument?.querySelectorAll('.authority-card').length === 18,
+        'Directory script did not initialize');
+      const win = frame.contentWindow;
+      const doc = frame.contentDocument;
+      const api = win.authorityConsumer;
+      const sameTargets = () => {
+        const current = [...api.getLinks()].sort();
+        return current.length === expectedLinks.length
+          && current.every((href, index) => href === [...expectedLinks].sort()[index]);
+      };
+      check(Object.isFrozen(api) && Object.isFrozen(api.getLinks())
+        && JSON.stringify(api.getLinks()) === JSON.stringify(expectedLinks),
+        'Public API exposes frozen snapshots and preserves all link targets');
+      check(doc.querySelector('h1').textContent ===
+        'Autorità finanziarie — Sezioni e settori per la tutela del consumatore e la prevenzione delle frodi',
+        'JavaScript preserves the exact Italian H1');
+      check(!doc.getElementById('authority-search').disabled
+        && !doc.getElementById('language').disabled
+        && !doc.getElementById('reset-search').disabled,
+        'Interactive controls enable after JavaScript initializes');
+      const collator = new win.Intl.Collator('it', { sensitivity: 'base' });
+      const sorted = [...doc.querySelectorAll('[data-country-label]')].map(node => node.textContent);
+      check(sorted.every((name, index) => !index || collator.compare(sorted[index - 1], name) <= 0),
+        'Rendered Italian cards are alphabetically sorted');
+      check(api.normalize('Étiopía') === 'etiopia', 'Search normalization ignores diacritics');
+      api.search('Romania');
+      check(api.getVisibleCount() === 1, 'Search finds a country label');
+      api.search('Commissione Nazionale');
+      check(api.getVisibleCount() === 1, 'Search finds the full authority name');
+      api.search('CONSOB');
+      check(api.getVisibleCount() === 1, 'Search finds an authority acronym');
+      api.search('Étiopia');
+      check(api.getVisibleCount() === 2, 'Accent-insensitive country search finds both Ethiopia pages');
+      api.search('not-a-country-or-authority-45973');
+      check(api.getVisibleCount() === 0 && !doc.getElementById('empty-state').hidden
+        && doc.getElementById('results-status').getAttribute('aria-live') === 'polite',
+        'No-results state is visible and announced through the live status');
+      api.reset();
+      check(api.getVisibleCount() === 18 && doc.getElementById('empty-state').hidden,
+        'Reset restores all 18 cards');
+
+      const h1 = {
+        it: 'Autorità finanziarie — Sezioni e settori per la tutela del consumatore e la prevenzione delle frodi',
+        en: 'Financial authorities — Sections and sectors for consumer protection and fraud prevention',
+        fr: 'Autorités financières — Sections et secteurs pour la protection des consommateurs et la prévention de la fraude',
+        de: 'Finanzbehörden — Bereiche und Sektoren zum Verbraucherschutz und zur Betrugsprävention',
+        es: 'Autoridades financieras — Secciones y sectores para la protección del consumidor y la prevención del fraude',
+        pt: 'Autoridades financeiras — Secções e setores para a proteção do consumidor e a prevenção de fraudes',
+        sq: 'Autoritetet financiare — Seksione dhe sektorë për mbrojtjen e konsumatorit dhe parandalimin e mashtrimeve',
+        ro: 'Autorități financiare — Secțiuni și sectoare pentru protecția consumatorilor și prevenirea fraudelor',
+        nl: 'Financiële autoriteiten — Afdelingen en sectoren voor consumentenbescherming en fraudepreventie',
+        el: 'Χρηματοπιστωτικές αρχές — Ενότητες και τομείς για την προστασία των καταναλωτών και την πρόληψη της απάτης',
+        bs: 'Finansijski organi — Odjeljci i sektori za zaštitu potrošača i sprečavanje prevara',
+        xk: 'Autoritetet financiare — Seksione dhe sektorë për mbrojtjen e konsumatorit dhe parandalimin e mashtrimeve',
+        ar: 'السلطات المالية — أقسام وقطاعات لحماية المستهلك ومنع الاحتيال',
+        zh: '金融监管机构 — 消费者保护与防范欺诈的领域和部门',
+        hi: 'वित्तीय प्राधिकरण — उपभोक्ता संरक्षण और धोखाधड़ी की रोकथाम के लिए अनुभाग और क्षेत्र',
+        vi: 'Cơ quan tài chính — Các mục và lĩnh vực bảo vệ người tiêu dùng và phòng chống gian lận'
+      };
+      const languageCodes = Object.keys(h1);
+      const referenceLinks = JSON.stringify([...expectedLinks].sort());
+      for (const language of languageCodes) {
+        api.setLanguage(language);
+        check(doc.querySelector('h1').textContent === h1[language],
+          `${language}: exact localized H1`);
+        check([...doc.querySelectorAll('[data-i18n], [data-country-label], [data-description]')]
+          .every(node => node.textContent.trim()),
+          `${language}: all interface text, country labels and descriptions are populated`);
+        check(doc.querySelector('[data-i18n="noticeBody"]').textContent.trim().length > 100,
+          `${language}: full translated disclaimer is present`);
+        check(sameTargets() && JSON.stringify([...api.getLinks()].sort()) === referenceLinks,
+          `${language}: all authority links remain unchanged`);
+      }
+      check(api.setLanguage('zh-CN') === 'zh' && doc.documentElement.lang === 'zh-CN'
+        && api.setLanguage('zh') === 'zh' && doc.documentElement.lang === 'zh-CN',
+        'zh-CN and zh aliases resolve to Simplified Chinese');
+      check(api.setLanguage('sq-XK') === 'xk' && doc.documentElement.lang === 'sq-XK'
+        && api.setLanguage('xk') === 'xk', 'sq-XK and xk aliases resolve to the Albanian Kosovo variant');
+      check(api.setLanguage('ro-RO') === 'ro' && doc.documentElement.lang === 'ro-RO'
+        && api.setLanguage('ro') === 'ro', 'Romanian aliases resolve and set ro-RO document language');
+      check(api.setLanguage('el-GR') === 'el' && doc.documentElement.lang === 'el-GR'
+        && api.setLanguage('el') === 'el', 'Greek aliases resolve and set el-GR document language');
+      api.setLanguage('bs-BA');
+      check(doc.documentElement.lang === 'bs-BA', 'Bosnian document language is bs-BA');
+      api.setLanguage('ar');
+      check(doc.documentElement.lang === 'ar' && doc.documentElement.dir === 'rtl',
+        'Arabic uses RTL direction');
+      api.setLanguage('it');
+
+      doc.documentElement.classList.add('flag-icons-unavailable');
+      const fallbackFlag = doc.querySelector('.flag-wrap');
+      check(win.getComputedStyle(fallbackFlag.querySelector('.flag-icon')).display === 'none'
+        && win.getComputedStyle(fallbackFlag.querySelector('.flag-emoji')).display !== 'none',
+        'Textual emoji fallback renders when the flag-icons CDN is unavailable');
+      doc.documentElement.classList.remove('flag-icons-unavailable');
+
+      for (const width of [320, 375, 768, 1280]) {
+        frame.style.width = `${width}px`;
+        await new Promise(resolve => win.requestAnimationFrame(() => win.requestAnimationFrame(resolve)));
+        check(win.innerWidth === width,
+          `${width}px iframe viewport is correctly sized (actual: ${win.innerWidth}px)`);
+        const { scrollWidth, clientWidth } = win.document.documentElement;
+        check(scrollWidth <= clientWidth,
+          `${width}px viewport has no horizontal overflow (scrollWidth: ${scrollWidth}px, clientWidth: ${clientWidth}px)`);
+      }
+      frame.style.width = '100%';
+
+      for (const [query, expectedLanguage, expectedHtmlLang] of [
+        ['zh-CN', 'zh', 'zh-CN'], ['zh', 'zh', 'zh-CN'], ['sq-XK', 'xk', 'sq-XK'],
+        ['xk', 'xk', 'sq-XK'], ['ro-RO', 'ro', 'ro-RO'], ['el-GR', 'el', 'el-GR']
+      ]) {
+        frame.src = `./authority-consumer/index.html?lang=${encodeURIComponent(query)}`;
+        await waitFor(() => frame.contentWindow?.authorityConsumer?.language === expectedLanguage,
+          `Query alias ${query} did not initialize`);
+        check(frame.contentDocument.documentElement.lang === expectedHtmlLang,
+          `?lang=${query} sets ${expectedHtmlLang}`);
+      }
+      return referenceLinks;
+    }
+    async function testHomepageBannerAndSeo() {
+      const source = await fetchText('./index.html');
+      const home = new DOMParser().parseFromString(source, 'text/html');
+      check(home.querySelectorAll('#authority-consumer-link').length === 1
+        && home.getElementById('authority-consumer-link').getAttribute('href') === 'authority-consumer/index.html',
+        'Homepage has one static banner with the expected directory destination');
+      check(source.includes('authorityConsumerBannerTitle')
+        && source.includes('authorityConsumerBannerDescription'),
+        'Homepage banner title and description use existing translation keys');
+
+      const title = source.match(/<title\b[^>]*>([\s\S]*?)<\/title>/i)?.[1]?.trim();
+      const seoBlock = source.match(/<!-- Meta Tags SEO Base -->[\s\S]*?<!-- Copyright & Ownership -->/i)?.[0]?.trim();
+      const schemas = [...source.matchAll(/<script\b(?=[^>]*type=["']application\/ld\+json["'])[^>]*>([\s\S]*?)<\/script>/gi)]
+        .map(match => match[1].trim());
+      const fingerprint = await sha256(JSON.stringify([title, seoBlock, schemas]));
+      check(fingerprint === 'e4e1a4ae4aff3eceabb9fef2752a1cc80bb44db44480985a512142d4468e8a07',
+        'Homepage title, canonical/hreflang, description, social metadata and JSON-LD match the pre-directory SEO baseline');
+      check(home.querySelector('link[rel="canonical"]')?.getAttribute('href') === 'https://www.amevfirenze.it/?lang=en'
+        && home.querySelectorAll('link[rel="alternate"][hreflang]').length === 20
+        && home.querySelectorAll('script[type="application/ld+json"]').length === 5,
+        'Homepage canonical, hreflang set and structured-data blocks remain intact');
+
+      const frame = document.getElementById('homepage');
+      frame.src = './index.html?lang=fr';
+      await waitFor(() => {
+        const href = frame.contentDocument?.getElementById('authority-consumer-link')?.href;
+        return href && new URL(href).searchParams.get('lang') === 'fr';
+      },
+        'Translated homepage banner did not render');
+      const links = frame.contentDocument.querySelectorAll('#authority-consumer-link');
+      const target = new URL(links[0].href);
+      check(links.length === 1 && target.pathname.endsWith('/authority-consumer/index.html')
+        && target.searchParams.get('lang') === 'fr',
+        'Translated homepage banner remains unique and passes the language query through');
+    }
+    async function run() {
+      const links = await testStaticDirectory();
+      await testRuntimeDirectory(links);
+      await testHomepageBannerAndSeo();
+      results.dataset.status = 'passed';
+    }
+    run().catch(error => {
+      results.dataset.status = 'failed';
+      results.textContent += `\nERROR: ${error.stack || error.message}`;
+    });
+  </script>
+</body>
+</html>
