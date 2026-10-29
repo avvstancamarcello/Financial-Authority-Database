@@ -7,7 +7,7 @@
   <style>
     body { margin: 1.5rem; color: #172033; font: 16px/1.5 system-ui, sans-serif; }
     pre { padding: 1rem; border: 1px solid #ccd4df; border-radius: .5rem; white-space: pre-wrap; }
-    iframe { display: block; width: 100%; height: 760px; border: 1px solid #ccd4df; }
+    iframe { box-sizing: content-box; display: block; width: 100%; height: 760px; border: 1px solid #ccd4df; }
     iframe[hidden] { position: absolute; width: 1px; height: 1px; border: 0; clip-path: inset(50%); }
   </style>
 </head>
@@ -206,9 +206,11 @@
       for (const width of [320, 375, 768, 1280]) {
         frame.style.width = `${width}px`;
         await new Promise(resolve => win.requestAnimationFrame(() => win.requestAnimationFrame(resolve)));
-        check(doc.documentElement.scrollWidth <= doc.documentElement.clientWidth
-          && doc.documentElement.scrollWidth <= width,
-          `${width}px viewport has no horizontal overflow`);
+        check(win.innerWidth === width,
+          `${width}px iframe viewport is correctly sized (actual: ${win.innerWidth}px)`);
+        const { scrollWidth, clientWidth } = win.document.documentElement;
+        check(scrollWidth <= clientWidth,
+          `${width}px viewport has no horizontal overflow (scrollWidth: ${scrollWidth}px, clientWidth: ${clientWidth}px)`);
       }
       frame.style.width = '100%';
 
