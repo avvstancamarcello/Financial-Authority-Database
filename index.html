@@ -636,6 +636,26 @@
     </script>
     
     <style>
+        .authority-consumer-banner {
+            margin: 20px 0;
+            border: 1px solid #38bdf8;
+            border-radius: 16px;
+            background: linear-gradient(120deg, #0e1626, #162238);
+        }
+        .authority-consumer-banner a {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            min-height: 44px;
+            padding: 18px;
+            color: #e2e8f0;
+            text-decoration: none;
+            overflow-wrap: anywhere;
+        }
+        .authority-consumer-banner a > span:nth-child(2) { flex: 1; min-width: 0; }
+        .authority-consumer-banner strong { display: block; color: #7dd3fc; margin-bottom: 6px; }
+        .authority-consumer-banner a:hover { background: rgba(56, 189, 248, 0.1); border-radius: 16px; }
+        .authority-consumer-banner a:focus-visible { outline: 3px solid #fbbf24; outline-offset: 3px; }
         * { margin: 0; padding: 0; box-sizing: border-box; }
         :root {
             --safe-area-inset-top: env(safe-area-inset-top, 0px);
@@ -3513,6 +3533,17 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
         <p data-i18n-text="orbitalCatalogDescription" lang="it">Esplora le Orbital WebApp disponibili: guide informative per Paese, territorio o autorità, con collegamenti alle fonti istituzionali e indicazioni per una verifica preliminare. Il catalogo comprende le pagine attualmente disponibili e potrà essere ampliato.</p>
 
+        <aside class="authority-consumer-banner" aria-labelledby="authority-consumer-banner-title">
+            <a id="authority-consumer-link" href="authority-consumer/index.html">
+                <span aria-hidden="true">🛡️</span>
+                <span>
+                    <strong id="authority-consumer-banner-title" data-i18n-text="authorityConsumerBannerTitle">Autorità finanziarie — Tutela del consumatore</strong>
+                    <span data-i18n-text="authorityConsumerBannerDescription">Esplora le guide alle fonti ufficiali per la tutela del consumatore e la prevenzione delle frodi.</span>
+                </span>
+                <span aria-hidden="true">→</span>
+            </a>
+        </aside>
+
         <!-- NUOVA BARRA RICERCA SUPERIORE -->
         <div class="search-bar-top">
             <input type="text" id="search-input-top" data-i18n-placeholder="searchCountryPlaceholder" data-i18n-aria-label="searchCountryAriaLabel" placeholder="🔍 Cerca paese..." aria-label="Search for a country">
@@ -6363,6 +6394,28 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             Object.assign(translations[locale] ||= {}, { heroAmevBrandCta: cta, heroAmevBrandSub: sub });
         });
         Object.entries({
+            it: ['Autorità finanziarie — Tutela del consumatore', 'Esplora le guide alle fonti ufficiali per la tutela del consumatore e la prevenzione delle frodi.'],
+            en: ['Financial authorities — Consumer protection', 'Explore guides to official sources for consumer protection and fraud prevention.'],
+            fr: ['Autorités financières — Protection des consommateurs', 'Consultez les guides vers les sources officielles pour protéger les consommateurs et prévenir les fraudes.'],
+            de: ['Finanzbehörden — Verbraucherschutz', 'Entdecken Sie Leitfäden zu offiziellen Quellen für Verbraucherschutz und Betrugsprävention.'],
+            es: ['Autoridades financieras — Protección del consumidor', 'Consulte las guías de fuentes oficiales para la protección del consumidor y la prevención del fraude.'],
+            pt: ['Autoridades financeiras — Proteção do consumidor', 'Consulte os guias de fontes oficiais para a proteção do consumidor e a prevenção de fraudes.'],
+            sq: ['Autoritetet financiare — Mbrojtja e konsumatorit', 'Shfletoni udhëzuesit për burimet zyrtare për mbrojtjen e konsumatorit dhe parandalimin e mashtrimit.'],
+            ro: ['Autorități financiare — Protecția consumatorilor', 'Consultați ghidurile către surse oficiale pentru protecția consumatorilor și prevenirea fraudelor.'],
+            nl: ['Financiële autoriteiten — Consumentenbescherming', 'Bekijk gidsen naar officiële bronnen voor consumentenbescherming en fraudepreventie.'],
+            el: ['Χρηματοοικονομικές αρχές — Προστασία καταναλωτών', 'Εξερευνήστε οδηγούς προς επίσημες πηγές για την προστασία των καταναλωτών και την πρόληψη της απάτης.'],
+            bs: ['Finansijski regulatori — Zaštita potrošača', 'Pregledajte vodiče do zvaničnih izvora za zaštitu potrošača i sprečavanje prevara.'],
+            ar: ['الهيئات المالية — حماية المستهلك', 'تصفّح أدلة المصادر الرسمية لحماية المستهلك والوقاية من الاحتيال.'],
+            zh: ['金融监管机构 — 消费者保护', '查阅官方来源指南，了解消费者保护与欺诈防范。'],
+            hi: ['वित्तीय प्राधिकरण — उपभोक्ता संरक्षण', 'उपभोक्ता संरक्षण और धोखाधड़ी की रोकथाम के लिए आधिकारिक स्रोतों की मार्गदर्शिकाएँ देखें।'],
+            vi: ['Cơ quan tài chính — Bảo vệ người tiêu dùng', 'Khám phá hướng dẫn đến các nguồn chính thức về bảo vệ người tiêu dùng và phòng ngừa gian lận.']
+        }).forEach(([locale, [title, description]]) => {
+            Object.assign(translations[locale] ||= {}, {
+                authorityConsumerBannerTitle: title,
+                authorityConsumerBannerDescription: description
+            });
+        });
+        Object.entries({
             it: {
                 landingHeroTitle: "Strumento per richiesta di collaborazione a 239 Autorità Finanziarie",
                 landingHeroCoverage: "Verifica preliminare nazionale e internazionale",
@@ -8128,6 +8181,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         function applyTranslations(lang) {
             const langData = getLanguageBundle(lang);
             const fallbackData = translations.en || {};
+            const consumerLink = document.getElementById('authority-consumer-link');
+            if (consumerLink) {
+                consumerLink.href = `authority-consumer/index.html?lang=${encodeURIComponent(getUrlLanguageParam(lang))}`;
+            }
             const editorialCopy = getWipEditorialCopy(lang);
             const localizedHeroKeys = new Set(['landingHeroTitle', 'landingHeroCoverage', 'landingHeroSubtitle']);
             document.querySelectorAll('[data-i18n], [data-i18n-text]').forEach(element => {
