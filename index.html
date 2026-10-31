@@ -2263,6 +2263,67 @@
         .fi.flag-emoji-fallback { background-image: none !important; font-size: 28px; line-height: 1; }
         .flag-code { font-weight: 600; color: #667eea; font-size: 0.9em; margin-top: 5px; }
         .flag-name { font-size: 0.75em; color: #334155; margin-top: 4px; line-height: 1.2; text-align: center; }
+        .petition-access {
+            max-width: 1200px;
+            margin: 24px auto 36px;
+            padding: clamp(20px, 4vw, 36px);
+            border: 1px solid rgba(125, 211, 252, 0.55);
+            border-radius: 18px;
+            background: linear-gradient(135deg, #0f172a, #1e3a8a);
+            color: #ffffff;
+            box-shadow: 0 12px 30px rgba(15, 23, 42, 0.2);
+        }
+        .petition-access h2 {
+            margin: 0 auto 24px;
+            max-width: 1000px;
+            color: #ffffff;
+            font-size: clamp(1.2rem, 2.6vw, 1.8rem);
+            line-height: 1.45;
+            text-align: center;
+            text-wrap: pretty;
+        }
+        .petition-language-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(150px, 100%), 1fr));
+            gap: 12px;
+        }
+        .petition-language-button {
+            display: flex;
+            min-height: 78px;
+            align-items: center;
+            gap: 12px;
+            padding: 12px;
+            border: 1px solid #cbd5e1;
+            border-radius: 12px;
+            background: #ffffff;
+            color: #0f172a;
+            text-decoration: none;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .petition-language-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(2, 6, 23, 0.25);
+        }
+        .petition-language-button:focus-visible {
+            outline: 3px solid #facc15;
+            outline-offset: 3px;
+        }
+        .petition-language-flag {
+            flex: 0 0 auto;
+            width: 42px;
+            height: 30px;
+            font-size: 42px;
+        }
+        .petition-language-name {
+            font-weight: 700;
+            line-height: 1.25;
+        }
+        .petition-access-status {
+            margin: 14px 0 0;
+            color: #fee2e2;
+            text-align: center;
+        }
+        .petition-access-status:empty { display: none; }
         .flag-marker-badge {
             display: inline-block;
             margin-top: 6px;
@@ -3291,6 +3352,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 </div>
             </section>
         </header>
+
+        <section id="petition-0888" class="petition-access" aria-labelledby="petition-banner-label">
+            <h2 id="petition-banner-label" lang="it">Responsabilità delle banche per truffe finanziarie eseguite con ordini di bonifico a destinatari non autorizzati a offrire servizi finanziari</h2>
+            <div id="petition-language-buttons" class="petition-language-grid" role="group" aria-label="Choose a petition language and open its PDF"></div>
+            <p id="petition-access-status" class="petition-access-status" role="status" aria-live="polite"></p>
+        </section>
 
         <p lang="it" style="text-align: center; margin: 20px;">
             <a href="#storia-giovanni-falcone" style="display: inline-block; padding: 12px 18px; color: #ffffff; background: #1e293b; border: 1px solid #FFCC00; border-radius: 8px;">Storia di Giovanni Falcone</a>
@@ -8277,6 +8344,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         function changeLanguage(lang, selectedLang = lang) {
             const normalizedLang = normalizeLanguageCode(lang);
             currentLanguage = normalizedLang;
+            window.updatePetitionBannerLanguage?.(normalizedLang);
             document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
             const activeBtn = Array.from(document.querySelectorAll('.lang-btn')).find(btn =>
                 btn.dataset.variant === selectedLang ||
@@ -10074,6 +10142,81 @@ https://avvstancamarcello.github.io/Financial-Authority-Database/
             });
         }
 
+    </script>
+
+    <script>
+        (() => {
+            const banner = document.getElementById('petition-banner-label');
+            const grid = document.getElementById('petition-language-buttons');
+            const status = document.getElementById('petition-access-status');
+            if (!banner || !grid || !status) return;
+
+            let labelTranslations = {};
+            window.updatePetitionBannerLanguage = (language) => {
+                const lang = String(language || '').toLowerCase();
+                const translatedLabel = labelTranslations[lang] || labelTranslations.en || labelTranslations.it;
+                if (!translatedLabel) return;
+                banner.textContent = translatedLabel;
+                banner.lang = lang;
+            };
+
+            grid.addEventListener('click', (event) => {
+                const link = event.target.closest('a[data-petition-lang]');
+                if (link) window.updatePetitionBannerLanguage(link.dataset.petitionLang);
+            });
+
+            async function loadPetitionLanguages() {
+                const [documentsResponse, translationsResponse] = await Promise.all([
+                    fetch('petition_documents.json'),
+                    fetch('i18n/petition-banner.json')
+                ]);
+                if (!documentsResponse.ok || !translationsResponse.ok) {
+                    throw new Error('Unable to load petition language data.');
+                }
+
+                const documentsData = await documentsResponse.json();
+                const translationsData = await translationsResponse.json();
+                const documents = documentsData.documents;
+                labelTranslations = translationsData.label;
+                if (!Array.isArray(documents) || documents.length !== 24 || !labelTranslations) {
+                    throw new Error('Petition language data must include all 24 EU language versions.');
+                }
+
+                const fragment = document.createDocumentFragment();
+                documents.forEach((petition) => {
+                    if (!petition.lang || !petition.iso || !petition.language_name || !petition.pdf || !petition.title) {
+                        throw new Error('A petition language entry is incomplete.');
+                    }
+                    const link = document.createElement('a');
+                    const encodedPath = petition.pdf.split('/').map(encodeURIComponent).join('/');
+                    link.className = 'petition-language-button';
+                    link.href = new URL(encodedPath, document.baseURI).href;
+                    link.target = '_blank';
+                    link.rel = 'noopener';
+                    link.hreflang = petition.lang;
+                    link.title = petition.title;
+                    link.dataset.petitionLang = petition.lang;
+                    link.setAttribute('aria-label', `${petition.language_name}: ${petition.title}`);
+
+                    const flag = document.createElement('span');
+                    flag.className = `fi fi-${petition.iso.toLowerCase()} petition-language-flag`;
+                    flag.setAttribute('aria-hidden', 'true');
+
+                    const name = document.createElement('span');
+                    name.className = 'petition-language-name';
+                    name.textContent = petition.language_name;
+                    link.append(flag, name);
+                    fragment.append(link);
+                });
+                grid.replaceChildren(fragment);
+                window.updatePetitionBannerLanguage(new URLSearchParams(window.location.search).get('lang') || 'en');
+            }
+
+            loadPetitionLanguages().catch((error) => {
+                console.error('Unable to display the petition language links:', error);
+                status.textContent = 'The petition language versions could not be loaded. Please try again later.';
+            });
+        })();
     </script>
 
     <footer style="text-align:center; padding: 12px 8px calc(16px + var(--safe-area-inset-bottom)); font-size: 0.85rem; color:#e5e7eb;">
