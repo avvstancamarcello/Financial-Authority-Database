@@ -99,31 +99,32 @@
             const requestedLanguage = new URLSearchParams(window.location.search).get('lang')?.toLowerCase();
             const language = allowedLanguages.has(requestedLanguage) ? requestedLanguage : 'en';
             const heading = document.getElementById('petition-banner-label');
+            const intro = document.querySelector('.intro');
             const labels = fetch('i18n/petition-banner.json')
                 .then(response => {
-                    if (!response.ok) throw new Error('Unable to load petition title translations.');
+                    if (!response.ok) throw new Error('Unable to load petition translations.');
                     return response.json();
-                })
-                .then(data => data.label);
+                });
 
-            document.documentElement.lang = language;
-            labels.then(translations => {
-                if (!translations[language]) throw new Error(`Missing petition title translation: ${language}`);
-                heading.textContent = translations[language];
-                heading.lang = language;
-            }).catch(error => {
-                console.error('Unable to translate the petition heading:', error);
+            function applyLanguage(selectedLanguage, translations) {
+                const title = translations.label[selectedLanguage];
+                const subtitle = translations.intro[selectedLanguage];
+                if (!title || !subtitle) throw new Error(`Missing petition translation: ${selectedLanguage}`);
+                heading.textContent = title;
+                heading.lang = selectedLanguage;
+                intro.textContent = subtitle;
+                document.documentElement.lang = selectedLanguage;
+            }
+
+            labels.then(translations => applyLanguage(language, translations)).catch(error => {
+                console.error('Unable to translate the petition:', error);
             });
 
             document.querySelectorAll('.language-link').forEach(link => {
                 link.addEventListener('click', () => {
                     const selectedLanguage = link.hreflang;
-                    labels.then(translations => {
-                        if (!translations[selectedLanguage]) return;
-                        heading.textContent = translations[selectedLanguage];
-                        heading.lang = selectedLanguage;
-                    }).catch(error => {
-                        console.error('Unable to update the petition heading:', error);
+                    labels.then(translations => applyLanguage(selectedLanguage, translations)).catch(error => {
+                        console.error('Unable to update the petition:', error);
                     });
                 });
             });

@@ -2831,6 +2831,7 @@
             font-weight: 700; text-decoration: none; text-align: center; overflow-wrap: anywhere;
             touch-action: manipulation; transition: background-color 0.2s ease;
         }
+        .falcone-cta-icon { flex: 0 0 auto; margin-inline-end: 8px; }
         .hero-cta-link:hover { background: #334155; }
         .hero-cta-link:focus-visible { outline: 3px solid #FFCC00; outline-offset: 3px; box-shadow: 0 0 0 6px #1e293b; }
         @media (prefers-reduced-motion: reduce) { .hero-cta-link { transition: none; } }
@@ -3025,12 +3026,15 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     <img src="logo_shield_financial_defense.svg" data-i18n-alt="consumerProtectionShieldAlt" alt="Financial Defense - consumer protection" width="170" height="170">
                 </div>
             </div>
-            <h1 itemprop="name"><span data-i18n="landingHeroTitle">Strumento per richiesta di collaborazione a 239 Autorità Finanziarie</span><br><span data-i18n="landingHeroCoverage">Verifica preliminare nazionale e internazionale</span></h1>
+            <h1 itemprop="name"><span data-i18n="landingHeroTitle">Strumento per richiesta di collaborazione a 239 Autorità Finanziarie</span><br><span data-i18n="landingHeroCoverage">Verifica preliminare nazionale e internazionale in 172 Paesi e territori</span></h1>
             <p class="subtitle" data-i18n="landingHeroSubtitle" itemprop="description">Fonti ufficiali e checklist preliminari per richieste di collaborazione nelle investigazioni finanziarie.</p>
             <p class="subtitle" data-i18n-text="landingHeroSafetyNotice">L'esistenza sul web (sito web, email o app) non garantisce la sicurezza degli investimenti.</p>
             <p class="hero-cta-row">
                 <a href="#flags-section" class="hero-cta-link" data-i18n-text="landingHeroCta">Apri il form di richiesta con ogni bandiera!</a>
-                <a href="#storia-giovanni-falcone" class="hero-cta-link" data-i18n-text="heroFalconeMethodCta">Metodo Falcone</a>
+                <a href="#storia-giovanni-falcone" class="hero-cta-link">
+                    <svg class="falcone-cta-icon" width="30" height="30" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path d="M4 27 7 17 5 15 10 7 18 4 25 8 26 13 22 18 20 27Z" fill="#f8fafc"/><path d="m21 11 8 4-1 6-3-3-5-1Z" fill="#facc15"/><path d="m13 10 10 1-3 3" fill="#172033"/><circle cx="20" cy="12" r="1" fill="#facc15"/><path d="m8 20 5-3-2 7 6-3-1 6H4Z" fill="#cbd5e1"/></svg>
+                    <span data-i18n-text="heroFalconeMethodCta">Falcone · Indagini finanziarie</span>
+                </a>
                 <a href="petitions.html?lang=en" class="hero-cta-link" target="_blank" rel="noopener noreferrer">NAV · Bank&#39;s Liability UE</a>
             </p>
             <p class="hero-brand-row">
@@ -3519,9 +3523,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <a href="authority/US-SEC.html">SEC · USA</a>
         </nav>
 
-        <nav id="orbital-micropages" aria-label="Micropagine Orbital WebApp in ordine alfabetico">
-            <p>Micropagine Orbital WebApp · MVP informativo · ordine alfabetico per Paese o territorio</p>
-            <ol>
+        <nav id="orbital-micropages" aria-labelledby="authority-consumer-banner-title">
+            <ul>
                 <li><a href="/authority/bulgaria-fsc-orbital-webapp.html"><span class="fi fi-bg" aria-hidden="true"></span> BULGARIA · BG</a></li>
                 <li><a href="authority/ethiopia-ecma-orbital-webapp.html">ETHIOPIA · ECMA</a></li>
                 <li><a href="authority/nunavut-orbital-webapp.html" lang="it">NUNAVUT · Territorio canadese / WSCC</a></li>
@@ -3529,17 +3532,15 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 <li><a href="authority/polynesie-francaise-orbital-webapp.html" lang="fr">POLYNÉSIE FRANÇAISE · Autorités financières</a></li>
                 <li><a href="authority/romania-asf-orbital-webapp.html">ROMANIA · ASF</a></li>
                 <li><a href="authority/CH-FINMA.html" lang="it">SVIZZERA / SWITZERLAND · FINMA CH</a></li>
-            </ol>
+            </ul>
         </nav>
-
-        <p data-i18n-text="orbitalCatalogDescription" lang="it">Esplora le Orbital WebApp disponibili: guide informative per Paese, territorio o autorità, con collegamenti alle fonti istituzionali e indicazioni per una verifica preliminare. Il catalogo comprende le pagine attualmente disponibili e potrà essere ampliato.</p>
 
         <aside class="authority-consumer-banner" aria-labelledby="authority-consumer-banner-title">
             <a id="authority-consumer-link" href="authority-consumer/index.html">
                 <span aria-hidden="true">🛡️</span>
                 <span>
-                    <strong id="authority-consumer-banner-title" data-i18n-text="authorityConsumerBannerTitle">Autorità finanziarie — Tutela del consumatore</strong>
-                    <span data-i18n-text="authorityConsumerBannerDescription">Esplora le guide alle fonti ufficiali per la tutela del consumatore e la prevenzione delle frodi.</span>
+                    <strong id="authority-consumer-banner-title" data-i18n-text="authorityConsumerBannerTitle">Autorità finanziarie — Tutela del consumatore · Pagine informative dedicate</strong>
+                    <span data-i18n-text="authorityConsumerBannerDescription">Esplora le guide informative per Paese, territorio o autorità, con collegamenti alle fonti ufficiali e indicazioni per le verifiche preliminari e la prevenzione delle frodi.</span>
                 </span>
                 <span aria-hidden="true">→</span>
             </a>
@@ -6370,10 +6371,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             }
         }).forEach(([locale, copy]) => Object.assign(translations[locale] ||= {}, copy));
         Object.entries({
-            it: 'Metodo Falcone', en: 'Falcone Method', fr: 'Méthode Falcone', de: 'Falcone-Methode',
-            es: 'Método Falcone', pt: 'Método Falcone', ar: 'منهج فالكوني', zh: '法尔科内方法',
-            hi: 'फाल्कोने पद्धति', vi: 'Phương pháp Falcone', sq: 'Metoda Falcone', bs: 'Falconeova metoda',
-            ro: 'Metoda Falcone', nl: 'Falcone-methode', el: 'Μέθοδος Φαλκόνε'
+            it: 'Falcone · Indagini finanziarie', en: 'Falcone · Financial Investigations',
+            fr: 'Falcone · Enquêtes financières', de: 'Falcone · Finanzermittlungen',
+            es: 'Falcone · Investigaciones financieras', pt: 'Falcone · Investigações financeiras',
+            ar: 'فالكوني · التحقيقات المالية', zh: '法尔科内 · 金融调查',
+            hi: 'फाल्कोने · वित्तीय जाँच', vi: 'Falcone · Điều tra tài chính',
+            sq: 'Falcone · Hetime financiare', bs: 'Falcone · Finansijske istrage',
+            ro: 'Falcone · Investigații financiare', nl: 'Falcone · Financieel onderzoek',
+            el: 'Φαλκόνε · Χρηματοοικονομικές έρευνες'
         }).forEach(([locale, label]) => { (translations[locale] ||= {}).heroFalconeMethodCta = label; });
         Object.entries({
             it: ['AMEV · Significato del brand', 'Equivalenza multilingue'],
@@ -6395,21 +6400,21 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             Object.assign(translations[locale] ||= {}, { heroAmevBrandCta: cta, heroAmevBrandSub: sub });
         });
         Object.entries({
-            it: ['Autorità finanziarie — Tutela del consumatore', 'Esplora le guide alle fonti ufficiali per la tutela del consumatore e la prevenzione delle frodi.'],
-            en: ['Financial authorities — Consumer protection', 'Explore guides to official sources for consumer protection and fraud prevention.'],
-            fr: ['Autorités financières — Protection des consommateurs', 'Consultez les guides vers les sources officielles pour protéger les consommateurs et prévenir les fraudes.'],
-            de: ['Finanzbehörden — Verbraucherschutz', 'Entdecken Sie Leitfäden zu offiziellen Quellen für Verbraucherschutz und Betrugsprävention.'],
-            es: ['Autoridades financieras — Protección del consumidor', 'Consulte las guías de fuentes oficiales para la protección del consumidor y la prevención del fraude.'],
-            pt: ['Autoridades financeiras — Proteção do consumidor', 'Consulte os guias de fontes oficiais para a proteção do consumidor e a prevenção de fraudes.'],
-            sq: ['Autoritetet financiare — Mbrojtja e konsumatorit', 'Shfletoni udhëzuesit për burimet zyrtare për mbrojtjen e konsumatorit dhe parandalimin e mashtrimit.'],
-            ro: ['Autorități financiare — Protecția consumatorilor', 'Consultați ghidurile către surse oficiale pentru protecția consumatorilor și prevenirea fraudelor.'],
-            nl: ['Financiële autoriteiten — Consumentenbescherming', 'Bekijk gidsen naar officiële bronnen voor consumentenbescherming en fraudepreventie.'],
-            el: ['Χρηματοοικονομικές αρχές — Προστασία καταναλωτών', 'Εξερευνήστε οδηγούς προς επίσημες πηγές για την προστασία των καταναλωτών και την πρόληψη της απάτης.'],
-            bs: ['Finansijski regulatori — Zaštita potrošača', 'Pregledajte vodiče do zvaničnih izvora za zaštitu potrošača i sprečavanje prevara.'],
-            ar: ['الهيئات المالية — حماية المستهلك', 'تصفّح أدلة المصادر الرسمية لحماية المستهلك والوقاية من الاحتيال.'],
-            zh: ['金融监管机构 — 消费者保护', '查阅官方来源指南，了解消费者保护与欺诈防范。'],
-            hi: ['वित्तीय प्राधिकरण — उपभोक्ता संरक्षण', 'उपभोक्ता संरक्षण और धोखाधड़ी की रोकथाम के लिए आधिकारिक स्रोतों की मार्गदर्शिकाएँ देखें।'],
-            vi: ['Cơ quan tài chính — Bảo vệ người tiêu dùng', 'Khám phá hướng dẫn đến các nguồn chính thức về bảo vệ người tiêu dùng và phòng ngừa gian lận.']
+            it: ["Autorità finanziarie — Tutela del consumatore · Pagine informative dedicate", "Esplora le guide informative per Paese, territorio o autorità, con collegamenti alle fonti ufficiali e indicazioni per le verifiche preliminari e la prevenzione delle frodi."],
+            en: ["Financial authorities — Consumer protection · Dedicated information pages", "Explore information guides by country, territory or authority, with links to official sources and guidance on preliminary checks and fraud prevention."],
+            fr: ["Autorités financières — Protection des consommateurs · Pages d’information dédiées", "Consultez les guides par pays, territoire ou autorité, avec des liens vers les sources officielles et des conseils pour les vérifications préliminaires et la prévention des fraudes."],
+            de: ["Finanzbehörden — Verbraucherschutz · Eigene Informationsseiten", "Entdecken Sie Informationsleitfäden nach Land, Gebiet oder Behörde mit Links zu offiziellen Quellen und Hinweisen zu Vorabprüfungen und Betrugsprävention."],
+            es: ["Autoridades financieras — Protección del consumidor · Páginas informativas dedicadas", "Explore las guías por país, territorio o autoridad, con enlaces a fuentes oficiales y orientaciones para las comprobaciones preliminares y la prevención del fraude."],
+            pt: ["Autoridades financeiras — Proteção do consumidor · Páginas informativas dedicadas", "Explore os guias por país, território ou autoridade, com ligações a fontes oficiais e orientações para verificações preliminares e prevenção de fraudes."],
+            sq: ["Autoritetet financiare — Mbrojtja e konsumatorit · Faqe informative të dedikuara", "Shfletoni udhëzuesit sipas vendit, territorit ose autoritetit, me lidhje drejt burimeve zyrtare dhe udhëzime për verifikimet paraprake dhe parandalimin e mashtrimit."],
+            ro: ["Autorități financiare — Protecția consumatorilor · Pagini informative dedicate", "Explorați ghidurile pe țări, teritorii sau autorități, cu linkuri către surse oficiale și îndrumări pentru verificări preliminare și prevenirea fraudelor."],
+            nl: ["Financiële autoriteiten — Consumentenbescherming · Speciale informatiepagina’s", "Bekijk informatiegidsen per land, gebied of autoriteit, met links naar officiële bronnen en uitleg over voorafgaande controles en fraudepreventie."],
+            el: ["Χρηματοοικονομικές αρχές — Προστασία καταναλωτών · Ειδικές ενημερωτικές σελίδες", "Εξερευνήστε ενημερωτικούς οδηγούς ανά χώρα, έδαφος ή αρχή, με συνδέσμους προς επίσημες πηγές και οδηγίες για προκαταρκτικούς ελέγχους και πρόληψη της απάτης."],
+            bs: ["Finansijski regulatori — Zaštita potrošača · Posebne informativne stranice", "Pregledajte informativne vodiče po zemlji, teritoriji ili regulatoru, s poveznicama na zvanične izvore i smjernicama za preliminarne provjere i sprečavanje prevara."],
+            ar: ["الهيئات المالية — حماية المستهلك · صفحات معلومات مخصصة", "تصفّح أدلة المعلومات حسب الدولة أو الإقليم أو الهيئة، مع روابط إلى المصادر الرسمية وإرشادات للفحوصات الأولية والوقاية من الاحتيال."],
+            zh: ["金融监管机构 — 消费者保护 · 专题信息页面", "按国家、地区或监管机构浏览信息指南，获取官方来源链接以及初步核查和防范欺诈的指引。"],
+            hi: ["वित्तीय प्राधिकरण — उपभोक्ता संरक्षण · समर्पित जानकारी पृष्ठ", "देश, क्षेत्र या प्राधिकरण के अनुसार जानकारी मार्गदर्शिकाएँ देखें, जिनमें आधिकारिक स्रोतों के लिंक और प्रारंभिक जाँच तथा धोखाधड़ी की रोकथाम के निर्देश हैं।"],
+            vi: ["Cơ quan tài chính — Bảo vệ người tiêu dùng · Trang thông tin chuyên biệt", "Khám phá hướng dẫn theo quốc gia, vùng lãnh thổ hoặc cơ quan, với liên kết đến nguồn chính thức và chỉ dẫn về kiểm tra sơ bộ, phòng ngừa gian lận."]
         }).forEach(([locale, [title, description]]) => {
             Object.assign(translations[locale] ||= {}, {
                 authorityConsumerBannerTitle: title,
@@ -6419,105 +6424,105 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         Object.entries({
             it: {
                 landingHeroTitle: "Strumento per richiesta di collaborazione a 239 Autorità Finanziarie",
-                landingHeroCoverage: "Verifica preliminare nazionale e internazionale",
+                landingHeroCoverage: "Verifica preliminare nazionale e internazionale in 172 Paesi e territori",
                 landingHeroSubtitle: "Fonti ufficiali e checklist preliminari per richieste di collaborazione nelle investigazioni finanziarie.",
                 landingHeroSafetyNotice: "L'esistenza sul web (sito web, email o app) non garantisce la sicurezza degli investimenti.",
                 landingHeroCta: "Apri il form di richiesta con ogni bandiera!"
             },
             en: {
                 landingHeroTitle: "A tool for requesting cooperation from 239 Financial Authorities",
-                landingHeroCoverage: "National and international preliminary checks",
+                landingHeroCoverage: "National and international preliminary checks in 172 countries and territories",
                 landingHeroSubtitle: "Official sources and preliminary checklists for cooperation requests in financial investigations.",
                 landingHeroSafetyNotice: "An online presence (website, email, or app) does not guarantee investment safety.",
                 landingHeroCta: "Open the request form from any flag!"
             },
             fr: {
                 landingHeroTitle: "Outil de demande de coopération auprès de 239 autorités financières",
-                landingHeroCoverage: "Vérification préliminaire nationale et internationale",
+                landingHeroCoverage: "Vérification préliminaire nationale et internationale dans 172 pays et territoires",
                 landingHeroSubtitle: "Sources officielles et listes de contrôle préliminaires pour les demandes de coopération dans les enquêtes financières.",
                 landingHeroSafetyNotice: "Une présence en ligne (site web, e-mail ou application) ne garantit pas la sécurité des investissements.",
                 landingHeroCta: "Ouvrez le formulaire de demande depuis n'importe quel drapeau !"
             },
             de: {
                 landingHeroTitle: "Instrument zur Beantragung der Zusammenarbeit mit 239 Finanzbehörden",
-                landingHeroCoverage: "Nationale und internationale Vorabprüfung",
+                landingHeroCoverage: "Nationale und internationale Vorabprüfung in 172 Ländern und Gebieten",
                 landingHeroSubtitle: "Offizielle Quellen und vorläufige Checklisten für Ersuchen um Zusammenarbeit bei Finanzermittlungen.",
                 landingHeroSafetyNotice: "Eine Präsenz im Internet (Website, E-Mail oder App) garantiert keine Anlagesicherheit.",
                 landingHeroCta: "Öffnen Sie das Antragsformular über eine beliebige Flagge!"
             },
             es: {
                 landingHeroTitle: "Herramienta para solicitar la cooperación de 239 autoridades financieras",
-                landingHeroCoverage: "Verificación preliminar nacional e internacional",
+                landingHeroCoverage: "Verificación preliminar nacional e internacional en 172 países y territorios",
                 landingHeroSubtitle: "Fuentes oficiales y listas de verificación preliminares para solicitudes de cooperación en investigaciones financieras.",
                 landingHeroSafetyNotice: "La presencia en Internet (sitio web, correo electrónico o aplicación) no garantiza la seguridad de las inversiones.",
                 landingHeroCta: "¡Abre el formulario de solicitud desde cualquier bandera!"
             },
             pt: {
                 landingHeroTitle: "Ferramenta para solicitar a cooperação de 239 autoridades financeiras",
-                landingHeroCoverage: "Verificação preliminar nacional e internacional",
+                landingHeroCoverage: "Verificação preliminar nacional e internacional em 172 países e territórios",
                 landingHeroSubtitle: "Fontes oficiais e listas de verificação preliminares para pedidos de cooperação em investigações financeiras.",
                 landingHeroSafetyNotice: "A presença na Internet (site, e-mail ou aplicação) não garante a segurança dos investimentos.",
                 landingHeroCta: "Abra o formulário de pedido a partir de qualquer bandeira!"
             },
             sq: {
                 landingHeroTitle: "Mjet për kërkesa bashkëpunimi me 239 autoritete financiare",
-                landingHeroCoverage: "Verifikim paraprak kombëtar dhe ndërkombëtar",
+                landingHeroCoverage: "Verifikim paraprak kombëtar dhe ndërkombëtar në 172 vende dhe territore",
                 landingHeroSubtitle: "Burime zyrtare dhe lista paraprake kontrolli për kërkesa bashkëpunimi në hetimet financiare.",
                 landingHeroSafetyNotice: "Prania në internet (faqe interneti, email ose aplikacion) nuk garanton sigurinë e investimeve.",
                 landingHeroCta: "Hap formularin e kërkesës nga cilido flamur!"
             },
             bs: {
                 landingHeroTitle: "Alat za zahtjev za saradnju s 239 finansijskih regulatora",
-                landingHeroCoverage: "Preliminarna nacionalna i međunarodna provjera",
+                landingHeroCoverage: "Preliminarna nacionalna i međunarodna provjera u 172 zemlje i teritorije",
                 landingHeroSubtitle: "Zvanični izvori i preliminarne kontrolne liste za zahtjeve za saradnju u finansijskim istragama.",
                 landingHeroSafetyNotice: "Prisustvo na internetu (web-stranica, e-pošta ili aplikacija) ne garantuje sigurnost ulaganja.",
                 landingHeroCta: "Otvorite obrazac za zahtjev putem bilo koje zastave!"
             },
             ro: {
                 landingHeroTitle: "Instrument pentru solicitarea cooperării cu 239 de autorități financiare",
-                landingHeroCoverage: "Verificare preliminară națională și internațională",
+                landingHeroCoverage: "Verificare preliminară națională și internațională în 172 de țări și teritorii",
                 landingHeroSubtitle: "Surse oficiale și liste preliminare de verificare pentru solicitări de cooperare în investigații financiare.",
                 landingHeroSafetyNotice: "Prezența online (site, e-mail sau aplicație) nu garantează siguranța investițiilor.",
                 landingHeroCta: "Deschide formularul de solicitare de la orice steag!"
             },
             nl: {
                 landingHeroTitle: "Hulpmiddel voor samenwerkingsverzoeken aan 239 financiële autoriteiten",
-                landingHeroCoverage: "Nationale en internationale voorafgaande controle",
+                landingHeroCoverage: "Nationale en internationale voorafgaande controle in 172 landen en gebieden",
                 landingHeroSubtitle: "Officiële bronnen en voorlopige checklists voor samenwerkingsverzoeken bij financiële onderzoeken.",
                 landingHeroSafetyNotice: "Een online aanwezigheid (website, e-mail of app) garandeert de veiligheid van beleggingen niet.",
                 landingHeroCta: "Open het aanvraagformulier via elke vlag!"
             },
             el: {
                 landingHeroTitle: "Εργαλείο υποβολής αιτημάτων συνεργασίας προς 239 χρηματοοικονομικές αρχές",
-                landingHeroCoverage: "Εθνικός και διεθνής προκαταρκτικός έλεγχος",
+                landingHeroCoverage: "Εθνικός και διεθνής προκαταρκτικός έλεγχος σε 172 χώρες και εδάφη",
                 landingHeroSubtitle: "Επίσημες πηγές και προκαταρκτικές λίστες ελέγχου για αιτήματα συνεργασίας σε χρηματοοικονομικές έρευνες.",
                 landingHeroSafetyNotice: "Η παρουσία στο διαδίκτυο (ιστότοπος, email ή εφαρμογή) δεν εγγυάται την ασφάλεια των επενδύσεων.",
                 landingHeroCta: "Ανοίξτε τη φόρμα αιτήματος από οποιαδήποτε σημαία!"
             },
             ar: {
                 landingHeroTitle: "أداة لطلب التعاون مع 239 سلطة مالية",
-                landingHeroCoverage: "تحقق أولي وطني ودولي",
+                landingHeroCoverage: "تحقق أولي وطني ودولي في 172 دولة وإقليمًا",
                 landingHeroSubtitle: "مصادر رسمية وقوائم تحقق أولية لطلبات التعاون في التحقيقات المالية.",
                 landingHeroSafetyNotice: "الوجود على الإنترنت (موقع إلكتروني أو بريد إلكتروني أو تطبيق) لا يضمن سلامة الاستثمارات.",
                 landingHeroCta: "افتح نموذج الطلب من أي علم!"
             },
             zh: {
                 landingHeroTitle: "与239家金融监管机构申请协作的工具",
-                landingHeroCoverage: "国内与国际初步核查",
+                landingHeroCoverage: "在172个国家和地区开展国内与国际初步核查",
                 landingHeroSubtitle: "为金融调查协作请求提供官方来源和初步核查清单。",
                 landingHeroSafetyNotice: "在线存在（网站、电子邮件或应用程序）并不保证投资安全。",
                 landingHeroCta: "通过任意旗帜打开请求表单！"
             },
             hi: {
                 landingHeroTitle: "239 वित्तीय प्राधिकरणों से सहयोग का अनुरोध करने का साधन",
-                landingHeroCoverage: "राष्ट्रीय और अंतरराष्ट्रीय प्रारंभिक जाँच",
+                landingHeroCoverage: "172 देशों और क्षेत्रों में राष्ट्रीय और अंतरराष्ट्रीय प्रारंभिक जाँच",
                 landingHeroSubtitle: "वित्तीय जाँच में सहयोग के अनुरोधों के लिए आधिकारिक स्रोत और प्रारंभिक जाँच-सूचियाँ।",
                 landingHeroSafetyNotice: "ऑनलाइन मौजूदगी (वेबसाइट, ईमेल या ऐप) निवेश की सुरक्षा की गारंटी नहीं देती।",
                 landingHeroCta: "किसी भी ध्वज से अनुरोध फ़ॉर्म खोलें!"
             },
             vi: {
                 landingHeroTitle: "Công cụ yêu cầu hợp tác với 239 cơ quan tài chính",
-                landingHeroCoverage: "Kiểm tra sơ bộ trong nước và quốc tế",
+                landingHeroCoverage: "Kiểm tra sơ bộ trong nước và quốc tế tại 172 quốc gia và vùng lãnh thổ",
                 landingHeroSubtitle: "Nguồn chính thức và danh sách kiểm tra sơ bộ cho các yêu cầu hợp tác trong điều tra tài chính.",
                 landingHeroSafetyNotice: "Sự hiện diện trên mạng (trang web, email hoặc ứng dụng) không đảm bảo an toàn cho khoản đầu tư.",
                 landingHeroCta: "Mở biểu mẫu yêu cầu từ bất kỳ lá cờ nào!"
@@ -6579,9 +6584,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         const WIP_EDITORIAL_COPY = {
             it: {
                 landingHeroTitle: "Strumento per richiesta di collaborazione a 239 Autorità Finanziarie",
-                landingHeroCoverage: "Verifica preliminare nazionale e internazionale",
+                landingHeroCoverage: "Verifica preliminare nazionale e internazionale in 172 Paesi e territori",
                 landingHeroSubtitle: "Fonti ufficiali e checklist preliminari per richieste di collaborazione nelle investigazioni finanziarie.",
-                orbitalCatalogDescription: "Esplora le Orbital WebApp disponibili: guide informative per Paese, territorio o autorità, con collegamenti alle fonti istituzionali e indicazioni per una verifica preliminare. Il catalogo comprende le pagine attualmente disponibili e potrà essere ampliato.",
+
                 polynesiaOrbitalOpen: "Apri Orbital WebApp · Polynésie française",
                 title: "Directory internazionale delle autorità finanziarie",
                 subtitle: "Collegamenti alle fonti ufficiali",
@@ -6589,7 +6594,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 securityText: "Consulta i registri aggiornati delle autorità competenti. La directory non accerta licenze, identità dei beneficiari o sicurezza degli investimenti; un link non implica approvazione dell'autorità.",
                 introText: "Directory indipendente di collegamenti alle autorità finanziarie, con record nazionali, regionali e subnazionali. Consulta i registri aggiornati presso le fonti ufficiali: questa pagina non accerta licenze né identifica il titolare di un conto.",
                 landingHeroTitle: "Strumento per richiesta di collaborazione a 239 Autorità Finanziarie",
-                landingHeroCoverage: "Verifica preliminare nazionale e internazionale",
+                landingHeroCoverage: "Verifica preliminare nazionale e internazionale in 172 Paesi e territori",
                 landingHeroSubtitle: "Fonti ufficiali e checklist preliminari per richieste di collaborazione nelle investigazioni finanziarie.",
                 quickIndexCountriesLink: "Consulta le schede delle autorità",
                 quickIndexAuthorLink: "Autore e riferimenti",
@@ -6621,9 +6626,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             },
             en: {
                 landingHeroTitle: "A tool for requesting cooperation from 239 Financial Authorities",
-                landingHeroCoverage: "National and international preliminary checks",
+                landingHeroCoverage: "National and international preliminary checks in 172 countries and territories",
                 landingHeroSubtitle: "Official sources and preliminary checklists for cooperation requests in financial investigations.",
-                orbitalCatalogDescription: "Explore the available Orbital WebApps: informational guides by country, territory or authority, with links to institutional sources and guidance for a preliminary check. The catalog includes the pages currently available and may be expanded.",
+
                 polynesiaOrbitalOpen: "Open Orbital WebApp · Polynésie française",
                 title: "International directory of financial authorities",
                 subtitle: "Links to official sources",
@@ -6631,7 +6636,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 securityText: "Consult current registers held by the competent authorities. This directory does not verify licenses, payment beneficiaries or investment safety; a link does not imply endorsement by an authority.",
                 introText: "Independent directory linking to financial authorities, including national, regional and subnational records. Consult current official registers: this page does not verify licenses or identify account holders.",
                 landingHeroTitle: "A tool for requesting cooperation from 239 Financial Authorities",
-                landingHeroCoverage: "National and international preliminary checks",
+                landingHeroCoverage: "National and international preliminary checks in 172 countries and territories",
                 landingHeroSubtitle: "Official sources and preliminary checklists for cooperation requests in financial investigations.",
                 quickIndexCountriesLink: "Browse authority records",
                 quickIndexAuthorLink: "Author and references",
