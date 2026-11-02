@@ -37,6 +37,9 @@
         const helper = await (await fetch('./scripts/news-feed.js')).text();
         const mock = `<script>
             window.fetch = (url, options) => {
+                if (String(url).endsWith('/data/dossier.json')) {
+                    return Promise.resolve({ ok: true, json: async () => [] });
+                }
                 window.feedRequest = { url: String(url), options };
                 return new Promise((resolve, reject) => { window.resolveFeed = resolve; window.rejectFeed = reject; });
             };

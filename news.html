@@ -275,7 +275,8 @@
       max-width: 100%;
     }
 
-    .news-card h2 {
+    .news-card h2,
+    .dossier-card h3 {
       margin: 0;
       font-size: clamp(1.12rem, 2vw, 1.6rem);
       line-height: 1.35;
@@ -421,6 +422,18 @@
       display: block;
     }
 
+    .dossier-section {
+      margin-top: 32px;
+    }
+
+    .dossier-card {
+      overflow-wrap: anywhere;
+    }
+
+    .dossier-card p {
+      white-space: pre-wrap;
+    }
+
     @media (max-width: 640px) {
       .hero, .back-btn, .status-pill {
         overflow-wrap: anywhere;
@@ -498,6 +511,12 @@
         Nessuna news pubblicata ancora. Inizia aggiungendo il primo aggiornamento al feed.
       </div>
 
+      <section class="dossier-section" aria-labelledby="dossier-title">
+        <h2 id="dossier-title">Dossier</h2>
+        <div id="dossier-status" class="empty-state is-visible" role="status">Caricamento dossier…</div>
+        <div id="dossier-list" class="feed" aria-live="polite" aria-busy="true"></div>
+      </section>
+
       <div class="vote-panel" aria-label="Vota la sequenza di pillole">
         <h2 class="vote-title" id="vote-title">Valuta questa sequenza</h2>
         <div class="star-rating" id="star-rating" role="radiogroup" aria-label="Vota la sequenza di tre pillole"></div>
@@ -507,6 +526,7 @@
   </div>
 
   <script src="scripts/news-feed.js"></script>
+  <script src="scripts/dossier-feed.js"></script>
   <script>
     const translations = {
       it: {
@@ -789,6 +809,7 @@
       document.querySelector('.back-btn').textContent = '⬅️ ' + t.homeLabel;
 
       renderNews();
+      PublicDossier.render(currentLanguage);
       renderStars(Number(localStorage.getItem(`pillole-vote-${lang}`) || 0));
     }
 
@@ -828,6 +849,7 @@
     languageSelector.value = currentLanguage;
     setLanguage(currentLanguage);
     loadNewsFeed();
+    PublicDossier.load();
   </script>
 </body>
 </html>

@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"><title>Dossier feed regression checks</title></head>
+<body>
+<h1>Dossier feed regression checks</h1>
+<pre id="results">Running...</pre>
+<iframe id="page" title="Dossier feed under test" width="850" height="700"></iframe>
+<script>
+    const results = document.getElementById('results');
+    const frame = document.getElementById('page');
+    const checks = [];
+    function check(condition, message) {
+        checks.push(`${condition ? 'PASS' : 'FAIL'}: ${message}`);
+        results.textContent = checks.join('\n');
+        if (!condition) throw new Error(message);
+    }
+    async function waitFor(predicate) {
+        const deadline = Date.now() + 5000;
+        while (!predicate()) {
+            if (Date.now() > deadline) throw new Error('Timed out');
+            await new Promise(resolve => setTimeout(resolve, 20));
+        }
+    }
+    async function run() {
+        let source = await (await fetch('./news.html')).text();
+        const mock = `<script>
+            window.requests = {};
+            window.fetch = (url, options) => {
+                const key = String(url).endsWith('/data/dossier.json') ? 'dossier' : 'news';
+                return new Promise((resolve, reject) => {
+                    window.requests[key] = { url: String(url), options, resolve, reject };
+                });
+            };
+        <\/script>`;
+        for (const name of ['news-feed', 'dossier-feed']) {
+            const helper = await (await fetch('./scripts/' + name + '.js')).text();
+            source = source.replace('<script src="scripts/' + name + '.js"></' + 'script>',
+                (name === 'news-feed' ? mock : '') + '<script>' + helper + '</' + 'script>');
+        }
+        const loaded = new Promise(resolve => { frame.onload = resolve; });
+        frame.srcdoc = source;
+        await loaded;
+        const page = frame.contentWindow;
+        const doc = page.document;
+        await waitFor(() => page.requests.news && page.requests.dossier);
+        const list = doc.getElementById('dossier-list');
+        const status = doc.getElementById('dossier-status');
+        check(list.getAttribute('aria-busy') === 'true', 'Dossiers have an independent loading state');
+        check(page.requests.dossier.url === 'https://raw.githubusercontent.com/avvstancamarcello/Airtable-news/main/data/dossier.json'
+            && page.requests.dossier.options.cache === 'no-cache', 'Dossiers request the public JSON feed without secrets');
+        const news = { news_id: 'news1', lang: 'it', title: 'News preserved',
+            published_at: '2026-11-02', status: 'published' };
+        page.requests.news.resolve({ ok: true, json: async () => [news] });
+        await waitFor(() => doc.querySelector('#news-list .news-card'));
+        const item = {
+            id: 'rec1', title: 'Generic title', author: 'Author', source_type: 'Research',
+            titles: { it: 'Titolo italiano', en: 'English title' },
+            texts: { en: 'English dossier body\nSecond line' }, tags: ['Research'],
+            editorial_note: '<img src=x onerror=alert(1)>',
+            notebook_url: 'https://example.org/notebook',
+            file_links: '[PDF](https://example.org/file.pdf) javascript:alert(1)'
+        };
+        page.setLanguage('it');
+        page.requests.dossier.resolve({ ok: true, json: async () => [item] });
+        await waitFor(() => list.getAttribute('aria-busy') === 'false');
+        check(list.querySelector('h3').textContent === 'Titolo italiano'
+            && list.textContent.includes('English dossier body'), 'Dossier title and body are rendered from the mapped JSON');
+        check(list.querySelector('h3').lang === 'it' && list.querySelector('p[lang="en"]')
+            && list.textContent.includes('Traduzione non disponibile'), 'Fallback body language is explicit');
+        check(list.textContent.includes('Author') && list.textContent.includes('Research')
+            && list.textContent.includes('<img src=x onerror=alert(1)>')
+            && !list.querySelector('img, script'), 'Author, tags and editorial note render safely as text');
+        check(list.querySelectorAll('a').length === 2
+            && [...list.querySelectorAll('a')].every(link => link.protocol === 'https:'
+                && link.rel.includes('noopener') && link.rel.includes('noreferrer')),
+            'Notebook and download links are safe external links');
+        page.setLanguage('en');
+        check(list.querySelector('h3').textContent === 'English title', 'Language switching updates Dossiers without refetching');
+        async function reload(payload, failure) {
+            const pending = page.PublicDossier.load();
+            if (failure === 'network') page.requests.dossier.reject(new TypeError('Offline'));
+            else page.requests.dossier.resolve({ ok: failure !== 'http', status: 404, json: async () => {
+                if (failure === 'json') throw new SyntaxError('Malformed JSON');
+                return payload;
+            } });
+            await pending;
+        }
+        await reload([]);
+        check(!list.children.length && status.textContent === 'No published dossiers'
+            && status.classList.contains('is-visible'), 'An empty Dossier feed has its own empty state');
+        for (const failure of ['network', 'http', 'json', 'schema']) {
+            await reload({ records: [] }, failure);
+            check(status.textContent === 'Dossiers unavailable' && !list.children.length
+                && doc.querySelector('#news-list h2').textContent === 'News preserved',
+                `${failure} Dossier failure is explicit and leaves NEWS_SIMPLE visible`);
+        }
+        await reload([{ ...item, notebook_url: 'javascript:alert(1)', file_links: 'https://user:pass@example.org/file' }]);
+        check(!list.querySelector('a'), 'Unsafe or credential-bearing links are not clickable');
+        await reload([{ id: 'rec2', title: 'Generic only', titles: null, texts: null }]);
+        check(list.querySelector('h3').textContent === 'Generic only', 'Missing optional translations preserve the generic title');
+        await reload([item]);
+        const pending = page.loadNewsFeed();
+        page.requests.news.reject(new TypeError('Offline'));
+        await pending;
+        check(list.querySelector('h3').textContent === 'English title'
+            && doc.getElementById('empty-state').textContent === 'News unavailable',
+            'A NEWS_SIMPLE failure leaves Dossiers available');
+        item.titles.en = 'LongDossierTitle'.repeat(40);
+        await reload([item]);
+        for (const width of [320, 768, 1280]) {
+            frame.style.width = `${width}px`;
+            await new Promise(resolve => setTimeout(resolve, 50));
+            check(doc.documentElement.scrollWidth <= width, `${width}px Dossiers do not cause horizontal overflow`);
+        }
+        const worker = await (await fetch('./service-worker.js')).text();
+        check(worker.includes('/scripts/dossier-feed.js')
+            && worker.includes("'/avvstancamarcello/Airtable-news/main/data/dossier.json'"),
+            'PWA precaches the Dossier controller and bypasses the remote feed cache');
+        results.textContent += '\nAll Dossier checks passed.';
+    }
+    run().catch(error => { results.textContent += `\nFAIL: ${error.message}`; console.error(error); });
+</script>
+</body>
+</html>
