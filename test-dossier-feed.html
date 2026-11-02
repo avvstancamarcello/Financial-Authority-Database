@@ -70,10 +70,21 @@
         check(list.textContent.includes('Author') && list.textContent.includes('Research')
             && list.textContent.includes('<img src=x onerror=alert(1)>')
             && !list.querySelector('img, script'), 'Author, tags and editorial note render safely as text');
-        check(list.querySelectorAll('a').length === 2
-            && [...list.querySelectorAll('a')].every(link => link.protocol === 'https:'
+        const documentLinks = [...list.querySelectorAll('.news-link')];
+        check(documentLinks.length === 2
+            && documentLinks.every(link => link.protocol === 'https:'
                 && link.rel.includes('noopener') && link.rel.includes('noreferrer')),
             'Notebook and download links are safe external links');
+        const shareLinks = [...list.querySelectorAll('.share-row a')];
+        check(shareLinks.length === 5 && shareLinks.map(link => link.getAttribute('aria-label').split(': ').at(-1)).join(',')
+            === 'Facebook,Threads,WhatsApp,LinkedIn,Instagram', 'Dossiers expose the same five social-sharing actions as news');
+        const facebookShare = new URL(shareLinks.find(link => link.getAttribute('aria-label').endsWith('Facebook')).href);
+        check(facebookShare.searchParams.get('u') === 'http://127.0.0.1:8765/news.html#dossier-rec1'
+            && facebookShare.searchParams.get('quote').includes('Author: Titolo italiano'),
+            'Social links share a direct Dossier anchor with its selected title and author');
+        check(shareLinks.every(link => link.target === '_blank'
+            && link.rel.includes('noopener') && link.rel.includes('noreferrer')),
+            'Social links open safely in a new tab');
         page.setLanguage('en');
         check(list.querySelector('h3').textContent === 'English title', 'Language switching updates Dossiers without refetching');
         async function reload(payload, failure) {
@@ -95,7 +106,7 @@
                 `${failure} Dossier failure is explicit and leaves NEWS_SIMPLE visible`);
         }
         await reload([{ ...item, notebook_url: 'javascript:alert(1)', file_links: 'https://user:pass@example.org/file' }]);
-        check(!list.querySelector('a'), 'Unsafe or credential-bearing links are not clickable');
+        check(!list.querySelector('.news-link'), 'Unsafe or credential-bearing source links are not clickable');
         await reload([{ id: 'rec2', title: 'Generic only', titles: null, texts: null }]);
         check(list.querySelector('h3').textContent === 'Generic only', 'Missing optional translations preserve the generic title');
         await reload([item]);
@@ -106,7 +117,11 @@
             && doc.getElementById('empty-state').textContent === 'News unavailable',
             'A NEWS_SIMPLE failure leaves Dossiers available');
         item.titles.en = 'LongDossierTitle'.repeat(40);
+        item.texts.en = 'Long dossier body '.repeat(1000);
         await reload([item]);
+        const longShare = new URL(list.querySelector('.share-row a[aria-label$="Threads"]').href);
+        check(longShare.searchParams.get('text').length < 500,
+            'Long Dossier text is shortened for social sharing instead of creating oversized URLs');
         for (const width of [320, 768, 1280]) {
             frame.style.width = `${width}px`;
             await new Promise(resolve => setTimeout(resolve, 50));
