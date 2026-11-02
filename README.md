@@ -10,6 +10,22 @@ regole, validatori automatici o strumenti di analisi statica.
 
 ## Filosofia del progetto
 
+### Feed Dossier nella pagina news
+
+`news.html` carica separatamente il feed news e il feed pubblico
+`https://raw.githubusercontent.com/avvstancamarcello/Airtable-news/main/data/dossier.json`
+tramite `scripts/dossier-feed.js`. Il formato atteso e un array di dossier
+con `id`, `title`, `titles`, `texts`, `author`, `source_type`, `tags`,
+`editorial_note`, `notebook_url` e `file_links`, come esportato dalla Action
+Public Dossier. Il browser non riceve credenziali Airtable.
+I dossier hanno stati di caricamento, assenza dati ed errore indipendenti dalle
+news. Titoli e testi seguono la lingua selezionata, poi inglese, italiano o
+la prima traduzione disponibile, segnalando le lingue di ripiego.
+I contenuti sono testo semplice, non HTML o Markdown eseguibile; notebook e
+URL HTTP(S) nei collegamenti ai file diventano link cliccabili.
+Servire il repository via HTTP e aprire `test-dossier-feed.html` e
+`test-website-news.html` per le verifiche di regressione con feed simulati.
+
 AMEV / Financial Authority Database nasce per facilitare l'accesso alle
 fonti istituzionali e aiutare gli utenti a orientarsi nella verifica delle
 imprese che offrono servizi finanziari in contesto internazionale.

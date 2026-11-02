@@ -1,4 +1,4 @@
-const CACHE_NAME = 'financial-authority-v44';
+const CACHE_NAME = 'financial-authority-v45';
 const BASE_PATH = '';
 const FLAG_ICONS_CSS_URL = 'https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.2.3/css/flag-icons.min.css';
 const PWA_ICON_PATHS = [
@@ -14,6 +14,7 @@ const CORE_APP_SHELL_URLS = [
   `${BASE_PATH}/index.html`,
   `${BASE_PATH}/news.html`,
   `${BASE_PATH}/scripts/news-feed.js`,
+  `${BASE_PATH}/scripts/dossier-feed.js`,
   `${BASE_PATH}/odissea.html`,
   `${BASE_PATH}/db.enc`,
   `${BASE_PATH}/logo_shield_financial_defense.svg`,
@@ -169,9 +170,10 @@ self.addEventListener('fetch', event => {
     return;
   }
 
-  // Let the browser revalidate the public news export on every page load.
+  // Let the browser revalidate public exports on every page load.
   if (new URL(event.request.url).origin === 'https://raw.githubusercontent.com'
-      && new URL(event.request.url).pathname === '/avvstancamarcello/Airtable-news/main/news.json') {
+      && (new URL(event.request.url).pathname === '/avvstancamarcello/Airtable-news/main/news.json'
+        || new URL(event.request.url).pathname === '/avvstancamarcello/Airtable-news/main/data/dossier.json')) {
     return;
   }
 
