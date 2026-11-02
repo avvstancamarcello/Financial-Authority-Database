@@ -3,12 +3,12 @@ window.PublicDossier = (() => {
     const list = document.getElementById('dossier-list');
     const status = document.getElementById('dossier-status');
     const copy = {
-        it: ['Dossier', 'Caricamento dossier…', 'Nessun dossier pubblicato', 'Dossier non disponibili', 'Nota editoriale', 'Download', 'Traduzione non disponibile; lingua:'],
-        en: ['Dossiers', 'Loading dossiers…', 'No published dossiers', 'Dossiers unavailable', 'Editorial note', 'Downloads', 'Translation unavailable; language:'],
-        fr: ['Dossiers', 'Chargement des dossiers…', 'Aucun dossier publié', 'Dossiers indisponibles', 'Note éditoriale', 'Téléchargements', 'Traduction indisponible ; langue :'],
-        es: ['Dosieres', 'Cargando dosieres…', 'No hay dosieres publicados', 'Dosieres no disponibles', 'Nota editorial', 'Descargas', 'Traducción no disponible; idioma:'],
-        de: ['Dossiers', 'Dossiers werden geladen…', 'Keine veröffentlichten Dossiers', 'Dossiers nicht verfügbar', 'Redaktioneller Hinweis', 'Downloads', 'Übersetzung nicht verfügbar; Sprache:'],
-        pt: ['Dossiês', 'A carregar dossiês…', 'Nenhum dossiê publicado', 'Dossiês indisponíveis', 'Nota editorial', 'Transferências', 'Tradução indisponível; idioma:']
+        it: ['Dossier', 'Caricamento dossier…', 'Nessun dossier pubblicato', 'Dossier non disponibili', 'Nota editoriale', 'Download', 'Traduzione non disponibile; lingua:', 'Condividi dossier'],
+        en: ['Dossiers', 'Loading dossiers…', 'No published dossiers', 'Dossiers unavailable', 'Editorial note', 'Downloads', 'Translation unavailable; language:', 'Share dossier'],
+        fr: ['Dossiers', 'Chargement des dossiers…', 'Aucun dossier publié', 'Dossiers indisponibles', 'Note éditoriale', 'Téléchargements', 'Traduction indisponible ; langue :', 'Partager le dossier'],
+        es: ['Dosieres', 'Cargando dosieres…', 'No hay dosieres publicados', 'Dosieres no disponibles', 'Nota editorial', 'Descargas', 'Traducción no disponible; idioma:', 'Compartir dossier'],
+        de: ['Dossiers', 'Dossiers werden geladen…', 'Keine veröffentlichten Dossiers', 'Dossiers nicht verfügbar', 'Redaktioneller Hinweis', 'Downloads', 'Übersetzung nicht verfügbar; Sprache:', 'Dossier teilen'],
+        pt: ['Dossiês', 'A carregar dossiês…', 'Nenhum dossiê publicado', 'Dossiês indisponíveis', 'Nota editorial', 'Transferências', 'Tradução indisponível; idioma:', 'Partilhar dossiê']
     };
     let records = [];
     let state = 'loading';
@@ -57,10 +57,24 @@ window.PublicDossier = (() => {
         parent.append(link);
     }
 
+    function shareUrl(platform, message, dossierUrl) {
+        const encodedUrl = encodeURIComponent(dossierUrl);
+        const encodedMessage = encodeURIComponent(message);
+        const urls = {
+            Facebook: `https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}&quote=${encodedMessage}`,
+            Threads: `https://www.threads.net/intent/post?text=${encodeURIComponent(`${message} ${dossierUrl}`)}`,
+            WhatsApp: `https://wa.me/?text=${encodeURIComponent(`${message} ${dossierUrl}`)}`,
+            LinkedIn: `https://www.linkedin.com/sharing/share-offsite/?url=${encodedUrl}`,
+            Instagram: 'https://www.instagram.com/'
+        };
+        return urls[platform] || dossierUrl;
+    }
+
     function card(record, messages) {
         const article = document.createElement('article');
         article.className = 'news-card dossier-card';
         article.dataset.dossierId = record.id;
+        article.id = `dossier-${record.id}`;
         const title = select(record.titles);
         const body = select(record.texts);
         const usedLanguages = new Set([title?.lang, body?.lang].filter(code => code && code !== language));
@@ -82,6 +96,41 @@ window.PublicDossier = (() => {
             const links = record.file_links.match(/https?:\/\/[^\s<>"\])]+/g) || [];
             for (const link of new Set(links)) appendLink(article, link, link);
         }
+        let dossierUrl;
+        try {
+            dossierUrl = new URL('news.html', document.baseURI);
+            dossierUrl.hash = article.id;
+            dossierUrl = dossierUrl.href;
+        } catch {
+            dossierUrl = `https://www.amevfirenze.it/news.html#${encodeURIComponent(article.id)}`;
+        }
+        const excerpt = (body?.value || record.editorial_note || '').replace(/\s+/g, ' ').trim();
+        const shareMessage = [record.author, title?.value || record.title]
+            .filter(Boolean)
+            .join(': ')
+            .concat(excerpt ? ` — ${[...excerpt].slice(0, 180).join('')}${[...excerpt].length > 180 ? '…' : ''}` : '');
+        const shareText = [...shareMessage].slice(0, 300).join('')
+            + ([...shareMessage].length > 300 ? '…' : '');
+        const shareRow = document.createElement('div');
+        shareRow.className = 'share-row';
+        shareRow.setAttribute('aria-label', messages[7]);
+        for (const [platform, label] of [
+            ['Facebook', 'f'],
+            ['Threads', '🧵'],
+            ['WhatsApp', '💬'],
+            ['LinkedIn', 'in'],
+            ['Instagram', '◎']
+        ]) {
+            const link = document.createElement('a');
+            link.className = 'share-button';
+            link.href = shareUrl(platform, shareText, dossierUrl);
+            link.target = '_blank';
+            link.rel = 'noopener noreferrer';
+            link.setAttribute('aria-label', `${messages[7]}: ${platform}`);
+            link.textContent = label;
+            shareRow.append(link);
+        }
+        article.append(shareRow);
         return article;
     }
 

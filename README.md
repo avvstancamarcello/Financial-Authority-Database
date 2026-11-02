@@ -23,6 +23,8 @@ news. Titoli e testi seguono la lingua selezionata, poi inglese, italiano o
 la prima traduzione disponibile, segnalando le lingue di ripiego.
 I contenuti sono testo semplice, non HTML o Markdown eseguibile; notebook e
 URL HTTP(S) nei collegamenti ai file diventano link cliccabili.
+Ogni scheda include pulsanti di condivisione per Facebook, Threads, WhatsApp,
+LinkedIn e Instagram; i testi lunghi sono abbreviati nei messaggi condivisi.
 Servire il repository via HTTP e aprire `test-dossier-feed.html` e
 `test-website-news.html` per le verifiche di regressione con feed simulati.
 
