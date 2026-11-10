@@ -1757,7 +1757,7 @@ Esempio di header email da cercare:
             const popupContent = `
                 <div class="popup-title">🚨 ${report.companyName || 'Truffa Segnalata'}</div>
                 <div class="popup-info"><strong>Tipo:</strong> ${getScamTypeLabel(report.scamType)}</div>
-                ${report.websiteUrl ? `<div class="popup-info"><strong>Sito:</strong> <a href="${report.websiteUrl}" target="_blank" rel="noopener">${report.websiteUrl}</a></div>` : ''}
+                ${report.websiteUrl ? `<div class="popup-info"><strong>Sito:</strong> <a href="${report.websiteUrl}" target="_blank" rel="noopener noreferrer">${report.websiteUrl}</a></div>` : ''}
                 ${report.declaredAddress ? `<div class="popup-info"><strong>Sede dichiarata:</strong> ${report.declaredAddress}</div>` : ''}
                 ${report.amountLost ? `<div class="popup-info"><strong>Importo:</strong> ${formatEuroAmount(report.amountLost)}</div>` : ''}
                 ${report.whatsappNumber ? `<div class="popup-info"><strong>WhatsApp:</strong> ${report.whatsappNumber}</div>` : ''}
