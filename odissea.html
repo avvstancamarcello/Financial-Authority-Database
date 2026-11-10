@@ -9,7 +9,7 @@
     })(window,document,'script','dataLayer','GTM-W2Q6GD42');</script>
     <!-- End Google Tag Manager -->
     <meta charset="UTF-8">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.gstatic.com https://unpkg.com https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://unpkg.com; img-src 'self' data: https://*.tile.openstreetmap.org https://raw.githubusercontent.com https://cdnjs.cloudflare.com https://unpkg.com; font-src 'self' data: https://cdn.jsdelivr.net; connect-src 'self' https://www.gstatic.com https://firebase.googleapis.com https://firebaseinstallations.googleapis.com https://firebaselogging.googleapis.com https://www.google-analytics.com; frame-src 'self'; object-src 'none'; base-uri 'self';">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-MNCpZdmJAXphHHSjmGjdeUaDcx0DriAxTOnNRxOzRxs=' 'sha256-eAVF9ECwy08iyrSmFlWw2zc/rLvfn5FYnQijF8j/YSA=' 'sha256-UkO57qphGD6SjO026jFqIPkid2gTu+evOpv6FpTV0Pk=' https://www.gstatic.com https://unpkg.com https://cdn.jsdelivr.net; style-src 'self' 'sha256-7BA+qj2uhIAf6I9lLnuDH3HNCS5hYtQV2gBjr5p8z6E=' https://cdn.jsdelivr.net https://unpkg.com; img-src 'self' data: https://*.tile.openstreetmap.org https://raw.githubusercontent.com https://cdnjs.cloudflare.com https://unpkg.com; font-src 'self' data: https://cdn.jsdelivr.net; connect-src 'self' https://www.gstatic.com https://firebase.googleapis.com https://firebaseinstallations.googleapis.com https://firebaselogging.googleapis.com https://www.google-analytics.com; frame-src 'self'; object-src 'none'; base-uri 'self';">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="google-site-verification" content="cyy_B7liLeU0oPM5epVAlJvP6XI9AwbCMIbuDzrtPFc" />
     
@@ -901,25 +901,44 @@
             overflow-x: auto;
             margin: 0.5rem 0;
         }
+        .top-nav { background: linear-gradient(135deg, #1e293b 0%, #334155 100%); padding: 1rem 0; box-shadow: 0 4px 12px rgba(0,0,0,0.15); position: sticky; top: 0; z-index: 999; }
+        .top-nav-inner { max-width: 1200px; margin: 0 auto; display: flex; gap: 1.5rem; justify-content: center; align-items: center; flex-wrap: wrap; padding: 0 1rem; }
+        .top-nav-link { color: #FFFFFF; text-decoration: none; font-weight: 500; font-size: 1.05rem; padding: 0.5rem 1.5rem; background: rgba(255,255,255,0.05); border-radius: 8px; transition: all 0.3s ease; }
+        .top-nav-link:hover { background: rgba(255,255,255,0.15); }
+        .top-nav-cv { background: rgba(255,215,0,0.1); border: 1px solid rgba(255,215,0,0.3); }
+        .top-nav-cv:hover { background: rgba(255,215,0,0.2); }
+        .top-nav-current { color: #FFFFFF; font-weight: bold; font-size: 1.05rem; padding: 0.5rem 1.5rem; background: rgba(255,215,0,0.2); border-radius: 8px; border: 2px solid rgba(255,215,0,0.5); }
+        .accent-link { color: #38bdf8; font-weight: 600; text-decoration: underline; }
+        .mt-1 { margin-top: 1rem; }
+        .mt-15 { margin-top: 1.5rem; }
+        .mt-2 { margin-top: 2rem; }
+        .mb-1 { margin-bottom: 1rem; }
+        .heading-blue { color: var(--odyssey-blue); margin-top: 1rem; }
+        .steps-list { margin-left: 1.5rem; line-height: 1.8; }
+        .footer-tagline { margin-top: 2rem; opacity: 0.8; }
+        .footer-copy { margin-top: 1rem; font-size: 0.9rem; opacity: 0.7; }
+        .popup-reported { margin-top: 0.5rem; font-size: 0.8rem; color: #64748b; }
+        .gtm-noscript-frame { display: none; visibility: hidden; }
     </style>
 </head>
 <body>
 <!-- Google Tag Manager (noscript) -->
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-W2Q6GD42"
-height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+height="0" width="0" class="gtm-noscript-frame"></iframe></noscript>
 <!-- End Google Tag Manager (noscript) -->
-    <!-- Main Navigation -->\n    <nav style=\"background: linear-gradient(135deg, #1e293b 0%, #334155 100%); padding: 1rem 0; box-shadow: 0 4px 12px rgba(0,0,0,0.15); position: sticky; top: 0; z-index: 999;\">
-        <div style=\"max-width: 1200px; margin: 0 auto; display: flex; gap: 1.5rem; justify-content: center; align-items: center; flex-wrap: wrap; padding: 0 1rem;\">
-            <a href=\"https://avvstancamarcello.github.io/Financial-Authority-Database/index.html#database-search-section\" style=\"color: #FFFFFF; text-decoration: none; font-weight: 500; font-size: 1.05rem; padding: 0.5rem 1.5rem; background: rgba(255,255,255,0.05); border-radius: 8px; transition: all 0.3s ease;\" onmouseover=\"this.style.background='rgba(255,255,255,0.15)';\" onmouseout=\"this.style.background='rgba(255,255,255,0.05)';\">
+    <!-- Main Navigation -->
+    <nav class="top-nav">
+        <div class="top-nav-inner">
+            <a class="top-nav-link" href="https://avvstancamarcello.github.io/Financial-Authority-Database/index.html#database-search-section">
                 🏠 Database Autorità Finanziarie (129)
             </a>
-            <span style=\"color: #FFFFFF; font-weight: bold; font-size: 1.05rem; padding: 0.5rem 1.5rem; background: rgba(255,215,0,0.2); border-radius: 8px; border: 2px solid rgba(255,215,0,0.5);\">
+            <span class="top-nav-current">
                 🌊 Odissea Digitale
             </span>
-            <a href=\"referenze.html\" style=\"color: #FFFFFF; text-decoration: none; font-weight: 500; font-size: 1.05rem; padding: 0.5rem 1.5rem; background: rgba(255,255,255,0.05); border-radius: 8px; transition: all 0.3s ease;\" onmouseover=\"this.style.background='rgba(255,255,255,0.15)';\" onmouseout=\"this.style.background='rgba(255,255,255,0.05)';\">
+            <a class="top-nav-link" href="referenze.html">
                 📜 Referenze Istituzionali
             </a>
-            <a href=\"curriculum.html\" style=\"color: #FFFFFF; text-decoration: none; font-weight: 500; font-size: 1.05rem; padding: 0.5rem 1.5rem; background: rgba(255,215,0,0.1); border-radius: 8px; transition: all 0.3s ease; border: 1px solid rgba(255,215,0,0.3);\" onmouseover=\"this.style.background='rgba(255,215,0,0.2)';\" onmouseout=\"this.style.background='rgba(255,215,0,0.1)';\">
+            <a class="top-nav-link top-nav-cv" href="curriculum.html">
                 👨‍⚖️ Avv Stanca - Curriculum
             </a>
         </div>
@@ -927,8 +946,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <!-- Navigation -->
     <nav class="nav-header">
         <div class="nav-container">
-            <a href=\"https://avvstancamarcello.github.io/Financial-Authority-Database/index.html#database-search-section\" class=\"nav-logo\">🌊 Odissea Digitale</a>
-            <ul class=\"nav-links\">
+            <a href="https://avvstancamarcello.github.io/Financial-Authority-Database/index.html#database-search-section" class="nav-logo">🌊 Odissea Digitale</a>
+            <ul class="nav-links">
                 <li><a href="https://avvstancamarcello.github.io/Financial-Authority-Database/index.html#database-search-section">Database Autorità Finanziarie (129)</a></li>
                 <li><a href="#viaggio">Il Viaggio</a></li>
                 <li><a href="#prove">Le Prove</a></li>
@@ -943,11 +962,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <section class="hero">
         <div class="hero-content">
             <nav class="language-selector" role="navigation" aria-label="Language selection">
-                <button class="lang-btn active" onclick="changeLanguage('it')" aria-label="Italiano">🇮🇹 IT</button>
-                <button class="lang-btn" onclick="changeLanguage('en')" aria-label="English">🇬🇧 EN</button>
-                <button class="lang-btn" onclick="changeLanguage('fr')" aria-label="Français">🇫🇷 FR</button>
-                <button class="lang-btn" onclick="changeLanguage('de')" aria-label="Deutsch">🇩🇪 DE</button>
-                <button class="lang-btn" onclick="changeLanguage('es')" aria-label="Español">🇪🇸 ES</button>
+                <button class="lang-btn active" data-lang="it" aria-label="Italiano">🇮🇹 IT</button>
+                <button class="lang-btn" data-lang="en" aria-label="English">🇬🇧 EN</button>
+                <button class="lang-btn" data-lang="fr" aria-label="Français">🇫🇷 FR</button>
+                <button class="lang-btn" data-lang="de" aria-label="Deutsch">🇩🇪 DE</button>
+                <button class="lang-btn" data-lang="es" aria-label="Español">🇪🇸 ES</button>
             </nav>
             <h1>🌊 ODISSEA DIGITALE</h1>
             <p class="hero-subtitle">Dalla Truffa alla Riconquista</p>
@@ -992,7 +1011,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                         <p class="phase-description">La tua quotidianità serena, prima che i truffatori entrassero nella tua vita. Risparmi accumulati, progetti per il futuro, fiducia nel sistema.</p>
                         <p class="phase-action">📝 Descrivi la tua situazione finanziaria prima della truffa</p>
                         <div class="phase-checkbox">
-                            <input type="checkbox" id="phase1" onchange="updateProgress()">
+                            <input type="checkbox" id="phase1">
                             <label for="phase1">Ho completato questa fase</label>
                         </div>
                     </div>
@@ -1009,7 +1028,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                         <p class="phase-description">La telefonata, l'email, il messaggio che promette guadagni straordinari. Come le Sirene di Omero, una voce irresistibile che seduce la ragione.</p>
                         <p class="phase-action">📝 Descrivi come sei stato contattato</p>
                         <div class="phase-checkbox">
-                            <input type="checkbox" id="phase2" onchange="updateProgress()">
+                            <input type="checkbox" id="phase2">
                             <label for="phase2">Ho completato questa fase</label>
                         </div>
                     </div>
@@ -1022,7 +1041,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                         <p class="phase-description">"Sembra troppo bello per essere vero..." Il tuo istinto ti avverte, ma i Fiori di Loto dei truffatori addormentano il giudizio critico.</p>
                         <p class="phase-action">📝 Quali dubbi hai ignorato?</p>
                         <div class="phase-checkbox">
-                            <input type="checkbox" id="phase3" onchange="updateProgress()">
+                            <input type="checkbox" id="phase3">
                             <label for="phase3">Ho completato questa fase</label>
                         </div>
                     </div>
@@ -1036,10 +1055,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     <div class="phase-content" data-phase="4">
                         <div class="phase-number">FASE 4 - Incontro col Mentore</div>
                         <h3 class="phase-title">🦉 La Guida di Atena</h3>
-                        <p class="phase-description">Trovi il <a href="https://avvstancamarcello.github.io/Financial-Authority-Database/index.html#database-search-section" style="color:#38bdf8; font-weight:600; text-decoration:underline;">Database Autorità Finanziarie (129)</a>, consulti un avvocato, scopri le associazioni consumatori. La dea della saggezza ti offre gli strumenti per navigare.</p>
+                        <p class="phase-description">Trovi il <a class="accent-link" href="https://avvstancamarcello.github.io/Financial-Authority-Database/index.html#database-search-section">Database Autorità Finanziarie (129)</a>, consulti un avvocato, scopri le associazioni consumatori. La dea della saggezza ti offre gli strumenti per navigare.</p>
                         <p class="phase-action">📝 Chi/cosa ti ha guidato nella reazione?</p>
                         <div class="phase-checkbox">
-                            <input type="checkbox" id="phase4" onchange="updateProgress()">
+                            <input type="checkbox" id="phase4">
                             <label for="phase4">Ho completato questa fase</label>
                         </div>
                     </div>
@@ -1052,7 +1071,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                         <p class="phase-description">Il primo bonifico. Sei diventato un "porco da macello" nel gergo FBI del "Pig Butchering". Non c'è più ritorno alla normalità precedente.</p>
                         <p class="phase-action">📝 Quando hai capito di essere stato truffato?</p>
                         <div class="phase-checkbox">
-                            <input type="checkbox" id="phase5" onchange="updateProgress()">
+                            <input type="checkbox" id="phase5">
                             <label for="phase5">Ho completato questa fase</label>
                         </div>
                     </div>
@@ -1070,7 +1089,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                         <p class="phase-description">Incontri chi ti aiuta (associazioni, altri truffati) e chi ostacola (banche non collaborative, lungaggini burocratiche). Raccogli prove, documenti, screenshot.</p>
                         <p class="phase-action">📝 Chi hai trovato sul tuo cammino?</p>
                         <div class="phase-checkbox">
-                            <input type="checkbox" id="phase6" onchange="updateProgress()">
+                            <input type="checkbox" id="phase6">
                             <label for="phase6">Ho completato questa fase</label>
                         </div>
                     </div>
@@ -1083,7 +1102,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                         <p class="phase-description">Organizzi la documentazione, prepari la denuncia/reclamo, studi le normative. Ti avvicini all'ingresso del Labirinto del Minotauro (il sistema legale).</p>
                         <p class="phase-action">📝 Come hai preparato la tua difesa?</p>
                         <div class="phase-checkbox">
-                            <input type="checkbox" id="phase7" onchange="updateProgress()">
+                            <input type="checkbox" id="phase7">
                             <label for="phase7">Ho completato questa fase</label>
                         </div>
                     </div>
@@ -1100,7 +1119,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                         <p class="phase-description">Entri nel tribunale, ABF, conciliazione bancaria. Affronti il sistema che vuole divorare la tua speranza. Questa è la battaglia decisiva.</p>
                         <p class="phase-action">📝 Quale procedura hai avviato?</p>
                         <div class="phase-checkbox">
-                            <input type="checkbox" id="phase8" onchange="updateProgress()">
+                            <input type="checkbox" id="phase8">
                             <label for="phase8">Ho completato questa fase</label>
                         </div>
                     </div>
@@ -1113,7 +1132,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                         <p class="phase-description">Ottieni una sentenza favorevole, un accordo di conciliazione, il riconoscimento del torto subito. La dea della Giustizia ti sorride.</p>
                         <p class="phase-action">📝 Quale risultato hai ottenuto?</p>
                         <div class="phase-checkbox">
-                            <input type="checkbox" id="phase9" onchange="updateProgress()">
+                            <input type="checkbox" id="phase9">
                             <label for="phase9">Ho completato questa fase</label>
                         </div>
                     </div>
@@ -1131,7 +1150,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                         <p class="phase-description">Esecuzione del recupero crediti, negoziazioni finali, ultimi ostacoli burocratici. Il viaggio di ritorno a casa può essere insidioso quanto l'andata.</p>
                         <p class="phase-action">📝 Come stai recuperando i fondi?</p>
                         <div class="phase-checkbox">
-                            <input type="checkbox" id="phase10" onchange="updateProgress()">
+                            <input type="checkbox" id="phase10">
                             <label for="phase10">Ho completato questa fase</label>
                         </div>
                     </div>
@@ -1144,7 +1163,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                         <p class="phase-description">Recuperi parzialmente o totalmente i tuoi capitali. Come gli Argonauti, torni con il tesoro. Rinasci finanziariamente ed emotivamente.</p>
                         <p class="phase-action">📝 Quanto hai recuperato?</p>
                         <div class="phase-checkbox">
-                            <input type="checkbox" id="phase11" onchange="updateProgress()">
+                            <input type="checkbox" id="phase11">
                             <label for="phase11">Ho completato questa fase</label>
                         </div>
                     </div>
@@ -1161,7 +1180,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                         <p class="phase-description">Diventi mentore per altre vittime, condividi la tua storia, aiuti la comunità. Trasformi il trauma in saggezza, la sconfitta in missione.</p>
                         <p class="phase-action">📝 Come aiuterai altri naviganti?</p>
                         <div class="phase-checkbox">
-                            <input type="checkbox" id="phase12" onchange="updateProgress()">
+                            <input type="checkbox" id="phase12">
                             <label for="phase12">Ho completato questa fase</label>
                         </div>
                     </div>
@@ -1182,7 +1201,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     <p class="trial-myth">"Nessun mortale resisteva al loro canto..."</p>
                     <p class="trial-modern">Chiamate da presunti broker, promesse di guadagni garantiti, pressione psicologica per "investire subito".</p>
                     <div class="trial-defense">
-                        <strong>🛡️ La Difesa di Ulisse:</strong> Come Ulisse si fece legare all'albero, tu verifica SEMPRE nel <a href="https://avvstancamarcello.github.io/Financial-Authority-Database/index.html#database-search-section" style="color:#38bdf8; font-weight:600; text-decoration:underline;">Database Autorità Finanziarie (129)</a> prima di qualsiasi bonifico. Metti "palline di cera" (filtri anti-spam) alle tue orecchie.
+                        <strong>🛡️ La Difesa di Ulisse:</strong> Come Ulisse si fece legare all'albero, tu verifica SEMPRE nel <a class="accent-link" href="https://avvstancamarcello.github.io/Financial-Authority-Database/index.html#database-search-section">Database Autorità Finanziarie (129)</a> prima di qualsiasi bonifico. Metti "palline di cera" (filtri anti-spam) alle tue orecchie.
                     </div>
                 </div>
 
@@ -1270,7 +1289,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
                 <div id="scam-map"></div>
 
-                <div class="alert-box" style="margin-top: 2rem;">
+                <div class="alert-box mt-2">
                     <strong>🛡️ Nota Importante:</strong> Le segnalazioni mostrano solo le <strong>sedi dichiarate dai truffatori</strong> nelle loro pagine web fraudolente. Queste sono quasi sempre fittizie. L'obiettivo è mappare le strategie di inganno geografico, NON perseguire individui.
                 </div>
             </div>
@@ -1316,7 +1335,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     </div>
                 </div>
 
-                <div class="alert-box" style="margin-top: 2rem;">
+                <div class="alert-box mt-2">
                     <strong>⚠️ Importante:</strong> Le segnalazioni devono riguardare SOLO informazioni pubbliche (numeri di telefono, email, siti web di truffatori già denunciati). NO vigilantismo, NO dati personali privati. Solo mutuo soccorso legale.
                 </div>
             </div>
@@ -1552,15 +1571,15 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
                     <!-- SECTION 7: Email Headers (Collapsible) -->
                     <div class="collapsible-section">
-                        <div class="collapsible-header" onclick="toggleCollapsible(this)">
+                        <div class="collapsible-header">
                             <span>📧 Istruzioni: Come Estrarre il Codice Sorgente delle Email (Avanzato)</span>
                             <span>▼</span>
                         </div>
                         <div class="collapsible-content">
-                            <p style="margin-bottom: 1rem;"><strong>Perché è importante:</strong> Gli header delle email rivelano il <strong>server di origine reale</strong>, l'indirizzo IP del mittente, e possono smascherare l'identità nascosta dei truffatori.</p>
+                            <p class="mb-1"><strong>Perché è importante:</strong> Gli header delle email rivelano il <strong>server di origine reale</strong>, l'indirizzo IP del mittente, e possono smascherare l'identità nascosta dei truffatori.</p>
 
-                            <h4 style="color: var(--odyssey-blue); margin-top: 1rem;">📩 Gmail (Desktop)</h4>
-                            <ol style="margin-left: 1.5rem; line-height: 1.8;">
+                            <h4 class="heading-blue">📩 Gmail (Desktop)</h4>
+                            <ol class="steps-list">
                                 <li>Apri l'email del truffatore</li>
                                 <li>Clicca sui tre puntini verticali (⋮) in alto a destra</li>
                                 <li>Seleziona <strong>"Mostra originale"</strong></li>
@@ -1568,22 +1587,22 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                                 <li>Copia tutto il testo e incollalo nel campo sottostante</li>
                             </ol>
 
-                            <h4 style="color: var(--odyssey-blue); margin-top: 1rem;">📧 Outlook (Desktop)</h4>
-                            <ol style="margin-left: 1.5rem; line-height: 1.8;">
+                            <h4 class="heading-blue">📧 Outlook (Desktop)</h4>
+                            <ol class="steps-list">
                                 <li>Apri l'email</li>
                                 <li>Clicca su <strong>File</strong> → <strong>Proprietà</strong></li>
                                 <li>Nella sezione "Intestazioni Internet", copia tutto il testo</li>
                                 <li>Oppure: Doppio clic sull'email → Messaggio → Azioni → Visualizza origine messaggio</li>
                             </ol>
 
-                            <h4 style="color: var(--odyssey-blue); margin-top: 1rem;">🍎 Apple Mail (Mac/iPhone)</h4>
-                            <ol style="margin-left: 1.5rem; line-height: 1.8;">
+                            <h4 class="heading-blue">🍎 Apple Mail (Mac/iPhone)</h4>
+                            <ol class="steps-list">
                                 <li>Apri l'email</li>
                                 <li>Seleziona <strong>Visualizza</strong> → <strong>Messaggio</strong> → <strong>Tutti gli header</strong></li>
                                 <li>Copia il testo visualizzato</li>
                             </ol>
 
-                            <div class="code-example" style="margin-top: 1rem;">
+                            <div class="code-example mt-1">
 Esempio di header email da cercare:
 
 <strong>Received: from</strong> scam-server.com (123.45.67.89)
@@ -1592,7 +1611,7 @@ Esempio di header email da cercare:
 <strong>Authentication-Results:</strong> spf=fail smtp.mailfrom=scam.com
                             </div>
 
-                            <div class="form-group" style="margin-top: 1.5rem;">
+                            <div class="form-group mt-15">
                                 <label for="email-headers">Incolla qui il codice sorgente completo dell'email</label>
                                 <textarea id="email-headers" rows="6" placeholder="Received: from mail.scam-broker.com by...&#10;Return-Path: <advisor@fake.com>&#10;..."></textarea>
                             </div>
@@ -1600,7 +1619,7 @@ Esempio di header email da cercare:
                     </div>
 
                     <!-- SECTION 8: Additional Evidence -->
-                    <div class="form-section" style="margin-top: 1.5rem;">
+                    <div class="form-section mt-15">
                         <div class="form-section-title">
                             <span>📎</span>
                             <span>Prove Aggiuntive e Note</span>
@@ -1653,10 +1672,10 @@ Esempio di header email da cercare:
             <a href="#mappa">Mappa Truffe</a>
             <a href="#argonauti">Ranghi Argonauti</a>
         </div>
-        <p style="margin-top: 2rem; opacity: 0.8;">
+        <p class="footer-tagline">
             🌊 "Polytropos" - L'uomo dai mille inganni, come Ulisse, sarà chi sconfigge i truffatori
         </p>
-        <p style="margin-top: 1rem; font-size: 0.9rem; opacity: 0.7;">
+        <p class="footer-copy">
             © 2026 Odissea Digitale - Basato sul "Viaggio dell'Eroe" di Joseph Campbell
         </p>
     </footer>
@@ -1742,7 +1761,7 @@ Esempio di header email da cercare:
                 ${report.declaredAddress ? `<div class="popup-info"><strong>Sede dichiarata:</strong> ${report.declaredAddress}</div>` : ''}
                 ${report.amountLost ? `<div class="popup-info"><strong>Importo:</strong> ${formatEuroAmount(report.amountLost)}</div>` : ''}
                 ${report.whatsappNumber ? `<div class="popup-info"><strong>WhatsApp:</strong> ${report.whatsappNumber}</div>` : ''}
-                <div class="popup-info" style="margin-top: 0.5rem; font-size: 0.8rem; color: #64748b;">Segnalato: ${new Date(report.timestamp).toLocaleDateString('it-IT')}</div>
+                <div class="popup-info popup-reported">Segnalato: ${new Date(report.timestamp).toLocaleDateString('it-IT')}</div>
             `;
 
             marker.bindPopup(popupContent);
@@ -1991,6 +2010,15 @@ Ricorda: come Ulisse, la strada è lunga ma Itaca ti aspetta.`);
 
         // Initialize on page load
         document.addEventListener('DOMContentLoaded', function() {
+            document.querySelectorAll('.lang-btn[data-lang]').forEach(btn => {
+                btn.addEventListener('click', () => changeLanguage(btn.dataset.lang));
+            });
+            document.querySelectorAll('.collapsible-header').forEach(header => {
+                header.addEventListener('click', () => toggleCollapsible(header));
+            });
+            document.querySelectorAll('.phase-checkbox input[type="checkbox"]').forEach(cb => {
+                cb.addEventListener('change', updateProgress);
+            });
             loadProgress();
             
             // Load trials count from localStorage
