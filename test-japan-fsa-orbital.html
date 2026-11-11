@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Japan FSA Orbital regression checks</title>
+</head>
+<body>
+  <h1>Japan FSA Orbital regression checks</h1>
+  <pre id="results">Running…</pre>
+  <iframe id="app" title="Homepage under test" src="./index.html" width="1000" height="700"></iframe>
+  <script>
+    const results = document.getElementById('results');
+    const paths = ['/authority/japan-fsa.html', '/authority/japan-fsa/it.html', '/authority/japan-fsa/ja.html'];
+    const languages = ['en', 'it', 'ja'];
+    function check(condition, message) {
+      results.textContent += `\n${condition ? 'PASS' : 'FAIL'}: ${message}`;
+      if (!condition) throw new Error(message);
+    }
+    async function waitFor(predicate) {
+      const deadline = Date.now() + 20000;
+      while (Date.now() < deadline) {
+        if (predicate()) return;
+        await new Promise(resolve => setTimeout(resolve, 50));
+      }
+      throw new Error('Timed out waiting for Japan in the homepage grid');
+    }
+    async function run() {
+      results.textContent = '';
+      for (const [index, path] of paths.entries()) {
+        const response = await fetch(path);
+        check(response.ok, `${path} is available`);
+        const page = new DOMParser().parseFromString(await response.text(), 'text/html');
+        const links = [...page.querySelectorAll('nav a[hreflang]')];
+        const alternates = [...page.querySelectorAll('link[rel="alternate"][hreflang]')];
+        check(page.documentElement.lang === languages[index]
+          && links.length === 3
+          && links.every((link, i) => link.getAttribute('href') === paths[i]
+            && link.hreflang === languages[i]
+            && (link.getAttribute('aria-current') === 'page') === (i === index)),
+          `${languages[index]} language switch links to all versions and marks the current page`);
+        check(alternates.length === 3 && alternates.every((link, i) =>
+          link.hreflang === languages[i] && link.href === `https://www.amevfirenze.it${paths[i]}`),
+          `${languages[index]} has reciprocal hreflang links`);
+        check(page.querySelectorAll('h3').length === 5
+          && page.querySelector('a[href="https://search.fsa.go.jp/"]')
+          && page.querySelector('.disclaimer'),
+          `${languages[index]} contains the guide, FSA search and independent disclaimer`);
+        check((await fetch(page.querySelector('link[rel="stylesheet"]').getAttribute('href'))).ok,
+          `${languages[index]} stylesheet is available`);
+      }
+      const doc = document.getElementById('app').contentDocument;
+      await waitFor(() => doc.querySelector('#flagsGrid [data-country-name="Japan"]'));
+      check(!!doc.querySelector('#orbital-micropages a[href="authority/japan-fsa.html"]'),
+        'Homepage directory links to Japan');
+      doc.getElementById('flagViewDialog').close();
+      doc.querySelector('#flagsGrid [data-country-name="Japan"]').click();
+      check(doc.getElementById('countryModal').style.display === 'block'
+        && !!doc.querySelector('#countryModal a[href="authority/japan-fsa.html"]'),
+        'Japan detail card links to the guide');
+      results.textContent += '\nAll checks passed.';
+    }
+    run().catch(error => { results.textContent += `\nERROR: ${error.message}`; });
+  </script>
+</body>
+</html>
