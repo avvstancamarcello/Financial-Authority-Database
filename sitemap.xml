@@ -133,7 +133,21 @@
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
-
+  <url>
+    <loc>https://www.amevfirenze.it/authority/japan-fsa-orbital-webapp.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.amevfirenze.it/authority/japan-fsa/it.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.amevfirenze.it/authority/japan-fsa/ja.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
   <url>
     <loc>https://www.amevfirenze.it/authority/oesterreich-fma-orbital-webapp.html</loc>
     <lastmod>2026-10-08</lastmod>

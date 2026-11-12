@@ -10,7 +10,7 @@
   <iframe id="app" title="Homepage under test" src="./index.html" width="1000" height="700"></iframe>
   <script>
     const results = document.getElementById('results');
-    const paths = ['/authority/japan-fsa.html', '/authority/japan-fsa/it.html', '/authority/japan-fsa/ja.html'];
+    const paths = ['/authority/japan-fsa-orbital-webapp.html', '/authority/japan-fsa/it.html', '/authority/japan-fsa/ja.html'];
     const languages = ['en', 'it', 'ja'];
     function check(condition, message) {
       results.textContent += `\n${condition ? 'PASS' : 'FAIL'}: ${message}`;
@@ -50,13 +50,16 @@
       }
       const doc = document.getElementById('app').contentDocument;
       await waitFor(() => doc.querySelector('#flagsGrid [data-country-name="Japan"]'));
-      check(!!doc.querySelector('#orbital-micropages a[href="authority/japan-fsa.html"]'),
+      check(!!doc.querySelector('#orbital-micropages a[href="authority/japan-fsa-orbital-webapp.html"]'),
         'Homepage directory links to Japan');
       doc.getElementById('flagViewDialog').close();
       doc.querySelector('#flagsGrid [data-country-name="Japan"]').click();
       check(doc.getElementById('countryModal').style.display === 'block'
-        && !!doc.querySelector('#countryModal a[href="authority/japan-fsa.html"]'),
+        && !!doc.querySelector('#countryModal a[href="authority/japan-fsa-orbital-webapp.html"]'),
         'Japan detail card links to the guide');
+      check(!!doc.querySelector('#countryModal img[src="authority/preview-JP-FSA.svg"]')
+        && (await fetch('authority/preview-JP-FSA.svg')).ok,
+        'Japan detail card includes a working FSA Orbital preview');
       results.textContent += '\nAll checks passed.';
     }
     run().catch(error => { results.textContent += `\nERROR: ${error.message}`; });

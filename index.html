@@ -3529,7 +3529,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <ul>
                 <li><a href="/authority/bulgaria-fsc-orbital-webapp.html"><span class="fi fi-bg" aria-hidden="true"></span> BULGARIA · BG</a></li>
                 <li><a href="authority/ethiopia-ecma-orbital-webapp.html">ETHIOPIA · ECMA</a></li>
-                <li><a href="authority/japan-fsa.html" lang="en">JAPAN · FSA</a></li>
+                <li><a href="authority/japan-fsa-orbital-webapp.html" lang="en">JAPAN · FSA</a></li>
                 <li><a href="authority/nunavut-orbital-webapp.html" lang="it">NUNAVUT · Territorio canadese / WSCC</a></li>
                 <li><a href="authority/oesterreich-fma-orbital-webapp.html" lang="de">ÖSTERREICH · FMA</a></li>
                 <li><a href="authority/polynesie-francaise-orbital-webapp.html" lang="fr">POLYNÉSIE FRANÇAISE · Autorités financières</a></li>
@@ -9384,6 +9384,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     <span data-i18n-text="polynesiaOrbitalOpen" lang="${currentLanguage === 'it' ? 'it' : 'en'}">${escapeHtmlAttribute(currentTranslations.polynesiaOrbitalOpen)}</span>
                 </a>
             ` : '';
+            const japanPreviewHtml = country.country_name === 'Japan' ? `
+                <section style="margin: 20px 0 0;" aria-label="Japan FSA orbital guide preview">
+                    <p style="margin: 0 0 10px;"><strong>Japan · FSA Orbital Preview:</strong></p>
+                    <a class="orbital-thumbnail-trigger" href="authority/japan-fsa-orbital-webapp.html">
+                        <img src="authority/preview-JP-FSA.svg" alt="Preview of the independent Japan FSA Orbital WebApp guide" width="640" height="360">
+                    </a>
+                </section>
+            ` : '';
             const safeCountryName = escapeHtmlAttribute(country.country_name);
             const safeAuthorityName = escapeHtmlAttribute(country.financial_authority.name);
             const safeAuthorityEmail = escapeHtmlAttribute(country.financial_authority.authorityEmail);
@@ -9427,7 +9435,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     ${orbitalPreviewHtml}
                     ${ecmaPreviewHtml}
                     ${polynesiaPreviewHtml}
-                    ${country.country_name === 'Japan' ? '<a class="polynesia-orbital-cta" href="authority/japan-fsa.html" lang="en">◎ Japan · FSA Orbital WebApp</a>' : ''}
+                    ${japanPreviewHtml}
                     <div style="margin-top: 20px; display: flex; align-items: center; flex-wrap: wrap; gap: 10px;">
                         <h3 style="margin: 0;">${currentTranslations.modalNotes || 'Notes'}:</h3>
                         <button id="translateNotesBtn" class="translate-btn" onclick="translateNotes(this.dataset.country)" data-country="${safeCountryName}">
