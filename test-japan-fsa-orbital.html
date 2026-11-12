@@ -57,6 +57,9 @@
       check(doc.getElementById('countryModal').style.display === 'block'
         && !!doc.querySelector('#countryModal a[href="authority/japan-fsa-orbital-webapp.html"]'),
         'Japan detail card links to the guide');
+      check(!!doc.querySelector('#countryModal img[src="authority/preview-JP-FSA.svg"]')
+        && (await fetch('authority/preview-JP-FSA.svg')).ok,
+        'Japan detail card includes a working FSA Orbital preview');
       results.textContent += '\nAll checks passed.';
     }
     run().catch(error => { results.textContent += `\nERROR: ${error.message}`; });
