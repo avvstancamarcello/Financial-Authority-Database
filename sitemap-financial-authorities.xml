@@ -26,6 +26,11 @@
     <priority>0.88</priority>
   </url>
   <url>
+    <loc>https://www.amevfirenze.it/authority/cnmv-orbital-webapp.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.88</priority>
+  </url>
+  <url>
     <loc>https://www.amevfirenze.it/authority/UK-FCA.html</loc>
     <changefreq>weekly</changefreq>
     <priority>0.88</priority>

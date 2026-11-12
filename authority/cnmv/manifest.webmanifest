@@ -1,0 +1,24 @@
+{
+  "id": "/authority/cnmv-orbital-webapp.html",
+  "name": "AMEV España · Guía independiente CNMV",
+  "short_name": "AMEV CNMV",
+  "description": "Guía independiente en español con recursos oficiales de la CNMV para inversores en España.",
+  "lang": "es",
+  "start_url": "/authority/cnmv-orbital-webapp.html",
+  "scope": "/authority/cnmv-orbital-webapp.html",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#a91624",
+  "icons": [
+    {
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

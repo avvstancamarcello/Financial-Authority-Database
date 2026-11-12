@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <title>CNMV Orbital regression checks</title>
+</head>
+<body>
+  <h1>CNMV Orbital regression checks</h1>
+  <pre id="results">Running…</pre>
+  <script>
+    const results = document.getElementById('results');
+    function check(condition, message) {
+      results.textContent += `\n${condition ? 'PASS' : 'FAIL'}: ${message}`;
+      if (!condition) throw new Error(message);
+    }
+    async function run() {
+      results.textContent = '';
+      const path = '/authority/cnmv-orbital-webapp.html';
+      const response = await fetch(path);
+      check(response.ok, 'CNMV consumer guide is available');
+      const doc = new DOMParser().parseFromString(await response.text(), 'text/html');
+      check(doc.documentElement.lang === 'es'
+        && doc.querySelector('.site-header svg.flag rect[fill="#f1bf00"]')
+        && doc.querySelector('.flag')?.getAttribute('aria-label') === 'Bandera de España',
+        'Guide is Spanish and displays an accessible Spanish flag at the top');
+      check(doc.querySelectorAll('a[href^="https://www.cnmv.es/"]').length >= 6
+        && doc.querySelector('a[href="https://sede.cnmv.gob.es/sedecnmv/LibreAcceso/RQC/Reclamaciones_Consultas.aspx"]'),
+        'Guide links to official CNMV sources and complaint procedures');
+      check(doc.querySelector('.notice')?.textContent.includes('no verifica licencias en tiempo real'),
+        'Guide states its independence and limits');
+
+      const manifest = await (await fetch('/authority/cnmv/manifest.webmanifest')).json();
+      check(manifest.lang === 'es' && manifest.start_url === path
+        && manifest.id === path && manifest.scope === path,
+        'Manifest has a Spanish locale and guide-only identity and scope');
+      for (const icon of manifest.icons) {
+        check((await fetch(icon.src)).ok, `Manifest icon ${icon.sizes} is available`);
+      }
+
+      const registration = await navigator.serviceWorker.register('/authority/cnmv-service-worker.js', { scope: path });
+      if (!registration.active) {
+        await new Promise((resolve, reject) => {
+          const worker = registration.installing || registration.waiting;
+          if (!worker) return reject(new Error('CNMV service worker did not start'));
+          worker.addEventListener('statechange', () => {
+            if (worker.state === 'activated') resolve();
+            if (worker.state === 'redundant') reject(new Error('CNMV service worker install failed'));
+          });
+        });
+      }
+      check(registration.scope.endsWith(path)
+        && registration.active.scriptURL.endsWith('/authority/cnmv-service-worker.js'),
+        'Dedicated service worker controls only the CNMV guide');
+      const shell = await (await caches.open('amev-cnmv-v1')).keys();
+      check(shell.some(request => new URL(request.url).pathname === path)
+        && shell.every(request => new URL(request.url).origin === location.origin),
+        'Offline cache contains the guide shell and no external official resources');
+      check((await fetch('/authority/ES-CNMV.html')).ok
+        && (await fetch('/authority/japan-fsa-orbital-webapp.html')).ok,
+        'Existing authority guides remain available');
+      const directory = new DOMParser().parseFromString(await (await fetch('/authority-consumer/index.html')).text(), 'text/html');
+      check(directory.querySelector('[data-id="spain"] a')?.getAttribute('href') === '../authority/cnmv-orbital-webapp.html',
+        'Consumer directory offers the CNMV mini-PWA');
+      results.textContent += '\nAll checks passed.';
+    }
+    run().catch(error => { results.textContent += `\nERROR: ${error.message}`; });
+  </script>
+</body>
+</html>
