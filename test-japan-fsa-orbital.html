@@ -49,15 +49,29 @@
           `${languages[index]} stylesheet is available`);
       }
       const doc = document.getElementById('app').contentDocument;
-      await waitFor(() => doc.querySelector('#flagsGrid [data-country-name="Japan"]'));
+      await waitFor(() => doc.querySelector('#countriesGrid [data-country-name="Japan"]'));
       check(!!doc.querySelector('#orbital-micropages a[href="authority/japan-fsa-orbital-webapp.html"]'),
         'Homepage directory links to Japan');
       doc.getElementById('flagViewDialog').close();
-      doc.querySelector('#flagsGrid [data-country-name="Japan"]').click();
+      const japanCard = doc.querySelector('#countriesGrid [data-country-name="Japan"]');
+      const preview = japanCard.querySelector('a.orbital-thumbnail-trigger');
+      const image = preview?.querySelector('img');
+      check(preview?.getAttribute('href') === '/authority/japan-fsa-orbital-webapp.html'
+        && image?.getAttribute('src') === '/authority/preview-JP-FSA.svg',
+        'Japan grid card includes the linked FSA hook image');
+      await waitFor(() => image.complete && image.naturalWidth > 0);
+      check(image.naturalWidth > 0, 'Japan grid hook image loads successfully');
+      preview.click();
+      check(doc.getElementById('consobOrbitalDialog').open
+        && new URL(doc.getElementById('consobOrbitalFrame').src).pathname === paths[0]
+        && doc.getElementById('countryModal').style.display !== 'block',
+        'Japan grid hook opens its orbital preview without opening the country details');
+      doc.getElementById('consobOrbitalCloseButton').click();
+      japanCard.click();
       check(doc.getElementById('countryModal').style.display === 'block'
-        && !!doc.querySelector('#countryModal a[href="authority/japan-fsa-orbital-webapp.html"]'),
+        && !!doc.querySelector('#countryModal a[href$="/authority/japan-fsa-orbital-webapp.html"]'),
         'Japan detail card links to the guide');
-      check(!!doc.querySelector('#countryModal img[src="authority/preview-JP-FSA.svg"]')
+      check(doc.querySelectorAll('#countryModal img[src$="/authority/preview-JP-FSA.svg"]').length === 1
         && (await fetch('authority/preview-JP-FSA.svg')).ok,
         'Japan detail card includes a working FSA Orbital preview');
       results.textContent += '\nAll checks passed.';

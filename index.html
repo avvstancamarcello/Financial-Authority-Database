@@ -7487,6 +7487,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     data.Switzerland.modal = 'authority/CH-FINMA.html';
                     data.Switzerland.has_orbital_view = true;
                 }
+                if (data.Japan) {
+                    data.Japan.thumbnail = 'authority/preview-JP-FSA.svg';
+                    data.Japan.modal = 'authority/japan-fsa-orbital-webapp.html';
+                    data.Japan.has_orbital_view = true;
+                }
                 if (data['French Polynesia (France)']) {
                     data['French Polynesia (France)'].thumbnail = 'authority/preview-PF.svg';
                     data['French Polynesia (France)'].modal = 'authority/polynesie-francaise-orbital-webapp.html';
@@ -8418,7 +8423,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     const orbitalContainer = document.createElement('div');
                     orbitalContainer.style.marginTop = '15px';
 
-                    const isPreviewLink = ['Austria', 'French Polynesia (France)'].includes(country.country_name);
+                    const isPreviewLink = ['Austria', 'French Polynesia (France)', 'Japan'].includes(country.country_name);
                     const orbitalButton = document.createElement(isPreviewLink ? 'a' : 'button');
                     if (isPreviewLink) orbitalButton.href = orbitalModalSrc;
                     else orbitalButton.type = 'button';
@@ -8704,7 +8709,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             new URL('/authority/US-SEC.html', window.location.origin).pathname,
             new URL('authority/US-SEC.html', window.location.href).pathname,
             new URL('/authority/CH-FINMA.html', window.location.origin).pathname,
-            new URL('authority/CH-FINMA.html', window.location.href).pathname
+            new URL('authority/CH-FINMA.html', window.location.href).pathname,
+            new URL('/authority/japan-fsa-orbital-webapp.html', window.location.origin).pathname,
+            new URL('authority/japan-fsa-orbital-webapp.html', window.location.href).pathname
         ]);
         const CONSOB_ORBITAL_ALLOWED_THUMBNAIL_PATHS = new Set([
             new URL('/authority/preview-consob.png', window.location.origin).pathname,
@@ -8726,7 +8733,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             new URL('/authority/preview-US-SEC.svg', window.location.origin).pathname,
             new URL('authority/preview-US-SEC.svg', window.location.href).pathname,
             new URL('/authority/preview-CH-FINMA.svg', window.location.origin).pathname,
-            new URL('authority/preview-CH-FINMA.svg', window.location.href).pathname
+            new URL('authority/preview-CH-FINMA.svg', window.location.href).pathname,
+            new URL('/authority/preview-JP-FSA.svg', window.location.origin).pathname,
+            new URL('authority/preview-JP-FSA.svg', window.location.href).pathname
         ]);
 
         function resolveConsobOrbitalSrc(candidateSource, { allowFallback = false } = {}) {
@@ -8765,6 +8774,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             if (country.country_name === 'Ethiopia') return 'ECMA Ethiopia';
             if (country.country_name === 'Austria') return 'FMA Austria';
             if (country.country_name === 'Switzerland') return 'FINMA Switzerland · CH';
+            if (country.country_name === 'Japan') return 'Japan · FSA';
             if (country.country_name === 'French Polynesia (France)') return 'Polynésie française · sources territoriales';
             return country.country_name || 'Unknown authority';
         }
@@ -9341,7 +9351,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 && Boolean(country.has_orbital_view)
                 && Boolean(orbitalThumbnailSrc)
                 && Boolean(orbitalModalSrc);
-            const isPreviewLink = ['Austria', 'French Polynesia (France)'].includes(country.country_name);
+            const isPreviewLink = ['Austria', 'French Polynesia (France)', 'Japan'].includes(country.country_name);
             const orbitalPreviewHtml = hasItalyOrbitalView ? `
                 <div style="margin: 20px 0 0;">
                     <p style="margin: 0 0 10px;"><strong>${escapeHtmlAttribute(orbitalAuthorityName)} Orbital Preview:</strong></p>
@@ -9383,14 +9393,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     <span aria-hidden="true">◎</span>
                     <span data-i18n-text="polynesiaOrbitalOpen" lang="${currentLanguage === 'it' ? 'it' : 'en'}">${escapeHtmlAttribute(currentTranslations.polynesiaOrbitalOpen)}</span>
                 </a>
-            ` : '';
-            const japanPreviewHtml = country.country_name === 'Japan' ? `
-                <section style="margin: 20px 0 0;" aria-label="Japan FSA orbital guide preview">
-                    <p style="margin: 0 0 10px;"><strong>Japan · FSA Orbital Preview:</strong></p>
-                    <a class="orbital-thumbnail-trigger" href="authority/japan-fsa-orbital-webapp.html">
-                        <img src="authority/preview-JP-FSA.svg" alt="Preview of the independent Japan FSA Orbital WebApp guide" width="640" height="360">
-                    </a>
-                </section>
             ` : '';
             const safeCountryName = escapeHtmlAttribute(country.country_name);
             const safeAuthorityName = escapeHtmlAttribute(country.financial_authority.name);
@@ -9435,7 +9437,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     ${orbitalPreviewHtml}
                     ${ecmaPreviewHtml}
                     ${polynesiaPreviewHtml}
-                    ${japanPreviewHtml}
                     <div style="margin-top: 20px; display: flex; align-items: center; flex-wrap: wrap; gap: 10px;">
                         <h3 style="margin: 0;">${currentTranslations.modalNotes || 'Notes'}:</h3>
                         <button id="translateNotesBtn" class="translate-btn" onclick="translateNotes(this.dataset.country)" data-country="${safeCountryName}">
