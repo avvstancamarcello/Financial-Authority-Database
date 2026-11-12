@@ -197,7 +197,7 @@ self.addEventListener('activate', event => {
     const cacheNames = await caches.keys();
     await Promise.all(
       cacheNames
-        .filter(cacheName => cacheName !== CACHE_NAME)
+        .filter(cacheName => cacheName.startsWith('financial-authority-v') && cacheName !== CACHE_NAME)
         .map(cacheName => caches.delete(cacheName))
     );
     await self.clients.claim();

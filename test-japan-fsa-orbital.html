@@ -48,6 +48,21 @@
         check((await fetch(page.querySelector('link[rel="stylesheet"]').getAttribute('href'))).ok,
           `${languages[index]} stylesheet is available`);
       }
+      const englishPage = new DOMParser().parseFromString(await (await fetch(paths[0])).text(), 'text/html');
+      const manifestUrl = englishPage.querySelector('link[rel="manifest"]')?.getAttribute('href');
+      const manifest = await (await fetch(manifestUrl)).json();
+      check(manifest.start_url === paths[0] && manifest.id === paths[0] && manifest.scope === paths[0],
+        'Japan manifest has a distinct identity and a scope limited to its guide');
+      for (const icon of manifest.icons) {
+        check((await fetch(icon.src)).ok, `Japan manifest icon ${icon.sizes} is available`);
+      }
+      const worker = await (await fetch('/authority/japan-fsa-service-worker.js')).text();
+      check(worker.includes("const CACHE_PREFIX = 'amev-japan-fsa-'")
+        && worker.includes("name.startsWith(CACHE_PREFIX)"),
+        'Japan worker cleans up only its own caches');
+      const rootWorker = await (await fetch('/service-worker.js')).text();
+      check(rootWorker.includes("cacheName.startsWith('financial-authority-v')"),
+        'Root worker preserves Japan and other unrelated caches');
       const doc = document.getElementById('app').contentDocument;
       await waitFor(() => doc.querySelector('#countriesGrid [data-country-name="Japan"]'));
       check(!!doc.querySelector('#orbital-micropages a[href="authority/japan-fsa-orbital-webapp.html"]'),
