@@ -3525,6 +3525,60 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <a href="authority/US-SEC.html">SEC · USA</a>
         </nav>
 
+        <!--
+          ORBITAL MINI-PWA CONTRACT — apply when adding a consumer-protection guide.
+          Purpose: this homepage is the discovery/catalog hub; each guide remains an
+          independent AMEV page, never an official authority app or endorsement.
+
+          Page record (keep these fields consistent wherever the page is registered):
+          {
+            "id": "<country-or-territory-slug>",
+            "country": "<display name>",
+            "authority": "<official body and abbreviation, if applicable>",
+            "title": "<short accessible title>",
+            "url": "/authority/<page-path>",
+            "languages": ["<BCP-47 language tags>"],
+            "summary": "<plain-language purpose and scope>",
+            "officialSources": [{"label": "<source>", "url": "<HTTPS URL>", "checkedOn": "YYYY-MM-DD"}],
+            "thumbnail": "/authority/<preview-asset>",
+            "pwa": {
+              "manifest": "<manifest URL>",
+              "serviceWorker": "<worker URL>",
+              "scope": "<unique page scope>",
+              "startUrl": "<URL inside that scope>"
+            }
+          }
+
+          Page requirements:
+          - Write original, responsive, keyboard-accessible consumer education; use semantic
+            headings, descriptive links, language metadata, and a visible skip link.
+          - Verify official links and contact details at their primary sources; record the
+            review date. Explain jurisdiction, subject limits, and that inclusion/absence
+            from a register or warning list is not proof of authorization or safety.
+          - Clearly identify the guide as independent, not published, endorsed, or certified
+            by the authority. Never imply live licence verification, advice, or fund recovery.
+          - Provide a canonical URL, a translated alternate only when that language page
+            exists, and a footer link back to this database/catalog.
+
+          Installation requirements:
+          - A catalog entry alone is not an installable or offline PWA. Offer installation
+            only after the page has its own manifest, valid icons, HTTPS service worker, and
+            a unique scope/start URL that cannot take control of sibling pages.
+          - Keep each worker's cache names and cleanup isolated. Cache only the guide shell
+            and reviewed static assets; do not cache personal, financial, or form data.
+            Make offline limitations clear and leave official external sources online-only.
+          - Use the browser install prompt only where supported; provide manual Add to Home
+            Screen guidance for iOS. Never promise that every browser can install the page.
+
+          Registration checklist in this homepage:
+          1. Add the page to #orbital-micropages (the consumer-facing catalog).
+          2. If it has a country-grid preview, register its country metadata and modal path
+             in the data enrichment below, and add exact page/thumbnail paths to both
+             CONSOB_ORBITAL_ALLOWED_PATHS and CONSOB_ORBITAL_ALLOWED_THUMBNAIL_PATHS.
+          3. Add the URL to the appropriate sitemap and verify canonical, language links,
+             preview, installation, scope isolation, offline behavior, and mobile layout.
+          4. Do not advertise installation or offline support until those checks pass.
+        -->
         <nav id="orbital-micropages" aria-labelledby="authority-consumer-banner-title">
             <ul>
                 <li><a href="/authority/bulgaria-fsc-orbital-webapp.html"><span class="fi fi-bg" aria-hidden="true"></span> BULGARIA · BG</a></li>
