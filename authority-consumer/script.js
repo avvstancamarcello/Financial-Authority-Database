@@ -3,7 +3,7 @@
 
   const ids = [
     'austria', 'benin', 'bulgaria', 'ethiopia-ecma', 'ethiopia-guide', 'france',
-    'germany', 'iosco', 'italy', 'nunavut', 'polynesia', 'uk', 'romania',
+    'germany', 'iosco', 'italy', 'japan', 'nunavut', 'polynesia', 'uk', 'romania',
     'spain', 'usa', 'switzerland-it', 'switzerland', 'eu'
   ];
   const uiKeys = [
@@ -25,7 +25,7 @@
     it: {
       austria: 'Austria', benin: 'Benin · area BCEAO', bulgaria: 'Bulgaria',
       'ethiopia-ecma': 'Etiopia', 'ethiopia-guide': 'Etiopia', france: 'Francia',
-      germany: 'Germania', iosco: 'Internazionale · IOSCO', italy: 'Italia',
+      germany: 'Germania', iosco: 'Internazionale · IOSCO', italy: 'Italia', japan: 'Giappone',
       nunavut: 'Nunavut · Canada', polynesia: 'Polinesia francese',
       uk: 'Regno Unito', romania: 'Romania', spain: 'Spagna', usa: 'Stati Uniti',
       'switzerland-it': 'Svizzera · pagina in inglese', switzerland: 'Svizzera',
@@ -34,7 +34,7 @@
     en: {
       austria: 'Austria', benin: 'Benin · BCEAO region', bulgaria: 'Bulgaria',
       'ethiopia-ecma': 'Ethiopia', 'ethiopia-guide': 'Ethiopia', france: 'France',
-      germany: 'Germany', iosco: 'International · IOSCO', italy: 'Italy',
+      germany: 'Germany', iosco: 'International · IOSCO', italy: 'Italy', japan: 'Japan',
       nunavut: 'Nunavut · Canada', polynesia: 'French Polynesia',
       uk: 'United Kingdom', romania: 'Romania', spain: 'Spain', usa: 'United States',
       'switzerland-it': 'Switzerland · English page', switzerland: 'Switzerland',
@@ -43,7 +43,7 @@
     fr: {
       austria: 'Autriche', benin: 'Bénin · zone BCEAO', bulgaria: 'Bulgarie',
       'ethiopia-ecma': 'Éthiopie', 'ethiopia-guide': 'Éthiopie', france: 'France',
-      germany: 'Allemagne', iosco: 'International · IOSCO', italy: 'Italie',
+      germany: 'Allemagne', iosco: 'International · IOSCO', italy: 'Italie', japan: 'Japon',
       nunavut: 'Nunavut · Canada', polynesia: 'Polynésie française',
       uk: 'Royaume-Uni', romania: 'Roumanie', spain: 'Espagne', usa: 'États-Unis',
       'switzerland-it': 'Suisse · page en anglais', switzerland: 'Suisse',
@@ -52,7 +52,7 @@
     de: {
       austria: 'Österreich', benin: 'Benin · BCEAO-Region', bulgaria: 'Bulgarien',
       'ethiopia-ecma': 'Äthiopien', 'ethiopia-guide': 'Äthiopien', france: 'Frankreich',
-      germany: 'Deutschland', iosco: 'International · IOSCO', italy: 'Italien',
+      germany: 'Deutschland', iosco: 'International · IOSCO', italy: 'Italien', japan: 'Japan',
       nunavut: 'Nunavut · Kanada', polynesia: 'Französisch-Polynesien',
       uk: 'Vereinigtes Königreich', romania: 'Rumänien', spain: 'Spanien',
       usa: 'Vereinigte Staaten', 'switzerland-it': 'Schweiz · englische Seite',
@@ -61,7 +61,7 @@
     es: {
       austria: 'Austria', benin: 'Benín · región BCEAO', bulgaria: 'Bulgaria',
       'ethiopia-ecma': 'Etiopía', 'ethiopia-guide': 'Etiopía', france: 'Francia',
-      germany: 'Alemania', iosco: 'Internacional · IOSCO', italy: 'Italia',
+      germany: 'Alemania', iosco: 'Internacional · IOSCO', italy: 'Italia', japan: 'Japón',
       nunavut: 'Nunavut · Canadá', polynesia: 'Polinesia Francesa',
       uk: 'Reino Unido', romania: 'Rumanía', spain: 'España', usa: 'Estados Unidos',
       'switzerland-it': 'Suiza · página en inglés', switzerland: 'Suiza',
@@ -70,7 +70,7 @@
     pt: {
       austria: 'Áustria', benin: 'Benim · região BCEAO', bulgaria: 'Bulgária',
       'ethiopia-ecma': 'Etiópia', 'ethiopia-guide': 'Etiópia', france: 'França',
-      germany: 'Alemanha', iosco: 'Internacional · IOSCO', italy: 'Itália',
+      germany: 'Alemanha', iosco: 'Internacional · IOSCO', italy: 'Itália', japan: 'Japão',
       nunavut: 'Nunavut · Canadá', polynesia: 'Polinésia Francesa',
       uk: 'Reino Unido', romania: 'Roménia', spain: 'Espanha', usa: 'Estados Unidos',
       'switzerland-it': 'Suíça · página em inglês', switzerland: 'Suíça',
@@ -79,7 +79,7 @@
     sq: {
       austria: 'Austri', benin: 'Benin · rajoni BCEAO', bulgaria: 'Bullgari',
       'ethiopia-ecma': 'Etiopi', 'ethiopia-guide': 'Etiopi', france: 'Francë',
-      germany: 'Gjermani', iosco: 'Ndërkombëtare · IOSCO', italy: 'Itali',
+      germany: 'Gjermani', iosco: 'Ndërkombëtare · IOSCO', italy: 'Itali', japan: 'Japoni',
       nunavut: 'Nunavut · Kanada', polynesia: 'Polinezia Franceze',
       uk: 'Mbretëria e Bashkuar', romania: 'Rumani', spain: 'Spanjë',
       usa: 'Shtetet e Bashkuara', 'switzerland-it': 'Zvicër · faqe në anglisht',
@@ -88,7 +88,7 @@
     ro: {
       austria: 'Austria', benin: 'Benin · regiunea BCEAO', bulgaria: 'Bulgaria',
       'ethiopia-ecma': 'Etiopia', 'ethiopia-guide': 'Etiopia', france: 'Franța',
-      germany: 'Germania', iosco: 'Internațional · IOSCO', italy: 'Italia',
+      germany: 'Germania', iosco: 'Internațional · IOSCO', italy: 'Italia', japan: 'Japonia',
       nunavut: 'Nunavut · Canada', polynesia: 'Polinezia Franceză',
       uk: 'Regatul Unit', romania: 'România', spain: 'Spania', usa: 'Statele Unite',
       'switzerland-it': 'Elveția · pagină în engleză', switzerland: 'Elveția',
@@ -97,7 +97,7 @@
     nl: {
       austria: 'Oostenrijk', benin: 'Benin · BCEAO-regio', bulgaria: 'Bulgarije',
       'ethiopia-ecma': 'Ethiopië', 'ethiopia-guide': 'Ethiopië', france: 'Frankrijk',
-      germany: 'Duitsland', iosco: 'Internationaal · IOSCO', italy: 'Italië',
+      germany: 'Duitsland', iosco: 'Internationaal · IOSCO', italy: 'Italië', japan: 'Japan',
       nunavut: 'Nunavut · Canada', polynesia: 'Frans-Polynesië',
       uk: 'Verenigd Koninkrijk', romania: 'Roemenië', spain: 'Spanje',
       usa: 'Verenigde Staten', 'switzerland-it': 'Zwitserland · Engelse pagina',
@@ -106,7 +106,7 @@
     el: {
       austria: 'Αυστρία', benin: 'Μπενίν · περιοχή BCEAO', bulgaria: 'Βουλγαρία',
       'ethiopia-ecma': 'Αιθιοπία', 'ethiopia-guide': 'Αιθιοπία', france: 'Γαλλία',
-      germany: 'Γερμανία', iosco: 'Διεθνής · IOSCO', italy: 'Ιταλία',
+      germany: 'Γερμανία', iosco: 'Διεθνής · IOSCO', italy: 'Ιταλία', japan: 'Ιαπωνία',
       nunavut: 'Νούναβουτ · Καναδάς', polynesia: 'Γαλλική Πολυνησία',
       uk: 'Ηνωμένο Βασίλειο', romania: 'Ρουμανία', spain: 'Ισπανία',
       usa: 'Ηνωμένες Πολιτείες', 'switzerland-it': 'Ελβετία · σελίδα στα αγγλικά',
@@ -115,7 +115,7 @@
     bs: {
       austria: 'Austrija', benin: 'Benin · regija BCEAO', bulgaria: 'Bugarska',
       'ethiopia-ecma': 'Etiopija', 'ethiopia-guide': 'Etiopija', france: 'Francuska',
-      germany: 'Njemačka', iosco: 'Međunarodno · IOSCO', italy: 'Italija',
+      germany: 'Njemačka', iosco: 'Međunarodno · IOSCO', italy: 'Italija', japan: 'Japan',
       nunavut: 'Nunavut · Kanada', polynesia: 'Francuska Polinezija',
       uk: 'Ujedinjeno Kraljevstvo', romania: 'Rumunija', spain: 'Španija',
       usa: 'Sjedinjene Američke Države', 'switzerland-it': 'Švicarska · stranica na engleskom',
@@ -124,7 +124,7 @@
     ar: {
       austria: 'النمسا', benin: 'بنين · منطقة البنك المركزي لدول غرب أفريقيا', bulgaria: 'بلغاريا',
       'ethiopia-ecma': 'إثيوبيا', 'ethiopia-guide': 'إثيوبيا', france: 'فرنسا',
-      germany: 'ألمانيا', iosco: 'دولي · IOSCO', italy: 'إيطاليا',
+      germany: 'ألمانيا', iosco: 'دولي · IOSCO', italy: 'إيطاليا', japan: 'اليابان',
       nunavut: 'نونافوت · كندا', polynesia: 'بولينيزيا الفرنسية',
       uk: 'المملكة المتحدة', romania: 'رومانيا', spain: 'إسبانيا',
       usa: 'الولايات المتحدة', 'switzerland-it': 'سويسرا · صفحة بالإنجليزية',
@@ -133,7 +133,7 @@
     zh: {
       austria: '奥地利', benin: '贝宁 · 西非国家中央银行区域', bulgaria: '保加利亚',
       'ethiopia-ecma': '埃塞俄比亚', 'ethiopia-guide': '埃塞俄比亚', france: '法国',
-      germany: '德国', iosco: '国际 · IOSCO', italy: '意大利',
+      germany: '德国', iosco: '国际 · IOSCO', italy: '意大利', japan: '日本',
       nunavut: '努纳武特 · 加拿大', polynesia: '法属波利尼西亚',
       uk: '英国', romania: '罗马尼亚', spain: '西班牙', usa: '美国',
       'switzerland-it': '瑞士 · 英文页面', switzerland: '瑞士', eu: '欧盟'
@@ -141,7 +141,7 @@
     hi: {
       austria: 'ऑस्ट्रिया', benin: 'बेनिन · BCEAO क्षेत्र', bulgaria: 'बुल्गारिया',
       'ethiopia-ecma': 'इथियोपिया', 'ethiopia-guide': 'इथियोपिया', france: 'फ़्रांस',
-      germany: 'जर्मनी', iosco: 'अंतरराष्ट्रीय · IOSCO', italy: 'इटली',
+      germany: 'जर्मनी', iosco: 'अंतरराष्ट्रीय · IOSCO', italy: 'इटली', japan: 'जापान',
       nunavut: 'नुनावुत · कनाडा', polynesia: 'फ़्रेंच पोलिनेशिया',
       uk: 'यूनाइटेड किंगडम', romania: 'रोमानिया', spain: 'स्पेन', usa: 'संयुक्त राज्य',
       'switzerland-it': 'स्विट्ज़रलैंड · अंग्रेज़ी पृष्ठ', switzerland: 'स्विट्ज़रलैंड',
@@ -150,7 +150,7 @@
     vi: {
       austria: 'Áo', benin: 'Benin · khu vực BCEAO', bulgaria: 'Bulgaria',
       'ethiopia-ecma': 'Ethiopia', 'ethiopia-guide': 'Ethiopia', france: 'Pháp',
-      germany: 'Đức', iosco: 'Quốc tế · IOSCO', italy: 'Ý',
+      germany: 'Đức', iosco: 'Quốc tế · IOSCO', italy: 'Ý', japan: 'Nhật Bản',
       nunavut: 'Nunavut · Canada', polynesia: 'Polynesia thuộc Pháp',
       uk: 'Vương quốc Anh', romania: 'Romania', spain: 'Tây Ban Nha',
       usa: 'Hoa Kỳ', 'switzerland-it': 'Thụy Sĩ · trang tiếng Anh',
@@ -164,7 +164,7 @@
       skip: 'Vai all’elenco delle autorità', home: 'Pagina iniziale', guide: 'Verifica prima di pagare',
       eyebrow: 'FONTI ISTITUZIONALI · DIRECTORY INFORMATIVA',
       intro: 'Esplora fonti ufficiali e guide indipendenti organizzate per Paese, territorio e ambito. Seleziona una scheda per consultare i riferimenti e i limiti specifici della relativa pagina.',
-      count: '18 pagine informative', updated: 'Selezione geografica e internazionale',
+      count: '19 pagine informative', updated: 'Selezione geografica e internazionale',
       directoryEyebrow: 'ESPLORA LE SCHEDE', directoryTitle: 'Autorità e fonti per area',
       languageLabel: 'Lingua', searchLabel: 'Cerca per Paese, autorità o settore',
       searchPlaceholder: 'Cerca per Paese, autorità o settore', reset: 'Azzera',
@@ -181,7 +181,7 @@
       skip: 'Skip to authority list', home: 'Home', guide: 'Check before you pay',
       eyebrow: 'INSTITUTIONAL SOURCES · INFORMATION DIRECTORY',
       intro: 'Explore official sources and independent guides by country, territory and subject. Open a card for the references and limitations specific to that page.',
-      count: '18 information pages', updated: 'Country and international coverage',
+      count: '19 information pages', updated: 'Country and international coverage',
       directoryEyebrow: 'EXPLORE THE DIRECTORY', directoryTitle: 'Authorities and sources by area',
       languageLabel: 'Language', searchLabel: 'Search by country, authority or sector',
       searchPlaceholder: 'Search by country, authority or sector', reset: 'Reset',
@@ -197,7 +197,7 @@
       skip: 'Accéder à la liste des autorités', home: 'Accueil', guide: 'Vérifier avant de payer',
       eyebrow: 'SOURCES INSTITUTIONNELLES · ANNUAIRE INFORMATIF',
       intro: 'Consultez les sources officielles et les guides indépendants par pays, territoire et domaine. Ouvrez une fiche pour connaître ses références et ses limites.',
-      count: '18 pages informatives', updated: 'Sélection nationale et internationale',
+      count: '19 pages informatives', updated: 'Sélection nationale et internationale',
       directoryEyebrow: 'PARCOURIR LES FICHES', directoryTitle: 'Autorités et sources par zone',
       languageLabel: 'Langue', searchLabel: 'Rechercher par pays, autorité ou secteur',
       searchPlaceholder: 'Rechercher par pays, autorité ou secteur', reset: 'Effacer',
@@ -213,7 +213,7 @@
       skip: 'Zur Behördenliste springen', home: 'Startseite', guide: 'Vor dem Bezahlen prüfen',
       eyebrow: 'INSTITUTIONELLE QUELLEN · INFORMATIONSDIREKTORIUM',
       intro: 'Entdecken Sie offizielle Quellen und unabhängige Leitfäden nach Land, Gebiet und Thema. Die jeweilige Karte enthält Hinweise und Grenzen der Seite.',
-      count: '18 Informationsseiten', updated: 'Länder und internationale Auswahl',
+      count: '19 Informationsseiten', updated: 'Länder und internationale Auswahl',
       directoryEyebrow: 'SEITEN ENTDECKEN', directoryTitle: 'Behörden und Quellen nach Gebiet',
       languageLabel: 'Sprache', searchLabel: 'Nach Land, Behörde oder Bereich suchen',
       searchPlaceholder: 'Nach Land, Behörde oder Bereich suchen', reset: 'Zurücksetzen',
@@ -229,7 +229,7 @@
       skip: 'Ir a la lista de autoridades', home: 'Inicio', guide: 'Verifica antes de pagar',
       eyebrow: 'FUENTES INSTITUCIONALES · DIRECTORIO INFORMATIVO',
       intro: 'Consulta fuentes oficiales y guías independientes por país, territorio y ámbito. Abre cada ficha para conocer sus referencias y limitaciones.',
-      count: '18 páginas informativas', updated: 'Selección geográfica e internacional',
+      count: '19 páginas informativas', updated: 'Selección geográfica e internacional',
       directoryEyebrow: 'EXPLORAR LAS FICHAS', directoryTitle: 'Autoridades y fuentes por zona',
       languageLabel: 'Idioma', searchLabel: 'Buscar por país, autoridad o sector',
       searchPlaceholder: 'Buscar por país, autoridad o sector', reset: 'Restablecer',
@@ -245,7 +245,7 @@
       skip: 'Ir para a lista de autoridades', home: 'Início', guide: 'Verifique antes de pagar',
       eyebrow: 'FONTES INSTITUCIONAIS · DIRETÓRIO INFORMATIVO',
       intro: 'Explore fontes oficiais e guias independentes por país, território e área. Abra cada ficha para consultar as referências e os limites da página.',
-      count: '18 páginas informativas', updated: 'Seleção geográfica e internacional',
+      count: '19 páginas informativas', updated: 'Seleção geográfica e internacional',
       directoryEyebrow: 'EXPLORAR AS FICHAS', directoryTitle: 'Autoridades e fontes por área',
       languageLabel: 'Idioma', searchLabel: 'Pesquisar por país, autoridade ou setor',
       searchPlaceholder: 'Pesquisar por país, autoridade ou setor', reset: 'Limpar',
@@ -261,7 +261,7 @@
       skip: 'Kalo te lista e autoriteteve', home: 'Kreu', guide: 'Verifiko para se të paguash',
       eyebrow: 'BURIME INSTITUCIONALE · DREJTORI INFORMUES',
       intro: 'Shfletoni burime zyrtare dhe udhëzues të pavarur sipas shtetit, territorit dhe fushës. Hapni një kartë për referencat dhe kufizimet përkatëse.',
-      count: '18 faqe informuese', updated: 'Përzgjedhje gjeografike dhe ndërkombëtare',
+      count: '19 faqe informuese', updated: 'Përzgjedhje gjeografike dhe ndërkombëtare',
       directoryEyebrow: 'SHFLETO FAQET', directoryTitle: 'Autoritetet dhe burimet sipas zonës',
       languageLabel: 'Gjuha', searchLabel: 'Kërko sipas shtetit, autoritetit ose sektorit',
       searchPlaceholder: 'Kërko sipas shtetit, autoritetit ose sektorit', reset: 'Pastro',
@@ -277,7 +277,7 @@
       skip: 'Salt la lista autorităților', home: 'Pagina principală', guide: 'Verifică înainte de plată',
       eyebrow: 'SURSE INSTITUȚIONALE · DIRECTOR INFORMATIV',
       intro: 'Explorați surse oficiale și ghiduri independente după țară, teritoriu și domeniu. Deschideți o fișă pentru referințele și limitele paginii respective.',
-      count: '18 pagini informative', updated: 'Selecție geografică și internațională',
+      count: '19 pagini informative', updated: 'Selecție geografică și internațională',
       directoryEyebrow: 'EXPLORAȚI FIȘELE', directoryTitle: 'Autorități și surse pe regiuni',
       languageLabel: 'Limba', searchLabel: 'Caută după țară, autoritate sau sector',
       searchPlaceholder: 'Caută după țară, autoritate sau sector', reset: 'Resetează',
@@ -293,7 +293,7 @@
       skip: 'Ga naar de autoriteitenlijst', home: 'Startpagina', guide: 'Controleer vóór betaling',
       eyebrow: 'INSTITUTIONELE BRONNEN · INFORMATIEDIRECTORY',
       intro: 'Bekijk officiële bronnen en onafhankelijke gidsen per land, gebied en onderwerp. Open een kaart voor de bronnen en beperkingen van die pagina.',
-      count: '18 informatiepagina’s', updated: 'Geografische en internationale selectie',
+      count: '19 informatiepagina’s', updated: 'Geografische en internationale selectie',
       directoryEyebrow: 'BEKIJK DE PAGINA’S', directoryTitle: 'Autoriteiten en bronnen per gebied',
       languageLabel: 'Taal', searchLabel: 'Zoeken op land, autoriteit of sector',
       searchPlaceholder: 'Zoeken op land, autoriteit of sector', reset: 'Wissen',
@@ -309,7 +309,7 @@
       skip: 'Μετάβαση στη λίστα αρχών', home: 'Αρχική σελίδα', guide: 'Έλεγχος πριν από την πληρωμή',
       eyebrow: 'ΘΕΣΜΙΚΕΣ ΠΗΓΕΣ · ΕΝΗΜΕΡΩΤΙΚΟΣ ΚΑΤΑΛΟΓΟΣ',
       intro: 'Εξερευνήστε επίσημες πηγές και ανεξάρτητους οδηγούς ανά χώρα, επικράτεια και τομέα. Ανοίξτε μια κάρτα για τις πηγές και τους περιορισμούς της.',
-      count: '18 ενημερωτικές σελίδες', updated: 'Γεωγραφική και διεθνής επιλογή',
+      count: '19 ενημερωτικές σελίδες', updated: 'Γεωγραφική και διεθνής επιλογή',
       directoryEyebrow: 'ΕΞΕΡΕΥΝΗΣΤΕ ΤΙΣ ΣΕΛΙΔΕΣ', directoryTitle: 'Αρχές και πηγές ανά περιοχή',
       languageLabel: 'Γλώσσα', searchLabel: 'Αναζήτηση ανά χώρα, αρχή ή τομέα',
       searchPlaceholder: 'Αναζήτηση ανά χώρα, αρχή ή τομέα', reset: 'Επαναφορά',
@@ -325,7 +325,7 @@
       skip: 'Pređi na listu nadležnih organa', home: 'Početna stranica', guide: 'Provjerite prije plaćanja',
       eyebrow: 'INSTITUCIONALNI IZVORI · INFORMATIVNI DIREKTORIJ',
       intro: 'Pregledajte službene izvore i nezavisne vodiče prema državi, teritoriji i oblasti. Otvorite karticu za izvore i ograničenja određene stranice.',
-      count: '18 informativnih stranica', updated: 'Geografski i međunarodni izbor',
+      count: '19 informativnih stranica', updated: 'Geografski i međunarodni izbor',
       directoryEyebrow: 'PREGLEDAJTE STRANICE', directoryTitle: 'Organi i izvori po području',
       languageLabel: 'Jezik', searchLabel: 'Pretraži prema državi, organu ili sektoru',
       searchPlaceholder: 'Pretraži prema državi, organu ili sektoru', reset: 'Poništi',
@@ -341,7 +341,7 @@
       skip: 'انتقل إلى قائمة السلطات', home: 'الصفحة الرئيسية', guide: 'تحقق قبل الدفع',
       eyebrow: 'مصادر مؤسسية · دليل معلوماتي',
       intro: 'استكشف المصادر الرسمية والأدلة المستقلة حسب البلد والإقليم والمجال. افتح بطاقة للاطلاع على المراجع والحدود الخاصة بكل صفحة.',
-      count: '١٨ صفحة معلوماتية', updated: 'اختيار جغرافي ودولي',
+      count: '١٩ صفحة معلوماتية', updated: 'اختيار جغرافي ودولي',
       directoryEyebrow: 'استكشف الصفحات', directoryTitle: 'السلطات والمصادر حسب المنطقة',
       languageLabel: 'اللغة', searchLabel: 'ابحث حسب البلد أو السلطة أو القطاع',
       searchPlaceholder: 'ابحث حسب البلد أو السلطة أو القطاع', reset: 'إعادة ضبط',
@@ -357,7 +357,7 @@
       skip: '跳转至监管机构列表', home: '首页', guide: '付款前先核查',
       eyebrow: '机构来源 · 信息目录',
       intro: '按国家、地区和领域浏览官方来源与独立指南。打开卡片可查看该页面的参考资料及其适用限制。',
-      count: '18 个信息页面', updated: '国家及国际信息精选',
+      count: '19 个信息页面', updated: '国家及国际信息精选',
       directoryEyebrow: '浏览页面', directoryTitle: '按地区查看机构与来源',
       languageLabel: '语言', searchLabel: '按国家、机构或领域搜索',
       searchPlaceholder: '按国家、机构或领域搜索', reset: '重置',
@@ -373,7 +373,7 @@
       skip: 'प्राधिकरण सूची पर जाएँ', home: 'मुखपृष्ठ', guide: 'भुगतान से पहले जाँचें',
       eyebrow: 'संस्थागत स्रोत · जानकारी निर्देशिका',
       intro: 'देश, क्षेत्र और विषय के अनुसार आधिकारिक स्रोत तथा स्वतंत्र मार्गदर्शिकाएँ देखें। किसी पृष्ठ के संदर्भ और सीमाएँ जानने के लिए उसका कार्ड खोलें।',
-      count: '18 जानकारी पृष्ठ', updated: 'भौगोलिक और अंतरराष्ट्रीय चयन',
+      count: '19 जानकारी पृष्ठ', updated: 'भौगोलिक और अंतरराष्ट्रीय चयन',
       directoryEyebrow: 'पृष्ठ देखें', directoryTitle: 'क्षेत्र के अनुसार प्राधिकरण और स्रोत',
       languageLabel: 'भाषा', searchLabel: 'देश, प्राधिकरण या क्षेत्र से खोजें',
       searchPlaceholder: 'देश, प्राधिकरण या क्षेत्र से खोजें', reset: 'रीसेट',
@@ -389,7 +389,7 @@
       skip: 'Chuyển đến danh sách cơ quan', home: 'Trang chủ', guide: 'Kiểm tra trước khi thanh toán',
       eyebrow: 'NGUỒN CƠ QUAN · DANH BẠ THÔNG TIN',
       intro: 'Khám phá nguồn chính thức và hướng dẫn độc lập theo quốc gia, lãnh thổ và lĩnh vực. Mở thẻ để xem nguồn tham khảo và giới hạn của từng trang.',
-      count: '18 trang thông tin', updated: 'Tuyển chọn theo khu vực và quốc tế',
+      count: '19 trang thông tin', updated: 'Tuyển chọn theo khu vực và quốc tế',
       directoryEyebrow: 'KHÁM PHÁ CÁC TRANG', directoryTitle: 'Cơ quan và nguồn theo khu vực',
       languageLabel: 'Ngôn ngữ', searchLabel: 'Tìm theo quốc gia, cơ quan hoặc lĩnh vực',
       searchPlaceholder: 'Tìm theo quốc gia, cơ quan hoặc lĩnh vực', reset: 'Đặt lại',
@@ -511,7 +511,7 @@
   const descriptionKinds = {
     austria: 'authority', benin: 'regional', bulgaria: 'authority',
     'ethiopia-ecma': 'authority', 'ethiopia-guide': 'guide', france: 'authority',
-    germany: 'authority', iosco: 'international', italy: 'authority',
+    germany: 'authority', iosco: 'international', italy: 'authority', japan: 'authority',
     nunavut: 'territory', polynesia: 'territory', uk: 'authority',
     romania: 'guide', spain: 'authority', usa: 'authority',
     'switzerland-it': 'authority', switzerland: 'authority', eu: 'regional'
@@ -611,7 +611,7 @@
       card.hidden = !matches;
       if (matches) visible++;
     }
-    status.textContent = visible === 18
+    status.textContent = visible === 19
       ? dictionaries[activeLanguage].count
       : dictionaries[activeLanguage].resultCount.replace('{count}', new Intl.NumberFormat(localeTags[activeLanguage]).format(visible));
     emptyState.hidden = visible !== 0;
