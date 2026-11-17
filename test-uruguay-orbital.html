@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Uruguay Orbital regression checks</title>
+</head>
+<body>
+  <h1>Uruguay Orbital regression checks</h1>
+  <pre id="results" data-status="running">Running…</pre>
+  <iframe id="app" title="Uruguay guide under test" src="./authority/uruguay-bcu-orbital-webapp.html" width="1000" height="700"></iframe>
+  <script>
+    const results = document.getElementById('results');
+    function check(condition, message) {
+      results.textContent += `\n${condition ? 'PASS' : 'FAIL'}: ${message}`;
+      if (!condition) throw new Error(message);
+    }
+    async function waitFor(predicate) {
+      const deadline = Date.now() + 20000;
+      while (!predicate()) {
+        if (Date.now() > deadline) throw new Error('Timed out waiting for page');
+        await new Promise(resolve => setTimeout(resolve, 50));
+      }
+    }
+    async function run() {
+      const path = 'authority/uruguay-bcu-orbital-webapp.html';
+      const canonical = 'https://www.amevfirenze.it/' + path;
+      const frame = document.getElementById('app');
+      await waitFor(() => frame.contentDocument?.querySelector('#it-limits'));
+      const doc = frame.contentDocument;
+      check(doc.documentElement.lang === 'es' && doc.querySelectorAll('h1').length === 1
+        && doc.querySelector('link[rel="canonical"]').href === canonical
+        && doc.querySelector('meta[property="og:url"]').content === canonical,
+        'Spanish-first guide has self-canonical and social metadata');
+      const sources = [
+        'https://usuariofinanciero.bcu.gub.uy/mercado-de-valores/recomendaciones-y-advertencias/',
+        'https://www.bcu.gub.uy/Comunicados/seggco26091.pdf',
+        'https://www.bcu.gub.uy/Servicios-Financieros-SSF/Paginas/Acerca-de-la-UIAF.aspx#ambito',
+        'https://www.gub.uy/tramites/denuncias-usuarios-sistema-financiero',
+        'https://www.gub.uy/tramites/formulario-reclamo-decreto-353-23?procedure=3515'
+      ];
+      for (const language of ['es', 'it']) {
+        const section = doc.getElementById(language);
+        const links = [...section.querySelectorAll('a')].map(link => link.getAttribute('href'));
+        check(section.lang === language && links.length === 5 && sources.every(url => links.includes(url)),
+          `${language}: all five exact source URLs retain their query strings and fragments`);
+        check(section.querySelector('a[href$=".pdf"]').textContent.includes('PDF'),
+          `${language}: PDF format is disclosed`);
+      }
+      check(!doc.querySelector('form, input, script, iframe, link[rel="manifest"]'),
+        'Guide collects no data and makes no installable-app integration');
+      check(doc.getElementById('it-uiaf').parentElement.textContent.includes('non è un modulo generale')
+        && doc.getElementById('it-complaints').parentElement.textContent.includes('procedure distinte')
+        && doc.getElementById('it-limits').parentElement.textContent.includes('non sono stati verificati'),
+        'UIAF, complaint scope and source verification limits are explicit');
+      for (const width of [1000, 375, 320]) {
+        frame.width = width;
+        await new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve)));
+        check(doc.documentElement.scrollWidth <= frame.contentWindow.innerWidth,
+          `${width}px: no horizontal overflow`);
+      }
+      doc.querySelector('.skip-link').focus();
+      check(doc.activeElement === doc.querySelector('.skip-link')
+        && doc.activeElement.getBoundingClientRect().top >= 0, 'Keyboard skip link is visible');
+      for (const sitemap of ['sitemap.xml', 'sitemap-financial-authorities.xml']) {
+        const xml = new DOMParser().parseFromString(await (await fetch(sitemap)).text(), 'application/xml');
+        check(!xml.querySelector('parsererror')
+          && [...xml.getElementsByTagNameNS('*', 'loc')].filter(node => node.textContent === canonical).length === 1,
+          `${sitemap}: canonical URL occurs exactly once`);
+      }
+      const home = new DOMParser().parseFromString(await (await fetch('index.html')).text(), 'text/html');
+      check(home.querySelectorAll(`#orbital-micropages a[href="${path}"]`).length === 1,
+        'Homepage catalog links to Uruguay exactly once');
+      frame.src = './authority-consumer/index.html';
+      await waitFor(() => frame.contentWindow?.authorityConsumer);
+      const directory = frame.contentDocument;
+      const api = frame.contentWindow.authorityConsumer;
+      const count = directory.querySelectorAll('.authority-card').length;
+      check(count === 20 && api.getVisibleCount() === count, 'Directory includes 20 unique cards');
+      const target = '../' + path;
+      check(api.getLinks().filter(link => link === target).length === 1,
+        'Consumer directory links to Uruguay exactly once');
+      for (const language of [...directory.getElementById('language').options].map(option => option.value)) {
+        api.setLanguage(language);
+        const card = directory.querySelector('[data-id="uruguay"]');
+        const formattedCount = new Intl.NumberFormat(directory.documentElement.lang).format(count);
+        check(card.querySelector('[data-country-label]').textContent.trim()
+          && card.querySelector('[data-description]').textContent.trim()
+          && !card.textContent.includes('undefined')
+          && directory.querySelector('[data-i18n="count"]').textContent.includes(formattedCount)
+          && directory.getElementById('results-status').textContent.includes(formattedCount),
+          `${language}: Uruguay is localized and totals match the cards`);
+        api.search('BCU');
+        check(api.getVisibleCount() === 1 && !card.hidden,
+          `${language}: BCU search finds only Uruguay`);
+        api.reset();
+        check(api.getVisibleCount() === count, `${language}: reset restores all cards`);
+      }
+      api.setLanguage('it');
+      directory.querySelector('[data-id="uruguay"] a').click();
+      await waitFor(() => frame.contentWindow.location.pathname.endsWith('/' + path)
+        && frame.contentDocument?.getElementById('it-limits'));
+      check(frame.contentDocument.querySelector('footer a').getAttribute('href') === '../index.html#orbital-micropages',
+        'Directory navigation opens the guide, with a return link to the Orbital catalog');
+      results.dataset.status = 'passed';
+    }
+    run().catch(error => {
+      results.dataset.status = 'failed';
+      results.textContent += `\nERROR: ${error.stack || error.message}`;
+    });
+  </script>
+</body>
+</html>

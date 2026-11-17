@@ -502,6 +502,19 @@ i collegamenti agli app store sono omessi.
 Verifica dedicata: `/test-nunavut-orbital.html`; verifica offline:
 `/test-grid-offline.html`, seguendo le istruzioni della pagina.
 
+### Estensione Uruguay
+
+La scheda [URUGUAY · BCU](authority/uruguay-bcu-orbital-webapp.html), in spagnolo
+e italiano, raccoglie i cinque link forniti dall'utente: raccomandazioni e
+avvertenze, comunicato PDF BCU, ambito UIAF e due procedure distinte di
+segnalazione/reclamo. È raggiungibile dal catalogo Orbital della homepage e
+dalla directory consumatori ed è presente nelle sitemap principale e finanziaria.
+Non modifica il database delle authority e non promette installazione PWA.
+Le fonti uruguaiane non erano raggiungibili durante la revisione: la scheda
+dichiara il limite, senza attribuire al PDF contenuti non verificati né
+presentare la UIAF come sportello generale per i reclami.
+Verifica dedicata: `/test-uruguay-orbital.html`.
+
 ### Estensione successiva, previa revisione e approvazione
 
 - Valutare contenuti territoriali distinti o traduzioni equivalenti realmente
