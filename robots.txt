@@ -16,6 +16,7 @@ Sitemap: https://www.amevfirenze.it/sitemap-pagine.xml
 Sitemap: https://www.amevfirenze.it/sitemap-financial-authorities.xml
 Sitemap: https://www.amevfirenze.it/sitemap-multilingua.xml
 Sitemap: https://www.amevfirenze.it/curriculum-sitemap.xml
+Sitemap: https://www.amevfirenze.it/sitemap-mappa-sito.xml
 # Petizione 0888/2024: 24 PDF con varianti linguistiche reciproche.
 Sitemap: https://www.amevfirenze.it/sitemap-pdf.xml
 
