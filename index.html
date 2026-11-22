@@ -10224,5 +10224,33 @@ https://avvstancamarcello.github.io/Financial-Authority-Database/
         <a href="terms.html" style="color:#bfdbfe; text-decoration:underline;">Termini di Servizio</a>
     </footer>
     <script src="scripts/news-feed.js"></script>
+    <script id="flags-state-anchor">
+        // Sola lettura: scorre al primo Stato richiesto (es. #flags-section?state=USA) senza modificare la griglia.
+        (function () {
+            var m = (location.hash + '&' + location.search.replace('?', '')).match(/[?&]state=([^&#]+)/);
+            if (!m) return;
+            var prefix;
+            try { prefix = decodeURIComponent(m[1]) + ' - '; } catch (e) { return; }
+            var grid = document.getElementById('flagsGrid');
+            if (!grid) return;
+            var observer;
+            function find() {
+                var items = grid.querySelectorAll('.flag-item');
+                for (var i = 0; i < items.length; i += 1) {
+                    var name = items[i].dataset.countryName || '';
+                    if (name.indexOf(prefix) === 0) {
+                        items[i].scrollIntoView({ block: 'center' });
+                        if (observer) observer.disconnect();
+                        return true;
+                    }
+                }
+                return false;
+            }
+            if (find()) return;
+            observer = new MutationObserver(find);
+            observer.observe(grid, { childList: true });
+            setTimeout(function () { observer.disconnect(); }, 15000);
+        })();
+    </script>
 </body>
 </html>
