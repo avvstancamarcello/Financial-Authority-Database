@@ -109,6 +109,88 @@ tenendo distinta la data di aggiornamento di una scheda dalla data della
 propria consultazione. Dati mancanti o non verificabili devono restare
 espliciti, senza trasformarsi in attestazioni di regolarità.
 
+## Analisi degli endpoint (katana)
+
+Scansione di `https://www.amevfirenze.it` eseguita con
+[katana](https://github.com/projectdiscovery/katana) v1.8.0 (crawling
+standard): **58 endpoint** individuati in 15 secondi.
+
+| Area | Percorso | Contenuto |
+| --- | --- | --- |
+| Pagine principali | `/`, `referenze.html`, `news.html`, `petitions.html?lang=en`, `curriculum.html`, `odissea.html`, `privacy.html`, `terms.html`, `obsolete-index.html` | Home e pagine informative |
+| Autorità | `/authority/` | Pagine autorità (IOSCO, EU-ESMA, CH-FINMA, DE-BAFIN, FR-AMF, UK-FCA, IT-CONSOB, ES-CNMV, US-SEC, BJ-BCEAO, ET-ECMA, `amev-equivalenza-lang-9-EU`) e micropagine Orbital WebApp |
+| Orbital WebApp | `/authority/*-orbital-webapp.html`, `/authority/cnmv/`, `/authority/japan-fsa/` | Uruguay, Polinesia francese, Romania, Nunavut, Austria, CNMV, Etiopia, Giappone, Bulgaria, con asset PWA |
+| Consumatori | `/authority-consumer/` | `index.html`, `styles.css`, `script.js` |
+| Barpedia | `/barpedia/` | Indice, `i18n.js`, versioni `de`, `us`, `it`, `es`, `ch`, `uk` |
+| Verifica prima di pagare | `/verifica-prima%20di%20pagare/` | `index.html` e app `amevcheck` con asset compilati |
+| Script e metadati | `manifest.json`, `scripts/news-feed.js`, `scripts/dossier-feed.js`, `curriculum-sitemap.xml` | Feed e manifest |
+
+<details>
+<summary>Elenco completo degli endpoint</summary>
+
+```text
+https://www.amevfirenze.it
+https://www.amevfirenze.it/manifest.json
+https://www.amevfirenze.it/scripts/news-feed.js
+https://www.amevfirenze.it/privacy.html
+https://www.amevfirenze.it/authority/IOSCO.html
+https://www.amevfirenze.it/barpedia/
+https://www.amevfirenze.it/terms.html
+https://www.amevfirenze.it/barpedia/de.html
+https://www.amevfirenze.it/barpedia/us.html
+https://www.amevfirenze.it/barpedia/i18n.js
+https://www.amevfirenze.it/barpedia/it.html
+https://www.amevfirenze.it/authority/uruguay-bcu-orbital-webapp.html
+https://www.amevfirenze.it/authority-consumer/index.html
+https://www.amevfirenze.it/referenze.html
+https://www.amevfirenze.it/barpedia/es.html
+https://www.amevfirenze.it/barpedia/ch.html
+https://www.amevfirenze.it/barpedia/uk.html
+https://www.amevfirenze.it/authority/polynesie-francaise-orbital-webapp.html
+https://www.amevfirenze.it/authority/romania-asf-orbital-webapp.html
+https://www.amevfirenze.it/authority/CH-FINMA.html
+https://www.amevfirenze.it/authority/nunavut-orbital-webapp.html
+https://www.amevfirenze.it/authority/oesterreich-fma-orbital-webapp.html
+https://www.amevfirenze.it/authority/cnmv-orbital-webapp.html
+https://www.amevfirenze.it/authority-consumer/styles.css
+https://www.amevfirenze.it/authority/EU-ESMA.html
+https://www.amevfirenze.it/authority/BJ-BCEAO.html
+https://www.amevfirenze.it/authority/CH-FINMA-en.html
+https://www.amevfirenze.it/authority-consumer/script.js
+https://www.amevfirenze.it/authority/ethiopia-ecma-orbital-webapp.html
+https://www.amevfirenze.it/authority/japan-fsa-orbital-webapp.html
+https://www.amevfirenze.it/authority/DE-BAFIN.html
+https://www.amevfirenze.it/authority/bulgaria-fsc-orbital-webapp.html
+https://www.amevfirenze.it/authority/ET-ECMA.html
+https://www.amevfirenze.it/obsolete-index.html
+https://www.amevfirenze.it/authority/cnmv/style.css
+https://www.amevfirenze.it/authority/cnmv/manifest.webmanifest
+https://www.amevfirenze.it/authority/cnmv/pwa.js
+https://www.amevfirenze.it/authority/FR-AMF.html
+https://www.amevfirenze.it/authority/japan-fsa/style.css
+https://www.amevfirenze.it/authority/japan-fsa/pwa.js
+https://www.amevfirenze.it/authority/UK-FCA.html
+https://www.amevfirenze.it/authority/japan-fsa/manifest.webmanifest
+https://www.amevfirenze.it/authority/IT-CONSOB.html
+https://www.amevfirenze.it/authority/japan-fsa/it.html
+https://www.amevfirenze.it/authority/ES-CNMV.html
+https://www.amevfirenze.it/authority/japan-fsa/ja.html
+https://www.amevfirenze.it/authority/US-SEC.html
+https://www.amevfirenze.it/verifica-prima%20di%20pagare/index.html
+https://www.amevfirenze.it/authority/amev-equivalenza-lang-9-EU.html
+https://www.amevfirenze.it/news.html
+https://www.amevfirenze.it/petitions.html?lang=en
+https://www.amevfirenze.it/curriculum.html
+https://www.amevfirenze.it/odissea.html
+https://www.amevfirenze.it/curriculum-sitemap.xml
+https://www.amevfirenze.it/scripts/dossier-feed.js
+https://www.amevfirenze.it/verifica-prima%20di%20pagare/amevcheck/index.html
+https://www.amevfirenze.it/verifica-prima%20di%20pagare/amevcheck/assets/main-DNOC4joa.css
+https://www.amevfirenze.it/verifica-prima%20di%20pagare/amevcheck/assets/main-DfHvLv1P.js
+```
+
+</details>
+
 ## Valutazione di Gemini AI sul modello Orbital WebApp
 
 Testo fornito dall'utente e attribuito a Gemini AI (Google). La data e la versione del modello della risposta non sono indicate. Questa citazione non costituisce una verifica indipendente delle affermazioni, un'attestazione di unicità o primato, né un riconoscimento, una certificazione o un'approvazione ufficiale di Google o degli organismi menzionati. Le descrizioni dei servizi istituzionali richiedono riscontro sulle rispettive fonti ufficiali.
