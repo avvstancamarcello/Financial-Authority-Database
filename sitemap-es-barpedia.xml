@@ -3,6 +3,27 @@
         xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://www.amevfirenze.it/barpedia/es.html</loc>
+    <xhtml:link rel="alternate" hreflang="it" href="https://www.amevfirenze.it/barpedia/es.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.amevfirenze.it/barpedia/en-es.html"/>
+    <xhtml:link rel="alternate" hreflang="es-ES" href="https://www.amevfirenze.it/barpedia/es-es.html"/>
+    <lastmod>2026-11-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.amevfirenze.it/barpedia/en-es.html</loc>
+    <xhtml:link rel="alternate" hreflang="it" href="https://www.amevfirenze.it/barpedia/es.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.amevfirenze.it/barpedia/en-es.html"/>
+    <xhtml:link rel="alternate" hreflang="es-ES" href="https://www.amevfirenze.it/barpedia/es-es.html"/>
+    <lastmod>2026-11-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.amevfirenze.it/barpedia/es-es.html</loc>
+    <xhtml:link rel="alternate" hreflang="it" href="https://www.amevfirenze.it/barpedia/es.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.amevfirenze.it/barpedia/en-es.html"/>
+    <xhtml:link rel="alternate" hreflang="es-ES" href="https://www.amevfirenze.it/barpedia/es-es.html"/>
     <lastmod>2026-11-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
