@@ -148,6 +148,15 @@
   var page = (location.pathname.split('/').pop() || 'index.html').replace('.html', '');
   var pageKey = COUNTRY_KEYS.indexOf(page) >= 0 ? page : null;
   var lang = 'it';
+  // Versioni complete (corpo tradotto) disponibili per ogni pagina nazionale.
+  var ALT = {
+    uk: { en: 'en.html' },
+    ch: { en: 'en-ch.html', de: 'ch-de.html' },
+    es: { en: 'en-es.html', es: 'es-es.html' },
+    de: { en: 'en-de.html', de: 'de-de.html' },
+    it: { en: 'en-it.html' },
+    us: { en: 'en-us.html' }
+  };
 
   function countryName(L, key) { return L.c[COUNTRY_KEYS.indexOf(key)]; }
 
@@ -203,6 +212,8 @@
   }
 
   function apply(code) {
+    var target = pageKey && ALT[pageKey] && ALT[pageKey][code];
+    if (target) { location.replace('/barpedia/' + target); return; }
     var L = T[code];
     lang = L ? code : 'it';
     items.forEach(function (it) {
@@ -225,5 +236,5 @@
   try {
     wanted = (new URLSearchParams(location.search).get('lang') || localStorage.getItem(STORAGE_KEY) || '').toLowerCase();
   } catch (e) { wanted = null; }
-  apply(wanted && (wanted === 'it' || T[wanted]) ? wanted : 'it');
+  apply(wanted && (wanted === 'it' || T[wanted]) ? wanted : 'en');
 })();
