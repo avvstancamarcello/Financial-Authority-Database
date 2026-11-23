@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url>
+    <loc>https://www.amevfirenze.it/barpedia/uk.html</loc>
+    <xhtml:link rel="alternate" hreflang="it" href="https://www.amevfirenze.it/barpedia/uk.html"/>
+    <xhtml:link rel="alternate" hreflang="en-GB" href="https://www.amevfirenze.it/barpedia/en.html"/>
+    <lastmod>2026-11-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.amevfirenze.it/barpedia/en.html</loc>
+    <xhtml:link rel="alternate" hreflang="it" href="https://www.amevfirenze.it/barpedia/uk.html"/>
+    <xhtml:link rel="alternate" hreflang="en-GB" href="https://www.amevfirenze.it/barpedia/en.html"/>
+    <lastmod>2026-11-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+</urlset>

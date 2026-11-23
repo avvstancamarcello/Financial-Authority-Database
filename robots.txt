@@ -17,6 +17,13 @@ Sitemap: https://www.amevfirenze.it/sitemap-financial-authorities.xml
 Sitemap: https://www.amevfirenze.it/sitemap-multilingua.xml
 Sitemap: https://www.amevfirenze.it/curriculum-sitemap.xml
 Sitemap: https://www.amevfirenze.it/sitemap-mappa-sito.xml
+Sitemap: https://www.amevfirenze.it/sitemap-barpedia.xml
+Sitemap: https://www.amevfirenze.it/sitemap-uk-barpedia.xml
+Sitemap: https://www.amevfirenze.it/sitemap-ch-barpedia.xml
+Sitemap: https://www.amevfirenze.it/sitemap-es-barpedia.xml
+Sitemap: https://www.amevfirenze.it/sitemap-de-barpedia.xml
+Sitemap: https://www.amevfirenze.it/sitemap-it-barpedia.xml
+Sitemap: https://www.amevfirenze.it/sitemap-us-barpedia.xml
 # Petizione 0888/2024: 24 PDF con varianti linguistiche reciproche.
 Sitemap: https://www.amevfirenze.it/sitemap-pdf.xml
 

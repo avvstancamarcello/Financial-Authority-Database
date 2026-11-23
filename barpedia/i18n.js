@@ -203,6 +203,7 @@
   }
 
   function apply(code) {
+    if (code === 'en' && pageKey === 'uk') { location.replace('/barpedia/en.html'); return; }
     var L = T[code];
     lang = L ? code : 'it';
     items.forEach(function (it) {
